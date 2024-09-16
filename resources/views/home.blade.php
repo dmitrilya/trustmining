@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="relative w-full max-w-md" x-data="{ open: false, sugs: false }" @click.away="open = false">
             <div class="relative z-0 w-full group" @click="open = true">
-                <input type="text" id="search_input" x-ref="search"
+                <input type="text"
                     placeholder="{{ __('Find a miner, company or article...') }}"
                     @input.debounce.500ms="sugs = search($el.value, $refs.suggestionList, open)" autocomplete="off"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-800 focus:outline-none focus:ring-0 focus:border-gray-800 peer" />
