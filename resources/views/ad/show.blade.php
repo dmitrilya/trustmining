@@ -1,0 +1,188 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Advertisement number') . ' ' . $ad->id }}
+        </h2>
+    </x-slot>
+
+    @php
+        $auth = Auth::user();
+    @endphp
+
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
+        @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
+            @include('moderation.components.buttons')
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+                <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
+                    <div
+                        class="md:col-span-5{{ isset($moderation->data['preview']) || isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                        @php
+                            $i = isset($moderation->data['images']) ? $moderation->data['images'] : $ad->images;
+                            $p = isset($moderation->data['preview']) ? $moderation->data['preview'] : $ad->preview;
+                        @endphp
+
+                        @if ($ad->new)
+                            <div
+                                class="w-full overflow-hidden rounded-lg col-start-2{{ isset($moderation->data['preview']) ? ' border border-indigo-500' : '' }}">
+                                <img src="{{ Storage::url($p) }}" alt="{{ $ad->asicVersion->asicModel->name }}"
+                                    class="w-full object-cover object-center">
+                            </div>
+                        @else
+                            <x-carousel :images="array_merge([$p], $i)"></x-carousel>
+                        @endif
+                    </div>
+
+                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
+                        <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
+                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate }}</h1>
+
+                        <p
+                            class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }} ₽</p>
+
+                        <div class="md:col-span-2 md:col-start-1">
+                            <div class="my-5">
+                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                    <li class="text-gray-400">{{ __('Condition') . ': ' }}<span
+                                            class="text-gray-600">{{ $ad->new ? __('New') : __('Used') }}</span>
+                                    </li>
+                                    <li class="text-gray-400">{{ __('Availability') . ': ' }}<span
+                                            class="text-gray-600">{{ $ad->in_stock ? __('In stock') : __('Preorder') }}</span>
+                                    </li>
+
+                                    @if (!$ad->new)
+                                        <li
+                                            class="text-gray-400{{ isset($moderation->data['warranty']) ? ' border border-indigo-500' : '' }}">
+                                            {{ __('Warranty (months)') . ': ' }}<span
+                                                class="text-gray-600">{{ isset($moderation->data['warranty']) ? $moderation->data['warranty'] : $ad->warranty }}</span>
+                                        </li>
+                                    @endif
+
+                                    @if (!$ad->in_stock)
+                                        <li
+                                            class="text-gray-400{{ isset($moderation->data['waiting']) ? ' border border-indigo-500' : '' }}">
+                                            {{ __('Waiting (days)') . ': ' }}<span
+                                                class="text-gray-600">{{ isset($moderation->data['waiting']) ? $moderation->data['waiting'] : $ad->waiting }}</span>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+
+                            <div>
+                                @include('components.about-seller', ['user' => $ad->user])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 md:col-span-12">
+                        <div>
+                            <h3 class="font-bold tracking-tight text-gray-900">{{ __('Description') }}</h3>
+
+                            <div class="space-y-6 mt-5">
+                                <p
+                                    class="text-sm sm:text-base text-gray-900{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    {{ !isset($moderation->data['description']) ? ($ad->description ? $ad->description : $ad->asicVersion->asicModel->description) : $moderation->data['description'] }}
+                                </p>
+                            </div>
+
+                            <a class="block mt-6"
+                                href="{{ route('database.model', [
+                                    'asicBrand' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name)),
+                                    'asicModel' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name)),
+                                ]) }}">
+                                <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
+            <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
+                <div class="md:col-span-5">
+                    @if ($ad->new)
+                        <div class="w-full overflow-hidden rounded-lg col-start-2">
+                            <img src="{{ Storage::url($ad->preview) }}" alt="{{ $ad->asicVersion->asicModel->name }}"
+                                class="w-full object-cover object-center">
+                        </div>
+                    @else
+                        <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
+                    @endif
+                </div>
+
+                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
+                    <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
+                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate }}</h1>
+
+                    <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} ₽</p>
+
+                    <div class="md:col-span-2 md:col-start-1">
+                        <div class="my-5">
+                            <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                <li class="text-gray-400">{{ __('Condition') . ': ' }}<span
+                                        class="text-gray-600">{{ $ad->new ? __('New') : __('Used') }}</span>
+                                </li>
+                                <li class="text-gray-400">{{ __('Availability') . ': ' }}<span
+                                        class="text-gray-600">{{ $ad->in_stock ? __('In stock') : __('Preorder') }}</span>
+                                </li>
+
+                                @if (!$ad->new)
+                                    <li class="text-gray-400">{{ __('Warranty (months)') . ': ' }}<span
+                                            class="text-gray-600">{{ $ad->warranty }}</span>
+                                    </li>
+                                @endif
+
+                                @if (!$ad->in_stock)
+                                    <li class="text-gray-400">{{ __('Waiting (days)') . ': ' }}<span
+                                            class="text-gray-600">{{ $ad->waiting }}</span>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+
+                        <div>
+                            @include('components.about-seller', ['user' => $ad->user])
+
+                            @php
+                                $auth = Auth::user();
+                            @endphp
+
+                            @if ($auth && $ad->user->id == $auth->id)
+                                <a class="block mt-6" href="{{ route('ads.edit', ['ad' => $ad->id]) }}">
+                                    <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                                </a>
+                            @else
+                                <a class="block mt-6"
+                                    href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
+                                    <x-primary-button>{{ __('Contact') }}</x-primary-button>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 md:col-span-12">
+                    <div>
+                        <h3 class="font-bold tracking-tight text-gray-900">{{ __('Description') }}</h3>
+
+                        <div class="space-y-6 mt-5">
+                            <p class="text-sm sm:text-base text-gray-900">
+                                {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
+                            </p>
+                        </div>
+
+                        <a class="block mt-6"
+                            href="{{ route('database.model', [
+                                'asicBrand' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name)),
+                                'asicModel' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name)),
+                            ]) }}">
+                            <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

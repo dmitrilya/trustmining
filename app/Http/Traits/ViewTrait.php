@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Traits;
+
+use App\Models\View;
+
+trait ViewTrait
+{
+    public function addView($request, $model)
+    {
+        $class = get_class($model);
+        $auth = $request->user();
+
+        if ($auth && $model->user && $model->user->id == $auth->id) return;
+
+        $view = View::where([
+            ['viewable_id', $model->id],
+            ['viewable_type', $class],
+            ['viewer', $request->ip()]
+        ])->first();
+
+        if (!$view) return View::create([
+            'viewable_id' => $model->id,
+            'viewable_type' => $class,
+            'viewer' => $request->ip()
+        ]);
+
+        $view->increment('count');
+
+        return $view;
+    }
+}

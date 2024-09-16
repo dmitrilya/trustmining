@@ -1,0 +1,34 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
+use DB;
+
+class ContactTypeSeeder extends Seeder
+{
+    /**
+     * Run the database seeders.
+     *
+     * @return void
+     */
+    public function run(Faker $faker)
+    {
+        DB::table('contact_types')->insert([
+            [
+                'name' => 'phone',
+                'href' => 'tel:',
+            ], [
+                'name' => 'email',
+                'href' => 'mailto:',
+            ], [
+                'name' => 'whatsapp',
+                'href' => 'https://wa.me/',
+            ], [
+                'name' => 'telegram',
+                'href' => 'https://t.me/',
+            ]
+        ]);
+    }
+}
