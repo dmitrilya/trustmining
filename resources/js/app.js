@@ -16,7 +16,7 @@ window.addressSuggs = function (address, list, open) {
 
                 if (!r.data.suggestions.length) return false;
 
-                for (suggestion of r.data.suggestions) {
+                for (let suggestion of r.data.suggestions) {
                     list.insertAdjacentHTML(
                         'beforeend',
                         `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.lastElementChild.text; open = false">
@@ -40,7 +40,7 @@ window.search = function (query, list, open) {
 
                 if (!r.data.suggestions.length) return false;
 
-                for (suggestion of r.data.suggestions) {
+                for (let suggestion of r.data.suggestions) {
                     list.insertAdjacentHTML(
                         'beforeend',
                         `<li role="option" class="relative cursor-default select-none hover:bg-gray-200 py-2 px-3">

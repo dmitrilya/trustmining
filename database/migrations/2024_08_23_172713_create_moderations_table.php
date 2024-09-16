@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('moderations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('moderation_status_id')->nullable();
+            $table->unsignedBigInteger('moderation_status_id')->default(1);
             $table->foreign('moderation_status_id')->references('id')
                 ->on('moderation_statuses')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();

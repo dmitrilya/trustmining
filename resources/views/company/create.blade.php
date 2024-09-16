@@ -11,7 +11,7 @@
                 enctype=multipart/form-data>
                 @csrf
 
-                @if (Auth::user()->passport)
+                @if (!Auth::user()->passport)
                     <div>
                         <x-input-label for="passport-images" :value="__('Photo')" />
                         <x-file-input id="passport-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
@@ -24,7 +24,7 @@
                 @endif
 
                 <div>
-                    <x-input-label for="company" :value="__('Tariff')" />
+                    <x-input-label for="company" :value="__('Company INN')" />
                     <x-text-input id="company" name="company" class="mt-1 block w-full" required autocomplete="company"/>
                     <x-input-error :messages="$errors->get('company')" class="mt-2" />
                 </div>
