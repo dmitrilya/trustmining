@@ -19,8 +19,8 @@ window.addressSuggs = function (address, list, open) {
                 for (let suggestion of r.data.suggestions) {
                     list.insertAdjacentHTML(
                         'beforeend',
-                        `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.text; open = false">
-                            <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion.unrestricted_value}</div>
+                        `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
+                            <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion.value}</div>
                         </li>`
                     );
                 }
