@@ -36,7 +36,7 @@ class DatabaseController extends Controller
      */
     public function brand(AsicBrand $asicBrand)
     {
-        return view('database.brand', ['brand' => $asicBrand, 'models' => $asicBrand->asicModels()->withCount('views')->reverse()]);
+        return view('database.brand', ['brand' => $asicBrand, 'models' => $asicBrand->asicModels()->withCount('views')->get()->reverse()]);
     }
 
     /**
