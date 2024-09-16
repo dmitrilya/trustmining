@@ -43,7 +43,7 @@
             <h2 class="text-xl font-medium text-gray-800 mb-6">{{ __('Popular models') }}</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-                @foreach ($models->sortByDesc('views')->take(4) as $model)
+                @foreach ($models->sortByDesc('views_count')->take(4) as $model)
                     <a href="{{ route('database.model', [
                         'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
                         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),

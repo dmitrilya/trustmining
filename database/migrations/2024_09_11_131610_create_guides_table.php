@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('preview');
             $table->string('title');
             $table->string('url_title');
             $table->string('subtitle');

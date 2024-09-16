@@ -34,7 +34,6 @@ return new class extends Migration
             $table->boolean('hidden')->default(0);
             $table->unsignedTinyInteger('waiting')->nullable();
             $table->float('price');
-            $table->unsignedInteger('views')->default(0);
             $table->unsignedInteger('contacts')->default(0);
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ class AsicModelSeeder extends Seeder
         DB::table('asic_models')->insert([
             [
                 'asic_brand_id' => 1,
+                'algorithm_id' => 1,
                 'name' => 'Antminer S19k Pro',
                 'description' => 'kekekekekekk kekekekkeke kekekekekek',
                 'width' => '15',
@@ -27,6 +28,7 @@ class AsicModelSeeder extends Seeder
                 'images' => '[]'
             ], [
                 'asic_brand_id' => 1,
+                'algorithm_id' => 1,
                 'name' => 'Antminer T21',
                 'description' => 'kekekekekekk kekekekkeke kekekekekek',
                 'width' => '15',
@@ -36,6 +38,7 @@ class AsicModelSeeder extends Seeder
                 'images' => '[]'
             ], [
                 'asic_brand_id' => 2,
+                'algorithm_id' => 1,
                 'name' => 'Whatsminer M30S++',
                 'description' => 'kekekekekekk kekekekkeke kekekekekek',
                 'width' => '15',
@@ -45,6 +48,7 @@ class AsicModelSeeder extends Seeder
                 'images' => '[]'
             ], [
                 'asic_brand_id' => 2,
+                'algorithm_id' => 1,
                 'name' => 'Whatsminer M50',
                 'description' => 'kekekekekekk kekekekkeke kekekekekek',
                 'width' => '15',

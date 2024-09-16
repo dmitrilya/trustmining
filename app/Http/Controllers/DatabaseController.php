@@ -24,7 +24,7 @@ class DatabaseController extends Controller
     {
         return view('database.index', [
             'brands' => AsicBrand::all()->reverse(),
-            'popularModels' => AsicModel::orderByDesc('views')->with('asicBrand')->limit(8)->get()
+            'popularModels' => AsicModel::with('asicBrand')->withCount('views')->orderBy('views_count', 'desc')->limit(8)->get()
         ]);
     }
 
@@ -36,7 +36,7 @@ class DatabaseController extends Controller
      */
     public function brand(AsicBrand $asicBrand)
     {
-        return view('database.brand', ['brand' => $asicBrand, 'models' => $asicBrand->asicModels->reverse()]);
+        return view('database.brand', ['brand' => $asicBrand, 'models' => $asicBrand->asicModels()->withCount('views')->reverse()]);
     }
 
     /**
