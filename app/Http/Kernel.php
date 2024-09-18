@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'in-chat' => \App\Http\Middleware\InChat::class,
         'passport-moderated' => \App\Http\Middleware\PassportModerated::class,
+        'office-moderated' => \App\Http\Middleware\OfficeModerated::class,
         'company-moderated' => \App\Http\Middleware\CompanyModerated::class,
     ];
 }

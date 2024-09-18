@@ -123,21 +123,23 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('passport-moderated')->group(function () {
-        Route::group(['prefix' => 'ads'], function () {
-            Route::get('/create', [AdController::class, 'create'])->name('ads.create');
-            Route::post('/store', [AdController::class, 'store'])->name('ads.store');
-            Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ads.edit');
-            Route::put('/{ad}/update', [AdController::class, 'update'])->name('ads.update');
-            Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ads.toggle-hidden');
-            Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ads.destroy');
-        });
-
         Route::group(['prefix' => 'office'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
             Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
             Route::put('/{office}/update', [OfficeController::class, 'update'])->name('office.update');
             Route::delete('/{office}/destroy', [OfficeController::class, 'destroy'])->name('office.destroy');
+        });
+
+        Route::middleware('office-moderated')->group(function () {
+            Route::group(['prefix' => 'ads'], function () {
+                Route::get('/create', [AdController::class, 'create'])->name('ads.create');
+                Route::post('/store', [AdController::class, 'store'])->name('ads.store');
+                Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ads.edit');
+                Route::put('/{ad}/update', [AdController::class, 'update'])->name('ads.update');
+                Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ads.toggle-hidden');
+                Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ads.destroy');
+            });
         });
 
         Route::middleware('company-moderated')->group(function () {

@@ -29,7 +29,7 @@
                 <li class="w-full">
                     <button id="question-tab" data-tabs-target="#question" type="button" role="tab"
                         aria-controls="about" aria-selected="{{ request()->chat ? 'true' : 'false' }}"
-                        class="inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">
+                        class="inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">
                         {{ __('Your question') }}
                         @if (
                             $auth &&

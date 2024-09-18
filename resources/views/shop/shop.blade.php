@@ -8,14 +8,18 @@
             </div>
 
             <div class="flex justify-between items-center w-full mt-4 lg:mt-0">
-                @include('shop.components.company-menu')
+                @include('shop.components.menu')
 
                 <x-header-filters></x-header-filters>
             </div>
         </div>
     </x-slot>
 
+    @php
+        $auth = Auth::user();
+    @endphp
+
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        @include('ad.components.list')
+        @include('ad.components.list', ['owner' => $auth && $auth->id == $user->id])
     </div>
 </x-app-layout>

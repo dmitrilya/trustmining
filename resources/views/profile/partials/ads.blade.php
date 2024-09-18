@@ -5,7 +5,7 @@
                 {{ __('My advertisements') }}
             </h2>
 
-            @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', true)->exists())
+            @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
                 <a href="{{ route('ads.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
             @endif
         </div>
@@ -15,7 +15,7 @@
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
         </p>
-    @elseif (!$user->offices()->where('moderation', true)->exists())
+    @elseif (!$user->offices()->where('moderation', false)->exists())
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>

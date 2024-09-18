@@ -18,6 +18,7 @@ class Ad extends Model
         'user_id',
         'ad_category_id',
         'asic_version_id',
+        'office_id',
         'description',
         'preview',
         'images',
@@ -51,6 +52,11 @@ class Ad extends Model
     public function asicVersion()
     {
         return $this->belongsTo(AsicVersion::class);
+    }
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
     }
 
     public function moderations()

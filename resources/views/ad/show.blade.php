@@ -23,8 +23,7 @@
                         @endphp
 
                         @if ($ad->new)
-                            <div
-                                class="w-full overflow-hidden rounded-lg col-start-2{{ isset($moderation->data['preview']) ? ' border border-indigo-500' : '' }}">
+                            <div class="w-full overflow-hidden rounded-lg col-start-2">
                                 <img src="{{ Storage::url($p) }}" alt="{{ $ad->asicVersion->asicModel->name }}"
                                     class="w-full object-cover object-center">
                             </div>
@@ -40,6 +39,18 @@
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }} ₽</p>
+
+                        <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
+                            target="_blank"
+                            class="flex items-center hover:underline text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
+                            <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ isset($moderation->data['office_id']) ? App\Models\Office::find($moderation->data['office_id'])->address : $ad->office->address }}
+                        </a>
 
                         <div class="md:col-span-2 md:col-start-1">
                             <div class="my-5">
@@ -117,6 +128,18 @@
                         {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate }}</h1>
 
                     <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} ₽</p>
+
+                    <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
+                        target="_blank"
+                        class="flex items-center hover:underline text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4">
+                        <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        {{ $ad->office->address }}
+                    </a>
 
                     <div class="md:col-span-2 md:col-start-1">
                         <div class="my-5">

@@ -8,7 +8,7 @@ trait AdTrait
 {
     public function getAds($request)
     {
-        $ads = Ad::with(['adCategory:name', 'user', 'user.company', 'user.contacts.contactType']);
+        $ads = Ad::with(['adCategory:name', 'user:id,name,url_name', 'user.company:id', 'user.contacts.contactType', 'office:id,address']);
 
         if ($request->brands && count($request->brands))
             $ads = $ads->whereHas(

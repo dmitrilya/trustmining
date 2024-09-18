@@ -24,6 +24,7 @@ class UpdateAdRequest extends FormRequest
     public function rules()
     {
         return [
+            'office_id' => 'required|exists:offices,id',
             'waiting' => 'max:120',
             'warranty' => 'max:12',
             'preview' => 'file|mimes:jpg,png,jpeg|max:2048',

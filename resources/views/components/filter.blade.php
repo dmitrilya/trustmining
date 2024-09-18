@@ -1,7 +1,7 @@
 @props(['show'])
 
 <div x-show="{{ !$show ? 'mobileFilter' : 'true' }}"
-    class="p-4 relative h-full w-full flex-col overflow-y-auto bg-white py-4 shadow-md{{ $show ? ' max-w-64 mr-4 hidden lg:flex rounded-lg' : ' max-w-xs pb-12 flex ml-auto' }}"
+    class="p-4 sticky top-8 h-full w-full flex-col overflow-y-auto bg-white py-4 shadow-md{{ $show ? ' max-w-64 mr-4 hidden lg:flex rounded-lg' : ' max-w-xs pb-12 flex ml-auto' }}"
     x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full"
     x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
     x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"

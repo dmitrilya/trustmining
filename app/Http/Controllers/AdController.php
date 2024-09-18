@@ -13,6 +13,7 @@ use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
 use App\Models\Ad;
+use App\Models\Office;
 use App\Models\AsicModel;
 use App\Models\Moderation;
 
@@ -40,7 +41,10 @@ class AdController extends Controller
      */
     public function create()
     {
-        return view('ad.create', ['models' => AsicModel::with('asicVersions')->get()]);
+        return view('ad.create', [
+            'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
+            'offices' => \Auth::user()->offices()->where('moderation', false)->select(['id', 'address'])->get()
+        ]);
     }
 
     /**
@@ -53,10 +57,13 @@ class AdController extends Controller
     {
         $user = $request->user();
 
+        if (Office::find($request->office_id)->moderation) return back();
+
         $ad = Ad::create([
             'user_id' => $user->id,
             'ad_category_id' => $request->ad_category_id,
             'asic_version_id' => $request->asic_version_id,
+            'office_id' => $request->office_id,
             'description' => '',
             'new' => $request->filled('new'),
             'warranty' => $request->filled('new') ? null : $request->warranty,
@@ -78,7 +85,7 @@ class AdController extends Controller
             'data' => $ad->attributesToArray()
         ]);
 
-        return redirect()->route('user', ['user' => $user->url_name]);
+        return redirect()->route('company', ['user' => $user->url_name]);
     }
 
     /**
@@ -102,7 +109,10 @@ class AdController extends Controller
      */
     public function edit(Ad $ad)
     {
-        return view('ad.edit', compact('ad'));
+        return view('ad.edit', [
+            'ad' => $ad,
+            'offices' => \Auth::user()->offices()->where('moderation', false)->select(['id', 'address'])->get()
+        ]);
     }
 
     /**
@@ -117,6 +127,12 @@ class AdController extends Controller
         if ($request->user()->id != $ad->user->id) return back();
 
         $data = [];
+
+        if ($request->office_id != $ad->office_id) {
+            if (Office::find($request->office_id)->moderation) return back();
+
+            $data['office_id'] = $request->office_id;
+        }
 
         if (!$ad->new) {
             if ($request->warranty != $ad->warranty) $data['warranty'] = $request->warranty;

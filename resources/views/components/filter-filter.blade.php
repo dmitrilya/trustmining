@@ -20,7 +20,7 @@
         </button>
     </h3>
 
-    <div class="pt-6" id="filter-section-mobile-0" x-show="open">
+    <div class="pt-6" id="filter-section-mobile-0" x-show="open" style="display: none">
         <div class="space-y-4">
             @foreach ($items as $item)
                 <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-500"

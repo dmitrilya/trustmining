@@ -10,7 +10,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        @include('ad.components.list')
+        @include('ad.components.list', ['owner' => false])
     </div>
 
     {{ $ads->links() }}

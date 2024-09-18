@@ -67,7 +67,7 @@
                 @endphp
 
                 <div class="hidden {{ $classes }} w-full h-full">
-                    @include('ad.components.card')
+                    @include('ad.components.card', ['owner' => false])
                 </div>
             @endforeach
         </div>

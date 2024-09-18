@@ -19,7 +19,8 @@
         <div
             class="w-full flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
             <div class="p-4">
-                <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                <a href="{{ route('company', ['user' => $user->url_name]) }}"
+                    class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                     <div
                         class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" fill="none"
@@ -30,15 +31,14 @@
                         </svg>
                     </div>
                     <div>
-                        <a href="{{ route('company', ['user' => $user->url_name]) }}"
-                            class="font-semibold text-gray-900">
+                        <div class="font-semibold text-gray-900">
                             {{ __('Miners') }}
                             <span class="absolute inset-0"></span>
-                        </a>
+                        </div>
                         <p class="mt-1 text-gray-600">{{ __('Current price') }}</p>
                     </div>
-                </div>
-                <div
+                </a>
+                <a href="{{ $user->company && !$user->company->moderation ? route('company.about', ['user' => $user->url_name]) : '#' }}"
                     class="group relative flex gap-x-6 rounded-lg p-4 {{ !$user->company || $user->company->moderation ? 'opacity-60' : 'hover:bg-gray-50' }}">
                     <div
                         class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -49,15 +49,14 @@
                         </svg>
                     </div>
                     <div>
-                        <a href="{{ $user->company && !$user->company->moderation ? route('company.about', ['user' => $user->url_name]) : '#' }}"
-                            class="font-semibold text-gray-900">
+                        <div class="font-semibold text-gray-900">
                             {{ __('About company') }}
                             <span class="absolute inset-0"></span>
-                        </a>
+                        </div>
                         <p class="mt-1 text-gray-600">{{ __('Information and documents') }}</p>
                     </div>
-                </div>
-                <div
+                </a>
+                <a href="{{ $user->hosting && !$user->hosting->moderation ? route('company.hosting', ['user' => $user->url_name]) : '#' }}"
                     class="group relative flex gap-x-6 rounded-lg p-4 {{ !$user->hosting || $user->hosting->moderation ? 'opacity-60' : 'hover:bg-gray-50' }}">
                     <div
                         class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -68,17 +67,17 @@
                         </svg>
                     </div>
                     <div>
-                        <a href="{{ $user->hosting && !$user->hosting->moderation ? route('company.hosting', ['user' => $user->url_name]) : '#' }}"
-                            class="font-semibold text-gray-900">
+                        <div class="font-semibold text-gray-900">
                             {{ __('Hosting') }}
                             <span class="absolute inset-0"></span>
-                        </a>
+                        </div>
                         <p class="mt-1 text-gray-600">
                             {{ $user->hosting && !$user->hosting->moderation ? __('Placement data') : __('No information about placement') }}
                         </p>
                     </div>
-                </div>
-                <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                </a>
+                <a href="{{ route('company.offices', ['user' => $user->url_name]) }}"
+                    class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                     <div
                         class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <svg class="w-6 h-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true"
@@ -88,17 +87,17 @@
                         </svg>
                     </div>
                     <div>
-                        <a href="{{ route('company.offices', ['user' => $user->url_name]) }}"
-                            class="font-semibold text-gray-900">
+                        <div class="font-semibold text-gray-900">
                             {{ __('Offices') }}
                             <span class="absolute inset-0"></span>
-                        </a>
+                        </div>
                         <p class="mt-1 text-gray-600">
                             {{ __('Offices and points of sale') }}
                         </p>
                     </div>
-                </div>
-                <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
+                </a>
+                <a href="{{ route('company.reviews', ['user' => $user->url_name]) }}"
+                    class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50">
                     <div
                         class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
@@ -109,11 +108,10 @@
                         </svg>
                     </div>
                     <div>
-                        <a href="{{ route('company.reviews', ['user' => $user->url_name]) }}"
-                            class="font-semibold text-gray-900">
+                        <div class="font-semibold text-gray-900">
                             {{ __('Reviews') }}
                             <span class="absolute inset-0"></span>
-                        </a>
+                        </div>
 
                         <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
                             <x-rating></x-rating>
@@ -123,7 +121,7 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
 
             <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">

@@ -42,7 +42,6 @@ class StoreOfficeRequest extends FormRequest
             'images.max' => __('File limit exceeded.'),
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
-            'address.required' => __('Description is required.'),
         ];
     }
 }
