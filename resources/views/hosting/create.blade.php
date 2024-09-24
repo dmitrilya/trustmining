@@ -18,6 +18,9 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 10 items)</p>
                     <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                    @foreach ($errors->get('images.*') as $error)
+                        <x-input-error :messages="$error" class="mt-2" />
+                    @endforeach
                 </div>
 
                 <div>
@@ -59,6 +62,9 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="documents_help">PDF (max. 1MB, 3 items)
                     </p>
                     <x-input-error :messages="$errors->get('documents')" class="mt-2" />
+                    @foreach ($errors->get('documents.*') as $error)
+                        <x-input-error :messages="$error" class="mt-2" />
+                    @endforeach
                 </div>
 
                 <div>

@@ -7,7 +7,8 @@
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-            <form method="post" action="{{ route('office.update', ['office' => $office->id]) }}" class="mt-6 space-y-6" enctype=multipart/form-data>
+            <form method="post" action="{{ route('office.update', ['office' => $office->id]) }}" class="mt-6 space-y-6"
+                enctype=multipart/form-data>
                 @csrf
                 @method('PUT')
 
@@ -19,6 +20,9 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 5 items)</p>
                     <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                    @foreach ($errors->get('images.*') as $error)
+                        <x-input-error :messages="$error" class="mt-2" />
+                    @endforeach
                 </div>
 
                 <x-peculiarities :ps="$office->peculiarities" :isForm="true"></x-peculiarities>
@@ -37,10 +41,10 @@
                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('Address') }}
                     </label>
-                </div>
-
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
-            </form>
         </div>
+
+        <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+        </form>
+    </div>
     </div>
 </x-app-layout>

@@ -27,8 +27,8 @@ class StoreCompanyRequest extends FormRequest
         return [
             'images' => [Rule::requiredIf(fn () => !$this->user()->passport), 'max:3'],
             'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
-            'company' => 'required|string',
-            'documents' => 'max:3',
+            'inn' => 'required|string',
+            'documents' => 'size:3',
             'documents.*' => 'file|mimes:pdf|max:1024',
         ];
     }
@@ -44,7 +44,7 @@ class StoreCompanyRequest extends FormRequest
             'images.max' => __('File limit exceeded.'),
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
-            'documents.max' => __('File limit exceeded.'),
+            'documents.size' => __('File limit exceeded.'),
             'documents.*.mimes' => __('Valid types are pdf.'),
             'documents.*.max' => __('The maximum file size should not exceed 1 MB.'),
         ];

@@ -7,8 +7,8 @@
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
-                class="mt-6 space-y-6" enctype=multipart/form-data>
+            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}" class="mt-6 space-y-6"
+                enctype=multipart/form-data>
                 @method('put')
                 @csrf
 
@@ -20,6 +20,9 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="images_help">
                         {{ __('When you upload new files, all old ones are deleted') }}</p>
                     <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                    @foreach ($errors->get('images.*') as $error)
+                        <x-input-error :messages="$error" class="mt-2" />
+                    @endforeach
                 </div>
 
                 <div>
@@ -61,6 +64,9 @@
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="documents_help">PDF (max. 1MB, 3 items)
                     </p>
                     <x-input-error :messages="$errors->get('documents')" class="mt-2" />
+                    @foreach ($errors->get('documents.*') as $error)
+                        <x-input-error :messages="$error" class="mt-2" />
+                    @endforeach
                 </div>
 
                 <div>

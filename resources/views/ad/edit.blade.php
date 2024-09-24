@@ -123,6 +123,9 @@
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG
                                 or JPEG (max. 2MB, 3 items)</p>
                             <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                            @foreach ($errors->get('images.*') as $error)
+                                <x-input-error :messages="$error" class="mt-2" />
+                            @endforeach
                         </div>
                     </div>
                 </div>
