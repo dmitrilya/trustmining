@@ -2,8 +2,7 @@
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
-            this.hidden = !this.hidden;
-            toggleHidden({{ $ad->id }})
+            toggleHidden({{ $ad->id }}).then(r => this.hidden = r ? !this.hidden : this.hidden);
         }
     }">
     <div>
@@ -53,7 +52,8 @@
     <div class="mt-1">
         <div class="sm:mt-2 text-gray-900 dark:text-white text-sm sm:text-lg font-bold">{{ $ad->price }} ₽</div>
 
-        <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}" target="_blank"
+        <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
+            target="_blank"
             class="block hover:underline text-xxs sm:text-xs text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->office->address }}</a>
 
         <div class="relative flex mt-2 sm:mt-3 items-center">

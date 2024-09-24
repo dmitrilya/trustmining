@@ -32,6 +32,11 @@ class OfficeController extends Controller
      */
     public function create()
     {
+        $user = \Auth::user();
+
+        if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+
         return view('office.create');
     }
 
@@ -44,6 +49,9 @@ class OfficeController extends Controller
     public function store(StoreOfficeRequest $request)
     {
         $user = $request->user();
+
+        if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $office = Office::create([
             'user_id' => $user->id,
@@ -73,7 +81,7 @@ class OfficeController extends Controller
      */
     public function edit(Office $office)
     {
-        if (\Auth::user()->id != $office->user->id) return back();
+        if (\Auth::user()->id != $office->user->id) return back()->withErrors(['forbidden' => __('Unavailable office.')]);;
 
         return view('office.edit', ['office' => $office]);
     }
@@ -89,7 +97,7 @@ class OfficeController extends Controller
     {
         $user = $request->user();
 
-        if ($office->user->id != $user->id) return back();
+        if ($office->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
         $data = [];
         $p = $request->peculiarities ? $request->peculiarities : [];

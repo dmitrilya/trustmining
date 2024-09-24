@@ -31,6 +31,10 @@
 
             <div class="grid gap-4">
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    @include('profile.partials.tariff')
+                </div>
+
+                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                     @include('profile.partials.update-profile-information-form')
                 </div>
 

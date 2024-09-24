@@ -1,7 +1,7 @@
 <div class="flex">
     <x-filter :show="true">@include('hosting.components.filter')</x-filter>
 
-    <fieldset aria-label="Choose a ad">
+    <fieldset aria-label="Choose a ad" class="w-full">
         <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             @php
                 $auth = Auth::user();

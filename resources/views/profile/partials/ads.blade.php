@@ -5,11 +5,23 @@
                 {{ __('My advertisements') }}
             </h2>
 
-            @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
-                <a href="{{ route('ads.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+            @if (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 5))
+                @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
+                    <a href="{{ route('ads.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                @endif
+            @else
+                <p class="text-xs text-gray-600">
+                    {{ __('Not available with current plan.') }}
+                </p>
             @endif
         </div>
     </header>
+
+    <div class="text-gray-400 text-lg">
+        <span class="text-gray-900 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
+            {{ $user->tariff ? $user->tariff->max_ads : 5 }}</span>
+        {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
+    </div>
 
     @if (!$user->passport || $user->passport->moderation)
         <p class="text-sm text-gray-600 dark:text-gray-400">

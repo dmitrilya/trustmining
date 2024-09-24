@@ -23,8 +23,12 @@ class StoreHostingRequest extends FormRequest
      */
     public function rules()
     {
+        $user = $this->user();
+
+        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
+
         return [
-            'description' => 'required|max:1500',
+            'description' => 'required|max:' . $descriptionMax,
             'video' => 'nullable|active_url',
             'images' => 'max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
@@ -43,7 +47,7 @@ class StoreHostingRequest extends FormRequest
     {
         return [
             'description.required' => __('Description is required.'),
-            'description.max' => __('validation.max.string', ['max' => 1500]),
+            //'description.max' => __('validation.max.string', ['max' => 1500]),
             'images.max' => __('File limit exceeded.'),
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
@@ -51,8 +55,6 @@ class StoreHostingRequest extends FormRequest
             'documents.*.mimes' => __('Valid types are pdf.'),
             'documents.*.max' => __('The maximum file size should not exceed 1 MB.'),
             'price.required' => __('Price is required.'),
-            'price.min' => __('Price is required.'),
-            'price.max' => __('Price is required.'),
         ];
     }
 }

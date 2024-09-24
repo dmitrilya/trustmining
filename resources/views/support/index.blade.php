@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        @include('chat.components.send', ['chatId' => $chat->id])
+                        @include('chat.components.send', ['chatId' => $chat->id, 'message' => request()->message])
                     @endif
                 </div>
             </div>

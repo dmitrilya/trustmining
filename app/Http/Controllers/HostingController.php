@@ -35,7 +35,12 @@ class HostingController extends Controller
      */
     public function create()
     {
-        if (\Auth::user()->hosting) return back();
+        $user = \Auth::user();
+
+        if ($user->hosting) return back()->withErrors(['forbidden' => __('Hosting already exists.')]);
+
+        if (!$user->tariff || !$user->tariff->can_have_hosting)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         return view('hosting.create');
     }
@@ -50,7 +55,10 @@ class HostingController extends Controller
     {
         $user = $request->user();
 
-        if ($user->hosting) return redirect()->route('profile');
+        if ($user->hosting) return redirect()->route('profile')->withErrors(['forbidden' => __('Hosting already exists.')]);
+
+        if (!$user->tariff || !$user->tariff->can_have_hosting)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $hosting = Hosting::create([
             'user_id' => $user->id,
@@ -87,7 +95,12 @@ class HostingController extends Controller
      */
     public function edit(Hosting $hosting)
     {
-        if (\Auth::user()->id != $hosting->user->id) return back();
+        $user = \Auth::user();
+
+        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
+
+        if (!$user->tariff || !$user->tariff->can_have_hosting)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         return view('hosting.edit', compact('hosting'));
     }
@@ -103,7 +116,10 @@ class HostingController extends Controller
     {
         $user = $request->user();
 
-        if ($hosting->user->id != $user->id) return back();
+        if ($hosting->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
+
+        if (!$user->tariff || !$user->tariff->can_have_hosting)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $data = [];
         $p = $request->peculiarities ? $request->peculiarities : [];
@@ -142,7 +158,7 @@ class HostingController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->id != $hosting->user->id) return back();
+        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
 
         $files = array_merge($hosting->images, array_column($hosting->documents, 'path'));
 

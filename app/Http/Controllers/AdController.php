@@ -41,9 +41,14 @@ class AdController extends Controller
      */
     public function create()
     {
+        $user = \Auth::user();
+
+        if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
-            'offices' => \Auth::user()->offices()->where('moderation', false)->select(['id', 'address'])->get()
+            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get()
         ]);
     }
 
@@ -57,7 +62,12 @@ class AdController extends Controller
     {
         $user = $request->user();
 
-        if (Office::find($request->office_id)->moderation) return back();
+        if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+
+        $office = Office::find($request->office_id);
+
+        if (!$office || $office->moderation) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
         $ad = Ad::create([
             'user_id' => $user->id,
@@ -96,6 +106,11 @@ class AdController extends Controller
      */
     public function show(Ad $ad)
     {
+        $user = \Auth::user();
+
+        if ($user->role->name == 'user' && $user->id != $ad->user->id && ($ad->moderation || $ad->hidden))
+            return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
         $this->addView(request(), $ad);
 
         return view('ad.show', compact('ad'));
@@ -109,9 +124,13 @@ class AdController extends Controller
      */
     public function edit(Ad $ad)
     {
+        $user = \Auth::user();
+
+        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
         return view('ad.edit', [
             'ad' => $ad,
-            'offices' => \Auth::user()->offices()->where('moderation', false)->select(['id', 'address'])->get()
+            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get()
         ]);
     }
 
@@ -124,12 +143,14 @@ class AdController extends Controller
      */
     public function update(UpdateAdRequest $request, Ad $ad)
     {
-        if ($request->user()->id != $ad->user->id) return back();
+        if ($request->user()->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
         $data = [];
 
         if ($request->office_id != $ad->office_id) {
-            if (Office::find($request->office_id)->moderation) return back();
+            $office = Office::find($request->office_id);
+
+            if (!$office || $office->moderation) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
             $data['office_id'] = $request->office_id;
         }
@@ -167,7 +188,12 @@ class AdController extends Controller
      */
     public function toggleHidden(Request $request, Ad $ad)
     {
-        if ($request->user()->id != $ad->user->id) return back();
+        $user = $request->user();
+
+        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
+        if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 5))
+            return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
 
         $ad->hidden = !$ad->hidden;
         $ad->save();
@@ -185,7 +211,7 @@ class AdController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->id != $ad->user->id) return back();
+        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
         $files = [];
         array_push($files, $ad->preview);

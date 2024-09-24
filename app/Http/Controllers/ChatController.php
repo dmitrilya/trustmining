@@ -29,7 +29,7 @@ class ChatController extends Controller
     {
         $auth = $request->user();
 
-        if ($auth->id == $user->id) return back();
+        if ($auth->id == $user->id) return back()->withErrors(['forbidden' => __('Unavailable chat.')]);;
 
         $chat = $auth->chats()->whereHas('users', function ($query) use ($user) {
             $query->where('id', $user->id);
@@ -64,7 +64,11 @@ class ChatController extends Controller
         return view('chat.index', [
             'auth' => $user,
             'chats' => $user->chats()->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
-                $query->whereNotIn('id', Role::where('name', 'support')->first()->users()->pluck('id')->merge([$user->id]));
+                $notIn = [$user->id];
+
+                if ($user->role->name != 'support') Role::where('name', 'support')->first()->users()->pluck('id')->merge($notIn);
+
+                $query->whereNotIn('id', $notIn);
             })->get()->sortByDesc(function ($chat) {
                 return $chat->messages->count() ? $chat->messages->reverse()->first()->created_at : $chat->created_at;
             })
@@ -88,7 +92,11 @@ class ChatController extends Controller
             'messages' => $chat->messages,
             'activeChat' => $chat,
             'chats' => $user->chats()->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
-                $query->whereNotIn('id', Role::where('name', 'support')->first()->users()->pluck('id')->merge([$user->id]));
+                $notIn = [$user->id];
+
+                if ($user->role->name != 'support') Role::where('name', 'support')->first()->users()->pluck('id')->merge($notIn);
+
+                $query->whereNotIn('id', $notIn);
             })->get()->sortByDesc(function ($chat) {
                 return $chat->messages->count() ? $chat->messages->reverse()->first()->created_at : $chat->created_at;
             })

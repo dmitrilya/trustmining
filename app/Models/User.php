@@ -128,4 +128,9 @@ class User extends Authenticatable
     {
         return $this->reviews()->where('moderation', false);
     }
+
+    public function tariff()
+    {
+        return $this->belongsTo(Tariff::class);
+    }
 }

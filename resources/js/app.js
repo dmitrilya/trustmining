@@ -60,7 +60,15 @@ window.search = function (query, list, open) {
 }
 
 window.toggleHidden = function (adId) {
-    return axios.put('/ads/' + adId + '/toggle-hidden');
+    return axios.put('/ads/' + adId + '/toggle-hidden').then(r => {
+        if (!r.data.success) {
+            window.pushToastAlert(r.data.message, 'error');
+
+            return false;
+        }
+
+        return true;
+    });
 }
 
 window.scrollBottom = function (el) {
@@ -89,7 +97,7 @@ window.checkNotifications = function () {
 
 window.onload = function () {
     let userId = document.querySelector("meta[name='user-id']");
-    
+
     if (userId) {
         userId = userId.getAttribute('content');
 

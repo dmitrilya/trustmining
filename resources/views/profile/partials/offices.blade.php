@@ -5,11 +5,25 @@
                 {{ __('Offices') }}
             </h2>
 
-            @if ($user->passport && !$user->passport->moderation)
-                <a href="{{ route('office.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+            @if (
+                ($user->tariff && $user->offices->count() < $user->tariff->max_offices) ||
+                    (!$user->tariff && $user->offices->count() < 1))
+                @if ($user->passport && !$user->passport->moderation)
+                    <a href="{{ route('office.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                @endif
+            @else
+                <p class="text-xs text-gray-600">
+                    {{ __('Not available with current plan.') }}
+                </p>
             @endif
         </div>
     </header>
+
+    <div class="text-gray-400 text-lg">
+        <span class="text-gray-900 text-xl sm:text-2xl font-bold">{{ $user->offices->count() }} /
+            {{ $user->tariff ? $user->tariff->max_offices : 1 }}</span>
+        {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
+    </div>
 
     <div class="mt-6">
         @if (!$user->passport || $user->passport->moderation)

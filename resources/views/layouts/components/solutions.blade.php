@@ -35,6 +35,17 @@
                     </div>
 
                     <div class="group flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 mr-2" aria-hidden="true" width="24" height="24"
+                            fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z" />
+                        </svg>
+
+                        <a class="under text-md text-gray-800 font-semibold"
+                            href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true" class="w-5 h-5 text-gray-400 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -93,8 +104,8 @@
                     </div>
 
                     <div class="group flex items-center">
-                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" aria-hidden="true">
+                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="m7.164 3.805-4.475.38L.327 6.546a1.114 1.114 0 0 0 .63 1.89l3.2.375 3.007-5.006ZM11.092 15.9l.472 3.14a1.114 1.114 0 0 0 1.89.63l2.36-2.362.38-4.475-5.102 3.067Zm8.617-14.283A1.613 1.613 0 0 0 18.383.291c-1.913-.33-5.811-.736-7.556 1.01-1.98 1.98-6.172 9.491-7.477 11.869a1.1 1.1 0 0 0 .193 1.316l.986.985.985.986a1.1 1.1 0 0 0 1.316.193c2.378-1.3 9.889-5.5 11.869-7.477 1.746-1.745 1.34-5.643 1.01-7.556Zm-3.873 6.268a2.63 2.63 0 1 1-3.72-3.72 2.63 2.63 0 0 1 3.72 3.72Z">
                             </path>
@@ -108,17 +119,19 @@
                     $articles = App\Models\Article::latest()->limit(2)->get();
                 @endphp
 
-                <div class="hidden lg:flex flex-col w-full max-w-60 justify-between">
-                    <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
-                        @include('article.components.card', ['article' => $articles[0]])
+                @if ($articles->count() == 2)
+                    <div class="hidden lg:flex flex-col w-full max-w-60 justify-between">
+                        <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
+                            @include('article.components.card', ['article' => $articles[0]])
+                        </div>
                     </div>
-                </div>
 
-                <div class="hidden lg:flex flex-col w-full max-w-60 justify-between">
-                    <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
-                        @include('article.components.card', ['article' => $articles[1]])
+                    <div class="hidden lg:flex flex-col w-full max-w-60 justify-between">
+                        <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
+                            @include('article.components.card', ['article' => $articles[1]])
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

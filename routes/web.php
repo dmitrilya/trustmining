@@ -15,6 +15,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ModerationController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -49,6 +50,10 @@ Route::get('/document', [Controller::class, 'document'])->name('document');
 Route::get('/about', [Controller::class, 'about'])->name('about');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
+
+Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
+
+Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 
 Route::group(['prefix' => 'articles'], function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles');
@@ -91,10 +96,10 @@ Route::group(['prefix' => 'ads'], function () {
     Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 });
 
-Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
-
 Route::middleware('auth')->group(function () {
     Route::get('/address/suggestions', [DaDataController::class, 'suggestions'])->name('address.suggestions');
+
+    Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile');

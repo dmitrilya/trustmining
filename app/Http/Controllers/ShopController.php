@@ -43,7 +43,8 @@ class ShopController extends Controller
      */
     public function hosting(User $user)
     {
-        if (!$user->hosting || $user->hosting->moderation) return redirect()->route('company', ['user' => $user->url_name]);
+        if (!$user->tariff || !$user->tariff->can_have_hosting || !$user->hosting || $user->hosting->moderation)
+            return redirect()->route('company', ['user' => $user->url_name]);
 
         $this->addView(request(), $user->hosting);
 
@@ -66,7 +67,9 @@ class ShopController extends Controller
      */
     public function offices(User $user)
     {
-        return view('office.index', ['offices' => $user->offices()->where('moderation', false)->get()]);
+        $limit = $user->tariff ? $user->tariff->max_offices : 1;
+
+        return view('office.index', ['offices' => $user->offices()->where('moderation', false)->limit($limit)->get()]);
     }
 
     /**
@@ -74,7 +77,11 @@ class ShopController extends Controller
      */
     public function office(User $user, Office $office)
     {
-        if ($office->moderation) return redirect()->route('company.offices', ['user' => $user->url_name]);
+        $limit = $user->tariff ? $user->tariff->max_offices : 1;
+        $officeIds = $user->offices()->where('moderation', false)->pluck('id');
+
+        if ($office->user->id != $user->id || $office->moderation || array_search($office->id, $officeIds) >= $limit)
+            return redirect()->route('company.offices', ['user' => $user->url_name]);
 
         $this->addView(request(), $office);
 

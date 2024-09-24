@@ -45,7 +45,8 @@
 
     @include('layouts.footer')
 
-    <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"></div>
+    <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
+        @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror></div>
 </body>
 
 </html>

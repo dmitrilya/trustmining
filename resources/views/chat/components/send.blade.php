@@ -3,7 +3,7 @@
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
             <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}"
-                class="resize-none w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"></textarea>
+                class="resize-none w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">@if (isset($message)){{ $message }}@endif</textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600" x-data="{ files: 0, photos: 0 }">
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse">

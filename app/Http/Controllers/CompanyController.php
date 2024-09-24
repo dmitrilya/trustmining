@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use MoveMoveIo\DaData\Facades\DaDataCompany;
+
 use App\Http\Requests\StoreCompanyRequest;
 use Illuminate\Http\Request;
 
@@ -59,6 +61,13 @@ class CompanyController extends Controller
             ]);
         }
 
+        $suggs = DaDataCompany::id($request->inn)['suggestions'];
+
+        if (!count($suggs)) return back()->withErrors(['forbidden' => __('Not available company.')]);
+
+        $compnayInfo = $suggs[0];
+        dd($compnayInfo);
+
         $company = Company::create([
             'user_id' => $user->id,
             'name' => $request->name,
@@ -88,6 +97,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        if (\Auth::user()->id != $company->user->id) return back()->withErrors(['forbidden' => __('Unavailable company.')]);
+        
         return view('company.edit', compact('company'));
     }
 
