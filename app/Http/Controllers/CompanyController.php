@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use MoveMoveIo\DaData\Facades\DaDataCompany;
 
+use App\Http\Traits\FileTrait;
+
 use App\Http\Requests\StoreCompanyRequest;
 use Illuminate\Http\Request;
 
@@ -13,15 +15,7 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use FileTrait;
 
     /**
      * Show the form for creating a new resource.
@@ -98,7 +92,7 @@ class CompanyController extends Controller
     public function edit(Company $company)
     {
         if (\Auth::user()->id != $company->user->id) return back()->withErrors(['forbidden' => __('Unavailable company.')]);
-        
+
         return view('company.edit', compact('company'));
     }
 

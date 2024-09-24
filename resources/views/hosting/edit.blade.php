@@ -7,7 +7,7 @@
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-            <form method="post" id="ad-update" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
+            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
                 class="mt-6 space-y-6" enctype=multipart/form-data>
                 @method('put')
                 @csrf

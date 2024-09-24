@@ -7,11 +7,14 @@
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-            <form method="post" id="ad-store" action="{{ route('hosting.store') }}" class="mt-6 space-y-6"
-                enctype=multipart/form-data>
+            <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
 
                 @if (!Auth::user()->passport)
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                        {{ __('Attach 3 scans or photos of your passport. 2-3 and 4-5 pages, also a selfie with a passport. Make sure the images are high quality and all characters are legible. After passing moderation, many seller functions will become available to you.') }}
+                    </p>
+
                     <div>
                         <x-input-label for="passport-images" :value="__('Photo')" />
                         <x-file-input id="passport-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
@@ -25,7 +28,8 @@
 
                 <div>
                     <x-input-label for="company" :value="__('Company INN')" />
-                    <x-text-input id="company" name="company" class="mt-1 block w-full" required autocomplete="company"/>
+                    <x-text-input id="company" name="company" class="mt-1 block w-full" required
+                        autocomplete="company" />
                     <x-input-error :messages="$errors->get('company')" class="mt-2" />
                 </div>
 
