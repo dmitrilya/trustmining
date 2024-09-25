@@ -81,7 +81,10 @@ class OfficeController extends Controller
      */
     public function edit(Office $office)
     {
-        if (\Auth::user()->id != $office->user->id) return back()->withErrors(['forbidden' => __('Unavailable office.')]);;
+        if (\Auth::user()->id != $office->user->id) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
+
+        if ($office->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         return view('office.edit', ['office' => $office]);
     }
@@ -98,6 +101,9 @@ class OfficeController extends Controller
         $user = $request->user();
 
         if ($office->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
+
+        if ($office->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         $data = [];
         $p = $request->peculiarities ? $request->peculiarities : [];

@@ -25,6 +25,9 @@ class Company extends Model
         'card',
         'images',
         'documents',
+        'description',
+        'video',
+        'logo',
         'moderation'
     ];
  

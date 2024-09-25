@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             AsicModelSeeder::class,
             AsicVersionSeeder::class,
 
+            ModerationStatusSeeder::class,
             ContactTypeSeeder::class,
             NotificationTypeSeeder::class
         ]);

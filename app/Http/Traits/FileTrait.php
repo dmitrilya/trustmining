@@ -70,6 +70,8 @@ trait FileTrait
         elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($file->getPathName());
 
         if (isset($image)) {
+            imagepalettetotruecolor($image);
+            
             if (!imagewebp($image, Storage::path($disk . $folder . '/' . $filename . '.webp'), 20)) return false;
 
             return 'webp';

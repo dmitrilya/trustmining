@@ -97,7 +97,10 @@ class HostingController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
+        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);
+
+        if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
@@ -116,7 +119,10 @@ class HostingController extends Controller
     {
         $user = $request->user();
 
-        if ($hosting->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
+        if ($hosting->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);
+
+        if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);

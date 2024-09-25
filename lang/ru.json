@@ -92,7 +92,9 @@
     "OGRN": "ОГРН",
     "Registration date": "Дата регистрации",
     "Employee count": "Количество сотрудников",
+    "Founders": "Основатели",
     "Authorized capital": "Уставный капитал",
+    "OGRN extract, registration certificate, charter (for LLC).": "Выписка ОГРН, свидетельство о регистрации, устав (для ООО).",
     "Add information about your company.": "Добавьте информацию о своей компании.",
     "Person": "Частное лицо",
     "Documents": "Документы",
@@ -254,5 +256,8 @@
     "Pay the tariff": "Оплатить тариф",
     "according to the tariff": "по тарифу",
     "Not available with current plan.": "Недоступно с текущим тарифным планом.",
-    "You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.": "Пополнить баланс можно на любую произвольную сумму, но для активации тарифа сумма должна превышать месячные затраты. Если баланса не хватит на ежедневное списание, тариф сбросится до Base."
+    "You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.": "Пополнить баланс можно на любую произвольную сумму, но для активации тарифа сумма должна превышать месячные затраты. Если баланса не хватит на ежедневное списание, тариф сбросится до Base.",
+    "First you need to pass moderation by passport": "Сначала нужно пройти модерацию по паспорту",
+    "Unavailable, currently under moderation": "Недоступно, пока находится на модерации",
+    "Logo": "Логотип"
 }

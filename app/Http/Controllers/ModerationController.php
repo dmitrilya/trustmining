@@ -66,9 +66,13 @@ class ModerationController extends Controller
 
     public function accept(Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1) return redirect()->route('moderations');
+        if ($moderation->moderation_status_id != 1)
+            return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
 
         $m = $moderation->moderationable;
+
+        if ($moderation->moderationable_type == 'App\Models\Company' && (!$m->user->passport || $m->user->passport->moderation))
+            return redirect()->route('moderations')->withErrors(['forbidden' => __('First you need to pass moderation by passport')]);
 
         if (!$m->moderation) {
             $files = [];
@@ -76,7 +80,7 @@ class ModerationController extends Controller
 
             switch ($moderation->moderationable_type) {
                 case ('App\Models\Company'):
-                    if (isset($moderation->data['logo'])) array_push($files, $m->logo);
+                    if (isset($moderation->data['logo']) && $m->logo) array_push($files, $m->logo);
                     if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
@@ -89,8 +93,8 @@ class ModerationController extends Controller
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
                 case ('App\Models\Review'):
-                    if (isset($moderation->data['document'])) array_push($files, $m->document);
-                    if (isset($moderation->data['image'])) array_push($files, $m->image);
+                    if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
+                    if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
                     break;
                 case ('App\Models\Office'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);

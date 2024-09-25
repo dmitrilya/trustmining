@@ -5,8 +5,13 @@
                 {{ __('Hosting') }}
             </h2>
 
-            @if ($user->company && !$user->company->moderation && !$user->hosting)
-                <a href="{{ route('hosting.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+            @if ($user->tariff && $user->tariff->can_have_hosting && $user->company && !$user->company->moderation)
+                @if (!$user->hosting)
+                    <a href="{{ route('hosting.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                @elseif (!$user->company->moderation)
+                    <a href="{{ route('hosting.edit', ['hosting' => $user->hosting->id]) }}">
+                        <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                @endif
             @endif
         </div>
     </header>

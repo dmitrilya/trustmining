@@ -35,6 +35,10 @@
                     <x-input-error :messages="$errors->get('inn')" class="mt-2" />
                 </div>
 
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    {{ __('OGRN extract, registration certificate, charter (for LLC).') }}
+                </p>
+
                 <div>
                     <x-input-label for="documents" :value="__('Documents')" />
                     <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple

@@ -128,6 +128,9 @@ class AdController extends Controller
 
         if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
+        if ($ad->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+
         return view('ad.edit', [
             'ad' => $ad,
             'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get()
@@ -144,6 +147,9 @@ class AdController extends Controller
     public function update(UpdateAdRequest $request, Ad $ad)
     {
         if ($request->user()->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
+        if ($ad->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         $data = [];
 

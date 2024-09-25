@@ -8,7 +8,9 @@
             @if (!$user->company)
                 <a href="{{ route('company.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
             @elseif (!$user->company->moderation)
-                <a href="{{ route('company.edit') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                <a href="{{ route('company.edit', ['company' => $user->company->id]) }}">
+                    <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                </a>
             @endif
         </div>
     </header>

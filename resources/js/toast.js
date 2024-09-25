@@ -37,7 +37,7 @@ const pushToast = function (type, title, pretext, text, alert) {
 
     const toast = document.createElement('div');
     toast.style.opacity = 0;
-    toast.className = "w-full p-4 bg-white rounded-lg shadow transition duration-300";
+    toast.className = "w-full p-4 bg-white rounded-lg shadow-lg border border-gray-200 transition duration-300";
     toast.role = 'alert';
     toast.innerHTML = type == 'alert' ? `<div class="flex items-center">
     ${alertIcons[alert]}
