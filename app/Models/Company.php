@@ -23,6 +23,8 @@ class Company extends Model
         'user_id',
         'name',
         'card',
+        'images',
+        'documents',
         'moderation'
     ];
  
