@@ -16,13 +16,9 @@ trait FileTrait
         if (isset($files))
             foreach ($files as $i => $file) {
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
-
-                $ext = $this->compress($file, $disk, $folder, $filename);
-                
-                if (!$ext) {
-                    $ext = $file->getClientOriginalExtension();
-                    $file->storeAs($disk . $folder, $filename . '.' . $ext);
-                }
+                $ext = $file->getClientOriginalExtension();
+                if ($ext != 'pdf') $ext = $this->compress($file, $disk, $folder, $filename);
+                else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
                 array_push(
                     $result,
@@ -36,12 +32,9 @@ trait FileTrait
     public function saveFile($file, $folder, $type, int $id, $disk = 'public/')
     {
         $filename = $type . '_' . $id . '_' . time();
-        $ext = $this->compress($file, $disk, $folder, $filename);
-                
-                if (!$ext) {
-                    $ext = $file->getClientOriginalExtension();
-                    $file->storeAs($disk . $folder, $filename . '.' . $ext);
-                }
+        $ext = $file->getClientOriginalExtension();
+        if ($ext != 'pdf') $ext = $this->compress($file, $disk, $folder, $filename);
+        else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
     }
@@ -56,15 +49,9 @@ trait FileTrait
             foreach ($files as $i => $file) {
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
-
-                $ext = $this->compress($file, $disk, $folder, $name);
-                
-                if (!$ext) {
-                    $ext = $file->getClientOriginalExtension();
-                    $file->storeAs($disk . $folder, $filename . '.' . $ext);
-                }
-
-                $file->storeAs($disk . $folder, $filename . '.' . $ext);
+                $ext = $file->getClientOriginalExtension();
+                if ($ext != 'pdf') $ext = $this->compress($file, $disk, $folder, $filename);
+                else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(
                     'name' => $name,
