@@ -45,6 +45,8 @@ class Company extends Model
      */
     protected $casts = [
         'card' => 'array',
+        'documents' => 'array',
+        'images' => 'array',
     ];
 
     public function user()

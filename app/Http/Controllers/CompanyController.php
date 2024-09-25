@@ -7,6 +7,7 @@ use MoveMoveIo\DaData\Facades\DaDataCompany;
 use App\Http\Traits\FileTrait;
 
 use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Http\Request;
 
 use App\Models\Moderation;
@@ -24,6 +25,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        if (\Auth::user()->company) return redirect()->route('profile');
+
         return view('company.create');
     }
 
@@ -60,18 +63,16 @@ class CompanyController extends Controller
         if (!count($suggs)) return back()->withErrors(['forbidden' => __('Not available company.')]);
 
         $compnayInfo = $suggs[0];
-        dd($compnayInfo);
 
         $company = Company::create([
             'user_id' => $user->id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'card' => [],
+            'name' => $compnayInfo['value'],
+            'card' => $compnayInfo['data'],
             'documents' => [],
+            'images' => [],
         ]);
 
-        $company->logo = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id);
-        $company->documents = $this->saveFiles($request->file('documents'), 'companies', 'doc', $company->id);
+        $company->documents = $this->saveFilesWithName($request->file('documents'), 'companies', 'doc', $company->id);
         $company->save();
 
         Moderation::create([
@@ -91,7 +92,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        if (\Auth::user()->id != $company->user->id) return back()->withErrors(['forbidden' => __('Unavailable company.')]);
+        if (\Auth::user()->id != $company->user->id || $company->moderation)
+            return back()->withErrors(['forbidden' => __('Unavailable company.')]);
 
         return view('company.edit', compact('company'));
     }
@@ -99,13 +101,36 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdateCompanyRequest  $request
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $user = \Auth::user();
+
+        if ($user->id != $company->user->id || $company->moderation)
+            return back()->withErrors(['forbidden' => __('Unavailable company.')]);
+
+        $data = [];
+
+        if ($request->description != $company->description) $data['description'] = $request->description;
+        if ($request->video != $company->video) $data['video'] = $request->video;
+
+        if ($request->images)
+            $data['images'] = $this->saveFiles($request->file('images'), 'companies', 'image', $company->id);
+
+        if ($request->logo)
+            $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id);
+
+        if (!empty($data))
+            Moderation::create([
+                'moderationable_type' => 'App\Models\Company',
+                'moderationable_id' => $company->id,
+                'data' => $data
+            ]);
+
+        return redirect()->route('company.about', ['user' => $user->url_name]);
     }
 
     /**

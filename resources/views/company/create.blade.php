@@ -30,9 +30,8 @@
                 @endif
 
                 <div>
-                    <x-input-label for="company" :value="__('Company INN')" />
-                    <x-text-input id="company" name="inn" class="mt-1 block w-full" required
-                        autocomplete="company" />
+                    <x-input-label for="inn" :value="__('Company INN')" />
+                    <x-text-input id="inn" name="inn" class="mt-1 block w-full" required autocomplete="inn" />
                     <x-input-error :messages="$errors->get('inn')" class="mt-2" />
                 </div>
 

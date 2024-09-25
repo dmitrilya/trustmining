@@ -78,6 +78,7 @@ class ModerationController extends Controller
                 case ('App\Models\Company'):
                     if (isset($moderation->data['logo'])) array_push($files, $m->logo);
                     if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
+                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
                 case ('App\Models\Hosting'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
@@ -125,6 +126,7 @@ class ModerationController extends Controller
             case ('App\Models\Company'):
                 if (isset($moderation->data['logo'])) array_push($files, $moderation->data['logo']);
                 if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
+                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
             case ('App\Models\Hosting'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);

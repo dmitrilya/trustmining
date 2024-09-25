@@ -125,6 +125,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
         Route::get('/edit', [CompanyController::class, 'edit'])->name('company.edit');
+        Route::put('/update', [CompanyController::class, 'update'])->name('company.update');
     });
 
     Route::middleware('passport-moderated')->group(function () {

@@ -22,8 +22,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('card');
             $table->string('logo')->nullable();
+            $table->string('video')->nullable();
             $table->string('banner')->nullable();
             $table->json('documents');
+            $table->json('images');
             $table->boolean('moderation')->default(1);
             $table->timestamps();
         });
