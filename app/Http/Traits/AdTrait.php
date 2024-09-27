@@ -10,7 +10,7 @@ trait AdTrait
     {
         $ads = Ad::with(['adCategory:name', 'user:id,name,url_name', 'user.company:id', 'user.contacts.contactType', 'office:id,address']);
 
-        if ($request->brands && count($request->brands))
+        if ($request->brands && count($request->brands)) {
             $ads = $ads->whereHas(
                 'asicVersion.asicModel.asicBrand',
                 function ($q) use ($request) {
@@ -20,29 +20,41 @@ trait AdTrait
                 }
             );
 
-        if ($request->models && count($request->models))
-            $ads = $ads->whereHas(
-                'asicVersion.asicModel',
-                function ($q) use ($request) {
-                    $q->whereIn('name', collect($request->models)->map(function ($model) {
-                        return str_replace('_', ' ', $model);
-                    }));
-                }
-            );
+            if ($request->models && count($request->models))
+                $ads = $ads->whereHas(
+                    'asicVersion.asicModel',
+                    function ($q) use ($request) {
+                        $q->whereIn('name', collect($request->models)->map(function ($model) {
+                            return str_replace('_', ' ', $model);
+                        }));
+                    }
+                );
+        }
 
         if ($request->algorithms && count($request->algorithms))
             $ads = $ads->whereHas('asicVersion.asicModel.algorithm', function ($q) use ($request) {
                 $q->whereIn('name', $request->algorithms);
             });
 
-        if ($request->conditions && count($request->conditions) && count($request->conditions) === 1) {
+        if ($request->conditions && count($request->conditions) === 1) {
             if (in_array('new', $request->conditions)) $ads = $ads->where('new', true);
             else $ads = $ads->where('new', false);
         }
 
-        if ($request->availabilities && count($request->availabilities) && count($request->availabilities) === 1) {
+        if ($request->availabilities && count($request->availabilities) === 1) {
             if (in_array('in_stock', $request->availabilities)) $ads = $ads->where('in_stock', true);
             else $ads = $ads->where('in_stock', false);
+        }
+
+        if ($request->display) {
+            if ($request->display == 'active') $ads = $ads->where('moderation', false)->where('hidden', false);
+            elseif ($request->display == 'moderation') $ads = $ads->whereHas('moderations', function ($q) {
+                $q->where('moderation_status_id', 1);
+            });
+            elseif ($request->display == 'rejected') $ads = $ads->whereHas('moderations', function ($q) {
+                $q->latest()->limit(1)->where('moderation_status_id', 3);
+            });
+            elseif ($request->display == 'hidden') $ads = $ads->where('hidden', true);
         }
 
         if ($request->sort)

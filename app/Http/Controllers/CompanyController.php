@@ -19,6 +19,21 @@ class CompanyController extends Controller
     use FileTrait;
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('company.index', [
+            'companies' => Company::where('moderation', false)->with('user:id,name,url_name')->get()
+                ->sortByDesc(function ($company) {
+                    $company->user->moderatedReviews ? $company->user->moderatedReviews->avg('rating') : 0;
+                })
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -120,6 +135,7 @@ class CompanyController extends Controller
 
         $data = [];
 
+        if ($user->tariff && $user->tariff->can_site_link && $request->site != $company->site) $data['site'] = $request->site;
         if ($request->description != $company->description) $data['description'] = $request->description;
         if ($request->video != $company->video) $data['video'] = $request->video;
 

@@ -45,7 +45,7 @@
                                         <x-primary-button class="w-full">{{ __('Details') }}</x-primary-button>
                                     </a>
 
-                                    @if ($auth->id == $office->user->id)
+                                    @if ($auth && $auth->id == $office->user->id)
                                         <a class="block w-full sm:w-auto mt-2 sm:mt-0 sm:ml-2"
                                             href="{{ route('office.edit', ['office' => $office->id]) }}">
                                             <x-primary-button class="w-full">{{ __('Edit') }}</x-primary-button>

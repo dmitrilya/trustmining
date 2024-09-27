@@ -4,7 +4,7 @@
     <fieldset aria-label="Choose a ad" class="w-full">
         <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             @if ($owner)
-                <a href="{{ route('ads.create') }}"
+                <a href="{{ route('ad.create') }}"
                     class="cursor-pointer bg-gray-100 group hover:bg-white sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-gray-400">
                     <div class="flex flex-col justify-center items-center">
                         <svg class="w-[72px] h-[72px] text-gray-300 dark:text-white" aria-hidden="true" width="24"

@@ -1,6 +1,6 @@
 @props(['path', 'name'])
 
-<div class="bg-gray-100 p-3 rounded-lg">
+<div {{ $attributes->merge(['class' => 'bg-gray-100 p-3 rounded-lg']) }}>
     <div class="flex items-center">
         <div class="rounded-md overflow-hidden min-w-14 w-14 h-14 mr-4 bg-white flex items-center justify-center">
             <svg class="w-7 h-7 text-gray-500 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

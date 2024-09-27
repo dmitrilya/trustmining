@@ -173,7 +173,19 @@
                             @endphp
 
                             @if ($auth && $ad->user->id == $auth->id)
-                                <a class="block mt-6" href="{{ route('ads.edit', ['ad' => $ad->id]) }}">
+                                @if (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
+                                    <div class="flex items-center mt-6">
+                                        <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+                                        </svg>
+                                        <p class="text-sm text-gray-400">
+                                            {{ __('The ad did not pass moderation for the following reason:') }}</p>
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-800">{{ $lastM->comment }}</p>
+                                @endif
+
+                                <a class="block mt-6" href="{{ route('ad.edit', ['ad' => $ad->id]) }}">
                                     <x-primary-button>{{ __('Edit') }}</x-primary-button>
                                 </a>
                             @else

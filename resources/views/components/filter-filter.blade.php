@@ -1,6 +1,6 @@
-@props(['name', 'items', 'field'])
+@props(['name', 'items', 'field', 'type'])
 
-<div class="border-t border-gray-200 py-5" x-data="{ open: false }">
+<div class="border-t border-gray-200 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
     <h3 class="-mx-2 -my-3 flow-root">
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
             class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
@@ -23,10 +23,15 @@
     <div class="pt-6" id="filter-section-mobile-0" x-show="open" style="display: none">
         <div class="space-y-4">
             @foreach ($items as $item)
-                <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-500"
-                    :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">
-                    {{ __($item['name']) }}
-                </x-checkbox>
+                @if ($type == 'checkbox')
+                    <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-500" :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">
+                        {{ __($item['name']) }}
+                    </x-checkbox>
+                @else
+                    <x-radio :name="$field" :value="$item['url_name']" textClasses="text-gray-500" :checked="request()->get($field) == $item['url_name']">
+                        {{ __($item['name']) }}
+                    </x-radio>
+                @endif
             @endforeach
         </div>
     </div>

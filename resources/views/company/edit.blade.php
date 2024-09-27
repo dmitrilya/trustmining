@@ -48,6 +48,15 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
+                @if ($company->user->tariff && $company->user->tariff->can_link_site)
+                    <div>
+                        <x-input-label for="site" :value="__('Link to site')" />
+                        <x-text-input id="site" name="site" type="text" class="mt-1 block w-full"
+                            :value="$company->site" autocomplete="site" />
+                        <x-input-error :messages="$errors->get('site')" class="mt-2" />
+                    </div>
+                @endif
+
                 <div>
                     <x-input-label for="video" :value="__('Link to video')" />
                     <x-text-input id="video" name="video" type="text" class="mt-1 block w-full"

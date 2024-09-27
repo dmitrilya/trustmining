@@ -234,6 +234,6 @@ class AdController extends Controller
 
         $ad->delete();
 
-        return redirect()->route('company', ['user' => $user->url_name]);
+        return redirect()->route('company', ['user' => $user->url_name])->withErrors(['success' => __('The ad has been removed')]);
     }
 }

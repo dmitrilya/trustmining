@@ -35,9 +35,9 @@
                     </div>
 
                     <div class="group flex items-center">
-                        <svg class="w-5 h-5 text-gray-400 mr-2" aria-hidden="true" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" class="w-5 h-5 text-gray-400 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z" />
                         </svg>
 
@@ -112,6 +112,16 @@
                         </svg>
                         <a class="under text-md text-gray-800 font-semibold"
                             href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z" />
+                        </svg>
+                        <a class="under text-md text-gray-800 font-semibold"
+                            href="{{ route('companies') }}">{{ __('Companies') }}</a>
                     </div>
                 </div>
 

@@ -31,6 +31,7 @@ class UpdateCompanyRequest extends FormRequest
             'images' => 'max:8',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
             'video' => 'nullable|active_url',
+            'site' => 'nullable|active_url',
             'description' => 'nullable|max:' . $descriptionMax,
             'logo' => 'file|mimes:jpg,png,jpeg|max:1048',
         ];

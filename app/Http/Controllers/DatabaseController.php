@@ -55,7 +55,7 @@ class DatabaseController extends Controller
 
     public function reviews(AsicBrand $asicBrand, AsicModel $asicModel)
     {
-        return view('reviews', [
+        return view('review.index', [
             'auth' => \Auth::user(),
             'name' => $asicModel->name,
             'type' => 'App\Models\AsicModel',

@@ -13,10 +13,15 @@
                     {{ __('Hidden') }}
                 </div>
 
-                @if ($ad->moderation)
+                @if ($ad->moderations->where('moderation_status_id', 1)->count())
                     <div
                         class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Is under moderation') }}
+                    </div>
+                @elseif (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
+                    <div
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-900 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                        {{ __('Rejected') }}
                     </div>
                 @endif
             </div>

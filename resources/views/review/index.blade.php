@@ -32,7 +32,7 @@
 
                         <div class="flex w-full">
                             <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">
-                                <div class="flex items-center justify-between mb-3">
+                                <div class="flex justify-between mb-3">
                                     <div class="text-md font-semibold text-gray-900">
                                         {{ $review->user->name }}
                                     </div>
@@ -43,8 +43,15 @@
 
                                 <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
 
-                                <p class="text-sm font-normal mt-6 text-gray-500 whitespace-pre-line">
-                                    {{ $review->review }}</p>
+                                <div class="flex justify-between mt-6">
+                                    <p class="text-sm font-normal text-gray-500 whitespace-pre-line">{{ $review->review }}</p>
+
+                                    @if ($review->moderation)
+                                        <p class="text-sm text-red-600 font-semibold">
+                                            {{ __('Is under moderation') }}
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
 
                             @if ($auth && ($auth->id == $review->reviewable->id || $review->user->id == $auth->id))
@@ -53,8 +60,7 @@
                                         <button type="button"
                                             class="ml-4 inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-200 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600">
                                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                viewBox="0 0 4 15">
+                                                fill="currentColor" viewBox="0 0 4 15">
                                                 <path
                                                     d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                             </svg>
@@ -63,14 +69,40 @@
 
                                     <x-slot name="content">
                                         @if ($auth->id == $review->reviewable->id)
-                                            <x-dropdown-link href="#">{{ __('Complain') }}</x-dropdown-link>
+                                            <x-dropdown-link
+                                                href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I am writing to appeal review number') . ' ' . $review->id]) }}">{{ __('Complain') }}</x-dropdown-link>
                                         @else
-                                            <x-dropdown-link href="#">{{ __('Edit') }}</x-dropdown-link>
+                                            <x-dropdown-link href="#"
+                                                @click.prevent="$dispatch('open-modal', 'confirm-review-deletion-{{ $review->id }}')">
+                                                {{ __('Delete') }}
+                                            </x-dropdown-link>
                                         @endif
                                     </x-slot>
                                 </x-dropdown>
                             @endif
                         </div>
+
+                        <x-modal name="{{ 'confirm-review-deletion-' . $review->id }}">
+                            <form method="post" action="{{ route('review.destroy', ['review' => $review->id]) }}"
+                                class="p-6">
+                                @csrf
+                                @method('delete')
+
+                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                    {{ __('Are you sure you want to delete this review?') }}
+                                </h2>
+
+                                <div class="mt-8 flex justify-center">
+                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                        {{ __('Cancel') }}
+                                    </x-secondary-button>
+
+                                    <x-danger-button class="ml-3">
+                                        {{ __('Confirm') }}
+                                    </x-danger-button>
+                                </div>
+                            </form>
+                        </x-modal>
                     @endforeach
                 </div>
             </div>
@@ -85,7 +117,9 @@
                             this.momentRating = r
                         },
                         setMomentRating(r) { this.momentRating = r },
-                        resetMomentRating() { this.momentRating = this.rating }
+                        resetMomentRating() { this.momentRating = this.rating },
+                        document: false,
+                        image: false
                     }" @submit.prevent="sendReview($el)">
                         @csrf
 
@@ -103,24 +137,22 @@
                             </div>
                             <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
                                 <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
-                                    <label for="input-file-review"
-                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                        <input id="input-file-review" name="document" class="hidden" type="file"
-                                            accept=".pdf,.doc,.docx">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 12 20">
+                                    <label for="input-document-review" :class="document ? 'text-indigo-600' : 'text-gray-500'"
+                                        class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                        <input id="input-document-review" name="document" class="hidden" type="file"
+                                            accept=".pdf" @change="document = true">
+                                        <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                                 d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
                                         </svg>
-                                        <span class="sr-only">Attach file</span>
+                                        <span class="sr-only">Attach document</span>
                                     </label>
 
-                                    <label for="input-file-review"
+                                    <label for="input-image-review" :class="image ? 'text-indigo-600' : 'text-gray-500'"
                                         class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                        <input id="input-file-review" name="image" class="hidden" type="file"
-                                            accept=".png,.jpg,.jpeg">
-                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="currentColor" viewBox="0 0 20 18">
+                                        <input id="input-image-review" name="image" class="hidden" type="file"
+                                            accept=".png,.jpg,.jpeg" @change="image = true">
+                                        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                                             <path
                                                 d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
                                         </svg>
@@ -138,6 +170,10 @@
                             </div>
                         </div>
                     </form>
+                    <div class="w-full border border-gray-200 rounded-b-lg bg-white dark:bg-gray-700 dark:border-gray-600 flex items-center justify-center"
+                        style="height: 172.7px;display:none">
+                        <p class="text-xl font-semibold text-gray-900 text-center">{{ __('Sent for moderation') }}</p>
+                    </div>
                 @endif
             @else
                 <div class="flex flex-col items-center justify-center py-6">

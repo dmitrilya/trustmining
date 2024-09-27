@@ -11,12 +11,12 @@
     class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
         <li>
-            <a href="{{ route('ads.edit', ['ad' => $ad->id]) }}"
+            <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"
                 class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('Edit') }}</a>
         </li>
         <li>
             <div class="flex px-4 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                <x-radio ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-radio>
+                <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
             </div>
         </li>
     </ul>

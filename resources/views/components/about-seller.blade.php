@@ -2,11 +2,12 @@
 
 <div class="flex items-center">
     @if (
-        $user->company->logo ||
-            (isset($moderation) &&
-                $auth &&
-                in_array($auth->role->name, ['admin', 'moderator']) &&
-                isset($moderation->data['logo'])))
+        $user->company &&
+            ($user->company->logo ||
+                (isset($moderation) &&
+                    $auth &&
+                    in_array($auth->role->name, ['admin', 'moderator']) &&
+                    isset($moderation->data['logo']))))
         <img class="rounded-full mr-2 w-12 h-12"
             src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}"
             alt="">

@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'url_name' => str_replace($cyr, $lat, $request->name),
+            'url_name' => strtolower(str_replace($cyr, $lat, $request->name)),
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

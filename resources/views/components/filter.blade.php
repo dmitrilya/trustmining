@@ -28,10 +28,16 @@
 
     <form class="mt-4 pt-4"
         action="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}">
+        @if ($sort)
+            <input type="hidden" name="sort" value="{{ $sort }}">
+        @endif
+
         {{ $slot }}
 
-        <div class="w-full mt-6">
-            <x-secondary-button type="submit" class="w-full justify-center">{{ __('Apply') }}</x-secondary-button>
-        </div>
+        <x-primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-primary-button>
+
+        <a href="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}">
+            <x-secondary-button type="button" class="w-full justify-center mt-2">{{ __('Reset') }}</x-secondary-button>
+        </a>
     </form>
 </div>

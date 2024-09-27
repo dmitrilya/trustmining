@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('max_offices');
             $table->unsignedTinyInteger('max_contacts');
             $table->boolean('can_have_hosting');
+            $table->boolean('can_site_link');
             $table->unsignedSmallInteger('max_description');
             $table->boolean('can_create_guide');
             $table->boolean('priority_moderation');

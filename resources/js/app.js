@@ -60,7 +60,7 @@ window.search = function (query, list, open) {
 }
 
 window.toggleHidden = function (adId) {
-    return axios.put('/ads/' + adId + '/toggle-hidden').then(r => {
+    return axios.put('/ad/' + adId + '/toggle-hidden').then(r => {
         if (!r.data.success) {
             window.pushToastAlert(r.data.message, 'error');
 
@@ -80,11 +80,14 @@ window.sendReview = function (form) {
 
     if (!data.get('rating')) return window.pushToastAlert('Необходимо поставить оценку', 'error');
 
-    return axios.post('/reviews/store', data, {
+    axios.post('/review/store', data, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     });
+
+    form.nextElementSibling.style.display = 'flex';
+    form.remove();
 }
 
 window.checkNotifications = function () {

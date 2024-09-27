@@ -7,7 +7,7 @@
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
-            <form method="post" action="{{ route('ads.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
+            <form method="post" action="{{ route('ad.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
 
                 <input type="hidden" name="ad_category_id" value="1" required>

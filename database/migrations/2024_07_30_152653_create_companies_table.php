@@ -23,6 +23,7 @@ return new class extends Migration
             $table->json('card');
             $table->string('logo')->nullable();
             $table->string('video')->nullable();
+            $table->string('site')->nullable();
             $table->string('banner')->nullable();
             $table->json('documents');
             $table->json('images');

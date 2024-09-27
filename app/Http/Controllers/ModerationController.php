@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 use App\Http\Traits\ModerationTrait;
+use App\Http\Traits\NotificationTrait;
 
 use App\Models\Moderation;
 
 class ModerationController extends Controller
 {
-    use ModerationTrait;
+    use ModerationTrait, NotificationTrait;
 
     /**
      * Display a listing of the resource.
@@ -95,6 +96,7 @@ class ModerationController extends Controller
                 case ('App\Models\Review'):
                     if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
                     if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
+                    $disk = 'private';
                     break;
                 case ('App\Models\Office'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
@@ -115,6 +117,9 @@ class ModerationController extends Controller
         $moderation->moderation_status_id = 2;
         $moderation->user_id = \Auth::id();
         $moderation->save();
+
+        if ($moderation->moderationable_type != 'App\Models\Ad' && $moderation->moderationable && $moderation->moderationable->user)
+            $this->notify('Moderation completed', $moderation->moderationable->user, 'App\Models\Moderation', $moderation);
 
         return redirect()->route('moderations');
     }
@@ -143,12 +148,15 @@ class ModerationController extends Controller
             case ('App\Models\Review'):
                 if (isset($moderation->data['document'])) array_push($files, $moderation->data['document']);
                 if (isset($moderation->data['image'])) array_push($files, $moderation->data['image']);
+                $moderation->moderationable->delete();
+                $disk = 'private';
                 break;
             case ('App\Models\Office'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
             case ('App\Models\Passport'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
+                $moderation->moderationable->delete();
                 $disk = 'private';
                 break;
         }
@@ -160,7 +168,8 @@ class ModerationController extends Controller
         $moderation->user_id = \Auth::id();
         $moderation->save();
 
-        if ($moderation->moderationable_type == 'App\Models\Passport') $moderation->moderationable->delete();
+        if ($moderation->moderationable && $moderation->moderationable->user)
+            $this->notify('Moderation failed', $moderation->moderationable->user, 'App\Models\Moderation', $moderation);
 
         return redirect()->route('moderations');
     }

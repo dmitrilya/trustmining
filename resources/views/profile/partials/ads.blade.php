@@ -7,7 +7,7 @@
 
             @if (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 5))
                 @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
-                    <a href="{{ route('ads.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                    <a href="{{ route('ad.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
                 @endif
             @else
                 <p class="text-xs text-gray-600">

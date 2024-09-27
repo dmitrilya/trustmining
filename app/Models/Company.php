@@ -28,6 +28,7 @@ class Company extends Model
         'description',
         'video',
         'logo',
+        'site',
         'moderation'
     ];
  

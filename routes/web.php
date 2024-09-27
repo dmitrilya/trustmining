@@ -52,8 +52,8 @@ Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
 
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
-
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies');
 
 Route::group(['prefix' => 'articles'], function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles');
@@ -111,7 +111,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
 
-    Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::group(['prefix' => 'review'], function () {
+        Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
+        Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
+        Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->name('review.destroy');
+    });
 
     Route::get('/chat/user/{user}', [ChatController::class, 'chat'])->name('chat.start');
     Route::get('/chats', [ChatController::class, 'index'])->name('chats');
@@ -138,13 +142,13 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('office-moderated')->group(function () {
-            Route::group(['prefix' => 'ads'], function () {
-                Route::get('/create', [AdController::class, 'create'])->name('ads.create');
-                Route::post('/store', [AdController::class, 'store'])->name('ads.store');
-                Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ads.edit');
-                Route::put('/{ad}/update', [AdController::class, 'update'])->name('ads.update');
-                Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ads.toggle-hidden');
-                Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ads.destroy');
+            Route::group(['prefix' => 'ad'], function () {
+                Route::get('/create', [AdController::class, 'create'])->name('ad.create');
+                Route::post('/store', [AdController::class, 'store'])->name('ad.store');
+                Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
+                Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
+                Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ad.toggle-hidden');
+                Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ad.destroy');
             });
         });
 

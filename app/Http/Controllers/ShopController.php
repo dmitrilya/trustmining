@@ -53,7 +53,7 @@ class ShopController extends Controller
 
     public function reviews(Request $request, User $user)
     {
-        return view('reviews', [
+        return view('review.index', [
             'auth' => $request->user(),
             'name' => $user->name,
             'type' => 'App\Models\User',
