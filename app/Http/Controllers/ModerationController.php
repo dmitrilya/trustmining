@@ -23,8 +23,15 @@ class ModerationController extends Controller
      */
     public function index(Request $request)
     {
+        $moderations = $this->getModerations($request)->get()
+            ->filter(fn($moderation) => $moderation->moderationable && $moderation->moderationable->user)->values();
+
         return view('moderation.index', [
-            'moderations' => $this->getModerations($request)->get()
+            'moderations' => $moderations->sortBy(
+                fn($moderation, $i) => $moderation->moderationable->user->tariff_id ?
+                    $i - floor($moderations->count() / 10 * 3) * $moderation->moderationable->user->tariff_id :
+                    $i
+            )
         ]);
     }
 
@@ -36,7 +43,10 @@ class ModerationController extends Controller
      */
     public function show(Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1 && \Auth::user()->role->name != 'admin') return redirect()->route('moderations');
+        if (
+            $moderation->moderation_status_id != 1 && \Auth::user()->role->name != 'admin' ||
+            !$moderation->moderationable || !$moderation->moderationable->user
+        ) return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
 
         switch ($moderation->moderationable_type) {
             case ('App\Models\Company'):
@@ -67,7 +77,7 @@ class ModerationController extends Controller
 
     public function accept(Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1)
+        if ($moderation->moderation_status_id != 1 || !$moderation->moderationable || !$moderation->moderationable->user)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
 
         $m = $moderation->moderationable;
@@ -126,7 +136,8 @@ class ModerationController extends Controller
 
     public function decline(Request $request, Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1) return redirect()->route('moderations');
+        if ($moderation->moderation_status_id != 1 || !$moderation->moderationable || !$moderation->moderationable->user)
+            return redirect()->route('moderations');
 
         $files = [];
         $disk = 'public';

@@ -63,7 +63,7 @@
                         class="rounded-md hover:bg-gray-200 block p-4">
                         <li>
                             <div class="flex">
-                                @if ($moderation->moderationable->user->company)
+                                @if ($moderation->moderationable->user->company && $moderation->moderationable->user->company->logo)
                                     <img class="h-12 w-12 flex-none rounded-full bg-gray-50 mr-4"
                                         src="{{ Storage::url($moderation->moderationable->user->company->logo) }}"
                                         alt="">
