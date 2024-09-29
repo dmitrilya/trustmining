@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('notificationable_id');
-            $table->string('notificationable_type');
+            $table->unsignedBigInteger('notificationable_id')->nullable();
+            $table->string('notificationable_type')->nullable();
             $table->boolean('checked')->default(0);
             $table->timestamp('created_at')->useCurrent();
         });

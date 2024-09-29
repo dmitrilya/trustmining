@@ -39,7 +39,7 @@
                 </p>
 
                 <p class="text-md text-gray-600 dark:text-gray-400">
-                    {{ $user->ads->where('hidden', false)->where('moderation', false)->count() }}
+                    {{ $user->ads()->where('hidden', false)->where('moderation', false)->count() }}
                 </p>
             </div>
 

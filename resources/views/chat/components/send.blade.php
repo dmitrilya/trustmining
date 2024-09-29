@@ -2,7 +2,7 @@
     <div class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
-            <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}"
+            <textarea x-ref="message" id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}"
                 class="resize-none w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400">
 @if (isset($message))
 {{ $message }}
@@ -45,7 +45,7 @@
 
                     <x-slot name="content">
                         <div class="px-2 py-1 grid grid-cols-5 h-60 overflow-y-auto">
-                            <x-emoji></x-emoji>
+                            @include('chat.components.emoji')
                         </div>
                     </x-slot>
                 </x-dropdown>

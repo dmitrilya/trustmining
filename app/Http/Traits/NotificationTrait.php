@@ -9,13 +9,13 @@ use App\Models\Notification;
 
 trait NotificationTrait
 {
-    public function notify($type, $user, $notificationableType, $notificationable)
+    public function notify($type, $user, $notificationableType = null, $notificationable = null)
     {
         Notification::create([
             'user_id' => $user->id,
             'notification_type_id' => NotificationType::where('name', $type)->first()->id,
             'notificationable_type' => $notificationableType,
-            'notificationable_id' => $notificationable->id,
+            'notificationable_id' => $notificationable ? $notificationable->id : null,
         ]);
 
         event(new NotificationEvent($user, $type, $notificationable));

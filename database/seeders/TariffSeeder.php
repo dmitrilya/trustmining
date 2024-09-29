@@ -27,20 +27,20 @@ class TariffSeeder extends Seeder
                 'max_description' => 500,
                 'can_create_guide' => 0,
                 'priority_moderation' => 0,
-                'price' => 20000,
+                'price' => 600,
             ],
             [
                 'name' => 'Company',
                 'description' => 'For medium-sized companies',
                 'max_ads' => 60,
-                'max_offices' => 5,
+                'max_offices' => 4,
                 'max_contacts' => 3,
                 'can_have_hosting' => 1,
                 'can_site_link' => 0,
                 'max_description' => 1500,
                 'can_create_guide' => 1,
                 'priority_moderation' => 1,
-                'price' => 50000,
+                'price' => 1400,
             ],
             [
                 'name' => 'Enterprise',
@@ -53,7 +53,7 @@ class TariffSeeder extends Seeder
                 'max_description' => 1500,
                 'can_create_guide' => 1,
                 'priority_moderation' => 1,
-                'price' => 0,
+                'price' => 2000,
             ],
         ]);
     }

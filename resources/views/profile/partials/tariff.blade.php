@@ -39,7 +39,7 @@
 
         @if ($user->tariff)
             <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                    class="text-gray-900 font-bold text-xl">{{ round($user->tariff->price / 30, 2) }}</span>
+                    class="text-gray-900 font-bold text-xl">{{ round($user->tariff->price) }}</span>
                 /{{ __('day') }}</div>
         @endif
     </div>

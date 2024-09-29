@@ -132,7 +132,7 @@ class ChatController extends Controller
         $message->save();
 
         if ($user->role->name == 'support')
-            $this->notify('message', $chat->users()->where('id', '!=', $user->id)->first(), 'App\Models\Message', $message);
+            $this->notify('New message from support', $chat->users()->where('id', '!=', $user->id)->first(), 'App\Models\Message', $message);
 
         return response()->json(['success' => true], 200);
     }

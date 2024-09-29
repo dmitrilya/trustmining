@@ -4,7 +4,7 @@
         <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariffs[0]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[0]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[0]->price }}</span>
+                class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[0]->price * 30 }}</span>
             /{{ __('month') }}</div>
         <a href="{{ route('tariff', ['tariff' => $tariffs[0]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
@@ -75,7 +75,7 @@
         <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariffs[1]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[1]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[1]->price }}</span>
+                class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[1]->price * 30 }}</span>
             /{{ __('month') }}</div>
             <a href="{{ route('tariff', ['tariff' => $tariffs[1]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">

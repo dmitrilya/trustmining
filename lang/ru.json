@@ -276,6 +276,8 @@
     "Good day! I am writing to appeal review number": "Добрый день! Пишу, чтобы обжаловать отзыв номер",
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",
+    "Subscription renewal failed": "Ошибка продления тарифа",
+    "Tariff reset to Base. Reactivate on the tariffs page": "Тариф сброшен до Base. Активируйте снова на странице тарифов",
 
 
     "Education": "Обучение",

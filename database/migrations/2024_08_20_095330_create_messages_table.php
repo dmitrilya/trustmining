@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->json('images');
             $table->json('files');
-            $table->boolean('checked');
+            $table->boolean('checked')->default(0);
             $table->timestamps();
         });
     }

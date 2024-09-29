@@ -21,13 +21,15 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'Price increase',
             ], [
-                'name' => 'Support',
+                'name' => 'New message from support',
             ], [
-                'name' => 'Advice',
+                'name' => 'New review',
             ], [
-                'name' => 'Warning',
+                'name' => 'Subscription renewal failed'
             ], [
-                'name' => 'Review',
+                'name' => 'Moderation failed'
+            ], [
+                'name' => 'Moderation completed'
             ]
         ]);
     }
