@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Http\Traits\SearchTrait;
+use App\Http\Traits\AdTrait;
 
 use App\Models\Article;
 use App\Models\Hosting;
@@ -21,7 +22,7 @@ use App\Models\Ad;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, AdTrait;
 
     public function locale(Request $request)
     {
@@ -39,7 +40,7 @@ class Controller extends BaseController
     {
         return view('home', [
             'articles' => Article::latest()->take(5)->get(),
-            'ads' => Ad::where('moderation', false)->latest()->take(5)->get(),
+            'ads' => $this->getAds()->where('moderation', false)->where('hidden', false)->latest()->take(5)->get(),
             'hostings' => Hosting::where('moderation', false)->latest()->take(5)->get()
         ]);
     }

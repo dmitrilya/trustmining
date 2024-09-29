@@ -14,7 +14,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
             },
             gridTemplateRows: {
                 '[auto,auto,1fr]': 'auto auto 1fr',

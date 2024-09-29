@@ -5,11 +5,11 @@
             <div class="flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block h-6 sm:h-8 w-auto fill-current drop-shadow-sm" />
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 md:-my-px md:ml-10 md:flex">
+                <div class="hidden space-x-4 lg:space-x-8 md:-my-px md:ml-10 md:flex">
                     <div class="relative flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
                         x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false"
                         @mouseover="open = true" @mouseleave="open = false">

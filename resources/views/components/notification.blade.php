@@ -2,8 +2,8 @@
 
 <a href="{{ $href }}" class="rounded-md block p-4{{ $href != '#' ? ' hover:bg-gray-200' : '' }}">
     <div class="flex items-center justify-between">
-        <div class="text-gray-400 text-xs mr-2">{{ $type }}</div>
-        <div class="date-transform text-xs leading-5 text-gray-500" data-date="{{ $date }}">
+        <div class="text-gray-400 text-xxs sm:text-xs mr-2">{{ $type }}</div>
+        <div class="date-transform text-xxs sm:text-xs leading-5 text-gray-500" data-date="{{ $date }}">
         </div>
     </div>
 

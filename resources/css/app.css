@@ -1,6 +1,16 @@
+@import 'fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-primary-gradient {
+    background: linear-gradient(to right, #7966FF, #404099);
+}
+
+.bg-secondary-gradient {
+    background: linear-gradient(to right, #40FF9F, #14AEFF);
+}
 
 .text-xxs {
     font-size: 9px;

@@ -1,7 +1,7 @@
 <footer class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-4 md:space-y-6">
         <a href="{{ route('home') }}">
-            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+            <x-application-logo class="block h-16 w-auto fill-current drop-shadow-sm" />
         </a>
 
         <div class="grid grid-cols-1 sm:grid-cols-2">

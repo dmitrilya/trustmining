@@ -240,6 +240,7 @@
     "For small points of sale": "Для небольших точек продаж",
     "For medium-sized companies": "Для средних компаний",
     "For market leaders": "Для лидеров рынка",
+    "Market leader": "Лидер рынка",
     "Advertising space on the website": "Рекламное место на сайте",
     "day": "день",
     "month": "месяц",
@@ -274,5 +275,33 @@
     "The ad has been removed": "Объявление было удалено",
     "Good day! I am writing to appeal review number": "Добрый день! Пишу, чтобы обжаловать отзыв номер",
     "Moderation failed": "Модерация не пройдена",
-    "Moderation completed": "Модерация пройдена "
+    "Moderation completed": "Модерация пройдена",
+
+
+    "Education": "Обучение",
+    "Creating and setting up an account": "Создание и настройка аккаунта",
+    "Registration": "Регистрация",
+    "To create an account, you must provide your name or company name, a current email, and a secure password of at least eight characters.": "Для создания аккаунта нужно указать ваше имя или название компании, актуальную почту и надежный пароль, состоящий минимум из восьми символов.",
+    "Account name": "Название аккаунта",
+    "The account name is displayed in each ad, on the hosting page, in the office card, and also in the address bar when the client goes to your profile. The account name can be changed in the profile settings. If the address bar does not display the transliteration of your name correctly, our support will help you fix it.": "Название аккаунта отображается в каждом объявлении, на странице хостинга, в карточке офиса, а так же в адресной строке, когда клиент переходит в ваш профиль. Название аккаунта можно поменять в настройках профиля. Если в адресной строке неверно отображается транслитерация вашего названия, то наша поддержка поможет вам это исправить.",
+    "Setting up an account": "Настройка аккаунта",
+    "After authorization, the Profile item will appear in the drop-down list in the upper right corner. On this page, you can change the data entered during registration, fill out the seller card and post your first ad.": "После авторизации в верхнем правом углу в раскрывающемся списке появится пункт Профиль. На этой странице вы можете поменять данные, введенные при регистрации, заполнить карточку продавца и выложить первое объявление.",
+    
+    "Seller card": "Карточка продавца",
+    "Step one": "Шаг первый",
+    "First, verify your identity using your passport. Only then will all the platform features be available to you.": "Для начала пройдите верификацию личности по паспорту. Только после этого вам откроются все возможности платформы.",
+    "Step two": "Шаг второй",
+    "Add at least one office or point of sale to open the possibility of creating ads.": "Добавьте хотя бы один офис или точку продаж, чтобы открыть возможность создания объявлений.",
+    "Step three": "Шаг третий",
+    "Adding information about equipment placement is only available after the company (sole proprietor or LLC) has passed moderation.": "Добавление информации о размещении оборудования доступно только после прохождения модерации компании (ИП или ООО).",
+
+    "Creating ads and passing moderation": "Создание объявлений и прохождение модерации",
+    "Requirements for the seller": "Требования к продавцу",
+    "To create ads, you must verify your identity using your passport and add at least one office or point of sale.": "Для создания объявлений необходимо пройти верификацию личности по паспорту и добавить хотя бы один офис или точку продаж.",
+    "Displaying ads to users": "Отображение объявлений у пользователей",
+    "After creating an ad, the moderation process begins. During this period, the ad will be hidden from users. You can also hide the ad on your store page. Hidden ads or ads under moderation are visible only to the owner on the store page.": "После создания объявления начинается процесс модерации. В этот период объявление будет скрыто от пользователей. Так же объявление можно скрыть на странице своего магазина. Скрытые объявления или объявления на модерации видны только владельцу на странице магазина.",
+    "Creating ads or editing them in any way starts the moderation process. The moderation speed depends on the overall load and the seller active tariff. If the ad does not pass moderation, you will receive a notification explaining the reason. After that, you can edit the ad again.": "Создание объявлений или любое редактирование запускает процесс модерации. Скорость модерации зависит от общей нагрузки и активного тарифа продавца. Если объявление не пройдет модерацию, вы получите оповещение с объяснением причины. После чего можно будет снова отредактировать объявление.",
+    "During the moderation process, editing is not available. A big plus of our platform is that after editing ads, they will continue to be displayed to users in their old form despite the moderation process.": "Во время процесса модерации редактирование недоступно. Большим плюсом нашей площадки является то, что после редактирования объявлений, они продолжат отображаться у пользователей в старом виде несмотря на процесс модерации.",
+
+    "Balance and tariff plans": "Баланс и тарифные планы"
 }

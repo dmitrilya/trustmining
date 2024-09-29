@@ -132,7 +132,7 @@ window.dateTransform = function (el) {
     switch (el.getAttribute("data-type")) {
         case 'datetime':
             date = date.toLocaleDateString('ru', {
-                month: "long",
+                month: "short",
                 day: "numeric",
                 hour: "numeric",
                 minute: "numeric",
@@ -147,7 +147,7 @@ window.dateTransform = function (el) {
             break;
         default:
             date = date.toLocaleDateString('ru', {
-                month: "long",
+                month: "short",
                 day: "numeric",
                 hour: "numeric",
                 minute: "numeric",
