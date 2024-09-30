@@ -28,8 +28,10 @@
                 </p>
             @else
                 <div class="flex">
-                    <img class="w-full aspect-[4/3] overflow-hidden rounded-lg mr-4"
-                        src="{{ Storage::url($user->hosting->images[0]) }}" alt="hosting_image">
+                    @if (count($user->hosting->images))
+                        <img class="w-full aspect-[4/3] overflow-hidden rounded-lg mr-4"
+                            src="{{ Storage::url($user->hosting->images[0]) }}" alt="hosting_image">
+                    @endif
 
                     <div>
                         <p class="text-xxs sm:text-sm text-gray-400">{{ __('Location') . ': ' }}<span

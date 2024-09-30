@@ -30,7 +30,7 @@
                             $classes = 'lg:!flex';
                             break;
                         case 4:
-                            $classes = 'xl-!flex';
+                            $classes = 'xl:!flex';
                             break;
                     }
                 @endphp
@@ -61,7 +61,7 @@
                             $classes = 'lg:!block';
                             break;
                         case 4:
-                            $classes = 'xl-!block';
+                            $classes = 'xl:!block';
                             break;
                     }
                 @endphp
@@ -87,7 +87,7 @@
                             $classes = 'lg:!block';
                             break;
                         case 4:
-                            $classes = 'xl-!block';
+                            $classes = 'xl:!block';
                             break;
                     }
                 @endphp

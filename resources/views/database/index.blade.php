@@ -2,8 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg px-2 py-4 sm:px-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
-                <ol role="list"
-                    class="flex items-center space-x-2 px-4 sm:px-6 lg:px-8">
+                <ol role="list" class="flex items-center space-x-2 px-4 sm:px-6 lg:px-8">
                     <li class="text-sm">
                         <div class="flex items-center">
                             <a href="#"
@@ -35,10 +34,16 @@
                     <a href="{{ route('database.model', [
                         'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
                         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
-                    ]) }}" class="group">
-                        <img class="w-full rounded-lg mb-2 shadow-md group-hover:shadow-lg" src="{{ Storage::url($model->images[0]) }}"
-                            alt="{{ $model->name }}">
-                        <h5 class="font-semibold text-gray-500 text-sm group-hover:text-gray-900">{{ $model->name }}</h5>
+                    ]) }}"
+                        class="group">
+                        @if (count($model->images))
+                            <img class="w-full rounded-lg mb-2 shadow-md group-hover:shadow-lg"
+                                src="{{ Storage::url($model->images[0]) }}" alt="{{ $model->name }}">
+                        @endif
+
+                        <h5 class="font-semibold text-gray-500 text-sm group-hover:text-gray-900">
+                            {{ $model->name }}
+                        </h5>
                     </a>
                 @endforeach
             </div>

@@ -31,26 +31,7 @@
                 </ol>
             </nav>
 
-            <div class="mx-auto sm:px-6 sm:grid sm:grid-cols-3 lg:gap-x-8 lg:px-8">
-                <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg sm:block">
-                    <img src="{{ Storage::url($model->images[0]) }}" alt="{{ $model->name }}"
-                        class="w-full object-cover object-center">
-                </div>
-                <div class="hidden sm:grid sm:grid-cols-1 sm:gap-y-8">
-                    <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                        <img src="{{ Storage::url($model->images[1]) }}" alt="{{ $model->name }}"
-                            class="w-full object-cover object-center">
-                    </div>
-                    <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                        <img src="{{ Storage::url($model->images[2]) }}" alt="{{ $model->name }}"
-                            class="w-full object-cover object-center">
-                    </div>
-                </div>
-                <div class="aspect-h-5 aspect-w-4 sm:aspect-h-4 sm:aspect-w-3 overflow-hidden rounded-lg">
-                    <img src="{{ Storage::url($model->images[3]) }}" alt="{{ $model->name }}"
-                        class="w-full object-cover object-center">
-                </div>
-            </div>
+            @include('database.components.model-images')
 
             <div
                 class="mx-auto px-4 pb-16 pt-10 sm:px-6 md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:pb-24 md:pt-16">

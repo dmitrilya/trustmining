@@ -3,8 +3,10 @@
 <div
     class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white shadow-md overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
-        <img class="w-full aspect-[4/3] overflow-hidden rounded-lg" src="{{ Storage::url($hosting->images[0]) }}"
-            alt="Hosting image">
+        @if (count($hosting->images))
+            <img class="w-full aspect-[4/3] overflow-hidden rounded-lg" src="{{ Storage::url($hosting->images[0]) }}"
+                alt="Hosting image">
+        @endif
 
         <a href="{{ route('company', ['user' => $hosting->user->url_name]) }}"
             class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500 mt-4">{{ $hosting->user->name }}</a>

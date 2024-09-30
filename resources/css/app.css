@@ -1,15 +1,15 @@
-@import 'fonts.css';
+@import "fonts.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .bg-primary-gradient {
-    background: linear-gradient(to right, #7966FF, #404099);
+    background: linear-gradient(to right, #7966ff, #404099);
 }
 
 .bg-secondary-gradient {
-    background: linear-gradient(to right, #40FF9F, #14AEFF);
+    background: linear-gradient(to right, #40ff9f, #14aeff);
 }
 
 .text-xxs {
