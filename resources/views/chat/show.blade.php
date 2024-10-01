@@ -59,8 +59,8 @@
                 </div>
 
                 <div class="bg-gray-100 p-1 rounded-t-md h-full overflow-hidden">
-                    <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-1 overflow-x-hidden overflow-y-auto duration-100" id="chat-messages"
-                        style="opacity: 0" x-init="setTimeout(() => {
+                    <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-1 overflow-x-hidden overflow-y-auto duration-100"
+                        id="chat-messages" style="opacity: 0" x-init="setTimeout(() => {
                             scrollBottom($el);
                             $el.style.opacity = 1;
                         }, 100)">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                @include('chat.components.send', ['chatId' => $activeChat->id])
+                @include('chat.components.send', ['chatId' => $activeChat->id, 'message' => null])
             </div>
         </div>
     </div>

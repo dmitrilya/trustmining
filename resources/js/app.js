@@ -117,7 +117,7 @@ window.onload = function () {
 window.dateTransform = function (el) {
     let date = new Date(Date.parse(el.getAttribute("data-date").replace(/ /g, "T")));
     if (date == 'Invalid Date') date = new Date(+el.getAttribute("data-date"));
-    
+
     date = new Date(
         Date.UTC(
             date.getFullYear(),
@@ -143,6 +143,12 @@ window.dateTransform = function (el) {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
+            });
+            break;
+        case 'month':
+            date = date.toLocaleDateString('ru', {
+                year: "numeric",
+                month: "long",
             });
             break;
         default:

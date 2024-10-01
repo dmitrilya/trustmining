@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased overflow-x-hidden">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ mobileFilter: false }">
         @include('layouts.navigation')
 
@@ -43,7 +43,9 @@
         </main>
     </div>
 
-    @include('layouts.footer')
+    @if (request()->route()->action['as'] !== 'roadmap')
+        @include('layouts.footer')
+    @endif
 
     <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
         @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror

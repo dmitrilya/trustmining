@@ -107,6 +107,8 @@ class ModerationController extends Controller
                     if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
                     if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
                     $disk = 'private';
+                    if ($moderation->moderationable && $moderation->moderationable->reviewable)
+                        $this->notify('New review', $moderation->moderationable->reviewable, 'App\Models\Review', $moderation->moderationable);
                     break;
                 case ('App\Models\Office'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);

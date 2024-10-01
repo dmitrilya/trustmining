@@ -50,9 +50,9 @@ class Controller extends BaseController
         return view('document');
     }
 
-    public function about(): View
+    public function roadmap(): View
     {
-        return view('about');
+        return view('roadmap');
     }
 
     public function career(): View

@@ -16,9 +16,9 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-screen absolute z-50 w-max rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-16"
+        class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-16"
         style="display: none" @click.away="open = false">
-        <div class="rounded-b-lg ring-b-1 ring-black ring-opacity-5 p-4 md:p-10 xl:p-14 bg-white dark:bg-gray-700">
+        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 md:p-10 xl:p-14 bg-white dark:bg-gray-700">
             <div class="sm:flex gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-500 mb-6">{{ __('Project') }}</div>
@@ -31,7 +31,7 @@
                             </path>
                         </svg>
                         <a class="under text-md text-gray-800 font-semibold"
-                            href="{{ route('about') }}">{{ __('About') }}</a>
+                            href="{{ route('roadmap') }}">Roadmap</a>
                     </div>
 
                     <div class="group flex items-center">
@@ -56,7 +56,7 @@
                             href="{{ route('articles') }}">{{ __('Blog') }}</a>
                     </div>
 
-                    <div class="group flex items-center">
+                    {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true" class="w-5 h-5 text-gray-400 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -65,7 +65,7 @@
                         </svg>
                         <a class="under text-md text-gray-800 font-semibold"
                             href="{{ route('career') }}">{{ __('Career in MPlace') }}</a>
-                    </div>
+                    </div> --}}
 
                     <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

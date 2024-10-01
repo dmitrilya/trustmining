@@ -47,7 +47,7 @@ Route::get('/locale', [Controller::class, 'locale'])->name('locale');
 Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/search', [Controller::class, 'search'])->name('search');
 Route::get('/document', [Controller::class, 'document'])->name('document');
-Route::get('/about', [Controller::class, 'about'])->name('about');
+Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
 
