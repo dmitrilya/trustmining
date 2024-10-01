@@ -104,7 +104,7 @@
                 @endauth
 
                 <div class="flex cursor-pointer mx-3">
-                    <a class="{{ app()->getLocale() == 'ru' ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700' }} p-1 rounded-l border border-r-0 border-gray-300 text-xxs font-semibold"
+                    <a class="{{ app()->getLocale() == 'ru' ? 'bg-primary-gradient hover:bg-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700' }} p-1 rounded-l border border-r-0 border-gray-300 text-xxs font-semibold"
                         href="{{ route('locale', ['locale' => 'ru']) }}">RU</a>
                     <a class="{{ app()->getLocale() == 'en' ? 'bg-gray-800 hover:bg-gray-700 text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700' }} p-1 rounded-r border border-l-0 border-gray-300 text-xxs font-semibold"
                         href="{{ route('locale', ['locale' => 'en']) }}">EN</a>
