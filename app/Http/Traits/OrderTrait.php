@@ -2,10 +2,14 @@
 
 namespace App\Http\Traits;
 
+use App\Http\Traits\Tinkoff;
+
 use App\Models\Order;
 
 trait OrderTrait
 {
+    use Tinkoff;
+
     public function storeOrder($request)
     {
         switch ($request->method) {
@@ -27,7 +31,11 @@ trait OrderTrait
             'amount' => $request->amount
         ]);
 
-        $response = $this->payInit($order);
+        $res = $this->payInit($order);
+
+        $order->token = $res['token'];
+
+        $response = $res['res'];
 
         if (!$response->Success) {
             $order->status = $response->Message;
@@ -37,7 +45,6 @@ trait OrderTrait
         }
 
         $order->status = $response->Status;
-        $order->token = $response->Status;
         $order->save();
 
         return redirect($response->PaymentURL);
