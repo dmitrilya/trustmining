@@ -24,6 +24,23 @@ trait OrderTrait
         }
     }
 
+    public function updateOrder($request)
+    {
+        $order = Order::find($request->OrderId);
+
+        if (!$order || $order->token != $request->token) return;
+
+        $order->status = $request->Status;
+        $order->save();
+
+        if ($order->status == 'CONFIRMED') {
+            $order->user->balance += $order->amount;
+            $order->user->save();
+        }
+
+        return;
+    }
+
     private function card($request)
     {
         $order = Order::create([
@@ -38,7 +55,8 @@ trait OrderTrait
         $response = $res['res'];
 
         if (!$response->Success) {
-            dd($response);
+            info(json_encode($response));
+            
             $order->status = $response->Message;
             $order->save();
 

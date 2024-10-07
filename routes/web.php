@@ -97,6 +97,8 @@ Route::group(['prefix' => 'ads'], function () {
     Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 });
 
+Route::post('/order/webhook', [OrderController::class, 'webhook']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/address/suggestions', [DaDataController::class, 'suggestions'])->name('address.suggestions');
 
