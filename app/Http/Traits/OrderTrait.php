@@ -38,6 +38,7 @@ trait OrderTrait
         $response = $res['res'];
 
         if (!$response->Success) {
+            dd($response);
             $order->status = $response->Message;
             $order->save();
 
