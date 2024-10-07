@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(10000000);
             $table->unsignedBigInteger('notification_type_id');
             $table->foreign('notification_type_id')->references('id')
                 ->on('notification_types')->onUpdate('cascade')->onDelete('cascade');

@@ -44,6 +44,10 @@
         @endif
     </div>
 
+    <a href="{{ route('order.create') }}" class="block ml-auto w-max">
+        <x-primary-button>{{ __('Top up') }}</x-primary-button>
+    </a>
+
     <p class="text-sm text-gray-600">
         {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}
     </p>

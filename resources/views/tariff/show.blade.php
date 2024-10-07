@@ -110,7 +110,7 @@
                         <path fill-rule="evenodd" d="M5 14a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1Zm5 0a1 1 0 0 1 1-1h5a1 1 0 1 1 0 2h-5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
                       </svg>
 
-                    <div class="ml-4 text-lg md:text-xl text-gray-600 group-hover:text-gray-900 font-semibold">{{ __('Bank card') }}</div>
+                    <div class="ml-4 text-lg md:text-xl text-gray-600 group-hover:text-gray-900 font-semibold">{{ __('Card') }}</div>
                 </div>
 
                 <div class="w-full cursor-pointer px-4 py-6 md:py-8 rounded-lg border border-gray-200 shadow-md hover:shadow-lg bg-white flex items-center justify-center group">

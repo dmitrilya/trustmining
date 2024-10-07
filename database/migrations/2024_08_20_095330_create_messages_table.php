@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(10000000);
             $table->unsignedBigInteger('chat_id');
             $table->foreign('chat_id')->references('id')
                 ->on('chats')->onUpdate('cascade')->onDelete('cascade');

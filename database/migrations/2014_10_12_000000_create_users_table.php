@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(10000000);
             $table->unsignedBigInteger('role_id')->default(2);
             $table->foreign('role_id')->references('id')
                 ->on('roles')->onUpdate('cascade')->onDelete('cascade');

@@ -15,6 +15,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ModerationController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TariffController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -100,6 +101,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/address/suggestions', [DaDataController::class, 'suggestions'])->name('address.suggestions');
 
     Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
+
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+        Route::post('/store', [OrderController::class, 'store'])->name('order.store');
+    });
 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'show'])->name('profile');
