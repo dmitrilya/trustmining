@@ -21,9 +21,9 @@ trait Tinkoff
                         'PaymentObject' => 'service',
                         'Tax' => 'none',
                     ],
-                    'Email' => $order->user->email,
-                    'Taxation' => 'usn_income'
-                ]
+                ],
+                'Email' => $order->user->email,
+                'Taxation' => 'usn_income'
             ]
         ];
 
