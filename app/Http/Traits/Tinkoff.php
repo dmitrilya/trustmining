@@ -61,6 +61,6 @@ trait Tinkoff
 
         ksort($params);
 
-        return hash('sha256', implode('', array_values($params)));
+        return hash('sha256', implode('', array_values(array_diff_key($params, ['Receipt' => 0]))));
     }
 }
