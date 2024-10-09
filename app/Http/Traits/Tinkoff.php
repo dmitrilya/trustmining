@@ -10,7 +10,21 @@ trait Tinkoff
     {
         $params = [
             'Amount' => $order->amount * 100,
-            'OrderId' => $order->id
+            'OrderId' => $order->id,
+            'Receipt' => [
+                'Items' => [
+                    [
+                        'Name' => 'Пополнение баланса личного кабинета',
+                        'Price' => $order->amount * 100,
+                        'Quantity' => 1,
+                        'Amount' => $order->amount * 100,
+                        'PaymentObject' => 'service',
+                        'Tax' => 'none',
+                    ],
+                    'Email' => $order->user->email,
+                    'Taxation' => 'usn_income'
+                ]
+            ]
         ];
 
         return $this->request('POST', 'Init', $params);
@@ -18,7 +32,7 @@ trait Tinkoff
 
     private function request($method, $link, $params)
     {
-        $params['TerminalKey'] = '1727865557613';
+        $params['TerminalKey'] = '1727865557366DEMO';
         $params['Token'] = $this->token($params);
 
         $link = 'https://securepay.tinkoff.ru/v2/' . $link;
@@ -43,7 +57,7 @@ trait Tinkoff
 
     private function token($params)
     {
-        $params['Password'] = '0Pa$_Y$NaX1_q4vi';
+        $params['Password'] = '$6X*_dtr*MuxTajY';
 
         ksort($params);
 
