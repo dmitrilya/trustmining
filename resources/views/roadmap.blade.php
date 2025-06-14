@@ -342,7 +342,7 @@
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
                         {{ __('Launching a mobile application') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
-                        {{ __('MPlace in your pocket') }}
+                        {{ __('TrustMining in your pocket') }}
                     </div>
                 </article>
             </div>

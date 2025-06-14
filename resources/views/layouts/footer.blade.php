@@ -17,7 +17,7 @@
                 <a class="w-max under text-sm text-gray-800 font-semibold"
                     href="{{ route('articles') }}">{{ __('Blog') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('career') }}">{{ __('Career in MPlace') }}</a> --}}
+                    href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-800 font-semibold"
                     href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy') }}</a>
             </div>

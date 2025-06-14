@@ -23,7 +23,7 @@
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-500 mb-6">{{ __('Project') }}</div>
 
-                    <div class="group flex items-center">
+                    {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true" class="w-5 h-5 text-gray-400 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -32,7 +32,7 @@
                         </svg>
                         <a class="under text-md text-gray-800 font-semibold"
                             href="{{ route('roadmap') }}">Roadmap</a>
-                    </div>
+                    </div> --}}
 
                     <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -64,7 +64,7 @@
                             </path>
                         </svg>
                         <a class="under text-md text-gray-800 font-semibold"
-                            href="{{ route('career') }}">{{ __('Career in MPlace') }}</a>
+                            href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a>
                     </div> --}}
 
                     <div class="group flex items-center">
