@@ -4,33 +4,38 @@
             <x-application-logo class="text-4xl sm:text-6xl" />
         </a>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2">
-            <div class="space-y-2 mb-4 sm:mb-0">
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('roadmap') }}">Roadmap</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('support') }}">FAQ</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
+        <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="space-y-2">
+                <div class="text-sm text-gray-400 font-semibold">{{ __('To the buyer') }}</div>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('ads') }}">{{ __('Miners') }}</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('companies') }}">{{ __('Companies') }}</a>
+                <a class="w-max under text-sm text-gray-800"
                     href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('articles') }}">{{ __('Blog') }}</a>
-                {{-- <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy') }}</a>
             </div>
 
             <div class="space-y-2">
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('ads') }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
-                    href="{{ route('companies') }}">{{ __('Companies') }}</a>
-                <a class="w-max under text-sm text-gray-800 font-semibold"
+                <div class="text-sm text-gray-400 font-semibold">{{ __('To the seller') }}</div>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('roadmap') }}">Roadmap</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('support') }}">FAQ</a>
+            </div>
+
+            <div class="space-y-2">
+                <a class="w-max under text-sm text-gray-800"
                     href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('articles') }}">{{ __('Blog') }}</a>
+                {{-- <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy') }}</a>
             </div>
         </div>
 
