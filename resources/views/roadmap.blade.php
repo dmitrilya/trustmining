@@ -5,7 +5,7 @@
                 <div class="h-full flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
                     <div>
                         <a href="/">
-                            <x-application-logo class="h-32 fill-current drop-shadow-sm" type="col" />
+                            <x-application-logo class="text-6xl" />
                         </a>
                     </div>
 

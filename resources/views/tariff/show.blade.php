@@ -31,7 +31,7 @@
                 <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
                 <div class="text-gray-500 text-sm md:text-base">{{ __($tariff->description) }}</div>
                 <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                        class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price }}</span>
+                        class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price * 30 }}</span>
                     /{{ __('month') }}</div>
                 <div class="space-y-2 sm:space-y-3">
                     <div class="flex items-center">

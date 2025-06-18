@@ -14,7 +14,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             @if (!$offices->count())
-                <p class="text-md text-gray-500">
+                <p class="text-base text-gray-500">
                     {{ __('There is no information about open offices and points of sale.') }}
                 </p>
             @else
@@ -25,7 +25,7 @@
 
                             <div class="flex flex-col justify-between sm:ml-6 mt-6 sm:mt-0 w-full">
                                 <div>
-                                    <p class="flex text-md font-semibold text-gray-900 mb-6">
+                                    <p class="flex text-base font-semibold text-gray-900 mb-6">
                                         <svg class="w-6 h-6 text-gray-500 mr-2" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="currentColor" viewBox="0 0 24 24">

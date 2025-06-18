@@ -10,7 +10,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             @if (!$chats->count())
-                <p class="text-md text-gray-500">
+                <p class="text-base text-gray-500">
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
                 </p>
             @else

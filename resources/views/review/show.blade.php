@@ -15,7 +15,7 @@
                 <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-8 duration-100">
                     <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">
                         <div class="flex justify-between mb-3">
-                            <div class="text-md font-semibold text-gray-900">
+                            <div class="text-base font-semibold text-gray-900">
                                 {{ $review->user->name }}
                             </div>
 

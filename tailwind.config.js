@@ -14,7 +14,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                sans: ['Huninn', ...defaultTheme.fontFamily.sans],
             },
             gridTemplateRows: {
                 '[auto,auto,1fr]': 'auto auto 1fr',

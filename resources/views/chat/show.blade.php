@@ -54,7 +54,7 @@
                 @endphp
 
                 <div class="lg:hidden px-3 py-2 sm:px-7">
-                    <p class="text-md font-semibold leading-6 text-gray-900">
+                    <p class="text-base font-semibold leading-6 text-gray-900">
                         {{ $user->name }}</p>
                 </div>
 

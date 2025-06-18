@@ -34,7 +34,7 @@ class TariffSeeder extends Seeder
                 'description' => 'For medium-sized companies',
                 'max_ads' => 60,
                 'max_offices' => 4,
-                'max_contacts' => 3,
+                'max_contacts' => 2,
                 'can_have_hosting' => 1,
                 'can_site_link' => 0,
                 'max_description' => 1500,
@@ -54,6 +54,19 @@ class TariffSeeder extends Seeder
                 'can_create_guide' => 1,
                 'priority_moderation' => 1,
                 'price' => 2000,
+            ],
+            [
+                'name' => 'Subscription',
+                'description' => 'description',
+                'max_ads' => 0,
+                'max_offices' => 0,
+                'max_contacts' => 0,
+                'can_have_hosting' => 0,
+                'can_site_link' => 0,
+                'max_description' => 0,
+                'can_create_guide' => 0,
+                'priority_moderation' => 0,
+                'price' => 500,
             ],
         ]);
     }

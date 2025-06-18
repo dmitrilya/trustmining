@@ -38,7 +38,7 @@
                     {{ __('Active') }}
                 </p>
 
-                <p class="text-md text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-600 dark:text-gray-400">
                     {{ $user->ads()->where('hidden', false)->where('moderation', false)->count() }}
                 </p>
             </div>
@@ -48,7 +48,7 @@
                     {{ __('Is under moderation') }}
                 </p>
 
-                <p class="text-md text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-600 dark:text-gray-400">
                     {{ $user->ads->where('moderation', true)->count() }}
                 </p>
             </div>
@@ -58,7 +58,7 @@
                     {{ __('Hidden') }}
                 </p>
 
-                <p class="text-md text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-600 dark:text-gray-400">
                     {{ $user->ads->where('hidden', true)->count() }}
                 </p>
             </div>

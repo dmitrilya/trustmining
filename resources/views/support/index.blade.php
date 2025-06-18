@@ -7,7 +7,7 @@
                 <li class="w-full">
                     <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="stats"
                         aria-selected="{{ request()->chat ? 'false' : 'true' }}"
-                        class="inline-block w-full p-4 rounded-ss-2xl bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">{{ __('Education') }}</button>
+                        class="inline-block w-full p-4 rounded-ss-2xl bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600">FAQ</button>
                 </li>
                 <li class="w-full">
                     <button id="question-tab" data-tabs-target="#question" type="button" role="tab"
@@ -24,7 +24,7 @@
             </ul>
 
             <div id="fullWidthTabContent" style="height: calc(100% - 52px)">
-                @include('support.components.education')
+                @include('support.components.faq')
 
                 <div class="h-full flex flex-col hidden bg-white rounded-b-2xl dark:bg-gray-800 p-1 sm:p-4" id="question"
                     role="tabpanel" aria-labelledby="question-tab">

@@ -5,7 +5,7 @@
             <div class="flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-6 sm:h-8 w-auto fill-current drop-shadow-sm" />
+                        <x-application-logo class="text-xl sm:h-2xl" />
                     </a>
                 </div>
 

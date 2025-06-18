@@ -8,8 +8,20 @@
     background: linear-gradient(to right, #7966ff, #404099);
 }
 
+.color-primary-gradient {
+    background-image: linear-gradient(to right, #7966ff, #404099);
+    color: transparent;
+    background-clip: text;
+}
+
 .bg-secondary-gradient {
     background: linear-gradient(to right, #40ff9f, #14aeff);
+}
+
+.color-secondary-gradient {
+    background-image: linear-gradient(to right, #40ff9f, #14aeff);
+    color: transparent;
+    background-clip: text;
 }
 
 .text-xxs {

@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="/">
-                    <x-application-logo class="h-32 fill-current drop-shadow-sm" type="col" />
+                    <x-application-logo class="text-4xl sm:text-5xl" />
                 </a>
             </div>
 

@@ -33,7 +33,7 @@
                         <div class="flex w-full">
                             <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">
                                 <div class="flex justify-between mb-3">
-                                    <div class="text-md font-semibold text-gray-900">
+                                    <div class="text-base font-semibold text-gray-900">
                                         {{ $review->user->name }}
                                     </div>
 

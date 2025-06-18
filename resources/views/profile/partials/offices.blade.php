@@ -36,7 +36,7 @@
                     {{ __('Active') }}
                 </p>
 
-                <p class="text-md text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-600 dark:text-gray-400">
                     {{ $user->offices->where('moderation', false)->count() }}
                 </p>
             </div>
@@ -46,7 +46,7 @@
                     {{ __('Is under moderation') }}
                 </p>
 
-                <p class="text-md text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-600 dark:text-gray-400">
                     {{ $user->offices->where('moderation', true)->count() }}
                 </p>
             </div>
