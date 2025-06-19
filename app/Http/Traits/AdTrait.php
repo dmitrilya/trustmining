@@ -58,7 +58,7 @@ trait AdTrait
                 elseif ($request->display == 'hidden') $ads = $ads->where('hidden', true);
             }
 
-            if ($request->sort)
+            if ($request->sort && ($user = $request->user()) && $user->tariff)
                 switch ($request->sort) {
                     case 'price_low_to_high':
                         $ads = $ads->orderBy('price');

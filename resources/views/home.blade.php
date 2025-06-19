@@ -87,31 +87,7 @@
             <div class="text-center text-xs sm:text-lg lg:text-xl text-gray-400">{{ __('You can start using the service right now. All the tools you need are free, but for a symbolic subscription fee to support the development of the project, you will have access to several functions that will be useful if you regularly track the best prices on the market') }}</div>
         </div>
 
-        <div
-            class="w-full max-w-md mx-auto shadow-lg bg-gray-900 border-2 border-indigo-500 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
-            <div class="h-9 flex items-end text-white md:text-lg"><span
-                    class="font-bold text-2xl sm:text-3xl lg:text-4xl">{{ ($tariff = App\Models\Tariff::where('name', 'Subscription')->first())->price }}₽</span></div>
-            <a
-                href="{{ route('tariff', ['tariff' => $tariff->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
-            <div class="space-y-2 sm:space-y-3">
-                <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <div class="text-sm text-gray-400">{{ __('Possibility to sort ads by price') }}</div>
-                </div>
-                <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <div class="text-sm text-gray-400">{{ __('Subscribe to price alerts') }}</div>
-                </div>
-            </div>
-        </div>
+        @include('tariff.components.subscription')
 
         <div>
             <div id="confidence-factor-info" class="max-w-sm lg:max-w-xl mx-auto pt-12 md:pt-16">
@@ -148,10 +124,10 @@
                 <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
                 <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Uniqueness of content and contracts') }}</div>
             </div>
-            <div class="flex items-center">
+            {{-- <div class="flex items-center">
                 <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
                 <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Participation in conferences and mention in the media') }}</div>
-            </div>
+            </div> --}}
             <div class="flex items-center">
                 <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
                 <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Message response speed') }}</div>

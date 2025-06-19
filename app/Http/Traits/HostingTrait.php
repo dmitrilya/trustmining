@@ -23,7 +23,7 @@ trait HostingTrait
             else $ads = $ads->where('in_stock', false);
         }*/
 
-        if ($request->sort)
+        if ($request->sort && ($user = $request->user()) && $user->tariff)
             switch ($request->sort) {
                 case 'price_low_to_high':
                     $hostings = $hostings->orderBy('price');

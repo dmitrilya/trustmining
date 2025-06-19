@@ -19,7 +19,7 @@
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ mobileFilter: false }">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ mobileFilter: {{ count(array_filter(request()->all(), fn($item) => $item != 'sort', ARRAY_FILTER_USE_KEY)) }} }">
         @include('layouts.navigation')
 
         @if (isset($header))
@@ -40,6 +40,28 @@
 
         <main>
             {{ $slot }}
+
+            <x-modal name="need-subscription">
+                <div class="p-6">
+                    <div class="flex justify-between mb-6">
+                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                            {{ __('This feature is only available with a subscription') }}
+                        </h2>
+
+                        <button type="button"
+                            class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-400"
+                            @click="show = false">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @include('tariff.components.subscription')
+                </div>
+            </x-modal>
         </main>
     </div>
 

@@ -1,10 +1,10 @@
 @props(['show'])
 
 <div x-show="{{ !$show ? 'mobileFilter' : 'true' }}" x-data="{ mobile: {{ $show ? 'false' : 'true' }}, isSticky: false, lastKnownScrollPosition: window.pageYOffset }"
-    class="p-4 sticky h-max w-full flex-col overflow-y-auto bg-white py-4 shadow-md{{ $show ? ' max-w-64 mr-4 hidden lg:flex rounded-lg' : ' max-w-xs pb-12 flex ml-auto' }}"
+    class="p-4 sticky h-max w-full flex-col overflow-y-auto bg-white py-4 shadow-md{{ $show ? ' max-w-64 mr-4 hidden lg:flex rounded-lg' : ' pb-12 flex ml-auto' }}"
     x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full"
     x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
-    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" style="top: 32px"
+    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" @if ($show)style="top: 32px"@endif
     @if (!$show) @click.away="mobileFilter = false" @endif
     @if ($show)
         @scroll.window="
@@ -54,7 +54,7 @@
 
         {{ $slot }}
 
-        <x-primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-primary-button>
+        {{-- <x-primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-primary-button> --}}
 
         <a href="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}">
             <x-secondary-button type="button"
