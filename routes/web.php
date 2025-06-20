@@ -101,6 +101,10 @@ Route::post('/order/webhook', [OrderController::class, 'webhook']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/address/suggestions', [DaDataController::class, 'suggestions'])->name('address.suggestions');
+    
+    Route::group(['prefix' => 'tg'], function () {
+        Route::get('/auth', [Controller::class, 'tgAuth']);
+    });
 
     Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
 
