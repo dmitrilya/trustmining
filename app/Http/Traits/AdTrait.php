@@ -11,7 +11,7 @@ trait AdTrait
         $ads = Ad::with(['adCategory:name', 'user:id,name,url_name', 'user.company:id', 'user.contacts.contactType', 'office:id,address']);
 
         if (isset($request)) {
-            if ($request->brands && count($request->brands)) {
+            /*if ($request->brands && count($request->brands)) {
                 $ads = $ads->whereHas(
                     'asicVersion.asicModel.asicBrand',
                     function ($q) use ($request) {
@@ -30,6 +30,10 @@ trait AdTrait
                             }));
                         }
                     );
+            }*/
+
+            if ($request->asic_version_id) {
+                $ads = $ads->where('asic_version_id', $request->asic_version_id);
             }
 
             if ($request->algorithms && count($request->algorithms))

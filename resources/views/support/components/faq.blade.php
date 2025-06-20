@@ -61,7 +61,7 @@
 
 <div class="h-full flex flex-col hidden p-4 md:p-6 bg-white rounded-b-2xl dark:bg-gray-800" id="faq" role="tabpanel"
     aria-labelledby="faq-tab" x-data="{ search: '' }">
-    <x-text-input class="w-full mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}"></x-text-input>
+    <x-text-input class="mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}" />
 
     <div id="accordion-flush-themes" data-accordion="collapse"
         class="pr-4 h-full divide-y-2 divide-gray-200 overflow-y-auto"

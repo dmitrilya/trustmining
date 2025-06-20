@@ -36,7 +36,7 @@
                                         {{ $office->address }}
                                     </p>
 
-                                    <x-peculiarities :ps="$office->peculiarities"></x-peculiarities>
+                                    <x-peculiarities :ps="$office->peculiarities" model="office"></x-peculiarities>
                                 </div>
 
                                 <div class="flex flex-col sm:flex-row sm:ml-auto">

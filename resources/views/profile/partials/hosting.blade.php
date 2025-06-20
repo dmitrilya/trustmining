@@ -10,7 +10,7 @@
                     <a href="{{ route('hosting.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
                 @elseif (!$user->company->moderation)
                     <a href="{{ route('hosting.edit', ['hosting' => $user->hosting->id]) }}">
-                        <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                        <x-primary-button>{{ __('Edit') }}</x-primary-button></a>
                 @endif
             @endif
         </div>
@@ -18,7 +18,7 @@
 
     <div class="mt-6">
         @if ($user->tariff && $user->tariff->can_have_hosting)
-            @if (!$user->company)
+            @if (!$user->company || $user->company->moderation)
                 <p class="text-sm text-gray-600 dark:text-gray-400">
                     {{ __('To add information about placement, you must register a company.') }}
                 </p>

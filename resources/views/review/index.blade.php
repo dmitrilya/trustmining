@@ -140,7 +140,7 @@
                                     <label for="input-document-review" :class="document ? 'text-indigo-600' : 'text-gray-500'"
                                         class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                         <input id="input-document-review" name="document" class="hidden" type="file"
-                                            accept=".pdf" @change="document = true">
+                                            accept=".pdf,.doc,.docx" @change="document = true">
                                         <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                                 d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />

@@ -63,14 +63,14 @@ class HostingController extends Controller
         $hosting = Hosting::create([
             'user_id' => $user->id,
             'description' => $request->description,
-            'address' => $request->address,
+            'address' => $request->address ? $request->address : 'Not specified',
             'video' => $request->video,
             'price' => $request->price,
             'images' => [],
             'documents' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
-            'expenses' => explode(';', $request->expenses),
-            'conditions' => explode(';', $request->conditions),
+            'conditions' => $request->conditions,
+            'expenses' => $request->expenses,
         ]);
 
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);
@@ -129,14 +129,16 @@ class HostingController extends Controller
 
         $data = [];
         $p = $request->peculiarities ? $request->peculiarities : [];
+        $c = $request->conditions ? $request->conditions : [];
+        $e = $request->expenses ? $request->expenses : [];
 
         if ($request->description != $hosting->description) $data['description'] = $request->description;
-        if ($request->address != $hosting->address) $data['address'] = $request->address;
+        if ($request->address != $hosting->address) $data['address'] = $request->address ? $request->address : 'Not specified';
         if ($request->video != $hosting->video) $data['video'] = $request->video;
         if ($request->price != $hosting->price) $data['price'] = $request->price;
         if (count(array_diff($hosting->peculiarities, $p)) || count(array_diff($p, $hosting->peculiarities))) $data['peculiarities'] = $p;
-        if ($request->expenses != implode(';', $hosting->expenses)) $data['expenses'] = explode(';', $request->expenses);
-        if ($request->conditions != implode(';', $hosting->conditions)) $data['conditions'] = explode(';', $request->conditions);
+        if (count(array_diff($hosting->conditions, $c)) || count(array_diff($c, $hosting->conditions))) $data['conditions'] = $c;
+        if (count(array_diff($hosting->expenses, $e)) || count(array_diff($e, $hosting->expenses))) $data['expenses'] = $e;
 
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);

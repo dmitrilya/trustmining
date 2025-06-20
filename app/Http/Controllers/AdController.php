@@ -62,7 +62,7 @@ class AdController extends Controller
     {
         $user = $request->user();
 
-        if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
+        if ($user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $office = Office::find($request->office_id);
@@ -108,7 +108,7 @@ class AdController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->role->name == 'user' && $user->id != $ad->user->id && ($ad->moderation || $ad->hidden))
+        if ((!$user || $user->role->name == 'user' && $user->id != $ad->user->id) && ($ad->moderation || $ad->hidden))
             return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
         $this->addView(request(), $ad);

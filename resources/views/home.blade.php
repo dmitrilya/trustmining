@@ -122,7 +122,11 @@
             </div>
             <div class="flex items-center">
                 <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
-                <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Uniqueness of content and contracts') }}</div>
+                <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Uniqueness of content') }}</div>
+            </div>
+            <div class="flex items-center">
+                <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
+                <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Correctness of documents and contracts') }}</div>
             </div>
             {{-- <div class="flex items-center">
                 <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>

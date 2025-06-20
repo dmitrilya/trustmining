@@ -12,14 +12,15 @@
 
                 <div>
                     <x-input-label for="amount" :value="__('Amount')" />
-                    <x-text-input id="amount" name="amount" type="number" class="mt-1 block w-full" min="100"
-                        autocomplete="off" required />
-                    <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                    <x-text-input id="amount" name="amount" type="number" min="100" autocomplete="off"
+                        required />
+                    <x-input-error :messages="$errors->get('amount')" />
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                     <div>
-                        <input class="sr-only peer" type="radio" name="method" id="card" value="card" required>
+                        <input class="sr-only peer" type="radio" name="method" id="card" value="card"
+                            required>
 
                         <label for="card"
                             class="w-full cursor-pointer px-4 py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-md hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
@@ -36,7 +37,8 @@
                     </div>
 
                     <div>
-                        <input class="sr-only peer" type="radio" name="method" id="qr" value="qr" required>
+                        <input class="sr-only peer" type="radio" name="method" id="qr" value="qr"
+                            required>
 
                         <label for="qr"
                             class="w-full cursor-pointer px-4 py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-md hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
@@ -53,7 +55,8 @@
                     </div>
 
                     <div>
-                        <input class="sr-only peer" type="radio" name="method" id="invoice" value="invoice" required>
+                        <input class="sr-only peer" type="radio" name="method" id="invoice" value="invoice"
+                            required>
 
                         <label for="invoice"
                             class="w-full cursor-pointer px-4 py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-md hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">

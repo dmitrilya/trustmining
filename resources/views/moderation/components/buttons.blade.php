@@ -42,9 +42,8 @@
 
             <div class="mt-6">
                 <x-input-label for="comment" value="{{ __('Comment') }}" class="sr-only" />
-                <x-text-input id="comment" name="comment" class="mt-1 block w-3/4"
-                    placeholder="{{ __('Comment') }}" />
-                <x-input-error :messages="$errors->userDeletion->get('comment')" class="mt-2" />
+                <x-text-input id="comment" name="comment" class="w-3/4" placeholder="{{ __('Comment') }}" />
+                <x-input-error :messages="$errors->userDeletion->get('comment')" />
             </div>
 
             <div class="mt-6 flex justify-end">

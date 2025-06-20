@@ -1,16 +1,16 @@
 @php
-    $brands = \App\Models\AsicBrand::with(['asicModels', 'asicModels.algorithm', 'asicModels.asicVersions'])
-        ->get()
-        ->map(function ($brand) {
-            $brand->url_name = strtolower(str_replace(' ', '_', $brand->name));
+    $models = \App\Models\AsicModel::with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])->whereHas('ads')
+        ->select(['id', 'name', 'algorithm_id'])->get()
+        ->map(function ($model) {
+            $model->url_name = strtolower(str_replace(' ', '_', $model->name));
 
-            return $brand;
+            return $model;
         });
 
-    $models = collect();
-
-    foreach ($brands->whereIn('url_name', request()->brands) as $brand) {
-        $models = $models->merge($brand->asicModels);
+    if ($asicVersionId = request()->get('asic_version_id')) {
+        $model = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersionId)->count())->first();
+        $version = $model->asicVersions->where('id', $asicVersionId)->first();
+        //dd($model->id, $version->id);
     }
 
     $algorithms = $models
@@ -21,19 +21,9 @@
 
             return $algorithm;
         });
-
-    $models = $models->map(function ($model) {
-        $model->url_name = strtolower(str_replace(' ', '_', $model->name));
-
-        return $model;
-    });
 @endphp
 
-<x-filter-filter type="checkbox" :name="__('Brand')" :items="$brands" field="brands"></x-filter-filter>
-
-@if ($models->count())
-    <x-filter-filter type="checkbox" :name="__('Model')" :items="$models" field="models"></x-filter-filter>
-@endif
+@include('ad.components.selectversion', ['selectedModel' => isset($model) ? $model : null, 'selectedVersion' => isset($version) ? $version : null])
 
 <x-filter-filter type="checkbox" :name="__('Algorithm')" :items="$algorithms" field="algorithms"></x-filter-filter>
 

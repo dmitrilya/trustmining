@@ -39,7 +39,7 @@ class StoreReviewRequest extends FormRequest
             'review' => 'required|string|max:500',
             'rating' => 'required|numeric|min:1|max:5',
             'image' => 'file|mimes:jpg,png,jpeg|max:1024',
-            'document' => 'file|mimes:pdf|max:1024',
+            'document' => 'file|mimes:pdf,doc,docx|max:1024',
         ];
     }
 
@@ -55,7 +55,7 @@ class StoreReviewRequest extends FormRequest
             'review.max' => __('validation.max.string', ['max' => 500]),
             'image.mimes' => __('Valid types are png, jpg and jpeg.'),
             'image.max' => __('The maximum file size should not exceed 1 MB.'),
-            'document.mimes' => __('Valid types are pdf.'),
+            'document.mimes' => __('Valid types are pdf, doc (word).'),
             'document.max' => __('The maximum file size should not exceed 1 MB.'),
         ];
     }

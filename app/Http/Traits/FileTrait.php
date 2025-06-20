@@ -50,7 +50,7 @@ trait FileTrait
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
-                if ($ext != 'pdf') $ext = $this->compress($file, $disk, $folder, $filename);
+                if ($ext != 'doc' && $ext != 'docx') $ext = $this->compress($file, $disk, $folder, $filename);
                 else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(

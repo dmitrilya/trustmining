@@ -1,10 +1,12 @@
-<div x-data="{ models: {{ $models }}, selectedModel: null, selectedVersion: null }">
+<div x-data="{ models: {{ $models }}, selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }}, selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }} }">
     <input type="hidden" :value="selectedVersion" name="asic_version_id" required>
 
     <div>
-        <div class="relative mt-1" x-data="{ open: false, search: '' }" @click.away="open = false">
+        <div class="relative mt-1" x-data="{ open: false, search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}' }" @click.away="open = false">
             <div class="relative z-0 w-full group" @click="open = true">
-                <input type="text" id="asic-model_input" placeholder=" " @input="search = $el.value;selectedModel = null;selectedVersion = null" autocomplete="off" :value="search"
+                <input type="text" id="asic-model_input" placeholder=" "
+                    @input="search = $el.value;selectedModel = null;selectedVersion = null" autocomplete="off"
+                    :value="search"
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-model_input"
                     class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -56,7 +58,7 @@
             <div class="relative mt-1">
                 <button type="button" data-dropdown-toggle="{{ 'dropdown-version_' . $asicModel->id }}"
                     id="{{ 'dropdown-version_' . $asicModel->id . '_button' }}"
-                    class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                    class="relative w-full cursor-pointer rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                     <span class="flex items-center">
                         <span class="ml-3 block truncate"
                             x-text="selectedModel != null ? models.find(function(model) {return model.id == selectedModel}).asic_versions.find(function(version) {return version.id == selectedVersion}).hashrate : ''"></span>
@@ -102,5 +104,5 @@
         </div>
     @endforeach
 
-    <x-input-error :messages="$errors->get('asic_version_id')" class="mt-2" />
+    <x-input-error :messages="$errors->get('asic_version_id')" />
 </div>

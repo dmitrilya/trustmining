@@ -40,7 +40,7 @@
                         <div class="{{ isset($moderation->data['peculiarities']) ? 'border border-indigo-500' : '' }}">
                             <x-peculiarities :ps="isset($moderation->data['peculiarities'])
                                 ? $moderation->data['peculiarities']
-                                : $office->peculiarities"></x-peculiarities>
+                                : $office->peculiarities" model="office"></x-peculiarities>
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@
                         {{ $office->address }}
                     </h1>
 
-                    <x-peculiarities :ps="$office->peculiarities"></x-peculiarities>
+                    <x-peculiarities :ps="$office->peculiarities" model="office"></x-peculiarities>
 
                     <div>
                         @if ($auth && $office->user->id == $auth->id)

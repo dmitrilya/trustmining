@@ -28,7 +28,7 @@ class StoreMessageRequest extends FormRequest
             'images' => 'nullable|max:10|required_without_all:message,files',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
             'files' => 'nullable|max:3|required_without_all:images,message',
-            'files.*' => 'file|mimes:pdf|max:512',
+            'files.*' => 'file|mimes:doc,docx,pdf|max:512',
         ];
     }
 
@@ -45,7 +45,7 @@ class StoreMessageRequest extends FormRequest
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('validaion.size.file', ['size' => 1024]),
             'files.max' => __('File limit exceeded.'),
-            'files.*.mimes' => __('Valid types are pdf.'),
+            'files.*.mimes' => __('Valid types are pdf, doc (word).'),
             'files.*.max' => __('validaion.max.file', ['size' => 512]),
         ];
     }

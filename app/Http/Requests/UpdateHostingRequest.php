@@ -29,7 +29,7 @@ class UpdateHostingRequest extends FormRequest
             'images' => 'max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
             'documents' => 'max:3',
-            'documents.*' => 'file|mimes:pdf|max:1024',
+            'documents.*' => 'file|mimes:doc,docx|max:1024',
             'price' => 'required|min:0|max:10',
         ];
     }
@@ -48,7 +48,7 @@ class UpdateHostingRequest extends FormRequest
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
             'documents.max' => __('File limit exceeded.'),
-            'documents.*.mimes' => __('Valid types are pdf.'),
+            'documents.*.mimes' => __('Valid types are doc (word).'),
             'documents.*.max' => __('The maximum file size should not exceed 1 MB.'),
             'price.required' => __('Price is required.'),
             'price.min' => __('Price is required.'),

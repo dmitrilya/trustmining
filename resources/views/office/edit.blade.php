@@ -19,19 +19,18 @@
                         @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 5 items)</p>
-                    <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
-                        <x-input-error :messages="$error" class="mt-2" />
+                        <x-input-error :messages="$error" />
                     @endforeach
                 </div>
 
-                <x-peculiarities :ps="$office->peculiarities" :isForm="true"></x-peculiarities>
+                <x-peculiarities :ps="$office->peculiarities" model="office" :isForm="true"></x-peculiarities>
 
                 <div>
                     <x-input-label for="video" :value="__('Link to video')" />
-                    <x-text-input id="video" name="video" type="text" class="mt-1 block w-full"
-                        :value="$office->video" autocomplete="video" />
-                    <x-input-error :messages="$errors->get('video')" class="mt-2" />
+                    <x-text-input id="video" name="video" type="text" :value="$office->video" autocomplete="video" />
+                    <x-input-error :messages="$errors->get('video')" />
                 </div>
 
                 <<div class="relative z-0 w-full group">

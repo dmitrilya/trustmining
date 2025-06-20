@@ -13,7 +13,7 @@
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
                 <label for="input-file-chat"
                     class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                    <input id="input-file-chat" name="files[]" class="hidden" type="file" accept=".pdf" multiple
+                    <input id="input-file-chat" name="files[]" class="hidden" type="file" accept=".pdf,.doc,.docx" multiple
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
                     <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
                         <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"

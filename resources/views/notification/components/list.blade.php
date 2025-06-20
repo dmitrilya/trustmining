@@ -1,5 +1,5 @@
 <div class="flex">
-    <x-filter :show="true">@include('notification.components.filter')</x-filter>
+    <x-filter>@include('notification.components.filter')</x-filter>
 
     <div class="w-full bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
         @if (!$notifications->count())

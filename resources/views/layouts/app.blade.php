@@ -19,7 +19,7 @@
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ mobileFilter: {{ count(array_filter(request()->all(), fn($item) => $item != 'sort', ARRAY_FILTER_USE_KEY)) }} }">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ filter: false }">
         @include('layouts.navigation')
 
         @if (isset($header))
@@ -28,14 +28,6 @@
                     {{ $header }}
                 </div>
             </header>
-        @endif
-
-        @if (in_array(request()->route()->action['as'], ['ads', 'company']))
-            <x-mobile-filter :show="false"> @include('ad.components.filter')</x-mobile-filter>
-        @elseif (in_array(request()->route()->action['as'], ['hostings']))
-            <x-mobile-filter :show="false"> @include('hosting.components.filter')</x-mobile-filter>
-        @elseif (in_array(request()->route()->action['as'], ['notifications']))
-            <x-mobile-filter :show="false"> @include('notification.components.filter')</x-mobile-filter>
         @endif
 
         <main>

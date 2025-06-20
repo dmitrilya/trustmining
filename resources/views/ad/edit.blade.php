@@ -23,7 +23,7 @@
 
                 <div>
                     <x-input-label for="asic_version" :value="__('Version')" />
-                    <x-text-input id="asic_version" class="mt-1 block w-full" disabled :value="$ad->asicVersion->hashrate" />
+                    <x-text-input id="asic_version" disabled :value="$ad->asicVersion->hashrate" />
                 </div>
 
                 <div class="mt-6" x-data="{ open: false, offices: {{ $offices }}, officeId: {{ $ad->office->id }} }">
@@ -75,7 +75,7 @@
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB)</p>
-                    <x-input-error :messages="$errors->get('preview')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('preview')" />
                 </div>
 
                 <div class="mt-6" x-data="{ inStock: {{ $ad->in_stock ? 'true' : 'false' }} }">
@@ -91,9 +91,9 @@
 
                     <div :class="{ 'block': !inStock, 'hidden': inStock }" class="mt-4">
                         <x-input-label for="waiting" :value="__('Waiting (days)')" />
-                        <x-text-input id="waiting" name="waiting" type="number" class="mt-1 block w-full"
-                            min="1" max="120" autocomplete="waiting" :value="$ad->waiting" />
-                        <x-input-error :messages="$errors->get('waiting')" class="mt-2" />
+                        <x-text-input id="waiting" name="waiting" type="number" min="1" max="120"
+                            autocomplete="waiting" :value="$ad->waiting" />
+                        <x-input-error :messages="$errors->get('waiting')" />
                     </div>
                 </div>
 
@@ -111,9 +111,9 @@
                     <div :class="{ 'block': !anew, 'hidden': anew }">
                         <div class="mt-4">
                             <x-input-label for="warranty" :value="__('Warranty (months)')" />
-                            <x-text-input id="warranty" name="warranty" type="number" class="mt-1 block w-full"
-                                min="1" max="12" autocomplete="warranty" :value="$ad->warranty" />
-                            <x-input-error :messages="$errors->get('warranty')" class="mt-2" />
+                            <x-text-input id="warranty" name="warranty" type="number" min="1" max="12"
+                                autocomplete="warranty" :value="$ad->warranty" />
+                            <x-input-error :messages="$errors->get('warranty')" />
                         </div>
 
                         <div class="mt-6">
@@ -122,9 +122,9 @@
                                 autocomplete="images" accept=".png,.jpg,.jpeg" />
                             <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG
                                 or JPEG (max. 2MB, 3 items)</p>
-                            <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('images')" />
                             @foreach ($errors->get('images.*') as $error)
-                                <x-input-error :messages="$error" class="mt-2" />
+                                <x-input-error :messages="$error" />
                             @endforeach
                         </div>
                     </div>
@@ -132,9 +132,9 @@
 
                 <div>
                     <x-input-label for="price" :value="__('Price rub')" />
-                    <x-text-input id="price" name="price" type="number" class="mt-1 block w-full" required
-                        autocomplete="price" :value="$ad->price" />
-                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                    <x-text-input id="price" name="price" type="number" required autocomplete="price"
+                        :value="$ad->price" />
+                    <x-input-error :messages="$errors->get('price')" />
                 </div>
 
                 <div class="mt-6 flex justify-end">

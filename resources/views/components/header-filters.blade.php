@@ -45,7 +45,6 @@
                 @else                    
                     <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out" @click.prevent="$dispatch('open-modal', 'need-subscription')">{{ __('Price: Low to High') }}</div>
                     <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out" @click.prevent="$dispatch('open-modal', 'need-subscription')">{{ __('Price: High to Low') }}</div>
-
                 @endif
             </x-slot>
         </x-dropdown>
@@ -58,8 +57,8 @@
       </svg>
     </button> --}}
 
-    <button @click="mobileFilter = true" type="button"
-        class="-m-2 ml-2 p-2 text-gray-400 hover:text-gray-500 sm:ml-4 lg:hidden">
+    <button @click="filter = true" type="button"
+        class="-m-2 ml-2 p-2 text-gray-400 hover:text-gray-500 sm:ml-4">
         <span class="sr-only">Filters</span>
         <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"
