@@ -1,17 +1,22 @@
 @php
-    $models = \App\Models\AsicModel::with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])->whereHas('ads')
-        ->select(['id', 'name', 'algorithm_id'])->get()
+    $models = \App\Models\AsicModel::with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])
+        ->whereHas('ads')
+        ->select(['id', 'name', 'algorithm_id'])
+        ->get()
         ->map(function ($model) {
             $model->url_name = strtolower(str_replace(' ', '_', $model->name));
 
             return $model;
         });
 
-    if ($asicVersionId = request()->get('asic_version_id')) {
-        $model = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersionId)->count())->first();
-        $version = $model->asicVersions->where('id', $asicVersionId)->first();
-        //dd($model->id, $version->id);
-    }
+    $rModel = request()->get('model');
+    $rVerId = request()->get('asic_version_id');
+    $selModel = !$rModel
+        ? ($rVerId
+            ? $models->filter(fn($model) => $model->asicVersions->where('id', $rVerId)->count())->first()
+            : null)
+        : $models->where('url_name', $rModel)->first();
+    $selVersion = $rVerId ? $selModel->asicVersions->where('id', $rVerId)->first() : null;
 
     $algorithms = $models
         ->pluck('algorithm')
@@ -23,7 +28,11 @@
         });
 @endphp
 
-@include('ad.components.selectversion', ['selectedModel' => isset($model) ? $model : null, 'selectedVersion' => isset($version) ? $version : null])
+@include('ad.components.selectversion', [
+    'selectedModel' => $selModel,
+    'selectedVersion' => $selVersion,
+    'withAllVersions' => true
+])
 
 <x-filter-filter type="checkbox" :name="__('Algorithm')" :items="$algorithms" field="algorithms"></x-filter-filter>
 

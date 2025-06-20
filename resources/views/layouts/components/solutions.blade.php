@@ -16,8 +16,8 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-16"
-        style="display: none" @click.away="open = false">
+        class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-16" style="display: none"
+        @click.away="open = false">
         <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 md:p-10 xl:p-14 bg-white dark:bg-gray-700">
             <div class="sm:flex gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
@@ -104,19 +104,18 @@
                     </div>
 
                     <div class="group flex items-center">
-                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m7.164 3.805-4.475.38L.327 6.546a1.114 1.114 0 0 0 .63 1.89l3.2.375 3.007-5.006ZM11.092 15.9l.472 3.14a1.114 1.114 0 0 0 1.89.63l2.36-2.362.38-4.475-5.102 3.067Zm8.617-14.283A1.613 1.613 0 0 0 18.383.291c-1.913-.33-5.811-.736-7.556 1.01-1.98 1.98-6.172 9.491-7.477 11.869a1.1 1.1 0 0 0 .193 1.316l.986.985.985.986a1.1 1.1 0 0 0 1.316.193c2.378-1.3 9.889-5.5 11.869-7.477 1.746-1.745 1.34-5.643 1.01-7.556Zm-3.873 6.268a2.63 2.63 0 1 1-3.72-3.72 2.63 2.63 0 0 1 3.72 3.72Z">
-                            </path>
+                        <svg class="w-5 h-5 text-gray-400 mr-2" aria-hidden="true" stroke-width="1.5" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                d="M5.005 11.19V12l6.998 4.042L19 12v-.81M5 16.15v.81L11.997 21l6.998-4.042v-.81M12.003 3 5.005 7.042l6.998 4.042L19 7.042 12.003 3Z" />
                         </svg>
                         <a class="under text-base text-gray-800 font-semibold"
                             href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
                     </div>
 
                     <div class="group flex items-center">
-                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z" />
                         </svg>

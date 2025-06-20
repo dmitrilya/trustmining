@@ -72,3 +72,11 @@ a {
         }
     }
 }
+
+#telegram-login-trust_m_notifications_bot {
+    margin-left: auto;
+
+    .tgme_widget_login_button {
+        background: linear-gradient(to right, #7966ff, #404099)
+    }
+}

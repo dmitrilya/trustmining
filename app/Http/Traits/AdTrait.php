@@ -32,6 +32,15 @@ trait AdTrait
                     );
             }*/
 
+            if ($request->model) {
+                $ads = $ads->whereHas(
+                    'asicVersion.asicModel',
+                    function ($q) use ($request) {
+                        $q->where('name', str_replace('_', ' ', $request->model));
+                    }
+                );
+            }
+
             if ($request->asic_version_id) {
                 $ads = $ads->where('asic_version_id', $request->asic_version_id);
             }
