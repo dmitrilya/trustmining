@@ -44,14 +44,42 @@
                             class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-400"
                             @click="show = false">
                             <span class="sr-only">Close menu</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                aria-hidden="true">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
 
                     @include('tariff.components.subscription')
+                </div>
+            </x-modal>
+
+            <x-modal name="tg-auth" :show="true">
+                <div class="p-6">
+                    <div class="flex justify-between mb-6">
+                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                            {{ __('Telegram authorization') }}
+                        </h2>
+
+                        <button type="button"
+                            class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-400"
+                            @click="show = false">
+                            <span class="sr-only">Close menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        {{ __('You need to authorize your telegram account, where notifications will be sent') }}
+                    </p>
+
+                    <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="trust_m_notifications_bot"
+                        data-size="medium" data-radius="6" data-auth-url="https://trustmining.ru/tg/auth" data-request-access="write">
+                    </script>
                 </div>
             </x-modal>
         </main>
