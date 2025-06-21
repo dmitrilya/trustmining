@@ -9,6 +9,8 @@ class AsicVersion extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * Retrieve the model for a bound value.
      *
@@ -23,5 +25,10 @@ class AsicVersion extends Model
     public function asicModel()
     {
         return $this->belongsTo(AsicModel::class);
+    }
+
+    public function ads()
+    {
+        return $this->hasMany(Ad::class);
     }
 }

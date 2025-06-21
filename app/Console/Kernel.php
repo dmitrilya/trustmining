@@ -15,8 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:subscription-payment')->daily();
-        $schedule->command('auth:clear-resets')->everyFifteenMinutes();
+        $schedule->command('subscription:check')->daily();
+        $schedule->command('coinprofit:update')->daily();
+        $schedule->command('auth:clear-resets')->daily();
     }
 
     /**

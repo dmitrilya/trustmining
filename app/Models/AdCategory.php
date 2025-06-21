@@ -9,6 +9,8 @@ class AdCategory extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function ads()
     {
         return $this->hasMany(Ad::class);

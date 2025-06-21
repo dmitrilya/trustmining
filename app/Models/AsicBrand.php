@@ -11,6 +11,8 @@ class AsicBrand extends Model
 {
     use HasFactory, Searchable;
 
+    public $timestamps = false;
+
     /**
      * Retrieve the model for a bound value.
      *

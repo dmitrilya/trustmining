@@ -1,6 +1,5 @@
 @php
     $models = \App\Models\AsicModel::with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])
-        ->whereHas('ads')
         ->select(['id', 'name', 'algorithm_id'])
         ->get()
         ->map(function ($model) {

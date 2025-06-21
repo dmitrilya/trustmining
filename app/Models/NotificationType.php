@@ -9,6 +9,8 @@ class NotificationType extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function notifications()
     {
         return $this->hasMany(Notification::class);

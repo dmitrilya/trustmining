@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             AdCategorySeeder::class,
 
             AlgorithmSeeder::class,
+            CoinSeeder::class,
             AsicBrandSeeder::class,
             AsicModelSeeder::class,
             AsicVersionSeeder::class,

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 use DB;
 
 class RoleSeeder extends Seeder
@@ -13,7 +12,7 @@ class RoleSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
         DB::table('roles')->insert([
             [

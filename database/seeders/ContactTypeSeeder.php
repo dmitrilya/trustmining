@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Faker\Generator as Faker;
 use DB;
 
 class ContactTypeSeeder extends Seeder
@@ -13,7 +12,7 @@ class ContactTypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
         DB::table('contact_types')->insert([
             [

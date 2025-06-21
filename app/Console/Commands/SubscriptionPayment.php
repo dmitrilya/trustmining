@@ -18,7 +18,7 @@ class SubscriptionPayment extends Command
      *
      * @var string
      */
-    protected $signature = 'command:subscription-payment';
+    protected $signature = 'subscription:check';
 
     /**
      * The console command description.
