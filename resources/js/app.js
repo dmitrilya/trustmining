@@ -11,7 +11,7 @@ Alpine.start();
 window.dadataSuggs = function (query, list, open, method) {
     if (!query.length || !['address', 'city'].includes(method)) return false;
 
-    return axios.get('/dadata/suggestions/' + method + '?query=' + query).then((r) => {
+    return axios.get('/dadata/suggestions/' + method + '?address=' + address).then((r) => {
         if (!r.data.success) return open;
 
         list.innerHTML = '';
