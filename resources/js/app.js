@@ -8,8 +8,8 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-window.dadataSuggs = function (query, list, open, method) {
-    if (!query.length || !['address', 'city'].includes(method)) return false;
+window.dadataSuggs = function (address, list, open, method) {
+    if (!address.length || !['address', 'city'].includes(method)) return false;
 
     return axios.get('/dadata/suggestions/' + method + '?address=' + address).then((r) => {
         if (!r.data.success) return open;
