@@ -26,7 +26,7 @@
                 <div class="relative mt-1" x-data="{ open: false, sugs: false }" @click.away="open = false">
                     <div class="relative z-0 w-full group" @click="open = true">
                         <input type="text" id="address" name="address" x-ref="search" placeholder=" "
-                            @input.debounce.1000ms="sugs = addressSuggs($el.value, $refs.suggestionList, open)"
+                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
                             autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"

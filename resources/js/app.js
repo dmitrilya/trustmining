@@ -8,7 +8,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-dadataSuggs = function (query, list, open, method) {
+window.dadataSuggs = function (query, list, open, method) {
     if (!query.length || !['address', 'city'].includes(method)) return false;
 
     return axios.get('/dadata/suggestions/' + method + '?query=' + query).then((r) => {
@@ -29,14 +29,6 @@ dadataSuggs = function (query, list, open, method) {
 
         return true;
     });
-}
-
-window.addressSuggs = function (address, list, open) {
-    return dadataSuggs(address, list, open, 'address');
-}
-
-window.addressSuggs = function (address, list, open) {
-    return dadataSuggs(address, list, open, 'address');
 }
 
 window.search = function (query, list, open) {
