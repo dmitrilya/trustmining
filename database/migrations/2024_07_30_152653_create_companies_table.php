@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('banner')->nullable();
             $table->json('documents');
             $table->json('images');
-            $table->unsignedTinyInteger('tf')->default(50);
             $table->boolean('moderation')->default(1);
             $table->timestamps();
         });

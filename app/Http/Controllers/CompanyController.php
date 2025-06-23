@@ -25,12 +25,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('company.index', [
-            'companies' => Company::where('moderation', false)->with('user:id,name,url_name')->get()
-                ->sortByDesc(function ($company) {
-                    $company->user->moderatedReviews ? $company->user->moderatedReviews->avg('rating') : 0;
-                })
-        ]);
+        //
     }
 
     /**

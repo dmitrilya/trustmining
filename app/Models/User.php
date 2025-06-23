@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use DB;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Searchable;
@@ -55,7 +57,7 @@ class User extends Authenticatable
     {
         return $this->where('url_name', $value)->orWhere('id', $value)->first() ?? abort(404);
     }
- 
+
     /**
      * Get the indexable data array for the model.
      *
@@ -104,6 +106,11 @@ class User extends Authenticatable
         return $this->hasMany(Office::class);
     }
 
+    public function moderatedOffices()
+    {
+        return $this->offices()->where('moderation', false);
+    }
+
     public function contacts()
     {
         return $this->hasMany(Contact::class);
@@ -126,7 +133,11 @@ class User extends Authenticatable
 
     public function moderatedReviews()
     {
-        return $this->reviews()->where('moderation', false);
+        $reviewsQuery = $this->reviews()->where('moderation', false);
+
+        if ($reviewsQuery->exists()) $reviewsQuery->addSelect(DB::raw('avg(`rating`) as avg_rating'));
+
+        return $reviewsQuery;
     }
 
     public function tariff()

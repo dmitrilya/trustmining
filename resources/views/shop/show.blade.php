@@ -1,0 +1,62 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="flex items-center mr-auto w-full max-w-max">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mr-4">
+                    {{ $user->name }}
+                </h2>
+            </div>
+
+            @php
+                $sort = request()->sort;
+            @endphp
+
+            <div class="flex justify-between items-center w-full mt-4 lg:mt-0">
+                @include('shop.components.menu')
+
+                <x-header-filters>
+                    <x-slot name="sort">
+                        @if (($user = Auth::user()) && $user->tariff)
+                            <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                                request()->route()->action['as'],
+                                array_merge(request()->route()->originalParameters(), [
+                                    'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
+                                    http_build_query(request()->except('sort')),
+                                ]),
+                            )">
+                                {{ __('Price: Low to High') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                                request()->route()->action['as'],
+                                array_merge(request()->route()->originalParameters(), [
+                                    'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
+                                    http_build_query(request()->except('sort')),
+                                ]),
+                            )">
+                                {{ __('Price: High to Low') }}
+                            </x-dropdown-link>
+                        @else
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out"
+                                @click.prevent="$dispatch('open-modal', 'need-subscription')">
+                                {{ __('Price: Low to High') }}
+                            </div>
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out"
+                                @click.prevent="$dispatch('open-modal', 'need-subscription')">
+                                {{ __('Price: High to Low') }}
+                            </div>
+                        @endif
+                    </x-slot>
+                </x-header-filters>
+            </div>
+        </div>
+    </x-slot>
+
+    @php
+        $auth = Auth::user();
+    @endphp
+
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+        @include('ad.components.list', ['owner' => $auth && $auth->id == $user->id])
+    </div>
+</x-app-layout>

@@ -27,7 +27,7 @@
 
 <div class="mt-4">
     <h3 class="sr-only">{{ __('Reviews') }}</h3>
-    <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
+    <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg_rating : 0 }} }">
         <x-rating></x-rating>
 
         <a href="{{ route('company.reviews', ['user' => $user->url_name]) }}"

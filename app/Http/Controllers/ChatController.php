@@ -44,6 +44,7 @@ class ChatController extends Controller
                 $chat->messages()->create([
                     'user_id' => $auth->id,
                     'message' => __('Good afternoon Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
+                    'images' => [],
                     'files' => []
                 ]);
             }

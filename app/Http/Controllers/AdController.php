@@ -29,9 +29,7 @@ class AdController extends Controller
      */
     public function index(Request $request)
     {
-        $ads = $this->getAds($request)->paginate(48);
-
-        return view('ad.index', compact('ads'));
+        return view('ad.index', ['ads' => $this->getAds($request)->paginate(48)]);
     }
 
     /**
@@ -62,7 +60,7 @@ class AdController extends Controller
     {
         $user = $request->user();
 
-        if ($user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
+        if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 5)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $office = Office::find($request->office_id);

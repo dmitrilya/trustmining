@@ -10,11 +10,19 @@ use MoveMoveIo\DaData\Facades\DaDataAddress;
 
 class DaDataController extends BaseController
 {
-    public function suggestions(Request $request)
+    public function address(Request $request)
     {
         return response()->json([
             'success' => true,
-            'suggestions' => DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions']
+            'suggestions' => DaDataAddress::prompt($request->request, 10, Language::RU)['suggestions']
+        ], 200);
+    }
+
+    public function city(Request $request)
+    {
+        return response()->json([
+            'success' => true,
+            'suggestions' => collect(DaDataAddress::prompt($request->request, 10, Language::RU)['suggestions'])->pluck('data.city')
         ], 200);
     }
 }

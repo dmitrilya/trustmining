@@ -23,6 +23,7 @@ return new class extends Migration
                 ->on('tariffs')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('url_name');
+            $table->unsignedTinyInteger('tf')->default(50);
             $table->unsignedInteger('balance')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

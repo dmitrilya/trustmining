@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Traits\AdTrait;
+use App\Http\Traits\ShopTrait;
 use App\Http\Traits\ViewTrait;
+use App\Http\Traits\AdTrait;
 
 use App\Models\User;
 use App\Models\Office;
 
 class ShopController extends Controller
 {
-    use AdTrait, ViewTrait;
+    use ShopTrait, ViewTrait, AdTrait;
+
+    /**
+     * Display a listing of the resource.
+     * 
+     * @param  Illuminate\Http\Request;
+     * @return \Illuminate\Http\Response
+     */
+    public function shops(Request $request)
+    {
+        return view('shop.index', [
+            'shops' => $this->getShops($request)->get()
+        ]);
+    }
 
     /**
      * @param  Illuminate\Http\Request;
@@ -23,7 +37,7 @@ class ShopController extends Controller
     {
         $ads = $this->getAds($request)->where('user_id', $user->id)->get();
 
-        return view('shop.shop', compact('ads', 'user'));
+        return view('shop.show', compact('ads', 'user'));
     }
 
     /**

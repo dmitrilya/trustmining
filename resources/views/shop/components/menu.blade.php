@@ -112,7 +112,7 @@
                             <span class="absolute inset-0"></span>
                         </div>
 
-                        <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
+                        <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg_rating : 0 }} }">
                             <x-rating></x-rating>
 
                             <p class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">

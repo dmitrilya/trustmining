@@ -7,6 +7,8 @@ use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class AsicModel extends Model
 {
     use HasFactory, Searchable;
@@ -75,7 +77,7 @@ class AsicModel extends Model
 
     public function moderatedReviews()
     {
-        return $this->reviews()->where('moderation', false);
+        return $this->reviews()->where('moderation', false)->addSelect(DB::raw('avg(`rating`) as avg_rating'));
     }
 
     public function views()

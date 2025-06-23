@@ -54,7 +54,15 @@ Route::get('/events', [Controller::class, 'events'])->name('events');
 
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
-Route::get('/companies', [CompanyController::class, 'index'])->name('companies');
+Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
+
+Route::group(['prefix' => 'dadata'], function () {
+    Route::group(['prefix' => 'suggestions'], function () {
+        Route::get('/address', [DaDataController::class, 'address'])->name('dadata.suggs.address');
+        Route::get('/city', [DaDataController::class, 'city'])->name('adadata.suggs.city');
+    });
+});
+
 
 Route::group(['prefix' => 'articles'], function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles');
@@ -100,8 +108,6 @@ Route::group(['prefix' => 'ads'], function () {
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/address/suggestions', [DaDataController::class, 'suggestions'])->name('address.suggestions');
-    
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);
     });

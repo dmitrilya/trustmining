@@ -8,28 +8,35 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+dadataSuggs = function (query, list, open, method) {
+    if (!query.length || !['address', 'city'].includes(method)) return false;
+
+    return axios.get('/dadata/suggestions/' + method + '?query=' + query).then((r) => {
+        if (!r.data.success) return open;
+
+        list.innerHTML = '';
+
+        if (!r.data.suggestions.length) return false;
+
+        for (let suggestion of r.data.suggestions) {
+            list.insertAdjacentHTML(
+                'beforeend',
+                `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
+                    <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion.value}</div>
+                </li>`
+            );
+        }
+
+        return true;
+    });
+}
+
 window.addressSuggs = function (address, list, open) {
-    if (address.length)
-        return axios.get('/address/suggestions?address=' + address).then((r) => {
-            if (r.data.success) {
-                list.innerHTML = '';
+    return dadataSuggs(address, list, open, 'address');
+}
 
-                if (!r.data.suggestions.length) return false;
-
-                for (let suggestion of r.data.suggestions) {
-                    list.insertAdjacentHTML(
-                        'beforeend',
-                        `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
-                            <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion.value}</div>
-                        </li>`
-                    );
-                }
-
-                return true;
-            } else return open;
-        });
-
-    return false;
+window.addressSuggs = function (address, list, open) {
+    return dadataSuggs(address, list, open, 'address');
 }
 
 window.search = function (query, list, open) {

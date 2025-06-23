@@ -23,7 +23,7 @@
             </button>
         </div>
 
-        <form class="mt-4 pt-4"
+        <form class="mt-5"
             action="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}"
             @submit.prevent="$el.querySelectorAll('input').forEach(item => {if (item.value == null || item.value == '') item.remove()});$el.submit()">
             @if ($sort = request()->sort)
