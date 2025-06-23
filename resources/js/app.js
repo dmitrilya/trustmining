@@ -22,7 +22,7 @@ window.dadataSuggs = function (address, list, open, method) {
             list.insertAdjacentHTML(
                 'beforeend',
                 `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
-                    <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion.value}</div>
+                    <div class="w-full py-2 px-3 text-gray-500 hover:bg-gray-200">${suggestion}</div>
                 </li>`
             );
         }

@@ -14,7 +14,7 @@ class DaDataController extends BaseController
     {
         return response()->json([
             'success' => true,
-            'suggestions' => DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions']
+            'suggestions' => DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions']->pluck('value')
         ], 200);
     }
 
@@ -22,7 +22,7 @@ class DaDataController extends BaseController
     {
         return response()->json([
             'success' => true,
-            'suggestions' => collect(DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions'])->pluck('data.city')
+            'suggestions' => collect(DaDataAddress::prompt($request->address, 10, Language::RU, [], [], [], "city", "city")['suggestions'])->pluck('data.city')
         ], 200);
     }
 }
