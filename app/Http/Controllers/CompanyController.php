@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use MoveMoveIo\DaData\Facades\DaDataCompany;
-
-use App\Http\Traits\FileTrait;
-
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Http\Request;
+
+use App\Http\Traits\FileTrait;
+use App\Http\Traits\DaData;
 
 use App\Models\Moderation;
 use App\Models\Passport;
@@ -16,7 +15,7 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    use FileTrait;
+    use FileTrait, DaData;
 
     /**
      * Display a listing of the resource.
@@ -68,16 +67,14 @@ class CompanyController extends Controller
             ]);
         }
 
-        $suggs = DaDataCompany::id($request->inn)['suggestions'];
+        $card = $this->dadataCompanyByInn($request->inn);
 
-        if (!count($suggs)) return back()->withErrors(['forbidden' => __('Not available company.')]);
-
-        $compnayInfo = $suggs[0];
+        if (!$card) return back()->withErrors(['forbidden' => __('Not available company.')]);
 
         $company = Company::create([
             'user_id' => $user->id,
-            'name' => $compnayInfo['value'],
-            'card' => $compnayInfo['data'],
+            'name' => $card['value'],
+            'card' => $card['data'],
             'documents' => [],
             'images' => [],
         ]);

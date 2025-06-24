@@ -5,7 +5,7 @@
                 {{ __('My advertisements') }}
             </h2>
 
-            @if (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 5))
+            @if (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 2))
                 @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
                     <a href="{{ route('ad.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
                 @endif
@@ -19,7 +19,7 @@
 
     <div class="text-gray-400 text-lg">
         <span class="text-gray-900 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
-            {{ $user->tariff ? $user->tariff->max_ads : 5 }}</span>
+            {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 

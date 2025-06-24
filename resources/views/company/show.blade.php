@@ -21,27 +21,27 @@
                 <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
-                            class="md:col-span-8 md:border-r md:border-gray-200 md:pr-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                            class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r md:border-gray-200 md:pr-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                             <x-carousel :images="isset($moderation->data['images'])
                                 ? $moderation->data['images']
                                 : $company->images" min="128" max="128"></x-carousel>
                         </div>
                     @endif
 
-                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 space-y-5">
+                    <div class="md:col-span-4 space-y-5">
                         <div class="{{ isset($moderation->data['logo']) ? 'border border-indigo-500' : '' }}">
                             @include('components.about-seller', ['user' => $company->user])
                         </div>
 
-                        @if ($company->card['opf']['short'] == 'ООО')
-                            <h1 class="flex items-center text-xl font-bold tracking-tight text-gray-900">
+                        @if ($company->card['type'] == 'LEGAL')
+                            <h1 class="flex items-center text-sm sm:text-base lg:text-lg font-bold tracking-tight text-gray-900">
                                 <svg class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" width="24" height="24"
                                     fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                {{ $company->card['address']['unrestricted_value'] }}
+                                {{ $company->card['address'] }}
                             </h1>
                         @endif
 
@@ -59,31 +59,50 @@
 
                         <div class="my-5">
                             <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                @php
+                                    $statuses = [
+                                        'ACTIVE' => 'Действующая',
+                                        'LIQUIDATING' => 'Ликвидируется',
+                                        'LIQUIDATED' => 'Ликвидирована',
+                                        'BANKRUPT' => 'Банкротство',
+                                        'REORGANIZING' =>
+                                            'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
+                                    ];
+                                @endphp
+
+                                <li class="text-gray-400">{{ __('Status') . ': ' }}<span
+                                        class="text-gray-600">{{ $statuses[$company->card['state']['status']] }}</span>
+                                </li>
                                 <li class="text-gray-400">{{ __('INN') . ': ' }}<span
                                         class="text-gray-600">{{ $company->card['inn'] }}</span>
                                 </li>
                                 <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
                                         class="text-gray-600">{{ $company->card['ogrn'] }}</span>
                                 </li>
+                                <li class="text-gray-400">{{ __('KPP') . ': ' }}<span
+                                        class="text-gray-600">{{ $company->card['kpp'] }}</span>
+                                </li>
                                 <li class="text-gray-400">{{ __('Registration date') . ': ' }}<span
                                         class="date-transform text-gray-600" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
+                                <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
+                                        class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                                </li>
 
-                                @if ($company->card['opf']['short'] == 'ООО')
+                                @if ($company->card['type'] == 'LEGAL')
                                     <li class="text-gray-400">{{ __('Authorized capital') . ': ' }}<span
-                                            class="text-gray-600">{{ $company->card['capital']['value'] }} ₽</span>
-                                    </li>
-                                    <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                            class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                                            class="text-gray-600">{{ $company->card['capital'] }} ₽</span>
                                     </li>
 
-                                    <div class="text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
+                                    <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
                                         <div class="ml-4">
                                             <li class="text-gray-400">{{ __('Name') . ': ' }}<span
-                                                    class="text-gray-600">{{ $founder['fio']['source'] }}</span>
+                                                    class="text-gray-600">{{ $founder['name'] }}
+                                                    ({{ $founder['share'] }}%)
+                                                </span>
                                             </li>
                                             <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
                                                     class="text-gray-600">{{ $founder['inn'] }}</span>
@@ -91,6 +110,19 @@
                                         </div>
                                     @endforeach
                                 @endif
+
+                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}</div>
+
+                                @foreach ($company->card['managers'] as $manager)
+                                    <div class="ml-4">
+                                        <li class="text-gray-400">{{ __('Name') . ': ' }}<span
+                                                class="text-gray-600">{{ $manager['name'] }}</span>
+                                        </li>
+                                        <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                                class="text-gray-600">{{ $manager['inn'] }}</span>
+                                        </li>
+                                    </div>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -138,55 +170,74 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                 @if (count($company->images))
-                    <div class="md:col-span-8 md:border-r md:border-gray-200 md:pr-8">
+                    <div class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r md:border-gray-200 md:pr-8">
                         <x-carousel :images="$company->images" min="128" max="128"></x-carousel>
                     </div>
                 @endif
 
-                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 space-y-5">
+                <div class="md:col-span-4 space-y-5">
                     <div>
                         @include('components.about-seller', ['user' => $company->user])
                     </div>
 
-                    @if ($company->card['opf']['short'] == 'ООО')
-                        <h1 class="flex items-center text-xl font-bold tracking-tight text-gray-900">
+                    @if ($company->card['type'] == 'LEGAL')
+                        <h1 class="flex items-center text-sm sm:text-base lg:text-lg font-bold tracking-tight text-gray-900">
                             <svg class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
                                     d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                     clip-rule="evenodd" />
                             </svg>
-                            {{ $company->card['address']['unrestricted_value'] }}
+                            {{ $company->card['address'] }}
                         </h1>
                     @endif
 
                     <div class="my-5">
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                            @php
+                                $statuses = [
+                                    'ACTIVE' => 'Действующая',
+                                    'LIQUIDATING' => 'Ликвидируется',
+                                    'LIQUIDATED' => 'Ликвидирована',
+                                    'BANKRUPT' => 'Банкротство',
+                                    'REORGANIZING' =>
+                                        'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
+                                ];
+                            @endphp
+
+                            <li class="text-gray-400">{{ __('Status') . ': ' }}<span
+                                    class="text-gray-600">{{ $statuses[$company->card['state']['status']] }}</span>
+                            </li>
                             <li class="text-gray-400">{{ __('INN') . ': ' }}<span
                                     class="text-gray-600">{{ $company->card['inn'] }}</span>
                             </li>
                             <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
                                     class="text-gray-600">{{ $company->card['ogrn'] }}</span>
                             </li>
+                            <li class="text-gray-400">{{ __('KPP') . ': ' }}<span
+                                    class="text-gray-600">{{ $company->card['kpp'] }}</span>
+                            </li>
                             <li class="text-gray-400">{{ __('Registration date') . ': ' }}<span
                                     class="date-transform text-gray-600" data-type="date"
                                     data-date="{{ $company->card['state']['registration_date'] }}"></span>
                             </li>
+                            <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
+                                    class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                            </li>
 
-                            @if ($company->card['opf']['short'] == 'ООО')
+                            @if ($company->card['type'] == 'LEGAL')
                                 <li class="text-gray-400">{{ __('Authorized capital') . ': ' }}<span
-                                        class="text-gray-600">{{ $company->card['capital']['value'] }} ₽</span>
-                                </li>
-                                <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                        class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                                        class="text-gray-600">{{ $company->card['capital'] }} ₽</span>
                                 </li>
 
-                                <div class="text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
+                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
 
                                 @foreach ($company->card['founders'] as $founder)
                                     <div class="ml-4">
                                         <li class="text-gray-400">{{ __('Name') . ': ' }}<span
-                                                class="text-gray-600">{{ $founder['fio']['source'] }}</span>
+                                                class="text-gray-600">{{ $founder['name'] }}
+                                                ({{ $founder['share'] }}%)
+                                            </span>
                                         </li>
                                         <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
                                                 class="text-gray-600">{{ $founder['inn'] }}</span>
@@ -194,6 +245,19 @@
                                     </div>
                                 @endforeach
                             @endif
+
+                            <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}</div>
+
+                            @foreach ($company->card['managers'] as $manager)
+                                <div class="ml-4">
+                                    <li class="text-gray-400">{{ __('Name') . ': ' }}<span
+                                            class="text-gray-600">{{ $manager['name'] }}</span>
+                                    </li>
+                                    <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                            class="text-gray-600">{{ $manager['inn'] }}</span>
+                                    </li>
+                                </div>
+                            @endforeach
                         </ul>
                     </div>
 

@@ -10,17 +10,19 @@ trait ShopTrait
 {
     public function getShops($request = null)
     {
-        $users = User::where(fn(Builder $q) => $q->whereHas('ads', function (Builder $query) {
-            $query->where('moderation', 'false')->where('hidden', 'false');
-        })->orWhereHas('hosting', function (Builder $query) {
-            $query->where('moderation', 'false');
-        }))->select(['id', 'name', 'url_name', 'tf'])->withCount(['offices' => function (Builder $query) {
-            $query->where('moderation', false);
-        }])->with(['company:user_id,logo,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
+        $users = User::where(
+            fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
+                ->orWhereHas('hosting', fn(Builder $query) => $query->where('moderation', 'false'))
+        )->select(['id', 'name', 'url_name', 'tf'])->withCount(['offices' => fn(Builder $query) => $query->where('moderation', false)])
+            ->with(['company:user_id,logo,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
 
         if (!isset($request)) return $users;
 
-        if ($request->city) $users = $users->whereLike('offices.address', '%' . $request->city . '%');
+        if ($request->city) $users = $users->whereHas(
+            'offices',
+            fn(Builder $query) =>
+            $query->where('moderation', 'false')->where('address', 'like', '%' . $request->city . '%')
+        );
 
         if ($request->has('is_company')) $users = $users->whereHas('company', function (Builder $query) {
             $query->where('moderation', false);

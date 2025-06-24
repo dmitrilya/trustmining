@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DaDataController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DatabaseController;
@@ -58,8 +57,8 @@ Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
 
 Route::group(['prefix' => 'dadata'], function () {
     Route::group(['prefix' => 'suggestions'], function () {
-        Route::get('/address', [DaDataController::class, 'address'])->name('dadata.suggs.address');
-        Route::get('/city', [DaDataController::class, 'city'])->name('adadata.suggs.city');
+        Route::get('/address', [Controller::class, 'dadataSuggsAddress'])->name('dadata.suggs.address');
+        Route::get('/city', [Controller::class, 'dadataSuggsCity'])->name('adadata.suggs.city');
     });
 });
 

@@ -28,6 +28,20 @@ trait YandexGPT
         return $this->request('POST', 'https://llm.api.cloud.yandex.net:443/foundationModels/v1/textClassification', $params);
     }
 
+    public function checkReviewWithPrompt($text)
+    {
+        $params = [
+            'modelUri' => 'cls://' . env('YANDEXGPT_FOLDER_ID') . '/yandexgpt-lite',
+            'text' => $text,
+            'task_description' => 'Определи вероятность того что отзыв является ненастоящим, заказным, фальшивым',
+            'labels' => [
+                'спам'
+            ]
+        ];
+
+        return $this->request('POST', 'https://llm.api.cloud.yandex.net/foundationModels/v1/fewShotTextClassification', $params);
+    }
+
     public function checkDocument($text)
     {
         $params = [
@@ -40,10 +54,12 @@ trait YandexGPT
                     "mode" => "DISABLED"
                 ]
             ],
-            "messages" => [[
+            "messages" => [
+                [
                     "role" => "system",
                     "text" => "Представлен договор на оказание услуг. Нужно внимательно пройтись по всем пунктам и найти все риски для заказчика. Все замечания нужно представить в виде массива на языке php с тремя вложенными массивами 1) То что может повлечь за собой утерю оборудования заказчиком или другие материальные или финансовые потери, 2) Неточности описания условий договора которые могут привести к спорам, 3) Наличие ошибок в тексте или отклонение от стандартов составления договоров"
-                ], [
+                ],
+                [
                     "role" => "user",
                     "text" => "To be, or not to be: that is the question."
                 ]

@@ -13,6 +13,7 @@ use Illuminate\View\View;
 
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\AdTrait;
+use App\Http\Traits\DaData;
 
 use App\Models\Article;
 use App\Models\Hosting;
@@ -22,7 +23,7 @@ use App\Models\Ad;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, AdTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, AdTrait, DaData;
 
     public function locale(Request $request)
     {

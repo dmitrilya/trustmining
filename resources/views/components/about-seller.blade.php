@@ -35,3 +35,9 @@
             {{ __('reviews') }}</a>
     </div>
 </div>
+
+<div class="mt-2 sm:mt-3">
+    <p class="text-xs sm:text-sm text-gray-400">
+        {{ __('Trust Factor') }}: <span class="text-gray-600">{{ $user->tf }}</span>
+    </p>
+</div>
