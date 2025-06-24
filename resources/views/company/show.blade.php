@@ -33,15 +33,23 @@
                             @include('components.about-seller', ['user' => $company->user])
                         </div>
 
+                        @if (isset($moderation->data['bg_logo']))
+                            <div class="border border-indigo-500">
+                                <img class="h-40" src="{{ Storage::url($moderation->data['bg_logo']) }}"
+                                    alt="">
+                            </div>
+                        @endif
+
                         @if ($company->card['type'] == 'LEGAL')
-                            <h1 class="flex items-center text-sm sm:text-base lg:text-lg font-bold tracking-tight text-gray-900">
+                            <h1
+                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-900">
                                 <svg class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" width="24" height="24"
                                     fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                {{ $company->card['address'] }}
+                                {{ $company->card['address']['unrestricted_value'] }}
                             </h1>
                         @endif
 
@@ -95,7 +103,8 @@
                                             class="text-gray-600">{{ $company->card['capital'] }} ₽</span>
                                     </li>
 
-                                    <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
+                                    <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">
+                                        {{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
                                         <div class="ml-4">
@@ -111,7 +120,9 @@
                                     @endforeach
                                 @endif
 
-                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}</div>
+                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">
+                                    {{ __('Managers') }}
+                                </div>
 
                                 @foreach ($company->card['managers'] as $manager)
                                     <div class="ml-4">
@@ -181,14 +192,15 @@
                     </div>
 
                     @if ($company->card['type'] == 'LEGAL')
-                        <h1 class="flex items-center text-sm sm:text-base lg:text-lg font-bold tracking-tight text-gray-900">
+                        <h1
+                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-900">
                             <svg class="w-5 h-5 text-gray-500 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
                                     d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                     clip-rule="evenodd" />
                             </svg>
-                            {{ $company->card['address'] }}
+                            {{ $company->card['address']['unrestricted_value'] }}
                         </h1>
                     @endif
 
@@ -230,7 +242,8 @@
                                         class="text-gray-600">{{ $company->card['capital'] }} ₽</span>
                                 </li>
 
-                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}</div>
+                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Founders') }}
+                                </div>
 
                                 @foreach ($company->card['founders'] as $founder)
                                     <div class="ml-4">
@@ -246,7 +259,8 @@
                                 @endforeach
                             @endif
 
-                            <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}</div>
+                            <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}
+                            </div>
 
                             @foreach ($company->card['managers'] as $manager)
                                 <div class="ml-4">

@@ -33,7 +33,8 @@ class UpdateCompanyRequest extends FormRequest
             'video' => 'nullable|active_url',
             'site' => 'nullable|active_url',
             'description' => 'nullable|max:' . $descriptionMax,
-            'logo' => 'file|mimes:jpg,png,jpeg|max:1048',
+            'logo' => 'file|mimes:jpg,png,jpeg|max:512',
+            'bg_logo' => 'file|mimes:jpg,png,jpeg|max:1024',
         ];
     }
 
@@ -49,7 +50,9 @@ class UpdateCompanyRequest extends FormRequest
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
             'logo.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'logo.max' => __('The maximum file size should not exceed 1 MB.'),
+            'logo.max' => __('The maximum file size should not exceed 0.5 MB.'),
+            'bg_logo.mimes' => __('Valid types are png, jpg and jpeg.'),
+            'bg_logo.max' => __('The maximum file size should not exceed 1 MB.'),
         ];
     }
 }

@@ -1,3 +1,5 @@
+@props(['withUniqueCheck' => false])
+
 <div class="flex justify-center items-center gap-4 mb-6">
     <x-secondary-button x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'accept-moderation')">{{ __('Accept') }}</x-secondary-button>
@@ -10,6 +12,14 @@
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                 {{ __('Accept moderation?') }}
             </h2>
+
+            @if ($withUniqueCheck)
+                <div class="my-4">
+                    <x-checkbox name="unique_content" value="unique_content" textClasses="text-gray-500 py-5">
+                        {{ __('Unique content is used') }}
+                    </x-checkbox>
+                </div>
+            @endif
 
             <div class="mt-6 flex justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">

@@ -11,7 +11,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
-            @include('moderation.components.buttons')
+            @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">

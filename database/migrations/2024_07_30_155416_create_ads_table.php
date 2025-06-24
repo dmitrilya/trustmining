@@ -35,6 +35,7 @@ return new class extends Migration
             $table->boolean('in_stock')->nullable();
             $table->boolean('moderation')->default(1);
             $table->boolean('hidden')->default(0);
+            $table->boolean('unique_content')->default(0);
             $table->unsignedTinyInteger('waiting')->nullable();
             $table->float('price');
             $table->unsignedInteger('contacts')->default(0);

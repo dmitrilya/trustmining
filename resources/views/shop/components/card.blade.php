@@ -4,7 +4,7 @@
         <div
             class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-gray-200 dark:bg-gray-600 @endif">
             @if ($shop->company)
-                <img class="w-full" src="{{ Storage::url($shop->company->logo) }}" alt="{{ $shop->url_name }}">
+                <img class="w-full" src="{{ Storage::url($shop->company->bg_logo) }}" alt="{{ $shop->url_name }}">
             @else
                 <p class="text-sm xs:text-lg text-white dark:text-gray-800 font-bold">{{ __('No logo') }}</p>
             @endif
@@ -13,7 +13,7 @@
         <div class="mt-2 sm:mt-4 text-sm sm:text-base text-gray-900 dark:text-white font-bold">{{ $shop->name }}</div>
 
         <div class="text-xs text-gray-400">
-            {{ $shop->company && !$shop->company->moderation ? __('Company') : __('Person') }}
+            {{ $shop->company && !$shop->company->moderation ? __($shop->company->card['type']) : __('Person') }}
         </div>
 
         <div class="flex items-center mt-2 sm:mt-4" x-data="{ momentRating: {{ $shop->moderatedReviews->count() ? $shop->moderatedReviews->avg_rating : 0 }} }">

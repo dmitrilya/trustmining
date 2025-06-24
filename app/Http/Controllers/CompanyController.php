@@ -137,6 +137,9 @@ class CompanyController extends Controller
         if ($request->logo)
             $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id);
 
+        if ($request->bg_logo)
+            $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id);
+
         if (!empty($data))
             Moderation::create([
                 'moderationable_type' => 'App\Models\Company',

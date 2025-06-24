@@ -28,7 +28,7 @@ class UpdateAdRequest extends FormRequest
             'waiting' => 'max:120',
             'warranty' => 'max:12',
             'preview' => 'file|mimes:jpg,png,jpeg|max:2048',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:1048',
+            'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
             'price' => 'required|numeric',
         ];
     }

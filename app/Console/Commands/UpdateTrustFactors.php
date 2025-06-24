@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Console\Command;
 
 use App\Http\Traits\TrustFactor;
@@ -38,8 +38,8 @@ class UpdateTrustFactors extends Command
             $query->where('moderation', 'false')->where('hidden', 'false');
         })->orWhereHas('hosting', function (Builder $query) {
             $query->where('moderation', 'false');
-        })->select(['id', 'tf'])
-            ->with(['moderatedOffices', 'company', 'tariff:id,name', 'moderatedReviews:user_id,rating', 'chats:id', 'chats.messages:chat_id,created_at'])
+        })->select(['id', 'tf', 'art'])
+            ->with(['moderatedOffices', 'company', 'tariff:id,name', 'moderatedReviews:user_id,rating', 'ads:user_id,unique_content'])
             ->get();
 
         foreach ($users as $user) {

@@ -303,6 +303,10 @@ trait DaData
                     ],
                     "address" => [
                         "unrestricted_value" => "117246, г Москва, р-н Черемушки, Научный проезд, д 19, помещ 126Н/3",
+                        "invalidity" => [
+                            "code" => "FTS",
+                            "decision" => null
+                        ],
                     ],
                     "phones" => null,
                     "emails" => [
@@ -339,7 +343,7 @@ trait DaData
 
             return $result;
         });
-        $card['data']['address'] = $card['data']['address']['unrestricted_value'];
+        $card['data']['address'] = collect($card['data']['address'])->only(['unrestricted_value', 'invalidity'])->all();
         $card['data']['phones'] = $card['data']['phones'] ? collect($card['data']['phones'])->pluck(['value'])->values() : [];
         $card['data']['emails'] = $card['data']['emails'] ? collect($card['data']['emails'])->pluck('value') : [];
 

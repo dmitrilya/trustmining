@@ -75,7 +75,7 @@ class ModerationController extends Controller
         return redirect()->route('moderations');
     }
 
-    public function accept(Moderation $moderation)
+    public function accept(Request $request, Moderation $moderation)
     {
         if ($moderation->moderation_status_id != 1 || !$moderation->moderationable || !$moderation->moderationable->user)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
@@ -92,6 +92,7 @@ class ModerationController extends Controller
             switch ($moderation->moderationable_type) {
                 case ('App\Models\Company'):
                     if (isset($moderation->data['logo']) && $m->logo) array_push($files, $m->logo);
+                    if (isset($moderation->data['bg_logo']) && $m->bg_logo) array_push($files, $m->bg_logo);
                     if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
@@ -124,6 +125,7 @@ class ModerationController extends Controller
 
         $data = $moderation->data;
         if ($m->moderation) $data['moderation'] = 0;
+        if ($moderation->moderationable_type == 'App\Models\Ad') $m->unique_content = $request->filled('unique_content');
         $m->update($data);
 
         $moderation->moderation_status_id = 2;
@@ -147,6 +149,7 @@ class ModerationController extends Controller
         switch ($moderation->moderationable_type) {
             case ('App\Models\Company'):
                 if (isset($moderation->data['logo'])) array_push($files, $moderation->data['logo']);
+                if (isset($moderation->data['bg_logo'])) array_push($files, $moderation->data['bg_logo']);
                 if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;

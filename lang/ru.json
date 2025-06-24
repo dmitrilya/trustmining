@@ -95,6 +95,8 @@
     "Review is required.": "Необходимо ввести текст отзыва",
     "Model details about miner": "Подробнее о данном оборудовании",
     "Company": "Компания",
+    "LEGAL": "Юр. лицо",
+    "INDIVIDUAL ": "ИП",
     "Status": "Статус",
     "Company INN": "ИНН компании",
     "INN": "ИНН",
@@ -293,6 +295,8 @@
     "First you need to pass moderation by passport": "Сначала нужно пройти модерацию по паспорту",
     "Unavailable, currently under moderation": "Недоступно, пока находится на модерации",
     "Logo": "Логотип",
+    "Logo for avatar": "Лого для аватарки",
+    "Logo for the card": "Лого для карточки",
     "Display": "Отображение",
     "Rejected": "Отклонено",
     "Reset": "Сбросить",
@@ -314,7 +318,9 @@
     "You need to authorize your telegram account, where notifications will be sent": "Необходимо пройти авторизацию своего аккаунта телеграм, куда будут приходить оповещения",
     "All": "Все",
     "Only IE and LLCs": "Только ИП и ООО",
-    "No logo": "",
+    "No logo": "Без логотипа",
+    "Unique content is used": "Используется уникальный контент",
+    "in the city": "в городе",
 
 
     "Creating and setting up an account": "Создание и настройка аккаунта",

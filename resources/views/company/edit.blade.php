@@ -32,12 +32,21 @@
                 </div>
 
                 <div>
-                    <x-input-label for="logo" :value="__('Logo')" />
+                    <x-input-label for="logo" :value="__('Logo for avatar')" />
                     <x-file-input id="logo" name="logo" class="mt-1 block w-full" :value="old('logo')"
                         accept=".png,.jpg,.jpeg" />
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="logo_help">PNG, JPG
-                        or JPEG (max. 500KB, 1x1)</p>
+                        or JPEG (max. 512KB, 1x1)</p>
                     <x-input-error :messages="$errors->get('logo')" />
+                </div>
+
+                <div>
+                    <x-input-label for="bg_logo" :value="__('Logo for the card')" />
+                    <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full" :value="old('bg_logo')"
+                        accept=".png,.jpg,.jpeg" />
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="bg_logo_help">PNG, JPG
+                        or JPEG (max. 1024KB)</p>
+                    <x-input-error :messages="$errors->get('bg_logo')" />
                 </div>
 
                 <div>

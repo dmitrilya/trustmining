@@ -15,7 +15,7 @@
 
     <div>
         <div class="text-xs text-gray-400">
-            {{ $user->company && !$user->company->moderation ? __('Company') : __('Person') }}
+            {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
         </div>
 
         <a href="{{ route('company', ['user' => $user->url_name]) }}"

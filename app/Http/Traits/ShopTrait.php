@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Models\User;
 
@@ -14,7 +14,7 @@ trait ShopTrait
             fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
                 ->orWhereHas('hosting', fn(Builder $query) => $query->where('moderation', 'false'))
         )->select(['id', 'name', 'url_name', 'tf'])->withCount(['offices' => fn(Builder $query) => $query->where('moderation', false)])
-            ->with(['company:user_id,logo,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
+            ->with(['company:user_id,bg_logo,card,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
 
         if (!isset($request)) return $users;
 
