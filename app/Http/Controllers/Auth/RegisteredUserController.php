@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
         $lat = ['_', 'a', 'b', 'v', 'g', 'd', 'e', 'io', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'sht', 'a', 'i', 'y', 'e', 'yu', 'ya', 'a', 'b', 'v', 'g', 'd', 'e', 'io', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'sht', 'a', 'i', 'y', 'e', 'yu', 'ya'];
 
         $user = User::create([
+            'ordering_id' => User::orderByDesc('ordering_id')->first()->ordering_id + 1,
             'name' => $request->name,
             'url_name' => strtolower(str_replace($cyr, $lat, $request->name)),
             'email' => $request->email,

@@ -25,7 +25,7 @@ class HostingController extends Controller
      */
     public function index(Request $request)
     {
-        return view('hosting.index', ['hostings' => $this->getHostings($request)->paginate(48)]);
+        return view('hosting.index', ['hostings' => $this->getHostings($request)->orderByDesc('ordering_id')->get()]);
     }
 
     /**
@@ -61,6 +61,7 @@ class HostingController extends Controller
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $hosting = Hosting::create([
+            'ordering_id' => Hosting::orderByDesc('ordering_id')->first()->ordering_id + 1,
             'user_id' => $user->id,
             'description' => $request->description,
             'address' => $request->address ? $request->address : 'Not specified',

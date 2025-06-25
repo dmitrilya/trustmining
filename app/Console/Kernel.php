@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('ordering:update')->hourlyAt(15);
         $schedule->command('subscription:check')->daily();
         $schedule->command('coinprofit:update')->dailyAt('02:00');
         $schedule->command('art:update')->twiceDaily(0, 12);

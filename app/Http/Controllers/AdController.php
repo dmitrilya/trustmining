@@ -29,7 +29,7 @@ class AdController extends Controller
      */
     public function index(Request $request)
     {
-        return view('ad.index', ['ads' => $this->getAds($request)->paginate(48)]);
+        return view('ad.index', ['ads' => $this->getAds($request)->orderByDesc('ordering_id')->paginate(30)]);
     }
 
     /**
@@ -68,6 +68,7 @@ class AdController extends Controller
         if (!$office || $office->moderation) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
         $ad = Ad::create([
+            'ordering_id' => Ad::orderByDesc('ordering_id')->first()->ordering_id + 1,
             'user_id' => $user->id,
             'ad_category_id' => $request->ad_category_id,
             'asic_version_id' => $request->asic_version_id,

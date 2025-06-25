@@ -39,6 +39,7 @@ trait ShopTrait
                     $users = $users->orderByDesc('tf');
                     break;
             }
+        else $users = $users->inRandomOrder();
 
         return $users;
     }

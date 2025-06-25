@@ -15,6 +15,7 @@ class Hosting extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'ordering_id',
         'user_id',
         'description',
         'address',

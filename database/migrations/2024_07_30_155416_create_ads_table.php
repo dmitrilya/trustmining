@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
+            $table->unsignedInteger('ordering_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');

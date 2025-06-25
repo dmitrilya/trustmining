@@ -1,7 +1,7 @@
 <x-filter>@include('ad.components.filter')</x-filter>
 
 <fieldset aria-label="Choose a ad" class="w-full">
-    <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         @if ($owner)
             <a href="{{ route('ad.create') }}"
                 class="cursor-pointer bg-gray-100 group hover:bg-white sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-gray-400">
@@ -25,3 +25,7 @@
         @endforeach
     </div>
 </fieldset>
+
+<div class="mt-8 sm:mt-12 lg:mt-16">
+    {{ $ads->links() }}
+</div>

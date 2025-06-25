@@ -15,6 +15,7 @@ class Ad extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'ordering_id',
         'user_id',
         'ad_category_id',
         'asic_version_id',

@@ -23,9 +23,7 @@ class ShopController extends Controller
      */
     public function shops(Request $request)
     {
-        return view('shop.index', [
-            'shops' => $this->getShops($request)->get()
-        ]);
+        return view('shop.index', ['shops' => $this->getShops($request)->orderByDesc('ordering_id')->get()]);
     }
 
     /**
@@ -92,7 +90,7 @@ class ShopController extends Controller
     public function office(User $user, Office $office)
     {
         $limit = $user->tariff ? $user->tariff->max_offices : 1;
-        $officeIds = $user->offices()->where('moderation', false)->pluck('id');
+        $officeIds = $user->offices()->where('moderation', false)->pluck('id')->toArray();
 
         if ($office->user->id != $user->id || $office->moderation || array_search($office->id, $officeIds) >= $limit)
             return redirect()->route('company.offices', ['user' => $user->url_name]);

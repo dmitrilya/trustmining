@@ -10,7 +10,7 @@
 </button>
 
 <div id="{{ 'ad-options_' . $ad->id }}"
-    class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+    class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg border-2 border-gray-100 dark:border-gray-600 w-44 dark:bg-gray-700 dark:divide-gray-600">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
         @if ($owner)
             <li>

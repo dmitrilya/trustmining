@@ -32,6 +32,7 @@ trait HostingTrait
                     $hostings = $hostings->orderByDesc('price');
                     break;
             }
+        else $hostings = $hostings->inRandomOrder();
 
         return $hostings;
     }

@@ -19,7 +19,7 @@ class GuideController extends Controller
      */
     public function index()
     {
-        return view('guide.index', ['guides' => Guide::orderByDesc('likes')->paginate(20)]);
+        return view('guide.index', ['guides' => Guide::orderByDesc('likes')->get()]);
     }
 
     /**
