@@ -6,9 +6,11 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Models\User;
 
+use DB;
+
 trait ShopTrait
 {
-    public function getShops($request = null)
+    public function getShops($request)
     {
         $users = User::where(
             fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
@@ -16,19 +18,15 @@ trait ShopTrait
         )->select(['id', 'name', 'url_name', 'tf'])->withCount(['offices' => fn(Builder $query) => $query->where('moderation', false)])
             ->with(['company:user_id,bg_logo,card,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
 
-        if (!isset($request)) return $users;
-
         if ($request->city) $users = $users->whereHas(
             'offices',
             fn(Builder $query) =>
-            $query->where('moderation', 'false')->where('address', 'like', '%' . $request->city . '%')
+            $query->where('moderation', false)->where('address', 'like', '%' . $request->city . '%')
         );
 
-        if ($request->has('is_company')) $users = $users->whereHas('company', function (Builder $query) {
+        if ($request->filled('is_company')) $users = $users->whereHas('company', function (Builder $query) {
             $query->where('moderation', false);
         });
-
-        if ($request->rating) $users = $users->where('moderatedReviews.avg_rating', '>=', $request->rating);
 
         if ($request->sort && ($user = $request->user()) && $user->tariff)
             switch ($request->sort) {

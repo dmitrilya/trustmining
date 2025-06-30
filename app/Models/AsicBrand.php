@@ -40,4 +40,14 @@ class AsicBrand extends Model
     {
         return $this->hasMany(AsicModel::class);
     }
+
+    public function algorithms()
+    {
+        return $this->hasManyThrow(Algorithm::class, AsicModel::class);
+    }
+
+    public function views()
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
 }

@@ -15,7 +15,7 @@ window.dateTransform = function (el) {
 
     switch (el.getAttribute("data-type")) {
         case 'datetime':
-            date = date.toLocaleDateString('ru', {
+            date = date.toLocaleDateString(window.locale, {
                 month: "short",
                 day: "numeric",
                 hour: "numeric",
@@ -23,20 +23,20 @@ window.dateTransform = function (el) {
             });
             break;
         case 'date':
-            date = date.toLocaleDateString('ru', {
+            date = date.toLocaleDateString(window.locale, {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
             });
             break;
         case 'month':
-            date = date.toLocaleDateString('ru', {
+            date = date.toLocaleDateString(window.locale, {
                 year: "numeric",
                 month: "long",
             });
             break;
         default:
-            date = date.toLocaleDateString('ru', {
+            date = date.toLocaleDateString(window.locale, {
                 month: "short",
                 day: "numeric",
                 hour: "numeric",

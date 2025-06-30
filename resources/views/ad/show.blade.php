@@ -34,7 +34,7 @@
 
                     <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
                         <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->asicModel->algorithm->measurement }}</h1>
+                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}</h1>
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
@@ -125,7 +125,7 @@
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->asicModel->algorithm->measurement }}</h1>
+                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}</h1>
 
                     <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} ₽</p>
 

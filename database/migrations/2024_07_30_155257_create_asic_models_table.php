@@ -22,12 +22,10 @@ return new class extends Migration
             $table->foreign('algorithm_id')->references('id')
                 ->on('algorithms')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->text('description');
-            $table->unsignedTinyInteger('width');
-            $table->unsignedTinyInteger('length');
-            $table->unsignedTinyInteger('height');
-            $table->unsignedTinyInteger('weight');
+            $table->text('description')->nullable();
+            $table->json('characteristics');
             $table->json('images');
+            $table->date('release');
         });
     }
 

@@ -47,7 +47,9 @@ class AsicModel extends Model
      * @var array
      */
     protected $casts = [
+        'characteristics' => 'array',
         'images' => 'array',
+        'release' => 'date',
     ];
 
     public function algorithm()
@@ -77,7 +79,11 @@ class AsicModel extends Model
 
     public function moderatedReviews()
     {
-        return $this->reviews()->where('moderation', false)->addSelect(DB::raw('avg(`rating`) as avg_rating'));
+        $reviewsQuery = $this->reviews()->where('moderation', false);
+
+        if ($reviewsQuery->exists()) $reviewsQuery->addSelect(DB::raw('avg(`rating`) as avg_rating'));
+
+        return $reviewsQuery;
     }
 
     public function views()

@@ -1,5 +1,6 @@
 @php
-    $models = \App\Models\AsicModel::with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])
+    $models = \App\Models\AsicModel::where('release', '>', '2020-03-01')
+        ->with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])
         ->select(['id', 'name', 'algorithm_id'])
         ->get()
         ->map(function ($model) {

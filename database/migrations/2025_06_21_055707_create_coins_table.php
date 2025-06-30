@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('abbreviation');
             $table->unsignedBigInteger('algorithm_id')->nullable();
             $table->foreign('algorithm_id')->references('id')
                 ->on('algorithms')->onUpdate('cascade');

@@ -8,10 +8,10 @@
 ])
 
 <div class="{{ $class }}">
-    <label class="flex items-center">
+    <label class="flex items-center cursor-pointer">
         <input @if ($disabled) disabled @endif @if ($checked) checked @endif
             type="checkbox" name="{{ $name }}" value="{{ $value }}"
-            class="mr-2 w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-0">
+            class="mr-2 w-4 h-4 cursor-pointer text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-0">
         <p class="text-sm {{ $textClasses }}">{{ $slot }}</p>
     </label>
 </div>

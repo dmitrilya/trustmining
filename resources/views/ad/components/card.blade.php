@@ -32,7 +32,7 @@
         </div>
 
         <div class="mt-2 md:mt-3 text-sm md:text-base text-gray-900 dark:text-white font-bold">
-            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->asicModel->algorithm->measurement }}
+            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
         </div>
 
         <a href="{{ route('company', ['user' => $ad->user->url_name]) }}"

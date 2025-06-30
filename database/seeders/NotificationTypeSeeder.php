@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
 
 class NotificationTypeSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class NotificationTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('notification_types')->insert([
+        \DB::table('notification_types')->insert([
             [
                 'name' => 'Price drop',
             ], [

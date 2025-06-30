@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
 
 class ContactTypeSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class ContactTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contact_types')->insert([
+        \DB::table('contact_types')->insert([
             [
                 'name' => 'phone',
                 'href' => 'tel:',

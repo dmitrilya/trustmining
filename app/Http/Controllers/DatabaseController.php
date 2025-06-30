@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Http\Traits\ViewTrait;
 
@@ -14,7 +14,7 @@ use App\Models\AsicVersion;
 class DatabaseController extends Controller
 {
     use ViewTrait;
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -22,9 +22,18 @@ class DatabaseController extends Controller
      */
     public function index()
     {
+        $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2020-03-01'))
+            ->with('asicModels', fn($q) => $q->where('release', '>', '2020-03-01')
+                ->select(['id', 'asic_brand_id', 'algorithm_id', 'release'])
+                ->with([
+                    'algorithm',
+                    'algorithm.coins'
+                ]))
+            ->withCount('views')->orderByDesc('views_count')->get();
+
         return view('database.index', [
-            'brands' => AsicBrand::all()->reverse(),
-            'popularModels' => AsicModel::with('asicBrand')->withCount('views')->orderBy('views_count', 'desc')->limit(8)->get()
+            'brands' => $brands,
+            'algos' => $brands->pluck('asicModels.*.algorithm')->flatten()->unique('name')
         ]);
     }
 
@@ -36,7 +45,17 @@ class DatabaseController extends Controller
      */
     public function brand(AsicBrand $asicBrand)
     {
-        return view('database.brand', ['brand' => $asicBrand, 'models' => $asicBrand->asicModels()->withCount('views')->get()->reverse()]);
+        $this->addView(request(), $asicBrand);
+
+        return view('database.brand', [
+            'brand' => $asicBrand,
+            'algos' => $asicBrand->asicModels()->where('release', '>', '2020-03-01')
+                ->select(['id', 'asic_brand_id', 'algorithm_id'])
+                ->with([
+                    'algorithm',
+                    'algorithm.coins'
+                ])->get()->pluck('algorithm')->flatten()->unique('name')
+        ]);
     }
 
     /**
@@ -62,5 +81,45 @@ class DatabaseController extends Controller
             'id' => $asicModel->id,
             'reviews' => $asicModel->reviews
         ]);
+    }
+
+    public function getModels(Request $request)
+    {
+        return response()->json(AsicModel::where('release', '>', '2020-03-01')->withCount('views')->with([
+            'asicBrand:id,name',
+            'algorithm',
+            'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
+        ])->get()->map(fn($model) => [
+            'name' => $model->name,
+            'url_name' => strtolower(str_replace(' ', '_', $model->name)),
+            'hashrate' => $model->asicVersions->first()->hashrate,
+            'power' => $model->asicVersions->first()->hashrate * $model->asicVersions->first()->efficiency,
+            'efficiency' => $model->asicVersions->first()->efficiency,
+            'algorithm' => $model->algorithm->name,
+            'measurement' => $model->asicVersions->first()->measurement,
+            'original_measurement' => $model->algorithm->measurement,
+            'release' => $model->release,
+            'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
+        ]));
+    }
+
+    public function getBrandModels(Request $request, AsicBrand $asicBrand)
+    {
+        return response()->json($asicBrand->asicModels()->where('release', '>', '2020-03-01')->withCount('views')->with([
+            'asicBrand:id,name',
+            'algorithm',
+            'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
+        ])->get()->map(fn($model) => [
+            'name' => $model->name,
+            'url_name' => strtolower(str_replace(' ', '_', $model->name)),
+            'hashrate' => $model->asicVersions->first()->hashrate,
+            'power' => $model->asicVersions->first()->hashrate * $model->asicVersions->first()->efficiency,
+            'efficiency' => $model->asicVersions->first()->efficiency,
+            'algorithm' => $model->algorithm->name,
+            'measurement' => $model->asicVersions->first()->measurement,
+            'original_measurement' => $model->algorithm->measurement,
+            'release' => $model->release,
+            'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
+        ]));
     }
 }

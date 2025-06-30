@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
 
 class AdCategorySeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class AdCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('ad_categories')->insert([
+        \DB::table('ad_categories')->insert([
             [
                 'name' => 'miners',
             ]

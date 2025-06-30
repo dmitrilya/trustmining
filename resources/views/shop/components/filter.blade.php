@@ -1,4 +1,4 @@
-<div class="relative" x-data="{ open: false, sugs: false }" @click.away="open = false">
+<div class="relative mb-4" x-data="{ open: false, sugs: false }" @click.away="open = false">
     <div class="relative z-0 w-full group" @click="open = true">
         <input type="text" id="city" name="city" x-ref="search" placeholder=" "
             value="{{ request()->get('city') }}" autocomplete="off"
@@ -15,6 +15,6 @@
     </ul>
 </div>
 
-<x-checkbox name="is_company" value="true" textClasses="text-gray-500 py-5" :checked="request()->get('is_company')">
+<x-checkbox name="is_company" value="true" textClasses="text-gray-500 py-3" :checked="request()->get('is_company')">
     {{ __('Only IE and LLCs') }}
 </x-checkbox>

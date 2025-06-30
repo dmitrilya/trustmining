@@ -8,7 +8,7 @@ trait AdTrait
 {
     public function getAds($request = null)
     {
-        $ads = Ad::with(['adCategory:name', 'user:id,name,url_name,tf', 'user.company:id', 'user.contacts.contactType', 'office:id,city', 'asicVersion:id,asic_model_id,hashrate', 'asicVersion.asicModel:id,name,algorithm_id', 'asicVersion.asicModel.algorithm:id,measurement']);
+        $ads = Ad::with(['adCategory:name', 'user:id,name,url_name,tf', 'user.company:id', 'user.contacts.contactType', 'office:id,city', 'asicVersion:id,asic_model_id,hashrate', 'asicVersion.asicModel:id,name,algorithm_id,measurement', 'asicVersion.asicModel.algorithm:id,measurement']);
 
         if (isset($request)) {
             /*if ($request->brands && count($request->brands)) {

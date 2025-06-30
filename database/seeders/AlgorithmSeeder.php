@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
 
 class AlgorithmSeeder extends Seeder
 {
@@ -14,52 +13,45 @@ class AlgorithmSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('algorithms')->insert([
-            [
-                'id' => 1,
-                'name' => 'SHA-256',
-                'measurement' => 'TH',
-            ], [
-                'id' => 3,
-                'name' => 'Scrypt',
-                'measurement' => 'MH',
-            ], [
-                'id' => 4,
-                'name' => 'Ethash',
-                'measurement' => 'MH',
-            ], [
-                'id' => 5,
-                'name' => 'Equihash',
-                'measurement' => 'KSol',
-            ], [
-                'id' => 6,
-                'name' => 'Ethash-ETHW',
-                'measurement' => 'MH',
-            ], [
-                'id' => 7,
-                'name' => 'KawPow',
-                'measurement' => 'MH',
-            ], [
-                'id' => 8,
-                'name' => 'X11',
-                'measurement' => 'GH',
-            ], [
-                'id' => 9,
-                'name' => 'SHA256-BCH',
-                'measurement' => 'TH',
-            ], [
-                'id' => 10,
-                'name' => 'Eaglesong',
-                'measurement' => 'TH',
-            ], [
-                'id' => 11,
-                'name' => 'Octopus',
-                'measurement' => 'MH',
-            ], [
-                'id' => 12,
-                'name' => 'KHeavyHash',
-                'measurement' => 'TH',
-            ],
+        \DB::table('algorithms')->insert([
+            ["name" => "SHA-256", "measurement" => "Th"],
+            ["name" => "Scrypt", "measurement" => "Mh"],
+            ["name" => "RandomX", "measurement" => "Th"],
+            ["name" => "EtHash", "measurement" => "Mh"],
+            ["name" => "KHeavyHash", "measurement" => "Th"],
+            ["name" => "Equihash", "measurement" => "kh"],
+            ["name" => "Cuckatoo31", "measurement" => "Th"],
+            ["name" => "Octopus", "measurement" => "Th"],
+            ["name" => "X11", "measurement" => "Gh"],
+            ["name" => "KawPow", "measurement" => "Th"],
+            ["name" => "Blake2B-Sia", "measurement" => "Th"],
+            ["name" => "Eaglesong", "measurement" => "Th"],
+            ["name" => "Qubit", "measurement" => "Th"],
+            ["name" => "Kadena", "measurement" => "Th"],
+            ["name" => "zkSNARK", "measurement" => "Mh"],
+            ["name" => "Blake3", "measurement" => "Gh"],
+            ["name" => "Groestl", "measurement" => "Gh"],
+            ["name" => "Lyra2REv2", "measurement" => "Gh"],
+            ["name" => "NexaPow", "measurement" => "Gh"],
+            ["name" => "Handshake", "measurement" => "Gh"],
+            ["name" => "CryptoNight", "measurement" => "Th"],
+            ["name" => "Cuckatoo32", "measurement" => "h"],
+            ["name" => "Blake256R14", "measurement" => "Th"],
+            ["name" => "SHA512256d", "measurement" => "Gh"],
+            ["name" => "Lbry", "measurement" => "Gh"],
+            ["name" => "CryptoNight-LiteV1", "measurement" => "Th"],
+            ["name" => "Autolykos", "measurement" => "Th"],
+            ["name" => "Nist5", "measurement" => "Th"],
+            ["name" => "Tensority", "measurement" => "kh"],
+            ["name" => "Cryptonight-V7", "measurement" => "Th"],
+            ["name" => "GhostRider", "measurement" => "Th"],
+            ["name" => "CryptoNightR", "measurement" => "kh"],
+            ["name" => "Myriad-Groestl", "measurement" => "Th"],
+            ["name" => "Pascal", "measurement" => "Th"],
+            ["name" => "ProgPow", "measurement" => "Th"],
+            ["name" => "Blake2B", "measurement" => "Gh"],
+            ["name" => "X11Gost", "measurement" => "Th"],
+            ["name" => "X13", "measurement" => "Th"]
         ]);
     }
 }

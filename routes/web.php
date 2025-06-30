@@ -75,8 +75,12 @@ Route::group(['prefix' => 'guides'], function () {
 
 Route::group(['prefix' => 'database'], function () {
     Route::get('/', [DatabaseController::class, 'index'])->name('database');
+    Route::get('/get-models', [DatabaseController::class, 'getModels'])->name('get-models');
+
     Route::group(['prefix' => '{asicBrand}'], function () {
         Route::get('/', [DatabaseController::class, 'brand'])->name('database.brand');
+        Route::get('/get-models', [DatabaseController::class, 'getBrandModels'])->name('get-brand-models');
+
         Route::group(['prefix' => '{asicModel}'], function () {
             Route::get('/', [DatabaseController::class, 'model'])->name('database.model');
             Route::get('/reviews', [DatabaseController::class, 'reviews'])->name('database.reviews');

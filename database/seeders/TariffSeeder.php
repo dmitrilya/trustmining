@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use DB;
 
 class TariffSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class TariffSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tariffs')->insert([
+        \DB::table('tariffs')->insert([
             [
                 'name' => 'Resale',
                 'description' => 'For small points of sale',
@@ -65,7 +64,7 @@ class TariffSeeder extends Seeder
                 'max_description' => 0,
                 'can_create_guide' => 0,
                 'priority_moderation' => 0,
-                'price' => 500,
+                'price' => 15,
             ],
         ]);
     }

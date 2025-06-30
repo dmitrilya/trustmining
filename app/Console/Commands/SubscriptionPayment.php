@@ -6,8 +6,9 @@ use Illuminate\Console\Command;
 
 use App\Http\Traits\NotificationTrait;
 
+use Carbon\Carbon;
+
 use App\Models\User;
-use DB;
 
 class SubscriptionPayment extends Command
 {
@@ -36,7 +37,12 @@ class SubscriptionPayment extends Command
     {
         $adIdsToHide = collect();
 
-        foreach (User::whereNotNull('tariff_id')->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user) {
+        foreach (
+            User::whereHas(
+                'tariff',
+                fn($q) => $q->where('created_at', '<', Carbon::now()->yesterday())
+            )->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user
+        ) {
             if ($user->balance < $user->tariff->price) {
                 $this->notify('Subscription renewal failed', $user);
 
@@ -53,7 +59,7 @@ class SubscriptionPayment extends Command
             $user->save();
         }
 
-        if ($adIdsToHide->count()) DB::table('ads')->whereIn('id', $adIdsToHide)->update(['hidden' => true]);
+        if ($adIdsToHide->count()) \DB::table('ads')->whereIn('id', $adIdsToHide)->update(['hidden' => true]);
 
         return Command::SUCCESS;
     }

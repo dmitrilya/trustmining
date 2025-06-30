@@ -1,10 +1,10 @@
 @props(['name', 'items', 'field', 'type'])
 
-<div class="border-t border-gray-200 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
+<div class="{{ $field != 'algorithms' ? 'border-t ' : '' }}border-gray-200 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
     <h3 class="-mx-2 -my-3 flow-root">
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
             class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
-            aria-controls="filter-section-mobile-0" aria-expanded="false">
+            aria-controls="filter-section-mobile-{{ $name }}" aria-expanded="false">
             <span class="font-medium text-gray-900">{{ $name }}</span>
             <span class="ml-6 flex items-center">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -20,7 +20,7 @@
         </button>
     </h3>
 
-    <div class="pt-6" id="filter-section-mobile-0" x-show="open" style="display: none">
+    <div class="pt-6 max-h-40 overflow-y-auto" id="filter-section-mobile-{{ $name }}" x-show="open" style="display: none">
         <div class="space-y-4">
             @foreach ($items as $item)
                 @if ($type == 'checkbox')

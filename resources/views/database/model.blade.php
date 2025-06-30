@@ -38,6 +38,16 @@
                         {{ $model->name }}</h1>
                 </div>
 
+                @php
+                    $algorithm = $model->algorithm()->with('coins')->first();
+                    $versions = $model
+                        ->asicVersions()
+                        ->with(['ads:price'])
+                        ->get()
+                        ->sortByDesc('hashrate');
+                    $hasTariff = ($user = \Auth::user()) && $user->tariff;
+                @endphp
+
                 <div class="mt-4 md:row-span-3 md:mt-0 md:pl-6 lg:pl-12 xl:pl-16">
                     <h2 class="sr-only">Информация</h2>
 
@@ -56,56 +66,107 @@
                         </div>
                     </div>
 
-                    <a class="block mt-4 sm:mt-6 md:mt-8"
-                        href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
-                        <x-primary-button>{{ __('Find ads') }}</x-primary-button>
-                    </a>
+                    @if ($versions->pluck('ads')->flatten()->count())
+                        <a class="w-max mt-4 sm:mt-6 md:mt-8"
+                            href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
+                            <x-primary-button>{{ __('Find ads') }}</x-primary-button>
+                        </a>
+                    @else
+                        <x-primary-button
+                            class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('No ads') }}</x-primary-button>
+                    @endif
                 </div>
 
                 <div
                     class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r md:border-gray-200 md:pb-16 md:pr-8 md:pt-6">
-                    @php
-                        $algorithm = $model->algorithm()->with('coins')->first();
-                    @endphp
 
                     <div class="text-sm text-gray-400">{{ __('Algorithm') }}: <span class="text-gray-600">
                             {{ $algorithm->name }}</span></div>
 
-                    <div class="grid gap-4 xl:gap-8 grid-cols-1 xl:grid-cols-2 mt-6 sm:mt-8 md:mt-10">
-                        @foreach ($model->asicVersions()->with(['ads:price'])->get() as $version)
-                            <div>
+                    <div class="text-sm text-gray-400">{{ __('Release date') }}: <span class="text-gray-600">
+                            {{ $model->release->locale('ru')->translatedFormat('F Y') }}</span></div>
+
+                    <div x-data="{ selectedTab: 0 }" class="mt-4 md:mt-8">
+                        <div
+                            class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                            <ul class="flex flex-wrap -mb-px">
+                                @foreach ($versions as $i => $version)
+                                    <li class="me-2">
+                                        <a href="#" class="inline-block p-4 border-b-2 rounded-t-lg"
+                                            @click="selectedTab = {{ $i }}"
+                                            :class="{
+                                                'border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300': {{ $i }} !=
+                                                    selectedTab,
+                                                'text-indigo-600 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500': {{ $i }} ==
+                                                    selectedTab
+                                            }">
+                                            {{ $version->hashrate }}{{ $version->measurement }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        @foreach ($versions as $i => $version)
+                            <div x-show="selectedTab == {{ $i }}">
                                 @php
                                     $avgPrice = $version->ads->avg('price');
                                 @endphp
 
-                                <a href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}"
-                                    class="flex items-center text-sm md:text-base text-gray-900 underline font-bold mb-4">
-                                    {{ $version->hashrate }} {{ $algorithm->measurement }}
-                                    <svg class="w-4 h-4 rotate-180 ml-2 text-gray-800 dark:text-white" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"></path>
-                                    </svg>
-                                </a>
-
-                                <div class="text-sm text-gray-400">{{ __('Average price') }}: <span
-                                        class="text-gray-600">
-                                        {{ $avgPrice ? $avgPrice : __('No ads') }}</span></div>
-
-                                <h3 class="text-sm font-medium text-gray-900 mt-4 mb-3">{{ __('Income today') }}</h3>
-
-                                <div class="space-y-2">
-                                    @foreach ($algorithm->coins as $coin)
-                                        <div class="flex items-center">
-                                            <img src="/img/coins/{{ $coin->name }}.webp" alt="{{ $coin->name }}"
-                                                class="w-5 mr-2">
-                                            <div class="text-sm text-gray-400 mr-3">{{ $coin->name }}:</div>
-                                            <div class="text-sm text-gray-600">
-                                                {{ number_format($version->hashrate * $coin->profit, 8) }}
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
+                                    <span class="text-gray-600">{{ $version->efficiency }}</span>
+                                    j/{{ $version->measurement }}
                                 </div>
+
+                                <div class="text-sm text-gray-400 mt-1 sm:mt-2">{{ __('Power') }}:
+                                    <span class="text-gray-600">{{ $version->efficiency * $version->hashrate }}</span>
+                                    W
+                                </div>
+
+                                @if ($avgPrice)
+                                    <div class="text-sm text-gray-400 mt-6">{{ __('The best price') }}:
+                                        @if ($hasTariff)
+                                            <span class="text-gray-600">
+                                                {{ $avgPrice }}
+                                            </span>
+                                        @else
+                                            <span class="text-gray-600 blur-sm"
+                                                @click.prevent="$dispatch('open-modal', 'need-subscription')">
+                                                {{ __('Subscription') }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+
+                                @if ($version->ads->count())
+                                    <a class="w-max mt-6 md:mt-8"
+                                        href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
+                                        <x-primary-button>{{ __('Buy') }}</x-primary-button>
+                                    </a>
+                                @else
+                                    <x-primary-button
+                                        class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('Out of stock') }}</x-primary-button>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <h3 class="text-sm font-medium text-gray-900 mt-8 mb-3">{{ __('Coins') }}</h3>
+
+                    <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                        @foreach ($algorithm->coins as $coin)
+                            <div class="flex items-center">
+                                <img src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}"
+                                    alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2">
+                                <div>
+                                    <div class="text-xs sm:text-sm text-gray-500 mr-3">
+                                        {{ $coin->abbreviation }}</div>
+                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3">{{ $coin->name }}
+                                    </div>
+                                </div>
+                                {{-- <div class="text-sm text-gray-600">
+                                                {{ number_format($version->hashrate * $coin->profit, 8) }}
+                                            </div> --}}
                             </div>
                         @endforeach
                     </div>
