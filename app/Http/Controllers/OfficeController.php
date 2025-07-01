@@ -59,7 +59,7 @@ class OfficeController extends Controller
         if (!count($suggestions)) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
         $address = $suggestions[0]['value'];
-        $city = $$suggestions[0]['city'];
+        $city = $suggestions[0]['city'];
 
         $office = Office::create([
             'user_id' => $user->id,
