@@ -2,13 +2,19 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
+
+use App\Http\Traits\YandexGPT;
+
 use App\Models\Algorithm;
 use App\Models\AsicModel;
+
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 
 class MyCommand extends Command
 {
+    use YandexGPT;
+
     /**
      * The name and signature of the console command.
      *
@@ -30,9 +36,11 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        $data = collect(file_get_contents('https://api.minerstat.com/v2/coins'));
+        //$data = collect(file_get_contents('https://api.minerstat.com/v2/coins'));
 
         //$data->where('')
+
+        dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
 
         return Command::SUCCESS;
     }

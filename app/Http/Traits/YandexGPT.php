@@ -2,6 +2,8 @@
 
 namespace App\Http\Traits;
 
+use Exception;
+
 trait YandexGPT
 {
     public function checkTextWithPrompt($text)
@@ -61,29 +63,40 @@ trait YandexGPT
                 ],
                 [
                     "role" => "user",
-                    "text" => "To be, or not to be: that is the question."
+                    "text" => $text
                 ]
             ]
         ];
 
-        return $this->request('POST', 'https://llm.api.cloud.yandex.net/foundationModels/v1/fewShotTextClassification', $params);
+        return $this->request('POST', 'https://llm.api.cloud.yandex.net/foundationModels/v1/completionAsync', $params);
     }
 
     private function request($method, $link, $params)
     {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($curl, CURLOPT_URL, $link);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Authorization: Api-Key ' . env('YANDEXGPT_APP_KEY')]);
+        try {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+            curl_setopt($curl, CURLOPT_URL, $link);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Authorization: Api-Key ' . env('YANDEXGPT_APP_KEY'),
+                'Content-Type: application/json',
+                'x-folder-id: ' . env('YANDEXGPT_FOLDER_ID')
+            ]);
 
-        if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
+            if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
 
-        $out = curl_exec($curl);
-        curl_close($curl);
+            $out = curl_exec($curl);
 
-        return [
-            'result' => json_decode($out)
-        ];
+            if ($out === false) throw new Exception(curl_error($curl), curl_errno($curl));
+
+            curl_close($curl);
+
+            return json_decode($out);
+        } catch (Exception $e) {
+            dd($e->getCode(), $e->getMessage());
+        } finally {
+            if (is_resource($curl)) curl_close($curl);
+        }
     }
 }
