@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Http\Traits\SearchTrait;
+use App\Http\Traits\Telegram;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 
@@ -23,7 +24,7 @@ use App\Models\Ad;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, AdTrait, DaData;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, DaData;
 
     public function locale(Request $request)
     {

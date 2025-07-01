@@ -26,7 +26,7 @@
                 <div
                     class="grid gap-2 {{ $auth->id == $message->user_id ? 'justify-items-end' : 'justify-items-start' }} {{ count($message->images) > 1 ? (count($message->images) > 4 ? 'grid-cols-3' : 'grid-cols-2') : 'grid-cols-1' }}">
                     @foreach ($message->images as $image)
-                        <div class="group relative h-max max-h-60 max-w-max">
+                        <div class="group relative h-max max-h-60 max-w-max flex items-center overflow-hidden">
                             <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
                                 class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                                 <a data-tooltip-target="download-image-{{ $message->id }}-{{ $loop->index }}" download
