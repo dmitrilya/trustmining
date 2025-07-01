@@ -7,13 +7,14 @@ use App\Http\Requests\UpdateOfficeRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Traits\FileTrait;
+use App\Http\Traits\DaData;
 
 use App\Models\Moderation;
 use App\Models\Office;
 
 class OfficeController extends Controller
 {
-    use FileTrait;
+    use FileTrait, DaData;
 
     /**
      * Display a listing of the resource.
@@ -53,9 +54,17 @@ class OfficeController extends Controller
         if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
+        $suggestions = $this->dadataSearchAddress($request->address);
+
+        if (!count($suggestions)) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
+
+        $address = $suggestions[0]['value'];
+        $city = $$suggestions[0]['city'];
+
         $office = Office::create([
             'user_id' => $user->id,
-            'address' => $request->address,
+            'address' => $address,
+            'city' => $city,
             'video' => $request->video,
             'images' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
