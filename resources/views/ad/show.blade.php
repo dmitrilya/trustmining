@@ -34,7 +34,8 @@
 
                     <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
                         <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}</h1>
+                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+                        </h1>
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
@@ -125,7 +126,8 @@
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}</h1>
+                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+                    </h1>
 
                     <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} ₽</p>
 
@@ -175,7 +177,8 @@
                             @if ($auth && $ad->user->id == $auth->id)
                                 @if (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
                                     <div class="flex items-center mt-6">
-                                        <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+                                        <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" aria-hidden="true"
+                                            viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
                                         </svg>
@@ -189,10 +192,30 @@
                                     <x-primary-button>{{ __('Edit') }}</x-primary-button>
                                 </a>
                             @else
-                                <a class="block mt-6"
-                                    href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
-                                    <x-primary-button>{{ __('Contact') }}</x-primary-button>
-                                </a>
+                                <div class="flex mt-6">
+                                    <x-secondary-button
+                                        @click.prevent="$dispatch('open-modal', '{{ ($user = \Auth::user()) && $user->tariff ? 'tg-auth' : 'need-subscription' }}')">
+                                        <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="1.5"
+                                                d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
+                                        </svg>
+                                        {{ __('Track price') }}
+                                    </x-secondary-button>
+                                    <a class="block ml-2 sm:ml-3"
+                                        href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
+                                        <x-primary-button class="flex items-center">
+                                            <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M7 9h5m3 0h2M7 12h2m3 0h5M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.616a1 1 0 0 0-.67.257l-2.88 2.592A.5.5 0 0 1 8 18.477V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                                            </svg>
+                                            {{ __('Contact') }}
+                                        </x-primary-button>
+                                    </a>
+                                </div>
                             @endif
                         </div>
                     </div>

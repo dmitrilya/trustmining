@@ -43,7 +43,7 @@ class ChatController extends Controller
             if ($request->ad) {
                 $chat->messages()->create([
                     'user_id' => $auth->id,
-                    'message' => __('Good afternoon Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
+                    'message' => __('Hello! Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
                     'images' => [],
                     'files' => []
                 ]);
