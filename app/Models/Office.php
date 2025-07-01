@@ -19,6 +19,7 @@ class Office extends Model
         'images',
         'video',
         'address',
+        'city',
         'peculiarities',
         'moderation',
     ];
