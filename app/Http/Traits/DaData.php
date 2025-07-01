@@ -14,7 +14,7 @@ trait DaData
     {
         return response()->json([
             'success' => true,
-            'suggestions' => DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions']->pluck('value')
+            'suggestions' => collect(DaDataAddress::prompt($request->address, 10, Language::RU)['suggestions'])->pluck('value')
         ], 200);
     }
 
