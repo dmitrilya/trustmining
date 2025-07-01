@@ -67,8 +67,9 @@ class AdController extends Controller
 
         if (!$office || $office->moderation) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
+        $firstAd = Ad::orderByDesc('ordering_id')->first();
         $ad = Ad::create([
-            'ordering_id' => Ad::orderByDesc('ordering_id')->first()->ordering_id + 1,
+            'ordering_id' => $firstAd ? $firstAd->ordering_id + 1 : 1,
             'user_id' => $user->id,
             'ad_category_id' => $request->ad_category_id,
             'asic_version_id' => $request->asic_version_id,

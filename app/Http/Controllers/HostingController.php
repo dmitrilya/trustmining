@@ -60,8 +60,9 @@ class HostingController extends Controller
         if (!$user->tariff || !$user->tariff->can_have_hosting)
             return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
+        $firstHosting = Hosting::orderByDesc('ordering_id')->first();
         $hosting = Hosting::create([
-            'ordering_id' => Hosting::orderByDesc('ordering_id')->first()->ordering_id + 1,
+            'ordering_id' => $firstHosting ? $firstHosting->ordering_id + 1 : 1,
             'user_id' => $user->id,
             'description' => $request->description,
             'address' => $request->address ? $request->address : 'Not specified',
