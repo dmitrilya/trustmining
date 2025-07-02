@@ -294,6 +294,7 @@
     "Top up your balance": "Пополнение баланса",
     "Amount": "Сумма",
     "Payment service error. Please try again in a couple of minutes": "Ошибка платежного сервиса. Попробуйте, пожалуйста, снова через пару минут",
+    "Authorization error. Try again": "Ошибка авторизации. Попробуйте снова",
     "Payment by card": "Оплата картой",
     "QR-code": "QR-код",
     "Card": "Карта",
