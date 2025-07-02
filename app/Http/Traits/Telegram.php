@@ -2,9 +2,11 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Http\Request;
+
 trait Telegram
 {
-    public function tgAuth($request)
+    public function tgAuth(Request $request)
     {
         $data = $request->all();
 
