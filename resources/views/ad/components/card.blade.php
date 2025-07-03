@@ -1,4 +1,4 @@
-<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white shadow-md overflow-hidden rounded-lg flex flex-col justify-between"
+<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white shadow-md overflow-hidden rounded-lg flex flex-col justify-between ad-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
@@ -31,8 +31,19 @@
             <img class="w-full" src="{{ Storage::url($ad->preview) }}" alt="{{ $ad->asicVersion->asicModel->name }}">
         </div>
 
-        <div class="mt-2 md:mt-3 text-sm md:text-base text-gray-900 dark:text-white font-bold">
-            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+        <div class="mt-2 md:mt-3 flex items-start justify-between">
+            <div class="text-xs xs:text-sm md:text-base text-gray-900 dark:text-white font-bold">
+                {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+            </div>
+
+            <div
+                class="bg-gray-100 rounded-full ml-3 p-1.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
+                <svg class="w-4 h-4 text-indigo-600" aria-hidden="true" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
+                </svg>
+            </div>
         </div>
 
         <a href="{{ route('company', ['user' => $ad->user->url_name]) }}"
@@ -65,7 +76,7 @@
     </div>
 
     <div class="mt-2 md:mt-3">
-        <div class="text-gray-900 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price }} ₽</div>
+        <div class="text-gray-900 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span></div>
 
         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
             target="_blank"

@@ -31,4 +31,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'yandexgpt' => [
+        'folder' => env('YANDEXGPT_FOLDER_ID'),
+        'id' => env('YANDEXGPT_APP_ID'),
+        'key' => env('YANDEXGPT_APP_KEY'),
+    ],
+
+    'tgbot' => [
+        'token' => env('NOTIFICATION_BOT_TOKEN'),
+    ],
+
 ];

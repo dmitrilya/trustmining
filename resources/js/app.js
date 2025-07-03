@@ -56,7 +56,7 @@ document.addEventListener('alpine:init', () => {
 Alpine.start();
 
 window.toggleHidden = function (adId) {
-    return axios.put('/ad/' + adId + '/toggle-hidden').then(r => {
+    return axios.put('/ads/' + adId + '/toggle-hidden').then(r => {
         if (!r.data.success) {
             window.pushToastAlert(r.data.message, 'error');
 

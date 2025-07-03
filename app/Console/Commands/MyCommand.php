@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 
 use App\Http\Traits\YandexGPT;
+use App\Http\Traits\Telegram;
 
 use App\Models\Algorithm;
 use App\Models\AsicModel;
@@ -13,7 +14,7 @@ use Carbon\Carbon;
 
 class MyCommand extends Command
 {
-    use YandexGPT;
+    use YandexGPT, Telegram;
 
     /**
      * The name and signature of the console command.
@@ -40,7 +41,8 @@ class MyCommand extends Command
 
         //$data->where('')
 
-        dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
+        //dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
+        
 
         return Command::SUCCESS;
     }

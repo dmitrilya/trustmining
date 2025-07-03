@@ -15,7 +15,8 @@ trait AdTrait
             'user.contacts.contactType',
             'office:id,city',
             'asicVersion:id,asic_model_id,hashrate,measurement',
-            'asicVersion.asicModel:id,name'
+            'asicVersion.asicModel:id,name',
+            'coin:id,abbreviation'
         ]);
 
         if (isset($request)) {

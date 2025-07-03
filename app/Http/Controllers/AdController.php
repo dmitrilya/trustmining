@@ -8,18 +8,20 @@ use App\Http\Requests\StoreAdRequest;
 use App\Http\Requests\UpdateAdRequest;
 use Illuminate\Http\Request;
 
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
 use App\Models\Ad;
+use App\Models\Coin;
 use App\Models\Office;
 use App\Models\AsicModel;
 use App\Models\Moderation;
 
 class AdController extends Controller
 {
-    use FileTrait, ViewTrait, AdTrait;
+    use NotificationTrait, FileTrait, ViewTrait, AdTrait;
 
     /**
      * Display a listing of the resource.
@@ -46,7 +48,8 @@ class AdController extends Controller
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
-            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get()
+            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get(),
+            'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);
     }
 
@@ -81,7 +84,8 @@ class AdController extends Controller
             'waiting' => $request->filled('in_stock') ? null : $request->waiting,
             'price' => $request->price,
             'images' => [],
-            'preview' => ''
+            'preview' => '',
+            'coin_id' => $request->coin_id,
         ]);
 
         $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
@@ -133,7 +137,8 @@ class AdController extends Controller
 
         return view('ad.edit', [
             'ad' => $ad,
-            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get()
+            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get(),
+            'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);
     }
 
@@ -170,17 +175,36 @@ class AdController extends Controller
 
         if (!$ad->in_stock && $request->waiting != $ad->waiting) $data['waiting'] = $request->waiting;
 
-        if ($request->price != $ad->price) $data['price'] = $request->price;
+        if ($request->price != $ad->price || $request->coin_id != $ad->coin_id) {
+            $data['price'] = $request->price;
+            $data['coin_id'] = $request->coin_id;
+        }
 
         if ($request->preview)
             $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id);
 
-        if (!empty($data))
-            Moderation::create([
+        if (!empty($data)) {
+            $moderation = Moderation::create([
                 'moderationable_type' => 'App\Models\Ad',
                 'moderationable_id' => $ad->id,
                 'data' => $data
             ]);
+
+            if (!$request->preview && ($ad->new || !$request->images)) {
+                $moderation->moderation_status_id = 2;
+                $moderation->user_id = 10000000;
+                $moderation->save();
+
+                if ($request->price != $ad->price || $request->coin_id != $ad->coin_id) $this->notify(
+                    'Price change',
+                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                    'App\Models\Ad',
+                    $ad
+                );
+
+                $ad->update($data);
+            }
+        }
 
         return redirect()->route('ads.show', ['ad' => $ad->id]);
     }
@@ -196,7 +220,7 @@ class AdController extends Controller
     {
         $user = $request->user();
 
-        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+        if ($user->id != $ad->user->id) return response()->json(['success' => false, 'message' => __('Unavailable ad.')]);
 
         if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 2))
             return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
@@ -205,6 +229,32 @@ class AdController extends Controller
         $ad->save();
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  Illuminate\Http\Request;
+     * @param  \App\Models\Ad  $ad
+     * @return \Illuminate\Http\Response
+     */
+    public function track(Request $request, Ad $ad)
+    {
+        $user = $request->user();
+
+        if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
+
+        if ($ad->trackingUsers()->where('users.id', $user->id)->exists()) {
+            $ad->trackingUsers()->detach($user->id);
+            $tracking = false;
+            $message = 'You have unsubscribed from notifications.';
+        } else {
+            $ad->trackingUsers()->attach($user->id);
+            $tracking = true;
+            $message = 'You have successfully subscribed to price change notifications.';
+        }
+
+        return response()->json(['success' => true, 'tracking' => $tracking, 'message' => __($message)]);
     }
 
     /**

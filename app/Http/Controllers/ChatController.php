@@ -13,6 +13,7 @@ use App\Http\Traits\NotificationTrait;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\Role;
+use App\Models\Ad;
 
 class ChatController extends Controller
 {
@@ -40,14 +41,12 @@ class ChatController extends Controller
 
             $chat->users()->attach([$auth->id, $user->id]);
 
-            if ($request->ad) {
-                $chat->messages()->create([
-                    'user_id' => $auth->id,
-                    'message' => __('Hello! Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
-                    'images' => [],
-                    'files' => []
-                ]);
-            }
+            if ($request->ad) $chat->messages()->create([
+                'user_id' => $auth->id,
+                'message' => __('Hello! Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
+                'images' => [],
+                'files' => []
+            ]);
         }
 
         return redirect()->route('chat', ['chat' => $chat->id]);
@@ -133,7 +132,7 @@ class ChatController extends Controller
         $message->save();
 
         if ($user->role->name == 'support')
-            $this->notify('New message from support', $chat->users()->where('id', '!=', $user->id)->first(), 'App\Models\Message', $message);
+            $this->notify('New message from support', $chat->users()->where('id', '!=', $user->id), 'App\Models\Message', $message);
 
         return response()->json(['success' => true], 200);
     }

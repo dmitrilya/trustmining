@@ -29,6 +29,15 @@
                 :text="$notification->notificationable->comment"></x-notification>
         @break
 
+        @case('App\Models\Ad')
+            @switch($notification->notificationType->name)
+                @case('Price change')
+                    <x-notification :href="route('ads.show', ['ad' => $notification->notificationable->id])" :date="$notification->created_at" :type="__($notification->notificationType->name)" :pretext="$notification->notificationable->asicVersion->asicModel->name"
+                        :text="$notification->notificationable->price"></x-notification>
+                @break
+            @endswitch
+        @break
+
         @default
             @switch($notification->notificationType->name)
                 @case('Subscription renewal failed')
@@ -36,5 +45,5 @@
                         :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notification>
                 @break
             @endswitch
-        @endswitch
-    @endforeach
+    @endswitch
+@endforeach

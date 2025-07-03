@@ -43,32 +43,32 @@ class ModerationController extends Controller
      */
     public function show(Moderation $moderation)
     {
-        if (
-            $moderation->moderation_status_id != 1 && \Auth::user()->role->name != 'admin' ||
-            !$moderation->moderationable || !$moderation->moderationable->user
-        ) return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
+        $m = $moderation->moderationable;
+
+        if ($moderation->moderation_status_id != 1 && \Auth::user()->role->name != 'admin' || !$m || !$m->user)
+            return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
 
         switch ($moderation->moderationable_type) {
             case ('App\Models\Company'):
-                return view('company.show', ['company' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('company.show', ['company' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Hosting'):
-                return view('hosting.show', ['hosting' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('hosting.show', ['hosting' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Ad'):
-                return view('ad.show', ['ad' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('ad.show', ['ad' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Review'):
-                return view('review.show', ['review' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('review.show', ['review' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Office'):
-                return view('office.show', ['office' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('office.show', ['office' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Contact'):
-                return view('contact.show', ['contact' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('contact.show', ['contact' => $m, 'moderation' => $moderation]);
                 break;
             case ('App\Models\Passport'):
-                return view('passport.show', ['passport' => $moderation->moderationable, 'moderation' => $moderation]);
+                return view('passport.show', ['passport' => $m, 'moderation' => $moderation]);
                 break;
         }
 
@@ -77,10 +77,10 @@ class ModerationController extends Controller
 
     public function accept(Request $request, Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1 || !$moderation->moderationable || !$moderation->moderationable->user)
-            return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
-
         $m = $moderation->moderationable;
+
+        if ($moderation->moderation_status_id != 1 || !$m || !$m->user)
+            return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation.')]);
 
         if ($moderation->moderationable_type == 'App\Models\Company' && (!$m->user->passport || $m->user->passport->moderation))
             return redirect()->route('moderations')->withErrors(['forbidden' => __('First you need to pass moderation by passport')]);
@@ -108,8 +108,8 @@ class ModerationController extends Controller
                     if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
                     if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
                     $disk = 'private';
-                    if ($moderation->moderationable && $moderation->moderationable->reviewable)
-                        $this->notify('New review', $moderation->moderationable->reviewable, 'App\Models\Review', $moderation->moderationable);
+                    if ($m && $m->reviewable)
+                        $this->notify('New review', collect([$m->reviewable]), 'App\Models\Review', $m);
                     break;
                 case ('App\Models\Office'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
@@ -125,23 +125,34 @@ class ModerationController extends Controller
 
         $data = $moderation->data;
         if ($m->moderation) $data['moderation'] = 0;
-        if ($moderation->moderationable_type == 'App\Models\Ad') $m->unique_content = $request->filled('unique_content');
+        if ($moderation->moderationable_type == 'App\Models\Ad') {
+            $m->unique_content = $request->filled('unique_content');
+
+            if ($data['price'] != $m->price || $data['coin_id'] != $m->coin_id) $this->notify(
+                'Price change',
+                $m->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                'App\Models\Ad',
+                $m
+            );
+        }
+
         $m->update($data);
 
         $moderation->moderation_status_id = 2;
         $moderation->user_id = \Auth::id();
         $moderation->save();
 
-        if ($moderation->moderationable_type != 'App\Models\Ad' && $moderation->moderationable && $moderation->moderationable->user)
-            $this->notify('Moderation completed', $moderation->moderationable->user, 'App\Models\Moderation', $moderation);
+        if ($moderation->moderationable_type != 'App\Models\Ad')
+            $this->notify('Moderation completed', collect([$m->user]), 'App\Models\Moderation', $moderation);
 
         return redirect()->route('moderations');
     }
 
     public function decline(Request $request, Moderation $moderation)
     {
-        if ($moderation->moderation_status_id != 1 || !$moderation->moderationable || !$moderation->moderationable->user)
-            return redirect()->route('moderations');
+        $m = $moderation->moderationable;
+
+        if ($moderation->moderation_status_id != 1 || !$m || !$m->user) return redirect()->route('moderations');
 
         $files = [];
         $disk = 'public';
@@ -164,7 +175,7 @@ class ModerationController extends Controller
             case ('App\Models\Review'):
                 if (isset($moderation->data['document'])) array_push($files, $moderation->data['document']);
                 if (isset($moderation->data['image'])) array_push($files, $moderation->data['image']);
-                $moderation->moderationable->delete();
+                $m->delete();
                 $disk = 'private';
                 break;
             case ('App\Models\Office'):
@@ -172,7 +183,7 @@ class ModerationController extends Controller
                 break;
             case ('App\Models\Passport'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
-                $moderation->moderationable->delete();
+                $m->delete();
                 $disk = 'private';
                 break;
         }
@@ -184,8 +195,7 @@ class ModerationController extends Controller
         $moderation->user_id = \Auth::id();
         $moderation->save();
 
-        if ($moderation->moderationable && $moderation->moderationable->user)
-            $this->notify('Moderation failed', $moderation->moderationable->user, 'App\Models\Moderation', $moderation);
+        $this->notify('Moderation failed', collect([$m->user]), 'App\Models\Moderation', $moderation);
 
         return redirect()->route('moderations');
     }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Traits;
 
-use App\Jobs\CompressImage;
 use Illuminate\Support\Facades\Storage;
 
 trait FileTrait

@@ -104,15 +104,18 @@ Route::group(['prefix' => 'company/{user}'], function () {
 
 Route::group(['prefix' => 'ads'], function () {
     Route::get('/', [AdController::class, 'index'])->name('ads');
-    Route::get('/ad/{ad}', [AdController::class, 'show'])->name('ads.show');
-    Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
+    Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
+    Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });
+
+Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
 
 Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);
+        Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
     });
 
     Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
@@ -132,7 +135,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
 
-    Route::group(['prefix' => 'review'], function () {
+    Route::group(['prefix' => 'reviews'], function () {
         Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
         Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
         Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->name('review.destroy');
@@ -146,7 +149,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
     });
 
-    Route::group(['prefix' => 'company'], function () {
+    Route::group(['prefix' => 'companies'], function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
         Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
@@ -154,7 +157,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('passport-moderated')->group(function () {
-        Route::group(['prefix' => 'office'], function () {
+        Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
             Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
@@ -163,7 +166,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('office-moderated')->group(function () {
-            Route::group(['prefix' => 'ad'], function () {
+            Route::group(['prefix' => 'ads'], function () {
                 Route::get('/create', [AdController::class, 'create'])->name('ad.create');
                 Route::post('/store', [AdController::class, 'store'])->name('ad.store');
                 Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
@@ -174,7 +177,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('company-moderated')->group(function () {
-            Route::group(['prefix' => 'hosting'], function () {
+            Route::group(['prefix' => 'hostings'], function () {
                 Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
                 Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
                 Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');

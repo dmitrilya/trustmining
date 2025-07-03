@@ -6,7 +6,7 @@
     </x-slot>
 
     @php
-        $auth = Auth::user();
+        $user = Auth::user();
     @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
@@ -39,7 +39,7 @@
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
-                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }} ₽</p>
+                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }} {{ $ad->coin->abbreviation }}</p>
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                             target="_blank"
@@ -112,7 +112,7 @@
         @endif
 
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
+            <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
                 <div class="md:col-span-5">
                     @if ($ad->new)
                         <div class="w-full overflow-hidden rounded-lg col-start-2">
@@ -125,11 +125,22 @@
                 </div>
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l md:border-gray-200 md:pl-8">
-                    <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                        {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                    </h1>
+                    <div class="flex items-start justify-between">
+                        <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
+                            {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+                        </h1>
 
-                    <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} ₽</p>
+                        <div
+                            class="bg-gray-100 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-600" aria-hidden="true" width="24" height="24"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} {{ $ad->coin->abbreviation }}</p>
 
                     <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
                         target="_blank"
@@ -192,20 +203,40 @@
                                     <x-primary-button>{{ __('Edit') }}</x-primary-button>
                                 </a>
                             @else
-                                <div class="flex mt-6">
-                                    <x-secondary-button
-                                        @click.prevent="$dispatch('open-modal', '{{ ($user = \Auth::user()) && $user->tariff ? 'tg-auth' : 'need-subscription' }}')">
+                                @php
+                                    $trackClick = $user && $user->tariff ?
+                                        'axios.post("/ads/' .
+                                            $ad->id .
+                                            '/track").then(r => {
+                                                pushToastAlert(r.data.message, r.data.success ? "success" : "error");
+
+                                                if (r.data.tracking) {
+                                                    $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('Untrack price') . '";
+                                                    ' . ($user->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') . '
+                                                } else {
+                                                    $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('Track price') . '";
+                                                }
+                                            })' :
+                                        '$dispatch("open-modal", "need-subscription")';
+                                @endphp
+
+                                <div class="xs:flex mt-6">
+                                    <x-secondary-button class="w-full xs:w-max justify-center"
+                                        @click="{{ $trackClick }}">
                                         <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24" height="24"
                                             fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                 stroke-width="1.5"
                                                 d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                                         </svg>
-                                        {{ __('Track price') }}
+                                        <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
                                     </x-secondary-button>
-                                    <a class="block ml-2 sm:ml-3"
+
+                                    <a class="block xs:ml-2 sm:ml-3 mt-2 xs:mt-0"
                                         href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
-                                        <x-primary-button class="flex items-center">
+                                        <x-primary-button class="w-full xs:w-max flex items-center justify-center">
                                             <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"

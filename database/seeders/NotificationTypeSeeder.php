@@ -15,6 +15,8 @@ class NotificationTypeSeeder extends Seeder
     {
         \DB::table('notification_types')->insert([
             [
+                'name' => 'Price change',
+            ], [
                 'name' => 'Price drop',
             ], [
                 'name' => 'Price increase',

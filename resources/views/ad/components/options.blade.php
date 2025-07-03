@@ -11,7 +11,7 @@
 
 <div id="{{ 'ad-options_' . $ad->id }}"
     class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg border-2 border-gray-100 dark:border-gray-600 w-44 dark:bg-gray-700 dark:divide-gray-600">
-    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
+    <ul class="py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
         @if ($owner)
             <li>
                 <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"
@@ -21,14 +21,33 @@
                 <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
             </li>
         @else
-            <li @click.prevent="$dispatch('open-modal', '{{ ($user = \Auth::user()) && $user->tariff ? 'tg-auth' : 'need-subscription' }}')"
+            @php
+                $trackClick = $user && $user->tariff ?
+                    'axios.post("/ads/' .
+                        $ad->id .
+                        '/track").then(r => {
+                            pushToastAlert(r.data.message, r.data.success ? "success" : "error");
+
+                            if (r.data.tracking) {
+                                $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                                $el.getElementsByTagName("span")[0].innerHTML = "' . __('Untrack price') . '";
+                                ' . ($user->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') . '
+                            } else {
+                                $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                                $el.getElementsByTagName("span")[0].innerHTML = "' . __('Track price') . '";
+                            }
+                        })' :
+                    '$dispatch("open-modal", "need-subscription")';
+            @endphp
+            
+            <li @click="{{ $trackClick }}"
                 class="flex items-center cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24" height="24" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                 </svg>
-                {{ __('Track price') }}
+                <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
             </li>
             <li>
                 <a class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"

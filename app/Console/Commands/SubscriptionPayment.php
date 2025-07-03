@@ -44,7 +44,7 @@ class SubscriptionPayment extends Command
             )->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user
         ) {
             if ($user->balance < $user->tariff->price) {
-                $this->notify('Subscription renewal failed', $user);
+                $this->notify('Subscription renewal failed', collect([$user]));
 
                 $user->tariff_id = null;
 

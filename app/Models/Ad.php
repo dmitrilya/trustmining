@@ -28,7 +28,8 @@ class Ad extends Model
         'in_stock',
         'waiting',
         'price',
-        'moderation'
+        'moderation',
+        'coin_id'
     ];
 
     /**
@@ -60,6 +61,11 @@ class Ad extends Model
         return $this->belongsTo(Office::class);
     }
 
+    public function coin()
+    {
+        return $this->belongsTo(Coin::class);
+    }
+
     public function moderations()
     {
         return $this->morphMany(Moderation::class, 'moderationable');
@@ -68,5 +74,15 @@ class Ad extends Model
     public function views()
     {
         return $this->morphMany(View::class, 'viewable');
+    }
+
+    public function tracks()
+    {
+        return $this->hasMany(Track::class);
+    }
+
+    public function trackingUsers()
+    {
+        return $this->belongsToMany(User::class, 'tracks');
     }
 }

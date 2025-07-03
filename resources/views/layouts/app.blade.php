@@ -56,7 +56,7 @@
             </x-modal>
 
             @auth
-                @if ($user->tariff)
+                @if ($user->tariff && $user->tg_id === null)
                     <x-modal name="tg-auth">
                         <div class="p-6">
                             <div class="flex justify-between mb-6">
@@ -76,12 +76,23 @@
                             </div>
 
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 mb-5">
-                                {{ __('You need to authorize your telegram account, where notifications will be sent') }}
+                                {{ __('You can also log in using Telegram to receive notifications from our bot') }}
                             </p>
 
                             <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="trust_m_notifications_bot"
                                 data-size="medium" data-radius="6" data-auth-url="https://trustmining.ru/tg/auth" data-request-access="write">
                             </script>
+
+                            <div class="flex items-center justify-between mt-6">
+                                <x-checkbox name="dont_ask" value="true" textClasses="text-gray-400 text-xxs py-3">
+                                    {{ __("Don't ask again") }}
+                                </x-checkbox>
+
+                                <x-danger-button class="ml-3 text-xxs"
+                                    @click="if($el.previousElementSibling.getElementsByTagName('input')[0].checked) {axios.patch('/tg/dont-ask');window.tgDontAsk = true}show = false">
+                                    {{ __('Not interested') }}
+                                </x-danger-button>
+                            </div>
                         </div>
                     </x-modal>
                 @endif

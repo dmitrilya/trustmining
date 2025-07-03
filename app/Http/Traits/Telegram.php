@@ -2,7 +2,10 @@
 
 namespace App\Http\Traits;
 
+use Error;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 trait Telegram
 {
@@ -32,6 +35,53 @@ trait Telegram
         $user->tg_id = $data['id'];
         $user->save();
 
-        return back();
+        return back()->withErrors(['success' => __('You are logged in. Now you can subscribe to price updates')]);
+    }
+
+    public function tgDontAsk(Request $request)
+    {
+        $user = $request->user();
+
+        if (!$user) return response()->json(['success' => false], 401);
+
+        $user->tg_id = 0;
+        $user->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function tgSendNotifications(Collection $chatIds, $text, $keyboard = null)
+    {
+        $token = config('services.tgbot.token');
+        $link = "https://api.telegram.org/bot$token/sendMessage?" . http_build_query([
+            'text' => $text,
+            'parse_mode' => 'HTML',
+        ]);
+
+        if ($keyboard) $link .= '&reply_markup=' . json_encode(['inline_keyboard' => $keyboard]);
+
+        $chatIds->each(function ($chatId) use ($link) {
+            try {
+                $link .= "&chat_id=$chatId";
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_URL, $link);
+
+                if (($out = curl_exec($curl)) === false || !json_decode($out)->ok)
+                    info('CURL Error - Telegram->tgSendNotification: ' . $out . ' ' . curl_error($curl) . ' ' . curl_errno($curl));
+
+                curl_close($curl);
+            } catch (Exception $e) {
+                info('Exception - Telegram->tgSendNotification: ' . $e->getMessage());
+            } catch (Error $e) {
+                info('Error - Telegram->tgSendNotification: ' . $e->getMessage());
+            } finally {
+                curl_close($curl);
+            }
+        });
+
+        return true;
     }
 }

@@ -145,4 +145,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tariff::class);
     }
+
+    public function tracks()
+    {
+        return $this->hasMany(Track::class);
+    }
+
+    public function trackedAds()
+    {
+        return $this->belongsToMany(Ad::class, 'tracks');
+    }
 }
