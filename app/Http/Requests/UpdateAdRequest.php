@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdRequest extends FormRequest
 {
@@ -30,6 +31,32 @@ class UpdateAdRequest extends FormRequest
             'preview' => 'file|mimes:jpg,png,jpeg|max:2048',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
             'price' => 'required|numeric',
+            'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'waiting.required_without' => __('Waiting is required.'),
+            'waiting.max' => __('Waiting too long.'),
+            'warranty.required_without' => __('Warranty is required.'),
+            'warranty.max' => __('The remainder of the warranty must be less than 12 months.'),
+            'preview.required' => __('Preview is required.'),
+            'preview.mimes' => __('Valid types are png, jpg and jpeg.'),
+            'preview.max' => __('The maximum file size should not exceed 2 MB.'),
+            'images.max' => __('File limit exceeded.'),
+            'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
+            'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
+            'price.required' => __('Price is required.'),
+            'price.numeric' => __('The price must be in numerical format.'),
+            'coin_id.required' => __('Currency is required.'),
+            'coin_id.exists' => __('Invalid currency.'),
         ];
     }
 }

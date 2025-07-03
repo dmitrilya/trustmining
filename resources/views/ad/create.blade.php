@@ -14,7 +14,7 @@
 
                 @include('ad.components.selectversion')
 
-                <x-select :label="__('Office')" name="office_id" :key="$ad->office_id" :items="$offices
+                <x-select :label="__('Office')" name="office_id" :items="$offices
                     ->map(fn($office) => ['key' => $office->id, 'value' => $office->address])
                     ->keyBy('key')" />
 
@@ -87,7 +87,7 @@
                         <x-input-error :messages="$errors->get('price')" />
                     </div>
 
-                    <x-select :label="__('Currency')" name="coin_id" :key="$ad->coin_id" :items="$coins
+                    <x-select :label="__('Currency')" name="coin_id" :items="$coins
                         ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
                         ->keyBy('key')"
                         :icon="['type' => 'value', 'path' => '/storage/coins/']" />

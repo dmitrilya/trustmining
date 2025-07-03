@@ -34,6 +34,7 @@ class StoreAdRequest extends FormRequest
             'images' => 'max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
             'price' => 'required|numeric',
+            'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
         ];
     }
 
@@ -59,6 +60,8 @@ class StoreAdRequest extends FormRequest
             'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
             'price.required' => __('Price is required.'),
             'price.numeric' => __('The price must be in numerical format.'),
+            'coin_id.required' => __('Currency is required.'),
+            'coin_id.exists' => __('Invalid currency.'),
         ];
     }
 }

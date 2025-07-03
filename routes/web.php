@@ -102,12 +102,6 @@ Route::group(['prefix' => 'company/{user}'], function () {
     Route::get('/offices/{office}', [ShopController::class, 'office'])->name('company.office');
 });
 
-Route::group(['prefix' => 'ads'], function () {
-    Route::get('/', [AdController::class, 'index'])->name('ads');
-    Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
-    Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
-});
-
 Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
@@ -195,6 +189,12 @@ Route::middleware('auth')->group(function () {
             Route::put('/{moderation}/decline', [ModerationController::class, 'decline'])->name('moderation.decline');
         });
     });
+});
+
+Route::group(['prefix' => 'ads'], function () {
+    Route::get('/', [AdController::class, 'index'])->name('ads');
+    Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
+    Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });
 
 require __DIR__ . '/auth.php';
