@@ -10,7 +10,7 @@
     @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
-        @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
+        @if (isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
@@ -181,11 +181,7 @@
                         <div>
                             @include('components.about-seller', ['user' => $ad->user])
 
-                            @php
-                                $auth = Auth::user();
-                            @endphp
-
-                            @if ($auth && $ad->user->id == $auth->id)
+                            @if ($user && $ad->user->id == $user->id)
                                 @if (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
                                     <div class="flex items-center mt-6">
                                         <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" aria-hidden="true"
