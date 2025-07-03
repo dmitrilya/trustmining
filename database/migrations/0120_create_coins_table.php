@@ -22,7 +22,7 @@ return new class extends Migration
                 ->on('algorithms')->onUpdate('cascade');
             $table->unsignedFloat('profit', 12, 8)->nullable();
             $table->unsignedFloat('rate', 16, 8)->nullable();
-            $table->boolean('payment');
+            $table->boolean('paymentable');
         });
     }
 
