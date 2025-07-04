@@ -35,7 +35,7 @@ trait Telegram
         $user->tg_id = $data['id'];
         $user->save();
 
-        return back()->withErrors(['success' => __('You are logged in. Now you can subscribe to price updates')]);
+        return back()->withErrors(['success' => __('You are logged in. Notifications will come from the official telegram bot')]);
     }
 
     public function tgDontAsk(Request $request)

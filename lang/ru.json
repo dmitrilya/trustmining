@@ -295,7 +295,7 @@
     "Amount": "Сумма",
     "Payment service error. Please try again in a couple of minutes": "Ошибка платежного сервиса. Попробуйте, пожалуйста, снова через пару минут",
     "Authorization error. Try again": "Ошибка авторизации. Попробуйте снова",
-    "You are logged in. Now you can subscribe to price updates": "Вы авторизованы. Теперь можете подписаться на обновление цены",
+    "You are logged in. Notifications will come from the official telegram bot": "Вы авторизованы. Уведомления будут приходить от официального бота в телеграм",
     "Payment by card": "Оплата картой",
     "QR-code": "QR-код",
     "Card": "Карта",

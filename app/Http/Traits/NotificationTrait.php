@@ -30,7 +30,8 @@ trait NotificationTrait
         
         Notification::upsert($notifications, ['id']);
 
-        SendTGNotifications::dispatch($users, $type, $notificationableType, $notificationable);
+        if ($users->whereNotNull('tg_id')->where('tg_id', '!=', 0)->count())
+            SendTGNotifications::dispatch($users, $type, $notificationableType, $notificationable);
 
         return true;
     }

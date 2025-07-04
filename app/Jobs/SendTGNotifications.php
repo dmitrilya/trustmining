@@ -81,7 +81,7 @@ class SendTGNotifications implements ShouldQueue
                 switch ($this->type) {
                     case 'Price change':
                         $lastModeration = $this->n->moderations()->whereNotNull('data->price')->latest()->limit(2)->get()[1];
-                        $text = $this->n->asicVersion->asicModel->name . ' ' . $this->n->asicVersion->hashrate . ' ' . $this->n->asicVersion->measurement . "\n" . $this->n->user->name . "\n\n" . $lastModeration->data['price'] . ' ' . Coin::find($lastModeration->data['coin_id'])->abbreviation . " => " . $this->n->price . ' ' . $this->n->coin->abbreviation;
+                        $text = $this->n->asicVersion->asicModel->name . ' ' . $this->n->asicVersion->hashrate . $this->n->asicVersion->measurement . "\n" . $this->n->user->name . "\n\n" . $lastModeration->data['price'] . Coin::find($lastModeration->data['coin_id'])->abbreviation . " => " . $this->n->price . $this->n->coin->abbreviation;
                         $keyboard = [[
                             ['text' => __('Contact'), 'url' => route('chat.start', ['user' => $this->n->user->id, 'ad' => $this->n->id])],
                             ['text' => __('Details'), 'url' => route('ads.show', ['ad' => $this->n->id])],
