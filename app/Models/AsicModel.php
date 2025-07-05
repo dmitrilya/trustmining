@@ -79,11 +79,7 @@ class AsicModel extends Model
 
     public function moderatedReviews()
     {
-        $reviewsQuery = $this->reviews()->where('moderation', false);
-
-        if ($reviewsQuery->exists()) $reviewsQuery->addSelect(DB::raw('avg(`rating`) as avg_rating'));
-
-        return $reviewsQuery;
+        return $this->reviews()->where('moderation', false);
     }
 
     public function views()

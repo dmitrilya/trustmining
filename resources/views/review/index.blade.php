@@ -43,15 +43,11 @@
 
                                 <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
 
-                                <div class="flex justify-between mt-6">
-                                    <p class="text-sm font-normal text-gray-500 whitespace-pre-line">{{ $review->review }}</p>
+                                @if ($review->moderation)
+                                    <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}</p>
+                                @endif
 
-                                    @if ($review->moderation)
-                                        <p class="text-sm text-red-600 font-semibold">
-                                            {{ __('Is under moderation') }}
-                                        </p>
-                                    @endif
-                                </div>
+                                <p class="text-sm font-normal text-gray-500 whitespace-pre-line mt-3 md:mt-4">{{ $review->review }}</p>
                             </div>
 
                             @if ($auth && ($auth->id == $review->reviewable->id || $review->user->id == $auth->id))
@@ -137,7 +133,8 @@
                             </div>
                             <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
                                 <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
-                                    <label for="input-document-review" :class="document ? 'text-indigo-600' : 'text-gray-500'"
+                                    <label for="input-document-review"
+                                        :class="document ? 'text-indigo-600' : 'text-gray-500'"
                                         class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                         <input id="input-document-review" name="document" class="hidden" type="file"
                                             accept=".pdf,.doc,.docx" @change="document = true">

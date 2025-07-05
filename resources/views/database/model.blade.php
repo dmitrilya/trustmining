@@ -54,7 +54,7 @@
                     <!-- Reviews -->
                     <div class="mt-4 sm:mt-6">
                         <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                        <div class="flex items-center" x-data="{ momentRating: {{ $model->moderatedReviews->count() ? $model->moderatedReviews->avg_rating : 0 }} }">
+                        <div class="flex items-center" x-data="{ momentRating: {{ $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0 }} }">
                             <x-rating></x-rating>
 
                             <a href="{{ route('database.reviews', [

@@ -43,12 +43,13 @@ trait TrustFactor
         }
 
         if ($user->moderatedReviews->count() > 3) {
-            if ($user->avg_rating >= 4.85) $tf += 7;
-            elseif ($user->avg_rating >= 4.7) $tf += 4;
-            elseif ($user->avg_rating >= 4.4) $tf += 1;
-            elseif ($user->avg_rating >= 4.1) $tf -= 3;
-            elseif ($user->avg_rating >= 3.9) $tf -= 6;
-            elseif ($user->avg_rating >= 3.65) $tf -= 10;
+            $avgRating = $user->moderatedReviews->avg('rating');
+            if ($avgRating >= 4.85) $tf += 7;
+            elseif ($avgRating >= 4.7) $tf += 4;
+            elseif ($avgRating >= 4.4) $tf += 1;
+            elseif ($avgRating >= 4.1) $tf -= 3;
+            elseif ($avgRating >= 3.9) $tf -= 6;
+            elseif ($avgRating >= 3.65) $tf -= 10;
             else $tf -= 15;
         }
 

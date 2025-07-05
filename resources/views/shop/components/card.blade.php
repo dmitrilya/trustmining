@@ -16,7 +16,7 @@
             {{ $shop->company && !$shop->company->moderation ? __($shop->company->card['type']) : __('Person') }}
         </div>
 
-        <div class="flex items-center mt-2 sm:mt-4" x-data="{ momentRating: {{ $shop->moderatedReviews->count() ? $shop->moderatedReviews->avg_rating : 0 }} }">
+        <div class="flex items-center mt-2 sm:mt-4" x-data="{ momentRating: {{ $shop->moderatedReviews->count() ? $shop->moderatedReviews->avg('rating') : 0 }} }">
             <x-rating sm="true"></x-rating>
 
             <p class="ml-3 text-xxs xs:text-xs sm:text-sm text-indigo-600 hover:text-indigo-500">

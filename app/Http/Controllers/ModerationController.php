@@ -145,6 +145,9 @@ class ModerationController extends Controller
         if ($moderation->moderationable_type != 'App\Models\Ad')
             $this->notify('Moderation completed', collect([$m->user]), 'App\Models\Moderation', $moderation);
 
+        if ($moderation->moderationable_type == 'App\Models\Review' && $m->reviewable_type == 'App\Models\User')
+            $this->notify('New review', collect([$m->reviewable]), 'App\Models\Review', $m);
+
         return redirect()->route('moderations');
     }
 

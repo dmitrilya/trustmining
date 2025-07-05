@@ -25,18 +25,17 @@
 
                         <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
 
-                        <div class="flex justify-between mt-6">
-                            <p class="text-sm font-normal text-gray-500 whitespace-pre-line">
-                                {{ $review->review }}</p>
+                        @if ($review->moderation)
+                            <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}</p>
+                        @endif
 
-                            <p class="text-sm text-red-600 font-semibold">
-                                {{ __('Is under moderation') }}
-                            </p>
-                        </div>
+                        <p class="text-sm font-normal text-gray-500 whitespace-pre-line mt-3 md:mt-5">
+                            {{ $review->review }}</p>
                     </div>
 
                     @if ($review->image)
-                        <img class="mx-auto min-w-64" src="{{ Storage::disk('private')->temporaryUrl($review->image, now()->addSeconds(2)) }}"
+                        <img class="mx-auto min-w-64"
+                            src="{{ Storage::disk('private')->temporaryUrl($review->image, now()->addSeconds(2)) }}"
                             alt="">
                     @endif
 
