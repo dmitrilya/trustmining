@@ -67,7 +67,7 @@ class SendTGNotifications implements ShouldQueue
                 $rating = "";
                 for ($i = 0; $i < $this->n->rating; $i++) $rating .= "⭐";
                 $text = "$rating\n\n" . $this->n->review;
-                $keyboard = [[['text' => __('Details'), 'url' => route('profile.reviews')]]];
+                $keyboard = [[['text' => __('Details'), 'url' => route('company.reviews', ['user' => $this->n->reviewable->url_name])]]];
                 break;
 
             case 'App\Models\Moderation':

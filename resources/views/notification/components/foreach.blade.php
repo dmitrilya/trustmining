@@ -13,37 +13,42 @@
 @foreach ($notifications as $notification)
     @continue ($notification->notificationable_id && !$notification->notificationable)
 
+    @php
+        $n = $notification->notificationable;
+        $ntName = $notification->notificationType->name;
+    @endphp
+
     @switch($notification->notificationable_type)
         @case('App\Models\Message')
-            <x-notification :href="route('support', ['chat' => true])" :type="__($notification->notificationType->name)" :date="$notification->created_at" :pretext="$notification->notificationable->user->name"
-                :text="$notification->notificationable->message"></x-notification>
+            <x-notification :href="route('support', ['chat' => true])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->user->name"
+                :text="$n->message"></x-notification>
         @break
 
         @case('App\Models\Review')
-            <x-notification :href="route('profile.reviews')" :type="__($notification->notificationType->name)" :date="$notification->created_at" :pretext="$notification->notificationable->rating"
-                :text="$notification->notificationable->review"></x-notification>
+            <x-notification :href="route('company.reviews', ['user' => $n->reviewable->url_name])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->rating"
+                :text="$n->review"></x-notification>
         @break
 
         @case('App\Models\Moderation')
-            <x-notification href="#" :date="$notification->created_at" :type="__($notification->notificationType->name)" :pretext="$moderationTypes[$notification->notificationable->moderationable_type]"
-                :text="$notification->notificationable->comment"></x-notification>
+            <x-notification href="#" :type="__($ntName)" :date="$notification->created_at" :pretext="$moderationTypes[$n->moderationable_type]"
+                :text="$n->comment"></x-notification>
         @break
 
         @case('App\Models\Ad')
-            @switch($notification->notificationType->name)
+            @switch($ntName)
                 @case('Price change')
-                    <x-notification :href="route('ads.show', ['ad' => $notification->notificationable->id])" :date="$notification->created_at" :type="__($notification->notificationType->name)" :pretext="$notification->notificationable->asicVersion->asicModel->name"
-                        :text="$notification->notificationable->price"></x-notification>
+                    <x-notification :href="route('ads.show', ['ad' => $n->id])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
+                        :text="$n->price"></x-notification>
                 @break
             @endswitch
         @break
 
         @default
-            @switch($notification->notificationType->name)
+            @switch($ntName)
                 @case('Subscription renewal failed')
-                    <x-notification href="#" :type="__($notification->notificationType->name)" :date="$notification->created_at" pretext=""
+                    <x-notification href="#" :type="__($ntName)" :date="$notification->created_at" pretext=""
                         :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notification>
                 @break
             @endswitch
-    @endswitch
-@endforeach
+        @endswitch
+    @endforeach
