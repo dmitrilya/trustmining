@@ -19,7 +19,7 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" :value="old('name', $user->name)" required autofocus
+            <x-text-input id="name" name="name" type="text" :value="old('name', $user->name)" required
                 autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" />
         </div>

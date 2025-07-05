@@ -76,7 +76,7 @@ window.sendReview = function (form) {
 
     if (!data.get('rating')) return window.pushToastAlert('Необходимо поставить оценку', 'error');
 
-    axios.post('/review/store', data, {
+    axios.post('/reviews/store', data, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

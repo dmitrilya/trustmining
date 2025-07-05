@@ -27,6 +27,10 @@
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
                     @include('profile.partials.hosting')
                 </div>
+
+                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+                    @include('profile.partials.tg-auth')
+                </div>
             </div>
 
             <div class="grid gap-4">

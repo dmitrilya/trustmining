@@ -9,7 +9,7 @@ module.exports = {
         "./node_modules/flowbite/**/*.js"
     ],
 
-    safelist: ['min-h-56', 'min-h-128', 'max-h-96', 'max-h-128', 'group-hover:bg-gray-200', 'w-32', 'max-h-10', 'rounded-2xl'],
+    safelist: ['min-h-56', 'min-h-128', 'max-h-96', 'max-h-128', 'group-hover:bg-gray-200', 'w-32', 'max-h-10', 'rounded-2xl', 'text-green-500', 'bg-green-100', 'rounded-full', 'dark:bg-green-800', 'dark:text-green-200', 'text-red-500', 'bg-red-100', 'rounded-full', 'dark:bg-red-800', 'dark:text-red-200', 'text-orange-500', 'bg-orange-100', 'rounded-full', 'dark:bg-orange-800', 'dark:text-orange-200'],
 
     theme: {
         extend: {

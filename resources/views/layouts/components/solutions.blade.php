@@ -1,4 +1,4 @@
-<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center md:px-1 md:pt-1 text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
+<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center lg:px-1 lg:pt-1 text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
         <div>{{ __('Solutions') }}</div>
@@ -18,7 +18,7 @@
         x-transition:leave-end="transform opacity-0 scale-50"
         class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-16" style="display: none"
         @click.away="open = false">
-        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 md:p-10 xl:p-14 bg-white dark:bg-gray-700">
+        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 xl:p-14 bg-white dark:bg-gray-700">
             <div class="sm:flex gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-500 mb-6">{{ __('Project') }}</div>

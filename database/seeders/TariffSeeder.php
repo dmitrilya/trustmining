@@ -56,8 +56,8 @@ class TariffSeeder extends Seeder
             [
                 'name' => 'Subscription',
                 'description' => 'description',
-                'max_ads' => 0,
-                'max_offices' => 0,
+                'max_ads' => 2,
+                'max_offices' => 1,
                 'max_contacts' => 0,
                 'can_have_hosting' => 0,
                 'can_site_link' => 0,
