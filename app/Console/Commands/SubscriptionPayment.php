@@ -53,6 +53,8 @@ class SubscriptionPayment extends Command
 
                 if ($countToHide > 0) $adIdsToHide = $adIdsToHide->merge($adIds->random($countToHide));
             } else {
+                if ($user->balance < $user->tariff->price * 7) $this->notify('Top up your balance', collect([$user]));
+
                 $user->balance -= $user->tariff->price;
             }
 

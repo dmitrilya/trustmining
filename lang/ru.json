@@ -352,6 +352,7 @@
     "Moderation completed": "Модерация пройдена",
     "Subscription renewal failed": "Ошибка продления тарифа",
     "Tariff reset to Base. Reactivate on the tariffs page": "Тариф сброшен до Base. Активируйте снова на странице тарифов",
+    "In 7 days there will not be enough funds on the balance to extend the tariff": "Через 7 дней на балансе не хватит средств для продления тарифа",
     "New message from support": "Новое сообщение от поддержки",
     "New review": "Новый отзыв",
     "Price change": "Изменение цены",

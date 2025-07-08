@@ -27,6 +27,8 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'Subscription renewal failed'
             ], [
+                'name' => 'Top up your balance'
+            ], [
                 'name' => 'Moderation failed'
             ], [
                 'name' => 'Moderation completed'

@@ -49,6 +49,10 @@
                     <x-notification href="#" :type="__($ntName)" :date="$notification->created_at" pretext=""
                         :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notification>
                 @break
+                @case('Top up your balance')
+                    <x-notification href="route('order.create')" :type="__($ntName)" :date="$notification->created_at" pretext=""
+                        :text="__('In 7 days there will not be enough funds on the balance to extend the tariff')"></x-notification>
+                @break
             @endswitch
         @endswitch
     @endforeach
