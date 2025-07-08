@@ -6,7 +6,7 @@
             </h2>
 
             <a class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500"
-                href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                href="{{ route('tariffs') }}">{{ __('Tariffs') }} ➚</a>
         </div>
     </header>
 
@@ -20,8 +20,8 @@
         </p>
     </div>
 
-    <div class="flex justify-between">
-        <div class="flex">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
@@ -32,21 +32,21 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <p class="text-xl text-gray-800 font-bold dark:text-gray-400 ml-4">
+            <p class="text-xl text-gray-800 font-bold dark:text-gray-400 ml-3">
                 {{ $user->balance }} ₽
             </p>
+
+            <a href="{{ route('order.create') }}"
+                class="ml-4 min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
         </div>
 
         @if ($user->tariff)
-            <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                    class="text-gray-900 font-bold text-xl">{{ round($user->tariff->price) }}</span>
-                /{{ __('day') }}</div>
+            <div class="flex items-end text-gray-500 md:text-lg">
+                <span
+                    class="text-gray-900 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
+            </div>
         @endif
     </div>
-
-    <a href="{{ route('order.create') }}" class="block ml-auto w-max">
-        <x-primary-button>{{ __('Top up') }}</x-primary-button>
-    </a>
 
     <p class="text-sm text-gray-600">
         {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}

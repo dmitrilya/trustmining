@@ -130,8 +130,6 @@ class AdController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
-
         if ($ad->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
@@ -151,8 +149,6 @@ class AdController extends Controller
      */
     public function update(UpdateAdRequest $request, Ad $ad)
     {
-        if ($request->user()->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
-
         if ($ad->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
@@ -220,8 +216,6 @@ class AdController extends Controller
     {
         $user = $request->user();
 
-        if ($user->id != $ad->user->id) return response()->json(['success' => false, 'message' => __('Unavailable ad.')]);
-
         if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 2))
             return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
 
@@ -266,8 +260,6 @@ class AdController extends Controller
     public function destroy(Ad $ad)
     {
         $user = \Auth::user();
-
-        if ($user->id != $ad->user->id) return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
         $files = [];
         array_push($files, $ad->preview);

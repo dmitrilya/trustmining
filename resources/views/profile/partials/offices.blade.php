@@ -6,9 +6,12 @@
             </h2>
 
             @if (
-                ($user->tariff && $user->offices->count() < $user->tariff->max_offices) ||
-                    (!$user->tariff && $user->offices->count() < 1 && $user->passport && !$user->passport->moderation))
-                <a href="{{ route('office.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
+                (($user->tariff && $user->offices->count() < $user->tariff->max_offices) ||
+                    (!$user->tariff && $user->offices->count() < 1)) &&
+                    $user->passport &&
+                    !$user->passport->moderation)
+                <a href="{{ route('office.create') }}"
+                    class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
             @endif
         </div>
     </header>
@@ -19,35 +22,33 @@
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
-    <div class="mt-6">
-        @if (!$user->passport || $user->passport->moderation)
+    @if (!$user->passport || $user->passport->moderation)
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+            {{ __('Please verify your identity using your passport or register a company to add offices.') }}
+        </p>
+    @elseif ($user->offices->count())
+        <div class="flex justify-between">
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Please verify your identity using your passport or register a company to add offices.') }}
+                {{ __('Active') }}
             </p>
-        @elseif ($user->offices->count())
-            <div class="flex justify-between">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                    {{ __('Active') }}
-                </p>
 
-                <p class="text-base text-gray-600 dark:text-gray-400">
-                    {{ $user->offices->where('moderation', false)->count() }}
-                </p>
-            </div>
+            <p class="text-base text-gray-600 dark:text-gray-400">
+                {{ $user->offices->where('moderation', false)->count() }}
+            </p>
+        </div>
 
-            <div class="flex justify-between">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                    {{ __('Is under moderation') }}
-                </p>
-
-                <p class="text-base text-gray-600 dark:text-gray-400">
-                    {{ $user->offices->where('moderation', true)->count() }}
-                </p>
-            </div>
-        @else
+        <div class="flex justify-between">
             <p class="text-sm text-gray-600 dark:text-gray-400">
-                {{ __('Add information about open offices and points of sale.') }}
+                {{ __('Is under moderation') }}
             </p>
-        @endif
-    </div>
+
+            <p class="text-base text-gray-600 dark:text-gray-400">
+                {{ $user->offices->where('moderation', true)->count() }}
+            </p>
+        </div>
+    @else
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+            {{ __('Add information about open offices and points of sale.') }}
+        </p>
+    @endif
 </section>

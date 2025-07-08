@@ -99,8 +99,6 @@ class HostingController extends Controller
     {
         $user = \Auth::user();
 
-        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);
-
         if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
@@ -120,8 +118,6 @@ class HostingController extends Controller
     public function update(UpdateHostingRequest $request, Hosting $hosting)
     {
         $user = $request->user();
-
-        if ($hosting->user->id != $user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);
 
         if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
@@ -166,10 +162,6 @@ class HostingController extends Controller
      */
     public function destroy(Hosting $hosting)
     {
-        $user = \Auth::user();
-
-        if ($user->id != $hosting->user->id) return back()->withErrors(['forbidden' => __('Unavailable hosting.')]);;
-
         $files = array_merge($hosting->images, array_column($hosting->documents, 'path'));
 
         foreach ($hosting->moderations()->where('moderation_status_id', 1)->get() as $moderation) {
@@ -180,7 +172,6 @@ class HostingController extends Controller
         Storage::disk('public')->delete($files);
 
         $hosting->moderations()->where('moderation_status_id', 1)->update(['moderation_status_id' => 4]);
-
         $hosting->delete();
 
         return redirect()->route('profile');

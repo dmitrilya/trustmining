@@ -1,18 +1,17 @@
 <section class="space-y-6">
     <header>
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between">
             <h2 class="w-full text-lg font-medium text-gray-900 dark:text-gray-100">
                 {{ __('My advertisements') }}
             </h2>
 
-            @if (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 2))
-                @if ($user->passport && !$user->passport->moderation && $user->offices()->where('moderation', false)->exists())
-                    <a href="{{ route('ad.create') }}"><x-primary-button>{{ __('Create') }}</x-primary-button></a>
-                @endif
-            @else
-                <p class="text-xs text-gray-600">
-                    {{ __('Not available with current plan.') }}
-                </p>
+            @if (
+                (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 2)) &&
+                    $user->passport &&
+                    !$user->passport->moderation &&
+                    $user->moderatedOffices()->exists())
+                <a href="{{ route('ad.create') }}"
+                    class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
             @endif
         </div>
     </header>
@@ -32,7 +31,7 @@
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>
     @else
-        <div class="mt-6">
+        <div>
             <div class="flex justify-between">
                 <p class="text-sm text-gray-600 dark:text-gray-400">
                     {{ __('Active') }}

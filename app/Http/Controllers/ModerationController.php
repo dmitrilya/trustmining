@@ -64,9 +64,6 @@ class ModerationController extends Controller
             case ('App\Models\Office'):
                 return view('office.show', ['office' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\Contact'):
-                return view('contact.show', ['contact' => $m, 'moderation' => $moderation]);
-                break;
             case ('App\Models\Passport'):
                 return view('passport.show', ['passport' => $m, 'moderation' => $moderation]);
                 break;

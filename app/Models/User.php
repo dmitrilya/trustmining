@@ -112,11 +112,6 @@ class User extends Authenticatable
         return $this->offices()->where('moderation', false);
     }
 
-    public function contacts()
-    {
-        return $this->hasMany(Contact::class);
-    }
-
     public function chats()
     {
         return $this->belongsToMany(Chat::class);
@@ -150,5 +145,10 @@ class User extends Authenticatable
     public function trackedAds()
     {
         return $this->belongsToMany(Ad::class, 'tracks');
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(Phone::class)->where('destroyed', false);
     }
 }

@@ -65,8 +65,6 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        if (\Auth::user()->id != $review->user->id) return back()->withErrors(['forbidden' => __('Unavailable review.')]);
-
         $files = [];
         if ($review->image) array_push($files, $review->image);
         if ($review->document) array_push($files, $review->document);

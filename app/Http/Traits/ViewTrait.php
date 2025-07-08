@@ -8,10 +8,11 @@ trait ViewTrait
 {
     public function addView($request, $model)
     {
-        $class = get_class($model);
         $auth = $request->user();
 
         if ($auth && ($model->user && $model->user->id == $auth->id || $auth->role->name != 'user')) return;
+
+        $class = get_class($model);
 
         $view = View::where([
             ['viewable_id', $model->id],

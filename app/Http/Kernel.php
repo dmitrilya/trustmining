@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'passport-moderated' => \App\Http\Middleware\PassportModerated::class,
         'office-moderated' => \App\Http\Middleware\OfficeModerated::class,
         'company-moderated' => \App\Http\Middleware\CompanyModerated::class,
+        'owner' => \App\Http\Middleware\EnsureOwner::class,
     ];
 }

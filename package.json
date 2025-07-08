@@ -20,6 +20,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@alpinejs/mask": "^3.14.9",
         "bootstrap": "^5.3.3",
         "flowbite": "^2.5.1"
     }

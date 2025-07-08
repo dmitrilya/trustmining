@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Phone extends Model
 {
     use HasFactory;
-
-    const UPDATED_AT = null;
 
     /**
      * The attributes that are mass assignable.
@@ -18,18 +16,11 @@ class Contact extends Model
      */
     protected $fillable = [
         'user_id',
-        'contact_type_id',
-        'contact',
-        'moderation'
+        'number',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function contactType()
-    {
-        return $this->belongsTo(ContactType::class);
     }
 }

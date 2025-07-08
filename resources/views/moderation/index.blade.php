@@ -43,10 +43,6 @@
                         {{ __('Offices') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'contact' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'contact'])">
-                        {{ __('Contacts') }}
-                    </x-dropdown-link>
-
                     <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'passport' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'passport'])">
                         {{ __('Passport') }}
                     </x-dropdown-link>

@@ -28,16 +28,6 @@
                         class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[0]->max_offices }}</span>
                     {{ __('of offices') }}</div>
             </div>
-            <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <div class="text-sm text-gray-500"><span
-                        class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[0]->max_contacts }}</span>
-                    {{ __('of contacts') }}</div>
-            </div>
             @if ($tariffs[0]->can_have_hosting)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
@@ -46,6 +36,16 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
                     <div class="text-sm text-gray-500">{{ __('Hosting adding') }}</div>
+                </div>
+            @endif
+            @if ($tariffs[0]->can_have_phone)
+                <div class="flex items-center">
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
                 </div>
             @endif
             @if ($tariffs[0]->can_create_guide)
@@ -99,16 +99,6 @@
                         class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[1]->max_offices }}</span>
                     {{ __('of offices') }}</div>
             </div>
-            <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <div class="text-sm text-gray-500"><span
-                        class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[1]->max_contacts }}</span>
-                    {{ __('of contacts') }}</div>
-            </div>
             @if ($tariffs[1]->can_have_hosting)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
@@ -117,6 +107,16 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
                     <div class="text-sm text-gray-500">{{ __('Hosting adding') }}</div>
+                </div>
+            @endif
+            @if ($tariffs[1]->can_have_phone)
+                <div class="flex items-center">
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
                 </div>
             @endif
             @if ($tariffs[1]->can_create_guide)
@@ -170,16 +170,6 @@
                         class="text-white font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[2]->max_offices }}</span>
                     {{ __('of offices') }}</div>
             </div>
-            <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <div class="text-sm text-gray-400"><span
-                        class="text-white font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[2]->max_contacts }}</span>
-                    {{ __('of contacts') }}</div>
-            </div>
             @if ($tariffs[2]->can_have_hosting)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -188,6 +178,16 @@
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
                     <div class="text-sm text-gray-400">{{ __('Hosting adding') }}</div>
+                </div>
+            @endif
+            @if ($tariffs[2]->can_have_phone)
+                <div class="flex items-center">
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                    <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
                 </div>
             @endif
             @if ($tariffs[2]->can_create_guide)
@@ -247,16 +247,6 @@
                 <div class="text-sm text-gray-500"><span
                         class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">1</span>
                     {{ __('of offices') }}</div>
-            </div>
-            <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                </svg>
-                <div class="text-sm text-gray-500"><span
-                        class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">0</span>
-                    {{ __('of contacts') }}</div>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\AdController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\PassportController;
+use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HostingController;
 use App\Http\Controllers\OfficeController;
@@ -106,6 +107,8 @@ Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
 
+Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
+
 Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);
@@ -132,7 +135,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'reviews'], function () {
         Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
         Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
-        Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->name('review.destroy');
+        Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->middleware('owner')->name('review.destroy');
     });
 
     Route::get('/chat/user/{user}', [ChatController::class, 'chat'])->name('chat.start');
@@ -146,27 +149,41 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'companies'], function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
-        Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
-        Route::put('/{company}/update', [CompanyController::class, 'update'])->name('company.update');
+        Route::middleware('owner')->group(function () {
+            Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+            Route::put('/{company}/update', [CompanyController::class, 'update'])->name('company.update');
+        });
     });
 
     Route::middleware('passport-moderated')->group(function () {
+        Route::group(['prefix' => 'phones'], function () {
+            Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
+            Route::middleware('owner')->group(function () {
+                Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
+                Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
+            });
+        });
+
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
-            Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
-            Route::put('/{office}/update', [OfficeController::class, 'update'])->name('office.update');
-            Route::delete('/{office}/destroy', [OfficeController::class, 'destroy'])->name('office.destroy');
+            Route::middleware('owner')->group(function () {
+                Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
+                Route::put('/{office}/update', [OfficeController::class, 'update'])->name('office.update');
+                Route::delete('/{office}/destroy', [OfficeController::class, 'destroy'])->name('office.destroy');
+            });
         });
 
         Route::middleware('office-moderated')->group(function () {
             Route::group(['prefix' => 'ads'], function () {
                 Route::get('/create', [AdController::class, 'create'])->name('ad.create');
                 Route::post('/store', [AdController::class, 'store'])->name('ad.store');
-                Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
-                Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
-                Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ad.toggle-hidden');
-                Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ad.destroy');
+                Route::middleware('owner')->group(function () {
+                    Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
+                    Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
+                    Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ad.toggle-hidden');
+                    Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ad.destroy');
+                });
             });
         });
 
@@ -174,9 +191,11 @@ Route::middleware('auth')->group(function () {
             Route::group(['prefix' => 'hostings'], function () {
                 Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
                 Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
-                Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
-                Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
-                Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
+                Route::middleware('owner')->group(function () {
+                    Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
+                    Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
+                    Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
+                });
             });
         });
     });

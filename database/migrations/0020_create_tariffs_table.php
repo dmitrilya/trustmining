@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedTinyInteger('max_ads');
             $table->unsignedTinyInteger('max_offices');
-            $table->unsignedTinyInteger('max_contacts');
             $table->boolean('can_have_hosting');
+            $table->boolean('can_have_phone');
             $table->boolean('can_site_link');
             $table->unsignedSmallInteger('max_description');
             $table->boolean('can_create_guide');

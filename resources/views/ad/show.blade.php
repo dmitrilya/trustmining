@@ -39,7 +39,8 @@
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
-                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }} {{ $ad->coin->abbreviation }}</p>
+                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }}
+                            {{ $ad->coin->abbreviation }}</p>
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                             target="_blank"
@@ -112,7 +113,8 @@
         @endif
 
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
+            <div
+                class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
                 <div class="md:col-span-5">
                     @if ($ad->new)
                         <div class="w-full overflow-hidden rounded-lg col-start-2">
@@ -132,15 +134,17 @@
 
                         <div
                             class="bg-gray-100 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-600" aria-hidden="true" width="24" height="24"
-                                fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-600" aria-hidden="true"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5"
                                     d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                             </svg>
                         </div>
                     </div>
 
-                    <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }} {{ $ad->coin->abbreviation }}</p>
+                    <p class="mt-5 text-2xl font-semibold text-gray-900">{{ $ad->price }}
+                        {{ $ad->coin->abbreviation }}</p>
 
                     <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
                         target="_blank"
@@ -200,40 +204,38 @@
                                 </a>
                             @else
                                 @php
-                                    $trackClick = $user && $user->tariff ?
-                                        'axios.post("/ads/' .
-                                            $ad->id .
-                                            '/track").then(r => {
+                                    $trackClick =
+                                        $user && $user->tariff
+                                            ? 'axios.post("/ads/' .
+                                                $ad->id .
+                                                '/track").then(r => {
                                                 pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
                                                 if (r.data.tracking) {
                                                     $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
-                                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('Untrack price') . '";
-                                                    ' . ($user->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') . '
+                                                    $el.getElementsByTagName("span")[0].innerHTML = "' .
+                                                __('Untrack price') .
+                                                '";
+                                                    ' .
+                                                ($user->tg_id === null
+                                                    ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");'
+                                                    : '') .
+                                                '
                                                 } else {
                                                     $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.add("hidden");
-                                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('Track price') . '";
+                                                    $el.getElementsByTagName("span")[0].innerHTML = "' .
+                                                __('Track price') .
+                                                '";
                                                 }
-                                            })' :
-                                        '$dispatch("open-modal", "need-subscription")';
+                                            })'
+                                            : '$dispatch("open-modal", "need-subscription")';
                                 @endphp
 
-                                <div class="xs:flex mt-6">
-                                    <x-secondary-button class="w-full xs:w-max justify-center"
-                                        @click="{{ $trackClick }}">
-                                        <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24" height="24"
-                                            fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="1.5"
-                                                d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
-                                        </svg>
-                                        <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
-                                    </x-secondary-button>
-
-                                    <a class="block xs:ml-2 sm:ml-3 mt-2 xs:mt-0"
+                                <div class="flex flex-wrap gap-3 sm:gap-4 mt-6">
+                                    <a class="block w-full sm:w-max"
                                         href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
-                                        <x-primary-button class="w-full xs:w-max flex items-center justify-center">
-                                            <svg class="w-4 h-4 mr-3" aria-hidden="true" width="24"
+                                        <x-primary-button class="w-full flex items-center justify-center xs:py-3">
+                                            <svg class="min-w-4 h-4 mr-3" aria-hidden="true" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="1.5"
@@ -242,6 +244,34 @@
                                             {{ __('Contact') }}
                                         </x-primary-button>
                                     </a>
+
+                                    <x-secondary-button
+                                        class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3"
+                                        x-data="{ number: null, status: '{{ __('View number') }}' }"
+                                        @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id]) }}')
+                                            .then(r => {
+                                                if (r.data.success) number = '+' + r.data.number;
+                                                else status = r.data.number;
+                                            }); else window.open('tel:' + number);">
+                                        <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24"
+                                            fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
+                                        </svg>
+                                        <span x-text="number ? number : status"></span>
+                                    </x-secondary-button>
+
+                                    <x-secondary-button class="w-full sm:w-max justify-center xs:py-3"
+                                        @click="{{ $trackClick }}">
+                                        <svg class="min-w-4 h-4 mr-3" aria-hidden="true" width="24"
+                                            height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.5"
+                                                d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
+                                        </svg>
+                                        <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
+                                    </x-secondary-button>
                                 </div>
                             @endif
                         </div>

@@ -99,9 +99,6 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        if (\Auth::user()->id != $company->user->id || $company->moderation)
-            return back()->withErrors(['forbidden' => __('Unavailable company.')]);
-
         if ($company->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
@@ -118,9 +115,6 @@ class CompanyController extends Controller
     public function update(UpdateCompanyRequest $request, Company $company)
     {
         $user = \Auth::user();
-
-        if ($user->id != $company->user->id || $company->moderation)
-            return back()->withErrors(['forbidden' => __('Unavailable company.')]);
 
         if ($company->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);

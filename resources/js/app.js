@@ -5,6 +5,10 @@ import './chat';
 import './suggestions';
 
 import Alpine from 'alpinejs';
+import mask from '@alpinejs/mask';
+
+Alpine.plugin(mask);
+
 window.Alpine = Alpine;
 
 window.measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];

@@ -39,6 +39,11 @@ class Office extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function moderations()
+    {
+        return $this->morphMany(Moderation::class, 'moderationable');
+    }
+
     public function views()
     {
         return $this->morphMany(View::class, 'viewable');

@@ -12,7 +12,7 @@ trait AdTrait
             'adCategory:name',
             'user:id,name,url_name,tf',
             'user.company:id',
-            'user.contacts.contactType',
+            'user.phones:id,user_id',
             'office:id,city',
             'asicVersion:id,asic_model_id,hashrate,measurement',
             'asicVersion.asicModel:id,name',
