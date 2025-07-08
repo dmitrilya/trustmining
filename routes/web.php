@@ -155,15 +155,16 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::middleware('passport-moderated')->group(function () {
-        Route::group(['prefix' => 'phones'], function () {
-            Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
-            Route::middleware('owner')->group(function () {
-                Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
-                Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
-            });
+    Route::group(['prefix' => 'phones'], function () {
+        Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
+        Route::middleware('owner')->group(function () {
+            Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
+            Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
         });
+    });
 
+
+    Route::middleware('passport-moderated')->group(function () {
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
