@@ -41,7 +41,7 @@ class MyCommand extends Command
 
         //$data->where('')
 
-        //dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
+        dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
         
 
         return Command::SUCCESS;

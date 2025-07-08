@@ -9,7 +9,7 @@ trait YandexGPT
     public function checkTextWithPrompt($text)
     {
         $params = [
-            'modelUri' => 'cls://' . env('YANDEXGPT_FOLDER_ID') . '/yandexgpt-lite',
+            'modelUri' => 'cls://' . config('services.yandexgpt.folder') . '/yandexgpt-lite',
             'text' => $text,
             'task_description' => 'Определи наличие в тексте нецензурной лексики, ругательств, матерных слов или упоминание имён известных личностей',
             'labels' => [
@@ -23,7 +23,7 @@ trait YandexGPT
     public function checkTextTuned($text)
     {
         $params = [
-            'modelUri' => 'cls://' . env('YANDEXGPT_FOLDER_ID') . '/yandexgpt-lite',
+            'modelUri' => 'cls://' . config('services.yandexgpt.folder') . '/yandexgpt-lite',
             'text' => $text,
         ];
 
@@ -33,7 +33,7 @@ trait YandexGPT
     public function checkReviewWithPrompt($text)
     {
         $params = [
-            'modelUri' => 'cls://' . env('YANDEXGPT_FOLDER_ID') . '/yandexgpt-lite',
+            'modelUri' => 'cls://' . config('services.yandexgpt.folder') . '/yandexgpt-lite',
             'text' => $text,
             'task_description' => 'Определи вероятность того что отзыв является ненастоящим, заказным, фальшивым',
             'labels' => [
@@ -47,7 +47,7 @@ trait YandexGPT
     public function checkDocument($text)
     {
         $params = [
-            'modelUri' => 'gpt://' . env('YANDEXGPT_FOLDER_ID') . '/yandexgpt',
+            'modelUri' => 'gpt://' . config('services.yandexgpt.folder') . '/yandexgpt',
             "completionOptions" => [
                 "stream" => false,
                 "temperature" => 0.1,
@@ -79,9 +79,9 @@ trait YandexGPT
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
             curl_setopt($curl, CURLOPT_URL, $link);
             curl_setopt($curl, CURLOPT_HTTPHEADER, [
-                'Authorization: Api-Key ' . env('YANDEXGPT_APP_KEY'),
+                'Authorization: Api-Key ' . config('services.yandexgpt.key'),
                 'Content-Type: application/json',
-                'x-folder-id: ' . env('YANDEXGPT_FOLDER_ID')
+                'x-folder-id: ' . config('services.yandexgpt.folder')
             ]);
 
             if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
