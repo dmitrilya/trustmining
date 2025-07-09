@@ -38,15 +38,14 @@ class SubscriptionPayment extends Command
         $adIdsToHide = collect();
 
         foreach (
-            User::whereHas(
-                'tariff',
-                fn($q) => $q->where('created_at', '<', Carbon::now()->yesterday())
-            )->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user
+            User::whereNotNull('tariff_id')->where('tariff_from', '<', Carbon::now()->yesterday())
+                ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user
         ) {
             if ($user->balance < $user->tariff->price) {
                 $this->notify('Subscription renewal failed', collect([$user]));
 
                 $user->tariff_id = null;
+                $user->tariff_from = null;
 
                 $adIds = $user->ads->where('hidden', false)->pluck('id');
                 $countToHide = $adIds->count() - 2;

@@ -40,8 +40,8 @@
         </div>
 
         <div>
-            {{-- <div class="text-sm text-gray-500">ИП Кононенко Дмитрий Игоревич</div>
-            <div class="text-sm text-gray-500">ОГРНИП: 324385000097102</div> --}}
+            {{-- <div class="text-sm text-gray-500">ИП </div>
+            <div class="text-sm text-gray-500">ОГРНИП: </div> --}}
         </div>
         <div class="text-xs text-gray-400" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}. Не
             является

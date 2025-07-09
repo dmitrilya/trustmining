@@ -72,8 +72,8 @@
                 </div>
 
                 <div class="p-2 sm:p-4 lg:p-6">
-                    <div class="text-xs text-gray-500">ИП Кононенко Дмитрий Игоревич</div>
-                    <div class="text-xs text-gray-500 mb-2">ОГРНИП: 324385000097102</div>
+                    <div class="text-xs text-gray-500">ИП </div>
+                    <div class="text-xs text-gray-500 mb-2">ОГРНИП: </div>
                     <div class="text-xxs text-gray-400" style ="max-width: 1312px;">
                         © 2024{{ ($year = Carbon\Carbon::now()->year) != 2024 ? ' - ' . $year : '' }}. Не является
                         публичной офертой.

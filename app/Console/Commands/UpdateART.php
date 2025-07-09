@@ -48,6 +48,8 @@ class UpdateART extends Command
             $responseCount = 0;
             $responseTime = 0;
 
+            if (!$user->chats->count()) continue;
+
             foreach ($user->chats as $chat) {
                 $waitingResponse = false;
 
@@ -65,7 +67,7 @@ class UpdateART extends Command
                 }
             }
 
-            $user->art = round($responseTime / $responseCount);
+            $user->art = $responseCount ? round($responseTime / $responseCount) : 0;
             $user->save();
         }
 

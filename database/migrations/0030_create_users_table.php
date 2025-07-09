@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tariff_id')->nullable();
             $table->foreign('tariff_id')->references('id')
                 ->on('tariffs')->onUpdate('cascade')->onDelete('cascade');
+            $table->date('tariff_from')->nullable();
             $table->string('name');
             $table->string('url_name');
             $table->unsignedTinyInteger('tf')->default(50);
