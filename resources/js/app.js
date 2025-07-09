@@ -109,6 +109,7 @@ window.onload = function () {
         });
 
         Echo.private(`messages.${userId}`).listen(".new-message", e => {
+            console.log(e);
             console.log(e.from + ': ' + e.message.message);
         });
     }
