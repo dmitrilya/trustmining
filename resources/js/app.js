@@ -107,6 +107,10 @@ window.onload = function () {
         Echo.private(`notifications.${userId}`).listen(".notification", e => {
             console.log('here');
         });
+
+        Echo.private(`messages.${userId}`).listen(".new-message", e => {
+            console.log(e.from + ': ' + e.message.message);
+        });
     }
 
     _.each(document.getElementsByClassName("date-transform"), window.dateTransform);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StoreMessageRequest;
@@ -133,6 +134,7 @@ class ChatController extends Controller
 
         if ($user->role->name == 'support')
             $this->notify('New message from support', $chat->users()->where('id', '!=', $user->id), 'App\Models\Message', $message);
+        else event(new NewMessage($user, $message));
 
         return response()->json(['success' => true], 200);
     }
