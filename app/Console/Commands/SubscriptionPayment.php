@@ -39,7 +39,7 @@ class SubscriptionPayment extends Command
 
         foreach (
             User::whereNotNull('tariff_id')->where('tariff_from', '<', Carbon::now()->yesterday())
-                ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance'])->get() as $user
+                ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance', 'tg_id'])->get() as $user
         ) {
             if ($user->balance < $user->tariff->price) {
                 $this->notify('Subscription renewal failed', collect([$user]));
@@ -52,7 +52,7 @@ class SubscriptionPayment extends Command
 
                 if ($countToHide > 0) $adIdsToHide = $adIdsToHide->merge($adIds->random($countToHide));
             } else {
-                if ($user->balance < $user->tariff->price * 7) $this->notify('Top up your balance', collect([$user]));
+                if ($user->balance < $user->tariff->price * 7 && $user->balance > $user->tariff->price * 6) $this->notify('Top up your balance', collect([$user]));
 
                 $user->balance -= $user->tariff->price;
             }
