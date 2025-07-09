@@ -96,8 +96,16 @@ class SendTGNotifications implements ShouldQueue
                         $text = __('Tariff reset to Base. Reactivate on the tariffs page');
                         $keyboard = [[['text' => __('Tariffs'), 'url' => route('tariffs')]]];
                         break;
-                    case 'Top up your balance':
+                    case 'Top up your balance (7 days)':
                         $text = __('In 7 days there will not be enough funds on the balance to extend the tariff');
+                        $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
+                        break;
+                    case 'Top up your balance (3 days)':
+                        $text = __('In 3 days there will not be enough funds on the balance to extend the tariff');
+                        $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
+                        break;
+                    case 'Top up your balance (1 day)':
+                        $text = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
                         break;
                 }

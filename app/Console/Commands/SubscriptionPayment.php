@@ -52,7 +52,9 @@ class SubscriptionPayment extends Command
 
                 if ($countToHide > 0) $adIdsToHide = $adIdsToHide->merge($adIds->random($countToHide));
             } else {
-                if ($user->balance < $user->tariff->price * 7 && $user->balance > $user->tariff->price * 6) $this->notify('Top up your balance', collect([$user]));
+                if ($user->balance < $user->tariff->price * 8 && $user->balance > $user->tariff->price * 7) $this->notify('Top up your balance (7 days)', collect([$user]));
+                elseif ($user->balance < $user->tariff->price * 4 && $user->balance > $user->tariff->price * 3) $this->notify('Top up your balance (3 days)', collect([$user]));
+                elseif ($user->balance < $user->tariff->price * 2 && $user->balance > $user->tariff->price) $this->notify('Top up your balance (1 day)', collect([$user]));
 
                 $user->balance -= $user->tariff->price;
             }
