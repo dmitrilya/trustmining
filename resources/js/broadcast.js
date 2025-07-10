@@ -19,16 +19,7 @@ window.messagesChannelEvent = function (e) {
     let date = new Date(Date.parse(e.created_at.replace(/ /g, "T")));
     if (date == 'Invalid Date') date = new Date(+e.created_at);
 
-    date = new Date(
-        Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()
-        )
-    ).toLocaleDateString(window.locale, {
+    date = date.toLocaleDateString(window.locale, {
         month: "short",
         day: "numeric",
         hour: "numeric",
@@ -47,22 +38,24 @@ window.messagesChannelEvent = function (e) {
         }
     } else document.getElementById('chat-list').insertAdjacentHTML('afterbegin', `
         <a href="/chat/${e.chat_id}" id="chat-${e.chat_id}"
-            class="rounded-md hover:bg-gray-200 block p-4 bg-gray-100">
-            <li class="flex justify-between">
-                <div class="flex min-w-0 gap-x-4">
-                    <div class="min-w-0 flex-auto mr-6">
-                        <div id="chat-signal-${e.chat_id}"
-                            class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
-                        </div>
+            class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3 bg-gray-50">
+            <li>
+                <div id="chat-signal-${e.chat_id}"
+                    class="absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                </div>
 
-                        <p class="text-sm font-semibold leading-6 text-gray-900">${e.from}</p>
-                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">${e.message ? e.message : 'Files'}</p>
+                <div class="flex">
+                    <p class="w-full text-xs font-semibold text-gray-900">${e.from}</p>
+
+                    <div class="min-w-fit text-right ml-2">
+                        <p class="text-xxs text-gray-900">${e.from_status}</p>
+                        @if ($lastMessage)
+                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500">${date}</p>
+                        @endif
                     </div>
                 </div>
-                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">\
-                    <p class="text-sm leading-6 text-gray-900">${e.from_status}</p>
-                    <p class="date-transform mt-1 text-xs leading-5 text-gray-500">${date}</p>
-                </div>
+
+                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-500 message">${e.message ? e.message : 'Files'}</p>
             </li>
         </a>
     `);

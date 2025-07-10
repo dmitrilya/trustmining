@@ -31,9 +31,7 @@
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
 
-                                    <p
-                                        class="w-full text-xs font-semibold text-gray-900">
-                                        {{ $user->name }}</p>
+                                    <p class="w-full text-xs font-semibold text-gray-900">{{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
                                         <p class="text-xxs text-gray-900">
@@ -46,7 +44,7 @@
                                     </div>
                                 </div>
 
-                                <p class="mt-2 xs:mt-3 truncate text-xs leading-5 text-gray-500 message">
+                                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-500 message">
                                     {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
                                 </p>
                             </li>

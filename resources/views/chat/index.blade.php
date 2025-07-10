@@ -38,26 +38,24 @@
 
                                 <div class="flex">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
-                                        <img class="h-6 w-6 xs:h-8 xs:w-8 sm:h-10 sm:w-10 mr-3 flex-none rounded-full bg-gray-50"
+                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50"
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
 
-                                    <p
-                                        class="w-full text-xs sm:text-sm font-semibold text-gray-900">
-                                        {{ $user->name }}</p>
+                                    <p class="w-full text-xs font-semibold text-gray-900">{{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
-                                        <p class="text-xxs sm:text-xs text-gray-900">
+                                        <p class="text-xxs text-gray-900">
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
-                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs sm:text-xs text-gray-500"
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500"
                                                 data-date="{{ $lastMessage->created_at }}"></p>
                                         @endif
                                     </div>
                                 </div>
 
-                                <p class="mt-2 xs:mt-3 truncate text-xs leading-5 text-gray-500 message">
+                                <p class="mt-1 xs:mt-2 truncate text-xs text-gray-500 message">
                                     {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
                                 </p>
                             </li>
