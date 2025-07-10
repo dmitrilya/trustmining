@@ -3,6 +3,7 @@ import './date';
 import './toast';
 import './chat';
 import './suggestions';
+import './broadcast';
 
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
@@ -101,18 +102,17 @@ window.checkNotifications = function () {
 window.onload = function () {
     let userId = document.querySelector("meta[name='user-id']");
 
-    if (userId) {
-        userId = userId.getAttribute('content');
+    /*setTimeout(() => window.messagesChannelEvent({
+        chat_id: 10000000,
+        message: 'qwe sadljfh asodf hy2803yt hoW;EUH ',
+        images: ["chat/image_10000003_0_1752072789.webp"],
+        files: [{ "name": "Ustav", "path": "chat/file_10000004_0_1752072902.doc" }],
+        from: 'asd',
+        from_status: 'Частное лицо',
+        created_at: '2025-07-09 14:45:14'
+    }), 2000);*/
 
-        Echo.private(`notifications.${userId}`).listen(".notification", e => {
-            console.log('here');
-        });
-
-        Echo.private(`messages.${userId}`).listen(".new-message", e => {
-            console.log(e);
-            console.log(e.from + ': ' + e.message.message);
-        });
-    }
+    if (userId) window.listenBroadcast(userId);
 
     _.each(document.getElementsByClassName("date-transform"), window.dateTransform);
 

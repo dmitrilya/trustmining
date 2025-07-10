@@ -18,7 +18,10 @@ class InChat
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->chat->users()->pluck('id')->contains($request->user()->id)) return back();
+        if (!$request->chat->users()->pluck('id')->contains($request->user()->id)) {
+            if ($request->header('X-Requested-With') === 'XMLHttpRequest') return response()->json(['success' => false, 'message' => __('No access rights')]);
+            return back()->withErrors(['forbidden' => __('No access rights')]);
+        }
 
         return $next($request);
     }

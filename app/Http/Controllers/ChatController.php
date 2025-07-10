@@ -114,8 +114,7 @@ class ChatController extends Controller
     public function send(StoreMessageRequest $request, Chat $chat)
     {
         $user = $request->user();
-
-        if (!$chat->users()->pluck('id')->contains($user->id)) response()->json(['success' => false], 200);
+        $addressee = $chat->users()->where('id', '!=', $user->id)->first();
 
         $chat->messages()->where('user_id', '!=', $user->id)->update(['checked' => 1]);
 
@@ -133,8 +132,8 @@ class ChatController extends Controller
         $message->save();
 
         if ($user->role->name == 'support')
-            $this->notify('New message from support', $chat->users()->where('id', '!=', $user->id), 'App\Models\Message', $message);
-        else event(new NewMessage($user, $message));
+            $this->notify('New message from support', collect([$addressee]), 'App\Models\Message', $message);
+        else event(new NewMessage($addressee, $message));
 
         return response()->json(['success' => true], 200);
     }

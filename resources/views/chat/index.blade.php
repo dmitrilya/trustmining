@@ -14,7 +14,7 @@
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
                 </p>
             @else
-                <ul role="list" class="divide-y divide-gray-200">
+                <ul role="list" class="divide-y divide-gray-200" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
                             $user = $chat->users->where('id', '!=', $auth->id)->first();
@@ -23,11 +23,14 @@
                                 $lastMessage = $chat->messages->reverse()->first();
                                 $lastMessageContent = $lastMessage->message ? $lastMessage->message : __('Files');
                             }
-                            $isUnchecked = $chat->messages->where('checked', false)->where('user_id', $user->id)->count();
+                            $isUnchecked = $chat->messages
+                                ->where('checked', false)
+                                ->where('user_id', $user->id)
+                                ->count();
                         @endphp
 
-                        <a href="{{ route('chat', ['chat' => $chat->id]) }}"
-                            class="rounded-md hover:bg-gray-200 block p-4{{ $isUnchecked ? ' bg-gray-100': '' }}">
+                        <a href="{{ route('chat', ['chat' => $chat->id]) }}" id="chat-{{ $chat->id }}"
+                            class="rounded-md hover:bg-gray-200 block p-4{{ $isUnchecked ? ' bg-gray-100' : '' }}">
                             <li class="flex justify-between">
                                 <div class="flex min-w-0 gap-x-4 w-full">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
@@ -35,17 +38,15 @@
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
                                     <div class="min-w-0 flex-auto mr-6 w-full">
-                                        @if ($isUnchecked)
-                                            <div id="notifications-signal"
-                                                class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
-                                            </div>
-                                        @endif
+                                        <div id="chat-signal-{{ $chat->id }}"
+                                            class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
+                                        </div>
 
                                         <p class="text-sm font-semibold leading-6 text-gray-900">
                                             {{ $user->name }}</p>
 
                                         <div class="flex">
-                                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+                                            <p class="mt-1 truncate text-xs leading-5 text-gray-500 message">
                                                 {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
                                             </p>
 
@@ -59,7 +60,8 @@
                                 </div>
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                                     <p class="text-sm leading-6 text-gray-900">
-                                        {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}</p>
+                                        {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
+                                    </p>
                                     @if ($lastMessage)
                                         <p class="date-transform mt-1 text-xs leading-5 text-gray-500"
                                             data-date="{{ $lastMessage->created_at }}"></p>

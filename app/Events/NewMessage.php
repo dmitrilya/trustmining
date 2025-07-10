@@ -35,9 +35,9 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('messages.'.$this->user->id);
+        return new PrivateChannel('messages.' . $this->user->id);
     }
-    
+
     public function broadcastAs()
     {
         return 'new-message';
@@ -48,7 +48,11 @@ class NewMessage implements ShouldBroadcast
         return [
             'chat_id' => $this->message->chat_id,
             'from' => $this->message->user->name,
-            'message' => $this->message,
+            'from_status' => $this->message->user->company && !$this->message->user->company->moderation ? __($this->message->user->company->card['type']) : __('Person'),
+            'message' => $this->message->message,
+            'images' => $this->message->images,
+            'files' => $this->message->files,
+            'created_at' => $this->message->created_at
         ];
     }
 }

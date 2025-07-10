@@ -73,6 +73,10 @@
                 @auth
                     @php
                         $auth = Auth::user();
+                        $uncheckedMessagesCount = App\Models\Message::whereIn('chat_id', $auth->chats()->pluck('id'))
+                            ->where('user_id', '!=', $auth->id)
+                            ->where('checked', false)
+                            ->count();
                     @endphp
 
                     <div class="mr-4"><x-notifications :notifications="$auth
@@ -94,13 +98,10 @@
                                     fill="currentColor" />
                             </svg>
 
-                            @if ($uncheckedMessagesCount = App\Models\Message::whereIn('chat_id', $auth->chats()->pluck('id'))->where('user_id', '!=', $auth->id)->where('checked', false)->count())
-                                <div id="notifications-signal"
-                                    class="absolute w-4 h-4 flex items-center justify-center bg-red-500 border-2 border-white rounded-full -top-1 start-2.5 dark:border-gray-900">
-                                    <div class="text-white text-xxs">
-                                        {{ $uncheckedMessagesCount < 100 ? $uncheckedMessagesCount : 99 }}</div>
-                                </div>
-                            @endif
+                            <div id="messages-signal"
+                                class="{{ !$uncheckedMessagesCount ? 'hidden ' : '' }}absolute w-4 h-4 flex items-center justify-center bg-red-500 border-2 border-white rounded-full -top-1 start-2.5 dark:border-gray-900 text-white text-xxs">
+                                {{ $uncheckedMessagesCount < 10 ? $uncheckedMessagesCount : '9+' }}
+                            </div>
                         </a>
                     </div>
                 @endauth
