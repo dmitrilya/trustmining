@@ -3,7 +3,7 @@
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
                 class="w-full max-w-xs xl:max-w-sm bg-white overflow-y-auto lg:shadow-sm border-r lg:border-0 lg:rounded-l-lg p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-150 lg:h-full absolute lg:static">
-                <ul role="list" class="divide-y divide-gray-200" id="chat-list">
+                <ul role="list" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
                             $user = $chat->users->where('id', '!=', $auth->id)->first();

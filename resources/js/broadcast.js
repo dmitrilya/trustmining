@@ -49,9 +49,7 @@ window.messagesChannelEvent = function (e) {
 
                     <div class="min-w-fit text-right ml-2">
                         <p class="text-xxs text-gray-900">${e.from_status}</p>
-                        @if ($lastMessage)
-                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500">${date}</p>
-                        @endif
+                        <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500">${date}</p>
                     </div>
                 </div>
 

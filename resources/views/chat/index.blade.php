@@ -14,7 +14,7 @@
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
                 </p>
             @else
-                <ul role="list" class="divide-y divide-gray-200" id="chat-list">
+                <ul role="list" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
                             $user = $chat->users->where('id', '!=', $auth->id)->first();

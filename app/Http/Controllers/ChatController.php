@@ -42,12 +42,12 @@ class ChatController extends Controller
 
             $chat->users()->attach([$auth->id, $user->id]);
 
-            if ($request->ad) $chat->messages()->create([
+            if ($request->ad) event(new NewMessage($user, $chat->messages()->create([
                 'user_id' => $auth->id,
                 'message' => __('Hello! Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad]),
                 'images' => [],
                 'files' => []
-            ]);
+            ])));
         }
 
         return redirect()->route('chat', ['chat' => $chat->id]);
