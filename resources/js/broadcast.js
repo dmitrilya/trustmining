@@ -35,6 +35,7 @@ window.messagesChannelEvent = function (e) {
         minute: "numeric",
     });
 
+    // CHAT
     let chat = document.getElementById('chat-' + e.chat_id);
     if (chat) {
         chat.getElementsByClassName('message')[0].innerText = e.message ? e.message : 'Files';
@@ -66,8 +67,8 @@ window.messagesChannelEvent = function (e) {
         </a>
     `);
 
+    // MESSAGE lIST
     let messagesList = document.getElementById('chat-messages');
-    
     if (messagesList && messagesList.getAttribute('data-chat_id') == e.chat_id) {
         let messageElement = ``;
 

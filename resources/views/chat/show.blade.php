@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)">
-        <div class="flex h-full">
-            <div
-                class="w-full max-w-xs xl:max-w-sm bg-white overflow-y-auto shadow-sm rounded-l-lg p-1 sm:p-4 h-full hidden lg:block">
+        <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
+            <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
+                class="w-full max-w-xs xl:max-w-sm bg-white overflow-y-auto lg:shadow-sm border-r lg:border-0 lg:rounded-l-lg p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-150 lg:h-full absolute lg:static">
                 <ul role="list" class="divide-y divide-gray-200" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
@@ -19,34 +19,36 @@
                         @endphp
 
                         <a href="{{ route('chat', ['chat' => $chat->id]) }}" id="chat-{{ $chat->id }}"
-                            class="rounded-md hover:bg-gray-200 block p-4{{ $activeChat->id != $chat->id ? ($isUnchecked ? ' bg-gray-100' : '') : ' bg-gray-200' }}">
-                            <li class="flex justify-between">
-                                <div class="flex min-w-0 gap-x-4">
+                            class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3{{ $activeChat->id != $chat->id ? ($isUnchecked ? ' bg-gray-50' : '') : ' border border-indigo-500' }}">
+                            <li>
+                                <div id="chat-signal-{{ $chat->id }}"
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                                </div>
+
+                                <div class="flex">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
-                                        <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50"
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
-                                    <div class="min-w-0 flex-auto mr-6">
-                                        <div id="chat-signal-{{ $chat->id }}"
-                                            class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
-                                        </div>
 
-                                        <p class="text-sm font-semibold leading-6 text-gray-900">
-                                            {{ $user->name }}</p>
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500 message">
-                                            {{ $lastMessage ? $lastMessageContent : __('The client wanted to write you a message, but never did so') }}
+                                    <p
+                                        class="w-full text-xs font-semibold text-gray-900">
+                                        {{ $user->name }}</p>
+
+                                    <div class="min-w-fit text-right ml-2">
+                                        <p class="text-xxs text-gray-900">
+                                            {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
+                                        @if ($lastMessage)
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500"
+                                                data-date="{{ $lastMessage->created_at }}"></p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm leading-6 text-gray-900">
-                                        {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
-                                    </p>
-                                    @if ($lastMessage)
-                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-500"
-                                            data-date="{{ $lastMessage->created_at }}"></p>
-                                    @endif
-                                </div>
+
+                                <p class="mt-2 xs:mt-3 truncate text-xs leading-5 text-gray-500 message">
+                                    {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
+                                </p>
                             </li>
                         </a>
                     @endforeach
@@ -58,14 +60,31 @@
                     $user = $activeChat->users()->where('id', '!=', $auth->id)->first();
                 @endphp
 
-                <div class="lg:hidden px-3 py-2 sm:px-7">
-                    <p class="text-base font-semibold leading-6 text-gray-900">
-                        {{ $user->name }}</p>
+                <div class="flex">
+                    <div class="flex items-center lg:hidden p-1 -ml-1">
+                        <button @click="open = ! open"
+                            class="inline-flex items-center justify-center p-1 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+                            <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16" />
+                                <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
+                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="lg:hidden px-3 py-2 sm:px-7">
+                        <p class="text-base font-semibold leading-6 text-gray-900">
+                            {{ $user->name }}</p>
+                    </div>
                 </div>
 
                 <div class="bg-gray-100 p-1 rounded-t-md h-full overflow-hidden">
                     <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-1 overflow-x-hidden overflow-y-auto duration-100"
-                        id="chat-messages" data-chat_id="{{ $activeChat->id }}" style="opacity: 0" x-init="setTimeout(() => {
+                        id="chat-messages" data-chat_id="{{ $activeChat->id }}" style="opacity: 0"
+                        x-init="setTimeout(() => {
                             scrollBottom($el);
                             $el.style.opacity = 1;
                         }, 100)">

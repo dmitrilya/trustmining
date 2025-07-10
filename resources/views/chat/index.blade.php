@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4">
             @if (!$chats->count())
                 <p class="text-base text-gray-500">
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
@@ -30,43 +30,36 @@
                         @endphp
 
                         <a href="{{ route('chat', ['chat' => $chat->id]) }}" id="chat-{{ $chat->id }}"
-                            class="rounded-md hover:bg-gray-200 block p-4{{ $isUnchecked ? ' bg-gray-100' : '' }}">
-                            <li class="flex justify-between">
-                                <div class="flex min-w-0 gap-x-4 w-full">
+                            class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3{{ $isUnchecked ? ' bg-gray-50' : '' }}">
+                            <li>
+                                <div id="chat-signal-{{ $chat->id }}"
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                                </div>
+
+                                <div class="flex">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
-                                        <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
+                                        <img class="h-6 w-6 xs:h-8 xs:w-8 sm:h-10 sm:w-10 mr-3 flex-none rounded-full bg-gray-50"
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
-                                    <div class="min-w-0 flex-auto mr-6 w-full">
-                                        <div id="chat-signal-{{ $chat->id }}"
-                                            class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full top-1 end-1 dark:border-gray-900">
-                                        </div>
 
-                                        <p class="text-sm font-semibold leading-6 text-gray-900">
-                                            {{ $user->name }}</p>
+                                    <p
+                                        class="w-full text-xs sm:text-sm font-semibold text-gray-900">
+                                        {{ $user->name }}</p>
 
-                                        <div class="flex">
-                                            <p class="mt-1 truncate text-xs leading-5 text-gray-500 message">
-                                                {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
-                                            </p>
-
-                                            @if ($lastMessage)
-                                                <p class="ml-auto block date-transform mt-1 text-xs leading-5 text-gray-500 sm:hidden"
-                                                    data-date="{{ $lastMessage->created_at }}">
-                                                </p>
-                                            @endif
-                                        </div>
+                                    <div class="min-w-fit text-right ml-2">
+                                        <p class="text-xxs sm:text-xs text-gray-900">
+                                            {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
+                                        </p>
+                                        @if ($lastMessage)
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs sm:text-xs text-gray-500"
+                                                data-date="{{ $lastMessage->created_at }}"></p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                    <p class="text-sm leading-6 text-gray-900">
-                                        {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
-                                    </p>
-                                    @if ($lastMessage)
-                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-500"
-                                            data-date="{{ $lastMessage->created_at }}"></p>
-                                    @endif
-                                </div>
+
+                                <p class="mt-2 xs:mt-3 truncate text-xs leading-5 text-gray-500 message">
+                                    {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
+                                </p>
                             </li>
                         </a>
                     @endforeach
