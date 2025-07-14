@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreReviewRequest;
-use Illuminate\Http\Request;
+
+use App\Jobs\CheckReview;
 
 use App\Http\Traits\FileTrait;
 
@@ -43,6 +44,9 @@ class ReviewController extends Controller
             'data' => $review->attributesToArray()
         ]);
 
+        CheckReview::dispatch($review);
+        //->delay(now()->addMinutes(rand(90, 150)))
+
         return response()->json(['success' => true], 200);
     }
 
@@ -65,6 +69,8 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
+        if ($review->fake) return back()->withErrors(['forbidden' => __('A review that we have found to be fake can only be edited/deleted through our support service')]);
+
         $files = [];
         if ($review->image) array_push($files, $review->image);
         if ($review->document) array_push($files, $review->document);

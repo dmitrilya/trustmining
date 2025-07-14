@@ -27,7 +27,11 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'Subscription renewal failed'
             ], [
-                'name' => 'Top up your balance'
+                'name' => 'Top up your balance (7 days)'
+            ], [
+                'name' => 'Top up your balance (3 days)'
+            ], [
+                'name' => 'Top up your balance (1 day)'
             ], [
                 'name' => 'Moderation failed'
             ], [

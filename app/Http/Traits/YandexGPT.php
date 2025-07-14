@@ -33,15 +33,17 @@ trait YandexGPT
     public function checkReviewWithPrompt($text)
     {
         $params = [
-            'modelUri' => 'cls://' . config('services.yandexgpt.folder') . '/yandexgpt-lite',
+            'modelUri' => 'cls://' . config('services.yandexgpt.folder') . '/yandexgpt',
             'text' => $text,
-            'task_description' => 'Определи вероятность того что отзыв является ненастоящим, заказным, фальшивым',
+            'task_description' => 'Представлен отзыв о компании, которая занимается продажей оборудования для майнинга и размещением у себя на площадке. Определи, является ли данный отзыв фальшивым, учитывая уместность отзыва для компании и признаки: 1) Чрезмерная положительность, 2) Отсутствие конкретики, 3) Неестественный язык, 4) Слишком короткий или слишком длинный текст, 5) Отсутствие информации о личном опыте, 6) Наличие контактных данных, 7) Использование ключевых слов',
             'labels' => [
-                'спам'
+                'Фальшивый',
+                'Настоящий',
+                'Оскорбительный'
             ]
         ];
 
-        return $this->request('POST', 'https://llm.api.cloud.yandex.net/foundationModels/v1/fewShotTextClassification', $params);
+        return collect($this->request('POST', 'https://llm.api.cloud.yandex.net/foundationModels/v1/fewShotTextClassification', $params)->predictions)->sortByDesc('confidence')->first();
     }
 
     public function checkDocument($text)

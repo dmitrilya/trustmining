@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('rating');
             $table->string('image')->nullable();
             $table->string('document')->nullable();
+            $table->boolean('fake')->default(0);
             $table->boolean('moderation')->default(1);
             $table->timestamps();
         });

@@ -20,24 +20,24 @@
 
     @switch($notification->notificationable_type)
         @case('App\Models\Message')
-            <x-notification :href="route('support', ['chat' => true])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->user->name"
+            <x-notification :href="route('support', ['chat' => true])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name"
                 :text="$n->message"></x-notification>
         @break
 
         @case('App\Models\Review')
-            <x-notification :href="route('company.reviews', ['user' => $n->reviewable->url_name])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->rating"
+            <x-notification :href="route('company.reviews', ['user' => $n->reviewable->url_name])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating"
                 :text="$n->review"></x-notification>
         @break
 
         @case('App\Models\Moderation')
-            <x-notification href="#" :type="__($ntName)" :date="$notification->created_at" :pretext="$moderationTypes[$n->moderationable_type]"
+            <x-notification href="#" :type="$ntName" :date="$notification->created_at" :pretext="$moderationTypes[$n->moderationable_type]"
                 :text="$n->comment"></x-notification>
         @break
 
         @case('App\Models\Ad')
             @switch($ntName)
                 @case('Price change')
-                    <x-notification :href="route('ads.show', ['ad' => $n->id])" :type="__($ntName)" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
+                    <x-notification :href="route('ads.show', ['ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
                         :text="$n->price"></x-notification>
                 @break
             @endswitch
@@ -46,19 +46,19 @@
         @default
             @switch($ntName)
                 @case('Subscription renewal failed')
-                    <x-notification href="#" :type="__($ntName)" :date="$notification->created_at" pretext=""
+                    <x-notification href="#" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notification>
                 @break
                 @case('Top up your balance (7 days)')
-                    <x-notification href="route('order.create')" :type="__($ntName)" :date="$notification->created_at" pretext=""
+                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('In 7 days there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
                 @case('Top up your balance (3 days)')
-                    <x-notification href="route('order.create')" :type="__($ntName)" :date="$notification->created_at" pretext=""
+                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('In 3 days there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
                 @case('Top up your balance (1 day)')
-                    <x-notification href="route('order.create')" :type="__($ntName)" :date="$notification->created_at" pretext=""
+                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Tomorrow there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
             @endswitch

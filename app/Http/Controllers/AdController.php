@@ -44,7 +44,7 @@ class AdController extends Controller
         $user = \Auth::user();
 
         if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
@@ -64,7 +64,7 @@ class AdController extends Controller
         $user = $request->user();
 
         if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $office = Office::find($request->office_id);
 
@@ -217,7 +217,7 @@ class AdController extends Controller
         $user = $request->user();
 
         if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 2))
-            return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
+            return response()->json(['success' => false, 'message' => __('Not available with current plan')]);
 
         $ad->hidden = !$ad->hidden;
         $ad->save();

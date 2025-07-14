@@ -42,8 +42,8 @@ trait TrustFactor
             if ($user->company->card['invalid']) $tf -= 15;
         }
 
-        if ($user->moderatedReviews->count() > 3) {
-            $avgRating = $user->moderatedReviews->avg('rating');
+        if ($user->moderatedReviews->where('fake', false)->count() > 2) {
+            $avgRating = $user->moderatedReviews->where('fake', false)->avg('rating');
             if ($avgRating >= 4.85) $tf += 7;
             elseif ($avgRating >= 4.7) $tf += 4;
             elseif ($avgRating >= 4.4) $tf += 1;
@@ -52,6 +52,8 @@ trait TrustFactor
             elseif ($avgRating >= 3.65) $tf -= 10;
             else $tf -= 15;
         }
+
+        if ($user->moderatedReviews->where('fake', true)->count()) $tf -= 3;
 
         $tfForOffices = [0, 0, 4, 6, 8, 10, 11, 12];
         $tf += $tfForOffices[$user->moderatedOffices->count()];

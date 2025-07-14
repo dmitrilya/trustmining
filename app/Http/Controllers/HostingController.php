@@ -40,7 +40,7 @@ class HostingController extends Controller
         if ($user->hosting) return back()->withErrors(['forbidden' => __('Hosting already exists.')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('hosting.create');
     }
@@ -58,7 +58,7 @@ class HostingController extends Controller
         if ($user->hosting) return redirect()->route('profile')->withErrors(['forbidden' => __('Hosting already exists.')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $firstHosting = Hosting::orderByDesc('ordering_id')->first();
         $hosting = Hosting::create([
@@ -103,7 +103,7 @@ class HostingController extends Controller
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('hosting.edit', compact('hosting'));
     }
@@ -123,7 +123,7 @@ class HostingController extends Controller
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
         if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $data = [];
         $p = $request->peculiarities ? $request->peculiarities : [];

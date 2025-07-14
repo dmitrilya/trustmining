@@ -36,7 +36,7 @@ class OfficeController extends Controller
         $user = \Auth::user();
 
         if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('office.create');
     }
@@ -52,7 +52,7 @@ class OfficeController extends Controller
         $user = $request->user();
 
         if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $suggestions = $this->dadataSearchAddress($request->address);
 

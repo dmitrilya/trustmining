@@ -9,6 +9,7 @@
     "Edit": "Редактировать",
     "Saved": "Сохранено",
     "Contact": "Связаться",
+    "Delete": "Удалить",
     "Delete Account": "Удалить аккаунт",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "После удаления вашей учетной записи все ее ресурсы и данные будут удалены без возможности восстановления.",
     "Are you sure you want to delete your account?": "Вы уверены, что хотите удалить свою учетную запись?",
@@ -302,7 +303,7 @@
     "Pay the tariff": "Оплатить тариф",
     "according to the tariff": "по тарифу",
     "Not available": "Недоступно",
-    "Not available with current plan.": "Недоступно с текущим тарифным планом.",
+    "Not available with current plan": "Недоступно с текущим тарифным планом.",
     "Please check the correctness of the specified address": "Проверьте корректность указанного адреса",
     "You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.": "Пополнить баланс можно на любую произвольную сумму, но для активации тарифа сумма должна превышать месячные затраты. Если баланса не хватит на ежедневное списание, тариф сбросится до Base.",
     "First you need to pass moderation by passport": "Сначала нужно пройти модерацию по паспорту",
@@ -348,7 +349,8 @@
     "Don't ask again": "Больше не спрашивать",
     "Not interested": "Не интересно",
     "Currency": "Валюта",
-
+    "A review that we have found to be fake can only be edited/deleted through our support service": "Отзыв, который мы посчитали фальшивым, можно отредактировать/удалить только через службу поддержки",
+    "Please try to express your emotions without directly insulting": "Пожалуйста, попробуйте выразить ваши эмоции без прямого оскорбления",
 
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",

@@ -20,6 +20,15 @@
 
                 @php
                     $model = request()->model;
+                    $moderationTypes = [
+                        'App\Models\Company' => __('Company'),
+                        'App\Models\Hosting' => __('Hosting'),
+                        'App\Models\Ad' => __('Ad'),
+                        'App\Models\Review' => __('Review'),
+                        'App\Models\Office' => __('Office'),
+                        'App\Models\Contact' => __('Contacts'),
+                        'App\Models\Passport' => __('Passport'),
+                    ];
                 @endphp
 
                 <x-slot name="content">
@@ -72,7 +81,7 @@
 
                                     <div class="flex justify-between">
                                         <p class="mt-1 truncate text-xs leading-5 text-gray-500">
-                                            {{ $moderation->moderationable_type }}
+                                            {{ $moderationTypes[$moderation->moderationable_type] }}
                                         </p>
 
                                         <p class="date-transform mt-1 text-xs leading-5 text-gray-500"
