@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 use App\Jobs\GetYandexGPTOperation;
 
 use App\Http\Traits\YandexGPT;
-use App\Http\Traits\Telegram;\\
+use App\Http\Traits\Telegram;
 use App\Models\Algorithm;
 use App\Models\AsicModel;
 

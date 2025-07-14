@@ -2,6 +2,8 @@
 
 namespace App\Http\Traits;
 
+use App\Jobs\GetYandexGPTOperation;
+
 use Exception;
 
 trait YandexGPT
@@ -75,7 +77,13 @@ trait YandexGPT
 
     public function getOperation($id)
     {
-        return $this->request('GET', 'https://operation.api.cloud.yandex.net/operations/' . $id);
+        $operation = $this->request('GET', 'https://operation.api.cloud.yandex.net/operations/' . $id);
+
+        if (!$operation['done']) return GetYandexGPTOperation::dispatch($id)->delay(now()->addMinutes(1));
+
+        if (array_key_exists('response', $operation)) return $operation['response'];
+
+        return false;
     }
 
     private function request($method, $link, $params = null)

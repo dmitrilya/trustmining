@@ -34,10 +34,10 @@ class GetYandexGPTOperation implements ShouldQueue
      */
     public function handle()
     {
-        $operation = $this->getOperation($this->operationId);
-        
-        if (!$operation['done']) return GetYandexGPTOperation::dispatch($this->checkDocument($text)['id'])->delay(now()->addMinutes(1));
+        $operationResponse = $this->getOperation($this->operationId);
 
-        if (array_key_exists('response', $operation)) info($operation['response']);
+        if (!$operationResponse) return;
+
+        info($operationResponse);
     }
 }
