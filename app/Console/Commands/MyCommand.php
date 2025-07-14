@@ -6,9 +6,10 @@ use PhpOffice\PhpWord\IOFactory;
 
 use Illuminate\Console\Command;
 
-use App\Http\Traits\YandexGPT;
-use App\Http\Traits\Telegram;
+use App\Jobs\GetYandexGPTOperation;
 
+use App\Http\Traits\YandexGPT;
+use App\Http\Traits\Telegram;\\
 use App\Models\Algorithm;
 use App\Models\AsicModel;
 
@@ -55,8 +56,8 @@ class MyCommand extends Command
                 }
             }
         }
-
-        dd($this->checkDocument($text));
+//$this->checkDocument($text)['id']
+        GetYandexGPTOperation::dispatch('d7qou147l00m492tbeeb')->delay(now()->addMinutes(1));
 
         return Command::SUCCESS;
     }

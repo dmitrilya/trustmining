@@ -44,8 +44,7 @@ class ReviewController extends Controller
             'data' => $review->attributesToArray()
         ]);
 
-        CheckReview::dispatch($review);
-        //->delay(now()->addMinutes(rand(90, 150)))
+        CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
 
         return response()->json(['success' => true], 200);
     }
