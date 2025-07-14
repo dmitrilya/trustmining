@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use PhpOffice\PhpWord\IOFactory;
+
 use Illuminate\Console\Command;
 
 use App\Http\Traits\YandexGPT;
@@ -41,8 +43,20 @@ class MyCommand extends Command
 
         //$data->where('')
 
-        dd($this->checkReviewWithPrompt('Все хорошо. Сотрудничество устраивает'));
-        
+        $document = IOFactory::load(storage_path('app/public/Document.docx'));        
+        $text = '';
+
+        foreach ($document->getSections() as $s) {
+            foreach ($s->getElements() as $e) {
+                if (method_exists(get_class($e), 'getText')) {
+                    $text .= $e->getText();
+                } else {
+                    $text .= "\n";
+                }
+            }
+        }
+
+        dd($this->checkDocument($text));
 
         return Command::SUCCESS;
     }

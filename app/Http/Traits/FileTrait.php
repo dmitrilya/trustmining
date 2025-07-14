@@ -49,8 +49,26 @@ trait FileTrait
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
-                if ($ext != 'doc' && $ext != 'docx') $ext = $this->compress($file, $disk, $folder, $filename);
-                else $file->storeAs($disk . $folder, $filename . '.' . $ext);
+                if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename);
+                else {
+                    $file->storeAs($disk . $folder, $filename . '.' . $ext);
+
+                    $document = PhpOffice\PhpWord\IOFactory::load(storage_path('app/' . $disk . '/' . $folder . '/' . $filename . '.' . $ext));
+
+                    $text = '';
+
+                    foreach ($document->getSections() as $s) {
+                        foreach ($s->getElements() as $e) {
+                            if (method_exists(get_class($e), 'getText')) {
+                                $text .= $e->getText();
+                            } else {
+                                $text .= "\n";
+                            }
+                        }
+                    }
+
+                    
+                }
 
                 array_push($result, array(
                     'name' => $name,
@@ -70,7 +88,7 @@ trait FileTrait
 
         if (isset($image)) {
             imagepalettetotruecolor($image);
-            
+
             if (!imagewebp($image, Storage::path($disk . $folder . '/' . $filename . '.webp'), 20)) return false;
 
             return 'webp';
