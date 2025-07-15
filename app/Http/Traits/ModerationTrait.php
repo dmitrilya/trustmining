@@ -48,7 +48,9 @@ trait ModerationTrait
                     break;
                 case ('App\Models\Hosting'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
-                    if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
+                    if (isset($moderation->data['contract'])) array_push($files, $m->contract);
+                    if (isset($moderation->data['territory']) && $m->territory) array_push($files, $m->territory);
+                    if (isset($moderation->data['energy_supply']) && $m->energy_supply) array_push($files, $m->energy_supply);
                     break;
                 case ('App\Models\Ad'):
                     if (isset($moderation->data['preview'])) array_push($files, $m->preview);
@@ -121,7 +123,9 @@ trait ModerationTrait
                 break;
             case ('App\Models\Hosting'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
-                if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
+                if (isset($moderation->data['contract'])) array_push($files, $moderation->data['contract']);
+                if (isset($moderation->data['territory'])) array_push($files, $moderation->data['territory']);
+                if (isset($moderation->data['energy_supply'])) array_push($files, $moderation->data['energy_supply']);
                 break;
             case ('App\Models\Ad'):
                 if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);

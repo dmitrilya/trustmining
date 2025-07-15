@@ -23,7 +23,10 @@ return new class extends Migration
             $table->text('description');
             $table->string('address');
             $table->string('video')->nullable();
-            $table->json('documents');
+            $table->string('contract');
+            $table->text('contract_deficiencies')->nullable();
+            $table->string('territory')->nullable();
+            $table->string('energy_supply')->nullable();
             $table->float('price', 5, 2);
             $table->json('peculiarities');
             $table->json('expenses');

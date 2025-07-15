@@ -56,8 +56,8 @@ class MyCommand extends Command
                 }
             }
         }
-//$this->checkDocument($text)['id']
-        GetYandexGPTOperation::dispatch('d7qou147l00m492tbeeb')->delay(now()->addMinutes(1));
+
+        GetYandexGPTOperation::dispatch($this->checkDocument($text)->id)->delay(now()->addMinutes(1));
 
         return Command::SUCCESS;
     }

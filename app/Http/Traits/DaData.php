@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use Illuminate\Http\Request;
 
 use MoveMoveIo\DaData\Enums\Language;
+use MoveMoveIo\DaData\Enums\BranchType;
 use MoveMoveIo\DaData\Facades\DaDataAddress;
 use MoveMoveIo\DaData\Facades\DaDataCompany;
 
@@ -40,7 +41,7 @@ trait DaData
 
     public function dadataCompanyByInn($inn)
     {
-        $suggs = DaDataCompany::id($inn, 1, null, 'MAIN');
+        $suggs = DaDataCompany::id($inn, 1, null, BranchType::MAIN);
 
         if (!count($suggs['suggestions'])) return null;
 

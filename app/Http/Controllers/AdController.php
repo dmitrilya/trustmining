@@ -266,8 +266,8 @@ class AdController extends Controller
         $files = array_merge($files, $ad->images);
 
         foreach ($ad->moderations()->where('moderation_status_id', 1)->get() as $moderation) {
-            array_push($files, $moderation->data['preview']);
-            $files = array_merge($files, $moderation->data['images']);
+            if (array_key_exists('preview', $moderation->data)) array_push($files, $moderation->data['preview']);
+            if (array_key_exists('images', $moderation->data)) $files = array_merge($files, $moderation->data['images']);
         }
 
         Storage::disk('public')->delete($files);

@@ -47,7 +47,7 @@ class CheckReview implements ShouldQueue
             $lastModeration = $this->review->moderations()->latest()->first();
             $result = $this->checkReviewWithPrompt($lastModeration);
 
-            switch ($result['label']) {
+            switch ($result->label) {
                 case 'Фальшивый':
                     $this->review->fake = true;
                     $this->review->save();

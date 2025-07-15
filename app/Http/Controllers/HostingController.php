@@ -69,14 +69,16 @@ class HostingController extends Controller
             'video' => $request->video,
             'price' => $request->price,
             'images' => [],
-            'documents' => [],
+            'contract' => '',
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
             'conditions' => $request->conditions,
             'expenses' => $request->expenses,
         ]);
 
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);
-        $hosting->documents = $this->saveFilesWithName($request->file('documents'), 'hostings', 'doc', $hosting->id);
+        $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting->id);
+        if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id);
+        if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
 
         $hosting->save();
 
@@ -141,8 +143,9 @@ class HostingController extends Controller
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);
 
-        if ($request->documents)
-            $data['documents'] = $this->saveFilesWithName($request->file('documents'), 'hostings', 'doc', $hosting->id);
+        if ($request->contract) $data['contract'] = $this->saveContract($request->file('contract'), 'hostings', $hosting->id);
+        if ($request->territory) $data['territory'] = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id);
+        if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
 
         if (!empty($data))
             Moderation::create([
@@ -162,11 +165,13 @@ class HostingController extends Controller
      */
     public function destroy(Hosting $hosting)
     {
-        $files = array_merge($hosting->images, array_column($hosting->documents, 'path'));
+        $files = array_merge($hosting->images, [$hosting->contract, $hosting->territory, $hosting->energy_supply]);
 
         foreach ($hosting->moderations()->where('moderation_status_id', 1)->get() as $moderation) {
-            $files = array_merge($files, $moderation->data['images']);
-            $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
+            if (array_key_exists('images', $moderation->data)) $files = array_merge($files, $moderation->data['images']);
+            if (array_key_exists('contract', $moderation->data)) array_push($files, $moderation->data['contract']);
+            if (array_key_exists('territory', $moderation->data)) array_push($files, $moderation->data['territory']);
+            if (array_key_exists('energy_supply', $moderation->data)) array_push($files, $moderation->data['energy_supply']);
         }
 
         Storage::disk('public')->delete($files);

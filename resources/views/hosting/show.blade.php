@@ -93,20 +93,38 @@
                     <div class="mt-8 md:col-span-12">
                         @include('components.about-seller', ['user' => $hosting->user])
 
-                        @php
-                            $d = isset($moderation->data['documents'])
-                                ? $moderation->data['documents']
-                                : $hosting->documents;
-                        @endphp
+                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                            @php
+                                $contract = isset($moderation->data['contract'])
+                                    ? $moderation->data['contract']
+                                    : $hosting->contract;
+                                $territory = isset($moderation->data['territory'])
+                                    ? $moderation->data['territory']
+                                    : $hosting->territory;
+                                $energySupply = isset($moderation->data['energy_supply'])
+                                    ? $moderation->data['energy_supply']
+                                    : $hosting->energy_supply;
+                            @endphp
 
-                        @if (count($d))
-                            <div
-                                class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8{{ isset($moderation->data['documents']) ? ' border border-indigo-500' : '' }}">
-                                @foreach ($d as $document)
-                                    <x-document :path="$document['path']" :name="$document['name']"></x-document>
-                                @endforeach
+
+                            <div class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
+                                <x-document :path="$contract" :name="__('Contract')"></x-document>
                             </div>
-                        @endif
+
+                            @if ($territory)
+                                <div
+                                    class="{{ isset($moderation->data['territory']) ? 'border border-indigo-500' : '' }}">
+                                    <x-document :path="$territory" :name="__('Territory')"></x-document>
+                                </div>
+                            @endif
+
+                            @if ($energySupply)
+                                <div
+                                    class="{{ isset($moderation->data['energy_supply']) ? 'border border-indigo-500' : '' }}">
+                                    <x-document :path="$energySupply" :name="__('Energy supply agreement')"></x-document>
+                                </div>
+                            @endif
+                        </div>
 
                         @php
                             $v = isset($moderation->data['video']) ? $moderation->data['video'] : $hosting->video;
@@ -143,7 +161,8 @@
                 </div>
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l md:border-gray-200 md:pl-8 space-y-5">
-                    <h1 class="flex items-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
+                    <h1
+                        class="flex items-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
                         <svg class="w-6 h-6 text-gray-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -201,13 +220,17 @@
                 <div class="mt-8 md:col-span-12">
                     @include('components.about-seller', ['user' => $hosting->user])
 
-                    @if (count($hosting->documents))
-                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            @foreach ($hosting->documents as $document)
-                                <x-document :path="$document['path']" :name="$document['name']"></x-document>
-                            @endforeach
-                        </div>
-                    @endif
+                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                        <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
+
+                        @if ($territory)
+                            <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>
+                        @endif
+
+                        @if ($energySupply)
+                            <x-document :path="$hosting->energy_supply" :name="__('Energy supply agreement')"></x-document>
+                        @endif
+                    </div>
 
                     @if ($hosting->video)
                         <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">

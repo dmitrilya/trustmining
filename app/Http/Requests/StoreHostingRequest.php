@@ -32,8 +32,9 @@ class StoreHostingRequest extends FormRequest
             'video' => 'nullable|active_url',
             'images' => 'max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
-            'documents' => 'max:3',
-            'documents.*' => 'file|mimes:doc,docx|max:1024',
+            'contract' => 'required|file|mimes:doc,docx|max:1024',
+            'territory' => 'file|mimes:doc,docx|max:1024',
+            'energy_supply' => 'file|mimes:doc,docx|max:1024',
             'price' => 'required|min:0|max:10',
         ];
     }
@@ -51,9 +52,12 @@ class StoreHostingRequest extends FormRequest
             'images.max' => __('File limit exceeded.'),
             'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
             'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
-            'documents.max' => __('File limit exceeded.'),
-            'documents.*.mimes' => __('Valid types are doc (word).'),
-            'documents.*.max' => __('The maximum file size should not exceed 1 MB.'),
+            'contract.mimes' => __('Valid types are doc (word).'),
+            'contract.max' => __('The maximum file size should not exceed 1 MB.'),
+            'territory.mimes' => __('Valid types are doc (word).'),
+            'territory.max' => __('The maximum file size should not exceed 1 MB.'),
+            'energy_supply.mimes' => __('Valid types are doc (word).'),
+            'energy_supply.max' => __('The maximum file size should not exceed 1 MB.'),
             'price.required' => __('Price is required.'),
         ];
     }

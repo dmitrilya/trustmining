@@ -22,11 +22,22 @@ class Hosting extends Model
         'video',
         'price',
         'images',
-        'documents',
+        'contract',
+        'territory',
+        'energy_supply',
         'peculiarities',
         'expenses',
         'conditions',
         'moderation'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'contract_deficiencies',
     ];
 
     /**
@@ -36,7 +47,6 @@ class Hosting extends Model
      */
     protected $casts = [
         'images' => 'array',
-        'documents' => 'array',
         'peculiarities' => 'array',
         'expenses' => 'array',
         'conditions' => 'array',

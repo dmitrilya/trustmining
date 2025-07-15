@@ -11,20 +11,26 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Http\Traits\YandexGPT;
 
+use App\Models\Hosting;
+
 class GetYandexGPTOperation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, YandexGPT;
 
     public $operationId;
+    public $folder;
+    public $modelId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($operationId)
+    public function __construct($operationId, $folder, $modelId)
     {
         $this->operationId = $operationId;
+        $this->folder = $folder;
+        $this->modelId = $modelId;
     }
 
     /**
@@ -38,6 +44,12 @@ class GetYandexGPTOperation implements ShouldQueue
 
         if (!$operationResponse) return;
 
-        info($operationResponse);
+        switch ($this->folder) {
+            case 'hostings':
+                $hosting = Hosting::find($this->modelId);
+                $hosting->contract_deficiencies = $operationResponse->alternatives[0]->messaage->text;
+                $hosting->save();
+                break;
+        }
     }
 }
