@@ -69,7 +69,7 @@ class CompanyController extends Controller
 
         $card = $this->dadataCompanyByInn($request->inn);
 
-        if (!$card) return back()->withErrors(['forbidden' => __('Not available company')]);
+        if (!$card) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 
         $company = Company::create([
             'user_id' => $user->id,

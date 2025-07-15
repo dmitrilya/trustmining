@@ -1,4 +1,4 @@
-@props(['name', 'forName' => $name . '[]', 'items'])
+@props(['name', 'forName' => $name . '[]', 'items' => []])
 
 <div {{ $attributes->merge(['class' => 'bg-gray-100 p-3 rounded-lg space-y-3']) }}>
     {{ $slot }}

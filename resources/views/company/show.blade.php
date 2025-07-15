@@ -81,7 +81,7 @@
                                 <li class="text-gray-400">{{ __('Status') . ': ' }}<span
                                         class="text-gray-600">{{ $statuses[$company->card['state']['status']] }}</span>
                                 </li>
-                                <li class="text-gray-400">{{ __('INN') . ': ' }}<span
+                                <li class="text-gray-400">{{ __('TIN') . ': ' }}<span
                                         class="text-gray-600">{{ $company->card['inn'] }}</span>
                                 </li>
                                 <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
@@ -113,7 +113,7 @@
                                                     ({{ $founder['share'] }}%)
                                                 </span>
                                             </li>
-                                            <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                            <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
                                                     class="text-gray-600">{{ $founder['inn'] }}</span>
                                             </li>
                                         </div>
@@ -129,7 +129,7 @@
                                         <li class="text-gray-400">{{ __('Name') . ': ' }}<span
                                                 class="text-gray-600">{{ $manager['name'] }}</span>
                                         </li>
-                                        <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                        <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
                                                 class="text-gray-600">{{ $manager['inn'] }}</span>
                                         </li>
                                     </div>
@@ -220,7 +220,7 @@
                             <li class="text-gray-400">{{ __('Status') . ': ' }}<span
                                     class="text-gray-600">{{ $statuses[$company->card['state']['status']] }}</span>
                             </li>
-                            <li class="text-gray-400">{{ __('INN') . ': ' }}<span
+                            <li class="text-gray-400">{{ __('TIN') . ': ' }}<span
                                     class="text-gray-600">{{ $company->card['inn'] }}</span>
                             </li>
                             <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
@@ -252,7 +252,7 @@
                                                 ({{ $founder['share'] }}%)
                                             </span>
                                         </li>
-                                        <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                        <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
                                                 class="text-gray-600">{{ $founder['inn'] }}</span>
                                         </li>
                                     </div>
@@ -267,7 +267,7 @@
                                     <li class="text-gray-400">{{ __('Name') . ': ' }}<span
                                             class="text-gray-600">{{ $manager['name'] }}</span>
                                     </li>
-                                    <li class="text-gray-400 mt-1">{{ __('INN') . ': ' }}<span
+                                    <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
                                             class="text-gray-600">{{ $manager['inn'] }}</span>
                                     </li>
                                 </div>

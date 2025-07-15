@@ -13,7 +13,7 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="company" :value="__('Company INN')" />
+                    <x-input-label for="company" :value="__('Company TIN')" />
                     <x-text-input id="company" readonly disabled autocomplete="company"
                         value="{{ $company->card['inn'] }}" />
                 </div>
