@@ -70,9 +70,10 @@ class HostingController extends Controller
             'price' => $request->price,
             'images' => [],
             'contract' => '',
+            'contract_deficiencies' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
-            'conditions' => $request->conditions,
-            'expenses' => $request->expenses,
+            'conditions' => $request->conditions ? $request->conditions : [],
+            'expenses' => $request->expenses ? $request->expenses : [],
         ]);
 
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);

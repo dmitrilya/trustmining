@@ -217,4 +217,6 @@ Route::group(['prefix' => 'ads'], function () {
     Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });
 
+Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
+
 require __DIR__ . '/auth.php';

@@ -69,6 +69,8 @@ trait TrustFactor
         elseif ($user->art > 40) $tf -= 4;
         elseif ($user->art > 20) $tf -= 2;
 
+        if ($user->hosting && !$user->hosting->moderation && !in_array('Possibility of visiting the territory', $user->hosting->peculiarities)) $tf -= 5;
+
         if ($tf > 100) $tf = 100;
         elseif ($tf < 0) $tf = 0;
 

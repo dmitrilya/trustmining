@@ -23,6 +23,7 @@ class Hosting extends Model
         'price',
         'images',
         'contract',
+        'contract_deficiencies',
         'territory',
         'energy_supply',
         'peculiarities',
@@ -47,6 +48,7 @@ class Hosting extends Model
      */
     protected $casts = [
         'images' => 'array',
+        'contract_deficiencies' => 'array',
         'peculiarities' => 'array',
         'expenses' => 'array',
         'conditions' => 'array',

@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use App\Models\Hosting;
+use Illuminate\Http\Request;
 
 trait HostingTrait
 {
@@ -35,5 +36,14 @@ trait HostingTrait
         else $hostings = $hostings->inRandomOrder();
 
         return $hostings;
+    }
+
+    public function getContractDeficiencies(Request $request, Hosting $hosting)
+    {
+        $user = $request->user();
+
+        if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
+        
+        return response()->json(['success' => true, 'deficiencies' => $hosting->contract_deficiencies]);
     }
 }

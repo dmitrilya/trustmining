@@ -358,6 +358,12 @@
     "A review that we have found to be fake can only be edited/deleted through our support service": "Отзыв, который мы посчитали фальшивым, можно отредактировать/удалить только через службу поддержки",
     "Please try to express your emotions without directly insulting": "Пожалуйста, попробуйте выразить ваши эмоции без прямого оскорбления",
     "required fields": "обязательные поля",
+    "Defects of the contract": "Недочёты договора",
+    "Anything that may result in the loss of equipment by the customer or other material or financial losses": "То что может повлечь за собой утрату оборудования заказчиком или другие материальные или финансовые потери",
+    "Inaccuracies in the description of the terms of the contract that may lead to disputes": "Неточности описания условий договора которые могут привести к спорам",
+    "The presence of errors in the text or deviation from the standards for drafting contracts": "Наличие ошибок в тексте или отклонение от стандартов составления договоров",
+    "No defects found": "Недочеты не обнаружены",
+    
 
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",

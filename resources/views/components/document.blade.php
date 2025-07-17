@@ -15,10 +15,10 @@
             <div class="text-gray-900 font-semibold mb-1">{{ $name }}</div>
 
             <div class="flex">
-                <a class="hover:underline text-gray-500 mr-4" target="_blank"
+                {{-- <a class="hover:underline text-gray-500 mr-4" target="_blank"
                     href="{{ route('document', ['path' => $path]) }}">
                     {{ __('Open') }}
-                </a>
+                </a> --}}
 
                 <a class="hover:underline text-gray-500" download href="{{ Storage::url($path) }}">
                     {{ __('Download') }}

@@ -26,8 +26,8 @@
 
                     <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l md:border-gray-200 md:pl-8 space-y-5">
                         <h1
-                            class="flex items-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                            <svg class="w-6 h-6 text-gray-500 mr-2" aria-hidden="true"
+                            class="flex items-center text-sm font-bold tracking-tight text-gray-900 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -38,7 +38,7 @@
                         </h1>
 
                         <p
-                            class="text-3xl tracking-tight text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="text-lg sm:text-3xl tracking-tight text-gray-900{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $hosting->price }} ₽</p>
 
                         <x-peculiarities
@@ -93,7 +93,7 @@
                     <div class="mt-8 md:col-span-12">
                         @include('components.about-seller', ['user' => $hosting->user])
 
-                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                        <div class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                             @php
                                 $contract = isset($moderation->data['contract'])
                                     ? $moderation->data['contract']
@@ -162,9 +162,10 @@
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l md:border-gray-200 md:pl-8 space-y-5">
                     <h1
-                        class="flex items-center text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
-                        <svg class="w-6 h-6 text-gray-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        class="flex items-center text-sm font-bold tracking-tight text-gray-900 xs:text-base sm:text-lg">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
                                 d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                 clip-rule="evenodd" />
@@ -223,14 +224,81 @@
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                         <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
 
-                        @if ($territory)
+                        @if ($hosting->territory)
                             <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>
                         @endif
 
-                        @if ($energySupply)
+                        @if ($hosting->energy_supply)
                             <x-document :path="$hosting->energy_supply" :name="__('Energy supply agreement')"></x-document>
                         @endif
                     </div>
+
+                    @if ($hosting->user->id != $auth->id)
+                        <div x-data="{ deficiencies: [], done: false }">
+                            <x-secondary-button
+                                class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
+                                @click="if (!false) {
+                                if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
+                                    .then(r => {
+                                        if (r.data.success) {
+                                            deficiencies = r.data.deficiencies;
+                                            done = true;
+                                            console.log(deficiencies);
+                                        }
+                                        else pushToastAlert(r.data.message, 'error');
+                                    });
+                                else $dispatch('open-modal', 'need-subscription');
+                            }">
+                                <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
+                                </svg>
+                                <span>{{ __('Defects of the contract') }}</span>
+                            </x-secondary-button>
+
+                            <template x-if="done">
+                                <div>
+                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-gray-500 font-bold">
+                                        {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
+                                    </h5>
+
+                                    <p x-show="!deficiencies[0].length"
+                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark: text-gray-400">
+                                        {{ __('No defects found') }}</p>
+                                    <template x-for="problem in deficiencies[0]" :key="problem.problem">
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark: text-gray-400"
+                                            x-text="problem.point + ' - ' + problem.problem"></p>
+                                    </template>
+
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-500 font-bold">
+                                        {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
+                                    </h5>
+
+                                    <p x-show="!deficiencies[1].length"
+                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark: text-gray-400">
+                                        {{ __('No defects found') }}</p>
+                                    <template x-for="problem in deficiencies[1]" :key="problem.problem">
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark: text-gray-400"
+                                            x-text="problem.point + ' - ' + problem.problem"></p>
+                                    </template>
+
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-500 font-bold">
+                                        {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
+                                    </h5>
+
+                                    <p x-show="!deficiencies[2].length"
+                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark: text-gray-400">
+                                        {{ __('No defects found') }}</p>
+                                    <template x-for="problem in deficiencies[2]" :key="problem.problem">
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark: text-gray-400"
+                                            x-text="problem.point + ' - ' + problem.problem"></p>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    @endif
 
                     @if ($hosting->video)
                         <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">

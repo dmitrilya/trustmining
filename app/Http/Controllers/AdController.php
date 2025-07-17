@@ -206,52 +206,6 @@ class AdController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  Illuminate\Http\Request;
-     * @param  \App\Models\Ad  $ad
-     * @return \Illuminate\Http\Response
-     */
-    public function toggleHidden(Request $request, Ad $ad)
-    {
-        $user = $request->user();
-
-        if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 2))
-            return response()->json(['success' => false, 'message' => __('Not available with current plan')]);
-
-        $ad->hidden = !$ad->hidden;
-        $ad->save();
-
-        return response()->json(['success' => true]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Illuminate\Http\Request;
-     * @param  \App\Models\Ad  $ad
-     * @return \Illuminate\Http\Response
-     */
-    public function track(Request $request, Ad $ad)
-    {
-        $user = $request->user();
-
-        if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
-
-        if ($ad->trackingUsers()->where('users.id', $user->id)->exists()) {
-            $ad->trackingUsers()->detach($user->id);
-            $tracking = false;
-            $message = 'You have unsubscribed from notifications.';
-        } else {
-            $ad->trackingUsers()->attach($user->id);
-            $tracking = true;
-            $message = 'You have successfully subscribed to price change notifications.';
-        }
-
-        return response()->json(['success' => true, 'tracking' => $tracking, 'message' => __($message)]);
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Ad  $ad

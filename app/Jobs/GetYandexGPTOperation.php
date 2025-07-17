@@ -47,7 +47,7 @@ class GetYandexGPTOperation implements ShouldQueue
         switch ($this->folder) {
             case 'hostings':
                 $hosting = Hosting::find($this->modelId);
-                $hosting->contract_deficiencies = $operationResponse->alternatives[0]->messaage->text;
+                $hosting->contract_deficiencies = json_decode($operationResponse->alternatives[0]->message->text);
                 $hosting->save();
                 break;
         }

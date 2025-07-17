@@ -10,6 +10,8 @@ use App\Jobs\GetYandexGPTOperation;
 
 trait FileTrait
 {
+    use YandexGPT;
+    
     public function saveFiles($files, $folder, $type, int $id, $disk = 'public/')
     {
         $result = [];

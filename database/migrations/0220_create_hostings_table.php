@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('video')->nullable();
             $table->string('contract');
-            $table->text('contract_deficiencies')->nullable();
+            $table->json('contract_deficiencies');
             $table->string('territory')->nullable();
             $table->string('energy_supply')->nullable();
             $table->float('price', 5, 2);
