@@ -9,7 +9,7 @@ trait HostingTrait
 {
     public function getHostings($request)
     {
-        $hostings = Hosting::with(['user:id,name,url_name,tf', 'user.company:id', 'user.phones.user_id,number']);
+        $hostings = Hosting::with(['user:id,name,url_name,tf', 'user.phones:id,user_id']);
 
         if ($request->peculiarities && count($request->peculiarities))
             $hostings = $hostings->whereJsonContains('peculiarities', $request->peculiarities);

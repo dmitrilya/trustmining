@@ -35,6 +35,7 @@
     "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Спасибо за регистрацию! Прежде чем начать, не могли бы вы подтвердить свой адрес электронной почты, нажав на ссылку, которую мы только что отправили вам по электронной почте? Если вы не получили письмо, мы с радостью отправим вам другое.",
     "A new verification link has been sent to the email address you provided during registration.": "Новая ссылка для подтверждения была отправлена ​​на адрес электронной почты, который вы указали при регистрации.",
     "Resend Verification Email": "Повторно отправить письмо с подтверждением",
+    "Blurb": "Рекламное объявление",
     "Advertisements": "Объявления",
     "Advertisement number": "Объявление номер",
     "My advertisements": "Мои объявления",
@@ -363,7 +364,9 @@
     "Inaccuracies in the description of the terms of the contract that may lead to disputes": "Неточности описания условий договора которые могут привести к спорам",
     "The presence of errors in the text or deviation from the standards for drafting contracts": "Наличие ошибок в тексте или отклонение от стандартов составления договоров",
     "No defects found": "Недочеты не обнаружены",
-    
+    "Place for your advertisement": "Место для вашего рекламного объявления",
+    "An ad for selling equipment can be placed here. It is always at the top and attracts the attention of the resource visitor": "Тут может размещаться объявление о продаже оборудования. Оно всегда находится в верху и обращает на себя внимание посетителя ресурса",
+
 
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",

@@ -6,7 +6,8 @@
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
                 class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[0]->price * 30 }}</span>
             /{{ __('month') }}</div>
-        <a href="{{ route('tariff', ['tariff' => $tariffs[0]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
+        <a
+            href="{{ route('tariff', ['tariff' => $tariffs[0]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
@@ -77,7 +78,8 @@
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
                 class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[1]->price * 30 }}</span>
             /{{ __('month') }}</div>
-            <a href="{{ route('tariff', ['tariff' => $tariffs[1]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
+        <a
+            href="{{ route('tariff', ['tariff' => $tariffs[1]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"

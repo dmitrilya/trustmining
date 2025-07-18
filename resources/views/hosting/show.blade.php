@@ -233,28 +233,29 @@
                         @endif
                     </div>
 
-                    @if ($hosting->user->id != $auth->id)
+                    @if ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
                                 class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
-                                @click="if (!false) {
-                                if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
-                                    .then(r => {
-                                        if (r.data.success) {
-                                            deficiencies = r.data.deficiencies;
-                                            done = true;
-                                            console.log(deficiencies);
-                                        }
-                                        else pushToastAlert(r.data.message, 'error');
-                                    });
-                                else $dispatch('open-modal', 'need-subscription');
-                            }">
+                                @click="if (!status) {
+                                    if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
+                                        .then(r => {
+                                            if (r.data.success) {
+                                                deficiencies = r.data.deficiencies;
+                                                done = true;
+                                                console.log(deficiencies);
+                                            }
+                                            else pushToastAlert(r.data.message, 'error');
+                                        });
+                                    else $dispatch('open-modal', 'need-subscription');
+                                }">
                                 <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
+                                        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
                                 </svg>
+
                                 <span>{{ __('Defects of the contract') }}</span>
                             </x-secondary-button>
 

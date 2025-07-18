@@ -1,16 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="relative w-full max-w-md" x-data="{ open: false, sugs: false }" @click.away="open = false">
-            <div class="relative z-0 w-full group" @click="open = true">
-                <input type="text" placeholder="{{ __('Find a miner, company or article...') }}"
-                    @input.debounce.1000ms="sugs = search($el.value, $refs.suggestionList, open)" autocomplete="off"
-                    class="block py-2.5 px-0 w-full text-sm placeholder:text-xs sm:placeholder:text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-gray-800 focus:outline-none focus:ring-0 focus:border-gray-800 peer" />
-            </div>
-
-            <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
-                class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            </ul>
-        </div>
+        @include('layouts.components.search')
     </x-slot>
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-8 lg:space-y-12">
@@ -84,17 +74,7 @@
             </p>
         </div>
 
-        <div class="relative w-full max-w-md mx-auto" x-data="{ open: false, sugs: false }" @click.away="open = false">
-            <div class="relative z-0 w-full group" @click="open = true">
-                <input type="text" placeholder="{{ __('Find a miner, company or article...') }}"
-                    @input.debounce.1000ms="sugs = search($el.value, $refs.suggestionList, open)" autocomplete="off"
-                    class="block py-2.5 px-4 rounded-md w-full placeholder:text-xs sm:placeholder:text-sm text-sm placeholder:text-gray-500 text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:placeholder:text-gray-300 dark:border-gray-600 dark:focus:border-gray-800 focus:outline-none focus:ring-0 focus:border-gray-800 peer" />
-            </div>
-
-            <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
-                class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            </ul>
-        </div>
+        @include('layouts.components.search', ['border' => 'px-4 py-2.5 rounded-md border-2', 'searchBlock' => 'max-w-lg mx-auto'])
 
         <div class="max-w-sm lg:max-w-xl mx-auto pt-12 md:pt-16">
             <p class="text-center text-2xl sm:text-3xl lg:text-5xl text-gray-800 dark:text-gray-200 font-bold">

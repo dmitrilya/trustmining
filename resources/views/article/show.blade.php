@@ -12,7 +12,9 @@
                 data-date="{{ $article->created_at }}"></p>
             <img src="{{ Storage::url('public/articles/' . $article->id . '.webp') }}" alt=""
                 class="rounded-lg w-full">
-            {!! $article->article !!}
+            <div class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                {!! $article->article !!}
+            </div>
         </div>
     </div>
 
