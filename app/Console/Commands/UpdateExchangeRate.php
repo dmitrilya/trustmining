@@ -51,8 +51,8 @@ class UpdateExchangeRate extends Command
         $rates = json_decode($out)->rates;
 
         $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
-        Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub]);
-        Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny]);
+        Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
+        Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
 
         return Command::SUCCESS;
     }
