@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Coin;
 use Illuminate\Console\Command;
 
 class UpdateExchangeRate extends Command
@@ -27,9 +28,10 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        $data = json_decode(file_get_contents('https://www.binance.com/bapi/asset/v2/public/asset-service/product/get-products'));
-
-        if ($data->code == '000000') $data = collect($data->data)->where('q', 'USDT');
+        $key = config('services.coinmarketcap.key');
+        $coins = Coin::where('paymentable', false)->pluck('abbreviation');
+        $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
+        $data->each(fn($coin) => Coin::where('abbreviation', $coin->symbol)->update(['rate' => $coin->quote->USD->price]));
 
         return Command::SUCCESS;
     }

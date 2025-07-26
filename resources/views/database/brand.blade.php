@@ -126,7 +126,8 @@
                     </h5>
                     <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
                         x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
-                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"></div>
+                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                        x-text="model.profit + ' {{ __('USDT') }}'"></div>
                     <div class="hidden sm:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
                         x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
                     <div class="hidden md:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"

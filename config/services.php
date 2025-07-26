@@ -41,4 +41,7 @@ return [
         'token' => env('NOTIFICATION_BOT_TOKEN'),
     ],
 
+    'coinmarketcap' => [
+        'key' => env('COINMARKETCAP_APP_KEY')
+    ]
 ];

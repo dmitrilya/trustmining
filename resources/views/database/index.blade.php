@@ -32,8 +32,8 @@
                         href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
                         class="flex items-center px-3 py-2 group hover:bg-gray-200 rounded-md">
                         <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}"
-                            alt="{{ $brand->name }}" class="w-5 xs:w-7 mr-2">
-                        <h5 class="font-semibold text-gray-500 text-xs xs:text-sm group-hover:text-gray-900">
+                            alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
+                        <h5 class="font-semibold text-gray-500 text-xs sm:text-sm group-hover:text-gray-900">
                             {{ $brand->name }}
                         </h5>
                     </a>
@@ -147,7 +147,8 @@
                     </h5>
                     <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
                         x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
-                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"></div>
+                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                        x-text="model.profit + ' {{ __('USDT') }}'"></div>
                     <div class="hidden sm:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
                         x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
                     <div class="hidden md:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"

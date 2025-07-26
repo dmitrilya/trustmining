@@ -39,12 +39,6 @@
                 </div>
 
                 @php
-                    $algorithm = $model->algorithm()->with('coins')->first();
-                    $versions = $model
-                        ->asicVersions()
-                        ->with(['ads:price'])
-                        ->get()
-                        ->sortByDesc('hashrate');
                     $hasTariff = ($user = \Auth::user()) && $user->tariff;
                 @endphp
 
@@ -110,7 +104,7 @@
                         @foreach ($versions as $i => $version)
                             <div x-show="selectedTab == {{ $i }}">
                                 @php
-                                    $avgPrice = $version->ads->avg('price');
+                                    $minPrice = $version->ads->sortBy('price')->first()
                                 @endphp
 
                                 <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
@@ -123,11 +117,11 @@
                                     W
                                 </div>
 
-                                @if ($avgPrice)
+                                @if ($minPrice)
                                     <div class="text-sm text-gray-400 mt-6">{{ __('The best price') }}:
                                         @if ($hasTariff)
                                             <span class="text-gray-600">
-                                                {{ $avgPrice }}
+                                                {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
                                             </span>
                                         @else
                                             <span class="text-gray-600 blur-sm"

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use App\Models\Algorithm;
 use App\Models\Coin;
 
 class UpdateCoinProfit extends Command
@@ -22,6 +23,15 @@ class UpdateCoinProfit extends Command
      */
     protected $description = 'Command description';
 
+    private $coinIds = [
+        22 => 'FB',
+        10 => 'DOGE',
+        21 => 'BEL',
+        23 => 'LKY',
+        24 => 'PEP',
+        25 => 'JKC'
+    ];
+
     /**
      * Execute the console command.
      *
@@ -29,18 +39,32 @@ class UpdateCoinProfit extends Command
      */
     public function handle()
     {
-        $algorithms = collect(json_decode(file_get_contents('https://pool.binance.com/mining-api/v1/public/pool/index'))->data->algoList)->pluck('symbolInfos', 'algoName');
+        $mes = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 
-        foreach ($algorithms as $algorithm) {
-            foreach ($algorithm as $symbolInfo) {
-                Coin::where('name', $symbolInfo->symbol)->update(['profit' => $symbolInfo->eachEarn]);
+        collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?list=' . Coin::where('paymentable', false)->pluck('abbreviation')->implode(','))))
+            ->each(function ($coin) use ($mes) {
+                $coinData = [];
+                dump($coin->name, $coin->algorithm);
+                if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
+                if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search(Algorithm::where('name', $coin->algorithm)->first()->measurement, $mes));
+                if ($coin->difficulty !== -1) $coinData['difficulty'] = $coin->difficulty;
+                if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
 
-                if ($symbolInfo->eachEarnMap)
-                    foreach ($symbolInfo->eachEarnMap as $coinId => $coinProfit) {
-                        Coin::where('id', $coinId)->update(['profit' => $coinProfit]);
+                if (count($coinData)) Coin::where('abbreviation', $coin->coin)->update($coinData);
+            });
+
+        collect(json_decode(file_get_contents('https://pool.binance.com/mining-api/v1/public/pool/index'))->data->algoList)
+            ->pluck('symbolInfos', 'algoName')
+            ->each(function ($algorithm) {
+                foreach ($algorithm as $symbolInfo) {
+                    Coin::where('abbreviation', $symbolInfo->symbol)->update(['profit' => $symbolInfo->eachEarn, 'difficulty' => $symbolInfo->difficulty]);
+
+                    if ($symbolInfo->eachEarnMap) foreach ($symbolInfo->eachEarnMap as $coinId => $coinProfit) {
+                        if (isset($this->coinIds[$coinId])) Coin::where('abbreviation', $this->coinIds[$coinId])->update(['profit' => $coinProfit]);
+                        else info('Binance new merged coin: ' . $symbolInfo->symbol);
                     }
-            }
-        }
+                }
+            });
 
         return Command::SUCCESS;
     }

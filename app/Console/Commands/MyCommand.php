@@ -2,16 +2,13 @@
 
 namespace App\Console\Commands;
 
-use PhpOffice\PhpWord\IOFactory;
-
 use Illuminate\Console\Command;
-
-use App\Jobs\GetYandexGPTOperation;
 
 use App\Http\Traits\YandexGPT;
 use App\Http\Traits\Telegram;
 use App\Models\Algorithm;
 use App\Models\AsicModel;
+use App\Models\Coin;
 
 use Carbon\Carbon;
 
@@ -40,24 +37,10 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        //$data = collect(file_get_contents('https://api.minerstat.com/v2/coins'));
-
+        $algo = Algorithm::pluck('name')->implode(',');
+        $data = collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?algo=' . $algo)));
+        dd($data);
         //$data->where('')
-
-        $document = IOFactory::load(storage_path('app/public/Document.docx'));        
-        $text = '';
-
-        foreach ($document->getSections() as $s) {
-            foreach ($s->getElements() as $e) {
-                if (method_exists(get_class($e), 'getText')) {
-                    $text .= $e->getText();
-                } else {
-                    $text .= "\n";
-                }
-            }
-        }
-
-        GetYandexGPTOperation::dispatch($this->checkDocument($text)->id)->delay(now()->addMinutes(1));
 
         return Command::SUCCESS;
     }

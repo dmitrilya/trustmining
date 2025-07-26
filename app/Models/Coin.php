@@ -9,8 +9,6 @@ class Coin extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     public function algorithm()
     {
         return $this->belongsTo(Algorithm::class);

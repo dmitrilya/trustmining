@@ -75,7 +75,7 @@
                     <div class="text-xs text-gray-500">ИП </div>
                     <div class="text-xs text-gray-500 mb-2">ОГРНИП: </div>
                     <div class="text-xxs text-gray-400" style ="max-width: 1312px;">
-                        © 2024{{ ($year = Carbon\Carbon::now()->year) != 2024 ? ' - ' . $year : '' }}. Не является
+                        © 2025{{ ($year = Carbon\Carbon::now()->year) != 2025 ? ' - ' . $year : '' }}. Не является
                         публичной офертой.
                     </div>
                 </div>
@@ -112,13 +112,13 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('10-10-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('10-10-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
-                        {{ __('Start of the project') }}</div>
+                        {{ __('Project launch') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
-                        {{ __('Opening a demo version of a convenient marketplace with a narrow specialization in mining for large companies') }}
+                        {{ __('Opening a demo version of a marketplace with a narrow specialization in mining for large companies') }}
                     </div>
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
@@ -147,18 +147,21 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-10-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('20-10-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.1' }}</div>
+                    <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
+                        {{ __('Running Advertising Ads') }}
+                    </div>
 
                     <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
                         <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Support for third party contacts (Phone, WA, TG)') }}
+                            {{ __('Booking advertising spaces') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Ad raising system') }}</li>
+                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Convenient auction system for advertising space') }}</li>
                     </ul>
                 </article>
 
@@ -167,7 +170,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('01-11-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('01-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -202,22 +205,22 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('05-11-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('05-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.2' }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
-                        {{ __('Make it easy to find the best deals') }}
+                        {{ __('SEO') }}
                     </div>
 
                     <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
                         <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Add to favorites and track price changes') }}
+                            {{ __('Mining calculator') }}
                         </li>
                         <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Subscribe to price alerts') }}
+                            {{ __('Improving indexing of site pages') }}
                         </li>
                     </ul>
                 </article>
@@ -227,7 +230,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('10-11-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('10-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -249,7 +252,35 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-11-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('20-11-2025')->timestamp * 1000 }}"></div>
+                    </header>
+
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                        {{ __('Ability to write manuals') }}</div>
+                    <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
+                        {{ __('Useful articles and guides') }}
+                    </div>
+
+                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
+                    <ul class="space-y-2 md:space-y-3 list-disc pl-8">
+                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                            {{ __('Create a platform section with accessible and reliable information about the world of mining') }}
+                        </li>
+                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                            {{ __('Implement additional promotion of active companies on the platform') }}
+                        </li>
+                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                            {{ __('Increasing indexed platform pages to improve search engine results') }}
+                        </li>
+                    </ul>
+                </article>
+
+                <article>
+                    <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        </div>
+                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                            data-date="{{ Carbon\Carbon::create('05-12-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -283,39 +314,11 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('05-12-2024')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('20-12-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
-                        {{ __('Ability to write manuals') }}</div>
-                    <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
-                        {{ __('Useful articles and guides') }}
-                    </div>
-
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
-                    <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Create a platform section with accessible and reliable information about the world of mining') }}
-                        </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Implement additional promotion of active companies on the platform') }}
-                        </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
-                            {{ __('Increasing indexed platform pages to improve search engine results') }}
-                        </li>
-                    </ul>
-                </article>
-
-                <article>
-                    <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
-                        </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-12-2024')->timestamp * 1000 }}"></div>
-                    </header>
-
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
-                        {{ __('Update') . ' v 1.5' }}</div>
+                        {{ __('Update') . ' v 1.4' }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Analytics of ad quality and chosen promotion method') }}
                     </div>
