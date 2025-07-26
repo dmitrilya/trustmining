@@ -90,49 +90,37 @@ class DatabaseController extends Controller
 
     public function getModels(Request $request)
     {
-        return response()->json(AsicModel::where('release', '>', '2020-03-01')->withCount('views')->with([
-            'asicBrand:id,name',
-            'algorithm:id,name,measurement',
-            'algorithm.coins:algorithm_id,profit,rate,merged_group',
-            'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
-        ])->get()->map(fn($model) => [
-            'name' => $model->name,
-            'url_name' => strtolower(str_replace(' ', '_', $model->name)),
-            'hashrate' => $model->asicVersions->first()->hashrate,
-            'profit' => round($model->algorithm->coins->groupBy('merged_group')->map(
-                fn($mergedGroup) => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate)
-            )->max() * $model->asicVersions->first()->hashrate, 2),
-            'power' => $model->asicVersions->first()->hashrate * $model->asicVersions->first()->efficiency,
-            'efficiency' => $model->asicVersions->first()->efficiency,
-            'algorithm' => $model->algorithm->name,
-            'measurement' => $model->asicVersions->first()->measurement,
-            'original_measurement' => $model->algorithm->measurement,
-            'release' => $model->release,
-            'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
-        ]));
-    }
+        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 
-    public function getBrandModels(Request $request, AsicBrand $asicBrand)
-    {
-        return response()->json($asicBrand->asicModels()->where('release', '>', '2000-03-01')->withCount('views')->with([
+        $asicModels = AsicModel::where('release', '>', '2020-03-01');
+
+        if ($request->asicBrand) $asicModels = $asicModels->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
+
+        return response()->json($asicModels->withCount('views')->with([
             'asicBrand:id,name',
             'algorithm:id,name,measurement',
             'algorithm.coins:algorithm_id,profit,rate,merged_group',
             'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
-        ])->get()->map(fn($model) => [
-            'name' => $model->name,
-            'url_name' => strtolower(str_replace(' ', '_', $model->name)),
-            'hashrate' => $model->asicVersions->first()->hashrate,
-            'profit' => round($model->algorithm->coins->groupBy('merged_group')->map(
-                fn($mergedGroup) => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate)
-            )->max() * $model->asicVersions->first()->hashrate, 2),
-            'power' => $model->asicVersions->first()->hashrate * $model->asicVersions->first()->efficiency,
-            'efficiency' => $model->asicVersions->first()->efficiency,
-            'algorithm' => $model->algorithm->name,
-            'measurement' => $model->asicVersions->first()->measurement,
-            'original_measurement' => $model->algorithm->measurement,
-            'release' => $model->release,
-            'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
-        ]));
+        ])->get()->map(function ($model) use ($measurements) {
+            $version = $model->asicVersions->first();
+
+            return [
+                'name' => $model->name,
+                'url_name' => strtolower(str_replace(' ', '_', $model->name)),
+                'hashrate' => $version->hashrate,
+                'original_hashrate' => $version->hashrate * pow(1000, array_search($version->measurement, $measurements)),
+                'profit' => round($model->algorithm->coins->groupBy('merged_group')->map(
+                    fn($mergedGroup) => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate)
+                )->max() * $version->hashrate, 2),
+                'power' => $version->hashrate * $version->efficiency,
+                'efficiency' => $version->efficiency,
+                'original_efficiency' => $version->efficiency * pow(1000, array_search($model->algorithm->measurement, $measurements) - array_search($version->measurement, $measurements)),
+                'algorithm' => $model->algorithm->name,
+                'measurement' => $version->measurement,
+                'original_measurement' => $model->algorithm->measurement,
+                'release' => $model->release,
+                'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
+            ];
+        }));
     }
 }

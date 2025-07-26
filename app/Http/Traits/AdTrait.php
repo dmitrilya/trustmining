@@ -2,8 +2,10 @@
 
 namespace App\Http\Traits;
 
-use App\Models\Ad;
 use Illuminate\Http\Request;
+
+use App\Models\Coin;
+use App\Models\Ad;
 
 trait AdTrait
 {
@@ -80,15 +82,18 @@ trait AdTrait
                 elseif ($request->display == 'hidden') $ads = $ads->where('hidden', true);
             }
 
-            if ($request->sort && ($user = $request->user()) && $user->tariff)
+            if ($request->sort && ($user = $request->user()) && ($user->tariff || $user->role_id != 2)) {
+                $originalPrice = '`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)';
+                
                 switch ($request->sort) {
                     case 'price_low_to_high':
-                        $ads = $ads->orderBy('price');
+                        $ads = $ads->orderByRaw($originalPrice);
                         break;
                     case 'price_high_to_low':
-                        $ads = $ads->orderByDesc('price');
+                        $ads = $ads->orderByRaw($originalPrice . ' DESC');
                         break;
                 }
+            }
         }
 
         return $ads;

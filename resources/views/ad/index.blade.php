@@ -11,7 +11,7 @@
 
             <x-header-filters>
                 <x-slot name="sort">
-                    @if (($user = Auth::user()) && $user->tariff)
+                    @if (($user = Auth::user()) && ($user->tariff || $user->role_id != 2))
                         <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [

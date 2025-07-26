@@ -25,17 +25,6 @@ document.addEventListener('alpine:init', () => {
         async init() {
             let resp = await fetch(window.location.origin + window.location.pathname + '/get-models');
             this.models = await resp.json();
-            this.models = this.models.map(model => ({
-                ...model,
-                original_efficiency: model.efficiency * Math.pow(
-                    1000,
-                    window.measurements.indexOf(model.original_measurement) - window.measurements.indexOf(model.measurement)
-                ),
-                original_hashrate: model.hashrate * Math.pow(
-                    1000,
-                    window.measurements.indexOf(model.measurement)
-                )
-            }));
             this.sourceModels = this.models;
         },
         sort(col, asc = true) {

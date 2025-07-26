@@ -43,5 +43,9 @@ return [
 
     'coinmarketcap' => [
         'key' => env('COINMARKETCAP_APP_KEY')
+    ],
+
+    'coingecko' => [
+        'key' => env('COINGECKO_APP_KEY')
     ]
 ];
