@@ -155,9 +155,14 @@
                     <div class="hidden lg:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
                         x-text="model.algorithm"></div>
                     <div class="hidden xl:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
-                        x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement"></div>
+                        x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
+                    </div>
                     <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
-                        x-text="model.profit + ' {{ __('USDT') }}'"></div>
+                        x-text="model.profit + ' {{ __('USDT') }}'">
+                        <template x-for="coin in model.coins">
+                            <img :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                        </template>
+                    </div>
                 </a>
             </template>
         </div>

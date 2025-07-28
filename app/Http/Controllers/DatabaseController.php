@@ -22,8 +22,8 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2000-03-01'))
-            ->with('asicModels', fn($q) => $q->where('release', '>', '2000-03-01')
+        $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2018-03-01'))
+            ->with('asicModels', fn($q) => $q->where('release', '>', '2018-03-01')
                 ->select(['id', 'asic_brand_id', 'algorithm_id', 'release'])
                 ->with([
                     'algorithm',
@@ -49,7 +49,7 @@ class DatabaseController extends Controller
 
         return view('database.brand', [
             'brand' => $asicBrand,
-            'algos' => $asicBrand->asicModels()->where('release', '>', '2020-03-01')
+            'algos' => $asicBrand->asicModels()->where('release', '>', '2018-03-01')
                 ->select(['id', 'asic_brand_id', 'algorithm_id'])
                 ->with([
                     'algorithm',
@@ -92,7 +92,7 @@ class DatabaseController extends Controller
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 
-        $asicModels = AsicModel::where('release', '>', '2020-03-01');
+        $asicModels = AsicModel::where('release', '>', '2018-03-01');
 
         if ($request->asicBrand) $asicModels = $asicModels->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
 
@@ -103,24 +103,31 @@ class DatabaseController extends Controller
             'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
         ])->get()->map(function ($model) use ($measurements) {
             $version = $model->asicVersions->first();
+            $vm = array_search($version->measurement, $measurements);
+            $am = array_search($model->algorithm->measurement, $measurements);
+            $maxProfit = $model->algorithm->coins->groupBy('merged_group')->map(
+                fn($mergedGroup) => [
+                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
+                    'coins' => $mergedGroup->pluck('abbreviation')
+                ]
+            )->sortByDesc('profit')->first();
 
             return [
                 'name' => $model->name,
                 'url_name' => strtolower(str_replace(' ', '_', $model->name)),
                 'hashrate' => $version->hashrate,
-                'original_hashrate' => $version->hashrate * pow(1000, array_search($version->measurement, $measurements)),
-                'profit' => round($model->algorithm->coins->groupBy('merged_group')->map(
-                    fn($mergedGroup) => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate)
-                )->max() * $version->hashrate, 2),
+                'original_hashrate' => $version->hashrate * pow(1000, $vm),
+                'profit' => round($maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
+                'coins' => $maxProfit['coins'],
                 'power' => $version->hashrate * $version->efficiency,
                 'efficiency' => $version->efficiency,
-                'original_efficiency' => $version->efficiency * pow(1000, array_search($model->algorithm->measurement, $measurements) - array_search($version->measurement, $measurements)),
+                'original_efficiency' => $version->efficiency * pow(1000, $am - $vm),
                 'algorithm' => $model->algorithm->name,
                 'measurement' => $version->measurement,
                 'original_measurement' => $model->algorithm->measurement,
                 'release' => $model->release,
                 'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
             ];
-        }));
+        })->sortByDesc('profit')->values());
     }
 }

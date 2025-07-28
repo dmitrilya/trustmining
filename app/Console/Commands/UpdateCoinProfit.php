@@ -44,7 +44,6 @@ class UpdateCoinProfit extends Command
         collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?list=' . Coin::where('paymentable', false)->pluck('abbreviation')->implode(','))))
             ->each(function ($coin) use ($mes) {
                 $coinData = [];
-                dump($coin->name, $coin->algorithm);
                 if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
                 if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search(Algorithm::where('name', $coin->algorithm)->first()->measurement, $mes));
                 if ($coin->difficulty !== -1) $coinData['difficulty'] = $coin->difficulty;

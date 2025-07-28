@@ -15,7 +15,7 @@ class AlgorithmSeeder extends Seeder
     {
         \DB::table('algorithms')->insert([
             ["name" => "SHA-256", "measurement" => "Th"],
-            ["name" => "Scrypt", "measurement" => "Mh"],
+            ["name" => "Scrypt", "measurement" => "Gh"],
             ["name" => "RandomX", "measurement" => "kh"],
             ["name" => "ETCHash", "measurement" => "Mh"],
             ["name" => "KHeavyHash", "measurement" => "Th"],
