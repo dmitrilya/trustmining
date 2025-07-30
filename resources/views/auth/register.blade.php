@@ -37,6 +37,12 @@
             <x-input-error :messages="$errors->get('password_confirmation')" />
         </div>
 
+        <div class="mt-4">
+            <p class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs">
+                {{ __('By clicking the "Register" button, I accept the terms of') }} <a class="inline text-indigo-300 hover:text-indigo-500" href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('the User Agreement') }}</a> {{ __('and the terms of') }} <a class="inline text-indigo-300 hover:text-indigo-500" href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('the Privacy Policy') }}</a>.
+            </p>
+        </div>
+
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                 href="{{ route('login') }}">

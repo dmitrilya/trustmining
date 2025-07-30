@@ -75,7 +75,19 @@
                             </path>
                         </svg>
                         <a class="under text-sm lg:text-base text-gray-800 font-semibold"
-                            href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy') }}</a>
+                            href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 mr-2" aria-hidden="true" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M10 3v4a1 1 0 0 1-1 1H5m4 6 2 2 4-4m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-gray-800 font-semibold"
+                            href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
                     </div>
                 </div>
                 <div class="space-y-4 w-full">

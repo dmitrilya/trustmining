@@ -35,13 +35,15 @@
                 {{-- <a class="w-max under text-sm text-gray-800"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy') }}</a>
+                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
+                <a class="w-max under text-sm text-gray-800"
+                    href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
             </div>
         </div>
 
         <div>
-            {{-- <div class="text-sm text-gray-500">ИП </div>
-            <div class="text-sm text-gray-500">ОГРНИП: </div> --}}
+            <div class="text-sm text-gray-500">ИП Дмитриева Елизавета Николаевна</div>
+            <div class="text-sm text-gray-500">ОГРНИП: 325470400068906</div>
         </div>
         <div class="text-xs text-gray-400" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}. Не
             является

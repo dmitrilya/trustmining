@@ -177,6 +177,10 @@
     "Login": "Войти",
     "Sign in": "Авторизоваться",
     "Register": "Зарегистрироваться",
+    "By clicking the \"Register\" button, I accept the terms of": "Нажимая кнопку «Зарегистрироваться», я принимаю условия",
+    "the User Agreement": "Пользовательского соглашения",
+    "and the terms of": "и условия",
+    "the Privacy Policy": "Политики конфиденциальности",
     "Logout": "Выйти",
     "Support": "Поддержка",
     "Write to support": "Написать в поддержку",
@@ -184,7 +188,8 @@
     "About": "О проекте",
     "Blog": "Блог",
     "Career in TrustMining": "Карьера в TrustMining",
-    "Privacy": "Конфиденциальность",
+    "Privacy Policy": "Политика конфиденциальности",
+    "User Agreement": "Пользовательское соглашение",
     "Knowledge Base": "База знаний",
     "Events": "Мероприятия",
     "Guides": "Руководства",
@@ -291,7 +296,7 @@
     "Custom": "Договорная",
     "of ads": "объявлений",
     "of offices": "офисов",
-    "Number of offices" : "Кол-во офисов",
+    "Number of offices": "Кол-во офисов",
     "of contacts": "контактов",
     "Hosting adding": "Добавление хостинга",
     "Guide creating": "Написание руководств",
@@ -367,7 +372,6 @@
     "Place for your advertisement": "Место для вашего рекламного объявления",
     "An ad for selling equipment can be placed here. It is always at the top and attracts the attention of the resource visitor": "Тут может размещаться объявление о продаже оборудования. Оно всегда находится в верху и обращает на себя внимание посетителя ресурса",
 
-
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",
     "Subscription renewal failed": "Ошибка продления тарифа",
@@ -381,7 +385,6 @@
     "Price drop": "Цена снизилась",
     "Price increase": "Цена выросла",
 
-
     "Creating and setting up an account": "Создание и настройка аккаунта",
     "Registration": "Регистрация",
     "To create an account, you must provide your name or company name, a current email, and a secure password of at least eight characters.": "Для создания аккаунта нужно указать ваше имя или название компании, актуальную почту и надежный пароль, состоящий минимум из восьми символов.",
@@ -389,7 +392,7 @@
     "The account name is displayed in each ad, on the hosting page, in the office card, and also in the address bar when the client goes to your profile. The account name can be changed in the profile settings. If the address bar does not display the transliteration of your name correctly, our support will help you fix it.": "Название аккаунта отображается в каждом объявлении, на странице хостинга, в карточке офиса, а так же в адресной строке, когда клиент переходит в ваш профиль. Название аккаунта можно поменять в настройках профиля. Если в адресной строке неверно отображается транслитерация вашего названия, то наша поддержка поможет вам это исправить.",
     "Setting up an account": "Настройка аккаунта",
     "After authorization, the Profile item will appear in the drop-down list in the upper right corner. On this page, you can change the data entered during registration, fill out the seller card and post your first ad.": "После авторизации в верхнем правом углу в раскрывающемся списке появится пункт Профиль. На этой странице вы можете поменять данные, введенные при регистрации, заполнить карточку продавца и выложить первое объявление.",
-    
+
     "Seller card": "Карточка продавца",
     "Step one": "Шаг первый",
     "First, verify your identity using your passport. Only then will all the platform features be available to you.": "Для начала пройдите верификацию личности по паспорту. Только после этого вам откроются все возможности платформы.",
@@ -407,7 +410,6 @@
     "During the moderation process, editing is not available. A big plus of our platform is that after editing ads, they will continue to be displayed to users in their old form despite the moderation process.": "Во время процесса модерации редактирование недоступно. Большим плюсом нашей площадки является то, что после редактирования объявлений, они продолжат отображаться у пользователей в старом виде несмотря на процесс модерации.",
 
     "Balance and tariff plans": "Баланс и тарифные планы",
-
 
     "Stage goals": "Цели этапа",
     "Update": "Обновление",
@@ -432,7 +434,7 @@
     "Forming a list of FAQs and displaying them on the support page": "Формирование списка FAQs и вывод их на странице поддержки",
     "Advertising with bloggers and collaborations": "Реклама у блогеров и коллаборации",
     "Search for popular bloggers covering mining": "Поиск популярных блогеров, освещающих майнинг",
-    "Collaborations to promote a platform with a convenient search for equipment from trusted suppliers and placement sites" :"Коллаборации с целью продвинуть платформу с удобным поиском оборудования от проверенных поставщиков и площадок для размещения",
+    "Collaborations to promote a platform with a convenient search for equipment from trusted suppliers and placement sites": "Коллаборации с целью продвинуть платформу с удобным поиском оборудования от проверенных поставщиков и площадок для размещения",
     "Integration with Yandex maps": "Интеграция с Яндекс картами",
     "Finding the nearest sales offices": "Нахождение ближайших офисов продаж",
     "Map and route planning in the company card": "Карта и построение маршрута в карточке компании",
@@ -448,7 +450,6 @@
     "Track lead activity and ad relevance": "Отслеживания активности лидов и релевантности объявлений",
     "Launching a mobile application": "Запуск мобильного приложения",
     "TrustMining in your pocket": "TrustMining в твоем кармане",
-
 
     "Reducing the risks of investing in mining": "Снижаем риски инвестиций в майнинг",
     "Every second miner has been scammed at least once. Every third has fallen for the tricks and often lost money irretrievably": "Каждого второго майнера хоть раз пытались обмануть мошенники. Каждый третий попадался на уловки и зачастую безвозвратно терял деньги",
