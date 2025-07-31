@@ -30,6 +30,15 @@ trait Tinkoff
         return $this->request('POST', 'Init', $params);
     }
 
+    public function getQr($paymentId)
+    {
+        $params = [
+            'PaymentId' => $paymentId
+        ];
+
+        return $this->request('POST', 'GetQr', $params);
+    }
+
     private function request($method, $link, $params)
     {
         $params['TerminalKey'] = config('services.tinkoff.terminal.key');

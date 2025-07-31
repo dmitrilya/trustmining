@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('amount');
+            $table->string('method');
             $table->string('status')->default('init');
             $table->string('token')->nullable();
             $table->timestamps();
