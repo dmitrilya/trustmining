@@ -32,7 +32,7 @@ trait Tinkoff
 
     private function request($method, $link, $params)
     {
-        $params['TerminalKey'] = '1727865557613';
+        $params['TerminalKey'] = config('services.tinkoff.terminal.key');
         $params['Token'] = $this->token($params);
 
         $link = 'https://securepay.tinkoff.ru/v2/' . $link;
@@ -57,7 +57,7 @@ trait Tinkoff
 
     private function token($params)
     {
-        $params['Password'] = '0Pa$_Y$NaX1_q4vi';
+        $params['Password'] = config('services.tinkoff.terminal.password');
 
         ksort($params);
 

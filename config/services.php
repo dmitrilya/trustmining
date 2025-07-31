@@ -47,5 +47,12 @@ return [
 
     'coingecko' => [
         'key' => env('COINGECKO_APP_KEY')
+    ],
+
+    'tinkoff' => [
+        'terminal' => [
+            'key' => env('TINKOFF_TERMINAL_KEY'),
+            'password' => env('TINKOFF_TERMINAL_PASSWORD')
+        ]
     ]
 ];
