@@ -51,6 +51,8 @@ class CompanyController extends Controller
 
         if ($user->company) return redirect()->route('profile');
 
+        if (Company::whereJsonContains('card->inn', $request->inn)->exists()) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
+
         if (!$user->passport) {
             $passport = Passport::create([
                 'user_id' => $user->id,
@@ -70,6 +72,7 @@ class CompanyController extends Controller
         $card = $this->dadataCompanyByInn($request->inn);
 
         if (!$card) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
+
 
         $company = Company::create([
             'user_id' => $user->id,

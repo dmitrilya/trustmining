@@ -146,14 +146,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
     });
 
-    Route::middleware(['verified'])->group(['prefix' => 'companies'], function () {
+    Route::group(['prefix' => 'companies'], function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
         Route::middleware('owner')->group(function () {
             Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
             Route::put('/{company}/update', [CompanyController::class, 'update'])->name('company.update');
         });
-    });
+    })->middleware('verified');
 
     Route::group(['prefix' => 'phones'], function () {
         Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
@@ -162,7 +162,6 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
         });
     });
-
 
     Route::middleware(['passport-moderated', 'verified'])->group(function () {
         Route::group(['prefix' => 'offices'], function () {

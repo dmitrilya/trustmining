@@ -104,7 +104,7 @@
                         @foreach ($versions as $i => $version)
                             <div x-show="selectedTab == {{ $i }}">
                                 @php
-                                    $minPrice = $version->ads->first()
+                                    $minPrice = $version->ads->first();
                                 @endphp
 
                                 <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
@@ -130,9 +130,7 @@
                                             </span>
                                         @endif
                                     </div>
-                                @endif
-
-                                @if ($version->ads->count())
+                                    
                                     <a class="w-max mt-6 md:mt-8"
                                         href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
                                         <x-primary-button>{{ __('Buy') }}</x-primary-button>

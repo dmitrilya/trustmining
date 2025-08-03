@@ -147,28 +147,12 @@
                 </a>
             </template>
         </div>
-
-        {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6 mt-6">
-            <h2 class="text-xl font-medium text-gray-800 mb-6">{{ __('Popular models') }}</h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                @foreach ($models->sortByDesc('views_count')->take(4) as $model)
-                    <a href="{{ route('database.model', [
-                        'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
-                        'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
-                    ]) }}"
-                        class="group">
-                        @if (count($model->images))
-                            <img class="w-full rounded-lg mb-2 shadow-md group-hover:shadow-lg"
-                                src="{{ Storage::url($model->images[0]) }}" alt="{{ $model->name }}">
-                        @endif
-
-                        <h5 class="font-semibold text-gray-500 text-sm group-hover:text-gray-900">
-                            {{ $model->name }}
-                        </h5>
-                    </a>
-                @endforeach
-            </div>
-        </div> --}}
+    
+        @foreach ($brand->asicModels as $asicModel)
+            <a href="{{ route('database.model', [
+                'asicBrand' => str_replace(' ', '_', $brand->name),
+                'asicModel' => str_replace(' ', '_', $asicModel->name)
+            ]) }}"></a>
+        @endforeach
     </div>
 </x-app-layout>

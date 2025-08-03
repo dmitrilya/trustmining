@@ -48,13 +48,13 @@ class DatabaseController extends Controller
         $this->addView(request(), $asicBrand);
 
         return view('database.brand', [
-            'brand' => $asicBrand,
-            'algos' => $asicBrand->asicModels()->where('release', '>', '2018-03-01')
-                ->select(['id', 'asic_brand_id', 'algorithm_id'])
+            'brand' => $asicBrand->load(['asicModels' => fn($q) => $q->where('release', '>', '2018-03-01')
+                ->select(['id', 'name', 'asic_brand_id', 'algorithm_id'])
                 ->with([
                     'algorithm',
                     'algorithm.coins'
-                ])->get()->pluck('algorithm')->flatten()->unique('name')
+                ])]),
+            'algos' => $asicBrand->asicModels->pluck('algorithm')->flatten()->unique('name')
         ]);
     }
 
@@ -102,7 +102,7 @@ class DatabaseController extends Controller
         return response()->json($asicModels->withCount('views')->with([
             'asicBrand:id,name',
             'algorithm:id,name,measurement',
-            'algorithm.coins:algorithm_id,profit,rate,merged_group',
+            'algorithm.coins:abbreviation,algorithm_id,profit,rate,merged_group',
             'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
         ])->get()->map(function ($model) use ($measurements) {
             $version = $model->asicVersions->first();
