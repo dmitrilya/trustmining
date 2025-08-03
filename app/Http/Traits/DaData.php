@@ -47,28 +47,31 @@ trait DaData
 
         $card = collect($suggs['suggestions'][0])->only(['value', 'data'])->all();
         $card['data'] = collect($card['data'])->only(['kpp', 'capital', 'invalid', 'founders', 'managers', 'branch_type', 'branch_count', 'type', 'state', 'inn', 'ogrn', 'okveds', 'finance', 'address', 'phones', 'emails', 'employee_count'])->all();
-        $card['data']['capital'] = $card['data']['capital']['value'];
-        $card['data']['founders'] = collect($card['data']['founders'])->map(fn($founder) => [
-            'inn' => $founder['inn'],
-            'name' => $founder['type'] == 'PHYSICAL' ? $founder['fio']['surname'] . ' ' . $founder['fio']['name'] . ' ' . $founder['fio']['patronymic'] : $founder['name'],
-            'type' => $founder['type'],
-            'share' => $founder['share']['value'],
-            'invalidity' => $founder['invalidity'],
-            'start_date' => $founder['start_date'],
-        ]);
-        $card['data']['managers'] = collect($card['data']['managers'])->map(function ($manager) {
-            $result = [
-                'inn' => $manager['inn'],
-                'name' => $manager['type'] == 'EMPLOYEE' ? $manager['fio']['surname'] . ' ' . $manager['fio']['name'] . ' ' . $manager['fio']['patronymic'] : $manager['name'],
-                'type' => $manager['type'],
-                'invalidity' => $manager['invalidity'],
-                'start_date' => $manager['start_date'],
-            ];
-
-            if ($manager['type'] == 'EMPLOYEE') array_push($result, ['post' => $manager['post']]);
-
-            return $result;
-        });
+        if ($card['data']['type'] == 'LEGAL') {
+            $card['data']['capital'] = $card['data']['capital']['value'];
+            $card['data']['founders'] = collect($card['data']['founders'])->map(fn($founder) => [
+                'inn' => $founder['inn'],
+                'name' => $founder['type'] == 'PHYSICAL' ? $founder['fio']['surname'] . ' ' . $founder['fio']['name'] . ' ' . $founder['fio']['patronymic'] : $founder['name'],
+                'type' => $founder['type'],
+                'share' => $founder['share']['value'],
+                'invalidity' => $founder['invalidity'],
+                'start_date' => $founder['start_date'],
+            ]);
+            $card['data']['managers'] = collect($card['data']['managers'])->map(function ($manager) {
+                $result = [
+                    'inn' => $manager['inn'],
+                    'name' => $manager['type'] == 'EMPLOYEE' ? $manager['fio']['surname'] . ' ' . $manager['fio']['name'] . ' ' . $manager['fio']['patronymic'] : $manager['name'],
+                    'type' => $manager['type'],
+                    'invalidity' => $manager['invalidity'],
+                    'start_date' => $manager['start_date'],
+                ];
+    
+                if ($manager['type'] == 'EMPLOYEE') array_push($result, ['post' => $manager['post']]);
+    
+                return $result;
+            });
+        }
+        
         $card['data']['address'] = collect($card['data']['address'])->only(['unrestricted_value', 'invalidity'])->all();
         $card['data']['phones'] = $card['data']['phones'] ? collect($card['data']['phones'])->pluck(['value'])->values() : [];
         $card['data']['emails'] = $card['data']['emails'] ? collect($card['data']['emails'])->pluck('value') : [];

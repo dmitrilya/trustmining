@@ -148,7 +148,9 @@
         <div class="text-white font-semibold text-lg md:text-2xl">{{ $tariffs[2]->name }}</div>
         <div class="text-gray-400 text-sm md:text-base">{{ __($tariffs[2]->description) }}</div>
         <div class="h-9 flex items-end text-white md:text-lg"><span
-                class="font-bold text-2xl sm:text-3xl lg:text-4xl">{{ __('Custom') }}</span></div>
+                class="font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariffs[2]->price * 30 }}</span>
+            /{{ __('month') }}</div>
+        
         <a
             href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}"><x-primary-button>{{ __('Contact') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
@@ -184,12 +186,12 @@
             @endif
             @if ($tariffs[2]->can_have_phone)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                     </svg>
-                    <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
+                    <div class="text-sm text-gray-400">{{ __('Phone number') }}</div>
                 </div>
             @endif
             @if ($tariffs[2]->can_create_guide)
@@ -218,6 +220,7 @@
                 </svg>
                 <div class="text-sm text-gray-400">{{ __('Advertising space on the website') }}</div>
             </div>
+            <div class="text-xxs text-gray-400">* {{ __('Advertising space is paid for separately. The price is determined in an auction format') }}</div>
         </div>
     </div>
 </div>
@@ -226,7 +229,7 @@
     <div
         class="w-full max-w-md lg:max-w-none bg-white border border-gray-200 rounded-3xl px-10 py-8 sm:px-12 sm:py-10 lg:px-18 lg:py-14 space-y-3 sm:space-y-5">
         <div class="text-gray-900 font-semibold text-lg md:text-2xl">Base</div>
-        <div class="text-gray-500 text-xs sm:text-base md:text-lg">
+        <div class="text-gray-500 text-xs sm:text-sm">
             {{ __('Starter plan to test all the platform functionality. Adding third-party contacts and posting hosting information is not available') }}
         </div>
         <div class="space-y-2 sm:space-y-0 sm:flex sm:space-x-10">

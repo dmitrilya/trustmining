@@ -146,7 +146,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
     });
 
-    Route::group(['prefix' => 'companies'], function () {
+    Route::middleware(['verified'])->group(['prefix' => 'companies'], function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
         Route::middleware('owner')->group(function () {
@@ -164,7 +164,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::middleware('passport-moderated')->group(function () {
+    Route::middleware(['passport-moderated', 'verified'])->group(function () {
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');

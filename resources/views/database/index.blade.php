@@ -74,8 +74,8 @@
             </div>
 
             <div
-                class="py-2 mb-2 grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 border-b border-gray-200">
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900 col-span-2"
+                class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-gray-200">
+                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 col-span-2"
                     @click="sort('name')">
                     {{ __('Model') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -84,7 +84,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('original_hashrate')">
                     {{ __('Hashrate') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -93,7 +93,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden sm:flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="hidden sm:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('power')">
                     {{ __('Power') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -102,7 +102,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden md:flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="hidden md:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('release')">
                     {{ __('Release') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -111,7 +111,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden lg:flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="hidden lg:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('algorithm')">
                     {{ __('Algorithm') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -120,7 +120,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden xl:flex flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="hidden xl:flex flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('original_efficiency', false)">j/Th
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -128,7 +128,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs xs:text-xs sm:text-sm hover:text-gray-900"
+                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900"
                     @click="sort('profit')">
                     {{ __('Profit') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -139,28 +139,30 @@
                 </div>
             </div>
 
-            <template x-for="model in models">
+            <template x-for="model in models" :key="model.name">
                 <a :href="'/database/' + model.brand + '/' + model.url_name"
-                    class="py-2 group rounded-md grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2">
-                    <h5 class="font-semibold text-gray-500 text-xxs xs:text-xs sm:text-sm group-hover:text-gray-900 col-span-2"
+                    class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
+                    <h5 class="font-semibold text-gray-500 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 col-span-2"
                         x-text="model.name">
                     </h5>
-                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
-                    <div class="hidden sm:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="hidden sm:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
-                    <div class="hidden md:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="hidden md:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="new Date(model.release).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
                     </div>
-                    <div class="hidden lg:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="hidden lg:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="model.algorithm"></div>
-                    <div class="hidden xl:block text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="hidden xl:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
                     </div>
-                    <div class="text-gray-500 text-xxs xs:text-xs group-hover:text-gray-900"
+                    <div class="text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900"
                         x-text="model.profit + ' {{ __('USDT') }}'">
-                        <template x-for="coin in model.coins">
-                            <img :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                    </div>
+                    <div class="pl-1.5 sm:pl-2">
+                        <template x-for="coin in model.coins" :key="model.name + coin">
+                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline" :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
                         </template>
                     </div>
                 </a>

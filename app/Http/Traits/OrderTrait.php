@@ -12,6 +12,8 @@ trait OrderTrait
 
     public function storeOrder($request)
     {
+        if ($request->method == 'invoice') return back()->withErrors(['forbidden' => __('Not yet available')]);
+
         $order = Order::create([
             'user_id' => $request->user()->id,
             'amount' => $request->amount,

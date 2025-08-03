@@ -80,7 +80,6 @@ class CoinSeeder extends Seeder
             ["name" => "EtherGem", "abbreviation" => "EGEM", "algorithm_id" => $algos->where("name", "ETCHash")->first()->id, "paymentable" => false, "merged_group" => 4],
             ["name" => "GainProX", "abbreviation" => "GPRX", "algorithm_id" => $algos->where("name", "GhostRider")->first()->id, "paymentable" => false, "merged_group" => 1],
             ["name" => "Galactrum", "abbreviation" => "ORE", "algorithm_id" => $algos->where("name", "Lyra2REv2")->first()->id, "paymentable" => false, "merged_group" => 3],
-            ["name" => "Goldcoin", "abbreviation" => "GLC", "algorithm_id" => $algos->where("name", "Scrypt")->first()->id, "paymentable" => false, "merged_group" => 6],
             ["name" => "Karbo", "abbreviation" => "KRB", "algorithm_id" => $algos->where("name", "CryptoNight")->first()->id, "paymentable" => false, "merged_group" => 2],
             ["name" => "Lethean", "abbreviation" => "LTHN", "algorithm_id" => $algos->where("name", "CryptoNightR")->first()->id, "paymentable" => false, "merged_group" => 1],
             ["name" => "Monero Original", "abbreviation" => "XMO", "algorithm_id" => $algos->where("name", "CryptoNight")->first()->id, "paymentable" => false, "merged_group" => 3],

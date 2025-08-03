@@ -72,7 +72,10 @@ class DatabaseController extends Controller
         return view('database.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
-            'versions' => $asicModel->asicVersions()->with(['ads:asic_version_id,price,coin_id', 'ads.coin:id,abbreviation'])->get()->sortByDesc('hashrate'),
+            'versions' => $asicModel->asicVersions()->with([
+                'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
+                    ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
+                'ads.coin:id,abbreviation'])->get()->sortByDesc('hashrate'),
             'algorithm' => $asicModel->algorithm()->with('coins')->first()
         ]);
     }

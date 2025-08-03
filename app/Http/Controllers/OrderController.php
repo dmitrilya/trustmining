@@ -13,7 +13,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('order.create');
+        return view('order.create', ['user' => \Auth::user()]);
     }
 
     public function store(StoreOrderRequest $request)

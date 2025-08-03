@@ -104,7 +104,7 @@
                         @foreach ($versions as $i => $version)
                             <div x-show="selectedTab == {{ $i }}">
                                 @php
-                                    $minPrice = $version->ads->sortBy('price')->first()
+                                    $minPrice = $version->ads->first()
                                 @endphp
 
                                 <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
