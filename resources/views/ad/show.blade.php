@@ -83,7 +83,7 @@
                             </div>
 
                             <div>
-                                @include('components.about-seller', ['user' => $ad->user])
+                                @include('components.about-seller', ['user' => $ad->user, 'auth' => $user])
                             </div>
                         </div>
                     </div>
@@ -282,13 +282,15 @@
 
                 <div class="mt-8 md:col-span-12">
                     <div>
-                        <h3 class="font-bold tracking-tight text-gray-900">{{ __('Description') }}</h3>
+                        @if ($ad->description || $ad->asicVersion->asicModel->description)
+                            <h3 class="font-bold tracking-tight text-gray-900">{{ __('Description') }}</h3>
 
-                        <div class="space-y-6 mt-5">
-                            <p class="text-sm sm:text-base text-gray-900">
-                                {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
-                            </p>
-                        </div>
+                            <div class="space-y-6 mt-5">
+                                <p class="text-sm sm:text-base text-gray-900">
+                                    {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
+                                </p>
+                            </div>
+                        @endif
 
                         <a class="block mt-6"
                             href="{{ route('database.model', [

@@ -5,7 +5,7 @@
         $user->company &&
             ($user->company->logo ||
                 (isset($moderation) &&
-                    $auth &&
+                    isset($auth) &&
                     in_array($auth->role->name, ['admin', 'moderator']) &&
                     isset($moderation->data['logo']))))
         <img class="rounded-full mr-2 w-12 h-12"
@@ -38,6 +38,6 @@
 
 <div class="mt-2 sm:mt-3">
     <p class="text-xs sm:text-sm text-gray-400">
-        {{ __('Trust Factor') }}: <span class="text-gray-600">{{ $user->tf }}</span>
+        {{ __('Trust Factor') }}: <span class="font-bold {{ $user->tf > 60 ? $user->tf > 80 ? 'text-green-500' : 'text-yellow-300' : 'text-red-600' }}">{{ $user->tf }}</span>
     </p>
 </div>

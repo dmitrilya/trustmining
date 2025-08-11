@@ -25,7 +25,7 @@
         </div>
 
         <p class="mt-4 sm:mt-5 text-xxs sm:text-sm text-gray-400">
-            {{ __('Trust Factor') }}: <span class="text-gray-600">{{ $shop->tf }}</span>
+            {{ __('Trust Factor') }}: <span class="font-bold {{ $shop->tf > 60 ? $shop->tf > 80 ? 'text-green-500' : 'text-yellow-300' : 'text-red-600' }}">{{ $shop->tf }}</span>
         </p>
 
         <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-gray-400">

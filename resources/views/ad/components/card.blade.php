@@ -50,7 +50,7 @@
             class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user->name }}</a>
 
         <p class="mt-1 md:mt-2 text-xxs sm:text-xs md:text-sm text-gray-400">
-            {{ __('Trust Factor') }}: <span class="text-gray-600">{{ $ad->user->tf }}</span>
+            {{ __('Trust Factor') }}: <span class="font-bold {{ $ad->user->tf > 60 ? $ad->user->tf > 80 ? 'text-green-500' : 'text-yellow-300' : 'text-red-600' }}">{{ $ad->user->tf }}</span>
         </p>
 
         <p class="mt-1 md:mt-2 text-xxs sm:text-xs md:text-sm text-gray-400">

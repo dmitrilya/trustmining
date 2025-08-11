@@ -39,7 +39,7 @@ trait TrustFactor
             elseif ($user->company->card['employee_count'] > 1) $tf += 1;
             else $tf -= 5;
 
-            if ($user->company->card['invalid']) $tf -= 15;
+            if (isset($user->company->card['invalid'])) $tf -= 15;
         }
 
         if ($user->moderatedReviews->where('fake', false)->count() > 2) {

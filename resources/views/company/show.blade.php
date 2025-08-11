@@ -87,15 +87,17 @@
                                 <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
                                         class="text-gray-600">{{ $company->card['ogrn'] }}</span>
                                 </li>
+                                @if (array_key_exists('kpp', $company->card))
                                 <li class="text-gray-400">{{ __('KPP') . ': ' }}<span
                                         class="text-gray-600">{{ $company->card['kpp'] }}</span>
                                 </li>
+                                @endif
                                 <li class="text-gray-400">{{ __('Registration date') . ': ' }}<span
                                         class="date-transform text-gray-600" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
                                 <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                        class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                                        class="text-gray-600">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                                 </li>
 
                                 @if ($company->card['type'] == 'LEGAL')
@@ -120,20 +122,22 @@
                                     @endforeach
                                 @endif
 
-                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">
-                                    {{ __('Managers') }}
-                                </div>
-
-                                @foreach ($company->card['managers'] as $manager)
-                                    <div class="ml-4">
-                                        <li class="text-gray-400">{{ __('Name') . ': ' }}<span
-                                                class="text-gray-600">{{ $manager['name'] }}</span>
-                                        </li>
-                                        <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
-                                                class="text-gray-600">{{ $manager['inn'] }}</span>
-                                        </li>
+                                @if (array_key_exists('managers', $company->card))
+                                    <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">
+                                        {{ __('Managers') }}
                                     </div>
-                                @endforeach
+    
+                                    @foreach ($company->card['managers'] as $manager)
+                                        <div class="ml-4">
+                                            <li class="text-gray-400">{{ __('Name') . ': ' }}<span
+                                                    class="text-gray-600">{{ $manager['name'] }}</span>
+                                            </li>
+                                            <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                                    class="text-gray-600">{{ $manager['inn'] }}</span>
+                                            </li>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -226,15 +230,17 @@
                             <li class="text-gray-400">{{ __('OGRN') . ': ' }}<span
                                     class="text-gray-600">{{ $company->card['ogrn'] }}</span>
                             </li>
+                            @if (array_key_exists('kpp', $company->card))
                             <li class="text-gray-400">{{ __('KPP') . ': ' }}<span
                                     class="text-gray-600">{{ $company->card['kpp'] }}</span>
                             </li>
+                            @endif
                             <li class="text-gray-400">{{ __('Registration date') . ': ' }}<span
                                     class="date-transform text-gray-600" data-type="date"
                                     data-date="{{ $company->card['state']['registration_date'] }}"></span>
                             </li>
                             <li class="text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                    class="text-gray-600">{{ $company->card['employee_count'] }}</span>
+                                    class="text-gray-600">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                             </li>
 
                             @if ($company->card['type'] == 'LEGAL')
@@ -259,19 +265,21 @@
                                 @endforeach
                             @endif
 
-                            <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}
-                            </div>
-
-                            @foreach ($company->card['managers'] as $manager)
-                                <div class="ml-4">
-                                    <li class="text-gray-400">{{ __('Name') . ': ' }}<span
-                                            class="text-gray-600">{{ $manager['name'] }}</span>
-                                    </li>
-                                    <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
-                                            class="text-gray-600">{{ $manager['inn'] }}</span>
-                                    </li>
+                            @if (array_key_exists('managers', $company->card))
+                                <div class="text-sm md:text-lg text-gray-800 font-semibold mt-3">{{ __('Managers') }}
                                 </div>
-                            @endforeach
+    
+                                @foreach ($company->card['managers'] as $manager)
+                                    <div class="ml-4">
+                                        <li class="text-gray-400">{{ __('Name') . ': ' }}<span
+                                                class="text-gray-600">{{ $manager['name'] }}</span>
+                                        </li>
+                                        <li class="text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                                class="text-gray-600">{{ $manager['inn'] }}</span>
+                                        </li>
+                                    </div>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
 

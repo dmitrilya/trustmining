@@ -68,7 +68,10 @@
                             'inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
-                    @include('layouts.components.search', ['border' => 'px-2.5 py-1.5 rounded-md border', 'searchBlock' => 'max-w-sm'])
+                    @include('layouts.components.search', [
+                        'border' => 'px-2.5 py-1.5 rounded-md border',
+                        'searchBlock' => 'max-w-sm',
+                    ])
                 </div>
             </div>
             <div class="flex items-center ml-4 xl:ml-6">
@@ -152,6 +155,12 @@
                                 <x-dropdown-link :href="route('notifications')">
                                     {{ __('Notifications') }}
                                 </x-dropdown-link>
+
+                                @if ($auth->role_id == 3)
+                                    <x-dropdown-link :href="route('moderations')">
+                                        {{ __('Moderations') }}
+                                    </x-dropdown-link>
+                                @endif
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -279,6 +288,12 @@
                     <x-responsive-nav-link :href="route('notifications')">
                         {{ __('Notifications') }}
                     </x-responsive-nav-link>
+
+                    @if ($auth->role_id == 3)
+                        <x-responsive-nav-link :href="route('moderations')">
+                            {{ __('Moderations') }}
+                        </x-responsive-nav-link>
+                    @endif
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

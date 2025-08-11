@@ -27,11 +27,11 @@
     <div class="bg-gray-100 relative z-20">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16 relative">
             <div
-                class="-mt-72 mx-auto w-full max-w-md shadow-lg bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
-                <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
-                <div class="text-gray-500 text-sm md:text-base">{{ __($tariff->description) }}</div>
-                <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
-                        class="text-gray-900 font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price * 30 }}</span>
+                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-gray-900 border-2 border-indigo-500' : 'bg-white border border-gray-200' }} rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-900' }} font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
+                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-gray-400' : 'text-gray-500' }} text-sm md:text-base">{{ __($tariff->description) }}</div>
+                <div class="h-9 flex items-end {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-500' }} md:text-lg"><span
+                        class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? '' : 'text-gray-900 ' }}font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price * 30 }}</span>
                     /{{ __('month') }}</div>
                 <div class="space-y-2 sm:space-y-3">
                     @if ($tariff->name == 'Subscription')
