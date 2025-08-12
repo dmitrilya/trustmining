@@ -136,25 +136,27 @@
                     </div>
                 </div>
 
-                @php
-                    $article = App\Models\Article::latest()->first();
-                    $guide = App\Models\Guide::inRandomOrder()->first();
-                @endphp
-
-                @if ($article)
-                    <div class="hidden md:block w-full">
-                        <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
-                            @include('article.components.card', ['article' => $article])
+                <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
+                    @php
+                        $article = App\Models\Article::latest()->first();
+                        $guide = App\Models\Guide::inRandomOrder()->first();
+                    @endphp
+    
+                    @if ($article)
+                        <div class="hidden md:block w-full">
+                            <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
+                                @include('article.components.card', ['article' => $article])
+                            </div>
                         </div>
+                    @endif
+    
+                    <div class="hidden lg:block w-full">
+                        @include('layouts.components.solutions-blurb')
                     </div>
-                @endif
-
-                <div class="hidden lg:block w-full">
-                    @include('layouts.components.solutions-blurb')
-                </div>
-
-                <div class="hidden xl:block w-full">
-                    @include('layouts.components.solutions-blurb')
+    
+                    <div class="hidden xl:block w-full">
+                        @include('layouts.components.solutions-blurb')
+                    </div>
                 </div>
             </div>
         </div>
