@@ -17,7 +17,7 @@ class TariffSeeder extends Seeder
             [
                 'name' => 'Resale',
                 'description' => 'For small points of sale',
-                'max_ads' => 15,
+                'max_ads' => 20,
                 'max_offices' => 1,
                 'can_have_hosting' => 0,
                 'can_have_phone' => 0,
@@ -25,7 +25,7 @@ class TariffSeeder extends Seeder
                 'max_description' => 500,
                 'can_create_guide' => 0,
                 'priority_moderation' => 0,
-                'price' => 700,
+                'price' => 600,
             ],
             [
                 'name' => 'Company',

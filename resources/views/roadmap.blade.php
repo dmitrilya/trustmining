@@ -72,12 +72,10 @@
                 </div>
 
                 <div class="p-2 sm:p-4 lg:p-6">
-                    <div class="text-xs text-gray-500">ИП </div>
-                    <div class="text-xs text-gray-500 mb-2">ОГРНИП: </div>
-                    <div class="text-xxs text-gray-400" style ="max-width: 1312px;">
-                        © 2025{{ ($year = Carbon\Carbon::now()->year) != 2025 ? ' - ' . $year : '' }}. Не является
-                        публичной офертой.
-                    </div>
+                    <div class="text-xs text-gray-500">ИП Дмитриева Елизавета Николаевна</div>
+                    <div class="text-xs text-gray-500 mb-2">ОГРНИП: 325385000082654</div>
+                    <div class="text-xxs text-gray-400" style ="max-width: 1312px;">© 2025 -
+                        {{ Carbon\Carbon::now()->year }}. {{ __('This is not a public offer.') }}</div>
                 </div>
 
                 <svg viewBox="0 0 1208 1024"
@@ -112,7 +110,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('10-10-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('13-08-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -147,7 +145,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-10-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('25-08-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -161,7 +159,8 @@
                         <li class="text-xs sm:text-sm text-gray-600 pl-2">
                             {{ __('Booking advertising spaces') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Convenient auction system for advertising space') }}</li>
+                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                            {{ __('Convenient auction system for advertising space') }}</li>
                     </ul>
                 </article>
 
@@ -170,7 +169,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('01-11-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('01-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -205,7 +204,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('05-11-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('10-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -230,7 +229,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('10-11-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('10-10-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -252,7 +251,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-11-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('01-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -280,7 +279,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('05-12-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('20-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -314,7 +313,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('20-12-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('1-12-2026')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
@@ -339,7 +338,7 @@
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
                         <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
-                            data-date="{{ Carbon\Carbon::create('01-03-2025')->timestamp * 1000 }}"></div>
+                            data-date="{{ Carbon\Carbon::create('01-02-2025')->timestamp * 1000 }}"></div>
                     </header>
 
                     <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
