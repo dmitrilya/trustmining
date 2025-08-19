@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Каталог ASIC майнеров">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6" x-data="{ search: '' }">
             <nav class="mb-3" aria-label="Breadcrumb">

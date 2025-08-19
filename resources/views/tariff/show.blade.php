@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Приобрести подписку {{ $tariff->name }}">
     <div class="bg-gray-900 h-128 lg:h-144 xl:h-160 relative z-10 overflow-hidden">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 py-8 relative">
             <div class="mt-4 md:mt-6 lg:mt-8 xl:mt-10 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">

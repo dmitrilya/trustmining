@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="TrustMining: дорожная карта, карта развития проекта">
     <div class="lg:grid lg:grid-cols-5" style="height: calc(100vh - 64.4px)">
         @guest
             <div class="col-span-2 bg-gray-900 hidden lg:flex flex-col h-full w-full relative z-10 overflow-hidden">

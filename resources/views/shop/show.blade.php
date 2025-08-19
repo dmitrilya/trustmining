@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Майнинговая компания {{ $user->name }}: купить ASIC майнер">
     <x-slot name="header">
         <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mr-auto w-full max-w-max">

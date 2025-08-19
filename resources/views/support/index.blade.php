@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Поддержка, часто задаваемые вопросы">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)">
         <div
             class="w-full h-full bg-white border border-gray-200 rounded-2xl shadow-lg dark:bg-gray-800 dark:border-gray-700">

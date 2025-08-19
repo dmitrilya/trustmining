@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Модерация">
     <x-slot name="header">
         <div class="flex items-center justify-end">
             <p class="text-gray-900 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>

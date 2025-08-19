@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Офис компании {{ $office->user->name }}, точка продаж ASIC майнеров">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $office->user->url_name])"></x-back-link>

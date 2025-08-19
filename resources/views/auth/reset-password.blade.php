@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="TrustMining Сбросить пароль">
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 

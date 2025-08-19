@@ -1,4 +1,20 @@
-<x-app-layout>
+@php
+    if ($type == 'App\Models\User') {
+        $user = App\Models\User::find($id);
+        $href = route('company', ['user' => $user->url_name]);
+    } elseif ($type == 'App\Models\AsicModel') {
+        $model = App\Models\AsicModel::find($id);
+        $href = route('database.model', [
+            'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
+            'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
+        ]);
+    } else {
+        $href = '#';
+    }
+@endphp
+
+<x-app-layout
+    title="Отзывы о {{ $type == 'App\Models\User' ? 'компании ' . $user->name : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name }}">
     <x-slot name="header">
         <div class="flex items-center">
             @php
@@ -44,10 +60,12 @@
                                 <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
 
                                 @if ($review->moderation)
-                                    <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}</p>
+                                    <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}
+                                    </p>
                                 @endif
 
-                                <p class="text-sm font-normal text-gray-500 whitespace-pre-line mt-3 md:mt-4">{{ $review->review }}</p>
+                                <p class="text-sm font-normal text-gray-500 whitespace-pre-line mt-3 md:mt-4">
+                                    {{ $review->review }}</p>
                             </div>
 
                             @if ($auth && ($auth->id == $review->reviewable->id || $review->user->id == $auth->id))

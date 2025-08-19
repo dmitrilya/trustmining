@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Купить ASIC майнер {{ $ad->asicVersion->asicModel->asicBrand->name }} {{ $ad->asicVersion->asicModel->name }} {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}, {{ $ad->user->name }}">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             #{{ $ad->id }}
