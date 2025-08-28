@@ -48,10 +48,10 @@
                                     class="text-gray-800 font-bold" x-text="version.algorithm"></span></div>
                             <div class="text-xxs xs:text-xs text-gray-500">{{ __('Power') }}: <span
                                     class="text-gray-800 font-bold"
-                                    x-text="version.efficiency * version.hashrate"></span></div>
+                                    x-text="version.efficiency * version.hashrate + ' W'"></span></div>
                             <div class="text-xxs xs:text-xs text-gray-500">{{ __('Average price') }}: <span
                                     class="text-gray-800 font-bold"
-                                    x-text="version.price ? version.price : '{{ __('No data') }}'"></span></div>
+                                    x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span></div>
                         </div>
                     </template>
                 </div>

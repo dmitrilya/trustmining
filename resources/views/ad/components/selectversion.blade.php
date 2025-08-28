@@ -65,7 +65,7 @@
             'hidden': selectedModel !=
                 {{ $asicModel->id }}
         }"
-            class="mt-6">
+            class="mt-6 hidden">
             <x-input-label :value="__('Version')" />
 
             <div class="relative mt-1">
