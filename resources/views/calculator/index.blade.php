@@ -133,7 +133,7 @@
                                         <label class="flex items-center">
                                             <input type="radio" name="profitNumber" :value="i"
                                                 :checked="profitNumber == i"
-                                                class="mr-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
+                                                class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
                                         </label>
                                     </div>
                                     <template x-for="coin in profit.coins" :key="coin.abbreviation">
