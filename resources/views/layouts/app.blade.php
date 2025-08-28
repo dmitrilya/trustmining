@@ -12,11 +12,11 @@
     @endauth
 
     <title>
-        @if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif
+        @if ($attributes->has('title')){{$attributes->get('title')}}@else{{config('app.name')}}@endif
     </title>
 
     @if ($attributes->has('description'))
-        <meta name="description" :content="$attributes->get('description')">
+        <meta name="description" content="{{$attributes->get('description')}}">
     @endif
 
     <!-- Yandex.Metrika counter -->

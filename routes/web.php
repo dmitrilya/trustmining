@@ -52,6 +52,12 @@ Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
 
+Route::group(['prefix' => 'calculator'], function () {
+    Route::get('/', [Controller::class, 'calculator'])->name('calculator');
+    Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
+    Route::get('/{asicModel}/{asicVersion}', [Controller::class, 'calculator'])->name('calculator.modelver');
+});
+
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 Route::get('/companies', [ShopController::class, 'shops'])->name('companies');

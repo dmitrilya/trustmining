@@ -18,7 +18,11 @@ use App\Http\Traits\DaData;
 
 use App\Models\Article;
 use App\Models\Hosting;
+use App\Models\Algorithm;
+use App\Models\AsicModel;
+use App\Models\AsicVersion;
 use App\Models\Role;
+use App\Models\Coin;
 use App\Models\Chat;
 use App\Models\Ad;
 
@@ -31,7 +35,7 @@ class Controller extends BaseController
         if (! in_array($request->locale, ['en', 'ru'])) {
             abort(400);
         }
-     
+
         app()->setLocale($request->locale);
         session()->put('locale', $request->locale);
 
@@ -65,6 +69,48 @@ class Controller extends BaseController
     public function events(): View
     {
         return view('events');
+    }
+
+    public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
+    {
+        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,name,algorithm_id,profit,rate,merged_group')->get()->map(function($algorithm) {
+            $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
+                fn($mergedGroup) => [
+                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
+                    'coins' => $mergedGroup
+                ]
+            )->sortByDesc('profit')->first();
+            
+            return $algorithm;
+        });
+
+        return view('calculator.index', [
+            'models' => AsicModel::select(['id', 'name', 'algorithm_id'])->with([
+                'algorithm:id,name,measurement',
+                'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
+                'asicVersions.ads:asic_version_id,price,coin_id',
+                'asicVersions.ads.coin:id,rate'
+            ])->get()->map(function ($model) use ($measurements, $algorithms) {
+                $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
+
+                $model->asicVersions->map(function($version) use ($measurements, $algorithm, $model) {
+                    $vm = array_search($version->measurement, $measurements);
+                    $am = array_search($model->algorithm->measurement, $measurements);
+                    $version->profit = round($algorithm->maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2);
+                    $version->coins = $algorithm->maxProfit['coins'];
+                    $version->price = $version->ads->avg(fn ($ad) => $ad->price * $ad->coin->rate);
+                    $version->algorithm = $model->algorithm->name;
+
+                    return $version;
+                });
+
+                return $model;
+            }),
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rModel' => $asicModel->name,
+            'rVersion' => $asicVersion->hashrate,
+        ]);
     }
 
     public function support(): View

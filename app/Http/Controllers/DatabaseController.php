@@ -7,6 +7,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Http\Traits\ViewTrait;
 
+use App\Models\Algorithm;
 use App\Models\AsicBrand;
 use App\Models\AsicModel;
 use App\Models\AsicVersion;
@@ -94,6 +95,16 @@ class DatabaseController extends Controller
     public function getModels(Request $request)
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,algorithm_id,profit,rate,merged_group')->get()->map(function($algorithm) {
+            $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
+                fn($mergedGroup) => [
+                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
+                    'coins' => $mergedGroup->pluck('abbreviation')
+                ]
+            )->sortByDesc('profit')->first();
+            
+            return $algorithm;
+        });
 
         $asicModels = AsicModel::where('release', '>', '2018-03-01');
 
@@ -102,26 +113,20 @@ class DatabaseController extends Controller
         return response()->json($asicModels->withCount('views')->with([
             'asicBrand:id,name',
             'algorithm:id,name,measurement',
-            'algorithm.coins:abbreviation,algorithm_id,profit,rate,merged_group',
             'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
-        ])->get()->map(function ($model) use ($measurements) {
+        ])->get()->map(function ($model) use ($measurements, $algorithms) {
             $version = $model->asicVersions->first();
+            $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
             $vm = array_search($version->measurement, $measurements);
             $am = array_search($model->algorithm->measurement, $measurements);
-            $maxProfit = $model->algorithm->coins->groupBy('merged_group')->map(
-                fn($mergedGroup) => [
-                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
-                    'coins' => $mergedGroup->pluck('abbreviation')
-                ]
-            )->sortByDesc('profit')->first();
 
             return [
                 'name' => $model->name,
                 'url_name' => strtolower(str_replace(' ', '_', $model->name)),
                 'hashrate' => $version->hashrate,
                 'original_hashrate' => $version->hashrate * pow(1000, $vm),
-                'profit' => round($maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
-                'coins' => $maxProfit['coins'],
+                'profit' => round($algorithm->maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
+                'coins' => $algorithm->maxProfit['coins'],
                 'power' => $version->hashrate * $version->efficiency,
                 'efficiency' => $version->efficiency,
                 'original_efficiency' => $version->efficiency * pow(1000, $am - $vm),

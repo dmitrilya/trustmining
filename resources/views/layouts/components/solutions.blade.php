@@ -134,6 +134,17 @@
                         <a class="under text-sm lg:text-base text-gray-800 font-semibold"
                             href="{{ route('companies') }}">{{ __('Companies') }}</a>
                     </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 mr-2" aria-hidden="true" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M6 15h12M6 6h12m-6 12h.01M7 21h10a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-gray-800 font-semibold"
+                            href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                    </div>
                 </div>
 
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
@@ -141,7 +152,7 @@
                         $article = App\Models\Article::latest()->first();
                         $guide = App\Models\Guide::inRandomOrder()->first();
                     @endphp
-    
+
                     @if ($article)
                         <div class="hidden md:block w-full">
                             <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
@@ -149,11 +160,11 @@
                             </div>
                         </div>
                     @endif
-    
+
                     <div class="hidden lg:block w-full">
                         @include('layouts.components.solutions-blurb')
                     </div>
-    
+
                     <div class="hidden xl:block w-full">
                         @include('layouts.components.solutions-blurb')
                     </div>

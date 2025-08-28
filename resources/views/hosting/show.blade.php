@@ -233,7 +233,7 @@
                         @endif
                     </div>
 
-                    @if ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies))
+                    @if (!$auth || $hosting->user->id != $auth->id && count($hosting->contract_deficiencies))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
                                 class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"

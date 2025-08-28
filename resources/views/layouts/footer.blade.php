@@ -7,31 +7,25 @@
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 font-semibold">{{ __('To the buyer') }}</div>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('ads') }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('companies') }}">{{ __('Companies') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('ads') }}">{{ __('Miners') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('companies') }}">{{ __('Companies') }}</a>
                 <a class="w-max under text-sm text-gray-800"
                     href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>
             </div>
 
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 font-semibold">{{ __('To the seller') }}</div>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('roadmap') }}">Roadmap</a>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('support') }}">FAQ</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('roadmap') }}">Roadmap</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('support') }}">FAQ</a>
             </div>
 
             <div class="space-y-2">
                 <a class="w-max under text-sm text-gray-800"
                     href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
-                <a class="w-max under text-sm text-gray-800"
-                    href="{{ route('articles') }}">{{ __('Blog') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('articles') }}">{{ __('Blog') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-800"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-800"
@@ -45,6 +39,7 @@
             <div class="text-sm text-gray-500">ИП Дмитриева Елизавета Николаевна</div>
             <div class="text-sm text-gray-500">ОГРНИП: 325385000082654</div>
         </div>
-        <div class="text-xs text-gray-400" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}. {{ __('This is not a public offer.') }}</div>
+        <div class="text-xs text-gray-400" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
+            {{ __('This is not a public offer.') }}</div>
     </div>
 </footer>

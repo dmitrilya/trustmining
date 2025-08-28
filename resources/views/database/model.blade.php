@@ -162,6 +162,12 @@
                             </div>
                         @endforeach
                     </div>
+
+                    <a class="block w-fit ml-auto mt-4 xs:mt-6 sm:mt-8"
+                        href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                        <x-secondary-button class="bg-secondary-gradient text-white">{{ __('Income calculator') }}</x-secondary-button>
+                    </a>
+
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 

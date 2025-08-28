@@ -1,16 +1,28 @@
 <div x-data="{ models: {{ $models }}, withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }}, selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }}, selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }} }">
-    <input type="hidden" value="{{ isset($selectedModel) ? strtolower(str_replace(' ', '_', $selectedModel->name)) : 'null' }}" x-ref="model" name="model">
+    <input type="hidden"
+        value="{{ isset($selectedModel) ? strtolower(str_replace(' ', '_', $selectedModel->name)) : 'null' }}"
+        x-ref="model" name="model">
     <input type="hidden" :value="selectedVersion" name="asic_version_id">
 
     <div>
         <div class="relative mt-1" x-data="{ open: false, search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}' }" @click.away="open = false">
             <div class="relative z-0 w-full group" @click="open = true">
-                <input type="text" id="asic-model_input" placeholder=" "
-                    @input="search = $el.value;selectedModel = null;$refs.model.value = null;selectedVersion = null" autocomplete="off"
-                    :value="search"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
-                <label for="asic-model_input"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-gray-600">
+                    <input type="text" placeholder=" "
+                        @input="search = $el.value;selectedModel = null;$refs.model.value = null;selectedVersion = null; if (typeof version !== 'undefined') version = null"
+                        autocomplete="off" :value="search"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white dark:group-focus:border-indigo-500 group-focus:outline-none focus:ring-0 group-focus:border-indigo-500 peer" />
+
+                    <button type="button"
+                        class="ml-4 flex h-4 w-4 items-center justify-center rounded-md bg-white text-gray-400"
+                        @click="search = '';selectedModel = null;$refs.model.value = null;selectedVersion = null; if (typeof version !== 'undefined') version = null">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Model') }}
                 </label>
             </div>
@@ -100,7 +112,7 @@
                     @endif
 
                     @foreach ($asicModel->asicVersions as $asicVersion)
-                        <li @click="selectedVersion = {{ $asicVersion->id }}; new Dropdown($event.target.closest('ul'), $event.target.closest('ul').previousElementSibling).hide()"
+                        <li @click="selectedVersion = {{ $asicVersion->id }}; new Dropdown($event.target.closest('ul'), $event.target.closest('ul').previousElementSibling).hide(); if (typeof version !== 'undefined') version = {{ $asicVersion }}"
                             role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 hover:bg-indigo-600 hover:text-white">
                             <div class="flex items-center">
