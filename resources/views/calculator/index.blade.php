@@ -119,8 +119,8 @@
                             <div class="text-xxs xs:text-xs text-gray-500 mt-6 sm:mt-7 lg:mt-8">{{ __('Payback') }}:
                                 <span class="text-gray-800 font-bold"
                                     x-text="version.price ? 
-                                        version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000 > 0 ?
-                                        version.price / (version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) + '{{ __('Days') }}' :
+                                        version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000 > 0 ?
+                                        version.price / (version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000) + '{{ __('Days') }}' :
                                         '∞' : '{{ __('No data') }}'"></span>
                             </div>
 
