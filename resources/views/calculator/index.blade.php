@@ -128,7 +128,7 @@
                                 {{ __('Coins per day') }}</h4>
 
                             <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
-                                <div class="flex items-center space-x-2 mt-2 sm:mt-4 cursor-pointer" @click="profitNumber = i">
+                                <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer" @click="profitNumber = i">
                                     <div>
                                         <label class="flex items-center">
                                             <input type="radio" name="profitNumber" :value="i"
@@ -140,11 +140,11 @@
                                         <div>
                                             <div class="flex items-center">
                                                 <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
-                                                    :alt="coin.name" class="w-4 sm:w-5 mr-2">
+                                                    :alt="coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
                                                 <div>
-                                                    <div class="text-xs text-gray-500 mr-3" x-text="coin.abbreviation">
+                                                    <div class="text-xxs xs:text-xs text-gray-500" x-text="coin.abbreviation">
                                                     </div>
-                                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3"
+                                                    <div class="text-xxs sm:text-xs text-gray-300"
                                                         x-text="coin.name">
                                                     </div>
                                                 </div>
