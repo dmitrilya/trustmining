@@ -120,7 +120,7 @@
                                 <span class="text-gray-800 font-bold"
                                     x-text="version.price ? 
                                         version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000 > 0 ?
-                                        version.price / (version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000) + '{{ __('Days') }}' :
+                                        Math.round(version.price / (version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000)) + ' {{ __('Days') }}' :
                                         '∞' : '{{ __('No data') }}'"></span>
                             </div>
 
