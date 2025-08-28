@@ -53,7 +53,7 @@
                         </div>
                     </template>
                 </div>
-                <div class="md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 col-span-3">
+                <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 col-span-3">
                     <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                         <h4 class="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                             {{ __('Calculation result') }}</h4>
@@ -128,11 +128,11 @@
                                 {{ __('Coins per day') }}</h4>
 
                             <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
-                                <div class="flex items-center space-x-2 mt-2 sm:mt-4">
+                                <div class="flex items-center space-x-2 mt-2 sm:mt-4 cursor-pointer" @click="profitNumber = i">
                                     <div>
                                         <label class="flex items-center">
                                             <input type="radio" name="profitNumber" :value="i"
-                                                :checked="profitNumber == i" @change="profitNumber = $el.value"
+                                                :checked="profitNumber == i"
                                                 class="mr-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
                                         </label>
                                     </div>
