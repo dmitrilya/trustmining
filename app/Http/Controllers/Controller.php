@@ -80,7 +80,7 @@ class Controller extends BaseController
                     'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
                     'coins' => $mergedGroup
                 ]
-            )->sortByDesc('profit')->first();
+            )->sortByDesc('profit')->values();
             
             return $algorithm;
         });
@@ -97,8 +97,10 @@ class Controller extends BaseController
                 $model->asicVersions->map(function($version) use ($measurements, $algorithm, $model) {
                     $vm = array_search($version->measurement, $measurements);
                     $am = array_search($model->algorithm->measurement, $measurements);
-                    $version->profit = round($algorithm->maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2);
-                    $version->coins = $algorithm->maxProfit['coins'];
+                    $version->profits = $algorithm->maxProfit->map(fn ($profit) => [
+                        'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
+                        'coins' => $profit['coins']
+                    ]);
                     $version->price = $version->ads->avg(fn ($ad) => $ad->price * $ad->coin->rate);
                     $version->algorithm = $model->algorithm->name;
 

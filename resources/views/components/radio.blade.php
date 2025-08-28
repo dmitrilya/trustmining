@@ -1,4 +1,4 @@
-@props(['name', 'value', 'textClasses', 'checked'])
+@props(['name', 'value', 'textClasses' => '', 'checked'])
 
 <div {{ $attributes }}>
     <label class="flex items-center">

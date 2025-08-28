@@ -1,12 +1,7 @@
-<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' . ($rModel
-    ? ($rVersion
-        ? $rModel . ' ' . $rVersion
-        : $rModel)
-    : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' . ($rModel
-    ? ($rVersion
-        ? ' ' . $rModel . ' ' . $rVersion
-        : ' ' . $rModel)
-    : '') . ' в удобном калькуляторе майнинга'">
+<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
+    ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' .
+    ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
+    ' в удобном калькуляторе майнинга'">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -26,10 +21,12 @@
                 $selVersion = $rVersion
                     ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
                     : $selModel->asicVersions->first();
-                if (!$selVersion) $selVersion = $selModel->asicVersions->first();
+                if (!$selVersion) {
+                    $selVersion = $selModel->asicVersions->first();
+                }
             @endphp
 
-            <div class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }} }">
+            <div class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }"x-init="console.log(version.profits)">
                 <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
                     <div class="mb-6">
                         <x-input-label for="price" :value="__('Tariff')" />
@@ -51,7 +48,8 @@
                                     x-text="version.efficiency * version.hashrate + ' W'"></span></div>
                             <div class="text-xxs xs:text-xs text-gray-500">{{ __('Average price') }}: <span
                                     class="text-gray-800 font-bold"
-                                    x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span></div>
+                                    x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
+                            </div>
                         </div>
                     </template>
                 </div>
@@ -88,63 +86,76 @@
                                 <div class="text-xxs xs:text-xs text-gray-500">{{ __('Profit') }}</div>
                                 <div class="text-xxs xs:text-xs text-gray-500">{{ __('Day') }}</div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round(version.profit / (currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100">
+                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 10) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round((version.profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 100) / 100">
+                                    x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 100) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-500">{{ __('Month') }}</div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round(version.profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 100) / 100">
+                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 100) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 10) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round((version.profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 100) / 100">
+                                    x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 100) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-500">{{ __('Year') }}</div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round(version.profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 100) / 100">
+                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 100) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 / 10) / 100">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 font-bold"
-                                    x-text="Math.round((version.profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 / 1000) * 100) / 100">
+                                    x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 / 1000) * 100) / 100">
                                 </div>
                             </div>
 
                             <div class="text-xxs xs:text-xs text-gray-500 mt-6 sm:mt-7 lg:mt-8">{{ __('Payback') }}:
                                 <span class="text-gray-800 font-bold"
-                                    x-text="version.price ? version.price / (version.profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) : '{{ __('No data') }}'"></span>
+                                    x-text="version.price ? 
+                                        version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000 > 0 ?
+                                        version.price / (version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) + '{{ __('Days') }}' :
+                                        '∞' : '{{ __('No data') }}'"></span>
                             </div>
 
                             <h4 class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-6 sm:mt-7 lg:mt-8">
                                 {{ __('Coins per day') }}</h4>
 
-                            <div class="flex items-center space-x-2 mt-2 sm:mt-4">
-                                <template x-for="coin in version.coins" :key="coin.abbreviation">
+                            <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
+                                <div class="flex items-center space-x-2 mt-2 sm:mt-4">
                                     <div>
-                                        <div class="flex items-center">
-                                            <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
-                                                :alt="coin.name" class="w-4 sm:w-5 mr-2">
-                                            <div>
-                                                <div class="text-xs text-gray-500 mr-3" x-text="coin.abbreviation">
-                                                </div>
-                                                <div class="text-xxs sm:text-xs text-gray-300 mr-3" x-text="coin.name">
+                                        <label class="flex items-center">
+                                            <input type="radio" name="profitNumber" :value="i"
+                                                :checked="profitNumber == i" @change="profitNumber = $el.value"
+                                                class="mr-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600 cursor-pointer">
+                                        </label>
+                                    </div>
+                                    <template x-for="coin in profit.coins" :key="coin.abbreviation">
+                                        <div>
+                                            <div class="flex items-center">
+                                                <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
+                                                    :alt="coin.name" class="w-4 sm:w-5 mr-2">
+                                                <div>
+                                                    <div class="text-xs text-gray-500 mr-3" x-text="coin.abbreviation">
+                                                    </div>
+                                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3"
+                                                        x-text="coin.name">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="text-xxs sm:text-xs text-gray-600 font-bold mt-1"
+                                                x-text="Math.round(version.hashrate * coin.profit * 100000000) / 100000000">
+                                            </div>
                                         </div>
-                                        <div class="text-xxs sm:text-xs text-gray-600 font-bold mt-1"
-                                            x-text="Math.round(version.hashrate * coin.profit * 100000000) / 100000000">
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
+                                    </template>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
