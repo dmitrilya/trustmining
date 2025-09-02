@@ -1,4 +1,4 @@
-<x-app-layout :title="'ASIC майнер ' . $brand->name . ' ' . $model->name">
+<x-app-layout :title="'ASIC майнер ' . $brand->name . ' ' . $model->name . (isset($selectedVersion) ? ' ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '')">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
