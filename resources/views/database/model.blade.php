@@ -80,7 +80,7 @@
                     <div class="text-sm text-gray-400">{{ __('Release date') }}: <span class="text-gray-600">
                             {{ $model->release->locale('ru')->translatedFormat('F Y') }}</span></div>
 
-                    <div x-data="{ selectedTab: 0 }" class="mt-4 md:mt-8">
+                    <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
                             class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
                             <ul class="flex flex-wrap -mb-px">

@@ -23,8 +23,8 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2018-03-01'))
-            ->with('asicModels', fn($q) => $q->where('release', '>', '2018-03-01')
+        $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2010-03-01'))
+            ->with('asicModels', fn($q) => $q->where('release', '>', '2010-03-01')
                 ->select(['id', 'asic_brand_id', 'algorithm_id', 'release'])
                 ->with([
                     'algorithm',
@@ -49,7 +49,7 @@ class DatabaseController extends Controller
         $this->addView(request(), $asicBrand);
 
         return view('database.brand', [
-            'brand' => $asicBrand->load(['asicModels' => fn($q) => $q->where('release', '>', '2018-03-01')
+            'brand' => $asicBrand->load(['asicModels' => fn($q) => $q->where('release', '>', '2010-03-01')
                 ->select(['id', 'name', 'asic_brand_id', 'algorithm_id'])
                 ->with([
                     'algorithm',
@@ -73,6 +73,32 @@ class DatabaseController extends Controller
         return view('database.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
+            'versions' => $asicModel->asicVersions()->with([
+                'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
+                    ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
+                'ads.coin:id,abbreviation'])->get()->sortByDesc('hashrate'),
+            'algorithm' => $asicModel->algorithm()->with('coins')->first()
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\AsicBrand  $asicBrand
+     * @param  \App\Models\AsicModel  $asicModel
+     * @param  \App\Models\AsicVersion  $asicVersion
+     * @return \Illuminate\Http\Response
+     */
+    public function version(AsicBrand $asicBrand, AsicModel $asicModel, AsicVersion $asicVersion)
+    {
+        if ($asicVersion->asicModel->id != $asicModel->id) abort(404);
+        
+        $this->addView(request(), $asicModel);
+
+        return view('database.model', [
+            'brand' => $asicBrand,
+            'model' => $asicModel,
+            'selectedVersion' => $asicVersion,
             'versions' => $asicModel->asicVersions()->with([
                 'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
                     ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
@@ -106,7 +132,7 @@ class DatabaseController extends Controller
             return $algorithm;
         });
 
-        $asicModels = AsicModel::where('release', '>', '2018-03-01');
+        $asicModels = AsicModel::where('release', '>', '2010-03-01');
 
         if ($request->asicBrand) $asicModels = $asicModels->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
 

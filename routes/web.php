@@ -69,7 +69,6 @@ Route::group(['prefix' => 'dadata'], function () {
     });
 });
 
-
 Route::group(['prefix' => 'articles'], function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles');
     Route::get('/article/{article}', [ArticleController::class, 'show'])->name('article');
@@ -91,6 +90,7 @@ Route::group(['prefix' => 'database'], function () {
         Route::group(['prefix' => '{asicModel}'], function () {
             Route::get('/', [DatabaseController::class, 'model'])->name('database.model');
             Route::get('/reviews', [DatabaseController::class, 'reviews'])->name('database.reviews');
+            Route::get('/{asicVersion}', [DatabaseController::class, 'version'])->name('database.version');
         });
     });
 });

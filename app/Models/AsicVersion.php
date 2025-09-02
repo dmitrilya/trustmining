@@ -19,7 +19,7 @@ class AsicVersion extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        return $this->where('hashrate', str_replace('_', ' ', $value))->first() ?? abort(404);
+        return $this->where('hashrate', $value)->first() ?? abort(404);
     }
 
     public function asicModel()
