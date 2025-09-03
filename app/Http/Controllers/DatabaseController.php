@@ -91,8 +91,6 @@ class DatabaseController extends Controller
      */
     public function version(AsicBrand $asicBrand, AsicModel $asicModel, AsicVersion $asicVersion)
     {
-        if ($asicVersion->asicModel->id != $asicModel->id) abort(404);
-        
         $this->addView(request(), $asicModel);
 
         return view('database.model', [

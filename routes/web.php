@@ -90,7 +90,7 @@ Route::group(['prefix' => 'database'], function () {
         Route::group(['prefix' => '{asicModel}'], function () {
             Route::get('/', [DatabaseController::class, 'model'])->name('database.model');
             Route::get('/reviews', [DatabaseController::class, 'reviews'])->name('database.reviews');
-            Route::get('/{asicVersion}', [DatabaseController::class, 'version'])->name('database.version');
+            Route::get('/{asicVersion:hashrate}', [DatabaseController::class, 'version'])->name('database.version');
         });
     });
 });
