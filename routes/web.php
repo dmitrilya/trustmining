@@ -55,7 +55,7 @@ Route::get('/events', [Controller::class, 'events'])->name('events');
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
     Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
-    Route::get('/{asicModel}/{asicVersion}', [Controller::class, 'calculator'])->name('calculator.modelver');
+    Route::get('/{asicModel}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->name('calculator.modelver');
 });
 
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
