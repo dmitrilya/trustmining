@@ -47,4 +47,14 @@ class Article extends Model
     {
         return $this->morphMany(Notification::class, 'notificationable');
     }
+
+    public function views()
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
 }
