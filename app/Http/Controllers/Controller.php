@@ -21,6 +21,7 @@ use App\Models\Hosting;
 use App\Models\Algorithm;
 use App\Models\AsicModel;
 use App\Models\AsicVersion;
+use App\Models\Like;
 use App\Models\Role;
 use App\Models\Coin;
 use App\Models\Chat;
@@ -74,14 +75,14 @@ class Controller extends BaseController
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
-        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,name,algorithm_id,profit,rate,merged_group')->get()->map(function($algorithm) {
+        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,name,algorithm_id,profit,rate,merged_group')->get()->map(function ($algorithm) {
             $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
                 fn($mergedGroup) => [
                     'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
                     'coins' => $mergedGroup
                 ]
             )->sortByDesc('profit')->values();
-            
+
             return $algorithm;
         });
 
@@ -94,14 +95,14 @@ class Controller extends BaseController
             ])->get()->map(function ($model) use ($measurements, $algorithms) {
                 $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
 
-                $model->asicVersions->map(function($version) use ($measurements, $algorithm, $model) {
+                $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $model) {
                     $vm = array_search($version->measurement, $measurements);
                     $am = array_search($model->algorithm->measurement, $measurements);
-                    $version->profits = $algorithm->maxProfit->map(fn ($profit) => [
+                    $version->profits = $algorithm->maxProfit->map(fn($profit) => [
                         'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
                         'coins' => $profit['coins']
                     ]);
-                    $version->price = $version->ads->avg(fn ($ad) => $ad->price * $ad->coin->rate);
+                    $version->price = $version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate);
                     $version->algorithm = $model->algorithm->name;
 
                     return $version;
@@ -135,5 +136,23 @@ class Controller extends BaseController
         }
 
         return view('support.index', compact(['auth', 'chat']));
+    }
+
+    public function like(Request $request)
+    {
+        if (!call_user_func_array([$request->likeableType, 'find'], [$request->likeableId]))
+            return response()->json(['success' => false, 'message' => __('Not available')]);
+
+        $user = $request->user();
+
+        if ($like = $user->likes()->where('likeable_type', $request->likeableType)->where('likeable_id', $request->likeableId)->first())
+            $like->delete();
+        else Like::create([
+            'likeable_type' => $request->likeableType,
+            'likeable_id' => $request->likeableId,
+            'user_id' => $user->id
+        ]);
+
+        return response()->json(['success' => true], 200);
     }
 }

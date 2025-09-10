@@ -28,6 +28,7 @@
                         'App\Models\Office' => __('Office'),
                         'App\Models\Contact' => __('Contacts'),
                         'App\Models\Passport' => __('Passport'),
+                        'App\Models\Guide' => __('Guide'),
                     ];
                 @endphp
 
@@ -54,6 +55,10 @@
 
                     <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'passport' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'passport'])">
                         {{ __('Passport') }}
+                    </x-dropdown-link>
+
+                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'guide' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'guide'])">
+                        {{ __('Guide') }}
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>

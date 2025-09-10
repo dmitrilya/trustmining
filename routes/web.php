@@ -116,9 +116,21 @@ Route::post('/order/webhook', [OrderController::class, 'webhook']);
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
 
 Route::middleware('auth')->group(function () {
+    Route::post('/like', [Controller::class, 'like'])->name('like');
+
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);
         Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
+    });
+
+    Route::group(['prefix' => 'guides'], function () {
+        Route::get('/create', [GuideController::class, 'create'])->name('guide.create');
+        Route::post('/store', [GuideController::class, 'store'])->name('guide.store');
+        Route::middleware('owner')->group(function () {
+            Route::get('/{guide}/edit', [GuideController::class, 'edit'])->name('guide.edit');
+            Route::put('/{guide}/update', [GuideController::class, 'update'])->name('guide.update');
+            Route::delete('/{guide}/destroy', [GuideController::class, 'destroy'])->name('guide.destroy');
+        });
     });
 
     Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');

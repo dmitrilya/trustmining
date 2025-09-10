@@ -64,6 +64,9 @@ class ModerationController extends Controller
             case ('App\Models\Passport'):
                 return view('passport.show', ['passport' => $m, 'moderation' => $moderation]);
                 break;
+            case ('App\Models\Guide'):
+                return view('guide.show', ['guide' => $m, 'moderation' => $moderation]);
+                break;
         }
 
         return redirect()->route('moderations');

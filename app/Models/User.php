@@ -151,4 +151,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Phone::class)->where('destroyed', false);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

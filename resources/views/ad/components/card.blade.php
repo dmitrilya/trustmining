@@ -27,7 +27,7 @@
             </div>
         @endif
 
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center">
+        <div class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center">
             <img class="w-full" src="{{ Storage::url($ad->preview) }}" alt="{{ $ad->asicVersion->asicModel->name }}">
         </div>
 

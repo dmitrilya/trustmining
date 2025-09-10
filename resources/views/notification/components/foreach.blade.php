@@ -7,6 +7,7 @@
         'App\Models\Office' => __('Office'),
         'App\Models\Contact' => __('Contacts'),
         'App\Models\Passport' => __('Passport'),
+        'App\Models\Guide' => __('Guide'),
     ];
 @endphp
 

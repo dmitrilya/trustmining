@@ -12,6 +12,29 @@ class Guide extends Model
     use HasFactory, Searchable;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'url_title',
+        'subtitle',
+        'guide',
+        'tags',
+        'user_id',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
@@ -62,5 +85,10 @@ class Guide extends Model
     public function views()
     {
         return $this->morphMany(View::class, 'viewable');
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
     }
 }

@@ -393,6 +393,18 @@
     "Income calculator": "Калькулятор дохода",
     "Calculation result": "Результат расчета",
 
+    "Creating article/guide": "Создание статьи/руководства",
+    "Title": "Заголовок",
+    "Brief description": "Краткое описание",
+    "Tags for search": "Тэги для поиска",
+    "Hashtag": "Хештег",
+    "Newest": "Новые",
+    "Oldest": "Старые",
+    "More likes": "Больше лайков",
+    "Less likes": "Меньше лайков",
+    "More views": "Больше просмотров",
+    "Less views": "Меньше просмотров",
+
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",
     "Subscription renewal failed": "Ошибка продления тарифа",

@@ -70,6 +70,9 @@ trait ModerationTrait
                     if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                     $disk = 'private';
                     break;
+                case ('App\Models\Guide'):
+                    if (isset($moderation->data['preview'])) array_push($files, $m->preview);
+                    break;
             }
 
             Storage::disk($disk)->delete($files);
@@ -144,6 +147,9 @@ trait ModerationTrait
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 $m->delete();
                 $disk = 'private';
+                break;
+            case ('App\Models\Guide'):
+                if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
                 break;
         }
 

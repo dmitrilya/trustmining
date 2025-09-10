@@ -71,7 +71,7 @@ class SendTGNotifications implements ShouldQueue
                 break;
 
             case 'App\Models\Moderation':
-                $moderationTypes = ['App\Models\Company' => __('Company'), 'App\Models\Hosting' => __('Hosting'), 'App\Models\Ad' => __('Ad'), 'App\Models\Review' => __('Review'), 'App\Models\Office' => __('Office'), 'App\Models\Contact' => __('Contacts'), 'App\Models\Passport' => __('Passport')];
+                $moderationTypes = ['App\Models\Company' => __('Company'), 'App\Models\Hosting' => __('Hosting'), 'App\Models\Ad' => __('Ad'), 'App\Models\Review' => __('Review'), 'App\Models\Office' => __('Office'), 'App\Models\Contact' => __('Contacts'), 'App\Models\Passport' => __('Passport'), 'App\Models\Guide' => __('Guide')];
                 $text = $moderationTypes[$this->n->moderationable_type];
                 if ($this->n->comment) $text .= "\n\n" . $this->n->comment;
                 $keyboard = null;

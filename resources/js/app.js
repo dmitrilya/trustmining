@@ -3,6 +3,7 @@ import './date';
 import './toast';
 import './chat';
 import './suggestions';
+import './format';
 import './broadcast';
 
 import Alpine from 'alpinejs';
@@ -48,6 +49,12 @@ document.addEventListener('alpine:init', () => {
 });
 
 Alpine.start();
+
+window.like = function (type, id) {
+    axios.post('/like', { likeableType: 'App\\Models\\' + type, likeableId: id }).then(r => {
+        if (!r.data.success) pushToastAlert(r.data.message, "error");
+    });
+}
 
 window.toggleHidden = function (adId) {
     return axios.put('/ads/' + adId + '/toggle-hidden').then(r => {

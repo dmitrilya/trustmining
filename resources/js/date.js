@@ -29,6 +29,12 @@ window.dateTransform = function (el) {
                 day: "numeric",
             });
             break;
+        case 'shortdate':
+            date = date.toLocaleDateString(window.locale, {
+                month: "short",
+                day: "numeric",
+            });
+            break;
         case 'month':
             date = date.toLocaleDateString(window.locale, {
                 year: "numeric",

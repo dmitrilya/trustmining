@@ -32,6 +32,10 @@ module.exports = {
             screens: {
                 'xs': '380px'
             },
+            gridTemplateColumns: {
+                '16': 'repeat(16, minmax(0, 1fr))',
+                '22': 'repeat(22, minmax(0, 1fr))',
+            }
         },
     },
 
