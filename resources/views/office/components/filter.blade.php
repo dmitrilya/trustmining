@@ -15,6 +15,4 @@
     </ul>
 </div>
 
-<x-checkbox name="is_company" value="true" textClasses="text-gray-500 py-3" :checked="request()->get('is_company')">
-    {{ __('Only IE and LLCs') }}
-</x-checkbox>
+<x-peculiarities :ps="request()->peculiarities" model="office" :isForm="true"></x-peculiarities>

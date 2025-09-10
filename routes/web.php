@@ -60,6 +60,7 @@ Route::group(['prefix' => 'calculator'], function () {
 
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
+Route::get('/services', [OfficeController::class, 'services'])->name('services');
 Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
 
 Route::group(['prefix' => 'dadata'], function () {

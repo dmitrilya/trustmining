@@ -8,22 +8,36 @@ use Illuminate\Http\Request;
 
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
-
+use App\Http\Traits\OfficeTrait;
 use App\Models\Moderation;
 use App\Models\Office;
 
 class OfficeController extends Controller
 {
-    use FileTrait, DaData;
+    use OfficeTrait, FileTrait, DaData;
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('office.index', ['offices' => Office::where('moderation', false)->with('user:id,url_name')->get()]);
+        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
+    }
+
+    /**
+     * Display a listing of the resource with filter (service).
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function services(Request $request)
+    {
+        $ps = $request->peculiarities ? $request->peculiarities : [];
+        array_push($ps, 'Repair service');
+        $request->peculiarities = $ps;
+
+        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
     }
 
     /**

@@ -9,6 +9,7 @@
                 <div class="text-sm text-gray-400 font-semibold">{{ __('To the buyer') }}</div>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('ads') }}">{{ __('Miners') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('services') }}">{{ __('Services') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('companies') }}">{{ __('Companies') }}</a>
                 <a class="w-max under text-sm text-gray-800"
