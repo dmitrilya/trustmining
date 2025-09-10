@@ -66,9 +66,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\Role::class,
         'in-chat' => \App\Http\Middleware\InChat::class,
-        'passport-moderated' => \App\Http\Middleware\PassportModerated::class,
-        'office-moderated' => \App\Http\Middleware\OfficeModerated::class,
-        'company-moderated' => \App\Http\Middleware\CompanyModerated::class,
+        'has-passport' => \App\Http\Middleware\HasPassport::class,
+        'has-office' => \App\Http\Middleware\HasOffice::class,
+        'has-company' => \App\Http\Middleware\HasCompany::class,
         'owner' => \App\Http\Middleware\EnsureOwner::class,
     ];
 }

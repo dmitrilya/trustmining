@@ -8,8 +8,7 @@
             @if (
                 (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 2)) &&
                     $user->passport &&
-                    !$user->passport->moderation &&
-                    $user->moderatedOffices()->exists())
+                    $user->offices->count())
                 <a href="{{ route('ad.create') }}"
                     class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
             @endif
@@ -22,11 +21,11 @@
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
-    @if (!$user->passport || $user->passport->moderation)
+    @if (!$user->passport)
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
         </p>
-    @elseif (!$user->offices()->where('moderation', false)->exists())
+    @elseif (!$user->offices->count())
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>

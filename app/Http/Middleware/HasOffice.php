@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class PassportModerated
+class HasOffice
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,7 @@ class PassportModerated
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user();
-        
-        if (!$user->passport || $user->passport->moderation) return redirect('/');
+        if (!$request->user()->offices()->where('moderation', false)->exists()) return back();
 
         return $next($request);
     }

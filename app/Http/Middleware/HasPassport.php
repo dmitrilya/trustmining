@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CompanyModerated
+class HasPassport
 {
     /**
      * Handle an incoming request.
@@ -15,11 +15,9 @@ class CompanyModerated
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
-        $user = $request->user();
+    {        
+        if (!$request->user()->passport) return redirect('/');
 
-        if (!$user->company || $user->company->moderation) return back();
-        
         return $next($request);
     }
 }

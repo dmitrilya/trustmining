@@ -182,7 +182,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::middleware(['passport-moderated', 'verified'])->group(function () {
+    Route::middleware(['has-passport', 'verified'])->group(function () {
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
@@ -193,7 +193,7 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::middleware('office-moderated')->group(function () {
+        Route::middleware('has-office')->group(function () {
             Route::group(['prefix' => 'ads'], function () {
                 Route::get('/create', [AdController::class, 'create'])->name('ad.create');
                 Route::post('/store', [AdController::class, 'store'])->name('ad.store');
@@ -206,7 +206,7 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::middleware('company-moderated')->group(function () {
+        Route::middleware('has-company')->group(function () {
             Route::group(['prefix' => 'hostings'], function () {
                 Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
                 Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');

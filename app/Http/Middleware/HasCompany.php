@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class OfficeModerated
+class HasCompany
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,8 @@ class OfficeModerated
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user();
-
-        if (!$user->offices()->where('moderation', false)->exists()) return back();
-
+        if (!$request->user()->company) return back();
+        
         return $next($request);
     }
 }
