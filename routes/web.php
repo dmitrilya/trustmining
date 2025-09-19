@@ -51,6 +51,7 @@ Route::get('/document', [Controller::class, 'document'])->name('document');
 Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
+Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty');
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'articles'], function () {
 
 Route::group(['prefix' => 'guides'], function () {
     Route::get('/', [GuideController::class, 'index'])->name('guides');
-    Route::get('/guide/{guide}', [GuideController::class, 'show'])->name('guide');
+    Route::get('/{user:id}/guide/{guide}', [GuideController::class, 'show'])->name('guide');
 });
 
 Route::group(['prefix' => 'database'], function () {

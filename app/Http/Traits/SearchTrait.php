@@ -52,7 +52,7 @@ trait SearchTrait
         })->get()->map(fn($guide) => [
             'model' => __('Guide'),
             'name' => $guide->title,
-            'href' => route('guide', ['guide' => $guide->url_title])
+            'href' => route('guide', ['user' => $guide->user->id, 'guide' => $guide->url_title])
         ]))->concat(User::search($q)->query(function ($query) {
             $query->whereHas('ads')->select(['users.name', 'users.url_name']);
         })->get()->map(fn($user) => [

@@ -12,6 +12,7 @@ use App\Http\Traits\ViewTrait;
 
 use App\Models\Moderation;
 use App\Models\Guide;
+use App\Models\User;
 
 use Carbon\Carbon;
 
@@ -83,10 +84,11 @@ class GuideController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\User  $user
      * @param  \App\Models\Guide  $guide
      * @return \Illuminate\Http\Response
      */
-    public function show(Guide $guide)
+    public function show(User $user, Guide $guide)
     {
         $this->addView(request(), $guide);
 

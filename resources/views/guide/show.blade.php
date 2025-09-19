@@ -26,9 +26,9 @@
                 <p class="date-transform text-xxs sm:text-xs font-normal text-gray-400" data-type="date"
                     data-date="{{ $guide->created_at }}"></p>
 
-                <div class="flex items-center" x-data="{ liked: '{{ $guide->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $guide->likes->count() }} }">
+                <div class="flex items-center" x-data="{ liked: '{{ $user && $guide->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $guide->likes->count() }} }">
                     <svg :class="{ 'block': liked, 'hidden': !liked }"
-                        @click="liked = false; likes--; window.like('Guide', {{ $guide->id }})"
+                        @if ($user) @click="liked = false; likes--; window.like('Guide', {{ $guide->id }})" @endif
                         class="w-4 h-4 text-gray-600 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
                         aria-hidden="true" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -36,7 +36,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <svg :class="{ 'hidden': liked, 'block': !liked }"
-                        @click="liked = true; likes++; window.like('Guide', {{ $guide->id }})"
+                        @if ($user) @click="liked = true; likes++; window.like('Guide', {{ $guide->id }})" @endif
                         class="w-4 h-4 text-gray-600 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
                         aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
@@ -67,7 +67,7 @@
 
     @if (isset($guides))
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pb-8">
-            <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($guides as $guide)
                     @php
                         switch ($loop->index) {

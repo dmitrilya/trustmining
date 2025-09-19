@@ -72,6 +72,11 @@ class Controller extends BaseController
         return view('events');
     }
 
+    public function warranty(): View
+    {
+        return view('warranty.index');
+    }
+
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];

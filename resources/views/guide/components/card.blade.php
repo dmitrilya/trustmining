@@ -37,7 +37,7 @@
                 <p class="text-xxs sm:text-xs font-normal text-gray-400 ml-1 xs:ml-2">{{ $guide->views()->count() }}</p>
             </div>
         </div>
-        <a class="block ml-auto sm:w-full mt-2" href="{{ route('guide', ['guide' => $guide->url_title]) }}">
+        <a class="block ml-auto sm:w-full mt-2" href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->url_title]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Details') }}</x-secondary-button>
         </a>
     </div>
