@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="$guide->title" :description="$guide->subtitle">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('guides')"></x-back-link>
