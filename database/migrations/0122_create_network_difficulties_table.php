@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('network_hashrates', function (Blueprint $table) {
+        Schema::create('network_difficulties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('coin_id');
             $table->foreign('coin_id')->references('id')
                 ->on('coins')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedDouble('hashrate', 24, 2);
+            $table->unsignedDouble('difficulty', 24, 2);
             $table->timestamp('created_at')->useCurrent();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('network_hashrates');
+        Schema::dropIfExists('network_difficulties');
     }
 };

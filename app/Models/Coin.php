@@ -13,4 +13,14 @@ class Coin extends Model
     {
         return $this->belongsTo(Algorithm::class);
     }
+
+    public function networkHashrates()
+    {
+        return $this->hasMany(NetworkHashrate::class);
+    }
+
+    public function networkDifficulties()
+    {
+        return $this->hasMany(NetworkDifficulty::class);
+    }
 }

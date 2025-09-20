@@ -9,6 +9,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\User;
 use App\Models\AsicBrand;
 use App\Models\Article;
+use App\Models\Guide;
 
 class SitemapGenerate extends Command
 {
@@ -88,6 +89,10 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('articles');
         foreach (Article::select('url_title')->get() as $article) {
             $out .= $this->addUrl('articles/article/' . $article->url_title);
+        }
+        $out .= $this->addUrl('guides');
+        foreach (Guide::select(['url_title', 'user_id'])->with(['user:id'])->get() as $guide) {
+            $out .= $this->addUrl('guides/' . $guide->user->id . '/guide/' . $guide->url_title);
         }
 
         $out .= $this->addUrl('support');

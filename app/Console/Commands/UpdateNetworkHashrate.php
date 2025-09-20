@@ -30,13 +30,10 @@ class UpdateNetworkHashrate extends Command
     public function handle()
     {
         // BTC
-        
+
         $coin = Coin::where('abbreviation', 'BTC')->first();
         $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
-        $coin->networkHashrates()->create([
-            'hashrate' => $data->hash_rate,
-            'minutes_between_blocks' => $data->minutes_between_blocks
-        ]);
+        $coin->networkHashrates()->create(['hashrate' => $data->hash_rate]);
 
         if ($coin->networkDifficulties()->latest()->first()->difficulty != $data->difficulty) $coin->networkDifficulties()->create([
             'difficulty' => $data->difficulty
