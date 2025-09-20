@@ -108,7 +108,7 @@ class SitemapGenerate extends Command
         $out .= '
 </urlset>';
 
-        file_put_contents('public/sitemap.xml', $out);
+        file_put_contents('public_html/sitemap.xml', $out);
 
         return Command::SUCCESS;
     }
