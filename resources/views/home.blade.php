@@ -1,4 +1,4 @@
-<x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг">
+<x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг" description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
     <x-slot name="header">
         @include('layouts.components.search')
     </x-slot>
