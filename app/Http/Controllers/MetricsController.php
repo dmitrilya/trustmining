@@ -47,12 +47,12 @@ class MetricsController extends Controller
                 if (!isset($difficulties[$i + 1])) return back();
 
                 if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
-                    array_push($recalcuateDates, $difficulty->craeted_at);
+                    array_push($recalcuateDates, $difficulty->created_at);
                     if (count($recalcuateDates) == 2) break;
                 }
             }
 
-            $prediction = round($coin->networkHashrates()->where('created_at', '>', $recalcuateDates[0])->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [$recalcuateDates[1], $recalcuateDates[0]])->avg('hashrate') - 1, 2);
+            $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalcuateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalcuateDates[1]), Carbon::createFromTimestamp($recalcuateDates[0])])->avg('hashrate') - 1) * 100, 2);
         }
 
         return view('metrics.network.difficulty.index', [

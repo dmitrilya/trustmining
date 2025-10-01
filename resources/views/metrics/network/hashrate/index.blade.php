@@ -61,7 +61,7 @@
             <h3 class="text-lg sm:text-xl lg:text-2xl text-gray-800 dark:text-gray-200 font-bold mb-2 sm:mb-3 lg:mb-4">
                 {{ __('Current hashrate') }}</h3>
             <div class="text-xs sm:text-sm lg:text-lg text-gray-500 dark:text-gray-400 mb-3 sm:mb-4 lg:mb-6">
-                {{ $hashrate }}</div>
+                {{ number_format($hashrate) }}</div>
         </div>
 
         <div id="graph" class="h-[35rem]"></div>

@@ -35,7 +35,7 @@ class UpdateNetworkData extends Command
         // BTC
         $coin = Coin::where('abbreviation', 'BTC')->first();
         $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
-        $coin->networkHashrates()->create(['hashrate' => $data->hash_rate]);
+        $coin->networkHashrates()->create(['hashrate' => $data->hash_rate * 1000000000]);
         $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
 
         return Command::SUCCESS;

@@ -28,7 +28,7 @@ class NetworkHashrate extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime',
+        'created_at' => 'timestamp',
     ];
 
     public function coin()

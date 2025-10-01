@@ -2,7 +2,7 @@
     description="История изменений и текущий показатель сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6" x-data="{ period: '3m' }"
         x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => window.buildGraph(r.data.difficulties, period))">
-        <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
+        <div class="flex justify-end items-start space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
             <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden">
                 <div @click="period = '3m';window.buildGraph(window.graph_data, period)"
                     :class="{
@@ -64,12 +64,16 @@
                 {{ number_format($difficulty) }}</div>
             @if ($prediction)
                 <div class="text-sm sm:text-base lg:text-lg text-gray-800 dark:text-gray-200 font-bold">
-                    {{ __('Prediction') }}: <span
-                        class="text-gray-500 dark:text-gray-400 {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">{{ $prediction > 0 ? '+' : '-' }}{{ $prediction }}</span>
+                    {{ __('Next difficulty prediction') }}: <span
+                        class="text-gray-500 dark:text-gray-400 {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">{{ $prediction }}</span>
                 </div>
             @endif
         </div>
 
         <div id="graph" class="h-[35rem]"></div>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
+        
     </div>
 </x-metrics-layout>
