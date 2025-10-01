@@ -400,6 +400,7 @@
     "Warranty": "Гарантия",
     "Check": "Проверить",
     "Check on the official website": "Проверить на официальном сайте",
+    "Date": "Дата",
 
     "Metrics": "Метрики",
     "Cryptonetwork": "Криптосеть",
@@ -408,6 +409,7 @@
     "Next difficulty prediction": "Прогноз следующей сложности",
     "Network hashrate": "Хэшрейт сети",
     "Current hashrate": "Текущий хэшрейт",
+    "Change": "Изменение",
 
     "m": "м",
     "y": "г",
