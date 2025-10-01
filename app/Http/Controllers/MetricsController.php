@@ -36,7 +36,7 @@ class MetricsController extends Controller
         $difficulties = $coin->networkDifficulties()->where('created_at', '>', Carbon::now()->subDays(31))
             ->latest()->select(['difficulty', 'need_blocks', 'created_at'])->get();
 
-        if (!$difficulties) return back();
+        if (!$difficulties->count()) return back();
 
         $prediction = null;
 

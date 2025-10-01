@@ -11,12 +11,12 @@ window.buildGraph = (data, period) => {
 
     if (period != 'all') {
         let dateDiffs = {
-            '3m': (864000000 * 90),            
-            '6m': (864000000 * 180),            
-            '1y': (864000000 * 360),            
-            '3y': (864000000 * 1080),            
+            '3m': (86400000 * 90),            
+            '6m': (86400000 * 180),            
+            '1y': (86400000 * 360),            
+            '3y': (86400000 * 1080),            
         };
-        data = data.filter(datum => datum.date > Date.now() - dateDiffs[period])
+        data = data.filter(datum => datum.date > (Date.now() - dateDiffs[period]))
     }
 
     let chart = root.container.children.push(am5xy.XYChart.new(root, {
