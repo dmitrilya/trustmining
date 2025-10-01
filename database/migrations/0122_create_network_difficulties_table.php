@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('coin_id');
             $table->foreign('coin_id')->references('id')
                 ->on('coins')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedDouble('difficulty', 24, 2);
+            $table->unsignedDouble('difficulty', 26, 4);
+            $table->unsignedSmallInteger('need_blocks');
             $table->timestamp('created_at')->useCurrent();
         });
     }

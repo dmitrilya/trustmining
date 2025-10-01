@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('subscription:check')->daily();
         $schedule->command('coinprofit:update')->hourlyAt(5);
         $schedule->command('exchangerates:update')->everyFiveMinutes();
+        $schedule->command('network_data:update')->hourly();
         $schedule->command('art:update')->twiceDaily(0, 12);
         $schedule->command('sitemap:generate')->twiceDaily(1, 13);
         $schedule->command('trustfactors:update')->dailyAt('00:30');

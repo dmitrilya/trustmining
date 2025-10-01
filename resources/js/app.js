@@ -2,6 +2,7 @@ import './bootstrap';
 import './date';
 import './toast';
 import './chat';
+import './graph';
 import './suggestions';
 import './format';
 import './broadcast';

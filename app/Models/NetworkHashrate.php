@@ -11,6 +11,26 @@ class NetworkHashrate extends Model
 
     const UPDATED_AT = null;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'coin_id',
+        'hashrate',
+        'created_at',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
+
     public function coin()
     {
         return $this->belongsTo(Coin::class);

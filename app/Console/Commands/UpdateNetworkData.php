@@ -4,16 +4,19 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Models\Coin;
+use Carbon\Carbon;
 
-class UpdateNetworkHashrate extends Command
+use App\Models\Coin;
+use App\Models\NetworkHashrate;
+
+class UpdateNetworkData extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'network_data:update';
 
     /**
      * The console command description.
@@ -30,14 +33,10 @@ class UpdateNetworkHashrate extends Command
     public function handle()
     {
         // BTC
-
         $coin = Coin::where('abbreviation', 'BTC')->first();
         $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
         $coin->networkHashrates()->create(['hashrate' => $data->hash_rate]);
-
-        if ($coin->networkDifficulties()->latest()->first()->difficulty != $data->difficulty) $coin->networkDifficulties()->create([
-            'difficulty' => $data->difficulty
-        ]);
+        $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
 
         return Command::SUCCESS;
     }

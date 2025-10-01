@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@alpinejs/mask": "^3.14.9",
+        "@amcharts/amcharts5": "^5.13.6",
         "bootstrap": "^5.3.3",
         "flowbite": "^2.5.1",
         "jquery": "^3.7.1"

@@ -401,6 +401,17 @@
     "Check": "Проверить",
     "Check on the official website": "Проверить на официальном сайте",
 
+    "Metrics": "Метрики",
+    "Cryptonetwork": "Криптосеть",
+    "Network difficulty": "Сложность сети",
+    "Current difficulty": "Текущая сложность",
+    "Prediction": "Прогноз",
+    "Network hashrate": "Хэшрейт сети",
+    "Current hashrate": "Текущий хэшрейт",
+
+    "m": "м",
+    "y": "г",
+
     "Creating article/guide": "Создание статьи/руководства",
     "Title": "Заголовок",
     "Brief description": "Краткое описание",

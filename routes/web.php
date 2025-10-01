@@ -17,6 +17,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TariffController;
+use App\Http\Controllers\MetricsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -57,6 +58,18 @@ Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
     Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
     Route::get('/{asicModel}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->name('calculator.modelver');
+});
+
+Route::group(['prefix' => 'metrics'], function () {
+    Route::get('/', [MetricsController::class, 'index'])->name('metrics');
+    Route::group(['prefix' => 'network'], function () {
+        Route::group(['prefix' => '{coin:name}'], function () {
+            Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
+            Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
+            Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
+            Route::get('/get-difficulty', [MetricsController::class, 'getDifficulty'])->name('metrics.network.get_difficulty');
+        });
+    });
 });
 
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
