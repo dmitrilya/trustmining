@@ -5,7 +5,7 @@
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
-            <div class="flex justify-between items-start mb-3 xs:mb-4 lg:mb-6">
+            <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-gray-100 size-7 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden"
                     @click="show = !show">
                     <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24" height="24"
@@ -17,7 +17,7 @@
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
                     <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7">
-                        <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m']);window.xAxis.set('baseInterval', { timeUnit: 'day', count: 1 });"
+                        <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m']);window.xAxis.set('groupData', false);"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3m',
@@ -26,7 +26,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('m') }}
                         </div>
-                        <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m']);window.xAxis.set('baseInterval', { timeUnit: 'day', count: 1 });"
+                        <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m']);window.xAxis.set('groupData', false);"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '6m',
@@ -35,7 +35,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '6' . __('m') }}
                         </div>
-                        <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y']);window.xAxis.set('baseInterval', { timeUnit: 'day', count: 1 });"
+                        <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y']);window.xAxis.set('groupData', false);"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '1y',
@@ -44,7 +44,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '1' . __('y') }}
                         </div>
-                        <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y']);window.xAxis.set('baseInterval', { timeUnit: 'week', count: 1 });"
+                        <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y']);window.xAxis.set('groupData', true);"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3y',
@@ -53,7 +53,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('y') }}
                         </div>
-                        <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all']);window.xAxis.set('baseInterval', { timeUnit: 'week', count: 2 });"
+                        <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all']);window.xAxis.set('groupData', true);"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     'all',

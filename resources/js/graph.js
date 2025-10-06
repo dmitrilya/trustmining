@@ -29,6 +29,8 @@ window.buildGraph = (data, period) => {
     }));
 
     let xAxis = chart.xAxes.push(DateAxis.new(root, {
+        groupData: false,
+        groupInterval: { timeUnit: "week", count: 1 },
         baseInterval: { timeUnit: "day", count: 1 },
         min: window.dateDiffs[period],
         renderer: AxisRendererX.new(root, {}),
