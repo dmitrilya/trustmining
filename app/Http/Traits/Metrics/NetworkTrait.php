@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Models\Coin;
 
+use Carbon\Carbon;
+
+use DB;
+
 trait NetworkTrait
 {
     public function getHashrate(Request $request, Coin $coin)
@@ -16,7 +20,19 @@ trait NetworkTrait
 
     public function getDifficulty(Request $request, Coin $coin)
     {
-        return response()->json(['difficulties' => $coin->networkDifficulties()->select(['difficulty', 'created_at'])->get()
-            ->groupBy('created_at')->map(fn($day, $createdAt) => ['date' => $createdAt * 1000, 'value' => $day->avg('difficulty')])->values()], 200);
+        $groupedDifficulties = $coin->networkDifficulties()->select(['difficulty', 'created_at', DB::raw('Date(created_at) as date')])
+            ->get()->groupBy('date');
+        $difficulties = [];
+        $prevAvg = $groupedDifficulties->first()->avg('difficulty');
+
+        foreach ($groupedDifficulties->slice(1) as $date => $dayDifficulties) {
+            $avg = $dayDifficulties->avg('difficulty');
+
+            $difficulty = $avg != $prevAvg ? ($avg > $prevAvg ? $dayDifficulties->max('difficulty') : $dayDifficulties->min('difficulty')) : $avg;
+            array_push($difficulties, ['date' => Carbon::create($date)->timestamp * 1000, 'value' => $difficulty]);
+
+            $prevAvg = $avg;
+        }
+        return response()->json(['difficulties' => $difficulties], 200);
     }
 }

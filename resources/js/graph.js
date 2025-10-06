@@ -17,10 +17,11 @@ window.buildGraph = (data, period) => {
             '1y': (86400000 * 360),
             '3y': (86400000 * 1080),
         };
-        data = data.filter(datum => datum.date > (Date.now() - dateDiffs[period]))
+        data = data.filter(datum => datum.date > (Date.now() - dateDiffs[period]));
     }
 
     root.locale = am5locales_ru_RU;
+    root.tapToActivate = true;
 
     let chart = root.container.children.push(am5xy.XYChart.new(root, {
         panX: true,
@@ -31,9 +32,10 @@ window.buildGraph = (data, period) => {
         paddingTop: 0,
         paddingBottom: 36,
         paddingLeft: 0,
+        tapToActivate: true
     }));
 
-    let xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+    let xAxis = chart.xAxes.push(am5xy.GaplessDateAxis.new(root, {
         baseInterval: { timeUnit: "day", count: 1 },
         renderer: am5xy.AxisRendererX.new(root, {
             minGridDistance: 60,

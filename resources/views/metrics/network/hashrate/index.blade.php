@@ -100,7 +100,7 @@
                     <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                         :class="{
                             'text-green-500': item.value > items[i + 1].value,
-                            'text-red-400': item.value < items[i +
+                            'text-red-500': item.value < items[i +
                                 1].value,
                             'text-gray-700 dark:text-gray-300': item.value == items[i + 1].value
                         }"

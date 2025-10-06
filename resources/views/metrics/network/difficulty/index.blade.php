@@ -1,8 +1,9 @@
 <x-metrics-layout title="Сложность сети {{ $coin->name }}" :header="__('Network difficulty') . ' ' . $coin->name" active="network_difficulty"
     description="История изменений и текущий показатель сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
-    <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
+    <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period);
-        items = r.data.difficulties.reverse().splice(0, 91);
+        difficulties = r.data.difficulties.reverse().slice(0, 361);
+        items = difficulties.slice(0, 360).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
@@ -90,7 +91,7 @@
                         {{ __('Network difficulty') }}</div>
                     <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-gray-500 dark:text-gray-400">{{ __('Change') }}</div>
                 </div>
-                <template x-for="(item, i) in items.slice(0, 90)" key="item.date">
+                <template x-for="(item, i) in items.slice(0, items.length - 1)" key="item.date">
                     <div class="grid grid-cols-6 gap-2 sm:gap-3 mb-1 sm:mb-2">
                         <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-700 dark:text-gray-300"
                             x-text="new Date(item.date).toLocaleString(window.locale, {
@@ -103,7 +104,7 @@
                         <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                             :class="{
                                 'text-green-500': item.value > items[i + 1].value,
-                                'text-red-400': item.value < items[i +
+                                'text-red-500': item.value < items[i +
                                     1].value,
                                 'text-gray-700 dark:text-gray-300': item.value == items[i + 1].value
                             }"
