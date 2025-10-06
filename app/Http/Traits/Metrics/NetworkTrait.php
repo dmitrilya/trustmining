@@ -14,13 +14,13 @@ trait NetworkTrait
 {
     public function getHashrate(Request $request, Coin $coin)
     {
-        return response()->json(['hashrates' => $coin->networkHashrates()->select(['hashrate', 'created_at'])->get()
-            ->groupBy('created_at')->map(fn($day, $createdAt) => ['date' => $createdAt * 1000, 'value' => $day->avg('hashrate')])->values()], 200);
+        return response()->json(['hashrates' => $coin->networkHashrates()->select(['hashrate', DB::raw('Date(created_at) as date')])->get()
+            ->groupBy('date')->map(fn($day, $date) => ['date' => $date * 1000, 'value' => $day->avg('hashrate')])->values()], 200);
     }
 
     public function getDifficulty(Request $request, Coin $coin)
     {
-        $groupedDifficulties = $coin->networkDifficulties()->select(['difficulty', 'created_at', DB::raw('Date(created_at) as date')])
+        $groupedDifficulties = $coin->networkDifficulties()->select(['difficulty', DB::raw('Date(created_at) as date')])
             ->get()->groupBy('date');
         $difficulties = [];
         $prevAvg = $groupedDifficulties->first()->avg('difficulty');

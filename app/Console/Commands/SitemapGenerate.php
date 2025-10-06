@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\AsicBrand;
 use App\Models\Article;
 use App\Models\Guide;
+use App\Models\Coin;
 
 class SitemapGenerate extends Command
 {
@@ -44,6 +45,15 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('ads');
         $out .= $this->addUrl('hostings');
         $out .= $this->addUrl('companies');
+
+        $out .= $this->addUrl('metrics');
+        foreach (Coin::whereHas('networkHashrates')->select('name')->get() as $coin) {
+            $out .= $this->addUrl('metrics/network/' . $coin->name . '/hashrate');
+        }
+
+        foreach (Coin::whereHas('networkDifficulties')->select('name')->get() as $coin) {
+            $out .= $this->addUrl('metrics/network/' . $coin->name . '/difficulty');
+        }
 
         $users = User::where(
             fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
