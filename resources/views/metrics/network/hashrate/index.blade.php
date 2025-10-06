@@ -66,7 +66,7 @@
                     ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
             </div>
 
-            <div class="text-center my-3 xs:my-4 sm::my-5 md:my-7 lg:my-9">
+            <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
                 <h3
                     class="text-lg sm:text-xl lg:text-2xl text-gray-800 dark:text-gray-200 font-bold mb-2 sm:mb-3 lg:mb-4">
                     {{ __('Current hashrate') }}</h3>
@@ -74,7 +74,7 @@
                     {{ number_format($hashrate) }}</div>
             </div>
 
-            <div id="graph" class="h-[35rem]"></div>
+            <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
         </div>
 
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
