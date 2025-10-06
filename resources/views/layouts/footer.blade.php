@@ -11,6 +11,7 @@
                 <a class="w-max under text-sm text-gray-800" href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('services') }}">{{ __('Services') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                <a class="w-max under text-sm text-gray-800" href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
                 <a class="w-max under text-sm text-gray-800" href="{{ route('companies') }}">{{ __('Companies') }}</a>
                 <a class="w-max under text-sm text-gray-800"
                     href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>

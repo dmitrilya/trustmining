@@ -1,7 +1,7 @@
 <div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
-        <div>{{ __('Solutions') }}</div>
+        <div>{{ __('Menu') }}</div>
 
         <div class="ml-1">
             <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
@@ -18,7 +18,8 @@
         x-transition:leave-end="transform opacity-0 scale-50"
         class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
         @click.away="open = false">
-        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white dark:bg-gray-700">
+        <div
+            class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white dark:bg-gray-700">
             <div class="sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-500 mb-6">{{ __('Project') }}</div>
@@ -144,6 +145,16 @@
                         </svg>
                         <a class="under text-sm lg:text-base text-gray-800 font-semibold"
                             href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-gray-400 mr-2" aria-hidden="true" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5" d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-gray-800 font-semibold"
+                            href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
                     </div>
                 </div>
 

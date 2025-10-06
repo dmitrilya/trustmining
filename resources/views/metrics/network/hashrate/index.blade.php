@@ -5,65 +5,76 @@
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
-            <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
-                <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden">
-                    <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m']"
-                        :class="{
-                            'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
-                                '3m',
-                            ' text-gray-600 dark:text-gray-300': period != '3m'
-                        }"
-                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
-                        {{ '3' . __('m') }}
-                    </div>
-                    <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m']"
-                        :class="{
-                            'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
-                                '6m',
-                            ' text-gray-600 dark:text-gray-300': period != '6m'
-                        }"
-                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
-                        {{ '6' . __('m') }}
-                    </div>
-                    <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y']"
-                        :class="{
-                            'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
-                                '1y',
-                            ' text-gray-600 dark:text-gray-300': period != '1y'
-                        }"
-                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
-                        {{ '1' . __('y') }}
-                    </div>
-                    <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y']"
-                        :class="{
-                            'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
-                                '3y',
-                            ' text-gray-600 dark:text-gray-300': period != '3y'
-                        }"
-                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
-                        {{ '3' . __('y') }}
-                    </div>
-                    <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all']"
-                        :class="{
-                            'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
-                                'all',
-                            ' text-gray-600 dark:text-gray-300': period != 'all'
-                        }"
-                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
-                        {{ __('All') }}
-                    </div>
+            <div class="flex justify-between items-start mb-3 xs:mb-4 lg:mb-6">
+                <div class="bg-gray-100 size-7 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden"
+                    @click="show = !show">
+                    <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
+                    </svg>
                 </div>
+                
+                <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
+                    <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7">
+                        <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m']"
+                            :class="{
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                    '3m',
+                                ' text-gray-600 dark:text-gray-300': period != '3m'
+                            }"
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            {{ '3' . __('m') }}
+                        </div>
+                        <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m']"
+                            :class="{
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                    '6m',
+                                ' text-gray-600 dark:text-gray-300': period != '6m'
+                            }"
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            {{ '6' . __('m') }}
+                        </div>
+                        <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y']"
+                            :class="{
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                    '1y',
+                                ' text-gray-600 dark:text-gray-300': period != '1y'
+                            }"
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            {{ '1' . __('y') }}
+                        </div>
+                        <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y']"
+                            :class="{
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                    '3y',
+                                ' text-gray-600 dark:text-gray-300': period != '3y'
+                            }"
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            {{ '3' . __('y') }}
+                        </div>
+                        <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all']"
+                            :class="{
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                    'all',
+                                ' text-gray-600 dark:text-gray-300': period != 'all'
+                            }"
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            {{ __('All') }}
+                        </div>
+                    </div>
 
-                <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Coin::has('networkHashrates')
-                    ->get()
-                    ->map(
-                        fn($coin) => [
-                            'key' => $coin->id,
-                            'value' => $coin->abbreviation,
-                            'href' => route('metrics.network.hashrate', ['coin' => $coin->name]),
-                        ],
-                    )
-                    ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Coin::has('networkHashrates')
+                        ->get()
+                        ->map(
+                            fn($coin) => [
+                                'key' => $coin->id,
+                                'value' => $coin->abbreviation,
+                                'href' => route('metrics.network.hashrate', ['coin' => $coin->name]),
+                            ],
+                        )
+                        ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                </div>
             </div>
 
             <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
