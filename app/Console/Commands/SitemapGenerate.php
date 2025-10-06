@@ -48,11 +48,11 @@ class SitemapGenerate extends Command
 
         $out .= $this->addUrl('metrics');
         foreach (Coin::whereHas('networkHashrates')->select('name')->get() as $coin) {
-            $out .= $this->addUrl('metrics/network/' . $coin->name . '/hashrate');
+            $out .= $this->addUrl('metrics/network/' . strtolower($coin->name) . '/hashrate');
         }
 
         foreach (Coin::whereHas('networkDifficulties')->select('name')->get() as $coin) {
-            $out .= $this->addUrl('metrics/network/' . $coin->name . '/difficulty');
+            $out .= $this->addUrl('metrics/network/' . strtolower($coin->name) . '/difficulty');
         }
 
         $users = User::where(

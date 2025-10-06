@@ -15,7 +15,7 @@ trait NetworkTrait
     public function getHashrate(Request $request, Coin $coin)
     {
         return response()->json(['hashrates' => $coin->networkHashrates()->select(['hashrate', DB::raw('Date(created_at) as date')])->get()
-            ->groupBy('date')->map(fn($day, $date) => ['date' => $date * 1000, 'value' => $day->avg('hashrate')])->values()], 200);
+            ->groupBy('date')->map(fn($day, $date) => ['date' => Carbon::create($date)->timestamp * 1000, 'value' => $day->avg('hashrate')])->values()], 200);
     }
 
     public function getDifficulty(Request $request, Coin $coin)
