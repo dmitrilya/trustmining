@@ -107,7 +107,7 @@
                         })">
                     </div>
                     <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-700 dark:text-gray-300"
-                        x-text="item.value + ''"></div>
+                        x-text="item.value.toLocaleString()"></div>
                     <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                         :class="{
                             'text-green-500': item.value > items[i + 1].value,
