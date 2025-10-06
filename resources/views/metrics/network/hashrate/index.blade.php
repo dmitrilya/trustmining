@@ -14,10 +14,10 @@
                             d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
                     </svg>
                 </div>
-                
+
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
                     <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7">
-                        <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m']"
+                        <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3m',
@@ -26,7 +26,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('m') }}
                         </div>
-                        <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m']"
+                        <div @click="period = '6m';window.xAxis.set('min', window.dateDiffs['6m'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '6m',
@@ -35,7 +35,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '6' . __('m') }}
                         </div>
-                        <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y']"
+                        <div @click="period = '1y';window.xAxis.set('min', window.dateDiffs['1y'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '1y',
@@ -44,7 +44,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '1' . __('y') }}
                         </div>
-                        <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y']"
+                        <div @click="period = '3y';window.xAxis.set('min', window.dateDiffs['3y'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3y',
@@ -53,7 +53,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('y') }}
                         </div>
-                        <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all']"
+                        <div @click="period = 'all';window.xAxis.set('min', window.dateDiffs['all'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     'all',
@@ -107,12 +107,11 @@
                         })">
                     </div>
                     <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-700 dark:text-gray-300"
-                        x-text="item.value"></div>
+                        x-text="item.value + ''"></div>
                     <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                         :class="{
                             'text-green-500': item.value > items[i + 1].value,
-                            'text-red-500': item.value < items[i +
-                                1].value,
+                            'text-red-500': item.value < items[i + 1].value,
                             'text-gray-700 dark:text-gray-300': item.value == items[i + 1].value
                         }"
                         x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">

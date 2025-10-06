@@ -2,8 +2,8 @@
     description="История изменений и текущий показатель сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period);
-        difficulties = r.data.difficulties.reverse().slice(0, 361);
-        items = difficulties.slice(0, 360).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
+        difficulties = r.data.difficulties.reverse().slice(0, 366);
+        items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div class="flex justify-between items-start mb-3 xs:mb-4 lg:mb-6">
