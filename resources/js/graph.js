@@ -4,21 +4,15 @@ import am5locales_ru_RU from "@amcharts/amcharts5/locales/ru_RU";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 
 window.buildGraph = (data, period) => {
-    window.graph_data = data;
-    if (window.root) window.root.dispose();
-
     let root = am5.Root.new("graph")
-    window.root = root;
-
-    if (period != 'all') {
-        let dateDiffs = {
-            '3m': (86400000 * 90),
-            '6m': (86400000 * 180),
-            '1y': (86400000 * 360),
-            '3y': (86400000 * 1080),
-        };
-        data = data.filter(datum => datum.date > (Date.now() - dateDiffs[period]));
-    }
+    let now = Date.now();
+    window.dateDiffs = {
+        '3m': now - (86400000 * 90),
+        '6m': now - (86400000 * 180),
+        '1y': now - (86400000 * 365),
+        '3y': now - (86400000 * 1095),
+        'all': null
+    };
 
     root.locale = am5locales_ru_RU;
     root.tapToActivate = true;
@@ -35,15 +29,14 @@ window.buildGraph = (data, period) => {
         tapToActivate: true
     }));
 
-    let xAxis = chart.xAxes.push(am5xy.GaplessDateAxis.new(root, {
+    let xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
         baseInterval: { timeUnit: "day", count: 1 },
-        renderer: am5xy.AxisRendererX.new(root, {
-            minGridDistance: 60,
-            minorGridEnabled: true,
-        }),
+        min: window.dateDiffs[period],
+        renderer: am5xy.AxisRendererX.new(root, {}),
         tooltip: am5.Tooltip.new(root, {}),
         tooltipLocation: 0,
     }));
+    window.xAxis = xAxis;
 
     let yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
         visible: false,
