@@ -17,7 +17,7 @@
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
                     <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7">
-                        <div @click="period = '3m';window.xAxis.setAll({min: window.dateDiffs['3m'], groupData: false);"
+                        <div @click="period = '3m';window.xAxis.setAll({min: window.dateDiffs['3m'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3m',
@@ -26,7 +26,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('m') }}
                         </div>
-                        <div @click="period = '6m';window.xAxis.setAll({min: window.dateDiffs['6m'], groupData: false);"
+                        <div @click="period = '6m';window.xAxis.setAll({min: window.dateDiffs['6m'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '6m',
@@ -35,7 +35,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '6' . __('m') }}
                         </div>
-                        <div @click="period = '1y';window.xAxis.setAll({min: window.dateDiffs['1y'], groupData: false);"
+                        <div @click="period = '1y';window.xAxis.setAll({min: window.dateDiffs['1y'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '1y',
@@ -44,7 +44,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '1' . __('y') }}
                         </div>
-                        <div @click="period = '3y';window.xAxis.setAll({min: window.dateDiffs['3y'], groupData: true, groupInterval: { timeUnit: 'week', count: 1 });"
+                        <div @click="period = '3y';window.xAxis.setAll({min: window.dateDiffs['3y'], groupData: true, groupInterval: { timeUnit: 'week', count: 1 }});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3y',
@@ -53,7 +53,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('y') }}
                         </div>
-                        <div @click="period = 'all';window.xAxis.setAll({min: window.dateDiffs['all'], groupData: true, groupInterval: { timeUnit: 'week', count: 2 });"
+                        <div @click="period = 'all';window.xAxis.setAll({min: window.dateDiffs['all'], groupData: true, groupInterval: { timeUnit: 'week', count: 2 }});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     'all',
