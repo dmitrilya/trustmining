@@ -7,7 +7,7 @@
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-gray-100 size-7 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden" @click="show = !show">
+                <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden" @click="show = !show">
                     <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
-                    <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7">
+                    <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
                         <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
@@ -70,7 +70,7 @@
                             fn($coin) => [
                                 'key' => $coin->id,
                                 'value' => $coin->abbreviation,
-                                'href' => route('metrics.network.difficulty', ['coin' => $coin->name]),
+                                'href' => route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]),
                             ],
                         )
                         ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
@@ -86,7 +86,7 @@
                 @if ($prediction)
                     <div class="text-sm sm:text-base lg:text-lg text-gray-800 dark:text-gray-200 font-bold">
                         {{ __('Next difficulty prediction') }}: <span
-                            class="text-gray-500 dark:text-gray-400 {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">{{ $prediction }}</span>
+                            class="text-gray-500 dark:text-gray-400 {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">{{ $prediction }}%</span>
                     </div>
                 @endif
             </div>

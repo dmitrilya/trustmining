@@ -38,6 +38,13 @@ class UpdateNetworkData extends Command
         $coin->networkHashrates()->create(['hashrate' => $data->hash_rate * 1000000000]);
         $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
 
+        // LTC
+        $coin = Coin::where('abbreviation', 'LTC')->first();
+        $dataRate = json_decode(file_get_contents('https://litecoinspace.org/api/v1/mining/hashrate/3d'));
+        $dataDif = json_decode(file_get_contents('https://litecoinspace.org/api/v1/difficulty-adjustment'));
+        $coin->networkHashrates()->create(['hashrate' => $dataRate->currentHashrate]);
+        $coin->networkDifficulties()->create(['difficulty' => $dataRate->currentDifficulty, 'need_blocks' => $dataDif->remainingBlocks]);
+
         return Command::SUCCESS;
     }
 }
