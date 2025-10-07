@@ -45,6 +45,7 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('ads');
         $out .= $this->addUrl('hostings');
         $out .= $this->addUrl('companies');
+        $out .= $this->addUrl('warranty-check');
 
         $out .= $this->addUrl('metrics');
         foreach (Coin::whereHas('networkHashrates')->select('name')->get() as $coin) {

@@ -79,6 +79,12 @@ a {
     }
 }
 
+button {
+    &.loading {
+        cursor: progress;
+    }
+}
+
 #telegram-login-trust_m_notifications_bot {
     margin-left: auto;
 }
