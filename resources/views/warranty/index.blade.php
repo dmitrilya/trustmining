@@ -13,13 +13,13 @@
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Whatsminer</h3>
-                <div class="flex flex-col sm:flex-row sm:items-end">
+                <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
-                    <div class="flex flex-col xs:flex-row mt-2 sm:mt-0 sm:ml-3">
-                        <div class="w-full sm:min-w-40">
+                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-3">
+                        <div class="w-full lg:min-w-80">
                             <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r"
                                 type="text" :placeholder="__('Warranty')" disabled readonly />
                         </div>
@@ -48,13 +48,13 @@
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Bitmain</h3>
-                <div class="flex flex-col sm:flex-row sm:items-end">
+                <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
-                    <div class="flex flex-col xs:flex-row mt-2 sm:mt-0 sm:ml-3">
-                        <div class="w-full sm:min-w-40">
+                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-3">
+                        <div class="w-full lg:min-w-80">
                             <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r"
                                 type="text" :placeholder="__('Warranty until')" disabled readonly />
                         </div>
