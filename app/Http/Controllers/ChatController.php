@@ -133,7 +133,11 @@ class ChatController extends Controller
 
         if ($user->role->name == 'support')
             $this->notify('New message from support', collect([$addressee]), 'App\Models\Message', $message);
-        else event(new NewMessage($addressee, $message));
+        else {
+            if ($addressee->role->name == 'support')
+                $this->notify('New message to support', collect([$addressee]), 'App\Models\Message', $message);
+            event(new NewMessage($addressee, $message));
+        }
 
         return response()->json(['success' => true], 200);
     }
