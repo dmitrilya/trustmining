@@ -1,5 +1,5 @@
 <x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
-    description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver">
+    description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Check warranty') }}
@@ -76,19 +76,53 @@
                     href="https://m.bitmain.com/support/warranty">{{ __('Check on the official website') }}</a>
             </div>
         </section>
+
+        <section>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+                x-data="{ sn: null }">
+                <h3
+                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    Canaan</h3>
+                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                    target="_blank"
+                    href="https://www.canaan.io/support/warranty_check">{{ __('Check on the official website') }}</a>
+            </div>
+        </section>
+
+        <section>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+                x-data="{ sn: null }">
+                <h3
+                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    Iceriver</h3>
+                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                    target="_blank"
+                    href="https://www.iceriver.io/warranty-inquiry">{{ __('Check on the official website') }}</a>
+            </div>
+        </section>
+
+        <section>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+                x-data="{ sn: null }">
+                <h3
+                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    Jasminer</h3>
+                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                    target="_blank"
+                    href="https://www.jasminer.com/#/support/searchsn">{{ __('Check on the official website') }}</a>
+            </div>
+        </section>
     </div>
 
     {{-- 
     https://www.canaan.io/?do_action=action.supports_sn_warranty POST
     -sn
-    https://www.canaan.io/support/warranty_check
 
     https://www.iceriver.io/wp-admin/admin-post.php POST
     -sn_number
     -action=warrantycheck_ajax_action
-    https://www.iceriver.io/warranty-inquiry/
 
     https://user-api.jasminer.com/jasminer/logistics/product/info/getByMachineCode POST
     -machineCode
-    https://www.jasminer.com/#/support/searchsn --}}
+     --}}
 </x-app-layout>
