@@ -109,6 +109,7 @@ class Controller extends BaseController
                     ]);
                     $version->price = $version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate);
                     $version->algorithm = $model->algorithm->name;
+                    $version->model_name = strtolower(str_replace(' ', '_', $model->name));
 
                     return $version;
                 });

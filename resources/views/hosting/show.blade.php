@@ -243,7 +243,6 @@
                                             if (r.data.success) {
                                                 deficiencies = r.data.deficiencies;
                                                 done = true;
-                                                console.log(deficiencies);
                                             }
                                             else pushToastAlert(r.data.message, 'error');
                                         });
