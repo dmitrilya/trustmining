@@ -4,7 +4,8 @@
         window.buildGraph(r.data.hashrates, period);
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6"
+            style="height: calc-size(max-content, size - 50px)">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden"
                     @click="show = !show">
@@ -16,7 +17,8 @@
                 </div>
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
-                    <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
+                    <div
+                        class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
                         <div @click="period = '3m';window.xAxis.setAll({min: window.dateDiffs['3m'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==

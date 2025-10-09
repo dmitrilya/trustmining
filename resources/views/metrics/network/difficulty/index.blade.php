@@ -5,18 +5,21 @@
         difficulties = r.data.difficulties.reverse().slice(0, 366);
         items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6"
+            style="height: calc-size(max-content, size - 50px)">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden" @click="show = !show">
-                    <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
+                <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden"
+                    @click="show = !show">
+                    <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
                     </svg>
                 </div>
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
-                    <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
+                    <div
+                        class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
                         <div @click="period = '3m';window.xAxis.set('min', window.dateDiffs['3m'])"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
