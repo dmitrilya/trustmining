@@ -23,6 +23,8 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'New message from support',
             ], [
+                'name' => 'New message to support',
+            ], [
                 'name' => 'New review',
             ], [
                 'name' => 'Subscription renewal failed'

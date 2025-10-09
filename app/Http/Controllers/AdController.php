@@ -141,6 +141,25 @@ class AdController extends Controller
     }
 
     /**
+     * Show the form for editing listings of the resource.
+     *
+     * @param  Illuminate\Http\Request;
+     * @return \Illuminate\Http\Response
+     */
+    public function editMass(Request $request)
+    {
+        return view('ad.edit-mass', [
+            'ads' => $request->user()->ads()->where('moderation', false)->with([
+                'office:id,city',
+                'coin:id,abbreviation',
+                'asicVersion:id,hashrate,measurement,asic_model_id',
+                'asicVersion.asicModel:id,name'
+            ])->get()->sortBy(['asicVersion.asicModel.name', 'asicVersion.hashrate']),
+            'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAdRequest  $request
@@ -203,6 +222,26 @@ class AdController extends Controller
         }
 
         return redirect()->route('ads.show', ['ad' => $ad->id]);
+    }
+
+    /**
+     * Update listing of the resource in storage.
+     *
+     * @param  Illuminate\Http\Request;
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMass(Request $request)
+    {
+        $changings = collect($request->changings);
+        $request->user()->ads()->whereIn('id', $changings->pluck('id'))->get()
+            ->each(function ($ad) use ($changings) {
+                $change = $changings->where('id', $ad->id)->first();
+                if (isset($change['price'])) $ad->price = $change['price'];
+                if (isset($change['coin_id'])) $ad->coin_id = $change['coin_id'];
+                $ad->save();
+            });
+
+        return response()->json(['success' => true, 'message' => __('Prices successfully updated')], 200);
     }
 
     /**

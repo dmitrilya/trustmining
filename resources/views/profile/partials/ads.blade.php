@@ -37,7 +37,7 @@
                 </p>
 
                 <p class="text-base text-gray-600 dark:text-gray-400">
-                    {{ $user->ads()->where('hidden', false)->where('moderation', false)->count() }}
+                    {{ $user->ads->where('hidden', false)->where('moderation', false)->count() }}
                 </p>
             </div>
 
@@ -61,5 +61,9 @@
                 </p>
             </div>
         </div>
+
+        @if ($user->ads->where('moderation', false)->count())
+            <a href="{{ route('ad.edit.mass') }}"><x-primary-button class="block ml-auto mt-4">{{ __('Update prices') }}</x-primary-button></a>
+        @endif
     @endif
 </section>

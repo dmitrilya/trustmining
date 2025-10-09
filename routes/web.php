@@ -211,6 +211,8 @@ Route::middleware('auth')->group(function () {
             Route::group(['prefix' => 'ads'], function () {
                 Route::get('/create', [AdController::class, 'create'])->name('ad.create');
                 Route::post('/store', [AdController::class, 'store'])->name('ad.store');
+                Route::get('/edit-mass', [AdController::class, 'editMass'])->name('ad.edit.mass');
+                Route::post('/update-mass', [AdController::class, 'updateMass'])->name('ad.update.mass');
                 Route::middleware('owner')->group(function () {
                     Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
                     Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
