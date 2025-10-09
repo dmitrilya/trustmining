@@ -104,7 +104,7 @@ class Controller extends BaseController
                     $vm = array_search($version->measurement, $measurements);
                     $am = array_search($model->algorithm->measurement, $measurements);
                     $version->profits = $algorithm->maxProfit->map(fn($profit) => [
-                        'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
+                        'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 4),
                         'coins' => $profit['coins']
                     ]);
                     $version->price = $version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate);
