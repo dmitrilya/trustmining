@@ -15,7 +15,7 @@
                     </svg>
                 </div>
 
-                <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
+                <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
                     <div class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
                         <div @click="period = '3m';window.xAxis.setAll({min: window.dateDiffs['3m'], groupData: false});"
                             :class="{
