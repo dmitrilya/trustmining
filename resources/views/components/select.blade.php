@@ -9,7 +9,7 @@
 
     <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
         <button type="button" @click="open = ! open"
-            class="relative w-full bg-white py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'r-10 rounded-md' }} text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-indigo-500">
+            class="relative w-full bg-white py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-indigo-500">
             <span class="flex items-center">
                 @if ($icon)
                     @switch($icon['type'])
