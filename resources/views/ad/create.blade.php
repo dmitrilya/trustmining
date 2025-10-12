@@ -20,7 +20,7 @@
 
                 <div>
                     <x-input-label for="preview" :value="__('Preview')" />
-                    <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
+                    <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview" required
                         accept=".png,.jpg,.jpeg"
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG
