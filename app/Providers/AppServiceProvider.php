@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
                 $expiration,
                 array_merge($options, ['path' => $path])
             );
+        });
+
+        VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+            return (new MailMessage)
+                ->subject(__('Verify Email Address'))
+                ->line(__('Please click the button below to verify your email address and activate your account.'))
+                ->action(__('Activate My Account'), $url)
+                ->line(__('If you did not create an account, no further action is required.'));
         });
     }
 }

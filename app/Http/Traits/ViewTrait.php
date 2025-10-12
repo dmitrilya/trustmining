@@ -4,9 +4,11 @@ namespace App\Http\Traits;
 
 use App\Models\View;
 
+use Carbon\Carbon;
+
 trait ViewTrait
 {
-    public function addView($request, $model)
+    public function addView($request, $model, $adId = null)
     {
         $auth = $request->user();
 
@@ -14,17 +16,16 @@ trait ViewTrait
 
         $class = get_class($model);
 
-        $view = View::where([
-            ['viewable_id', $model->id],
-            ['viewable_type', $class],
-            ['viewer', $request->ip()]
-        ])->first();
-
-        if (!$view) return View::create([
+        $data = [
             'viewable_id' => $model->id,
             'viewable_type' => $class,
-            'viewer' => $request->ip()
-        ]);
+            'viewer' => $request->ip(),
+            'created_at' => Carbon::now()->format('Y-m-d')
+        ];
+
+        if ($adId) $data['ad_id'] = $adId;
+
+        $view = View::firstOrCreate($data);
 
         $view->increment('count');
 

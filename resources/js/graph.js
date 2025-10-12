@@ -1,17 +1,9 @@
-import { Root, Tooltip, color } from "@amcharts/amcharts5";
+import { Root, Tooltip, color, DataProcessor } from "@amcharts/amcharts5";
 import { XYChart, DateAxis, AxisRendererX, ValueAxis, AxisRendererY, XYCursor, LineSeries } from "@amcharts/amcharts5/xy";
 import am5locales_ru_RU from "@amcharts/amcharts5/locales/ru_RU";
 
-window.buildGraph = (data, period) => {
-    let root = Root.new("graph")
-    let now = Date.now();
-    window.dateDiffs = {
-        '3m': now - (86400000 * 90),
-        '6m': now - (86400000 * 180),
-        '1y': now - (86400000 * 365),
-        '3y': now - (86400000 * 1095),
-        'all': null
-    };
+window.buildGraph = (data, period, div, valueYField, visibleY = false) => {
+    let root = Root.new(div);
 
     root.locale = am5locales_ru_RU;
     root.tapToActivate = true;
@@ -25,7 +17,7 @@ window.buildGraph = (data, period) => {
         paddingTop: 0,
         paddingBottom: 36,
         paddingLeft: 0,
-        tapToActivate: true
+        tapToActivate: true,
     }));
 
     let xAxis = chart.xAxes.push(DateAxis.new(root, {
@@ -37,10 +29,9 @@ window.buildGraph = (data, period) => {
         tooltip: Tooltip.new(root, {}),
         tooltipLocation: 0,
     }));
-    window.xAxis = xAxis;
 
     let yAxis = chart.yAxes.push(ValueAxis.new(root, {
-        visible: false,
+        visible: visibleY,
         renderer: AxisRendererY.new(root, {})
     }));
 
@@ -54,7 +45,7 @@ window.buildGraph = (data, period) => {
         name: "Series",
         xAxis: xAxis,
         yAxis: yAxis,
-        valueYField: "value",
+        valueYField: valueYField,
         valueXField: "date",
         locationX: 0,
         fill: color(0x404099),
@@ -62,8 +53,12 @@ window.buildGraph = (data, period) => {
         seriesTooltipTarget: "bullet",
         tooltip: Tooltip.new(root, {
             labelText: "{valueY}"
-        })
+        }),
     }));
+    series.data.processor = DataProcessor.new(root, {
+        emptyAs: 0
+    });
 
     series.data.setAll(data);
+    window[div + '_chart'] = chart;
 }

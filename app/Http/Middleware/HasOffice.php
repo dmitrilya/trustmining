@@ -16,7 +16,7 @@ class HasOffice
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->offices()->where('moderation', false)->exists()) return back();
+        if (!$request->user()->offices()->exists()) return back();
 
         return $next($request);
     }

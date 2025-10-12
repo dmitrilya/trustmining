@@ -1,7 +1,7 @@
 <x-metrics-layout title="Хэшрейт сети {{ $coin->name }}" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
     description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_hashrate', ['coin' => $coin->name]) }}').then(r => {
-        window.buildGraph(r.data.hashrates, period);
+        window.buildGraph(r.data.hashrates, period, 'graph', 'value');
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 graph-container">
@@ -18,7 +18,7 @@
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
                     <div
                         class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
-                        <div @click="period = '3m';window.xAxis.setAll({min: window.dateDiffs['3m'], groupData: false});"
+                        <div @click="period = '3m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3m'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3m',
@@ -27,7 +27,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('m') }}
                         </div>
-                        <div @click="period = '6m';window.xAxis.setAll({min: window.dateDiffs['6m'], groupData: false});"
+                        <div @click="period = '6m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['6m'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '6m',
@@ -36,7 +36,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '6' . __('m') }}
                         </div>
-                        <div @click="period = '1y';window.xAxis.setAll({min: window.dateDiffs['1y'], groupData: false});"
+                        <div @click="period = '1y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['1y'], groupData: false});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '1y',
@@ -45,7 +45,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '1' . __('y') }}
                         </div>
-                        <div @click="period = '3y';window.xAxis.setAll({min: window.dateDiffs['3y'], groupData: true});"
+                        <div @click="period = '3y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3y'], groupData: true});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     '3y',
@@ -54,7 +54,7 @@
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
                             {{ '3' . __('y') }}
                         </div>
-                        <div @click="period = 'all';window.xAxis.setAll({min: window.dateDiffs['all'], groupData: true});"
+                        <div @click="period = 'all';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['all'], groupData: true});"
                             :class="{
                                 'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
                                     'all',

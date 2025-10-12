@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DatabaseController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ChatController;
@@ -213,6 +214,8 @@ Route::middleware('auth')->group(function () {
                 Route::post('/store', [AdController::class, 'store'])->name('ad.store');
                 Route::get('/edit-mass', [AdController::class, 'editMass'])->name('ad.edit.mass');
                 Route::post('/update-mass', [AdController::class, 'updateMass'])->name('ad.update.mass');
+                Route::get('/statistics', [StatisticsController::class, 'ads'])->name('ad.statistics');
+                Route::get('/statistics/get-ads-statistics', [StatisticsController::class, 'adsStatistics'])->name('ad.get-statistics');
                 Route::middleware('owner')->group(function () {
                     Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
                     Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');

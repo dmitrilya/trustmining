@@ -48,14 +48,14 @@
 }
 
 .graph-container {
-    height: calc-size(max-content, size - 40px);
+    height: calc-size(max-content, size - 36px);
 
     @media (min-width: 640px) {
-        height: calc-size(max-content, size - 44px);
+        height: calc-size(max-content, size - 40px);
     }
 
     @media (min-width: 768px) {
-        height: calc-size(max-content, size - 48px);
+        height: calc-size(max-content, size - 44px);
     }
 }
 

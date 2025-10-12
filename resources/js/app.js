@@ -3,6 +3,7 @@ import './date';
 import './toast';
 import './chat';
 import './graph';
+import {adsStatistics} from './statistics';
 import './suggestions';
 import './format';
 import './broadcast';
@@ -15,6 +16,26 @@ Alpine.plugin(mask);
 window.Alpine = Alpine;
 
 window.measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+window.now = Date.now();
+window.dateDiffs = {
+    '1d': now - 86400000,
+    '1dbefore': now - (86400000 * 2),
+    '3d': now - (86400000 * 3),
+    '3dbefore': now - (86400000 * 6),
+    '1w': now - (86400000 * 7),
+    '1wbefore': now - (86400000 * 14),
+    '1m': now - (86400000 * 30),
+    '1mbefore': now - (86400000 * 60),
+    '3m': now - (86400000 * 90),
+    '3mbefore': now - (86400000 * 180),
+    '6m': now - (86400000 * 180),
+    '6mbefore': now - (86400000 * 360),
+    '1y': now - (86400000 * 365),
+    '1ybefore': now - (86400000 * 730),
+    '3y': now - (86400000 * 1095),
+    '3ybefore': now - (86400000 * 2190),
+    'all': null
+};
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('modelsData', () => ({
@@ -46,7 +67,9 @@ document.addEventListener('alpine:init', () => {
                 model => (!this.algo || this.algo && model.algorithm == this.algo) && model.name.toLowerCase().includes(this.search)
             );
         },
-    }))
+    }));
+
+    Alpine.data('adsStatisticsData', adsStatistics);
 });
 
 Alpine.start();
@@ -98,16 +121,6 @@ window.checkNotifications = function () {
 
 window.onload = function () {
     let userId = document.querySelector("meta[name='user-id']");
-
-    /*setTimeout(() => window.messagesChannelEvent({
-        chat_id: 10000000,
-        message: 'qwe sadljfh asodf hy2803yt hoW;EUH ',
-        images: ["chat/image_10000003_0_1752072789.webp"],
-        files: [{ "name": "Ustav", "path": "chat/file_10000004_0_1752072902.doc" }],
-        from: 'asd',
-        from_status: 'Частное лицо',
-        created_at: '2025-07-09 14:45:14'
-    }), 2000);*/
 
     if (userId) window.listenBroadcast(userId);
 

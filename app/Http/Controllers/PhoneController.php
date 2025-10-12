@@ -34,14 +34,15 @@ class PhoneController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  Illuminate\Http\Request  $request
      * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
-    public function show(Phone $phone)
+    public function show(Request $request, Phone $phone)
     {
         if (!$phone->user->tariff || !$phone->user->tariff->can_have_phone) return response()->json(['success' => false, 'number' => __('Not available')]);
 
-        $this->addView(request(), $phone);
+        $this->addView(request(), $phone, $request->ad_id);
 
         return response()->json(['success' => true, 'number' => $phone->number]);
     }

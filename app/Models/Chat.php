@@ -9,6 +9,15 @@ class Chat extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'ad_id'
+    ];
+
     public function messages()
     {
         return $this->hasMany(Message::class);
@@ -17,5 +26,10 @@ class Chat extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function ad()
+    {
+        return $this->belongsTo(Ad::class);
     }
 }

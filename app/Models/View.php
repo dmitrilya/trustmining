@@ -18,10 +18,17 @@ class View extends Model
         'viewable_id',
         'viewable_type',
         'viewer',
+        'ad_id',
+        'created_at'
     ];
 
     public function viewable()
     {
         return $this->morphTo();
+    }
+
+    public function ad()
+    {
+        return $this->belongsTo(Ad::class);
     }
 }

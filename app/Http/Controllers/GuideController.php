@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreGuideRequest;
+
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\GuideTrait;
 use App\Http\Traits\ViewTrait;

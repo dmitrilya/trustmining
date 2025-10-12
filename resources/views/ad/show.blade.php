@@ -233,9 +233,9 @@
 
                                 <div class="flex flex-wrap gap-3 sm:gap-4 mt-6">
                                     <a class="block w-full sm:w-max"
-                                        href="{{ route('chat.start', ['user' => $ad->user->id, 'ad' => $ad->id]) }}">
+                                        href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
                                         <x-primary-button class="w-full flex items-center justify-center xs:py-3">
-                                            <svg class="min-w-4 h-4 mr-3" aria-hidden="true" width="24"
+                                            <svg class="min-w-4 h-4 mr-1 xs:mr-2" aria-hidden="true" width="24"
                                                 height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="1.5"
@@ -249,12 +249,12 @@
                                         <x-secondary-button
                                             class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3"
                                             x-data="{ number: null, status: '{{ __('View number') }}' }"
-                                            @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id]) }}')
+                                            @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')
                                                 .then(r => {
                                                     if (r.data.success) number = '+' + r.data.number;
                                                     else status = r.data.number;
                                                 }); else window.open('tel:' + number);">
-                                            <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24"
+                                            <svg class="min-w-4 h-4 mr-1 xs:mr-2" width="24" height="24"
                                                 fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2"
@@ -266,7 +266,7 @@
 
                                     <x-secondary-button class="w-full sm:w-max justify-center xs:py-3"
                                         @click="{{ $trackClick }}">
-                                        <svg class="min-w-4 h-4 mr-3" aria-hidden="true" width="24"
+                                        <svg class="min-w-4 h-4 mr-1 xs:mr-2" aria-hidden="true" width="24"
                                             height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round"
                                                 stroke-linejoin="round" stroke-width="1.5"

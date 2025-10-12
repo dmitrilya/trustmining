@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('viewable_id');
             $table->string('viewable_type');
-            $table->unsignedInteger('count')->default(1);
+            $table->unsignedBigInteger('ad_id')->nullable();
+            $table->foreign('ad_id')->references('id')
+                ->on('ads')->onUpdate('cascade')->onDelete('set null');
+            $table->unsignedInteger('count')->default(0);
             $table->ipAddress('viewer');
             $table->timestamps();
         });

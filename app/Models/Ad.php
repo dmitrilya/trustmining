@@ -76,9 +76,19 @@ class Ad extends Model
         return $this->morphMany(View::class, 'viewable');
     }
 
+    public function phoneViews()
+    {
+        return $this->hasMany(View::class);
+    }
+
     public function tracks()
     {
         return $this->hasMany(Track::class);
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class);
     }
 
     public function trackingUsers()
