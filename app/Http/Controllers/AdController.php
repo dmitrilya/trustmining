@@ -48,7 +48,7 @@ class AdController extends Controller
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
-            'offices' => $user->offices()->where('moderation', false)->select(['id', 'address'])->get(),
+            'offices' => $user->offices()->select(['id', 'address'])->get(),
             'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);
     }
