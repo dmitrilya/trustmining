@@ -5,15 +5,15 @@
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
 
     <div x-show="filter"
-        class="fixed top-0 right-0 p-4 h-max w-full sm:max-w-sm flex-col overflow-y-auto bg-white shadow-md flex ml-auto"
+        class="fixed top-0 right-0 p-4 h-max w-full sm:max-w-sm flex-col overflow-y-auto bg-white dark:bg-zinc-900 shadow-md flex ml-auto"
         x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full"
         x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" @click.away="filter = false">
         <div class="flex items-center justify-between">
-            <h2 class="text-lg font-medium text-gray-900">{{ __('Filters') }}</h2>
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-200">{{ __('Filters') }}</h2>
 
             <button type="button"
-                class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+                class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white dark:bg-zinc-950 p-2 text-gray-400"
                 @click="filter = false">
                 <span class="sr-only">Close menu</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

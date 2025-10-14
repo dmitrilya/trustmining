@@ -13,7 +13,7 @@
         @if (isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                     <div
                         class="md:col-span-5{{ isset($moderation->data['preview']) || isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -112,7 +112,7 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
                 <div class="md:col-span-5">
@@ -247,7 +247,7 @@
 
                                     @if (count($ad->user->phones))
                                         <x-secondary-button
-                                            class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3"
+                                            class="w-full sm:w-max justify-center bg-secondary-gradient !text-white xs:py-3"
                                             x-data="{ number: null, status: '{{ __('View number') }}' }"
                                             @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')
                                                 .then(r => {

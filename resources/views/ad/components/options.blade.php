@@ -1,7 +1,7 @@
 @props(['owner'])
 
 <button id="ad-options-trigger" data-dropdown-toggle="{{ 'ad-options_' . $ad->id }}"
-    class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-md hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-md hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700"
     type="button">
     <svg class="w-4 xs:w-5 h-4 xs:h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
         <path
@@ -10,14 +10,14 @@
 </button>
 
 <div id="{{ 'ad-options_' . $ad->id }}"
-    class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg border-2 border-gray-100 dark:border-gray-600 min-w-32 w-full max-w-44 dark:bg-gray-700 dark:divide-gray-600">
+    class="z-100 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg border-2 border-gray-100 dark:border-zinc-700 min-w-32 w-full max-w-44 dark:bg-zinc-800 dark:divide-zinc-700">
     <ul class="py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
         @if ($owner)
             <li>
                 <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"
-                    class="block px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ __('Edit') }}</a>
+                    class="block px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white">{{ __('Edit') }}</a>
             </li>
-            <li class="flex px-3 py-2 sm:px-4 rounded hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+            <li class="flex px-3 py-2 sm:px-4 rounded hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white">
                 <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
             </li>
         @else
@@ -50,7 +50,7 @@
             @endphp
 
             <li @click="{{ $trackClick }}"
-                class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white">
                 <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
@@ -58,7 +58,7 @@
                 <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
             </li>
             <li>
-                <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
                     href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
                     <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -68,7 +68,7 @@
                 </a>
             </li>
             @if ($ad->user->phones->count())
-                <li class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                <li class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
                     x-data="{ number: '{{ __('View number') }}' }"
                     @click="if (/^\d+$/.test(number)) window.open('tel:+' + number);
                         else axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')

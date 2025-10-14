@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
             <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @csrf
@@ -21,7 +21,7 @@
                         <x-file-input id="passport-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
                             accept=".png,.jpg,.jpeg" multiple required
                             @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="images_help">PNG, JPG
+                        <p class="mt-1 text-sm text-gray-500" id="images_help">PNG, JPG
                             or JPEG (max. 2MB, 3 items)</p>
                         <x-input-error :messages="$errors->get('images')" />
                         @foreach ($errors->get('images.*') as $error)
@@ -76,7 +76,7 @@
                     <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple
                         autocomplete="documents" accept=".doc,.docx" required
                         @change="if ($el.files.length > 4) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 4]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="documents_help">DOC (max. 1MB, max. 4
+                    <p class="mt-1 text-sm text-gray-500" id="documents_help">DOC (max. 1MB, max. 4
                         items)
                     </p>
                     <x-input-error :messages="$errors->get('documents')" />

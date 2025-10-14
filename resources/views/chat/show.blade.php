@@ -22,7 +22,7 @@
                             class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3{{ $activeChat->id != $chat->id ? ($isUnchecked ? ' bg-gray-50' : '') : ' border border-indigo-500' }}">
                             <li>
                                 <div id="chat-signal-{{ $chat->id }}"
-                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-zinc-950">
                                 </div>
 
                                 <div class="flex">
@@ -61,7 +61,7 @@
                 <div class="flex">
                     <div class="flex items-center lg:hidden p-1 -ml-1">
                         <button @click="open = ! open"
-                            class="inline-flex items-center justify-center p-1 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+                            class="inline-flex items-center justify-center p-1 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-950 focus:outline-none focus:bg-gray-100 dark:focus:bg-zinc-950 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                             <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

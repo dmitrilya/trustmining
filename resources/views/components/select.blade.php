@@ -9,7 +9,7 @@
 
     <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
         <button type="button" @click="open = ! open"
-            class="relative w-full bg-white py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-indigo-500">
+            class="relative w-full bg-white dark:bg-zinc-900 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-gray-900 dark:text-zinc-200 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-600">
             <span class="flex items-center">
                 @if ($icon)
                     @switch($icon['type'])
@@ -31,7 +31,7 @@
                     x-text="items[itemKey].value"></span>
             </span>
             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5' : 'h-4 w-4' }} sm:h-5 sm:w-5 text-gray-400"
+                <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5' : 'h-4 w-4' }} sm:h-5 sm:w-5 text-gray-400 dark:text-gray-500"
                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" />
@@ -40,12 +40,12 @@
         </button>
 
         <ul x-show="open" @click.away="open = false" style="display: none"
-            class="absolute top-full z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            class="absolute top-full z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
             @foreach ($items as $item)
                 <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'"
                     @elseif ($handleChange) @click="{{ $handleChange }}({{ $item['key'] }});itemKey = {{ $item['key'] }};open = false"
                     @else @click="itemKey = {{ $item['key'] }};open = false" @endif
-                    class="flex items-center justify-between cursor-pointer select-none py-2 px-3 text-gray-900 hover:bg-indigo-600 hover:text-white">
+                    class="flex items-center justify-between cursor-pointer select-none py-2 px-3 text-gray-900 dark:text-gray-200 hover:bg-indigo-600 hover:text-white">
                     <div class="flex items-center w-full">
                         @if ($icon)
                             @switch($icon['type'])

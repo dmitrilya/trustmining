@@ -1,7 +1,7 @@
 @props(['ad', 'auth', 'hidden'])
 
 <div
-    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white shadow-md overflow-hidden rounded-lg flex flex-col justify-between">
+    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         @if (count($hosting->images))
             <img class="w-full aspect-[4/3] overflow-hidden rounded-lg" src="{{ Storage::url($hosting->images[0]) }}"
@@ -15,7 +15,7 @@
             {{ __('Trust Factor') }}: <span class="text-gray-600">{{ $hosting->user->tf }}</span>
         </p>
 
-        <div class="flex items-center my-2 sm:my-3 text-sm sm:text-base text-gray-900 dark:text-white font-bold">
+        <div class="flex items-center my-2 sm:my-3 text-sm sm:text-base text-gray-900 dark:text-gray-100 font-bold">
             <svg class="w-4 h-4 text-gray-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                 height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"

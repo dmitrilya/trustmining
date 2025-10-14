@@ -5,7 +5,7 @@
         difficulties = r.data.difficulties.reverse().slice(0, 366);
         items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 graph-container">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 graph-container">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm cursor-pointer border flex justify-center items-center md:hidden"
                     @click="show = !show">
@@ -18,50 +18,50 @@
 
                 <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
                     <div
-                        class="flex bg-gray-100 dark:bg-gray-700 rounded-s-lg rounded-e-lg overflow-hidden border h-7 sm:h-8">
+                        class="flex bg-gray-100 dark:bg-zinc-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-zinc-700 h-7 sm:h-8">
                         <div @click="period = '3m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3m'])"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
                                     '3m',
                                 ' text-gray-600 dark:text-gray-300': period != '3m'
                             }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '3' . __('m') }}
                         </div>
                         <div @click="period = '6m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['6m'])"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
                                     '6m',
                                 ' text-gray-600 dark:text-gray-300': period != '6m'
                             }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '6' . __('m') }}
                         </div>
                         <div @click="period = '1y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['1y'])"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
                                     '1y',
                                 ' text-gray-600 dark:text-gray-300': period != '1y'
                             }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '1' . __('y') }}
                         </div>
                         <div @click="period = '3y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3y'])"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
                                     '3y',
                                 ' text-gray-600 dark:text-gray-300': period != '3y'
                             }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '3' . __('y') }}
                         </div>
                         <div @click="period = 'all';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['all'])"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-600': period ==
+                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
                                     'all',
                                 ' text-gray-600 dark:text-gray-300': period != 'all'
                             }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500">
+                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ __('All') }}
                         </div>
                     </div>
@@ -96,13 +96,13 @@
             <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
-                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
                     {{ __('Date') }}</div>
-                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
                     {{ __('Network difficulty') }}</div>
-                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-gray-500 dark:text-gray-400">
+                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
                     {{ __('Change') }}</div>
             </div>
             <template x-for="(item, i) in items.slice(0, items.length - 1)" key="item.date">

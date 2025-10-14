@@ -128,7 +128,7 @@
     </div>
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-3xl p-4 sm:p-8 md:p-12">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-3xl p-4 sm:p-8 md:p-12">
             <div class="text-center text-gray-900 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
                 {{ __('Pay the tariff') }}</div>
 

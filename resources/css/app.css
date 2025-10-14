@@ -43,7 +43,21 @@
 
     &::-webkit-scrollbar-thumb {
         border-radius: 6px;
-        background-color: #1c64f2;
+        background-color: oklch(58.5% 0.233 277.117);
+    }
+}
+
+.dark .overflow-y-auto {
+    &::-webkit-scrollbar-track {
+        background-color: oklch(14.1% 0.005 285.823);
+    }
+
+    &::-webkit-scrollbar {
+        background-color: oklch(14.1% 0.005 285.823);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: oklch(51.1% 0.262 276.966);
     }
 }
 

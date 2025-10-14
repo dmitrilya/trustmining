@@ -37,22 +37,22 @@ const pushToast = function (type, title, pretext, text, alert) {
 
     const toast = document.createElement('div');
     toast.style.opacity = 0;
-    toast.className = "w-full p-4 bg-white rounded-lg shadow-lg border border-gray-200 transition duration-300";
+    toast.className = "w-full p-4 bg-white dark:bg-zinc-900 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-700 transition duration-300";
     toast.role = 'alert';
     toast.innerHTML = type == 'alert' ? `<div class="flex items-center">
     ${alertIcons[alert]}
-    <div class="ms-3 text-sm font-normal text-gray-500">${text}</div>
+    <div class="ms-3 text-sm font-normal text-gray-500 dark:text-gray-400">${text}</div>
     <button type="button" onclick="this.parentElement.parentElement.style.opacity = 0;setTimeout(() => { this.parentElement.parentElement.remove() }, 300)"
-        class="block ml-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500" aria-label="Close">
+        class="block ml-auto -mx-1.5 -my-1.5 bg-white dark:bg-zinc-900 justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 rounded-lg p-1.5 hover:bg-gray-100 dark:hover:border-zinc-800 inline-flex h-8 w-8 dark:text-gray-500" aria-label="Close">
         <span class="sr-only">Close</span>
         <svg class="w-3 h-3" aria-hidden="true" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
         </svg>
     </button>
 </div>` : `<div class="flex items-center">
-    <span class="text-xs text-gray-400 dark:text-white">${title}</span>
+    <span class="text-xs text-gray-400 dark:text-100">${title}</span>
     <button type="button" onclick="this.parentElement.parentElement.style.opacity = 0;setTimeout(() => { this.parentElement.parentElement.remove() }, 300)"
-        class="block ml-auto -mx-1.5 -my-1.5 bg-white justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500" aria-label="Close">
+        class="block ml-auto -mx-1.5 -my-1.5 bg-white dark:bg-zinc-900 justify-center items-center flex-shrink-0 text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 rounded-lg p-1.5 hover:bg-gray-100 dark:hover:border-zinc-800 inline-flex h-8 w-8 dark:text-gray-500" aria-label="Close">
         <span class="sr-only">Close</span>
         <svg class="w-3 h-3" aria-hidden="true" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>

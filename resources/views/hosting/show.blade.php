@@ -17,7 +17,7 @@
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons')
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
                     <div
                         class="md:col-span-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -154,7 +154,7 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6">
             <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                 <div class="md:col-span-8">
                     <x-carousel :images="$hosting->images" min="128" max="128"></x-carousel>
@@ -236,7 +236,7 @@
                     @if (!$auth || $hosting->user->id != $auth->id && count($hosting->contract_deficiencies))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
-                                class="w-full sm:w-max justify-center bg-secondary-gradient text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
+                                class="w-full sm:w-max justify-center bg-secondary-gradient !text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
                                 @click="if (!status) {
                                     if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
                                         .then(r => {

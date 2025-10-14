@@ -1,4 +1,4 @@
-<div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white shadow-md overflow-hidden rounded-lg">
+<div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-zinc-950 shadow-md overflow-hidden rounded-lg">
     <div
         class="w-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mb-3 lg:mb-4">
         <svg class="w-14 h-14 text-gray-300 dark:text-gray-800" width="24" height="24" fill="currentColor"
@@ -20,7 +20,7 @@
         </div>
         <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
             href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
-            <x-secondary-button class="bg-secondary-gradient text-white">{{ __('Contact') }}</x-secondary-button>
+            <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
         </a>
     </div>
 </div>

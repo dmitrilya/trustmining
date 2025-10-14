@@ -93,11 +93,11 @@
             </div>
         @endguest
 
-        <div class="md:col-span-3 @auth lg:col-start-2 @endauth bg-white relative overflow-y-auto">
+        <div class="md:col-span-3 @auth lg:col-start-2 @endauth bg-white dark:bg-zinc-950 relative overflow-y-auto">
             <svg class="absolute left-0 top-0 w-1.5 sm:w-2" aria-hidden="true" x-ref="timeline">
                 <defs>
                     <pattern id=":S4:" width="6" height="8" patternUnits="userSpaceOnUse">
-                        <path d="M0 0H6M0 8H6" class="stroke-gray-200" fill="none"></path>
+                        <path d="M0 0H6M0 8H6" class="stroke-gray-200 dark:stroke-zinc-800" fill="none"></path>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#:S4:)"></rect>
@@ -109,11 +109,11 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('22-08-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Project launch') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Opening a demo version of a marketplace with a narrow specialization in mining for large companies') }}
@@ -128,13 +128,13 @@
                             class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-xl rotate-[15deg]">
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Invitation of large companies') }}
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">{{ __('Invitation of large companies') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Testing basic functions') }}</li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">{{ __('Bug fixes and optimization') }}</li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">{{ __('Testing basic functions') }}</li>
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">{{ __('Bug fixes and optimization') }}</li>
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Development of an advertising campaign') }}
                         </li>
                     </ul>
@@ -144,22 +144,22 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.1' }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Running Advertising Ads') }}
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Booking advertising spaces') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Convenient auction system for advertising space') }}</li>
                     </ul>
                 </article>
@@ -168,11 +168,11 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('10-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Entering the market') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Launching an advertising campaign and actively attracting sellers and buyers to the site') }}
@@ -187,14 +187,14 @@
                             class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-xl rotate-[6deg]">
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Attract as many users as possible') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Monitor the load on the site and identify scaling opportunities') }}</li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Recruitment of moderators and support staff') }}</li>
                     </ul>
                 </article>
@@ -203,22 +203,22 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.2' }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('SEO') }}
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Mining calculator') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Improving indexing of site pages') }}
                         </li>
                     </ul>
@@ -228,19 +228,19 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Advertising with bloggers and collaborations') }}</div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Search for popular bloggers covering mining') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Collaborations to promote a platform with a convenient search for equipment from trusted suppliers and placement sites') }}
                         </li>
                     </ul>
@@ -250,25 +250,25 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-10-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Ability to write manuals') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Useful articles and guides') }}
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Create a platform section with accessible and reliable information about the world of mining') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Implement additional promotion of active companies on the platform') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Increasing indexed platform pages to improve search engine results') }}
                         </li>
                     </ul>
@@ -278,11 +278,11 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.3' }}
 
                     </div>
@@ -294,16 +294,16 @@
                             class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-xl rotate-[6deg]">
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Integration with Yandex maps') }}
                             <a class="inline-block text-indigo-500 hover:text-indigo-400" target="_blank"
                                 href="https://yandex.ru/maps-api/products">Yandex api</a>
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Finding the nearest sales offices') }}</li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Map and route planning in the company card') }}</li>
                     </ul>
                 </article>
@@ -312,22 +312,22 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('1-12-2026')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Update') . ' v 1.4' }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('Analytics of ad quality and chosen promotion method') }}
                     </div>
 
-                    <div class="md:text-lg text-gray-700 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
+                    <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Detailed statistics of buyer interest') }}
                         </li>
-                        <li class="text-xs sm:text-sm text-gray-600 pl-2">
+                        <li class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 pl-2">
                             {{ __('Track lead activity and ad relevance') }}
                         </li>
                     </ul>
@@ -337,11 +337,11 @@
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
                         <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-gray-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
                         </div>
-                        <div class="date-transform text-xs text-gray-600 font-semibold" data-type="date"
+                        <div class="date-transform text-xs text-gray-600 dark:text-gray-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-02-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 dark:text-gray-200 font-semibold mb-2 lg:mb-3">
                         {{ __('Launching a mobile application') }}</div>
                     <div class="text-xs lg:text-sm text-gray-500 mb-6 md:mb-8">
                         {{ __('TrustMining in your pocket') }}

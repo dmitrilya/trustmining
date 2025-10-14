@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4">
             @if (!$chats->count())
                 <p class="text-base text-gray-500">
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
@@ -33,7 +33,7 @@
                             class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3{{ $isUnchecked ? ' bg-gray-50' : '' }}">
                             <li>
                                 <div id="chat-signal-{{ $chat->id }}"
-                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-zinc-950">
                                 </div>
 
                                 <div class="flex">

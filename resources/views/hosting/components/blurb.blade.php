@@ -1,5 +1,5 @@
 <div class="flex flex-col md:flex-row gap-2 sm:gap-3 lg:gap-4 mb-4">
-    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white shadow-lg overflow-hidden rounded-lg md:grid grid-cols-9">
+    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white dark:bg-zinc-900 shadow-lg overflow-hidden rounded-lg md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-gray-300 dark:text-gray-800" width="24" height="24" fill="currentColor"
@@ -22,12 +22,12 @@
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
                 href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
-                <x-secondary-button class="bg-secondary-gradient text-white">{{ __('Contact') }}</x-secondary-button>
+                <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
             </a>
         </div>
     </div>
 
-    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white shadow-lg overflow-hidden rounded-lg md:grid grid-cols-9">
+    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white dark:bg-zinc-900 shadow-lg overflow-hidden rounded-lg md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-gray-300 dark:text-gray-800" width="24" height="24" fill="currentColor"
@@ -50,7 +50,7 @@
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
                 href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
-                <x-secondary-button class="bg-secondary-gradient text-white">{{ __('Contact') }}</x-secondary-button>
+                <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
             </a>
         </div>
     </div>

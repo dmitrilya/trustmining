@@ -1,6 +1,6 @@
 <div class="relative" x-data="{ show: false }">
     <button type="button" @click="show = !show"
-        class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-gray-600">
+        class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700">
         <span class="cursor-pointer">&#128512</span>
     </button>
 

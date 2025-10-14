@@ -54,11 +54,11 @@
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900" x-data="{ filter: false }">
+    <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white dark:bg-gray-800 shadow">
+            <header class="bg-white dark:bg-zinc-900 shadow">
                 <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

@@ -1,4 +1,4 @@
-<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white shadow-md overflow-hidden rounded-lg flex flex-col justify-between ad-card"
+<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white dark:bg-zinc-900 shadow-md overflow-hidden rounded-lg flex flex-col justify-between ad-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
@@ -9,13 +9,13 @@
         @if ($owner)
             <div class="mt-2 absolute left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->moderations->where('moderation_status_id', 1)->count())
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
@@ -32,7 +32,7 @@
         </div>
 
         <div class="mt-2 md:mt-3 flex items-start justify-between">
-            <div class="text-xs xs:text-sm md:text-base text-gray-900 dark:text-white font-bold">
+            <div class="text-xs xs:text-sm md:text-base text-gray-900 dark:text-gray-100 font-bold">
                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
             </div>
 
@@ -53,24 +53,24 @@
             {{ __('Trust Factor') }}: <span class="font-bold {{ $ad->user->tf > 60 ? $ad->user->tf > 80 ? 'text-green-500' : 'text-yellow-300' : 'text-red-600' }}">{{ $ad->user->tf }}</span>
         </p>
 
-        <p class="mt-1 md:mt-2 text-xxs sm:text-xs md:text-sm text-gray-400">
-            {{ __('Condition') . ': ' }}<span class="text-gray-600">{{ $ad->new ? __('New') : __('Used') }}</span>
+        <p class="mt-1 md:mt-2 text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+            {{ __('Condition') . ': ' }}<span class="text-gray-600 dark:text-gray-400">{{ $ad->new ? __('New') : __('Used') }}</span>
         </p>
 
-        <p class="text-xxs sm:text-xs md:text-sm text-gray-400">
+        <p class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
             {{ __('Availability') . ': ' }}<span
-                class="text-gray-600">{{ $ad->in_stock ? __('In stock') : __('Preorder') }}</span>
+                class="text-gray-600 dark:text-gray-400">{{ $ad->in_stock ? __('In stock') : __('Preorder') }}</span>
         </p>
 
         @if (!$ad->new)
-            <p class="text-xxs sm:text-xs md:text-sm text-gray-400">
-                {{ __('Warranty (months)') . ': ' }}<span class="text-gray-600">{{ $ad->warranty }}</span>
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+                {{ __('Warranty (months)') . ': ' }}<span class="text-gray-600 dark:text-gray-400">{{ $ad->warranty }}</span>
             </p>
         @endif
 
         @if (!$ad->in_stock)
-            <p class="text-xxs sm:text-xs md:text-sm text-gray-400">
-                {{ __('Waiting (days)') . ': ' }}<span class="text-gray-600">{{ $ad->waiting }}</span>
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+                {{ __('Waiting (days)') . ': ' }}<span class="text-gray-600 dark:text-gray-400">{{ $ad->waiting }}</span>
             </p>
         @endif
     </div>

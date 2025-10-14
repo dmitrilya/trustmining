@@ -11,7 +11,7 @@
 
             <x-header-filters>
                 <x-slot name="sort">
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'tf_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                    <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'tf_high_to_low' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->action['as'],
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'tf_high_to_low' ? null : 'tf_high_to_low',
@@ -21,7 +21,7 @@
                         {{ __('TF: High to Low') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'tf_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                    <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'tf_low_to_high' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->action['as'],
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'tf_low_to_high' ? null : 'tf_low_to_high',

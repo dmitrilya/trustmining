@@ -41,7 +41,7 @@ window.messagesChannelEvent = function (e) {
             class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3 bg-gray-50">
             <li>
                 <div id="chat-signal-${e.chat_id}"
-                    class="absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-gray-900">
+                    class="absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-zinc-950">
                 </div>
 
                 <div class="flex">

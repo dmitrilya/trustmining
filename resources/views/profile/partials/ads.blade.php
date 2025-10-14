@@ -16,7 +16,7 @@
     </header>
 
     <div class="text-gray-400 text-lg">
-        <span class="text-gray-900 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
+        <span class="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
             {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
@@ -65,7 +65,7 @@
         @if ($user->ads->where('moderation', false)->count())
             <div class="flex justify-end mt-4">
                 <a href="{{ route('ad.statistics') }}">
-                    <x-secondary-button class="bg-secondary-gradient text-white mr-2 sm:mr-3">
+                    <x-secondary-button class="bg-secondary-gradient !text-white mr-2 sm:mr-3">
                         {{ __('Statistics') }}
                     </x-secondary-button>
                 </a>

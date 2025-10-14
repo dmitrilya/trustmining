@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
             <form action="{{ route('guide.store') }}" method="POST" class="space-y-6" enctype=multipart/form-data>
                 @csrf
 
@@ -21,7 +21,7 @@
                     <x-input-label for="preview" :value="__('Preview')" />
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
                         accept=".png,.jpg,.jpeg" />
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
@@ -44,7 +44,7 @@
                         'blocks' => ['emoji', 'color', 'size', 'style', 'hilite', 'align', 'media', 'word_count'],
                     ])
 
-                    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg">
+                    <div class="bg-gray-100 dark:bg-zinc-950 rounded-lg">
                         <pre contenteditable @input="$refs.guide.value=$el.innerHTML"
                             class="whitespace-break-spaces text-xs sm:text-sm text-gray-700 dark:text-gray-200 border-0 focus:border-0 focus:outline-0 px-3 py-2"></pre>
                         <input type="hidden" x-ref="guide" class="hidden" name="guide" value="">

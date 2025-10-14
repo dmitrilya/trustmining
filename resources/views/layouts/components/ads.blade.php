@@ -18,7 +18,7 @@
         x-transition:leave-end="transform opacity-0 scale-50"
         class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
         @click.away="open = false">
-        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white dark:bg-gray-700">
+        <div class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white dark:bg-zinc-900">
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                 <a href="{{ route('ads') }}" class="flex items-center group">
                     <img src="{{ Storage::url('public/menu/asics.webp') }}" alt="" class="w-10 xs:w-14 sm:w-16 lg:w-20 mr-1 xs:mr-2 lg:mr-3">

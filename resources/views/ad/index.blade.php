@@ -12,7 +12,7 @@
             <x-header-filters>
                 <x-slot name="sort">
                     @if (($user = Auth::user()) && ($user->tariff || $user->role_id != 2))
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
@@ -22,7 +22,7 @@
                             {{ __('Price: Low to High') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
@@ -32,10 +32,10 @@
                             {{ __('Price: High to Low') }}
                         </x-dropdown-link>
                     @else
-                        <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out"
+                        <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
                             @click.prevent="$dispatch('open-modal', 'need-subscription')">{{ __('Price: Low to High') }}
                         </div>
-                        <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition duration-150 ease-in-out"
+                        <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
                             @click.prevent="$dispatch('open-modal', 'need-subscription')">{{ __('Price: High to Low') }}
                         </div>
                     @endif

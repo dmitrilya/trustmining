@@ -14,7 +14,7 @@
     @endif
 
     <div>
-        <div class="text-xs text-gray-400">
+        <div class="text-xs text-gray-400 dark:text-gray-500">
             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
         </div>
 
@@ -37,7 +37,7 @@
 </div>
 
 <div class="mt-2 sm:mt-3">
-    <p class="text-xs sm:text-sm text-gray-400">
+    <p class="text-xs sm:text-sm text-gray-400 dark:text-gray-500">
         {{ __('Trust Factor') }}: <span class="font-bold {{ $user->tf > 60 ? $user->tf > 80 ? 'text-green-500' : 'text-yellow-300' : 'text-red-600' }}">{{ $user->tf }}</span>
     </p>
 </div>

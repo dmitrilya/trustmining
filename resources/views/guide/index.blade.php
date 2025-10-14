@@ -11,7 +11,7 @@
 
             <x-header-filters>
                 <x-slot name="sort">
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'newest' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'newest' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'newest' ? null : 'newest',
@@ -21,7 +21,7 @@
                             {{ __('Newest') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'oldest' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'oldest' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'oldest' ? null : 'oldest',
@@ -31,7 +31,7 @@
                             {{ __('Oldest') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'more_likes' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'more_likes' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'more_likes' ? null : 'more_likes',
@@ -41,7 +41,7 @@
                             {{ __('More likes') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'less_likes' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'less_likes' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'less_likes' ? null : 'less_likes',
@@ -51,7 +51,7 @@
                             {{ __('Less likes') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'more_views' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'more_views' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'more_views' ? null : 'more_views',
@@ -61,7 +61,7 @@
                             {{ __('More views') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'less_views' ? 'true' : 'false' }} }" :href="route(
+                        <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'less_views' ? 'true' : 'false' }} }" :href="route(
                             request()->route()->action['as'],
                             array_merge(request()->route()->originalParameters(), [
                                 'sort' => $sort && $sort == 'less_views' ? null : 'less_views',

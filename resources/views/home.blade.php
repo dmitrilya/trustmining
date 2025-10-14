@@ -16,10 +16,10 @@
         </div>
 
         <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Hosting') }}</p>
-                    <div class="flex items-center justify-center bg-gray-100 min-w-8 h-8 rounded-full">
+                    <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
                         <svg class="h-4 w-4 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24"
                             stroke-width="2" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,10 +30,10 @@
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Fake hostings that lure customers with favorable conditions') }}</p>
             </div>
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Miners') }}</p>
-                    <div class="flex items-center justify-center bg-gray-100 min-w-8 h-8 rounded-full">
+                    <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
                         <svg class="h-4 w-4 text-gray-600 dark:text-gray-400" aria-hidden="true" fill="none"
                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,10 +44,10 @@
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Counterfeit equipment that does not meet specifications or breaks down quickly') }}</p>
             </div>
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Seller') }}</p>
-                    <div class="flex items-center justify-center bg-gray-100 min-w-8 h-8 rounded-full">
+                    <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
                         <svg class="w-4 h-4 text-gray-600 dark:text-gray-400" aria-hidden="true" width="24"
                             height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -73,20 +73,20 @@
         </div>
 
         <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Verification') }}</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Each seller must pass passport verification and confirm the presence of at least one point of sale') }}
                 </p>
             </div>
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">
                     {{ __('Availability of information') }}</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('The buyer can see all the information from offices to the official number of employees of the company') }}
                 </p>
             </div>
-            <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">Trust Factor</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('A unique metric of trust in a company') }}</p>
@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        <div class="bg-white dark:bg-gray-900 p-6 md:p-7 rounded-2xl shadow-lg space-y-4">
+        <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-2xl shadow-lg space-y-4">
             <div class="flex items-center">
                 <div
                     class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">

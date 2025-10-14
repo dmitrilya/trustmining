@@ -1,12 +1,12 @@
 <x-app-layout :title="'ASIC майнер ' . $brand->name . ' ' . $model->name . (isset($selectedVersion) ? ' ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '')" :description="'ASIC майнер от производителя ' . $brand->name . ' модели ' . $model->name . (isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '') . 'Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol role="list" class="flex items-center space-x-2">
                     <li>
                         <div class="flex items-center">
                             <a href="{{ route('database') }}"
-                                class="mr-2 text-sm font-medium text-gray-900">{{ __('Catalog of models') }}</a>
+                                class="mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">{{ __('Catalog of models') }}</a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"
                                 class="h-5 w-4 text-gray-300">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
@@ -16,7 +16,7 @@
                     <li>
                         <div class="flex items-center">
                             <a href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
-                                class="mr-2 text-sm font-medium text-gray-900">{{ $brand->name }}</a>
+                                class="mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">{{ $brand->name }}</a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
                                 aria-hidden="true" class="h-5 w-4 text-gray-300">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
@@ -25,7 +25,7 @@
                     </li>
                     <li class="text-sm">
                         <a href="#" aria-current="page"
-                            class="font-medium text-gray-500 hover:text-gray-600">{{ $model->name }}</a>
+                            class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">{{ $model->name }}</a>
                     </li>
                 </ol>
             </nav>
@@ -33,8 +33,8 @@
             {{-- @include('database.components.model-images') --}}
 
             <div class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
-                <div class="md:col-span-2 md:border-r md:border-gray-200 md:pr-8">
-                    <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl">
+                <div class="md:col-span-2 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
+                    <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
                 </div>
 
@@ -72,7 +72,7 @@
                 </div>
 
                 <div
-                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r md:border-gray-200 md:pb-16 md:pr-8 md:pt-6">
+                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
 
                     <div class="text-sm text-gray-400">{{ __('Algorithm') }}: <span class="text-gray-600">
                             {{ $algorithm->name }}</span></div>
@@ -82,7 +82,7 @@
 
                     <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
-                            class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                            class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-zinc-800">
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="me-2">
@@ -91,7 +91,7 @@
                                             :class="{
                                                 'border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300': {{ $i }} !=
                                                     selectedTab,
-                                                'text-indigo-600 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500': {{ $i }} ==
+                                                'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': {{ $i }} ==
                                                     selectedTab
                                             }">
                                             {{ $version->hashrate }}{{ $version->measurement }}
@@ -165,7 +165,7 @@
 
                     <a class="block w-fit ml-auto mt-4 xs:mt-6 sm:mt-8"
                         href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                        <x-secondary-button class="bg-secondary-gradient text-white">{{ __('Income calculator') }}</x-secondary-button>
+                        <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
                     </a>
 
                     {{-- <div>

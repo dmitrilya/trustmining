@@ -16,7 +16,7 @@
     </header>
 
     <div class="text-gray-400 text-lg">
-        <span class="text-gray-900 text-xl sm:text-2xl font-bold">{{ $user->offices->count() }} /
+        <span class="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl font-bold">{{ $user->offices->count() }} /
             {{ $user->tariff ? $user->tariff->max_offices : 1 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
