@@ -76,7 +76,6 @@ trait Tinkoff
 
         $out = curl_exec($curl);
         curl_close($curl);
-        dd($out);
 
         return json_decode($out);
     }
