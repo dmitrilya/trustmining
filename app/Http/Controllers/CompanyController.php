@@ -77,7 +77,7 @@ class CompanyController extends Controller
         $res = $this->invoice($order);
 
         $order->invoice_id = $res->invoiceId;
-        $order->invoice_url = $res->incomingInvoiceUrl;
+        $order->invoice_url = $res->pdfUrl;
         $order->save();
 
         return redirect()->route('profile');
