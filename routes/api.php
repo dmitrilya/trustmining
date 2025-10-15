@@ -18,6 +18,6 @@ use App\Http\Controllers\OrderController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:admin')->group(function () {
-        Route::get('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
+        Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
     });
 });
