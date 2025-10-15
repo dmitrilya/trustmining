@@ -32,8 +32,8 @@ class OrderController extends Controller
 
     function invoiceWebhook(Request $request)
     {
-        if ($request->token != '') return;
-        
+        if ($request->token != '5026378f48457ae81c43e1c70a51a003754972b8710ebac9ccd42975c1fe75d2') return;
+
         $order = Order::where('invoice_id', $request->invoiceId)->first();
         $order->update(['status' => 'CONFIRMED']);
 
