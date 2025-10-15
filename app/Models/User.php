@@ -137,6 +137,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Tariff::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function tracks()
     {
         return $this->hasMany(Track::class);
