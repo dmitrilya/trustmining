@@ -53,6 +53,7 @@ return [
         'terminal' => [
             'key' => env('TINKOFF_TERMINAL_KEY'),
             'password' => env('TINKOFF_TERMINAL_PASSWORD')
-        ]
+        ],
+        'key' => env('TINKOFF_API_KEY')
     ]
 ];

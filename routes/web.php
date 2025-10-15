@@ -164,8 +164,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/notifications/check', [ProfileController::class, 'notificationsCheck'])->name('notifications.check');
     });
 
-    Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
-
     Route::group(['prefix' => 'reviews'], function () {
         Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
         Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
@@ -180,6 +178,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
     });
 
+    Route::group(['prefix' => 'phones'], function () {
+        Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
+        Route::middleware('owner')->group(function () {
+            Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
+            Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
+        });
+    });
+
+    Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
+
     Route::group(['prefix' => 'companies'], function () {
         Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
@@ -189,15 +197,7 @@ Route::middleware('auth')->group(function () {
         });
     })->middleware('verified');
 
-    Route::group(['prefix' => 'phones'], function () {
-        Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
-        Route::middleware('owner')->group(function () {
-            Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
-            Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
-        });
-    });
-
-    Route::middleware(['has-passport', 'verified'])->group(function () {
+    Route::middleware(['identified', 'verified'])->group(function () {
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');

@@ -5,10 +5,7 @@
                 {{ __('Company') }}
             </h2>
 
-            @if (!$user->company)
-                <a href="{{ route('company.create') }}"
-                    class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
-            @elseif (!$user->company->moderation)
+            @if ($user->company && !$user->company->moderation)
                 <a href="{{ route('company.edit', ['company' => $user->company->id]) }}"
                     class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">
                     <svg class="w-[1.125rem] h-[1.125rem] ml-1 mb-0.5" aria-hidden="true" width="24" height="24"
@@ -22,13 +19,29 @@
     </header>
 
     @if (!$user->company)
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
             {{ __('Add information about your company.') }}
         </p>
+
+        <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6">
+            @csrf
+
+            <div>
+                <x-input-label for="inn" :value="__('Company TIN')" />
+                <x-text-input id="inn" name="inn" required autocomplete="inn" />
+                <x-input-error :messages="$errors->get('inn')" />
+            </div>
+
+            <x-primary-button class="block ml-auto">{{ __('Confirm') }}</x-primary-button>
+        </form>
     @elseif ($user->company->moderation)
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Is under moderation') }}
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            {{ __('Make a payment to confirm ownership of the specified company.') }}
         </p>
+
+        <a href="{{ $user->orders()->where('amount', 10)->where('status', 'NEW')->first('invoice_url')->invoice_url }}">
+            <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
+        </a>
     @else
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('The company is registered. Now you can fill the About page with an additional description that reveals your values ​​and a photo.') }}

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class HasCompany
+class Identified
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class HasCompany
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->company()->exists()) return back();
-        
+        if (!$request->user()->company()->exists() && !$request->user()->passport()->exists()) return back();
+
         return $next($request);
     }
 }

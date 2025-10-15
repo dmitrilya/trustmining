@@ -20,6 +20,8 @@ return new class extends Migration
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('amount');
             $table->string('method');
+            $table->string('invoice_id')->nullable();
+            $table->string('invoice_url')->nullable();
             $table->string('status')->default('init');
             $table->string('token')->nullable();
             $table->timestamps();

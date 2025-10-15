@@ -4,6 +4,8 @@ namespace App\Http\Traits;
 
 use App\Models\Payment;
 
+use Carbon\Carbon;
+
 trait Tinkoff
 {
     public function payInit($order)
@@ -37,6 +39,45 @@ trait Tinkoff
         ];
 
         return $this->request('POST', 'GetQr', $params);
+    }
+
+    public function invoice($order)
+    {
+        $params = [
+            'invoiceNumber' => $order->id,
+            'dueDate' => Carbon::now()->addDays(3),
+            'payer' => [
+                'name' => $order->user->company->name,
+                'inn' => $order->user->company->card['inn'],
+            ],
+            'items' => [
+                'name' => 'Пополнение баланса личного кабинета',
+                'price' => $order->amount,
+                'unit' => 'шт',
+                'vat' => '6',
+                'amount' => 1
+            ],
+            'contacts' => [
+                'email' => $order->user->email
+            ],
+            'customPaymentPurpose' => 'Пополнение баланса личного кабинета'
+        ];
+
+        if ($order->user->company->card['type'] == 'LEGAL') $params['payer']['kpp'] = $order->user->company->card['kpp'];
+
+        $link = 'https://business.tbank.ru/openapi/api/v1/invoice/send';
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_URL, $link);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json, Authorization: Bearer ' . config('services.tinkoff.key')]);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
+
+        $out = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($out);
     }
 
     private function request($method, $link, $params)

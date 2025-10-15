@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'has-passport' => \App\Http\Middleware\HasPassport::class,
         'has-office' => \App\Http\Middleware\HasOffice::class,
         'has-company' => \App\Http\Middleware\HasCompany::class,
+        'identified' => \App\Http\Middleware\Identified::class,
         'owner' => \App\Http\Middleware\EnsureOwner::class,
     ];
 }

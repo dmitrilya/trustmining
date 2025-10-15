@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
-
+use App\Http\Traits\Tinkoff;
 use App\Models\Moderation;
-use App\Models\Passport;
 use App\Models\Company;
+use App\Models\Order;
 
 class CompanyController extends Controller
 {
-    use FileTrait, DaData;
+    use FileTrait, DaData, Tinkoff;
 
     /**
      * Display a listing of the resource.
@@ -53,26 +53,9 @@ class CompanyController extends Controller
 
         if (Company::whereJsonContains('card->inn', $request->inn)->exists()) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 
-        if (!$user->passport) {
-            $passport = Passport::create([
-                'user_id' => $user->id,
-                'images' => [],
-            ]);
-
-            $passport->images = $this->saveFiles($request->file('images'), 'passports', 'image', $passport->id, 'private/');
-            $passport->save();
-
-            Moderation::create([
-                'moderationable_type' => 'App\Models\Passport',
-                'moderationable_id' => $passport->id,
-                'data' => $passport->attributesToArray()
-            ]);
-        }
-
         $card = $this->dadataCompanyByInn($request->inn);
 
         if (!$card) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
-
 
         $company = Company::create([
             'user_id' => $user->id,
@@ -82,14 +65,20 @@ class CompanyController extends Controller
             'images' => [],
         ]);
 
-        $company->documents = $this->saveFilesWithName($request->file('documents'), 'companies', 'doc', $company->id);
-        $company->save();
+        //$company->documents = $this->saveFilesWithName($request->file('documents'), 'companies', 'doc', $company->id);
+        //$company->save();
 
-        Moderation::create([
-            'moderationable_type' => 'App\Models\Company',
-            'moderationable_id' => $company->id,
-            'data' => $company->attributesToArray()
+        $order = Order::create([
+            'user_id' => $user->id,
+            'amount' => 10,
+            'method' => 'invoice'
         ]);
+
+        $res = $this->invoice($order);
+
+        $order->invoice_id = $res->invoiceId;
+        $order->invoice_url = $res->incomingInvoiceUrl;
+        $order->save();
 
         return redirect()->route('profile');
     }

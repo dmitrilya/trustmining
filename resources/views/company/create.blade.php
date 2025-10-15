@@ -11,25 +11,6 @@
                 enctype=multipart/form-data>
                 @csrf
 
-                @if (!Auth::user()->passport)
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ __('Attach 3 scans or photos of your passport. 2-3 and 4-5 pages, also a selfie with a passport. Make sure the images are high quality and all characters are legible. After passing moderation, many seller functions will become available to you.') }}
-                    </p>
-
-                    <div>
-                        <x-input-label for="passport-images" :value="__('Photo')" />
-                        <x-file-input id="passport-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
-                            accept=".png,.jpg,.jpeg" multiple required
-                            @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                        <p class="mt-1 text-sm text-gray-500" id="images_help">PNG, JPG
-                            or JPEG (max. 2MB, 3 items)</p>
-                        <x-input-error :messages="$errors->get('images')" />
-                        @foreach ($errors->get('images.*') as $error)
-                            <x-input-error :messages="$error" />
-                        @endforeach
-                    </div>
-                @endif
-
                 <div>
                     <x-input-label for="inn" :value="__('Company TIN')" />
                     <x-text-input id="inn" name="inn" required autocomplete="inn" />
