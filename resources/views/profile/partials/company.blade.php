@@ -39,7 +39,7 @@
             {{ __('Make a payment to confirm ownership of the specified company.') }}
         </p>
 
-        <a href="{{ $user->orders()->where('amount', 10)->where('status', 'NEW')->first('invoice_url')->invoice_url }}">
+        <a href="{{ $user->orders()->where('amount', 10)->where('status', 'init')->first('invoice_url')->invoice_url }}">
             <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
         </a>
     @else
