@@ -45,7 +45,7 @@ trait Tinkoff
     {
         $params = [
             'invoiceNumber' => $order->id,
-            'dueDate' => Carbon::now()->addDays(3),
+            'dueDate' => Carbon::now()->addDays(10),
             'payer' => [
                 'name' => $order->user->company->name,
                 'inn' => $order->user->company->card['inn'],
@@ -76,6 +76,7 @@ trait Tinkoff
 
         $out = curl_exec($curl);
         curl_close($curl);
+        dd($out);
 
         return json_decode($out);
     }
