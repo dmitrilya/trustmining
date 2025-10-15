@@ -70,7 +70,7 @@ trait Tinkoff
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_URL, $link);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json, Authorization: Bearer ' . config('services.tinkoff.key')]);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer ' . config('services.tinkoff.key')]);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
 
