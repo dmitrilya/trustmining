@@ -44,22 +44,22 @@ trait Tinkoff
     public function invoice($order)
     {
         $params = [
-            'invoiceNumber' => $order->id,
-            'dueDate' => Carbon::now()->addDays(10),
+            'invoiceNumber' => "$order->id",
+            'dueDate' => Carbon::now()->addDays(10)->format('yyyy-MM-dd'),
             'payer' => [
                 'name' => $order->user->company->name,
                 'inn' => $order->user->company->card['inn'],
             ],
-            'items' => [
+            'items' => [[
                 'name' => 'Пополнение баланса личного кабинета',
                 'price' => $order->amount,
                 'unit' => 'шт',
                 'vat' => '6',
                 'amount' => 1
-            ],
-            'contacts' => [
+            ]],
+            'contacts' => [[
                 'email' => $order->user->email
-            ],
+            ]],
             'customPaymentPurpose' => 'Пополнение баланса личного кабинета'
         ];
 
