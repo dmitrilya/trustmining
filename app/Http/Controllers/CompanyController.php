@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\Tinkoff;
+use App\Jobs\CheckInvoice;
 use App\Models\Moderation;
 use App\Models\Company;
 use App\Models\Order;
@@ -79,6 +80,8 @@ class CompanyController extends Controller
         $order->invoice_id = $res->invoiceId;
         $order->invoice_url = $res->pdfUrl;
         $order->save();
+
+        CheckInvoice::dispatch($order)->delay(now()->addMinutes(15));
 
         return redirect()->route('profile');
     }

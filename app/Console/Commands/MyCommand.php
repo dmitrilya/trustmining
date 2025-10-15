@@ -9,6 +9,7 @@ use App\Http\Traits\Telegram;
 use App\Models\Algorithm;
 use App\Models\AsicModel;
 use App\Models\Coin;
+use App\Models\User;
 
 use Carbon\Carbon;
 
@@ -37,10 +38,7 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        $algo = Algorithm::pluck('name')->implode(',');
-        $data = collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?algo=' . $algo)));
-        dd($data);
-        //$data->where('')
+        User::first()->createToken('admin');
 
         return Command::SUCCESS;
     }

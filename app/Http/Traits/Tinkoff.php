@@ -65,19 +65,12 @@ trait Tinkoff
 
         if ($order->user->company->card['type'] == 'LEGAL') $params['payer']['kpp'] = $order->user->company->card['kpp'];
 
-        $link = 'https://business.tbank.ru/openapi/api/v1/invoice/send';
+        return $this->tinkoffBusinessRequest('POST', 'invoice/send', $params);
+    }
 
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_URL, $link);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer ' . config('services.tinkoff.key')]);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
-
-        $out = curl_exec($curl);
-        curl_close($curl);
-
-        return json_decode($out);
+    public function getInvoice($invoiceId)
+    {
+        return $this->tinkoffBusinessRequest('GET', "openapi/invoice/$invoiceId/info");
     }
 
     private function tinkoffRequest($method, $link, $params)
@@ -103,6 +96,25 @@ trait Tinkoff
             'token' => $params['Token'],
             'res' => json_decode($out)
         ];
+    }
+
+    private function tinkoffBusinessRequest($method, $link, $params = null)
+    {
+        $link = 'https://business.tbank.ru/openapi/api/v1/' . $link;
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_URL, $link);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json', 'Authorization: Bearer ' . config('services.tinkoff.key')]);
+
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+
+        if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
+
+        $out = curl_exec($curl);
+        curl_close($curl);
+
+        return json_decode($out);
     }
 
     private function token($params)
