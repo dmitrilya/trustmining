@@ -128,6 +128,7 @@ Route::group(['prefix' => 'company/{user}'], function () {
 Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
+Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
 
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
 
