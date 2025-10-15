@@ -45,7 +45,7 @@ trait Tinkoff
     {
         $params = [
             'invoiceNumber' => "$order->id",
-            'dueDate' => Carbon::now()->addDays(10)->format('yyyy-MM-dd'),
+            'dueDate' => Carbon::now()->addDays(10)->format('Y-m-d'),
             'payer' => [
                 'name' => $order->user->company->name,
                 'inn' => $order->user->company->card['inn'],
@@ -54,7 +54,7 @@ trait Tinkoff
                 'name' => 'Пополнение баланса личного кабинета',
                 'price' => $order->amount,
                 'unit' => 'шт',
-                'vat' => '6',
+                'vat' => 'None',
                 'amount' => 1
             ]],
             'contacts' => [[
