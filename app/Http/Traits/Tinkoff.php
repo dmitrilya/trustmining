@@ -29,7 +29,7 @@ trait Tinkoff
             ]
         ];
 
-        return $this->request('POST', 'Init', $params);
+        return $this->tinkoffRequest('POST', 'Init', $params);
     }
 
     public function getQr($paymentId)
@@ -38,7 +38,7 @@ trait Tinkoff
             'PaymentId' => $paymentId
         ];
 
-        return $this->request('POST', 'GetQr', $params);
+        return $this->tinkoffRequest('POST', 'GetQr', $params);
     }
 
     public function invoice($order)
@@ -80,7 +80,7 @@ trait Tinkoff
         return json_decode($out);
     }
 
-    private function request($method, $link, $params)
+    private function tinkoffRequest($method, $link, $params)
     {
         $params['TerminalKey'] = config('services.tinkoff.terminal.key');
         $params['Token'] = $this->token($params);
