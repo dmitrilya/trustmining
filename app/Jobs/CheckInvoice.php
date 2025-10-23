@@ -44,9 +44,15 @@ class CheckInvoice implements ShouldQueue
         $response = $this->getInvoice($this->order->invoice_id);
 
         if ($response->status == 'EXECUTED') {
-            $this->order->status == 'CONFIRMED';
-            $this->order->user->company->moderation = false;
-            $this->order->user->company->save();
+            $operations = $this->getOperations(['from' => $this->order->created_at->format('Y-m-d\Th:i:s\Z'), 'inns' => [$this->order->user->company->card['inn']]]);
+
+            if (!count($operations)) $this->order->update(['status' => 'INVALID_PAYER']);
+            else {
+                $this->order->update(['status' => 'CONFIRMED']);
+                $this->order->user->company->update(['moderation' => false])
+            }
+
+            return;
         }
 
         switch ($this->attempts()) {

@@ -34,10 +34,17 @@ class OrderController extends Controller
     {
         if ($request->token != '5026378f48457ae81c43e1c70a51a003754972b8710ebac9ccd42975c1fe75d2') return;
 
-        $order = Order::where('invoice_id', $request->invoiceId)->first();
-        $order->update(['status' => 'CONFIRMED']);
+        $order = Order::where('invoice_id', $request->invoiceId)->with(['user:id,balance', 'user.company:id,user_id,card,moderation'])->first();
 
-        if ($order->amount == 10 && $order->user->company && $order->user->company->moderation) $order->user->company->update(['moderation' => false]);
+        $operations = $this->getOperations(['from' => $order->created_at->format('Y-m-d\Th:i:s\Z'), 'inns' => [$order->user->company->card['inn']]]);
+
+        if (!count($operations)) $order->update(['status' => 'INVALID_PAYER']);
+        else {
+            $order->update(['status' => 'CONFIRMED']);
+
+            if ($order->method == 'invoice_verification') $order->user->company->update(['moderation' => false]);
+            else $order->user->update(['balance' => $order->user->balance + $order->amount]);
+        }
 
         echo 'OK';
     }

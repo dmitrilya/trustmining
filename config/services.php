@@ -50,6 +50,7 @@ return [
     ],
 
     'tinkoff' => [
+        'account_number' => env('TINKOFF_ACCOUNT_NUMBER'),
         'terminal' => [
             'key' => env('TINKOFF_TERMINAL_KEY'),
             'password' => env('TINKOFF_TERMINAL_PASSWORD')

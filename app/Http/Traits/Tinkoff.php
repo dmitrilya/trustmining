@@ -73,6 +73,13 @@ trait Tinkoff
         return $this->tinkoffBusinessRequest('GET', "openapi/invoice/$invoiceId/info");
     }
 
+    public function getOperations($params)
+    {
+        $params['accountNumber'] = config('services.tinkoff.account_number');
+
+        return $this->tinkoffBusinessRequest('GET', 'statement?' . http_build_query($params));
+    }
+
     private function tinkoffRequest($method, $link, $params)
     {
         $params['TerminalKey'] = config('services.tinkoff.terminal.key');

@@ -72,7 +72,7 @@ class CompanyController extends Controller
         $order = Order::create([
             'user_id' => $user->id,
             'amount' => 10,
-            'method' => 'invoice'
+            'method' => 'invoice_verification'
         ]);
 
         $res = $this->invoice($order);
