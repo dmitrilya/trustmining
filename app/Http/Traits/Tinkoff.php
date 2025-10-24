@@ -77,7 +77,7 @@ trait Tinkoff
     {
         $params['accountNumber'] = config('services.tinkoff.account_number');
 
-        return $this->tinkoffBusinessRequest('GET', 'statement?' . http_build_query($params));
+        return $this->tinkoffBusinessRequest('GET', 'statement?' . http_build_query($params))->operations;
     }
 
     private function tinkoffRequest($method, $link, $params)
