@@ -49,7 +49,7 @@ class CheckInvoice implements ShouldQueue
             if (!count($operations)) $this->order->update(['status' => 'INVALID_PAYER']);
             else {
                 $this->order->update(['status' => 'CONFIRMED']);
-                $this->order->user->company->update(['moderation' => false])
+                $this->order->user->company->update(['moderation' => false]);
             }
 
             return;
