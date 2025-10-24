@@ -12,7 +12,7 @@
                     @include('profile.partials.ads')
                 </div>
 
-                <div class="{{ !$user->passport ? 'sm:col-span-2' : 'order-last' }} p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
+                <div class="{{ !$user->passport && (!$user->company || $user->company->moderation) ? 'sm:col-span-2' : 'order-last' }} p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
                     @include('profile.partials.passport')
                 </div>
 
