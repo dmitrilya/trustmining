@@ -16,7 +16,7 @@ class Identified
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->company()->exists() && !$request->user()->passport()->exists()) return back();
+        if (!$request->user()->company()->where('moderation', false)->exists() && !$request->user()->passport()->exists()) return back();
 
         return $next($request);
     }

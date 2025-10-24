@@ -16,7 +16,7 @@ class HasCompany
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->company()->exists()) return back();
+        if (!$request->user()->company()->where('moderation', false)->exists()) return back();
         
         return $next($request);
     }

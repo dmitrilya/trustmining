@@ -8,7 +8,7 @@
             @if (
                 (($user->tariff && $user->offices->count() < $user->tariff->max_offices) ||
                     (!$user->tariff && $user->offices->count() < 1)) &&
-                    $user->passport)
+                    ($user->passport || ($user->company && !$user->company->moderation)))
                 <a href="{{ route('office.create') }}"
                     class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">+</a>
             @endif
@@ -21,7 +21,7 @@
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
-    @if (!$user->passport)
+    @if (!$user->passport && (!$user->company || $user->company->moderation))
         <p class="text-sm text-gray-600 dark:text-gray-400">
             {{ __('Please verify your identity using your passport or register a company to add offices.') }}
         </p>

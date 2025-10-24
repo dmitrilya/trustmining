@@ -5,7 +5,7 @@
                 {{ __('Hosting') }}
             </h2>
 
-            @if ($user->tariff && $user->tariff->can_have_hosting && $user->company)
+            @if ($user->tariff && $user->tariff->can_have_hosting && $user->company && !$user->company->moderation)
                 @if (!$user->hosting)
                     <a href="{{ route('hosting.create') }}"
                         class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">
@@ -26,7 +26,7 @@
     </header>
 
     @if ($user->tariff && $user->tariff->can_have_hosting)
-        @if (!$user->company)
+        @if (!$user->company || $user->company->moderation)
             <p class="text-sm text-gray-600 dark:text-gray-400">
                 {{ __('To add information about placement, you must register a company.') }}
             </p>
