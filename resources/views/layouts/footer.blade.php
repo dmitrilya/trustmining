@@ -17,7 +17,7 @@
 
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the seller') }}</div>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('roadmap') }}">Roadmap</a>
+                {{-- <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('roadmap') }}">Roadmap</a> --}}
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('support') }}">FAQ</a>
             </div>
