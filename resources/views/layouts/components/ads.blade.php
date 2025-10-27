@@ -1,4 +1,4 @@
-<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
+<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
         <div>{{ __('Advertisements') }}</div>
@@ -23,106 +23,106 @@
             <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                 <a href="{{ route('ads', ['adCategory' => 'miners']) }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.miner', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '50%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Miners') }}</h4>
                 </a>
                 <a href="{{ route('hostings') }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.hosting', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '60%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Hostings') }}</h4>
                 </a>
                 <a href="{{ route('services') }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.service', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '55%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Services') }}</h4>
                 </a>
                 <a href="{{ route('ads', ['adCategory' => 'legals']) }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.legal', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '50%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Legals') }}</h4>
                 </a>
                 <a href="{{ route('ads', ['adCategory' => 'containers']) }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.container', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '65%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Containers') }}</h4>
                 </a>
                 <a href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.noisebox', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '50%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Noiseboxes') }}</h4>
                 </a>
                 <a href="{{ route('ads', ['adCategory' => 'heat-exchange']) }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.heat_exchange', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '50%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Heat exchange') }}</h4>
                 </a>
                 <a href="{{ route('cryptoexchangers') }}" class="flex flex-col items-center group">
                     <div
-                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 dark:border-gray-400 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+                        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
                         @include('layouts.components.svg.cryptoexchanger', [
                             'class' =>
-                                'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+                                'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
                             'w' => '55%',
                         ])
                     </div>
                     <h4
-                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-gray-100 font-bold">
+                        class="text-xs xs:text-sm lg:text-base text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
                         {{ __('Cryptoexchangers') }}</h4>
                 </a>
             </div>
