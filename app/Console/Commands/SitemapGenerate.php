@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Models\User;
+use App\Models\AdCategory;
 use App\Models\AsicBrand;
 use App\Models\Article;
 use App\Models\Guide;
@@ -42,10 +43,15 @@ class SitemapGenerate extends Command
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
         $out .= $this->addUrl('');
-        $out .= $this->addUrl('ads');
         $out .= $this->addUrl('hostings');
+        $out .= $this->addUrl('services');
+        $out .= $this->addUrl('cryptoexchangers');
         $out .= $this->addUrl('companies');
         $out .= $this->addUrl('warranty-check');
+
+        foreach (AdCategory::select('name')->get() as $adCategory) {
+            $out .= $this->addUrl('ads/' . $adCategory->name);
+        }
 
         $out .= $this->addUrl('metrics');
         foreach (Coin::whereHas('networkHashrates')->select('name')->get() as $coin) {
@@ -68,7 +74,7 @@ class SitemapGenerate extends Command
             if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->url_name . '/about');
 
             foreach ($user->ads->where('moderation', false)->where('hidden', false) as $ad) {
-                $out .= $this->addUrl('ads/' . $ad->id);
+                $out .= $this->addUrl('ads/' . $ad->adCategory->name . '/' . $ad->id);
             }
 
             $out .= $this->addUrl('company/' . $user->url_name . '/offices');
