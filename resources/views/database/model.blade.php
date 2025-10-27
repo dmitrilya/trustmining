@@ -1,4 +1,13 @@
-<x-app-layout :title="'ASIC майнер ' . $brand->name . ' ' . $model->name . (isset($selectedVersion) ? ' ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '')" :description="'ASIC майнер от производителя ' . $brand->name . ' модели ' . $model->name . (isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '') . 'Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
+<x-app-layout :title="'ASIC майнер ' .
+    $brand->name .
+    ' ' .
+    $model->name .
+    (isset($selectedVersion) ? ' ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '')" :description="'ASIC майнер от производителя ' .
+    $brand->name .
+    ' модели ' .
+    $model->name .
+    (isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '') .
+    'Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
@@ -32,31 +41,39 @@
 
             {{-- @include('database.components.model-images') --}}
 
-            <div class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
+            <div itemscope itemtype="https://schema.org/Product"
+                class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
                 <div class="md:col-span-2 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
-                    <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                    <meta itemprop="brand" content="{{ $brand->name }}" />
+                    <h1 itemprop="name"
+                        class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
                 </div>
 
                 @php
                     $hasTariff = ($user = \Auth::user()) && $user->tariff;
+                    $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                 @endphp
 
                 <div class="mt-4 md:row-span-3 md:mt-0 md:pl-6 lg:pl-12 xl:pl-16">
                     <h2 class="sr-only">Информация</h2>
 
                     <!-- Reviews -->
-                    <div class="mt-4 sm:mt-6">
+                    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                        class="mt-4 sm:mt-6">
                         <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                        <div class="flex items-center" x-data="{ momentRating: {{ $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0 }} }">
+                        <div class="flex items-center" x-data="{ momentRating: {{ }} }">
                             <x-rating></x-rating>
+                            <meta itemprop="ratingValue" content="{{ $momentRating }}" />
 
                             <a href="{{ route('database.reviews', [
                                 'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
                                 'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
                             ]) }}"
-                                class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{ $model->moderatedReviews->count() }}
-                                {{ __('reviews') }}</a>
+                                class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                <span itemprop="reviewCount">{{ $model->moderatedReviews->count() }}</span>
+                                {{ __('reviews') }}
+                            </a>
                         </div>
                     </div>
 
@@ -74,11 +91,15 @@
                 <div
                     class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
 
-                    <div class="text-sm text-gray-400">{{ __('Algorithm') }}: <span class="text-gray-600">
+                    <div class="text-sm text-gray-400" itemprop="additionalProperty" itemscope
+                        itemtype="http://schema.org/PropertyValue"><span itemprop="name">{{ __('Algorithm') }}:
+                        </span><span class="text-gray-600" itemprop="value">
                             {{ $algorithm->name }}</span></div>
 
                     <div class="text-sm text-gray-400">{{ __('Release date') }}: <span class="text-gray-600">
-                            {{ $model->release->locale('ru')->translatedFormat('F Y') }}</span></div>
+                            <time itemprop="releaseDate"
+                                datetime="{{ $model->release }}">{{ $model->release->locale('ru')->translatedFormat('F Y') }}</time></span>
+                    </div>
 
                     <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
@@ -102,10 +123,12 @@
                         </div>
 
                         @foreach ($versions as $i => $version)
-                            <div x-show="selectedTab == {{ $i }}">
+                            <div x-show="selectedTab == {{ $i }}" itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
                                 @php
                                     $minPrice = $version->ads->first();
                                 @endphp
+
+                                <meta itemprop="name" content="{{ $version->hashrate . $version->measurement }}" />
 
                                 <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
                                     <span class="text-gray-600">{{ $version->efficiency }}</span>
@@ -130,7 +153,7 @@
                                             </span>
                                         @endif
                                     </div>
-                                    
+
                                     <a class="w-max mt-6 md:mt-8"
                                         href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
                                         <x-primary-button>{{ __('Buy') }}</x-primary-button>
@@ -165,7 +188,8 @@
 
                     <a class="block w-fit ml-auto mt-4 xs:mt-6 sm:mt-8"
                         href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                        <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
+                        <x-secondary-button
+                            class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
                     </a>
 
                     {{-- <div>

@@ -139,7 +139,7 @@
                 </div>
             </div>
 
-            <template x-for="model in models" :key="model.name">
+            <template x-for="model in models" :key="model.brand + '_' + model.name">
                 <a :href="'/database/' + model.brand + '/' + model.url_name"
                     class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h5 class="font-semibold text-gray-500 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2"
