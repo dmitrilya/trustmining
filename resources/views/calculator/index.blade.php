@@ -34,7 +34,7 @@
                             min="0" max="10" type="number" step="0.01" />
                     </div>
 
-                    @include('ad.components.selectversion', [
+                    @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,
                         'selectedVersion' => $selVersion,
                     ])

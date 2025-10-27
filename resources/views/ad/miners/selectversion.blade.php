@@ -1,17 +1,18 @@
 <div x-data="{ models: {{ $models }}, withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }}, selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }}, selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }} }">
-    <input type="hidden"
+    <input class="opacity-0 h-0 p-0 border-0" type="text"
         value="{{ isset($selectedModel) ? strtolower(str_replace(' ', '_', $selectedModel->name)) : 'null' }}"
-        x-ref="model" name="model">
-    <input type="hidden" :value="selectedVersion" name="asic_version_id">
+        x-ref="model" name="model" @if (isset($required)) required @endif>
+    <input class="opacity-0 h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
+        @if (isset($required)) required @endif>
 
     <div>
         <div class="relative mt-1" x-data="{ open: false, search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}' }" @click.away="open = false">
-            <div class="relative z-0 w-full group" @click="open = true">
-                <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
-                    <input type="text" placeholder=" "
+            <div class="relative z-0 w-full" @click="open = true">
+                <div
+                    class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
+                    <input type="text" autocomplete="off" :value="search"
                         @input="search = $el.value;selectedModel = null;$refs.model.value = null;selectedVersion = null; if (typeof version !== 'undefined') version = null"
-                        autocomplete="off" :value="search"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white dark:group-focus:border-indigo-500 group-focus:outline-none focus:ring-0 group-focus:border-indigo-500 peer" />
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                     <button type="button"
                         class="ml-4 flex h-4 w-4 items-center justify-center rounded-md bg-white dark:bg-zinc-900 text-gray-400 dark:text-gray-500"
@@ -21,10 +22,12 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
+
+                    <label
+                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        {{ __('Model') }}
+                    </label>
                 </div>
-                <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                    {{ __('Model') }}
-                </label>
             </div>
 
             <ul role="listbox" style="display: none" x-show="open"
@@ -77,7 +80,8 @@
                             x-text="selectedVersion == null ? withAllVersions ? '{{ __('All') }}' : '' : models.find(function(model) {return model.id == selectedModel}).asic_versions.find(function(version) {return version.id == selectedVersion}).hashrate"></span>
                     </span>
                     <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                        <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <svg class="h-5 w-5 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor"
+                            aria-hidden="true">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" />
                         </svg>

@@ -76,6 +76,7 @@ Route::group(['prefix' => 'metrics'], function () {
 Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
 Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
 Route::get('/services', [OfficeController::class, 'services'])->name('services');
+Route::get('/cryptoexchangers', [OfficeController::class, 'cryptoexchangers'])->name('cryptoexchangers');
 Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
 
 Route::group(['prefix' => 'dadata'], function () {
@@ -249,7 +250,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::group(['prefix' => 'ads'], function () {
+Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
     Route::get('/', [AdController::class, 'index'])->name('ads');
     Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
     Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');

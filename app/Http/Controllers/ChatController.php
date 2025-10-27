@@ -41,13 +41,6 @@ class ChatController extends Controller
             $chat = isset($request->ad_id) ? Chat::create(['ad_id' => $request->ad_id]) : Chat::create();
 
             $chat->users()->attach([$auth->id, $user->id]);
-
-            if (isset($request->ad_id)) event(new NewMessage($user, $chat->messages()->create([
-                'user_id' => $auth->id,
-                'message' => __('Hello! Interested in the ad') . ' ' . route('ads.show', ['ad' => $request->ad_id]),
-                'images' => [],
-                'files' => []
-            ])));
         }
 
         return redirect()->route('chat', ['chat' => $chat->id]);

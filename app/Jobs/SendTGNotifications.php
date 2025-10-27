@@ -84,7 +84,7 @@ class SendTGNotifications implements ShouldQueue
                         $text = $this->n->asicVersion->asicModel->name . ' ' . $this->n->asicVersion->hashrate . $this->n->asicVersion->measurement . "\n" . $this->n->user->name . "\n\n" . $lastModeration->data['price'] . Coin::find($lastModeration->data['coin_id'])->abbreviation . " => " . $this->n->price . $this->n->coin->abbreviation;
                         $keyboard = [[
                             ['text' => __('Contact'), 'url' => route('chat.start', ['user' => $this->n->user->id, 'ad' => $this->n->id])],
-                            ['text' => __('Details'), 'url' => route('ads.show', ['ad' => $this->n->id])],
+                            ['text' => __('Details'), 'url' => route('ads.show', ['adCategory' => $this->n->adCaategory->name, 'ad' => $this->n->id])],
                         ]];
                         break;
                 }

@@ -38,7 +38,7 @@
         @case('App\Models\Ad')
             @switch($ntName)
                 @case('Price change')
-                    <x-notification :href="route('ads.show', ['ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
+                    <x-notification :href="route('ads.show', ['adCategory' => $n->adCategory->name, 'ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
                         :text="$n->price"></x-notification>
                 @break
             @endswitch

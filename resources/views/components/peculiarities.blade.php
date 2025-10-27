@@ -3,12 +3,18 @@
 @php
     switch ($model) {
         case 'office':
-            $peculiarities = ['Free parking', 'Paid parking', 'Ability to check miner', 'Repair service'];
+            $peculiarities = [
+                'Free parking',
+                'Paid parking',
+                'Ability to check miner',
+                'Repair service',
+                'Cryptoexchanger',
+            ];
             break;
-            case 'hosting':
+        case 'hosting':
             $peculiarities = ['Possibility of visiting the territory', 'Postpay', 'Payment with VAT possible'];
             break;
-        
+
         default:
             $peculiarities = [];
             break;
@@ -17,7 +23,10 @@
 
 <div {{ $attributes->merge(['class' => 'space-y-1.5 sm:space-y-2']) }}>
     @foreach ($peculiarities as $peculiarity)
-        <x-checkbox name="peculiarities[]" :checked="in_array($peculiarity, $ps)" :disabled="!$isForm || Route::current()->getName() == 'services' && $peculiarity == 'Repair service'"
-            value="{{ $peculiarity }}">{{ __($peculiarity) }}</x-checkbox>
+        <x-checkbox name="peculiarities[]" :checked="in_array($peculiarity, $ps)" :disabled="!$isForm ||
+            (Route::current()->getName() == 'services' && $peculiarity == 'Repair service') ||
+            (Route::current()->getName() == 'cryptoexchangers' && $peculiarity == 'Cryptoexchanger')" value="{{ $peculiarity }}">
+            {{ __($peculiarity) }}
+        </x-checkbox>
     @endforeach
 </div>

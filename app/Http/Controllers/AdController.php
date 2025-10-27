@@ -14,6 +14,7 @@ use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
 use App\Models\Ad;
+use App\Models\AdCategory;
 use App\Models\Coin;
 use App\Models\Office;
 use App\Models\AsicModel;
@@ -29,9 +30,12 @@ class AdController extends Controller
      * @param  Illuminate\Http\Request;
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, AdCategory $adCategory)
     {
-        return view('ad.index', ['ads' => $this->getAds($request)->orderByDesc('ordering_id')->paginate(30)]);
+        return view('ad.index', [
+            'ads' => $this->getAds($request, $adCategory)->orderByDesc('ordering_id')->paginate(30),
+            'adCategory' => $adCategory
+        ]);
     }
 
     /**
@@ -78,10 +82,7 @@ class AdController extends Controller
             'asic_version_id' => $request->asic_version_id,
             'office_id' => $request->office_id,
             'description' => '',
-            'new' => $request->filled('new'),
-            'warranty' => $request->filled('new') ? null : $request->warranty,
-            'in_stock' => $request->filled('in_stock'),
-            'waiting' => $request->filled('in_stock') ? null : $request->waiting,
+            'props' => json_decode($request->props),
             'price' => $request->price,
             'images' => [],
             'preview' => '',
@@ -105,10 +106,11 @@ class AdController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Models\AdCategory  $adCategory
      * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Http\Response
      */
-    public function show(Ad $ad)
+    public function show(AdCategory $adCategory, Ad $ad)
     {
         $user = \Auth::user();
 
@@ -149,7 +151,7 @@ class AdController extends Controller
     public function editMass(Request $request)
     {
         return view('ad.edit-mass', [
-            'ads' => $request->user()->ads()->where('moderation', false)->with([
+            'ads' => $request->user()->ads()->where('ad_category_id', 1)->where('moderation', false)->with([
                 'office:id,city',
                 'coin:id,abbreviation',
                 'asicVersion:id,hashrate,measurement,asic_model_id',
@@ -181,14 +183,12 @@ class AdController extends Controller
             $data['office_id'] = $request->office_id;
         }
 
-        if (!$ad->new) {
-            if ($request->warranty != $ad->warranty) $data['warranty'] = $request->warranty;
+        $props = json_decode($request->props, true);
+        $propDiffs = array_merge(array_diff_assoc($ad->props, $props), array_diff_assoc($props, $ad->props));
+        if (count($propDiffs)) $data['props'] = $props;
 
-            if ($request->images)
-                $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
-        }
-
-        if (!$ad->in_stock && $request->waiting != $ad->waiting) $data['waiting'] = $request->waiting;
+        if ($request->images)
+            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
 
         if ($request->price != $ad->price || $request->coin_id != $ad->coin_id) {
             $data['price'] = $request->price;
@@ -205,12 +205,12 @@ class AdController extends Controller
                 'data' => $data
             ]);
 
-            if (!$request->preview && ($ad->new || !$request->images)) {
+            if (!$request->preview && !$request->images && !$request->description) {
                 $moderation->moderation_status_id = 2;
                 $moderation->user_id = 10000000;
                 $moderation->save();
 
-                if ($request->price != $ad->price || $request->coin_id != $ad->coin_id) $this->notify(
+                if (isset($data['price'])) $this->notify(
                     'Price change',
                     $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
                     'App\Models\Ad',
@@ -221,7 +221,7 @@ class AdController extends Controller
             }
         }
 
-        return redirect()->route('ads.show', ['ad' => $ad->id]);
+        return redirect()->route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]);
     }
 
     /**

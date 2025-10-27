@@ -7,12 +7,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
 
-use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\NotificationTrait;
 
 class ProfileController extends Controller
 {
+    use NotificationTrait;
+
     /**
      * Display the user's profile form.
      */
@@ -63,24 +64,5 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
-    }
-
-    public function notifications(Request $request): View
-    {
-        $notifications = $request->user()->notifications()->with(['notificationType', 'notificationable']);
-
-        if ($request->notificationable_types && count($request->notificationable_types))
-            $notifications = $notifications->whereIn('notificationable_type', $request->notificationable_types);
-
-        return view('notification.index', [
-            'notifications' => $notifications->latest()->paginate(50)
-        ]);
-    }
-
-    public function notificationsCheck(Request $request)
-    {
-        $request->user()->notifications()->update(['checked' => true]);
-
-        return response()->json(['success' => true], 200);
     }
 }

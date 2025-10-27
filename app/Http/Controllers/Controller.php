@@ -45,11 +45,7 @@ class Controller extends BaseController
 
     public function home(): View
     {
-        return view('home', [
-            'articles' => Article::latest()->take(5)->get(),
-            'ads' => $this->getAds()->where('moderation', false)->where('hidden', false)->latest()->take(5)->get(),
-            'hostings' => Hosting::where('moderation', false)->latest()->take(5)->get()
-        ]);
+        return view('home');
     }
 
     public function document(): View

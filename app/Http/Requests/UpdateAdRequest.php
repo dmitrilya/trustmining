@@ -26,8 +26,6 @@ class UpdateAdRequest extends FormRequest
     {
         return [
             'office_id' => 'required|exists:offices,id',
-            'waiting' => 'max:120',
-            'warranty' => 'max:12',
             'preview' => 'file|mimes:jpg,png,jpeg|max:2048',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
             'price' => 'required|numeric',
@@ -43,10 +41,6 @@ class UpdateAdRequest extends FormRequest
     public function messages()
     {
         return [
-            'waiting.required_without' => __('Waiting is required.'),
-            'waiting.max' => __('Waiting too long.'),
-            'warranty.required_without' => __('Warranty is required.'),
-            'warranty.max' => __('The remainder of the warranty must be less than 12 months.'),
             'preview.required' => __('Preview is required.'),
             'preview.mimes' => __('Valid types are png, jpg and jpeg.'),
             'preview.max' => __('The maximum file size should not exceed 2 MB.'),

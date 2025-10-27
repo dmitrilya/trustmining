@@ -1,16 +1,24 @@
 @php
     $auth = Auth::user();
     $serviceFilter = request()->peculiarities && in_array('Repair service', request()->peculiarities);
-    $title =
-        ($serviceFilter ? 'Сервисные центры по ремонту майнингового оборудования' : 'Офисы майнинговых компаний') .
-        ', точки продаж ASIC майнеров';
+    $cryptoexchangerFilter = request()->peculiarities && in_array('Cryptoexchanger', request()->peculiarities);
+
+    if ($serviceFilter) $title = 'Сервисные центры по ремонту майнингового оборудования, точки продаж ASIC майнеров';
+    elseif ($cryptoexchangerFilter) $title = 'Криптообменники, организации по обмену криптовалюты';
+    else $title = 'Офисы майнинговых компаний , точки продаж ASIC майнеров'
 @endphp
 
 <x-app-layout :title="$title">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ $serviceFilter ? __('Repair services') : __('Offices') }}
+                @if ($serviceFilter)
+                    {{ __('Repair services') }}
+                @elseif ($cryptoexchangerFilter)
+                    {{ __('Cryptoexchangers') }}
+                @else
+                    {{ __('Offices') }}
+                @endif
             </h2>
 
             <x-header-filters withoutSort="true" />

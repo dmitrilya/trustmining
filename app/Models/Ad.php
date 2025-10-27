@@ -23,10 +23,7 @@ class Ad extends Model
         'description',
         'preview',
         'images',
-        'new',
-        'warranty',
-        'in_stock',
-        'waiting',
+        'props',
         'price',
         'moderation',
         'coin_id'
@@ -39,6 +36,7 @@ class Ad extends Model
      */
     protected $casts = [
         'images' => 'array',
+        'props' => 'array',
     ];
 
     public function user()

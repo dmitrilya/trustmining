@@ -41,6 +41,20 @@ class OfficeController extends Controller
     }
 
     /**
+     * Display a listing of the resource with filter (cryptoexchanger).
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cryptoexchangers(Request $request)
+    {
+        $ps = $request->peculiarities ? $request->peculiarities : [];
+        array_push($ps, 'Cryptoexchanger');
+        $request->peculiarities = $ps;
+
+        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

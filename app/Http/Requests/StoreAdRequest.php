@@ -26,10 +26,8 @@ class StoreAdRequest extends FormRequest
     {
         return [
             'ad_category_id' => 'required|exists:ad_categories,id',
-            'asic_version_id' => 'required|exists:asic_versions,id',
+            'asic_version_id' => 'exists:asic_versions,id',
             'office_id' => 'required|exists:offices,id',
-            'waiting' => 'required_without:in_stock|max:120',
-            'warranty' => 'required_without:new|max:12',
             'preview' => 'required|file|mimes:jpg,png,jpeg|max:2048',
             'images' => 'max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
@@ -48,10 +46,6 @@ class StoreAdRequest extends FormRequest
         return [
             'asic_version_id.required' => __('Miner version is required.'),
             'asic_version_id.exists' => __('Non-existent miner version.'),
-            'waiting.required_without' => __('Waiting is required.'),
-            'waiting.max' => __('Waiting too long.'),
-            'warranty.required_without' => __('Warranty is required.'),
-            'warranty.max' => __('The remainder of the warranty must be less than 12 months.'),
             'preview.required' => __('Preview is required.'),
             'preview.mimes' => __('Valid types are png, jpg and jpeg.'),
             'preview.max' => __('The maximum file size should not exceed 2 MB.'),

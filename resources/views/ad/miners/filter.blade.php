@@ -28,7 +28,7 @@
         });
 @endphp
 
-@include('ad.components.selectversion', [
+@include('ad.miners.selectversion', [
     'selectedModel' => $selModel,
     'selectedVersion' => $selVersion,
     'withAllVersions' => true

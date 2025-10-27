@@ -7,18 +7,33 @@
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the buyer') }}</div>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('ads') }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('services') }}">{{ __('Services') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('companies') }}">{{ __('Companies') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
-                    href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>
+                    href="{{ route('companies') }}">{{ __('Companies') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'miners']) }}">{{ __('Miners') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('services') }}">{{ __('Services') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'legals']) }}">{{ __('Legals') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'containers']) }}">{{ __('Containers') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'heat-exchange']) }}">{{ __('Heat exchange') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
             </div>
 
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the seller') }}</div>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('roadmap') }}">Roadmap</a> --}}
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('support') }}">FAQ</a>
             </div>
 
@@ -29,8 +44,10 @@
                     href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('articles') }}">{{ __('Blog') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('articles') }}">{{ __('Blog') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"

@@ -1,6 +1,6 @@
 @props(['label' => null, 'name', 'size' => 'base', 'items', 'key' => null, 'icon' => null, 'handleChange' => null])
 
-<div x-data="{ open: false, items: {{ $items }}, itemKey: {{ $key ? $key : $items->first()['key'] }} }">
+<div x-data="{ open: false, items: {{ $items }}, itemKey: '{{ $key ? $key : $items->first()['key'] }}' }">
     @if (isset($label))
         <x-input-label :value="$label" />
     @endif
@@ -43,8 +43,8 @@
             class="absolute top-full z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
             @foreach ($items as $item)
                 <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'"
-                    @elseif ($handleChange) @click="{{ $handleChange }}({{ $item['key'] }});itemKey = {{ $item['key'] }};open = false"
-                    @else @click="itemKey = {{ $item['key'] }};open = false" @endif
+                    @elseif ($handleChange) @click="{{ $handleChange }}('{{ $item['key'] }}');itemKey = '{{ $item['key'] }}';open = false"
+                    @else @click="itemKey = '{{ $item['key'] }}';open = false" @endif
                     class="flex items-center justify-between cursor-pointer select-none py-2 px-3 text-gray-900 dark:text-gray-200 hover:bg-indigo-600 hover:text-white">
                     <div class="flex items-center w-full">
                         @if ($icon)
@@ -65,7 +65,7 @@
                             class="block truncate {{ $size == 'sm' ? 'text-xxs' : 'text-xs' }} sm:text-sm">{{ $item['value'] }}</span>
                     </div>
 
-                    <span x-show="{{ $item['key'] }} == itemKey" class="flex items-center">
+                    <span x-show="'{{ $item['key'] }}' == itemKey" class="flex items-center">
                         <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5 min-w-2.5 sm:h-4 sm:w-4 sm:min-w-4 ml-1 xs:ml-2 sm:ml-3' : 'h-4 w-4 min-w-4 ml-2 xs:ml-3' }}"
                             viewBox="0 0 20 20" fill="currentColor" class="text-indigo-600 hover:text-white"
                             aria-hidden="true">

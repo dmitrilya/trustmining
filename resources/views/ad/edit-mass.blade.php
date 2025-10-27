@@ -39,7 +39,8 @@
                             {{ $ad->office->city }}
                         </div>
                         <div class="text-gray-500 text-xxs sm:text-sm col-span-2">
-                            {{ $ad->asicVersion->asicModel->name }} {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
+                            {{ $ad->asicVersion->asicModel->name }}
+                            {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
                         </div>
                         <div class="col-span-2">
                             <x-text-input class="text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md" id="price"
@@ -52,11 +53,11 @@
                         <div>
                             <x-select name="coin_id" size="sm" :key="$ad->coin_id"
                                 handleChange="(coinId => {
-                                let id = $el.closest('.ad').getAttribute('data-id');
-                                let ad = changings.find(el => el.id == id);
-                                if (!ad) changings.push({ id: id, coin_id: coinId });
-                                else ad.coin_id = coinId;
-                            })"
+                                    let id = $el.closest('.ad').getAttribute('data-id');
+                                    let ad = changings.find(el => el.id == id);
+                                    if (!ad) changings.push({ id: id, coin_id: coinId });
+                                    else ad.coin_id = coinId;
+                                })"
                                 :items="$coins
                                     ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
                                     ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />

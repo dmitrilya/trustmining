@@ -83,7 +83,7 @@ trait ModerationTrait
         if ($moderation->moderationable_type == 'App\Models\Ad') {
             $m->unique_content = $isUniqueContent;
 
-            if ($data['price'] != $m->price || $data['coin_id'] != $m->coin_id) $this->notify(
+            if (isset($data['price'])) $this->notify(
                 'Price change',
                 $m->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
                 'App\Models\Ad',
