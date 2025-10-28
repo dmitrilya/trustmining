@@ -31,11 +31,11 @@
                 </label>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div class="flex flex-wrap sm:grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                 @foreach ($brands as $brand)
                     <a x-data="{ name: '{{ $brand->name }}'.toLowerCase() }" x-show="name.includes(search.toLowerCase())"
                         href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
-                        class="flex items-center px-3 py-2 group hover:bg-gray-200 dark:hover:bg-zinc-800 rounded-md">
+                        class="flex items-center px-2 sm:px-3 py-1 sm:py-2 group hover:bg-gray-200 dark:hover:bg-zinc-800 rounded-md">
                         <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}"
                             alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
                         <h5

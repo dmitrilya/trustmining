@@ -94,9 +94,9 @@
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
 
-                            <a itemprop="url" class="w-max mt-4 sm:mt-6 md:mt-8"
+                            <a itemprop="url" class="w-full xs:w-max mt-4 sm:mt-6 md:mt-8"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
-                                <x-primary-button>{{ __('Find ads') }}</x-primary-button>
+                                <x-primary-button class="w-full">{{ __('Find ads') }}</x-primary-button>
                             </a>
                         </div>
                     @else
@@ -189,18 +189,45 @@
                                         @endif
                                     </div>
 
-                                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
-                                        class="mt-6 md:mt-8">
-                                        <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
+                                    <div class="xs:flex mt-6 md:mt-8 ">
+                                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
+                                            class="xs:mr-2 sm:mr-3 lg:mr-4">
+                                            <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
 
-                                        <a itemprop="url" class="w-max"
-                                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
-                                            <x-primary-button>{{ __('Buy') }}</x-primary-button>
-                                        </a>
+                                            <a itemprop="url" class="w-full xs:w-max"
+                                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
+                                                <x-primary-button class="w-full">{{ __('Buy') }}</x-primary-button>
+                                            </a>
+                                        </div>
+
+                                        <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage"
+                                            class="mt-2 xs:mt-0">
+                                            <meta itemprop="name"
+                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
+
+                                            <a itemprop="url" class="block w-full xs:w-fit"
+                                                href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                                                <x-secondary-button
+                                                    class="bg-secondary-gradient !text-white w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
+                                            </a>
+                                        </div>
                                     </div>
                                 @else
-                                    <x-primary-button
-                                        class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('Out of stock') }}</x-primary-button>
+                                    <div class="flex mt-6 md:mt-8">
+                                        <x-primary-button
+                                            class="mr-2 sm:mr-3 lg:mr-4 cursor-default opacity-60">{{ __('Out of stock') }}</x-primary-button>
+
+                                        <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage">
+                                            <meta itemprop="name"
+                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
+
+                                            <a itemprop="url" class="block w-fit"
+                                                href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                                                <x-secondary-button
+                                                    class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
+                                            </a>
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                         @endforeach
@@ -227,18 +254,6 @@
                                             </div> --}}
                             </div>
                         @endforeach
-                    </div>
-
-                    <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage"
-                        class="mt-4 xs:mt-6 sm:mt-8">
-                        <meta itemprop="name"
-                            content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
-
-                        <a itemprop="url" class="block w-fit ml-auto"
-                            href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                            <x-secondary-button
-                                class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
-                        </a>
                     </div>
 
                     {{-- <div>
