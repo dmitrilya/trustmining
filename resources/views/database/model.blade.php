@@ -62,7 +62,7 @@
                     <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
                         class="mt-4 sm:mt-6">
                         <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                        <div class="flex items-center" x-data="{ momentRating: {{ }} }">
+                        <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
                             <x-rating></x-rating>
                             <meta itemprop="ratingValue" content="{{ $momentRating }}" />
 
