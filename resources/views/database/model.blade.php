@@ -11,30 +11,41 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
-                <ol role="list" class="flex items-center space-x-2">
-                    <li>
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
+                    class="flex items-center space-x-1 sm:space-x-2">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="1" />
                         <div class="flex items-center">
-                            <a href="{{ route('database') }}"
-                                class="mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">{{ __('Catalog of models') }}</a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"
-                                class="h-5 w-4 text-gray-300">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <a href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
-                                class="mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">{{ $brand->name }}</a>
+                            <a itemprop="item" href="{{ route('database') }}"
+                                class="sm:mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                <span itemprop="name">{{ __('Catalog of models') }}</span>
+                            </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-4 text-gray-300">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-300">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
                     </li>
-                    <li class="text-sm">
-                        <a href="#" aria-current="page"
-                            class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">{{ $model->name }}</a>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="2" />
+                        <div class="flex items-center">
+                            <a itemprop="item"
+                                href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
+                                class="sm:mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                <span itemprop="name">{{ $brand->name }}</span>
+                            </a>
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-300">
+                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
+                        <meta itemprop="position" content="3" />
+                        <a itemprop="item" href="#" aria-current="page"
+                            class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <span itemprop="name">{{ $model->name }}</span>
+                        </a>
                     </li>
                 </ol>
             </nav>
@@ -53,6 +64,7 @@
                 @php
                     $hasTariff = ($user = \Auth::user()) && $user->tariff;
                     $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
+                    $modelAdsCount = $versions->pluck('ads')->flatten()->count();
                 @endphp
 
                 <div class="mt-4 md:row-span-3 md:mt-0 md:pl-6 lg:pl-12 xl:pl-16">
@@ -65,6 +77,7 @@
                         <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
                             <x-rating></x-rating>
                             <meta itemprop="ratingValue" content="{{ $momentRating }}" />
+                            <meta itemprop="bestRating" content="5" />
 
                             <a href="{{ route('database.reviews', [
                                 'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
@@ -77,11 +90,15 @@
                         </div>
                     </div>
 
-                    @if ($versions->pluck('ads')->flatten()->count())
-                        <a class="w-max mt-4 sm:mt-6 md:mt-8"
-                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
-                            <x-primary-button>{{ __('Find ads') }}</x-primary-button>
-                        </a>
+                    @if ($modelAdsCount)
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                            <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
+
+                            <a itemprop="url" class="w-max mt-4 sm:mt-6 md:mt-8"
+                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
+                                <x-primary-button>{{ __('Find ads') }}</x-primary-button>
+                            </a>
+                        </div>
                     @else
                         <x-primary-button
                             class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('No ads') }}</x-primary-button>
@@ -90,7 +107,6 @@
 
                 <div
                     class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
-
                     <div class="text-sm text-gray-400" itemprop="additionalProperty" itemscope
                         itemtype="http://schema.org/PropertyValue"><span itemprop="name">{{ __('Algorithm') }}:
                         </span><span class="text-gray-600" itemprop="value">
@@ -123,34 +139,47 @@
                         </div>
 
                         @foreach ($versions as $i => $version)
-                            <div x-show="selectedTab == {{ $i }}" itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
+                            <div x-show="selectedTab == {{ $i }}" itemprop="model" itemscope
+                                itemtype="http://schema.org/ProductModel">
                                 @php
                                     $minPrice = $version->ads->first();
                                 @endphp
 
-                                <meta itemprop="name" content="{{ $version->hashrate . $version->measurement }}" />
-                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                <meta itemprop="name"
+                                    content="{{ $model->name . ' ' . $version->hashrate . $version->measurement }}" />
+
+                                <div itemprop="hasMeasurement" itemscope
+                                    itemtype="http://schema.org/QuantitativeValue">
+                                    <meta itemprop="valueReference" content="Hashrate" />
                                     <meta itemprop="value" content="{{ $version->hashrate }}" />
                                     <meta itemprop="unitText" content="{{ $version->measurement }}/s" />
                                 </div>
 
-                                <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
-                                    <span class="text-gray-600">{{ $version->efficiency }}</span>
-                                    j/{{ $version->measurement }}
+                                <div itemprop="hasMeasurement" itemscope
+                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-400 mt-6">
+                                    <span itemprop="valueReference">{{ __('Efficiency') }}</span>:
+                                    <span itemprop="value" class="text-gray-600">{{ $version->efficiency }}</span>
+                                    <span itemprop="unitText">j/{{ $version->measurement }}</span>
                                 </div>
 
-                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-400 mt-1 sm:mt-2">{{ __('Power') }}:
-                                    <span class="text-gray-600" itemprop="value">{{ $version->efficiency * $version->hashrate }}</span>
+                                <div itemprop="hasMeasurement" itemscope
+                                    itemtype="http://schema.org/QuantitativeValue"
+                                    class="text-sm text-gray-400 mt-1 sm:mt-2"><span
+                                        itemprop="valueReference">{{ __('Power') }}</span>:
+                                    <span class="text-gray-600"
+                                        itemprop="value">{{ $version->efficiency * $version->hashrate }}</span>
                                     <span itemprop="unitCode">W</span>
                                 </div>
 
                                 @if ($minPrice)
                                     <div class="text-sm text-gray-400 mt-6">{{ __('The best price') }}:
                                         @if ($hasTariff)
-                                            <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="text-gray-600">
+                                            <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"
+                                                class="text-gray-600">
                                                 {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
                                                 <meta itemprop="bestPrice" content="{{ $minPrice->price }}" />
-                                                <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation }}" />
+                                                <meta itemprop="priceCurrency"
+                                                    content="{{ $minPrice->coin->abbreviation }}" />
                                             </span>
                                         @else
                                             <span class="text-gray-600 blur-sm"
@@ -160,10 +189,15 @@
                                         @endif
                                     </div>
 
-                                    <a class="w-max mt-6 md:mt-8"
-                                        href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
-                                        <x-primary-button>{{ __('Buy') }}</x-primary-button>
-                                    </a>
+                                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
+                                        class="mt-6 md:mt-8">
+                                        <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
+
+                                        <a itemprop="url" class="w-max"
+                                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
+                                            <x-primary-button>{{ __('Buy') }}</x-primary-button>
+                                        </a>
+                                    </div>
                                 @else
                                     <x-primary-button
                                         class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('Out of stock') }}</x-primary-button>
@@ -176,13 +210,16 @@
 
                     <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         @foreach ($algorithm->coins as $coin)
-                            <div class="flex items-center">
-                                <img src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}"
-                                    alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2">
+                            <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/Thing"
+                                class="flex items-center">
+                                <img itemprop="image" alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2"
+                                    src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}">
                                 <div>
-                                    <div class="text-xs sm:text-sm text-gray-500 mr-3">
-                                        {{ $coin->abbreviation }}</div>
-                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3">{{ $coin->name }}
+                                    <div itemprop="alternateName" class="text-xs sm:text-sm text-gray-500 mr-3">
+                                        {{ $coin->abbreviation }}
+                                    </div>
+                                    <div itemprop="name" class="text-xxs sm:text-xs text-gray-300 mr-3">
+                                        {{ $coin->name }}
                                     </div>
                                 </div>
                                 {{-- <div class="text-sm text-gray-600">
@@ -192,11 +229,17 @@
                         @endforeach
                     </div>
 
-                    <a class="block w-fit ml-auto mt-4 xs:mt-6 sm:mt-8"
-                        href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                        <x-secondary-button
-                            class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
-                    </a>
+                    <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage"
+                        class="mt-4 xs:mt-6 sm:mt-8">
+                        <meta itemprop="name"
+                            content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
+
+                        <a itemprop="url" class="block w-fit ml-auto"
+                            href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                            <x-secondary-button
+                                class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
+                        </a>
+                    </div>
 
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>

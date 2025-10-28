@@ -1,12 +1,17 @@
-<x-app-layout title="Каталог ASIC майнеров" description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
+<x-app-layout title="Каталог ASIC майнеров"
+    description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6" x-data="{ search: '' }">
             <nav class="mb-3" aria-label="Breadcrumb">
-                <ol role="list" class="flex items-center space-x-2">
-                    <li class="text-sm">
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
+                    class="flex items-center space-x-2">
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
+                        <meta itemprop="position" content="1" />
                         <div class="flex items-center">
-                            <a href="#"
-                                class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">{{ __('Catalog of models') }}</a>
+                            <a itemprop="item" href="#"
+                                class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                <span itemprop="name">{{ __('Catalog of models') }}</span>
+                            </a>
                         </div>
                     </li>
                 </ol>
@@ -33,7 +38,8 @@
                         class="flex items-center px-3 py-2 group hover:bg-gray-200 dark:hover:bg-zinc-800 rounded-md">
                         <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}"
                             alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
-                        <h5 class="font-semibold text-gray-500 dark:text-gray-400 text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200">
+                        <h5
+                            class="font-semibold text-gray-500 dark:text-gray-400 text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200">
                             {{ $brand->name }}
                         </h5>
                     </a>
@@ -48,11 +54,15 @@
                 @foreach ($algos as $algo)
                     <div @click="algo && algo == '{{ $algo->name }}' ? filter(null, search) : filter('{{ $algo->name }}', search)"
                         class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
-                        :class="{ 'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo == '{{ $algo->name }}', 'border-gray-300 dark:border-zinc-700': algo != '{{ $algo->name }}' }">
+                        :class="{ 'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo ==
+                                '{{ $algo->name }}', 'border-gray-300 dark:border-zinc-700': algo !=
+                                '{{ $algo->name }}' }">
                         <img src="{{ Storage::url('public/coins/' . $algo->coins->first()->abbreviation . '.webp') }}"
                             alt="{{ $algo->coins->first()->abbreviation }}" class="w-4 sm:w-5 mr-2">
                         <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-gray-100"
-                            :class="{ 'text-indigo-500 dark:text-gray-100': algo == '{{ $algo->name }}', 'text-gray-500 dark:text-gray-400': algo != '{{ $algo->name }}' }">
+                            :class="{ 'text-indigo-500 dark:text-gray-100': algo ==
+                                '{{ $algo->name }}', 'text-gray-500 dark:text-gray-400': algo !=
+                                    '{{ $algo->name }}' }">
                             {{ $algo->name }}
                         </h5>
                     </div>
@@ -162,7 +172,8 @@
                     </div>
                     <div class="pl-1.5 sm:pl-2">
                         <template x-for="coin in model.coins" :key="model.name + coin">
-                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline" :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
+                                :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
                         </template>
                     </div>
                 </a>
