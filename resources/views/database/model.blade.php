@@ -129,22 +129,28 @@
                                 @endphp
 
                                 <meta itemprop="name" content="{{ $version->hashrate . $version->measurement }}" />
+                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                    <meta itemprop="value" content="{{ $version->hashrate }}" />
+                                    <meta itemprop="unitText" content="{{ $version->measurement }}/s" />
+                                </div>
 
                                 <div class="text-sm text-gray-400 mt-6">{{ __('Efficiency') }}:
                                     <span class="text-gray-600">{{ $version->efficiency }}</span>
                                     j/{{ $version->measurement }}
                                 </div>
 
-                                <div class="text-sm text-gray-400 mt-1 sm:mt-2">{{ __('Power') }}:
-                                    <span class="text-gray-600">{{ $version->efficiency * $version->hashrate }}</span>
-                                    W
+                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-400 mt-1 sm:mt-2">{{ __('Power') }}:
+                                    <span class="text-gray-600" itemprop="value">{{ $version->efficiency * $version->hashrate }}</span>
+                                    <span itemprop="unitCode">W</span>
                                 </div>
 
                                 @if ($minPrice)
                                     <div class="text-sm text-gray-400 mt-6">{{ __('The best price') }}:
                                         @if ($hasTariff)
-                                            <span class="text-gray-600">
+                                            <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="text-gray-600">
                                                 {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
+                                                <meta itemprop="bestPrice" content="{{ $minPrice->price }}" />
+                                                <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation }}" />
                                             </span>
                                         @else
                                             <span class="text-gray-600 blur-sm"
@@ -155,7 +161,7 @@
                                     </div>
 
                                     <a class="w-max mt-6 md:mt-8"
-                                        href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
+                                        href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
                                         <x-primary-button>{{ __('Buy') }}</x-primary-button>
                                     </a>
                                 @else
