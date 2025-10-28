@@ -79,7 +79,7 @@
 
                     @if ($versions->pluck('ads')->flatten()->count())
                         <a class="w-max mt-4 sm:mt-6 md:mt-8"
-                            href="{{ route('ads', ['model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
+                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
                             <x-primary-button>{{ __('Find ads') }}</x-primary-button>
                         </a>
                     @else
