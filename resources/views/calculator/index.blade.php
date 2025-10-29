@@ -26,13 +26,19 @@
                 }
             @endphp
 
-            <div class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }">
+            <div itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }">
                 <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
                     <div class="mb-6">
                         <x-input-label for="price" :value="__('Tariff')" />
                         <x-text-input ::value="tariff" @input="tariff = $el.value" id="price" name="price"
                             min="0" max="10" type="number" step="0.01" />
                     </div>
+
+                    <meta itemprop="name" content="{{ $selModel->asicBrand->name }} {{ $selModel->name }}" />
+                    <style itemscope itemtype="http://schema.org/Brand" itemref="bname"></style>
+                    <meta id="bname" itemprop="name" content="{{ $selModel->asicBrand->name }}">
+                    <style itemscope itemtype="http://schema.org/ProductModel" itemref="pmname"></style>
+                    <meta id="pmname" itemprop="name" content="{{ $selModel->name }}">
 
                     @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,
@@ -41,25 +47,40 @@
 
                     <template x-if="version !== null">
                         <div class="mt-6 sm:mt-8 lg:mt-10 space-y-1 sm:space-y-2">
-                            <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Algorithm') }}: <span
-                                    class="text-gray-800 dark:text-gray-200 font-bold" x-text="version.algorithm"></span></div>
-                            <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Power') }}: <span
+                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                <span itemprop="name">{{ __('Algorithm') }}: </span><span itemprop="value"
                                     class="text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="version.efficiency * version.hashrate + ' W'"></span></div>
-                            <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Average price') }}: <span
+                                    x-text="version.algorithm"></span>
+                            </div>
+                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                <span itemprop="name">{{ __('Power') }}: </span><span itemprop="value"
+                                    class="text-gray-800 dark:text-gray-200 font-bold"
+                                    x-text="version.efficiency * version.hashrate"></span> <span
+                                    itemprop="unitCode">W</span>
+                            </div>
+                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                <span itemprop="name"></span>{{ __('Average price') }}: <span itemprop="value"
                                     class="text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                             </div>
                             <template x-if="version.ads.length">
-                                <a class="pt-2 sm:pt-3" :href="'/ads?model=' + version.model_name">
-                                    <x-primary-button
-                                        class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
-                                </a>
+                                <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                                    <meta itemprop="offerCount" ::content="version.ads.length" />
+
+                                    <a itemprop="url" class="pt-2 sm:pt-3" :href="'/ads?model=' + version.model_name">
+                                        <x-primary-button
+                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                    </a>
+                                </div>
                             </template>
                         </div>
                     </template>
                 </div>
-                <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 dark:border-zinc-700 col-span-3">
+                <div
+                    class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 dark:border-zinc-700 col-span-3">
                     <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                         <h4 class="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                             {{ __('Calculation result') }}</h4>
@@ -68,7 +89,8 @@
                                 :class="{
                                     'bg-primary-gradient text-white': currency ==
                                         'RUB',
-                                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': currency == 'USDT'
+                                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': currency ==
+                                        'USDT'
                                 }"
                                 class="p-1 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
                                 @click="currency = 'RUB'">RUB</button>
@@ -76,7 +98,8 @@
                                 :class="{
                                     'bg-primary-gradient text-white': currency ==
                                         'USDT',
-                                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': currency == 'RUB'
+                                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': currency ==
+                                        'RUB'
                                 }"
                                 class="p-1 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
                                 @click="currency = 'USDT'">USDT</button>
@@ -87,12 +110,22 @@
                         <div>
                             <div class="grid grid-cols-4 gap-2 sm:gap-4">
                                 <div></div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Income') }}</div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Expense') }}</div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Profit') }}</div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Day') }}</div>
-                                <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Income') }}
+                                </div>
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Expense') }}
+                                </div>
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Profit') }}
+                                </div>
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Day') }}
+                                </div>
+                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                    <meta itemprop="valueReference"
+                                        content="{{ __('Income per') }} {{ __('day') }}" />
+                                    <meta itemprop="unitCode" content="RUB" />
+                                    <div itemprop="value"
+                                        class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
+                                    </div>
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 * 10) / 10000">
@@ -100,9 +133,16 @@
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 10000) / 10000">
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Month') }}</div>
-                                <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Month') }}
+                                </div>
+                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                    <meta itemprop="valueReference"
+                                        content="{{ __('Income per') }} {{ __('month') }}" />
+                                    <meta itemprop="unitCode" content="RUB" />
+                                    <div itemprop="value"
+                                        class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
+                                    </div>
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 * 10) / 10000">
@@ -110,7 +150,8 @@
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 10000) / 10000">
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Year') }}</div>
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Year') }}
+                                </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 10000) / 10000">
                                 </div>
@@ -122,7 +163,8 @@
                                 </div>
                             </div>
 
-                            <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400 mt-6 sm:mt-7 lg:mt-8">{{ __('Payback') }}:
+                            <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400 mt-6 sm:mt-7 lg:mt-8">
+                                {{ __('Payback') }}:
                                 <span class="text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="version.price ? 
                                         version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000 > 0 ?

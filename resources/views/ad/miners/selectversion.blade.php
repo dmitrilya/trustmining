@@ -1,8 +1,8 @@
 <div x-data="{ models: {{ $models }}, withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }}, selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }}, selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }} }">
-    <input class="opacity-0 h-0 p-0 border-0" type="text"
+    <input class="block h-0 p-0 border-0" type="text"
         value="{{ isset($selectedModel) ? strtolower(str_replace(' ', '_', $selectedModel->name)) : 'null' }}"
         x-ref="model" name="model" @if (isset($required)) required @endif>
-    <input class="opacity-0 h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
+    <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif>
 
     <div>

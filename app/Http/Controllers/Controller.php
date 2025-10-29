@@ -88,8 +88,9 @@ class Controller extends BaseController
         });
 
         return view('calculator.index', [
-            'models' => AsicModel::select(['id', 'name', 'algorithm_id'])->with([
+            'models' => AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id'])->with([
                 'algorithm:id,name,measurement',
+                'asicBrand:id,name',
                 'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
                 'asicVersions.ads:asic_version_id,price,coin_id',
                 'asicVersions.ads.coin:id,rate'
