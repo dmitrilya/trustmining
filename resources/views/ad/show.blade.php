@@ -192,7 +192,7 @@
                                 @php
                                     $trackClick =
                                         $user && $user->tariff
-                                            ? 'axios.post("/ads/' .
+                                            ? 'axios.post("/ads/' . $ad->adCategory->name . '/' .
                                                 $ad->id .
                                                 '/track").then(r => {
                                                 pushToastAlert(r.data.message, r.data.success ? "success" : "error");

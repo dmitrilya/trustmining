@@ -35,10 +35,12 @@
                     </div>
 
                     <meta itemprop="name" content="{{ $selModel->asicBrand->name }} {{ $selModel->name }}" />
-                    <style itemscope itemtype="http://schema.org/Brand" itemref="bname"></style>
-                    <meta id="bname" itemprop="name" content="{{ $selModel->asicBrand->name }}">
-                    <style itemscope itemtype="http://schema.org/ProductModel" itemref="pmname"></style>
-                    <meta id="pmname" itemprop="name" content="{{ $selModel->name }}">
+                    <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
+                        <meta itemprop="name" content="{{ $selModel->asicBrand->name }}" />
+                    </div>
+                    <div itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
+                        <meta itemprop="name" content="{{ $selModel->name }}">
+                    </div>
 
                     @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,
@@ -47,6 +49,21 @@
 
                     <template x-if="version !== null">
                         <div class="mt-6 sm:mt-8 lg:mt-10 space-y-1 sm:space-y-2">
+                            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                                class="mt-4 sm:mt-6">
+                                <h3 class="sr-only">{{ __('Reviews') }}</h3>
+                                <div class="flex items-center" x-data="{ momentRating: version.moderated_reviews.length ? version.moderated_reviews.reduce((a, b) => a.rating + b.rating) / version.moderated_reviews.length : 0 }">
+                                    <x-rating></x-rating>
+                                    <meta itemprop="ratingValue" :content="momentRating" />
+                                    <meta itemprop="bestRating" content="5" />
+
+                                    <a :href="'/database/' + version.brand_name + '/' + version.model_name""
+                                        class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                        <span itemprop="reviewCount" x-text="version.moderated_reviews.length"></span>
+                                        {{ __('reviews') }}
+                                    </a>
+                                </div>
+                            </div>
                             <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
                                 class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
                                 <span itemprop="name">{{ __('Algorithm') }}: </span><span itemprop="value"
@@ -70,7 +87,8 @@
                                 <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                                     <meta itemprop="offerCount" ::content="version.ads.length" />
 
-                                    <a itemprop="url" class="pt-2 sm:pt-3" :href="'/ads?model=' + version.model_name">
+                                    <a itemprop="url" class="pt-2 sm:pt-3"
+                                        :href="'/ads/miners?model=' + version.model_name">
                                         <x-primary-button
                                             class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
                                     </a>
@@ -135,7 +153,8 @@
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Month') }}
                                 </div>
-                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                <div itemprop="hasMeasurement" itemscope
+                                    itemtype="http://schema.org/QuantitativeValue">
                                     <meta itemprop="valueReference"
                                         content="{{ __('Income per') }} {{ __('month') }}" />
                                     <meta itemprop="unitCode" content="RUB" />

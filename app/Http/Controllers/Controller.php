@@ -93,7 +93,8 @@ class Controller extends BaseController
                 'asicBrand:id,name',
                 'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
                 'asicVersions.ads:asic_version_id,price,coin_id',
-                'asicVersions.ads.coin:id,rate'
+                'asicVersions.ads.coin:id,rate',
+                'moderatedReviews:reviewable_id,reviewable_type,rating'
             ])->get()->map(function ($model) use ($measurements, $algorithms) {
                 $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
 
@@ -106,6 +107,7 @@ class Controller extends BaseController
                     ]);
                     $version->price = $version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate);
                     $version->algorithm = $model->algorithm->name;
+                    $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
                     $version->model_name = strtolower(str_replace(' ', '_', $model->name));
 
                     return $version;

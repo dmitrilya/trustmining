@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="w-full hidden space-x-4 xl:space-x-8 -my-px ml-10 lg:flex items-center">
-                    @include('layouts/components/ads', [
+                    @include('layouts.components.ads', [
                         'classes' =>
                             'h-full inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
@@ -160,7 +160,7 @@
                 @include('layouts.components.search')
             </div>
 
-            @include('layouts/components/ads', [
+            @include('layouts.components.ads', [
                 'relative' => true,
                 'classes' =>
                     'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-700 transition duration-150 ease-in-out',
