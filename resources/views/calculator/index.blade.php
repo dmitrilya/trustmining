@@ -34,13 +34,48 @@
                             min="0" max="10" type="number" step="0.01" />
                     </div>
 
-                    <meta itemprop="name" content="{{ $selModel->asicBrand->name }} {{ $selModel->name }}" />
+                    <meta itemprop="name" content="{{ $selModel->asicBrand->name . ' ' . $selModel->name }}" />
                     <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
                         <meta itemprop="name" content="{{ $selModel->asicBrand->name }}" />
                     </div>
                     <div itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
                         <meta itemprop="name" content="{{ $selModel->name }}">
                     </div>
+                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <meta itemprop="ratingValue" content="{{ $selVersion->reviews_avg }}" />
+                        <meta itemprop="bestRating" content="5" />
+                        <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
+                    </div>
+                    <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                        <meta itemprop="name" content="{{ __('Algorithm') }}">
+                        <meta itemprop="value" content=" {{ $selVersion->algorithm }}">
+                    </div>
+                    <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <meta itemprop="valueReference" content="{{ __('Power') }}" />
+                        <meta itemprop="unitCode" content="W" />
+                        <meta itemprop="value" content="{{ $selVersion->efficiency * $selVersion->hashrate }}" />
+                    </div>
+                    <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
+                        <meta itemprop="name" content="{{ __('Average price') }}">
+                        <meta itemprop="value" content="{{ $selVersion->price ? $selVersion->price : __('No data') }}">
+                    </div>
+                    <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
+                        <meta itemprop="unitCode" content="RUB" />
+                        <meta itemprop="value" content="{{ round($selVersion->profits[0]['profit'] / $rub, 2) }}" />
+                    </div>
+                    <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                        <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
+                        <meta itemprop="unitCode" content="RUB" />
+                        <meta itemprop="value" content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
+                    </div>
+                    @if ($selVersion->ads->count())
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                            <meta itemprop="offerCount" content="{{ $selVersion->ads->count() }}" />
+                            <link itemprop="url"
+                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+                        </div>
+                    @endif
 
                     @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,
@@ -49,53 +84,38 @@
 
                     <template x-if="version !== null">
                         <div class="mt-6 sm:mt-8 lg:mt-10">
-                            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
-                                class="mt-4 sm:mt-6">
+                            <div class="mt-4 sm:mt-6">
                                 <h3 class="sr-only">{{ __('Reviews') }}</h3>
                                 <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                                     <x-rating></x-rating>
-                                    <meta itemprop="ratingValue" :content="momentRating" />
-                                    <meta itemprop="bestRating" content="5" />
 
                                     <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
                                         class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                        <span itemprop="reviewCount" x-text="version.reviews_count"></span>
+                                        <span x-text="version.reviews_count"></span>
                                         {{ __('reviews') }}
                                     </a>
                                 </div>
                             </div>
                             <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                    <span itemprop="name">{{ __('Algorithm') }}: </span><span itemprop="value"
-                                        class="text-gray-800 dark:text-gray-200 font-bold"
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    {{ __('Algorithm') }}:
+                                    <span class="text-gray-800 dark:text-gray-200 font-bold"
                                         x-text="version.algorithm"></span>
                                 </div>
-                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                    <span itemprop="name">{{ __('Power') }}: </span><span itemprop="value"
-                                        class="text-gray-800 dark:text-gray-200 font-bold"
-                                        x-text="version.efficiency * version.hashrate"></span> <span
-                                        itemprop="unitCode">W</span>
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Power') }}:
+                                    <span class="text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
-                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                    <span itemprop="name"></span>{{ __('Average price') }}: <span itemprop="value"
-                                        class="text-gray-800 dark:text-gray-200 font-bold"
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    {{ __('Average price') }}: <span class="text-gray-800 dark:text-gray-200 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
                             </div>
                             <template x-if="version.ads.length">
-                                <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
-                                    class="mt-2 sm:mt-3">
-                                    <meta itemprop="offerCount" ::content="version.ads.length" />
-
-                                    <a itemprop="url" class="pt-2 sm:pt-3"
-                                        :href="'/ads/miners?model=' + version.model_name">
-                                        <x-primary-button
-                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
-                                    </a>
-                                </div>
+                                <a class="pt-2 sm:pt-3" :href="'/ads/miners?model=' + version.model_name">
+                                    <x-primary-button
+                                        class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                </a>
                             </template>
                         </div>
                     </template>
@@ -139,14 +159,8 @@
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Day') }}
                                 </div>
-                                <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
-                                    <meta itemprop="valueReference"
-                                        content="{{ __('Income per') }} {{ __('day') }}" />
-                                    <meta itemprop="unitCode" content="RUB" />
-                                    <div itemprop="value"
-                                        class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
-                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
-                                    </div>
+                                <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
+                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 * 10) / 10000">
@@ -154,17 +168,11 @@
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 10000) / 10000">
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Month') }}
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    {{ __('Month') }}
                                 </div>
-                                <div itemprop="hasMeasurement" itemscope
-                                    itemtype="http://schema.org/QuantitativeValue">
-                                    <meta itemprop="valueReference"
-                                        content="{{ __('Income per') }} {{ __('month') }}" />
-                                    <meta itemprop="unitCode" content="RUB" />
-                                    <div itemprop="value"
-                                        class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
-                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
-                                    </div>
+                                <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
+                                    x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 * 10) / 10000">
@@ -172,7 +180,8 @@
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 10000) / 10000">
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">{{ __('Year') }}
+                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    {{ __('Year') }}
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-800 dark:text-gray-200 font-bold"
                                     x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 10000) / 10000">
