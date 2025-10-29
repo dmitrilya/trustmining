@@ -48,43 +48,46 @@
                     ])
 
                     <template x-if="version !== null">
-                        <div class="mt-6 sm:mt-8 lg:mt-10 space-y-1 sm:space-y-2">
+                        <div class="mt-6 sm:mt-8 lg:mt-10">
                             <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
                                 class="mt-4 sm:mt-6">
                                 <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                                <div class="flex items-center" x-data="{ momentRating: version.moderated_reviews.length ? version.moderated_reviews.reduce((a, b) => a.rating + b.rating) / version.moderated_reviews.length : 0 }">
+                                <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                                     <x-rating></x-rating>
                                     <meta itemprop="ratingValue" :content="momentRating" />
                                     <meta itemprop="bestRating" content="5" />
 
-                                    <a :href="'/database/' + version.brand_name + '/' + version.model_name""
+                                    <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
                                         class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                        <span itemprop="reviewCount" x-text="version.moderated_reviews.length"></span>
+                                        <span itemprop="reviewCount" x-text="version.reviews_count"></span>
                                         {{ __('reviews') }}
                                     </a>
                                 </div>
                             </div>
-                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                <span itemprop="name">{{ __('Algorithm') }}: </span><span itemprop="value"
-                                    class="text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="version.algorithm"></span>
-                            </div>
-                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                <span itemprop="name">{{ __('Power') }}: </span><span itemprop="value"
-                                    class="text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="version.efficiency * version.hashrate"></span> <span
-                                    itemprop="unitCode">W</span>
-                            </div>
-                            <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                                class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                <span itemprop="name"></span>{{ __('Average price') }}: <span itemprop="value"
-                                    class="text-gray-800 dark:text-gray-200 font-bold"
-                                    x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
+                            <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
+                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    <span itemprop="name">{{ __('Algorithm') }}: </span><span itemprop="value"
+                                        class="text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="version.algorithm"></span>
+                                </div>
+                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    <span itemprop="name">{{ __('Power') }}: </span><span itemprop="value"
+                                        class="text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="version.efficiency * version.hashrate"></span> <span
+                                        itemprop="unitCode">W</span>
+                                </div>
+                                <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
+                                    class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
+                                    <span itemprop="name"></span>{{ __('Average price') }}: <span itemprop="value"
+                                        class="text-gray-800 dark:text-gray-200 font-bold"
+                                        x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
+                                </div>
                             </div>
                             <template x-if="version.ads.length">
-                                <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                                <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
+                                    class="mt-2 sm:mt-3">
                                     <meta itemprop="offerCount" ::content="version.ads.length" />
 
                                     <a itemprop="url" class="pt-2 sm:pt-3"

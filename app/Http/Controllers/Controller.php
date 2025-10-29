@@ -109,6 +109,8 @@ class Controller extends BaseController
                     $version->algorithm = $model->algorithm->name;
                     $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
                     $version->model_name = strtolower(str_replace(' ', '_', $model->name));
+                    $version->reviews_count = $model->moderatedReviews->count();
+                    $version->reviews_avg = $model->moderatedReviews->avg('rating');
 
                     return $version;
                 });
