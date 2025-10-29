@@ -65,8 +65,13 @@ class SitemapGenerate extends Command
         $users = User::where(
             fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
                 ->orWhereHas('hosting', fn(Builder $query) => $query->where('moderation', 'false'))
-        )->with(['ads:id,user_id,moderation,hidden', 'hosting:user_id,moderation', 'company:user_id,moderation', 'offices:id,user_id'])
-            ->select(['id', 'url_name'])->get();
+        )->with([
+            'ads:id,ad_category_id,user_id,moderation,hidden',
+            'ads.adCategory:id,name',
+            'hosting:user_id,moderation',
+            'company:user_id,moderation',
+            'offices:id,user_id'
+        ])->select(['id', 'url_name'])->get();
 
         foreach ($users as $user) {
             $out .= $this->addUrl('company/' . $user->url_name . '/shop');

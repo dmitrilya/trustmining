@@ -47,7 +47,12 @@ class UpdateCoinProfit extends Command
 
                 $coinData = [];
                 if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
-                if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search(Algorithm::where('name', $coin->algorithm)->first()->measurement, $mes));
+                if ($coin->algorithm == 'NexaHash') $coin->algorithm = 'NexaPow';
+                
+                $algorithm = Algorithm::where('name', $coin->algorithm)->first();
+                if (!$algorithm) return;
+                
+                if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
                 if ($coin->difficulty !== -1) $coinData['difficulty'] = $coin->difficulty;
                 if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
 
