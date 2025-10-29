@@ -71,7 +71,7 @@
                     <h2 class="sr-only">Информация</h2>
 
                     <!-- Reviews -->
-                    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                    <div @if ($model->moderatedReviews->count()) itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating @endif"
                         class="mt-4 sm:mt-6">
                         <h3 class="sr-only">{{ __('Reviews') }}</h3>
                         <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">

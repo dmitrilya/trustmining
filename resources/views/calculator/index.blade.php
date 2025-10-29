@@ -41,11 +41,13 @@
                     <div itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
                         <meta itemprop="name" content="{{ $selModel->name }}">
                     </div>
-                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                        <meta itemprop="ratingValue" content="{{ $selVersion->reviews_avg }}" />
-                        <meta itemprop="bestRating" content="5" />
-                        <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
-                    </div>
+                    @if ($selVersion->reviews_count)
+                        <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <meta itemprop="ratingValue" content="{{ $selVersion->reviews_avg }}" />
+                            <meta itemprop="bestRating" content="5" />
+                            <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
+                        </div>
+                    @endif
                     <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                         <meta itemprop="name" content="{{ __('Algorithm') }}">
                         <meta itemprop="value" content=" {{ $selVersion->algorithm }}">
@@ -67,7 +69,8 @@
                     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
                         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
                         <meta itemprop="unitCode" content="RUB" />
-                        <meta itemprop="value" content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
+                        <meta itemprop="value"
+                            content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
                     </div>
                     @if ($selVersion->ads->count())
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
