@@ -100,10 +100,8 @@
                             </a>
                         </div>
                     @else
-                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                            <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
-                            <link itemprop="url"
-                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}" />
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                            <link itemprop="availability" href="https://schema.org/OutOfStock"/>
                         </div>
 
                         <x-primary-button
