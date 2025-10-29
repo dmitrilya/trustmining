@@ -72,13 +72,11 @@
                         <meta itemprop="value"
                             content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
                     </div>
-                    @if ($selVersion->ads->count())
-                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                            <meta itemprop="offerCount" content="{{ $selVersion->ads->count() }}" />
-                            <link itemprop="url"
-                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
-                        </div>
-                    @endif
+                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                        <meta itemprop="offerCount" content="{{ $selVersion->ads->count() }}" />
+                        <link itemprop="url"
+                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+                    </div>
 
                     @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,

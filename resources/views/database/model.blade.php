@@ -100,6 +100,12 @@
                             </a>
                         </div>
                     @else
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                            <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
+                            <link itemprop="url"
+                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}" />
+                        </div>
+
                         <x-primary-button
                             class="mt-4 sm:mt-6 md:mt-8 cursor-default opacity-60">{{ __('No ads') }}</x-primary-button>
                     @endif
@@ -196,7 +202,8 @@
 
                                             <a itemprop="url" class="w-full xs:w-max"
                                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
-                                                <x-primary-button class="w-full">{{ __('Buy') }}</x-primary-button>
+                                                <x-primary-button
+                                                    class="w-full">{{ __('Buy') }}</x-primary-button>
                                             </a>
                                         </div>
 
