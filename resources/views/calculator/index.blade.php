@@ -82,7 +82,7 @@
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="offerCount" content="{{ $modelAds->count() }}" />
                             <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
-                            <meta itemprop="currency"
+                            <meta itemprop="priceCurrency"
                                 content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
                             <link itemprop="url"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
@@ -91,7 +91,7 @@
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="offerCount" content="0" />
                             <meta itemprop="lowPrice" content="0" />
-                            <meta itemprop="currency" content="RUB" />
+                            <meta itemprop="priceCurrency" content="RUB" />
                             <link itemprop="url"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
                         </div>
