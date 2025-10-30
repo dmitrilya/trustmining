@@ -74,7 +74,7 @@
                     </div>
 
                     @php
-                        $modelAds = $selModel->pluck('asicVersions.ads')->flatten();
+                        $modelAds = $selModel->asicVersions->pluck('ads')->flatten();
                         $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
                     @endphp
 
