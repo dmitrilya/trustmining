@@ -64,7 +64,8 @@
                 @php
                     $hasTariff = ($user = \Auth::user()) && $user->tariff;
                     $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
-                    $modelAdsCount = $versions->pluck('ads')->flatten()->count();
+                    $modelAds = $versions->pluck('ads')->flatten();
+                    $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
                 @endphp
 
                 <div class="mt-4 md:row-span-3 md:mt-0 md:pl-6 lg:pl-12 xl:pl-16">
@@ -90,9 +91,10 @@
                         </div>
                     </div>
 
-                    @if ($modelAdsCount)
+                    @if ($modelAds->count())
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                            <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
+                            <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
+                            <meta itemprop="priceCurrency" content="{{ $modelAdWithMinPrice->coin->abbreviation }}" />
 
                             <a itemprop="url" class="w-full xs:w-max mt-4 sm:mt-6 md:mt-8"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
@@ -101,7 +103,8 @@
                         </div>
                     @else
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                            <meta itemprop="offerCount" content="{{ $modelAdsCount }}" />
+                            <meta itemprop="lowPrice" content="0" />
+                            <meta itemprop="priceCurrency" content="RUB" />
                             <link itemprop="url"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}" />
                         </div>
@@ -198,7 +201,8 @@
                                     <div class="xs:flex mt-6 md:mt-8 ">
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
                                             class="xs:mr-2 sm:mr-3 lg:mr-4">
-                                            <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
+                                            <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
+                                            <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation }}" />
 
                                             <a itemprop="url" class="w-full xs:w-max"
                                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
