@@ -93,7 +93,7 @@ class Controller extends BaseController
                 'asicBrand:id,name',
                 'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
                 'asicVersions.ads:asic_version_id,price,coin_id',
-                'asicVersions.ads.coin:id,rate',
+                'asicVersions.ads.coin:id,rate,abbreviation',
                 'moderatedReviews:reviewable_id,reviewable_type,rating'
             ])->get()->map(function ($model) use ($measurements, $algorithms) {
                 $algorithm = $algorithms->where('id', $model->algorithm->id)->first();

@@ -72,11 +72,30 @@
                         <meta itemprop="value"
                             content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
                     </div>
-                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                        <meta itemprop="offerCount" content="{{ $selVersion->ads->count() }}" />
-                        <link itemprop="url"
-                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
-                    </div>
+
+                    @php
+                        $modelAds = $selModel->pluck('asicVersions.ads')->flatten();
+                        $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
+                    @endphp
+
+                    @if ($modelAds->count())
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                            <meta itemprop="offerCount" content="{{ $modelAds->count() }}" />
+                            <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
+                            <meta itemprop="currency"
+                                content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
+                            <link itemprop="url"
+                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+                        </div>
+                    @else
+                        <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                            <meta itemprop="offerCount" content="0" />
+                            <meta itemprop="lowPrice" content="0" />
+                            <meta itemprop="currency" content="RUB" />
+                            <link itemprop="url"
+                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+                        </div>
+                    @endif
 
                     @include('ad.miners.selectversion', [
                         'selectedModel' => $selModel,
@@ -108,7 +127,8 @@
                                         x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400">
-                                    {{ __('Average price') }}: <span class="text-gray-800 dark:text-gray-200 font-bold"
+                                    {{ __('Average price') }}: <span
+                                        class="text-gray-800 dark:text-gray-200 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
                             </div>

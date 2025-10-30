@@ -94,7 +94,7 @@
                     @if ($modelAds->count())
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
-                            <meta itemprop="priceCurrency" content="{{ $modelAdWithMinPrice->coin->abbreviation }}" />
+                            <meta itemprop="priceCurrency" content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
 
                             <a itemprop="url" class="w-full xs:w-max mt-4 sm:mt-6 md:mt-8"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
@@ -188,7 +188,7 @@
                                                 {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
                                                 <meta itemprop="bestPrice" content="{{ $minPrice->price }}" />
                                                 <meta itemprop="priceCurrency"
-                                                    content="{{ $minPrice->coin->abbreviation }}" />
+                                                    content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
                                             </span>
                                         @else
                                             <span class="text-gray-600 blur-sm"
@@ -202,7 +202,7 @@
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
                                             class="xs:mr-2 sm:mr-3 lg:mr-4">
                                             <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
-                                            <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation }}" />
+                                            <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
 
                                             <a itemprop="url" class="w-full xs:w-max"
                                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
