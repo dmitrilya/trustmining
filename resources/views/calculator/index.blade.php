@@ -92,12 +92,12 @@
                             <meta itemprop="valueReference" content="{{ __('Payback') }}" />
                             <meta itemprop="unitCode" content="DAY" />
                             <meta itemprop="value"
-                                content="{{ $selVersion->profits['profitNumber']['profit'] -
+                                content="{{ $selVersion->profits[0]['profit'] -
                                     ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000 >
                                 0
                                     ? round(
                                         $selVersion->price /
-                                            ($selVersion->profits['profitNumber']['profit'] -
+                                            ($selVersion->profits[0]['profit'] -
                                                 ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000),
                                     )
                                     : 0 }}" />
