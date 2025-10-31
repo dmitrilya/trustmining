@@ -66,35 +66,56 @@
                     $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                     $modelAds = $versions->pluck('ads')->flatten();
                     $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
+                    $reviewsCount = $model->moderatedReviews->count();
                 @endphp
 
                 <div class="mt-4 md:row-span-3 md:mt-0 md:pl-6 lg:pl-12 xl:pl-16">
                     <h2 class="sr-only">Информация</h2>
 
                     <!-- Reviews -->
-                    <div @if ($model->moderatedReviews->count()) itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating @endif"
-                        class="mt-4 sm:mt-6">
-                        <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                        <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
-                            <x-rating></x-rating>
-                            <meta itemprop="ratingValue" content="{{ $momentRating }}" />
-                            <meta itemprop="bestRating" content="5" />
+                    @if ($reviewsCount)
+                        <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                            class="mt-4 sm:mt-6">
+                            <h3 class="sr-only">{{ __('Reviews') }}</h3>
+                            <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
+                                <x-rating></x-rating>
+                                <meta itemprop="ratingValue" content="{{ $momentRating }}" />
+                                <meta itemprop="worstRating" content="1" />
+                                <meta itemprop="bestRating" content="5" />
 
-                            <a href="{{ route('database.reviews', [
-                                'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
-                                'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
-                            ]) }}"
-                                class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                <span itemprop="reviewCount">{{ $model->moderatedReviews->count() }}</span>
-                                {{ __('reviews') }}
-                            </a>
+                                <a itemprop="url"
+                                    href="{{ route('database.reviews', [
+                                        'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
+                                        'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
+                                    ]) }}"
+                                    class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                    <span itemprop="reviewCount">{{ $reviewsCount }}</span>
+                                    {{ __('reviews') }}
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="mt-4 sm:mt-6">
+                            <h3 class="sr-only">{{ __('Reviews') }}</h3>
+                            <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
+                                <x-rating></x-rating>
+
+                                <a href="{{ route('database.reviews', [
+                                    'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
+                                    'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
+                                ]) }}"
+                                    class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{ $reviewsCount }}
+                                    {{ __('reviews') }}
+                                </a>
+                            </div>
+                        </div>
+                    @endif
 
                     @if ($modelAds->count())
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
-                            <meta itemprop="priceCurrency" content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
+                            <meta itemprop="priceCurrency"
+                                content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
 
                             <a itemprop="url" class="w-full xs:w-max mt-4 sm:mt-6 md:mt-8"
                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name))]) }}">
@@ -132,7 +153,8 @@
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="me-2">
-                                        <a href="#" class="inline-block p-2 xs:p-3 sm:p-4 border-b-2 rounded-t-lg"
+                                        <a href="#"
+                                            class="inline-block p-2 xs:p-3 sm:p-4 border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
                                                 'border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300': {{ $i }} !=
@@ -202,7 +224,8 @@
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer"
                                             class="xs:mr-2 sm:mr-3 lg:mr-4">
                                             <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
-                                            <meta itemprop="priceCurrency" content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
+                                            <meta itemprop="priceCurrency"
+                                                content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
 
                                             <a itemprop="url" class="w-full xs:w-max"
                                                 href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $model->name)), 'asic_version_id' => $version->id]) }}">
@@ -211,16 +234,18 @@
                                             </a>
                                         </div>
 
-                                        <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage"
-                                            class="mt-2 xs:mt-0">
+                                        <div itemprop="potentialAction" itemscope
+                                            itemtype="https://schema.org/ViewAction" class="mt-2 xs:mt-0">
                                             <meta itemprop="name"
                                                 content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
 
-                                            <a itemprop="url" class="block w-full xs:w-fit"
-                                                href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                                                <x-secondary-button
-                                                    class="bg-secondary-gradient !text-white w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
-                                            </a>
+                                            <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
+                                                <a itemprop="urlTemplate" class="block w-full xs:w-fit"
+                                                    href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                                                    <x-secondary-button
+                                                        class="bg-secondary-gradient !text-white w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 @else
@@ -228,15 +253,18 @@
                                         <x-primary-button
                                             class="mr-2 sm:mr-3 lg:mr-4 cursor-default opacity-60">{{ __('Out of stock') }}</x-primary-button>
 
-                                        <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/WebPage">
+                                        <div itemprop="potentialAction" itemscope
+                                            itemtype="https://schema.org/ViewAction">
                                             <meta itemprop="name"
                                                 content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
 
-                                            <a itemprop="url" class="block w-fit"
-                                                href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
-                                                <x-secondary-button
-                                                    class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
-                                            </a>
+                                            <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
+                                                <a itemprop="urlTemplate" class="block w-fit"
+                                                    href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
+                                                    <x-secondary-button
+                                                        class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 @endif
@@ -248,25 +276,26 @@
 
                     <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         @foreach ($algorithm->coins as $coin)
-                            <div itemprop="isRelatedTo" itemscope itemtype="https://schema.org/Thing"
-                                class="flex items-center">
-                                <img itemprop="image" alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2"
-                                    src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}">
+                            <div class="flex items-center">
+                                <img alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2"
+                                    src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
                                 <div>
-                                    <div itemprop="alternateName" class="text-xs sm:text-sm text-gray-500 mr-3">
+                                    <div class="text-xs sm:text-sm text-gray-500 mr-3">
                                         {{ $coin->abbreviation }}
                                     </div>
-                                    <div itemprop="name" class="text-xxs sm:text-xs text-gray-300 mr-3">
+                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3">
                                         {{ $coin->name }}
                                     </div>
                                 </div>
                                 {{-- <div class="text-sm text-gray-600">
-                                                {{ number_format($version->hashrate * $coin->profit, 8) }}
-                                            </div> --}}
+                                    {{ number_format($version->hashrate * $coin->profit, 8) }}
+                                </div> --}}
                             </div>
                         @endforeach
                     </div>
 
+                    <meta itemprop="description"
+                        content="ASIC майнер от производителя {{ $brand->name }} модели {{ $model->name }}{{ isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '' }}" />
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 

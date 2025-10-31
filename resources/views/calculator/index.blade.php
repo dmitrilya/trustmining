@@ -11,7 +11,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-zinc-900 shadow-sm rounded-lg p-2 sm:p-4">
+        <div itemscope itemtype="https://schema.org/ViewAction" class="bg-white dark:bg-zinc-900 shadow-sm rounded-lg p-2 sm:p-4">
             @php
                 $selModel = !$rModel
                     ? ($rVersion
@@ -26,7 +26,10 @@
                 }
             @endphp
 
-            <div itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }">
+            <meta itemprop="name" content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
+            <meta itemprop="description" content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
+
+            <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }">
                 <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
                     <div class="mb-6">
                         <x-input-label for="price" :value="__('Tariff')" />
@@ -35,6 +38,8 @@
                     </div>
 
                     <meta itemprop="name" content="{{ $selModel->asicBrand->name . ' ' . $selModel->name }}" />
+                    <meta itemprop="description"
+                        content="ASIC майнер от производителя {{ $selModel->asicBrand->name }} модели {{ $selModel->name }} на {{ $selVersion->hashrate }} {{ $selVersion->measurement }}" />
                     <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
                         <meta itemprop="name" content="{{ $selModel->asicBrand->name }}" />
                     </div>
@@ -44,8 +49,13 @@
                     @if ($selVersion->reviews_count)
                         <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                             <meta itemprop="ratingValue" content="{{ $selVersion->reviews_avg }}" />
+                            <meta itemprop="worstRating" content="1">
                             <meta itemprop="bestRating" content="5" />
                             <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
+                            <link itemprop="url" href="{{ route('database.reviews', [
+                                'asicBrand' => strtolower(str_replace(' ', '_', $selVersion->brand_name)),
+                                'asicModel' => strtolower(str_replace(' ', '_', $selVersion->model_name)),
+                            ]) }}" />
                         </div>
                     @endif
                     <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
