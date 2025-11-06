@@ -138,7 +138,7 @@ Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phon
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');
 
-    Route::post('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
+    Route::get('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
 
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);
