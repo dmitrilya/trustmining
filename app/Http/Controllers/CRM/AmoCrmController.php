@@ -38,7 +38,7 @@ class AmoCRMController extends BaseController
         if (!$scopeId) return redirect()->route('profile')->withErrors(['forbidden' => __('Authorization error. Please try again later or contact support')]);
 
         $user->crmConnections()->attach([
-            'crm_system_id' => CRMSystem::where('name', 'Amo')->first()->id,
+            'crm_system_id' => CRMSystem::where('name', 'AmoCRM')->first()->id,
             'external_id' => $scopeId
         ]);
 
