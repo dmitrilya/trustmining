@@ -5,7 +5,6 @@ namespace App\Http\Controllers\CRM;
 use Illuminate\Http\Request;
 
 use App\Models\CRMSystem;
-use App\Models\CRMConnection;
 
 use App\Services\CRM\AmoCRMService;
 

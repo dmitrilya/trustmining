@@ -5,7 +5,7 @@ namespace App\Services\CRM;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class AmoCRMService extends AbstractCRMService
+class AmoCRMService extends BaseCRMService
 {
     protected string $integrationId;
     protected string $integrationSecret;
