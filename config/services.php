@@ -66,6 +66,7 @@ return [
         ],
         'integration' => [
             'id' => env('AMOCRM_INTEGRATION_ID'),
+            'secret_key' => env('AMOCRM_INTEGRATION_SECRET_KEY'),
             'token' => env('AMOCRM_INTEGRATION_TOKEN'),
         ]
     ]

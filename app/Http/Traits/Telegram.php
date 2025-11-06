@@ -27,10 +27,10 @@ trait Telegram
         $hash = hash_hmac('sha256', $data_check_string, $secret_key);
 
         if (strcmp($hash, $check_hash) !== 0 || (time() - $data['auth_date']) > 86400)
-            return back()->withErrors(['forbidden' => __('Authorization error. Try again')]);
+            return back()->withErrors(['forbidden' => __('Authorization error. Please try again later or contact support')]);
 
         $user = $request->user();
-        if (!$user) return back()->withErrors(['forbidden' => __('Authorization error. Try again')]);
+        if (!$user) return back()->withErrors(['forbidden' => __('Authorization error. Please try again later or contact support')]);
 
         $user->tg_id = $data['id'];
         $user->save();

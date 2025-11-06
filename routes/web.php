@@ -15,6 +15,7 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ModerationController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TariffController;
@@ -136,6 +137,8 @@ Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phon
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');
+
+    Route::post('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
 
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);

@@ -1,41 +1,74 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\CRM;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class AmoCrmChatService
+class AmoCRMService extends AbstractCRMService
 {
     protected string $integrationId;
+    protected string $integrationSecret;
     protected string $channelId;
     protected string $channelSecret;
 
     public function __construct()
     {
         $this->integrationId = config('services.amocrm.integration.id');
+        $this->integrationSecret = config('services.amocrm.integration.secret_key');
         $this->channelId = config('services.amocrm.channel.id');
         $this->channelSecret = config('services.amocrm.channel.secret_key');
     }
 
     /**
+     * Получение access token по auth code
+     */
+    public function getAccessToken(string $domain, string $code): string
+    {
+        $endpoint = "oauth2/access_token";
+        $body = [
+            'client_id' => $this->integrationId,
+            'client_secret' => $this->integrationSecret,
+            'grant_type' => 'authorization_code',
+            'code' => $code,
+            'redirect_uri' => route('amocrm.auth'),
+        ];
+
+        $response = $this->sendSignedRequest($domain, 'POST', $endpoint, $body);
+
+        return empty($response['access_token']) ? false : $response['access_token'];
+    }
+
+    /**
+     * Получение amojo id
+     */
+    public function getAccountAmojoId(string $domain, string $accessToken): string
+    {
+        $endpoint = "api/v4/account?with=amojo_id&access_token=$accessToken";
+
+        $response = $this->sendSignedRequest($domain, 'GET', $endpoint);
+
+        return empty($response['amojo_id']) ? false : $response['amojo_id'];
+    }
+
+    /**
      * Подключение канала к аккаунту amoCRM
      */
-    public function connectChannelToAccount(string $accountId): array
+    public function connectChannelToAccount(string $accountId): string
     {
-        $endpoint = "/v2/origin/custom/{$this->channelId}/connect";
+        $endpoint = "{$this->channelId}/connect";
         $body = [
             'account_id' => $accountId,
             'hook_api_version' => 'v2',
         ];
 
-        $response = $this->sendSignedRequest('POST', $endpoint, $body);
+        $response = $this->sendSignedRequestAmojo('POST', $endpoint, $body);
 
         if (!empty($response['scope_id'])) {
             Log::info("✅ Connected account {$accountId} -> scope_id: {$response['scope_id']}");
         }
 
-        return $response;
+        return empty($response['scope_id']) ? false : $response['scope_id'];
     }
 
     /**
@@ -70,7 +103,7 @@ class AmoCrmChatService
         ?string $userName = null,
         ?string $userEmail = null,
     ): array {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $endpoint = "{$scopeId}/messages";
         $responses = [];
 
         // Определяем блок отправителя/получателя
@@ -97,7 +130,7 @@ class AmoCrmChatService
                 ],
             ];
 
-            $responses[] = $this->sendSignedRequest('POST', $endpoint, $body);
+            $responses[] = $this->sendSignedRequestAmojo('POST', $endpoint, $body);
         }
 
         // 2️⃣ Файловые сообщения
@@ -136,7 +169,7 @@ class AmoCrmChatService
                     ],
                 ];
 
-                $responses[] = $this->sendSignedRequest('POST', $endpoint, $body);
+                $responses[] = $this->sendSignedRequestAmojo('POST', $endpoint, $body);
             }
         }
 
@@ -149,7 +182,7 @@ class AmoCrmChatService
      */
     public function sendMessageDelivered(string $scopeId, string $conversationId, string $messageId): array
     {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $endpoint = "{$scopeId}/messages";
         $timestamp = time();
 
         $body = [
@@ -165,7 +198,7 @@ class AmoCrmChatService
             ],
         ];
 
-        return $this->sendSignedRequest('POST', $endpoint, $body);
+        return $this->sendSignedRequestAmojo('POST', $endpoint, $body);
     }
 
     /**
@@ -173,7 +206,7 @@ class AmoCrmChatService
      */
     public function sendMessageRead(string $scopeId, string $conversationId, string $messageId): array
     {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $endpoint = "{$scopeId}/messages";
         $timestamp = time();
 
         $body = [
@@ -189,15 +222,40 @@ class AmoCrmChatService
             ],
         ];
 
-        return $this->sendSignedRequest('POST', $endpoint, $body);
+        return $this->sendSignedRequestAmojo('POST', $endpoint, $body);
     }
 
     /**
      * Вспомогательный метод формирования подписанного запроса
      */
-    protected function sendSignedRequest(string $method, string $endpoint, array $body): array
+    protected function sendSignedRequest(string $domain, string $method, string $endpoint, ?array $body = null): array
     {
-        $url = "https://amojo.amocrm.ru" . $endpoint;
+        $url = "https://$domain/$endpoint";
+        
+        $contentType = 'application/json';
+
+        $request = Http::withHeaders(['Content-Type' => $contentType]);
+
+        if ($body) {
+            $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $request = $request->withBody($jsonBody, $contentType);
+        }
+            
+        $response = $request->send($method, $url);
+
+        if (!$response->successful()) {
+            throw new \Exception("AmoCRM API Error: " . $response->body());
+        }
+
+        return $response->json();
+    }
+
+    /**
+     * Вспомогательный метод формирования подписанного запроса к amojo
+     */
+    protected function sendSignedRequestAmojo(string $method, string $endpoint, array $body): array
+    {
+        $url = "https://amojo.amocrm.ru/v2/origin/custom/$endpoint";
 
         $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $contentType = 'application/json';
@@ -219,17 +277,8 @@ class AmoCrmChatService
             ->withBody($jsonBody, $contentType)
             ->send($method, $url);
 
-        Log::info('AmoCRM API Request', [
-            'method' => $method,
-            'url' => $url,
-            'headers' => $headers,
-            'body' => $body,
-            'status' => $response->status(),
-            'response' => $response->json(),
-        ]);
-
         if (!$response->successful()) {
-            throw new \Exception("AmoCRM API Error: " . $response->body());
+            throw new \Exception("AmoCRM API Amojo Error: " . $response->body());
         }
 
         return $response->json();
