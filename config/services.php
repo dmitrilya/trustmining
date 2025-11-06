@@ -56,5 +56,17 @@ return [
             'password' => env('TINKOFF_TERMINAL_PASSWORD')
         ],
         'key' => env('TINKOFF_API_KEY')
+    ],
+
+    'amocrm' => [
+        'channel' => [
+            'id' => env('AMOCRM_CHANNEL_ID'),
+            'secret_key' => env('AMOCRM_CHANNEL_SECRET_KEY'),
+            'bot_id' => env('AMOCRM_CHANNEL_BOT_ID'),
+        ],
+        'integration' => [
+            'id' => env('AMOCRM_INTEGRATION_ID'),
+            'token' => env('AMOCRM_INTEGRATION_TOKEN'),
+        ]
     ]
 ];

@@ -57,15 +57,13 @@ class ChatController extends Controller
 
         return view('chat.index', [
             'auth' => $user,
-            'chats' => $user->chats()->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
+            'chats' => $user->chats()->has('messages')->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
                 $notIn = [$user->id];
 
                 if ($user->role->name != 'support') Role::where('name', 'support')->first()->users()->pluck('id')->merge($notIn);
 
                 $query->whereNotIn('id', $notIn);
-            })->get()->sortByDesc(function ($chat) {
-                return $chat->messages->count() ? $chat->messages->reverse()->first()->created_at : $chat->created_at;
-            })
+            })->get()->sortByDesc(fn($chat) => $chat->messages->reverse()->first()->created_at)
         ]);
     }
 
@@ -85,15 +83,13 @@ class ChatController extends Controller
             'auth' => $user,
             'messages' => $chat->messages,
             'activeChat' => $chat,
-            'chats' => $user->chats()->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
+            'chats' => $user->chats()->has('messages')->with(['messages', 'users'])->whereHas('users', function ($query) use ($user) {
                 $notIn = [$user->id];
 
                 if ($user->role->name != 'support') Role::where('name', 'support')->first()->users()->pluck('id')->merge($notIn);
 
                 $query->whereNotIn('id', $notIn);
-            })->get()->sortByDesc(function ($chat) {
-                return $chat->messages->count() ? $chat->messages->reverse()->first()->created_at : $chat->created_at;
-            })
+            })->get()->sortByDesc(fn($chat) => $chat->messages->reverse()->first()->created_at)
         ]);
     }
 
@@ -118,7 +114,11 @@ class ChatController extends Controller
             'files' => []
         ]);
 
-        if ($request->images) $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
+        if ($request->images) {
+            $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
+
+            
+        }
 
         if ($request->files) $message->files = $this->saveFilesWithName($request->file('files'), 'chat', 'file', $message->id);
 

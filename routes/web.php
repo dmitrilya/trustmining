@@ -130,6 +130,7 @@ Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
 Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
+Route::post('/amocrm/webhook/{scope_id}', [OrderController::class, 'invoiceWebhook']);
 
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
 

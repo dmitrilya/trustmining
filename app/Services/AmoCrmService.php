@@ -1,0 +1,237 @@
+<?php
+
+namespace App\Services;
+
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
+class AmoCrmChatService
+{
+    protected string $integrationId;
+    protected string $channelId;
+    protected string $channelSecret;
+
+    public function __construct()
+    {
+        $this->integrationId = config('services.amocrm.integration.id');
+        $this->channelId = config('services.amocrm.channel.id');
+        $this->channelSecret = config('services.amocrm.channel.secret_key');
+    }
+
+    /**
+     * Подключение канала к аккаунту amoCRM
+     */
+    public function connectChannelToAccount(string $accountId): array
+    {
+        $endpoint = "/v2/origin/custom/{$this->channelId}/connect";
+        $body = [
+            'account_id' => $accountId,
+            'hook_api_version' => 'v2',
+        ];
+
+        $response = $this->sendSignedRequest('POST', $endpoint, $body);
+
+        if (!empty($response['scope_id'])) {
+            Log::info("✅ Connected account {$accountId} -> scope_id: {$response['scope_id']}");
+        }
+
+        return $response;
+    }
+
+    /**
+     * Универсальный метод отправки сообщений в amoCRM Chat API
+     *
+     * @param string $scopeId
+     * @param string $conversationId
+     * @param string $userId — ID клиента (или пользователя)
+     * @param string|array $content — текст или массив файлов
+     * @param bool $fromClient — true, если сообщение от клиента (создаёт "Неразобранное")
+     * @param string|null $userName — имя клиента (опционально, используется при создании "Неразобранного")
+     * 
+     * Формат для файлов:
+     * [
+     *     [
+     *         'type' => 'file|image|audio|video',
+     *         'file_name' => 'example.png',
+     *         'file_size' => 123456,
+     *         'mime_type' => 'image/png',
+     *         'file_url' => 'https://yourdomain.com/uploads/example.png',
+     *     ],
+     *     ...
+     * ]
+     */
+    public function sendMessage(
+        string $scopeId,
+        int $conversationId,
+        int $messageId,
+        string $userId,
+        string|array $content,
+        bool $fromClient = false,
+        ?string $userName = null,
+        ?string $userEmail = null,
+    ): array {
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $responses = [];
+
+        // Определяем блок отправителя/получателя
+        $direction = $fromClient
+            ? ['sender' => ['id' => $userId, 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
+            : ['sender' => ['ref_id' => $this->integrationId, 'name' => 'Bot'], 'recipient' => ['id' => $userId], 'silent' => true];
+
+        // 1️⃣ Текстовое сообщение
+        if (is_string($content)) {
+            $timestamp = time();
+
+            $body = [
+                [
+                    'event_type' => 'new_message',
+                    'payload' => array_merge($direction, [
+                        'timestamp' => $timestamp,
+                        'conversation_id' => $conversationId,
+                        'msgid' => $messageId,
+                        'message' => [
+                            'type' => 'text',
+                            'text' => $content,
+                        ],
+                    ]),
+                ],
+            ];
+
+            $responses[] = $this->sendSignedRequest('POST', $endpoint, $body);
+        }
+
+        // 2️⃣ Файловые сообщения
+        if (is_array($content)) {
+            foreach ($content as $file) {
+                foreach (['type', 'file_name', 'file_size', 'mime_type', 'file_url'] as $key) {
+                    if (empty($file[$key])) {
+                        throw new \InvalidArgumentException("Missing required file data key: {$key}");
+                    }
+                }
+
+                $messageId = uniqid('msg_', true);
+                $timestamp = time();
+
+                $message = [
+                    'id' => $messageId,
+                    'type' => $file['type'],
+                    'timestamp' => $timestamp,
+                    'file_name' => $file['file_name'],
+                    'file_size' => (int)$file['file_size'],
+                    'mime_type' => $file['mime_type'],
+                    'file_url' => $file['file_url'],
+                ];
+
+                if (!empty($file['preview_url'])) {
+                    $message['preview_url'] = $file['preview_url'];
+                }
+
+                $body = [
+                    [
+                        'event_type' => 'new_message',
+                        'payload' => array_merge($direction, [
+                            'conversation_id' => $conversationId,
+                            'message' => $message,
+                        ]),
+                    ],
+                ];
+
+                $responses[] = $this->sendSignedRequest('POST', $endpoint, $body);
+            }
+        }
+
+        return $responses;
+    }
+
+
+    /**
+     * 📬 Сообщение доставлено
+     */
+    public function sendMessageDelivered(string $scopeId, string $conversationId, string $messageId): array
+    {
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $timestamp = time();
+
+        $body = [
+            [
+                'event_type' => 'message_delivered',
+                'payload' => [
+                    'timestamp' => $timestamp,
+                    'conversation_id' => $conversationId,
+                    'message' => [
+                        'id' => $messageId,
+                    ],
+                ],
+            ],
+        ];
+
+        return $this->sendSignedRequest('POST', $endpoint, $body);
+    }
+
+    /**
+     * 👁️ Сообщение прочитано
+     */
+    public function sendMessageRead(string $scopeId, string $conversationId, string $messageId): array
+    {
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $timestamp = time();
+
+        $body = [
+            [
+                'event_type' => 'message_read',
+                'payload' => [
+                    'timestamp' => $timestamp,
+                    'conversation_id' => $conversationId,
+                    'message' => [
+                        'id' => $messageId,
+                    ],
+                ],
+            ],
+        ];
+
+        return $this->sendSignedRequest('POST', $endpoint, $body);
+    }
+
+    /**
+     * Вспомогательный метод формирования подписанного запроса
+     */
+    protected function sendSignedRequest(string $method, string $endpoint, array $body): array
+    {
+        $url = "https://amojo.amocrm.ru" . $endpoint;
+
+        $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $contentType = 'application/json';
+        $date = gmdate('D, d M Y H:i:s T');
+        $contentMd5 = base64_encode(md5($jsonBody, true));
+
+        $stringToSign = "{$method}\n{$contentMd5}\n{$contentType}\n{$date}\n{$endpoint}";
+        $signature = base64_encode(hash_hmac('sha1', $stringToSign, $this->secretKey, true));
+        $xSignature = "{$this->integrationId}:{$signature}";
+
+        $headers = [
+            'Date' => $date,
+            'Content-Type' => $contentType,
+            'Content-MD5' => $contentMd5,
+            'X-Signature' => $xSignature,
+        ];
+
+        $response = Http::withHeaders($headers)
+            ->withBody($jsonBody, $contentType)
+            ->send($method, $url);
+
+        Log::info('AmoCRM API Request', [
+            'method' => $method,
+            'url' => $url,
+            'headers' => $headers,
+            'body' => $body,
+            'status' => $response->status(),
+            'response' => $response->json(),
+        ]);
+
+        if (!$response->successful()) {
+            throw new \Exception("AmoCRM API Error: " . $response->body());
+        }
+
+        return $response->json();
+    }
+}

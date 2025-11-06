@@ -162,4 +162,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Like::class);
     }
+
+    public function crmConnections()
+    {
+        return $this->hasMany(CRMConnection::class);
+    }
 }

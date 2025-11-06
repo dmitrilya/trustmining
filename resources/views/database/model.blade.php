@@ -7,7 +7,7 @@
     ' модели ' .
     $model->name .
     (isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '') .
-    'Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
+    '. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
