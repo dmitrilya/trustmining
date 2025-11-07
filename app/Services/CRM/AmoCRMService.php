@@ -262,19 +262,18 @@ class AmoCRMService extends BaseCRMService
         $url = "https://amojo.amocrm.ru/v2/origin/custom/$endpoint";
 
         $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $checkSum = md5($jsonBody);
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');
-        $contentMd5 = base64_encode(md5($jsonBody, true));
 
-        $stringToSign = "{$method}\n{$contentMd5}\n{$contentType}\n{$date}\n{$endpoint}";
-        $signature = base64_encode(hash_hmac('sha1', $stringToSign, $this->channelSecret, true));
-        $xSignature = "{$this->integrationId}:{$signature}";
+        $stringToSign = "{$method}\n{$checkSum}\n{$contentType}\n{$date}\n{$endpoint}";
+        $signature = hash_hmac('sha1', $stringToSign, $this->channelSecret);
 
         $headers = [
             'Date' => $date,
             'Content-Type' => $contentType,
-            'Content-MD5' => $contentMd5,
-            'X-Signature' => $xSignature,
+            'Content-MD5' => strtolower($checkSum),
+            'X-Signature' => strtolower($signature),
         ];
 
         $response = Http::withHeaders($headers)
