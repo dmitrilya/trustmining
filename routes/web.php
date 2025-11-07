@@ -47,6 +47,7 @@ Route::get('private/temp', function (Request $request) {
 })->name('private.temp');
 
 Route::get('/locale', [Controller::class, 'locale'])->name('locale');
+Route::get('/change-theme', [Controller::class, 'changeTheme'])->name('change-theme');
 
 Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/search', [Controller::class, 'search'])->name('search');

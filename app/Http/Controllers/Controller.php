@@ -43,6 +43,16 @@ class Controller extends BaseController
         return back();
     }
 
+    public function changeTheme(Request $request)
+    {
+        $dark = session()->get('dark');
+
+        if (!$dark) session()->put('dark', true);
+        else session()->put('dark', false);
+
+        return response('', 200);
+    }
+
     public function home(): View
     {
         return view('home');

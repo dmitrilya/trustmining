@@ -4,6 +4,36 @@
             <x-application-logo class="text-4xl sm:text-6xl" />
         </a>
 
+        <div class="flex cursor-pointer my-2 sm:my-3">
+            <button
+                :class="{
+                    'bg-primary-gradient text-white': !dark,
+                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': dark
+                }"
+                class="p-1.5 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                @click="if (dark) {dark = false; axios.get('{{ route('change-theme') }}');}console.log(dark)">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+                </svg>
+            </button>
+            <button
+                :class="{
+                    'bg-primary-gradient text-white': dark,
+                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200':
+                        !dark
+                }"
+                class="p-1.5 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                @click="if (!dark) {dark = true; axios.get('{{ route('change-theme') }}');}console.log(dark)">
+                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                        d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z" />
+                </svg>
+            </button>
+        </div>
+
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
                 <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the buyer') }}</div>

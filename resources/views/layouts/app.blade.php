@@ -12,11 +12,13 @@
     @endauth
 
     <title>
-        @if ($attributes->has('title')){{$attributes->get('title')}}@else{{config('app.name')}}@endif
+        @if ($attributes->has('title'))
+            {{ $attributes->get('title') }}@else{{ config('app.name') }}
+        @endif
     </title>
 
     @if ($attributes->has('description'))
-        <meta name="description" content="{{$attributes->get('description')}}">
+        <meta name="description" content="{{ $attributes->get('description') }}">
     @endif
 
     <!-- Yandex.Metrika counter -->
@@ -53,7 +55,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden">
+<body class="font-sans antialiased overflow-x-hidden{{ session()->get('dark') ? ' dark' : '' }}" x-data="{ dark: {{ session()->get('dark') ? 'true' : 'false' }} }"
+    :class="{ 'dark': dark }">
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 
@@ -141,7 +144,8 @@
 
     <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
         @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror
-        @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror></div>
+        @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror>
+    </div>
 </body>
 
 </html>
