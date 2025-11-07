@@ -2,7 +2,7 @@
 
 namespace App\Services\CRM;
 
-class ServiceFactory
+class CRMServiceFactory
 {
     public static function createService(string $type): BaseCRMService
     {

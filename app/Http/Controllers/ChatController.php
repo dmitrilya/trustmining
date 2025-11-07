@@ -15,7 +15,8 @@ use App\Http\Traits\NotificationTrait;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\Role;
-use App\Services\CRM\ServiceFactory;
+
+use App\Services\CRM\CRMServiceFactory;
 
 class ChatController extends Controller
 {
@@ -154,14 +155,14 @@ class ChatController extends Controller
                 $this->notify('New message to support', collect([$addressee]), 'App\Models\Message', $message);
             else {
                 foreach ($user->crmConnections()->with('crm_system')->get() as $crmConnection) {
-                    $service = ServiceFactory::createService($crmConnection->crmSystem->name);
+                    $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
                     if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $request->message, $message->id);
                     if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $files);
                 }
 
                 foreach ($addressee->crmConnections()->with('crmSystem')->get() as $crmConnection) {
-                    $service = ServiceFactory::createService($crmConnection->crmSystem->name);
+                    $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
                     if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $request->message, $message->id, true, $user->name, $user->email);
                     if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $files, true, $user->name, $user->email);
