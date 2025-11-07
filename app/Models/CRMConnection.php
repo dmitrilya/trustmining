@@ -9,6 +9,8 @@ class CRMConnection extends Model
 {
     use HasFactory;
 
+    protected $table = 'crm_connections';
+
     /**
      * The attributes that are mass assignable.
      *

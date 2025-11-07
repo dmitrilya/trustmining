@@ -9,6 +9,8 @@ class CRMSystem extends Model
 {
     use HasFactory;
 
+    protected $table = 'crm_systems';
+
     public $timestamps = false;
 
     public function crmConnections()
