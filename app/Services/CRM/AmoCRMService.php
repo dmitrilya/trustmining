@@ -56,7 +56,7 @@ class AmoCRMService extends BaseCRMService
      */
     public function connectChannelToAccount(string $accountId): string
     {
-        $endpoint = "{$this->channelId}/connect";
+        $endpoint = "/v2/origin/custom/{$this->channelId}/connect";
         $body = [
             'account_id' => $accountId,
             'hook_api_version' => 'v2',
@@ -103,7 +103,7 @@ class AmoCRMService extends BaseCRMService
         ?string $userName = null,
         ?string $userEmail = null,
     ): array {
-        $endpoint = "{$scopeId}/messages";
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
         $responses = [];
 
         // Определяем блок отправителя/получателя
@@ -182,7 +182,7 @@ class AmoCRMService extends BaseCRMService
      */
     public function sendMessageDelivered(string $scopeId, string $conversationId, string $messageId): array
     {
-        $endpoint = "{$scopeId}/messages";
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
         $timestamp = time();
 
         $body = [
@@ -206,7 +206,7 @@ class AmoCRMService extends BaseCRMService
      */
     public function sendMessageRead(string $scopeId, string $conversationId, string $messageId): array
     {
-        $endpoint = "{$scopeId}/messages";
+        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
         $timestamp = time();
 
         $body = [
@@ -241,7 +241,7 @@ class AmoCRMService extends BaseCRMService
         $request = Http::withHeaders($headers);
 
         if ($body) {
-            $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $jsonBody = json_encode($body);
             $request = $request->withBody($jsonBody, $contentType);
         }
 
@@ -259,9 +259,9 @@ class AmoCRMService extends BaseCRMService
      */
     protected function sendSignedRequestAmojo(string $method, string $endpoint, array $body): array
     {
-        $url = "https://amojo.amocrm.ru/v2/origin/custom/$endpoint";
+        $url = "https://amojo.amocrm.ru$endpoint";
 
-        $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $jsonBody = json_encode($body);
         $checkSum = md5($jsonBody);
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');
