@@ -231,7 +231,7 @@ class AmoCRMService extends BaseCRMService
     protected function sendSignedRequest(string $domain, string $method, string $endpoint, ?string $accessToken, ?array $body = null): array
     {
         $url = "https://$domain/$endpoint";
-        
+
         $contentType = 'application/json';
         $headers = [
             'Content-Type' => $contentType,
@@ -244,7 +244,7 @@ class AmoCRMService extends BaseCRMService
             $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             $request = $request->withBody($jsonBody, $contentType);
         }
-            
+
         $response = $request->send($method, $url);
 
         if (!$response->successful()) {
@@ -267,7 +267,7 @@ class AmoCRMService extends BaseCRMService
         $contentMd5 = base64_encode(md5($jsonBody, true));
 
         $stringToSign = "{$method}\n{$contentMd5}\n{$contentType}\n{$date}\n{$endpoint}";
-        $signature = base64_encode(hash_hmac('sha1', $stringToSign, $this->secretKey, true));
+        $signature = base64_encode(hash_hmac('sha1', $stringToSign, $this->channelSecret, true));
         $xSignature = "{$this->integrationId}:{$signature}";
 
         $headers = [
