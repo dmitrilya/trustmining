@@ -107,31 +107,29 @@ class AmoCRMService extends BaseCRMService
         ?string $userName = null,
         ?string $userEmail = null,
     ): array {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
+        $endpoint = "/v2/origin/custom/{$scopeId}";
         $responses = [];
 
         // Определяем блок отправителя/получателя
         $direction = $fromClient
-            ? ['sender' => ['id' => $userId, 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
-            : ['sender' => ['ref_id' => $this->botId, 'name' => 'Bot'], 'recipient' => ['id' => $userId], 'silent' => true];
+            ? ['sender' => ['id' => "$userId", 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
+            : ['sender' => ['ref_id' => $this->botId, 'name' => 'Bot'], 'recipient' => ['id' => "$userId"], 'silent' => true];
 
         // 1️⃣ Текстовое сообщение
         if (is_string($content)) {
             $timestamp = time();
 
             $body = [
-                [
-                    'event_type' => 'new_message',
-                    'payload' => array_merge($direction, [
-                        'timestamp' => $timestamp,
-                        'conversation_id' => $conversationId,
-                        'msgid' => $messageId,
-                        'message' => [
-                            'type' => 'text',
-                            'text' => $content,
-                        ],
-                    ]),
-                ],
+                'event_type' => 'new_message',
+                'payload' => array_merge($direction, [
+                    'timestamp' => $timestamp,
+                    'conversation_id' => "$conversationId",
+                    'msgid' => "$messageId",
+                    'message' => [
+                        'type' => 'text',
+                        'text' => $content,
+                    ],
+                ]),
             ];
 
             $responses[] = $this->sendSignedRequestAmojo('POST', $endpoint, $body);
@@ -161,14 +159,12 @@ class AmoCRMService extends BaseCRMService
                 }
 
                 $body = [
-                    [
-                        'event_type' => 'new_message',
-                        'payload' => array_merge($direction, [
-                            'timestamp' => $timestamp,
-                            'conversation_id' => $conversationId,
-                            'message' => $message,
-                        ]),
-                    ],
+                    'event_type' => 'new_message',
+                    'payload' => array_merge($direction, [
+                        'timestamp' => $timestamp,
+                        'conversation_id' => $conversationId,
+                        'message' => $message,
+                    ]),
                 ];
 
                 $responses[] = $this->sendSignedRequestAmojo('POST', $endpoint, $body);
@@ -176,55 +172,6 @@ class AmoCRMService extends BaseCRMService
         }
 
         return $responses;
-    }
-
-
-    /**
-     * 📬 Сообщение доставлено
-     */
-    public function sendMessageDelivered(string $scopeId, string $conversationId, string $messageId): array
-    {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
-        $timestamp = time();
-
-        $body = [
-            [
-                'event_type' => 'message_delivered',
-                'payload' => [
-                    'timestamp' => $timestamp,
-                    'conversation_id' => $conversationId,
-                    'message' => [
-                        'id' => $messageId,
-                    ],
-                ],
-            ],
-        ];
-
-        return $this->sendSignedRequestAmojo('POST', $endpoint, $body);
-    }
-
-    /**
-     * 👁️ Сообщение прочитано
-     */
-    public function sendMessageRead(string $scopeId, string $conversationId, string $messageId): array
-    {
-        $endpoint = "/v2/origin/custom/{$scopeId}/messages";
-        $timestamp = time();
-
-        $body = [
-            [
-                'event_type' => 'message_read',
-                'payload' => [
-                    'timestamp' => $timestamp,
-                    'conversation_id' => $conversationId,
-                    'message' => [
-                        'id' => $messageId,
-                    ],
-                ],
-            ],
-        ];
-
-        return $this->sendSignedRequestAmojo('POST', $endpoint, $body);
     }
 
     /**

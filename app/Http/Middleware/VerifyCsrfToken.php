@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'order/webhook',
         'order/invoice/webhook',
+        'amocrm/webhook/{scope_id}',
     ];
 }

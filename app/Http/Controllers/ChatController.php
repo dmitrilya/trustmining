@@ -14,9 +14,13 @@ use App\Http\Traits\NotificationTrait;
 
 use App\Models\User;
 use App\Models\Chat;
+use App\Models\CRMConnection;
 use App\Models\Role;
 
+use App\Services\CRM\AmoCRMService;
 use App\Services\CRM\CRMServiceFactory;
+
+use Carbon\Carbon;
 
 class ChatController extends Controller
 {
@@ -123,11 +127,11 @@ class ChatController extends Controller
 
             foreach ($request->images as $i => $file) {
                 array_push($files, [
-                    'type' => 'image',
+                    'type' => 'picture',
                     'file_name' => end(explode('/', $message->images[$i])),
                     'file_size' => filesize($file),
                     'mime_type' => mime_content_type($file),
-                    'file_url' => Storage::url($message->images[$i]),
+                    'media' => Storage::url($message->images[$i]),
                 ]);
             }
         }
@@ -141,7 +145,7 @@ class ChatController extends Controller
                     'file_name' => $message->files[$i]['name'],
                     'file_size' => filesize($file),
                     'mime_type' => mime_content_type($file),
-                    'file_url' => Storage::url($message->files[$i]['path']),
+                    'media' => Storage::url($message->files[$i]['path']),
                 ]);
             }
         }
@@ -172,5 +176,48 @@ class ChatController extends Controller
         }
 
         return response()->json(['success' => true], 200);
+    }
+
+    /**
+     * Вебхук от амо
+     */
+    public function amocrmWebhook(Request $request, string $scope_id)
+    {
+        $service = new AmoCRMService();
+
+        if (strtolower(hash_hmac('sha1', $request->getContent(), $service->channelSecret)) != $request->header('HTTP_X_SIGNATURE')) return;
+
+        $crmConnection = CRMConnection::where('external_id', $scope_id)->first();
+        if (!$crmConnection) return;
+
+        $chat = Chat::find($request->message['conversation']->client_id);
+        if (!$chat) return;
+
+        if ($request->message['message']->type == 'text') $message = $chat->messages()->create([
+            'user_id' => $crmConnection->user_id,
+            'message' => $request->message['message']->text,
+            'images' => [],
+            'files' => [],
+            'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
+        ]);
+        else {
+            $message = $chat->messages()->create([
+                'user_id' => $crmConnection->user_id,
+                'message' => null,
+                'images' => [],
+                'files' => [],
+                'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
+            ]);
+
+            if ($request->message['message']->type == 'picture')
+                $message->images = $this->saveFiles([file_get_contents($request->message['message']->media)], 'chat', 'image', $message->id);
+            else $message->files = $this->saveFilesWithName([file_get_contents($request->message['message']->media)], 'chat', 'file', $message->id);
+
+            $message->save();
+        }
+
+        event(new NewMessage($chat->users()->where('id', '!=', $crmConnection->user_id)->first(), $message));
+
+        return 'OK';
     }
 }

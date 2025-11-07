@@ -20,6 +20,7 @@ class Message extends Model
         'message',
         'images',
         'files',
+        'created_at'
     ];
 
     /**
