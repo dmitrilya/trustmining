@@ -34,7 +34,7 @@ class AmoCRMService extends BaseCRMService
             'redirect_uri' => route('amocrm.auth'),
         ];
 
-        $response = $this->sendSignedRequest($domain, 'POST', $endpoint, $body);
+        $response = $this->sendSignedRequest($domain, 'POST', $endpoint, null, $body);
 
         return empty($response['access_token']) ? false : $response['access_token'];
     }
@@ -44,9 +44,9 @@ class AmoCRMService extends BaseCRMService
      */
     public function getAccountAmojoId(string $domain, string $accessToken): string
     {
-        $endpoint = "api/v4/account?with=amojo_id&access_token=$accessToken";
+        $endpoint = "api/v4/account?with=amojo_id";
 
-        $response = $this->sendSignedRequest($domain, 'GET', $endpoint);
+        $response = $this->sendSignedRequest($domain, 'GET', $endpoint, $accessToken);
 
         return empty($response['amojo_id']) ? false : $response['amojo_id'];
     }
@@ -228,13 +228,17 @@ class AmoCRMService extends BaseCRMService
     /**
      * Вспомогательный метод формирования подписанного запроса
      */
-    protected function sendSignedRequest(string $domain, string $method, string $endpoint, ?array $body = null): array
+    protected function sendSignedRequest(string $domain, string $method, string $endpoint, ?string $accessToken, ?array $body = null): array
     {
         $url = "https://$domain/$endpoint";
         
         $contentType = 'application/json';
+        $headers = [
+            'Content-Type' => $contentType,
+            'Authorization: Bearer' => $accessToken
+        ];
 
-        $request = Http::withHeaders(['Content-Type' => $contentType]);
+        $request = Http::withHeaders($headers);
 
         if ($body) {
             $jsonBody = json_encode($body, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
