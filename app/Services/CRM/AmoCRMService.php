@@ -235,7 +235,7 @@ class AmoCRMService extends BaseCRMService
         $contentType = 'application/json';
         $headers = [
             'Content-Type' => $contentType,
-            'Authorization: Bearer' => $accessToken
+            'Authorization' => "Bearer $accessToken"
         ];
 
         $request = Http::withHeaders($headers);
