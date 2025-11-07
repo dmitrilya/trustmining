@@ -11,6 +11,7 @@ class AmoCRMService extends BaseCRMService
     protected string $integrationSecret;
     protected string $channelId;
     protected string $channelSecret;
+    protected string $botId;
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class AmoCRMService extends BaseCRMService
         $this->integrationSecret = config('services.amocrm.integration.secret_key');
         $this->channelId = config('services.amocrm.channel.id');
         $this->channelSecret = config('services.amocrm.channel.secret_key');
+        $this->botId = config('services.amocrm.channel.bot_id');
     }
 
     /**
@@ -78,8 +80,10 @@ class AmoCRMService extends BaseCRMService
      * @param string $conversationId
      * @param string $userId — ID клиента (или пользователя)
      * @param string|array $content — текст или массив файлов
+     * @param string|null $messageId
      * @param bool $fromClient — true, если сообщение от клиента (создаёт "Неразобранное")
      * @param string|null $userName — имя клиента (опционально, используется при создании "Неразобранного")
+     * @param string|null $userEmail — email клиента (опционально, используется при создании "Неразобранного")
      * 
      * Формат для файлов:
      * [
@@ -96,9 +100,9 @@ class AmoCRMService extends BaseCRMService
     public function sendMessage(
         string $scopeId,
         int $conversationId,
-        int $messageId,
         string $userId,
         string|array $content,
+        ?int $messageId = null,
         bool $fromClient = false,
         ?string $userName = null,
         ?string $userEmail = null,
@@ -109,7 +113,7 @@ class AmoCRMService extends BaseCRMService
         // Определяем блок отправителя/получателя
         $direction = $fromClient
             ? ['sender' => ['id' => $userId, 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
-            : ['sender' => ['ref_id' => $this->integrationId, 'name' => 'Bot'], 'recipient' => ['id' => $userId], 'silent' => true];
+            : ['sender' => ['ref_id' => $this->botId, 'name' => 'Bot'], 'recipient' => ['id' => $userId], 'silent' => true];
 
         // 1️⃣ Текстовое сообщение
         if (is_string($content)) {
@@ -142,13 +146,10 @@ class AmoCRMService extends BaseCRMService
                     }
                 }
 
-                $messageId = uniqid('msg_', true);
                 $timestamp = time();
 
                 $message = [
-                    'id' => $messageId,
                     'type' => $file['type'],
-                    'timestamp' => $timestamp,
                     'file_name' => $file['file_name'],
                     'file_size' => (int)$file['file_size'],
                     'mime_type' => $file['mime_type'],
@@ -163,6 +164,7 @@ class AmoCRMService extends BaseCRMService
                     [
                         'event_type' => 'new_message',
                         'payload' => array_merge($direction, [
+                            'timestamp' => $timestamp,
                             'conversation_id' => $conversationId,
                             'message' => $message,
                         ]),

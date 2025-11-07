@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\NewMessage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreMessageRequest;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use App\Http\Traits\NotificationTrait;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\Role;
-use App\Models\Ad;
+use App\Services\CRM\ServiceFactory;
 
 class ChatController extends Controller
 {
@@ -114,13 +115,35 @@ class ChatController extends Controller
             'files' => []
         ]);
 
+        $files = [];
+
         if ($request->images) {
             $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
 
-            
+            foreach ($request->images as $i => $file) {
+                array_push($files, [
+                    'type' => 'image',
+                    'file_name' => end(explode('/', $message->images[$i])),
+                    'file_size' => filesize($file),
+                    'mime_type' => mime_content_type($file),
+                    'file_url' => Storage::url($message->images[$i]),
+                ]);
+            }
         }
 
-        if ($request->files) $message->files = $this->saveFilesWithName($request->file('files'), 'chat', 'file', $message->id);
+        if ($request->files) {
+            $message->files = $this->saveFilesWithName($request->file('files'), 'chat', 'file', $message->id);
+
+            foreach ($request->files as $i => $file) {
+                array_push($files, [
+                    'type' => 'file',
+                    'file_name' => $message->files[$i]['name'],
+                    'file_size' => filesize($file),
+                    'mime_type' => mime_content_type($file),
+                    'file_url' => Storage::url($message->files[$i]['path']),
+                ]);
+            }
+        }
 
         $message->save();
 
@@ -129,6 +152,21 @@ class ChatController extends Controller
         else {
             if ($addressee->role->name == 'support')
                 $this->notify('New message to support', collect([$addressee]), 'App\Models\Message', $message);
+            else {
+                foreach ($user->crmConnections()->with('crm_system')->get() as $crmConnection) {
+                    $service = ServiceFactory::createService($crmConnection->crmSystem->name);
+
+                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $request->message, $message->id);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $files);
+                }
+
+                foreach ($addressee->crmConnections()->with('crm_system')->get() as $crmConnection) {
+                    $service = ServiceFactory::createService($crmConnection->crmSystem->name);
+
+                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $request->message, $message->id, true, $user->name, $user->email);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $files, true, $user->name, $user->email);
+                }
+            }
             event(new NewMessage($addressee, $message));
         }
 
