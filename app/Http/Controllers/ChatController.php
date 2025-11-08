@@ -122,7 +122,7 @@ class ChatController extends Controller
 
         $files = [];
 
-        if ($request->images) {
+        if ($request->file('images')) {
             $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
 
             foreach ($request->file('images') as $i => $file) {
@@ -137,8 +137,9 @@ class ChatController extends Controller
             }
         }
 
-        if ($request->files) {
+        if ($request->file('files')) {
             $message->files = $this->saveFilesWithName($request->file('files'), 'chat', 'file', $message->id);
+
             foreach ($request->file('files') as $i => $file) {
                 array_push($files, [
                     'type' => 'file',
