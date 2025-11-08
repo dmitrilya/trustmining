@@ -30,7 +30,7 @@
                         @endphp
 
                         <a href="{{ route('chat', ['chat' => $chat->id]) }}" id="chat-{{ $chat->id }}"
-                            class="rounded-lg hover:bg-gray-100 block p-2 xs:p-3{{ $isUnchecked ? ' bg-gray-50' : '' }}">
+                            class="rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-950 block p-2 xs:p-3{{ $isUnchecked ? ' bg-gray-50 dark:bg-zinc-800' : '' }}">
                             <li>
                                 <div id="chat-signal-{{ $chat->id }}"
                                     class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1 dark:border-zinc-950">
@@ -38,14 +38,14 @@
 
                                 <div class="flex">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
-                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50"
-                                            src="{{ Storage::url($user->company->logo) }}" alt="">
+                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50 dark:bg-zinc-950"
+                                            src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }}">
                                     @endif
 
-                                    <p class="w-full text-xs font-semibold text-gray-900">{{ $user->name }}</p>
+                                    <p class="w-full text-xs font-semibold text-gray-900 dark:text-gray-200">{{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
-                                        <p class="text-xxs text-gray-900">
+                                        <p class="text-xxs text-gray-900 dark:text-gray-200">
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
