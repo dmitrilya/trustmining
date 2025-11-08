@@ -11,10 +11,29 @@
         @endif
     </header>
 
-    <div class="space-y-3 sm:space-y-4 lg:space-y-5">
+    <div class="space-y-4 sm:space-y-5 lg:space-y-6">
         @foreach (App\Models\CRMSystem::all() as $crmSystem)
-            <div class="flex justify-between">
-                <img src="{{ Storage::url('crm_systems/' . $crmSystem->name . '.webp') }}" alt="{{ $crmSystem->name }}" class="w-1/3" />
+            <div class="flex justify-between items-center border dark:border-zinc-700 rounded-lg p-4 xl:p-6">
+                <img src="{{ Storage::url('crm_systems/' . $crmSystem->name . '.webp') }}" alt="{{ $crmSystem->name }}"
+                    class="w-[40%]" />
+
+                @if ($user->crmConnections()->where('crm_system_id', $crmSystem->id)->exists())
+                        <x-secondary-button>{{ __('Connected') }}</x-secondary-button>
+                @else
+                    @switch($crmSystem->name)
+                        @case('AmoCRM')
+                            <a href="https://www.amocrm.ru/oauth?client_id={{ config('services.amocrm.integration.id') }}&state={{ csrf_token() }}&mode=popup">
+                                <x-primary-button>{{ __('Connect') }}</x-primary-button>
+                            </a>
+                        @break
+
+                        @case('Bitrix24')
+                            <a href="">
+                                <x-primary-button>{{ __('Connect') }}</x-primary-button>
+                            </a>
+                        @break
+                    @endswitch
+                @endif
             </div>
         @endforeach
     </div>

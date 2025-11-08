@@ -43,6 +43,10 @@
                 </div>
 
                 <div class="p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
+                    @include('profile.partials.crm-integration')
+                </div>
+
+                <div class="p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
                     @include('profile.partials.update-profile-information-form')
                 </div>
 
