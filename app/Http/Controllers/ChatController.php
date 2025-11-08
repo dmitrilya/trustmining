@@ -185,7 +185,7 @@ class ChatController extends Controller
     {
         $service = new AmoCRMService();
 
-        if ($service->signature($request->json()) != $request->header('HTTP_X_SIGNATURE')) return;
+        if ($service->signature($request->getContent()) != $request->header('HTTP_X_SIGNATURE')) return;
 
         $crmConnection = CRMConnection::where('external_id', $scope_id)->first();
         if (!$crmConnection) return;

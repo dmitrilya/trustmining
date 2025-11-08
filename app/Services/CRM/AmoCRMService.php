@@ -208,7 +208,7 @@ class AmoCRMService extends BaseCRMService
      */
     public function signature(string $stringToSign): string
     {
-        return strtolower(hash_hmac('sha1', $stringToSign, $this->channelSecret);
+        return strtolower(hash_hmac('sha1', $stringToSign, $this->channelSecret));
     }
 
     /**
@@ -222,12 +222,13 @@ class AmoCRMService extends BaseCRMService
         $checkSum = md5($jsonBody);
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');
+        $stringToSign = "{$method}\n{$checkSum}\n{$contentType}\n{$date}\n{$endpoint}";
 
         $headers = [
             'Date' => $date,
             'Content-Type' => $contentType,
             'Content-MD5' => strtolower($checkSum),
-            'X-Signature' => $this->signature("{$method}\n{$checkSum}\n{$contentType}\n{$date}\n{$endpoint}"),
+            'X-Signature' => $this->signature($stringToSign),
         ];
 
         $response = Http::withHeaders($headers)
