@@ -1,4 +1,5 @@
-<form @submit.prevent="sendMessage({{ $chatId }}, $el)">
+<form @submit.prevent="sendMessage({{ $chatId }}, $el)" x-data
+    @keypress="if ($event.ctrlKey && $event.code == 'Enter') sendMessage({{ $chatId }}, $el);">
     <div class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
@@ -52,7 +53,8 @@
                 </x-dropdown>
 
                 <div class="flex flex-col justify-center ml-2">
-                    <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-500" style="display: hidden" x-show="files > 0">
+                    <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-500" style="display: hidden"
+                        x-show="files > 0">
                         {{ __('File') }}: <span class="text-gray-600 dark:text-gray-400" x-text="files"></span>
                     </div>
                     <div class="text-xxs sm:text-xs text-gray-400" style="display: hidden" x-show="photos > 0">
