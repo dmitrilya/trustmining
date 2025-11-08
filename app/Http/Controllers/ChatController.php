@@ -125,10 +125,11 @@ class ChatController extends Controller
         if ($request->images) {
             $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
 
-            foreach ($request->images as $i => $file) {
+            foreach ($request->file('images') as $i => $file) {
+                $name = explode('/', $message->images[$i]);
                 array_push($files, [
                     'type' => 'picture',
-                    'file_name' => end(explode('/', $message->images[$i])),
+                    'file_name' => end($name),
                     'file_size' => filesize($file),
                     'mime_type' => mime_content_type($file),
                     'media' => Storage::url($message->images[$i]),
@@ -138,13 +139,12 @@ class ChatController extends Controller
 
         if ($request->files) {
             $message->files = $this->saveFilesWithName($request->file('files'), 'chat', 'file', $message->id);
-
-            foreach ($request->files as $i => $file) {
+            foreach ($request->file('files') as $i => $file) {
                 array_push($files, [
                     'type' => 'file',
                     'file_name' => $message->files[$i]['name'],
-                    'file_size' => filesize($file),
-                    'mime_type' => mime_content_type($file),
+                    'file_size' => $file->getSize(),
+                    'mime_type' => $file->getClientMimeType(),
                     'media' => Storage::url($message->files[$i]['path']),
                 ]);
             }
@@ -172,6 +172,7 @@ class ChatController extends Controller
                     if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $files, true, $user->name, $user->email);
                 }
             }
+            
             event(new NewMessage($addressee, $message));
         }
 
@@ -185,17 +186,17 @@ class ChatController extends Controller
     {
         $service = new AmoCRMService();
 
-        if ($service->signature($request->getContent()) != $request->header('HTTP_X_SIGNATURE')) return;
+        if ($service->signature(rtrim($request->getContent(), "\r\n")) != $request->header('X_Signature')) return;
 
         $crmConnection = CRMConnection::where('external_id', $scope_id)->first();
         if (!$crmConnection) return;
 
-        $chat = Chat::find($request->message['conversation']->client_id);
+        $chat = Chat::find($request->message['conversation']['client_id']);
         if (!$chat) return;
 
-        if ($request->message['message']->type == 'text') $message = $chat->messages()->create([
+        if ($request->message['message']['type'] == 'text') $message = $chat->messages()->create([
             'user_id' => $crmConnection->user_id,
-            'message' => $request->message['message']->text,
+            'message' => $request->message['message']['text'],
             'images' => [],
             'files' => [],
             'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
@@ -209,9 +210,9 @@ class ChatController extends Controller
                 'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
             ]);
 
-            if ($request->message['message']->type == 'picture')
-                $message->images = $this->saveFiles([file_get_contents($request->message['message']->media)], 'chat', 'image', $message->id);
-            else $message->files = $this->saveFilesWithName([file_get_contents($request->message['message']->media)], 'chat', 'file', $message->id);
+            if ($request->message['message']['type'] == 'picture')
+                $message->images = $this->saveFiles([file_get_contents($request->message['message']['media'])], 'chat', 'image', $message->id);
+            else $message->files = $this->saveFilesWithName([file_get_contents($request->message['message']['media'])], 'chat', 'file', $message->id);
 
             $message->save();
         }
