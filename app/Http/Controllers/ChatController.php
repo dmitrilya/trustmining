@@ -121,6 +121,7 @@ class ChatController extends Controller
         ]);
 
         $files = [];
+        $url = url('/');
 
         if ($request->file('images')) {
             $message->images = $this->saveFiles($request->file('images'), 'chat', 'image', $message->id);
@@ -132,7 +133,7 @@ class ChatController extends Controller
                     'file_name' => end($name),
                     'file_size' => filesize($file),
                     'mime_type' => mime_content_type($file),
-                    'media' => Storage::url($message->images[$i]),
+                    'media' => $url . Storage::url($message->images[$i]),
                 ]);
             }
         }
@@ -146,7 +147,7 @@ class ChatController extends Controller
                     'file_name' => $message->files[$i]['name'],
                     'file_size' => $file->getSize(),
                     'mime_type' => $file->getClientMimeType(),
-                    'media' => Storage::url($message->files[$i]['path']),
+                    'media' => $url . Storage::url($message->files[$i]['path']),
                 ]);
             }
         }
