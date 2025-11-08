@@ -146,24 +146,12 @@ class AmoCRMService extends BaseCRMService
 
                 $timestamp = time();
 
-                $message = [
-                    'type' => $file['type'],
-                    'file_name' => $file['file_name'],
-                    'file_size' => (int)$file['file_size'],
-                    'mime_type' => $file['mime_type'],
-                    'file_url' => $file['file_url'],
-                ];
-
-                if (!empty($file['preview_url'])) {
-                    $message['preview_url'] = $file['preview_url'];
-                }
-
                 $body = [
                     'event_type' => 'new_message',
                     'payload' => array_merge($direction, [
                         'timestamp' => $timestamp,
                         'conversation_id' => $conversationId,
-                        'message' => $message,
+                        'message' => $file,
                     ]),
                 ];
 
