@@ -44,13 +44,13 @@ class AmoCRMService extends BaseCRMService
     /**
      * Получение amojo id
      */
-    public function getAccountAmojoId(string $domain, string $accessToken): string
+    public function getAccountDataWithAmojoId(string $domain, string $accessToken): string
     {
         $endpoint = "api/v4/account?with=amojo_id";
 
         $response = $this->sendSignedRequest($domain, 'GET', $endpoint, $accessToken);
 
-        return empty($response['amojo_id']) ? false : $response['amojo_id'];
+        return empty($response['amojo_id']) ? false : $response;
     }
 
     /**
@@ -172,6 +172,14 @@ class AmoCRMService extends BaseCRMService
         }
 
         return $responses;
+    }
+
+    /**
+     * Формирование Signature для проверки вебхука об отключении интеграции
+     */
+    public function uninstallSignature($accountId)
+    {
+        return hash_hmac('sha256', sprintf('%s|%s', $this->integration, $accountId), $this->integrationSecret);
     }
 
     /**

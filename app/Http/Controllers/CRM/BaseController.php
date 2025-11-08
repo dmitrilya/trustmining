@@ -16,6 +16,4 @@ abstract class BaseController extends Controller
         $this->authError = ['forbidden' => __('Authorization error. Please try again later or contact support')];
         $this->service = $service;
     }
-
-    // Общие методы для всех интеграций
 }

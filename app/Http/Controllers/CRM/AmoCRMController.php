@@ -31,17 +31,34 @@ class AmoCRMController extends BaseController
         $accessToken = $this->service->getAccessToken($request->referer, $request->code);
         if (!$accessToken) return redirect()->route('profile')->withErrors($this->authError);
 
-        $amojoId = $this->service->getAccountAmojoId($request->referer, $accessToken);
-        if (!$amojoId) return redirect()->route('profile')->withErrors($this->authError);
+        $accountData = $this->service->getAccountDataWithAmojoId($request->referer, $accessToken);
+        if (!$accountData) return redirect()->route('profile')->withErrors($this->authError);
 
-        $scopeId = $this->service->connectChannelToAccount($amojoId);
+        $scopeId = $this->service->connectChannelToAccount($accountData['amojo_id']);
         if (!$scopeId) return redirect()->route('profile')->withErrors($this->authError);
 
         $user->crmConnections()->create([
             'crm_system_id' => $this->crmSystem->id,
+            'account_id' => $accountData['id'],
             'external_id' => $scopeId
         ]);
 
         return redirect()->route('profile')->withErrors(['success' => __('Authorization was successful')]);
+    }
+
+    /**
+     * Получение вебхука об отключении интеграции
+     */
+    public function handleUninstallWebhook(Request $request)
+    {
+        if (!$request->client_uuid || $request->client_uuid != $this->service->integrationId)
+            throw new \Exception('Invalid hook signature');
+
+        if (!hash_equals($this->service->uninstallSignature($request->account_id), $request->signature))
+            throw new \Exception('Invalid hook signature');
+
+        $this->crmSystem->crmConnections()->where('account_id', $request->account_id)->delete();
+
+        return 'OK';
     }
 }

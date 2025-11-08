@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('crm_system_id');
             $table->foreign('crm_system_id')->references('id')
                 ->on('crm_systems')->onUpdate('cascade');
+            $table->string('account_id');
             $table->string('external_id');
             $table->timestamps();
         });

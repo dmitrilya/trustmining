@@ -19,6 +19,7 @@ class CRMConnection extends Model
     protected $fillable = [
         'user_id',
         'crm_system_id',
+        'account_id',
         'external_id',
     ];
 
