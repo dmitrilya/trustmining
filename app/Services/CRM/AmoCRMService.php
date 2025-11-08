@@ -204,6 +204,14 @@ class AmoCRMService extends BaseCRMService
     }
 
     /**
+     * Формирование X-Signature
+     */
+    public function signature(string $stringToSign): string
+    {
+        return strtolower(hash_hmac('sha1', $stringToSign, $this->channelSecret);
+    }
+
+    /**
      * Вспомогательный метод формирования подписанного запроса к amojo
      */
     protected function sendSignedRequestAmojo(string $method, string $endpoint, array $body): array
@@ -215,14 +223,11 @@ class AmoCRMService extends BaseCRMService
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');
 
-        $stringToSign = "{$method}\n{$checkSum}\n{$contentType}\n{$date}\n{$endpoint}";
-        $signature = hash_hmac('sha1', $stringToSign, $this->channelSecret);
-
         $headers = [
             'Date' => $date,
             'Content-Type' => $contentType,
             'Content-MD5' => strtolower($checkSum),
-            'X-Signature' => strtolower($signature),
+            'X-Signature' => $this->signature("{$method}\n{$checkSum}\n{$contentType}\n{$date}\n{$endpoint}"),
         ];
 
         $response = Http::withHeaders($headers)
