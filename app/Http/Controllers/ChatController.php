@@ -159,7 +159,7 @@ class ChatController extends Controller
             if ($addressee->role->name == 'support')
                 $this->notify('New message to support', collect([$addressee]), 'App\Models\Message', $message);
             else {
-                foreach ($user->crmConnections()->with('crm_system')->get() as $crmConnection) {
+                foreach ($user->crmConnections()->with('crmSystem')->get() as $crmConnection) {
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
                     if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $request->message, $message->id);
