@@ -92,7 +92,7 @@ class AmoCRMService extends BaseCRMService
      *         'file_name' => 'example.png',
      *         'file_size' => 123456,
      *         'mime_type' => 'image/png',
-     *         'file_url' => 'https://yourdomain.com/uploads/example.png',
+     *         'media' => 'https://yourdomain.com/uploads/example.png',
      *     ],
      *     ...
      * ]
@@ -138,7 +138,7 @@ class AmoCRMService extends BaseCRMService
         // 2️⃣ Файловые сообщения
         if (is_array($content)) {
             foreach ($content as $file) {
-                foreach (['type', 'file_name', 'file_size', 'mime_type', 'file_url'] as $key) {
+                foreach (['type', 'file_name', 'file_size', 'mime_type', 'media'] as $key) {
                     if (empty($file[$key])) {
                         throw new \InvalidArgumentException("Missing required file data key: {$key}");
                     }
