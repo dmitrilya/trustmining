@@ -44,7 +44,7 @@ class AmoCRMService extends BaseCRMService
     /**
      * Получение amojo id
      */
-    public function getAccountDataWithAmojoId(string $domain, string $accessToken): string
+    public function getAccountDataWithAmojoId(string $domain, string $accessToken): bool|array
     {
         $endpoint = "api/v4/account?with=amojo_id";
 
