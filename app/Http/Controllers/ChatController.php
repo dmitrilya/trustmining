@@ -22,6 +22,7 @@ use App\Services\CRM\AmoCRMService;
 use App\Services\CRM\CRMServiceFactory;
 
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
 
 class ChatController extends Controller
 {
@@ -173,7 +174,7 @@ class ChatController extends Controller
                     if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, $message->id, true, $user->name, $user->email);
                 }
             }
-            
+
             event(new NewMessage($addressee, $message));
         }
 
@@ -210,10 +211,14 @@ class ChatController extends Controller
                 'files' => [],
                 'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
             ]);
-            info(file_get_contents($request->message['message']['media']));
-            if ($request->message['message']['type'] == 'picture')
-                $message->images = $this->saveFiles([Http::get($request->message['message']['media'])->body()], 'chat', 'image', $message->id);
-            else $message->files = $this->saveFilesWithName([Http::get($request->message['message']['media'])->body()], 'chat', 'file', $message->id);
+
+            $content = Http::get($request->message['message']['media'])->body();
+            $tmpPath = tempnam(sys_get_temp_dir(), 'upload_');
+            file_put_contents($tmpPath, $content);
+            $file = new UploadedFile($tmpPath, 'temp', mime_content_type($tmpPath), null, true);
+
+            if ($request->message['message']['type'] == 'picture') $message->images = $this->saveFiles([$file], 'chat', 'image', $message->id);
+            else $message->files = $this->saveFilesWithName([$file], 'chat', 'file', $message->id);
 
             $message->save();
         }
