@@ -215,7 +215,7 @@ class ChatController extends Controller
             $content = Http::get($request->message['message']['media'])->body();
             $tmpPath = tempnam(sys_get_temp_dir(), 'upload_');
             file_put_contents($tmpPath, $content);
-            $file = new UploadedFile($tmpPath, 'temp', mime_content_type($tmpPath), null, true);
+            $file = new UploadedFile($tmpPath, $request->message['message']['file_name'], mime_content_type($tmpPath), null, true);
 
             if ($request->message['message']['type'] == 'picture') $message->images = $this->saveFiles([$file], 'chat', 'image', $message->id);
             else $message->files = $this->saveFilesWithName([$file], 'chat', 'file', $message->id);
