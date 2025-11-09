@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 use App\Http\Requests\StoreMessageRequest;
 use Illuminate\Http\Request;
@@ -204,15 +205,15 @@ class ChatController extends Controller
         else {
             $message = $chat->messages()->create([
                 'user_id' => $crmConnection->user_id,
-                'message' => null,
+                'message' => $request->message['message']['text'],
                 'images' => [],
                 'files' => [],
                 'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
             ]);
             info(file_get_contents($request->message['message']['media']));
             if ($request->message['message']['type'] == 'picture')
-                $message->images = $this->saveFiles([file_get_contents($request->message['message']['media'])], 'chat', 'image', $message->id);
-            else $message->files = $this->saveFilesWithName([file_get_contents($request->message['message']['media'])], 'chat', 'file', $message->id);
+                $message->images = $this->saveFiles([Http::get($request->message['message']['media'])->body()], 'chat', 'image', $message->id);
+            else $message->files = $this->saveFilesWithName([Http::get($request->message['message']['media'])->body()], 'chat', 'file', $message->id);
 
             $message->save();
         }
