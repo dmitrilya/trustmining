@@ -209,7 +209,7 @@ class ChatController extends Controller
                 'files' => [],
                 'created_at' => Carbon::createFromTimestamp($request->message['timestamp'])
             ]);
-
+            info(file_get_contents($request->message['message']['media']));
             if ($request->message['message']['type'] == 'picture')
                 $message->images = $this->saveFiles([file_get_contents($request->message['message']['media'])], 'chat', 'image', $message->id);
             else $message->files = $this->saveFilesWithName([file_get_contents($request->message['message']['media'])], 'chat', 'file', $message->id);

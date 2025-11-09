@@ -144,8 +144,6 @@ class AmoCRMService extends BaseCRMService
                     }
                 }
 
-                info(json_encode($file));
-
                 $body = [
                     'event_type' => 'new_message',
                     'payload' => array_merge($direction, [
@@ -216,7 +214,6 @@ class AmoCRMService extends BaseCRMService
         $url = "https://amojo.amocrm.ru$endpoint";
 
         $jsonBody = json_encode($body);
-        info($jsonBody);
         $checkSum = md5($jsonBody);
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');
