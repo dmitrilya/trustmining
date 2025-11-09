@@ -78,7 +78,8 @@ class AmoCRMService extends BaseCRMService
      *
      * @param string $scopeId
      * @param string $conversationId
-     * @param string $userId — ID клиента (или пользователя)
+     * @param string $userId — ID отправителя
+     * @param string $addresseeId — ID получателя
      * @param string|array $content — текст или массив файлов
      * @param string|null $messageId
      * @param bool $fromClient — true, если сообщение от клиента (создаёт "Неразобранное")
@@ -88,10 +89,9 @@ class AmoCRMService extends BaseCRMService
      * Формат для файлов:
      * [
      *     [
-     *         'type' => 'file|image|audio|video',
+     *         'type' => 'file|picture|audio|video',
      *         'file_name' => 'example.png',
      *         'file_size' => 123456,
-     *         'mime_type' => 'image/png',
      *         'media' => 'https://yourdomain.com/uploads/example.png',
      *     ],
      *     ...
@@ -101,6 +101,7 @@ class AmoCRMService extends BaseCRMService
         string $scopeId,
         int $conversationId,
         string $userId,
+        string $addresseeId,
         string|array $content,
         ?int $messageId = null,
         bool $fromClient = false,
@@ -108,17 +109,16 @@ class AmoCRMService extends BaseCRMService
         ?string $userEmail = null,
     ): array {
         $endpoint = "/v2/origin/custom/{$scopeId}";
+        $timestamp = time();
         $responses = [];
 
         // Определяем блок отправителя/получателя
         $direction = $fromClient
             ? ['sender' => ['id' => "$userId", 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
-            : ['sender' => ['ref_id' => $this->botId, "name" => "TrustMining"], 'recipient' => ['id' => "$userId"], 'silent' => true];
+            : ['sender' => ['id' => "$userId", 'ref_id' => '91314bae-d1e4-4eb4-aeb5-2df8baa3eade', 'name' => 'Bot'], 'recipient' => ['id' => "$addresseeId"], 'silent' => true];
 
         // 1️⃣ Текстовое сообщение
         if (is_string($content)) {
-            $timestamp = time();
-
             $body = [
                 'event_type' => 'new_message',
                 'payload' => array_merge($direction, [
@@ -138,19 +138,19 @@ class AmoCRMService extends BaseCRMService
         // 2️⃣ Файловые сообщения
         if (is_array($content)) {
             foreach ($content as $file) {
-                foreach (['type', 'file_name', 'file_size', 'mime_type', 'media'] as $key) {
+                foreach (['type', 'file_name', 'file_size', 'media'] as $key) {
                     if (empty($file[$key])) {
                         throw new \InvalidArgumentException("Missing required file data key: {$key}");
                     }
                 }
 
-                $timestamp = time();
+                info(json_encode($file));
 
                 $body = [
                     'event_type' => 'new_message',
                     'payload' => array_merge($direction, [
                         'timestamp' => $timestamp,
-                        'conversation_id' => $conversationId,
+                        'conversation_id' => "$conversationId",
                         'message' => $file,
                     ]),
                 ];
@@ -215,6 +215,7 @@ class AmoCRMService extends BaseCRMService
         $url = "https://amojo.amocrm.ru$endpoint";
 
         $jsonBody = json_encode($body);
+        info($jsonBody);
         $checkSum = md5($jsonBody);
         $contentType = 'application/json';
         $date = gmdate('D, d M Y H:i:s T');

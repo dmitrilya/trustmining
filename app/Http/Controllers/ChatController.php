@@ -131,8 +131,7 @@ class ChatController extends Controller
                 array_push($files, [
                     'type' => 'picture',
                     'file_name' => end($name),
-                    'file_size' => filesize($file),
-                    'mime_type' => mime_content_type($file),
+                    'file_size' => $file->getSize(),
                     'media' => $url . Storage::url($message->images[$i]),
                 ]);
             }
@@ -146,7 +145,6 @@ class ChatController extends Controller
                     'type' => 'file',
                     'file_name' => $message->files[$i]['name'],
                     'file_size' => $file->getSize(),
-                    'mime_type' => $file->getClientMimeType(),
                     'media' => $url . Storage::url($message->files[$i]['path']),
                 ]);
             }
@@ -163,15 +161,15 @@ class ChatController extends Controller
                 foreach ($user->crmConnections()->with('crmSystem')->get() as $crmConnection) {
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
-                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $request->message, $message->id);
-                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $addressee->id, $files);
+                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $request->message, $message->id);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files);
                 }
 
                 foreach ($addressee->crmConnections()->with('crmSystem')->get() as $crmConnection) {
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
-                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $request->message, $message->id, true, $user->name, $user->email);
-                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $files, true, $user->name, $user->email);
+                    if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $request->message, $message->id, true, $user->name, $user->email);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, null, true, $user->name, $user->email);
                 }
             }
             
