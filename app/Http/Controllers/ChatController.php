@@ -162,14 +162,14 @@ class ChatController extends Controller
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
                     if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $request->message, $message->id);
-                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, $message->id);
                 }
 
                 foreach ($addressee->crmConnections()->with('crmSystem')->get() as $crmConnection) {
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
                     if ($request->message) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $request->message, $message->id, true, $user->name, $user->email);
-                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, null, true, $user->name, $user->email);
+                    if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, $message->id, true, $user->name, $user->email);
                 }
             }
             
