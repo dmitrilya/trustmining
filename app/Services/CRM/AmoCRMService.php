@@ -151,7 +151,7 @@ class AmoCRMService extends BaseCRMService
                     'payload' => array_merge($direction, [
                         'timestamp' => $timestamp,
                         'conversation_id' => "$conversationId",
-                        'msgid' => "$messageId",
+                        'msgid' => $messageId . '_' . $file['file_name'],
                         'message' => $file,
                     ]),
                 ];

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\App;
-
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,8 +14,6 @@ use App\Http\Traits\Telegram;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 
-use App\Models\Article;
-use App\Models\Hosting;
 use App\Models\Algorithm;
 use App\Models\AsicModel;
 use App\Models\AsicVersion;
@@ -25,33 +21,10 @@ use App\Models\Like;
 use App\Models\Role;
 use App\Models\Coin;
 use App\Models\Chat;
-use App\Models\Ad;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, DaData;
-
-    public function locale(Request $request)
-    {
-        if (! in_array($request->locale, ['en', 'ru'])) {
-            abort(400);
-        }
-
-        app()->setLocale($request->locale);
-        session()->put('locale', $request->locale);
-
-        return back();
-    }
-
-    public function changeTheme(Request $request)
-    {
-        $dark = session()->get('dark');
-
-        if (!$dark) session()->put('dark', true);
-        else session()->put('dark', false);
-
-        return response('', 200);
-    }
 
     public function home(): View
     {

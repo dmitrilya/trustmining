@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Cookie;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -43,6 +44,25 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile')->with('status', 'profile-updated');
+    }
+
+    public function locale(Request $request)
+    {
+        if (! in_array($request->locale, ['en', 'ru'])) {
+            abort(400);
+        }
+
+        app()->setLocale($request->locale);
+        session()->put('locale', $request->locale);
+
+        return back();
+    }
+
+    public function changeTheme(Request $request)
+    {
+        Cookie::queue('theme', $request->theme, 60 * 24 * 30);
+
+        return response('', 200);
     }
 
     /**

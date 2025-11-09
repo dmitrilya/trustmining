@@ -7,11 +7,17 @@
         <div class="flex cursor-pointer my-2 sm:my-3">
             <button
                 :class="{
-                    'bg-primary-gradient text-white': !dark,
-                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': dark
+                    'bg-primary-gradient text-white': theme == 'light',
+                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': theme !=
+                        'light'
                 }"
                 class="p-1.5 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
-                @click="if (dark) {dark = false; axios.get('{{ route('change-theme') }}');}console.log(dark)">
+                @click="if (theme != 'light') {
+                    theme = 'light';
+                    axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
+                    document.body.classList.add('light');
+                    document.body.classList.remove('dark');
+                }">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -20,12 +26,17 @@
             </button>
             <button
                 :class="{
-                    'bg-primary-gradient text-white': dark,
-                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200':
-                        !dark
+                    'bg-primary-gradient text-white': theme == 'dark',
+                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': theme !=
+                        'dark'
                 }"
                 class="p-1.5 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
-                @click="if (!dark) {dark = true; axios.get('{{ route('change-theme') }}');}console.log(dark)">
+                @click="if (theme != 'dark') {
+                    theme = 'dark';
+                    axios.get('{{ route('change-theme', ['theme' => 'dark']) }}');
+                    document.body.classList.add('dark');
+                    document.body.classList.remove('light');
+                }">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

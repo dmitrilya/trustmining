@@ -55,8 +55,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden{{ session()->get('dark') ? ' dark' : '' }}" x-data="{ dark: {{ session()->get('dark') ? 'true' : 'false' }} }"
-    :class="{ 'dark': dark }">
+<body class="font-sans antialiased overflow-x-hidden {{ request()->cookie('theme', 'light') }}" x-data="{ theme: '{{ request()->cookie('theme', 'light') }}' }">
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 

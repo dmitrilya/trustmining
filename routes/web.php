@@ -46,8 +46,8 @@ Route::get('private/temp', function (Request $request) {
     return Storage::disk('private')->download($request->path);
 })->name('private.temp');
 
-Route::get('/locale', [Controller::class, 'locale'])->name('locale');
-Route::get('/change-theme', [Controller::class, 'changeTheme'])->name('change-theme');
+Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
+Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
 Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/search', [Controller::class, 'search'])->name('search');
