@@ -38,7 +38,9 @@ class MetricsController extends Controller
 
         if (!$difficulties->count()) return back();
 
+        $lastDifficulty = $difficulties->first();
         $prediction = null;
+        $needBlocksTime = null;
 
         if ($coin->predictionable) {
             $recalcuateDates = [];
@@ -46,7 +48,36 @@ class MetricsController extends Controller
             foreach ($difficulties as $i => $difficulty) {
                 if (!isset($difficulties[$i + 1])) return back();
 
+                if (!$needBlocksTime) {
+                    $difficultyFotTime = $difficulty;
+
+                    if ($i == 3) {
+                        $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
+                        $days = $time / 60 / 60 / 24;
+                        $hours = $time / 60 / 60;
+                        $minutes = $time / 60;
+                        $needBlocksTime = '~ ';
+                        if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
+                        if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.days', $hours);
+                        if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.days', $minutes);
+                    }
+                }
+
                 if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
+                    if (!$needBlocksTime) {
+                        if ($i == 0) $needBlocksTime = __('Time calculation');
+                        else {
+                            $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
+                            $days = $time / 60 / 60 / 24;
+                            $hours = $time / 60 / 60;
+                            $minutes = $time / 60;
+                            $needBlocksTime = '~ ';
+                            if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
+                            if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.days', $hours);
+                            if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.days', $minutes);
+                        }
+                    }
+
                     array_push($recalcuateDates, $difficulty->created_at);
                     if (count($recalcuateDates) == 2) break;
                 }
@@ -57,7 +88,8 @@ class MetricsController extends Controller
 
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,
-            'difficulty' => $difficulties->first()->difficulty,
+            'difficulty' => $lastDifficulty,
+            'needBlocksTime' => $needBlocksTime,
             'prediction' => $prediction
         ]);
     }

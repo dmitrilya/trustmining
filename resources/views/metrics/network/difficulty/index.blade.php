@@ -82,13 +82,20 @@
             <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
                 <h3
                     class="text-lg sm:text-xl lg:text-2xl text-gray-800 dark:text-gray-200 font-bold mb-2 sm:mb-3 lg:mb-4">
-                    {{ __('Current difficulty') }}</h3>
+                    {{ __('Current difficulty') }}
+                </h3>
                 <div class="text-xs sm:text-sm lg:text-lg text-gray-500 dark:text-gray-400 mb-3 sm:mb-4 lg:mb-6">
-                    {{ number_format($difficulty) }}</div>
+                    {{ number_format($difficulty->difficulty) }}
+                </div>
                 @if ($prediction)
+                    <div class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-300 mb-2 sm:mb-3 lg:mb-4">
+                        {{ __('Blocks before difficulty recalculation') }}: <span
+                            class="font-bold">{{ $difficulty->need_blocks }}</span> ({{ $needBlocksTime }})
+                    </div>
+
                     <div class="text-sm sm:text-base lg:text-lg text-gray-800 dark:text-gray-200 font-bold">
                         {{ __('Next difficulty prediction') }}: <span
-                            class="text-gray-500 dark:text-gray-400 {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
+                            class="{{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
                             @if ($prediction > 0)
                                 +
                             @endif{{ $prediction }}%
