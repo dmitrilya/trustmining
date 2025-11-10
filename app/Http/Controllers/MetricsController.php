@@ -54,7 +54,9 @@ class MetricsController extends Controller
                     if ($i == 3) {
                         $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
                         $days = intdiv($time, 60 * 60 * 24);
+                        $time %= (60 * 60 * 24);
                         $hours = intdiv($time, 60 * 60);
+                        $time %= (60 * 60);
                         $minutes = intdiv($time, 60);
                         $needBlocksTime = '~ ';
                         if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
@@ -69,7 +71,9 @@ class MetricsController extends Controller
                         else {
                             $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
                             $days = intdiv($time, 60 * 60 * 24);
+                            $time %= (60 * 60 * 24);
                             $hours = intdiv($time, 60 * 60);
+                            $time %= (60 * 60);
                             $minutes = intdiv($time, 60);
                             $needBlocksTime = '~ ';
                             if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
