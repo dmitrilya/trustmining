@@ -24,9 +24,9 @@
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $office->images" min="128" max="128"></x-carousel>
                     </div>
 
-                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l md:border-gray-200 md:pl-8">
+                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                         <h1
-                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-900 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-900 dark:text-gray-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
@@ -68,8 +68,8 @@
                     <x-carousel :images="$office->images" min="128" max="128"></x-carousel>
                 </div>
 
-                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l md:border-gray-200 md:pl-8">
-                    <h1 class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-900 xs:text-base sm:text-lg">
+                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
+                    <h1 class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-900 dark:text-gray-200 xs:text-base sm:text-lg">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
