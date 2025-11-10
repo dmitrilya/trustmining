@@ -457,7 +457,7 @@
     "Cryptonetwork": "Криптосеть",
     "Network difficulty": "Сложность сети",
     "Current difficulty": "Текущая сложность",
-    "Blocks before difficulty recalculation": "Блоков до пересчета сложности",
+    "Blocks before recalculation": "Блоков до пересчета",
     "Time calculation": "Расчет времени",
     "Next difficulty prediction": "Прогноз следующей сложности",
     "Network hashrate": "Хэшрейт сети",
