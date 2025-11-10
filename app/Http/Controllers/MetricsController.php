@@ -53,13 +53,13 @@ class MetricsController extends Controller
 
                     if ($i == 3) {
                         $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                        $days = $time / 60 / 60 / 24;
-                        $hours = $time / 60 / 60;
-                        $minutes = $time / 60;
+                        $days = intdiv($time, 60 * 60 * 24);
+                        $hours = intdiv($time, 60 * 60);
+                        $minutes = intdiv($time, 60);
                         $needBlocksTime = '~ ';
                         if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
-                        if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.days', $hours);
-                        if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.days', $minutes);
+                        if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours);
+                        if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
                     }
                 }
 
@@ -68,13 +68,13 @@ class MetricsController extends Controller
                         if ($i == 0) $needBlocksTime = __('Time calculation');
                         else {
                             $time = ($lastDifficulty->created_at - $difficultyFotTime->created_at) / ($difficultyFotTime->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                            $days = $time / 60 / 60 / 24;
-                            $hours = $time / 60 / 60;
-                            $minutes = $time / 60;
+                            $days = intdiv($time, 60 * 60 * 24);
+                            $hours = intdiv($time, 60 * 60);
+                            $minutes = intdiv($time, 60);
                             $needBlocksTime = '~ ';
                             if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days);
-                            if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.days', $hours);
-                            if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.days', $minutes);
+                            if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours);
+                            if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
                         }
                     }
 
