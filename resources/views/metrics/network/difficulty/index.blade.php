@@ -89,7 +89,7 @@
                 </div>
                 @if ($prediction)
                     <div class="text-xxs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-300 mb-2 sm:mb-3 lg:mb-4">
-                        {{ __('Blocks before difficulty recalculation') }}: <span
+                        {{ __('Blocks before recalculation') }}: <span
                             class="font-bold">{{ $difficulty->need_blocks }}</span> ({{ $needBlocksTime }})
                     </div>
 
