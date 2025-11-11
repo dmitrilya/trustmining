@@ -65,11 +65,9 @@
     @if (!$theme)
         <script type="text/javascript">
             if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                fetch('{{ route('change-theme', ['theme' => 'dark']) }}');
                 document.body.classList.add("dark");
                 document.body.classList.remove("light");
             } else {
-                fetch('{{ route('change-theme', ['theme' => 'light']) }}');
                 document.body.classList.add("light");
                 document.body.classList.remove("dark");
             }
