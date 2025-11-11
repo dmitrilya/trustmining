@@ -1,5 +1,9 @@
-$(function() {
-  $(".format-text").click(function(e) {
+
+import jQuery from 'jquery';
+window.$ = jQuery.noConflict();
+
+$(function () {
+  $(".format-text").click(function (e) {
     let command = $(this).data("key");
     let active = $(this).hasClass("active");
 
@@ -18,7 +22,7 @@ $(function() {
 
   var selSticker, rangeSticker;
 
-  $(".format-text-wrap.format-stickers").click(function() {
+  $(".format-text-wrap.format-stickers").click(function () {
     selSticker = document.getSelection();
 
     let node = selSticker.anchorNode;
@@ -40,7 +44,7 @@ $(function() {
     rangeSticker = selSticker.getRangeAt(0);
   });
 
-  $(".emoji-code").click(function() {
+  $(".emoji-code").click(function () {
     if (rangeSticker) {
       rangeSticker.insertNode(document.createTextNode($(this).html()));
     } else {
@@ -49,11 +53,11 @@ $(function() {
     }
   });
 
-  $.each($(".image_box"), function(index, imageBox) {
+  $.each($(".image_box"), function (index, imageBox) {
     $(imageBox).attr("src", $(imageBox).attr("data-href"));
   });
 
-  $(".add-mentor-image").click(function() {
+  $(".add-mentor-image").click(function () {
     let mentorImagesContainer = $(
       `.mentor-images_container[data-question=${$(this).data("question")}]`
     );
@@ -65,7 +69,7 @@ $(function() {
 
   $(".mentor-images_container")
     .find(".type_like")
-    .on("click", function() {
+    .on("click", function () {
       $(".images_container").css("display", "none");
       $(".add-images_container").css("display", "none");
       $(`.like[data-question=${$(this).data("question")}]`).css(
@@ -76,7 +80,7 @@ $(function() {
 
   $(".mentor-images_container")
     .find(".type_dislike")
-    .on("click", function() {
+    .on("click", function () {
       $(".images_container").css("display", "none");
       $(".add-images_container").css("display", "none");
       $(`.dislike[data-question=${$(this).data("question")}]`).css(
@@ -87,7 +91,7 @@ $(function() {
 
   $(".mentor-images_container")
     .find(".type_support")
-    .on("click", function() {
+    .on("click", function () {
       $(".images_container").css("display", "none");
       $(".add-images_container").css("display", "none");
       $(`.support[data-question=${$(this).data("question")}]`).css(
@@ -98,7 +102,7 @@ $(function() {
 
   $(".mentor-images_container")
     .find(".type_plus")
-    .on("click", function() {
+    .on("click", function () {
       $(".images_container").css("display", "none");
       $(`.plus[data-question=${$(this).data("question")}]`).css(
         "display",
@@ -106,7 +110,7 @@ $(function() {
       );
     });
 
-  $(".add-comment-image").on("click", function() {
+  $(".add-comment-image").on("click", function () {
     let questionId = $(this).attr("data-question");
     let href = $(
       `.comment-img[data-question=${$(this).attr("data-question")}]`
@@ -133,16 +137,14 @@ $(function() {
                 $(".mentor-images_container")
                   .find(".like")
                   .append(
-                    `<img class="image_box comment-image" data-image="${
-                      response["id"]
+                    `<img class="image_box comment-image" data-image="${response["id"]
                     }" data-question="${questionId}" src="${href}" alt="image">`
                   );
               } else if (type == 2) {
                 $(".mentor-images_container")
                   .find(".dislike")
                   .append(
-                    `<img class="image_box comment-image" data-image="${
-                      response["id"]
+                    `<img class="image_box comment-image" data-image="${response["id"]
                     }" data-question="${questionId}" src="${href}" alt="image">`
                   );
               }
@@ -164,7 +166,7 @@ $(function() {
     }
   });
 
-  $(document).on("click", ".comment-image", function() {
+  $(document).on("click", ".comment-image", function () {
     $(".mentor-images_container").toggleClass("active");
     $(".mentor-images_container").toggle("active");
     $(".mentor-images_container")
@@ -181,14 +183,14 @@ $(function() {
       let ta =
         dq != -1
           ? $(".question")
-              .eq($(this).attr("data-question"))
-              .find(".textarea[placeholder='Комментарий']")
+            .eq($(this).attr("data-question"))
+            .find(".textarea[placeholder='Комментарий']")
           : $(".textarea[placeholder='Общий комментарий']");
       ta.append(
         `<img class="w-100 d-block mx-auto" style="max-width:380px" src="${src}">`
       );
 
-      $(`img[src="${src}"]`).one("load", function() {
+      $(`img[src="${src}"]`).one("load", function () {
         ta = ta[0];
         if (ta.scrollHeight > ta.clientHeight) {
           ta.style.height = ta.scrollHeight + "px";
@@ -197,20 +199,20 @@ $(function() {
     }
   });
 
-  $("[data-target='#add-comment-video']").click(function() {
+  $("[data-target='#add-comment-video']").click(function () {
     $("#add-comment-video .modal-body button").attr(
       "data-question",
       `${$(this).data("question")}`
     );
   });
 
-  $("#add-comment-video").on("hide.bs.modal", function() {
+  $("#add-comment-video").on("hide.bs.modal", function () {
     $(this)
       .find("input")
       .val("");
   });
 
-  $("#add-comment-video .modal-body button").click(function() {
+  $("#add-comment-video .modal-body button").click(function () {
     let id = $("#comment-video").val(),
       dq;
 
@@ -221,14 +223,14 @@ $(function() {
       let ta =
         dq != -1
           ? $(".question")
-              .eq($(this).attr("data-question"))
-              .find(".textarea[placeholder='Комментарий']")
+            .eq($(this).attr("data-question"))
+            .find(".textarea[placeholder='Комментарий']")
           : $(".textarea[placeholder='Общий комментарий']");
       ta.append(
         `<div class="f-16-9"><iframe width="100%" src="${src}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
       );
 
-      $(`[src="${src}"]`).one("load", function() {
+      $(`[src="${src}"]`).one("load", function () {
         ta = ta[0];
         if (ta.scrollHeight > ta.clientHeight) {
           ta.style.height = ta.scrollHeight + "px";
@@ -237,8 +239,8 @@ $(function() {
     }
   });
 
-  $(".textarea").on("selectstart", function(event) {
-    setTimeout(function() {
+  $(".textarea").on("selectstart", function (event) {
+    setTimeout(function () {
       $(".format-text").removeClass("active");
       let selection = document.getSelection();
       let node = selection.anchorNode;

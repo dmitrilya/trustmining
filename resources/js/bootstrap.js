@@ -1,8 +1,8 @@
-import _ from 'lodash';
+//import _ from 'lodash';
 import 'flowbite';
-import jQuery from 'jquery';
-window.$ = jQuery.noConflict();
-window._ = _;
+//import jQuery from 'jquery';
+//window.$ = jQuery.noConflict();
+//window._ = _;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

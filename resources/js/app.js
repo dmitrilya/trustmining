@@ -2,10 +2,8 @@ import './bootstrap';
 import './date';
 import './toast';
 import './chat';
-//import './graph';
 import {adsStatistics} from './statistics';
 import './suggestions';
-import './format';
 import './broadcast';
 
 import Alpine from 'alpinejs';
