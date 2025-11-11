@@ -13,9 +13,7 @@
 
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#ffffff" />
-    <meta name="theme-color" content="#18181b" media="(prefers-color-scheme: dark)" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
 
     @auth
         <meta name="user-id" content="{{ ($user = \Auth::user())->id }}">
@@ -72,10 +70,14 @@
                 fetch('{{ route('change-theme', ['theme' => 'dark']) }}');
                 document.body.classList.add("dark");
                 document.body.classList.remove("light");
+                document.querySelector(`meta[name='theme-color']`).content = '#18181b';
+                document.querySelector(`meta[name='apple-mobile-web-app-status-bar-style']`).content = '#18181b';
             } else {
                 fetch('{{ route('change-theme', ['theme' => 'light']) }}');
                 document.body.classList.add("light");
                 document.body.classList.remove("dark");
+                document.querySelector(`meta[name='theme-color']`).content = '#ffffff';
+                document.querySelector(`meta[name='apple-mobile-web-app-status-bar-style']`).content = '#ffffff';
             }
         </script>
     @endif
