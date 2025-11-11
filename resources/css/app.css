@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .bg-primary-gradient {
     background: linear-gradient(to right, #7966ff, #404099);
 }
@@ -107,7 +113,24 @@ a {
 
 button {
     &.loading {
+        position: relative;
         cursor: progress;
+        opacity: 0.6;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -6px;
+            margin-left: -6px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid transparent;
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
     }
 }
 
