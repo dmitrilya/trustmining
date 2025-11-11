@@ -115,7 +115,7 @@ class AmoCRMService extends BaseCRMService
         // Определяем блок отправителя/получателя
         $direction = $fromClient
             ? ['sender' => ['id' => "$userId", 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
-            : ['sender' => ['ref_id' => '91314bae-d1e4-4eb4-aeb5-2df8baa3eade'], 'reciever' => ['id' => "$addresseeId"], 'silent' => true];
+            : ['sender' => ['ref_id' => $this->botId], 'reciever' => ['id' => "$addresseeId"], 'silent' => true];
 
         // 1️⃣ Текстовое сообщение
         if (is_string($content)) {

@@ -2,7 +2,7 @@ import './bootstrap';
 import './date';
 import './toast';
 import './chat';
-import {adsStatistics} from './statistics';
+import { adsStatistics } from './statistics';
 import './suggestions';
 import './broadcast';
 
@@ -122,7 +122,7 @@ window.onload = function () {
 
     if (userId) window.listenBroadcast(userId);
 
-    _.each(document.getElementsByClassName("date-transform"), window.dateTransform);
+    Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
 
     return;
 }

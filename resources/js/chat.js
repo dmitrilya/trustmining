@@ -15,7 +15,7 @@ window.sendMessage = function (chatId, form) {
     }).catch(e => {
         if (e.response.status === 419) {
             pushToastAlert('Your session has expired. Please refresh the page.', "error")
-        }
+        } else window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
     }).then(r => {
         if (r.data.success) {
             const container = document.getElementById('chat-messages');
@@ -95,7 +95,7 @@ window.sendMessage = function (chatId, form) {
             const image = form.querySelector('#input-image-chat');
             image.value = null;
             image.dispatchEvent(new Event('change'));
-        } else window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
+        }
 
         button.classList.remove('loading');
         button.disabled = false;
