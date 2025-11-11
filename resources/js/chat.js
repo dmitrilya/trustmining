@@ -16,6 +16,9 @@ window.sendMessage = function (chatId, form) {
         if (e.response.status === 419) {
             pushToastAlert('Your session has expired. Please refresh the page.', "error")
         } else window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
+
+        button.classList.remove('loading');
+        button.disabled = false;
     }).then(r => {
         if (r.data.success) {
             const container = document.getElementById('chat-messages');
