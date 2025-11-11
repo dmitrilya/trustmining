@@ -14,8 +14,8 @@
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#ffffff" />
     <meta name="theme-color" content="#18181b" media="(prefers-color-scheme: dark)" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#18181b" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" media="(prefers-color-scheme: dark)">
 
     @auth
         <meta name="user-id" content="{{ ($user = \Auth::user())->id }}">

@@ -31,17 +31,19 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: #18181b;
-        color: #ffffff;
+    :root {
+        --bg-color: #18181b;
     }
 }
 
 @media (prefers-color-scheme: light) {
-    body {
-        background-color: #ffffff;
-        color: #1f2937;
+    :root {
+        --bg-color: #ffffff;
     }
+}
+
+body {
+    background-color: var(--bg-color);
 }
 
 .text-xxs {
