@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @php
+        $theme = request()->cookie('theme', 'light');
+    @endphp
+
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#{{ $theme == 'light' ? 'ffffff' : '18181b' }}" />
+
     @auth
         <meta name="user-id" content="{{ ($user = \Auth::user())->id }}">
     @endauth
@@ -55,7 +62,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden {{ request()->cookie('theme', 'light') }}" x-data="{ theme: '{{ request()->cookie('theme', 'light') }}' }">
+<body class="font-sans antialiased overflow-x-hidden {{ $theme }}" x-data="{ theme: '{{ $theme }}' }">
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 

@@ -27,7 +27,7 @@
 
                                 <div class="flex">
                                     @if ($user->company && !$user->company->moderation && $user->company->logo)
-                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50"
+                                        <img class="h-6 w-6 xs:h-8 xs:w-8 mr-3 flex-none rounded-full bg-gray-50 dark:bg-zinc-950"
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
 
