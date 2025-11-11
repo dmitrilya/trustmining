@@ -10,6 +10,16 @@
     }
 }
 
+body {
+    &.light {
+        background-color: #fff;
+    }
+
+    &.dark {
+        background-color: #18181b;
+    }
+}
+
 .bg-primary-gradient {
     background: linear-gradient(to right, #7966ff, #404099);
 }

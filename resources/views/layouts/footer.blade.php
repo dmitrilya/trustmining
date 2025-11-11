@@ -17,8 +17,6 @@
                     axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
                     document.body.classList.add('light');
                     document.body.classList.remove('dark');
-                    document.querySelector(`meta[name='theme-color']`).content = '#ffffff';
-                    document.querySelector(`meta[name='apple-mobile-web-app-status-bar-style']`).content = '#ffffff';
                 }">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
@@ -38,8 +36,6 @@
                     axios.get('{{ route('change-theme', ['theme' => 'dark']) }}');
                     document.body.classList.add('dark');
                     document.body.classList.remove('light');
-                    document.querySelector(`meta[name='theme-color']`).content = '#18181b';
-                    document.querySelector(`meta[name='apple-mobile-web-app-status-bar-style']`).content = '#18181b';
                 }">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
