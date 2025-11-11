@@ -95,7 +95,7 @@ window.sendMessage = function (chatId, form) {
             const image = form.querySelector('#input-image-chat');
             image.value = null;
             image.dispatchEvent(new Event('change'));
-        } else return window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
+        } else window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
 
         button.classList.remove('loading');
         button.disabled = false;
