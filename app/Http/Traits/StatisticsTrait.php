@@ -12,7 +12,7 @@ trait StatisticsTrait
 {
     public function adsStatistics(Request $request)
     {
-        $ads = $request->user()->ads()->where('moderation', false)
+        $ads = $request->user()->ads()->where('moderation', false)->where('ad_category_id', 1)
             ->select(['id', 'preview', 'office_id', 'asic_version_id'])
             ->with([
                 'views' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),

@@ -1,5 +1,7 @@
 <x-metrics-layout title="Хэшрейт сети {{ $coin->name }}" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
     description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+    @vite(['resources/js/graph.js'])
+
     <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_hashrate', ['coin' => $coin->name]) }}').then(r => {
         window.buildGraph(r.data.hashrates, period, 'graph', 'value');
         items = r.data.hashrates.reverse().splice(0, 91);
