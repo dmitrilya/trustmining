@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
-        $theme = request()->cookie('theme', 'light');
+        $theme = $theme = request()->cookie('theme');
     @endphp
 
     <meta name="color-scheme" content="light dark">
@@ -65,7 +65,21 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden {{ $theme }}" x-data="{ theme: '{{ $theme }}' }">
+<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }">
+    @if (!$theme)
+        <script type="text/javascript">
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                fetch('{{ route('change-theme', ['theme' => 'dark']) }}');
+                document.body.classList.add("dark");
+                document.body.classList.remove("light");
+            } else {
+                fetch('{{ route('change-theme', ['theme' => 'light']) }}');
+                document.body.classList.add("light");
+                document.body.classList.remove("dark");
+            }
+        </script>
+    @endif
+
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 

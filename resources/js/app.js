@@ -118,14 +118,6 @@ window.checkNotifications = function () {
 }
 
 window.onload = function () {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        document.body.classList.add("dark");
-        document.body.classList.remove("light");
-    } else {
-        document.body.classList.add("light");
-        document.body.classList.remove("dark");
-    }
-
     let userId = document.querySelector("meta[name='user-id']");
 
     if (userId) window.listenBroadcast(userId);
