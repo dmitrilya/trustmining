@@ -61,19 +61,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }">
-    @if (!$theme)
-        <script type="text/javascript">
-            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                document.body.classList.add("dark");
-                document.body.classList.remove("light");
+<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }"
+    @if (!$theme) x-init="if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark');
+                document.body.classList.remove('light');
+                theme = 'dark';
             } else {
-                document.body.classList.add("light");
-                document.body.classList.remove("dark");
-            }
-        </script>
-    @endif
-
+                document.body.classList.add('light');
+                document.body.classList.remove('dark');
+                theme = 'light';
+            }" @endif>
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
         @include('layouts.navigation')
 
