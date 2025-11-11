@@ -115,7 +115,7 @@ class AmoCRMService extends BaseCRMService
         // Определяем блок отправителя/получателя
         $direction = $fromClient
             ? ['sender' => ['id' => "$userId", 'name' => $userName ?? 'Клиент', 'profile' => ['email' => $userEmail]], 'silent' => false]
-            : ['sender' => ['ref_id' => $this->botId], 'reciever' => ['id' => "$addresseeId"], 'silent' => true];
+            : ['sender' => ['ref_id' => $this->botId], 'receiver' => ['id' => "$addresseeId"], 'silent' => true];
 
         // 1️⃣ Текстовое сообщение
         if (is_string($content)) {
@@ -136,7 +136,7 @@ class AmoCRMService extends BaseCRMService
         }
 
         // 2️⃣ Файловые сообщения
-        if (is_array($content)) {
+        elseif (is_array($content)) {
             foreach ($content as $file) {
                 foreach (['type', 'file_name', 'file_size', 'media'] as $key) {
                     if (empty($file[$key])) {
