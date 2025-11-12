@@ -1,7 +1,7 @@
 @props(['ad', 'auth', 'hidden'])
 
 <div
-    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md overflow-hidden rounded-lg flex flex-col justify-between">
+    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         @if (count($hosting->images))
             <img class="w-full aspect-[4/3] overflow-hidden rounded-lg" src="{{ Storage::url($hosting->images[0]) }}"
@@ -32,7 +32,7 @@
         @if ($hosting && $hosting->id == $hosting->user->id && $hosting->moderation)
             <div class="mt-2 sm:flex">
                 <div
-                    class="cursor-default inline-flex items-center px-2 py-1 bg-red-500 border border-red-500 rounded-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                    class="cursor-default inline-flex items-center px-2 py-1 bg-red-500 border border-red-500 rounded-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
                     {{ __('Is under moderation') }}
                 </div>
             </div>

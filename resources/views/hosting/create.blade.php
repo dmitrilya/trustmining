@@ -39,7 +39,7 @@
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
-                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     </ul>
                 </div>
 
@@ -62,7 +62,7 @@
                 <div>
                     <x-input-label for="description" :value="'* ' . __('Description')" />
                     <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
+                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
                         required maxlength="1500">{{ old('description') }}</textarea>
                     <x-input-error :messages="$errors->get('description')" />
                 </div>

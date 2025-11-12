@@ -7,7 +7,7 @@
 
             @if ($user->company && !$user->company->moderation)
                 <a href="{{ route('company.edit', ['company' => $user->company->id]) }}"
-                    class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">
+                    class="min-w-7 h-7 rounded-full shadow-lg dark:shadow-zinc-800 bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl dark:shadow-zinc-800 text-white text-3xl flex items-center justify-center">
                     <svg class="w-[1.125rem] h-[1.125rem] ml-1 mb-0.5" aria-hidden="true" width="24" height="24"
                         fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"

@@ -1,7 +1,7 @@
 <x-app-layout :title="'ASIC майнеры от производителя ' . $brand->name"
     description="ASIC майнеры от производителя {{ $brand->name }}. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-4 md:p-6" x-data="modelsData">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-4 md:p-6" x-data="modelsData">
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
                     class="flex items-center space-x-2 sm:space-x-2">

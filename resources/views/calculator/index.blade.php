@@ -12,7 +12,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div itemscope itemtype="https://schema.org/ViewAction"
-            class="bg-white dark:bg-zinc-900 shadow-sm rounded-lg p-2 sm:p-4">
+            class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4">
             @php
                 $selModel = !$rModel
                     ? ($rVersion

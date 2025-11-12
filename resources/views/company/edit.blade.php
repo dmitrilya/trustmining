@@ -52,7 +52,7 @@
                 <div>
                     <x-input-label for="description" :value="__('Description')" />
                     <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
+                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
                         required maxlength="1500">{{ $company->description }}</textarea>
                     <x-input-error :messages="$errors->get('description')" />
                 </div>

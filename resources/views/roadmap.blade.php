@@ -121,11 +121,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/3.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-xl -rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-xl dark:shadow-zinc-800 -rotate-[15deg]">
                         <img src="{{ Storage::url('public/roadmap/1.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-1/2 rounded-xl shadow-xl z-10">
+                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-1/2 rounded-xl shadow-xl dark:shadow-zinc-800 z-10">
                         <img src="{{ Storage::url('public/roadmap/2.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-xl rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-xl dark:shadow-zinc-800 rotate-[15deg]">
                     </div>
 
                     <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -180,11 +180,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/6.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-xl -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-xl dark:shadow-zinc-800 -rotate-[6deg]">
                         <img src="{{ Storage::url('public/roadmap/5.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[50%] rounded-xl shadow-xl">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[50%] rounded-xl shadow-xl dark:shadow-zinc-800">
                         <img src="{{ Storage::url('public/roadmap/4.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-xl rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-xl dark:shadow-zinc-800 rotate-[6deg]">
                     </div>
 
                     <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -289,9 +289,9 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/7.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-xl -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-xl dark:shadow-zinc-800 -rotate-[6deg]">
                         <img src="{{ Storage::url('public/roadmap/8.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-xl rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-xl dark:shadow-zinc-800 rotate-[6deg]">
                     </div>
 
                     <div class="md:text-lg text-gray-700 dark:text-gray-300 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>

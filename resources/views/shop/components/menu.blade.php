@@ -17,7 +17,7 @@
         x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-1"
         @click.away="open = false">
         <div
-            class="w-full flex-auto overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 dark:ring-zinc-200/5">
+            class="w-full flex-auto overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-sm leading-6 shadow-lg dark:shadow-zinc-800 ring-1 ring-gray-900/5 dark:ring-zinc-200/5">
             <div class="p-4">
                 <a href="{{ route('company', ['user' => $user->url_name]) }}"
                     class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-zinc-800">

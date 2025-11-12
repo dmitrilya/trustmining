@@ -1,4 +1,4 @@
-<div class="sticky top-0 bg-white dark:bg-zinc-900 overflow-hidden shadow-lg rounded-lg p-4 z-10">
+<div class="sticky top-0 bg-white dark:bg-zinc-900 overflow-hidden shadow-lg dark:shadow-zinc-800 rounded-lg p-4 z-10">
     <div class="flex max-w-max bg-gray-100 dark:bg-zinc-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-zinc-700 h-7 sm:h-8">
         <div @click="changePeriod('1d');"
             :class="{

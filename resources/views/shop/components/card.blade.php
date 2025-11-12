@@ -1,5 +1,5 @@
 <div
-    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md overflow-hidden rounded-lg flex flex-col justify-between">
+    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         <div
             class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-gray-200 dark:bg-zinc-700 @endif">

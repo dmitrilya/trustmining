@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-zinc-900 shadow-sm rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
+<div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
     <div class="sticky top-16 bg-white dark:bg-zinc-900">
         <div class="py-4 grid grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-1 xs:gap-2">
             <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 col-start-2"

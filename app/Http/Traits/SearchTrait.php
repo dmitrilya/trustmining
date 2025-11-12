@@ -48,11 +48,11 @@ trait SearchTrait
             'href' => route('company', ['user' => $company->user_url_name])
         ]))->concat(Guide::search($q)->query(function ($query) {
             $query->join('users', 'guides.user_id', 'users.id')
-                ->select(['guides.id', 'guides.title', 'guides.url_title']);
+                ->select(['guides.id', 'guides.user_id', 'guides.title', 'guides.url_title']);
         })->get()->map(fn($guide) => [
             'model' => __('Guide'),
             'name' => $guide->title,
-            'href' => route('guide', ['user' => $guide->user->id, 'guide' => $guide->url_title])
+            'href' => route('guide', ['user' => $guide->user_id, 'guide' => $guide->url_title])
         ]))->concat(User::search($q)->query(function ($query) {
             $query->whereHas('ads')->select(['users.name', 'users.url_name']);
         })->get()->map(fn($user) => [

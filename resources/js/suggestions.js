@@ -32,10 +32,10 @@ window.search = function (query, list, open) {
                 for (let suggestion of r.data.suggestions) {
                     list.insertAdjacentHTML(
                         'beforeend',
-                        `<li role="option" class="relative select-none hover:bg-gray-100 dark:hover:bg-gray-800">
+                        `<li role="option" class="relative select-none hover:bg-gray-100 dark:hover:bg-zinc-800">
                             <a href="${suggestion.href}" class="flex items-center text-sm py-2 px-3">
                                 <div class="w-full text-gray-500">${suggestion.name}</div>
-                                <div class="ml-auto inline-flex items-center px-2 py-1 bg-gray-50 dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-md text-xxs text-gray-700 dark:text-gray-400 uppercase shadow-sm transition ease-in-out duration-150">${suggestion.model}</div>
+                                <div class="ml-auto inline-flex items-center px-2 py-1 bg-gray-50 dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-md text-xxs text-gray-700 dark:text-gray-400 uppercase shadow-sm dark:shadow-zinc-800 transition ease-in-out duration-150">${suggestion.model}</div>
                             </a>
                         </li>`
                     );

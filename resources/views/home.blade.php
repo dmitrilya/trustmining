@@ -16,7 +16,7 @@
         </div>
 
         <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Hosting') }}</p>
                     <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
@@ -30,7 +30,7 @@
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Fake hostings that lure customers with favorable conditions') }}</p>
             </div>
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Miners') }}</p>
                     <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
@@ -44,7 +44,7 @@
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Counterfeit equipment that does not meet specifications or breaks down quickly') }}</p>
             </div>
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <div class="flex items-center justify-between">
                     <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Seller') }}</p>
                     <div class="flex items-center justify-center bg-gray-100 dark:bg-zinc-950 min-w-8 h-8 rounded-full">
@@ -73,20 +73,20 @@
         </div>
 
         <div class="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-3">
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">{{ __('Verification') }}</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('Each seller must pass passport verification and confirm the presence of at least one point of sale') }}
                 </p>
             </div>
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">
                     {{ __('Availability of information') }}</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('The buyer can see all the information from offices to the official number of employees of the company') }}
                 </p>
             </div>
-            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg">
+            <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-xl shadow-lg dark:shadow-zinc-800">
                 <p class="text-sm sm:text-lg text-gray-700 dark:text-gray-300 font-bold">Trust Factor</p>
                 <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 md:mt-3">
                     {{ __('A unique metric of trust in a company') }}</p>
@@ -132,70 +132,70 @@
             </div>
         </div>
 
-        <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-2xl shadow-lg space-y-4">
+        <div class="bg-white dark:bg-zinc-900 p-6 md:p-7 rounded-2xl shadow-lg dark:shadow-zinc-800 space-y-4">
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Registration of individual entrepreneur or LLC') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Duration of work since company registration') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Number of offices and points of sale') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <pp class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Official income of the company') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Registered employees') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Uniqueness of content') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Correctness of documents and contracts') }}</p>
             </div>
             {{-- <div class="flex items-center">
-                <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
+                <div class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
                 <div class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Participation in conferences and mention in the media') }}</div>
             </div> --}}
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">
                     {{ __('Message response speed') }}</p>
             </div>
             <div class="flex items-center">
                 <div
-                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
+                    class="me-3 sm:me-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-md dark:shadow-zinc-800 min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">
                     ✓</div>
                 <p class="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-300">{{ __('Reviews') }}</p>
             </div>

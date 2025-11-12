@@ -16,7 +16,7 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-full absolute z-50 rounded-md shadow-lg origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
+        class="w-full absolute z-50 rounded-md shadow-lg dark:shadow-zinc-800 origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
         @click.away="open = false">
         <div
             class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white dark:bg-zinc-900">
@@ -176,7 +176,7 @@
 
                     @if ($article)
                         <div class="hidden md:block w-full">
-                            <div class="h-full bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
+                            <div class="h-full bg-white shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex-col justify-between">
                                 @include('article.components.card', ['article' => $article])
                             </div>
                         </div>

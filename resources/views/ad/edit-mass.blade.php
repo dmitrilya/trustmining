@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-zinc-900 shadow-sm rounded-lg p-2 sm:p-4 md:p-6" x-data="{ search: '', changings: [] }">
+        <div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6" x-data="{ search: '', changings: [] }">
             <div class="flex justify-between items-center my-6">
                 <div class="relative z-0">
                     <input type="text" id="asic-model_search-name" placeholder=" " @input="search = $el.value"

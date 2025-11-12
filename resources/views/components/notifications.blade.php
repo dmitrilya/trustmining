@@ -22,7 +22,7 @@
         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-1" @click.away="open = false">
         <div
-            class="w-full flex-auto overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            class="w-full flex-auto overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-sm leading-6 shadow-lg dark:shadow-zinc-800 ring-1 ring-gray-900/5">
             <div
                 class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-zinc-900 dark:text-white">
                 {{ __('Notifications') }}

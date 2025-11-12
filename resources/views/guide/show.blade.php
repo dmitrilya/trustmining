@@ -21,7 +21,7 @@
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+            class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
             <div class="flex items-center justify-between">
                 <p class="date-transform text-xxs sm:text-xs font-normal text-gray-400" data-type="date"
                     data-date="{{ $guide->created_at }}"></p>
@@ -88,7 +88,7 @@
                     @endphp
 
                     <div
-                        class="hidden {{ $classes }} bg-white shadow-md overflow-hidden rounded-lg flex-col justify-between">
+                        class="hidden {{ $classes }} bg-white shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex-col justify-between">
                         @include('guide.components.card')
                     </div>
                 @endforeach

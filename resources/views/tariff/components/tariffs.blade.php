@@ -1,6 +1,6 @@
 <div class="grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 -mt-72">
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg dark:shadow-zinc-800 bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariffs[0]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[0]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg dark:shadow-zinc-800 bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-gray-900 font-semibold text-lg md:text-2xl">{{ $tariffs[1]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[1]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
@@ -144,7 +144,7 @@
         </div>
     </div>
     <div
-        class="w-full max-w-md shadow-lg bg-gray-900 border-2 border-indigo-500 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg dark:shadow-zinc-800 bg-gray-900 border-2 border-indigo-500 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-white font-semibold text-lg md:text-2xl">{{ $tariffs[2]->name }}</div>
         <div class="text-gray-400 text-sm md:text-base">{{ __($tariffs[2]->description) }}</div>
         <div class="h-9 flex items-end text-white md:text-lg"><span

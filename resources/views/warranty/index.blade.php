@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
         <section>
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -43,7 +43,7 @@
         </section>
 
         <section>
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -78,7 +78,7 @@
         </section>
 
         <section>
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -90,7 +90,7 @@
         </section>
 
         <section>
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -102,7 +102,7 @@
         </section>
 
         <section>
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
                     class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">

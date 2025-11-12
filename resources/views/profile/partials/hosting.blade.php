@@ -8,11 +8,11 @@
             @if ($user->tariff && $user->tariff->can_have_hosting && $user->company && !$user->company->moderation)
                 @if (!$user->hosting)
                     <a href="{{ route('hosting.create') }}"
-                        class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">
+                        class="min-w-7 h-7 rounded-full shadow-lg dark:shadow-zinc-800 bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl dark:shadow-zinc-800 text-white text-3xl flex items-center justify-center">
                         +</a>
                 @elseif (!$user->hosting->moderation)
                     <a href="{{ route('hosting.edit', ['hosting' => $user->hosting->id]) }}"
-                        class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl text-white text-3xl flex items-center justify-center">
+                        class="min-w-7 h-7 rounded-full shadow-lg dark:shadow-zinc-800 bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl dark:shadow-zinc-800 text-white text-3xl flex items-center justify-center">
                         <svg class="w-[1.125rem] h-[1.125rem] ml-1 mb-0.5" aria-hidden="true" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

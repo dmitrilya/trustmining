@@ -1,4 +1,4 @@
-<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white dark:bg-zinc-900 shadow-md overflow-hidden rounded-lg flex flex-col justify-between ad-card"
+<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex flex-col justify-between ad-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
@@ -9,18 +9,18 @@
         @if ($owner)
             <div class="mt-2 absolute left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->moderations->where('moderation_status_id', 1)->count())
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-900 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-900 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Rejected') }}
                     </div>
                 @endif

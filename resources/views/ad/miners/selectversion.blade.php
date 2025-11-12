@@ -31,7 +31,7 @@
             </div>
 
             <ul role="listbox" style="display: none" x-show="open"
-                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zing-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black dark:ring-zing-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
                 @foreach ($models as $asicModel)
                     <li @click="selectedModel = {{ $asicModel->id }}; open = false; search = '{{ $asicModel->name }}'; $refs.model.value = '{{ strtolower(str_replace(' ', '_', $asicModel->name)) }}'"
@@ -74,7 +74,7 @@
             <div class="relative mt-1">
                 <button type="button" data-dropdown-toggle="{{ 'dropdown-version_' . $asicModel->id }}"
                     id="{{ 'dropdown-version_' . $asicModel->id . '_button' }}"
-                    class="h-9 relative w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-900 dark:text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    class="h-9 relative w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-zinc-800 ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <span class="flex items-center">
                         <span class="ml-3 block truncate"
                             x-text="selectedVersion == null ? withAllVersions ? '{{ __('All') }}' : '' : models.find(function(model) {return model.id == selectedModel}).asic_versions.find(function(version) {return version.id == selectedVersion}).hashrate"></span>
@@ -88,7 +88,7 @@
                     </span>
                 </button>
 
-                <ul class="hidden absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                <ul class="hidden absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                     aria-labelledby="{{ 'dropdown-version_' . $asicModel->id . '_button' }}"
                     id="{{ 'dropdown-version_' . $asicModel->id }}">
 

@@ -7,7 +7,7 @@
     <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         @if ($owner)
             <a href="{{ route('ad.create') }}"
-                class="cursor-pointer bg-gray-100 dark:bg-zinc-800 group hover:bg-white dark:hover:bg-zinc-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-gray-400 dark:border-zinc-700">
+                class="cursor-pointer bg-gray-100 dark:bg-zinc-800 group hover:bg-white dark:hover:bg-zinc-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-gray-400 dark:border-zinc-700">
                 <div class="flex flex-col justify-center items-center">
                     <svg class="w-[72px] h-[72px] text-gray-300 dark:text-gray-400" aria-hidden="true" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">

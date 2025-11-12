@@ -9,7 +9,7 @@
 
     <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
         <button type="button" @click="open = ! open"
-            class="relative w-full bg-white dark:bg-zinc-900 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-gray-900 dark:text-zinc-200 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-600">
+            class="relative w-full bg-white dark:bg-zinc-900 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-gray-900 dark:text-zinc-200 shadow-sm dark:shadow-zinc-800 ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-600">
             <span class="flex items-center">
                 @if ($icon)
                     @switch($icon['type'])
@@ -40,7 +40,7 @@
         </button>
 
         <ul x-show="open" @click.away="open = false" style="display: none"
-            class="absolute top-full z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
+            class="absolute top-full z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black dark:ring-zinc-700 ring-opacity-5 focus:outline-none sm:text-sm">
             @foreach ($items as $item)
                 <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'"
                     @elseif ($handleChange) @click="{{ $handleChange }}('{{ $item['key'] }}');itemKey = '{{ $item['key'] }}';open = false"
