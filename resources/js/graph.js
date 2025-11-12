@@ -41,7 +41,8 @@ window.buildGraph = (data, period, div, valueYField, visibleY = false) => {
             }],
             rotation: 360
         }),
-        cursorOverStyle: 'pointer'
+        cursorOverStyle: 'pointer',
+        x: 0
     });
 
     zoomOutButtonContainer.states.create("hover", {
@@ -57,7 +58,7 @@ window.buildGraph = (data, period, div, valueYField, visibleY = false) => {
         }),
     });
 
-    chart.zoomOutButton.set("background", zoomOutButtonContainer);
+    chart.zoomOutButton.setAll({ background: zoomOutButtonContainer, x: 60 });
 
     let xAxis = chart.xAxes.push(DateAxis.new(root, {
         groupData: false,
