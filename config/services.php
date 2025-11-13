@@ -64,6 +64,10 @@ return [
             'secret_key' => env('AMOCRM_CHANNEL_SECRET_KEY'),
             'bot_id' => env('AMOCRM_CHANNEL_BOT_ID'),
         ],
+        'app' => [
+            'id' => env('AMOCRM_APP_ID'),
+            'secret_key' => env('AMOCRM_APP_SECRET_KEY'),
+        ],
         'integration' => [
             'id' => env('AMOCRM_INTEGRATION_ID'),
             'secret_key' => env('AMOCRM_INTEGRATION_SECRET_KEY'),

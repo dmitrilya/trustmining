@@ -7,16 +7,16 @@ use Illuminate\Support\Facades\Log;
 
 class AmoCRMService extends BaseCRMService
 {
-    protected string $integrationId;
-    protected string $integrationSecret;
+    protected string $appId;
+    protected string $appSecret;
     protected string $channelId;
     protected string $channelSecret;
     protected string $botId;
 
     public function __construct()
     {
-        $this->integrationId = config('services.amocrm.integration.id');
-        $this->integrationSecret = config('services.amocrm.integration.secret_key');
+        $this->appId = config('services.amocrm.app.id');
+        $this->appSecret = config('services.amocrm.app.secret_key');
         $this->channelId = config('services.amocrm.channel.id');
         $this->channelSecret = config('services.amocrm.channel.secret_key');
         $this->botId = config('services.amocrm.channel.bot_id');
@@ -29,8 +29,8 @@ class AmoCRMService extends BaseCRMService
     {
         $endpoint = "oauth2/access_token";
         $body = [
-            'client_id' => $this->integrationId,
-            'client_secret' => $this->integrationSecret,
+            'client_id' => $this->appId,
+            'client_secret' => $this->appSecret,
             'grant_type' => 'authorization_code',
             'code' => $code,
             'redirect_uri' => route('amocrm.auth'),
@@ -166,7 +166,7 @@ class AmoCRMService extends BaseCRMService
      */
     public function uninstallSignature($accountId)
     {
-        return hash_hmac('sha256', sprintf('%s|%s', $this->integration, $accountId), $this->integrationSecret);
+        return hash_hmac('sha256', sprintf('%s|%s', $this->integration, $accountId), $this->appSecret);
     }
 
     /**
