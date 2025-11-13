@@ -12,8 +12,8 @@ trait StatisticsTrait
 {
     public function adsStatistics(Request $request)
     {
-        $ads = $request->user()->ads()->where('moderation', false)->where('ad_category_id', 1)
-            ->select(['id', 'preview', 'office_id', 'asic_version_id'])
+        $ads = $request->user()->ads()->where('moderation', false)
+            ->select(['id', 'preview', 'office_id', 'asic_version_id', 'ad_category_id'])
             ->with([
                 'views' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
                 'tracks' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
@@ -21,10 +21,13 @@ trait StatisticsTrait
                 'chats' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
                 'office:id,city',
                 'asicVersion:id,hashrate,measurement,asic_model_id',
-                'asicVersion.asicModel:id,name'
+                'asicVersion.asicModel:id,name',
+                'adCategory:id,name,header'
             ])->get()->map(function ($ad) {
                 $ad->city = $ad->office->city;
-                $ad->model = $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement;
+                $ad->ad = $ad->adCategory->name == 'miners' ?
+                    $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement :
+                    __($ad->adCategory->header);
                 $ad->stat = $ad->views->groupBy('date')->map(fn($day, $date) => ['date' => Carbon::create($date)->timestamp * 1000, 'views_count' => $day->sum('count')])
                     ->mergeRecursive($ad->views->groupBy('date')->map(fn($day, $date) => ['date' => Carbon::create($date)->timestamp * 1000, 'visits_count' => $day->count()]))
                     ->mergeRecursive($ad->phoneViews->groupBy('date')->map(fn($day, $date) => ['date' => Carbon::create($date)->timestamp * 1000, 'phone_views_count' => $day->count()]))

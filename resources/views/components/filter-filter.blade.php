@@ -21,7 +21,7 @@
     </h3>
 
     <div class="pt-6 max-h-40 overflow-y-auto" id="filter-section-mobile-{{ $name }}" x-show="open" style="display: none">
-        <div class="space-y-4">
+        <div class="space-y-3">
             @foreach ($items as $item)
                 @if ($type == 'checkbox')
                     <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-500" :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">

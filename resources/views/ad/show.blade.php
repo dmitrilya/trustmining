@@ -65,10 +65,14 @@
                             {{ isset($moderation->data['office_id']) ? App\Models\Office::find($moderation->data['office_id'])->address : $ad->office->address }}
                         </a>
 
+                        @php
+                            $props = isset($moderation->data['props']) ? $moderation->data['props'] : $ad->props;
+                        @endphp
+
                         <div class="md:col-span-2 md:col-start-1">
                             <div class="my-5">
                                 <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                                    @foreach ($moderation->data['props'] as $prop => $value)
+                                    @foreach ($props as $prop => $value)
                                         <li class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
                                             {{ __($prop) . ': ' }}<span
                                                 class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
@@ -89,9 +93,7 @@
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="text-sm sm:text-base text-gray-900 dark:text-gray-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
-                                </p>
+                                    class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">{{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}</p>
                             </div>
 
                             @if ($ad->adCategory->name == 'miners')
@@ -272,9 +274,7 @@
                             <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">{{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
-                                <p class="text-sm sm:text-base text-gray-900 dark:text-gray-200">
-                                    {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
-                                </p>
+                                <p class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200">{{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}</p>
                             </div>
                         @endif
 

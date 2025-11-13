@@ -24,10 +24,15 @@ class UpdateAdRequest extends FormRequest
      */
     public function rules()
     {
+        $user = $this->user();
+
+        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
+
         return [
             'office_id' => 'required|exists:offices,id',
             'preview' => 'file|mimes:jpg,png,jpeg|max:2048',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'description' => 'max:' . $descriptionMax,
             'price' => 'required|numeric',
             'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
         ];

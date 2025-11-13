@@ -22,7 +22,7 @@
                 @else
                     @switch($crmSystem->name)
                         @case('AmoCRM')
-                            <a href="https://www.amocrm.ru/oauth?client_id={{ config('services.amocrm.integration.id') }}&state={{ csrf_token() }}&mode=popup">
+                            <a href="https://www.amocrm.ru/oauth?client_id={{ config('services.amocrm.app.id') }}&state={{ csrf_token() }}&mode=popup">
                                 <x-primary-button>{{ __('Connect') }}</x-primary-button>
                             </a>
                         @break

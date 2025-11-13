@@ -1,22 +1,26 @@
-<div x-data="{ models: {{ $models }}, withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }}, selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }}, selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }} }">
-    <input class="block h-0 p-0 border-0" type="text"
-        value="{{ isset($selectedModel) ? strtolower(str_replace(' ', '_', $selectedModel->name)) : 'null' }}"
-        x-ref="model" name="model" @if (isset($required)) required @endif>
+<div x-data="{
+    models: {{ $models }},
+    withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }},
+    selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
+    selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
+    search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}'
+}">
+    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="model"
+        @if (isset($required)) required @endif>
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif>
 
     <div>
-        <div class="relative mt-1" x-data="{ open: false, search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}' }" @click.away="open = false">
+        <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
             <div class="relative z-0 w-full" @click="open = true">
-                <div
-                    class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
+                <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
                     <input type="text" autocomplete="off" :value="search"
-                        @input="search = $el.value;selectedModel = null;$refs.model.value = null;selectedVersion = null; if (typeof version !== 'undefined') version = null"
+                        @input="search = $el.value;selectedModel = null;selectedVersion = null; if (typeof version !== 'undefined') version = null"
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                     <button type="button"
                         class="ml-4 flex h-4 w-4 items-center justify-center rounded-md bg-white dark:bg-zinc-900 text-gray-400 dark:text-gray-500"
-                        @click="search = '';selectedModel = null;$refs.model.value = null;selectedVersion = null; if (typeof version !== 'undefined') version = null">
+                        @click="search = '';selectedModel = null;selectedVersion = null; if (typeof version !== 'undefined') version = null">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -34,7 +38,7 @@
                 class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black dark:ring-zing-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
                 @foreach ($models as $asicModel)
-                    <li @click="selectedModel = {{ $asicModel->id }}; open = false; search = '{{ $asicModel->name }}'; $refs.model.value = '{{ strtolower(str_replace(' ', '_', $asicModel->name)) }}'"
+                    <li @click="selectedModel = {{ $asicModel->id }}; open = false; search = '{{ $asicModel->name }}'"
                         class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 dark:text-gray-100 hover:bg-indigo-600 hover:text-white"
                         role="option"
                         x-show="search === '' || '{{ $asicModel->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">

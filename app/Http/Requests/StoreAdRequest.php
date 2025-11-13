@@ -24,6 +24,10 @@ class StoreAdRequest extends FormRequest
      */
     public function rules()
     {
+        $user = $this->user();
+
+        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
+
         return [
             'ad_category_id' => 'required|exists:ad_categories,id',
             'asic_version_id' => 'exists:asic_versions,id',
@@ -31,6 +35,7 @@ class StoreAdRequest extends FormRequest
             'preview' => 'required|file|mimes:jpg,png,jpeg|max:2048',
             'images' => 'max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'description' => 'max:' . $descriptionMax,
             'price' => 'required|numeric',
             'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
         ];

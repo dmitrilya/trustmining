@@ -81,7 +81,7 @@ class AdController extends Controller
             'ad_category_id' => $request->ad_category_id,
             'asic_version_id' => $request->asic_version_id,
             'office_id' => $request->office_id,
-            'description' => '',
+            'description' => $request->description ?? '',
             'props' => json_decode($request->props),
             'price' => $request->price,
             'images' => [],
@@ -186,6 +186,8 @@ class AdController extends Controller
         $props = json_decode($request->props, true);
         $propDiffs = array_merge(array_diff_assoc($ad->props, $props), array_diff_assoc($props, $ad->props));
         if (count($propDiffs)) $data['props'] = $props;
+
+        if ($request->description != $ad->description) $data['description'] = $request->description;
 
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);

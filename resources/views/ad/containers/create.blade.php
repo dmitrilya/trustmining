@@ -1,18 +1,18 @@
 <div class="space-y-6">
     <input type="hidden" name="props" x-ref="props_containers"
-        value='{"Capacity": 1, "Material": "LP", "Length": 0, "Width": 0, "Height": 0}'>
+        value='{"Capacity": 60, "Power": "200", "Length": 0, "Width": 0, "Height": 0}'>
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
-        <x-text-input id="capacity" name="capacity" type="number" min="1" autocomplete="capacity" value="40"
+        <x-text-input id="capacity" name="capacity" type="number" min="30" autocomplete="capacity" value="60"
             @change="let props = JSON.parse($refs.props_containers.value);props['Capacity'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('capacity')" />
     </div>
 
     <div>
-        <x-input-label for="power" :value="__('Power')" />
-        <x-text-input id="power" name="power" type="number" min="1" autocomplete="power" value="40"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Capacity'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+        <x-input-label for="power" :value="__('Power') . ' (' . __('kW') . ')'" />
+        <x-text-input id="power" name="power" type="number" min="90" autocomplete="power" value="200"
+            @change="let props = JSON.parse($refs.props_containers.value);props['Power'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('power')" />
     </div>
 
@@ -35,5 +35,13 @@
         <x-text-input id="height" name="height" type="text" autocomplete="height" value="0"
             @change="let props = JSON.parse($refs.props_containers.value);props['Height'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('height')" />
+    </div>
+
+    <div>
+        <x-input-label for="description" :value="__('Description')" />
+        <textarea id="description" rows="16" name="description"
+            class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 dark:text-gray-300 bg-gray-100 dark:bg-zinc-950 rounded-md border-gray-300 dark:border-zinc-700 focus:border-indigo-500 dark:focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
+            required maxlength="{{ ($user = Auth::user()) && $user->tariff ? $user->tariff->max_description : 500 }}">{{ old('description') }}</textarea>
+        <x-input-error :messages="$errors->get('description')" />
     </div>
 </div>

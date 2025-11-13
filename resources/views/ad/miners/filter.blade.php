@@ -36,12 +36,12 @@
 
 <x-filter-filter type="checkbox" :name="__('Algorithm')" :items="$algorithms" field="algorithms"></x-filter-filter>
 
-<x-filter-filter type="checkbox" :name="__('Condition')" :items="collect([['name' => 'New', 'url_name' => 'new'], ['name' => 'Used', 'url_name' => 'used']])" field="conditions"></x-filter-filter>
+<x-filter-filter type="checkbox" :name="__('Condition')" :items="collect([['name' => 'New', 'url_name' => 'New'], ['name' => 'Used', 'url_name' => 'Used']])" field="Condition"></x-filter-filter>
 
 <x-filter-filter type="checkbox" :name="__('Availability')" :items="collect([
-    ['name' => 'In stock', 'url_name' => 'in_stock'],
-    ['name' => 'Preorder', 'url_name' => 'preorder'],
-])" field="availabilities"></x-filter-filter>
+    ['name' => 'In stock', 'url_name' => 'In stock'],
+    ['name' => 'Preorder', 'url_name' => 'Preorder'],
+])" field="Availability"></x-filter-filter>
 
 @if (in_array(request()->route()->action['as'], ['company']) &&
         ($user = \Auth::user()) &&

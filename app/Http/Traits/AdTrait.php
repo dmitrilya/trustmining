@@ -41,14 +41,16 @@ trait AdTrait
                 $q->whereIn('name', $request->algorithms);
             });
 
-        if ($request->conditions && count($request->conditions) === 1) {
-            if (in_array('new', $request->conditions)) $ads = $ads->where('new', true);
-            else $ads = $ads->where('new', false);
-        }
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms']) as $key => $value) {
+            if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
+            elseif (count($value) === 1) $ads = $ads->whereJsonContains('props->' . $key, $value[0]);
+            else $ads = $ads->where(function ($q) use ($key, $value) {
+                $q->whereJsonContains('props->' . $key, $value[0]);
 
-        if ($request->availabilities && count($request->availabilities) === 1) {
-            if (in_array('in_stock', $request->availabilities)) $ads = $ads->where('in_stock', true);
-            else $ads = $ads->where('in_stock', false);
+                for ($i = 1; $i < count($value); $i++) {
+                    $q->orWhereJsonContains('props->' . $key, $value[$i]);
+                }
+            });     
         }
 
         if ($request->display) {
