@@ -12,7 +12,7 @@ trait AdTrait
     public function getAds($request, $adCategory = null)
     {
         $ads = Ad::with([
-            'adCategory:id,name',
+            'adCategory:id,name,header',
             'user:id,name,url_name,tf',
             'user.phones:id,user_id',
             'office:id,city',

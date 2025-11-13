@@ -32,7 +32,7 @@
                     </div>
                     <div>
                         <div class="font-semibold text-gray-900 dark:text-gray-100">
-                            {{ __('Miners') }}
+                            {{ __('Advertisements') }}
                             <span class="absolute inset-0"></span>
                         </div>
                         <p class="mt-1 text-gray-600 dark:text-gray-400">{{ __('Current price') }}</p>

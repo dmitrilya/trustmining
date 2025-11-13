@@ -63,7 +63,9 @@
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
                     href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
-                    href="{{ route('ads', ['adCategory' => 'heat-exchange']) }}">{{ __('Heat exchange') }}</a>
+                    href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}">{{ __('Cryptoboilers') }}</a>
+                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                    href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
                 <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
             </div>

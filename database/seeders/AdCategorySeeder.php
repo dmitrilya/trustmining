@@ -35,10 +35,15 @@ class AdCategorySeeder extends Seeder
                 'description' => 'Купить шумобокс для майнингового оборудования с доставкой по РФ. Цены, размеры, характеристики, отзывы',
                 'header' => 'Noiseboxes'
             ], [
-                'name' => 'heat-exchange',
+                'name' => 'cryptoboilers',
                 'title' => 'Криптокотлы, реализация тепла от майнинга',
                 'description' => 'Обогрев дома с помощью майнинга, использование выделяемого тепла от ASIC майнеров',
-                'header' => 'Heat exchange'
+                'header' => 'Cryptoboilers'
+            ], [
+                'name' => 'water_cooling_plates',
+                'title' => 'Водоблоки: эффективное охлаждение ASIC майнера',
+                'description' => 'Водяное охлаждение. Обогрев дома с помощью майнинга, использование выделяемого тепла от ASIC майнеров',
+                'header' => 'Water cooling plates'
             ]
         ]);
     }

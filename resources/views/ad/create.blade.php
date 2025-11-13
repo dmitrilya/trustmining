@@ -29,6 +29,11 @@
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
 
+                @php
+                    $descriptionMaxLength =
+                        ($user = Auth::user()) && $user->tariff ? $user->tariff->max_description : 500;
+                @endphp
+
                 <template x-if="ad_category_id == 1">
                     @include('ad.miners.create')
                 </template>
@@ -46,7 +51,11 @@
                 </template>
 
                 <template x-if="ad_category_id == 5">
-                    @include('ad.heat-exchange.create')
+                    @include('ad.cryptoboilers.create')
+                </template>
+
+                <template x-if="ad_category_id == 6">
+                    @include('ad.water_cooling_plates.create')
                 </template>
 
                 <div class="flex items-center">

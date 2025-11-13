@@ -58,7 +58,18 @@
 
         @foreach ($ad->props as $prop => $value)
             <p class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
-                {{ __($prop) . ': ' }}<span class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                {{ __($prop) . ': ' }}@if (!is_array($value))
+                    <span class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                @else
+                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                        @foreach ($value as $item)
+                            <div
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                {{ $item }}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </p>
         @endforeach
     </div>
