@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <input type="hidden" name="props" x-ref="props_cryptoboilers"
-        value='{"Capacity": 1, "Heating area": 10, "Length": 0, "Width": 0, "Height": 0}'>
+        value='{"Capacity": 1, "Heating area (m²)": 40, "Length": 0, "Width": 0, "Height": 0}'>
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
@@ -11,8 +11,8 @@
 
     <div>
         <x-input-label for="heating_area" :value="__('Heating area (m²)')" />
-        <x-text-input id="heating_area" name="heating_area" type="number" autocomplete="heating_area" value="10"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Heating area'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-text-input id="heating_area" name="heating_area" type="number" autocomplete="heating_area" value="40"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Heating area (m²)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('heating_area')" />
     </div>
 

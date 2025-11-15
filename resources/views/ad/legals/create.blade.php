@@ -1,10 +1,10 @@
 <div class="space-y-6">
-    <input type="hidden" name="props" x-ref="props_legals" value='{"Area of ​​activity": ""}' />
+    <input type="hidden" name="props" x-ref="props_legals" value='{"Service": ""}' />
 
     <div>
-        <x-input-label for="area_of_activity" :value="__('Area of ​​activity')" />
+        <x-input-label for="area_of_activity" :value="__('Service')" />
         <x-text-input id="area_of_activity" name="area_of_activity" type="text" autocomplete="area_of_activity" value="" required
-            @change="let props = JSON.parse($refs.props_legals.value);props['Area of ​​activity'] = $el.value;$refs.props_legals.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_legals.value);props['Service'] = $el.value;$refs.props_legals.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('area_of_activity')" />
     </div>
 

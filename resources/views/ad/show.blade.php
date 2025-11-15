@@ -23,7 +23,8 @@
         @if (isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            <div
+                class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                     <div
                         class="md:col-span-5{{ isset($moderation->data['preview']) || isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -41,9 +42,11 @@
                         @endif
                     </div>
 
-                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
+                    <div
+                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
-                            <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                            <h1
+                                class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @endif
@@ -74,8 +77,19 @@
                                 <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                     @foreach ($props as $prop => $value)
                                         <li class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
-                                            {{ __($prop) . ': ' }}<span
-                                                class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                            {{ __($prop) . ': ' }}@if (!is_array($value))
+                                                <span
+                                                    class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                            @else
+                                                <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                                                    @foreach ($value as $item)
+                                                        <div
+                                                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                                            {{ $item }}
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
@@ -89,11 +103,14 @@
 
                     <div class="mt-8 md:col-span-12">
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">{{ __('Description') }}</h3>
+                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">
+                                {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">{{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}</p>
+                                    class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
+                                </p>
                             </div>
 
                             @if ($ad->adCategory->name == 'miners')
@@ -111,7 +128,8 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
+        <div
+            class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
                 <div class="md:col-span-5">
@@ -124,10 +142,12 @@
                     @endif
                 </div>
 
-                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
+                <div
+                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
-                            <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                            <h1
+                                class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @endif
@@ -163,8 +183,18 @@
                             <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                 @foreach ($ad->props as $prop => $value)
                                     <li class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
-                                        {{ __($prop) . ': ' }}<span
-                                            class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                        {{ __($prop) . ': ' }}@if (!is_array($value))
+                                            <span class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                        @else
+                                            <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                                                @foreach ($value as $item)
+                                                    <div
+                                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                                        {{ $item }}
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
                                     </li>
                                 @endforeach
                             </ul>
@@ -194,7 +224,9 @@
                                 @php
                                     $trackClick =
                                         $user && $user->tariff
-                                            ? 'axios.post("/ads/' . $ad->adCategory->name . '/' .
+                                            ? 'axios.post("/ads/' .
+                                                $ad->adCategory->name .
+                                                '/' .
                                                 $ad->id .
                                                 '/track").then(r => {
                                                 pushToastAlert(r.data.message, r.data.success ? "success" : "error");
@@ -271,10 +303,13 @@
                 <div class="mt-8 md:col-span-12">
                     <div>
                         @if ($ad->description || ($ad->adcategory->name == 'miners' && $ad->asicVersion->asicModel->description))
-                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">{{ __('Description') }}</h3>
+                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">
+                                {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
-                                <p class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200">{{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}</p>
+                                <p class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200">
+                                    {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
+                                </p>
                             </div>
                         @endif
 

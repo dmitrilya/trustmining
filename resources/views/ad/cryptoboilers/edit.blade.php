@@ -3,7 +3,7 @@
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
-        <x-text-input id="capacity" name="capacity" type="number" min="30" autocomplete="capacity"
+        <x-text-input id="capacity" name="capacity" type="number" min="1" autocomplete="capacity"
             :value="$ad->props['Capacity']"
             @change="let props = JSON.parse($refs.props_containers.value);props['Capacity'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('capacity')" />
@@ -11,9 +11,9 @@
 
     <div>
         <x-input-label for="heating_area" :value="__('Heating area (m²)')" />
-        <x-text-input id="heating_area" name="heating_area" type="number" min="90" autocomplete="heating_area"
-            :value="$ad->props['Heating area']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Heating area'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+        <x-text-input id="heating_area" name="heating_area" type="number" autocomplete="heating_area"
+            :value="$ad->props['Heating area (m²)']"
+            @change="let props = JSON.parse($refs.props_containers.value);props['Heating area (m²)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('heating_area')" />
     </div>
 

@@ -26,7 +26,7 @@ trait NetworkTrait
         $prevAvg = $groupedDifficulties->first()->avg('difficulty');
 
         foreach ($groupedDifficulties->slice(1) as $date => $dayDifficulties) {
-            $avg = $dayDifficulties->avg('difficulty');
+            $avg = round($dayDifficulties->avg('difficulty'), 4);
 
             $difficulty = $avg != $prevAvg ? ($avg > $prevAvg ? $dayDifficulties->max('difficulty') : $dayDifficulties->min('difficulty')) : $avg;
             array_push($difficulties, ['date' => Carbon::create($date)->timestamp * 1000, 'value' => $difficulty]);

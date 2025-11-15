@@ -42,15 +42,35 @@ trait AdTrait
             });
 
         foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms']) as $key => $value) {
+            $key = str_replace('_', ' ', $key);
             if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
-            elseif (count($value) === 1) $ads = $ads->whereJsonContains('props->' . $key, $value[0]);
-            else $ads = $ads->where(function ($q) use ($key, $value) {
-                $q->whereJsonContains('props->' . $key, $value[0]);
+            elseif (count($value) === 1) {
+                if (substr($value[0], 0, 1) == '>') {
+                    if (substr($value[0], 1, 1) == '<') {
+                        $value = explode('-', substr($value[0], 2));
+                        $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $value);
+                    } else $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[0], 1)]);
+                } elseif (substr($value[0], 0, 1) == '<') $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[0], 1)]);
+                else $ads = $ads->whereJsonContains('props->' . $key, $value[0]);
+            } else $ads = $ads->where(function ($q) use ($key, $value) {
+                if (substr($value[0], 0, 1) == '>') {
+                    if (substr($value[0], 1, 1) == '<') {
+                        $values = explode('-', substr($value[0], 2));
+                        $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $values);
+                    } else $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[0], 1)]);
+                } elseif (substr($value[0], 0, 1) == '<') $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[0], 1)]);
+                else $q->whereJsonContains('props->' . $key, $value[0]);
 
                 for ($i = 1; $i < count($value); $i++) {
-                    $q->orWhereJsonContains('props->' . $key, $value[$i]);
+                    if (substr($value[$i], 0, 1) == '>') {
+                        if (substr($value[$i], 1, 1) == '<') {
+                            $values = explode('-', substr($value[$i], 2));
+                            $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $values);
+                        } else $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[$i], 1)]);
+                    } elseif (substr($value[$i], 0, 1) == '<') $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[$i], 1)]);
+                    else $q->orWhereJsonContains('props->' . $key, $value[$i]);
                 }
-            });     
+            });
         }
 
         if ($request->display) {

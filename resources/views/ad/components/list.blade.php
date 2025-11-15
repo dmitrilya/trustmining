@@ -1,4 +1,4 @@
-@if (isset($adCategory))
+@if (isset($adCategory) && !isset($shop))
     <x-filter>@include('ad.' . $adCategory->name . '.filter')</x-filter>
 @endif
 

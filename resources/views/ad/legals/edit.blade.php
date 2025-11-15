@@ -2,9 +2,9 @@
     <input type="hidden" name="props" x-ref="props_legals" value="{{ json_encode($ad->props) }}" />
 
     <div>
-        <x-input-label for="area_of_activity" :value="__('Area of ​​activity')" />
-        <x-text-input id="area_of_activity" name="area_of_activity" type="text" autocomplete="area_of_activity" :value="$ad->props['Area of ​​activity']" required
-            @change="let props = JSON.parse($refs.props_legals.value);props['Area of ​​activity'] = $el.value;$refs.props_legals.value = JSON.stringify(props)" />
+        <x-input-label for="area_of_activity" :value="__('Service')" />
+        <x-text-input id="area_of_activity" name="area_of_activity" type="text" autocomplete="area_of_activity" :value="$ad->props['Service']" required
+            @change="let props = JSON.parse($refs.props_legals.value);props['Service'] = $el.value;$refs.props_legals.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('area_of_activity')" />
     </div>
 
