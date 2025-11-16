@@ -58,6 +58,10 @@
                     @include('ad.water_cooling_plates.create')
                 </template>
 
+                <template x-if="ad_category_id == 7">
+                    @include('ad.accessories.create')
+                </template>
+
                 <div class="flex items-center">
                     <div class="mr-2 xs:mr-3 w-full">
                         <x-input-label for="price" :value="__('Price')" />

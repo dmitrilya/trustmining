@@ -1,6 +1,6 @@
 <div class="space-y-6">
     <input type="hidden" name="props" x-ref="props_cryptoboilers"
-        value='{"Capacity": 1, "Heating area (m²)": 40, "Length": 0, "Width": 0, "Height": 0}'>
+        value='{"Capacity": 1, "Heating area (m²)": 40, "Length (cm)": 0, "Width (cm)": 0, "Height (cm)": 0}'>
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
@@ -17,23 +17,23 @@
     </div>
 
     <div>
-        <x-input-label for="length" :value="__('Length') . ' ' . __('cm') . '.'" />
-        <x-text-input id="length" name="length" type="text" autocomplete="length" value="0"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Length'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-input-label for="length" :value="__('Length (cm)')" />
+        <x-text-input id="length" name="length" type="number" autocomplete="length" value="0"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Length (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('length')" />
     </div>
 
     <div>
-        <x-input-label for="width" :value="__('Width') . ' ' . __('cm') . '.'" />
-        <x-text-input id="width" name="width" type="text" autocomplete="width" value="0"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Width'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-input-label for="width" :value="__('Width (cm)')" />
+        <x-text-input id="width" name="width" type="number" autocomplete="width" value="0"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Width (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('width')" />
     </div>
 
     <div>
-        <x-input-label for="height" :value="__('Height') . ' ' . __('cm') . '.'" />
-        <x-text-input id="height" name="height" type="text" autocomplete="height" value="0"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Height'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-input-label for="height" :value="__('Height (cm)')" />
+        <x-text-input id="height" name="height" type="number" autocomplete="height" value="0"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Height (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('height')" />
     </div>
 

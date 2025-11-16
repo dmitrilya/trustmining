@@ -18,23 +18,23 @@
     </div>
 
     <div>
-        <x-input-label for="length" :value="__('Length') . ' ' . __('cm') . '.'" />
-        <x-text-input id="length" name="length" type="text" autocomplete="length" :value="$ad->props['Length']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Length'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+        <x-input-label for="length" :value="__('Length (cm)')" />
+        <x-text-input id="length" name="length" type="number" autocomplete="length" :value="$ad->props['Length (cm)']"
+            @change="let props = JSON.parse($refs.props_containers.value);props['Length (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('length')" />
     </div>
 
     <div>
-        <x-input-label for="width" :value="__('Width') . ' ' . __('cm') . '.'" />
-        <x-text-input id="width" name="width" type="text" autocomplete="width" :value="$ad->props['Width']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Width'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+        <x-input-label for="width" :value="__('Width (cm)')" />
+        <x-text-input id="width" name="width" type="number" autocomplete="width" :value="$ad->props['Width (cm)']"
+            @change="let props = JSON.parse($refs.props_containers.value);props['Width (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('width')" />
     </div>
 
     <div>
-        <x-input-label for="height" :value="__('Height') . ' ' . __('cm') . '.'" />
-        <x-text-input id="height" name="height" type="text" autocomplete="height" :value="$ad->props['Height']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Height'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+        <x-input-label for="height" :value="__('Height (cm)')" />
+        <x-text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
+            @change="let props = JSON.parse($refs.props_containers.value);props['Height (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('height')" />
     </div>
 
