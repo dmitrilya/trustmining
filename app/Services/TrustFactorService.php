@@ -7,11 +7,17 @@ use Illuminate\Support\Facades\Log;
 
 class TrustFactorService
 {
+    protected array $config;
+
+    public function __construct()
+    {
+        $this->config = config('trustfactor');
+    }
+
     public function calculate($user)
     {
-        $config = config('trust');
         $oldTF = $user->tf ?? null;
-        $tf = $config['base'];
+        $tf = $this->config['base'];
 
         // --- 1. Компания ---
         $tf += $this->scoreCompanyData($user);
@@ -32,7 +38,7 @@ class TrustFactorService
         $tf += $this->scoreHosting($user);
 
         // --- 7. Обрезаем по границам ---
-        $tf = max($config['min'], min($config['max'], $tf));
+        $tf = max($this->config['min'], min($this->config['max'], $tf));
 
         $user->tf = $tf;
         $user->save();
@@ -42,10 +48,9 @@ class TrustFactorService
         return $tf;
     }
 
-    // =========================================================================
-    // COMPANY
-    // =========================================================================
-
+    /**
+     * COMPANY
+     */
     private function scoreCompanyData($user)
     {
         if (!$user->company) {
@@ -101,10 +106,9 @@ class TrustFactorService
         return $score;
     }
 
-    // =========================================================================
-    // REVIEWS
-    // =========================================================================
-
+    /**
+     * REVIEWS
+     */
     private function scoreReviews($user)
     {
         $reviews = $user->moderatedReviews;
@@ -134,22 +138,20 @@ class TrustFactorService
         return $score;
     }
 
-    // =========================================================================
-    // OFFICES
-    // =========================================================================
-
+    /**
+     * OFFICES
+     */
     private function scoreOffices($user)
     {
-        $cfg = config('trust.office_bonus');
+        $cfg = $this->config['office_bonus'];
         $count = min(count($cfg) - 1, $user->moderatedOffices->count());
 
         return $cfg[$count];
     }
 
-    // =========================================================================
-    // UNIQUE CONTENT
-    // =========================================================================
-
+    /**
+     * UNIQUE CONTENT
+     */
     private function scoreUniqueContent($user)
     {
         $adsCount = $user->ads->count();
@@ -169,10 +171,9 @@ class TrustFactorService
         return 0;
     }
 
-    // =========================================================================
-    // AVERAGE RESPONSE TIME (с учётом ночного времени)
-    // =========================================================================
-
+    /**
+     * AVERAGE RESPONSE TIME
+     */
     private function scoreResponseTime($user)
     {
         $minutes = $user->art;
@@ -185,10 +186,9 @@ class TrustFactorService
         return 0;
     }
 
-    // =========================================================================
-    // HOSTING
-    // =========================================================================
-
+    /**
+     * HOSTING
+     */
     private function scoreHosting($user)
     {
         if (!$user->hosting) return 0;
@@ -201,10 +201,9 @@ class TrustFactorService
         return 0;
     }
 
-    // =========================================================================
-    // LOGGING
-    // =========================================================================
-
+    /**
+     * LOGGING
+     */
     private function logIfAnomaly($user, $old, $new)
     {
         if ($old === null) {
@@ -213,7 +212,7 @@ class TrustFactorService
         }
 
         $diff = abs($old - $new);
-        $threshold = config('trust.log_diff_threshold');
+        $threshold = $this->config['log_diff_threshold'];
 
         if ($diff >= $threshold) {
             Log::channel('trustfactor')->warning("[TF ANOMALY] user={$user->id} old=$old new=$new diff=$diff");
