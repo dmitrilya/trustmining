@@ -5,14 +5,12 @@ namespace App\Console\Commands;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Console\Command;
 
-use App\Http\Traits\TrustFactor;
+use App\Services\TrustFactorService;
 
 use App\Models\User;
 
 class UpdateTrustFactors extends Command
 {
-    use TrustFactor;
-
     /**
      * The name and signature of the console command.
      *
@@ -34,16 +32,18 @@ class UpdateTrustFactors extends Command
      */
     public function handle()
     {
-        $users = User::whereHas('ads', function (Builder $query) {
-            $query->where('moderation', 'false')->where('hidden', 'false');
-        })->orWhereHas('hosting', function (Builder $query) {
-            $query->where('moderation', 'false');
+        $users = User::whereHas('ads', function (Builder $q) {
+            $q->where('moderation', 'false')->where('hidden', 'false');
+        })->orWhereHas('hosting', function (Builder $q) {
+            $q->where('moderation', 'false');
         })->select(['id', 'tf', 'art'])
             ->with(['moderatedOffices', 'company', 'tariff:id,name', 'moderatedReviews:user_id,rating', 'ads:user_id,unique_content'])
             ->get();
 
+        $service = app(TrustFactorService::class);
+
         foreach ($users as $user) {
-            $this->calculateTrustFactor($user);
+            $service->calculate($user);
         }
 
         return Command::SUCCESS;

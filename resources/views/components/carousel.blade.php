@@ -22,7 +22,7 @@
         class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-3 sm:px-4 cursor-pointer group focus:outline-none"
         data-carousel-prev>
         <span
-            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
+            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
             <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
                 fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +35,7 @@
         class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-3 sm:px-4 cursor-pointer group focus:outline-none"
         data-carousel-next>
         <span
-            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
+            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
             <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
                 fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

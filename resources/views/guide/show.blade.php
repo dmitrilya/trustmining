@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('guides')"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight ml-3">
                 {{ $guide->title }}
             </h2>
         </div>

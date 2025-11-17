@@ -81,7 +81,7 @@ class CompanyController extends Controller
         $order->invoice_url = $res->pdfUrl;
         $order->save();
 
-        CheckInvoice::dispatch($order)->delay(now()->addMinutes(15));
+        //CheckInvoice::dispatch($order)->delay(now()->addMinutes(15));
 
         return redirect()->route('profile');
     }

@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Console\Command;
 
-use App\Http\Traits\TrustFactor;
+use Illuminate\Support\Facades\Log;
+
+use App\Services\Chat\ArtCalculator;
 
 use App\Models\User;
 
@@ -13,62 +14,36 @@ use Carbon\Carbon;
 
 class UpdateART extends Command
 {
-    use TrustFactor;
-
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'art:update';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Updating average response time to messages';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
-        $users = User::whereHas('ads', fn(Builder $q) => $q->where('moderation', 'false')->where('hidden', 'false'))
-            ->orWhereHas('hosting', fn(Builder $q) => $q->where('moderation', 'false'))->select(['id'])
-            ->with([
+        $twoWeeksAgo = Carbon::now()->subWeeks(2);
+
+        $users = User::whereHas('ads', fn($q) => $q->where('moderation', 'false')->where('hidden', 'false'))
+            ->orWhereHas('hosting', fn($q) => $q->where('moderation', 'false'))
+            ->select(['id'])->with([
                 'chats:id',
-                'chats.messages' =>
-                fn(Builder $q) => $q->where('created_at', '>', Carbon::now()->subWeeks(2))->select(['chat_id', 'user_id', 'created_at'])
+                'chats.messages' => fn($q) => $q->where('created_at', '>', $twoWeeksAgo)->orderBy('created_at')
+                    ->select(['chat_id', 'user_id', 'created_at'])
             ])->get();
 
+        $service = new ArtCalculator;
+
         foreach ($users as $user) {
-            $responseCount = 0;
-            $responseTime = 0;
+            $old = $user->art;
 
-            if (!$user->chats->count()) continue;
-
-            foreach ($user->chats as $chat) {
-                $waitingResponse = false;
-
-                foreach ($chat->messages as $message) {
-                    if ($message->user_id != $user->id) {
-                        if ($waitingResponse) continue;
-
-                        $waitingResponse = true;
-                        $waitingResponseFrom = $message->created_at;
-                    } elseif ($waitingResponse) {
-                        $waitingResponse = false;
-                        $responseCount++;
-                        $responseTime += $message->created_at->diffInMinutes($waitingResponseFrom);
-                    }
-                }
-            }
-
-            $user->art = $responseCount ? round($responseTime / $responseCount) : 0;
+            $user->art = $service->calculateForUser($user);
             $user->save();
+
+            Log::channel('art')->info('ART updated', [
+                'user_id'  => $user->id,
+                'old'      => $old,
+                'new'      => $user->art,
+                'changed'  => $old !== $user->art,
+                'chats'    => $user->chats->count(),
+            ]);
         }
 
         return Command::SUCCESS;
