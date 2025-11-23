@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('asic_model_id');
             $table->foreign('asic_model_id')->references('id')
                 ->on('asic_models')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedFloat('hashrate', 10, 4);
+            $table->unsignedDecimal('hashrate', 10, 4);
             $table->unsignedFloat('efficiency', 7, 3);
             $table->string('measurement');
         });

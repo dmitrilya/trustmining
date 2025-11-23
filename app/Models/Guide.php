@@ -35,14 +35,11 @@ class Guide extends Model
     ];
 
     /**
-     * Retrieve the model for a bound value.
-     *
-     * @param  mixed  $value
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * Get the route key for the model.
      */
-    public function resolveRouteBinding($value, $field = null)
+    public function getRouteKeyName(): string
     {
-        return $this->where('url_title', $value)->first() ?? abort(404);
+        return 'url_title';
     }
 
     /**
@@ -55,7 +52,7 @@ class Guide extends Model
     {
         return $query->with(['user']);
     }
- 
+
     /**
      * Get the indexable data array for the model.
      *

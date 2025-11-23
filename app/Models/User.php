@@ -88,6 +88,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->ads()->where('moderation', 0);
     }
 
+    public function guides()
+    {
+        return $this->hasMany(Guide::class);
+    }
+
     public function company()
     {
         return $this->hasOne(Company::class);

@@ -95,7 +95,7 @@ Route::group(['prefix' => 'articles'], function () {
 
 Route::group(['prefix' => 'guides'], function () {
     Route::get('/', [GuideController::class, 'index'])->name('guides');
-    Route::get('/{user:id}/guide/{guide}', [GuideController::class, 'show'])->name('guide');
+    Route::get('/{user:id}/guide/{guide}', [GuideController::class, 'show'])->scopeBindings()->name('guide');
 });
 
 Route::group(['prefix' => 'database'], function () {

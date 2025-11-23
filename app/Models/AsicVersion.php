@@ -11,6 +11,15 @@ class AsicVersion extends Model
 
     public $timestamps = false;
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'hashrate' => 'double',
+    ];
+
     public function asicModel()
     {
         return $this->belongsTo(AsicModel::class);
