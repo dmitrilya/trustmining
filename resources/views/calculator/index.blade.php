@@ -1,7 +1,24 @@
+@php
+    $selModel = !$rModel
+        ? ($rVersion
+            ? $models->filter(fn($model) => $model->asicVersions->where('id', $rVersion)->count())->first()
+            : $models->where('name', 'Antminer T21')->first())
+        : $models->where('name', $rModel)->first();
+    $selVersion = $rVersion
+        ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
+        : $selModel->asicVersions->first();
+    if (!$selVersion) {
+        $selVersion = $selModel->asicVersions->first();
+    }
+@endphp
+
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
     ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' .
     ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
-    ' в удобном калькуляторе майнинга'">
+    ' в удобном калькуляторе майнинга'" :canonical="route('calculator.modelver', [
+        'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
+        'asicVersion' => $selVersion->hashrate,
+    ])">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -13,20 +30,6 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div itemscope itemtype="https://schema.org/ViewAction"
             class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4">
-            @php
-                $selModel = !$rModel
-                    ? ($rVersion
-                        ? $models->filter(fn($model) => $model->asicVersions->where('id', $rVersion)->count())->first()
-                        : $models->where('name', 'Antminer T21')->first())
-                    : $models->where('name', $rModel)->first();
-                $selVersion = $rVersion
-                    ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
-                    : $selModel->asicVersions->first();
-                if (!$selVersion) {
-                    $selVersion = $selModel->asicVersions->first();
-                }
-            @endphp
-
             <meta itemprop="name"
                 content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
             <meta itemprop="description"
