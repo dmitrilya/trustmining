@@ -28,7 +28,10 @@
         @endif
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center">
-            <img class="w-full" src="{{ Storage::url($ad->preview) }}">
+            <a class="block w-full"
+                href="{{ route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]) }}">
+                <img class="w-full" src="{{ Storage::url($ad->preview) }}">
+            </a>
         </div>
 
         <div class="mt-2 md:mt-3 flex items-start justify-between">

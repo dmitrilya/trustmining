@@ -1,5 +1,7 @@
 <li class="sm:flex">
-    <x-carousel :images="$office->images"></x-carousel>
+    <a class="block w-full" href="{{ route('office.edit', ['office' => $office->id]) }}">
+        <x-carousel :images="$office->images"></x-carousel>
+    </a>
 
     <div class="flex flex-col justify-between mt-3 sm:mt-0 sm:ml-6 w-full">
         <div>

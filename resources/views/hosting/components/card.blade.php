@@ -4,8 +4,11 @@
     class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         @if (count($hosting->images))
-            <img class="w-full aspect-[4/3] overflow-hidden rounded-lg" src="{{ Storage::url($hosting->images[0]) }}"
-                alt="Hosting image">
+            <div class="w-full aspect-[4/3] overflow-hidden rounded-lg">
+                <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">
+                    <img class="w-full" src="{{ Storage::url($hosting->images[0]) }}" alt="Hosting image">
+                </a>
+            </div>
         @endif
 
         <a href="{{ route('company', ['user' => $hosting->user->url_name]) }}"

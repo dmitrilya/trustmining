@@ -15,14 +15,14 @@
                             'h-full inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
-                    <x-nav-link :href="route('support')">
-                        {{ __('Support') }}
-                    </x-nav-link>
-
                     @include('layouts.components.solutions', [
                         'classes' =>
                             'h-full inline-flex items-center border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
+
+                    <x-nav-link :href="route('support')">
+                        {{ __('Support') }}
+                    </x-nav-link>
 
                     @include('layouts.components.search', [
                         'border' => 'px-2.5 py-1.5 rounded-md border',
