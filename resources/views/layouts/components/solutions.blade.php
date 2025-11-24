@@ -16,10 +16,10 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-full absolute z-50 rounded-md shadow-lg dark:shadow-zinc-800 origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
+        class="w-full absolute z-50 rounded-b-2xl shadow-lg dark:shadow-zinc-800 origin-top left-0 top-0 mt-10 lg:mt-14" style="display: none"
         @click.away="open = false">
         <div
-            class="rounded-b-2xl ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white dark:bg-zinc-900">
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white dark:bg-zinc-900">
             <div class="sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-500 mb-6">{{ __('Project') }}</div>
