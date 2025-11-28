@@ -72,7 +72,7 @@ class AsicModel extends Model
 
     public function reviews()
     {
-        return $this->morphMany(\App\Models\Morph\ReView::class, 'reviewable');
+        return $this->morphMany(\App\Models\Morph\Review::class, 'reviewable');
     }
 
     public function moderatedReviews()
