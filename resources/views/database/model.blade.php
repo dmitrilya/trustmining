@@ -65,7 +65,7 @@
                 </div>
 
                 @php
-                    $hasTariff = ($user = \Auth::user()) && $user->tariff;
+                    $hasTariff = ($user = Auth::user()) && $user->tariff;
                     $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                     $modelAds = $versions->pluck('ads')->flatten();
                     $modelAdWithMinPrice = $modelAds->sortBy('price')->first();

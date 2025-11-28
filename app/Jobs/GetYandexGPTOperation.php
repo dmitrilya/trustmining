@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Http\Traits\YandexGPT;
 
-use App\Models\Hosting;
+use App\Models\Ad\Hosting;
 
 class GetYandexGPTOperation implements ShouldQueue
 {

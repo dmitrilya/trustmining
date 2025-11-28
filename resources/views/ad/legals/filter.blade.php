@@ -1,4 +1,4 @@
-<x-select :label="__('Service')" name="Service" :items="App\Models\AdCategory::where('name', 'legals')
+<x-select :label="__('Service')" name="Service" :items="App\Models\Ad\AdCategory::where('name', 'legals')
     ->with('ads:ad_category_id,props')
     ->first()
     ->ads->pluck('props')

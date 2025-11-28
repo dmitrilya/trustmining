@@ -4,19 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Http\Traits\YandexGPT;
-use App\Http\Traits\Telegram;
-use App\Models\Algorithm;
-use App\Models\AsicModel;
-use App\Models\Coin;
-use App\Models\User;
-
-use Carbon\Carbon;
-
 class MyCommand extends Command
 {
-    use YandexGPT, Telegram;
-
     /**
      * The name and signature of the console command.
      *
@@ -38,8 +27,6 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        User::first()->createToken('admin');
-
         return Command::SUCCESS;
     }
 }

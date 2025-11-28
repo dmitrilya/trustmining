@@ -18,7 +18,7 @@
     <meta name="color-scheme" content="light dark">
 
     @auth
-        <meta name="user-id" content="{{ ($user = \Auth::user())->id }}">
+        <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
     <title>

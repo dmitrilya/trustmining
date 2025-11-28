@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 use App\Services\TrustFactorService;
 
-use App\Models\User;
+use App\Models\User\User;
 
 class UpdateTrustFactors extends Command
 {

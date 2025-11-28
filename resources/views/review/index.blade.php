@@ -1,9 +1,9 @@
 @php
-    if ($type == 'App\Models\User') {
+    if ($type == 'App\Models\User\User') {
         $user = App\Models\User::find($id);
         $href = route('company', ['user' => $user->url_name]);
-    } elseif ($type == 'App\Models\AsicModel') {
-        $model = App\Models\AsicModel::find($id);
+    } elseif ($type == 'App\Models\Database\AsicModel') {
+        $model = App\Models\Database\AsicModel::find($id);
         $href = route('database.model', [
             'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
             'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
@@ -14,14 +14,14 @@
 @endphp
 
 <x-app-layout
-    title="Отзывы о {{ $type == 'App\Models\User' ? 'компании ' . $user->name : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name }}">
+    title="Отзывы о {{ $type == 'App\Models\User\User' ? 'компании ' . $user->name : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name }}">
     <x-slot name="header">
         <div class="flex items-center">
             @php
-                if ($type == 'App\Models\User') {
+                if ($type == 'App\Models\User\User') {
                     $href = route('company', ['user' => App\Models\User::find($id)->url_name]);
-                } elseif ($type == 'App\Models\AsicModel') {
-                    $model = App\Models\AsicModel::find($id);
+                } elseif ($type == 'App\Models\Database\AsicModel') {
+                    $model = App\Models\Database\AsicModel::find($id);
                     $href = route('database.model', [
                         'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
                         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),

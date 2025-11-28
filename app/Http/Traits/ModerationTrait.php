@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Traits\NotificationTrait;
 
-use App\Models\Moderation;
+use App\Models\Morph\Moderation;
 
 trait ModerationTrait
 {
@@ -32,7 +32,7 @@ trait ModerationTrait
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
 
-        if ($moderation->moderationable_type == 'App\Models\Company' && (!$m->user->passport || $m->user->passport->moderation))
+        if ($moderation->moderationable_type == 'App\Models\User\Company' && (!$m->user->passport || $m->user->passport->moderation))
             return redirect()->route('moderations')->withErrors(['forbidden' => __('First you need to pass moderation by passport')]);
 
         if (!$m->moderation) {
@@ -40,37 +40,37 @@ trait ModerationTrait
             $disk = 'public';
 
             switch ($moderation->moderationable_type) {
-                case ('App\Models\Company'):
+                case ('App\Models\User\Company'):
                     if (isset($moderation->data['logo']) && $m->logo) array_push($files, $m->logo);
                     if (isset($moderation->data['bg_logo']) && $m->bg_logo) array_push($files, $m->bg_logo);
                     if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
-                case ('App\Models\Hosting'):
+                case ('App\Models\Ad\Hosting'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     if (isset($moderation->data['contract'])) array_push($files, $m->contract);
                     if (isset($moderation->data['territory']) && $m->territory) array_push($files, $m->territory);
                     if (isset($moderation->data['energy_supply']) && $m->energy_supply) array_push($files, $m->energy_supply);
                     break;
-                case ('App\Models\Ad'):
+                case ('App\Models\Ad\Ad'):
                     if (isset($moderation->data['preview'])) array_push($files, $m->preview);
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
-                case ('App\Models\Review'):
+                case ('App\Models\Morph\Review'):
                     if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
                     if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
                     $disk = 'private';
                     if ($m && $m->reviewable)
-                        $this->notify('New review', collect([$m->reviewable]), 'App\Models\Review', $m);
+                        $this->notify('New review', collect([$m->reviewable]), 'App\Models\Morph\Review', $m);
                     break;
-                case ('App\Models\Office'):
+                case ('App\Models\User\Office'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
-                case ('App\Models\Passport'):
+                case ('App\Models\User\Passport'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                     $disk = 'private';
                     break;
-                case ('App\Models\Guide'):
+                case ('App\Models\Blog\Guide'):
                     if (isset($moderation->data['preview'])) array_push($files, $m->preview);
                     break;
             }
@@ -80,13 +80,13 @@ trait ModerationTrait
 
         $data = $moderation->data;
         if ($m->moderation) $data['moderation'] = 0;
-        if ($moderation->moderationable_type == 'App\Models\Ad') {
+        if ($moderation->moderationable_type == 'App\Models\Ad\Ad') {
             $m->unique_content = $isUniqueContent;
 
             if (isset($data['price'])) $this->notify(
                 'Price change',
                 $m->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
-                'App\Models\Ad',
+                'App\Models\Ad\Ad',
                 $m
             );
         }
@@ -97,11 +97,11 @@ trait ModerationTrait
         $moderation->user_id = $userId;
         $moderation->save();
 
-        if ($moderation->moderationable_type != 'App\Models\Ad')
-            $this->notify('Moderation completed', collect([$m->user]), 'App\Models\Moderation', $moderation);
+        if ($moderation->moderationable_type != 'App\Models\Ad\Ad')
+            $this->notify('Moderation completed', collect([$m->user]), 'App\Models\Morph\Moderation', $moderation);
 
-        if ($moderation->moderationable_type == 'App\Models\Review' && $m->reviewable_type == 'App\Models\User')
-            $this->notify('New review', collect([$m->reviewable]), 'App\Models\Review', $m);
+        if ($moderation->moderationable_type == 'App\Models\Morph\Review' && $m->reviewable_type == 'App\Models\User\User')
+            $this->notify('New review', collect([$m->reviewable]), 'App\Models\Morph\Review', $m);
 
         return redirect()->route('moderations');
     }
@@ -118,37 +118,37 @@ trait ModerationTrait
         $disk = 'public';
 
         switch ($moderation->moderationable_type) {
-            case ('App\Models\Company'):
+            case ('App\Models\User\Company'):
                 if (isset($moderation->data['logo'])) array_push($files, $moderation->data['logo']);
                 if (isset($moderation->data['bg_logo'])) array_push($files, $moderation->data['bg_logo']);
                 if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
-            case ('App\Models\Hosting'):
+            case ('App\Models\Ad\Hosting'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 if (isset($moderation->data['contract'])) array_push($files, $moderation->data['contract']);
                 if (isset($moderation->data['territory'])) array_push($files, $moderation->data['territory']);
                 if (isset($moderation->data['energy_supply'])) array_push($files, $moderation->data['energy_supply']);
                 break;
-            case ('App\Models\Ad'):
+            case ('App\Models\Ad\Ad'):
                 if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
-            case ('App\Models\Review'):
+            case ('App\Models\Morph\Review'):
                 if (isset($moderation->data['document'])) array_push($files, $moderation->data['document']);
                 if (isset($moderation->data['image'])) array_push($files, $moderation->data['image']);
                 $m->delete();
                 $disk = 'private';
                 break;
-            case ('App\Models\Office'):
+            case ('App\Models\User\Office'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
-            case ('App\Models\Passport'):
+            case ('App\Models\User\Passport'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 $m->delete();
                 $disk = 'private';
                 break;
-            case ('App\Models\Guide'):
+            case ('App\Models\Blog\Guide'):
                 if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
                 break;
         }
@@ -160,7 +160,7 @@ trait ModerationTrait
         $moderation->user_id = $userId;
         $moderation->save();
 
-        $this->notify('Moderation failed', collect([$m->user]), 'App\Models\Moderation', $moderation);
+        $this->notify('Moderation failed', collect([$m->user]), 'App\Models\Morph\Moderation', $moderation);
 
         return redirect()->route('moderations');
     }

@@ -11,7 +11,7 @@
                 @csrf
 
                 <x-select :label="__('Ad type')" name="ad_category_id"
-                    handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\AdCategory::all()
+                    handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
                         ->map(fn($adCategory) => ['key' => $adCategory->id, 'value' => __($adCategory->header)])
                         ->keyBy('key')" />
 

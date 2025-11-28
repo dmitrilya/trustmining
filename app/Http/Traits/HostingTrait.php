@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-use App\Models\Hosting;
+use App\Models\Ad\Hosting;
 use Illuminate\Http\Request;
 
 trait HostingTrait

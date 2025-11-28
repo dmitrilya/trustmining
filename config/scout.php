@@ -174,7 +174,7 @@ return [
             'retry_interval_seconds' => env('TYPESENSE_RETRY_INTERVAL_SECONDS', 1),
         ],
         'model-settings' => [
-            // User::class => [
+            // \App\Models\User\User::class => [
             //     'collection-schema' => [
             //         'fields' => [
             //             [

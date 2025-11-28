@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Services\Chat\ArtCalculator;
 
-use App\Models\User;
+use App\Models\User\User;
 
 use Carbon\Carbon;
 

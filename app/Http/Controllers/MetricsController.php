@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Traits\Metrics\NetworkTrait;
 
-use App\Models\Coin;
+use App\Models\Database\Coin;
 
 use Carbon\Carbon;
 

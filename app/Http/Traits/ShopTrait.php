@@ -4,9 +4,7 @@ namespace App\Http\Traits;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-use App\Models\User;
-
-use DB;
+use App\Models\User\User;
 
 trait ShopTrait
 {

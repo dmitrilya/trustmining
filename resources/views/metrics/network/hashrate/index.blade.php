@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Coin::has('networkHashrates')
+                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkHashrates')
                         ->get()
                         ->map(
                             fn($coin) => [

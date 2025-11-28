@@ -34,7 +34,7 @@
                 @auth
                     @php
                         $auth = Auth::user();
-                        $uncheckedMessagesCount = App\Models\Message::whereIn('chat_id', $auth->chats()->pluck('id'))
+                        $uncheckedMessagesCount = App\Models\Chat\Message::whereIn('chat_id', $auth->chats()->pluck('id'))
                             ->where('user_id', '!=', $auth->id)
                             ->where('checked', false)
                             ->count();

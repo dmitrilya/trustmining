@@ -1,5 +1,5 @@
 @php
-    $models = \App\Models\AsicModel::where('release', '>', '2010-03-01')
+    $models = \App\Models\Database\AsicModel::where('release', '>', '2010-03-01')
         ->with(['asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name'])
         ->select(['id', 'name', 'algorithm_id'])
         ->get()
@@ -44,7 +44,7 @@
 ])" field="Availability"></x-filter-filter>
 
 @if (in_array(request()->route()->action['as'], ['company']) &&
-        ($user = \Auth::user()) &&
+        ($user = Auth::user()) &&
         $user->id == request()->user->id)
     <x-filter-filter type="radio" :name="__('Display')" :items="collect([
         ['name' => 'View all', 'url_name' => ''],

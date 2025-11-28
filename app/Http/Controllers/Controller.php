@@ -14,13 +14,13 @@ use App\Http\Traits\Telegram;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 
-use App\Models\Algorithm;
-use App\Models\AsicModel;
-use App\Models\AsicVersion;
-use App\Models\Like;
-use App\Models\Role;
-use App\Models\Coin;
-use App\Models\Chat;
+use App\Models\Database\Algorithm;
+use App\Models\Database\AsicModel;
+use App\Models\Database\AsicVersion;
+use App\Models\Morph\Like;
+use App\Models\User\Role;
+use App\Models\Database\Coin;
+use App\Models\Chat\Chat;
 
 class Controller extends BaseController
 {
@@ -59,7 +59,10 @@ class Controller extends BaseController
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
-        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,name,algorithm_id,profit,rate,merged_group')->get()->map(function ($algorithm) {
+        $algorithms = Algorithm::select(['id'])->with([
+            'coins' => fn($q) => $q->where('profit', '>', 0)->where('rate', '>', 0)
+                ->select(['abbreviation', 'name', 'algorithm_id', 'profit', 'rate', 'merged_group'])
+        ])->get()->map(function ($algorithm) {
             $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
                 fn($mergedGroup) => [
                     'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),

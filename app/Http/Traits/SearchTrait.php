@@ -4,12 +4,12 @@ namespace App\Http\Traits;
 
 use App\Http\Requests\SearchRequest;
 
-use App\Models\AsicBrand;
-use App\Models\AsicModel;
-use App\Models\Article;
-use App\Models\Company;
-use App\Models\Guide;
-use App\Models\User;
+use App\Models\Database\AsicBrand;
+use App\Models\Database\AsicModel;
+use App\Models\Blog\Article;
+use App\Models\User\Company;
+use App\Models\Blog\Guide;
+use App\Models\User\User;
 
 trait SearchTrait
 {

@@ -21,14 +21,14 @@
                 @php
                     $model = request()->model;
                     $moderationTypes = [
-                        'App\Models\Company' => __('Company'),
-                        'App\Models\Hosting' => __('Hosting'),
-                        'App\Models\Ad' => __('Ad'),
-                        'App\Models\Review' => __('Review'),
-                        'App\Models\Office' => __('Office'),
+                        'App\Models\User\Company' => __('Company'),
+                        'App\Models\Ad\Hosting' => __('Hosting'),
+                        'App\Models\Ad\Ad' => __('Ad'),
+                        'App\Models\Morph\Review' => __('Review'),
+                        'App\Models\User\Office' => __('Office'),
                         'App\Models\Contact' => __('Contacts'),
-                        'App\Models\Passport' => __('Passport'),
-                        'App\Models\Guide' => __('Guide'),
+                        'App\Models\User\Passport' => __('Passport'),
+                        'App\Models\Blog\Guide' => __('Guide'),
                     ];
                 @endphp
 

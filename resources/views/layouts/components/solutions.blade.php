@@ -170,8 +170,8 @@
 
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
                     @php
-                        $article = App\Models\Article::latest()->first();
-                        $guide = App\Models\Guide::inRandomOrder()->first();
+                        $article = App\Models\Blog\Article::latest()->first();
+                        $guide = App\Models\Blog\Guide::inRandomOrder()->first();
                     @endphp
 
                     @if ($article)

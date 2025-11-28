@@ -8,7 +8,7 @@ use App\Http\Traits\NotificationTrait;
 
 use Carbon\Carbon;
 
-use App\Models\User;
+use App\Models\User\User;
 
 class SubscriptionPayment extends Command
 {

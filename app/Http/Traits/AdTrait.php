@@ -4,8 +4,8 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
 
-use App\Models\Coin;
-use App\Models\Ad;
+use App\Models\Database\Coin;
+use App\Models\Ad\Ad;
 
 trait AdTrait
 {
@@ -104,7 +104,7 @@ trait AdTrait
      * Update the specified resource in storage.
      *
      * @param  Illuminate\Http\Request;
-     * @param  \App\Models\Ad  $ad
+     * @param  \App\Models\Ad\Ad  $ad
      * @return \Illuminate\Http\Response
      */
     public function toggleHidden(Request $request, Ad $ad)
@@ -124,7 +124,7 @@ trait AdTrait
      * Update the specified resource in storage.
      *
      * @param  Illuminate\Http\Request;
-     * @param  \App\Models\Ad  $ad
+     * @param  \App\Models\Ad\Ad  $ad
      * @return \Illuminate\Http\Response
      */
     public function track(Request $request, Ad $ad)

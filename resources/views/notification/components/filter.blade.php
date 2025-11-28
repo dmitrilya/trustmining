@@ -1,11 +1,11 @@
 @php
     $types = [
-        ['name' => 'Article', 'url_name' => 'App\Models\Article'],
-        ['name' => 'Guide', 'url_name' => 'App\Models\Guide'],
-        ['name' => 'Message', 'url_name' => 'App\Models\Message'],
-        ['name' => 'Moderation', 'url_name' => 'App\Models\Moderation'],
-        ['name' => 'Review', 'url_name' => 'App\Models\Review'],
-        ['name' => 'Track', 'url_name' => 'App\Models\Track'],
+        ['name' => 'Article', 'url_name' => 'App\Models\Blog\Article'],
+        ['name' => 'Guide', 'url_name' => 'App\Models\Blog\Guide'],
+        ['name' => 'Message', 'url_name' => 'App\Models\Chat\Message'],
+        ['name' => 'Moderation', 'url_name' => 'App\Models\Morph\Moderation'],
+        ['name' => 'Review', 'url_name' => 'App\Models\Morph\Review'],
+        ['name' => 'Track', 'url_name' => 'App\Models\Ad\Track'],
     ];
 @endphp
 

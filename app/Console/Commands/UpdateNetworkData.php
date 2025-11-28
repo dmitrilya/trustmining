@@ -6,8 +6,7 @@ use Illuminate\Console\Command;
 
 use Carbon\Carbon;
 
-use App\Models\Coin;
-use App\Models\NetworkHashrate;
+use App\Models\Database\Coin;
 
 class UpdateNetworkData extends Command
 {

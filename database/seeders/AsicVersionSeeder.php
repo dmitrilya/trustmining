@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Models\AsicModel;
+use App\Models\Database\AsicModel;
 
 class AsicVersionSeeder extends Seeder
 {

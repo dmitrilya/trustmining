@@ -2,7 +2,7 @@
     $requestModels = request()['For_which_models'];
 @endphp
 
-<div x-data="{ allModels: {{ App\Models\AsicModel::pluck('name')->diff($requestModels)->values() }}, models: {{ collect($requestModels) }}, search: '' }">
+<div x-data="{ allModels: {{ App\Models\Database\AsicModel::pluck('name')->diff($requestModels)->values() }}, models: {{ collect($requestModels) }}, search: '' }">
     <div>
         <x-input-label for="search" :value="__('For which models')" />
         <x-text-input id="search" type="text" ::value="search" placeholder="" @input="search = $el.value" />

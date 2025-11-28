@@ -7,7 +7,7 @@
     }">
     <div>
         @if ($owner)
-            <div class="mt-2 absolute left-0 top-4">
+            <div class="mt-2 absolute z-10 left-0 top-4">
                 <div x-show="hidden" style="display: none"
                     class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
                     {{ __('Hidden') }}

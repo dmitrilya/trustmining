@@ -12,7 +12,7 @@
     </header>
 
     <div class="space-y-4 sm:space-y-5 lg:space-y-6">
-        @foreach (App\Models\CRMSystem::all() as $crmSystem)
+        @foreach (App\Models\CRM\CRMSystem::all() as $crmSystem)
             <div class="flex justify-between items-center border dark:border-zinc-700 rounded-lg p-4 xl:p-6">
                 <img src="{{ Storage::url('crm_systems/' . $crmSystem->name . '.webp') }}" alt="{{ $crmSystem->name }}"
                     class="w-[40%]" />

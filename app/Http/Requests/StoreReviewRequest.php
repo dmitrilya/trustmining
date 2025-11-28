@@ -26,7 +26,7 @@ class StoreReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'reviewable_type' => ['required', Rule::in(['App\Models\User', 'App\Models\AsicModel'])],
+            'reviewable_type' => ['required', Rule::in(['App\Models\User\User', 'App\Models\Database\AsicModel'])],
             'reviewable_id' => [
                 'required',
                 'exists:' . $this->reviewable_type . ',id',

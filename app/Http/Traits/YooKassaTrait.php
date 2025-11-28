@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 use App\Jobs\TokenNull;
-use App\Models\Hosting;
-use App\Models\User;
+use App\Models\Ad\Hosting;
+use App\Models\User\User;
 use App\Models\DailyHostingProfit;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use DB;
 
 trait YooKassaTrait
 {

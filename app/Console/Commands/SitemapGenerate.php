@@ -6,12 +6,12 @@ use Illuminate\Console\Command;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-use App\Models\User;
-use App\Models\AdCategory;
-use App\Models\AsicBrand;
-use App\Models\Article;
-use App\Models\Guide;
-use App\Models\Coin;
+use App\Models\User\User;
+use App\Models\Ad\AdCategory;
+use App\Models\Database\AsicBrand;
+use App\Models\Blog\Article;
+use App\Models\Blog\Guide;
+use App\Models\Database\Coin;
 
 class SitemapGenerate extends Command
 {

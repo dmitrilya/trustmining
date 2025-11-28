@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
-use DB;
-
 trait StatisticsTrait
 {
     public function adsStatistics(Request $request)
@@ -15,10 +13,10 @@ trait StatisticsTrait
         $ads = $request->user()->ads()->where('moderation', false)
             ->select(['id', 'preview', 'office_id', 'asic_version_id', 'ad_category_id'])
             ->with([
-                'views' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
-                'tracks' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
-                'phoneViews' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
-                'chats' => fn($q) => $q->select(DB::raw('*, Date(`created_at`) as date')),
+                'views' => fn($q) => $q->select(\DB::raw('*, Date(`created_at`) as date')),
+                'tracks' => fn($q) => $q->select(\DB::raw('*, Date(`created_at`) as date')),
+                'phoneViews' => fn($q) => $q->select(\DB::raw('*, Date(`created_at`) as date')),
+                'chats' => fn($q) => $q->select(\DB::raw('*, Date(`created_at`) as date')),
                 'office:id,city',
                 'asicVersion:id,hashrate,measurement,asic_model_id',
                 'asicVersion.asicModel:id,name',

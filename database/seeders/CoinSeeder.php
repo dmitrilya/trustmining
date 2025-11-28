@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Algorithm;
+use App\Models\Database\Algorithm;
 
 class CoinSeeder extends Seeder
 {

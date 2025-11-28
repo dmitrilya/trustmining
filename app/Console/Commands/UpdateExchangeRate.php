@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Coin;
+use App\Models\Database\Coin;
 use Illuminate\Console\Command;
 
 class UpdateExchangeRate extends Command

@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
 
-use App\Models\Guide;
+use App\Models\Blog\Guide;
 
 trait GuideTrait
 {

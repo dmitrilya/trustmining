@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Coin::has('networkDifficulties')
+                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkDifficulties')
                         ->get()
                         ->map(
                             fn($coin) => [

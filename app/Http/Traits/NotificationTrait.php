@@ -9,8 +9,8 @@ use App\Events\Notification as NotificationEvent;
 use App\Jobs\SendTGNotifications;
 use App\Jobs\SendTGNotifucations;
 
-use App\Models\NotificationType;
-use App\Models\Notification;
+use App\Models\User\NotificationType;
+use App\Models\User\Notification;
 
 trait NotificationTrait
 {

@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
 
-use App\Models\Office;
+use App\Models\User\Office;
 
 trait OfficeTrait
 {

@@ -1,31 +1,31 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\AdController;
-use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ChatController;
-use App\Http\Controllers\PassportController;
-use App\Http\Controllers\PhoneController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\HostingController;
-use App\Http\Controllers\OfficeController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ModerationController;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Ad\AdController;
+use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\User\PassportController;
+use App\Http\Controllers\User\PhoneController;
+use App\Http\Controllers\User\CompanyController;
+use App\Http\Controllers\Ad\HostingController;
+use App\Http\Controllers\User\OfficeController;
+use App\Http\Controllers\Morph\ReviewController;
+use App\Http\Controllers\Morph\ModerationController;
+use App\Http\Controllers\Blog\ArticleController;
 use App\Http\Controllers\CRM\AmoCRMController;
-use App\Http\Controllers\GuideController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\TariffController;
+use App\Http\Controllers\Blog\GuideController;
+use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\MetricsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
-use App\Models\User;
-use App\Models\Company;
+use App\Models\User\User;
+use App\Models\User\Company;
 
 /*
 |--------------------------------------------------------------------------

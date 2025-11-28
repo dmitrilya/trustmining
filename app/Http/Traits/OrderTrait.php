@@ -4,7 +4,7 @@ namespace App\Http\Traits;
 
 use App\Http\Traits\Tinkoff;
 
-use App\Models\Order;
+use App\Models\User\Order;
 
 trait OrderTrait
 {

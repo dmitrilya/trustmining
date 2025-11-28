@@ -7,10 +7,10 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Http\Traits\ViewTrait;
 
-use App\Models\Algorithm;
-use App\Models\AsicBrand;
-use App\Models\AsicModel;
-use App\Models\AsicVersion;
+use App\Models\Database\Algorithm;
+use App\Models\Database\AsicBrand;
+use App\Models\Database\AsicModel;
+use App\Models\Database\AsicVersion;
 
 class DatabaseController extends Controller
 {
@@ -41,7 +41,7 @@ class DatabaseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\AsicBrand  $asicBrand
+     * @param  \App\Models\Database\AsicBrand  $asicBrand
      * @return \Illuminate\Http\Response
      */
     public function brand(AsicBrand $asicBrand)
@@ -62,8 +62,8 @@ class DatabaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AsicBrand  $asicBrand
-     * @param  \App\Models\AsicModel  $asicModel
+     * @param  \App\Models\Database\AsicBrand  $asicBrand
+     * @param  \App\Models\Database\AsicModel  $asicModel
      * @return \Illuminate\Http\Response
      */
     public function model(AsicBrand $asicBrand, AsicModel $asicModel)
@@ -84,9 +84,9 @@ class DatabaseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AsicBrand  $asicBrand
-     * @param  \App\Models\AsicModel  $asicModel
-     * @param  \App\Models\AsicVersion  $asicVersion
+     * @param  \App\Models\Database\AsicBrand  $asicBrand
+     * @param  \App\Models\Database\AsicModel  $asicModel
+     * @param  \App\Models\Database\AsicVersion  $asicVersion
      * @return \Illuminate\Http\Response
      */
     public function version(AsicBrand $asicBrand, AsicModel $asicModel, AsicVersion $asicVersion)
@@ -110,7 +110,7 @@ class DatabaseController extends Controller
         return view('review.index', [
             'auth' => \Auth::user(),
             'name' => $asicModel->name,
-            'type' => 'App\Models\AsicModel',
+            'type' => 'App\Models\Database\AsicModel',
             'id' => $asicModel->id,
             'reviews' => $asicModel->reviews
         ]);

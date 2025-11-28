@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <input type="hidden" name="props" x-ref="props_water_cooling_plates" value='{"For which models": []}'>
 
-    <div x-data="{ allModels: {{ App\Models\AsicModel::pluck('name') }}, models: [], search: '' }">
+    <div x-data="{ allModels: {{ App\Models\Database\AsicModel::pluck('name') }}, models: [], search: '' }">
         <div>
             <x-input-label for="search" :value="__('For which models')" />
             <x-text-input id="search" type="text" ::value="search" placeholder="" autocomplete="off"

@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Models\Algorithm;
-use App\Models\Coin;
+use App\Models\Database\Algorithm;
+use App\Models\Database\Coin;
 
 class UpdateCoinProfit extends Command
 {
