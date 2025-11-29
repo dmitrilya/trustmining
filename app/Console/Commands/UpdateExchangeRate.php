@@ -46,8 +46,6 @@ class UpdateExchangeRate extends Command
 
         if ($out === false) dump(curl_error($curl), curl_errno($curl));
         
-        curl_close($curl);
-
         $rates = json_decode($out)->rates;
 
         $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Forum;
 
 use Illuminate\Http\Request;
 
-class ForumAnswerController extends BaseController
+class ForumAnswerController extends ForumController
 {
     //
 }

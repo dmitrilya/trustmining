@@ -71,14 +71,10 @@ trait Telegram
 
                 if (($out = curl_exec($curl)) === false || !json_decode($out)->ok)
                     info('CURL Error - Telegram->tgSendNotification: ' . $out . ' ' . curl_error($curl) . ' ' . curl_errno($curl));
-
-                curl_close($curl);
             } catch (Exception $e) {
                 info('Exception - Telegram->tgSendNotification: ' . $e->getMessage());
             } catch (Error $e) {
                 info('Error - Telegram->tgSendNotification: ' . $e->getMessage());
-            } finally {
-                curl_close($curl);
             }
         });
 

@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Traits\ModerationTrait;
-use App\Http\Traits\YandexGPT;
+use App\Services\YandexGPTService;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -14,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
 
 class CheckReview implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, YandexGPT, ModerationTrait;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, ModerationTrait;
     
     /**
      * The number of times the job may be attempted.
@@ -45,7 +45,7 @@ class CheckReview implements ShouldQueue
     {
         try {
             $lastModeration = $this->review->moderations()->latest()->first();
-            $result = $this->checkReviewWithPrompt($lastModeration);
+            $result = (new YandexGPTService())->checkReviewWithPrompt($lastModeration);
 
             switch ($result->label) {
                 case 'Фальшивый':

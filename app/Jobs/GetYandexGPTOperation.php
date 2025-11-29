@@ -9,13 +9,13 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use App\Http\Traits\YandexGPT;
+use App\Services\YandexGPTService;
 
 use App\Models\Ad\Hosting;
 
 class GetYandexGPTOperation implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, YandexGPT;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $operationId;
     public $folder;
@@ -40,7 +40,7 @@ class GetYandexGPTOperation implements ShouldQueue
      */
     public function handle()
     {
-        $operationResponse = $this->getOperation($this->operationId);
+        $operationResponse = (new YandexGPTService())->getOperation($this->operationId);
 
         if (!$operationResponse) return;
 

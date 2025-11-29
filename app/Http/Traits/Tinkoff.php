@@ -101,7 +101,6 @@ trait Tinkoff
         if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
 
         $out = curl_exec($curl);
-        curl_close($curl);
 
         return [
             'token' => $params['Token'],
@@ -123,7 +122,6 @@ trait Tinkoff
         if ($method == 'POST') curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($params));
 
         $out = curl_exec($curl);
-        curl_close($curl);
 
         return json_decode($out);
     }

@@ -6,12 +6,10 @@ use PhpOffice\PhpWord\IOFactory;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Jobs\GetYandexGPTOperation;
+use App\Services\YandexGPTService;
 
 trait FileTrait
-{
-    use YandexGPT;
-    
+{    
     public function saveFiles($files, $folder, $type, int $id, $disk = 'public/')
     {
         $result = [];
@@ -48,7 +46,7 @@ trait FileTrait
             }
         }
 
-        GetYandexGPTOperation::dispatch($this->checkDocument($text)->id, $folder, $id)->delay(now()->addMinutes(1));
+        (new YandexGPTService())->checkDocument($text, $folder, $id);
 
         return $path;
     }

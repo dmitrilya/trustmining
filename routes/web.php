@@ -1,31 +1,30 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\Ad\AdController;
+use App\Http\Controllers\Ad\HostingController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ShopController;
-use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\User\PassportController;
 use App\Http\Controllers\User\PhoneController;
 use App\Http\Controllers\User\CompanyController;
-use App\Http\Controllers\Ad\HostingController;
 use App\Http\Controllers\User\OfficeController;
+use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\Morph\ReviewController;
 use App\Http\Controllers\Morph\ModerationController;
 use App\Http\Controllers\Blog\ArticleController;
-use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Blog\GuideController;
-use App\Http\Controllers\User\OrderController;
-use App\Http\Controllers\User\TariffController;
-use App\Http\Controllers\MetricsController;
+use App\Http\Controllers\Forum\ForumController;
+use App\Http\Controllers\CRM\AmoCRMController;
+use App\Http\Controllers\Chat\ChatController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
-use App\Models\User\User;
-use App\Models\User\Company;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,6 +135,11 @@ Route::post('/amocrm/webhook/uninstall', [AmoCRMController::class, 'handleUninst
 Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook']);
 
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
+
+Route::group(['prefix' => 'forum'], function () {
+        Route::get('/', [ForumController::class, 'index'])->name('forum');
+        Route::get('/{forumCategory}', [ForumController::class, 'category'])->name('forum.category');
+    });
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');

@@ -16,6 +16,7 @@ class ForumAnswer extends Model
      */
     protected $fillable = [
         'text',
+        'images',
         'forum_question_id',
         'user_id',
     ];
@@ -28,5 +29,10 @@ class ForumAnswer extends Model
     public function forumQuestion()
     {
         return $this->belongsTo(\App\Models\Forum\ForumQuestion::class);
+    }
+
+    public function forumComments()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumComment::class);
     }
 }

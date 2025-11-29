@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('forum_question_categories', function (Blueprint $table) {
+        Schema::create('forum_subcategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('title');
-            $table->text('description');
-            $table->string('header');
+            $table->unsignedBigInteger('forum_category_id');
+            $table->foreign('forum_category_id')->references('id')
+                ->on('forum_categories')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forum_question_categories');
+        Schema::dropIfExists('forum_subcategories');
     }
 };

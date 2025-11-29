@@ -5,7 +5,7 @@ namespace App\Models\Forum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ForumAnswerComment extends Model
+class ForumComment extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,7 @@ class ForumAnswerComment extends Model
      */
     protected $fillable = [
         'text',
+        'images',
         'forum_answer_id',
         'user_id',
     ];

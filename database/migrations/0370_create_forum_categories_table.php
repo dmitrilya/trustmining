@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('forum_answer_comments', function (Blueprint $table) {
+        Schema::create('forum_categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forum_answer_comments');
+        Schema::dropIfExists('forum_categories');
     }
 };

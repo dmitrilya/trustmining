@@ -15,7 +15,7 @@ class ForumQuestion extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
+        'theme',
         'text',
         'keywords',
         'forum_question_category_id',
@@ -27,9 +27,9 @@ class ForumQuestion extends Model
         return $this->belongsTo(\App\Models\User\User::class);
     }
 
-    public function forumQuestionCategory()
+    public function forumSubcategory()
     {
-        return $this->belongsTo(\App\Models\Forum\ForumQuestionCategory::class);
+        return $this->belongsTo(\App\Models\Forum\ForumSubcategory::class);
     }
 
     public function forumAnswers()

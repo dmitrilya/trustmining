@@ -493,8 +493,6 @@
     "Connected": "Подключено",
 
     "Metrics": "Метрики",
-    "Cryptonetwork": "Криптосеть",
-    "Network difficulty": "Сложность сети",
     "Current difficulty": "Текущая сложность",
     "Blocks before recalculation": "Блоков до пересчета",
     "Time calculation": "Расчет времени",
@@ -508,6 +506,64 @@
     "m": "м",
     "y": "г",
 
+
+    "Forum": "Форум",
+
+    "News": "Новости",
+    "Regulation of cryptocurrencies": "Регулирование криптовалют",
+    "Events and summits": "Мероприятия и саммиты",
+    "Electricity prices": "Цены на электроэнергию",
+    "Investments, funds": "Инвестиции, фонды",
+    "Ecology": "Экология",
+    "Large transactions": "Крупные транзакции",
+    
+    "Cryptocurrency": "Криптовалюта",
+    "Cryptonetwork and blockchain": "Криптосеть и блокчейн",
+    "Network difficulty and halving": "Сложность сети и халвинг",
+    "Exchange rate": "Курс валюты",
+    "Forks and coin listings": "Форки и листинги монет",
+
+    "ASIC miners and video cards": "ASIC майнеры и видеокарты",
+    "Models": "Модели",
+    "Prices": "Цены",
+    "Setting up": "Настройка",
+    "Modes and firmware": "Режимы и прошивки",
+    "Errors": "Ошибки",
+    "Consumables and accessories": "Расходники и комплектующие",
+
+    "Mining": "Майнинг",
+    "Pools": "Пулы",
+    "Profitability and payback period": "Доходность и окупаемость",
+    "Cloud mining": "Облачный майнинг",
+    "Mining software": "Программы для майнинга",
+    "General questions": "Общие вопросы",
+
+    "Technologies": "Технологии",
+    "Payment systems": "Платежные системы",
+    "Alternative sources of electricity": "Альтернативные источники электроэнергии",
+
+    "Trading": "Трейдинг",
+    "Crypto exchanges and exchangers": "Криптобиржи и обменники",
+    "Help and advice": "Помощь и советы",
+    "Predictions": "Прогнозы",
+
+    "Legal issues": "Юридические вопросы",
+    "Scammers": "Мошенники",
+    "Legalization": "Легализация",
+
+    "Technical solutions": "Технические решения",
+    "Electrical wiring": "Электропроводка",
+    "Noise reduction": "Шумоподавление",
+    "Ventilation": "Вентиляция",
+    "Cooling": "Охлаждение",
+    "Realization of heat from mining": "Реализация тепла от майнинга",
+
+    "Alternative earnings": "Альтернативный заработок",
+    "Metaverses and P2E": "Метавселенные и P2E",
+    "NFT": "NFT",
+    "Airdrops": "Airdrops",
+
+    
     "Creating article/guide": "Создание статьи/руководства",
     "Title": "Заголовок",
     "Brief description": "Краткое описание",
