@@ -31,20 +31,20 @@
                                             src="{{ Storage::url($user->company->logo) }}" alt="">
                                     @endif
 
-                                    <p class="w-full text-xs font-semibold text-gray-900 dark:text-gray-200">{{ $user->name }}</p>
+                                    <p class="w-full text-xs font-semibold text-gray-950 dark:text-gray-100">{{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
-                                        <p class="text-xxs text-gray-900 dark:text-gray-200">
+                                        <p class="text-xxs text-gray-950 dark:text-gray-100">
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
-                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500"
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-600"
                                                 data-date="{{ $lastMessage->created_at }}"></p>
                                         @endif
                                     </div>
                                 </div>
 
-                                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-500 message">
+                                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-600 message">
                                     {{ $lastMessage ? $lastMessageContent : __('The user wanted to write you a message, but never did so') }}
                                 </p>
                             </li>
@@ -61,7 +61,7 @@
                 <div class="flex">
                     <div class="flex items-center lg:hidden p-1 -ml-1">
                         <button @click="open = ! open"
-                            class="inline-flex items-center justify-center p-1 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-950 focus:outline-none focus:bg-gray-100 dark:focus:bg-zinc-950 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+                            class="inline-flex items-center justify-center p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-950 focus:outline-none focus:bg-gray-100 dark:focus:bg-zinc-950 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                             <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="lg:hidden px-3 py-2 sm:px-7">
-                        <p class="text-base font-semibold leading-6 text-gray-900">
+                        <p class="text-base font-semibold leading-6 text-gray-950">
                             {{ $user->name }}</p>
                     </div>
                 </div>

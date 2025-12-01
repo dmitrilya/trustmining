@@ -7,10 +7,10 @@
                 class="mr-2 size-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
 
             <div>
-                <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">
+                <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">
                     {{ __('Views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                         x-text="all_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -29,10 +29,10 @@
                 class="mr-2 size-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
 
             <div>
-                <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">
+                <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">
                     {{ __('Visits') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                         x-text="all_visits_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -51,10 +51,10 @@
                 class="mr-2 size-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
 
             <div>
-                <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">
+                <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">
                     {{ __('Phone views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                         x-text="all_phone_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -73,10 +73,10 @@
                 class="mr-2 size-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
 
             <div>
-                <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">
+                <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">
                     {{ __('Tracks') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                         x-text="all_tracks_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -95,10 +95,10 @@
                 class="mr-2 size-3 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
 
             <div>
-                <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">
+                <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">
                     {{ __('Chats') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                         x-text="all_chats_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -113,9 +113,9 @@
         </label>
 
         <div>
-            <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-600 mb-1 lg:mb-2">CR</div>
+            <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-500 mb-1 lg:mb-2">CR</div>
             <div class="flex items-end">
-                <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-800 dark:text-gray-200 mr-1 sm:mr-2 lg:mr-3"
+                <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-gray-900 dark:text-gray-100 mr-1 sm:mr-2 lg:mr-3"
                     x-text="all_cr">
                 </div>
                 <div class="text-xxs lg:text-xs"

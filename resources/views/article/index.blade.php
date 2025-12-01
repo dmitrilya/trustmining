@@ -1,6 +1,6 @@
 <x-app-layout title="Блог: статьи, новости майнинга">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Blog') }}
         </h2>
     </x-slot>

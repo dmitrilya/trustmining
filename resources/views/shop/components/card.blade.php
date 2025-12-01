@@ -12,10 +12,10 @@
             </a>
         </div>
 
-        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-gray-900 dark:text-gray-100 font-bold">{{ $shop->name }}
+        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-gray-950 dark:text-gray-50 font-bold">{{ $shop->name }}
         </div>
 
-        <div class="text-xs text-gray-400 dark:text-gray-500">
+        <div class="text-xs text-gray-500 dark:text-gray-400">
             {{ $shop->company && !$shop->company->moderation ? __($shop->company->card['type']) : __('Person') }}
         </div>
 
@@ -27,14 +27,14 @@
             </p>
         </div>
 
-        <p class="mt-4 sm:mt-5 text-xxs sm:text-sm text-gray-400 dark:text-gray-500">
+        <p class="mt-4 sm:mt-5 text-xxs sm:text-sm text-gray-500 dark:text-gray-400">
             {{ __('Trust Factor') }}: <span
                 class="font-bold {{ $shop->tf > 60 ? ($shop->tf > 80 ? 'text-green-500' : 'text-yellow-300') : 'text-red-600' }}">{{ $shop->tf }}</span>
         </p>
 
-        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-gray-400 dark:text-gray-500">
+        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-gray-500 dark:text-gray-400">
             {{ __('Number of offices') }}: <span
-                class="text-gray-600 dark:text-gray-400">{{ $shop->offices_count }}</span>
+                class="text-gray-700 dark:text-gray-300">{{ $shop->offices_count }}</span>
         </p>
     </div>
 

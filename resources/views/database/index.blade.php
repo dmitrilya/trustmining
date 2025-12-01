@@ -9,7 +9,7 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="#"
-                                class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                                class="text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
                                 <span itemprop="name">{{ __('Catalog of models') }}</span>
                             </a>
                         </div>
@@ -20,9 +20,9 @@
             <div class="relative z-0 sm:max-w-xs group mb-6 ml-auto">
                 <input type="text" id="asic-model_input" placeholder=" " @input="search = $el.value"
                     autocomplete="off" :value="search"
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                    class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-model_input"
-                    class="flex items-center absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="flex items-center absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -39,7 +39,7 @@
                         <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}"
                             alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
                         <h5
-                            class="font-semibold text-gray-500 dark:text-gray-400 text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200">
+                            class="font-semibold text-gray-600 dark:text-gray-300 text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200">
                             {{ $brand->name }}
                         </h5>
                     </a>
@@ -60,8 +60,8 @@
                         <img src="{{ Storage::url('public/coins/' . $algo->coins->first()->abbreviation . '.webp') }}"
                             alt="{{ $algo->coins->first()->abbreviation }}" class="w-4 sm:w-5 mr-2">
                         <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-gray-100"
-                            :class="{ 'text-indigo-500 dark:text-gray-100': algo ==
-                                '{{ $algo->name }}', 'text-gray-500 dark:text-gray-400': algo !=
+                            :class="{ 'text-indigo-500 dark:text-gray-50': algo ==
+                                '{{ $algo->name }}', 'text-gray-500 dark:text-gray-300': algo !=
                                     '{{ $algo->name }}' }">
                             {{ $algo->name }}
                         </h5>
@@ -72,9 +72,9 @@
             <div class="relative z-0 group ml-auto my-6">
                 <input type="text" id="asic-model_input" placeholder=" " @input="filter(algo, $el.value)"
                     autocomplete="off" :value="search"
-                    class="py-2.5 px-0 w-full max-w-56 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                    class="py-2.5 px-0 w-full max-w-56 text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-model_input"
-                    class="flex items-center absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="flex items-center absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -85,7 +85,7 @@
 
             <div
                 class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-gray-200 dark:border-zinc-700">
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200 col-span-2"
+                <div class="flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200 col-span-2"
                     @click="sort('name')">
                     {{ __('Model') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -94,7 +94,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('original_hashrate')">
                     {{ __('Hashrate') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -103,7 +103,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden sm:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="hidden sm:flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('power')">
                     {{ __('Power') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -112,7 +112,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden md:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="hidden md:flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('release')">
                     {{ __('Release') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -121,7 +121,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden lg:flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="hidden lg:flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('algorithm')">
                     {{ __('Algorithm') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -130,7 +130,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden xl:flex flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="hidden xl:flex flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('original_efficiency', false)">j/Th
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -138,7 +138,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-gray-500 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
+                <div class="flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200"
                     @click="sort('profit')">
                     {{ __('Profit') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -152,22 +152,22 @@
             <template x-for="model in models" :key="model.brand + '_' + model.name">
                 <a :href="'/database/' + model.brand + '/' + model.url_name"
                     class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
-                    <h5 class="font-semibold text-gray-500 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2"
+                    <h5 class="font-semibold text-gray-600 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2"
                         x-text="model.name">
                     </h5>
-                    <div class="text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
-                    <div class="hidden sm:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden sm:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
-                    <div class="hidden md:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden md:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="new Date(model.release).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
                     </div>
-                    <div class="hidden lg:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden lg:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="model.algorithm"></div>
-                    <div class="hidden xl:block text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden xl:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
                     </div>
-                    <div class="text-gray-500 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="model.profit + ' {{ __('USDT') }}'">
                     </div>
                     <div class="pl-1.5 sm:pl-2">

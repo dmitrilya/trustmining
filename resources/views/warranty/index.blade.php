@@ -1,7 +1,7 @@
 <x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
     description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Check warranty') }}
         </h2>
     </x-slot>
@@ -11,7 +11,7 @@
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Whatsminer</h3>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
@@ -46,7 +46,7 @@
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Bitmain</h3>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
@@ -81,7 +81,7 @@
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Canaan</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
@@ -93,7 +93,7 @@
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Iceriver</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
@@ -105,7 +105,7 @@
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-700 dark:text-gray-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Jasminer</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"

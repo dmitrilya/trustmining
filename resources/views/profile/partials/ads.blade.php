@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between">
-            <h2 class="w-full text-lg text-gray-900 dark:text-gray-100">
+            <h2 class="w-full text-lg text-gray-950 dark:text-gray-50">
                 {{ __('My advertisements') }}
             </h2>
 
@@ -15,48 +15,48 @@
         </div>
     </header>
 
-    <div class="text-gray-400 text-lg">
-        <span class="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
+    <div class="text-gray-500 text-lg">
+        <span class="text-gray-950 dark:text-gray-50 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
             {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
     @if (!$user->passport && (!$user->company || $user->company->moderation))
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-700 dark:text-gray-300">
             {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
         </p>
     @elseif (!$user->offices->count())
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-700 dark:text-gray-300">
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>
     @else
         <div>
             <div class="flex justify-between">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
                     {{ __('Active') }}
                 </p>
 
-                <p class="text-base text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-700 dark:text-gray-300">
                     {{ $user->ads->where('hidden', false)->where('moderation', false)->count() }}
                 </p>
             </div>
 
             <div class="flex justify-between mt-3">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
                     {{ __('Is under moderation') }}
                 </p>
 
-                <p class="text-base text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-700 dark:text-gray-300">
                     {{ $user->ads->where('moderation', true)->count() }}
                 </p>
             </div>
 
             <div class="flex justify-between mt-3">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
+                <p class="text-sm text-gray-700 dark:text-gray-300">
                     {{ __('Hidden') }}
                 </p>
 
-                <p class="text-base text-gray-600 dark:text-gray-400">
+                <p class="text-base text-gray-700 dark:text-gray-300">
                     {{ $user->ads->where('hidden', true)->count() }}
                 </p>
             </div>

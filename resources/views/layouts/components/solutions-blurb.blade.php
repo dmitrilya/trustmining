@@ -1,7 +1,7 @@
 <div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-zinc-950 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg">
     <div
         class="w-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mb-3 lg:mb-4">
-        <svg class="w-14 h-14 text-gray-300 dark:text-gray-800" width="24" height="24" fill="currentColor"
+        <svg class="w-14 h-14 text-gray-400 dark:text-gray-800" width="24" height="24" fill="currentColor"
             viewBox="0 0 24 24">
             <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z" clip-rule="evenodd" />
             <path fill-rule="evenodd"
@@ -12,9 +12,9 @@
 
     <div class="flex flex-col justify-between">
         <div>
-            <h6 class="text-xs xs:text-sm text-gray-800 dark:text-gray-200 font-bold">
+            <h6 class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold">
                 {{ __('Blurb') }}</h6>
-            <p class="text-xxs xs:text-xs text-gray-600 dark:text-gray-400 mt-2">
+            <p class="text-xxs xs:text-xs text-gray-700 dark:text-gray-300 mt-2">
                 {{ __('An ad for selling equipment can be placed here. It is always at the top and attracts the attention of the resource visitor') }}
             </p>
         </div>

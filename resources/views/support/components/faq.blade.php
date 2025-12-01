@@ -65,13 +65,13 @@
 
     <div id="accordion-flush-themes" data-accordion="collapse"
         class="pr-4 h-full divide-y-2 divide-gray-200 dark:divide-zinc-700 overflow-y-auto"
-        data-active-classes="bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-200"
-        data-inactive-classes="text-gray-500 dark:text-gray-400">
+        data-active-classes="bg-white dark:bg-zinc-900 text-gray-950 dark:text-gray-100"
+        data-inactive-classes="text-gray-600 dark:text-gray-300">
         @foreach ($themes as $theme => $faqs)
             <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                 <h2 id="accordion-flush-themes-heading-{{ $loop->index }}">
                     <button type="button"
-                        class="flex items-center justify-between w-full py-5 font-semibold text-left rtl:text-right text-gray-700 dark:text-gray-400 text-lg"
+                        class="flex items-center justify-between w-full py-5 font-semibold text-left rtl:text-right text-gray-800 dark:text-gray-300 text-lg"
                         data-accordion-target="#accordion-flush-themes-body-{{ $loop->index }}" aria-expanded="false"
                         aria-controls="accordion-flush-themes-body-{{ $loop->index }}">
                         <span>{{ __($theme) }}</span>
@@ -87,14 +87,14 @@
                     <div class="p-5 md:px-10">
                         <div id="accordion-flush-faqs-{{ $loop->index }}" data-accordion="collapse"
                             class="h-full divide-y-2 divide-gray-100 dark:divide-zinc-800 overflow-y-auto"
-                            data-active-classes="bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-200"
-                            data-inactive-classes="text-gray-500">
+                            data-active-classes="bg-white dark:bg-zinc-900 text-gray-950 dark:text-gray-100"
+                            data-inactive-classes="text-gray-600">
                             @foreach ($faqs as $faq)
                                 <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                                     <h2
                                         id="accordion-flush-faqs-heading-{{ $loop->parent->index }}-{{ $loop->index }}">
                                         <button type="button"
-                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-gray-500"
+                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-gray-600"
                                             data-accordion-target="#accordion-flush-faqs-body-{{ $loop->parent->index }}-{{ $loop->index }}"
                                             aria-expanded="false"
                                             aria-controls="accordion-flush-faqs-body-{{ $loop->parent->index }}-{{ $loop->index }}">
@@ -110,7 +110,7 @@
                                         class="hidden"
                                         aria-labelledby="accordion-flush-faqs-heading-{{ $loop->parent->index }}-{{ $loop->index }}">
                                         <div class="py-5">
-                                            <p class="text-gray-500">
+                                            <p class="text-gray-600">
                                                 {{ __($faq['a']) }}
                                             </p>
                                         </div>

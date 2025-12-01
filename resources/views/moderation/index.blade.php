@@ -1,12 +1,12 @@
 <x-app-layout title="Модерация">
     <x-slot name="header">
         <div class="flex items-center justify-end">
-            <p class="text-gray-900 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
+            <p class="text-gray-950 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">
@@ -80,16 +80,16 @@
                                 @endif
 
                                 <div class="w-full">
-                                    <p class="text-sm font-semibold leading-6 text-gray-900">
+                                    <p class="text-sm font-semibold leading-6 text-gray-950">
                                         {{ $moderation->moderationable->user->name }}
                                     </p>
 
                                     <div class="flex justify-between">
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-500">
+                                        <p class="mt-1 truncate text-xs leading-5 text-gray-600">
                                             {{ $moderationTypes[$moderation->moderationable_type] }}
                                         </p>
 
-                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-500"
+                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-600"
                                             data-date="{{ $moderation->created_at }}">
                                         </p>
                                     </div>

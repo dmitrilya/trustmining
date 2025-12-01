@@ -1,5 +1,5 @@
 <button type="button" data-key="justifyLeft" data-value=""
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-gray-200">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path
@@ -16,7 +16,7 @@
     </svg>
 </button>
 <button type="button" data-key="justifyCenter" data-value=""
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-gray-200">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path
@@ -33,7 +33,7 @@
     </svg>
 </button>
 <button type="button" data-key="justifyRight" data-value=""
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-gray-200">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path

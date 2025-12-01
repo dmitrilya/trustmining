@@ -11,7 +11,7 @@
 <x-app-layout :title="$title">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 @if ($serviceFilter)
                     {{ __('Repair services') }}
                 @elseif ($cryptoexchangerFilter)

@@ -1,5 +1,5 @@
 <button type="button"
-    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-gray-200"
+    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100"
     data-toggle="modal" data-target="#format_add-img">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 16 16" version="1.1">
         <g>
@@ -9,7 +9,7 @@
     </svg>
 </button>
 
-<button type="button" class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-700 dark:text-gray-200" data-toggle="modal"
+<button type="button" class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100" data-toggle="modal"
     data-target="#format_add-video">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 16 16" version="1.1">
         <g>

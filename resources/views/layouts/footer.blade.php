@@ -8,7 +8,7 @@
             <button
                 :class="{
                     'bg-primary-gradient text-white': theme == 'light',
-                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': theme !=
+                    'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=
                         'light'
                 }"
                 class="p-1.5 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
@@ -27,7 +27,7 @@
             <button
                 :class="{
                     'bg-primary-gradient text-white': theme == 'dark',
-                    'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200': theme !=
+                    'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=
                         'dark'
                 }"
                 class="p-1.5 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
@@ -47,64 +47,64 @@
 
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
-                <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the buyer') }}</div>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <div class="text-sm text-gray-500 dark:text-gray-500 font-semibold">{{ __('To the buyer') }}</div>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('companies') }}">{{ __('Companies') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'miners']) }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('services') }}">{{ __('Services') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'legals']) }}">{{ __('Legals') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'containers']) }}">{{ __('Containers') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}">{{ __('Cryptoboilers') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
             </div>
 
             <div class="space-y-2">
-                <div class="text-sm text-gray-400 dark:text-gray-600 font-semibold">{{ __('To the seller') }}</div>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <div class="text-sm text-gray-500 dark:text-gray-500 font-semibold">{{ __('To the seller') }}</div>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('support', ['chat' => 1]) }}">{{ __('Write to support') }}</a>
-                {{-- <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('roadmap') }}">Roadmap</a> --}}
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50" href="{{ route('roadmap') }}">Roadmap</a> --}}
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100" href="{{ route('support') }}">FAQ</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50" href="{{ route('support') }}">FAQ</a>
             </div>
 
             <div class="space-y-2">
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('articles') }}">{{ __('Blog') }}</a>
-                {{-- <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
-                <a class="w-max under text-sm text-gray-800 dark:text-gray-100"
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
             </div>
         </div>
 
         <div>
-            <div class="text-sm text-gray-500">ИП Дмитриева Елизавета Николаевна</div>
-            <div class="text-sm text-gray-500">ОГРНИП: 325385000082654</div>
+            <div class="text-sm text-gray-600">ИП Дмитриева Елизавета Николаевна</div>
+            <div class="text-sm text-gray-600">ОГРНИП: 325385000082654</div>
         </div>
-        <div class="text-xs text-gray-400" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
+        <div class="text-xs text-gray-500" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
             {{ __('This is not a public offer.') }}</div>
     </div>
 </footer>

@@ -1,6 +1,6 @@
 <x-app-layout title="Майнинг отель: редактировать объявление о хостинге">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Placement data') }}
         </h2>
     </x-slot>
@@ -17,7 +17,7 @@
                     <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
                         accept=".png,.jpg,.jpeg" multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-500" id="images_help">
+                    <p class="mt-1 text-sm text-gray-600" id="images_help">
                         {{ __('When you upload new files, all old ones are deleted') }}</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
@@ -31,9 +31,9 @@
                             value="{{ __($hosting->address) }}"
                             @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
                             autocomplete="off"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                            class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
-                            class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
                         <x-input-error :messages="$errors->get('address')" />
@@ -63,7 +63,7 @@
                 <div>
                     <x-input-label for="description" :value="__('Description')" />
                     <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-900 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
+                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
                         required maxlength="1500">{{ $hosting->description }}</textarea>
                     <x-input-error :messages="$errors->get('description')" />
                 </div>
@@ -72,7 +72,7 @@
                     <x-input-label for="hosting-contract" :value="__('Agreement for the provision of accommodation services')" />
                     <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
                         autocomplete="contract" accept=".doc,.docx" :value="old('contract')" />
-                    <p class="mt-1 text-sm text-gray-500" id="contract_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-gray-600" id="contract_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('contract')" />
                 </div>
 
@@ -80,7 +80,7 @@
                     <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
                     <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
                         autocomplete="territory" accept=".doc,.docx" :value="old('territory')" />
-                    <p class="mt-1 text-sm text-gray-500" id="territory_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-gray-600" id="territory_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('territory')" />
                 </div>
 
@@ -88,7 +88,7 @@
                     <x-input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
                     <x-file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
                         autocomplete="energy_supply" accept=".doc,.docx" :value="old('energy_supply')" />
-                    <p class="mt-1 text-sm text-gray-500" id="energy_supply_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-gray-600" id="energy_supply_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('energy_supply')" />
                 </div>
 
@@ -113,7 +113,7 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg text-gray-900 dark:text-gray-100">
+                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
                         {{ __('Are you sure you want to delete this hosting?') }}
                     </h2>
 

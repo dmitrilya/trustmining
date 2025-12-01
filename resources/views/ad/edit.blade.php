@@ -1,6 +1,6 @@
 <x-app-layout title="Редактировать объявление о продаже оборудования для майнинга">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Editing an advertisement') }}
         </h2>
     </x-slot>
@@ -21,7 +21,7 @@
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
                         accept=".png,.jpg,.jpeg"
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB)</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
@@ -55,7 +55,7 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg text-gray-900 dark:text-gray-100">
+                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
                         {{ __('Are you sure you want to delete this ad?') }}
                     </h2>
 

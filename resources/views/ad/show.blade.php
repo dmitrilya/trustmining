@@ -10,7 +10,7 @@
         $ad->user->name
     : $ad->adCategory->title">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             #{{ $ad->id }}
         </h2>
     </x-slot>
@@ -46,13 +46,13 @@
                         class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
                             <h1
-                                class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @endif
 
                         <p
-                            class="mt-5 text-2xl font-semibold text-gray-900 dark:text-gray-100{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }}
                             {{ $ad->coin->abbreviation }}</p>
 
@@ -76,10 +76,10 @@
                             <div class="my-5">
                                 <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                     @foreach ($props as $prop => $value)
-                                        <li class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+                                        <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
                                             {{ __($prop) . ': ' }}@if (!is_array($value))
                                                 <span
-                                                    class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                                    class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
                                             @else
                                                 <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                                     @foreach ($value as $item)
@@ -103,12 +103,12 @@
 
                     <div class="mt-8 md:col-span-12">
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">
+                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
                                 {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
                                 </p>
                             </div>
@@ -147,7 +147,7 @@
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <h1
-                                class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @endif
@@ -163,7 +163,7 @@
                         </div>
                     </div>
 
-                    <p class="mt-5 text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ $ad->price }}
+                    <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">{{ $ad->price }}
                         {{ $ad->coin->abbreviation }}</p>
 
                     <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
@@ -182,9 +182,9 @@
                         <div class="my-5">
                             <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                 @foreach ($ad->props as $prop => $value)
-                                    <li class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+                                    <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
                                         {{ __($prop) . ': ' }}@if (!is_array($value))
-                                            <span class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                                            <span class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
                                         @else
                                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                                 @foreach ($value as $item)
@@ -211,10 +211,10 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
                                         </svg>
-                                        <p class="text-sm text-gray-400">
+                                        <p class="text-sm text-gray-500">
                                             {{ __('The ad did not pass moderation for the following reason:') }}</p>
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-800 dark:text-gray-300">{{ $lastM->comment }}</p>
+                                    <p class="mt-2 text-sm text-gray-900 dark:text-gray-200">{{ $lastM->comment }}</p>
                                 @endif
 
                                 <a class="block mt-6" href="{{ route('ad.edit', ['ad' => $ad->id]) }}">
@@ -303,11 +303,11 @@
                 <div class="mt-8 md:col-span-12">
                     <div>
                         @if ($ad->description || ($ad->adcategory->name == 'miners' && $ad->asicVersion->asicModel->description))
-                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200">
+                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
                                 {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
-                                <p class="whitespace-pre text-sm sm:text-base text-gray-900 dark:text-gray-200">
+                                <p class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">
                                     {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
                                 </p>
                             </div>

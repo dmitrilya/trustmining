@@ -36,7 +36,7 @@
 
         <div class="mt-2 md:mt-3 flex items-start justify-between">
             @if ($ad->adCategory->name == 'miners')
-                <div class="text-xs xs:text-sm md:text-base text-gray-900 dark:text-gray-100 font-bold">
+                <div class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
                     {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                 </div>
             @endif
@@ -54,15 +54,15 @@
         <a href="{{ route('company', ['user' => $ad->user->url_name]) }}"
             class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user->name }}</a>
 
-        <p class="my-1 md:my-2 text-xxs sm:text-xs md:text-sm text-gray-400">
+        <p class="my-1 md:my-2 text-xxs sm:text-xs md:text-sm text-gray-500">
             {{ __('Trust Factor') }}: <span
                 class="font-bold {{ $ad->user->tf > 60 ? ($ad->user->tf > 80 ? 'text-green-500' : 'text-yellow-300') : 'text-red-600' }}">{{ $ad->user->tf }}</span>
         </p>
 
         @foreach ($ad->props as $prop => $value)
-            <p class="text-xxs sm:text-xs md:text-sm text-gray-400 dark:text-gray-500">
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
                 {{ __($prop) . ': ' }}@if (!is_array($value))
-                    <span class="text-gray-600 dark:text-gray-400">{{ __($value) }}</span>
+                    <span class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
                 @else
                     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                         @foreach ($value as $item)
@@ -78,7 +78,7 @@
     </div>
 
     <div class="mt-2 md:mt-3">
-        <div class="text-gray-900 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price }} <span
+        <div class="text-gray-950 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price }} <span
                 class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span></div>
 
         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"

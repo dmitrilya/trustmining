@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight ml-3">
+            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ $review->id }}
             </h2>
         </div>
@@ -15,11 +15,11 @@
                 <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-8 duration-100">
                     <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">
                         <div class="flex justify-between mb-3">
-                            <div class="text-base font-semibold text-gray-900">
+                            <div class="text-base font-semibold text-gray-950">
                                 {{ $review->user->name }}
                             </div>
 
-                            <span class="date-transform text-xs font-normal text-gray-500"
+                            <span class="date-transform text-xs font-normal text-gray-600"
                                 data-date="{{ $review->created_at }}"></span>
                         </div>
 
@@ -29,7 +29,7 @@
                             <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}</p>
                         @endif
 
-                        <p class="text-sm font-normal text-gray-500 whitespace-pre-line mt-3 md:mt-5">
+                        <p class="text-sm font-normal text-gray-600 whitespace-pre-line mt-3 md:mt-5">
                             {{ $review->review }}</p>
                     </div>
 

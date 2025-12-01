@@ -11,7 +11,7 @@
                 <path
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
             </svg>
-            <div class="text-sm text-gray-400">{{ __('Possibility to sort ads by price') }}</div>
+            <div class="text-sm text-gray-500">{{ __('Possibility to sort ads by price') }}</div>
         </div>
         <div class="flex items-center">
             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -19,7 +19,7 @@
                 <path
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
             </svg>
-            <div class="text-sm text-gray-400">{{ __('Price change alerts') }}</div>
+            <div class="text-sm text-gray-500">{{ __('Price change alerts') }}</div>
         </div>
         <div class="flex items-center">
             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -27,7 +27,7 @@
                 <path
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
             </svg>
-            <div class="text-sm text-gray-400">{{ __('Viewing errors or deficiencies in contracts') }}</div>
+            <div class="text-sm text-gray-500">{{ __('Viewing errors or deficiencies in contracts') }}</div>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
             <div class="mt-4 md:mt-6 lg:mt-8 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">
                 <div class="text-white font-semibold text-lg sm:text-xl md:text-3xl lg:text-4xl mb-2 sm:mb-4 lg:mb-6">
                     {{ __('Pricing plans for teams of all sizes') }}</div>
-                <div class="max-w-3xl mx-auto text-gray-300 sm:text-lg lg:text-xl">
+                <div class="max-w-3xl mx-auto text-gray-400 sm:text-lg lg:text-xl">
                     {{ __('Choose a tariff plan according to your company request. For all questions, please contact support') }}
                 </div>
             </div>

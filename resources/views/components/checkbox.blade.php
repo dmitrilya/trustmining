@@ -4,7 +4,7 @@
     'name',
     'value',
     'checked' => false,
-    'textClasses' => 'text-gray-700 dark:text-gray-300',
+    'textClasses' => 'text-gray-700 dark:text-gray-200',
 ])
 
 <div class="{{ $class }}">

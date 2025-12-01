@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight ml-3">
+            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Placement data') }}
             </h2>
         </div>
@@ -26,8 +26,8 @@
 
                     <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
                         <h1
-                            class="flex items-center text-sm font-bold tracking-tight text-gray-900 dark:text-gray-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true"
+                            class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -38,7 +38,7 @@
                         </h1>
 
                         <p
-                            class="text-lg sm:text-3xl tracking-tight text-gray-900 dark:text-gray-100{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="text-lg sm:text-3xl tracking-tight text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $hosting->price }} ₽</p>
 
                         <x-peculiarities
@@ -48,7 +48,7 @@
                                 : $hosting->peculiarities" model="hosting"></x-peculiarities>
 
                         <div>
-                            <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
+                            <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Conditions') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['conditions']) ? ' border border-indigo-500' : '' }}">
@@ -59,17 +59,17 @@
                                 @endphp
 
                                 @if (!count($c))
-                                    <li class="text-gray-400">{{ __('Not specified') }}</li>
+                                    <li class="text-gray-500">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($c as $condition)
-                                        <li class="text-gray-400">{{ $condition }}</li>
+                                        <li class="text-gray-500">{{ $condition }}</li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
 
                         <div>
-                            <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Additional costs') }}</h3>
+                            <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Additional costs') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['expenses']) ? ' border border-indigo-500' : '' }}">
@@ -80,10 +80,10 @@
                                 @endphp
 
                                 @if (!count($e))
-                                    <li class="text-gray-400 dark:text-gray-500">{{ __('Not specified') }}</li>
+                                    <li class="text-gray-500 dark:text-gray-400">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($e as $expense)
-                                        <li class="text-gray-400 dark:text-gray-500">{{ $expense }}</li>
+                                        <li class="text-gray-500 dark:text-gray-400">{{ $expense }}</li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -140,11 +140,11 @@
                         @endif
 
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-8">{{ __('Description') }}</h3>
+                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
 
                             <div class="mt-5">
                                 <p
-                                    class="text-gray-700 dark:text-gray-400 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description }}
                                 </p>
                             </div>
@@ -162,8 +162,8 @@
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
                     <h1
-                        class="flex items-center text-sm font-bold tracking-tight text-gray-900 dark:text-gray-200 xs:text-base sm:text-lg">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mr-2" aria-hidden="true"
+                        class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -173,33 +173,33 @@
                         {{ __($hosting->address) }}
                     </h1>
 
-                    <p class="text-3xl tracking-tight text-gray-900 dark:text-gray-100">{{ $hosting->price }} ₽</p>
+                    <p class="text-3xl tracking-tight text-gray-950 dark:text-gray-50">{{ $hosting->price }} ₽</p>
 
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
 
                     <div>
-                        <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
+                        <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Conditions') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->conditions))
-                                <li class="text-gray-400">{{ __('Not specified') }}</li>
+                                <li class="text-gray-500">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->conditions as $condition)
-                                    <li class="text-gray-400">{{ $condition }}</li>
+                                    <li class="text-gray-500">{{ $condition }}</li>
                                 @endforeach
                             @endif
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-sm text-gray-900 mb-2">{{ __('Additional costs') }}</h3>
+                        <h3 class="text-sm text-gray-950 mb-2">{{ __('Additional costs') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->expenses))
-                                <li class="text-gray-400 dark:text-gray-500">{{ __('Not specified') }}</li>
+                                <li class="text-gray-500 dark:text-gray-400">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->expenses as $expense)
-                                    <li class="text-gray-400 dark:text-gray-500">{{ $expense }}</li>
+                                    <li class="text-gray-500 dark:text-gray-400">{{ $expense }}</li>
                                 @endforeach
                             @endif
                         </ul>
@@ -260,39 +260,39 @@
 
                             <template x-if="done">
                                 <div>
-                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-gray-500 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-gray-600 font-bold">
                                         {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[0].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark:text-gray-400">
+                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[0]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark:text-gray-400"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-500 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-600 font-bold">
                                         {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[1].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark:text-gray-400">
+                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[1]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark:text-gray-400"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-500 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-600 font-bold">
                                         {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[2].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-600 dark:text-gray-400">
+                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[2]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-600 dark:text-gray-400"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
                                 </div>
@@ -309,10 +309,10 @@
                     @endif
 
                     <div>
-                        <h3 class="font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-8">{{ __('Description') }}</h3>
+                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
 
                         <div class="mt-5">
-                            <p class="text-gray-700 dark:text-gray-400 text-sm whitespace-pre-line">{{ $hosting->description }}</p>
+                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">{{ $hosting->description }}</p>
                         </div>
                     </div>
                 </div>

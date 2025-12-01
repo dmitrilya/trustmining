@@ -92,14 +92,14 @@
             <x-modal name="need-subscription">
                 <div class="p-6">
                     <div class="flex justify-between mb-6">
-                        <h2 class="text-lg text-gray-900 dark:text-gray-100">
+                        <h2 class="text-lg text-gray-950 dark:text-gray-50">
                             {{ __('This feature is only available with a subscription') }}
                         </h2>
 
-                        <button type="button"
-                            class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-400"
+                        <button type="button" aria-label="{{ __('Close') }}"
+                            class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-500"
                             @click="show = false">
-                            <span class="sr-only">Close menu</span>
+                            <span class="sr-only">Close</span>
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -116,14 +116,14 @@
                     <x-modal name="tg-auth">
                         <div class="p-6">
                             <div class="flex justify-between mb-6">
-                                <h2 class="text-lg text-gray-900 dark:text-gray-100">
+                                <h2 class="text-lg text-gray-950 dark:text-gray-50">
                                     {{ __('Telegram authorization') }}
                                 </h2>
 
-                                <button type="button"
-                                    class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-400"
+                                <button type="button" aria-label="{{ __('Close') }}"
+                                    class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-500"
                                     @click="show = false">
-                                    <span class="sr-only">Close menu</span>
+                                    <span class="sr-only">Close</span>
                                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                         stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -131,7 +131,7 @@
                                 </button>
                             </div>
 
-                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 mb-5">
+                            <p class="mt-1 text-sm text-gray-700 dark:text-gray-300 mb-5">
                                 {{ __('You can log in using Telegram to receive notifications from our bot') }}
                             </p>
 
@@ -140,7 +140,7 @@
                             </script>
 
                             <div class="flex items-center justify-between mt-6">
-                                <x-checkbox name="dont_ask" value="true" textClasses="text-gray-400 text-xxs py-3">
+                                <x-checkbox name="dont_ask" value="true" textClasses="text-gray-500 text-xxs py-3">
                                     {{ __("Don't ask again") }}
                                 </x-checkbox>
 

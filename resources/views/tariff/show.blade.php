@@ -5,7 +5,7 @@
                 <div
                     class="text-white font-semibold text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl mb-2 sm:mb-4 lg:mb-6">
                     {{ __('Pricing plans for teams of all sizes') }}</div>
-                <div class="max-w-2xl mx-auto text-gray-300 sm:text-lg lg:text-xl xl:text-2xl">
+                <div class="max-w-2xl mx-auto text-gray-400 sm:text-lg lg:text-xl xl:text-2xl">
                     {{ __('Choose a tariff plan according to your company request. For all questions, please contact support') }}
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-400">{{ __('Possibility to sort ads by price') }}</div>
+                            <div class="text-sm text-gray-500">{{ __('Possibility to sort ads by price') }}</div>
                         </div>
                         <div class="flex items-center">
                             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -49,7 +49,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-400">{{ __('Price change alerts') }}</div>
+                            <div class="text-sm text-gray-500">{{ __('Price change alerts') }}</div>
                         </div>
                         <div class="flex items-center">
                             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -57,7 +57,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-400">{{ __('Viewing errors or deficiencies in contracts') }}
+                            <div class="text-sm text-gray-500">{{ __('Viewing errors or deficiencies in contracts') }}
                             </div>
                         </div>
                     @else
@@ -67,8 +67,8 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500"><span
-                                    class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
+                            <div class="text-sm text-gray-600"><span
+                                    class="text-gray-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
                                 {{ __('of ads') }}</div>
                         </div>
                         <div class="flex items-center">
@@ -77,8 +77,8 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500"><span
-                                    class="text-gray-900 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
+                            <div class="text-sm text-gray-600"><span
+                                    class="text-gray-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
                                 {{ __('of offices') }}</div>
                         </div>
                     @endif
@@ -89,7 +89,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Hosting adding') }}</div>
+                            <div class="text-sm text-gray-600">{{ __('Hosting adding') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_have_phone)
@@ -99,7 +99,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
+                            <div class="text-sm text-gray-600">{{ __('Phone number') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_create_guide)
@@ -109,7 +109,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Guide creating') }}</div>
+                            <div class="text-sm text-gray-600">{{ __('Guide creating') }}</div>
                         </div>
                     @endif
                     @if ($tariff->priority_moderation)
@@ -119,7 +119,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Priority moderation') }}</div>
+                            <div class="text-sm text-gray-600">{{ __('Priority moderation') }}</div>
                         </div>
                     @endif
                 </div>
@@ -129,7 +129,7 @@
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-3xl p-4 sm:p-8 md:p-12">
-            <div class="text-center text-gray-900 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
+            <div class="text-center text-gray-950 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
                 {{ __('Pay the tariff') }}</div>
 
             <form method="post" action="{{ route('order.store') }}" class="space-y-4 sm:space-y-6">
@@ -144,7 +144,7 @@
                             checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -257,7 +257,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -276,7 +276,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

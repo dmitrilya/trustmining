@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between items-center">
-            <h2 class="text-lg text-gray-900 dark:text-gray-100">
+            <h2 class="text-lg text-gray-950 dark:text-gray-50">
                 {{ __('Offices') }}
             </h2>
 
@@ -15,38 +15,38 @@
         </div>
     </header>
 
-    <div class="text-gray-400 text-lg">
-        <span class="text-gray-900 dark:text-gray-100 text-xl sm:text-2xl font-bold">{{ $user->offices->count() }} /
+    <div class="text-gray-500 text-lg">
+        <span class="text-gray-950 dark:text-gray-50 text-xl sm:text-2xl font-bold">{{ $user->offices->count() }} /
             {{ $user->tariff ? $user->tariff->max_offices : 1 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
     @if (!$user->passport && (!$user->company || $user->company->moderation))
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-700 dark:text-gray-300">
             {{ __('Please verify your identity using your passport or register a company to add offices.') }}
         </p>
     @elseif ($user->offices->count())
         <div class="flex justify-between">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-gray-700 dark:text-gray-300">
                 {{ __('Active') }}
             </p>
 
-            <p class="text-base text-gray-600 dark:text-gray-400">
+            <p class="text-base text-gray-700 dark:text-gray-300">
                 {{ $user->offices->where('moderation', false)->count() }}
             </p>
         </div>
 
         <div class="flex justify-between">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-sm text-gray-700 dark:text-gray-300">
                 {{ __('Is under moderation') }}
             </p>
 
-            <p class="text-base text-gray-600 dark:text-gray-400">
+            <p class="text-base text-gray-700 dark:text-gray-300">
                 {{ $user->offices->where('moderation', true)->count() }}
             </p>
         </div>
     @else
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-700 dark:text-gray-300">
             {{ __('Add information about open offices and points of sale.') }}
         </p>
     @endif

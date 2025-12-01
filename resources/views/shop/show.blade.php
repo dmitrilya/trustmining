@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mr-auto w-full max-w-max">
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mr-4">
+                <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight mr-4">
                     {{ $user->name }}
                 </h2>
             </div>
@@ -37,11 +37,11 @@
                                 {{ __('Price: High to Low') }}
                             </x-dropdown-link>
                         @else
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                 {{ __('Price: Low to High') }}
                             </div>
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                 {{ __('Price: High to Low') }}
                             </div>
@@ -69,9 +69,9 @@
                     }">
                     <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-gray-100"
                         :class="{
-                            'text-indigo-500 dark:text-gray-100': ad_category_id ==
+                            'text-indigo-500 dark:text-gray-50': ad_category_id ==
                                 '{{ $adCategory->id }}',
-                            'text-gray-500 dark:text-gray-400': ad_category_id !=
+                            'text-gray-500 dark:text-gray-300': ad_category_id !=
                                 '{{ $adCategory->id }}'
                         }">
                         {{ __($adCategory->header) }}

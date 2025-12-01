@@ -1,6 +1,6 @@
 <x-app-layout title="Создать объявление о продаже оборудования для майнинга">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Creating an advertisement') }}
         </h2>
     </x-slot>
@@ -24,7 +24,7 @@
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
                         required accept=".png,.jpg,.jpeg"
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>

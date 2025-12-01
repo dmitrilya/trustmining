@@ -2,7 +2,7 @@
 
 <div x-data="{ open: false }">
     <button @click="open = ! open"
-        class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm text-center text-gray-900 bg-white rounded-md hover:bg-gray-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700">
+        class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm text-center text-gray-950 bg-white rounded-md hover:bg-gray-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700">
         <svg class="w-4 xs:w-5 h-4 xs:h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
             <path
                 d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
@@ -11,7 +11,7 @@
 
     <div x-show="open" @mouseleave="open = false" style="display: none"
         class="z-100 -right-0.5 bottom-[44px] absolute bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:shadow-zinc-800 border-2 border-gray-100 dark:border-zinc-700 min-w-32 w-full max-w-44 dark:bg-zinc-800 dark:divide-zinc-700">
-        <ul class="py-2 text-xs sm:text-sm text-gray-700 dark:text-gray-200" aria-labelledby="ad-options-trigger">
+        <ul class="py-2 text-xs sm:text-sm text-gray-800 dark:text-gray-100" aria-labelledby="ad-options-trigger">
             @if ($owner)
                 <li>
                     <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"

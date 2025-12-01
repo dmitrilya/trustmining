@@ -45,15 +45,15 @@ window.messagesChannelEvent = function (e) {
                 </div>
 
                 <div class="flex">
-                    <p class="w-full text-xs font-semibold text-gray-900 dark:text-gray-200">${e.from}</p>
+                    <p class="w-full text-xs font-semibold text-gray-950 dark:text-gray-100">${e.from}</p>
 
                     <div class="min-w-fit text-right ml-2">
-                        <p class="text-xxs text-gray-900 dark:text-gray-200">${e.from_status}</p>
-                        <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-500">${date}</p>
+                        <p class="text-xxs text-gray-950 dark:text-gray-100">${e.from_status}</p>
+                        <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-gray-600">${date}</p>
                     </div>
                 </div>
 
-                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-500 message">${e.message ? e.message : 'Files'}</p>
+                <p class="mt-1 xs:mt-2 truncate text-xs leading-5 text-gray-600 message">${e.message ? e.message : 'Files'}</p>
             </li>
         </a>
     `);
@@ -67,10 +67,10 @@ window.messagesChannelEvent = function (e) {
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="text-xs font-normal text-gray-500">${date}</span>
+                <span class="text-xs font-normal text-gray-600">${date}</span>
             </div>
 
-            <p class="text-sm font-normal text-gray-900 dark:text-gray-100 whitespace-pre-line">${e.message}</p>
+            <p class="text-sm font-normal text-gray-950 dark:text-gray-50 whitespace-pre-line">${e.message}</p>
             </div>
         </div>`;
 
@@ -78,7 +78,7 @@ window.messagesChannelEvent = function (e) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-500">${date}</span>
+                    <span class="text-xs font-normal text-gray-600">${date}</span>
                 </div>
                 <div class="grid gap-2 ${e.images.length > 1 ? e.images.length > 4 ? 'grid-cols-3' : 'grid-cols-2' : 'grid-cols-1'}">`;
 
@@ -93,7 +93,7 @@ window.messagesChannelEvent = function (e) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-500">${date}</span>
+                    <span class="text-xs font-normal text-gray-600">${date}</span>
                 </div>
                 <div class="space-y-2">`;
 
@@ -101,7 +101,7 @@ window.messagesChannelEvent = function (e) {
                 messageElement = messageElement + `<div class="bg-gray-100 dark:bg-zinc-800 p-3 rounded-lg">
                     <div class="flex items-center">
                         <div class="rounded-md overflow-hidden min-w-14 w-14 h-14 mr-4 bg-white dark:bg-zinc-950 flex items-center justify-center">
-                            <svg class="w-7 h-7 text-gray-500 aria-hidden="true" fill="none" viewBox="0 0 16 20">
+                            <svg class="w-7 h-7 text-gray-600 aria-hidden="true" fill="none" viewBox="0 0 16 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M1 17V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M5 15V1m8 18v-4">
                                 </path>
@@ -109,10 +109,10 @@ window.messagesChannelEvent = function (e) {
                         </div>
 
                         <div>
-                            <div class="text-gray-900 dark:text-gray-200 font-semibold mb-1">${file.name}</div>
+                            <div class="text-gray-950 dark:text-gray-100 font-semibold mb-1">${file.name}</div>
 
                             <div class="flex">
-                                <a class="hover:underline text-gray-500" download href="/storage/${file.path}">
+                                <a class="hover:underline text-gray-600" download href="/storage/${file.path}">
                                     Download
                                 </a>
                             </div>

@@ -20,11 +20,11 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="{{ route('database') }}"
-                                class="sm:mr-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
                                 <span itemprop="name">{{ __('Catalog of models') }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-300">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -34,11 +34,11 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
-                                class="sm:mr-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
                                 <span itemprop="name">{{ $brand->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-300">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -46,7 +46,7 @@
                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
                         <meta itemprop="position" content="3" />
                         <a itemprop="item" href="#" aria-current="page"
-                            class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
                             <span itemprop="name">{{ $model->name }}</span>
                         </a>
                     </li>
@@ -60,7 +60,7 @@
                 <div class="md:col-span-2 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
                     <meta itemprop="brand" content="{{ $brand->name }}" />
                     <h1 itemprop="name"
-                        class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-2xl md:text-3xl">
+                        class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
                 </div>
 
@@ -140,19 +140,19 @@
 
                 <div
                     class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
-                    <div class="text-sm text-gray-400" itemprop="additionalProperty" itemscope
+                    <div class="text-sm text-gray-500" itemprop="additionalProperty" itemscope
                         itemtype="http://schema.org/PropertyValue"><span itemprop="name">{{ __('Algorithm') }}:
-                        </span><span class="text-gray-600" itemprop="value">
+                        </span><span class="text-gray-700" itemprop="value">
                             {{ $algorithm->name }}</span></div>
 
-                    <div class="text-sm text-gray-400">{{ __('Release date') }}: <span class="text-gray-600">
+                    <div class="text-sm text-gray-500">{{ __('Release date') }}: <span class="text-gray-700">
                             <time itemprop="releaseDate"
                                 datetime="{{ $model->release }}">{{ $model->release->locale('ru')->translatedFormat('F Y') }}</time></span>
                     </div>
 
                     <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
-                            class="text-xs sm:text-sm text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-zinc-800">
+                            class="text-xs sm:text-sm text-center text-gray-600 border-b border-gray-200 dark:text-gray-300 dark:border-zinc-800">
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="me-2">
@@ -190,33 +190,33 @@
                                 </div>
 
                                 <div itemprop="hasMeasurement" itemscope
-                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-400 mt-6">
+                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-500 mt-6">
                                     <span itemprop="valueReference">{{ __('Efficiency') }}</span>:
-                                    <span itemprop="value" class="text-gray-600">{{ $version->efficiency }}</span>
+                                    <span itemprop="value" class="text-gray-700">{{ $version->efficiency }}</span>
                                     <span itemprop="unitText">j/{{ $version->measurement }}</span>
                                 </div>
 
                                 <div itemprop="hasMeasurement" itemscope
                                     itemtype="http://schema.org/QuantitativeValue"
-                                    class="text-sm text-gray-400 mt-1 sm:mt-2"><span
+                                    class="text-sm text-gray-500 mt-1 sm:mt-2"><span
                                         itemprop="valueReference">{{ __('Power') }}</span>:
-                                    <span class="text-gray-600"
+                                    <span class="text-gray-700"
                                         itemprop="value">{{ $version->efficiency * $version->hashrate }}</span>
                                     <span itemprop="unitCode">W</span>
                                 </div>
 
                                 @if ($minPrice)
-                                    <div class="text-sm text-gray-400 mt-6">{{ __('The best price') }}:
+                                    <div class="text-sm text-gray-500 mt-6">{{ __('The best price') }}:
                                         @if ($hasTariff)
                                             <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"
-                                                class="text-gray-600">
+                                                class="text-gray-700">
                                                 {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
                                                 <meta itemprop="bestPrice" content="{{ $minPrice->price }}" />
                                                 <meta itemprop="priceCurrency"
                                                     content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
                                             </span>
                                         @else
-                                            <span class="text-gray-600 blur-sm"
+                                            <span class="text-gray-700 blur-sm"
                                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                                 {{ __('Subscription') }}
                                             </span>
@@ -275,7 +275,7 @@
                         @endforeach
                     </div>
 
-                    <h3 class="text-sm text-gray-900 mt-8 mb-3">{{ __('Coins') }}</h3>
+                    <h3 class="text-sm text-gray-950 mt-8 mb-3">{{ __('Coins') }}</h3>
 
                     <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         @foreach ($algorithm->coins as $coin)
@@ -283,14 +283,14 @@
                                 <img alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2"
                                     src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
                                 <div>
-                                    <div class="text-xs sm:text-sm text-gray-500 mr-3">
+                                    <div class="text-xs sm:text-sm text-gray-600 mr-3">
                                         {{ $coin->abbreviation }}
                                     </div>
-                                    <div class="text-xxs sm:text-xs text-gray-300 mr-3">
+                                    <div class="text-xxs sm:text-xs text-gray-400 mr-3">
                                         {{ $coin->name }}
                                     </div>
                                 </div>
-                                {{-- <div class="text-sm text-gray-600">
+                                {{-- <div class="text-sm text-gray-700">
                                     {{ number_format($version->hashrate * $coin->profit, 8) }}
                                 </div> --}}
                             </div>
@@ -302,19 +302,19 @@
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 
-                        <p class="text-sm sm:text-base text-gray-900">{{ $model->description }}</p>
+                        <p class="text-sm sm:text-base text-gray-950">{{ $model->description }}</p>
                     </div>
 
                     <div class="mt-6 sm:mt-8 md:mt-10">
-                        <h3 class="text-sm text-gray-900">Характеристики</h3>
+                        <h3 class="text-sm text-gray-950">Характеристики</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm mt-4">
-                            <li class="text-gray-400">Алгоритм: <span class="text-gray-600">
+                            <li class="text-gray-500">Алгоритм: <span class="text-gray-700">
                                     {{ $model->algorithm->name }}</span></li>
-                            <li class="text-gray-400">Размер: <span class="text-gray-600">
+                            <li class="text-gray-500">Размер: <span class="text-gray-700">
                                     {{ $model->width }}см X {{ $model->length }}см X
                                     {{ $model->height }}см</span></li>
-                            <li class="text-gray-400">Вес: <span class="text-gray-600">
+                            <li class="text-gray-500">Вес: <span class="text-gray-700">
                                     {{ $model->weight }}кг</span></li>
                         </ul>
                     </div> --}}

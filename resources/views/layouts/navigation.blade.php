@@ -12,12 +12,12 @@
                 <div class="w-full hidden space-x-4 xl:space-x-8 -my-px ml-10 lg:flex items-center">
                     @include('layouts.components.ads', [
                         'classes' =>
-                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
+                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
                     @include('layouts.components.solutions', [
                         'classes' =>
-                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
+                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
                     <x-nav-link :href="route('support')">
@@ -34,7 +34,10 @@
                 @auth
                     @php
                         $auth = Auth::user();
-                        $uncheckedMessagesCount = App\Models\Chat\Message::whereIn('chat_id', $auth->chats()->pluck('id'))
+                        $uncheckedMessagesCount = App\Models\Chat\Message::whereIn(
+                            'chat_id',
+                            $auth->chats()->pluck('id'),
+                        )
                             ->where('user_id', '!=', $auth->id)
                             ->where('checked', false)
                             ->count();
@@ -48,8 +51,8 @@
                         ->get()"></x-notifications></div>
 
                     <div class="mr-5 w-5 h-5">
-                        <a
-                            href="{{ route('chats') }}"class="relative inline-flex items-center text-sm text-center text-gray-500 dark:text-zinc-500 hover:text-gray-500 dark:hover:text-zinc-400 focus:outline-none">
+                        <a aria-label="{{ __('Chats') }}"
+                            href="{{ route('chats') }}"class="relative inline-flex items-center text-sm text-center text-gray-600 dark:text-zinc-500 hover:text-gray-500 dark:hover:text-zinc-400 focus:outline-none">
                             <svg class="w-5 h-5 me-2.5" aria-hidden="true" viewBox="0 0 20 18" fill="currentColor">
                                 <path
                                     d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z"
@@ -68,10 +71,15 @@
                 @endauth
 
                 <div class="flex cursor-pointer mr-3">
-                    <a class="{{ app()->getLocale() == 'ru' ? 'bg-primary-gradient text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200' }} p-1 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
-                        href="{{ route('locale', ['locale' => 'ru']) }}">RU</a>
-                    <a class="{{ app()->getLocale() == 'en' ? 'bg-primary-gradient text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-200' }} p-1 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
-                        href="{{ route('locale', ['locale' => 'en']) }}">EN</a>
+                    <div
+                        class="{{ app()->getLocale() == 'ru' ? 'bg-primary-gradient text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100' }} py-1 px-1.5 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold">
+                        <a href="{{ route('locale', ['locale' => 'ru']) }}">RU</a>
+                    </div>
+                    <div
+                        class="{{ app()->getLocale() == 'en' ? 'bg-primary-gradient text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100' }} py-1 px-1.5 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold">
+                        <a href="{{ route('locale', ['locale' => 'en']) }}">EN</a>
+                    </div>
+
                 </div>
 
                 <div class="hidden lg:flex items-center ml-3">
@@ -79,7 +87,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                     <div class="w-max">{{ $auth->name }}</div>
 
                                     <div class="ml-1">
@@ -137,8 +145,8 @@
 
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center lg:hidden">
-                    <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-zinc-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
+                    <button @click="open = ! open" aria-label="{{ __('Menu') }}"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-zinc-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-zinc-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -163,7 +171,7 @@
             @include('layouts.components.ads', [
                 'relative' => true,
                 'classes' =>
-                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-700 transition duration-150 ease-in-out',
+                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-700 transition duration-150 ease-in-out',
             ])
 
             <x-responsive-nav-link :href="route('support')">
@@ -173,15 +181,15 @@
             @include('layouts.components.solutions', [
                 'relative' => true,
                 'classes' =>
-                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-700 transition duration-150 ease-in-out',
+                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-gray-700 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-zinc-800 hover:border-gray-300 dark:hover:border-zinc-700 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-700 transition duration-150 ease-in-out',
             ])
         </div>
 
         <div class="py-3 border-t border-gray-200 dark:border-zinc-700">
             @auth
                 <div class="px-4">
-                    <div class="text-base text-gray-800 dark:text-gray-200">{{ $auth->name }}</div>
-                    <div class="text-sm text-gray-500">{{ $auth->email }}</div>
+                    <div class="text-base text-gray-900 dark:text-gray-100">{{ $auth->name }}</div>
+                    <div class="text-sm text-gray-600">{{ $auth->email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">

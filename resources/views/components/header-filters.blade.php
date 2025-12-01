@@ -5,7 +5,7 @@
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
                 <button
-                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                     <span class="hidden xs:block">{{ __('Sort') }}</span>
                     <span class="xs:hidden">{{ __('Sort.') }}</span>
 
@@ -24,14 +24,14 @@
         </x-dropdown>
     @endif
 
-    {{-- <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+    {{-- <button type="button" class="-m-2 ml-5 p-2 text-gray-500 hover:text-gray-500 sm:ml-7">
       <span class="sr-only">View grid</span>
       <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
       </svg>
     </button> --}}
 
-    <button @click="filter = true" type="button" class="-m-2 ml-2 p-2 text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 sm:ml-4">
+    <button @click="filter = true" type="button" class="-m-2 ml-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400 sm:ml-4">
         <span class="sr-only">Filters</span>
         <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"

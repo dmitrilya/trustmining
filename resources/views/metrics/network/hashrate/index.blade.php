@@ -10,7 +10,7 @@
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm dark:shadow-zinc-800 cursor-pointer border flex justify-center items-center md:hidden"
                     @click="show = !show">
-                    <svg class="size-4 text-gray-800 dark:text-gray-200" aria-hidden="true" width="24" height="24"
+                    <svg class="size-4 text-gray-900 dark:text-gray-100" aria-hidden="true" width="24" height="24"
                         fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
@@ -22,45 +22,45 @@
                         class="flex bg-gray-100 dark:bg-zinc-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-zinc-700 h-7 sm:h-8">
                         <div @click="period = '3m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3m'], groupData: false});"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
+                                'text-gray-800 dark:text-gray-100 bg-gray-200 dark:bg-zinc-800': period ==
                                     '3m',
-                                ' text-gray-600 dark:text-gray-300': period != '3m'
+                                ' text-gray-700 dark:text-gray-200': period != '3m'
                             }"
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '3' . __('m') }}
                         </div>
                         <div @click="period = '6m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['6m'], groupData: false});"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
+                                'text-gray-800 dark:text-gray-100 bg-gray-200 dark:bg-zinc-800': period ==
                                     '6m',
-                                ' text-gray-600 dark:text-gray-300': period != '6m'
+                                ' text-gray-700 dark:text-gray-200': period != '6m'
                             }"
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '6' . __('m') }}
                         </div>
                         <div @click="period = '1y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['1y'], groupData: false});"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
+                                'text-gray-800 dark:text-gray-100 bg-gray-200 dark:bg-zinc-800': period ==
                                     '1y',
-                                ' text-gray-600 dark:text-gray-300': period != '1y'
+                                ' text-gray-700 dark:text-gray-200': period != '1y'
                             }"
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '1' . __('y') }}
                         </div>
                         <div @click="period = '3y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3y'], groupData: true});"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
+                                'text-gray-800 dark:text-gray-100 bg-gray-200 dark:bg-zinc-800': period ==
                                     '3y',
-                                ' text-gray-600 dark:text-gray-300': period != '3y'
+                                ' text-gray-700 dark:text-gray-200': period != '3y'
                             }"
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ '3' . __('y') }}
                         </div>
                         <div @click="period = 'all';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['all'], groupData: true});"
                             :class="{
-                                'text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-zinc-800': period ==
+                                'text-gray-800 dark:text-gray-100 bg-gray-200 dark:bg-zinc-800': period ==
                                     'all',
-                                ' text-gray-600 dark:text-gray-300': period != 'all'
+                                ' text-gray-700 dark:text-gray-200': period != 'all'
                             }"
                             class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-gray-300 dark:hover:bg-zinc-700">
                             {{ __('All') }}
@@ -82,9 +82,9 @@
 
             <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
                 <h3
-                    class="text-lg sm:text-xl lg:text-2xl text-gray-800 dark:text-gray-200 font-bold mb-2 sm:mb-3 lg:mb-4">
+                    class="text-lg sm:text-xl lg:text-2xl text-gray-900 dark:text-gray-100 font-bold mb-2 sm:mb-3 lg:mb-4">
                     {{ __('Current hashrate') }}</h3>
-                <div class="text-xs sm:text-sm lg:text-lg text-gray-500 dark:text-gray-400 mb-3 sm:mb-4 lg:mb-6">
+                <div class="text-xs sm:text-sm lg:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-6">
                     {{ number_format($hashrate) }}</div>
             </div>
 
@@ -93,29 +93,29 @@
 
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
-                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
+                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-gray-600">
                     {{ __('Date') }}</div>
-                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
+                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-gray-600">
                     {{ __('Network hashrate') }}</div>
-                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-gray-500">
+                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-gray-600">
                     {{ __('Change') }}</div>
             </div>
             <template x-for="(item, i) in items.slice(0, 90)" key="item.date">
                 <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
-                    <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-700 dark:text-gray-300"
+                    <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-800 dark:text-gray-200"
                         x-text="new Date(item.date).toLocaleString(window.locale, {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric',
                         })">
                     </div>
-                    <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-700 dark:text-gray-300"
+                    <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-gray-800 dark:text-gray-200"
                         x-text="item.value.toLocaleString('fullwide', {useGrouping:false})"></div>
                     <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                         :class="{
                             'text-green-500': item.value > items[i + 1].value,
                             'text-red-500': item.value < items[i + 1].value,
-                            'text-gray-700 dark:text-gray-300': item.value == items[i + 1].value
+                            'text-gray-700 dark:text-gray-200': item.value == items[i + 1].value
                         }"
                         x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">
                     </div>

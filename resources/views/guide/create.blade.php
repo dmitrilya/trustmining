@@ -1,6 +1,6 @@
 <x-app-layout title="Создание статьи/руководства">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Creating article/guide') }}
         </h2>
     </x-slot>
@@ -21,7 +21,7 @@
                     <x-input-label for="preview" :value="__('Preview')" />
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
                         accept=".png,.jpg,.jpeg" />
-                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
@@ -46,7 +46,7 @@
 
                     <div class="bg-gray-100 dark:bg-zinc-950 rounded-lg">
                         <pre contenteditable @input="$refs.guide.value=$el.innerHTML"
-                            class="whitespace-break-spaces text-xs sm:text-sm text-gray-700 dark:text-gray-200 border-0 focus:border-0 focus:outline-0 px-3 py-2"></pre>
+                            class="whitespace-break-spaces text-xs sm:text-sm text-gray-800 dark:text-gray-100 border-0 focus:border-0 focus:outline-0 px-3 py-2"></pre>
                         <input type="hidden" x-ref="guide" class="hidden" name="guide" value="">
                     </div>
                     <x-input-error :messages="$errors->get('guide')" />

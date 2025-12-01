@@ -1,6 +1,6 @@
 <x-app-layout title="Пополнить баланс">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Top up your balance') }}
         </h2>
     </x-slot>
@@ -23,7 +23,7 @@
                             required checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -135,7 +135,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M4 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4Zm0 6h16v6H4v-6Z" />
@@ -153,7 +153,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-500 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
