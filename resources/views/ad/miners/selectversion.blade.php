@@ -5,10 +5,10 @@
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}'
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="model"
-        @if (isset($required)) required @endif>
+    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="model" 
+        @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
-        @if (isset($required)) required @endif>
+        @if (isset($required)) required @endif aria-label="{{ __('Version') }}">
 
     <div>
         <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">

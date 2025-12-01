@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -73,8 +74,9 @@ class Controller extends BaseController
             return $algorithm;
         });
 
-        return view('calculator.index', [
-            'models' => AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id'])->with([
+        if (Cache::has('calculator_models')) $models = Cache::get('calculator_models');
+        else {
+            $models = AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id'])->with([
                 'algorithm:id,name,measurement',
                 'asicBrand:id,name',
                 'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
@@ -102,7 +104,13 @@ class Controller extends BaseController
                 });
 
                 return $model;
-            }),
+            });
+
+            Cache::put('calculator_models', $models, 300);
+        }
+
+        return view('calculator.index', [
+            'models' => $models,
             'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
             'rModel' => $asicModel->name,
             'rVersion' => $asicVersion->hashrate,

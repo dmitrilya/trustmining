@@ -5,7 +5,7 @@
         </a>
 
         <div class="flex cursor-pointer my-2 sm:my-3">
-            <button
+            <button aria-label="{{ __('Change theme to light') }}"
                 :class="{
                     'bg-primary-gradient text-white': theme == 'light',
                     'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=
@@ -24,7 +24,7 @@
                         d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
                 </svg>
             </button>
-            <button
+            <button aria-label="{{ __('Change theme to dark') }}"
                 :class="{
                     'bg-primary-gradient text-white': theme == 'dark',
                     'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=

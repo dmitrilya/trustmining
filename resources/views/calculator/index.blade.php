@@ -280,7 +280,7 @@
                                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300"
                                                         x-text="coin.abbreviation">
                                                     </div>
-                                                    <div class="text-xxs sm:text-xs text-gray-400" x-text="coin.name">
+                                                    <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400" x-text="coin.name">
                                                     </div>
                                                 </div>
                                             </div>
