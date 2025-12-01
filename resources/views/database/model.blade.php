@@ -140,12 +140,12 @@
 
                 <div
                     class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
-                    <div class="text-sm text-gray-500" itemprop="additionalProperty" itemscope
+                    <div class="text-sm text-gray-500 dark:text-gray-400" itemprop="additionalProperty" itemscope
                         itemtype="http://schema.org/PropertyValue"><span itemprop="name">{{ __('Algorithm') }}:
-                        </span><span class="text-gray-700" itemprop="value">
+                        </span><span class="text-gray-700 dark:text-gray-200" itemprop="value">
                             {{ $algorithm->name }}</span></div>
 
-                    <div class="text-sm text-gray-500">{{ __('Release date') }}: <span class="text-gray-700">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('Release date') }}: <span class="text-gray-700 dark:text-gray-200">
                             <time itemprop="releaseDate"
                                 datetime="{{ $model->release }}">{{ $model->release->locale('ru')->translatedFormat('F Y') }}</time></span>
                     </div>
@@ -190,17 +190,17 @@
                                 </div>
 
                                 <div itemprop="hasMeasurement" itemscope
-                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-500 mt-6">
+                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-500 dark:text-gray-400 mt-6">
                                     <span itemprop="valueReference">{{ __('Efficiency') }}</span>:
-                                    <span itemprop="value" class="text-gray-700">{{ $version->efficiency }}</span>
+                                    <span itemprop="value" class="text-gray-700 dark:text-gray-200">{{ $version->efficiency }}</span>
                                     <span itemprop="unitText">j/{{ $version->measurement }}</span>
                                 </div>
 
                                 <div itemprop="hasMeasurement" itemscope
                                     itemtype="http://schema.org/QuantitativeValue"
-                                    class="text-sm text-gray-500 mt-1 sm:mt-2"><span
+                                    class="text-sm text-gray-500 dark:text-gray-400 mt-1 sm:mt-2"><span
                                         itemprop="valueReference">{{ __('Power') }}</span>:
-                                    <span class="text-gray-700"
+                                    <span class="text-gray-700 dark:text-gray-200"
                                         itemprop="value">{{ $version->efficiency * $version->hashrate }}</span>
                                     <span itemprop="unitCode">W</span>
                                 </div>
@@ -246,7 +246,7 @@
                                                 <a itemprop="urlTemplate" class="block w-full xs:w-fit"
                                                     href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
                                                     <x-secondary-button
-                                                        class="bg-secondary-gradient !text-white w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
+                                                        class="bg-secondary-gradient !text-white font-bold w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
                                             </div>
                                         </div>
@@ -265,7 +265,7 @@
                                                 <a itemprop="urlTemplate" class="block w-fit"
                                                     href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
                                                     <x-secondary-button
-                                                        class="bg-secondary-gradient !text-white">{{ __('Income calculator') }}</x-secondary-button>
+                                                        class="bg-secondary-gradient !text-white font-bold">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
                                             </div>
                                         </div>
@@ -275,7 +275,7 @@
                         @endforeach
                     </div>
 
-                    <h3 class="text-sm text-gray-950 mt-8 mb-3">{{ __('Coins') }}</h3>
+                    <h3 class="text-sm text-gray-950 dark:text-gray-100 mt-8 mb-3">{{ __('Coins') }}</h3>
 
                     <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         @foreach ($algorithm->coins as $coin)
@@ -283,10 +283,10 @@
                                 <img alt="{{ $coin->name }}" class="w-5 sm:w-7 mr-2"
                                     src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
                                 <div>
-                                    <div class="text-xs sm:text-sm text-gray-600 mr-3">
+                                    <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-500 mr-3">
                                         {{ $coin->abbreviation }}
                                     </div>
-                                    <div class="text-xxs sm:text-xs text-gray-400 mr-3">
+                                    <div class="text-xxs sm:text-xs text-gray-400 dark:text-gray-300 mr-3">
                                         {{ $coin->name }}
                                     </div>
                                 </div>

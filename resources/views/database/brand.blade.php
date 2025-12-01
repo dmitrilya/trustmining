@@ -133,22 +133,22 @@
             <template x-for="model in models" :key="model.brand + '_' + model.name">
                 <a :href="'/database/' + model.brand + '/' + model.url_name"
                     class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
-                    <h5 class="font-semibold text-gray-600 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2"
+                    <h5 class="font-semibold text-gray-600 dark:text-gray-400 text-xxs sm:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2"
                         x-text="model.name">
                     </h5>
-                    <div class="text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
-                    <div class="hidden sm:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden sm:block text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
-                    <div class="hidden md:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden md:block text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="new Date(model.release).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
                     </div>
-                    <div class="hidden lg:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden lg:block text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="model.algorithm"></div>
-                    <div class="hidden xl:block text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="hidden xl:block text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
                     </div>
-                    <div class="text-gray-600 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                    <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
                         x-text="model.profit + ' {{ __('USDT') }}'">
                     </div>
                     <div class="pl-1.5 sm:pl-2">
