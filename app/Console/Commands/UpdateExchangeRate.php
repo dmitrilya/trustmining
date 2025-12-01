@@ -108,6 +108,6 @@ class UpdateExchangeRate extends Command
             return $model;
         });
 
-        Cache::put('calculator_models', $models, 300);
+        Cache::put('calculator_models', $models);
     }
 }
