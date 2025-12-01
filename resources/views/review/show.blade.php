@@ -19,7 +19,7 @@
                                 {{ $review->user->name }}
                             </div>
 
-                            <span class="date-transform text-xs font-normal text-gray-600"
+                            <span class="date-transform text-xs text-gray-600"
                                 data-date="{{ $review->created_at }}"></span>
                         </div>
 
@@ -29,7 +29,7 @@
                             <p class="text-sm text-red-600 font-semibold mt-3">{{ __('Is under moderation') }}</p>
                         @endif
 
-                        <p class="text-sm font-normal text-gray-600 whitespace-pre-line mt-3 md:mt-5">
+                        <p class="text-sm text-gray-600 whitespace-pre-line mt-3 md:mt-5">
                             {{ $review->review }}</p>
                     </div>
 

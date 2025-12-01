@@ -32,12 +32,10 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        $key = config('services.coinmarketcap.key');
+        /*$key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->pluck('abbreviation');
         $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
         $data->each(fn($coin) => Coin::where('abbreviation', $coin->symbol)->update(['rate' => $coin->quote->USD->price]));
-
-        $this->updateProfit();
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -56,7 +54,9 @@ class UpdateExchangeRate extends Command
 
         $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
         Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
-        Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
+        Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);*/
+
+        $this->updateProfit();
 
         return Command::SUCCESS;
     }

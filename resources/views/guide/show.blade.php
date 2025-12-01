@@ -23,7 +23,7 @@
         <div
             class="bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-200 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
             <div class="flex items-center justify-between">
-                <p class="date-transform text-xxs sm:text-xs font-normal text-gray-500" data-type="date"
+                <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="date"
                     data-date="{{ $guide->created_at }}"></p>
 
                 <div class="flex items-center" x-data="{ liked: '{{ $user && $guide->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $guide->likes->count() }} }">
@@ -43,7 +43,7 @@
                             d="M7 11c.889-.086 1.416-.543 2.156-1.057a22.323 22.323 0 0 0 3.958-5.084 1.6 1.6 0 0 1 .582-.628 1.549 1.549 0 0 1 1.466-.087c.205.095.388.233.537.406a1.64 1.64 0 0 1 .384 1.279l-1.388 4.114M7 11H4v6.5A1.5 1.5 0 0 0 5.5 19v0A1.5 1.5 0 0 0 7 17.5V11Zm6.5-1h4.915c.286 0 .372.014.626.15.254.135.472.332.637.572a1.874 1.874 0 0 1 .215 1.673l-2.098 6.4C17.538 19.52 17.368 20 16.12 20c-2.303 0-4.79-.943-6.67-1.475" />
                     </svg>
 
-                    <p class="text-xxs sm:text-xs font-normal text-gray-500 ml-2 mr-4" x-text="likes"></p>
+                    <p class="text-xxs sm:text-xs text-gray-500 ml-2 mr-4" x-text="likes"></p>
 
                     <svg class="w-4 h-4 text-gray-700 dark:text-white" aria-hidden="true" width="24" height="24"
                         fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@
                             clip-rule="evenodd" />
                     </svg>
 
-                    <p class="text-xxs sm:text-xs font-normal text-gray-500 ml-2">{{ $guide->views()->count() }}</p>
+                    <p class="text-xxs sm:text-xs text-gray-500 ml-2">{{ $guide->views()->count() }}</p>
                 </div>
             </div>
             <img src="{{ Storage::url($guide->preview) }}" alt="" class="rounded-lg w-full">

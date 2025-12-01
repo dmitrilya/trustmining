@@ -59,6 +59,9 @@ class Controller extends BaseController
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $models = Cache::get('calculator_models');
+        
+        if ($asicVersion->id) $models = $models->where('asic_versions.id', $asicVersion->id);
+        else $models = $models->where('name', 'Antminer T21');
 
         return view('calculator.index', [
             'models' => $models,
@@ -66,6 +69,11 @@ class Controller extends BaseController
             'rModel' => $asicModel->name,
             'rVersion' => $asicVersion->hashrate,
         ]);
+    }
+
+    public function calculatorModels()
+    {
+        return response()->json(Cache::get('calculator_models'), 200);
     }
 
     public function support(): View

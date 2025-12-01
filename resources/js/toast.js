@@ -41,7 +41,7 @@ const pushToast = function (type, title, pretext, text, alert) {
     toast.role = 'alert';
     toast.innerHTML = type == 'alert' ? `<div class="flex items-center">
     ${alertIcons[alert]}
-    <div class="ms-3 text-sm font-normal text-gray-600 dark:text-gray-300">${text}</div>
+    <div class="ms-3 text-sm text-gray-600 dark:text-gray-300">${text}</div>
     <button type="button" onclick="this.parentElement.parentElement.style.opacity = 0;setTimeout(() => { this.parentElement.parentElement.remove() }, 300)"
         class="block ml-auto -mx-1.5 -my-1.5 bg-white dark:bg-zinc-900 justify-center items-center flex-shrink-0 text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 rounded-lg p-1.5 hover:bg-gray-100 dark:hover:border-zinc-800 inline-flex h-8 w-8 dark:text-gray-400" aria-label="Close">
         <span class="sr-only">Close</span>

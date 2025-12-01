@@ -7,13 +7,13 @@
             <h5
                 class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-gray-950 dark:text-white">
                 {{ $guide->title }}</h5>
-            <p class="text-xs sm:text-sm font-normal text-gray-800 dark:text-gray-300">
+            <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-300">
                 {{ $guide->subtitle }}</p>
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs font-normal text-gray-500" data-type="shortdate"
+            <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="shortdate"
                 data-date="{{ $guide->created_at }}"></p>
 
             <div class="flex items-center">
@@ -24,7 +24,7 @@
                         clip-rule="evenodd" />
                 </svg>
 
-                <p class="text-xxs sm:text-xs font-normal text-gray-500 ml-1 xs:ml-2 mr-2 xs:mr-3 sm:mr-4">{{ $guide->likes->count() }}
+                <p class="text-xxs sm:text-xs text-gray-500 ml-1 xs:ml-2 mr-2 xs:mr-3 sm:mr-4">{{ $guide->likes->count() }}
                 </p>
 
                 <svg class="w-3 h-3 xs:w-4 xs:h-4 text-gray-700 dark:text-white" aria-hidden="true" width="24" height="24"
@@ -34,7 +34,7 @@
                         clip-rule="evenodd" />
                 </svg>
 
-                <p class="text-xxs sm:text-xs font-normal text-gray-500 ml-1 xs:ml-2">{{ $guide->views()->count() }}</p>
+                <p class="text-xxs sm:text-xs text-gray-500 ml-1 xs:ml-2">{{ $guide->views()->count() }}</p>
             </div>
         </div>
         <a class="block ml-auto sm:w-full mt-2" href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->url_title]) }}">

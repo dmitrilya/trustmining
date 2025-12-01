@@ -1,15 +1,9 @@
 @php
-    $selModel = !$rModel
-        ? ($rVersion
-            ? $models->filter(fn($model) => $model->asicVersions->where('id', $rVersion)->count())->first()
-            : $models->where('name', 'Antminer T21')->first())
-        : $models->where('name', $rModel)->first();
+    $selModel = $models->first();
     $selVersion = $rVersion
         ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
         : $selModel->asicVersions->first();
-    if (!$selVersion) {
-        $selVersion = $selModel->asicVersions->first();
-    }
+    if (!$selVersion) $selVersion = $selModel->asicVersions->first();
 @endphp
 
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
@@ -131,7 +125,7 @@
                         </div>
                     @endif
 
-                    @include('ad.miners.selectversion', [
+                    @include('calculator.components.selectversion', [
                         'selectedModel' => $selModel,
                         'selectedVersion' => $selVersion,
                     ])

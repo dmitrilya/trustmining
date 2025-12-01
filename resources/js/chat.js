@@ -34,10 +34,10 @@ window.sendMessage = function (chatId, form) {
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="text-xs font-normal text-gray-600">${date}</span>
+                <span class="text-xs text-gray-600">${date}</span>
             </div>
 
-            <p class="text-sm font-normal text-gray-950 dark:text-gray-50 whitespace-pre-line">${data.get('message')}</p>
+            <p class="text-sm text-gray-950 dark:text-gray-50 whitespace-pre-line">${data.get('message')}</p>
             </div>
         </div>`;
 
@@ -45,7 +45,7 @@ window.sendMessage = function (chatId, form) {
                 messageElement = messageElement + `<div class="flex justify-end">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-600">${date}</span>
+                    <span class="text-xs text-gray-600">${date}</span>
                 </div>
                 <div class="grid gap-2 ${data.getAll('images[]').length > 1 ? data.getAll('images[]').length > 4 ? 'grid-cols-3' : 'grid-cols-2' : 'grid-cols-1'}">`;
 
@@ -60,7 +60,7 @@ window.sendMessage = function (chatId, form) {
                 messageElement = messageElement + `<div class="flex justify-end">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-600">${date}</span>
+                    <span class="text-xs text-gray-600">${date}</span>
                 </div>
                 <div class="space-y-2">`;
 

@@ -43,7 +43,7 @@
                         role="option"
                         x-show="search === '' || '{{ $asicModel->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                         <div class="flex items-center">
-                            <span class="ml-3 block truncate font-normal">{{ $asicModel->name }}</span>
+                            <span class="ml-3 block truncate">{{ $asicModel->name }}</span>
                         </div>
 
                         <span
@@ -101,7 +101,7 @@
                             role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
                             <div class="flex items-center">
-                                <span class="ml-3 block truncate font-normal">{{ __('All') }}</span>
+                                <span class="ml-3 block truncate">{{ __('All') }}</span>
                             </div>
 
                             <span
@@ -124,7 +124,7 @@
                             role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
                             <div class="flex items-center">
-                                <span class="ml-3 block truncate font-normal">{{ $asicVersion->hashrate }}</span>
+                                <span class="ml-3 block truncate">{{ $asicVersion->hashrate }}</span>
                             </div>
 
                             <span

@@ -58,6 +58,7 @@ Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty')
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
+    Route::get('/get-models', [Controller::class, 'calculatorModels'])->name('calculator-models');
     Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
     Route::get('/{asicModel}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->name('calculator.modelver');
 });

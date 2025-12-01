@@ -67,10 +67,10 @@ window.messagesChannelEvent = function (e) {
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="text-xs font-normal text-gray-600">${date}</span>
+                <span class="text-xs text-gray-600">${date}</span>
             </div>
 
-            <p class="text-sm font-normal text-gray-950 dark:text-gray-50 whitespace-pre-line">${e.message}</p>
+            <p class="text-sm text-gray-950 dark:text-gray-50 whitespace-pre-line">${e.message}</p>
             </div>
         </div>`;
 
@@ -78,7 +78,7 @@ window.messagesChannelEvent = function (e) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-600">${date}</span>
+                    <span class="text-xs text-gray-600">${date}</span>
                 </div>
                 <div class="grid gap-2 ${e.images.length > 1 ? e.images.length > 4 ? 'grid-cols-3' : 'grid-cols-2' : 'grid-cols-1'}">`;
 
@@ -93,7 +93,7 @@ window.messagesChannelEvent = function (e) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 rounded-b-xl mr-6 rounded-tr-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs font-normal text-gray-600">${date}</span>
+                    <span class="text-xs text-gray-600">${date}</span>
                 </div>
                 <div class="space-y-2">`;
 

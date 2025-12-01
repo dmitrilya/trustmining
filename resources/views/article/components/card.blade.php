@@ -8,13 +8,13 @@
             <h5
                 class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-gray-950 dark:text-gray-50">
                 {{ $article->title }}</h5>
-            <p class="text-xs sm:text-sm font-normal text-gray-800 dark:text-gray-300">
+            <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-300">
                 {{ $article->subtitle }}</p>
         </div>
     </div>
     <div class="p-2 md:p-3">
         <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs font-normal text-gray-500 dark:text-gray-400" data-type="date"
+            <p class="date-transform text-xxs sm:text-xs text-gray-500 dark:text-gray-400" data-type="date"
                 data-date="{{ $article->created_at }}"></p>
 
             <div class="flex items-center">
@@ -25,7 +25,7 @@
                         clip-rule="evenodd" />
                 </svg>
 
-                <p class="text-xxs sm:text-xs font-normal text-gray-500 dark:text-gray-400 ml-2">{{ $article->views()->count() }}</p>
+                <p class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400 ml-2">{{ $article->views()->count() }}</p>
             </div>
         </div>
         <a class="block ml-auto sm:w-full mt-1 sm:mt-4" href="{{ route('article', ['article' => $article->url_title]) }}">
