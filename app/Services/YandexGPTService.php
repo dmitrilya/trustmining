@@ -5,6 +5,9 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 
 use App\Jobs\GetYandexGPTOperation;
+use App\Models\Forum\ForumAnswer;
+use App\Models\Forum\ForumComment;
+use App\Models\Forum\ForumQuestion;
 use Exception;
 
 /**
@@ -34,7 +37,7 @@ class YandexGPTService
      * 1. Модерация текста (вердикт + список причин)
      * ---------------------------------------------------------
      */
-    public function moderateText(string $text)
+    public function moderateText(string $text, array $data)
     {
         $params = [
             'modelUri' => "gpt://{$this->folderId}/yandexgpt",
@@ -56,7 +59,19 @@ class YandexGPTService
             ]
         ];
 
-        return $this->request('POST', "$this->baseLLM/completion", $params);
+        $response = $this->request('POST', "$this->baseLLM/completionAsync", $params);
+
+        $fallbacks = [
+            ['risk' => 50, 'reasons' => []],
+            [
+                'risk' => 100,
+                'reasons' => $response->result->alternatives[0]->status
+            ]
+        ];
+
+        GetYandexGPTOperation::dispatch($response->id, 'moderation', null, $fallbacks, $data)->delay(now()->addMinutes(1));
+
+        return $response;
     }
 
 
@@ -82,9 +97,7 @@ class YandexGPTService
 
         if (!$result || !isset($result->predictions)) return null;
 
-        return collect($result->predictions)
-            ->sortByDesc('confidence')
-            ->first();
+        return collect($result->predictions)->sortByDesc('confidence')->first();
     }
 
 
@@ -102,7 +115,7 @@ class YandexGPTService
                 'temperature' => 0.1,
                 'maxTokens' => '2000',
                 'reasoningOptions' => [
-                    'mode' => "DISABLED"
+                    'mode' => 'DISABLED'
                 ]
             ],
             'messages' => [
@@ -119,9 +132,9 @@ class YandexGPTService
 
         $response = $this->request('POST', "$this->baseLLM/completionAsync", $params);
 
-        GetYandexGPTOperation::dispatch($response->id, $folder, $id)->delay(now()->addMinutes(1));
+        GetYandexGPTOperation::dispatch($response->id, $folder, $id)->delay(now()->addMinutes(2));
 
-        return;
+        return $response;
     }
 
 
@@ -130,7 +143,7 @@ class YandexGPTService
      * 4. Определение категории вопроса + список ключевых слов
      * ---------------------------------------------------------
      */
-    public function classifyForumQuestion(string $title, string $content)
+    public function classifyForumQuestion(ForumQuestion $question)
     {
         $params = [
             'modelUri' => "gpt://{$this->folderId}/yandexgpt",
@@ -138,7 +151,9 @@ class YandexGPTService
                 'stream' => false,
                 'temperature' => 0.1,
                 'maxTokens' => '800',
-                'reasoningOptions' => ['mode' => 'DISABLED'],
+                'reasoningOptions' => [
+                    'mode' => 'DISABLED'
+                ],
             ],
             'messages' => [
                 [
@@ -147,12 +162,16 @@ class YandexGPTService
                 ],
                 [
                     'role' => 'user',
-                    'text' => "Заголовок: $title\n\nТекст вопроса: $content"
+                    'text' => "Заголовок: $question->theme\n\nТекст вопроса: $question->text"
                 ]
             ]
         ];
 
-        return $this->request('POST', "$this->baseLLM/completion", $params);
+        $response = $this->request('POST', "$this->baseLLM/completionAsync", $params);
+
+        GetYandexGPTOperation::dispatch($response->id, 'forum-question')->delay(now()->addMinutes(1));
+
+        return $response;
     }
 
 
@@ -179,6 +198,31 @@ class YandexGPTService
         }
 
         return false;
+    }
+
+
+    /**
+     * ---------------------------------------------------------
+     * Безопасный парсер JSON из текста ответа модели.
+     * ---------------------------------------------------------
+     */
+    public function parseJsonSafe(string $text, array $fallback = []): array
+    {
+        $data = json_decode($text, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($data)) {
+            return $data;
+        }
+
+        if (preg_match('/\{.*\}/s', $text, $matches)) {
+            $data = json_decode($matches[0], true);
+
+            if (json_last_error() === JSON_ERROR_NONE && is_array($data)) {
+                return $data;
+            }
+        }
+
+        return $fallback;
     }
 
 

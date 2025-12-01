@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)">
         <div
             class="w-full h-full bg-white border border-gray-200 rounded-2xl shadow-lg dark:shadow-zinc-800 dark:bg-zinc-900 dark:border-zinc-800">
-            <ul class="flex text-sm font-medium text-center text-gray-500 rounded-t-2xl divide-x divide-gray-200 border-b border-gray-200 dark:border-zinc-700 dark:divide-zinc-700 dark:text-gray-300 rtl:divide-x-reverse"
+            <ul class="flex text-sm text-center text-gray-500 rounded-t-2xl divide-x divide-gray-200 border-b border-gray-200 dark:border-zinc-700 dark:divide-zinc-700 dark:text-gray-300 rtl:divide-x-reverse"
                 id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
                 <li class="w-full">
                     <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="stats"

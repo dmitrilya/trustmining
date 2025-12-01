@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('text');
             $table->json('images');
             $table->json('keywords');
-            $table->unsignedBigInteger('forum_subcategory_id');
+            $table->boolean('moderation')->default(1);
+            $table->unsignedBigInteger('forum_subcategory_id')->nullable();
             $table->foreign('forum_subcategory_id')->references('id')
                 ->on('forum_subcategories')->onUpdate('cascade');
             $table->unsignedBigInteger('user_id');

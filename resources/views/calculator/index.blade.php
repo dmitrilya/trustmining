@@ -144,7 +144,7 @@
                                     <x-rating></x-rating>
 
                                     <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
-                                        class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                        class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
                                         <span x-text="version.reviews_count"></span>
                                         {{ __('reviews') }}
                                     </a>

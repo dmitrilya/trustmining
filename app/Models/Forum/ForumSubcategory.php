@@ -16,8 +16,13 @@ class ForumSubcategory extends Model
         return $this->belongsTo(\App\Models\Forum\ForumCategory::class);
     }
 
-    public function questions()
+    public function forumQuestions()
     {
         return $this->hasMany(\App\Models\Forum\ForumQuestion::class);
+    }
+
+    public function moderatedForumQuestions()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumQuestion::class)->where('moderation', false);
     }
 }

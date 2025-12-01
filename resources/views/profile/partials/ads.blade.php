@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between">
-            <h2 class="w-full text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h2 class="w-full text-lg text-gray-900 dark:text-gray-100">
                 {{ __('My advertisements') }}
             </h2>
 

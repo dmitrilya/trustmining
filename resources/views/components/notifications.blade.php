@@ -2,7 +2,7 @@
 
 <div class="w-5 h-5" x-data="{ open: false }">
     <button @click="open = ! open;checkNotifications()"
-        class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 dark:text-zinc-500 hover:text-gray-500 dark:hover:text-zinc-400 focus:outline-none"
+        class="relative inline-flex items-center text-sm text-center text-gray-500 dark:text-zinc-500 hover:text-gray-500 dark:hover:text-zinc-400 focus:outline-none"
         type="button">
         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 14 20">
             <path
@@ -24,7 +24,7 @@
         <div
             class="w-full flex-auto overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 text-sm leading-6 shadow-lg dark:shadow-zinc-800 ring-1 ring-gray-900/5">
             <div
-                class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-zinc-900 dark:text-white">
+                class="block px-4 py-2 text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-zinc-900 dark:text-white">
                 {{ __('Notifications') }}
             </div>
             <div class="divide-y divide-gray-100 dark:divide-zinc-800">
@@ -35,7 +35,7 @@
                 @endif
             </div>
             <a href="{{ route('notifications') }}"
-                class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-white">
+                class="block py-2 text-sm text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-white">
                 <div class="inline-flex items-center ">
                     <svg class="w-4 h-4 me-2 text-gray-400 dark:text-gray-500" aria-hidden="true" fill="currentColor"
                         viewBox="0 0 20 14">

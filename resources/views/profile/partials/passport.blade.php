@@ -1,6 +1,6 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
+        <h2 class="text-lg text-gray-900 dark:text-gray-100 mb-2">
             {{ __('Personal identification') }}
         </h2>
 

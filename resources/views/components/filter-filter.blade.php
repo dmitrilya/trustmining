@@ -5,7 +5,7 @@
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
             class="flex w-full items-center justify-between bg-white dark:bg-zinc-900 px-2 py-3 text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400"
             aria-controls="filter-section-mobile-{{ $name }}" aria-expanded="false">
-            <span class="font-medium text-gray-900 dark:text-gray-200">{{ $name }}</span>
+            <span class="text-gray-900 dark:text-gray-200">{{ $name }}</span>
             <span class="ml-6 flex items-center">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path

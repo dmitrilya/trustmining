@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex justify-between">
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h2 class="text-lg text-gray-900 dark:text-gray-100">
                 {{ __('Company') }}
             </h2>
 

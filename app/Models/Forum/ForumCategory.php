@@ -20,4 +20,10 @@ class ForumCategory extends Model
     {
         return $this->hasManyThrow(\App\Models\Forum\ForumQuestion::class, \App\Models\Forum\ForumSubcategory::class);
     }
+
+    public function moderatedForumQuestions()
+    {
+        return $this->hasManyThrow(\App\Models\Forum\ForumQuestion::class, \App\Models\Forum\ForumSubcategory::class)
+            ->where('moderation', false);
+    }
 }

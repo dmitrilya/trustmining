@@ -94,7 +94,7 @@
                                     <h2
                                         id="accordion-flush-faqs-heading-{{ $loop->parent->index }}-{{ $loop->index }}">
                                         <button type="button"
-                                            class="flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500"
+                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-gray-500"
                                             data-accordion-target="#accordion-flush-faqs-body-{{ $loop->parent->index }}-{{ $loop->index }}"
                                             aria-expanded="false"
                                             aria-controls="accordion-flush-faqs-body-{{ $loop->parent->index }}-{{ $loop->index }}">

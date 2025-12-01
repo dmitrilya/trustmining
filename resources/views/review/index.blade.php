@@ -72,7 +72,7 @@
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                         <button type="button"
-                                            class="ml-4 inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 dark:text-gray-100 bg-white rounded-lg hover:bg-gray-200 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus:ring-zinc-700">
+                                            class="ml-4 inline-flex self-center items-center p-2 text-sm text-center text-gray-900 dark:text-gray-100 bg-white rounded-lg hover:bg-gray-200 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus:ring-zinc-700">
                                             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                                 fill="currentColor" viewBox="0 0 4 15">
                                                 <path
@@ -102,7 +102,7 @@
                                 @csrf
                                 @method('delete')
 
-                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                <h2 class="text-lg text-gray-900 dark:text-gray-100">
                                     {{ __('Are you sure you want to delete this review?') }}
                                 </h2>
 
@@ -179,7 +179,7 @@
                                     <x-rating :clickable="true"></x-rating>
                                 </div>
                                 <button type="submit"
-                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
+                                    class="inline-flex items-center py-2.5 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
                                     {{ __('Send') }}
                                 </button>
                             </div>

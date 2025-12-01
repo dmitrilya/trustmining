@@ -20,7 +20,7 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="{{ route('database') }}"
-                                class="sm:mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
                                 <span itemprop="name">{{ __('Catalog of models') }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
@@ -34,7 +34,7 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $brand->name))]) }}"
-                                class="sm:mr-2 text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-100">
                                 <span itemprop="name">{{ $brand->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
@@ -46,7 +46,7 @@
                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
                         <meta itemprop="position" content="3" />
                         <a itemprop="item" href="#" aria-current="page"
-                            class="font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                             <span itemprop="name">{{ $model->name }}</span>
                         </a>
                     </li>
@@ -91,7 +91,7 @@
                                         'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
                                         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
                                     ]) }}"
-                                    class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
                                     <span itemprop="reviewCount">{{ $reviewsCount }}</span>
                                     {{ __('reviews') }}
                                 </a>
@@ -107,7 +107,7 @@
                                     'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
                                     'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
                                 ]) }}"
-                                    class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">{{ $reviewsCount }}
+                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $reviewsCount }}
                                     {{ __('reviews') }}
                                 </a>
                             </div>
@@ -152,7 +152,7 @@
 
                     <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
-                            class="text-xs sm:text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-zinc-800">
+                            class="text-xs sm:text-sm text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-zinc-800">
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="me-2">
@@ -275,7 +275,7 @@
                         @endforeach
                     </div>
 
-                    <h3 class="text-sm font-medium text-gray-900 mt-8 mb-3">{{ __('Coins') }}</h3>
+                    <h3 class="text-sm text-gray-900 mt-8 mb-3">{{ __('Coins') }}</h3>
 
                     <div class="grid gap-2 grid-cols-3 xs:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         @foreach ($algorithm->coins as $coin)
@@ -306,7 +306,7 @@
                     </div>
 
                     <div class="mt-6 sm:mt-8 md:mt-10">
-                        <h3 class="text-sm font-medium text-gray-900">Характеристики</h3>
+                        <h3 class="text-sm text-gray-900">Характеристики</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm mt-4">
                             <li class="text-gray-400">Алгоритм: <span class="text-gray-600">

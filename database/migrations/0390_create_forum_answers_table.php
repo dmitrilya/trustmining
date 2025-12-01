@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('text');
             $table->json('images');
+            $table->boolean('moderation')->default(1);
             $table->unsignedBigInteger('forum_question_id');
             $table->foreign('forum_question_id')->references('id')
                 ->on('forum_questions')->onUpdate('cascade');

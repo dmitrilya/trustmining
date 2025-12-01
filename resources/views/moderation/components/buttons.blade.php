@@ -9,7 +9,7 @@
             @csrf
             @method('put')
 
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h2 class="text-lg text-gray-900 dark:text-gray-100">
                 {{ __('Accept moderation?') }}
             </h2>
 
@@ -42,7 +42,7 @@
             @csrf
             @method('put')
 
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+            <h2 class="text-lg text-gray-900 dark:text-gray-100">
                 {{ __('Decline moderation?') }}
             </h2>
 

@@ -48,7 +48,7 @@
                                 : $hosting->peculiarities" model="hosting"></x-peculiarities>
 
                         <div>
-                            <h3 class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
+                            <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['conditions']) ? ' border border-indigo-500' : '' }}">
@@ -69,7 +69,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">{{ __('Additional costs') }}</h3>
+                            <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Additional costs') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['expenses']) ? ' border border-indigo-500' : '' }}">
@@ -178,7 +178,7 @@
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
+                        <h3 class="text-sm text-gray-900 dark:text-gray-200 mb-2">{{ __('Conditions') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->conditions))
@@ -192,7 +192,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-sm font-medium text-gray-900 mb-2">{{ __('Additional costs') }}</h3>
+                        <h3 class="text-sm text-gray-900 mb-2">{{ __('Additional costs') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->expenses))
