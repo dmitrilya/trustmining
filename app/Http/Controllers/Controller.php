@@ -15,7 +15,6 @@ use App\Http\Traits\Telegram;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 
-use App\Models\Database\Algorithm;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
 use App\Models\Morph\Like;
@@ -59,55 +58,7 @@ class Controller extends BaseController
 
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
-        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
-        $algorithms = Algorithm::select(['id'])->with([
-            'coins' => fn($q) => $q->where('profit', '>', 0)->where('rate', '>', 0)
-                ->select(['abbreviation', 'name', 'algorithm_id', 'profit', 'rate', 'merged_group'])
-        ])->get()->map(function ($algorithm) {
-            $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
-                fn($mergedGroup) => [
-                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
-                    'coins' => $mergedGroup
-                ]
-            )->sortByDesc('profit')->values();
-
-            return $algorithm;
-        });
-
-        if (Cache::has('calculator_models')) $models = Cache::get('calculator_models');
-        else {
-            $models = AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id'])->with([
-                'algorithm:id,name,measurement',
-                'asicBrand:id,name',
-                'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
-                'asicVersions.ads:asic_version_id,price,coin_id',
-                'asicVersions.ads.coin:id,rate,abbreviation',
-                'moderatedReviews:reviewable_id,reviewable_type,rating'
-            ])->get()->map(function ($model) use ($measurements, $algorithms) {
-                $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
-
-                $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $model) {
-                    $vm = array_search($version->measurement, $measurements);
-                    $am = array_search($model->algorithm->measurement, $measurements);
-                    $version->profits = $algorithm->maxProfit->map(fn($profit) => [
-                        'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 4),
-                        'coins' => $profit['coins']
-                    ]);
-                    $version->price = round($version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
-                    $version->algorithm = $model->algorithm->name;
-                    $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
-                    $version->model_name = strtolower(str_replace(' ', '_', $model->name));
-                    $version->reviews_count = $model->moderatedReviews->count();
-                    $version->reviews_avg = $model->moderatedReviews->avg('rating');
-
-                    return $version;
-                });
-
-                return $model;
-            });
-
-            Cache::put('calculator_models', $models, 300);
-        }
+        $models = Cache::get('calculator_models');
 
         return view('calculator.index', [
             'models' => $models,
