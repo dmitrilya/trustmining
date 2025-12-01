@@ -1,6 +1,6 @@
 @php
     if ($type == 'App\Models\User\User') {
-        $user = App\Models\User::find($id);
+        $user = App\Models\User\User::find($id);
         $href = route('company', ['user' => $user->url_name]);
     } elseif ($type == 'App\Models\Database\AsicModel') {
         $model = App\Models\Database\AsicModel::find($id);
@@ -19,7 +19,7 @@
         <div class="flex items-center">
             @php
                 if ($type == 'App\Models\User\User') {
-                    $href = route('company', ['user' => App\Models\User::find($id)->url_name]);
+                    $href = route('company', ['user' => App\Models\User\User::find($id)->url_name]);
                 } elseif ($type == 'App\Models\Database\AsicModel') {
                     $model = App\Models\Database\AsicModel::find($id);
                     $href = route('database.model', [
