@@ -27,7 +27,7 @@
     <div class="bg-gray-100 relative z-20">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16 relative">
             <div
-                class="-mt-72 mx-auto w-full max-w-md shadow-lg dark:shadow-zinc-800 {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-gray-900 border-2 border-indigo-500' : 'bg-white border border-gray-200' }} rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-gray-900 border-2 border-indigo-500' : 'bg-white border border-gray-200' }} rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
                 <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-900' }} font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
                 <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-gray-400' : 'text-gray-500' }} text-sm md:text-base">{{ __($tariff->description) }}</div>
                 <div class="h-9 flex items-end {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-500' }} md:text-lg"><span
@@ -62,7 +62,7 @@
                         </div>
                     @else
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -72,7 +72,7 @@
                                 {{ __('of ads') }}</div>
                         </div>
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -84,7 +84,7 @@
                     @endif
                     @if ($tariff->can_have_hosting)
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -94,7 +94,7 @@
                     @endif
                     @if ($tariff->can_have_phone)
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -104,7 +104,7 @@
                     @endif
                     @if ($tariff->can_create_guide)
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -114,7 +114,7 @@
                     @endif
                     @if ($tariff->priority_moderation)
                         <div class="flex items-center">
-                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500"
+                            <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -128,7 +128,7 @@
     </div>
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-3xl p-4 sm:p-8 md:p-12">
+        <div class="bg-white overflow-hidden shadow-sm rounded-3xl p-4 sm:p-8 md:p-12">
             <div class="text-center text-gray-950 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
                 {{ __('Pay the tariff') }}</div>
 
@@ -144,7 +144,7 @@
                             checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -257,7 +257,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -276,7 +276,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm dark:shadow-zinc-800 hover:shadow-lg dark:shadow-zinc-800 peer peer-checked:shadow-xl dark:shadow-zinc-800 peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-200 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
