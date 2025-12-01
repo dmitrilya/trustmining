@@ -129,7 +129,7 @@
                     </div>
                     <h4
                         class="text-xs xs:text-sm lg:text-base text-gray-600 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
-                        {{ __('Cryptoexchangers') }}</h4>
+                        {{ __('Exchangers') }}</h4>
                 </a>
                 <a href="{{ route('ads', ['adCategory' => 'accessories']) }}" class="flex flex-col items-center group">
                     <div
