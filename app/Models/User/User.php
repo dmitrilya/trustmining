@@ -170,4 +170,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(\App\Models\CRM\CRMConnection::class);
     }
+
+    public function forumQuestions()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumQuestion::class);
+    }
+
+    public function forumAnswers()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumAnswer::class);
+    }
+
+    public function forumComments()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumComment::class);
+    }
 }

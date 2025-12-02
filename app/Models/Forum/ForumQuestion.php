@@ -36,4 +36,14 @@ class ForumQuestion extends Model
     {
         return $this->hasMany(\App\Models\Forum\ForumAnswer::class);
     }
+
+    public function moderatedForumAnswers()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumAnswer::class)->where('moderation', false);
+    }
+
+    public function views()
+    {
+        return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
+    }
 }

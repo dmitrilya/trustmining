@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 
 use App\Services\Forum\ForumQuestionService;
 use App\Services\Forum\ForumAnswerService;
-use App\Services\Forum\ForumAnswerCommentService;
+use App\Services\Forum\ForumCommentService;
 
 use App\Models\Forum\ForumCategory;
 use App\Models\Forum\ForumQuestion;
@@ -16,13 +16,13 @@ class ForumController extends Controller
 {
     protected $questionService;
     protected $answerService;
-    protected $answerCommentService;
+    protected $commentService;
 
-    public function __construct(ForumQuestionService $questionService, ForumAnswerService $answerService, ForumAnswerCommentService $answerCommentService)
+    public function __construct(ForumQuestionService $questionService, ForumAnswerService $answerService, ForumCommentService $commentService)
     {
         $this->questionService = $questionService;
         $this->answerService = $answerService;
-        $this->answerCommentService = $answerCommentService;
+        $this->commentService = $commentService;
     }
 
     public function index(): View

@@ -3,16 +3,18 @@
     $selVersion = $rVersion
         ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
         : $selModel->asicVersions->first();
-    if (!$selVersion) $selVersion = $selModel->asicVersions->first();
+    if (!$selVersion) {
+        $selVersion = $selModel->asicVersions->first();
+    }
 @endphp
 
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
     ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' .
     ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
     ' в удобном калькуляторе майнинга'" :canonical="route('calculator.modelver', [
-        'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
-        'asicVersion' => $selVersion->hashrate,
-    ])">
+    'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
+    'asicVersion' => $selVersion->hashrate,
+])">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
@@ -73,32 +75,35 @@
                         <meta itemprop="name" content="{{ __('Average price') }}">
                         <meta itemprop="value" content="{{ $selVersion->price ? $selVersion->price : __('No data') }}">
                     </div>
-                    <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
-                        <meta itemprop="unitCode" content="RUB" />
-                        <meta itemprop="value" content="{{ round($selVersion->profits[0]['profit'] / $rub, 2) }}" />
-                    </div>
-                    <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
-                        <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
-                        <meta itemprop="unitCode" content="RUB" />
-                        <meta itemprop="value"
-                            content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
-                    </div>
-                    @if ($selVersion->price)
+                    @if (count($selVersion->profits))
                         <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
-                            <meta itemprop="valueReference" content="{{ __('Payback') }}" />
-                            <meta itemprop="unitCode" content="DAY" />
+                            <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
+                            <meta itemprop="unitCode" content="RUB" />
                             <meta itemprop="value"
-                                content="{{ $selVersion->profits[0]['profit'] -
-                                    ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000 >
-                                0
-                                    ? round(
-                                        $selVersion->price /
-                                            ($selVersion->profits[0]['profit'] -
-                                                ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000),
-                                    )
-                                    : 0 }}" />
+                                content="{{ round($selVersion->profits[0]['profit'] / $rub, 2) }}" />
                         </div>
+                        <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                            <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
+                            <meta itemprop="unitCode" content="RUB" />
+                            <meta itemprop="value"
+                                content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
+                        </div>
+                        @if ($selVersion->price)
+                            <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
+                                <meta itemprop="valueReference" content="{{ __('Payback') }}" />
+                                <meta itemprop="unitCode" content="DAY" />
+                                <meta itemprop="value"
+                                    content="{{ $selVersion->profits[0]['profit'] -
+                                        ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000 >
+                                    0
+                                        ? round(
+                                            $selVersion->price /
+                                                ($selVersion->profits[0]['profit'] -
+                                                    ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000),
+                                        )
+                                        : 0 }}" />
+                            </div>
+                        @endif
                     @endif
 
                     @php
@@ -260,7 +265,8 @@
                                     @click="profitNumber = i">
                                     <div>
                                         <label class="flex items-center">
-                                            <input type="radio" name="profitNumber" :value="i" :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
+                                            <input type="radio" name="profitNumber" :value="i"
+                                                :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
                                                 :checked="profitNumber == i"
                                                 class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
                                         </label>
@@ -274,7 +280,8 @@
                                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300"
                                                         x-text="coin.abbreviation">
                                                     </div>
-                                                    <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400" x-text="coin.name">
+                                                    <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400"
+                                                        x-text="coin.name">
                                                     </div>
                                                 </div>
                                             </div>

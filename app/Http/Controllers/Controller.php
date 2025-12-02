@@ -60,8 +60,9 @@ class Controller extends BaseController
     {
         $models = Cache::get('calculator_models');
         
-        if ($asicVersion->id) $models = $models->where('asic_versions.id', $asicVersion->id);
-        else $models = $models->where('name', 'Antminer T21');
+        if ($asicVersion->id) $models = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersion->id)->count());
+        elseif ($asicModel->id) $models = $models->where('id', $asicModel->id);
+        else $models = $models->where('name', 'Antminer L9');
 
         return view('calculator.index', [
             'models' => $models,

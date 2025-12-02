@@ -37,7 +37,7 @@ class YandexGPTService
      * 1. Модерация текста (вердикт + список причин)
      * ---------------------------------------------------------
      */
-    public function moderateText(string $text, array $data)
+    public function moderateText(string $text, $model = null)
     {
         $params = [
             'modelUri' => "gpt://{$this->folderId}/yandexgpt",
@@ -69,7 +69,7 @@ class YandexGPTService
             ]
         ];
 
-        GetYandexGPTOperation::dispatch($response->id, 'moderation', null, $fallbacks, $data)->delay(now()->addMinutes(1));
+        GetYandexGPTOperation::dispatch($response->id, 'moderation', $fallbacks, $model)->delay(now()->addMinutes(1));
 
         return $response;
     }

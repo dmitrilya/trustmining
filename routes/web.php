@@ -19,9 +19,11 @@ use App\Http\Controllers\Morph\ModerationController;
 use App\Http\Controllers\Blog\ArticleController;
 use App\Http\Controllers\Blog\GuideController;
 use App\Http\Controllers\Forum\ForumController;
+use App\Http\Controllers\Forum\ForumQuestionController;
+use App\Http\Controllers\Forum\ForumAnswerController;
+use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -138,9 +140,21 @@ Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
 
 Route::group(['prefix' => 'forum'], function () {
-        Route::get('/', [ForumController::class, 'index'])->name('forum');
-        Route::get('/{forumCategory}', [ForumController::class, 'category'])->name('forum.category');
+    Route::get('/', [ForumController::class, 'index'])->name('forum');
+    Route::group(['prefix' => '{forumCategory}'], function () {
+        Route::get('/', [ForumController::class, 'category'])->name('forum.category');
+        Route::group(['prefix' => '{forumSubcategory}'], function () {
+            Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
+            Route::middleware('auth')->group(function () {
+                Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
+                Route::get('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
+                Route::get('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
+                Route::get('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+            });
+            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question');
+        });
     });
+});
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');

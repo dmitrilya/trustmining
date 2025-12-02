@@ -35,4 +35,14 @@ class ForumAnswer extends Model
     {
         return $this->hasMany(\App\Models\Forum\ForumComment::class);
     }
+
+    public function moderatedForumComments()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumComment::class)->where('moderation', false);
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(\App\Models\Morph\Like::class, 'likeable');
+    }
 }

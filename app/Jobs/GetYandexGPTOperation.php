@@ -11,8 +11,6 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Services\YandexGPTService;
 
-use App\Models\Ad\Hosting;
-
 class GetYandexGPTOperation implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -29,12 +27,11 @@ class GetYandexGPTOperation implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($operationId, string $folder,  array|null $fallbacks = null, int|null $modelId = null, array|null $model)
+    public function __construct($operationId, string $folder, array|null $fallbacks = null, $model)
     {
         $this->service = new YandexGPTService();
         $this->operationId = $operationId;
         $this->folder = $folder;
-        $this->modelId = $modelId;
         $this->fallbacks = $fallbacks;
         $this->model = $model;
     }
@@ -61,9 +58,8 @@ class GetYandexGPTOperation implements ShouldQueue
                     info('Contract Deficiencies error: ' . $res->result->alternatives[0]->status);
                     break;
                 }
-                $hosting = Hosting::find($this->modelId);
-                $hosting->contract_deficiencies = json_decode(str_replace('```', "'", $res->alternatives[0]->message->text));
-                $hosting->save();
+                $this->model->contract_deficiencies = json_decode(str_replace('```', "'", $res->alternatives[0]->message->text));
+                $this->model->save();
                 break;
             case 'forum-question':
                 $res = $res->result->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
