@@ -10,12 +10,12 @@
     get currentVersion() {
         return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
     },
-    modelsLoaded = false
-}" x-init="function loadHeavyScriptOnUserInteraction() {
+    modelsLoaded: false
+}" x-init="const loadHeavyScriptOnUserInteraction = () => {
     if (modelsLoaded) return;
     scriptLoaded = true;
 
-    axios.get('/calculator/get-models').then(r => models = r.data)
+    axios.get('/calculator/get-models').then(r => models = r.data);
 }
 
 document.addEventListener('scroll', loadHeavyScriptOnUserInteraction, { once: true });
