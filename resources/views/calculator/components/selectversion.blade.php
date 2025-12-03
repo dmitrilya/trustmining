@@ -3,7 +3,7 @@
     selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}'
-}" x-init="document.addEventListener('DOMContentLoade', () => axios.get('/calculator/get-models').then(r => models = r.data))">
+}" x-init="document.addEventListener('DOMContentLoaded', () => axios.get('/calculator/get-models').then(r => models = r.data))">
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
             <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
