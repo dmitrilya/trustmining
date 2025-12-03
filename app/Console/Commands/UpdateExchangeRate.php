@@ -48,13 +48,14 @@ class UpdateExchangeRate extends Command
 
         $out = curl_exec($curl);
 
-        if ($out === false) dump(curl_error($curl), curl_errno($curl));
+        if ($out === false) info(curl_error($curl), curl_errno($curl));
+        else {
+            $rates = json_decode($out)->rates;
 
-        $rates = json_decode($out)->rates;
-
-        $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
-        Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
-        Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
+            $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
+            Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
+            Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
+        }
 
         $this->updateProfit();
 
