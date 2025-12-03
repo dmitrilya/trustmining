@@ -43,7 +43,7 @@ class AsicBrand extends Model
 
     public function algorithms()
     {
-        return $this->hasManyThrow(\App\Models\Database\Algorithm::class, \App\Models\Database\AsicModel::class);
+        return $this->hasManyThrough(\App\Models\Database\Algorithm::class, \App\Models\Database\AsicModel::class);
     }
 
     public function views()

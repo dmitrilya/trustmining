@@ -26,6 +26,6 @@ class ForumCommentService
 
         (new YandexGPTService())->moderateText($comment->text, $comment);
 
-        return redirect()->route('forum');
+        return $comment;
     }
 }

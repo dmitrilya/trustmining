@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers\Forum;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Forum\StoreForumAnswerRequest;
 
 class ForumAnswerController extends ForumController
 {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Forum\StoreForumQuestionRequest  $request
+     * @param  \App\Http\Requests\Forum\StoreForumAnswerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreForumQuestionRequest $request)
+    public function store(StoreForumAnswerRequest $request)
     {
-        $question = $request->user()->forumQuestions()->create([
-            'theme' => $request->theme,
-            'text' => $request->text,
-            'images' => []
-        ]);
+        $this->questionService->store($request->user(), $request->text, $request->file('images'), $request->forum_question_id);
 
-        $question->images = $this->saveFiles($request->file('images'), 'forum', 'question', $question->id);
-        $question->save();
-
-        return back();
+        return redirect()->route('forum');
     }
 }

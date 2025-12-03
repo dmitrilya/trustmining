@@ -18,7 +18,8 @@ class ForumQuestionService
         $question = $user->forumQuestions()->create([
             'theme' => $theme,
             'text' => $text,
-            'images' => []
+            'images' => [],
+            'keywords' => []
         ]);
 
         $question->images = $this->saveFiles($images, 'forum', 'question', $question->id);
@@ -26,6 +27,6 @@ class ForumQuestionService
 
         (new YandexGPTService())->classifyForumQuestion($question);
 
-        return redirect()->route('forum');
+        return $question;
     }
 }

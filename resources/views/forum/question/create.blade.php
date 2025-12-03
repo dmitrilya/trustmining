@@ -8,16 +8,30 @@
                         <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
                     </div>
                 @else
-                    <form @submit.prevent="createForumQuestion($el)" x-data
-                        @keypress="if ($event.ctrlKey && $event.code == 'Enter') createForumQuestion($el);">
+                    <form
+                        @submit.prevent="if (theme.length > 64) return window.pushToastAlert({{ __('The maximum theme length is 64 characters.') }}, 'error');
+                            if (text.length > 1500) return window.pushToastAlert({{ __('The maximum question length is 1500 characters.') }}, 'error');
+                            $el.submit()"
+                        action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: '', text: '' }">
+                        @csrf
+
                         <div
                             class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
-                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
-                                <label for="question" class="sr-only">{{ __('Your question...') }}</label>
-                                <textarea x-ref="question" id="question" rows="4" name="question" placeholder="{{ __('Your question...') }}"
+                            <div>
+                                <x-input-label for="theme" :value="__('Theme')" />
+                                <x-text-input required id="theme" name="theme" type="number" autocomplete="off"
+                                    :value="theme" />
+                                <x-input-error :messages="$errors->get('theme')" />
+                            </div>
+
+                            <div class="px-4 py-2 bg-white dark:bg-zinc-950 rounded-t-lg">
+                                <label for="text" class="sr-only">{{ __('Your question...') }}</label>
+                                <textarea required id="text" rows="4" name="text" placeholder="{{ __('Your question...') }}"
+                                    x-text="text"
                                     class="resize-none w-full px-0 text-sm text-gray-950 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:text-gray-50 dark:placeholder-gray-400">
                                 </textarea>
                             </div>
+
                             <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700"
                                 x-data="{ images: 0 }">
                                 <div class="flex ps-0 space-x-1 rtl:space-x-reverse">

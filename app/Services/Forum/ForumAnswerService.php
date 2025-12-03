@@ -26,6 +26,6 @@ class ForumAnswerService
 
         (new YandexGPTService())->moderateText($answer->text, $answer);
 
-        return redirect()->route('forum');
+        return $answer;
     }
 }

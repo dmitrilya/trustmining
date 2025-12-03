@@ -203,6 +203,9 @@
     "You don't have any open dialogues yet. Contact a company on the ad page or company profile.": "У вас пока нет открытых диалогов. Свяжитесь с какой-либо компанией на странице объяления или в профиле компании.",
     "Send": "Отправить",
     "Your message...": "Ваше сообщение...",
+    "Theme": "Тема",
+    "The maximum theme length is 64 characters.": "Максимальная длина темы 64 символа.",
+    "The maximum question length is 1500 characters.": "Максимальная длина вопроса 1500 символов.",
     "Your question...": "Ваш вопрос...",
     "The user wanted to write you a message, but never did so": "Пользователь хотел написать Вам сообщение, но так и не сделал этого",
     "Notifications": "Оповещения",
@@ -498,6 +501,7 @@
     "Connected": "Подключено",
     "Change theme to light": "Поменять тему на светлую",
     "Change theme to dark": "Поменять тему на тёмную",
+    "New question": "Новый вопрос",
 
     "Metrics": "Метрики",
     "Cryptonetwork": "Криптосеть",

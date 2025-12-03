@@ -10,6 +10,7 @@ use App\Services\Forum\ForumAnswerService;
 use App\Services\Forum\ForumCommentService;
 
 use App\Models\Forum\ForumCategory;
+use App\Models\Forum\ForumSubcategory;
 use App\Models\Forum\ForumQuestion;
 
 class ForumController extends Controller
@@ -33,11 +34,18 @@ class ForumController extends Controller
         return view('forum.index', ['categories' => $categories, 'questions' => $questions]);
     }
 
-    public function category(ForumCategory $forumcategory): View
+    public function category(ForumCategory $forumCategory): View
     {
-        $subcategories = $forumcategory->forumSubcategories()->withCount('moderatedForumQuestions')->get();
-        $questions = $forumcategory->moderatedForumQuestions()->limit(10)->get();
+        $subcategories = $forumCategory->forumSubcategories()->withCount('moderatedForumQuestions')->get();
+        $questions = $forumCategory->moderatedForumQuestions()->limit(10)->get();
 
-        return view('forum.index', ['subcategories' => $subcategories, 'questions' => $questions]);
+        return view('forum.category', ['category' => $forumCategory, 'subcategories' => $subcategories, 'questions' => $questions]);
+    }
+
+    public function subcategory(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory): View
+    {
+        $questions = $forumSubcategory->moderatedForumQuestions()->paginate(30);
+
+        return view('forum.subcategory', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'questions' => $questions]);
     }
 }
