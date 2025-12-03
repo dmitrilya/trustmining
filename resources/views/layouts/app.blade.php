@@ -13,6 +13,16 @@
 
     @php
         $theme = $theme = request()->cookie('theme');
+        $exceptAgents = ['bingbot', 'Googlebot', 'YandexBot'];
+        $agent = request()->header('User-Agent');
+        $isBot = false;
+
+        foreach ($exceptAgents as $exceptAgent) {
+            if (str_contains($agent, $exceptAgent)) {
+                $isBot = true;
+                break;
+            }
+        }
     @endphp
 
     <meta name="color-scheme" content="light dark">
@@ -32,37 +42,39 @@
     @endif
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            (function(m, e, t, r, i, k, a) {
-                m[i] = m[i] || function() {
-                    (m[i].a = m[i].a || []).push(arguments)
-                };
-                m[i].l = 1 * new Date();
-                for (var j = 0; j < document.scripts.length; j++) {
-                    if (document.scripts[j].src === r) {
-                        return;
+    @if (!$isBot)
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', () => {
+                (function(m, e, t, r, i, k, a) {
+                    m[i] = m[i] || function() {
+                        (m[i].a = m[i].a || []).push(arguments)
+                    };
+                    m[i].l = 1 * new Date();
+                    for (var j = 0; j < document.scripts.length; j++) {
+                        if (document.scripts[j].src === r) {
+                            return;
+                        }
                     }
-                }
-                k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
-                    .insertBefore(
-                        k, a)
-            })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=103577303', 'ym');
+                    k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode
+                        .insertBefore(
+                            k, a)
+                })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=103577303', 'ym');
 
-            ym(103577303, 'init', {
-                ssr: true,
-                webvisor: true,
-                clickmap: true,
-                ecommerce: "dataLayer",
-                accurateTrackBounce: true,
-                trackLinks: true
+                ym(103577303, 'init', {
+                    ssr: true,
+                    webvisor: true,
+                    clickmap: true,
+                    ecommerce: "dataLayer",
+                    accurateTrackBounce: true,
+                    trackLinks: true
+                });
             });
-        });
-    </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;" alt="" />
-        </div>
-    </noscript>
+        </script>
+        <noscript>
+            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;" alt="" />
+            </div>
+        </noscript>
+    @endif
     <!-- /Yandex.Metrika counter -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
