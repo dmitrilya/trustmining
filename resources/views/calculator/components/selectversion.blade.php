@@ -6,7 +6,7 @@
 }" x-init="if ('requestIdleCallback' in window) {
     window.requestIdleCallback(() => axios.get('/calculator/get-models').then(r => models = r.data));
 } else {
-    setTimeout(() => axios.get('/calculator/get-models').then(r => models = r.data), 3000);
+    setTimeout(() => axios.get('/calculator/get-models').then(r => models = r.data), 4000);
 }">
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
