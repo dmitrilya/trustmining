@@ -3,6 +3,10 @@
     selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}'
+}" x-init="if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => axios.get('/calculator/get-models').then(r => models = r.data));
+} else {
+    setTimeout(() => axios.get('/calculator/get-models').then(r => models = r.data), 10000);
 }">
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
