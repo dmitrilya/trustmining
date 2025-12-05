@@ -47,7 +47,6 @@ class GetYandexGPTOperation implements ShouldQueue
         $res = $this->service->getOperation($this->operationId);
 
         if (!$res) return;
-        info(json_encode($res));
 
         switch ($this->folder) {
             case 'moderation':
@@ -67,7 +66,6 @@ class GetYandexGPTOperation implements ShouldQueue
                 $res = $res->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
-                info(json_encode($res));
 
                 if (isset($res['risk'])) {
                     Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res['reasons']));
@@ -77,7 +75,7 @@ class GetYandexGPTOperation implements ShouldQueue
                 if (is_int($res['category'])) {
                     $this->model->forum_subcategory_id = $res['category'];
                     $this->model->keywords = $res['keywords'];
-                    $this->model->save;
+                    $this->model->save();
                     break;
                 }
 
