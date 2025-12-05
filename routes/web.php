@@ -141,11 +141,11 @@ Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phon
 
 Route::group(['prefix' => 'forum'], function () {
     Route::get('/', [ForumController::class, 'index'])->name('forum');
+    Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
     Route::middleware('auth')->group(function () {
-        Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
-        Route::get('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
-        Route::get('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
-        Route::get('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+        Route::post('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
+        Route::post('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
+        Route::post('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
     });
     Route::group(['prefix' => '{forumCategory}'], function () {
         Route::get('/', [ForumController::class, 'category'])->name('forum.category');

@@ -13,7 +13,7 @@ class ForumQuestionService
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, string $theme, string $text, array $images)
+    public function store(User $user, string $theme, string $text, array|null $images)
     {
         $question = $user->forumQuestions()->create([
             'theme' => $theme,

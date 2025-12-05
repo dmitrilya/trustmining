@@ -13,7 +13,7 @@ class ForumCommentService
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, string $text, array $images, int $forumAnswerId)
+    public function store(User $user, string $text, array|null $images, int $forumAnswerId)
     {
         $comment = $user->forumComments()->create([
             'text' => $text,

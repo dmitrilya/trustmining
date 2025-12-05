@@ -44,20 +44,25 @@
                 </ol>
             </nav>
 
-            <x-primary-button>
-                <a href="{{ route('forum.question.create') }}">{{ __('New question') }}</a>
-            </x-primary-button>
+            <a href="{{ route('forum.question.create') }}">
+                <x-primary-button>
+                    {{ __('New question') }}
+                </x-primary-button>
+            </a>
         </div>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-4 md:p-6"
-            x-data="{ search: '' }">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-4 md:p-6">
             @foreach ($questions as $question)
                 <h2>
                     question
                 </h2>
             @endforeach
+
+            <div class="mt-8 sm:mt-12 lg:mt-16">
+                {{ $ads->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>

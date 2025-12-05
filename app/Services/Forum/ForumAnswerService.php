@@ -13,7 +13,7 @@ class ForumAnswerService
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, string $text, array $images, int $forumQuestionId)
+    public function store(User $user, string $text, array|null $images, int $forumQuestionId)
     {
         $answer = $user->forumAnswers()->create([
             'text' => $text,

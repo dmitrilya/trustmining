@@ -17,6 +17,7 @@ class ForumSubcategorySeeder extends Seeder
             ['name' => 'Regulation of cryptocurrencies', 'forum_category_id' => 1],
             ['name' => 'Events and summits', 'forum_category_id' => 1],
             ['name' => 'Electricity prices', 'forum_category_id' => 1],
+            ['name' => 'Investments and funds', 'forum_category_id' => 1],
             ['name' => 'Ecology', 'forum_category_id' => 1],
             ['name' => 'Large transactions', 'forum_category_id' => 1],
             ['name' => 'Cryptonetwork and blockchain', 'forum_category_id' => 2],

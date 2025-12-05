@@ -17,9 +17,20 @@ class ForumQuestion extends Model
     protected $fillable = [
         'theme',
         'text',
+        'images',
         'keywords',
         'forum_question_category_id',
         'user_id',
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'images' => 'array',
+        'keywords' => 'array',
     ];
 
     public function user()

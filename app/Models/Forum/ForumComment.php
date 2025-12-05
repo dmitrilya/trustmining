@@ -21,6 +21,15 @@ class ForumComment extends Model
         'user_id',
     ];
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'images' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class);

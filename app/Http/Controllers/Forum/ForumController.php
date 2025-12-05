@@ -28,7 +28,11 @@ class ForumController extends Controller
 
     public function index(): View
     {
-        $categories = ForumCategory::with(['forumSubcategories' => fn($q) => $q->withCount('moderatedForumQuestions')])->get();
+        $categories = ForumCategory::with(['forumSubcategories' => fn($q) => $q->withCount('moderatedForumQuestions')->orderByDesc('moderated_forum_questions_count')])
+            ->get()->map(function ($category) {
+                $category->moderated_forum_questions_count = $category->forumSubcategories->sum('moderated_forum_questions_count');
+                return $category;
+            })->sortByDesc('moderated_forum_questions_count');
         $questions = ForumQuestion::where('moderation', false)->limit(10)->get();
 
         return view('forum.index', ['categories' => $categories, 'questions' => $questions]);

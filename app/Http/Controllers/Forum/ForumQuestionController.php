@@ -15,7 +15,7 @@ class ForumQuestionController extends ForumController
      */
     public function create()
     {
-        return view('guide.create');
+        return view('forum.question.create');
     }
 
     /**
