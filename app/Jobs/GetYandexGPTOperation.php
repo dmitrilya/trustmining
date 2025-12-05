@@ -67,6 +67,7 @@ class GetYandexGPTOperation implements ShouldQueue
                 $res = $res->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
+                info(json_encode($res));
 
                 if (isset($res['risk'])) {
                     Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res['reasons']));
