@@ -169,7 +169,15 @@ class YandexGPTService
 
         $response = $this->request('POST', "$this->baseLLM/completionAsync", $params);
 
-        GetYandexGPTOperation::dispatch($response->id, 'forum-question')->delay(now()->addMinutes(1));
+        $fallbacks = [
+            ['risk' => 50, 'reasons' => []],
+            [
+                'risk' => 100,
+                'reasons' => $response->result->alternatives[0]->status
+            ]
+        ];
+
+        GetYandexGPTOperation::dispatch($response->id, 'forum-question', $fallbacks, $question)->delay(now()->addMinutes(1));
 
         return $response;
     }
