@@ -50,21 +50,21 @@ class GetYandexGPTOperation implements ShouldQueue
 
         switch ($this->folder) {
             case 'moderation':
-                $res = $res->result->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
-                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) :
+                $res = $res->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
+                    $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
                 break;
             case 'hostings':
-                if ($res->result->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
-                    info('Contract Deficiencies error: ' . $res->result->alternatives[0]->status);
+                if ($res->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
+                    info('Contract Deficiencies error: ' . $res->alternatives[0]->status);
                     break;
                 }
                 $this->model->contract_deficiencies = json_decode(str_replace('```', "'", $res->alternatives[0]->message->text));
                 $this->model->save();
                 break;
             case 'forum-question':
-                $res = $res->result->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
-                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) :
+                $res = $res->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
+                    $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
 
                 if (isset($res->risk)) {
