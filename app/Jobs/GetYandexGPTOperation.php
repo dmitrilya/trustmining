@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -50,7 +51,7 @@ class GetYandexGPTOperation implements ShouldQueue
         switch ($this->folder) {
             case 'moderation':
                 $res = $res->result->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
-                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) : 
+                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
                 break;
             case 'hostings':
@@ -63,8 +64,25 @@ class GetYandexGPTOperation implements ShouldQueue
                 break;
             case 'forum-question':
                 $res = $res->result->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
-                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) : 
+                    $this->service->parseJsonSafe($res->result->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
+
+                if (isset($res->risk)) {
+                    Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res->reasons));
+                    break;
+                }
+
+                if (is_int($res->category)) {
+                    $this->model->forum_subcategory_id = $res->category;
+                    $this->model->keywords = $res->keywords;
+                    $this->model->save;
+                    break;
+                }
+
+                Log::channel('forum-question')->info("[Question classification new category] question={$this->model->id} category={$res->category}");
+                $this->model->keywords = $res->keywords;
+                $this->model->save;
+
                 break;
         }
     }

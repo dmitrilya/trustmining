@@ -63,6 +63,12 @@ return [
             'level' => 'info',
         ],
 
+        'art' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/forum-question.log'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
