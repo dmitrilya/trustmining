@@ -65,7 +65,7 @@ class YandexGPTService
             ['risk' => 50, 'reasons' => []],
             [
                 'risk' => 100,
-                'reasons' => $response->result->alternatives[0]->status
+                'reasons' => 'Fail'
             ]
         ];
 
@@ -173,7 +173,7 @@ class YandexGPTService
             ['risk' => 50, 'reasons' => []],
             [
                 'risk' => 100,
-                'reasons' => $response->result->alternatives[0]->status
+                'reasons' => 'Fail'
             ]
         ];
 
