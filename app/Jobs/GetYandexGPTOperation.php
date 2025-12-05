@@ -47,6 +47,7 @@ class GetYandexGPTOperation implements ShouldQueue
         $res = $this->service->getOperation($this->operationId);
 
         if (!$res) return;
+        info(json_encode($res));
 
         switch ($this->folder) {
             case 'moderation':
@@ -67,20 +68,20 @@ class GetYandexGPTOperation implements ShouldQueue
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
 
-                if (isset($res->risk)) {
-                    Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res->reasons));
+                if (isset($res['risk'])) {
+                    Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res['reasons']));
                     break;
                 }
 
-                if (is_int($res->category)) {
-                    $this->model->forum_subcategory_id = $res->category;
-                    $this->model->keywords = $res->keywords;
+                if (is_int($res['category'])) {
+                    $this->model->forum_subcategory_id = $res['category'];
+                    $this->model->keywords = $res['keywords'];
                     $this->model->save;
                     break;
                 }
 
-                Log::channel('forum-question')->info("[Question classification new category] question={$this->model->id} category={$res->category}");
-                $this->model->keywords = $res->keywords;
+                Log::channel('forum-question')->info("[Question classification new category] question={$this->model->id} category={$res['category']}");
+                $this->model->keywords = $res['keywords'];
                 $this->model->save;
 
                 break;
