@@ -1,5 +1,5 @@
-<x-app-layout title="Каталог ASIC майнеров"
-    description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
+<x-app-layout title="Форум TrustMining: {{ __($subcategory->name) }}"
+    description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} категории {{ __($category->name) }} или задайте свой">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <nav aria-label="Breadcrumb">
@@ -61,7 +61,7 @@
             @endforeach
 
             <div class="mt-8 sm:mt-12 lg:mt-16">
-                {{ $ads->links() }}
+                {{ $questions->links() }}
             </div>
         </div>
     </div>

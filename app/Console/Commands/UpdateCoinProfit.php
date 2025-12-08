@@ -41,17 +41,17 @@ class UpdateCoinProfit extends Command
     {
         $mes = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 
-        collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?list=' . Coin::where('paymentable', false)->pluck('abbreviation')->implode(','))))
+        collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' . config('services.minerstat.key') . '&list=' . Coin::where('paymentable', false)->pluck('abbreviation')->implode(','))))
             ->each(function ($coin) use ($mes) {
                 if ($coin->coin == 'GRIN') return;
 
                 $coinData = [];
                 if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
                 if ($coin->algorithm == 'NexaHash') $coin->algorithm = 'NexaPow';
-                
+
                 $algorithm = Algorithm::where('name', $coin->algorithm)->first();
                 if (!$algorithm) return;
-                
+
                 if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
                 if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
 

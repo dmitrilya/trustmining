@@ -41,6 +41,10 @@ return [
         'token' => env('NOTIFICATION_BOT_TOKEN'),
     ],
 
+    'minerstat' => [
+        'key' => env('MINERSTAT_APP_KEY')
+    ],
+
     'coinmarketcap' => [
         'key' => env('COINMARKETCAP_APP_KEY')
     ],

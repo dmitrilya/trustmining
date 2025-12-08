@@ -31,6 +31,11 @@ class ForumSubcategory extends Model
     {
         return $this->hasMany(\App\Models\Forum\ForumQuestion::class);
     }
+    
+    public function latestForumQuestion()
+    {
+        return $this->hasOne(ForumQuestion::class)->latestOfMany();
+    }
 
     public function moderatedForumQuestions()
     {

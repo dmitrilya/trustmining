@@ -75,6 +75,7 @@ class GetYandexGPTOperation implements ShouldQueue
                 if (is_int($res['category'])) {
                     $this->model->forum_subcategory_id = $res['category'];
                     $this->model->keywords = $res['keywords'];
+                    $this->model->moderation = false;
                     $this->model->save();
                     break;
                 }

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Forum;
 
 use App\Http\Requests\Forum\StoreForumQuestionRequest;
-
+use App\Http\Traits\ViewTrait;
+use App\Models\Forum\ForumCategory;
+use App\Models\Forum\ForumSubcategory;
 use App\Models\Forum\ForumQuestion;
 
 class ForumQuestionController extends ForumController
 {
+    use ViewTrait;
+
     /**
      * Show the form for creating a new resource.
      *
@@ -34,15 +38,17 @@ class ForumQuestionController extends ForumController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Forum\ForumQuestion  $question
+     * @param  \App\Models\Forum\ForumCategory  $forumCategory
+     * @param  \App\Models\Forum\ForumSubcategory  $forumSubcategory
+     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
      * @return \Illuminate\Http\Response
      */
-    public function show(ForumQuestion $question)
+    public function show(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory, ForumQuestion $forumQuestion)
     {
-        $this->addView(request(), $question);
+        $this->addView(request(), $forumQuestion);
 
-        $question->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments']);
+        $forumQuestion->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments']);
 
-        return view('forum.question.show', compact($question));
+        return view('forum.question.show', compact($forumQuestion));
     }
 }

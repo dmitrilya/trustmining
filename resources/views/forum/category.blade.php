@@ -1,5 +1,5 @@
-<x-app-layout title="Каталог ASIC майнеров"
-    description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
+<x-app-layout title="Форум TrustMining: {{ __($category->name) }}"
+    description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} или задайте свой">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <nav aria-label="Breadcrumb">
@@ -76,7 +76,9 @@
 
                             <div
                                 class="ml-3 sm:ml-4 text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 font-bold text-right">
-                                Постов:<br class="xs:hidden" /> {{ $subcategory->moderated_forum_questions_count }}
+                                <span
+                                    class="text:xxs xs:text-xs sm:text-sm lg:text-base text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300">Постов:</span>
+                                <br class="xs:hidden" /> {{ $subcategory->moderated_forum_questions_count }}
                             </div>
                         </div>
                     </a>

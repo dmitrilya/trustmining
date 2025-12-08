@@ -151,7 +151,7 @@ Route::group(['prefix' => 'forum'], function () {
         Route::get('/', [ForumController::class, 'category'])->name('forum.category');
         Route::group(['prefix' => '{forumSubcategory}'], function () {
             Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
-            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question');
+            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
         });
     });
 });

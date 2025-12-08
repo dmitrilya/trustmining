@@ -33,6 +33,17 @@ class ForumQuestion extends Model
         'keywords' => 'array',
     ];
 
+    /**
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->find(explode('-', $value)[0]) ?? abort(404);
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class);
