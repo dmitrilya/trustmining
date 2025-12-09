@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('ordering:update')->hourlyAt(15);
         $schedule->command('subscription:check')->daily();
-        $schedule->command('coinprofit:update')->cron('0 2,10,18 * * *');;
+        $schedule->command('coinprofit:update')->cron('3 2,10,18 * * *');;
         $schedule->command('exchangerates:update')->everyFiveMinutes();
         $schedule->command('network_data:update')->everyThirtyMinutes();
         $schedule->command('art:update')->twiceDaily(0, 12);
