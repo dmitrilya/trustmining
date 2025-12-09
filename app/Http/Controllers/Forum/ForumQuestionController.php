@@ -49,6 +49,6 @@ class ForumQuestionController extends ForumController
 
         $forumQuestion->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments']);
 
-        return view('forum.question.show', compact($forumQuestion));
+        return view('forum.question.show', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'question' => $forumQuestion]);
     }
 }

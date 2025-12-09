@@ -43,9 +43,10 @@ class ForumController extends Controller
 
     public function category(ForumCategory $forumCategory): View
     {
-        $subcategories = $forumCategory->forumSubcategories()->withCount('moderatedForumQuestions')
+        $subcategories = $forumCategory->forumSubcategories()->withCount('moderatedForumQuestions')->orderByDesc('moderated_forum_questions_count')
             ->with(['latestForumQuestion' => fn($q) => $q->select(['forum_questions.forum_subcategory_id', 'created_at'])])->get();
-        $questions = $forumCategory->moderatedForumQuestions()->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+        $questions = ForumQuestion::where('moderation', false)->whereIn('forum_subcategory_id', $subcategories->pluck('id'))
+            ->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
             ->withCount('forumAnswers')->withCount('views')->latest()->limit(5)->get();
 
@@ -54,7 +55,8 @@ class ForumController extends Controller
 
     public function subcategory(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory): View
     {
-        $questions = $forumSubcategory->moderatedForumQuestions()->paginate(2);
+        $questions = $forumSubcategory->moderatedForumQuestions()->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])->withCount('forumAnswers')->withCount('views')->latest()->paginate(2);
 
         return view('forum.subcategory', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'questions' => $questions]);
     }

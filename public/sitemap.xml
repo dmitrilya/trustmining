@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url><loc>https://trustmining.ru/</loc></url>
-    <url><loc>https://trustmining.ru/ads</loc></url>
     <url><loc>https://trustmining.ru/hostings</loc></url>
+    <url><loc>https://trustmining.ru/services</loc></url>
+    <url><loc>https://trustmining.ru/cryptoexchangers</loc></url>
     <url><loc>https://trustmining.ru/companies</loc></url>
+    <url><loc>https://trustmining.ru/warranty-check</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners</loc></url>
+    <url><loc>https://trustmining.ru/ads/legals</loc></url>
+    <url><loc>https://trustmining.ru/ads/containers</loc></url>
+    <url><loc>https://trustmining.ru/ads/noiseboxes</loc></url>
+    <url><loc>https://trustmining.ru/ads/cryptoboilers</loc></url>
+    <url><loc>https://trustmining.ru/ads/water_cooling_plates</loc></url>
+    <url><loc>https://trustmining.ru/ads/accessories</loc></url>
+    <url><loc>https://trustmining.ru/metrics</loc></url>
+    <url><loc>https://trustmining.ru/metrics/network/bitcoin/difficulty</loc></url>
+    <url><loc>https://trustmining.ru/metrics/network/litecoin/difficulty</loc></url>
     <url><loc>https://trustmining.ru/company/123/shop</loc></url>
     <url><loc>https://trustmining.ru/company/123/about</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000000</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000001</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000002</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000003</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000004</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000005</loc></url>
-    <url><loc>https://trustmining.ru/ads/10000006</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000000</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000001</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000002</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000003</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000004</loc></url>
     <url><loc>https://trustmining.ru/company/123/offices</loc></url>
-    <url><loc>https://trustmining.ru/company/123/offices/10000000</loc></url>
     <url><loc>https://trustmining.ru/company/123/reviews</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/shop</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000005</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000007</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000008</loc></url>
+    <url><loc>https://trustmining.ru/ads/noiseboxes/10000009</loc></url>
+    <url><loc>https://trustmining.ru/ads/containers/10000011</loc></url>
+    <url><loc>https://trustmining.ru/ads/legals/10000012</loc></url>
+    <url><loc>https://trustmining.ru/ads/water_cooling_plates/10000013</loc></url>
+    <url><loc>https://trustmining.ru/ads/cryptoboilers/10000014</loc></url>
+    <url><loc>https://trustmining.ru/ads/cryptoboilers/10000015</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/offices</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/offices/10000000</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/reviews</loc></url>
     <url><loc>https://trustmining.ru/database</loc></url>
     <url><loc>https://trustmining.ru/calculator</loc></url>
     <url><loc>https://trustmining.ru/database/aisen</loc></url>
@@ -1489,8 +1511,8 @@
     <url><loc>https://trustmining.ru/database/goldshell/x5s</loc></url>
     <url><loc>https://trustmining.ru/database/goldshell/x5s/reviews</loc></url>
     <url><loc>https://trustmining.ru/calculator/x5s</loc></url>
-    <url><loc>https://trustmining.ru/database/goldshell/x5s/1.36</loc></url>
-    <url><loc>https://trustmining.ru/calculator/x5s/1.36</loc></url>
+    <url><loc>https://trustmining.ru/database/goldshell/x5s/2.611</loc></url>
+    <url><loc>https://trustmining.ru/calculator/x5s/2.611</loc></url>
     <url><loc>https://trustmining.ru/database/halong_mining</loc></url>
     <url><loc>https://trustmining.ru/database/halong_mining/dragonmint_b29</loc></url>
     <url><loc>https://trustmining.ru/database/halong_mining/dragonmint_b29/reviews</loc></url>
@@ -3066,6 +3088,69 @@
     <url><loc>https://trustmining.ru/database/ipollo/x1/330</loc></url>
     <url><loc>https://trustmining.ru/calculator/x1/330</loc></url>
     <url><loc>https://trustmining.ru/articles</loc></url>
+    <url><loc>https://trustmining.ru/guides</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwe</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000001/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/forum</loc></url>
+    <url><loc>https://trustmining.ru/forum/news</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/regulation_of_cryptocurrencies</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/regulation_of_cryptocurrencies/1-как-зарегистрироваться-на-бирже-криптовалют?</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/events_and_summits</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/electricity_prices</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/investments_and_funds</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/ecology</loc></url>
+    <url><loc>https://trustmining.ru/forum/news/large_transactions</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/cryptonetwork_and_blockchain</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/network_difficulty_and_halving</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/exchange_rate</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/exchange_rate/2-и-чтобы-в-мире-не-было-бактерий</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/3-хочу-на-море-и-белый-мерин</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/4-сейчас-бы-на-морря,-а-не-вот-это-все</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/5-быть-или-не-быть?-вот-в-чем-вопрос-быть-или-не-быть?-вот-в-чем-вопрос</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/6-не-могу-настроить</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/7-ошибка-в-асике-m50</loc></url>
+    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/8-как-торговать</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/models</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/prices</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/setting_up</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/modes_and_firmware</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/errors</loc></url>
+    <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards/consumables_and_accessories</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining/pools</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining/profitability_and_payback_period</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining/cloud_mining</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining/mining_software</loc></url>
+    <url><loc>https://trustmining.ru/forum/mining/general_questions</loc></url>
+    <url><loc>https://trustmining.ru/forum/technologies</loc></url>
+    <url><loc>https://trustmining.ru/forum/technologies/payment_systems</loc></url>
+    <url><loc>https://trustmining.ru/forum/technologies/alternative_sources_of_electricity</loc></url>
+    <url><loc>https://trustmining.ru/forum/trading</loc></url>
+    <url><loc>https://trustmining.ru/forum/trading/crypto_exchanges_and_exchangers</loc></url>
+    <url><loc>https://trustmining.ru/forum/trading/help_and_advice</loc></url>
+    <url><loc>https://trustmining.ru/forum/trading/predictions</loc></url>
+    <url><loc>https://trustmining.ru/forum/legal_issues</loc></url>
+    <url><loc>https://trustmining.ru/forum/legal_issues/scammers</loc></url>
+    <url><loc>https://trustmining.ru/forum/legal_issues/legalization</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions/electrical_wiring</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions/noise_reduction</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions/ventilation</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions/cooling</loc></url>
+    <url><loc>https://trustmining.ru/forum/technical_solutions/realization_of_heat_from_mining</loc></url>
+    <url><loc>https://trustmining.ru/forum/alternative_earnings</loc></url>
+    <url><loc>https://trustmining.ru/forum/alternative_earnings/metaverses_and_p2e</loc></url>
+    <url><loc>https://trustmining.ru/forum/alternative_earnings/nft</loc></url>
+    <url><loc>https://trustmining.ru/forum/alternative_earnings/airdrops</loc></url>
     <url><loc>https://trustmining.ru/support</loc></url>
     <url><loc>https://trustmining.ru/support?chat=1</loc></url>
     <url><loc>https://trustmining.ru/document?path=documents/privacy.pdf</loc></url>

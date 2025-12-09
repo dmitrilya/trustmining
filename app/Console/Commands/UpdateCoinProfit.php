@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
+use Carbon\Carbon;
 
 class UpdateCoinProfit extends Command
 {
@@ -41,23 +42,6 @@ class UpdateCoinProfit extends Command
     {
         $mes = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 
-        collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' . config('services.minerstat.key') . '&list=' . Coin::where('paymentable', false)->pluck('abbreviation')->implode(','))))
-            ->each(function ($coin) use ($mes) {
-                if ($coin->coin == 'GRIN') return;
-
-                $coinData = [];
-                if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
-                if ($coin->algorithm == 'NexaHash') $coin->algorithm = 'NexaPow';
-
-                $algorithm = Algorithm::where('name', $coin->algorithm)->first();
-                if (!$algorithm) return;
-
-                if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
-                if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
-
-                if (count($coinData)) Coin::where('abbreviation', $coin->coin)->update($coinData);
-            });
-
         collect(json_decode(file_get_contents('https://pool.binance.com/mining-api/v1/public/pool/index'))->data->algoList)
             ->pluck('symbolInfos', 'algoName')
             ->each(function ($algorithm) {
@@ -70,6 +54,32 @@ class UpdateCoinProfit extends Command
                     }
                 }
             });
+
+        $i = 1;
+        foreach (
+            Coin::where('paymentable', false)->where('updated_at', '<', Carbon::now()->subMinutes(2))
+                ->whereNotNull('profit')->pluck('abbreviation')->chunk(10) as $coins
+        ) {
+            collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' .
+                config('services.minerstat.key' . $i) . '&list=' . $coins->implode(',')))->data)
+                ->each(function ($coin) use ($mes) {
+                    if ($coin->coin == 'GRIN') return;
+
+                    $coinData = [];
+                    if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
+                    if ($coin->algorithm == 'NexaHash') $coin->algorithm = 'NexaPow';
+
+                    $algorithm = Algorithm::where('name', $coin->algorithm)->first();
+                    if (!$algorithm) return;
+
+                    if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
+                    if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
+
+                    if (count($coinData)) Coin::where('abbreviation', $coin->coin)->update($coinData);
+                });
+
+            $i++;
+        }
 
         return Command::SUCCESS;
     }

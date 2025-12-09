@@ -38,7 +38,49 @@
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5 xl:gap-7">
+        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg">
+            <h2
+                class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
+                {{ __('New posts') }}
+            </h2>
+
+            <div class="divide-y divide-gray-100 dark:divide-zinc-800">
+                @foreach ($questions as $question)
+                    <a
+                        href="{{ route('forum.question.show', [
+                            'forumCategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->forumCategory->name)),
+                            'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
+                            'forumQuestion' => $question->id . '-' . mb_strtolower(str_replace(' ', '-', $question->theme)),
+                        ]) }}">
+                        <div class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-gray-200 dark:hover:bg-zinc-950">
+                            <div class="mb-1.5 sm:mb-2 flex justify-between">
+                                <div class="text-xxs sm:text-xs lg:text-sm text-gray-500">
+                                    {{ __($question->forumSubcategory->forumCategory->name) }}.
+                                    {{ __($question->forumSubcategory->name) }}
+                                </div>
+
+                                <div class="text-right ml-3 sm:ml-5">
+                                    <div
+                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
+                                        {{ __('Views') }}: <span>{{ $question->views_count }}</span>
+                                    </div>
+                                    <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
+                                        {{ __('Answers') }}: <span>{{ $question->forum_answers_count }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3
+                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
+                                {{ $question->theme }}
+                            </h3>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg">
             <h2 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6">
                 <a href="{{ route('forum.category', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name))]) }}"
@@ -66,7 +108,6 @@
                                         ]
                                     )
                                 </div>
-
                                 <h3
                                     class="text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 font-bold">
                                     {{ __($subcategory->name) }}
@@ -74,11 +115,14 @@
                                 </h3>
                             </div>
 
-                            <div
-                                class="ml-3 sm:ml-4 text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 font-bold text-right">
-                                <span
-                                    class="text:xxs xs:text-xs sm:text-sm lg:text-base text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300">Постов:</span>
-                                <br class="xs:hidden" /> {{ $subcategory->moderated_forum_questions_count }}
+                            <div class="text-right ml-3 sm:ml-5">
+                                <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
+                                    {{ __('Posts') }}: {{ $subcategory->moderated_forum_questions_count }}
+                                </div>
+                                @if ($subcategory->latestForumQuestion)
+                                    <div class="date-transform mt-0.5 sm:mt-1 text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap"
+                                        data-date={{ $subcategory->latestForumQuestion->created_at }}></div>
+                                @endif
                             </div>
                         </div>
                     </a>

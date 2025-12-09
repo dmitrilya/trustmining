@@ -42,7 +42,9 @@ return [
     ],
 
     'minerstat' => [
-        'key' => env('MINERSTAT_APP_KEY')
+        'key1' => env('MINERSTAT_APP_KEY_1'),
+        'key2' => env('MINERSTAT_APP_KEY_2'),
+        'key3' => env('MINERSTAT_APP_KEY_3')
     ],
 
     'coinmarketcap' => [

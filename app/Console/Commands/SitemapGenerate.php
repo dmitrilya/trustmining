@@ -12,6 +12,7 @@ use App\Models\Database\AsicBrand;
 use App\Models\Blog\Article;
 use App\Models\Blog\Guide;
 use App\Models\Database\Coin;
+use App\Models\Forum\ForumCategory;
 
 class SitemapGenerate extends Command
 {
@@ -117,6 +118,20 @@ class SitemapGenerate extends Command
             $out .= $this->addUrl('guides/' . $guide->user->id . '/guide/' . $guide->url_title);
         }
 
+        $out .= $this->addUrl('forum');
+
+        foreach (ForumCategory::select(['id', 'name'])->with(['forumSubcategories:id,forum_category_id,name', 'forumSubcategories.forumQuestions:id,forum_subcategory_id,theme'])->get() as $forumCategory) {
+            $forumCategoryName = strtolower(str_replace(' ', '_', $forumCategory->name));
+            $out .= $this->addUrl('forum/' . $forumCategoryName);
+            foreach ($forumCategory->forumSubcategories as $forumSubcategory) {
+                $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
+                $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
+                foreach ($forumSubcategory->forumQuestions as $forumQuestion) {
+                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $forumQuestion->theme)));
+                }
+            }
+        }
+
         $out .= $this->addUrl('support');
         $out .= $this->addUrl('support?chat=1');
         $out .= $this->addUrl('document?path=documents/privacy.pdf');
@@ -130,7 +145,7 @@ class SitemapGenerate extends Command
         $out .= '
 </urlset>';
 
-        file_put_contents('public_html/sitemap.xml', $out);
+        file_put_contents('public/sitemap.xml', $out);
 
         return Command::SUCCESS;
     }
