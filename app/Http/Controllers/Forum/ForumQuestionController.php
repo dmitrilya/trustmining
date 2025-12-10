@@ -47,8 +47,19 @@ class ForumQuestionController extends ForumController
     {
         $this->addView(request(), $forumQuestion);
 
-        $forumQuestion->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments']);
+        $forumQuestion->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments'])
+            ->loadCount('views');
 
-        return view('forum.question.show', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'question' => $forumQuestion]);
+        $similarQuestions = \DB::table('forum_questions')->where('moderation', false)->select('id')->selectRaw('JSON_LENGTH(keywords) AS total_keywords')
+            ->selectRaw("(SELECT COUNT(*) FROM JSON_TABLE(? , '$[*]' COLUMNS (kw VARCHAR(255) PATH '$')) AS s
+            WHERE JSON_CONTAINS(forum_questions.keywords, JSON_QUOTE(s.kw))
+        ) AS matches", [json_encode($forumQuestion->keywords)])->havingRaw('matches / total_keywords >= ?', [0.75])
+            ->orderByDesc('matches')->limit(5)->get();
+
+        $newQuestions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->withCount('forumAnswers')->withCount('views')->latest()->limit(5)->get();
+
+        return view('forum.question.show', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'question' => $forumQuestion, 'similarQuestions' => $similarQuestions, 'newQuestions' => $newQuestions]);
     }
 }
