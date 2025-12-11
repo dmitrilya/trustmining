@@ -57,11 +57,11 @@ class ForumQuestionController extends ForumController
             'user' => fn($q) => $q->select(['id', 'name'])->withCount('moderatedForumAnswers'),
         ])->loadCount('views');
 
-        $similarQuestions = \DB::table('forum_questions')->where('moderation', false)->select('id')->selectRaw('JSON_LENGTH(keywords) AS total_keywords')
+        $similarQuestions = ForumQuestion::where('moderation', false)->select('id')->selectRaw('JSON_LENGTH(keywords) AS total_keywords')
             ->selectRaw("(SELECT COUNT(*) FROM JSON_TABLE(? , '$[*]' COLUMNS (kw VARCHAR(255) PATH '$')) AS s
             WHERE JSON_CONTAINS(forum_questions.keywords, JSON_QUOTE(s.kw))
         ) AS matches", [json_encode($forumQuestion->keywords)])->havingRaw('matches / total_keywords >= ?', [0.75])
-            ->orderByDesc('matches')->limit(5)->get();
+            ->orderByDesc('matches')->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])->limit(5)->get();
 
         $newQuestions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
