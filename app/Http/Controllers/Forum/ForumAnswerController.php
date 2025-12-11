@@ -16,6 +16,6 @@ class ForumAnswerController extends ForumController
     {
         $this->answerService->store($request->user(), $request->text, $request->file('images'), $request->forum_question_id);
 
-        return redirect()->route('forum');
+        return back();
     }
 }

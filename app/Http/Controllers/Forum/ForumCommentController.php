@@ -16,6 +16,6 @@ class ForumCommentController extends ForumController
     {
         $this->commentService->store($request->user(), $request->text, $request->file('images'), $request->forum_answer_id);
 
-        return redirect()->route('forum');
+        return back();
     }
 }

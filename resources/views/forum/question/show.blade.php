@@ -59,8 +59,7 @@
         <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6">
             <div
                 class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
-                <meta itemprop="about" itemscope itemtype="https://schema.org/Thing"
-                    content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
+                <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
                 <h2 itemprop="name"
                     class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
