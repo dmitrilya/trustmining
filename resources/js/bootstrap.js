@@ -1,5 +1,4 @@
 //import _ from 'lodash';
-//import 'flowbite';
 //import jQuery from 'jquery';
 //window.$ = jQuery.noConflict();
 //window._ = _;

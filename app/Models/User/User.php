@@ -176,13 +176,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\App\Models\Forum\ForumQuestion::class);
     }
 
+    public function moderatedForumQuestions()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumQuestion::class)->where('moderation', false);
+    }
+
     public function forumAnswers()
     {
         return $this->hasMany(\App\Models\Forum\ForumAnswer::class);
     }
 
+    public function moderatedForumAnswers()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumAnswer::class)->where('moderation', false);
+    }
+
     public function forumComments()
     {
         return $this->hasMany(\App\Models\Forum\ForumComment::class);
+    }
+
+    public function moderatedForumComments()
+    {
+        return $this->hasMany(\App\Models\Forum\ForumComment::class)->where('moderation', false);
     }
 }

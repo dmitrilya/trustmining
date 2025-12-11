@@ -1,22 +1,20 @@
 <x-app-layout title="Поддержка, часто задаваемые вопросы">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)" x-data="{ tab: 0 }">
         <div
             class="w-full h-full bg-white border border-gray-200 rounded-2xl shadow-lg dark:shadow-zinc-800 dark:bg-zinc-900 dark:border-zinc-800">
             <ul class="flex text-sm text-center text-gray-600 rounded-t-2xl divide-x divide-gray-200 border-b border-gray-200 dark:border-zinc-700 dark:divide-zinc-700 dark:text-gray-200 rtl:divide-x-reverse"
-                id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+                role="tablist">
                 <li class="w-full">
-                    <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="stats"
-                        aria-selected="{{ request()->chat ? 'false' : 'true' }}"
-                        class="inline-block w-full p-4 rounded-ss-2xl bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-800">FAQ</button>
+                    <button @click="tab = 0" type="button" role="tab" aria-controls="faq"
+                        aria-selected="{{ request()->chat ? 'false' : 'true' }}" :class="{ 'text-indigo-500': tab == 0 }"
+                        class="inline-block w-full p-4 rounded-ss-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none dark:bg-zinc-900">FAQ</button>
                 </li>
                 <li class="w-full">
-                    <button id="question-tab" data-tabs-target="#question" type="button" role="tab"
-                        aria-controls="about" aria-selected="{{ request()->chat ? 'true' : 'false' }}"
-                        class="inline-block w-full p-4 rounded-se-2xl bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-zinc-900 dark:hover:bg-zinc-800">
+                    <button @click="tab = 1" type="button" role="tab" aria-controls="question"
+                        aria-selected="{{ request()->chat ? 'true' : 'false' }}" :class="{ 'text-indigo-500': tab == 1 }"
+                        class="inline-block w-full p-4 rounded-se-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none dark:bg-zinc-900">
                         {{ __('Your question') }}
-                        @if (
-                            $auth &&
-                                $chat->messages->where('checked', false)->where('user_id', '!=', $auth->id)->count())
+                        @if ($auth && $chat->messages->where('checked', false)->where('user_id', '!=', $auth->id)->count())
                             <span class="inline-flex w-3 h-3 bg-indigo-500 rounded-full"></span>
                         @endif
                     </button>
@@ -26,7 +24,8 @@
             <div id="fullWidthTabContent" style="height: calc(100% - 52px)">
                 @include('support.components.faq')
 
-                <div class="h-full flex flex-col hidden bg-white rounded-b-2xl dark:bg-zinc-900 p-1 sm:p-4" id="question"
+                <div x-show="tab == 1"
+                    class="h-full flex flex-col bg-white rounded-b-2xl dark:bg-zinc-900 p-1 sm:p-4"
                     role="tabpanel" aria-labelledby="question-tab">
                     @if (!$auth)
                         <div class="flex items-center justify-center w-full h-full">

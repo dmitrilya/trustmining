@@ -5,11 +5,11 @@
         </h2>
 
         @if (!$user->tg_id)
-            <p class="text-sm text-gray-700 dark:text-gray-300">
+            <p class="text-sm text-gray-700 dark:text-gray-400">
                 {{ __('You can log in using Telegram to receive notifications from our bot') }}
             </p>
         @else
-            <p class="text-sm text-gray-700 dark:text-gray-300">
+            <p class="text-sm text-gray-700 dark:text-gray-400">
                 {{ __('You are logged in. Notifications will come from the official telegram bot') }}
             </p>
         @endif

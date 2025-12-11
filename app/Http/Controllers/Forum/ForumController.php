@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Forum;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use App\Http\Traits\FileTrait;
 
 use App\Services\Forum\ForumQuestionService;
 use App\Services\Forum\ForumAnswerService;
@@ -15,6 +17,8 @@ use App\Models\Forum\ForumQuestion;
 
 class ForumController extends Controller
 {
+    use FileTrait;
+
     protected $questionService;
     protected $answerService;
     protected $commentService;
@@ -36,7 +40,7 @@ class ForumController extends Controller
         })->sortByDesc('moderated_forum_questions_count');
         $questions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
-            ->withCount('forumAnswers')->withCount('views')->latest()->limit(5)->get();
+            ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(5)->get();
 
         return view('forum.index', ['categories' => $categories, 'questions' => $questions]);
     }
@@ -48,7 +52,7 @@ class ForumController extends Controller
         $questions = ForumQuestion::where('moderation', false)->whereIn('forum_subcategory_id', $subcategories->pluck('id'))
             ->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
-            ->withCount('forumAnswers')->withCount('views')->latest()->limit(5)->get();
+            ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(5)->get();
 
         return view('forum.category', ['category' => $forumCategory, 'subcategories' => $subcategories, 'questions' => $questions]);
     }
@@ -56,8 +60,16 @@ class ForumController extends Controller
     public function subcategory(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory): View
     {
         $questions = $forumSubcategory->moderatedForumQuestions()->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])->withCount('forumAnswers')->withCount('views')->latest()->paginate(2);
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->withCount('moderatedForumAnswers')->withCount('views')->latest()->paginate(30);
 
         return view('forum.subcategory', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'questions' => $questions]);
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        $this->saveFile($request->file('avatar'), 'forum', 'avatar', $request->user()->id, 'public/', 80, false);
+
+        return back();
     }
 }

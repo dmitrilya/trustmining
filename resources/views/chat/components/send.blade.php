@@ -1,14 +1,11 @@
-<form @submit.prevent="sendMessage({{ $chatId }}, $el)" x-data
+<form @submit.prevent="sendMessage({{ $chatId }}, $el)" x-data="{ text: '{{ isset($message) ? $message : '' }}' }"
     @keypress="if ($event.ctrlKey && $event.code == 'Enter') sendMessage({{ $chatId }}, $el);">
     <div class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
-            <textarea x-ref="message" id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}"
-                class="resize-none w-full px-0 text-sm text-gray-950 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:text-gray-50 dark:placeholder-gray-400">
-@if (isset($message))
-{{ $message }}
-@endif
-</textarea>
+            <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}" :value="text"
+                class="resize-none w-full px-0 text-sm text-gray-950 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:text-gray-50 dark:placeholder-gray-400"
+                @change="text = $el.value"></textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700" x-data="{ files: 0, photos: 0 }">
             <div class="flex ps-0 space-x-1 rtl:space-x-reverse">

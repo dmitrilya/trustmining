@@ -43,12 +43,12 @@
         @if ($user->tariff)
             <div class="flex items-end text-gray-600 md:text-lg">
                 <span
-                    class="text-gray-950 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
+                    class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
             </div>
         @endif
     </div>
 
-    <p class="text-sm text-gray-700">
+    <p class="text-sm text-gray-700 dark:text-gray-400">
         {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}
     </p>
 </section>

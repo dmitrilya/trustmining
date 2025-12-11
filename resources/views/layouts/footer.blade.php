@@ -68,6 +68,8 @@
                     href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('ads', ['adCategory' => 'accessories']) }}">{{ __('Accessories') }}</a>
             </div>
 
             <div class="space-y-2">

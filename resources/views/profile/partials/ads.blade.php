@@ -15,18 +15,18 @@
         </div>
     </header>
 
-    <div class="text-gray-500 text-lg">
+    <div class="text-gray-500 text-sm">
         <span class="text-gray-950 dark:text-gray-50 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
             {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
     @if (!$user->passport && (!$user->company || $user->company->moderation))
-        <p class="text-sm text-gray-700 dark:text-gray-300">
+        <p class="text-sm text-gray-700 dark:text-gray-400">
             {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
         </p>
     @elseif (!$user->offices->count())
-        <p class="text-sm text-gray-700 dark:text-gray-300">
+        <p class="text-sm text-gray-700 dark:text-gray-400">
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>
     @else
@@ -41,7 +41,7 @@
                 </p>
             </div>
 
-            <div class="flex justify-between mt-3">
+            <div class="flex justify-between mt-2">
                 <p class="text-sm text-gray-700 dark:text-gray-300">
                     {{ __('Is under moderation') }}
                 </p>
@@ -51,7 +51,7 @@
                 </p>
             </div>
 
-            <div class="flex justify-between mt-3">
+            <div class="flex justify-between mt-2">
                 <p class="text-sm text-gray-700 dark:text-gray-300">
                     {{ __('Hidden') }}
                 </p>

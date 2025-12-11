@@ -19,7 +19,7 @@
     </header>
 
     @if (!$user->company)
-        <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+        <p class="text-sm text-gray-700 dark:text-gray-400 mb-3">
             {{ __('Add information about your company.') }}
         </p>
 
@@ -35,7 +35,7 @@
             <x-primary-button class="block ml-auto">{{ __('Confirm') }}</x-primary-button>
         </form>
     @elseif ($user->company->moderation)
-        <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+        <p class="text-sm text-gray-700 dark:text-gray-400 mb-3">
             {{ __('Make a payment to confirm ownership of the specified company.') }}
         </p>
 
@@ -44,7 +44,7 @@
             <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
         </a>
     @else
-        <p class="text-sm text-gray-700 dark:text-gray-300">
+        <p class="text-sm text-gray-700 dark:text-gray-400">
             {{ __('The company is registered. Now you can fill the About page with an additional description that reveals your values ​​and a photo.') }}
         </p>
     @endif

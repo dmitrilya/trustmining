@@ -28,7 +28,7 @@
 
                 <div class="flex items-center" x-data="{ liked: '{{ $user && $guide->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $guide->likes->count() }} }">
                     <svg :class="{ 'block': liked, 'hidden': !liked }"
-                        @if ($user) @click="liked = false; likes--; window.like('Guide', {{ $guide->id }})" @endif
+                        @if ($user) @click="liked = false; likes--; window.like('Blog\Guide', {{ $guide->id }})" @endif
                         class="w-4 h-4 text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
                         aria-hidden="true" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -36,7 +36,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <svg :class="{ 'hidden': liked, 'block': !liked }"
-                        @if ($user) @click="liked = true; likes++; window.like('Guide', {{ $guide->id }})" @endif
+                        @if ($user) @click="liked = true; likes++; window.like('Blog\Guide', {{ $guide->id }})" @endif
                         class="w-4 h-4 text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
                         aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"

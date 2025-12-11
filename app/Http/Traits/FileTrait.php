@@ -51,11 +51,12 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, int $id, $disk = 'public/')
+    public function saveFile($file, $folder, $type, int $id, $disk = 'public/', $resize = false, $withTime = true)
     {
-        $filename = $type . '_' . $id . '_' . time();
+        $filename = $type . '_' . $id;
+        if ($withTime) $filename .= '_' . time();
         $ext = $file->getClientOriginalExtension();
-        if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename);
+        if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename, $resize);
         else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
@@ -84,7 +85,7 @@ trait FileTrait
         return $result;
     }
 
-    private function compress($file, $disk, $folder, $filename)
+    private function compress($file, $disk, $folder, $filename, $resize = false)
     {
         $info = getimagesize($file->getPathName());
 
@@ -92,6 +93,7 @@ trait FileTrait
         elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($file->getPathName());
 
         if (isset($image)) {
+            if ($resize) $image = imagescale($image, $resize);
             imagepalettetotruecolor($image);
 
             if (!imagewebp($image, Storage::path($disk . $folder . '/' . $filename . '.webp'), 20)) return false;

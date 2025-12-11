@@ -15,9 +15,8 @@
                 </div>
             @else
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}` }"
-                    @submit.prevent="console.log(theme.length);if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters.') }}', 'error');
-                        if (text.length > 1500) return window.pushToastAlert('{{ __('The maximum question length is 1500 characters.') }}', 'error');
-                        $el.submit()"
+                    @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters.') }}', 'error');
+                        if (text.length > 1500) return window.pushToastAlert('{{ __('The maximum question length is 1500 characters.') }}', 'error'); $el.submit()"
                     enctype=multipart/form-data>
                     @csrf
 
@@ -31,9 +30,8 @@
                     <div class="px-4 py-2 mt-6 bg-white dark:bg-zinc-950 rounded-t-lg">
                         <label for="text" class="sr-only">{{ __('Your question...') }}</label>
                         <textarea required id="text" rows="4" name="text" placeholder="{{ __('Your question...') }}"
-                            x-text="text" @change="text = $el.value"
-                            class="resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:placeholder-gray-400">
-                        </textarea>
+                            class="resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:placeholder-gray-400"
+                            :value="text" @change="text = $el.value"></textarea>
                         <x-input-error :messages="$errors->get('text')" />
                     </div>
 

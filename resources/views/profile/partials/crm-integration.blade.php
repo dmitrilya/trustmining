@@ -5,7 +5,7 @@
         </h2>
 
         @if ((!$user->company || $user->company->moderation) && !$user->passport)
-            <p class="text-sm text-gray-700 dark:text-gray-300">
+            <p class="text-sm text-gray-700 dark:text-gray-400">
                 {{ __('Please verify your identity using your passport or register a company to create CRM integrations.') }}
             </p>
         @endif

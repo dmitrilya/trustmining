@@ -47,8 +47,15 @@ class ForumQuestionController extends ForumController
     {
         $this->addView(request(), $forumQuestion);
 
-        $forumQuestion->load(['forumAnswers' => fn($q) => $q->withCount('likes'), 'forumAnswers.forumComments'])
-            ->loadCount('views');
+        $forumQuestion->load([
+            'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->with([
+                'likes',
+                'user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
+                'moderatedForumComments',
+                'moderatedForumComments.user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
+            ]),
+            'user' => fn($q) => $q->select(['id', 'name'])->withCount('moderatedForumAnswers'),
+        ])->loadCount('views');
 
         $similarQuestions = \DB::table('forum_questions')->where('moderation', false)->select('id')->selectRaw('JSON_LENGTH(keywords) AS total_keywords')
             ->selectRaw("(SELECT COUNT(*) FROM JSON_TABLE(? , '$[*]' COLUMNS (kw VARCHAR(255) PATH '$')) AS s
@@ -56,10 +63,17 @@ class ForumQuestionController extends ForumController
         ) AS matches", [json_encode($forumQuestion->keywords)])->havingRaw('matches / total_keywords >= ?', [0.75])
             ->orderByDesc('matches')->limit(5)->get();
 
-        $newQuestions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+        $newQuestions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
-            ->withCount('forumAnswers')->withCount('views')->latest()->limit(5)->get();
+            ->latest()->limit(5)->get();
 
-        return view('forum.question.show', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'question' => $forumQuestion, 'similarQuestions' => $similarQuestions, 'newQuestions' => $newQuestions]);
+        return view('forum.question.show', [
+            'category' => $forumCategory,
+            'subcategory' => $forumSubcategory,
+            'question' => $forumQuestion,
+            'similarQuestions' => $similarQuestions,
+            'newQuestions' => $newQuestions,
+            'user' => request()->user()
+        ]);
     }
 }
