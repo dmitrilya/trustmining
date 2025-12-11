@@ -28,7 +28,7 @@
                 <p class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400 ml-2">{{ $article->views()->count() }}</p>
             </div>
         </div>
-        <a class="block ml-auto sm:w-full mt-1 sm:mt-4" href="{{ route('article', ['article' => $article->url_title]) }}">
+        <a class="block ml-auto sm:w-full mt-1 sm:mt-4" href="{{ route('article', ['article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Details') }}</x-secondary-button>
         </a>
     </div>

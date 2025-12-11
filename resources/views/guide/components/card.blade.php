@@ -1,7 +1,7 @@
 <div class="relative sm:max-w-md h-full bg-white dark:bg-zinc-900 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center">
-            <img class="w-full" src="{{ Storage::url($guide->preview) }}" alt="{{ $guide->title }}" />
+            <img loading="lazy" class="w-full" src="{{ Storage::url($guide->preview) }}" alt="{{ $guide->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             <h5
@@ -37,7 +37,7 @@
                 <p class="text-xxs sm:text-xs text-gray-500 ml-1 xs:ml-2">{{ $guide->views()->count() }}</p>
             </div>
         </div>
-        <a class="block ml-auto sm:w-full mt-2" href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->url_title]) }}">
+        <a class="block ml-auto sm:w-full mt-2" href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->id . '-' . mb_strtolower(str_replace(' ', '-', $guide->title))]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Details') }}</x-secondary-button>
         </a>
     </div>

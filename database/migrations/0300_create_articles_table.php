@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->string('title');
-            $table->string('url_title');
             $table->string('subtitle');
             $table->text('article');
             $table->timestamp('created_at')->useCurrent();

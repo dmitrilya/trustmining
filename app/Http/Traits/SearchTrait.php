@@ -34,11 +34,11 @@ trait SearchTrait
                 'asicModel' => strtolower(str_replace(' ', '_', $asicModel->name))
             ])
         ]))->concat(Article::search($q)->query(function ($query) {
-            $query->select(['articles.title', 'articles.url_title']);
+            $query->select(['articles.title']);
         })->get()->map(fn($article) => [
             'model' => __('Article'),
             'name' => $article->title,
-            'href' => route('article', ['article' => $article->url_title])
+            'href' => route('article', ['article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
         ]))->concat(Company::search($q)->query(function ($query) {
             $query->join('users', 'companies.user_id', 'users.id')
                 ->select(['companies.id', 'companies.name', 'users.url_name as user_url_name']);
@@ -48,11 +48,11 @@ trait SearchTrait
             'href' => route('company', ['user' => $company->user_url_name])
         ]))->concat(Guide::search($q)->query(function ($query) {
             $query->join('users', 'guides.user_id', 'users.id')
-                ->select(['guides.id', 'guides.user_id', 'guides.title', 'guides.url_title']);
+                ->select(['guides.id', 'guides.user_id', 'guides.title']);
         })->get()->map(fn($guide) => [
             'model' => __('Guide'),
             'name' => $guide->title,
-            'href' => route('guide', ['user' => $guide->user_id, 'guide' => $guide->url_title])
+            'href' => route('guide', ['user' => $guide->user_id, 'guide' => $guide->id . '-' . mb_strtolower(str_replace(' ', '-', $guide->title))])
         ]))->concat(User::search($q)->query(function ($query) {
             $query->whereHas('ads')->select(['users.name', 'users.url_name']);
         })->get()->map(fn($user) => [

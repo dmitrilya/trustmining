@@ -18,7 +18,6 @@ class Guide extends Model
      */
     protected $fillable = [
         'title',
-        'url_title',
         'subtitle',
         'guide',
         'tags',
@@ -35,11 +34,14 @@ class Guide extends Model
     ];
 
     /**
-     * Get the route key for the model.
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function getRouteKeyName(): string
+    public function resolveRouteBinding($value, $field = null)
     {
-        return 'url_title';
+        return $this->find(explode('-', $value)[0]) ?? abort(404);
     }
 
     /**
@@ -62,7 +64,6 @@ class Guide extends Model
     {
         return [
             'title' => '',
-            'url_title' => '',
             'subtitle' => '',
             'guide' => '',
             'users.name' => ''

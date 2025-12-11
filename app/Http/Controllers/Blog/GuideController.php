@@ -59,13 +59,9 @@ class GuideController extends Controller
         //if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
         //    return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
-        $cyr = [' ', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я'];
-        $lat = ['_', 'a', 'b', 'v', 'g', 'd', 'e', 'io', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'sht', 'a', 'i', 'y', 'e', 'yu', 'ya', 'a', 'b', 'v', 'g', 'd', 'e', 'io', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'sht', 'a', 'i', 'y', 'e', 'yu', 'ya'];
-
         $guide = Guide::create([
             'user_id' => $user->id,
             'title' => $request->title,
-            'url_title' => strtolower(str_replace($cyr, $lat, $request->title)),
             'subtitle' => $request->subtitle,
             'guide' => $request->guide,
             'preview' => '',
@@ -97,7 +93,7 @@ class GuideController extends Controller
 
         return view('guide.show', [
             'guide' => $guide,
-            'guides' => Guide::select(['id', 'user_id', 'title', 'url_title', 'subtitle', 'preview', 'created_at'])
+            'guides' => Guide::select(['id', 'user_id', 'title', 'subtitle', 'preview', 'created_at'])
                 ->where('moderation', false)->whereNot('id', $guide->id)->withCount(['likes' => function (Builder $q) {
                     $q->where('created_at', '>', Carbon::now()->subWeek());
                 }])->orderBy('likes_count', 'desc')->take(5)->get()

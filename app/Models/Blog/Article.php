@@ -21,7 +21,7 @@ class Article extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        return $this->where('url_title', $value)->first() ?? abort(404);
+        return $this->find(explode('-', $value)[0]) ?? abort(404);
     }
  
     /**
@@ -33,7 +33,6 @@ class Article extends Model
     {
         return [
             'title' => '',
-            'url_title' => '',
             'subtitle' => '',
             'article' => '',
         ];

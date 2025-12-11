@@ -110,12 +110,12 @@ class SitemapGenerate extends Command
         }
 
         $out .= $this->addUrl('articles');
-        foreach (Article::select('url_title')->get() as $article) {
-            $out .= $this->addUrl('articles/article/' . $article->url_title);
+        foreach (Article::select(['id', 'title'])->get() as $article) {
+            $out .= $this->addUrl('articles/article/' . $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title)));
         }
         $out .= $this->addUrl('guides');
-        foreach (Guide::select(['url_title', 'user_id'])->with(['user:id'])->get() as $guide) {
-            $out .= $this->addUrl('guides/' . $guide->user->id . '/guide/' . $guide->url_title);
+        foreach (Guide::select(['id', 'title', 'user_id'])->with(['user:id'])->get() as $guide) {
+            $out .= $this->addUrl('guides/' . $guide->user->id . '/guide/' . $guide->id . '-' . mb_strtolower(str_replace(' ', '-', $guide->title)));
         }
 
         $out .= $this->addUrl('forum');

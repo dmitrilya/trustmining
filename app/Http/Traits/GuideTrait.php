@@ -11,7 +11,7 @@ trait GuideTrait
     public function getGuides($request = null)
     {
         $guides = Guide::where('moderation', false)->with(['likes', 'user:id,name'])
-            ->select(['id', 'user_id', 'title', 'url_title', 'subtitle', 'preview', 'created_at']);
+            ->select(['id', 'user_id', 'title', 'subtitle', 'preview', 'created_at']);
 
         if (isset($request)) {
             if ($request->tags && count($request->tags)) $guides = $guides->where(function ($q) use ($request) {

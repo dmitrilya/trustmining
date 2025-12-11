@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')
                 ->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
-            $table->string('url_title');
             $table->string('subtitle');
             $table->text('guide');
             $table->json('tags');
