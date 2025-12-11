@@ -54,8 +54,6 @@ class GetYandexGPTOperation implements ShouldQueue
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
 
-                    info(json_encode($res));
-
                     if ($res['risk'] < 20) {
                         $this->model->moderation = false;
                         $this->model->save();

@@ -174,7 +174,7 @@
 
                                     <div class="mt-4 sm:mt-6 lg:mt-8 space-y-2 sm:space-y-4">
                                         @foreach ($answer->moderatedForumComments as $comment)
-                                            <div itemprop="comment" itemscope itemtype="https://schema.org/Comment"
+                                            <div itemprop="comment" itemscope itemtype="https://schema.org/Comment" itemref="comment_{{ $comment->id }}"
                                                 class="flex justify-between">
                                                 <div itemprop="author" itemscope itemtype="https://schema.org/Person"
                                                     class="flex">
@@ -191,7 +191,7 @@
                                                             class="mb-0.5 sm:mb-1 text-xs lg:text-sm text-gray-700 dark:text-gray-300">
                                                             {{ $comment->user->name }}
                                                         </h5>
-                                                        <p itemprop="text"
+                                                        <p itemprop="text" id="comment_{{ $comment->id }}"
                                                             class="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
                                                             {{ $comment->text }}
                                                         </p>
