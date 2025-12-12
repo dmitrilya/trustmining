@@ -95,6 +95,8 @@
                     href="{{ route('articles') }}">{{ __('Blog') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('guides') }}">{{ __('Guides') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('forum') }}">{{ __('Forum') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
