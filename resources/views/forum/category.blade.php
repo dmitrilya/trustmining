@@ -53,7 +53,7 @@
                             'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
                             'forumQuestion' => $question->id . '-' . mb_strtolower(str_replace(' ', '-', $question->theme)),
                         ]) }}">
-                        <div class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-gray-200 dark:hover:bg-zinc-950">
+                        <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-gray-200 dark:hover:bg-zinc-950">
                             <div class="mb-1.5 sm:mb-2 flex justify-between">
                                 <div class="text-xxs sm:text-xs lg:text-sm text-gray-500">
                                     {{ __($question->forumSubcategory->forumCategory->name) }}.
@@ -62,10 +62,10 @@
 
                                 <div class="text-right ml-3 sm:ml-5">
                                     <div
-                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
+                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
                                         {{ __('Views') }}: <span>{{ $question->views_count }}</span>
                                     </div>
-                                    <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
+                                    <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
                                         {{ __('Answers') }}: <span>{{ $question->moderated_forum_answers_count }}</span>
                                     </div>
                                 </div>
