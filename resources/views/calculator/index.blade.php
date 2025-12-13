@@ -11,10 +11,11 @@
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
     ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' .
     ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
-    ' в удобном калькуляторе майнинга'" :canonical="route('calculator.modelver', [
-    'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
-    'asicVersion' => $selVersion->hashrate,
-])">
+    ' в удобном калькуляторе майнинга'"
+    canonical="{{ route('calculator.modelver', [
+        'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
+        'asicVersion' => $selVersion->hashrate,
+    ]) }}">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
@@ -280,12 +281,12 @@
                                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300"
                                                         x-text="coin.abbreviation">
                                                     </div>
-                                                    <div class="text-xxs sm:text-xs text-gray-500 dark:text-gray-400"
+                                                    <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400"
                                                         x-text="coin.name">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="text-xxs sm:text-xs text-gray-700 dark:text-gray-200 font-bold mt-1"
+                                            <div class="text-xxs xs:text-xs text-gray-700 dark:text-gray-200 font-bold mt-1"
                                                 x-text="Math.round(version.hashrate * coin.profit * 100000000) / 100000000">
                                             </div>
                                         </div>

@@ -7,10 +7,11 @@
     ' модели ' .
     $model->name .
     (isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '') .
-    '. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'" :canonical="route('database.model', [
+    '. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'"
+    canonical="{{ route('database.model', [
         'asicBrand' => strtolower(str_replace(' ', '_', $brand->name)),
         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
-    ])">
+    ]) }}">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
@@ -145,7 +146,8 @@
                         </span><span class="text-gray-700 dark:text-gray-200" itemprop="value">
                             {{ $algorithm->name }}</span></div>
 
-                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('Release date') }}: <span class="text-gray-700 dark:text-gray-200">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('Release date') }}: <span
+                            class="text-gray-700 dark:text-gray-200">
                             <time itemprop="releaseDate"
                                 datetime="{{ $model->release }}">{{ $model->release->locale('ru')->translatedFormat('F Y') }}</time></span>
                     </div>
@@ -190,9 +192,11 @@
                                 </div>
 
                                 <div itemprop="hasMeasurement" itemscope
-                                    itemtype="http://schema.org/QuantitativeValue" class="text-sm text-gray-500 dark:text-gray-400 mt-6">
+                                    itemtype="http://schema.org/QuantitativeValue"
+                                    class="text-sm text-gray-500 dark:text-gray-400 mt-6">
                                     <span itemprop="valueReference">{{ __('Efficiency') }}</span>:
-                                    <span itemprop="value" class="text-gray-700 dark:text-gray-200">{{ $version->efficiency }}</span>
+                                    <span itemprop="value"
+                                        class="text-gray-700 dark:text-gray-200">{{ $version->efficiency }}</span>
                                     <span itemprop="unitText">j/{{ $version->measurement }}</span>
                                 </div>
 
