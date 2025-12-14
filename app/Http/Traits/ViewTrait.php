@@ -12,7 +12,7 @@ trait ViewTrait
     {
         //$exceptIPs = ['87.250.224.', '195.178.110.', '5.255.231.', '188.168.158.', '40.77.167.', '57.141.0.', '95.108.213.', '52.167.144.', '207.46.13.', '213.180.203.', '157.55.39.', '66.249.', '83.99.151.', '188.162.250.', '85.92.66.', '138.201.194.', '148.251.11.', '37.114.96.', '216.10.31.', '64.44.18.', '34.30.37.', '217.113.194.', '47.82.11.', '57.141.4.'];
         $ip = $request->ip();
-        $exceptAgents = ['bingbot', 'Googlebot', 'YandexBot', 'SERankingBacklinksBot', 'Chrome-Lighthouse'];
+        $exceptAgents = ['bingbot', 'Googlebot', 'YandexBot', 'YandexMobileBot', 'GeedoShopProductFinder', 'SERankingBacklinksBot', 'Chrome-Lighthouse'];
         $agent = $request->header('User-Agent');
 
         foreach ($exceptAgents as $exceptAgent) {

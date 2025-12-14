@@ -36,7 +36,7 @@
                         </x-primary-button>
                     </div>
                 </div>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.whatsminer.com/src/views/support.html">{{ __('Check on the official website') }}</a>
             </div>

@@ -35,6 +35,10 @@ module.exports = {
             gridTemplateColumns: {
                 '16': 'repeat(16, minmax(0, 1fr))',
                 '22': 'repeat(22, minmax(0, 1fr))',
+            },
+            maxWidth: {
+                '8xl': '88rem',
+                '9xl': '96rem',
             }
         },
     },
