@@ -1,4 +1,4 @@
-<x-app-layout title="Блог: {{ $article->title }}">
+<x-app-layout title="Блог: {{ $article->title }}" description="{{ $article->subtitle }}">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ $article->title }}

@@ -76,7 +76,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
             <div class="relative mt-1" @click.away="openDropdown = null">
 
                 <button type="button" @click="openDropdown = openDropdown === asicModel.id ? null : asicModel.id"
-                    class="h-9 w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-gray-300 dark:ring-zinc-700">
+                    class="h-9 w-full cursor-pointer rounded-md text-gray-950 dark:text-gray-50 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-gray-300 dark:ring-zinc-700">
                     <span class="ml-3 block truncate" x-text="currentVersion?.hashrate ?? ''"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -96,7 +96,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
                                 version = asicVersion;
                                 openDropdown = null;
                             "
-                            class="cursor-default select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
+                            class="cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
                             <span class="ml-3 block truncate" x-text="asicVersion.hashrate"></span>
 
                             <span x-show="selectedVersion == asicVersion.id"
