@@ -9,12 +9,12 @@
         $guide = App\Models\Blog\Guide::find(10000001);
     @endphp
 
-    <div class="text-xs sm:text-sm lg:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-6">
+    <div class="text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-6">
         {{ number_format($coin->networkDifficulties()->latest()->first()->difficulty) }}
     </div>
 
     @if ($guide)
-        <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline mt-2 sm:mt-3" target="_blank"
+        <a class="text-xxs xs:text-xs text-indigo-400 hover:text-indigo-600 underline mt-2 sm:mt-3" target="_blank"
             href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->id . '-' . strtolower(str_replace(' ', '-', $guide->title))]) }}">
             {{ __('What is network difficulty?') }}
         </a>
