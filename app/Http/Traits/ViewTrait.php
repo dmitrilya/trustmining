@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use App\Models\Morph\View;
+use Illuminate\Support\Facades\Log;
 
 use Carbon\Carbon;
 
@@ -19,7 +20,7 @@ trait ViewTrait
             if (str_contains($agent, $exceptAgent)) return;
         }
 
-        info($agent);
+        Log::channel('agents')->info("UserAgent={$agent} ip={$ip}");
 
         $auth = $request->user();
 

@@ -69,6 +69,12 @@ return [
             'level' => 'info',
         ],
 
+        'agents' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/agents.log'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
