@@ -59,7 +59,7 @@
     ];
 @endphp
 
-<div x-show="tab == 0" class="h-full flex flex-col p-4 md:p-6 bg-white rounded-b-2xl dark:bg-zinc-900" role="tabpanel"
+<div x-show="tab == 'faq'" class="h-full flex flex-col p-4 md:p-6 bg-white rounded-b-2xl dark:bg-zinc-900" role="tabpanel"
     aria-labelledby="faq-tab" x-data="{ search: '' }">
     <x-text-input class="mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}" />
 

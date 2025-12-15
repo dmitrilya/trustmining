@@ -21,7 +21,7 @@
                 </p>
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
-                href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
+                href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
                 <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
             </a>
         </div>
@@ -49,7 +49,7 @@
                 </p>
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
-                href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
+                href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
                 <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
             </a>
         </div>

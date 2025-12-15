@@ -152,7 +152,7 @@
             /{{ __('month') }}</div>
         
         <a
-            href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}"><x-primary-button>{{ __('Contact') }}</x-primary-button></a>
+            href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}"><x-primary-button>{{ __('Contact') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"

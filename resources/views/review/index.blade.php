@@ -84,7 +84,7 @@
                                     <x-slot name="content">
                                         @if ($auth->id == $review->reviewable->id)
                                             <x-dropdown-link
-                                                href="{{ route('support', ['chat' => 1, 'message' => __('Good day! I am writing to appeal review number') . ' ' . $review->id]) }}">{{ __('Complain') }}</x-dropdown-link>
+                                                href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I am writing to appeal review number') . ' ' . $review->id]) }}">{{ __('Complain') }}</x-dropdown-link>
                                         @else
                                             <x-dropdown-link href="#"
                                                 @click.prevent="$dispatch('open-modal', 'confirm-review-deletion-{{ $review->id }}')">
