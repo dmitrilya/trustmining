@@ -1,5 +1,5 @@
 <x-metrics-layout title="Сложность сети {{ $coin->name }}" :header="__('Network difficulty') . ' ' . $coin->name" active="network_difficulty"
-    description="История изменений и текущий показатель сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+    description="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
