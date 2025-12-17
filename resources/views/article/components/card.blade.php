@@ -5,9 +5,9 @@
             <img class="w-full" src="{{ Storage::url('public/articles/' . $article->id . '.webp') }}" alt="{{ $article->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
-            <h5
+            <h3
                 class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-gray-950 dark:text-gray-50">
-                {{ $article->title }}</h5>
+                {{ $article->title }}</h3>
             <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-300">
                 {{ $article->subtitle }}</p>
         </div>

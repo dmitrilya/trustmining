@@ -4,9 +4,9 @@
             <img loading="lazy" class="w-full" src="{{ Storage::url($guide->preview) }}" alt="{{ $guide->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
-            <h5
+            <h3
                 class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-gray-950 dark:text-white">
-                {{ $guide->title }}</h5>
+                {{ $guide->title }}</h3>
             <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-300">
                 {{ $guide->subtitle }}</p>
         </div>
