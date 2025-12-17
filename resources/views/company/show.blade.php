@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $company->name }}: информация о компании">
+<x-app-layout title="{{ $company->name }}: информация о компании" description="Ознакомьтесь со всей информацией о компании на сайте TrustMining">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $company->user->url_name])"></x-back-link>

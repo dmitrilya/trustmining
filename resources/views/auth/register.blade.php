@@ -1,4 +1,4 @@
-<x-guest-layout title="TrustMining Регистрация">
+<x-guest-layout title="TrustMining Регистрация" description="Регистрация на сайте TrustMining">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

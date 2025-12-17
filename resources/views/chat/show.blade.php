@@ -1,4 +1,4 @@
-<x-app-layout title="Онлайн чат: сообщения, диалоги">
+<x-app-layout title="Онлайн чат: сообщения, диалоги" description="Диалог с пользователем на сайте TrustMining">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 64.4px)">
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"

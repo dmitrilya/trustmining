@@ -1,4 +1,4 @@
-<x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}">
+<x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}" description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
