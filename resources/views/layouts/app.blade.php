@@ -13,8 +13,8 @@
 
     @php
         $theme = $theme = request()->cookie('theme');
-        $exceptAgents = ['bingbot', 'Googlebot', 'YandexBot', 'YandexMobileBot', 'GeedoShopProductFinder', 'SERankingBacklinksBot', 'Chrome-Lighthouse', 'PerplexityBot'];
-        $agent = request()->header('User-Agent');
+        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse'];
+        $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
 
         foreach ($exceptAgents as $exceptAgent) {

@@ -12,8 +12,8 @@ trait ViewTrait
     public function addView($request, $model, $adId = null)
     {
         $ip = $request->ip();
-        $exceptAgents = ['bingbot', 'Googlebot', 'YandexBot', 'YandexMobileBot', 'GeedoShopProductFinder', 'SERankingBacklinksBot', 'Chrome-Lighthouse', 'PerplexityBot'];
-        $agent = $request->header('User-Agent');
+        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse'];
+        $agent = strtolower($request->header('User-Agent'));
 
         foreach ($exceptAgents as $exceptAgent) {
             if (str_contains($agent, $exceptAgent)) return;
