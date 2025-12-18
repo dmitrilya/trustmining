@@ -205,7 +205,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-xxs xs:text-xs text-gray-700 dark:text-gray-200 font-bold mt-1"
-                                                    x-text="Math.round(version.hashrate * coin.profit * 100000000) / 100000000">
+                                                    x-text="Math.round(version.hashrate * coin.profit * version.coef * 100000000) / 100000000">
                                                 </div>
                                             </div>
                                         </template>

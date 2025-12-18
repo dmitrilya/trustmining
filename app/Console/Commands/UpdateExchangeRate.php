@@ -48,7 +48,7 @@ class UpdateExchangeRate extends Command
 
         $out = curl_exec($curl);
 
-        if ($out === false) info(curl_error($curl), curl_errno($curl));
+        if ($out === false) info(curl_error($curl) . ', ' . curl_errno($curl));
         else {
             $rates = json_decode($out)->rates;
 
@@ -92,10 +92,12 @@ class UpdateExchangeRate extends Command
             $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $model) {
                 $vm = array_search($version->measurement, $measurements);
                 $am = array_search($model->algorithm->measurement, $measurements);
+                $coef = pow(1000, $vm - $am);
                 $version->profits = $algorithm->maxProfit->map(fn($profit) => [
-                    'profit' => round($profit['profit'] * $version->hashrate * pow(1000, $vm - $am), 4),
+                    'profit' => round($profit['profit'] * $version->hashrate * $coef, 4),
                     'coins' => $profit['coins']
                 ]);
+                $version->coef = pow(1000, $vm - $am);
                 $version->price = round($version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
