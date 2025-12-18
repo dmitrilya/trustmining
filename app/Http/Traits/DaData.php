@@ -48,7 +48,7 @@ trait DaData
         $card = collect($suggs['suggestions'][0])->only(['value', 'data'])->all();
         $card['data'] = collect($card['data'])->only(['kpp', 'capital', 'invalid', 'founders', 'managers', 'branch_type', 'branch_count', 'type', 'state', 'inn', 'ogrn', 'okveds', 'finance', 'address', 'phones', 'emails', 'employee_count'])->all();
         if ($card['data']['type'] == 'LEGAL') {
-            $card['data']['capital'] = $card['data']['capital']['value'];
+            $card['data']['capital'] = isset($card['data']['capital']['value']) ? $card['data']['capital']['value'] : 10000;
             $card['data']['founders'] = collect($card['data']['founders'])->map(fn($founder) => [
                 'inn' => $founder['inn'],
                 'name' => $founder['type'] == 'PHYSICAL' ? $founder['fio']['surname'] . ' ' . $founder['fio']['name'] . ' ' . $founder['fio']['patronymic'] : $founder['name'],

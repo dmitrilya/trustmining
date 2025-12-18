@@ -61,9 +61,9 @@
                             @include('profile.partials.forum')
                         </div>
 
-                        <div class="mt-2 p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
+                        {{-- <div class="mt-2 p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
                             @include('profile.partials.delete-user-form')
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
