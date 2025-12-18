@@ -75,6 +75,12 @@ return [
             'level' => 'info',
         ],
 
+        'unknownalgo' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/unknownalgo.log'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

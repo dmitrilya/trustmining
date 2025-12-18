@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
-use Carbon\Carbon;
 
 class UpdateCoinProfit extends Command
 {
@@ -41,17 +41,24 @@ class UpdateCoinProfit extends Command
     public function handle()
     {
         $mes = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $algos = Algorithm::all();
 
-        collect(json_decode(file_get_contents('https://pool.binance.com/mining-api/v1/public/pool/index'))->data->algoList)
-            ->pluck('symbolInfos', 'algoName')
-            ->each(function ($algorithm) {
-                foreach ($algorithm as $symbolInfo) {
-                    Coin::where('abbreviation', $symbolInfo->symbol)->update(['profit' => $symbolInfo->eachEarn, 'difficulty' => $symbolInfo->difficulty]);
+        collect(json_decode(file_get_contents('https://www.antpool.com/auth/v3/index/poolcoins'))->data->items)->whereNotIn('coinType', ['FB'])
+            ->each(function ($coin) use ($mes, $algos) {
+                if ($coin->algorithm == 'SHA256d') $coin->algorithm = 'SHA-256';
+                elseif ($coin->algorithm == 'Blake2B+SHA3') $coin->algorithm = 'Handshake';
+                elseif ($coin->algorithm == 'Blake2S') $coin->algorithm = 'Blake (2s-Kadena)';
+                elseif ($coin->algorithm == 'SCRYPT') $coin->algorithm = 'Scrypt';
 
-                    if ($symbolInfo->eachEarnMap) foreach ($symbolInfo->eachEarnMap as $coinId => $coinProfit) {
-                        if (isset($this->coinIds[$coinId])) Coin::where('abbreviation', $this->coinIds[$coinId])->update(['profit' => $coinProfit]);
-                        else info('Binance new merged coin: ' . $symbolInfo->symbol);
-                    }
+                $algorithm = $algos->where('name', $coin->algorithm)->first();
+                if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
+
+                $profit = $coin->blockReward * 86400 / 4294967296 / $coin->networkDiff * pow(1000, array_search($algorithm->measurement, $mes));
+                Coin::where('abbreviation', $coin->coinType)->update(['profit' => $profit, 'difficulty' => $coin->networkDiff, 'reward_block' => $coin->blockIncentive]);
+
+                if (!$coin->mergeMiningInfos) return;
+                foreach ($coin->mergeMiningInfos as $mergeCoin) {
+                    Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate]);
                 }
             });
 
@@ -62,14 +69,14 @@ class UpdateCoinProfit extends Command
         ) {
             collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' .
                 config('services.minerstat.key' . $i) . '&list=' . $coins->implode(',')))->data)
-                ->each(function ($coin) use ($mes) {
+                ->each(function ($coin) use ($mes, $algos) {
                     if ($coin->coin == 'GRIN') return;
 
                     $coinData = [];
                     if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
                     if ($coin->algorithm == 'NexaHash') $coin->algorithm = 'NexaPow';
 
-                    $algorithm = Algorithm::where('name', $coin->algorithm)->first();
+                    $algorithm = $algos->where('name', $coin->algorithm)->first();
                     if (!$algorithm) return;
 
                     if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
