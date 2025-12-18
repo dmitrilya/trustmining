@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
+use Carbon\Carbon;
 
 class UpdateCoinProfit extends Command
 {
