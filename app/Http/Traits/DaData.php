@@ -53,7 +53,7 @@ trait DaData
                 'inn' => $founder['inn'],
                 'name' => $founder['type'] == 'PHYSICAL' ? $founder['fio']['surname'] . ' ' . $founder['fio']['name'] . ' ' . $founder['fio']['patronymic'] : $founder['name'],
                 'type' => $founder['type'],
-                'share' => $founder['share']['value'],
+                'share' => isset($founder['share']['value']) ? $founder['share']['value'] : null,
                 'invalidity' => $founder['invalidity'],
                 'start_date' => $founder['start_date'],
             ]);
