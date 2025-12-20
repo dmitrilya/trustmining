@@ -1,47 +1,52 @@
 @props(['images', 'max' => '96', 'min' => '56'])
 
-<div id="ad-images" class="relative w-full h-full" data-carousel="static">
-    <div class="relative h-full min-h-{{ $min }} max-h-{{ $max }} overflow-hidden">
+<div id="ad-images" class="relative max-w-full overflow-hidden" x-data="{ slide: 1, slides: '{{ count($images) }}', width: 0 }" x-init="width = $el.clientWidth">
+    <div class="duration-700 ease-in-out flex items-center relative h-full"
+        :style="{ left: -1 * (slide - 1) * width + 'px' }">
         @foreach ($images as $image)
-            <div class="hidden duration-700 ease-in-out bg-white" data-carousel-item>
-                <img src="{{ Storage::url($image) }}"
-                    class="h-full rounded-lg absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                    alt="...">
+            <div class="rounded-lg overflow-hidden bg-white" x-init="$el.style.minWidth = width + 'px'">
+                <img src="{{ Storage::url($image) }}" class="w-full block" alt="...">
             </div>
         @endforeach
     </div>
 
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        @foreach ($images as $image)
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true"
-                aria-label="{{ 'Slide ' . $loop->iteration }}" data-carousel-slide-to="{{ $loop->index }}"></button>
-        @endforeach
-    </div>
+    @if (count($images) > 1)
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-3 sm:bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            @foreach ($images as $image)
+                <button type="button" class="size-3 sm:size-4 border border-gray-300 dark:border-zinc-700 rounded-full"
+                    @click="slide = {{ $loop->iteration }}"
+                    :class="{
+                        'bg-gray-300 dark:bg-zinc-600': slide == {{ $loop->iteration }},
+                        'bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700': slide !=
+                            {{ $loop->iteration }}
+                    }"
+                    aria-label="{{ 'Slide ' . $loop->iteration }}"></button>
+            @endforeach
+        </div>
 
-    <button type="button"
-        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-3 sm:px-4 cursor-pointer group focus:outline-none"
-        data-carousel-prev>
-        <span
-            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
-            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M5 1 1 5l4 4" />
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button"
-        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-3 sm:px-4 cursor-pointer group focus:outline-none"
-        data-carousel-next>
-        <span
-            class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
-            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-gray-500 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m1 9 4-4-4-4" />
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
+        <button type="button" @click="if (slide > 1) slide--"
+            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
+            <span
+                class="inline-flex items-center justify-center size-6 sm:size-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
+                <svg class="size-2 sm:size-4 text-gray-500 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 1 1 5l4 4" />
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" @click="if (slide < slides) slide++"
+            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
+            <span
+                class="inline-flex items-center justify-center size-6 sm:size-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
+                <svg class="size-2 sm:size-4 text-gray-500 dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                    fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 9 4-4-4-4" />
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+    @endif
 </div>

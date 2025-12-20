@@ -1,9 +1,7 @@
-<li class="sm:flex">
-    <a class="block w-full" href="{{ route('office.edit', ['office' => $office->id]) }}">
-        <x-carousel :images="$office->images"></x-carousel>
-    </a>
+<li class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
+    <x-carousel :images="$office->images"></x-carousel>
 
-    <div class="flex flex-col justify-between mt-3 sm:mt-0 sm:ml-6 w-full">
+    <div class="flex flex-col justify-between w-full">
         <div>
             <p class="flex items-center text-sm sm:text-base font-semibold text-gray-950 mb-3 sm:mb-4">
                 <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-600 mr-2" aria-hidden="true" width="24" height="24"
@@ -34,7 +32,7 @@
             </a>
 
             @if ($auth && $auth->id == $office->user->id)
-                <a class="block w-full sm:w-auto sm:ml-2" href="{{ route('office.edit', ['office' => $office->id]) }}">
+                <a class="block w-full sm:w-auto mt-1 sm:mt-0 sm:ml-2" href="{{ route('office.edit', ['office' => $office->id]) }}">
                     <x-primary-button class="w-full">{{ __('Edit') }}</x-primary-button>
                 </a>
             @endif

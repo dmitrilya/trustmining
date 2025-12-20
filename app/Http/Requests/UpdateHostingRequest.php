@@ -31,7 +31,7 @@ class UpdateHostingRequest extends FormRequest
             'description' => 'required|max:' . $descriptionMax,
             'video' => 'nullable|active_url',
             'images' => 'max:10',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'contract' => 'file|mimes:doc,docx|max:1024',
             'territory' => 'file|mimes:doc,docx|max:1024',
             'energy_supply' => 'file|mimes:doc,docx|max:1024',

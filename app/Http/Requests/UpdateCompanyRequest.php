@@ -29,12 +29,12 @@ class UpdateCompanyRequest extends FormRequest
 
         return [
             'images' => 'max:8',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'video' => 'nullable|active_url',
             'site' => 'nullable|active_url',
             'description' => 'nullable|max:' . $descriptionMax,
-            'logo' => 'file|mimes:jpg,png,jpeg|max:512',
-            'bg_logo' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'logo' => 'file|mimes:jpg,png,jpeg,webp|max:512',
+            'bg_logo' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
         ];
     }
 

@@ -38,7 +38,7 @@ class StoreReviewRequest extends FormRequest
             ],
             'review' => 'required|string|max:500',
             'rating' => 'required|numeric|min:1|max:5',
-            'image' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'image' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'document' => 'file|mimes:pdf,doc,docx|max:1024',
         ];
     }

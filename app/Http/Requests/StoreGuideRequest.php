@@ -27,7 +27,7 @@ class StoreGuideRequest extends FormRequest
 
         return [
             'title' => 'required|max:40',
-            'preview' => 'required|file|mimes:jpg,png,jpeg|max:2048',
+            'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048',
             'subtitle' => 'required|max:100',
             'guide' => 'required',
         ];

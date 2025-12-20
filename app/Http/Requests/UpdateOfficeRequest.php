@@ -25,7 +25,7 @@ class UpdateOfficeRequest extends FormRequest
     {
         return [            
             'images' => 'max:5',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'video' => 'nullable|active_url',
         ];
     }

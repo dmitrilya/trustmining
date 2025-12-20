@@ -26,7 +26,7 @@ class StoreForumCommentRequest extends FormRequest
         return [
             'text' => 'required|string|max:1500',
             'images' => 'max:3',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'forum_answer_id' => 'exists:forum_answers,id',
         ];
     }

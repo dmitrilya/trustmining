@@ -25,7 +25,7 @@ class StorePassportRequest extends FormRequest
     {
         return [
             'images' => 'required|size:3',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:2048',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
         ];
     }
 

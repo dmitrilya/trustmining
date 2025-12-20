@@ -26,7 +26,7 @@ class StoreMessageRequest extends FormRequest
         return [
             'message' => 'nullable|string:max:1000|required_without_all:images,files',
             'images' => 'nullable|max:10|required_without_all:message,files',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'files' => 'nullable|max:3|required_without_all:images,message',
             'files.*' => 'file|mimes:doc,docx,pdf|max:512',
         ];

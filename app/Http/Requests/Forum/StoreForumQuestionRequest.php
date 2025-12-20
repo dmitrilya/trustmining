@@ -27,7 +27,7 @@ class StoreForumQuestionRequest extends FormRequest
             'theme' => 'required|string|max:64',
             'text' => 'required|string|max:1500',
             'images' => 'max:3',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
         ];
     }
 }

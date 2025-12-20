@@ -32,9 +32,6 @@ trait ModerationTrait
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
 
-        if ($moderation->moderationable_type == 'App\Models\User\Company' && (!$m->user->passport || $m->user->passport->moderation))
-            return redirect()->route('moderations')->withErrors(['forbidden' => __('First you need to pass moderation by passport')]);
-
         if (!$m->moderation) {
             $files = [];
             $disk = 'public';

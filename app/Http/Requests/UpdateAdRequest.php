@@ -30,8 +30,8 @@ class UpdateAdRequest extends FormRequest
 
         return [
             'office_id' => 'required|exists:offices,id',
-            'preview' => 'file|mimes:jpg,png,jpeg|max:2048',
-            'images.*' => 'file|mimes:jpg,png,jpeg|max:1024',
+            'preview' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
+            'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'description' => 'max:' . $descriptionMax,
             'price' => 'required|numeric',
             'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
