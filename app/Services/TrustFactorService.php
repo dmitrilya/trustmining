@@ -63,7 +63,7 @@ class TrustFactorService
         if ($card['type'] === 'LEGAL') {
             $score += 3;
 
-            if ($card['capital'] == 10000) $score -= 4;
+            if ($card['capital'] > 10000) $score += 2;
             if ($card['branch_count'] > 0) $score += 3;
         }
 

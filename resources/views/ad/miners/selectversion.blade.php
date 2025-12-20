@@ -3,9 +3,10 @@
     withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }},
     selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
-    search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}'
+    search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
+    openDropdown: null
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="model" 
+    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="model"
         @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif aria-label="{{ __('Version') }}">
@@ -47,12 +48,7 @@
                         </div>
 
                         <span
-                            :class="{
-                                'block': selectedModel ==
-                                    {{ $asicModel->id }},
-                                'hidden': selectedModel !=
-                                    {{ $asicModel->id }}
-                            }"
+                            x-show="selectedModel == {{ $asicModel->id }}"
                             class="absolute inset-y-0 right-0 flex items-center pr-4">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                                 class="text-indigo-600 hover:text-white" aria-hidden="true">
@@ -67,17 +63,12 @@
     </div>
 
     @foreach ($models as $asicModel)
-        <div :class="{
-            'block': selectedModel == {{ $asicModel->id }},
-            'hidden': selectedModel !=
-                {{ $asicModel->id }}
-        }"
-            class="mt-6 hidden">
+        <div x-show="selectedModel == {{ $asicModel->id }}" class="mt-6" style="display: none">
             <x-input-label :value="__('Version')" />
 
-            <div class="relative mt-1">
-                <button type="button" data-dropdown-toggle="{{ 'dropdown-version_' . $asicModel->id }}"
-                    id="{{ 'dropdown-version_' . $asicModel->id . '_button' }}"
+            <div class="relative mt-1" @click.away="openDropdown = null">
+                <button type="button"
+                    @click="openDropdown = openDropdown === {{ $asicModel->id }} ? null : {{ $asicModel->id }}"
                     class="h-9 relative w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-950 dark:text-gray-50 shadow-sm dark:shadow-zinc-800 ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <span class="flex items-center">
                         <span class="ml-3 block truncate"
@@ -92,23 +83,16 @@
                     </span>
                 </button>
 
-                <ul class="hidden absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                    aria-labelledby="{{ 'dropdown-version_' . $asicModel->id . '_button' }}"
-                    id="{{ 'dropdown-version_' . $asicModel->id }}">
+                <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                    x-show="openDropdown === {{ $asicModel->id }}">
 
                     @if (isset($withAllVersions))
-                        <li @click="selectedVersion = null; new Dropdown($event.target.closest('ul'), $event.target.closest('ul').previousElementSibling).hide()"
+                        <li @click="selectedVersion = null; openDropdown = null;"
                             role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
-                            <div class="flex items-center">
-                                <span class="ml-3 block truncate">{{ __('All') }}</span>
-                            </div>
+                            <span class="ml-3 block truncate">{{ __('All') }}</span>
 
-                            <span
-                                :class="{
-                                    'block': selectedVersion == null,
-                                    'hidden': selectedVersion != null
-                                }"
+                            <span x-show="selectedVersion == null"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                                     class="text-indigo-600 hover:text-white" aria-hidden="true">
@@ -120,20 +104,12 @@
                     @endif
 
                     @foreach ($asicModel->asicVersions as $asicVersion)
-                        <li @click="selectedVersion = {{ $asicVersion->id }}; new Dropdown($event.target.closest('ul'), $event.target.closest('ul').previousElementSibling).hide(); if (typeof version !== 'undefined') version = {{ $asicVersion }}"
+                        <li @click="selectedVersion = {{ $asicVersion->id }}; if (typeof version !== 'undefined') version = {{ $asicVersion }}; openDropdown = null;"
                             role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
-                            <div class="flex items-center">
-                                <span class="ml-3 block truncate">{{ $asicVersion->hashrate }}</span>
-                            </div>
+                            <span class="ml-3 block truncate">{{ $asicVersion->hashrate }}</span>
 
-                            <span
-                                :class="{
-                                    'block': selectedVersion ==
-                                        {{ $asicVersion->id }},
-                                    'hidden': selectedVersion !=
-                                        {{ $asicVersion->id }}
-                                }"
+                            <span x-show="selectedVersion == {{ $asicVersion->id }}"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                                     class="text-indigo-600 hover:text-white" aria-hidden="true">

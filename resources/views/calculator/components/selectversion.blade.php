@@ -74,7 +74,6 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
             <x-input-label :value="__('Version')" />
 
             <div class="relative mt-1" @click.away="openDropdown = null">
-
                 <button type="button" @click="openDropdown = openDropdown === asicModel.id ? null : asicModel.id"
                     class="h-9 w-full cursor-pointer rounded-md text-gray-950 dark:text-gray-50 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-gray-300 dark:ring-zinc-700">
                     <span class="ml-3 block truncate" x-text="currentVersion?.hashrate ?? ''"></span>
@@ -89,7 +88,6 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
 
                 <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg"
                     x-show="openDropdown === asicModel.id">
-
                     <template x-for="asicVersion in asicModel.asic_versions" :key="asicVersion.id">
                         <li @click="
                                 selectedVersion = asicVersion.id; 
@@ -109,7 +107,6 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
                             </span>
                         </li>
                     </template>
-
                 </ul>
             </div>
         </div>
