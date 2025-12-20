@@ -103,6 +103,15 @@ class TrustFactorService
             $score -= 15;
         }
 
+        // сайт
+        if ($user->company->site) $score += 3;
+
+        // видео
+        if ($user->company->video) $score += 3;
+
+        // количество фото
+        if (count($user->company->images) > 5) $score += 2;
+
         return $score;
     }
 
