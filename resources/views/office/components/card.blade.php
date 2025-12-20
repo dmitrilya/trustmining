@@ -1,4 +1,4 @@
-<li class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 xl:gap-3">
+<li class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 xl:gap-4">
     <x-carousel :images="$office->images"></x-carousel>
 
     <div class="flex flex-col justify-between w-full">
