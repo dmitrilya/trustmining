@@ -24,7 +24,7 @@
             @endforeach
         </div>
 
-        <button type="button" @click="if (slide > 1) slide--"
+        <button type="button" @click="if (slide > 1) slide--; else slide = {{ count($images) }}"
             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
             <span
                 class="inline-flex items-center justify-center size-6 sm:size-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
@@ -36,7 +36,7 @@
                 <span class="sr-only">Previous</span>
             </span>
         </button>
-        <button type="button" @click="if (slide < slides) slide++"
+        <button type="button" @click="if (slide < slides) slide++; else slide = 1"
             class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
             <span
                 class="inline-flex items-center justify-center size-6 sm:size-10 rounded-full bg-gray-100 dark:bg-zinc-800 group-hover:bg-gray-200 dark:hover:bg-zinc-700 group-focus:ring-2 group-focus:ring-gray-50 group-focus:outline-none">
