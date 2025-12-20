@@ -15,7 +15,7 @@
                 <div>
                     <x-input-label for="hosting-images" :value="__('Photo')" />
                     <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
-                        accept=".png,.jpg,.jpeg" multiple
+                        accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-600" id="images_help">
                         {{ __('When you upload new files, all old ones are deleted') }}</p>

@@ -55,7 +55,7 @@
         <div class="mt-6">
             <x-input-label for="images" :value="__('Change photo')" />
             <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple autocomplete="images"
-                accept=".png,.jpg,.jpeg" />
+                accept=".png,.jpg,.jpeg,.webp" />
             <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
                 or JPEG (max. 2MB, 3 items)</p>
             <x-input-error :messages="$errors->get('images')" />

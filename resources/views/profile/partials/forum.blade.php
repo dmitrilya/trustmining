@@ -18,7 +18,7 @@
 
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" />
-            <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" :value="old('avatar')" accept=".png,.jpg,.jpeg"
+            <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" :value="old('avatar')" accept=".png,.jpg,.jpeg,.webp"
                 required />
             <p class="mt-1 text-xxs text-gray-600" id="avatar_help">PNG, JPG
                 or JPEG (max. 1MB)</p>

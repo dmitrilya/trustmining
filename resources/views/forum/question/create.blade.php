@@ -41,7 +41,7 @@
                             <label for="input-image-question"
                                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
                                 <input id="input-image-question" name="images[]" class="hidden" type="file"
-                                    accept=".png,.jpg,.jpeg" multiple
+                                    accept=".png,.jpg,.jpeg,.webp" multiple
                                     @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};photos = $el.files.length">
                                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                                     <path
