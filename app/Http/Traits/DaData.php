@@ -13,7 +13,7 @@ trait DaData
 {
     public function dadataSearchAddress($query)
     {
-        return DaDataAddress::prompt($query, 10, Language::RU)['suggestions'];
+        return DaDataAddress::prompt($query, 10, Language::RU, [['country' => '*']])['suggestions'];
     }
 
     public function dadataSuggsAddress(Request $request)
@@ -26,7 +26,7 @@ trait DaData
 
     public function dadataSearchCity($query)
     {
-        return DaDataAddress::prompt($query, 10, Language::RU, [], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
+        return DaDataAddress::prompt($query, 10, Language::RU, [['country' => '*']], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
     }
 
     public function dadataSuggsCity(Request $request)
@@ -65,13 +65,13 @@ trait DaData
                     'invalidity' => $manager['invalidity'],
                     'start_date' => $manager['start_date'],
                 ];
-    
+
                 if ($manager['type'] == 'EMPLOYEE') array_push($result, ['post' => $manager['post']]);
-    
+
                 return $result;
             });
         }
-        
+
         $card['data']['address'] = collect($card['data']['address'])->only(['unrestricted_value', 'invalidity'])->all();
         $card['data']['phones'] = $card['data']['phones'] ? collect($card['data']['phones'])->pluck(['value'])->values() : [];
         $card['data']['emails'] = $card['data']['emails'] ? collect($card['data']['emails'])->pluck('value') : [];
