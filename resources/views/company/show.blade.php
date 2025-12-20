@@ -18,7 +18,7 @@
             @include('moderation.components.buttons')
 
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
-                <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
+                <div class="md:grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 md:px-8 md:py-8 z-10">
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
                             class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -183,7 +183,7 @@
         @endif
 
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 md:px-8 md:py-8">
                 @if (count($company->images))
                     <div class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
                         <x-carousel :images="$company->images" min="128" max="128"></x-carousel>
