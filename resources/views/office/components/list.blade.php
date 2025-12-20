@@ -11,7 +11,7 @@
         <ul role="list" class="divide-y divide-gray-100 dark:divide-zinc-700">
             <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-1 xl:grid-cols-2 gap-2">
                 @foreach ($offices as $office)
-                    <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
+                    <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 xl:p-4">
                         @include('office.components.card')
                     </div>
                 @endforeach
