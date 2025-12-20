@@ -1,4 +1,5 @@
-<x-app-layout title="{{ $company->name }}: информация о компании" description="Ознакомьтесь со всей информацией о компании на сайте TrustMining">
+<x-app-layout title="{{ $company->name }}: информация о компании"
+    description="Ознакомьтесь со всей информацией о компании на сайте TrustMining">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $company->user->url_name])"></x-back-link>
@@ -17,11 +18,12 @@
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons')
 
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
-                <div class="md:grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 md:px-8 md:py-8 z-10">
+            <div
+                class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
-                            class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                            class="md:col-span-3 sm:border-r border-gray-200 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                             <x-carousel :images="isset($moderation->data['images'])
                                 ? $moderation->data['images']
                                 : $company->images" min="128" max="128"></x-carousel>
@@ -88,9 +90,9 @@
                                         class="text-gray-700 dark:text-gray-200">{{ $company->card['ogrn'] }}</span>
                                 </li>
                                 @if (array_key_exists('kpp', $company->card))
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
-                                </li>
+                                    <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
+                                            class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
+                                    </li>
                                 @endif
                                 <li class="text-gray-500 dark:text-gray-400">{{ __('Registration date') . ': ' }}<span
                                         class="date-transform text-gray-700 dark:text-gray-200" data-type="date"
@@ -101,8 +103,10 @@
                                 </li>
 
                                 @if ($company->card['type'] == 'LEGAL')
-                                    <li class="text-gray-500 dark:text-gray-400">{{ __('Authorized capital') . ': ' }}<span
-                                            class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }} ₽</span>
+                                    <li class="text-gray-500 dark:text-gray-400">
+                                        {{ __('Authorized capital') . ': ' }}<span
+                                            class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }}
+                                            ₽</span>
                                     </li>
 
                                     <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
@@ -115,7 +119,8 @@
                                                     ({{ $founder['share'] }}%)
                                                 </span>
                                             </li>
-                                            <li class="text-gray-500 dark:text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                            <li class="text-gray-500 dark:text-gray-400 mt-1">
+                                                {{ __('TIN') . ': ' }}<span
                                                     class="text-gray-700 dark:text-gray-200">{{ $founder['inn'] }}</span>
                                             </li>
                                         </div>
@@ -126,13 +131,14 @@
                                     <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
                                         {{ __('Managers') }}
                                     </div>
-    
+
                                     @foreach ($company->card['managers'] as $manager)
                                         <div class="ml-4">
                                             <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
                                                     class="text-gray-700 dark:text-gray-200">{{ $manager['name'] }}</span>
                                             </li>
-                                            <li class="text-gray-500 dark:text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                            <li class="text-gray-500 dark:text-gray-400 mt-1">
+                                                {{ __('TIN') . ': ' }}<span
                                                     class="text-gray-700 dark:text-gray-200">{{ $manager['inn'] }}</span>
                                             </li>
                                         </div>
@@ -141,51 +147,53 @@
                             </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mt-8 md:col-span-12">
-                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            @foreach ($company->documents as $document)
-                                <x-document :path="$document['path']" :name="$document['name']"></x-document>
-                            @endforeach
-                        </div>
-
-                        @php
-                            $v = isset($moderation->data['video']) ? $moderation->data['video'] : $company->video;
-                            $d = isset($moderation->data['description'])
-                                ? $moderation->data['description']
-                                : $company->description;
-                        @endphp
-
-                        @if ($v)
-                            <div
-                                class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
-                                <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                        @endif
-
-                        @if ($d)
-                            <div>
-                                <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
-
-                                <div class="mt-5">
-                                    <p
-                                        class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                        {{ $d }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endif
+                <div class="mt-8">
+                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                        @foreach ($company->documents as $document)
+                            <x-document :path="$document['path']" :name="$document['name']"></x-document>
+                        @endforeach
                     </div>
+
+                    @php
+                        $v = isset($moderation->data['video']) ? $moderation->data['video'] : $company->video;
+                        $d = isset($moderation->data['description'])
+                            ? $moderation->data['description']
+                            : $company->description;
+                    @endphp
+
+                    @if ($v)
+                        <div
+                            class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
+                            <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    @endif
+
+                    @if ($d)
+                        <div>
+                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                                {{ __('Description') }}</h3>
+
+                            <div class="mt-5">
+                                <p
+                                    class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    {{ $d }}
+                                </p>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         @endif
 
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 md:px-8 md:py-8">
+        <div
+            class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                 @if (count($company->images))
-                    <div class="mb-4 sm:mb-8 md:mb-0 md:col-span-8 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
+                    <div class="md:col-span-3 sm:border-r border-gray-200 dark:border-zinc-700 sm:pr-6">
                         <x-carousel :images="$company->images" min="128" max="128"></x-carousel>
                     </div>
                 @endif
@@ -231,9 +239,9 @@
                                     class="text-gray-700 dark:text-gray-200">{{ $company->card['ogrn'] }}</span>
                             </li>
                             @if (array_key_exists('kpp', $company->card))
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
-                                    class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
-                            </li>
+                                <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
+                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
+                                </li>
                             @endif
                             <li class="text-gray-500 dark:text-gray-400">{{ __('Registration date') . ': ' }}<span
                                     class="date-transform text-gray-700 dark:text-gray-200" data-type="date"
@@ -244,11 +252,14 @@
                             </li>
 
                             @if ($company->card['type'] == 'LEGAL')
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('Authorized capital') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }} ₽</span>
+                                <li class="text-gray-500 dark:text-gray-400">
+                                    {{ __('Authorized capital') . ': ' }}<span
+                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }}
+                                        ₽</span>
                                 </li>
 
-                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">{{ __('Founders') }}
+                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                    {{ __('Founders') }}
                                 </div>
 
                                 @foreach ($company->card['founders'] as $founder)
@@ -266,9 +277,10 @@
                             @endif
 
                             @if (array_key_exists('managers', $company->card))
-                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">{{ __('Managers') }}
+                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                    {{ __('Managers') }}
                                 </div>
-    
+
                                 @foreach ($company->card['managers'] as $manager)
                                     <div class="ml-4">
                                         <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
@@ -295,34 +307,36 @@
                         @endif
                     </div>
                 </div>
+            </div>
 
-                <div class="mt-8 md:col-span-12">
-                    @if (count($company->documents))
-                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            @foreach ($company->documents as $document)
-                                <x-document :path="$document['path']" :name="$document['name']"></x-document>
-                            @endforeach
+            <div class="mt-8">
+                @if (count($company->documents))
+                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                        @foreach ($company->documents as $document)
+                            <x-document :path="$document['path']" :name="$document['name']"></x-document>
+                        @endforeach
+                    </div>
+                @endif
+
+                @if ($company->video)
+                    <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
+                        <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                @endif
+
+                @if ($company->description)
+                    <div>
+                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                            {{ __('Description') }}</h3>
+
+                        <div class="mt-5">
+                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">
+                                {{ $company->description }}</p>
                         </div>
-                    @endif
-
-                    @if ($company->video)
-                        <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
-                            <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    @endif
-
-                    @if ($company->description)
-                        <div>
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
-
-                            <div class="mt-5">
-                                <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">{{ $company->description }}</p>
-                            </div>
-                        </div>
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
