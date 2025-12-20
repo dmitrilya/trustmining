@@ -91,6 +91,7 @@ trait FileTrait
 
         if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($file->getPathName());
         elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($file->getPathName());
+        elseif ($info['mime'] == 'image/webp') $image = imagecreatefromwebp($file->getPathName());
 
         if (isset($image)) {
             if ($resize) $image = imagescale($image, $resize);
