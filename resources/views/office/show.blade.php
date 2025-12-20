@@ -27,7 +27,7 @@
                     <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                         <h1
                             class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
+                            <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -70,7 +70,7 @@
 
                 <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                     <h1 class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
                                 d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
