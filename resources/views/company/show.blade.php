@@ -55,7 +55,7 @@
                             </h1>
                         @endif
 
-                        @if ($company->site && $company->user->tariff && $company->user->tariff->can_link_site)
+                        @if ($company->site && $company->user->tariff && $company->user->tariff->can_site_link)
                             <a href="{{ $company->site }}" target="_blank"
                                 class="text-indigo-500 hover:text-indigo-700 flex items-center">
                                 <svg class="w-5 h-5" aria-hidden="true" width="24" height="24" fill="none"

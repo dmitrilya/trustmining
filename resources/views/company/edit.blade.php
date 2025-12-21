@@ -57,7 +57,7 @@
                     <x-input-error :messages="$errors->get('description')" />
                 </div>
 
-                @if ($company->user->tariff && $company->user->tariff->can_link_site)
+                @if ($company->user->tariff && $company->user->tariff->can_site_link)
                     <div>
                         <x-input-label for="site" :value="__('Link to site')" />
                         <x-text-input id="site" name="site" type="text" :value="$company->site"

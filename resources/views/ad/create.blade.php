@@ -69,7 +69,7 @@
                         <x-input-error :messages="$errors->get('price')" />
                     </div>
 
-                    <x-select :label="__('Currency')" name="coin_id" :items="$coins
+                    <x-select :label="__('Currency')" name="coin_id" key="2" :items="$coins
                         ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
                         ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                 </div>
