@@ -1,4 +1,4 @@
-<li class="h-fit">
+<li class="h-full">
     <p class="hidden sm:flex items-center text-sm font-semibold text-gray-800 dark:text-gray-200 mb-6">
         <svg class="min-w-4 w-4 h-4 sm:min-w-6 sm:w-6 sm:h-6 text-gray-600 mr-2" aria-hidden="true" width="24"
             height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -9,7 +9,7 @@
         {{ $office->address }}
     </p>
 
-    <div class="h-full flex flex-col justify-between sm:grid grid-cols-2 gap-3 sm:gap-6 xl:gap-4">
+    <div class="h-full sm:h-auto flex flex-col justify-between sm:grid grid-cols-2 gap-3 sm:gap-6 xl:gap-4">
         <x-carousel :images="$office->images"></x-carousel>
 
         <div class="flex flex-col justify-between w-full">
