@@ -12,6 +12,19 @@ class AsicVersion extends Model
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id',
+        'asic_model_id',
+        'hashrate',
+        'efficiency',
+        'measurement',
+    ];
+
+    /**
      * The attributes that should be casted to native types.
      *
      * @var array
