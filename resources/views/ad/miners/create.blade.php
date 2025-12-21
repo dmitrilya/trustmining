@@ -15,7 +15,7 @@
 
         <div :class="{ 'block': !inStock, 'hidden': inStock }" class="mt-4">
             <x-input-label for="waiting" :value="__('Waiting (days)')" />
-            <x-text-input id="waiting" name="waiting" type="number" min="1" max="120"
+            <x-text-input id="waiting" name="waiting" type="number" min="1" max="120" value="30"
                 autocomplete="waiting"
                 @change="let props = JSON.parse($refs.props_miners.value);props['Waiting (days)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
             <x-input-error :messages="$errors->get('waiting')" />
@@ -35,7 +35,7 @@
         <div :class="{ 'block': !anew, 'hidden': anew }">
             <div class="mt-4">
                 <x-input-label for="warranty" :value="__('Warranty (months)')" />
-                <x-text-input id="warranty" name="warranty" type="number" min="1" max="12"
+                <x-text-input id="warranty" name="warranty" type="number" min="0" max="12" value="0"
                     autocomplete="warranty"
                     @change="let props = JSON.parse($refs.props_miners.value);props['Warranty (months)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
                 <x-input-error :messages="$errors->get('warranty')" />
