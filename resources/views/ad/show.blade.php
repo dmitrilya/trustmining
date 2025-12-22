@@ -54,13 +54,13 @@
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             @if (isset($moderation->data['price']))
-                                @if ($moderation->data['price'] !== 0)
+                                @if ($moderation->data['price'] != 0)
                                     {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
                                 @else
                                     {{ __('Price on request') }}
                                 @endif
                             @else
-                                @if ($ad->price !== 0)
+                                @if ($ad->price != 0)
                                     {{ $ad->price }} {{ $ad->coin->abbreviation }}
                                 @else
                                     {{ __('Price on request') }}
@@ -176,7 +176,7 @@
                     </div>
 
                     <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
-                        @if ($ad->price !== 0)
+                        @if ($ad->price != 0)
                             {{ $ad->price }} {{ $ad->coin->abbreviation }}
                         @else
                             {{ __('Price on request') }}

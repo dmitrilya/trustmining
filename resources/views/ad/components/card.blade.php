@@ -79,7 +79,7 @@
 
     <div class="mt-2 md:mt-3">
         <div class="text-gray-950 dark:text-white text-sm sm:text-base font-bold">
-            @if ($ad->price !== 0)
+            @if ($ad->price != 0)
                 {{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span>
             @else
                 {{ __('Price on request') }}
