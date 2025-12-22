@@ -140,14 +140,15 @@
             </div>
         @endif
 
-        <div
+        <div itemscope itemtype="https://schema.org/Product"
             class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
                 <div class="md:col-span-5">
                     @if (!count($ad->images))
                         <div class="w-full overflow-hidden rounded-lg col-start-2">
-                            <img src="{{ Storage::url($ad->preview) }}" class="w-full object-cover object-center">
+                            <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
+                                class="w-full object-cover object-center">
                         </div>
                     @else
                         <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
@@ -158,10 +159,13 @@
                     class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
-                            <h1
+                            <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
+                            <h1 itemprop="name"
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
+                        @else
+                            <meta itemprop="name" content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
                         @endif
 
                         <div
@@ -175,9 +179,11 @@
                         </div>
                     </div>
 
-                    <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
+                    <p itemprop="offers" itemscope itemtype="https://schema.org/Offer"
+                        class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
                         @if ($ad->price != 0)
-                            {{ $ad->price }} {{ $ad->coin->abbreviation }}
+                            <span itemprop="price">{{ $ad->price }}</span> <span
+                                itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
                         @else
                             {{ __('Price on request') }}
                         @endif
@@ -324,7 +330,8 @@
                                 {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
-                                <p class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                <p itemprop="description"
+                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">
                                     {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
                                 </p>
                             </div>
