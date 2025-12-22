@@ -78,7 +78,7 @@
     </div>
 
     <div class="mt-2 md:mt-3">
-        <div class="text-gray-950 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price }} <span
+        <div class="text-gray-950 dark:text-white text-sm sm:text-base font-bold">{{ $ad->price !== 0 ? $ad->price : __('Price on request') }} <span
                 class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span></div>
 
         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"

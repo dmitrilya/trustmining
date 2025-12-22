@@ -98,7 +98,7 @@ class UpdateExchangeRate extends Command
                     'coins' => $profit['coins']
                 ]);
                 $version->coef = pow(1000, $vm - $am);
-                $version->price = round($version->ads->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
+                $version->price = round($version->ads->where('price', '!=', 0)->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
                 $version->model_name = strtolower(str_replace(' ', '_', $model->name));

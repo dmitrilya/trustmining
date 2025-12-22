@@ -69,7 +69,7 @@
                     $hasTariff = ($user = Auth::user()) && $user->tariff;
                     $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                     $modelAds = $versions->pluck('ads')->flatten();
-                    $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
+                    $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();
                     $reviewsCount = $model->moderatedReviews->count();
                 @endphp
 
@@ -178,7 +178,7 @@
                             <div x-show="selectedTab == {{ $i }}" itemprop="model" itemscope
                                 itemtype="http://schema.org/ProductModel">
                                 @php
-                                    $minPrice = $version->ads->first();
+                                    $minPrice = $version->ads->where('price', '!=', 0)->first();
                                 @endphp
 
                                 <meta itemprop="name"

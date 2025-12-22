@@ -53,7 +53,7 @@
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
-                            {{ isset($moderation->data['price']) ? $moderation->data['price'] : $ad->price }}
+                            {{ isset($moderation->data['price']) ? ($moderation->data['price'] !== 0 ? $moderation->data['price'] : __('Price on request')) : ($ad->price !== 0 ? $ad->price : __('Price on request')) }}
                             {{ $ad->coin->abbreviation }}</p>
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
@@ -108,7 +108,8 @@
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">{{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
+                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
                                 </p>
                             </div>
 
@@ -162,7 +163,8 @@
                         </div>
                     </div>
 
-                    <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">{{ $ad->price }}
+                    <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
+                        {{ $ad->price !== 0 ? $ad->price : __('Price on request') }}
                         {{ $ad->coin->abbreviation }}</p>
 
                     <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
@@ -306,7 +308,8 @@
                                 {{ __('Description') }}</h3>
 
                             <div class="space-y-6 mt-5">
-                                <p class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">{{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
+                                <p class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                    {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
                                 </p>
                             </div>
                         @endif

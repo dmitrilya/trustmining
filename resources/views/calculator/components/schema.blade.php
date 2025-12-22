@@ -64,7 +64,7 @@
 
 @php
     $modelAds = $selModel->asicVersions->pluck('ads')->flatten();
-    $modelAdWithMinPrice = $modelAds->sortBy('price')->first();
+    $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();
 @endphp
 
 @if ($modelAds->count())
