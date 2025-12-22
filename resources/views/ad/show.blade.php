@@ -53,8 +53,20 @@
 
                         <p
                             class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
-                            {{ isset($moderation->data['price']) ? ($moderation->data['price'] !== 0 ? $moderation->data['price'] : __('Price on request')) : ($ad->price !== 0 ? $ad->price : __('Price on request')) }}
-                            {{ $ad->coin->abbreviation }}</p>
+                            @if (isset($moderation->data['price']))
+                                @if ($moderation->data['price'] !== 0)
+                                    {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
+                                @else
+                                    {{ __('Price on request') }}
+                                @endif
+                            @else
+                                @if ($ad->price !== 0)
+                                    {{ $ad->price }} {{ $ad->coin->abbreviation }}
+                                @else
+                                    {{ __('Price on request') }}
+                                @endif
+                            @endif
+                        </p>
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                             target="_blank"
@@ -164,8 +176,12 @@
                     </div>
 
                     <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
-                        {{ $ad->price !== 0 ? $ad->price : __('Price on request') }}
-                        {{ $ad->coin->abbreviation }}</p>
+                        @if ($ad->price !== 0)
+                            {{ $ad->price }} {{ $ad->coin->abbreviation }}
+                        @else
+                            {{ __('Price on request') }}
+                        @endif
+                    </p>
 
                     <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
                         target="_blank"
