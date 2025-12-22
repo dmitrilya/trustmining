@@ -303,13 +303,13 @@
 
                     <meta itemprop="description"
                         content="ASIC майнер от производителя {{ $brand->name }} модели {{ $model->name }}{{ isset($selectedVersion) ? ' на ' . $selectedVersion->hashrate . ' ' . $selectedVersion->measurement : '' }}" />
-                    {{-- <div>
+                    <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 
-                        <p class="text-sm sm:text-base text-gray-950">{{ $model->description }}</p>
+                        <p class="text-sm sm:text-base text-gray-700 dark:text-gray-400">{{ $model->description }}</p>
                     </div>
 
-                    <div class="mt-6 sm:mt-8 md:mt-10">
+                    {{-- <div class="mt-6 sm:mt-8 md:mt-10">
                         <h3 class="text-sm text-gray-950">Характеристики</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm mt-4">
