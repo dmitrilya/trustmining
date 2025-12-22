@@ -534,6 +534,7 @@
     "Network hashrate": "Хэшрейт сети",
     "Current hashrate": "Текущий хэшрейт",
     "Change": "Изменение",
+    "Enter 0 to display \"Price on request\"": "Укажите 0, чтобы отображалось \"Цена по запросу\"",
     "Price on request": "Цена по запросу",
 
     "d": "д",

@@ -28,19 +28,26 @@
 
                 @include('ad.' . $ad->adCategory->name . '.edit')
 
-                <div class="flex items-center">
-                    <div class="mr-2 xs:mr-3 w-full">
-                        <x-input-label for="price" :value="__('Price')" />
-                        <x-text-input id="price" name="price" type="number" required autocomplete="price"
-                            :value="$ad->price" />
-                        <x-input-error :messages="$errors->get('price')" />
+                <div>
+                    <div class="flex items-center">
+                        <div class="mr-2 xs:mr-3 w-full">
+                            <x-input-label for="price" :value="__('Price')" />
+                            <x-text-input id="price" name="price" type="number" required autocomplete="price"
+                                :value="$ad->price" />
+                            <x-input-error :messages="$errors->get('price')" />
+                        </div>
+
+                        <x-select :label="__('Currency')" name="coin_id" :key="$ad->coin_id" :items="$coins
+                            ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
+                            ->keyBy('key')"
+                            :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                     </div>
 
-                    <x-select :label="__('Currency')" name="coin_id" :key="$ad->coin_id" :items="$coins
-                        ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
-                        ->keyBy('key')"
-                        :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                    <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-gray-500">
+                        {{ __('Enter 0 to display "Price on request"') }}
+                    </div>
                 </div>
+
 
                 <div class="flex justify-end">
                     <x-danger-button x-data="" type="button"
