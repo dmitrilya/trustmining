@@ -41,7 +41,7 @@ trait AdTrait
                 $q->whereIn('name', $request->algorithms);
             });
 
-        foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms']) as $key => $value) {
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms', 'page', 'sort']) as $key => $value) {
             $key = str_replace('_', ' ', $key);
             if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
             elseif (count($value) === 1) {

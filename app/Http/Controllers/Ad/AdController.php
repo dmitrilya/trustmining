@@ -35,7 +35,7 @@ class AdController extends Controller
     public function index(Request $request, AdCategory $adCategory)
     {
         return view('ad.index', [
-            'ads' => $this->getAds($request, $adCategory)->orderByDesc('ordering_id')->paginate(30),
+            'ads' => $this->getAds($request, $adCategory)->orderByDesc('ordering_id')->paginate(30)->withQueryString(),
             'adCategory' => $adCategory
         ]);
     }
