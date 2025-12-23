@@ -40,7 +40,9 @@ class ChatController extends Controller
     {
         $auth = $request->user();
 
-        if ($auth->id == $user->id) return back()->withErrors(['forbidden' => __('Unavailable chat.')]);;
+        if ($auth->id == $user->id) return back()->withErrors(['forbidden' => __('Unavailable chat.')]);
+
+        if ($user->is_anchor && $user->tg_contact) $this->addView(request(), $user);
 
         $chat = $auth->chats()->whereHas('users', function ($query) use ($user) {
             $query->where('id', $user->id);

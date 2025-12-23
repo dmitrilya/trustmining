@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\Database\Coin;
 use App\Models\Ad\Ad;
@@ -11,15 +12,20 @@ trait AdTrait
 {
     public function getAds($request, $adCategory = null)
     {
-        $ads = Ad::with([
-            'adCategory:id,name,header',
-            'user:id,name,url_name,tf',
-            'user.phones:id,user_id',
-            'office:id,city',
-            'asicVersion:id,asic_model_id,hashrate,measurement',
-            'asicVersion.asicModel:id,name',
-            'coin:id,abbreviation'
-        ]);
+        if (Cache::has('ads')) $ads = Cache::get('ads');
+        else {
+            $ads = Ad::with([
+                'adCategory:id,name,header',
+                'user:id,name,url_name,tf',
+                'user.phones:id,user_id',
+                'office:id,city',
+                'asicVersion:id,asic_model_id,hashrate,measurement',
+                'asicVersion.asicModel:id,name',
+                'coin:id,abbreviation'
+            ]);
+
+            Cache::put('ads', $ads);
+        }
 
         if ($adCategory) $ads = $ads->where('ad_category_id', $adCategory->id);
 

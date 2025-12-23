@@ -1,6 +1,9 @@
-<x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг" description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
+<x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг"
+    description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
     <x-slot name="header">
-        @include('layouts.components.search')
+        <div class="sm:mt-4 grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 gap-3 sm:gap-4">
+            @include('layouts.components.ad-categories')
+        </div>
     </x-slot>
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-8 lg:space-y-12">
@@ -92,7 +95,7 @@
                     {{ __('A unique metric of trust in a company') }}</p>
                 <a href="#confidence-factor-info"
                     @click="console.log('here');event.preventDefault();document.querySelector(event.target.getAttribute('href')).scrollIntoView({behavior: 'smooth'});"
-                    class="mt-2 md:mt-3 text-xxs sm:text-xs underline">{{ __('Details') }}</a>
+                    class="mt-2 md:mt-3 text-xxs sm:text-xs underline text-indigo-600 dark:text-indigo-500">{{ __('Details') }}</a>
             </div>
         </div>
 
