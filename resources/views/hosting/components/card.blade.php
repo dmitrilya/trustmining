@@ -14,9 +14,12 @@
         <a href="{{ route('company', ['user' => $hosting->user->url_name]) }}"
             class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500 mt-4">{{ $hosting->user->name }}</a>
 
-        <p class="mt-2 sm:mt-3 text-xxs sm:text-sm text-gray-500">
-            {{ __('Trust Factor') }}: <span class="text-gray-700">{{ $hosting->user->tf }}</span>
-        </p>
+        <div class="flex items-center my-1 md:my-2">
+            <div
+                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $hosting->user->tf > 60 ? ($hosting->user->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+            </div>
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+        </div>
 
         <div class="flex items-center my-2 sm:my-3 text-sm sm:text-base text-gray-950 dark:text-gray-50 font-bold">
             <svg class="w-4 h-4 text-gray-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

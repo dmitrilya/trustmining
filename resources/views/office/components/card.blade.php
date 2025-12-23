@@ -14,8 +14,7 @@
 
         <div class="flex flex-col justify-between w-full">
             <div>
-                <p
-                    class="flex sm:hidden items-center text-xs font-semibold text-gray-800 dark:text-gray-200 mb-3">
+                <p class="flex sm:hidden items-center text-xs font-semibold text-gray-800 dark:text-gray-200 mb-3">
                     <svg class="min-w-4 w-4 h-4 sm:min-w-6 sm:w-6 sm:h-6 text-gray-600 mr-2" aria-hidden="true"
                         width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -28,10 +27,12 @@
                 <a href="{{ route('company', ['user' => $office->user->url_name]) }}"
                     class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500">{{ $office->user->name }}</a>
 
-                <p class="mt-1 md:mt-2 mb-3 sm:mb-4 text-xxs sm:text-xs md:text-sm text-gray-500">
-                    {{ __('Trust Factor') }}: <span
-                        class="font-bold {{ $office->user->tf > 60 ? ($office->user->tf > 80 ? 'text-green-500' : 'text-yellow-300') : 'text-red-600' }}">{{ $office->user->tf }}</span>
-                </p>
+                <div class="flex items-center mt-1 md:mt-2 mb-3 sm:mb-4">
+                    <div
+                        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $hosting->user->tf > 60 ? ($hosting->user->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                    </div>
+                    <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+                </div>
 
                 <x-peculiarities :ps="$office->peculiarities" model="office"></x-peculiarities>
             </div>

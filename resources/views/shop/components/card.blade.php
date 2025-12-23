@@ -27,10 +27,12 @@
             </p>
         </div>
 
-        <p class="mt-4 sm:mt-5 text-xxs sm:text-sm text-gray-500 dark:text-gray-400">
-            {{ __('Trust Factor') }}: <span
-                class="font-bold {{ $shop->tf > 60 ? ($shop->tf > 80 ? 'text-green-500' : 'text-yellow-300') : 'text-red-600' }}">{{ $shop->tf }}</span>
-        </p>
+        <div class="flex items-center mt-4 sm:mt-5">
+            <div
+                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $shop->tf > 60 ? ($shop->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+            </div>
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+        </div>
 
         <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-gray-500 dark:text-gray-400">
             {{ __('Number of offices') }}: <span

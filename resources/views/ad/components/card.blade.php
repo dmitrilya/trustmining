@@ -54,10 +54,12 @@
         <a href="{{ route('company', ['user' => $ad->user->url_name]) }}"
             class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user->name }}</a>
 
-        <p class="my-1 md:my-2 text-xxs sm:text-xs md:text-sm text-gray-500">
-            {{ __('Trust Factor') }}: <span
-                class="font-bold {{ $ad->user->tf > 60 ? ($ad->user->tf > 80 ? 'text-green-500' : 'text-yellow-300') : 'text-red-600' }}">{{ $ad->user->tf }}</span>
-        </p>
+        <div class="flex items-center my-1 md:my-2">
+            <div
+                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $ad->user->tf > 60 ? ($ad->user->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+            </div>
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+        </div>
 
         @foreach ($ad->props as $prop => $value)
             <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
