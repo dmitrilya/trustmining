@@ -24,7 +24,7 @@ trait AdTrait
                 'coin:id,abbreviation'
             ]);
 
-            Cache::put('ads', $ads);
+            Cache::put('ads', $ads, 600);
         }
 
         if ($adCategory) $ads = $ads->where('ad_category_id', $adCategory->id);
