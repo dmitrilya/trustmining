@@ -29,7 +29,7 @@
 
                 <div class="flex items-center mt-1 md:mt-2 mb-3 sm:mb-4">
                     <div
-                        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $hosting->user->tf > 60 ? ($hosting->user->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $office->user->tf > 60 ? ($office->user->tf > 80 ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
                     </div>
                     <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
                 </div>
