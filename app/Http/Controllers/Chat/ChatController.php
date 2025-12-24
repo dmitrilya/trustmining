@@ -43,7 +43,7 @@ class ChatController extends Controller
         if ($auth->id == $user->id) return back()->withErrors(['forbidden' => __('Unavailable chat.')]);
 
         if ($user->is_anchor && $user->tg_contact) {
-            $this->addView(request(), $user);
+            $this->addView(request(), $user, $request->ad_id);
 
             return redirect("https://t.me/$user->tg_contact");
         }
