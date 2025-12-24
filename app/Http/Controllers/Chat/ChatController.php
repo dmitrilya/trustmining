@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\NotificationTrait;
-
+use App\Http\Traits\ViewTrait;
 use App\Models\User\User;
 use App\Models\Chat\Chat;
 use App\Models\CRM\CRMConnection;
@@ -27,7 +27,7 @@ use Illuminate\Http\UploadedFile;
 
 class ChatController extends Controller
 {
-    use FileTrait, NotificationTrait;
+    use ViewTrait, FileTrait, NotificationTrait;
 
     /**
      * Start the chat.
