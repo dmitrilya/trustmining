@@ -37,6 +37,7 @@
                     ['key' => '2P34', 'value' => '2P34'],
                     ['key' => 'M25', 'value' => 'M25'],
                     ['key' => 'SA2-30', 'value' => 'SA2-30'],
+                    ['key' => 'RJ45', 'value' => 'RJ45'],
                     ['key' => 'LP-20-J04PE-01', 'value' => 'LP-20-J04PE-01'],
                 ])->keyBy('key')" />
 
@@ -62,6 +63,7 @@
                     ['key' => '2P34', 'value' => '2P34'],
                     ['key' => 'M25', 'value' => 'M25'],
                     ['key' => 'SA2-30', 'value' => 'SA2-30'],
+                    ['key' => 'RJ45', 'value' => 'RJ45'],
                     ['key' => 'LP-20-J04PE-01', 'value' => 'LP-20-J04PE-01'],
                 ])->keyBy('key')" />
 
