@@ -301,7 +301,8 @@
                                 <x-primary-button>{{ __('Edit') }}</x-primary-button>
                             </a>
                         @else
-                            <a class="block mt-6" href="{{ route('chat.start', ['user' => $company->user->id]) }}">
+                            <a class="block mt-6" target="_blank"
+                                href="{{ route('chat.start', ['user' => $company->user->id]) }}">
                                 <x-primary-button>{{ __('Contact') }}</x-primary-button>
                             </a>
                         @endif

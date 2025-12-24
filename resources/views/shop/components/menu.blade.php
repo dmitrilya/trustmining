@@ -125,7 +125,7 @@
             </div>
 
             <div class="grid grid-cols-2 divide-x divide-gray-900/5 dark:divide-zinc-700 bg-gray-50 dark:bg-zinc-800">
-                <a href="{{ route('chat.start', ['user' => $user->id]) }}"
+                <a target="_blank" href="{{ route('chat.start', ['user' => $user->id]) }}"
                     class="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-950 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-zinc-900">
                     <svg class="h-5 w-5 flex-none text-gray-500 dark:text-gray-400" aria-hidden="true"
                         viewBox="0 0 20 18" fill="currentColor">

@@ -62,7 +62,7 @@
                 </li>
                 <li>
                     <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
-                        href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
+                        target="_blank" href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
                         <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

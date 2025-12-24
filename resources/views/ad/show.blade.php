@@ -275,7 +275,7 @@
                                 @endphp
 
                                 <div class="flex flex-wrap gap-3 sm:gap-4 mt-6">
-                                    <a class="block w-full sm:w-max"
+                                    <a class="block w-full sm:w-max" target="_blank"
                                         href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
                                         <x-primary-button class="w-full flex items-center justify-center xs:py-3">
                                             <svg class="min-w-4 h-4 mr-1 xs:mr-2" aria-hidden="true" width="24"

@@ -1,4 +1,5 @@
-<x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}" description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
+<x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}"
+    description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
@@ -17,14 +18,16 @@
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons')
 
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            <div
+                class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
                     <div
                         class="md:col-span-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
                     </div>
 
-                    <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
+                    <div
+                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
                         <h1
                             class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
@@ -140,7 +143,8 @@
                         @endif
 
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
+                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                                {{ __('Description') }}</h3>
 
                             <div class="mt-5">
                                 <p
@@ -154,13 +158,15 @@
             </div>
         @endif
 
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
+        <div
+            class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
             <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                 <div class="md:col-span-8">
                     <x-carousel :images="$hosting->images" min="128" max="128"></x-carousel>
                 </div>
 
-                <div class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
+                <div
+                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
                     <h1
                         class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
@@ -211,7 +217,8 @@
                                 <x-primary-button>{{ __('Edit') }}</x-primary-button>
                             </a>
                         @else
-                            <a class="block mt-6" href="{{ route('chat.start', ['user' => $hosting->user->id]) }}">
+                            <a class="block mt-6" target="_blank"
+                                href="{{ route('chat.start', ['user' => $hosting->user->id]) }}">
                                 <x-primary-button>{{ __('Contact') }}</x-primary-button>
                             </a>
                         @endif
@@ -233,7 +240,7 @@
                         @endif
                     </div>
 
-                    @if (!$auth || $hosting->user->id != $auth->id && count($hosting->contract_deficiencies))
+                    @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
                                 class="w-full sm:w-max justify-center bg-secondary-gradient !text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
@@ -309,10 +316,12 @@
                     @endif
 
                     <div>
-                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">{{ __('Description') }}</h3>
+                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                            {{ __('Description') }}</h3>
 
                         <div class="mt-5">
-                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">{{ $hosting->description }}</p>
+                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">
+                                {{ $hosting->description }}</p>
                         </div>
                     </div>
                 </div>
