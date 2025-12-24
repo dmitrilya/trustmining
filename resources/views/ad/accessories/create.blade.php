@@ -99,7 +99,7 @@
 
             <div>
                 <x-input-label for="amperage" :value="__('Amperage (A)')" />
-                <x-text-input id="amperage" name="amperage" type="number" autocomplete="amperage" value="9"
+                <x-text-input id="amperage" name="amperage" type="number" step="0.01" autocomplete="amperage" value="7.2"
                     @change="props['Amperage (A)'] = $el.value;" />
                 <x-input-error :messages="$errors->get('amperage')" />
             </div>
@@ -113,7 +113,7 @@
 
             <div>
                 <x-input-label for="model" :value="__('Model')" />
-                <x-text-input id="model" name="model" type="number" autocomplete="model"
+                <x-text-input id="model" name="model" type="text" autocomplete="model"
                     placeholder="PFC1412HE-00" @change="props['Model'] = $el.value;" />
                 <x-input-error :messages="$errors->get('model')" />
             </div>
