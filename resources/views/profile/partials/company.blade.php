@@ -39,10 +39,11 @@
             {{ __('Make a payment to confirm ownership of the specified company.') }}
         </p>
 
-        <a href="{{ $user->orders()->where('amount', 10)->where('status', 'init')->latest()->first('invoice_url')->invoice_url }}"
-            target="_blank">
-            <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
-        </a>
+        @if ($order = $user->orders()->where('amount', 10)->where('status', 'init')->latest()->first('invoice_url'))
+            <a href="{{ $order->invoice_url }}" target="_blank">
+                <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
+            </a>
+        @endif
     @else
         <p class="text-sm text-gray-700 dark:text-gray-400">
             {{ __('The company is registered. Now you can fill the About page with an additional description that reveals your values ​​and a photo.') }}
