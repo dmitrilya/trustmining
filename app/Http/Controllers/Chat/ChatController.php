@@ -45,7 +45,7 @@ class ChatController extends Controller
         if ($user->is_anchor && $user->tg_contact) {
             $this->addView(request(), $user, $request->ad_id);
 
-            return redirect("https://t.me/$user->tg_contact");
+            return redirect("https://t.me/$user->tg_contact?text=Здравствуйте! Пишу из сервиса TrustMining. Проконсультируйте, пожалуйста");
         }
 
         $chat = $auth->chats()->whereHas('users', function ($query) use ($user) {

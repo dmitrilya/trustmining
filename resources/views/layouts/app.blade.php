@@ -13,7 +13,7 @@
 
     @php
         $theme = $theme = request()->cookie('theme');
-        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse'];
+        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse', 'googleother'];
         $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
 

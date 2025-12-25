@@ -21,6 +21,7 @@ use App\Models\Morph\Like;
 use App\Models\User\Role;
 use App\Models\Database\Coin;
 use App\Models\Chat\Chat;
+use App\Models\User\User;
 
 class Controller extends BaseController
 {
@@ -56,10 +57,16 @@ class Controller extends BaseController
         return view('warranty.index');
     }
 
+    public function top(): View
+    {
+        return view('top.index', ['users' => User::select(['id', 'name', 'url_name', 'tf', 'tariff_id'])->orderByDesc('tf')->limit(10)
+            ->with(['company:user_id,logo,card,moderation', 'moderatedReviews', 'passport:moderation'])->get()]);
+    }
+
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $models = Cache::get('calculator_models');
-        
+
         if ($asicVersion->id) $models = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersion->id)->count());
         elseif ($asicModel->id) $models = $models->where('id', $asicModel->id);
         else $models = $models->where('name', 'Antminer L9');

@@ -8,7 +8,7 @@
                     isset($auth) &&
                     in_array($auth->role->name, ['admin', 'moderator']) &&
                     isset($moderation->data['logo']))))
-        <img class="rounded-full mr-2 w-12 h-12"
+        <img class="rounded-full mr-2 {{ isset($bg) ? 'size-12 sm:size-14 lg:size-16' : 'size-12' }}"
             src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}"
             alt="">
     @endif

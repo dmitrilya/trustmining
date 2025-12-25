@@ -57,6 +57,7 @@ Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
 Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty');
+Route::get('/top', [Controller::class, 'top'])->name('top');
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
