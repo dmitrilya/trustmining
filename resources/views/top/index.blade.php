@@ -18,15 +18,15 @@
         @foreach ($users as $user)
             <div class="bg-white dark:bg-zinc-900 rounded-xl shadow-lg dark:shadow-zinc-800 p-2 sm:p-4 lg:p-6 relative">
                 @if ($loop->index == 0)
-                    <div class="absolute left-1 sm:left-3 lg:left-5 top-1.5 sm:top-3.5 lg:top-5.5 size-6 sm:size-7 lg:size-8">
+                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 size-6 sm:size-7 lg:size-8">
                         <img src="/img/gold.webp" alt="gold medal">
                     </div>
                 @elseif ($loop->index == 1)
-                    <div class="absolute left-1 sm:left-3 lg:left-5 top-1.5 sm:top-3.5 lg:top-5.5 sm:size-7 lg:size-8">
+                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 sm:size-7 lg:size-8">
                         <img src="/img/silver.webp" alt="silver medal">
                     </div>
                 @elseif ($loop->index == 2)
-                    <div class="absolute left-1 sm:left-3 lg:left-5 top-1.5 sm:top-3.5 lg:top-5.5 sm:size-7 lg:size-8">
+                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 sm:size-7 lg:size-8">
                         <img src="/img/bronze.webp" alt="bronze medal">
                     </div>
                 @endif
