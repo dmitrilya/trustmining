@@ -13,9 +13,9 @@
                 <div class="relative z-0">
                     <input type="text" id="asic-model_search-name" placeholder=" " @input="search = $el.value"
                         autocomplete="off" :value="search"
-                        class="py-2.5 px-0 w-full max-w-56 text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                        class="py-2.5 px-0 w-full max-w-56 text-sm text-gray-800 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-200 dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                     <label for="asic-model_search-name"
-                        class="flex items-center absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="flex items-center absolute text-sm text-gray-600 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                                 d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -30,17 +30,25 @@
                 </x-primary-button>
             </div>
 
-            <div class="space-y-1 sm:space-y-2 lg:space-y-3 divide-y divide-gray-400">
+            <div class="space-y-1 sm:space-y-2 lg:space-y-3 divide-y divide-gray-400 dark:divide-gray-700">
                 @foreach ($ads as $ad)
                     <div x-show="search === '' || '{{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1"
-                        class="grid grid-cols-6 gap-1 xs:gap-2 sm:gap-3 items-center pt-1 sm:pt-2 ad"
+                        class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center pt-1 sm:pt-2 ad"
                         data-id="{{ $ad->id }}">
-                        <div class="text-gray-600 text-xxs sm:text-sm col-span-1">
+                        <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-1">
                             {{ $ad->office->city }}
                         </div>
-                        <div class="text-gray-600 text-xxs sm:text-sm col-span-2">
+                        <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-2">
                             {{ $ad->asicVersion->asicModel->name }}
                             {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
+                        </div>
+                        <div class="hidden xs:block text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-1">
+                            @if (isset($ad->props['Condition']))<p>{{ __($ad->props['Condition']) }}</p>@endif
+                            @if (isset($ad->props['Availability']))<p>{{ __($ad->props['Availability']) }}</p>@endif
+                        </div>
+                        <div class="hidden xl:block text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-1">
+                            @if (isset($ad->props['Waiting (days)']))<p>{{ __('Waiting') . ' ' . __($ad->props['Waiting (days)']) }}</p>@endif
+                            @if (isset($ad->props['Warranty (months)']))<p>{{ __('Warranty') . ' ' . __($ad->props['Warranty (months)']) }}</p>@endif
                         </div>
                         <div class="col-span-2">
                             <x-text-input class="text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md" id="price"
