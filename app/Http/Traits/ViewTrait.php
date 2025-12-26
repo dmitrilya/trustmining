@@ -12,7 +12,7 @@ trait ViewTrait
     public function addView($request, $model, $adId = null)
     {
         $ip = $request->ip();
-        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse', 'googleother'];
+        $exceptAgents = ['bot', 'GeedoShopProductFinder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
         $agent = strtolower($request->header('User-Agent'));
 
         foreach ($exceptAgents as $exceptAgent) {
