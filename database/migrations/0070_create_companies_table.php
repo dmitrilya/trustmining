@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('video')->nullable();
             $table->string('site')->nullable();
             $table->string('banner')->nullable();
+            $table->boolean('registry')->default(0);
             $table->json('documents');
             $table->json('images');
             $table->boolean('moderation')->default(1);

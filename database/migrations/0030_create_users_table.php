@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('tg_id')->nullable();
             $table->string('tg_contact')->nullable();
             $table->boolean('is_anchor')->default(0);
+            $table->boolean('first')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

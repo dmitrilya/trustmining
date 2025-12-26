@@ -36,6 +36,10 @@
                 <div class="p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
                     @include('profile.partials.tg-auth')
                 </div>
+
+                <div class="p-3 sm:p-4 bg-white dark:bg-zinc-900 shadow rounded-lg">
+                    @include('profile.partials.registry')
+                </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">

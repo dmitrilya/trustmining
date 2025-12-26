@@ -37,8 +37,11 @@ class TrustFactorService
         // --- 6. Хостинг ---
         $tf += $this->scoreHosting($user);
 
-        // --- 7. Обрезаем по границам ---
-        $tf = max($this->config['min'], min($this->config['max'], $tf));
+        // --- 7. Хостинг ---
+        $tf += $this->scoreRegistry($user);
+
+        // --- 8. Обрезаем по границам ---
+        //$tf = max($this->config['min'], min($this->config['max'], $tf));
 
         $user->tf = $tf;
         $user->save();
@@ -208,6 +211,14 @@ class TrustFactorService
         }
 
         return 0;
+    }
+
+    /**
+     * REGISTRY
+     */
+    private function scoreRegistry($user)
+    {
+        return $user->registry ? 15 : 0;
     }
 
     /**
