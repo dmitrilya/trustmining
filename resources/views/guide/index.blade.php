@@ -1,4 +1,4 @@
-<x-app-layout title="Руководства: статьи, руководства для майнеров, отзывы и обзоры экспертов">
+<x-app-layout title="Руководства: статьи, руководства для майнеров, отзывы и обзоры экспертов" description="База знаний по майнингу: подробные обзоры ASIC-майнеров, видеокарт и комплектующих. Полезные статьи и инструкции от экспертов и сообщества. Узнайте, как эффективно добывать криптовалюту.">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">

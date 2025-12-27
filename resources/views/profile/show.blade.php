@@ -1,4 +1,4 @@
-<x-app-layout title="Личный кабинет, профиль компании">
+<x-app-layout title="Личный кабинет, профиль компании" description="Ваш личный кабинет: управление профилем компании и контроль баланса. Редактируйте данные и управляйте всеми услугами">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Profile') }}

@@ -1,4 +1,4 @@
-<x-app-layout title="Тарифы">
+<x-app-layout title="Тарифы на размещение объявлений: продажа ASIC, хостинг, услуги майнинга" description="Актуальные тарифы на продвижение ваших товаров и услуг на крупнейшей платформе для майнеров. Разместите объявление о продаже оборудования, ASIC-хостинге или ремонте. Выберите оптимальный план (бесплатный, премиум) и получите целевых клиентов уже сегодня">
     <div class="bg-gray-900 h-128 lg:h-144 relative z-10 overflow-hidden">
         <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 relative">
             <div class="mt-4 md:mt-6 lg:mt-8 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">

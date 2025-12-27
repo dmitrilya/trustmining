@@ -1,4 +1,4 @@
-<x-app-layout title="Майнинговая компания {{ $user->name }}: купить ASIC майнер">
+<x-app-layout title="Майнинговая компания {{ $user->name }}: купить ASIC майнер" description="Официальный представитель {{ $user->name }}: купите ASIC-майнеры Bitmain, Whatsminer и Canaan с гарантией от производителя. Большой выбор оборудования в наличии, низкие цены, быстрая доставка и профессиональная поддержка 24/7. Проверьте и заберите майнеры в наших офисах или закажите онлайн">
     <x-slot name="header">
         <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mr-auto w-full max-w-max">

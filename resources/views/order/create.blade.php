@@ -1,4 +1,4 @@
-<x-app-layout title="Пополнить баланс">
+<x-app-layout title="Пополнить баланс личного кабинета" description="Инструкция и формы для пополнения баланса. Безопасные платежи, низкие комиссии и моментальное поступление средств на счет. Выберите удобный способ и продолжайте пользоваться услугами без пауз">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Top up your balance') }}
