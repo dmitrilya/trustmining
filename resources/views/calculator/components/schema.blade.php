@@ -67,7 +67,7 @@
     $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();
 @endphp
 
-@if ($modelAdWithMinPrice->count())
+@if ($modelAdWithMinPrice)
     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
         <meta itemprop="offerCount" content="{{ $modelAds->count() }}" />
         <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
