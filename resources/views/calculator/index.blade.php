@@ -132,37 +132,37 @@
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                                         {{ __('Day') }}
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 * 10) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 10000) / 10000">
                                     </div>
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                                         {{ __('Month') }}
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 * 10) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 10000) / 10000">
                                     </div>
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                                         {{ __('Year') }}
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 10000) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 * 10) / 10000">
                                     </div>
-                                    <div class="text-xxs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                                    <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 / 1000) * 10000) / 10000">
                                     </div>
                                 </div>
