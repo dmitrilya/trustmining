@@ -1,9 +1,9 @@
 <div itemprop="comment" itemscope itemtype="https://schema.org/Comment" class="flex justify-between">
     @include('forum.components.author', [
-        'id' => $commment->user->id,
-        'name' => $commment->user->name,
+        'id' => $comment->user->id,
+        'name' => $comment->user->name,
         'status' => 'Status',
-        'messages' => $commment->user->moderated_forum_answers_count,
+        'messages' => $comment->user->moderated_forum_answers_count,
         'sm' => true
     ])
 
