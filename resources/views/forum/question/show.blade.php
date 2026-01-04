@@ -74,7 +74,7 @@
                 ])
 
                 @if ($question->images)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 lg:gap-4">
+                    <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 lg:gap-4">
                         @foreach ($question->images as $image)
                             <div class="rounded-lg overflow-hidden">
                                 <img src="{{ Storage::url($image) }}" alt="">

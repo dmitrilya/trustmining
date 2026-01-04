@@ -16,6 +16,16 @@
         </div>
     </div>
 
+    @if ($comment->images)
+        <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 lg:gap-4">
+            @foreach ($comment->images as $image)
+                <div class="rounded-lg overflow-hidden">
+                    <img src="{{ Storage::url($image) }}" alt="">
+                </div>
+            @endforeach
+        </div>
+    @endif
+
     <p itemprop="text" class="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
         {{ $comment->text }}
     </p>

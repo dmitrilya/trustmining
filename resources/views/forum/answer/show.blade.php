@@ -41,6 +41,16 @@
         'messages' => $answer->user->moderated_forum_answers_count,
     ])
 
+    @if ($answer->images)
+        <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 lg:gap-4">
+            @foreach ($answer->images as $image)
+                <div class="rounded-lg overflow-hidden">
+                    <img src="{{ Storage::url($image) }}" alt="">
+                </div>
+            @endforeach
+        </div>
+    @endif
+
     <p itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-500">
         {{ $answer->text }}
     </p>
@@ -67,7 +77,8 @@
                 <div class="py-3">
                     @if (!Auth::user())
                         <div class="flex items-center justify-center w-full h-full">
-                            <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+                            <a
+                                href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
                         </div>
                     @else
                         @include('forum.comment.create')
