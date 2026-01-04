@@ -41,9 +41,15 @@
         'messages' => $answer->user->moderated_forum_answers_count,
     ])
 
-    <p itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500">
+    <p itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-500">
         {{ $answer->text }}
     </p>
+
+    <div class="ml-auto w-fit mb-2 sm:mb-3 lg:mb-4">
+        <div data-type="datetime" data-date="{{ $answer->created_at }}"
+            class="date-transform text-xxs xs:text-xs lg:text-sm text-gray-500"></div>
+        <meta itemprop="dateCreated" content="{{ $answer->created_at }}">
+    </div>
 
     <div x-data="{ show: false }" class="px-2 sm:px-4 h-full border-t border-gray-200 dark:border-zinc-700">
         <div>
@@ -75,11 +81,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="ml-auto w-fit">
-        <div data-type="datetime" data-date="{{ $answer->created_at }}"
-            class="date-transform text-xxs xs:text-xs lg:text-sm text-gray-500"></div>
-        <meta itemprop="dateCreated" content="{{ $answer->created_at }}">
     </div>
 </div>
