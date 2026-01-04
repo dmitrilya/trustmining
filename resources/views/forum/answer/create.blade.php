@@ -17,8 +17,8 @@
         <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
             <label for="input-image-answer"
                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
-                <input id="input-image-answer" name="images[]" class="hidden" type="file" accept=".png,.jpg,.jpeg,.webp"
-                    multiple
+                <input id="input-image-answer" name="images[]" class="hidden" type="file"
+                    accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                     <path
@@ -55,4 +55,12 @@
             {{ __('Send') }}
         </button>
     </div>
+
+    @if (count($errors->get('images.*')))
+        <div class="px-3 py-2">
+            @foreach ($errors->get('images.*') as $error)
+                <x-input-error :messages="$error" />
+            @endforeach
+        </div>
+    @endif
 </form>

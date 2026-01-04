@@ -30,4 +30,18 @@ class StoreForumQuestionRequest extends FormRequest
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'images.max' => __('Image limit exceeded.'),
+            'images.*.mimes' => __('Valid types are jpg,png,jpeg,webp.'),
+            'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
+        ];
+    }
 }

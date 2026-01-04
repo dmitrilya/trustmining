@@ -30,4 +30,18 @@ class StoreForumCommentRequest extends FormRequest
             'forum_answer_id' => 'exists:forum_answers,id',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'images.max' => __('Image limit exceeded.'),
+            'images.*.mimes' => __('Valid types are jpg,png,jpeg,webp.'),
+            'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
+        ];
+    }
 }

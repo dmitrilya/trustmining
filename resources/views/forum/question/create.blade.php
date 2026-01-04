@@ -80,6 +80,14 @@
                             {{ __('Send') }}
                         </button>
                     </div>
+
+                    @if (count($errors->get('images.*')))
+                        <div class="px-3 py-2">
+                            @foreach ($errors->get('images.*') as $error)
+                                <x-input-error :messages="$error" />
+                            @endforeach
+                        </div>
+                    @endif
                 </form>
             @endif
         </div>
