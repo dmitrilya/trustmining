@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Services\Forum\ForumQuestionService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -54,10 +55,13 @@ class GetYandexGPTOperation implements ShouldQueue
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];
 
-                    if ($res['risk'] < 20) {
-                        $this->model->moderation = false;
-                        $this->model->save();
-                    }
+                if ($res['risk'] < 20) {
+                    $this->model->moderation = false;
+                    $this->model->save();
+                    break;
+                }
+
+                Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons={" . json_encode($res['reasons']) . "}");
                 break;
             case 'hostings':
                 if ($res->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
@@ -79,15 +83,13 @@ class GetYandexGPTOperation implements ShouldQueue
 
                 if (is_int($res['category'])) {
                     $this->model->forum_subcategory_id = $res['category'];
-                    $this->model->keywords = $res['keywords'];
                     $this->model->moderation = false;
-                    $this->model->save();
-                    break;
-                }
+                } else Log::channel('forum-question')->info("[Question classification new category] question={$this->model->id} category={$res['category']}");
 
-                Log::channel('forum-question')->info("[Question classification new category] question={$this->model->id} category={$res['category']}");
                 $this->model->keywords = $res['keywords'];
                 $this->model->save;
+
+                (new ForumQuestionService())->findSimilarQuestions($this->model);
 
                 break;
         }

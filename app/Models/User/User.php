@@ -176,9 +176,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\App\Models\Forum\ForumQuestion::class);
     }
 
-    public function moderatedForumQuestions()
+    public function publishedForumQuestions()
     {
-        return $this->hasMany(\App\Models\Forum\ForumQuestion::class)->where('moderation', false);
+        return $this->hasMany(\App\Models\Forum\ForumQuestion::class)->where('published', true);
     }
 
     public function forumAnswers()

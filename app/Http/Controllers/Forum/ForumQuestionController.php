@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Forum;
 
+use Illuminate\Contracts\View\View;
 use App\Http\Requests\Forum\StoreForumQuestionRequest;
 use App\Http\Traits\ViewTrait;
 use App\Models\Forum\ForumCategory;
@@ -11,6 +12,20 @@ use App\Models\Forum\ForumQuestion;
 class ForumQuestionController extends ForumController
 {
     use ViewTrait;
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(): View
+    {
+        $questions = ForumQuestion::select(['id', 'forum_subcategory_id', 'theme', 'moderation', 'similar_questions', 'published', 'created_at'])
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->withCount('moderatedForumAnswers')->withCount('views')->latest()->get()->append('similar_questions_list');
+
+        return view('forum.question.index', ['questions' => $questions]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -36,6 +51,19 @@ class ForumQuestionController extends ForumController
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Forum\StoreForumQuestionRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function publish(ForumQuestion $forumQuestion)
+    {
+        $this->questionService->publish($forumQuestion);
+
+        return back();
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Forum\ForumCategory  $forumCategory
@@ -57,15 +85,9 @@ class ForumQuestionController extends ForumController
             'user' => fn($q) => $q->select(['id', 'name'])->withCount('moderatedForumAnswers'),
         ])->loadCount('views');
 
-        $similarQuestions = ForumQuestion::where('moderation', false)->whereNot('id', $forumQuestion->id)
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
-            ->select(['id', 'forum_subcategory_id', 'theme'])->selectRaw('JSON_LENGTH(keywords) AS total_keywords')
-            ->selectRaw("(SELECT COUNT(*) FROM JSON_TABLE(? , '$[*]' COLUMNS (kw VARCHAR(255) PATH '$')) AS s
-            WHERE JSON_CONTAINS(forum_questions.keywords, JSON_QUOTE(s.kw))
-        ) AS matches", [json_encode($forumQuestion->keywords)])->havingRaw('matches / total_keywords >= ?', [0.75])
-            ->orderByDesc('matches')->limit(5)->get();
+        $similarQuestions = ForumQuestion::whereIn('id', $forumQuestion->similar_questions)->get();
 
-        $newQuestions = ForumQuestion::where('moderation', false)->select(['id', 'forum_subcategory_id', 'theme'])
+        $newQuestions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
             ->latest()->limit(5)->get();
 

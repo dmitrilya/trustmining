@@ -140,24 +140,6 @@ Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook
 
 Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
 
-Route::group(['prefix' => 'forum'], function () {
-    Route::get('/', [ForumController::class, 'index'])->name('forum');
-    Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
-    Route::middleware('auth')->group(function () {
-        Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');
-        Route::post('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
-        Route::post('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
-        Route::post('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
-    });
-    Route::group(['prefix' => '{forumCategory}'], function () {
-        Route::get('/', [ForumController::class, 'category'])->name('forum.category');
-        Route::group(['prefix' => '{forumSubcategory}'], function () {
-            Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
-            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
-        });
-    });
-});
-
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');
 
@@ -191,6 +173,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::get('/notifications', [ProfileController::class, 'notifications'])->name('notifications');
         Route::get('/notifications/check', [ProfileController::class, 'notificationsCheck'])->name('notifications.check');
+    });
+
+    Route::group(['prefix' => 'forum/questions'], function () {
+        Route::get('/', [ForumQuestionController::class, 'index'])->name('forum.question.index');
+        Route::get('/publish/{forumQuestion}', [ForumQuestionController::class, 'publish'])->middleware('owner')->name('forum.question.publish');
     });
 
     Route::group(['prefix' => 'reviews'], function () {
@@ -284,5 +271,23 @@ Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
 });
 
 Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
+
+Route::group(['prefix' => 'forum'], function () {
+    Route::get('/', [ForumController::class, 'index'])->name('forum');
+    Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
+    Route::middleware('auth')->group(function () {
+        Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');
+        Route::post('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
+        Route::post('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
+        Route::post('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+    });
+    Route::group(['prefix' => '{forumCategory}'], function () {
+        Route::get('/', [ForumController::class, 'category'])->name('forum.category');
+        Route::group(['prefix' => '{forumSubcategory}'], function () {
+            Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
+            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
+        });
+    });
+});
 
 require __DIR__ . '/auth.php';

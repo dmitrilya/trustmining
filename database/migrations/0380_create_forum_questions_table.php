@@ -20,6 +20,8 @@ return new class extends Migration
             $table->json('images');
             $table->json('keywords');
             $table->boolean('moderation')->default(1);
+            $table->json('similar_questions');
+            $table->boolean('published')->default(0);
             $table->unsignedBigInteger('forum_subcategory_id')->nullable();
             $table->foreign('forum_subcategory_id')->references('id')
                 ->on('forum_subcategories')->onUpdate('cascade');

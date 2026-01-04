@@ -32,9 +32,9 @@ class ForumCategory extends Model
         return $this->hasManyThrough(\App\Models\Forum\ForumQuestion::class, \App\Models\Forum\ForumSubcategory::class);
     }
 
-    public function moderatedForumQuestions()
+    public function publishedForumQuestions()
     {
         return $this->hasManyThrough(\App\Models\Forum\ForumQuestion::class, \App\Models\Forum\ForumSubcategory::class)
-            ->where('moderation', false);
+            ->where('published', true);
     }
 }

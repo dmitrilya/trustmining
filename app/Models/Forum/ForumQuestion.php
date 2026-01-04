@@ -19,6 +19,7 @@ class ForumQuestion extends Model
         'text',
         'images',
         'keywords',
+        'similar_questions',
         'forum_question_category_id',
         'user_id',
     ];
@@ -31,6 +32,7 @@ class ForumQuestion extends Model
     protected $casts = [
         'images' => 'array',
         'keywords' => 'array',
+        'similar_questions' => 'array',
     ];
 
     /**
@@ -47,6 +49,14 @@ class ForumQuestion extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class);
+    }
+
+    public function getSimilarQuestionsListAttribute()
+    {
+        return self::whereIn('id', $this->similar_questions)->where('published', true)
+            ->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->withCount('moderatedForumAnswers')->withCount('views')->get();
     }
 
     public function forumSubcategory()

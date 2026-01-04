@@ -63,6 +63,12 @@ return [
             'level' => 'info',
         ],
 
+        'moderation' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/moderation.log'),
+            'level' => 'info',
+        ],
+
         'forum-question' => [
             'driver' => 'single',
             'path' => storage_path('logs/forum-question.log'),
