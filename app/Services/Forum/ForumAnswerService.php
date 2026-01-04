@@ -22,9 +22,10 @@ class ForumAnswerService
         ]);
 
         $answer->images = $this->saveFiles($images, 'forum', 'answer', $answer->id);
+        $answer->moderation = false;
         $answer->save();
 
-        (new YandexGPTService())->moderateText($answer->text, $answer);
+        //(new YandexGPTService())->moderateText($answer->text, $answer);
 
         return $answer;
     }

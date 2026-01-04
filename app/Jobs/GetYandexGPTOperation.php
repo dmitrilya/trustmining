@@ -61,7 +61,7 @@ class GetYandexGPTOperation implements ShouldQueue
                     break;
                 }
 
-                Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons={" . json_encode($res['reasons']) . "}");
+                Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons={" . json_encode($res['reasons'], JSON_UNESCAPED_UNICODE) . "}");
                 break;
             case 'hostings':
                 if ($res->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
