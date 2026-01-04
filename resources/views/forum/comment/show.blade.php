@@ -9,10 +9,10 @@
         ])
 
         <div class="text-right ml-3 sm:ml-5">
-            <div data-type="datetime" data-date="{{ $question->created_at }}"
+            <div data-type="datetime" data-date="{{ $comment->created_at }}"
                 class="date-transform text-xxs xs:text-xs lg:text-sm text-gray-500">
             </div>
-            <meta itemprop="dateCreated" content="{{ $question->created_at }}">
+            <meta itemprop="dateCreated" content="{{ $comment->created_at }}">
         </div>
     </div>
 
