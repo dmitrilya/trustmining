@@ -117,7 +117,7 @@
 
                             <div class="text-right ml-3 sm:ml-5">
                                 <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap">
-                                    {{ __('Posts') }}: {{ $subcategory->moderated_forum_questions_count }}
+                                    {{ __('Posts') }}: {{ $subcategory->published_forum_questions_count }}
                                 </div>
                                 @if ($subcategory->latestForumQuestion)
                                     <div class="date-transform mt-0.5 sm:mt-1 text-xxs sm:text-xs lg:text-sm text-gray-500 whitespace-nowrap"
