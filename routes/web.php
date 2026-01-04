@@ -176,7 +176,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'forum/questions'], function () {
-        Route::get('/', [ForumQuestionController::class, 'index'])->name('forum.question.index');
+        Route::get('/', [ForumQuestionController::class, 'myQuestions'])->name('forum.question.index');
         Route::get('/publish/{forumQuestion}', [ForumQuestionController::class, 'publish'])->middleware('owner')->name('forum.question.publish');
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Forum;
 
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Forum\StoreForumQuestionRequest;
+use Illuminate\Http\Request;
 use App\Http\Traits\ViewTrait;
 use App\Models\Forum\ForumCategory;
 use App\Models\Forum\ForumSubcategory;
@@ -18,9 +19,10 @@ class ForumQuestionController extends ForumController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function myQuestions(Request $request): View
     {
-        $questions = ForumQuestion::select(['id', 'forum_subcategory_id', 'theme', 'moderation', 'similar_questions', 'published', 'created_at'])
+        $questions = $request->user()->forumQuestions()
+            ->select(['id', 'forum_subcategory_id', 'theme', 'moderation', 'similar_questions', 'published', 'created_at'])
             ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->get()->append('similar_questions_list');
 
