@@ -99,7 +99,6 @@
                                     <h3
                                         class="text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200 font-bold">
                                         {{ __($subcategory->name) }}
-
                                     </h3>
                                 </div>
 

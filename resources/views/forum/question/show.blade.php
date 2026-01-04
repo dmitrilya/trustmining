@@ -73,6 +73,16 @@
                     'messages' => $question->user->moderated_forum_answers_count,
                 ])
 
+                @if ($question->images)
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 lg:gap-4">
+                        @foreach ($question->images as $image)
+                            <div class="rounded-lg overflow-hidden">
+                                <img src="{{ Storage::url($image) }}" alt="">
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <p itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500">
                     {{ $question->text }}
                 </p>
