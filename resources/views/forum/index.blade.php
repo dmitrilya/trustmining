@@ -1,7 +1,7 @@
 <x-app-layout title="Форум TrustMining"
     description="Найдите ответ на вопрос среди постов на форуме TrustMining или задайте свой на любую тему из криптосферы">
     <x-slot name="header">
-        <div class="flex items-center justify-between">
+        <div class="lg:flex items-center justify-between">
             <nav aria-label="Breadcrumb">
                 <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
                     class="flex items-center sm:space-x-2">
@@ -17,11 +17,17 @@
                 </ol>
             </nav>
 
-            <a class="block ml-auto w-full sm:w-fit mt-3 xs:mt-4 sm:mt-5 lg:mt-0" href="{{ route('forum.question.create') }}">
-                <x-primary-button class="w-full">
-                    {{ __('New question') }}
-                </x-primary-button>
-            </a>
+            <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
+                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.index') }}">
+                    <x-secondary-button
+                        class="bg-secondary-gradient !text-gray-900">{{ __('My questions') }}</x-secondary-button>
+                </a>
+                <a class="" href="{{ route('forum.question.create') }}">
+                    <x-primary-button>
+                        {{ __('New question') }}
+                    </x-primary-button>
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -48,12 +54,12 @@
                                 </div>
 
                                 <div class="text-right ml-3 sm:ml-5">
-                                    <div
-                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                                    <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
                                         {{ __('Views') }}: <span>{{ $question->views_count }}</span>
                                     </div>
                                     <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
-                                        {{ __('Answers') }}: <span>{{ $question->moderated_forum_answers_count }}</span>
+                                        {{ __('Answers') }}:
+                                        <span>{{ $question->moderated_forum_answers_count }}</span>
                                     </div>
                                 </div>
                             </div>

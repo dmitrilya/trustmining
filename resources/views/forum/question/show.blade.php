@@ -45,12 +45,17 @@
                 </ol>
             </nav>
 
-            <a class="block ml-auto w-full sm:w-fit mt-3 xs:mt-4 sm:mt-5 lg:mt-0"
-                href="{{ route('forum.question.create') }}">
-                <x-primary-button class="w-full">
-                    {{ __('New question') }}
-                </x-primary-button>
-            </a>
+            <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
+                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.index') }}">
+                    <x-secondary-button
+                        class="bg-secondary-gradient !text-gray-900">{{ __('My questions') }}</x-secondary-button>
+                </a>
+                <a class="" href="{{ route('forum.question.create') }}">
+                    <x-primary-button>
+                        {{ __('New question') }}
+                    </x-primary-button>
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -74,7 +79,8 @@
                 ])
 
                 @if ($question->images)
-                    <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
+                    <div
+                        class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                         @foreach ($question->images as $image)
                             <div class="rounded-lg overflow-hidden">
                                 <img src="{{ Storage::url($image) }}" alt="">

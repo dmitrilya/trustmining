@@ -6,7 +6,7 @@
                 {{ __('My questions') }}
             </h2>
 
-            <a class="block ml-auto w-full sm:w-fit mt-3 xs:mt-4 sm:mt-5 lg:mt-0"
+            <a class="block ml-auto w-fit"
                 href="{{ route('forum.question.create') }}">
                 <x-primary-button class="w-full">
                     {{ __('New question') }}
