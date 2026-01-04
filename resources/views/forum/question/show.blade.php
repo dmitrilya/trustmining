@@ -102,7 +102,7 @@
             <div
                 class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg dark:border dark:border-zinc-700">
                 @if (!Auth::user())
-                    <div class="flex flex-column items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
+                    <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-gray-700 dark:text-gray-300 text-xs sm:text-sm lg:text-base">
                             {{ __('Please log in to leave a reply') }}</p>
                         <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
