@@ -25,7 +25,7 @@ class StoreForumQuestionRequest extends FormRequest
     {
         return [
             'theme' => 'required|string|max:64',
-            'text' => 'required|string|max:1500',
+            'text' => 'required|string|max:3000',
             'images' => 'max:5',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
         ];

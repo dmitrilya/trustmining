@@ -1,5 +1,5 @@
 <form action="{{ route('forum.answer.store') }}" method="POST" x-data="{ text: `{{ old('text') }}` }"
-    @submit.prevent="if (text.length > 1500) return window.pushToastAlert('{{ __('The maximum answer length is 1500 characters.') }}', 'error');$el.submit()"
+    @submit.prevent="if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum answer length is 1500 characters.') }}', 'error');$el.submit()"
     enctype=multipart/form-data>
     @csrf
 

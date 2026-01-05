@@ -24,7 +24,7 @@ class StoreForumAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string|max:1500',
+            'text' => 'required|string|max:3000',
             'images' => 'max:5',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'forum_question_id' => 'exists:forum_questions,id',

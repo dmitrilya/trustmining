@@ -16,7 +16,7 @@
             @else
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}` }"
                     @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters.') }}', 'error');
-                        if (text.length > 1500) return window.pushToastAlert('{{ __('The maximum question length is 1500 characters.') }}', 'error'); $el.submit()"
+                        if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"
                     enctype=multipart/form-data>
                     @csrf
 

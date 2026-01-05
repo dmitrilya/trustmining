@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -40,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
             return (new MailMessage)
                 ->subject(__('Verify Email Address'))
                 ->line(__('Please click the button below to verify your email address and activate your account.'))
-                ->action(__('Activate My Account'), $url)
+                ->action(__('Activate account'), $url)
                 ->line(__('If you did not create an account, no further action is required.'));
         });
     }
