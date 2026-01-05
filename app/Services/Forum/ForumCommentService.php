@@ -25,6 +25,8 @@ class ForumCommentService
         $comment->moderation = false;
         $comment->save();
 
+        $comment->moderations()->create(['data' => $comment->attributesToArray()]);
+
         //(new YandexGPTService())->moderateText($comment->text, $comment);
 
         return $comment;

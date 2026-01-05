@@ -109,6 +109,10 @@ class SendTGNotifications implements ShouldQueue
                         $text = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
                         break;
+                    case 'Similar questions':
+                        $text = __('Before publishing, please review questions similar to yours');
+                        $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.index')]]];
+                        break;
                 }
                 break;
         }

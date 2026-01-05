@@ -78,4 +78,9 @@ class ForumQuestion extends Model
     {
         return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
     }
+
+    public function moderations()
+    {
+        return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
+    }
 }

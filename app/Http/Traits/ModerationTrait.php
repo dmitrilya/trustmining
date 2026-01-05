@@ -70,6 +70,15 @@ trait ModerationTrait
                 case ('App\Models\Blog\Guide'):
                     if (isset($moderation->data['preview'])) array_push($files, $m->preview);
                     break;
+                case ('App\Models\Forum\ForumQuestion'):
+                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
+                    break;
+                case ('App\Models\Forum\ForumAnswer'):
+                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
+                    break;
+                case ('App\Models\Forum\ForumComment'):
+                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
+                    break;
             }
 
             Storage::disk($disk)->delete($files);
@@ -147,6 +156,15 @@ trait ModerationTrait
                 break;
             case ('App\Models\Blog\Guide'):
                 if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
+                break;
+            case ('App\Models\Forum\ForumQuestion'):
+                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
+                break;
+            case ('App\Models\Forum\ForumAnswer'):
+                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
+                break;
+            case ('App\Models\Forum\ForumComment'):
+                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
         }
 

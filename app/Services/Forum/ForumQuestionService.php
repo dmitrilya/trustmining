@@ -3,14 +3,14 @@
 namespace App\Services\Forum;
 
 use App\Services\YandexGPTService;
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
-
 use App\Models\Forum\ForumQuestion;
 use App\Models\User\User;
 
 class ForumQuestionService
 {
-    use FileTrait;
+    use FileTrait, NotificationTrait;
 
     /**
      * Store a newly created resource in storage.
@@ -27,6 +27,8 @@ class ForumQuestionService
 
         $question->images = $this->saveFiles($images, 'forum', 'question', $question->id);
         $question->save();
+
+        $question->moderations()->create(['data' => $question->attributesToArray()]);
 
         (new YandexGPTService())->classifyForumQuestion($question);
 
@@ -46,7 +48,10 @@ class ForumQuestionService
         ) AS matches", [json_encode($question->keywords)])->havingRaw('matches / total_keywords >= ?', [0.75])
             ->orderByDesc('matches')->limit(5)->pluck('id');
 
-        if (count($similarQuestions)) $question->similar_questions = $similarQuestions;
+        if (count($similarQuestions)) {
+            $question->similar_questions = $similarQuestions;
+            $this->notify('Similar questions', collect([$question->user]), 'App\Models\Forum\ForumQuestions', $question);
+        }
         else $question->published = true;
 
         $question->save();

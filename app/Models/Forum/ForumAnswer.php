@@ -54,4 +54,9 @@ class ForumAnswer extends Model
     {
         return $this->morphMany(\App\Models\Morph\Like::class, 'likeable');
     }
+
+    public function moderations()
+    {
+        return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
+    }
 }

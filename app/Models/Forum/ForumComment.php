@@ -39,4 +39,9 @@ class ForumComment extends Model
     {
         return $this->belongsTo(\App\Models\Forum\ForumAnswer::class);
     }
+
+    public function moderations()
+    {
+        return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
+    }
 }

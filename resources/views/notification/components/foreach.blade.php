@@ -8,6 +8,9 @@
         'App\Models\Contact' => __('Contacts'),
         'App\Models\User\Passport' => __('Passport'),
         'App\Models\Blog\Guide' => __('Guide'),
+        'App\Models\Forum\ForumQuestion' => __('Forum Question'),
+        'App\Models\Forum\ForumAnswer' => __('Forum Answer'),
+        'App\Models\Forum\ForumComment' => __('Forum Comment'),
     ];
 @endphp
 
@@ -52,18 +55,24 @@
                 @break
 
                 @case('Top up your balance (7 days)')
-                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
+                    <x-notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('In 7 days there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
 
                 @case('Top up your balance (3 days)')
-                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
+                    <x-notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('In 3 days there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
 
                 @case('Top up your balance (1 day)')
-                    <x-notification href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
+                    <x-notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Tomorrow there will not be enough funds on the balance to extend the tariff')"></x-notification>
+                @break
+                @break
+
+                @case('Similar questions')
+                    <x-notification :href="route('forum.question.index')" :type="$ntName" :date="$notification->created_at" pretext=""
+                        :text="__('Before publishing, please review questions similar to yours')"></x-notification>
                 @break
             @endswitch
         @endswitch

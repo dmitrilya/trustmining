@@ -38,6 +38,8 @@ class NotificationTypeSeeder extends Seeder
                 'name' => 'Moderation failed'
             ], [
                 'name' => 'Moderation completed'
+            ], [
+                'name' => 'Similar questions'
             ]
         ]);
     }

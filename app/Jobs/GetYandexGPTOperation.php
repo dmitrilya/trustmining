@@ -11,11 +11,13 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+use App\Http\Traits\ModerationTrait;
+
 use App\Services\YandexGPTService;
 
 class GetYandexGPTOperation implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, ModerationTrait;
 
     private $service;
     private $operationId;
@@ -58,10 +60,14 @@ class GetYandexGPTOperation implements ShouldQueue
                 if ($res['risk'] < 20) {
                     $this->model->moderation = false;
                     $this->model->save();
+
+                    $this->acceptModeration(true, $this->model->moderations()->latest()->first());
                     break;
                 }
 
-                Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons={" . json_encode($res['reasons'], JSON_UNESCAPED_UNICODE) . "}");
+                $reasons = implode('\n', $res['reasons']);
+                Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons:\n$reasons");
+                $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), 10000000);
                 break;
             case 'hostings':
                 if ($res->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
@@ -77,7 +83,9 @@ class GetYandexGPTOperation implements ShouldQueue
                     $this->fallbacks[1];
 
                 if (isset($res['risk'])) {
-                    Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n" . implode('\n', $res['reasons']));
+                    $reasons = implode('\n', $res['reasons']);
+                    $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), 10000000);
+                    Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n$reasons");
                     break;
                 }
 
@@ -88,6 +96,8 @@ class GetYandexGPTOperation implements ShouldQueue
 
                 $this->model->keywords = $res['keywords'];
                 $this->model->save;
+
+                $this->acceptModeration(true, $this->model->moderations()->latest()->first());
 
                 (new ForumQuestionService())->findSimilarQuestions($this->model);
 
