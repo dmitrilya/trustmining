@@ -50,11 +50,12 @@ class ForumQuestionService
 
         if (count($similarQuestions)) {
             $question->similar_questions = $similarQuestions;
+            $question->save();
             $this->notify('Similar questions', collect([$question->user]), 'App\Models\Forum\ForumQuestions', $question);
-        }
-        else $question->published = true;
-
-        $question->save();
+        } elseif (!$question->moderation) {
+            $question->published = true;
+            $question->save();
+        }        
     }
 
     /**
