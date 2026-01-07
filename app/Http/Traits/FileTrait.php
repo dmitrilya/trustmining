@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Services\YandexGPTService;
 
 trait FileTrait
-{    
+{
     public function saveFiles($files, $folder, $type, int $id, $disk = 'public/')
     {
         $result = [];
@@ -94,7 +94,29 @@ trait FileTrait
         elseif ($info['mime'] == 'image/webp') $image = imagecreatefromwebp($file->getPathName());
 
         if (isset($image)) {
-            if ($resize) $image = imagescale($image, $resize);
+            if ($resize) {
+                $w = $info[0];
+                $h = $info[1];
+                if ($w > $h) {
+                    $x = ($w - $h) / 2;
+                    $y = 0;
+                    $minSide = $h;
+                } else {
+                    $x = 0;
+                    $y = ($h - $w) / 2;
+                    $minSide = $w;
+                }
+
+                $dest = imagecreatetruecolor($resize, $resize);
+                if ($info['mime'] == 'image/png') {
+                    imagealphablending($dest, false);
+                    imagesavealpha($dest, true);
+                }
+
+                imagecopyresampled($dest, $image, 0, 0, $x, $y, $resize, $resize, $minSide, $minSide);
+                $image = $dest;
+            }
+
             imagepalettetotruecolor($image);
 
             if (!imagewebp($image, Storage::path($disk . $folder . '/' . $filename . '.webp'), 20)) return false;
@@ -103,5 +125,27 @@ trait FileTrait
         }
 
         return false;
+    }
+
+    private function cropToSquare($sourcePath, $destPath, $size = 300)
+    {
+
+        // 4. Создаем новый квадратный холст
+
+
+        // Сохраняем прозрачность для PNG
+
+
+        // 5. Копируем и масштабируем центральную часть
+        
+
+        // 6. Сохраняем результат
+        imagejpeg($dest, $destPath, 90);
+
+        // Чистим память
+        imagedestroy($src);
+        imagedestroy($dest);
+
+        return true;
     }
 }
