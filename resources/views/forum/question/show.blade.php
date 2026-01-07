@@ -89,7 +89,7 @@
                     </div>
                 @endif
 
-                <p itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500">
+                <p itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500 whitespace-pre-line">
                     {{ $question->text }}
                 </p>
 
