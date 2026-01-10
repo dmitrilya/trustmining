@@ -43,6 +43,7 @@ class UpdateExchangeRate extends Command
         curl_setopt($curl, CURLOPT_URL, 'https://api.coingecko.com/api/v3/exchange_rates');
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
             'x-cg-demo-api-key:' . config('services.coingecko.key'),
+            'User-Agent: TrustMining/1.0 (contact: admin@trustmining.ru)',
             'accept: application/json',
         ]);
 

@@ -29,6 +29,9 @@
                         'App\Models\Contact' => __('Contacts'),
                         'App\Models\User\Passport' => __('Passport'),
                         'App\Models\Blog\Guide' => __('Guide'),
+                        'App\Models\Forum\ForumQuestion' => __('Forum Question'),
+                        'App\Models\Forum\ForumAnswer' => __('Forum Answer'),
+                        'App\Models\Forum\ForumComment' => __('Forum Comment'),
                     ];
                 @endphp
 
