@@ -105,16 +105,16 @@
 
             <x-modal name="need-subscription">
                 <div class="p-6">
-                    <div class="flex justify-between mb-6">
+                    <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg text-gray-950 dark:text-gray-50">
                             {{ __('This feature is only available with a subscription') }}
                         </h2>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-500"
+                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -129,16 +129,16 @@
                 @if ($user->tariff && $user->tg_id === null)
                     <x-modal name="tg-auth">
                         <div class="p-6">
-                            <div class="flex justify-between mb-6">
+                            <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg text-gray-950 dark:text-gray-50">
                                     {{ __('Telegram authorization') }}
                                 </h2>
 
                                 <button type="button" aria-label="{{ __('Close') }}"
-                                    class="ml-4 mt-1 flex h-6 w-6 items-center justify-center rounded-md bg-white text-gray-500"
+                                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
                                     @click="show = false">
                                     <span class="sr-only">Close</span>
-                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                         stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>

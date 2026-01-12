@@ -1,8 +1,8 @@
-<x-app-layout :title="isset($adCategory) ? $adCategory->title : 'Объявления'" :description="isset($adCategory) ? $adCategory->description : 'Объявления о продаже товаров и предоставлении услуг из сферы майнинга'">
+<x-app-layout :title="$adCategory->title" :description="$adCategory->description">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-                {{ isset($adCategory) ? __($adCategory->header) : __('Ads') }}
+                {{ __($adCategory->header) }}
             </h2>
 
             @php

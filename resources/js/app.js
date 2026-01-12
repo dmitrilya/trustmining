@@ -124,5 +124,24 @@ window.onload = function () {
 
     Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
 
+    let ec = document.querySelector(".emoji-container");
+    if (ec) ec.addEventListener('click', (e) => {
+        if (e.target.classList.contains('chat-emoji')) {
+            let textarea = e.target.closest("form").querySelector("pre");
+
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            const oldText = textarea.value;
+            const emoji = e.target.innerHTML;
+            textarea.value = oldText.substring(0, start) + emoji + oldText.substring(end);
+            console.log(textarea.value);
+
+            textarea.focus();
+
+            textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
+        }
+    });
+
     return;
 }

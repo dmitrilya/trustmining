@@ -13,14 +13,14 @@
     </div>
 
     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-        <template x-for="tag in allTags.filter(allTag => `${allTag}`.indexOf(search) !== -1).slice(0, 10)" :key="tag">
+        <template x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)" :key="tag">
             <div @click="tags.push(tag);allTags.splice(allTags.indexOf(tag), 1);" x-text="tag"
                 class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
             </div>
         </template>
-        <div x-show="allTags.filter(allTag => `${allTag}`.indexOf(search) !== -1).length > 10"
+        <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
             class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
-            <span x-text="allTags.filter(allTag => `${allTag}`.indexOf(search) !== -1).length - 10"></span>
+            <span x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
             {{ __('tags more') }}
         </div>
     </div>
