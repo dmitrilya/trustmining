@@ -35,9 +35,9 @@ $(function () {
         media.classList.add('w-full', 'aspect-[4/3]');
         if (src.indexOf('vkvideo') !== -1) {
           let data = src.split('/video')[1].split('_');
-          src = `https://vkvideo.ru/video_ext.php?oid=${data[0]}&id=${data[1]}`.replace('/', '');
-        } else if (src.indexOf('youtube') !== -1) src = `https://www.youtube.com/embed/${src.split('v=')[1]}`.replace('/', '');
-        else if (src.indexOf('rutube') !== -1) src = `https://rutube.ru/play/embed/${src.split('video/')[1]}`.replace('/', '');
+          src = `https://vkvideo.ru/video_ext.php?oid=${data[0]}&id=${data[1]}`;
+        } else if (src.indexOf('youtube') !== -1) src = `https://www.youtube.com/embed/${src.split('v=')[1]}`;
+        else if (src.indexOf('rutube') !== -1) src = `https://rutube.ru/play/embed/${src.split('video/')[1]}`;
       }
       media.src = src;
       media.classList.add('block', 'mx-auto', 'rounded-lg');
