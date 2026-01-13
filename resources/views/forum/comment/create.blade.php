@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="mt-2 sm:mt-4 flex justify-end">
-                        <x-secondary-button @click="$dispatch('close')">
+                        <x-secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
                             {{ __('Cancel') }}
                         </x-secondary-button>
 
