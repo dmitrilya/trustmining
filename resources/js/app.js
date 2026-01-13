@@ -123,25 +123,70 @@ window.onload = function () {
     if (userId) window.listenBroadcast(userId);
 
     Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
+}
 
-    let ec = document.querySelector(".emoji-container");
-    if (ec) ec.addEventListener('click', (e) => {
-        if (e.target.classList.contains('chat-emoji')) {
-            let textarea = e.target.closest("form").querySelector("pre");
+window.saveRange = function () {
+    const sel = window.getSelection();
+    if (sel.rangeCount > 0) {
+        return sel.getRangeAt(0);
+    }
 
-            const start = textarea.selectionStart;
-            const end = textarea.selectionEnd;
+    return null;
+}
 
-            const oldText = textarea.value;
-            const emoji = e.target.innerHTML;
-            textarea.value = oldText.substring(0, start) + emoji + oldText.substring(end);
-            console.log(textarea.value);
+function beforeRangeManipulation(range, pre) {
+    if (!range) {
+        pre.focus();
+        const sel = window.getSelection();
+        if (sel.rangeCount > 0) range = sel.getRangeAt(0);
+        else return;
+    }
 
-            textarea.focus();
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
 
-            textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
-        }
-    });
+    return [sel, range];
+}
 
-    return;
+function afterRangeManipulation(sel, range, pre) {
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    pre.focus();
+    pre.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+window.insertEmoji = function(range, pre, emoji) {
+    let selection = beforeRangeManipulation(range, pre);
+    const textNode = document.createTextNode(emoji);
+
+    selection[1].deleteContents();
+    selection[1].insertNode(textNode);
+    selection[1].setStartAfter(textNode);
+
+    afterRangeManipulation(selection[0], selection[1], pre);
+}
+
+window.prepareLink = function(range, pre) {
+    let selection = beforeRangeManipulation(range, pre);
+
+    return selection[1].toString();
+}
+
+window.insertLink = function(range, pre, text, url) {
+    let selection = beforeRangeManipulation(range, pre);
+    const link = document.createElement('a');
+    
+    link.href = url;
+    link.textContent = text || selection[1].toString() || url;
+    link.target = "_blank";
+    link.classList.add('underline', 'text-indigo-500', 'inline');
+
+    selection[1].deleteContents();
+    selection[1].insertNode(link);
+    selection[1].setStartAfter(link);
+
+    afterRangeManipulation(selection[0], selection[1], pre);
 }

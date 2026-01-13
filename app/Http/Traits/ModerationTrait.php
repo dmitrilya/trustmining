@@ -28,7 +28,6 @@ trait ModerationTrait
         $userId = $userId ? $userId : \Auth::id();
 
         $m = $moderation->moderationable;
-
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
 

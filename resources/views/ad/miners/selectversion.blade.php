@@ -64,7 +64,7 @@
 
     @foreach ($models as $asicModel)
         <div x-show="selectedModel == {{ $asicModel->id }}" class="mt-6" style="display: none">
-            <x-input-label :value="__('Version')" />
+            <p class="block text-sm text-gray-800 dark:text-gray-300">{{ __('Version') }}</p>
 
             <div class="relative mt-1" @click.away="openDropdown = null">
                 <button type="button"

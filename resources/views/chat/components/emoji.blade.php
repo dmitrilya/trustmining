@@ -1,218 +1,109 @@
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128512</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128516</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128513</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128518</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128517</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129315</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128514</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128578</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128579</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128521</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128522</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128519</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129392</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128525</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129321</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128536</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128535</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128538</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128537</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128523</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128539</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128540</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129322</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128541</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129297</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129303</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129325</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129323</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129300</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129296</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129320</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128528</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128529</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128566</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128527</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128530</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128580</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128556</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129317</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128524</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128532</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128554</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129316</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128564</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128567</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129298</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129301</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129314</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129326</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129319</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129397</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129398</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129396</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128565</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129327</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129312</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129395</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128526</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129299</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129488</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128533</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128543</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128577</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128558</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128559</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128562</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128563</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129402</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128550</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128551</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128552</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128560</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128549</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128546</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128557</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128561</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128534</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128547</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128542</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128531</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128553</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128555</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128548</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128545</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128544</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129324</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128520</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128127</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128128</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128169</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129313</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128121</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128122</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128123</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128125</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128126</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#129302</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128570</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128568</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128569</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128571</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128572</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128573</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128576</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128575</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128574</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128584</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128585</span>
-<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer"
-    @click="text += $event.target.innerHTML">&#128586</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128512</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128516</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128513</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128518</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128517</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129315</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128514</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128578</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128579</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128521</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128522</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128519</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129392</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128525</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129321</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128536</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128535</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128538</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128537</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128523</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128539</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128540</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129322</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128541</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129297</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129303</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129325</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129323</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129300</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129296</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129320</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128528</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128529</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128566</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128527</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128530</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128580</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128556</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129317</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128524</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128532</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128554</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129316</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128564</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128567</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129298</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129301</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129314</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129326</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129319</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129397</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129398</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129396</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128565</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129327</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129312</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129395</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128526</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129299</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129488</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128533</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128543</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128577</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128558</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128559</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128562</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128563</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129402</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128550</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128551</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128552</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128560</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128549</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128546</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128557</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128561</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128534</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128547</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128542</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128531</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128553</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128555</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128548</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128545</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128544</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129324</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128520</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128127</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128128</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128169</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129313</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128121</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128122</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128123</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128125</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128126</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#129302</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128570</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128568</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128569</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128571</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128572</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128573</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128576</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128575</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128574</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128584</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128585</span>
+<span class="p-1 hover:bg-gray-100 rounded-md cursor-pointer chat-emoji">&#128586</span>

@@ -51,9 +51,9 @@
         </div>
     @endif
 
-    <p itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-500 whitespace-pre-line">
-        {{ $answer->text }}
-    </p>
+    <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-500">
+        {!! $answer->text !!}
+    </div>
 
     <div class="ml-auto w-fit mb-2 sm:mb-3 lg:mb-4">
         <div data-type="datetime" data-date="{{ $answer->created_at }}"

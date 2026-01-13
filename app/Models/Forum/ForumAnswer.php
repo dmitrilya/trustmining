@@ -19,6 +19,7 @@ class ForumAnswer extends Model
         'images',
         'forum_question_id',
         'user_id',
+        'moderation'
     ];
 
     /**

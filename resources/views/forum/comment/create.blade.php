@@ -1,4 +1,4 @@
-<form action="{{ route('forum.comment.store') }}" method="POST" x-data="{ text: `{{ old('text') }}` }"
+<form action="{{ route('forum.comment.store') }}" method="POST" x-data="{ text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
     @submit.prevent="if (text.length > 1500) return window.pushToastAlert('{{ __('The maximum comment length is 1500 characters.') }}', 'error');$el.submit()"
     enctype=multipart/form-data class="bg-gray-50 dark:bg-zinc-950 rounded-xl">
     @csrf
@@ -6,14 +6,15 @@
     <input type="hidden" name="forum_answer_id" value="{{ $answer->id }}">
 
     <div class="px-4 py-2 bg-gray-50 dark:bg-zinc-950 rounded-t-lg">
-        <label for="text" class="sr-only">{{ __('Your comment...') }}</label>
-        <textarea required id="text" rows="2" name="text" placeholder="{{ __('Your comment...') }}"
-            class="resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-gray-50 border-0 dark:bg-zinc-950 focus:ring-0 dark:placeholder-gray-400"
-            :value="text" @change="text = $el.value"></textarea>
+        <input type="hidden" name="text" :value="text">
+        <pre required id="text" aria-placeholder="{{ __('Your comment...') }}" contenteditable="true" x-ref="pre"
+            class="resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-gray-50 border-0 dark:bg-zinc-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-gray-400"
+            style="min-height: 48px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
+            @mouseup="range = saveRange()" @touchend="range = saveRange()"></pre>
         <x-input-error :messages="$errors->get('text')" />
     </div>
 
-    <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700" x-data="{ images: 0 }">
+    <div class="flex items-center justify-between px-3 py-1 border-t dark:border-zinc-700" x-data="{ images: 0 }">
         <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
             <label for="input-image-comment"
                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
@@ -27,6 +28,52 @@
                 <span class="sr-only">Upload image</span>
             </label>
 
+            <div @click="$dispatch('open-modal', 'create-comment-link_{{ $answer->id }}');link_text = prepareLink(range, $refs.pre)"
+                aria-label="Create hyperlink"
+                class="inline-flex justify-center items-center p-1 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
+                <svg class="size-5" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
+                </svg>
+            </div>
+
+            <x-modal name="create-comment-link_{{ $answer->id }}" maxWidth="sm">
+                <div class="p-4">
+                    <h2 class="text-lg text-gray-950 dark:text-gray-50 mb-6">
+                        {{ __('Create link') }}
+                    </h2>
+
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="text" id="hyper" placeholder=" " :value="link_text"
+                            @change="link_text = $el.value"
+                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                        <label for="hyper"
+                            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            {{ __('Text') }}
+                        </label>
+                    </div>
+
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="url" id="url" placeholder=" " :value="link_url"
+                            @change="link_url = $el.value"
+                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                        <label for="url"
+                            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            URL
+                        </label>
+                    </div>
+
+                    <div class="mt-2 sm:mt-4 flex justify-end">
+                        <x-secondary-button @click="$dispatch('close')">
+                            {{ __('Cancel') }}
+                        </x-secondary-button>
+
+                        <x-primary-button type="button"
+                            @click="() => {insertLink(range, $refs.pre, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-primary-button>
+                    </div>
+                </div>
+            </x-modal>
+
             <x-dropdown align="bottom" width="auto">
                 <x-slot name="trigger">
                     <button type="button" data-dropdown-placement="top"
@@ -37,7 +84,8 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <div class="px-2 py-1 grid grid-cols-5 h-60 overflow-y-auto">
+                    <div class="px-2 py-1 grid grid-cols-5 h-60 overflow-y-auto emoji-container"
+                        @click="e => {if (e.target.classList.contains('chat-emoji')) insertEmoji(range, $refs.pre, e.target.innerHTML);}">
                         @include('chat.components.emoji')
                     </div>
                 </x-slot>
@@ -51,7 +99,7 @@
         </div>
 
         <button type="submit" id="send_button"
-            class="inline-flex items-center py-2.5 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
+            class="inline-flex items-center py-2 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
             {{ __('Send') }}
         </button>
     </div>

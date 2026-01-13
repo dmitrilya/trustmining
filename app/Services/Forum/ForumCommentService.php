@@ -4,11 +4,12 @@ namespace App\Services\Forum;
 
 use App\Services\YandexGPTService;
 use App\Http\Traits\FileTrait;
+use App\Http\Traits\ModerationTrait;
 use App\Models\User\User;
 
 class ForumCommentService
 {
-    use FileTrait;
+    use FileTrait, ModerationTrait;
 
     /**
      * Store a newly created resource in storage.
@@ -22,10 +23,11 @@ class ForumCommentService
         ]);
 
         $comment->images = $this->saveFiles($images, 'forum', 'comment', $comment->id);
-        $comment->moderation = false;
         $comment->save();
 
-        $comment->moderations()->create(['data' => $comment->attributesToArray()]);
+        $moderation = $comment->moderations()->create(['data' => $comment->attributesToArray()]);
+        $moderation->moderation_status_id = 1;
+        $this->acceptModeration(true, $moderation);
 
         //(new YandexGPTService())->moderateText($comment->text, $comment);
 

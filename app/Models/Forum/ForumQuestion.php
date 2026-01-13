@@ -22,6 +22,7 @@ class ForumQuestion extends Model
         'similar_questions',
         'forum_question_category_id',
         'user_id',
+        'moderation'
     ];
 
     /**

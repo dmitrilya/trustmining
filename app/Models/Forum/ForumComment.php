@@ -19,6 +19,7 @@ class ForumComment extends Model
         'images',
         'forum_answer_id',
         'user_id',
+        'moderation'
     ];
 
     /**

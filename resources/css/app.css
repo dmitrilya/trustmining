@@ -50,6 +50,12 @@ body {
     letter-spacing: 0.03em;
 }
 
+pre[contenteditable]:empty::before {
+    content: attr(aria-placeholder);
+    color: oklch(55.1% 0.027 264.364);
+    cursor: text;
+}
+
 .overflow-y-auto {
     &::-webkit-scrollbar-track {
         border-radius: 6px;

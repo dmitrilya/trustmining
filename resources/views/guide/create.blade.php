@@ -35,7 +35,7 @@
                 </div>
 
                 <x-editable-list name="tags">
-                    <x-input-label :value="__('Tags for search')" />
+                    <p class="block text-sm text-gray-800 dark:text-gray-300">{{ __('Tags for search') }}</p>
                 </x-editable-list>
                 <x-input-error :messages="$errors->get('tags')" />
 
@@ -75,7 +75,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="attach-img_url" :value="__('Link to the image') . ' (vkvideo, youtube, rutube)'" />
+                    <x-input-label for="attach-img_url" :value="__('Link to the image')" />
                     <x-text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
                 </div>
 
@@ -103,7 +103,7 @@
                 </div>
 
                 <div>
-                    <x-input-label for="attach-video_url" :value="__('Link to the video')" />
+                    <x-input-label for="attach-video_url" :value="__('Link to the video') . ' (vkvideo, youtube, rutube)'" />
                     <x-text-input id="attach-video_url" type="text" autocomplete="attach-video_url" />
                 </div>
 

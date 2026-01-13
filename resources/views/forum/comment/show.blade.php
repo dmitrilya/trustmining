@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <p itemprop="text" class="text-xs lg:text-sm text-gray-500 dark:text-gray-400 whitespace-pre-line">
-        {{ $comment->text }}
-    </p>
+    <div itemprop="text" class="text-xs lg:text-sm text-gray-500 dark:text-gray-400">
+        {!! $comment->text !!}
+    </div>
 </div>

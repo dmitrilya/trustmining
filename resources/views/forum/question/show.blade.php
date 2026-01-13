@@ -89,9 +89,10 @@
                     </div>
                 @endif
 
-                <p itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500 whitespace-pre-line">
-                    {{ $question->text }}
-                </p>
+                <div itemprop="text"
+                    class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-gray-500">
+                    {!! $question->text !!}
+                </div>
 
                 <div class="mt-3 xs:mt-4 sm:mt-5 flex justify-between">
                     <div class="flex">
@@ -111,10 +112,6 @@
                 </div>
             </div>
 
-            @foreach ($question->moderatedForumAnswers as $i => $answer)
-                @include('forum.answer.show')
-            @endforeach
-
             <div
                 class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg dark:border dark:border-zinc-700">
                 @if (!Auth::user())
@@ -127,6 +124,10 @@
                     @include('forum.answer.create')
                 @endif
             </div>
+
+            @foreach ($question->moderatedForumAnswers as $i => $answer)
+                @include('forum.answer.show')
+            @endforeach
         </div>
 
         @include('forum.components.sidebar')

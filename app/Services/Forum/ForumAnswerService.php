@@ -23,10 +23,11 @@ class ForumAnswerService
         ]);
 
         $answer->images = $this->saveFiles($images, 'forum', 'answer', $answer->id);
-        $answer->moderation = false;
         $answer->save();
 
-        $answer->moderations()->create(['data' => $answer->attributesToArray()]);
+        $moderation = $answer->moderations()->create(['data' => $answer->attributesToArray()]);
+        $moderation->moderation_status_id = 1;
+        $this->acceptModeration(true, $moderation);
 
         //(new YandexGPTService())->moderateText($answer->text, $answer);
 

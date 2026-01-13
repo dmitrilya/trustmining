@@ -1,6 +1,6 @@
 <div class="relative w-full {{ isset($searchBlock) ? $searchBlock : 'max-w-md' }}" x-data="{ open: false, sugs: false }" @click.away="open = false">
     <div class="relative z-0 w-full group" @click="open = true">
-        <input type="text" placeholder="{{ __('Find a miner, company or article...') }}"
+        <input type="text" name="search" placeholder="{{ __('Find a miner, company or article...') }}"
             @input.debounce.1000ms="sugs = search($el.value, $refs.suggestionList, open)" autocomplete="off"
             class="block w-full text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-gray-500 text-gray-950 bg-transparent border-gray-300 appearance-none dark:text-gray-50 {{ isset($border) ? $border : 'px-0 py-2.5 border-0 border-b-2' }} dark:border-zinc-700 dark:focus:border-zinc-600 focus:outline-none focus:ring-0 focus:border-gray-800 peer" />
     </div>
