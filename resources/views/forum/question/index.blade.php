@@ -24,7 +24,7 @@
                             href="{{ route('forum.question.show', [
                                 'forumCategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->forumCategory->name)),
                                 'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
-                                'forumQuestion' => $question->id . '-' . mb_strtolower(str_replace(' ', '-', $question->theme)),
+                                'forumQuestion' => $question->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $question->theme)),
                             ]) }}">
                     @endif
                     <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-gray-200 dark:hover:bg-zinc-950">
@@ -85,7 +85,7 @@
                                                         href="{{ route('forum.question.show', [
                                                             'forumCategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->forumCategory->name)),
                                                             'forumSubcategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->name)),
-                                                            'forumQuestion' => $similarQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $similarQuestion->theme)),
+                                                            'forumQuestion' => $similarQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $similarQuestion->theme)),
                                                         ]) }}">
                                                         <div
                                                             class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-gray-white dark:hover:bg-zinc-900 rounded-lg">

@@ -11,7 +11,7 @@
                     href="{{ route('forum.question.show', [
                         'forumCategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->forumCategory->name)),
                         'forumSubcategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->name)),
-                        'forumQuestion' => $similarQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $similarQuestion->theme)),
+                        'forumQuestion' => $similarQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $similarQuestion->theme)),
                     ]) }}">
                     <div class="p-2 xs:p-3 md:p-4 group hover:bg-gray-200 dark:hover:bg-zinc-950">
                         <div class="mb-1.5 sm:mb-2 text-xxs sm:text-xs lg:text-sm text-gray-500">
@@ -41,7 +41,7 @@
                     href="{{ route('forum.question.show', [
                         'forumCategory' => strtolower(str_replace(' ', '_', $newQuestion->forumSubcategory->forumCategory->name)),
                         'forumSubcategory' => strtolower(str_replace(' ', '_', $newQuestion->forumSubcategory->name)),
-                        'forumQuestion' => $newQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $newQuestion->theme)),
+                        'forumQuestion' => $newQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $newQuestion->theme)),
                     ]) }}">
                     <div class="p-2 xs:p-3 md:p-4 group hover:bg-gray-200 dark:hover:bg-zinc-950">
                         <div class="mb-1.5 sm:mb-2 text-xxs sm:text-xs lg:text-sm text-gray-500">
