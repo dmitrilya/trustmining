@@ -127,7 +127,7 @@ class SitemapGenerate extends Command
                 $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
                 foreach ($forumSubcategory->forumQuestions as $forumQuestion) {
-                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $forumQuestion->theme)));
+                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $forumQuestion->theme)));
                 }
             }
         }
@@ -145,7 +145,7 @@ class SitemapGenerate extends Command
         $out .= '
 </urlset>';
 
-        file_put_contents('public/sitemap.xml', $out);
+        file_put_contents('public_html/sitemap.xml', $out);
 
         return Command::SUCCESS;
     }
