@@ -8,9 +8,9 @@
     <div class="px-4 py-2 bg-white dark:bg-zinc-950 rounded-t-lg">
         <input type="hidden" name="text" :value="text">
         <pre required id="text" aria-placeholder="{{ __('Your answer...') }}" x-ref="answer" contenteditable="true"
-            class="resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-white border-0 dark:bg-zinc-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-gray-400"
+            class="whitespace-normal resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-white border-0 dark:bg-zinc-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-gray-400"
             style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
-            @mouseup="range = saveRange()" @touchend="range = saveRange()"></pre>
+            @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"></pre>
         <x-input-error :messages="$errors->get('text')" />
     </div>
 

@@ -81,9 +81,9 @@ class ForumQuestionController extends ForumController
             'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->with([
                 'likes',
                 'user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
-                'moderatedForumComments' => fn($q2) => $q2->latest(),
+                'moderatedForumComments',
                 'moderatedForumComments.user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
-            ])->latest(),
+            ]),
             'user' => fn($q) => $q->select(['id', 'name'])->withCount('moderatedForumAnswers'),
         ])->loadCount('views');
 

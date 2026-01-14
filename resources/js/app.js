@@ -158,7 +158,14 @@ function afterRangeManipulation(sel, range, pre) {
     pre.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
-window.insertEmoji = function(range, pre, emoji) {
+window.formatPaste = function (pre, e) {
+    e.preventDefault();
+
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    document.execCommand('insertText', false, text);
+}
+
+window.insertEmoji = function (range, pre, emoji) {
     let selection = beforeRangeManipulation(range, pre);
     const textNode = document.createTextNode(emoji);
 
@@ -169,16 +176,16 @@ window.insertEmoji = function(range, pre, emoji) {
     afterRangeManipulation(selection[0], selection[1], pre);
 }
 
-window.prepareLink = function(range, pre) {
+window.prepareLink = function (range, pre) {
     let selection = beforeRangeManipulation(range, pre);
 
     return selection[1].toString();
 }
 
-window.insertLink = function(range, pre, text, url) {
+window.insertLink = function (range, pre, text, url) {
     let selection = beforeRangeManipulation(range, pre);
     const link = document.createElement('a');
-    
+
     link.href = url;
     link.textContent = text || selection[1].toString() || url;
     link.target = "_blank";
