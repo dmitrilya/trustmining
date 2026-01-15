@@ -12,9 +12,9 @@
     <x-text-input id="asic_version" disabled :value="$ad->asicVersion->hashrate" />
 </div>
 
-<input type="hidden" name="props" x-ref="props_miners" :value="json_encode($ad->props)">
+<input type="hidden" name="props" x-ref="props_miners" value="{{ json_encode($ad->props) }}">
 
-<div x-data="{ inStock: {{ $ad->props['Availability'] ? 'true' : 'false' }} }">
+<div x-data="{ inStock: {{ $ad->props['Availability'] == 'In stock' ? 'true' : 'false' }} }">
     <label class="inline-flex items-center cursor-pointer">
         <input type="checkbox" :value="inStock" class="sr-only peer" disabled
             @change="inStock = ! inStock;let props = JSON.parse($refs.props_miners.value);props.Availability = inStock ? 'In stock' : 'Preorder';delete props['Waiting (days)'];$refs.props_miners.value = JSON.stringify(props);">
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div x-data="{ anew: {{ $ad->props['Condition'] ? 'true' : 'false' }} }">
+<div x-data="{ anew: {{ $ad->props['Condition'] == 'New' ? 'true' : 'false' }} }">
     <label class="inline-flex items-center cursor-pointer">
         <input type="checkbox" :value="anew" class="sr-only peer" disabled
             @change="anew = ! anew;let props = JSON.parse($refs.props_miners.value);props.Condition = anew ? 'New' : 'Used';delete props['Warranty (months)'];$refs.props_miners.value = JSON.stringify(props);">
