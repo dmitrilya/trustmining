@@ -46,7 +46,7 @@
     <div x-show="!anew">
         <div class="mt-4">
             <x-input-label for="warranty" :value="__('Warranty (months)')" />
-            <x-text-input id="warranty" name="warranty" type="number" min="1" max="12"
+            <x-text-input id="warranty" name="warranty" type="number" min="0" max="12"
                 autocomplete="warranty" :value="isset($ad->props['Warranty (months)']) ? $ad->props['Warranty (months)'] : null"
                 @change="let props = JSON.parse($refs.props_miners.value);props['Warranty (months)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
             <x-input-error :messages="$errors->get('warranty')" />
