@@ -19,7 +19,7 @@
 
             <div
                 class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
-                <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
+                <div class="mx-auto md:gap-x-8 md:px-8 md:py-8 z-10">
                     <div
                         class="md:col-span-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $office->images" min="128" max="128"></x-carousel>
@@ -68,7 +68,7 @@
 
         <div
             class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
+            <div class="mx-auto md:gap-x-8 md:px-8 md:py-8">
                 <div class="md:col-span-8">
                     <x-carousel :images="$office->images" min="128" max="128"></x-carousel>
                 </div>
