@@ -20,7 +20,7 @@
         style="display: none" @click.away="open = false">
         <div
             class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white dark:bg-zinc-900">
-            <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 sm:gap-4">
+            <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                 @include('layouts.components.ad-categories')
             </div>
         </div>

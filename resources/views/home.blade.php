@@ -1,7 +1,7 @@
 <x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг"
     description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
     <x-slot name="header">
-        <div class="sm:mt-4 grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-5 gap-3 sm:gap-4">
+        <div class="sm:mt-4 grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 gap-3 sm:gap-4">
             @include('layouts.components.ad-categories')
         </div>
     </x-slot>

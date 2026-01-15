@@ -59,6 +59,14 @@
                 </template>
 
                 <template x-if="ad_category_id == 7">
+                    @include('ad.firmwares.create')
+                </template>
+
+                <template x-if="ad_category_id == 8">
+                    @include('ad.monitorings.create')
+                </template>
+
+                <template x-if="ad_category_id == 9">
                     @include('ad.accessories.create')
                 </template>
 

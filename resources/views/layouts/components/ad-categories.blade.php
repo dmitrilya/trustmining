@@ -106,9 +106,8 @@
     <h4
         class="text-xs xs:text-sm lg:text-base text-gray-600 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
         {{ __('GPU') }}</h4>
-</a>
-<a href="{{ route('ads', ['adCategory' => 'firmwares']) }}"
-    class="flex flex-col items-center group">
+</a> --}}
+<a href="{{ route('ads', ['adCategory' => 'firmwares']) }}" class="flex flex-col items-center group">
     <div
         class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg dark:shadow-zinc-800 border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
         @include('layouts.components.svg.firmware', [
@@ -119,7 +118,19 @@
     <h4
         class="text-xs xs:text-sm lg:text-base text-gray-600 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
         {{ __('Firmwares') }}</h4>
-</a> --}}
+</a>
+<a href="{{ route('ads', ['adCategory' => 'monitoring']) }}" class="flex flex-col items-center group">
+    <div
+        class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg dark:shadow-zinc-800 border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
+        @include('layouts.components.svg.monitoring', [
+            'class' => 'text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100',
+            'w' => '50%',
+        ])
+    </div>
+    <h4
+        class="text-xs xs:text-sm lg:text-base text-gray-600 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
+        {{ __('Monitoring') }}</h4>
+</a>
 <a href="{{ route('cryptoexchangers') }}" class="flex flex-col items-center group">
     <div
         class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg dark:shadow-zinc-800 border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
