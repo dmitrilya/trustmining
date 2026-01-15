@@ -78,7 +78,7 @@ class ForumQuestionController extends ForumController
         $this->addView(request(), $forumQuestion);
 
         $forumQuestion->load([
-            'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->with([
+            'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->orderBy('id')->with([
                 'likes',
                 'user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
                 'moderatedForumComments',
