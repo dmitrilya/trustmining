@@ -29,7 +29,8 @@ class AdController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Illuminate\Http\Request;
+     * @param  Illuminate\Http\Request  $request;
+     * @param  \App\Models\Ad\AdCategory  $adCategory;
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, AdCategory $adCategory)

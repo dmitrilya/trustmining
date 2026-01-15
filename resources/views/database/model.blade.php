@@ -115,7 +115,7 @@
                         </div>
                     @endif
 
-                    @if ($modelAds->count())
+                    @if ($modelAds->count() && $modelAdWithMinPrice)
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                             <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
                             <meta itemprop="priceCurrency"

@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use Illuminate\Http\Request;
 
 use App\Models\Database\Coin;
+use App\Models\Ad\AdCategory;
 use App\Models\Ad\Ad;
 
 trait AdTrait
@@ -124,10 +125,11 @@ trait AdTrait
      * Update the specified resource in storage.
      *
      * @param  Illuminate\Http\Request;
+     * @param  \App\Models\Ad\AdCategory  $adCategory;
      * @param  \App\Models\Ad\Ad  $ad
      * @return \Illuminate\Http\Response
      */
-    public function track(Request $request, Ad $ad)
+    public function track(Request $request, AdCategory $adCategory, Ad $ad)
     {
         $user = $request->user();
 
