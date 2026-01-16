@@ -74,7 +74,7 @@ class GetYandexGPTOperation implements ShouldQueue
                     info('Contract Deficiencies error: ' . $res->alternatives[0]->status);
                     break;
                 }
-                $this->model->contract_deficiencies = json_decode(str_replace('```', "'", $res->alternatives[0]->message->text));
+                $this->model->contract_deficiencies = json_decode(trim($res->alternatives[0]->message->text, "`\n\r "));
                 $this->model->save();
                 break;
             case 'forum-question':
