@@ -120,7 +120,7 @@
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="whitespace-pre-line text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
                                 </p>
                             </div>
@@ -331,7 +331,7 @@
 
                             <div class="space-y-6 mt-5">
                                 <p itemprop="description"
-                                    class="whitespace-pre text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                    class="whitespace-pre-line text-sm sm:text-base text-gray-950 dark:text-gray-100">
                                     {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
                                 </p>
                             </div>
