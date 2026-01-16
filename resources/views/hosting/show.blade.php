@@ -20,14 +20,13 @@
 
             <div
                 class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6">
-                <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     <div
-                        class="md:col-span-8{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                        class="md:col-span-3 sm:border-r border-gray-200 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
                     </div>
 
-                    <div
-                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
+                    <div class="md:col-span-4 space-y-5">
                         <h1
                             class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
@@ -160,13 +159,13 @@
 
         <div
             class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
-            <div class="mx-auto md:grid md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
-                <div class="md:col-span-8">
-                    <x-carousel :images="$hosting->images" min="128" max="128"></x-carousel>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
+                <div
+                    class="md:col-span-3 sm:border-r border-gray-200 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                    <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
                 </div>
 
-                <div
-                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-4 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8 space-y-5">
+                <div class="md:col-span-4 space-y-5">
                     <h1
                         class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
