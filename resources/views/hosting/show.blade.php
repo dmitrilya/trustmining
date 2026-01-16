@@ -197,7 +197,7 @@
                     </div>
 
                     <div>
-                        <h3 class="text-sm text-gray-950 mb-2">{{ __('Additional costs') }}</h3>
+                        <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Additional costs') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->expenses))
