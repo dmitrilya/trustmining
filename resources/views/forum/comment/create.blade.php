@@ -7,7 +7,7 @@
 
     <div class="px-4 py-2 bg-gray-50 dark:bg-zinc-950 rounded-t-lg">
         <input type="hidden" name="text" :value="text">
-        <pre required id="text" aria-placeholder="{{ __('Your comment...') }}" contenteditable="true" x-ref="pre"
+        <pre required id="comment-text_{{ $answer->id }}" aria-placeholder="{{ __('Your comment...') }}" contenteditable="true" x-ref="pre"
             class="whitespace-normal resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-gray-50 border-0 dark:bg-zinc-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-gray-400"
             style="min-height: 48px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"></pre>
@@ -16,9 +16,9 @@
 
     <div class="flex items-center justify-between px-3 py-1 border-t dark:border-zinc-700" x-data="{ images: 0 }">
         <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
-            <label for="input-image-comment"
+            <label for="input-image-comment_{{ $answer->id }}"
                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
-                <input id="input-image-comment" name="images[]" class="hidden" type="file"
+                <input id="input-image-comment_{{ $answer->id }}" name="images[]" class="hidden" type="file"
                     accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
@@ -44,20 +44,20 @@
                     </h2>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" id="hyper" placeholder=" " :value="link_text"
+                        <input type="text" id="comment-hyper_{{ $answer->id }}" placeholder=" " :value="link_text"
                             @change="link_text = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
-                        <label for="hyper"
+                        <label for="comment-hyper_{{ $answer->id }}"
                             class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Text') }}
                         </label>
                     </div>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="url" id="url" placeholder=" " :value="link_url"
+                        <input type="url" id="comment-url_{{ $answer->id }}" placeholder=" " :value="link_url"
                             @change="link_url = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
-                        <label for="url"
+                        <label for="comment-url_{{ $answer->id }}"
                             class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             URL
                         </label>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <button type="submit" id="send_button"
+        <button type="submit" id="send-comment-button_{{ $answer->id }}"
             class="inline-flex items-center py-2 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
             {{ __('Send') }}
         </button>

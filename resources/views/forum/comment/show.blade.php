@@ -1,4 +1,4 @@
-<div itemprop="comment" itemscope itemtype="https://schema.org/Comment">
+<div itemprop="comment" itemscope itemtype="https://schema.org/Comment" x-data="open: false">
     <div class="flex justify-between">
         @include('forum.components.author', [
             'id' => $comment->user->id,
@@ -19,8 +19,11 @@
     @if ($comment->images)
         <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
             @foreach ($comment->images as $image)
-                <div class="rounded-lg overflow-hidden">
-                    <img src="{{ Storage::url($image) }}" alt="">
+                <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
+                    <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
+                        class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    </div>
+                    <img src="{{ Storage::url($image) }}" />
                 </div>
             @endforeach
         </div>

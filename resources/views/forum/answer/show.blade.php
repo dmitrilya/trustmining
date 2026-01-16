@@ -1,5 +1,5 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
-    itemtype="https://schema.org/Answer"
+    itemtype="https://schema.org/Answer" x-data="{ open: false }"
     class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
@@ -44,8 +44,11 @@
     @if ($answer->images)
         <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
             @foreach ($answer->images as $image)
-                <div class="rounded-lg overflow-hidden">
-                    <img src="{{ Storage::url($image) }}" alt="">
+                <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
+                    <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
+                        class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                    </div>
+                    <img src="{{ Storage::url($image) }}" />
                 </div>
             @endforeach
         </div>
@@ -90,6 +93,26 @@
                         @endforeach
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
+        class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="bg-gray-900/50 dark:bg-zinc-950/80 fixed inset-0 z-40"></div>
+        <div
+            class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
+            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-zinc-800"
+                @click.away="open = false">
+                <button @click="open = false" type="button"
+                    class="absolute top-1 right-1 text-gray-600 bg-transparent hover:text-gray-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-zinc-700 dark:hover:text-white">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <img x-ref="image_preview" src="" alt="Image preview" class="max-h-full">
             </div>
         </div>
     </div>
