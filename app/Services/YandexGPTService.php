@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 
 use App\Jobs\GetYandexGPTOperation;
+use App\Models\Ad\Hosting;
 use App\Models\Forum\ForumAnswer;
 use App\Models\Forum\ForumComment;
 use App\Models\Forum\ForumQuestion;
@@ -106,7 +107,7 @@ class YandexGPTService
      * 3. Отправка документа (договор) на асинхронную проверку
      * ---------------------------------------------------------
      */
-    public function checkDocument(string $text, string $folder, int $id)
+    public function checkDocument(string $text, string $folder, Hosting $hosting)
     {
         $params = [
             'modelUri' => "gpt://{$this->folderId}/yandexgpt",
@@ -132,7 +133,7 @@ class YandexGPTService
 
         $response = $this->request('POST', "$this->baseLLM/completionAsync", $params);
 
-        GetYandexGPTOperation::dispatch($response->id, $folder, $id)->delay(now()->addMinutes(2));
+        GetYandexGPTOperation::dispatch($response->id, $folder, null, $hosting)->delay(now()->addMinutes(2));
 
         return $response;
     }

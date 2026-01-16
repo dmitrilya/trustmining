@@ -7,6 +7,7 @@ use PhpOffice\PhpWord\IOFactory;
 use Illuminate\Support\Facades\Storage;
 
 use App\Services\YandexGPTService;
+use App\Models\Ad\Hosting;
 
 trait FileTrait
 {
@@ -32,9 +33,9 @@ trait FileTrait
         return $result;
     }
 
-    public function saveContract($file, $folder, int $id, $disk = 'public/')
+    public function saveContract($file, $folder, Hosting $hosting, $disk = 'public/')
     {
-        $path = $this->saveFile($file, $folder, 'contract', $id, $disk);
+        $path = $this->saveFile($file, $folder, 'contract', $hosting->id, $disk);
 
         $document = IOFactory::load(storage_path('app/' . $disk . '/' . $path));
         $text = '';
@@ -46,7 +47,7 @@ trait FileTrait
             }
         }
 
-        (new YandexGPTService())->checkDocument($text, $folder, $id);
+        (new YandexGPTService())->checkDocument($text, $folder, $hosting);
 
         return $path;
     }
