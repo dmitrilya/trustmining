@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Forum;
 
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Forum\StoreForumQuestionRequest;
+use App\Http\Requests\Forum\UpdateForumQuestionRequest;
 use Illuminate\Http\Request;
 use App\Http\Traits\ViewTrait;
 use App\Models\Forum\ForumCategory;
@@ -50,6 +51,33 @@ class ForumQuestionController extends ForumController
         $this->questionService->store($request->user(), $request->theme, $request->text, $request->file('images'));
 
         return redirect()->route('forum');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateForumQuestionRequest  $request
+     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateForumQuestionRequest $request, ForumQuestion $forumQuestion)
+    {
+        $this->questionService->update($forumQuestion, $request->text, $request->file('images'));
+
+        return back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ForumQuestion $forumQuestion)
+    {
+        $this->questionService->destroy($forumQuestion);
+
+        return back();
     }
 
     /**

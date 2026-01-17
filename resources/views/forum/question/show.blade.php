@@ -59,9 +59,14 @@
         </div>
     </x-slot>
 
+    @php
+        $authId = Auth::id();
+    @endphp
+
     <div
         class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-3 sm:gap-5 xl:gap-7 items-start">
-        <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6">
+        <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6"
+            x-data="{ deleteHref: null }">
             <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
@@ -82,7 +87,8 @@
                     <div
                         class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                         @foreach ($question->images as $image)
-                            <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
+                            <div
+                                class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                                 <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
                                     class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                                 </div>
@@ -150,6 +156,27 @@
             @foreach ($question->moderatedForumAnswers as $i => $answer)
                 @include('forum.answer.show')
             @endforeach
+
+            <x-modal name="delete-modal" :show="$errors->userDeletion->isNotEmpty()" focusable>
+                <form method="post" :action="deleteHref" class="p-6">
+                    @csrf
+                    @method('delete')
+
+                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                        {{ __('Are you sure?') }}
+                    </h2>
+
+                    <div class="mt-6 flex justify-end">
+                        <x-secondary-button x-on:click="$dispatch('close')">
+                            {{ __('Cancel') }}
+                        </x-secondary-button>
+
+                        <x-danger-button class="ml-3">
+                            {{ __('Delete') }}
+                        </x-danger-button>
+                    </div>
+                </form>
+            </x-modal>
         </div>
 
         @include('forum.components.sidebar')

@@ -277,9 +277,21 @@ Route::group(['prefix' => 'forum'], function () {
     Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
     Route::middleware('auth')->group(function () {
         Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');
-        Route::post('/question/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
-        Route::post('/answer/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
-        Route::post('/comment/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+        Route::group(['prefix' => 'question'], function () {
+            Route::post('/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
+            Route::put('/{forumQuestion}/update', [ForumQuestionController::class, 'update'])->middleware('owner')->name('forum.question.update');
+            Route::delete('/{forumQuestion}/destroy', [ForumQuestionController::class, 'destroy'])->middleware('owner')->name('forum.question.destroy');
+        });
+        Route::group(['prefix' => 'answer'], function () {
+            Route::post('/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
+            Route::put('/{forumAnswer}/update', [ForumAnswerController::class, 'update'])->middleware('owner')->name('forum.answer.update');
+            Route::delete('/{forumAnswer}/destroy', [ForumAnswerController::class, 'destroy'])->middleware('owner')->name('forum.answer.destroy');
+        });
+        Route::group(['prefix' => 'comment'], function () {
+            Route::post('/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+            Route::put('/{forumComment}/update', [ForumCommentController::class, 'update'])->middleware('owner')->name('forum.comment.update');
+            Route::delete('/{forumComment}/destroy', [ForumCommentController::class, 'destroy'])->middleware('owner')->name('forum.comment.destroy');
+        });
     });
     Route::group(['prefix' => '{forumCategory}'], function () {
         Route::get('/', [ForumController::class, 'category'])->name('forum.category');

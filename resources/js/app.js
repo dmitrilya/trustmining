@@ -197,3 +197,8 @@ window.insertLink = function (range, pre, text, url) {
 
     afterRangeManipulation(selection[0], selection[1], pre);
 }
+
+window.forumEdit = function(content) {
+    content.classList.add('hidden');
+    content.nextElementSibling.classList.remove('hidden');
+}

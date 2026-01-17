@@ -2,15 +2,18 @@
 
 namespace App\Services\Forum;
 
+use Illuminate\Support\Facades\Storage;
 use App\Services\YandexGPTService;
 use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
+use App\Http\Traits\ModerationTrait;
+
 use App\Models\Forum\ForumQuestion;
 use App\Models\User\User;
 
 class ForumQuestionService
 {
-    use FileTrait, NotificationTrait;
+    use FileTrait, NotificationTrait, ModerationTrait;
 
     /**
      * Store a newly created resource in storage.
@@ -33,6 +36,45 @@ class ForumQuestionService
         (new YandexGPTService())->classifyForumQuestion($question);
 
         return $question;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(ForumQuestion $question, string $text, array|null $images)
+    {
+        if ($question->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+
+        $data = ['text' => $text];
+
+        if ($images)
+            $data['images'] = $this->saveFiles($images, 'forum', 'question', $question->id);
+
+        $moderation = $question->moderations()->create(['data' => $data]);
+        $moderation->moderation_status_id = 1;
+        $this->acceptModeration(true, $moderation);
+
+        //(new YandexGPTService())->moderateText($question->text, $question);
+
+        return $question;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(ForumQuestion $question)
+    {
+        $images = [];
+        $images = array_merge($images, $question->images);
+
+        foreach ($question->moderations()->where('moderation_status_id', 1)->get() as $moderation)
+            if (array_key_exists('images', $moderation->data)) $images = array_merge($images, $moderation->data['images']);
+
+        Storage::disk('public')->delete($images);
+
+        $question->moderations()->where('moderation_status_id', 1)->update(['moderation_status_id' => 4]);
+        $question->delete();
     }
 
     /**
