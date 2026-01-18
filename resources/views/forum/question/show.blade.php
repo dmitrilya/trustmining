@@ -62,6 +62,9 @@
     @php
         $authId = Auth::id();
         $ranks = config('forum.ranks');
+        $answerPoints = config('forum.answer');
+        $helpfulAnswerPoints = config('forum.like');
+        $bestAnswerPoints = config('forum.best');
         $notificationAnswerId = request()->answer;
     @endphp
 

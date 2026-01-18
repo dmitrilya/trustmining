@@ -75,9 +75,9 @@
                     </div>
 
                     <div class="space-y-0.5 sm:space-y-1">
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Answer to the question') }} <span class="text-gray-500">- 1 {{ __('point') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Helpful answer') }} <span class="text-gray-500">- 10 {{ __('points') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Best answer') }} <span class="text-gray-500">- 1 {{ __('points') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Answer to the question') }} <span class="text-gray-500">- {{ $answerPoints }} {{ __('point') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Helpful answer') }} <span class="text-gray-500">- {{ $helpfulAnswerPoints }} {{ __('points') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-gray-700 dark:text-gray-300">{{ __('Best answer') }} <span class="text-gray-500">- {{ $bestAnswerPoints }} {{ __('points') }}</span></p>
                     </div>
                 </div>
             </div>
