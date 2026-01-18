@@ -41,6 +41,44 @@ class ForumQuestionController extends ForumController
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Forum\ForumCategory  $forumCategory
+     * @param  \App\Models\Forum\ForumSubcategory  $forumSubcategory
+     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory, ForumQuestion $forumQuestion)
+    {
+        $this->addView(request(), $forumQuestion);
+
+        $forumQuestion->load([
+            'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->orderBy('id')->with([
+                'likes',
+                'user' => fn($q2) => $q2->select(['id', 'name', 'forum_score'])->withCount('moderatedForumAnswers'),
+                'moderatedForumComments',
+                'moderatedForumComments.user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
+            ]),
+            'user' => fn($q) => $q->select(['id', 'name', 'forum_score'])->withCount('moderatedForumAnswers'),
+        ])->loadCount('views');
+
+        $similarQuestions = ForumQuestion::whereIn('id', $forumQuestion->similar_questions)->get();
+
+        $newQuestions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme'])
+            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->latest()->limit(5)->get();
+
+        return view('forum.question.show', [
+            'category' => $forumCategory,
+            'subcategory' => $forumSubcategory,
+            'question' => $forumQuestion,
+            'similarQuestions' => $similarQuestions,
+            'newQuestions' => $newQuestions,
+            'user' => request()->user()
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Forum\StoreForumQuestionRequest  $request
@@ -91,43 +129,5 @@ class ForumQuestionController extends ForumController
         $this->questionService->publish($forumQuestion);
 
         return back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Forum\ForumCategory  $forumCategory
-     * @param  \App\Models\Forum\ForumSubcategory  $forumSubcategory
-     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory, ForumQuestion $forumQuestion)
-    {
-        $this->addView(request(), $forumQuestion);
-
-        $forumQuestion->load([
-            'moderatedForumAnswers' => fn($q) => $q->withCount('likes')->orderByDesc('likes_count')->orderBy('id')->with([
-                'likes',
-                'user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
-                'moderatedForumComments',
-                'moderatedForumComments.user' => fn($q2) => $q2->select(['id', 'name'])->withCount('moderatedForumAnswers'),
-            ]),
-            'user' => fn($q) => $q->select(['id', 'name'])->withCount('moderatedForumAnswers'),
-        ])->loadCount('views');
-
-        $similarQuestions = ForumQuestion::whereIn('id', $forumQuestion->similar_questions)->get();
-
-        $newQuestions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
-            ->latest()->limit(5)->get();
-
-        return view('forum.question.show', [
-            'category' => $forumCategory,
-            'subcategory' => $forumSubcategory,
-            'question' => $forumQuestion,
-            'similarQuestions' => $similarQuestions,
-            'newQuestions' => $newQuestions,
-            'user' => request()->user()
-        ]);
     }
 }

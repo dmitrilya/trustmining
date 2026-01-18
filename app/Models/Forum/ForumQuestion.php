@@ -5,6 +5,8 @@ namespace App\Models\Forum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Morph\Like;
+
 class ForumQuestion extends Model
 {
     use HasFactory;
@@ -72,7 +74,7 @@ class ForumQuestion extends Model
 
     public function moderatedForumAnswers()
     {
-        return $this->hasMany(\App\Models\Forum\ForumAnswer::class)->where('moderation', false);
+        return $this->forumAnswers()->where('moderation', false);
     }
 
     public function views()

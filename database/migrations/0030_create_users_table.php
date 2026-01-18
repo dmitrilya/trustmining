@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('url_name');
             $table->unsignedTinyInteger('tf')->default(50);
             $table->unsignedSmallInteger('art')->default(0);
+            $table->unsignedSmallInteger('forum_score')->default(0);
             $table->unsignedInteger('balance')->default(0);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

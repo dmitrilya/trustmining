@@ -63,6 +63,12 @@ return [
             'level' => 'info',
         ],
 
+        'forum-score' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/forum_score.log'),
+            'level' => 'info',
+        ],
+
         'moderation' => [
             'driver' => 'single',
             'path' => storage_path('logs/moderation.log'),
@@ -71,7 +77,7 @@ return [
 
         'forum-question' => [
             'driver' => 'single',
-            'path' => storage_path('logs/forum-question.log'),
+            'path' => storage_path('logs/forum_question.log'),
             'level' => 'info',
         ],
 

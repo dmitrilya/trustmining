@@ -27,7 +27,7 @@
         @include('forum.components.author', [
             'id' => $comment->user->id,
             'name' => $comment->user->name,
-            'status' => 'Status',
+            'forumScore' => $comment->user->forum_score,
             'messages' => $comment->user->moderated_forum_answers_count,
             'sm' => true,
         ])

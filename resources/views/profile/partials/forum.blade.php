@@ -12,7 +12,7 @@
     @include('forum.components.author', [
         'id' => $user->id,
         'name' => $user->name,
-        'status' => 'Status',
+        'forumScore' => $user->forum_score,
         'messages' => $user->moderatedForumAnswers()->count(),
     ])
 

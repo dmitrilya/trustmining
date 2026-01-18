@@ -1,6 +1,6 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
     itemtype="https://schema.org/Answer" x-data="{ open: false }"
-    class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
+    class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
             <svg class="flex-shrink-0 size-5 sm:size-7 text-yellow-300" aria-hidden="true"
@@ -13,7 +13,8 @@
 
         <div class="ml-auto flex items-end">
             @if ($authId && $authId == $answer->user_id)
-                <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center" @click="forumEdit($refs.content)">
+                <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center"
+                    @click="forumEdit($refs.content)">
                     <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
                         aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -58,7 +59,7 @@
     @include('forum.components.author', [
         'id' => $answer->user->id,
         'name' => $answer->user->name,
-        'status' => 'Status',
+        'forumScore' => $answer->user->forum_score,
         'messages' => $answer->user->moderated_forum_answers_count,
     ])
 
