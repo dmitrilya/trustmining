@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('art:update')->twiceDaily(0, 12);
         $schedule->command('sitemap:generate')->twiceDaily(1, 13);
         $schedule->command('trustfactors:update')->dailyAt('00:30');
+        $schedule->command('forumscore:update')->dailyAt('01:30');
         $schedule->command('auth:clear-resets')->daily();
     }
 
