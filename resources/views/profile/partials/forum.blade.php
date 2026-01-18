@@ -5,6 +5,13 @@
         </h2>
     </header>
 
+    @php
+        $ranks = config('forum.ranks');
+        $answerPoints = config('forum.answer');
+        $helpfulAnswerPoints = config('forum.like');
+        $bestAnswerPoints = config('forum.best');
+    @endphp
+
     <a href="{{ route('forum.question.index') }}">
         <x-secondary-button class="bg-secondary-gradient !text-gray-900">{{ __('My questions') }}</x-secondary-button>
     </a>
