@@ -39,6 +39,15 @@ module.exports = {
             maxWidth: {
                 '8xl': '88rem',
                 '9xl': '96rem',
+            },
+            keyframes: {
+                'highlight': {
+                    '0%, 50%, 100%': { opacity: '1' },
+                    '25%, 75%': { opacity: '0.3' },
+                }
+            },
+            animation: {
+                'scrolling-highlight': 'highlight 2s ease-in-out forwards',
             }
         },
     },

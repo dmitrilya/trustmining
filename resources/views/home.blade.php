@@ -94,7 +94,7 @@
                 <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-2 md:mt-3">
                     {{ __('A unique metric of trust in a company') }}</p>
                 <a href="#confidence-factor-info"
-                    @click="console.log('here');event.preventDefault();document.querySelector(event.target.getAttribute('href')).scrollIntoView({behavior: 'smooth'});"
+                    @click="event.preventDefault();document.querySelector(event.target.getAttribute('href')).scrollIntoView({behavior: 'smooth'});"
                     class="mt-2 md:mt-3 text-xxs sm:text-xs underline text-indigo-600 dark:text-indigo-500">{{ __('Details') }}</a>
             </div>
         </div>

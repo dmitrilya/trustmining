@@ -2,6 +2,7 @@
 
 namespace App\Services\Forum;
 
+use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Facades\Storage;
 use App\Services\YandexGPTService;
 use App\Http\Traits\NotificationTrait;
@@ -20,6 +21,10 @@ class ForumQuestionService
      */
     public function store(User $user, string $theme, string $text, array|null $images)
     {
+        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
+
+        if ($text === "") return;
+
         $question = $user->forumQuestions()->create([
             'theme' => $theme,
             'text' => $text,
@@ -43,8 +48,9 @@ class ForumQuestionService
      */
     public function update(ForumQuestion $question, string $text, array|null $images)
     {
-        if ($question->moderations()->where('moderation_status_id', 1)->exists())
-            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
+
+        if ($text === "") return;
 
         $data = ['text' => $text];
 

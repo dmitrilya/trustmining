@@ -31,6 +31,9 @@ class ForumAnswerController extends ForumController
      */
     public function update(UpdateForumAnswerRequest $request, ForumAnswer $forumAnswer)
     {
+        if ($forumAnswer->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+
         $this->answerService->update($forumAnswer, $request->text, $request->file('images'));
 
         return back();

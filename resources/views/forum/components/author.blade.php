@@ -8,14 +8,6 @@
     </div>
 
     @php
-        $ranks = [
-            50 => 'Nocoiner',
-            150 => 'Hamster',
-            400 => 'Low-Cap Gem',
-            900 => 'Trader',
-            1500 => 'Whale',
-            5000 => 'Satoshi',
-        ];
         $prevRankScore = 0;
         foreach ($ranks as $rankScore => $rank) {
             if ($forumScore < $rankScore) {
@@ -52,7 +44,7 @@
                 </div>
 
                 <div x-show="open" style="display: none"
-                    class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-4 bg-gray-50 dark:bg-zinc-950 border border-gray-300 dark:border-zinc-700 rounded-lg z-20">
+                    class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-5 bg-gray-50 dark:bg-zinc-950 border border-gray-300 dark:border-zinc-700 rounded-lg z-20">
                     <div class="flex justify-center items-center">
                         <svg class="{{ isset($sm) ? 'size-3 sm:size-4' : 'size-4 sm:size-5' }} text-gray-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

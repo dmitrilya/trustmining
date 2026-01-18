@@ -19,6 +19,7 @@ trait NotificationTrait
         $notifications = [];
         $typeId = NotificationType::where('name', $type)->first()->id;
         $notifId = $notificationable ? $notificationable->id : null;
+        $users = $users->unique();
 
         foreach ($users as $user) {
             $notifications[] = [

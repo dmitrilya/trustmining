@@ -31,6 +31,9 @@ class ForumCommentController extends ForumController
      */
     public function update(UpdateForumCommentRequest $request, ForumComment $forumComment)
     {
+        if ($forumComment->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+
         $this->commentService->update($forumComment, $request->text, $request->file('images'));
 
         return back();

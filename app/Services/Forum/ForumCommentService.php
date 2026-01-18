@@ -2,6 +2,7 @@
 
 namespace App\Services\Forum;
 
+use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Facades\Storage;
 use App\Services\YandexGPTService;
 use App\Http\Traits\FileTrait;
@@ -19,6 +20,10 @@ class ForumCommentService
      */
     public function store(User $user, string $text, array|null $images, int $forumAnswerId)
     {
+        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
+
+        if ($text === "") return;
+        
         $comment = $user->forumComments()->create([
             'text' => $text,
             'images' => [],
@@ -42,9 +47,10 @@ class ForumCommentService
      */
     public function update(ForumComment $comment, string $text, array|null $images)
     {
-        if ($comment->moderations()->where('moderation_status_id', 1)->exists())
-            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
 
+        if ($text === "") return;
+        
         $data = ['text' => $text];
 
         if ($images)

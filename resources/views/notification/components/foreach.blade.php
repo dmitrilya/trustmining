@@ -68,11 +68,48 @@
                     <x-notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Tomorrow there will not be enough funds on the balance to extend the tariff')"></x-notification>
                 @break
-                @break
 
                 @case('Similar questions')
                     <x-notification :href="route('forum.question.index')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Before publishing, please review questions similar to yours')"></x-notification>
+                @break
+
+                @case('New forum answer')
+                    <x-notification :href="route('forum.question.show', [
+                        'forumCategory' => strtolower(
+                            str_replace(' ', '_', $n->forumQuestion->forumSubcategory->forumCategory->name),
+                        ),
+                        'forumSubcategory' => strtolower(
+                            str_replace(' ', '_', $n->forumQuestion->forumSubcategory->name),
+                        ),
+                        'forumQuestion' =>
+                            $n->forumQuestion->id .
+                            '-' .
+                            mb_strtolower(str_replace([' ', '/'], '-', $n->forumQuestion->theme)),
+                        'answer' => $n->id,
+                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumQuestion->theme"
+                        :text="$n->text"></x-notification>
+                @break
+
+                @case('New forum comment')
+                    <x-notification :href="route('forum.question.show', [
+                        'forumCategory' => strtolower(
+                            str_replace(
+                                ' ',
+                                '_',
+                                $n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->name,
+                            ),
+                        ),
+                        'forumSubcategory' => strtolower(
+                            str_replace(' ', '_', $n->forumAnswer->forumQuestion->forumSubcategory->name),
+                        ),
+                        'forumQuestion' =>
+                            $n->forumAnswer->forumQuestion->id .
+                            '-' .
+                            mb_strtolower(str_replace([' ', '/'], '-', $n->forumAnswer->forumQuestion->theme)),
+                        'answer' => $n->forum_answer_id,
+                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumAnswer->forumQuestion->theme"
+                        :text="$n->text"></x-notification>
                 @break
             @endswitch
         @endswitch

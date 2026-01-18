@@ -17,5 +17,5 @@
         @endif
     </div>
 
-    <div class="text-sm text-gray-600 max-h-10 overflow-hidden">{{ $text }}</div>
+    <div class="text-sm text-gray-600 max-h-10 overflow-hidden">{!! $text !!}</div>
 </a>

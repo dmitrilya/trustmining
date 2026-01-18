@@ -105,8 +105,12 @@ trait ModerationTrait
         if ($moderation->moderationable_type != 'App\Models\Ad\Ad')
             $this->notify('Moderation completed', collect([$m->user]), 'App\Models\Morph\Moderation', $moderation);
 
-        if ($moderation->moderationable_type == 'App\Models\Morph\Review' && $m->reviewable_type == 'App\Models\User\User')
+        if ($moderation->moderationable_type == 'App\Models\Morph\Review' && $m->reviewable_type == 'App\Models\User\User' && isset($data['moderation']))
             $this->notify('New review', collect([$m->reviewable]), 'App\Models\Morph\Review', $m);
+        elseif ($moderation->moderationable_type == 'App\Models\Forum\ForumAnswer' && isset($data['moderation']) /* Не сработает на редактирование */)
+            $this->notify('New forum answer', collect([$m->forumQuestion->user]), 'App\Models\Forum\ForumAnswer', $m);
+        elseif ($moderation->moderationable_type == 'App\Models\Forum\ForumComment' && isset($data['moderation']) /* Не сработает на редактирование */)
+            $this->notify('New forum comment', collect([$m->forumAnswer->user, $m->forumAnswer->forumQuestion->user]), 'App\Models\Forum\ForumComment', $m);
 
         return redirect()->route('moderations');
     }

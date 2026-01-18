@@ -1,5 +1,5 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
-    itemtype="https://schema.org/Answer" x-data="{ open: false }"
+    itemtype="https://schema.org/Answer" x-data="{ open: false }" id="answer-{{ $answer->id }}"
     class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)

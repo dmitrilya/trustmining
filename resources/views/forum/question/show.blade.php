@@ -61,12 +61,14 @@
 
     @php
         $authId = Auth::id();
+        $ranks = config('forum.ranks');
+        $notificationAnswerId = request()->answer;
     @endphp
 
     <div
         class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-3 sm:gap-5 xl:gap-7 items-start">
         <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6"
-            x-data="{ deleteHref: null }">
+            x-data="{ deleteHref: null }" x-init="if ({{ $notificationAnswerId !== null }}) {let answer = document.querySelector('#answer-{{ $notificationAnswerId }}'); answer.scrollIntoView({ behavior: 'smooth' }); answer.classList.add('animate-scrolling-highlight')}">
             <div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">

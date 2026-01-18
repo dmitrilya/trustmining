@@ -40,6 +40,10 @@ class NotificationTypeSeeder extends Seeder
                 'name' => 'Moderation completed'
             ], [
                 'name' => 'Similar questions'
+            ], [
+                'name' => 'New forum answer'
+            ], [
+                'name' => 'New forum comment'
             ]
         ]);
     }

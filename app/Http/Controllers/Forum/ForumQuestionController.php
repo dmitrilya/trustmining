@@ -100,6 +100,9 @@ class ForumQuestionController extends ForumController
      */
     public function update(UpdateForumQuestionRequest $request, ForumQuestion $forumQuestion)
     {
+        if ($forumQuestion->moderations()->where('moderation_status_id', 1)->exists())
+            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+
         $this->questionService->update($forumQuestion, $request->text, $request->file('images'));
 
         return back();
