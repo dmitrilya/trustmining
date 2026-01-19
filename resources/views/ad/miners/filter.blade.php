@@ -16,7 +16,7 @@
             ? $models->filter(fn($model) => $model->asicVersions->where('id', $rVerId)->count())->first()
             : null)
         : $models->where('url_name', $rModel)->first();
-    $selVersion = $rVerId ? $selModel->asicVersions->where('id', $rVerId)->first() : null;
+    $selVersion = $rVerId && $selModel ? $selModel->asicVersions->where('id', $rVerId)->first() : null;
 
     $algorithms = $models
         ->pluck('algorithm')
