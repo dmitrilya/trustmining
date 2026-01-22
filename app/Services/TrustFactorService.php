@@ -86,11 +86,11 @@ class TrustFactorService
         if (!empty($card['finance'])) {
             $income = $card['finance']['income'];
 
-            if ($income > 10_000_000_000) $score += 7;
-            elseif ($income > 5_000_000_000) $score += 5;
-            elseif ($income > 2_000_000_000) $score += 3;
-            elseif ($income < 100_000_000)   $score -= 6;
-            elseif ($income < 1_000_000_000) $score -= 3;
+            if ($income > 10000000000) $score += 7;
+            elseif ($income > 5000000000) $score += 5;
+            elseif ($income > 2000000000) $score += 3;
+            elseif ($income < 100000000)   $score -= 6;
+            elseif ($income < 1000000000) $score -= 3;
         }
 
         // сотрудники
@@ -203,8 +203,7 @@ class TrustFactorService
      */
     private function scoreHosting($user)
     {
-        if (!$user->hosting) return 0;
-        if ($user->hosting->moderation) return 0;
+        if (!$user->hosting || $user->hosting->moderation) return 0;
 
         if (!in_array('Possibility of visiting the territory', $user->hosting->peculiarities)) {
             return -5;
