@@ -9,6 +9,7 @@
 
             @php
                 $sort = request()->sort;
+                $auth = Auth::user();
             @endphp
 
             <div class="flex justify-between items-center w-full mt-4 lg:mt-0">
@@ -16,7 +17,7 @@
 
                 <x-header-filters>
                     <x-slot name="sort">
-                        @if (($user = Auth::user()) && $user->tariff)
+                        @if ($auth && $auth->tariff)
                             <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                                 request()->route()->action['as'],
                                 array_merge(request()->route()->originalParameters(), [
@@ -51,10 +52,6 @@
             </div>
         </div>
     </x-slot>
-
-    @php
-        $auth = Auth::user();
-    @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ ad_category_id: null }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
