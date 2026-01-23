@@ -33,7 +33,7 @@
                             pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
                             if (r.data.tracking) {
-                                $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                                $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
                                 $el.getElementsByTagName("span")[0].innerHTML = "' .
                                 __('Untrack price') .
                                 '";
@@ -43,7 +43,7 @@
                                     : '') .
                                 '
                             } else {
-                                $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                                $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
                                 $el.getElementsByTagName("span")[0].innerHTML = "' .
                                 __('Track price') .
                                 '";

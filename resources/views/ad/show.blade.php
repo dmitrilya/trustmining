@@ -143,7 +143,7 @@
         <div itemscope itemtype="https://schema.org/Product"
             class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
             <div
-                class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 ad-card">
+                class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 offer-card">
                 <div class="md:col-span-5">
                     @if (!count($ad->images))
                         <div class="w-full overflow-hidden rounded-lg col-start-2">
@@ -255,7 +255,7 @@
                                                 pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
                                                 if (r.data.tracking) {
-                                                    $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
                                                     $el.getElementsByTagName("span")[0].innerHTML = "' .
                                                 __('Untrack price') .
                                                 '";
@@ -265,7 +265,7 @@
                                                     : '') .
                                                 '
                                                 } else {
-                                                    $el.closest(".ad-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
                                                     $el.getElementsByTagName("span")[0].innerHTML = "' .
                                                 __('Track price') .
                                                 '";
