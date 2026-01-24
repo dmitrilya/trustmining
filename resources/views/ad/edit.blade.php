@@ -26,6 +26,11 @@
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
 
+                @php
+                    $descriptionMaxLength =
+                        ($user = Auth::user()) && $user->tariff ? $user->tariff->max_description : 500;
+                @endphp
+
                 @include('ad.' . $ad->adCategory->name . '.edit')
 
                 <div>
