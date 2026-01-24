@@ -10,115 +10,95 @@ use App\Models\Ad\Ad;
 
 trait AdTrait
 {
-    public function getAds(Request $request, ?AdCategory $category = null)
+    public function getAds($request, $adCategory = null)
     {
-        $ads = Ad::query()
-            ->with($this->relations())
-            ->when($category, fn($q) => $q->whereBelongsTo($category))
-            ->when($request->model, fn($q) => $this->filterModel($q, $request->model))
-            ->when($request->asic_version_id, fn($q) => $q->where('asic_version_id', $request->asic_version_id))
-            ->when($request->algorithms, fn($q) => $this->filterAlgorithms($q, $request->algorithms))
-            ->tap(fn($q) => $this->applyPropsFilters($q, $request))
-            ->tap(fn($q) => $this->applyDisplay($q, $request))
-            ->tap(fn($q) => $this->applySort($q, $request));
-
-        return $ads;
-    }
-
-    protected function relations(): array
-    {
-        return [
+        $ads = Ad::with([
             'adCategory:id,name,header',
             'user:id,name,url_name,tf',
             'user.phones:id,user_id',
             'office:id,city',
             'asicVersion:id,asic_model_id,hashrate,measurement',
             'asicVersion.asicModel:id,name',
-            'coin:id,abbreviation',
-        ];
-    }
+            'coin:id,abbreviation'
+        ]);
 
-    protected function filterModel($q, string $model): void
-    {
-        $q->whereHas(
-            'asicVersion.asicModel',
-            fn($q) =>
-            $q->where('name', str_replace('_', ' ', $model))
-        );
-    }
+        if ($adCategory) $ads = $ads->where('ad_category_id', $adCategory->id);
 
-    protected function filterAlgorithms($q, array $algorithms): void
-    {
-        $q->whereHas(
-            'asicVersion.asicModel.algorithm',
-            fn($q) => $q->whereIn('name', $algorithms)
-        );
-    }
-
-    protected function applyPropsFilters($q, Request $request): void
-    {
-        $filters = collect($request->except([
-            'model',
-            'asic_version_id',
-            'algorithms',
-            'page',
-            'sort',
-            'display'
-        ]));
-
-        foreach ($filters as $key => $value) {
-            $this->applyJsonFilter($q, str_replace('_', ' ', $key), $value);
+        if ($request->model) {
+            $ads = $ads->whereHas(
+                'asicVersion.asicModel',
+                function ($q) use ($request) {
+                    $q->where('name', str_replace('_', ' ', $request->model));
+                }
+            );
         }
-    }
 
-    protected function applyJsonFilter($q, string $key, $value): void
-    {
-        $values = (array) $value;
+        if ($request->asic_version_id) {
+            $ads = $ads->where('asic_version_id', $request->asic_version_id);
+        }
 
-        $q->where(function ($q) use ($key, $values) {
-            foreach ($values as $v) {
-                match (true) {
-                    str_starts_with($v, '><') => $this->between($q, $key, $v),
-                    str_starts_with($v, '>')  => $this->greater($q, $key, $v),
-                    str_starts_with($v, '<')  => $this->less($q, $key, $v),
-                    default                   => $q->orWhereJsonContains("props->$key", $v),
-                };
+        if ($request->algorithms && count($request->algorithms))
+            $ads = $ads->whereHas('asicVersion.asicModel.algorithm', function ($q) use ($request) {
+                $q->whereIn('name', $request->algorithms);
+            });
+
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms', 'page', 'sort']) as $key => $value) {
+            $key = str_replace('_', ' ', $key);
+            if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
+            elseif (count($value) === 1) {
+                if (substr($value[0], 0, 1) == '>') {
+                    if (substr($value[0], 1, 1) == '<') {
+                        $value = explode('-', substr($value[0], 2));
+                        $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $value);
+                    } else $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[0], 1)]);
+                } elseif (substr($value[0], 0, 1) == '<') $ads = $ads->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[0], 1)]);
+                else $ads = $ads->whereJsonContains('props->' . $key, $value[0]);
+            } else $ads = $ads->where(function ($q) use ($key, $value) {
+                if (substr($value[0], 0, 1) == '>') {
+                    if (substr($value[0], 1, 1) == '<') {
+                        $values = explode('-', substr($value[0], 2));
+                        $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $values);
+                    } else $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[0], 1)]);
+                } elseif (substr($value[0], 0, 1) == '<') $q->whereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[0], 1)]);
+                else $q->whereJsonContains('props->' . $key, $value[0]);
+
+                for ($i = 1; $i < count($value); $i++) {
+                    if (substr($value[$i], 0, 1) == '>') {
+                        if (substr($value[$i], 1, 1) == '<') {
+                            $values = explode('-', substr($value[$i], 2));
+                            $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ? and CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", $values);
+                        } else $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) > ?", [substr($value[$i], 1)]);
+                    } elseif (substr($value[$i], 0, 1) == '<') $q->orWhereRaw("CAST(JSON_EXTRACT(props, '$.\"$key\"') as UNSIGNED) <= ?", [substr($value[$i], 1)]);
+                    else $q->orWhereJsonContains('props->' . $key, $value[$i]);
+                }
+            });
+        }
+
+        if ($request->display) {
+            if ($request->display == 'active') $ads = $ads->where('moderation', false)->where('hidden', false);
+            elseif ($request->display == 'moderation') $ads = $ads->whereHas('moderations', function ($q) {
+                $q->where('moderation_status_id', 1);
+            });
+            elseif ($request->display == 'rejected') $ads = $ads->whereHas('moderations', function ($q) {
+                $q->latest()->limit(1)->where('moderation_status_id', 3);
+            });
+            elseif ($request->display == 'hidden') $ads = $ads->where('hidden', true);
+        }
+
+        if ($request->sort && ($user = $request->user()) && ($user->tariff || $user->role_id != 2)) {
+            $originalPrice = '`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)';
+
+            switch ($request->sort) {
+                case 'price_low_to_high':
+                    $ads = $ads->orderByRaw($originalPrice);
+                    break;
+                case 'price_high_to_low':
+                    $ads = $ads->orderByRaw($originalPrice . ' DESC');
+                    break;
             }
-        });
-    }
+        }
 
-    protected function greater($q, string $key, string $v)
-    {
-        $q->orWhereRaw(
-            "CAST(JSON_EXTRACT(props, '$.\"$key\"') AS UNSIGNED) > ?",
-            [substr($v, 1)]
-        );
-    }
-
-    protected function applyDisplay($q, Request $r): void
-    {
-        match ($r->display) {
-            'active'     => $q->where('moderation', false)->where('hidden', false),
-            'moderation' => $q->whereHas('moderations', fn($q) => $q->where('moderation_status_id', 1)),
-            'rejected'   => $q->whereHas('moderations', fn($q) => $q->latest()->limit(1)->where('moderation_status_id', 3)),
-            'hidden'     => $q->where('hidden', true),
-            default      => null
-        };
-    }
-
-    protected function applySort($q, Request $r): void
-    {
-        if (!$r->sort || !$user = $r->user()) return;
-
-        if (!$user->tariff && $user->role_id == 2) return;
-
-        $price = '`price` * (SELECT rate FROM coins WHERE coins.id = ads.coin_id LIMIT 1)';
-
-        match ($r->sort) {
-            'price_low_to_high' => $q->orderByRaw($price),
-            'price_high_to_low' => $q->orderByRaw("$price DESC"),
-            default => null
-        };
+        return $ads;
     }
 
     /**
