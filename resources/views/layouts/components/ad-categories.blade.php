@@ -119,7 +119,7 @@
         class="text-xs xs:text-sm lg:text-base text-gray-600 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
         {{ __('Firmwares') }}</h4>
 </a>
-<a href="{{ route('ads', ['adCategory' => 'monitoring']) }}" class="flex flex-col items-center group">
+<a href="{{ route('ads', ['adCategory' => 'monitorings']) }}" class="flex flex-col items-center group">
     <div
         class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg dark:shadow-zinc-800 border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
         @include('layouts.components.svg.monitoring', [
