@@ -94,7 +94,7 @@
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('top') }}">{{ __('Top reliable companies') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
-                    href="{{ route('top') }}">{{ __('The most profitable ASICs') }}</a>
+                    href="{{ route('asic-rating') }}">{{ __('The most profitable ASICs') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
