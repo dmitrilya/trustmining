@@ -10,9 +10,9 @@
         $ad->user->name
     : $ad->adCategory->title . ', ' . $ad->user->name">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-            #{{ $ad->id }}
-        </h2>
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            {{ __('Ad') }} 
+        </h1>
     </x-slot>
 
     @php
@@ -45,10 +45,10 @@
                     <div
                         class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
-                            <h1
+                            <h2
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h1>
+                            </h2>
                         @endif
 
                         <p
@@ -160,10 +160,10 @@
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
-                            <h1 itemprop="name"
+                            <h2 itemprop="name"
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h1>
+                            </h2>
                         @else
                             <meta itemprop="name" content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
                         @endif

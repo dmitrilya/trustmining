@@ -94,6 +94,28 @@ window.scrollBottom = function (el) {
     el.scrollTo(0, el.scrollHeight);
 }
 
+window.filterDouble = function (el, min, max, precision) {
+    let v = el.value.replace(/,/g, '.').replace(/[^\d.]/g, '');
+
+    let parts = v.split('.');
+    if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
+    
+    parts = v.split('.');
+    console.log(parts);
+    if (parts[1] && parts[1].length > precision) {
+        v = parts[0] + '.' + parts[1].slice(0, precision);
+        console.log(v);
+    }
+
+    if (v !== '' && !v.endsWith('.')) {
+        let num = parseFloat(v);
+        if (num > max) v = max;
+        if (num < min) v = min;
+    }
+
+    return v.toString();
+}
+
 window.sendReview = function (form) {
     const data = new FormData(form);
 
@@ -198,7 +220,7 @@ window.insertLink = function (range, pre, text, url) {
     afterRangeManipulation(selection[0], selection[1], pre);
 }
 
-window.forumEdit = function(content) {
+window.forumEdit = function (content) {
     content.classList.add('hidden');
     content.nextElementSibling.classList.remove('hidden');
 }

@@ -4,9 +4,9 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Placement data') }}
-            </h2>
+            </h1>
         </div>
     </x-slot>
 
@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="md:col-span-4 space-y-5">
-                        <h1
+                        <h3
                             class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -37,7 +37,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             {{ isset($moderation->data['address']) ? __($moderation->data['address']) : __($hosting->address) }}
-                        </h1>
+                        </h3>
 
                         <p
                             class="text-lg sm:text-3xl tracking-tight text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
@@ -166,7 +166,7 @@
                 </div>
 
                 <div class="md:col-span-4 space-y-5">
-                    <h1
+                    <h3
                         class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -176,7 +176,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         {{ __($hosting->address) }}
-                    </h1>
+                    </h3>
 
                     <p class="text-3xl tracking-tight text-gray-950 dark:text-gray-50">{{ $hosting->price }} ₽</p>
 

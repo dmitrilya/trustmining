@@ -33,9 +33,9 @@
 
             <x-back-link :href="$href"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Reviews') }} {{ $name }}
-            </h2>
+            </h1>
         </div>
     </x-slot>
 

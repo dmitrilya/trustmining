@@ -1,9 +1,9 @@
 <x-app-layout title="Топ надёжных продавцов оборудования для майнинга — проверенные компании | TrustMining"
     description="Рейтинг проверенных продавцов майнинг-оборудования и услуг. Надёжные магазины, хостинги и поставщики с высоким Trust Factor. Попадите в топ продавцов на TrustMining">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight mr-4">
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Top reliable companies') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-8 lg:space-y-12">
@@ -22,11 +22,11 @@
                         <img src="/img/gold.webp" alt="gold medal">
                     </div>
                 @elseif ($loop->index == 1)
-                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 sm:size-7 lg:size-8">
+                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 size-6 sm:size-7 lg:size-8">
                         <img src="/img/silver.webp" alt="silver medal">
                     </div>
                 @elseif ($loop->index == 2)
-                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 sm:size-7 lg:size-8">
+                    <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 size-6 sm:size-7 lg:size-8">
                         <img src="/img/bronze.webp" alt="bronze medal">
                     </div>
                 @endif

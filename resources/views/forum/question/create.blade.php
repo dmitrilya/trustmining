@@ -1,9 +1,9 @@
 <x-app-layout title="Задать вопрос на форуме TrustMining"
     description="Опишите свою проблему или начните обсуждение интересующей вас темы из криптосферы">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Question creating') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
@@ -64,9 +64,9 @@
 
                             <x-modal name="create-question-link" maxWidth="sm">
                                 <div class="p-4">
-                                    <h2 class="text-lg text-gray-950 dark:text-gray-50 mb-6">
+                                    <h3 class="text-lg text-gray-950 dark:text-gray-50 mb-6">
                                         {{ __('Create link') }}
-                                    </h2>
+                                    </h3>
 
                                     <div class="relative z-0 w-full mb-5 group">
                                         <input type="text" id="hyper" placeholder=" " :value="link_text"

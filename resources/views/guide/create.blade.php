@@ -1,8 +1,8 @@
 <x-app-layout title="Создание статьи/руководства" description="Создайте свою статью и обзор на сайте TrustMining">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Creating article/guide') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ addImg: false, addVideo: false }">
@@ -59,9 +59,9 @@
         <x-modal name="attach-img_modal" maxWidth="md">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                    <h3 class="text-lg text-gray-950 dark:text-gray-50">
                         {{ __('Attach a picture') }}
-                    </h2>
+                    </h3>
 
                     <button type="button" aria-label="{{ __('Close') }}"
                         class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
@@ -87,9 +87,9 @@
         <x-modal name="attach-video_modal" maxWidth="md">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                    <h3 class="text-lg text-gray-950 dark:text-gray-50">
                         {{ __('Attach a video') }}
-                    </h2>
+                    </h3>
 
                     <button type="button" aria-label="{{ __('Close') }}"
                         class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"

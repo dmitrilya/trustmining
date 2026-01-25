@@ -1,14 +1,13 @@
 <x-app-layout title="Обновление цен">
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-                {{ __('Price update') }}
-            </h2>
-        </div>
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            {{ __('Price update') }}
+        </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6" x-data="{ search: '', changings: [] }">
+        <div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6"
+            x-data="{ search: '', changings: [] }">
             <div class="flex justify-between items-center my-6">
                 <div class="relative z-0">
                     <input type="text" id="asic-model_search-name" placeholder=" " @input="search = $el.value"
@@ -43,12 +42,20 @@
                             {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
                         </div>
                         <div class="hidden xs:block text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-1">
-                            @if (isset($ad->props['Condition']))<p>{{ __($ad->props['Condition']) }}</p>@endif
-                            @if (isset($ad->props['Availability']))<p>{{ __($ad->props['Availability']) }}</p>@endif
+                            @if (isset($ad->props['Condition']))
+                                <p>{{ __($ad->props['Condition']) }}</p>
+                            @endif
+                            @if (isset($ad->props['Availability']))
+                                <p>{{ __($ad->props['Availability']) }}</p>
+                            @endif
                         </div>
                         <div class="hidden xl:block text-gray-600 dark:text-gray-400 text-xxs sm:text-sm col-span-1">
-                            @if (isset($ad->props['Waiting (days)']))<p>{{ __('Waiting') . ' ' . __($ad->props['Waiting (days)']) }}</p>@endif
-                            @if (isset($ad->props['Warranty (months)']))<p>{{ __('Warranty') . ' ' . __($ad->props['Warranty (months)']) }}</p>@endif
+                            @if (isset($ad->props['Waiting (days)']))
+                                <p>{{ __('Waiting') . ' ' . __($ad->props['Waiting (days)']) }}</p>
+                            @endif
+                            @if (isset($ad->props['Warranty (months)']))
+                                <p>{{ __('Warranty') . ' ' . __($ad->props['Warranty (months)']) }}</p>
+                            @endif
                         </div>
                         <div class="col-span-2">
                             <x-text-input class="text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md" id="price"

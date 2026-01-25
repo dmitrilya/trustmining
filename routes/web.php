@@ -58,6 +58,7 @@ Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');
 Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty');
 Route::get('/top', [Controller::class, 'top'])->name('top');
+Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');

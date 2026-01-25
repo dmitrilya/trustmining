@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Http\Traits\ViewTrait;
 
@@ -117,48 +118,32 @@ class DatabaseController extends Controller
 
     public function getModels(Request $request)
     {
-        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
-        $algorithms = Algorithm::select(['id'])->with('coins:abbreviation,algorithm_id,profit,rate,merged_group')->get()->map(function($algorithm) {
-            $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
-                fn($mergedGroup) => [
-                    'profit' => $mergedGroup->sum(fn($coin) => $coin->profit * $coin->rate),
-                    'coins' => $mergedGroup->pluck('abbreviation')
-                ]
-            )->sortByDesc('profit')->first();
-            
-            return $algorithm;
-        });
+        $models = Cache::get('calculator_models');
+        
+        if ($request->asicBrand) $models = $models->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
 
-        $asicModels = AsicModel::where('release', '>', '2010-03-01');
-
-        if ($request->asicBrand) $asicModels = $asicModels->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
-
-        return response()->json($asicModels->withCount('views')->with([
-            'asicBrand:id,name',
-            'algorithm:id,name,measurement',
-            'asicVersions' => fn($q) => $q->select(['asic_model_id', 'hashrate', 'efficiency', 'measurement'])->orderByDesc('hashrate')
-        ])->get()->map(function ($model) use ($measurements, $algorithms) {
+        $models = $models->map(function ($model) {
             $version = $model->asicVersions->first();
-            $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
-            $vm = array_search($version->measurement, $measurements);
-            $am = array_search($model->algorithm->measurement, $measurements);
+            $profit = $version->profits->first();
 
             return [
                 'name' => $model->name,
-                'url_name' => strtolower(str_replace(' ', '_', $model->name)),
+                'url_name' => $version->model_name,
                 'hashrate' => $version->hashrate,
-                'original_hashrate' => $version->hashrate * pow(1000, $vm),
-                'profit' => round($algorithm->maxProfit['profit'] * $version->hashrate * pow(1000, $vm - $am), 2),
-                'coins' => $algorithm->maxProfit['coins'],
+                'original_hashrate' => $version->original_hashrate,
+                'profit' => $profit ? $profit['profit'] : 0,
+                'coins' => $profit ? $profit['coins']->pluck('abbreviation') : [],
                 'power' => $version->hashrate * $version->efficiency,
                 'efficiency' => $version->efficiency,
-                'original_efficiency' => $version->efficiency * pow(1000, $am - $vm),
-                'algorithm' => $model->algorithm->name,
+                'original_efficiency' => $version->original_efficiency,
+                'algorithm' => $version->algorithm,
                 'measurement' => $version->measurement,
                 'original_measurement' => $model->algorithm->measurement,
                 'release' => $model->release,
-                'brand' => strtolower(str_replace(' ', '_', $model->asicBrand->name))
+                'brand' => $version->brand_name
             ];
-        })->sortByDesc('profit')->values());
+        })->sortByDesc('profit')->values();        
+
+        return response()->json($models);
     }
 }

@@ -1,8 +1,8 @@
 <x-app-layout title="Редактировать офис, точку продаж" description="Отредактируйте созданный офис или точку продаж">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Editing an office') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">

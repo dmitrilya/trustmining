@@ -76,10 +76,10 @@
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
-                <h2 itemprop="name"
+                <h1 itemprop="name"
                     class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
                     {{ __($question->theme) }}
-                </h2>
+                </h1>
 
                 @include('forum.components.author', [
                     'id' => $question->user->id,

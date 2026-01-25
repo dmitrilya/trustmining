@@ -1,9 +1,9 @@
 <x-app-layout :title="$adCategory->title" :description="$adCategory->description">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __($adCategory->header) }}
-            </h2>
+            </h1>
 
             @php
                 $sort = request()->sort;

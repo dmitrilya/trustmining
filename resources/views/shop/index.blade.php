@@ -1,9 +1,9 @@
 <x-app-layout title="Майнинговые компании: рейтинг, отзывы" description="Рейтинг лучших майнинговых компаний России и мира. Актуальные отзывы реальных клиентов о надежности поставщиков оборудования, хостинге и обслуживании. Сравните компании по ценам, услугам и репутации, чтобы выбрать проверенного партнера">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __('Companies') }} @if (request()->get('city')){{ __('in the city') }} "{{ request()->get('city') }}" @endif
-            </h2>
+            </h1>
 
             @php
                 $sort = request()->sort;

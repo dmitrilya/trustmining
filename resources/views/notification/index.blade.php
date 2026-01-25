@@ -1,9 +1,9 @@
 <x-app-layout title="Оповещения" description="Посмотрите оповещения на платформе TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __('Notifications') }}
-            </h2>
+            </h1>
 
             <x-header-filters :withoutSort="true"></x-header-filters>
         </div>

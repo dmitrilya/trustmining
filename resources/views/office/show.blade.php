@@ -3,9 +3,9 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $office->user->url_name])"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Office of company') }} {{ $office->user->name }}
-            </h2>
+            </h1>
         </div>
     </x-slot>
 
@@ -27,7 +27,7 @@
 
                     <div
                         class="md:col-span-4 space-y-5">
-                        <h1
+                        <h3
                             class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -37,7 +37,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             {{ isset($moderation->data['address']) ? $moderation->data['address'] : $office->address }}
-                        </h1>
+                        </h3>
 
                         <div class="{{ isset($moderation->data['peculiarities']) ? 'border border-indigo-500' : '' }}">
                             <x-peculiarities :ps="isset($moderation->data['peculiarities'])
@@ -75,7 +75,7 @@
 
                 <div
                     class="md:col-span-4 space-y-5">
-                    <h1
+                    <h3
                         class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
                         <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -85,7 +85,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                         {{ $office->address }}
-                    </h1>
+                    </h3>
 
                     <x-peculiarities :ps="$office->peculiarities" model="office"></x-peculiarities>
 

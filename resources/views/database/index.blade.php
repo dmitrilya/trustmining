@@ -168,7 +168,7 @@
                         x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
                     </div>
                     <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
-                        x-text="model.profit + ' {{ __('USDT') }}'">
+                        x-text="model.profit + ' USDT'">
                     </div>
                     <div class="pl-1.5 sm:pl-2">
                         <template x-for="coin in model.coins" :key="model.name + coin">

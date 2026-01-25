@@ -38,9 +38,9 @@
 
             <x-modal name="edit-create-answer-link_{{ $answer->id }}" maxWidth="sm">
                 <div class="p-4">
-                    <h2 class="text-lg text-gray-950 dark:text-gray-50 mb-6">
+                    <h3 class="text-lg text-gray-950 dark:text-gray-50 mb-6">
                         {{ __('Create link') }}
-                    </h2>
+                    </h3>
 
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="text" id="hyper-answer_{{ $answer->id }}" placeholder=" " :value="link_text"

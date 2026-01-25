@@ -1,9 +1,9 @@
 <x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
     description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Check warranty') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">

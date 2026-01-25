@@ -1,10 +1,8 @@
 <x-app-layout title="Онлайн чат: диалоги" description="Все диалоги с пользователями на сайте TrustMining">
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-                {{ __('Chats') }}
-            </h2>
-        </div>
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            {{ __('Chats') }}
+        </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
@@ -42,7 +40,8 @@
                                             src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }}">
                                     @endif
 
-                                    <p class="w-full text-xs font-semibold text-gray-950 dark:text-gray-100">{{ $user->name }}</p>
+                                    <p class="w-full text-xs font-semibold text-gray-950 dark:text-gray-100">
+                                        {{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
                                         <p class="text-xxs text-gray-950 dark:text-gray-100">

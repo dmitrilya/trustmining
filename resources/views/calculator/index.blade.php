@@ -17,11 +17,9 @@
         'asicVersion' => $selVersion->hashrate,
     ]) }}">
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-                {{ __('Mining calculator') }}
-            </h2>
-        </div>
+        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            {{ __('Mining calculator') }}
+        </h1>
     </x-slot>
 
     <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-8">

@@ -67,6 +67,10 @@
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('ads', ['adCategory' => 'firmwares']) }}">{{ __('Firmwares') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('ads', ['adCategory' => 'monitorings']) }}">{{ __('Monitoring') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'accessories']) }}">{{ __('Accessories') }}</a>
@@ -84,9 +88,13 @@
 
             <div class="space-y-2">
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
-                    href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                    href="{{ route('top') }}">{{ __('Top reliable companies') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('top') }}">{{ __('The most profitable ASICs') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"

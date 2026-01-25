@@ -10,7 +10,7 @@
         x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" @click.away="filter = false">
         <div class="flex items-center justify-between">
-            <h2 class="text-lg text-gray-950 dark:text-gray-100">{{ __('Filters') }}</h2>
+            <h3 class="text-lg text-gray-950 dark:text-gray-100">{{ __('Filters') }}</h3>
 
             <button type="button"
                 class="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white dark:bg-zinc-950 p-2 text-gray-500"

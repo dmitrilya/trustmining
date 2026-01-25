@@ -4,9 +4,9 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $company->user->url_name])"></x-back-link>
 
-            <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ $company->name }}
-            </h2>
+            </h1>
         </div>
     </x-slot>
 
@@ -43,7 +43,7 @@
                         @endif
 
                         @if ($company->card['type'] == 'LEGAL')
-                            <h1
+                            <h3
                                 class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-950 dark:text-gray-100">
                                 <svg class="w-5 h-5 text-gray-600 mr-2" aria-hidden="true" width="24" height="24"
                                     fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +52,7 @@
                                         clip-rule="evenodd" />
                                 </svg>
                                 {{ $company->card['address']['unrestricted_value'] }}
-                            </h1>
+                            </h3>
                         @endif
 
                         @if ($company->site && $company->user->tariff && $company->user->tariff->can_site_link)
@@ -204,7 +204,7 @@
                     </div>
 
                     @if ($company->card['type'] == 'LEGAL')
-                        <h1
+                        <h3
                             class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-950 dark:text-gray-100">
                             <svg class="w-5 h-5 text-gray-600 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
@@ -213,7 +213,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             {{ $company->card['address']['unrestricted_value'] }}
-                        </h1>
+                        </h3>
                     @endif
 
                     <div class="my-5">

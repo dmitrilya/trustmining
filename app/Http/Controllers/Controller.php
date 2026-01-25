@@ -63,6 +63,34 @@ class Controller extends BaseController
             ->with(['company:user_id,logo,card,moderation', 'moderatedReviews', 'passport:moderation'])->get()]);
     }
 
+    public function asicRating(): View
+    {
+        $models = Cache::get('calculator_models')->filter(fn($model) => count($model->asicVersions->first()->profits))
+            ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(15)->map(function ($model) {
+                $version = $model->asicVersions->first();
+                $profit = $version->profits->first();
+
+                return [
+                    'name' => $model->name,
+                    'url_name' => $version->model_name,
+                    'hashrate' => $version->hashrate,
+                    'original_hashrate' => $version->original_hashrate,
+                    'profit' => $profit ? $profit['profit'] : 0,
+                    'coins' => $profit ? $profit['coins']->pluck('abbreviation') : [],
+                    'power' => $version->hashrate * $version->efficiency,
+                    'efficiency' => $version->efficiency,
+                    'original_efficiency' => $version->original_efficiency,
+                    'algorithm' => $version->algorithm,
+                    'measurement' => $version->measurement,
+                    'original_measurement' => $model->algorithm->measurement,
+                    'release' => $model->release,
+                    'brand' => $version->brand_name
+                ];
+            })->values();
+
+        return view('profitable', ['models' => $models, 'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate]);
+    }
+
     public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
     {
         $models = Cache::get('calculator_models');
