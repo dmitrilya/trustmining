@@ -80,7 +80,7 @@ class UpdateExchangeRate extends Command
             return $algorithm;
         });
 
-        $models = AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id'])->with([
+        $models = AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id', 'release'])->with([
             'algorithm:id,name,measurement',
             'asicBrand:id,name',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
@@ -99,6 +99,8 @@ class UpdateExchangeRate extends Command
                     'coins' => $profit['coins']
                 ]);
                 $version->coef = pow(1000, $vm - $am);
+                $version->original_hashrate = $version->hashrate * pow(1000, $vm);
+                $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
                 $version->price = round($version->ads->where('price', '!=', 0)->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
