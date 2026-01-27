@@ -11,7 +11,7 @@
     : $ad->adCategory->title . ', ' . $ad->user->name">
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-            {{ __('Ad') }} 
+            {{ __('Ad') }}
         </h1>
     </x-slot>
 
@@ -56,12 +56,18 @@
                             @if (isset($moderation->data['price']))
                                 @if ($moderation->data['price'] != 0)
                                     {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
+                                    @if ($moderation->data['with_vat'])
+                                        <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                    @endif
                                 @else
                                     {{ __('Price on request') }}
                                 @endif
                             @else
                                 @if ($ad->price != 0)
                                     {{ $ad->price }} {{ $ad->coin->abbreviation }}
+                                    @if ($ad->with_vat)
+                                        <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                    @endif
                                 @else
                                     {{ __('Price on request') }}
                                 @endif
@@ -184,6 +190,9 @@
                         @if ($ad->price != 0)
                             <span itemprop="price">{{ $ad->price }}</span> <span
                                 itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
+                            @if ($ad->with_vat)
+                                <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                            @endif
                         @else
                             {{ __('Price on request') }}
                         @endif

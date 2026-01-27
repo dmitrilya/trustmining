@@ -87,6 +87,7 @@ class AdController extends Controller
             'description' => $request->description ?? '',
             'props' => json_decode($request->props),
             'price' => $request->price,
+            'with_vat' => $request->filled('with_vat'),
             'images' => [],
             'preview' => '',
             'coin_id' => $request->coin_id,
@@ -195,9 +196,10 @@ class AdController extends Controller
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
 
-        if ($request->price != $ad->price || $request->coin_id != $ad->coin_id) {
+        if ($request->price != $ad->price || $request->coin_id != $ad->coin_id || $request->filled('with_vat') != $ad->with_vat) {
             $data['price'] = $request->price;
             $data['coin_id'] = $request->coin_id;
+            $data['with_vat'] = $request->filled('with_vat');
         }
 
         if ($request->preview)

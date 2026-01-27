@@ -53,6 +53,9 @@
                     </div>
                 </div>
 
+                <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat">
+                    {{ __('Price including VAT') }}
+                </x-checkbox>
 
                 <div class="flex justify-end">
                     <x-danger-button x-data="" type="button"

@@ -36,6 +36,7 @@ return new class extends Migration
             $table->boolean('hidden')->default(0);
             $table->boolean('unique_content')->default(0);
             $table->float('price');
+            $table->boolean('with_vat')->default(0);
             $table->unsignedBigInteger('coin_id');
             $table->foreign('coin_id')->references('id')
                 ->on('coins')->onUpdate('cascade')->onDelete('cascade');

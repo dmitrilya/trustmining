@@ -56,6 +56,9 @@
                             @if (isset($ad->props['Warranty (months)']))
                                 <p>{{ __('Warranty') . ' ' . __($ad->props['Warranty (months)']) }}</p>
                             @endif
+                            @if ($ad->with_vat)
+                                <p>{{ __('Price including VAT') }}</p>
+                            @endif
                         </div>
                         <div class="col-span-2">
                             <x-text-input class="text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md" id="price"

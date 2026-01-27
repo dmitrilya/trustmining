@@ -89,6 +89,10 @@
                     </div>
                 </div>
 
+                <x-checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
+                    {{ __('Price including VAT') }}
+                </x-checkbox>
+
                 <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
             </form>
         </div>

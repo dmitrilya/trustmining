@@ -80,7 +80,11 @@
     </div>
 
     <div class="mt-2 md:mt-3">
-        <div class="text-gray-950 dark:text-white text-sm sm:text-base font-bold">
+        @if ($ad->price != 0 && $ad->with_vat)
+            <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs">{{ __('The price includes VAT') }}</div>
+        @endif
+
+        <div class="text-gray-950 dark:text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold">
             @if ($ad->price != 0)
                 {{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span>
             @else
@@ -90,7 +94,7 @@
 
         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
             target="_blank"
-            class="block hover:underline text-xxs sm:text-xs text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->office->city }}</a>
+            class="block hover:underline text-xxs sm:text-xs text-indigo-600 hover:text-indigo-500 mt-1 sm:mt-2">{{ $ad->office->city }}</a>
 
         <div class="relative flex mt-2 items-center">
             <a class="block w-full"
