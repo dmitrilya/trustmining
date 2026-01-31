@@ -1,4 +1,4 @@
-<x-guest-layout title="TrustMining Авторизация" description="Авторизация на сайте TrustMining">
+<x-guest-layout title="TrustMining Авторизация" description="Авторизация на сайте TrustMining" description="Авторизация на TrustMining — вход для майнеров и клиентов инфраструктурных компаний. Получите доступ к проверенным предложениям, экспертному сообществу, обзорам оборудования и профессиональной экосистеме майнинга">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

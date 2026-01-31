@@ -99,7 +99,7 @@ window.filterDouble = function (el, min, max, precision) {
 
     let parts = v.split('.');
     if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
-    
+
     parts = v.split('.');
     console.log(parts);
     if (parts[1] && parts[1].length > precision) {
@@ -219,6 +219,45 @@ window.insertLink = function (range, pre, text, url) {
 
     afterRangeManipulation(selection[0], selection[1], pre);
 }
+
+window.processVideoLink = src => {
+    if (src.indexOf('vkvideo') !== -1) {
+        let data = src.split('/video')[1].split('_');
+        src = `https://vkvideo.ru/video_ext.php?oid=${data[0]}&id=${data[1]}`;
+    } else if (src.indexOf('youtube') !== -1) src = `https://www.youtube.com/embed/${src.split('v=')[1]}`;
+    else if (src.indexOf('rutube') !== -1) src = `https://rutube.ru/play/embed/${src.split('video/')[1]}`;
+
+    return src
+}
+
+window.formatAttachMedia = (type) => {
+    let urlInput = document.getElementById(`attach-${type}_url`);
+
+    if (urlInput.value != "") {
+        let src = urlInput.value, ta = document.querySelector("pre[contenteditable]");
+        let media = type == 'img' ? document.createElement('img') : document.createElement('iframe');
+        if (type == 'video') {
+            media.classList.add('w-full', 'aspect-[4/3]');
+            src = window.processVideoLink(src);
+        }
+        media.src = src;
+        media.classList.add('block', 'mx-auto', 'rounded-lg');
+
+        let selection = window.getSelection();
+
+        if (selection.rangeCount === 0 || !ta.contains(selection.getRangeAt(0).commonAncestorContainer)) {
+            ta.appendChild(media);
+        } else {
+            let range = selection.getRangeAt(0);
+            range.collapse(false);
+            range.insertNode(media);
+
+            selection.removeAllRanges();
+            range.setStartAfter(image);
+            selection.addRange(range);
+        }
+    }
+};
 
 window.forumEdit = function (content) {
     content.classList.add('hidden');

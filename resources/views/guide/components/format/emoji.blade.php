@@ -1,120 +1,16 @@
-<div class="relative" x-data="{ show: false }">
-    <button type="button" @click="show = !show"
-        class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700">
-        <span class="cursor-pointer">&#128512</span>
-    </button>
+<x-dropdown align="bottom" width="auto">
+    <x-slot name="trigger">
+        <button type="button" data-dropdown-placement="top"
+            class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700">
+            <span>&#128516</span>
+            <span class="sr-only">Add emoji</span>
+        </button>
+    </x-slot>
 
-    <div @click.away="show = false" x-show="show" style="display: none"
-        class="format_add-emoji absolute bg-gray-200 p-1 rounded-lg left-0 top-7 sm:top-8 w-max grid grid-cols-10 sm:grid-cols-16 md:grid-cols-22 gap-0.5">
-        <span class="emoji-code cursor-pointer">&#128512</span>
-        <span class="emoji-code cursor-pointer">&#128515</span>
-        <span class="emoji-code cursor-pointer">&#128516</span>
-        <span class="emoji-code cursor-pointer">&#128513</span>
-        <span class="emoji-code cursor-pointer">&#128518</span>
-        <span class="emoji-code cursor-pointer">&#128517</span>
-        <span class="emoji-code cursor-pointer">&#129315</span>
-        <span class="emoji-code cursor-pointer">&#128514</span>
-        <span class="emoji-code cursor-pointer">&#128578</span>
-        <span class="emoji-code cursor-pointer">&#128579</span>
-        <span class="emoji-code cursor-pointer">&#128521</span>
-        <span class="emoji-code cursor-pointer">&#128522</span>
-        <span class="emoji-code cursor-pointer">&#128519</span>
-        <span class="emoji-code cursor-pointer">&#129392</span>
-        <span class="emoji-code cursor-pointer">&#128525</span>
-        <span class="emoji-code cursor-pointer">&#129321</span>
-        <span class="emoji-code cursor-pointer">&#128536</span>
-        <span class="emoji-code cursor-pointer">&#128535</span>
-        <span class="emoji-code cursor-pointer">&#128538</span>
-        <span class="emoji-code cursor-pointer">&#128537</span>
-        <span class="emoji-code cursor-pointer">&#128523</span>
-        <span class="emoji-code cursor-pointer">&#128539</span>
-        <span class="emoji-code cursor-pointer">&#128540</span>
-        <span class="emoji-code cursor-pointer">&#129322</span>
-        <span class="emoji-code cursor-pointer">&#128541</span>
-        <span class="emoji-code cursor-pointer">&#129297</span>
-        <span class="emoji-code cursor-pointer">&#129303</span>
-        <span class="emoji-code cursor-pointer">&#129325</span>
-        <span class="emoji-code cursor-pointer">&#129323</span>
-        <span class="emoji-code cursor-pointer">&#129300</span>
-        <span class="emoji-code cursor-pointer">&#129296</span>
-        <span class="emoji-code cursor-pointer">&#129320</span>
-        <span class="emoji-code cursor-pointer">&#128528</span>
-        <span class="emoji-code cursor-pointer">&#128529</span>
-        <span class="emoji-code cursor-pointer">&#128566</span>
-        <span class="emoji-code cursor-pointer">&#128527</span>
-        <span class="emoji-code cursor-pointer">&#128530</span>
-        <span class="emoji-code cursor-pointer">&#128580</span>
-        <span class="emoji-code cursor-pointer">&#128556</span>
-        <span class="emoji-code cursor-pointer">&#129317</span>
-        <span class="emoji-code cursor-pointer">&#128524</span>
-        <span class="emoji-code cursor-pointer">&#128532</span>
-        <span class="emoji-code cursor-pointer">&#128554</span>
-        <span class="emoji-code cursor-pointer">&#129316</span>
-        <span class="emoji-code cursor-pointer">&#128564</span>
-        <span class="emoji-code cursor-pointer">&#128567</span>
-        <span class="emoji-code cursor-pointer">&#129298</span>
-        <span class="emoji-code cursor-pointer">&#129301</span>
-        <span class="emoji-code cursor-pointer">&#129314</span>
-        <span class="emoji-code cursor-pointer">&#129326</span>
-        <span class="emoji-code cursor-pointer">&#129319</span>
-        <span class="emoji-code cursor-pointer">&#129397</span>
-        <span class="emoji-code cursor-pointer">&#129398</span>
-        <span class="emoji-code cursor-pointer">&#129396</span>
-        <span class="emoji-code cursor-pointer">&#128565</span>
-        <span class="emoji-code cursor-pointer">&#129327</span>
-        <span class="emoji-code cursor-pointer">&#129312</span>
-        <span class="emoji-code cursor-pointer">&#129395</span>
-        <span class="emoji-code cursor-pointer">&#128526</span>
-        <span class="emoji-code cursor-pointer">&#129299</span>
-        <span class="emoji-code cursor-pointer">&#129488</span>
-        <span class="emoji-code cursor-pointer">&#128533</span>
-        <span class="emoji-code cursor-pointer">&#128543</span>
-        <span class="emoji-code cursor-pointer">&#128577</span>
-        <span class="emoji-code cursor-pointer">&#128558</span>
-        <span class="emoji-code cursor-pointer">&#128559</span>
-        <span class="emoji-code cursor-pointer">&#128562</span>
-        <span class="emoji-code cursor-pointer">&#128563</span>
-        <span class="emoji-code cursor-pointer">&#129402</span>
-        <span class="emoji-code cursor-pointer">&#128550</span>
-        <span class="emoji-code cursor-pointer">&#128551</span>
-        <span class="emoji-code cursor-pointer">&#128552</span>
-        <span class="emoji-code cursor-pointer">&#128560</span>
-        <span class="emoji-code cursor-pointer">&#128549</span>
-        <span class="emoji-code cursor-pointer">&#128546</span>
-        <span class="emoji-code cursor-pointer">&#128557</span>
-        <span class="emoji-code cursor-pointer">&#128561</span>
-        <span class="emoji-code cursor-pointer">&#128534</span>
-        <span class="emoji-code cursor-pointer">&#128547</span>
-        <span class="emoji-code cursor-pointer">&#128542</span>
-        <span class="emoji-code cursor-pointer">&#128531</span>
-        <span class="emoji-code cursor-pointer">&#128553</span>
-        <span class="emoji-code cursor-pointer">&#128555</span>
-        <span class="emoji-code cursor-pointer">&#128548</span>
-        <span class="emoji-code cursor-pointer">&#128545</span>
-        <span class="emoji-code cursor-pointer">&#128544</span>
-        <span class="emoji-code cursor-pointer">&#129324</span>
-        <span class="emoji-code cursor-pointer">&#128520</span>
-        <span class="emoji-code cursor-pointer">&#128127</span>
-        <span class="emoji-code cursor-pointer">&#128128</span>
-        <span class="emoji-code cursor-pointer">&#128169</span>
-        <span class="emoji-code cursor-pointer">&#129313</span>
-        <span class="emoji-code cursor-pointer">&#128121</span>
-        <span class="emoji-code cursor-pointer">&#128122</span>
-        <span class="emoji-code cursor-pointer">&#128123</span>
-        <span class="emoji-code cursor-pointer">&#128125</span>
-        <span class="emoji-code cursor-pointer">&#128126</span>
-        <span class="emoji-code cursor-pointer">&#129302</span>
-        <span class="emoji-code cursor-pointer">&#128570</span>
-        <span class="emoji-code cursor-pointer">&#128568</span>
-        <span class="emoji-code cursor-pointer">&#128569</span>
-        <span class="emoji-code cursor-pointer">&#128571</span>
-        <span class="emoji-code cursor-pointer">&#128572</span>
-        <span class="emoji-code cursor-pointer">&#128573</span>
-        <span class="emoji-code cursor-pointer">&#128576</span>
-        <span class="emoji-code cursor-pointer">&#128575</span>
-        <span class="emoji-code cursor-pointer">&#128574</span>
-        <span class="emoji-code cursor-pointer">&#128584</span>
-        <span class="emoji-code cursor-pointer">&#128585</span>
-        <span class="emoji-code cursor-pointer">&#128586</span>
-    </div>
-</div>
+    <x-slot name="content">
+        <div class="px-2 py-1 grid grid-cols-5 h-60 overflow-y-auto emoji-container"
+            @click="e => {if (e.target.classList.contains('chat-emoji')) insertEmoji(range, $refs.editor, e.target.innerHTML);}">
+            @include('chat.components.emoji')
+        </div>
+    </x-slot>
+</x-dropdown>

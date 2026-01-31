@@ -56,6 +56,75 @@ pre[contenteditable]:empty::before {
     cursor: text;
 }
 
+#editor-wrap {
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+        border: unset;
+    }
+
+    .ql-editor {
+        padding: 0;
+    }
+
+    .ql-toolbar {
+        border: none;
+    }
+}
+
+.ql-color-main-text-color {
+    color: #1e2939;
+}
+
+.ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="main-text-color"] {
+    background-color: #1e2939;
+}
+
+.dark .ql-color-main-text-color {
+    color: #e5e7eb;
+}
+
+.dark .ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="main-text-color"] {
+    background-color: #e5e7eb;
+}
+
+.ql-color-secondary-text-color {
+    color: #99a1af;
+}
+
+.ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="secondary-text-color"] {
+    background-color: #99a1af;
+}
+
+.dark .ql-color-secondary-text-color {
+    color: #4a5565;
+}
+
+.dark .ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="secondary-text-color"] {
+    background-color: #4a5565;
+}
+
+.ql-bg-green-bg-color, .ql-snow .ql-color-picker.ql-background .ql-picker-item[data-value="green-bg-color"] {
+    background-color: #06df72;
+}
+
+.ql-bg-indigo-bg-color, .ql-snow .ql-color-picker.ql-background .ql-picker-item[data-value="indigo-bg-color"] {
+    background-color: #7c86ff;
+}
+
+.quill-embed-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+.quill-embed-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: .5rem;
+}
+
 .overflow-y-auto {
     &::-webkit-scrollbar-track {
         border-radius: 6px;
