@@ -1,4 +1,8 @@
-<x-app-layout :title="$adCategory->title" :description="$adCategory->description">
+@php
+    $model = request()->model ? \App\Models\Database\AsicModel::where('name', str_replace('_', ' ', request()->model))->first('name') : null;
+@endphp
+
+<x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
