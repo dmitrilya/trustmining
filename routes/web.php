@@ -62,6 +62,7 @@ Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
+    Route::get('/app', [Controller::class, 'calculatorApp'])->name('calculator.app');
     Route::get('/get-models', [Controller::class, 'calculatorModels'])->name('calculator-models');
     Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
     Route::get('/{asicModel}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->name('calculator.modelver');

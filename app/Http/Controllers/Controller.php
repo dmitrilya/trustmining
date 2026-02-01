@@ -107,6 +107,22 @@ class Controller extends BaseController
         ]);
     }
 
+    public function calculatorApp(AsicModel $asicModel, AsicVersion $asicVersion): View
+    {
+        $models = Cache::get('calculator_models');
+
+        if ($asicVersion->id) $models = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersion->id)->count());
+        elseif ($asicModel->id) $models = $models->where('id', $asicModel->id);
+        else $models = $models->where('name', 'Antminer L9');
+
+        return view('calculator.app', [
+            'models' => $models,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rModel' => $asicModel->name,
+            'rVersion' => $asicVersion->hashrate,
+        ]);
+    }
+
     public function calculatorModels()
     {
         return response()->json(Cache::get('calculator_models'), 200);
