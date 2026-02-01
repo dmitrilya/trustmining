@@ -14,7 +14,7 @@
 @endphp
 
 <x-app-layout
-    title="Отзывы о {{ $type == 'App\Models\User\User' ? 'компании ' . $user->name : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name }}">
+    title="Отзывы о {{ $type == 'App\Models\User\User' ? 'компании ' . $user->name . ' - мнения клиентов и экспертов' : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name . ' - реальный опыт, плюсы и минусы' }}" description="{{ $type == 'App\Models\User\User' ? 'Реальные отзывы о компании ' . $user->name . ' от клиентов, партнёров и экспертов: качество услуг, надёжность, условия сотрудничества и опыт работы' : 'Отзывы майнеров о модели ASIC ' . $model->asicBrand->name . ' ' . $model->name . ': реальный опыт эксплуатации, доходность, энергопотребление, надёжность и мнения экспертов' }} на платформе TrustMining">
     <x-slot name="header">
         <div class="flex items-center">
             @php

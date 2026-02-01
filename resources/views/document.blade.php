@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="{{ request()->path == 'documents/agreement.pdf' ? 'Пользовательское соглашение - условия использования TrustMining' : 'Политика конфиденциальности - условия обработки данных TrustMining' }}" description="{{ request()->path == 'documents/agreement.pdf' ? 'Пользовательское соглашение TrustMining: правила использования платформы, права и обязанности пользователей, ответственность сторон и условия работы с сервисами сайта' : 'Политика конфиденциальности TrustMining: правила сбора, хранения и защиты персональной информации пользователей, использование файлов cookie и гарантии безопасности данных' }}">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div id="doc-wrapper" class="mx-auto px-0 space-y-4" style="max-width:596px"></div>
 

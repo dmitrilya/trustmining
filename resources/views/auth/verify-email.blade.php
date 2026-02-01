@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Подтверждение email - завершение регистрации в TrustMining" description="Подтвердите адрес электронной почты, чтобы завершить регистрацию в TrustMining и получить полный доступ к платформе для майнеров, продавцов, экспертов и сервисных компаний">
     <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
         {{ __("Before continuing, you'll need to confirm your email address by clicking the link we just sent you. If you haven't received the email, we'll be happy to send you another one.") }}
     </div>

@@ -31,11 +31,7 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>
-        @if ($attributes->has('title'))
-            {{ $attributes->get('title') }}@else{{ config('app.name') }}
-        @endif
-    </title>
+    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">

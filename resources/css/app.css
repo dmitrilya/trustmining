@@ -70,6 +70,10 @@ pre[contenteditable]:empty::before {
     }
 }
 
+.ql-toolbar.ql-snow .ql-formats {
+    margin-right: 13px !important;
+}
+
 .ql-color-main-text-color {
     color: #1e2939;
 }

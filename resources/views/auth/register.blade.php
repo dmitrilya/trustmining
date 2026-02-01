@@ -1,4 +1,4 @@
-<x-guest-layout title="TrustMining Регистрация" description="Регистрация на сайте TrustMining">
+<x-guest-layout title="Регистрация аккаунта — доступ к платформе TrustMining" description="Создайте аккаунт на TrustMining и получите доступ к каталогу майнингового оборудования, сервисных компаний, экспертов и возможностям взаимодействия внутри криптоэкосистемы">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

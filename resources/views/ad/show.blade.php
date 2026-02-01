@@ -6,9 +6,20 @@
         ' ' .
         $ad->asicVersion->hashrate .
         $ad->asicVersion->measurement .
+        ' - ' .
+        $ad->user->name .
         ', ' .
-        $ad->user->name
-    : $ad->adCategory->title . ', ' . $ad->user->name">
+        __(array_keys($ad->props)[0]) .
+        ': ' .
+        __($ad->props[array_keys($ad->props)[0]]) .
+        ', ' .
+        __(array_keys($ad->props)[1]) .
+        ': ' .
+        __($ad->props[array_keys($ad->props)[1]])
+    : $ad->adCategory->title .
+        ' - ' .
+        $ad->user->name .
+        (count($ad->props) ? ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]]) : '')">
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Ad') }}
@@ -57,7 +68,8 @@
                                 @if ($moderation->data['price'] != 0)
                                     {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
                                     @if ($moderation->data['with_vat'])
-                                        <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                        <span
+                                            class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                                     @endif
                                 @else
                                     {{ __('Price on request') }}
@@ -66,7 +78,8 @@
                                 @if ($ad->price != 0)
                                     {{ $ad->price }} {{ $ad->coin->abbreviation }}
                                     @if ($ad->with_vat)
-                                        <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                        <span
+                                            class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                                     @endif
                                 @else
                                     {{ __('Price on request') }}
@@ -191,7 +204,8 @@
                             <span itemprop="price">{{ $ad->price }}</span> <span
                                 itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
                             @if ($ad->with_vat)
-                                <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                <span
+                                    class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                             @endif
                         @else
                             {{ __('Price on request') }}
