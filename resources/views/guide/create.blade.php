@@ -91,7 +91,7 @@
         (node, delta) => new Delta().insert(node.innerText || node.textContent)
     );
     
-    quill.on('text-change', () => text = quill.getSemanticHTML());">
+    quill.on('text-change', () => text = quill.root.innerHTML);">
         <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
             <form action="{{ route('guide.store') }}" method="POST" class="space-y-6" enctype=multipart/form-data>
                 @csrf

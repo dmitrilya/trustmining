@@ -8,6 +8,9 @@
             </h1>
         </div>
     </x-slot>
+    
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     @php
         $user = Auth::user();
@@ -21,7 +24,7 @@
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-200 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+            class="ql-snow bg-white dark:bg-zinc-900 text-gray-900 dark:text-gray-200 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
             <div class="flex items-center justify-between">
                 <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="date"
                     data-date="{{ $guide->created_at }}"></p>
@@ -61,7 +64,7 @@
                 <p class="text-xs sm:text-sm text-gray-600">{{ $guide->subtitle }}</p>
             @endif
 
-            {!! $guide->guide !!}
+            <div class="ql-editor !p-0">{!! $guide->guide !!}</div>
         </div>
     </div>
 
