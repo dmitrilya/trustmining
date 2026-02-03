@@ -20,6 +20,7 @@ class ForumQuestion extends Model
         'theme',
         'text',
         'images',
+        'files',
         'keywords',
         'similar_questions',
         'forum_question_category_id',
@@ -34,6 +35,7 @@ class ForumQuestion extends Model
      */
     protected $casts = [
         'images' => 'array',
+        'files' => 'array',
         'keywords' => 'array',
         'similar_questions' => 'array',
     ];

@@ -21,7 +21,7 @@ trait FileTrait
             foreach ($files as $i => $file) {
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
-                if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename);
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
                 else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
                 array_push(
@@ -57,7 +57,7 @@ trait FileTrait
         $filename = $type . '_' . $id;
         if ($withTime) $filename .= '_' . time();
         $ext = $file->getClientOriginalExtension();
-        if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename, $resize);
+        if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize);
         else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
@@ -74,7 +74,7 @@ trait FileTrait
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
-                if (!($ext == 'doc' || $ext == 'docx')) $ext = $this->compress($file, $disk, $folder, $filename);
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
                 else $file->storeAs($disk . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(
@@ -126,27 +126,5 @@ trait FileTrait
         }
 
         return false;
-    }
-
-    private function cropToSquare($sourcePath, $destPath, $size = 300)
-    {
-
-        // 4. Создаем новый квадратный холст
-
-
-        // Сохраняем прозрачность для PNG
-
-
-        // 5. Копируем и масштабируем центральную часть
-        
-
-        // 6. Сохраняем результат
-        imagejpeg($dest, $destPath, 90);
-
-        // Чистим память
-        imagedestroy($src);
-        imagedestroy($dest);
-
-        return true;
     }
 }

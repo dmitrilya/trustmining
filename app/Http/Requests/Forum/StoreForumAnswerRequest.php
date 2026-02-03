@@ -24,9 +24,11 @@ class StoreForumAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string|max:3000',
-            'images' => 'max:5',
+            'text' => 'required_without_all:images,files|max:3000',
+            'images' => 'nullable|max:5|required_without_all:files,text',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
+            'files' => 'nullable|max:3|required_without_all:images,text',
+            'files.*' => 'file|mimes:doc,docx,pdf,txt|max:512',
             'forum_question_id' => 'exists:forum_questions,id',
         ];
     }

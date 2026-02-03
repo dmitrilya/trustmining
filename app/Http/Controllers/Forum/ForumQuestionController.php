@@ -86,7 +86,7 @@ class ForumQuestionController extends ForumController
      */
     public function store(StoreForumQuestionRequest $request)
     {
-        $this->questionService->store($request->user(), $request->theme, $request->text, $request->file('images'));
+        $this->questionService->store($request->user(), $request->theme, $request->text, $request->file('images'), $request->file('files'));
 
         return redirect()->route('forum');
     }
@@ -103,7 +103,7 @@ class ForumQuestionController extends ForumController
         if ($forumQuestion->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
-        $this->questionService->update($forumQuestion, $request->text, $request->file('images'));
+        $this->questionService->update($forumQuestion, $request->text, $request->file('images'), $request->file('files'));
 
         return back();
     }

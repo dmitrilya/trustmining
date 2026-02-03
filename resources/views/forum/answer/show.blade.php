@@ -64,7 +64,7 @@
     ])
 
     <div x-ref="content">
-        @if ($answer->images)
+        @if (count($answer->images))
             <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                 @foreach ($answer->images as $image)
                     <div
@@ -78,7 +78,15 @@
             </div>
         @endif
 
-        <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-500">
+        @if (count($answer->files))
+            <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
+                @foreach ($answer->files as $file)
+                    <x-document :path="$file['path']" :name="$file['name']"></x-document>
+                @endforeach
+            </div>
+        @endif
+
+        <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400">
             {!! $answer->text !!}
         </div>
     </div>

@@ -11,8 +11,8 @@
             </svg>
         </div>
 
-        <div>
-            <div class="text-gray-950 dark:text-gray-100 font-semibold mb-1">{{ $name }}</div>
+        <div class="grow min-w-0">
+            <div class="text-gray-950 dark:text-gray-100 font-semibold mb-1 truncate">{{ $name }}</div>
 
             <div class="flex">
                 {{-- <a class="hover:underline text-gray-600 mr-4" target="_blank"

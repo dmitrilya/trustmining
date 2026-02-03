@@ -17,7 +17,8 @@ class ForumAnswerController extends ForumController
      */
     public function store(StoreForumAnswerRequest $request)
     {
-        $this->answerService->store($request->user(), $request->text, $request->file('images'), $request->forum_question_id);
+        info('here');
+        $this->answerService->store($request->user(), $request->text, $request->file('images'), $request->file('files'), $request->forum_question_id);
 
         return back();
     }
@@ -34,7 +35,7 @@ class ForumAnswerController extends ForumController
         if ($forumAnswer->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
-        $this->answerService->update($forumAnswer, $request->text, $request->file('images'));
+        $this->answerService->update($forumAnswer, $request->text, $request->file('images'), $request->file('files'));
 
         return back();
     }

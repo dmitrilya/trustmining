@@ -18,19 +18,21 @@ class ForumAnswerService
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, string $text, array|null $images, int $forumQuestionId)
+    public function store(User $user, string|null $text, array|null $images, array|null $files, int $forumQuestionId)
     {
-        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
+        if ($text) $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
 
-        if ($text === "") return;
+        if ((!$text || $text === "") && !$images && !$files) return;
 
         $answer = $user->forumAnswers()->create([
             'text' => $text,
             'images' => [],
+            'files' => [],
             'forum_question_id' => $forumQuestionId
         ]);
 
         $answer->images = $this->saveFiles($images, 'forum', 'answer', $answer->id);
+        $answer->files = $this->saveFilesWithName($files, 'forum', 'answer', $answer->id);
         $answer->save();
 
         $moderation = $answer->moderations()->create(['data' => $answer->attributesToArray()]);
@@ -45,16 +47,18 @@ class ForumAnswerService
     /**
      * Update the specified resource in storage.
      */
-    public function update(ForumAnswer $answer, string $text, array|null $images)
+    public function update(ForumAnswer $answer, string|null $text, array|null $images, array|null $files)
     {
-        $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
+        if ($text) $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
 
-        if ($text === "") return;
+        if ((!$text || $text === "") && !$images && !$files) return;
 
         $data = ['text' => $text];
 
         if ($images)
             $data['images'] = $this->saveFiles($images, 'forum', 'answer', $answer->id);
+        if ($files)
+            $data['files'] = $this->saveFilesWithName($files, 'forum', 'answer', $answer->id);
 
         $moderation = $answer->moderations()->create(['data' => $data]);
         $moderation->moderation_status_id = 1;

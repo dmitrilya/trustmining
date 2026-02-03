@@ -17,7 +17,7 @@ class ForumCommentController extends ForumController
      */
     public function store(StoreForumCommentRequest $request)
     {
-        $this->commentService->store($request->user(), $request->text, $request->file('images'), $request->forum_answer_id);
+        $this->commentService->store($request->user(), $request->text, $request->file('images'), $request->file('files'), $request->forum_answer_id);
 
         return back();
     }
@@ -34,7 +34,7 @@ class ForumCommentController extends ForumController
         if ($forumComment->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
-        $this->commentService->update($forumComment, $request->text, $request->file('images'));
+        $this->commentService->update($forumComment, $request->text, $request->file('images'), $request->file('files'));
 
         return back();
     }

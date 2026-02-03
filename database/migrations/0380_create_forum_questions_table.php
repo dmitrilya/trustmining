@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('theme');
             $table->text('text');
             $table->json('images');
+            $table->json('files');
             $table->json('keywords');
             $table->boolean('moderation')->default(1);
             $table->json('similar_questions');

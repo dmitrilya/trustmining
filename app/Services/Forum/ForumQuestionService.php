@@ -19,7 +19,7 @@ class ForumQuestionService
     /**
      * Store a newly created resource in storage.
      */
-    public function store(User $user, string $theme, string $text, array|null $images)
+    public function store(User $user, string $theme, string $text, array|null $images, array|null $files)
     {
         $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
 
@@ -29,11 +29,13 @@ class ForumQuestionService
             'theme' => $theme,
             'text' => $text,
             'images' => [],
+            'files' => [],
             'keywords' => [],
             'similar_questions' => []
         ]);
 
         $question->images = $this->saveFiles($images, 'forum', 'question', $question->id);
+        $question->files = $this->saveFilesWithName($files, 'forum', 'question', $question->id);
         $question->save();
 
         $question->moderations()->create(['data' => $question->attributesToArray()]);
@@ -46,7 +48,7 @@ class ForumQuestionService
     /**
      * Update the specified resource in storage.
      */
-    public function update(ForumQuestion $question, string $text, array|null $images)
+    public function update(ForumQuestion $question, string $text, array|null $images, array|null $files)
     {
         $text = Purifier::clean(htmlspecialchars_decode($text), 'forum_default');
 
@@ -56,6 +58,8 @@ class ForumQuestionService
 
         if ($images)
             $data['images'] = $this->saveFiles($images, 'forum', 'question', $question->id);
+        if ($files)
+            $data['files'] = $this->saveFilesWithName($files, 'forum', 'question', $question->id);
 
         $moderation = $question->moderations()->create(['data' => $data]);
         $moderation->moderation_status_id = 1;

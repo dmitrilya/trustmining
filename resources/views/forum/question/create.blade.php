@@ -37,8 +37,20 @@
                     </div>
 
                     <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700"
-                        x-data="{ images: 0 }">
+                        x-data="{ images: 0, files: 0 }">
                         <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
+                            <label for="input-file-question"
+                                class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
+                                <input id="input-file-question" name="files[]" class="hidden" type="file"
+                                    accept=".pdf,.doc,.docx,.txt" multiple
+                                    @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
+                                <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
+                                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                        d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
+                                </svg>
+                                <span class="sr-only">Attach file</span>
+                            </label>
+
                             <label for="input-image-question"
                                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
                                 <input id="input-image-question" name="images[]" class="hidden" type="file"
@@ -117,6 +129,11 @@
                             </x-dropdown>
 
                             <div class="flex flex-col justify-center ml-2">
+                                <div class="text-xxs sm:text-xs text-gray-500"
+                                    style="display: hidden" x-show="files > 0">
+                                    {{ __('File') }}: <span class="text-gray-700 dark:text-gray-300"
+                                        x-text="files"></span>
+                                </div>
                                 <div class="text-xxs sm:text-xs text-gray-500" style="display: hidden"
                                     x-show="images > 0">
                                     {{ __('Image') }}: <span class="text-gray-700 dark:text-gray-300"
@@ -134,6 +151,14 @@
                     @if (count($errors->get('images.*')))
                         <div class="px-3 py-2">
                             @foreach ($errors->get('images.*') as $error)
+                                <x-input-error :messages="$error" />
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (count($errors->get('files.*')))
+                        <div class="px-3 py-2">
+                            @foreach ($errors->get('files.*') as $error)
                                 <x-input-error :messages="$error" />
                             @endforeach
                         </div>

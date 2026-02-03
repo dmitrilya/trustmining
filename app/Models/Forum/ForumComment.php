@@ -17,6 +17,7 @@ class ForumComment extends Model
     protected $fillable = [
         'text',
         'images',
+        'files',
         'forum_answer_id',
         'user_id',
         'moderation'
@@ -29,6 +30,7 @@ class ForumComment extends Model
      */
     protected $casts = [
         'images' => 'array',
+        'files' => 'array',
     ];
 
     public function user()

@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('forum_comments', function (Blueprint $table) {
             $table->id();
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->json('images');
+            $table->json('files');
             $table->boolean('moderation')->default(1);
             $table->unsignedBigInteger('forum_answer_id');
             $table->foreign('forum_answer_id')->references('id')

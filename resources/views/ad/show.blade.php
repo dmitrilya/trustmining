@@ -19,7 +19,11 @@
     : $ad->adCategory->title .
         ' - ' .
         $ad->user->name .
-        (count($ad->props) ? is_array($ad->props[array_keys($ad->props)[0]]) ? ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]][0]) : ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]]) : '')">
+        (count($ad->props)
+            ? (is_array($ad->props[array_keys($ad->props)[0]])
+                ? ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]][0])
+                : ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]]))
+            : '')">
     <x-slot name="header">
         <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Ad') }}

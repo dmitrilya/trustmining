@@ -9,15 +9,28 @@
         <pre required id="text" aria-placeholder="{{ __('Your answer...') }}" x-ref="answer" contenteditable="true"
             class="whitespace-normal resize-none w-full px-0 text-gray-950 dark:text-gray-200 bg-white border-0 dark:bg-zinc-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-gray-400"
             style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
-            @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)" x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
+            @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"
+            x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
         <x-input-error :messages="$errors->get('text')" />
     </div>
 
-    <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700" x-data="{ images: {{ count($answer->images) }} }">
+    <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700" x-data="{ images: {{ count($answer->images) }}, files: {{ count($answer->files) }} }">
         <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
-            <label for="input-image-answer_{{ $answer->id }}"
+            <label for="edit-input-file-answer_{{ $answer->id }}"
                 class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
-                <input id="input-image-answer_{{ $answer->id }}" name="images[]" class="hidden" type="file"
+                <input id="edit-input-file-answer_{{ $answer->id }}" name="files[]" class="hidden" type="file"
+                    accept=".pdf,.doc,.docx,.txt" multiple
+                    @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
+                <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
+                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                        d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
+                </svg>
+                <span class="sr-only">Attach file</span>
+            </label>
+
+            <label for="edit-input-image-answer_{{ $answer->id }}"
+                class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-gray-100 dark:hover:bg-zinc-700">
+                <input id="edit-input-image-answer_{{ $answer->id }}" name="images[]" class="hidden" type="file"
                     accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
                 <svg class="size-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
@@ -43,8 +56,8 @@
                     </h3>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" id="hyper-answer_{{ $answer->id }}" placeholder=" " :value="link_text"
-                            @change="link_text = $el.value"
+                        <input type="text" id="hyper-answer_{{ $answer->id }}" placeholder=" "
+                            :value="link_text" @change="link_text = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="hyper-answer_{{ $answer->id }}"
                             class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -53,8 +66,8 @@
                     </div>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="url" id="url-answer_{{ $answer->id }}" placeholder=" " :value="link_url"
-                            @change="link_url = $el.value"
+                        <input type="url" id="url-answer_{{ $answer->id }}" placeholder=" "
+                            :value="link_url" @change="link_url = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-700 dark:text-gray-300 border-gray-300 dark:border-zinc-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="url-answer_{{ $answer->id }}"
                             class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -91,6 +104,9 @@
             </x-dropdown>
 
             <div class="flex flex-col justify-center ml-2">
+                <div class="text-xxs sm:text-xs text-gray-500" style="display: hidden" x-show="files > 0">
+                    {{ __('File') }}: <span class="text-gray-700 dark:text-gray-300" x-text="files"></span>
+                </div>
                 <div class="text-xxs sm:text-xs text-gray-500" style="display: hidden" x-show="images > 0">
                     {{ __('Image') }}: <span class="text-gray-700 dark:text-gray-300" x-text="images"></span>
                 </div>
@@ -106,6 +122,14 @@
     @if (count($errors->get('images.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('images.*') as $error)
+                <x-input-error :messages="$error" />
+            @endforeach
+        </div>
+    @endif
+
+    @if (count($errors->get('files.*')))
+        <div class="px-3 py-2">
+            @foreach ($errors->get('files.*') as $error)
                 <x-input-error :messages="$error" />
             @endforeach
         </div>

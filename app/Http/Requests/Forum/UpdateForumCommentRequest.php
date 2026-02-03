@@ -24,9 +24,11 @@ class UpdateForumCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string|max:1500',
-            'images' => 'max:5',
+            'text' => 'max:1500',
+            'images' => 'nullable|max:5',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
+            'files' => 'nullable|max:3',
+            'files.*' => 'file|mimes:doc,docx,pdf,txt|max:512',
         ];
     }
 
