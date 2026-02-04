@@ -243,9 +243,27 @@ class AdController extends Controller
         $request->user()->ads()->whereIn('id', $changings->pluck('id'))->get()
             ->each(function ($ad) use ($changings) {
                 $change = $changings->where('id', $ad->id)->first();
-                if (isset($change['price'])) $ad->price = $change['price'];
-                if (isset($change['coin_id'])) $ad->coin_id = $change['coin_id'];
-                $ad->save();
+
+                if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
+                    $moderation = Moderation::create([
+                        'moderationable_type' => 'App\Models\Ad\Ad',
+                        'moderationable_id' => $ad->id,
+                        'data' => $change
+                    ]);
+
+                    $moderation->moderation_status_id = 2;
+                    $moderation->user_id = 10000000;
+                    $moderation->save();
+
+                    $this->notify(
+                        'Price change',
+                        $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                        'App\Models\Ad\Ad',
+                        $ad
+                    );
+
+                    $ad->update($change);
+                }
             });
 
         return response()->json(['success' => true, 'message' => __('Prices successfully updated')], 200);

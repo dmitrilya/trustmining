@@ -24,6 +24,16 @@ body {
     }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .bg-primary-gradient {
     background: linear-gradient(to right, #7966ff, #404099);
 }
@@ -78,7 +88,9 @@ pre[contenteditable]:empty::before {
     color: #1e2939;
 }
 
-.ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="main-text-color"] {
+.ql-snow
+    .ql-color-picker.ql-color
+    .ql-picker-item[data-value="main-text-color"] {
     background-color: #1e2939;
 }
 
@@ -86,7 +98,10 @@ pre[contenteditable]:empty::before {
     color: #e5e7eb;
 }
 
-.dark .ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="main-text-color"] {
+.dark
+    .ql-snow
+    .ql-color-picker.ql-color
+    .ql-picker-item[data-value="main-text-color"] {
     background-color: #e5e7eb;
 }
 
@@ -94,7 +109,9 @@ pre[contenteditable]:empty::before {
     color: #99a1af;
 }
 
-.ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="secondary-text-color"] {
+.ql-snow
+    .ql-color-picker.ql-color
+    .ql-picker-item[data-value="secondary-text-color"] {
     background-color: #99a1af;
 }
 
@@ -102,15 +119,24 @@ pre[contenteditable]:empty::before {
     color: #4a5565;
 }
 
-.dark .ql-snow .ql-color-picker.ql-color .ql-picker-item[data-value="secondary-text-color"] {
+.dark
+    .ql-snow
+    .ql-color-picker.ql-color
+    .ql-picker-item[data-value="secondary-text-color"] {
     background-color: #4a5565;
 }
 
-.ql-bg-green-bg-color, .ql-snow .ql-color-picker.ql-background .ql-picker-item[data-value="green-bg-color"] {
+.ql-bg-green-bg-color,
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="green-bg-color"] {
     background-color: #06df72;
 }
 
-.ql-bg-indigo-bg-color, .ql-snow .ql-color-picker.ql-background .ql-picker-item[data-value="indigo-bg-color"] {
+.ql-bg-indigo-bg-color,
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="indigo-bg-color"] {
     background-color: #7c86ff;
 }
 
@@ -118,7 +144,7 @@ pre[contenteditable]:empty::before {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     overflow: hidden;
 }
 
@@ -126,7 +152,7 @@ pre[contenteditable]:empty::before {
     display: block;
     width: 100%;
     aspect-ratio: 4 / 3;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 .overflow-y-auto {

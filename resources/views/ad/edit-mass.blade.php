@@ -56,17 +56,29 @@
                             @if (isset($ad->props['Warranty (months)']))
                                 <p>{{ __('Warranty') . ' ' . __($ad->props['Warranty (months)']) }}</p>
                             @endif
-                            @if ($ad->with_vat)
-                                <p>{{ __('Price including VAT') }}</p>
-                            @endif
                         </div>
                         <div class="col-span-2">
-                            <x-text-input class="text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md" id="price"
-                                name="price" type="number" required value="{{ $ad->price }}" autocomplete="price"
-                                @change="let id = $el.closest('.ad').getAttribute('data-id');
+                            <div class="flex items-center">
+                                <x-text-input
+                                    class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md !px-2"
+                                    id="price" name="price" type="number" required value="{{ $ad->price }}"
+                                    autocomplete="price"
+                                    @change="let id = $el.closest('.ad').getAttribute('data-id');
                                 let ad = changings.find(el => el.id == id);
                                 if (!ad) changings.push({ id: id, price: $el.value });
                                 else ad.price = $el.value;" />
+
+                                <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat" sm="true"
+                                    handleChange="(checked => {
+                                        console.log(checked);
+                                        let id = $el.closest('.ad').getAttribute('data-id');
+                                        let ad = changings.find(el => el.id == id);
+                                        if (!ad) changings.push({ id: id, with_vat: checked });
+                                        else ad.with_vat = checked;
+                                    })">
+                                    {{ __('VAT') }}
+                                </x-checkbox>
+                            </div>
                         </div>
                         <div>
                             <x-select name="coin_id" size="sm" :key="$ad->coin_id"
