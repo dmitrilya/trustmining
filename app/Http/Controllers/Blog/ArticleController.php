@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Traits\ViewTrait;
+
 use App\Models\Blog\Article;
 
 class ArticleController extends Controller
 {
+    use ViewTrait;
+
     /**
      * Display a listing of the resource.
      *
