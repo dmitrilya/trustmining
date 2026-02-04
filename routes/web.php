@@ -156,7 +156,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [GuideController::class, 'create'])->name('guide.create');
         Route::post('/store', [GuideController::class, 'store'])->name('guide.store');
         Route::middleware('owner')->group(function () {
-            Route::get('/{guide}/edit', [GuideController::class, 'edit'])->name('guide.edit');
             Route::put('/{guide}/update', [GuideController::class, 'update'])->name('guide.update');
             Route::delete('/{guide}/destroy', [GuideController::class, 'destroy'])->name('guide.destroy');
         });

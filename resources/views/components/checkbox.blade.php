@@ -6,7 +6,7 @@
     'checked' => false,
     'textClasses' => 'text-gray-700 dark:text-gray-200',
     'handleChange' => null,
-    'sm' => null
+    'sm' => null,
 ])
 
 <div class="{{ $class }}">

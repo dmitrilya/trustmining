@@ -170,7 +170,7 @@
                 @include('forum.answer.show')
             @endforeach
 
-            <x-modal name="delete-modal" :show="$errors->userDeletion->isNotEmpty()" focusable>
+            <x-modal name="delete-modal" focusable>
                 <form method="post" :action="deleteHref" class="p-6">
                     @csrf
                     @method('delete')

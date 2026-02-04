@@ -118,7 +118,7 @@ class AdController extends Controller
     {
         $user = \Auth::user();
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $ad->user->id) && ($ad->moderation || $ad->hidden))
+        if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
             return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
         $this->addView(request(), $ad);

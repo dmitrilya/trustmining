@@ -23,6 +23,7 @@ class Guide extends Model
         'guide',
         'tags',
         'user_id',
+        'moderation',
     ];
 
     /**
@@ -79,6 +80,11 @@ class Guide extends Model
     public function notifications()
     {
         return $this->morphMany(\App\Models\User\Notification::class, 'notificationable');
+    }
+
+    public function moderations()
+    {
+        return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
     }
 
     public function views()

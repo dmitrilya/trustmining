@@ -1,7 +1,7 @@
 <x-app-layout title="Модерация">
     <x-slot name="header">
         <div class="flex items-center justify-end">
-            <p class="text-gray-950 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
+            <p class="text-gray-700 dark:text-gray-300 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
@@ -70,10 +70,10 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6">
-            <ul role="list" class="divide-y divide-gray-100">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-zinc-700">
                 @foreach ($moderations as $moderation)
                     <a href="{{ route('moderation', ['moderation' => $moderation->id]) }}"
-                        class="rounded-md hover:bg-gray-200 block p-4">
+                        class="rounded-md hover:bg-gray-200 dark:hover:bg-zinc-950 block p-4">
                         <li>
                             <div class="flex">
                                 @if ($moderation->moderationable->user->company && $moderation->moderationable->user->company->logo)
@@ -83,16 +83,16 @@
                                 @endif
 
                                 <div class="w-full">
-                                    <p class="text-sm font-semibold leading-6 text-gray-950">
+                                    <p class="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-200">
                                         {{ $moderation->moderationable->user->name }}
                                     </p>
 
                                     <div class="flex justify-between">
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-600">
+                                        <p class="mt-1 truncate text-xs leading-5 text-gray-600 dark:text-gray-400">
                                             {{ $moderationTypes[$moderation->moderationable_type] }}
                                         </p>
 
-                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-600"
+                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400"
                                             data-date="{{ $moderation->created_at }}">
                                         </p>
                                     </div>
