@@ -69,7 +69,7 @@ class UpdateCoinProfit extends Command
                 ->whereNotNull('profit')->pluck('abbreviation')->chunk(10) as $coins
         ) {
             collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' .
-                config('services.minerstat.key' . $i) . '&list=' . $coins->implode(',')))->data)
+                config('services.minerstat.key' . $i) . '&list=' . $coins->implode(','))))
                 ->each(function ($coin) use ($mes, $algos) {
                     if ($coin->coin == 'GRIN') return;
 
