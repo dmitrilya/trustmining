@@ -141,14 +141,15 @@ pre[contenteditable]:empty::before {
 .ql-snow
     .ql-color-picker.ql-background
     .ql-picker-item[data-value="ql-bg-green-bg-color"] {
-    background-color: #06df72;
+    background-color: oklch(87.1% 0.15 154.449);
+    
 }
 
 .ql-bg-indigo-bg-color,
 .ql-snow
     .ql-color-picker.ql-background
     .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
-    background-color: #7c86ff;
+    background-color: oklch(78.5% 0.115 274.713);
 }
 
 .quill-embed-image {
