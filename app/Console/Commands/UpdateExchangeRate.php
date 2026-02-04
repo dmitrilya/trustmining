@@ -101,7 +101,7 @@ class UpdateExchangeRate extends Command
                 $version->coef = pow(1000, $vm - $am);
                 $version->original_hashrate = $version->hashrate * pow(1000, $vm);
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
-                $version->price = round($version->ads->where('price', '!=', 0)->avg(fn($ad) => $ad->price * $ad->coin->rate), 2);
+                $version->price = round($version->ads->where('price', '!=', 0)->min(fn($ad) => $ad->price * $ad->coin->rate), 2);
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
                 $version->model_name = strtolower(str_replace(' ', '_', $model->name));
