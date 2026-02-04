@@ -31,52 +31,52 @@
     </x-editable-list>
     <x-input-error :messages="$errors->get('tags')" />
 
-    <div class="mt-5" style="background:inherit;" x-data="{ text: `{{ old('guide') }}`, quill: null, Delta: Quill.import('delta'), attachCallback: null }" x-init="const Parchment = Quill.import('parchment');
-    const MyColorClass = new Parchment.Attributor('color', 'class', {
+    <div class="mt-5" style="background:inherit;" x-data="{ text: `{{ old('guide') }}`, quill: null, Delta: Quill.import('delta'), attachCallback: null }" x-init='const Parchment = Quill.import("parchment");
+    const MyColorClass = new Parchment.Attributor("color", "class", {
         scope: Parchment.Scope.INLINE,
-        whitelist: ['ql-color-main-text-color', 'ql-color-secondary-text-color']
+        whitelist: ["ql-color-main-text-color", "ql-color-secondary-text-color"]
     });
     
-    const MyBackgroundClass = new Parchment.Attributor('background', 'class', {
+    const MyBackgroundClass = new Parchment.Attributor("background", "class", {
         scope: Parchment.Scope.INLINE,
-        whitelist: ['ql-bg-green-bg-color', 'ql-bg-indigo-bg-color']
+        whitelist: ["ql-bg-green-bg-color", "ql-bg-indigo-bg-color"]
     });
     
     Quill.register(MyColorClass, true);
     Quill.register(MyBackgroundClass, true);
     
-    const Image = Quill.import('formats/image');
-    Image.className = 'quill-embed-image';
+    const Image = Quill.import("formats/image");
+    Image.className = "quill-embed-image";
     Quill.register(Image, true);
     
-    const Video = Quill.import('formats/video');
-    Video.className = 'quill-embed-video';
+    const Video = Quill.import("formats/video");
+    Video.className = "quill-embed-video";
     Quill.register(Video, true);
     
-    quill = new Quill('#editor', {
+    quill = new Quill("#editor", {
         modules: {
             toolbar: {
                 container: [
                     [{
-                        'size': ['small', false, 'large', 'huge']
+                        "size": ["small", false, "large", "huge"]
                     }],
-                    ['bold', 'italic', 'underline'],
-                    ['blockquote', 'code-block'],
-                    ['link', 'image', 'video', 'table'],
+                    ["bold", "italic", "underline"],
+                    ["blockquote", "code-block"],
+                    ["link", "image", "video", "table"],
                     [{
-                        'list': 'ordered'
+                        "list": "ordered"
                     }, {
-                        'list': 'bullet'
+                        "list": "bullet"
                     }],
                     [{
-                        'color': ['ql-color-main-text-color', 'ql-color-secondary-text-color']
+                        "color": ["ql-color-main-text-color", "ql-color-secondary-text-color"]
                     }, {
-                        'background': ['ql-bg-green-bg-color', 'ql-bg-indigo-bg-color']
+                        "background": ["ql-bg-green-bg-color", "ql-bg-indigo-bg-color"]
                     }],
                     [{
-                        'align': []
+                        "align": []
                     }],
-                    ['clean'],
+                    ["clean"],
                 ],
                 handlers: {
                     image: function() {
@@ -91,8 +91,8 @@
                             Quill.sources.USER,
                         );
     
-                        window.dispatchEvent(new CustomEvent('open-modal', {
-                            detail: 'attach-img_modal'
+                        window.dispatchEvent(new CustomEvent("open-modal", {
+                            detail: "attach-img_modal"
                         }))
                     },
                     video: function() {
@@ -107,25 +107,25 @@
                             Quill.sources.USER,
                         );
     
-                        window.dispatchEvent(new CustomEvent('open-modal', {
-                            detail: 'attach-video_modal'
+                        window.dispatchEvent(new CustomEvent("open-modal", {
+                            detail: "attach-video_modal"
                         }))
                     },
                 }
             },
         },
-        placeholder: 'Compose an epic...',
-        theme: 'snow'
+        placeholder: "Compose an epic...",
+        theme: "snow"
     });
     
-    quill.root.innerHTML = '{{ $guide->guide }}';
+    quill.root.innerHTML = `{{ $guide->guide }}`;
     
     quill.clipboard.addMatcher(
         Node.ELEMENT_NODE,
         (node, delta) => new Delta().insert(node.innerText || node.textContent)
     );
     
-    quill.on('text-change', () => text = quill.root.innerHTML);">
+    quill.on("text-change", () => text = quill.root.innerHTML);'>
         <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-lg -mx-2 sm:-mx-4">
             <div id="editor"
                 class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-2 sm:p-4">
