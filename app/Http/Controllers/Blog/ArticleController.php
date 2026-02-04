@@ -26,6 +26,8 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $this->addView(request(), $article);
+
         return view('article.show', ['article' => $article, 'articles' => Article::where('id', '!=', $article->id)->latest()->take(5)->get()]);
     }
 }
