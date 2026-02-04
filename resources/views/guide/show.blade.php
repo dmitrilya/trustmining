@@ -114,9 +114,7 @@
             </div>
 
             @if ($user && $user->id == $guide->user_id)
-                <div x-show="edit">
-                    @include('guide.edit')
-                </div>
+                @include('guide.edit')
             @endif
         </div>
 

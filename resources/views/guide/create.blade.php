@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-    <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ text: `{{ old('guide') }}`, quill: null, Delta: Quill.import('delta'), attachCallback: null }" x-init="const ColorClass = Quill.import('attributors/class/color');
+    <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ text: `{{ old('guide') }}`, attachCallback: null }" x-init="const Delta = Quill.import('delta');
+    const ColorClass = Quill.import('attributors/class/color');
     Quill.register(ColorClass, true);
     const BackgroundClass = Quill.import('attributors/class/background');
     Quill.register(BackgroundClass, true);

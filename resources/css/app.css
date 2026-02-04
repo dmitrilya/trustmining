@@ -152,12 +152,28 @@ pre[contenteditable]:empty::before {
     background-color: oklch(78.5% 0.115 274.713);
 }
 
+.dark .ql-bg-green-bg-color,
+.dark .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-green-bg-color"] {
+    background-color: oklch(39.3% 0.095 152.535);
+    
+}
+
+.dark .ql-bg-indigo-bg-color,
+.dark .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
+    background-color: oklch(45.7% 0.24 277.023);
+}
+
 .quill-embed-image {
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 0.5rem;
     overflow: hidden;
+    max-height: 512px;
 }
 
 .quill-embed-video {
