@@ -1,4 +1,5 @@
-<form action="{{ route('guide.update', ['guide' => $guide->id]) }}" method="POST" class="space-y-6" enctype=multipart/form-data>
+<form action="{{ route('guide.update', ['guide' => $guide->id]) }}" method="POST" class="space-y-6"
+    enctype=multipart/form-data>
     @csrf
     @method('PUT')
 
@@ -31,7 +32,8 @@
     </x-editable-list>
     <x-input-error :messages="$errors->get('tags')" />
 
-    <div class="mt-5" style="background:inherit;" x-data="{ text: `{{ old('guide') }}`, quill: null, Delta: Quill.import('delta'), attachCallback: null }" x-init='const Parchment = Quill.import("parchment");
+    <div class="mt-5" style="background:inherit;" x-data="{ text: `{{ old('guide') }}`, quill: null, Delta: Quill.import('delta'), attachCallback: null }"
+        x-init='const Parchment = Quill.import("parchment");
     const MyColorClass = new Parchment.Attributor("color", "class", {
         scope: Parchment.Scope.INLINE,
         whitelist: ["ql-color-main-text-color", "ql-color-secondary-text-color"]
@@ -57,9 +59,7 @@
         modules: {
             toolbar: {
                 container: [
-                    [{
-                        "size": ["small", false, "large", "huge"]
-                    }],
+                    [{ "header": [2, 3, false] }],
                     ["bold", "italic", "underline"],
                     ["blockquote", "code-block"],
                     ["link", "image", "video", "table"],

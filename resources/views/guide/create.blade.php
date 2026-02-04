@@ -16,7 +16,7 @@
     const Image = Quill.import('formats/image');
     Image.className = 'quill-embed-image';
     Quill.register(Image, true);
-
+    
     const Video = Quill.import('formats/video');
     Video.className = 'quill-embed-video';
     Quill.register(Video, true);
@@ -25,9 +25,7 @@
         modules: {
             toolbar: {
                 container: [
-                    [{
-                        'size': ['small', false, 'large', 'huge']
-                    }],
+                    [{ 'header': [2, 3, false] }],
                     ['bold', 'italic', 'underline'],
                     ['blockquote', 'code-block'],
                     ['link', 'image', 'video', 'table'],
@@ -58,7 +56,7 @@
                             .insert({ image: src }),
                             Quill.sources.USER,
                         );
-
+    
                         window.dispatchEvent(new CustomEvent('open-modal', {
                             detail: 'attach-img_modal'
                         }))
@@ -74,7 +72,7 @@
                             .insert({ video: src }),
                             Quill.sources.USER,
                         );
-
+    
                         window.dispatchEvent(new CustomEvent('open-modal', {
                             detail: 'attach-video_modal'
                         }))
