@@ -96,45 +96,45 @@ pre[contenteditable]:empty::before {
 }
 
 .ql-color-main-text-color {
-    color: #1e2939;
+    color: oklch(27.8% 0.033 256.848);
 }
 
 .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-main-text-color"] {
-    background-color: #1e2939;
+    background-color: oklch(27.8% 0.033 256.848);
 }
 
 .dark .ql-color-main-text-color {
-    color: #e5e7eb;
+    color: oklch(92.8% 0.006 264.531);
 }
 
 .dark
     .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-main-text-color"] {
-    background-color: #e5e7eb;
+    background-color: oklch(92.8% 0.006 264.531);
 }
 
 .ql-color-secondary-text-color {
-    color: #99a1af;
+    color: oklch(44.6% 0.03 256.802);
 }
 
 .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-secondary-text-color"] {
-    background-color: #99a1af;
+    background-color: oklch(44.6% 0.03 256.802);
 }
 
 .dark .ql-color-secondary-text-color {
-    color: #4a5565;
+    color: oklch(70.7% 0.022 261.325);
 }
 
 .dark
     .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-secondary-text-color"] {
-    background-color: #4a5565;
+    background-color: oklch(70.7% 0.022 261.325);
 }
 
 .ql-bg-green-bg-color,
