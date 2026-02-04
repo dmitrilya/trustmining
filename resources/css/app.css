@@ -96,24 +96,24 @@ pre[contenteditable]:empty::before {
 }
 
 .ql-color-main-text-color {
-    color: oklch(27.8% 0.033 256.848);
+    color: oklch(21% 0.034 264.665);
 }
 
 .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-main-text-color"] {
-    background-color: oklch(27.8% 0.033 256.848);
+    background-color: oklch(21% 0.034 264.665);
 }
 
 .dark .ql-color-main-text-color {
-    color: oklch(92.8% 0.006 264.531);
+    color: oklch(96.7% 0.003 264.542);
 }
 
 .dark
     .ql-snow
     .ql-color-picker.ql-color
     .ql-picker-item[data-value="ql-color-main-text-color"] {
-    background-color: oklch(92.8% 0.006 264.531);
+    background-color: oklch(96.7% 0.003 264.542);
 }
 
 .ql-color-secondary-text-color {
