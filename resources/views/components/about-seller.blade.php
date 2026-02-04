@@ -38,7 +38,7 @@
 
 <div class="flex items-center mt-2 sm:mt-3">
     <div
-        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $user->tf > config('trustfactor.yellow') ? ($ad->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
     </div>
     <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Trust Factor</p>
 </div>
