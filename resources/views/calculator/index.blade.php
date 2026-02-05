@@ -9,7 +9,7 @@
 @endphp
 
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
-    ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость ASIC майнера' .
+    ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
     ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
     ' в удобном калькуляторе доходности майнинга'"
     canonical="{{ route('calculator.modelver', [
