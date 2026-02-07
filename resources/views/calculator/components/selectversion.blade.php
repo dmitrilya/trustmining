@@ -29,7 +29,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
                     class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                 <button type="button" aria-label="Clear"
-                    class="ml-4 flex h-4 w-4 items-center justify-center rounded-md bg-white dark:bg-zinc-900 text-gray-500 dark:text-gray-400"
+                    class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-gray-500 dark:text-gray-400"
                     @click="search = '';selectedModel = null;selectedVersion = null; version = null">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
@@ -45,7 +45,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
         </div>
 
         <ul role="listbox" x-show="open"
-            class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black dark:ring-zing-900 ring-opacity-5 focus:outline-none sm:text-sm">
+            class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-zinc-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
             <template x-for="asicModel in models" :key="asicModel.id">
                 <li @click="selectedModel = asicModel.id; open = false; search = asicModel.name"

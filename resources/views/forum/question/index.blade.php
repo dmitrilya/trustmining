@@ -16,7 +16,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg">
+        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
             <div class="divide-y divide-gray-100 dark:divide-zinc-800">
                 @foreach ($questions as $question)
                     @if ($question->published)
@@ -31,12 +31,12 @@
                         <div class="mb-1.5 sm:mb-2 flex justify-between items-start">
                             @if ($question->moderation)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                                     {{ __('Is under moderation') }}
                                 </div>
                             @elseif (!$question->published)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm dark:shadow-zinc-800 hover:bg-red-400 transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                                     {{ __('Check out similar questions') }}
                                 </div>
                             @else

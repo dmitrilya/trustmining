@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="w-full h-full bg-white border border-gray-200 rounded-2xl shadow-lg dark:shadow-zinc-800 dark:bg-zinc-900 dark:border-zinc-800">
+            class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-200 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
             @if (!Auth::user())
                 <div class="flex items-center justify-center w-full h-full">
                     <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>

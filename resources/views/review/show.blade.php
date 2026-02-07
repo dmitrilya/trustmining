@@ -10,7 +10,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         @include('moderation.components.buttons')
 
-        <div class="w-full bg-white shadow-sm dark:shadow-zinc-800 rounded-lg lg:rounded-l-none flex flex-col p-1 sm:p-4">
+        <div class="w-full bg-white shadow-sm shadow-logo-color rounded-lg lg:rounded-l-none flex flex-col p-1 sm:p-4">
             <div class="bg-gray-100 p-1 rounded-t-md min-h-72">
                 <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-8 duration-100">
                     <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">

@@ -32,7 +32,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5 xl:gap-7">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg">
+        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
             <h2
                 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
                 {{ __('New posts') }}
@@ -75,7 +75,7 @@
         </div>
 
         @foreach ($categories as $category)
-            <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg">
+            <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
                 <h2 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6">
                     <a href="{{ route('forum.category', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name))]) }}"
                         class="xs:text-lg sm:text-xl lg:text-2xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
@@ -91,7 +91,7 @@
                                 class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-gray-200 dark:hover:bg-zinc-950 flex items-center justify-between">
                                 <div class="flex items-center">
                                     <div
-                                        class="mr-3 sm:mr-4 size-6 min-w-6 xs:size-8 xs:min-w-8 sm:size-10 sm:min-w-10 lg:size-12 lg:min-w-12 rounded-full group-hover:shadow-lg dark:shadow-zinc-800 border-[1.5px] border-gray-500 dark:border-zinc-500 group-hover:border-gray-900 dark:group-hover:border-zinc-100 flex items-center justify-center">
+                                        class="mr-3 sm:mr-4 size-6 min-w-6 xs:size-8 xs:min-w-8 sm:size-10 sm:min-w-10 lg:size-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-gray-500 dark:border-zinc-500 group-hover:border-gray-900 dark:group-hover:border-zinc-100 flex items-center justify-center">
                                         @include(
                                             'forum.components.svg.' .
                                                 strtolower(str_replace(' ', '_', $subcategory->name)),

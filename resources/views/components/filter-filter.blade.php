@@ -3,7 +3,7 @@
 <div class="{{ $field != 'algorithms' ? 'border-t ' : '' }}border-gray-200 dark:border-zinc-700 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
     <h3 class="-mx-2 -my-3 flow-root">
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
-            class="flex w-full items-center justify-between bg-white dark:bg-zinc-900 px-2 py-3 text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400"
+            class="flex w-full items-center justify-between px-2 py-3 text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400"
             aria-controls="filter-section-mobile-{{ $name }}" aria-expanded="false">
             <span class="text-gray-950 dark:text-gray-100">{{ $name }}</span>
             <span class="ml-6 flex items-center">
@@ -24,11 +24,11 @@
         <div class="space-y-3">
             @foreach ($items as $item)
                 @if ($type == 'checkbox')
-                    <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-600" :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">
+                    <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-gray-600 dark:text-gray-400" :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">
                         {{ __($item['name']) }}
                     </x-checkbox>
                 @else
-                    <x-radio :name="$field" :value="$item['url_name']" textClasses="text-gray-600" :checked="request()->get($field) == $item['url_name']">
+                    <x-radio :name="$field" :value="$item['url_name']" textClasses="text-gray-600 dark:text-gray-400" :checked="request()->get($field) == $item['url_name']">
                         {{ __($item['name']) }}
                     </x-radio>
                 @endif

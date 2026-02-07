@@ -85,11 +85,11 @@
                 document.body.classList.remove('dark');
                 theme = 'light';
             }" @endif>
-    <div class="min-h-screen bg-gray-100 dark:bg-zinc-950" x-data="{ filter: false }">
+    <div class="min-h-screen" x-data="{ filter: false }">
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white dark:bg-zinc-900 shadow">
+            <header class="bg-white/60 dark:bg-zinc-900/60 shadow">
                 <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

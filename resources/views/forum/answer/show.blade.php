@@ -1,6 +1,6 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
     itemtype="https://schema.org/Answer" x-data="{ open: false }" id="answer-{{ $answer->id }}"
-    class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 xs:p-3 md:p-4">
+    class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
             <svg class="flex-shrink-0 size-5 sm:size-7 text-yellow-300" aria-hidden="true"

@@ -16,10 +16,10 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-full absolute z-50 rounded-b-2xl shadow-lg dark:shadow-zinc-800 origin-top left-0 top-0 mt-10 lg:mt-14"
+        class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-2xl origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
         <div
-            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white dark:bg-zinc-900">
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white/60 dark:bg-zinc-900/60">
             <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                 @include('layouts.components.ad-categories')
             </div>

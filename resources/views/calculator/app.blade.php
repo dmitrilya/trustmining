@@ -73,7 +73,7 @@
                 theme = 'light';
             }" @endif>
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950">
-        <nav class="bg-white dark:bg-zinc-900 border-b border-gray-100 dark:border-zinc-800">
+        <nav class="bg-white/60 dark:bg-zinc-900/60 border-b border-gray-100 dark:border-zinc-800">
             <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
                 <div class="flex justify-between h-10 lg:h-14">
                     <div class="w-full flex">
@@ -102,7 +102,7 @@
             <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-2">
                 <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">
                     <div itemscope itemtype="https://schema.org/ViewAction"
-                        class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
+                        class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
                         <meta itemprop="name"
                             content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
                         <meta itemprop="description"

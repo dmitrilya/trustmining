@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-zinc-900 border-b border-gray-100 dark:border-zinc-800">
+<nav x-data="{ open: false }" class="bg-white/60 dark:bg-zinc-900/60 border-b border-gray-100 dark:border-zinc-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
         <div class="flex justify-between h-10 lg:h-14">
@@ -12,12 +12,12 @@
                 <div class="w-full hidden space-x-4 xl:space-x-8 -my-px ml-10 lg:flex items-center">
                     @include('layouts.components.ads', [
                         'classes' =>
-                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
+                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
                     @include('layouts.components.solutions', [
                         'classes' =>
-                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
+                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150',
                     ])
 
                     <x-nav-link :href="route('support')">
@@ -87,7 +87,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                     <div class="w-max">{{ $auth->name }}</div>
 
                                     <div class="ml-1">

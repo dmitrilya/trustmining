@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
             <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @method('put')
@@ -40,7 +40,7 @@
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
-                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     </ul>
                 </div>
 
@@ -63,7 +63,7 @@
                 <div>
                     <x-input-label for="description" :value="__('Description')" />
                     <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
+                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm shadow-logo-color"
                         required maxlength="1500">{{ $hosting->description }}</textarea>
                     <x-input-error :messages="$errors->get('description')" />
                 </div>

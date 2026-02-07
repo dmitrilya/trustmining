@@ -16,7 +16,7 @@
 
     <div class="max-w-xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6">
         @foreach ($users as $user)
-            <div class="bg-white dark:bg-zinc-900 rounded-xl shadow-lg dark:shadow-zinc-800 p-2 sm:p-4 lg:p-6 relative">
+            <div class="bg-white/60 dark:bg-zinc-900/60 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 relative">
                 @if ($loop->index == 0)
                     <div class="absolute left-1 sm:left-1.5 lg:left-2 top-1.5 sm:top-2 lg:top-3 size-6 sm:size-7 lg:size-8">
                         <img src="/img/gold.webp" alt="gold medal">

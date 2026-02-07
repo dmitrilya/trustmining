@@ -14,7 +14,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             gridTemplateRows: {
                 '[auto,auto,1fr]': 'auto auto 1fr',
@@ -48,7 +48,10 @@ module.exports = {
             },
             animation: {
                 'scrolling-highlight': 'highlight 2s ease-in-out forwards',
-            }
+            },
+            colors: {
+                'logo-color': 'rgba(var(--logo-color), var(--logo-opacity))',
+            },
         },
     },
 

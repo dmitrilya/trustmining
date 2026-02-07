@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
             <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @csrf

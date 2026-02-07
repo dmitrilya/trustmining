@@ -5,7 +5,7 @@
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
                 <button
-                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white dark:bg-zinc-900 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                     <span class="hidden xs:block">{{ __('Sort') }}</span>
                     <span class="xs:hidden">{{ __('Sort.') }}</span>
 

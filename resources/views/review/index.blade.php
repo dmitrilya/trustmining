@@ -40,7 +40,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="w-full bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg flex flex-col p-1 sm:p-4">
+        <div class="w-full bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
             <div class="bg-gray-100 dark:bg-zinc-950 p-1 rounded-t-md min-h-72">
                 <div class="bg-gray-100 dark:bg-zinc-950 p-1 sm:p-5 h-full space-y-8 duration-100">
                     @foreach ($reviews as $review)

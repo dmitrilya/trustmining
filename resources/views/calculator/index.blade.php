@@ -25,7 +25,7 @@
     <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">
             <div itemscope itemtype="https://schema.org/ViewAction"
-                class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
+                class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
                 <meta itemprop="name"
                     content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
                 <meta itemprop="description"

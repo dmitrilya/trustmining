@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6" x-data="{ tariff: 5, currency: 'RUB' }">
         <div class="flex justify-center">
-            <div class="bg-white dark:bg-zinc-900 rounded-full p-0.5 space-x-2 flex">
+            <div class="bg-white/60 dark:bg-zinc-900/60 rounded-full p-0.5 space-x-2 flex">
                 <div class="relative z-0 group">
                     <input id="tariff" type="text" :value="tariff" aria-label="{{ __('Tariff') }}"
                         class="py-1 px-3 block w-28 rounded-full text-sm text-gray-950 bg-gray-50 dark:bg-zinc-950 dark:text-gray-200 border ring-0 border-gray-300 dark:border-zinc-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="bg-white dark:bg-zinc-900 rounded-xl shadow-lg dark:shadow-zinc-800 p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-gray-300 dark:divide-zinc-700">
+        <div class="bg-white/60 dark:bg-zinc-900/60 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-gray-300 dark:divide-zinc-700">
             @foreach ($models as $model)
                 <a href="{{ route('database.model', ['asicBrand' => $model['brand'], 'asicModel' => $model['url_name']]) }}"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">

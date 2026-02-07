@@ -7,9 +7,9 @@
         difficulties = r.data.difficulties.reverse().slice(0, 366);
         items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4 md:p-6 graph-container">
+        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 graph-container">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm dark:shadow-zinc-800 cursor-pointer border flex justify-center items-center md:hidden"
+                <div class="bg-gray-100 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border flex justify-center items-center md:hidden"
                     @click="show = !show">
                     <svg class="size-4 text-gray-900 dark:text-gray-100" aria-hidden="true" width="24" height="24"
                         fill="none" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@
             <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
         </div>
 
-        <div class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm dark:shadow-zinc-800 rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
+        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-gray-600">
                     {{ __('Date') }}</div>

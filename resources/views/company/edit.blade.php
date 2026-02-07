@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white dark:bg-zinc-900 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
             <form method="post" action="{{ route('company.update', ['company' => $company->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @method('put')
@@ -52,7 +52,7 @@
                 <div>
                     <x-input-label for="description" :value="__('Description')" />
                     <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm dark:shadow-zinc-800"
+                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm shadow-logo-color"
                         required maxlength="1500">{{ $company->description }}</textarea>
                     <x-input-error :messages="$errors->get('description')" />
                 </div>

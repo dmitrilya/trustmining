@@ -20,7 +20,7 @@
                         class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                     <button type="button" aria-label="Clear"
-                        class="ml-4 flex h-4 w-4 items-center justify-center rounded-md bg-white dark:bg-zinc-900 text-gray-500 dark:text-gray-400"
+                        class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-gray-500 dark:text-gray-400"
                         @click="search = '';selectedModel = null;selectedVersion = null; if (typeof version !== 'undefined') version = null">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true">
@@ -36,7 +36,7 @@
             </div>
 
             <ul role="listbox" style="display: none" x-show="open"
-                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black dark:ring-zing-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-zinc-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
                 @foreach ($models as $asicModel)
                     <li @click="selectedModel = {{ $asicModel->id }}; open = false; search = '{{ $asicModel->name }}'"
@@ -69,7 +69,7 @@
             <div class="relative mt-1" @click.away="openDropdown = null">
                 <button type="button"
                     @click="openDropdown = openDropdown === {{ $asicModel->id }} ? null : {{ $asicModel->id }}"
-                    class="h-9 relative w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-950 dark:text-gray-50 shadow-sm dark:shadow-zinc-800 ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    class="h-9 relative w-full cursor-pointer rounded-md bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left text-gray-950 dark:text-gray-50 shadow-sm shadow-logo-color ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <span class="flex items-center">
                         <span class="ml-3 block truncate"
                             x-text="selectedVersion == null ? withAllVersions ? '{{ __('All') }}' : '' : models.find(function(model) {return model.id == selectedModel}).asic_versions.find(function(version) {return version.id == selectedVersion}).hashrate"></span>
@@ -83,7 +83,7 @@
                     </span>
                 </button>
 
-                <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg dark:shadow-zinc-800 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                     x-show="openDropdown === {{ $asicModel->id }}">
 
                     @if (isset($withAllVersions))

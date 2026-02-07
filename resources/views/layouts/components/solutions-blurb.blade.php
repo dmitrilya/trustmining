@@ -1,4 +1,4 @@
-<div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-zinc-950 shadow-md dark:shadow-zinc-800 overflow-hidden rounded-lg">
+<div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-zinc-950 shadow-md shadow-logo-color overflow-hidden rounded-lg">
     <div
         class="w-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mb-3 lg:mb-4">
         <svg class="w-14 h-14 text-gray-400 dark:text-gray-800" width="24" height="24" fill="currentColor"

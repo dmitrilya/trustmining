@@ -1,5 +1,5 @@
 <div class="flex flex-col md:flex-row gap-2 sm:gap-3 lg:gap-4 mb-4">
-    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white dark:bg-zinc-900 shadow-lg dark:shadow-zinc-800 overflow-hidden rounded-lg md:grid grid-cols-9">
+    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/60 dark:bg-zinc-900/60 shadow-lg shadow-logo-color overflow-hidden rounded-lg md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-gray-400 dark:text-gray-800" width="24" height="24" fill="currentColor"
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white dark:bg-zinc-900 shadow-lg dark:shadow-zinc-800 overflow-hidden rounded-lg md:grid grid-cols-9">
+    <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/60 dark:bg-zinc-900/60 shadow-lg shadow-logo-color overflow-hidden rounded-lg md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-gray-400 dark:text-gray-800" width="24" height="24" fill="currentColor"

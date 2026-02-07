@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-zinc-900 shadow-sm dark:shadow-zinc-800 rounded-lg p-2 sm:p-4">
+<div class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
     <h2
         class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
         {{ __('Network difficulty') }} BTC

@@ -10,7 +10,7 @@
                     ($user->passport || ($user->company && !$user->company->moderation)) &&
                     $user->offices->count())
                 <a href="{{ route('ad.create') }}"
-                    class="min-w-7 h-7 rounded-full shadow-lg dark:shadow-zinc-800 bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl dark:shadow-zinc-800 text-white text-3xl flex items-center justify-center">+</a>
+                    class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-xl shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
             @endif
         </div>
     </header>

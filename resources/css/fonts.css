@@ -1,7 +1,7 @@
 @layer base {
     @font-face {
-        font-family: "Montserrat";
-        src: url("../fonts/Montserrat.woff"), url("../fonts/Montserrat.ttf");
+        font-family: "Nunito";
+        src: url("../fonts/Nunito.ttf");
         font-display: swap;
     }
 }
