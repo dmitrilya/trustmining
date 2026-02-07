@@ -18,7 +18,8 @@
         x-transition:leave-end="transform opacity-0 scale-50"
         class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-2xl origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
-        <div class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white/60 dark:bg-zinc-900/60">
+        <div
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white/60 dark:bg-zinc-900/60">
             <div class="sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-600 mb-6">{{ __('Project') }}</div>
@@ -98,7 +99,8 @@
                         <svg class="size-4 lg:size-5 text-gray-500 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
                                 d="M13.6 16.733c.234.269.548.456.895.534a1.4 1.4 0 0 0 1.75-.762c.172-.615-.446-1.287-1.242-1.481-.796-.194-1.41-.861-1.241-1.481a1.4 1.4 0 0 1 1.75-.762c.343.077.654.26.888.524m-1.358 4.017v.617m0-5.939v.725M4 15v4m3-6v6M6 8.5 10.5 5 14 7.5 18 4m0 0h-3.5M18 4v3m2 8a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
                         </svg>
 
@@ -224,10 +226,7 @@
 
                     @if ($article)
                         <div class="hidden md:block w-full">
-                            <div
-                                class="h-full bg-white shadow-md shadow-logo-color overflow-hidden rounded-lg flex-col justify-between">
-                                @include('article.components.card', ['article' => $article])
-                            </div>
+                            @include('article.components.card', ['article' => $article])
                         </div>
                     @endif
 
