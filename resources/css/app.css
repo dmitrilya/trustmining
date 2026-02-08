@@ -166,7 +166,7 @@ pre[contenteditable]:empty::before {
 
 .ql-snow
     .ql-color-picker.ql-color
-    .ql-picker-item[data-value="ql-color-main-text-color"] {
+    .ql-picker-item[data-value="main-text-color"] {
     background-color: oklch(21% 0.034 264.665);
 }
 
@@ -177,7 +177,7 @@ pre[contenteditable]:empty::before {
 .dark
     .ql-snow
     .ql-color-picker.ql-color
-    .ql-picker-item[data-value="ql-color-main-text-color"] {
+    .ql-picker-item[data-value="main-text-color"] {
     background-color: oklch(96.7% 0.003 264.542);
 }
 
@@ -187,7 +187,7 @@ pre[contenteditable]:empty::before {
 
 .ql-snow
     .ql-color-picker.ql-color
-    .ql-picker-item[data-value="ql-color-secondary-text-color"] {
+    .ql-picker-item[data-value="secondary-text-color"] {
     background-color: oklch(44.6% 0.03 256.802);
 }
 
@@ -198,21 +198,21 @@ pre[contenteditable]:empty::before {
 .dark
     .ql-snow
     .ql-color-picker.ql-color
-    .ql-picker-item[data-value="ql-color-secondary-text-color"] {
+    .ql-picker-item[data-value="secondary-text-color"] {
     background-color: oklch(70.7% 0.022 261.325);
 }
 
 .ql-bg-green-bg-color,
 .ql-snow
     .ql-color-picker.ql-background
-    .ql-picker-item[data-value="ql-bg-green-bg-color"] {
+    .ql-picker-item[data-value="green-bg-color"] {
     background-color: oklch(87.1% 0.15 154.449);
 }
 
 .ql-bg-indigo-bg-color,
 .ql-snow
     .ql-color-picker.ql-background
-    .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
+    .ql-picker-item[data-value="indigo-bg-color"] {
     background-color: oklch(78.5% 0.115 274.713);
 }
 
@@ -220,7 +220,7 @@ pre[contenteditable]:empty::before {
 .dark
     .ql-snow
     .ql-color-picker.ql-background
-    .ql-picker-item[data-value="ql-bg-green-bg-color"] {
+    .ql-picker-item[data-value="green-bg-color"] {
     background-color: oklch(39.3% 0.095 152.535);
 }
 
@@ -228,7 +228,7 @@ pre[contenteditable]:empty::before {
 .dark
     .ql-snow
     .ql-color-picker.ql-background
-    .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
+    .ql-picker-item[data-value="indigo-bg-color"] {
     background-color: oklch(45.7% 0.24 277.023);
 }
 
