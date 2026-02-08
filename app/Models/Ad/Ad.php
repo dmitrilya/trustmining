@@ -55,6 +55,11 @@ class Ad extends Model
         return $this->belongsTo(\App\Models\Database\AsicVersion::class);
     }
 
+    public function gpuModel()
+    {
+        return $this->belongsTo(\App\Models\Database\GPUModel::class);
+    }
+
     public function office()
     {
         return $this->belongsTo(\App\Models\User\Office::class);

@@ -19,6 +19,8 @@ trait AdTrait
             'office:id,city',
             'asicVersion:id,asic_model_id,hashrate,measurement',
             'asicVersion.asicModel:id,name',
+            'gpuModel:id,gpu_brand_id,name,max_power,enclosure',
+            'gpuModel.gpuBrand:id,name,country',
             'coin:id,abbreviation'
         ]);
 
@@ -35,6 +37,10 @@ trait AdTrait
 
         if ($request->asic_version_id) {
             $ads = $ads->where('asic_version_id', $request->asic_version_id);
+        }
+
+        if ($request->gpu_model_id) {
+            $ads = $ads->where('gpu_model_id', $request->gpu_model_id);
         }
 
         if ($request->algorithms && count($request->algorithms))

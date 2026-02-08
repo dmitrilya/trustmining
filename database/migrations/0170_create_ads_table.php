@@ -25,6 +25,9 @@ return new class extends Migration
             $table->unsignedBigInteger('asic_version_id')->nullable();
             $table->foreign('asic_version_id')->references('id')
                 ->on('asic_versions')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('gpu_model_id')->nullable();
+            $table->foreign('gpu_model_id')->references('id')
+                ->on('gpu_models')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('office_id')->nullable();
             $table->foreign('office_id')->references('id')
                 ->on('offices')->onUpdate('cascade')->onDelete('cascade');
