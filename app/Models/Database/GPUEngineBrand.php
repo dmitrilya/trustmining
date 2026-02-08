@@ -14,6 +14,16 @@ class GPUEngineBrand extends Model
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'country',
+    ];
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value

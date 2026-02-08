@@ -18,9 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('gpu_engine_brand_id');
             $table->foreign('gpu_engine_brand_id')->references('id')
                 ->on('gpu_engine_brands')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedSmallInteger('engine_volume');
+            $table->string('name');
+            $table->unsignedSmallInteger('volume');
             $table->unsignedTinyInteger('cylinders');
-            $table->unsignedSmallInteger('engine_rpm');
+            $table->unsignedSmallInteger('rpm');
             $table->string('cooling_type');
         });
     }

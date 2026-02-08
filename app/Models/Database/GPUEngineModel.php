@@ -14,6 +14,20 @@ class GPUEngineModel extends Model
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'gpu_engine_brand_id',
+        'name',
+        'volume',
+        'cylinders',
+        'rpm',
+        'cooling_type',
+    ];
+
+    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
