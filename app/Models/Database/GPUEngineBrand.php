@@ -9,6 +9,8 @@ class GPUEngineBrand extends Model
 {
     use HasFactory;
 
+    protected $table = 'gpu_engine_brands';
+
     public $timestamps = false;
 
     /**

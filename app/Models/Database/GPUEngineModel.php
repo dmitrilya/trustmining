@@ -9,6 +9,8 @@ class GPUEngineModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'gpu_engine_models';
+
     public $timestamps = false;
 
     /**

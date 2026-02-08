@@ -11,6 +11,8 @@ class GPUModel extends Model
 {
     use HasFactory, Searchable;
 
+    protected $table = 'gpu_models';
+
     public $timestamps = false;
 
     /**
