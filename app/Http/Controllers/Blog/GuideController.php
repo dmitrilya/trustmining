@@ -66,7 +66,7 @@ class GuideController extends Controller
             'subtitle' => $request->subtitle,
             'guide' => $request->guide,
             'preview' => '',
-            'tags' => $request->tags || [],
+            'tags' => $request->tags ?? [],
         ]);
 
         $guide->preview = $this->saveFile($request->file('preview'), 'guides', 'preview', $guide->id);
@@ -125,7 +125,7 @@ class GuideController extends Controller
         if ($request->guide != $guide->guide) $data['guide'] = $request->guide;
         if ($request->preview) $data['preview'] = $this->saveFile($request->file('preview'), 'guides', 'preview', $guide->id);
 
-        $tags = $request->tags ? $request->tags : [];
+        $tags = $request->tags ?? [];
         if (count(array_diff($guide->tags, $tags)) || count(array_diff($tags, $guide->tags))) $data['tags'] = $tags;
 
         if (!empty($data))
