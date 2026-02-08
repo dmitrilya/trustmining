@@ -90,10 +90,10 @@ trait AdTrait
 
             switch ($request->sort) {
                 case 'price_low_to_high':
-                    $ads = $ads->orderByRaw($originalPrice);
+                    $ads = $ads->orderByRaw('(`price` = 0)')->orderByRaw($originalPrice);
                     break;
                 case 'price_high_to_low':
-                    $ads = $ads->orderByRaw($originalPrice . ' DESC');
+                    $ads = $ads->orderByRaw('(`price` = 0)')->orderByRaw($originalPrice . ' DESC');
                     break;
             }
         }
