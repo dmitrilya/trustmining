@@ -39,6 +39,10 @@
                 <div class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
                     {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                 </div>
+            @elseif ($ad->adCategory->name == 'gpus')
+                <div class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                    {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
+                </div>
             @endif
 
             <div
@@ -60,6 +64,13 @@
             </div>
             <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
         </div>
+
+        @if ($ad->adCategory->name == 'gpus')
+            <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                {{ __('Power (kW/h)') . ': ' }}
+                <span class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
+            </p>
+        @endif
 
         @foreach ($ad->props as $prop => $value)
             <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">

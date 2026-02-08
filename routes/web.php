@@ -107,6 +107,9 @@ Route::group(['prefix' => 'database'], function () {
     Route::get('/', [DatabaseController::class, 'index'])->name('database');
     Route::get('/get-models', [DatabaseController::class, 'getModels']);
 
+    Route::get('/gpu/{gpuBrand}/{gpuModel}', [DatabaseController::class, 'gpuModel'])->name('database.gpu.model');
+    Route::get('/gpu/{gpuBrand}/{gpuModel}/reviews', [DatabaseController::class, 'gpuReviews'])->name('database.gpu.reviews');
+
     Route::group(['prefix' => '{asicBrand}'], function () {
         Route::get('/', [DatabaseController::class, 'brand'])->name('database.brand');
         Route::get('/get-models', [DatabaseController::class, 'getModels']);

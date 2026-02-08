@@ -1,5 +1,19 @@
 @if (isset($adCategory) && !isset($shop))
-    <x-filter>@include('ad.' . $adCategory->name . '.filter')</x-filter>
+    <x-filter>
+        @include('ad.' . $adCategory->name . '.filter')
+
+        @if (in_array(request()->route()->action['as'], ['company']) &&
+                ($user = Auth::user()) &&
+                $user->id == request()->user->id)
+            <x-filter-filter type="radio" :name="__('Display')" :items="collect([
+                ['name' => 'View all', 'url_name' => ''],
+                ['name' => 'Active', 'url_name' => 'active'],
+                ['name' => 'Is under moderation', 'url_name' => 'moderation'],
+                ['name' => 'Rejected', 'url_name' => 'rejected'],
+                ['name' => 'Hidden', 'url_name' => 'hidden'],
+            ])" field="display"></x-filter-filter>
+        @endif
+    </x-filter>
 @endif
 
 <fieldset aria-label="Choose a ad" class="w-full">

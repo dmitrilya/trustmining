@@ -83,7 +83,7 @@ class GPUModel extends Model
 
     public function ads()
     {
-        return $this->hasMany(\App\Models\Ad\Ad::class);
+        return $this->hasMany(\App\Models\Ad\Ad::class, 'gpu_model_id', 'id');
     }
 
     public function reviews()

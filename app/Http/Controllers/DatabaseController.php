@@ -11,6 +11,8 @@ use App\Models\Database\Algorithm;
 use App\Models\Database\AsicBrand;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
+use App\Models\Database\GPUBrand;
+use App\Models\Database\GPUModel;
 
 class DatabaseController extends Controller
 {
@@ -76,7 +78,8 @@ class DatabaseController extends Controller
             'versions' => $asicModel->asicVersions()->with([
                 'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
                     ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
-                'ads.coin:id,abbreviation'])->get()->sortByDesc('hashrate'),
+                'ads.coin:id,abbreviation'
+            ])->get()->sortByDesc('hashrate'),
             'algorithm' => $asicModel->algorithm()->with('coins')->first()
         ]);
     }
@@ -100,7 +103,8 @@ class DatabaseController extends Controller
             'versions' => $asicModel->asicVersions()->with([
                 'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
                     ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
-                'ads.coin:id,abbreviation'])->get()->sortByDesc('hashrate'),
+                'ads.coin:id,abbreviation'
+            ])->get()->sortByDesc('hashrate'),
             'algorithm' => $asicModel->algorithm()->with('coins')->first()
         ]);
     }
@@ -116,10 +120,37 @@ class DatabaseController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Database\GPUBrand  $gpuBrand
+     * @param  \App\Models\Database\GPUModel  $gpuModel
+     * @return \Illuminate\Http\Response
+     */
+    public function gpuModel(GPUBrand $gpuBrand, GPUModel $gpuModel)
+    {
+        return view('database.gpu-model', [
+            'brand' => $gpuBrand,
+            'model' => $gpuModel->load(['ads' => fn($q) => $q->select(['gpu_model_id', 'price', 'coin_id'])
+                ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)')]),
+        ]);
+    }
+
+    public function gpuReviews(GPUBrand $gpuBrand, GPUModel $gpuModel)
+    {
+        return view('review.index', [
+            'auth' => \Auth::user(),
+            'name' => $gpuModel->name,
+            'type' => 'App\Models\Database\GPUModel',
+            'id' => $gpuModel->id,
+            'reviews' => $gpuModel->reviews
+        ]);
+    }
+
     public function getModels(Request $request)
     {
         $models = Cache::get('calculator_models');
-        
+
         if ($request->asicBrand) $models = $models->where('asic_brand_id', AsicBrand::where('name', str_replace('_', ' ', $request->asicBrand))->first('id')->id);
 
         $models = $models->map(function ($model) {
@@ -142,7 +173,7 @@ class DatabaseController extends Controller
                 'release' => $model->release,
                 'brand' => $version->brand_name
             ];
-        })->sortByDesc('profit')->values();        
+        })->sortByDesc('profit')->values();
 
         return response()->json($models);
     }

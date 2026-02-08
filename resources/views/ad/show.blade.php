@@ -64,6 +64,11 @@
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h2>
+                        @elseif ($ad->adCategory->name == 'gpus')
+                            <h2
+                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
+                            </h2>
                         @endif
 
                         <p
@@ -110,6 +115,14 @@
                         <div class="md:col-span-2 md:col-start-1">
                             <div class="my-5">
                                 <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                    @if ($ad->adCategory->name == 'gpus')
+                                        <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                            {{ __('Power (kW/h)') . ': ' }}
+                                            <span
+                                                class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
+                                        </li>
+                                    @endif
+
                                     @foreach ($props as $prop => $value)
                                         <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
                                             {{ __($prop) . ': ' }}@if (!is_array($value))
@@ -154,7 +167,15 @@
                                         'asicBrand' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name)),
                                         'asicModel' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name)),
                                     ]) }}">
-                                    <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                                    <x-secondary-button>{{ __('More details about miner') }}</x-secondary-button>
+                                </a>
+                            @elseif ($ad->adCategory->name == 'gpus')
+                                <a class="block mt-6"
+                                    href="{{ route('database.gpu.model', [
+                                        'gpuBrand' => strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name)),
+                                        'gpuModel' => strtolower(str_replace(' ', '_', $ad->gpuModel->name)),
+                                    ]) }}">
+                                    <x-secondary-button>{{ __('More details about gpu') }}</x-secondary-button>
                                 </a>
                             @endif
                         </div>
@@ -186,6 +207,13 @@
                             <h2 itemprop="name"
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
+                            </h2>
+                        @elseif ($ad->adCategory->name == 'gpus')
+                            <meta itemprop="brand" content="{{ $ad->gpuModel->gpuBrand->name }}" />
+                            <meta itemprop="name" content="{{ $ad->gpuModel->name }}" />
+                            <h2
+                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
                             </h2>
                         @else
                             <meta itemprop="name" content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
@@ -231,6 +259,14 @@
                     <div class="md:col-span-2 md:col-start-1">
                         <div class="my-5">
                             <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                @if ($ad->adCategory->name == 'gpus')
+                                    <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                        {{ __('Power (kW/h)') . ': ' }}
+                                        <span
+                                            class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
+                                    </li>
+                                @endif
+
                                 @foreach ($ad->props as $prop => $value)
                                     <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
                                         {{ __($prop) . ': ' }}@if (!is_array($value))
@@ -371,6 +407,14 @@
                                     'asicModel' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name)),
                                 ]) }}">
                                 <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                            </a>
+                        @elseif ($ad->adCategory->name == 'gpus')
+                            <a class="block mt-6"
+                                href="{{ route('database.gpu.model', [
+                                    'gpuBrand' => strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name)),
+                                    'gpuModel' => strtolower(str_replace(' ', '_', $ad->gpuModel->name)),
+                                ]) }}">
+                                <x-secondary-button>{{ __('More details about gpu') }}</x-secondary-button>
                             </a>
                         @endif
                     </div>

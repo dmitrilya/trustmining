@@ -94,7 +94,7 @@
         class="text-xs xs:text-sm lg:text-base text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
         {{ __('Water cooling plates') }}</h4>
 </a>
-{{-- <a href="{{ route('ads', ['adCategory' => 'gpus']) }}"
+<a href="{{ route('ads', ['adCategory' => 'gpus']) }}"
     class="flex flex-col items-center group">
     <div
         class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">
@@ -106,7 +106,7 @@
     <h4
         class="text-xs xs:text-sm lg:text-base text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
         {{ __('GPU') }}</h4>
-</a> --}}
+</a>
 <a href="{{ route('ads', ['adCategory' => 'firmwares']) }}" class="flex flex-col items-center group">
     <div
         class="mb-3 sm:mb-4 xl:mb-5 size-16 sm:size-20 md:size-24 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-gray-500 group-hover:border-gray-900 dark:group-hover:border-gray-100 flex items-center justify-center">

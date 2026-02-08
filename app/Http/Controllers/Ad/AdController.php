@@ -20,6 +20,7 @@ use App\Models\Ad\AdCategory;
 use App\Models\Database\Coin;
 use App\Models\User\Office;
 use App\Models\Database\AsicModel;
+use App\Models\Database\GPUModel;
 use App\Models\Morph\Moderation;
 
 class AdController extends Controller
@@ -55,6 +56,7 @@ class AdController extends Controller
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
+            'gpuModels' => GPUModel::select(['id', 'name', 'gpu_brand_id'])->with('gpuBrand:id,name')->get(),
             'offices' => $user->offices()->select(['id', 'address'])->get(),
             'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);

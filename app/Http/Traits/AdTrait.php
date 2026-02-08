@@ -26,29 +26,28 @@ trait AdTrait
 
         if ($adCategory) $ads = $ads->where('ad_category_id', $adCategory->id);
 
-        if ($request->model) {
-            $ads = $ads->whereHas(
-                'asicVersion.asicModel',
-                function ($q) use ($request) {
-                    $q->where('name', str_replace('_', ' ', $request->model));
-                }
-            );
-        }
+        if ($request->model) $ads = $ads->whereHas(
+            'asicVersion.asicModel',
+            function ($q) use ($request) {
+                $q->where('name', str_replace('_', ' ', $request->model));
+            }
+        );
 
-        if ($request->asic_version_id) {
-            $ads = $ads->where('asic_version_id', $request->asic_version_id);
-        }
+        if ($request->asic_version_id) $ads = $ads->where('asic_version_id', $request->asic_version_id);
 
-        if ($request->gpu_model_id) {
-            $ads = $ads->where('gpu_model_id', $request->gpu_model_id);
-        }
+        if ($request->gpu_model) $ads = $ads->whereHas(
+            'gpuModel',
+            function ($q) use ($request) {
+                $q->where('name', str_replace('_', ' ', $request->gpu_model));
+            }
+        );
 
         if ($request->algorithms && count($request->algorithms))
             $ads = $ads->whereHas('asicVersion.asicModel.algorithm', function ($q) use ($request) {
                 $q->whereIn('name', $request->algorithms);
             });
 
-        foreach ($request->collect()->except(['model', 'asic_version_id', 'algorithms', 'page', 'sort']) as $key => $value) {
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'page', 'sort']) as $key => $value) {
             $key = str_replace('_', ' ', $key);
             if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
             elseif (count($value) === 1) {

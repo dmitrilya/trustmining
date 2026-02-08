@@ -70,6 +70,10 @@
                     @include('ad.accessories.create')
                 </template>
 
+                <template x-if="ad_category_id == 10">
+                    @include('ad.gpus.create')
+                </template>
+
                 <div>
                     <div class="flex items-center">
                         <div class="mr-2 xs:mr-3 w-full">

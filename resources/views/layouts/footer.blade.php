@@ -61,6 +61,8 @@
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'containers']) }}">{{ __('Containers') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('ads', ['adCategory' => 'gpus']) }}">{{ __('GPU') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}">{{ __('Cryptoboilers') }}</a>
