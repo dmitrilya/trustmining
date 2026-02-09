@@ -13,7 +13,7 @@
 
             @php
                 $sort = request()->sort;
-                user = Auth::user();
+                $user = Auth::user();
             @endphp
 
             <x-header-filters>
