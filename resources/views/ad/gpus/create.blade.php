@@ -1,5 +1,5 @@
 <div class="space-y-6">
-    @include('ad.gpus.selectModel')
+    @include('ad.gpus.selectmodel')
 
     <input type="hidden" name="props" x-ref="props_gpus" value='{"Condition": "New", "Availability": "In stock"}'>
 
