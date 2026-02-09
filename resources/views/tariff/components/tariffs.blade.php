@@ -1,6 +1,6 @@
 <div class="grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 -mt-72">
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg bg-white border border-gray-300 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-gray-950 font-semibold text-lg md:text-2xl">{{ $tariffs[0]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[0]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-gray-200 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg bg-white border border-gray-300 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-gray-950 font-semibold text-lg md:text-2xl">{{ $tariffs[1]->name }}</div>
         <div class="text-gray-500 text-sm md:text-base">{{ __($tariffs[1]->description) }}</div>
         <div class="h-9 flex items-end text-gray-500 md:text-lg"><span
@@ -235,7 +235,7 @@
 
 <div class="grid justify-items-center mt-4 lg:mt-8">
     <div
-        class="w-full max-w-md lg:max-w-none bg-white border border-gray-200 rounded-3xl px-10 py-8 sm:px-12 sm:py-10 lg:px-18 lg:py-14 space-y-3 sm:space-y-5">
+        class="w-full max-w-md lg:max-w-none bg-white border border-gray-300 rounded-3xl px-10 py-8 sm:px-12 sm:py-10 lg:px-18 lg:py-14 space-y-3 sm:space-y-5">
         <div class="text-gray-950 font-semibold text-lg md:text-2xl">Base</div>
         <div class="text-gray-500 text-xs sm:text-sm">
             {{ __('Starter plan to test all the platform functionality. Adding third-party contacts and posting hosting information is not available') }}

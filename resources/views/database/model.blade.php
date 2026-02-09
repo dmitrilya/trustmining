@@ -58,7 +58,7 @@
 
             <div itemscope itemtype="https://schema.org/Product"
                 class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
-                <div class="md:col-span-2 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
+                <div class="md:col-span-2 md:border-r border-gray-300 dark:border-zinc-700 md:pr-8">
                     <meta itemprop="brand" content="{{ $brand->name }}" />
                     <h1 itemprop="name"
                         class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
@@ -140,7 +140,7 @@
                 </div>
 
                 <div
-                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
+                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-300 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
                     <div class="text-sm text-gray-500 dark:text-gray-400" itemprop="additionalProperty" itemscope
                         itemtype="http://schema.org/PropertyValue"><span itemprop="name">{{ __('Algorithm') }}:
                         </span><span class="text-gray-700 dark:text-gray-200" itemprop="value">
@@ -154,7 +154,7 @@
 
                     <div x-data="{ selectedTab: {{ isset($selectedVersion) ? array_search($selectedVersion->id, $versions->pluck('id')->toArray()) : '0' }} }" class="mt-4 md:mt-8">
                         <div
-                            class="text-xs sm:text-sm text-center text-gray-600 border-b border-gray-200 dark:text-gray-300 dark:border-zinc-800">
+                            class="text-xs sm:text-sm text-center text-gray-600 border-b border-gray-300 dark:text-gray-300 dark:border-zinc-800">
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="me-2">

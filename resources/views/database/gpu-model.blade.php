@@ -48,7 +48,7 @@
 
             <div itemscope itemtype="https://schema.org/Product"
                 class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
-                <div class="md:col-span-2 md:border-r border-gray-200 dark:border-zinc-700 md:pr-8">
+                <div class="md:col-span-2 md:border-r border-gray-300 dark:border-zinc-700 md:pr-8">
                     <h1 itemprop="name"
                         class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
@@ -129,7 +129,7 @@
                 </div>
 
                 <div
-                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-200 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
+                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-300 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
                     <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
                         <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400">{{ __('Manufacturer') }}:
                             <span itemprop="name" class="text-gray-700 dark:text-gray-200">

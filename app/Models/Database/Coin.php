@@ -9,6 +9,19 @@ class Coin extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'profit',
+        'rate',
+        'difficulty',
+        'fee',
+        'reward_block',
+    ];
+
     public function algorithm()
     {
         return $this->belongsTo(\App\Models\Database\Algorithm::class);

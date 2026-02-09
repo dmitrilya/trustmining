@@ -64,7 +64,7 @@
 
                         @if (count($question->similar_questions_list) && !$question->published)
                             <div x-data="{ show: false }"
-                                class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-gray-200 dark:border-zinc-700">
+                                class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-gray-300 dark:border-zinc-700">
                                 <div>
                                     <h3 id="accordion-flush-themes-heading">
                                         <button type="button" @click="show = !show"

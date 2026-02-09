@@ -101,7 +101,7 @@
         <meta itemprop="dateCreated" content="{{ $answer->created_at }}">
     </div>
 
-    <div x-data="{ show: false }" class="px-2 sm:px-4 h-full border-t border-gray-200 dark:border-zinc-700">
+    <div x-data="{ show: false }" class="px-2 sm:px-4 h-full border-t border-gray-300 dark:border-zinc-700">
         <div>
             <h3 id="accordion-flush-themes-heading">
                 <button type="button" @click="show = !show"

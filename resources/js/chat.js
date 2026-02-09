@@ -32,7 +32,7 @@ window.sendMessage = function (chatId, form) {
 
             if (data.get('message')) messageElement = messageElement + `<div class="flex justify-end">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                 <span class="text-xs text-gray-600">${date}</span>
             </div>
@@ -43,7 +43,7 @@ window.sendMessage = function (chatId, form) {
 
             if (data.get('images[]').size) {
                 messageElement = messageElement + `<div class="flex justify-end">
-            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                     <span class="text-xs text-gray-600">${date}</span>
                 </div>
@@ -58,7 +58,7 @@ window.sendMessage = function (chatId, form) {
 
             if (data.get('files[]').size) {
                 messageElement = messageElement + `<div class="flex justify-end">
-            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                     <span class="text-xs text-gray-600">${date}</span>
                 </div>

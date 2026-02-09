@@ -70,7 +70,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
     </div>
 
     <template x-for="asicModel in models" :key="asicModel.id">
-        <div x-show="selectedModel == asicModel.id" class="mt-6">
+        <div x-show="selectedModel == asicModel.id" class="mt-4 md:mt-6">
             <x-input-label :value="__('Version')" />
 
             <div class="relative mt-1" @click.away="openDropdown = null">

@@ -58,7 +58,7 @@
                     </div>
 
                     <div
-                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
+                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-300 dark:border-zinc-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
                             <h2
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
@@ -200,7 +200,7 @@
                 </div>
 
                 <div
-                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-200 dark:border-zinc-700 md:pl-8">
+                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-300 dark:border-zinc-700 md:pl-8">
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
@@ -406,7 +406,7 @@
                                     'asicBrand' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name)),
                                     'asicModel' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name)),
                                 ]) }}">
-                                <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                                <x-secondary-button>{{ __('More details about miner') }}</x-secondary-button>
                             </a>
                         @elseif ($ad->adCategory->name == 'gpus')
                             <a class="block mt-6"

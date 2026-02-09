@@ -185,7 +185,7 @@
             ])
         </div>
 
-        <div class="py-3 border-t border-gray-200 dark:border-zinc-700">
+        <div class="py-3 border-t border-gray-300 dark:border-zinc-700">
             @auth
                 <div class="px-4">
                     <div class="text-base text-gray-900 dark:text-gray-100">{{ $auth->name }}</div>

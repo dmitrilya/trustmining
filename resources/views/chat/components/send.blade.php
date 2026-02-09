@@ -1,6 +1,6 @@
 <form @submit.prevent="sendMessage({{ $chatId }}, $el)" x-data="{ text: '{{ isset($message) ? $message : '' }}' }"
     @keypress="if ($event.ctrlKey && $event.code == 'Enter') sendMessage({{ $chatId }}, $el);">
-    <div class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
+    <div class="w-full border border-gray-300 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
             <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}" :value="text"

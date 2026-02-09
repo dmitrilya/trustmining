@@ -296,7 +296,7 @@
 
                                         <a class="block mt-6 xl:mt-8"
                                             x-bind:href="'/database/' + version.brand_name + '/' + version.model_name">
-                                            <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                                            <x-secondary-button>{{ __('More details about miner') }}</x-secondary-button>
                                         </a>
                                     </div>
                                 </template>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedFloat('profit', 12, 8)->nullable();
             $table->unsignedFloat('rate', 16, 8)->nullable();
             $table->unsignedDouble('difficulty', 24, 2)->nullable();
+            $table->unsignedTinyInteger('fee')->default(0);
             $table->unsignedDouble('reward_block', 16, 8)->nullable();
             $table->unsignedTinyInteger('merged_group')->nullable();
             $table->boolean('paymentable')->default(false);

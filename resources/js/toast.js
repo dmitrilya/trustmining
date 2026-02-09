@@ -37,7 +37,7 @@ const pushToast = function (type, title, pretext, text, alert) {
 
     const toast = document.createElement('div');
     toast.style.opacity = 0;
-    toast.className = "w-full p-4 bg-white/60 dark:bg-zinc-900/60 rounded-lg shadow-lg shadow-logo-color border border-gray-200 dark:border-zinc-700 transition duration-300";
+    toast.className = "w-full p-4 bg-white/60 dark:bg-zinc-900/60 rounded-lg shadow-lg shadow-logo-color border border-gray-300 dark:border-zinc-700 transition duration-300";
     toast.role = 'alert';
     toast.innerHTML = type == 'alert' ? `<div class="flex items-center">
     ${alertIcons[alert]}

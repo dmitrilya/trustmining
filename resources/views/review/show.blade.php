@@ -13,7 +13,7 @@
         <div class="w-full bg-white shadow-sm shadow-logo-color rounded-lg lg:rounded-l-none flex flex-col p-1 sm:p-4">
             <div class="bg-gray-100 p-1 rounded-t-md min-h-72">
                 <div class="bg-gray-100 p-1 sm:p-5 h-full space-y-8 duration-100">
-                    <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 bg-white rounded-lg">
+                    <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-300 bg-white rounded-lg">
                         <div class="flex justify-between mb-3">
                             <div class="text-base font-semibold text-gray-950">
                                 {{ $review->user->name }}

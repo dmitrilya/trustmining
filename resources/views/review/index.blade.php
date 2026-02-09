@@ -47,7 +47,7 @@
                         @continue ($review->moderation && (!$auth || $review->user->id != $auth->id))
 
                         <div class="flex w-full">
-                            <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-990 rounded-lg">
+                            <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-990 rounded-lg">
                                 <div class="flex justify-between mb-3">
                                     <div class="text-base font-semibold text-gray-950 dark:text-gray-50">
                                         {{ $review->user->name }}
@@ -141,7 +141,7 @@
                         <input type="hidden" name="reviewable_id" value="{{ $id }}">
 
                         <div
-                            class="w-full border border-gray-200 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
+                            class="w-full border border-gray-300 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
                             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
                                 <label for="review" class="sr-only">Your review</label>
                                 <textarea id="review" rows="4" x-ref="review" name="review"
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="w-full border border-gray-200 rounded-b-lg bg-white dark:bg-zinc-800 dark:border-zinc-700 flex items-center justify-center"
+                    <div class="w-full border border-gray-300 rounded-b-lg bg-white dark:bg-zinc-800 dark:border-zinc-700 flex items-center justify-center"
                         style="height: 172.7px;display:none">
                         <p class="text-xl font-semibold text-gray-950 dark:text-gray-50 text-center">{{ __('Sent for moderation') }}</p>
                     </div>

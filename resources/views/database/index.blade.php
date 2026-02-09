@@ -84,7 +84,7 @@
             </div>
 
             <div
-                class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-gray-200 dark:border-zinc-700">
+                class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-gray-300 dark:border-zinc-700">
                 <div class="flex items-center cursor-pointer text-gray-600 text-xxs sm:text-xs sm:text-sm hover:text-gray-900 dark:hover:text-gray-200 col-span-2"
                     @click="sort('name')">
                     {{ __('Model') }}

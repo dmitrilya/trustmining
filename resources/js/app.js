@@ -70,6 +70,14 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('adsStatisticsData', adsStatistics);
 });
 
+window.calculateProfitCAGR = (dailyProfit, days, percent) => {
+    if (percent == 0) return dailyProfit * days;
+    
+    let coef = 1 / Math.pow(1 + (percent / 100), 1 / 365);
+
+    return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
+}
+
 Alpine.start();
 
 window.like = function (type, id) {
@@ -101,10 +109,8 @@ window.filterDouble = function (el, min, max, precision) {
     if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
 
     parts = v.split('.');
-    console.log(parts);
     if (parts[1] && parts[1].length > precision) {
         v = parts[0] + '.' + parts[1].slice(0, precision);
-        console.log(v);
     }
 
     if (v !== '' && !v.endsWith('.')) {

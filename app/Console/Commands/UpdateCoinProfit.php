@@ -55,12 +55,17 @@ class UpdateCoinProfit extends Command
                 if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
 
                 $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, array_search($algorithm->measurement, $mes));
-                Coin::where('abbreviation', $coin->coinType)->update(['profit' => $profit, 'difficulty' => $coin->networkDiff, 'reward_block' => $coin->blockIncentive]);
+                $fee = (1 - collect($coin->miningType)->min('percent')) * 100;
+                Coin::where('abbreviation', $coin->coinType)->update([
+                    'profit' => $profit,
+                    'difficulty' => $coin->networkDiff,
+                    'fee' => $fee,
+                    'reward_block' => $coin->blockIncentive
+                ]);
 
                 if (!$coin->mergeMiningInfos) return;
-                foreach ($coin->mergeMiningInfos as $mergeCoin) {
-                    Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate]);
-                }
+                foreach ($coin->mergeMiningInfos as $mergeCoin)
+                    Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate, 'fee' => $fee]);
             });
 
         $i = 1;

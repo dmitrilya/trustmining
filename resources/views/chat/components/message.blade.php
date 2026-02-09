@@ -1,7 +1,7 @@
 @if ($message->message)
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                 <span class="date-transform text-xs text-gray-600"
                     data-date="{{ $message->created_at }}"></span>
@@ -17,7 +17,7 @@
     <div x-data="{ open: false }">
         <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
             <div
-                class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+                class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                     <span class="date-transform text-xs text-gray-600"
                         data-date="{{ $message->created_at }}"></span>
@@ -78,7 +78,7 @@
 @if (count($message->files))
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-200 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                 <span class="date-transform text-xs text-gray-600"
                     data-date="{{ $message->created_at }}"></span>

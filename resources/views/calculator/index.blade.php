@@ -25,21 +25,15 @@
     <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">
             <div itemscope itemtype="https://schema.org/ViewAction"
-                class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
+                class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
                 <meta itemprop="name"
                     content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
                 <meta itemprop="description"
                     content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
                 <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5"
-                    x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0 }">
+                    x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, uptime: 100, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
                     <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
-                        <div class="mb-6">
-                            <x-input-label for="price" :value="__('Tariff')" />
-                            <x-text-input ::value="tariff" @input="tariff = $el.value" id="price" name="price"
-                                min="0" max="10" type="number" step="0.01" />
-                        </div>
-
                         @include('calculator.components.schema')
 
                         @include('calculator.components.selectversion', [
@@ -47,9 +41,11 @@
                             'selectedVersion' => $selVersion,
                         ])
 
+                        @include('calculator.components.expenses')
+
                         <template x-if="version !== null">
                             <div class="mt-6 sm:mt-8 lg:mt-10">
-                                <div class="mt-4 sm:mt-6">
+                                <div class="hidden md:block mt-6">
                                     <h3 class="sr-only">{{ __('Reviews') }}</h3>
                                     <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                                         <x-rating></x-rating>
@@ -115,7 +111,14 @@
                         </div>
 
                         <template x-if="version !== null">
-                            <div>
+                            <div x-data="{
+                                get dailyProfit() {
+                                    return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) / (currency == 'RUB' ? {{ $rub }} : 1);
+                                },
+                                get dailyConsumption() {
+                                    return version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * uptime / 100;
+                                }
+                            }">
                                 <div class="grid grid-cols-4 gap-2 sm:gap-4">
                                     <div></div>
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
@@ -131,37 +134,37 @@
                                         {{ __('Day') }}
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 10000) / 10000">
+                                        x-text="Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) * 100) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 * 10) / 10000">
+                                        x-text="Math.round(dailyConsumption * 24 / 10) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 24 / 1000) * 10000) / 10000">
+                                        x-text="Math.round((calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) - dailyConsumption * 24 / 1000) * 100) / 100">
                                     </div>
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                                         {{ __('Month') }}
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 * 10000) / 10000">
+                                        x-text="Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) * 100) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 * 10) / 10000">
+                                        x-text="Math.round(dailyConsumption * 720 / 10) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 30 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 720 / 1000) * 10000) / 10000">
+                                        x-text="Math.round((calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) - dailyConsumption * 720 / 1000) * 100) / 100">
                                     </div>
                                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                                         {{ __('Year') }}
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 * 10000) / 10000">
+                                        x-text="Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) * 100) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round(version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 * 10) / 10000">
+                                        x-text="Math.round(dailyConsumption * 8760 / 10) / 100">
                                     </div>
                                     <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                                        x-text="Math.round((version.profits[profitNumber].profit / (currency == 'RUB' ? {{ $rub }} : 1) * 365 - version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * 8760 / 1000) * 10000) / 10000">
+                                        x-text="Math.round((calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) - dailyConsumption * 8760 / 1000) * 100) / 100">
                                     </div>
                                 </div>
 
@@ -169,8 +172,8 @@
                                     {{ __('Payback') }}:
                                     <span class="text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="version.price ? 
-                                        version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000 > 0 ?
-                                        Math.round(version.price / (version.profits[profitNumber].profit - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 / 1000)) + ' {{ __('Days') }}' :
+                                        version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000 > 0 ?
+                                        Math.round(version.price / (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000)) + ' {{ __('Days') }}' :
                                         '∞' : '{{ __('No data') }}'"></span>
                                 </div>
 
@@ -179,7 +182,7 @@
 
                                 <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                                     <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                        @click="profitNumber = i">
+                                        @click="profitNumber = i, fee = version.profits[i].coins[0].fee">
                                         <div>
                                             <label class="flex items-center">
                                                 <input type="radio" name="profitNumber" :value="i"
@@ -212,7 +215,7 @@
 
                                 <a class="block mt-6 xl:mt-8"
                                     x-bind:href="'/database/' + version.brand_name + '/' + version.model_name">
-                                    <x-secondary-button>{{ __('Model details about miner') }}</x-secondary-button>
+                                    <x-secondary-button>{{ __('More details about miner') }}</x-secondary-button>
                                 </a>
                             </div>
                         </template>
