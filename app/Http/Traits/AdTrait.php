@@ -90,7 +90,7 @@ trait AdTrait
             elseif ($request->display == 'hidden') $ads = $ads->where('hidden', true);
         }
 
-        if ($request->sort && ($user = $request->user()) && ($user->tariff || $user->role_id != 2)) {
+        if ($request->sort) {
             $originalPrice = '`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)';
 
             switch ($request->sort) {
