@@ -2,7 +2,7 @@
     @include('ad.gpus.selectmodel')
 
     <input type="hidden" name="props" x-ref="props_gpus"
-        value='{"Condition": "New", "Availability": "In stock", "Enclosure": "On frame"}'>
+        value='{"Enclosure": "On frame", "Condition": "New", "Availability": "In stock"}'>
 
     <x-select :label="__('Enclosure')" name="Enclosure"
         handleChange="(enclosure => {
