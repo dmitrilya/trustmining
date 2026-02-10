@@ -24,9 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedSmallInteger('max_power');
             $table->unsignedTinyInteger('phases');
-            $table->string('gas_type');
-            $table->unsignedTinyInteger('fuel_consumption');
-            $table->string('enclosure');
+            $table->unsignedFloat('fuel_consumption', 6,3);
             $table->unsignedSmallInteger('length');
             $table->unsignedSmallInteger('width');
             $table->unsignedSmallInteger('height');

@@ -161,7 +161,7 @@
                         itemscope itemtype="http://schema.org/PropertyValue">
                         <span itemprop="name">{{ __('Gas type') }}</span>:
                         <span itemprop="value" class="text-gray-700 dark:text-gray-200">
-                            {{ $model->gas_type }}</span>
+                            {{ __('Natural') }}</span>
                     </div>
 
                     <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
@@ -169,13 +169,6 @@
                         <span itemprop="name">{{ __('Fuel consumption (m³/h)') }}</span>:
                         <span itemprop="value" class="text-gray-700 dark:text-gray-200">
                             {{ $model->fuel_consumption }}</span>
-                    </div>
-
-                    <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
-                        itemscope itemtype="http://schema.org/PropertyValue">
-                        <span itemprop="name">{{ __('Enclosure') }}</span>:
-                        <span itemprop="value" class="text-gray-700 dark:text-gray-200">
-                            {{ $model->enclosure }}</span>
                     </div>
 
                     <meta itemprop="description"
@@ -237,7 +230,7 @@
                             itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                             <span itemprop="name">{{ __('Cooling type') }}</span>:
                             <span itemprop="value" class="text-gray-700 dark:text-gray-200">
-                                {{ $model->gpuEngineModel->cooling_type }}</span>
+                                {{ __('Liquid') }}</span>
                         </div>
                     </div>
 
