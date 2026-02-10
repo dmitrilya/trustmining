@@ -24,7 +24,6 @@ class GPUEngineModel extends Model
         'volume',
         'cylinders',
         'rpm',
-        'cooling_type',
     ];
 
     /**

@@ -19,7 +19,7 @@ trait AdTrait
             'office:id,city',
             'asicVersion:id,asic_model_id,hashrate,measurement',
             'asicVersion.asicModel:id,name',
-            'gpuModel:id,gpu_brand_id,name,max_power,enclosure',
+            'gpuModel:id,gpu_brand_id,name,max_power',
             'gpuModel.gpuBrand:id,name,country',
             'coin:id,abbreviation'
         ]);
