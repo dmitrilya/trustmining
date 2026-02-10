@@ -56,7 +56,8 @@ class AdController extends Controller
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
-            'gpuModels' => GPUModel::select(['id', 'name', 'gpu_brand_id'])->with('gpuBrand:id,name')->get(),
+            'gpuModels' => GPUModel::select(['id', 'name', 'gpu_brand_id', 'gpu_engine_model_id'])
+                ->with(['gpuBrand:id,name', 'gpuEngineModel:id,name', 'gpuEngineModel.gpuEngineBrand:id,name'])->get(),
             'offices' => $user->offices()->select(['id', 'address'])->get(),
             'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);
