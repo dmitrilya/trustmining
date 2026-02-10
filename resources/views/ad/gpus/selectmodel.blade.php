@@ -41,7 +41,7 @@
                         x-show="search === '' || '{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                         <div class="flex items-center">
                             <span
-                                class="ml-3 block truncate">{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name }}</span>
+                                class="ml-3 block truncate">{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name }}</span>
                         </div>
 
                         <span x-show="selectedModel == {{ $gpuModel->id }}"
