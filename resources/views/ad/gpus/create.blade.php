@@ -1,7 +1,20 @@
 <div class="space-y-6">
     @include('ad.gpus.selectmodel')
 
-    <input type="hidden" name="props" x-ref="props_gpus" value='{"Condition": "New", "Availability": "In stock"}'>
+    <input type="hidden" name="props" x-ref="props_gpus"
+        value='{"Condition": "New", "Availability": "In stock", "Enclosure": "On frame"}'>
+
+    <x-select :label="__('Enclosure')" name="Enclosure"
+        handleChange="(enclosure => {
+            let props = JSON.parse($refs.props_gpus.value);
+            props['Enclosure'] = enclosure;
+            $refs.props_gpus.value = JSON.stringify(props);
+        })"
+        :items="collect([
+            ['key' => 'On frame', 'value' => __('On frame')],
+            ['key' => 'In a casing', 'value' => __('In a casing')],
+            ['key' => 'In a container', 'value' => __('In a container')],
+        ])->keyBy('key')" />
 
     <div x-data="{ inStock: true }">
         <label class="inline-flex items-center cursor-pointer">

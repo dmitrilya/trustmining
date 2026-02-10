@@ -86,6 +86,7 @@ class AdController extends Controller
             'user_id' => $user->id,
             'ad_category_id' => $request->ad_category_id,
             'asic_version_id' => $request->asic_version_id,
+            'gpu_model_id' => $request->gpu_model_id,
             'office_id' => $request->office_id,
             'description' => $request->description ?? '',
             'props' => json_decode($request->props),

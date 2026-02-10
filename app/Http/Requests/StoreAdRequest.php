@@ -31,6 +31,7 @@ class StoreAdRequest extends FormRequest
         return [
             'ad_category_id' => 'required|exists:ad_categories,id',
             'asic_version_id' => 'exists:asic_versions,id',
+            'gpu_model_id' => 'exists:gpu_models,id',
             'office_id' => 'required|exists:offices,id',
             'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048',
             'images' => 'max:3',

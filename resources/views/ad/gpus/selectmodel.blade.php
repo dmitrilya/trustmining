@@ -6,6 +6,8 @@
 }">
     <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="gpu_model"
         required aria-label="{{ __('Model') }}">
+    <input class="block h-0 p-0 border-0" type="text" :value="selectedModel" name="gpu_model_id"
+        required aria-label="{{ __('Model') }}">
 
     <div>
         <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
@@ -38,10 +40,10 @@
                     <li @click="selectedModel = {{ $gpuModel->id }}; open = false; search = '{{ $gpuModel->name }}'"
                         class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white"
                         role="option"
-                        x-show="search === '' || '{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">
+                        x-show="search === '' || '{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name . ' ' . $gpuModel->gpuEngineModel->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                         <div class="flex items-center">
                             <span
-                                class="ml-3 block truncate">{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name }}</span>
+                                class="ml-3 block truncate">{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' | ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name . ' ' . $gpuModel->gpuEngineModel->name }}</span>
                         </div>
 
                         <span x-show="selectedModel == {{ $gpuModel->id }}"
