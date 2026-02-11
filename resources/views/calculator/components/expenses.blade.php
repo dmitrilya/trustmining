@@ -1,4 +1,4 @@
-<div class="mt-2 md:mt-mt-4 mb-4">
+<div class="mt-2 md:mt-4 mb-4">
     <x-input-label for="tariff" :value="__('Tariff')" />
     <x-text-input ::value="tariff" id="tariff" type="text"
         @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
@@ -6,16 +6,14 @@
 
 <div x-data="{ show: true }" class="border-y border-gray-300 dark:border-zinc-700">
     <div>
-        <h4>
-            <button type="button" @click="show = !show"
-                class="flex items-center justify-between w-full py-2 sm:py-3 text-left rtl:text-right text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
-                <span>{{ __('Additional settings') }}</span>
-                <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 5 5 1 1 5" />
-                </svg>
-            </button>
-        </h4>
+        <button type="button" @click="show = !show"
+            class="flex items-center justify-between w-full py-2 sm:py-3 text-left rtl:text-right text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
+            <span>{{ __('Additional settings') }}</span>
+            <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5 5 1 1 5" />
+            </svg>
+        </button>
         <div x-show="show" style="display: none">
             <div class="py-3">
                 <div class="space-y-2 md:space-y-4">

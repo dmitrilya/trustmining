@@ -1,11 +1,10 @@
-<div x-data="{
+<div style="height: 118.67px" x-data="{
     models: {{ $models->values() }},
-    selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
+    selectedModel: {{ isset($selectedModel) ? $selectedModel : 'null' }},
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
-    openDropdown: null,
     get currentModel() {
-        return this.models.find(m => m.id == this.selectedModel);
+        return this.models.find(m => m.id == this.selectedModel.id);
     },
     get currentVersion() {
         return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
@@ -25,12 +24,12 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
         <div class="relative z-0 w-full" @click="open = true">
             <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
                 <input type="text" autocomplete="off" :value="search" id="search_model"
-                    @input="search = $el.value;selectedModel = null;selectedVersion = null; version = null"
+                    @input="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
                     class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                 <button type="button" aria-label="Clear"
                     class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-gray-500 dark:text-gray-400"
-                    @click="search = '';selectedModel = null;selectedVersion = null; version = null">
+                    @click="search = '';selectedModel = null;selectedVersion = null;version = null">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -48,7 +47,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
             class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-zinc-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
             <template x-for="asicModel in models" :key="asicModel.id">
-                <li @click="selectedModel = asicModel.id; open = false; search = asicModel.name"
+                <li @click="selectedModel = asicModel; open = false; search = asicModel.name"
                     class="relative cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white"
                     role="option"
                     x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
@@ -56,7 +55,7 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
                         <span class="ml-3 block truncate" x-text="asicModel.name"></span>
                     </div>
 
-                    <span x-show="selectedModel == asicModel.id"
+                    <span x-show="selectedModel && selectedModel.id == asicModel.id"
                         class="absolute inset-y-0 right-0 flex items-center pr-4">
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                             class="text-indigo-600 hover:text-white" aria-hidden="true">
@@ -69,14 +68,14 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
         </ul>
     </div>
 
-    <template x-for="asicModel in models" :key="asicModel.id">
-        <div x-show="selectedModel == asicModel.id" class="mt-4 md:mt-6">
-            <x-input-label :value="__('Version')" />
+    <template x-if="selectedModel">
+        <div class="mt-4">
+            <p class="block text-sm text-gray-800 dark:text-gray-300">{{ __('Version') }}</p>
 
-            <div class="relative mt-1" @click.away="openDropdown = null">
-                <button type="button" @click="openDropdown = openDropdown === asicModel.id ? null : asicModel.id"
+            <div class="relative mt-1" x-data="{ show: false }" @click.away="show = false">
+                <button type="button" @click="show = !show"
                     class="h-9 w-full cursor-pointer rounded-md text-gray-950 dark:text-gray-50 bg-white dark:bg-zinc-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-gray-300 dark:ring-zinc-700">
-                    <span class="ml-3 block truncate" x-text="currentVersion?.hashrate ?? ''"></span>
+                    <span class="block truncate" x-text="currentVersion?.hashrate ?? ''"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">
                         <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" viewBox="0 0 20 20" fill="currentColor">
@@ -87,20 +86,15 @@ document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once
                 </button>
 
                 <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-zinc-900 py-1 text-base shadow-lg"
-                    x-show="openDropdown === asicModel.id">
-                    <template x-for="asicVersion in asicModel.asic_versions" :key="asicVersion.id">
-                        <li @click="
-                                selectedVersion = asicVersion.id; 
-                                version = asicVersion;
-                                openDropdown = null;
-                            "
-                            class="cursor-default select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
-                            <span class="ml-3 block truncate" x-text="asicVersion.hashrate"></span>
+                    x-show="show">
+                    <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
+                        <li @click="selectedVersion = asicVersion.id; version = asicVersion; show = false;"
+                            class="cursor-default relative select-none py-2 pl-3 pr-9 text-gray-950 dark:text-gray-50 hover:bg-indigo-600 hover:text-white">
+                            <span class="block truncate" x-text="asicVersion.hashrate"></span>
 
                             <span x-show="selectedVersion == asicVersion.id"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4">
-                                <svg class="h-5 w-5 text-indigo-600 hover:text-white" viewBox="0 0 20 20"
-                                    fill="currentColor">
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                                 </svg>
