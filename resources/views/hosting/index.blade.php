@@ -1,7 +1,7 @@
 <x-app-layout title="Майнинг отель: разместить оборудование, проверенные хостинги" description="Найти объявления о майнинг фермах на сайте TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __('Hostings') }}
             </h1>
 

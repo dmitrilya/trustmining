@@ -250,7 +250,7 @@
                                                 <a itemprop="urlTemplate" class="block w-full xs:w-fit"
                                                     href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
                                                     <x-secondary-button
-                                                        class="bg-secondary-gradient !text-white font-bold w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
+                                                        class="bg-secondary-gradient dark:text-gray-800 w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
                                             </div>
                                         </div>
@@ -269,7 +269,7 @@
                                                 <a itemprop="urlTemplate" class="block w-fit"
                                                     href="{{ route('calculator.modelver', ['asicModel' => strtolower(str_replace(' ', '_', $model->name)), 'asicVersion' => $version->hashrate]) }}">
                                                     <x-secondary-button
-                                                        class="bg-secondary-gradient !text-white font-bold">{{ __('Income calculator') }}</x-secondary-button>
+                                                        class="bg-secondary-gradient dark:text-gray-800">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
                                             </div>
                                         </div>

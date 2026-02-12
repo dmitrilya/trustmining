@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $office->user->url_name])"></x-back-link>
 
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Office of company') }} {{ $office->user->name }}
             </h1>
         </div>

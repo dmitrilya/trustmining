@@ -17,7 +17,7 @@
         'asicVersion' => $selVersion->hashrate,
     ]) }}">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Mining calculator') }}
         </h1>
     </x-slot>

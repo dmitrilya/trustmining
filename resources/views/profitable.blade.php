@@ -1,7 +1,7 @@
 <x-app-layout title="Доходность асиков на сегодня: Рейтинг самых прибыльных ASIC-майнеров 2026"
     description="Актуальный рейтинг самых прибыльных ASIC-майнеров на 2026 год. Таблица доходности и окупаемости асиков для майнинга Bitcoin (BTC) и других валют. Сравнение ТОП-моделей.">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('The most profitable ASICs') }}
         </h1>
     </x-slot>

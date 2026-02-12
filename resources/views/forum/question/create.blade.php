@@ -1,7 +1,7 @@
 <x-app-layout title="Задать вопрос на форуме TrustMining"
     description="Опишите свою проблему или начните обсуждение интересующей вас темы из криптосферы">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Question creating') }}
         </h1>
     </x-slot>

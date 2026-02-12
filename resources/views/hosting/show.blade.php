@@ -4,7 +4,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
 
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ __('Placement data') }}
             </h1>
         </div>
@@ -242,7 +242,7 @@
                     @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
-                                class="w-full sm:w-max justify-center bg-secondary-gradient !text-white xs:py-3 mt-2 xs:mt-3 sm:mt-4"
+                                class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-gray-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
                                 @click="if (!status) {
                                     if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
                                         .then(r => {

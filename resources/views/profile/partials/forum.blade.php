@@ -13,7 +13,7 @@
     @endphp
 
     <a href="{{ route('forum.question.index') }}">
-        <x-secondary-button class="bg-secondary-gradient !text-gray-900">{{ __('My questions') }}</x-secondary-button>
+        <x-secondary-button class="bg-secondary-gradient dark:text-gray-800">{{ __('My questions') }}</x-secondary-button>
     </a>
 
     @include('forum.components.author', [

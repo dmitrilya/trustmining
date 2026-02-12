@@ -65,7 +65,7 @@
         @if ($user->ads->where('moderation', false)->count())
             <div class="flex justify-end mt-4">
                 <a href="{{ route('ad.statistics') }}">
-                    <x-secondary-button class="bg-secondary-gradient !text-white mr-2 sm:mr-3">
+                    <x-secondary-button class="bg-secondary-gradient dark:text-gray-800 mr-2 sm:mr-3">
                         {{ __('Statistics') }}
                     </x-secondary-button>
                 </a>

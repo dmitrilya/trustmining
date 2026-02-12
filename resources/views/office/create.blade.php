@@ -1,6 +1,6 @@
 <x-app-layout title="Добавить офис, точку продаж" description="Если у вас есть офис, точка продаж, производство или другое место, где вы можете встретиться с потенциальным клиентом, то добавьте его здесь">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Adding an office') }}
         </h1>
     </x-slot>

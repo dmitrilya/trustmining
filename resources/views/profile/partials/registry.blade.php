@@ -18,7 +18,7 @@
     @if (!$user->registry)
         <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
             href="{{ route('support', ['tab' => 'chat', 'message' => __('Hello! Our company is a member of the register of mining operators. We will send the confirmation now')]) }}">
-            <x-secondary-button class="bg-secondary-gradient !text-white">{{ __('Contact') }}</x-secondary-button>
+            <x-secondary-button class="bg-secondary-gradient dark:text-gray-800">{{ __('Contact') }}</x-secondary-button>
         </a>
     @endif
 </section>

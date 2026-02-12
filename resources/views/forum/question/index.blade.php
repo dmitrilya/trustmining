@@ -2,7 +2,7 @@
     description="Посмотрите историю ваших вопросов, узнайте о процессе модерации и ознакомьтесь с похожими вопросами">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __('My questions') }}
             </h1>
 

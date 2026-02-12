@@ -1,7 +1,7 @@
 <x-app-layout title="Топ надёжных продавцов оборудования для майнинга — проверенные компании | TrustMining"
     description="Рейтинг проверенных продавцов майнинг-оборудования и услуг. Надёжные магазины, хостинги и поставщики с высоким Trust Factor. Попадите в топ продавцов на TrustMining">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Top reliable companies') }}
         </h1>
     </x-slot>

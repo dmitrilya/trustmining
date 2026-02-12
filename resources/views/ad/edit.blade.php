@@ -1,6 +1,6 @@
 <x-app-layout title="Редактировать объявление о продаже оборудования для майнинга">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Editing an advertisement') }}
         </h1>
     </x-slot>

@@ -7,7 +7,7 @@
 <x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                 {{ __($adCategory->header) }}
             </h1>
 

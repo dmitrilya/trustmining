@@ -25,7 +25,7 @@
                 : ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]]))
             : '')">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Ad') }}
         </h1>
     </x-slot>
@@ -353,7 +353,7 @@
 
                                     @if (count($ad->user->phones))
                                         <x-secondary-button
-                                            class="w-full sm:w-max justify-center bg-secondary-gradient !text-white xs:py-3"
+                                            class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-gray-800 xs:py-3"
                                             x-data="{ number: null, status: '{{ __('View number') }}' }"
                                             @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')
                                                 .then(r => {

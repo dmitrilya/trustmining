@@ -34,7 +34,7 @@
             <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
                 <a class="mr-1 xs:mr-2" href="{{ route('forum.question.index') }}">
                     <x-secondary-button
-                        class="bg-secondary-gradient !text-gray-900">{{ __('My questions') }}</x-secondary-button>
+                        class="bg-secondary-gradient dark:text-gray-800">{{ __('My questions') }}</x-secondary-button>
                 </a>
                 <a class="" href="{{ route('forum.question.create') }}">
                     <x-primary-button>

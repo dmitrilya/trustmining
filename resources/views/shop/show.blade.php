@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mr-auto w-full max-w-max mr-4">
-                <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+                <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
                     {{ $user->name }}
                 </h1>
             </div>

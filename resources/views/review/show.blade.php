@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center">
-            <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
                 {{ $review->id }}
             </h1>
         </div>

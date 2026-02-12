@@ -1,6 +1,6 @@
 <x-app-layout title="Блог: статьи, новости майнинга" description="Новостной блог от TrustMining. Только самые интересные и актуальные статьи">
     <x-slot name="header">
-        <h1 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Blog') }}
         </h1>
     </x-slot>
