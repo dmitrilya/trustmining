@@ -31,11 +31,7 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>
-        @if ($attributes->has('title'))
-            {{ $attributes->get('title') }}@else{{ config('app.name') }}
-        @endif
-    </title>
+    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
@@ -88,10 +84,12 @@
                 document.body.classList.add('dark');
                 document.body.classList.remove('light');
                 theme = 'dark';
+                axios.get('{{ route('change-theme', ['theme' => 'dark']) }}');
             } else {
                 document.body.classList.add('light');
                 document.body.classList.remove('dark');
                 theme = 'light';
+                axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
             }" @endif>
     <div class="min-h-screen" x-data="{ filter: false }">
         @include('layouts.navigation')
