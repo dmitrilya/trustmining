@@ -206,7 +206,6 @@
                             lon: position.coords.longitude
                         }).then(r => {
                             if (r.data.city) {
-                                alert(r.data.city);
                                 window.location.reload();
                             } else pushToastAlert(r.data.error, 'error');
                         });
