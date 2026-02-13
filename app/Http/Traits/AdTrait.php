@@ -79,6 +79,9 @@ trait AdTrait
             });
         }
 
+        if ($request->city) $ads = $ads->leftJoin('offices', 'ads.office_id', '=', 'offices.id')
+                ->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$request->city]);
+
         if ($request->display) {
             if ($request->display == 'active') $ads = $ads->where('moderation', false)->where('hidden', false);
             elseif ($request->display == 'moderation') $ads = $ads->whereHas('moderations', function ($q) {
@@ -102,10 +105,6 @@ trait AdTrait
                     break;
             }
         }
-
-        $city = $request->city ?? (session('user_location')['city'] ?? config('app.default_city'));
-        $ads = $ads->leftJoin('offices', 'ads.office_id', '=', 'offices.id')
-            ->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$city]);
 
         return $ads;
     }

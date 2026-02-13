@@ -5,7 +5,7 @@
         <div class="relative mt-4" x-data="{ open: false, sugs: false }" @click.away="open = false">
             <div class="relative z-0 w-full group" @click="open = true">
                 <input type="text" id="city" name="city" x-ref="search" placeholder=" "
-                    value="{{ request()->get('city') ?? (session('user_location')['city'] ?? config('app.default_city')) }}" autocomplete="off"
+                    value="{{ request()->get('city') }}" autocomplete="off"
                     @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'city')"
                     class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="city"
