@@ -9,7 +9,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\User\User;
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
-use App\Models\Blog\Article;
+use App\Models\Blog\BlogArticle;
 use App\Models\Blog\Guide;
 use App\Models\Database\Coin;
 use App\Models\Forum\ForumCategory;
@@ -109,9 +109,9 @@ class SitemapGenerate extends Command
             }
         }
 
-        $out .= $this->addUrl('articles');
-        foreach (Article::select(['id', 'title'])->get() as $article) {
-            $out .= $this->addUrl('articles/article/' . $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title)));
+        $out .= $this->addUrl('blog');
+        foreach (BlogArticle::select(['id', 'title'])->get() as $article) {
+            $out .= $this->addUrl('blog/article/' . $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title)));
         }
         $out .= $this->addUrl('guides');
         foreach (Guide::select(['id', 'title', 'user_id'])->with(['user:id'])->get() as $guide) {

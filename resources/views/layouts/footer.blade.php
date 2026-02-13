@@ -102,7 +102,7 @@
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
-                    href="{{ route('articles') }}">{{ __('Blog') }}</a>
+                    href="{{ route('blog') }}">{{ __('Blog') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('guides') }}">{{ __('Guides') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"

@@ -56,7 +56,7 @@
                             </path>
                         </svg>
                         <a class="under text-sm lg:text-base text-gray-900 dark:text-gray-200 font-semibold"
-                            href="{{ route('articles') }}">{{ __('Blog') }}</a>
+                            href="{{ route('blog') }}">{{ __('Blog') }}</a>
                     </div>
 
                     <div class="group flex items-center">
@@ -220,7 +220,7 @@
 
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
                     @php
-                        $article = App\Models\Blog\Article::latest()->first();
+                        $article = App\Models\Blog\BlogArticle::latest()->first();
                         $guide = App\Models\Blog\Guide::inRandomOrder()->first();
                     @endphp
 

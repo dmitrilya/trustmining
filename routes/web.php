@@ -16,7 +16,7 @@ use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\Morph\ReviewController;
 use App\Http\Controllers\Morph\ModerationController;
-use App\Http\Controllers\Blog\ArticleController;
+use App\Http\Controllers\Blog\BlogArticleController;
 use App\Http\Controllers\Blog\GuideController;
 use App\Http\Controllers\Forum\ForumController;
 use App\Http\Controllers\Forum\ForumQuestionController;
@@ -94,9 +94,9 @@ Route::group(['prefix' => 'dadata'], function () {
     });
 });
 
-Route::group(['prefix' => 'articles'], function () {
-    Route::get('/', [ArticleController::class, 'index'])->name('articles');
-    Route::get('/article/{article}', [ArticleController::class, 'show'])->name('article');
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', [BlogArticleController::class, 'index'])->name('blog');
+    Route::get('/article/{article}', [BlogArticleController::class, 'show'])->name('blog.article');
 });
 
 Route::group(['prefix' => 'guides'], function () {

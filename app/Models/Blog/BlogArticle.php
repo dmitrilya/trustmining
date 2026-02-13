@@ -7,7 +7,7 @@ use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class BlogArticle extends Model
 {
     use HasFactory, Searchable;
 

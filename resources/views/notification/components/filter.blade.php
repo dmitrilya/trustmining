@@ -1,6 +1,6 @@
 @php
     $types = [
-        ['name' => 'Article', 'url_name' => 'App\Models\Blog\Article'],
+        ['name' => 'Blog article', 'url_name' => 'App\Models\Blog\BlogArticle'],
         ['name' => 'Guide', 'url_name' => 'App\Models\Blog\Guide'],
         ['name' => 'Message', 'url_name' => 'App\Models\Chat\Message'],
         ['name' => 'Moderation', 'url_name' => 'App\Models\Morph\Moderation'],

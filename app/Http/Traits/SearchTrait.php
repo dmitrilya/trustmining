@@ -6,7 +6,7 @@ use App\Http\Requests\SearchRequest;
 
 use App\Models\Database\AsicBrand;
 use App\Models\Database\AsicModel;
-use App\Models\Blog\Article;
+use App\Models\Blog\BlogArticle;
 use App\Models\User\Company;
 use App\Models\Blog\Guide;
 use App\Models\User\User;
@@ -33,12 +33,12 @@ trait SearchTrait
                 'asicBrand' => strtolower(str_replace(' ', '_', $asicModel->asic_brand_name)),
                 'asicModel' => strtolower(str_replace(' ', '_', $asicModel->name))
             ])
-        ]))->concat(Article::search($q)->query(function ($query) {
+        ]))->concat(BlogArticle::search($q)->query(function ($query) {
             $query->select(['articles.title']);
         })->get()->map(fn($article) => [
-            'model' => __('Article'),
+            'model' => __('BlogArticle'),
             'name' => $article->title,
-            'href' => route('article', ['article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
+            'href' => route('blog.article', ['article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
         ]))->concat(Company::search($q)->query(function ($query) {
             $query->join('users', 'companies.user_id', 'users.id')
                 ->select(['companies.id', 'companies.name', 'users.url_name as user_url_name']);
