@@ -78,20 +78,20 @@ class ProfileController extends Controller
 
         try {
             $result = DaDataAddress::geolocate($request->lat, $request->lon, 1, 50);
+
+            if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
+                $city = config('app.default_city');
+                $source = 'default';
+                $locale = 'ru';
+            } else {
+                $city = $result['suggestions'][0]['data']['city'];
+                $source = 'geo';
+                $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
+            }
         } catch (\Exception $e) {
             $result['suggestions'][0]['data']['city'] = config('app.default_city');
             $source = 'default';
             $result['suggestions'][0]['data']['country_iso_code'] = 'RU';
-        }
-
-        if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
-            $city = config('app.default_city');
-            $source = 'default';
-            $locale = 'ru';
-        } else {
-            $city = $result['suggestions'][0]['data']['city'];
-            $source = 'geo';
-            $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
         }
 
         app()->setLocale($locale);
