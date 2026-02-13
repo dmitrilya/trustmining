@@ -17,7 +17,6 @@ class ForumAnswerController extends ForumController
      */
     public function store(StoreForumAnswerRequest $request)
     {
-        info('here');
         $this->answerService->store($request->user(), $request->text, $request->file('images'), $request->file('files'), $request->forum_question_id);
 
         return back();
