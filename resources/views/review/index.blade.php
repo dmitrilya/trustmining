@@ -2,35 +2,53 @@
     if ($type == 'App\Models\User\User') {
         $user = App\Models\User\User::find($id);
         $href = route('company', ['user' => $user->url_name]);
+        $title = 'компании ' . $user->name . ' - мнения клиентов и экспертов';
+        $description =
+            'Реальные отзывы о компании ' .
+            $user->name .
+            ' от клиентов, партнёров и экспертов: качество услуг, надёжность, условия сотрудничества и опыт работы';
     } elseif ($type == 'App\Models\Database\AsicModel') {
         $model = App\Models\Database\AsicModel::find($id);
         $href = route('database.model', [
             'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
             'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
         ]);
+        $title = 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name . ' - реальный опыт, плюсы и минусы';
+        $description =
+            'Отзывы майнеров о модели ASIC ' .
+            $model->asicBrand->name .
+            ' ' .
+            $model->name .
+            ': реальный опыт эксплуатации, доходность, энергопотребление, надёжность и мнения экспертов';
+    } elseif ($type == 'App\Models\Database\GPUModel') {
+        $model = App\Models\Database\GPUModel::find($id);
+        $href = route('database.gpu.model', [
+            'gpuBrand' => strtolower(str_replace(' ', '_', $model->gpuBrand->name)),
+            'gpuModel' => strtolower(str_replace(' ', '_', $model->name)),
+        ]);
+        $title =
+            'газопоршневой электростанции ' .
+            $model->gpuBrand->name .
+            ' ' .
+            $model->name .
+            ' - реальный опыт, плюсы и минусы';
+        $description =
+            'Отзывы майнеров о модели ГПУ ' .
+            $model->gpuBrand->name .
+            ' ' .
+            $model->name .
+            ': реальный опыт эксплуатации, надёжность и мнения экспертов';
     } else {
+        $model = null;
         $href = '#';
+        $title = null;
+        $description = null;
     }
 @endphp
 
-<x-app-layout
-    title="Отзывы о {{ $type == 'App\Models\User\User' ? 'компании ' . $user->name . ' - мнения клиентов и экспертов' : 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name . ' - реальный опыт, плюсы и минусы' }}" description="{{ $type == 'App\Models\User\User' ? 'Реальные отзывы о компании ' . $user->name . ' от клиентов, партнёров и экспертов: качество услуг, надёжность, условия сотрудничества и опыт работы' : 'Отзывы майнеров о модели ASIC ' . $model->asicBrand->name . ' ' . $model->name . ': реальный опыт эксплуатации, доходность, энергопотребление, надёжность и мнения экспертов' }} на платформе TrustMining">
+<x-app-layout title="Отзывы о {{ $title }}" description="{{ $description }} на платформе TrustMining">
     <x-slot name="header">
         <div class="flex items-center">
-            @php
-                if ($type == 'App\Models\User\User') {
-                    $href = route('company', ['user' => App\Models\User\User::find($id)->url_name]);
-                } elseif ($type == 'App\Models\Database\AsicModel') {
-                    $model = App\Models\Database\AsicModel::find($id);
-                    $href = route('database.model', [
-                        'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
-                        'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
-                    ]);
-                } else {
-                    $href = '#';
-                }
-            @endphp
-
             <x-back-link :href="$href"></x-back-link>
 
             <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
@@ -40,14 +58,16 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="w-full bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
+        <div
+            class="w-full bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
             <div class="bg-gray-100 dark:bg-zinc-950 p-1 rounded-t-md min-h-72">
                 <div class="bg-gray-100 dark:bg-zinc-950 p-1 sm:p-5 h-full space-y-8 duration-100">
                     @foreach ($reviews as $review)
                         @continue ($review->moderation && (!$auth || $review->user->id != $auth->id))
 
                         <div class="flex w-full">
-                            <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-990 rounded-lg">
+                            <div
+                                class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-990 rounded-lg">
                                 <div class="flex justify-between mb-3">
                                     <div class="text-base font-semibold text-gray-950 dark:text-gray-50">
                                         {{ $review->user->name }}
@@ -187,12 +207,14 @@
                     </form>
                     <div class="w-full border border-gray-300 rounded-b-lg bg-white dark:bg-zinc-800 dark:border-zinc-700 flex items-center justify-center"
                         style="height: 172.7px;display:none">
-                        <p class="text-xl font-semibold text-gray-950 dark:text-gray-50 text-center">{{ __('Sent for moderation') }}</p>
+                        <p class="text-xl font-semibold text-gray-950 dark:text-gray-50 text-center">
+                            {{ __('Sent for moderation') }}</p>
                     </div>
                 @endif
             @else
                 <div class="flex flex-col items-center justify-center py-6">
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">{{ __('You must be logged in to leave a review.') }}</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
+                        {{ __('You must be logged in to leave a review.') }}</p>
 
                     <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
                 </div>
