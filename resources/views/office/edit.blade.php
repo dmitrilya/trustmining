@@ -1,4 +1,4 @@
-<x-app-layout title="Редактировать офис, точку продаж" description="Отредактируйте созданный офис или точку продаж">
+<x-app-layout title="Редактировать офис, точку продаж" description="Отредактируйте созданный офис или точку продаж" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Editing an office') }}

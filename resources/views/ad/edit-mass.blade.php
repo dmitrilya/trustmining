@@ -1,4 +1,4 @@
-<x-app-layout title="Обновление цен">
+<x-app-layout title="Обновление цен" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Price update') }}

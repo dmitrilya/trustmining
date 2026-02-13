@@ -12,7 +12,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
-        $theme = $theme = request()->cookie('theme');
+        $theme = request()->cookie('theme');
         $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
         $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
@@ -35,6 +35,10 @@
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
+    @endif
+
+    @if ($attributes->has('noindex'))
+        <meta name="robots" content="noindex, nofollow">
     @endif
 
     <!-- Yandex.Metrika counter -->
@@ -166,14 +170,39 @@
         </main>
     </div>
 
-    @if (request()->route()->action['as'] !== 'roadmap')
+    @if (!request()->route() || request()->route()->action['as'] !== 'roadmap')
         @include('layouts.footer')
     @endif
 
-    <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
-        @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror
-        @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror>
-    </div>
+    @if (!$attributes->has('noindex'))
+        <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
+            @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror
+            @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror>
+        </div>
+    @endif
+
+    @if (!session()->has('user_city'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        axios.post('{{ route('location') }}', {
+                            lat: position.coords.latitude,
+                            lon: position.coords.longitude
+                        }).then(r => {
+                            if (r.data.city) {
+                                alert(r.data.city);
+                                window.location.reload();
+                            } else pushToastAlert(r.data.error, 'error');
+                        });
+                    }, function(error) {
+                        pushToastAlert('{{ __('Geolocation access is denied or unavailable') }}', 'error');
+                        axios.post('{{ route('location') }}', { default: true });
+                    });
+                }
+            });
+        </script>
+    @endif
 </body>
 
 </html>

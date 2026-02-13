@@ -47,7 +47,7 @@ trait AdTrait
                 $q->whereIn('name', $request->algorithms);
             });
 
-        foreach ($request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'page', 'sort']) as $key => $value) {
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'page', 'sort', 'city']) as $key => $value) {
             $key = str_replace('_', ' ', $key);
             if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
             elseif (count($value) === 1) {
@@ -102,6 +102,10 @@ trait AdTrait
                     break;
             }
         }
+
+        $city = $request->city ?? session('user_city', config('app.default_city'));
+        $ads = $ads->leftJoin('offices', 'ads.office_id', '=', 'offices.id')
+            ->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$city]);
 
         return $ads;
     }

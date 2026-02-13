@@ -1,4 +1,4 @@
-<x-app-layout title="Редактировать информацию о компании" description="Добавьте описание, фото и логотип к своей компании на сайте TrustMining">
+<x-app-layout title="Редактировать информацию о компании" description="Добавьте описание, фото и логотип к своей компании на сайте TrustMining" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ $company->name }}

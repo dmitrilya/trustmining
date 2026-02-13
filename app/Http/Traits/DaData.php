@@ -39,6 +39,11 @@ trait DaData
         ], 200);
     }
 
+    public function dadataGetCityByIp(Request $request)
+    {
+        return DaDataAddress::iplocate($request->ip(), 1);
+    }
+
     public function dadataCompanyByInn($inn)
     {
         $suggs = DaDataCompany::id($inn, 1, null, BranchType::MAIN);

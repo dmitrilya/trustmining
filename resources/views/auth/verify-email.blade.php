@@ -1,4 +1,6 @@
-<x-guest-layout title="Подтверждение email - завершение регистрации в TrustMining" description="Подтвердите адрес электронной почты, чтобы завершить регистрацию в TrustMining и получить полный доступ к платформе для майнеров, продавцов, экспертов и сервисных компаний">
+<x-guest-layout title="Подтверждение email - завершение регистрации в TrustMining"
+    description="Подтвердите адрес электронной почты, чтобы завершить регистрацию в TrustMining и получить полный доступ к платформе для майнеров, продавцов, экспертов и сервисных компаний"
+    noindex="true">
     <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
         {{ __("Before continuing, you'll need to confirm your email address by clicking the link we just sent you. If you haven't received the email, we'll be happy to send you another one.") }}
     </div>
@@ -23,7 +25,8 @@
         <form class="mt-3 sm:mt-4" method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <button type="submit" class="block ml-auto underline text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+            <button type="submit"
+                class="block ml-auto underline text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                 {{ __('Logout') }}
             </button>
         </form>

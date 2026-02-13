@@ -48,6 +48,7 @@ Route::get('private/temp', function (Request $request) {
 })->name('private.temp');
 
 Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
+Route::post('/location', [ProfileController::class, 'location'])->name('location');
 Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
 Route::get('/', [Controller::class, 'home'])->name('home');

@@ -1,4 +1,4 @@
-<x-app-layout title="Майнинг отель: редактировать объявление о хостинге" description="Редактирование объявления о хостинге на сайте TrustMining">
+<x-app-layout title="Майнинг отель: редактировать объявление о хостинге" description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Placement data') }}

@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cookie;
+use MoveMoveIo\DaData\Facades\DaDataAddress;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -57,6 +58,39 @@ class ProfileController extends Controller
         session()->put('locale', $request->locale);
 
         return back();
+    }
+
+    public function location(Request $request)
+    {
+        if ($request->has('default')) {
+            $city = config('app.default_city');
+            $locale = 'ru';
+
+            app()->setLocale($locale);
+            session(['user_city' => $city, 'locale' => $locale]);
+
+            return response()->json(['city' => $city]);
+        }
+
+        try {
+            $result = DaDataAddress::geolocate($request->lat, $request->lon, 1, 50);
+        } catch (\Exception $e) {
+            $result['suggestions'][0]['data']['city'] = config('app.default_city');
+            $result['suggestions'][0]['data']['country_iso_code'] = 'RU';
+        }
+
+        if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
+            $city = config('app.default_city');
+            $locale = 'ru';
+        } else {
+            $city = $result['suggestions'][0]['data']['city'];
+            $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
+        }
+
+        app()->setLocale($locale);
+        session(['user_city' => $city, 'locale' => $locale]);
+
+        return response()->json(['city' => $city]);
     }
 
     public function changeTheme(Request $request)

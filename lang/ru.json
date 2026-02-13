@@ -591,6 +591,12 @@
     "Liquid": "Жидкостное",
     "Natural": "Природный",
     "Liquefied": "Cжиженный",
+    "Technical work is underway": "Ведутся технические работы",
+    "Session timed out": "Время сессии истекло",
+    "Please refresh the page and submit your request again": "Пожалуйста, обновите страницу и отправьте запрос снова",
+    "This page does not exist": "Такой страницы не существует",
+    "Geolocation access is denied or unavailable": "Доступ к геолокации запрещен или недоступен",
+    "First from the city": "Сначала из города",
 
     "Russia": "Россия",
     "China": "Китай",
