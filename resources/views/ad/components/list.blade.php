@@ -2,6 +2,8 @@
     <x-filter>
         @include('ad.' . $adCategory->name . '.filter')
 
+        <x-filter-filter type="checkbox" :name="__('VAT')" :items="collect([['name' => 'Price including VAT', 'url_name' => 'with_vat'], ['name' => 'Price without VAT', 'url_name' => 'without_vat']])" field="vat"></x-filter-filter>
+
         <div class="relative mt-4" x-data="{ open: false, sugs: false }" @click.away="open = false">
             <div class="relative z-0 w-full group" @click="open = true">
                 <input type="text" id="city" name="city" x-ref="search" placeholder=" "

@@ -110,6 +110,7 @@
     "kW/h": "кВт/ч",
     "VAT": "НДС",
     "Price including VAT": "Цена с НДС",
+    "Price without VAT": "Цена без НДС",
     "The price includes VAT": "Цена указана с НДС",
     "Average price": "Средняя цена",
     "The best price": "Лучшая цена",

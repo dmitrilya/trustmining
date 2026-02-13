@@ -47,7 +47,12 @@ trait AdTrait
                 $q->whereIn('name', $request->algorithms);
             });
 
-        foreach ($request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'page', 'sort', 'city']) as $key => $value) {
+        if ($request->vat && count($request->vat) == 1) {
+            if ($request->vat[0] == 'with_vat') $ads = $ads->where('with_vat', true);
+            elseif ($request->vat[0] == 'without_vat') $ads = $ads->where('with_vat', false);
+        }
+
+        foreach ($request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'vat', 'page', 'sort', 'city']) as $key => $value) {
             $key = str_replace('_', ' ', $key);
             if (is_string($value)) $ads = $ads->whereJsonContains('props->' . $key, $value);
             elseif (count($value) === 1) {
