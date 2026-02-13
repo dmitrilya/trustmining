@@ -18,32 +18,7 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pb-8">
-        <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            @foreach ($articles as $article)
-                @php
-                    switch ($loop->index) {
-                        case 0:
-                        case 1:
-                            $classes = '!flex';
-                            break;
-                        case 2:
-                            $classes = 'md:!flex';
-                            break;
-                        case 3:
-                            $classes = 'lg:!flex';
-                            break;
-                        case 4:
-                            $classes = 'xl-!flex';
-                            break;
-                    }
-                @endphp
-
-                <div
-                    class="hidden {{ $classes }} bg-white shadow-md shadow-logo-color overflow-hidden rounded-lg flex-col justify-between">
-                    @include('article.components.card')
-                </div>
-            @endforeach
-        </div>
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+        @include('article.components.list')
     </div>
 </x-app-layout>
