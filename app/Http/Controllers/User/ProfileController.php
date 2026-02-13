@@ -95,7 +95,7 @@ class ProfileController extends Controller
 
     public function changeTheme(Request $request)
     {
-        Cookie::queue('theme', $request->theme, 60 * 24 * 30);
+        Cookie::queue('app_theme', $request->theme, 60 * 24 * 30);
 
         return response('', 200);
     }

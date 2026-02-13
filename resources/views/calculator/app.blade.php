@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
-        $theme = $theme = request()->cookie('theme');
+        $theme = request()->cookie('app_theme');
         $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
         $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
