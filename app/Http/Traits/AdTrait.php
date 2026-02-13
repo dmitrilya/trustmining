@@ -103,7 +103,7 @@ trait AdTrait
             }
         }
 
-        $city = $request->city ?? session('user_city', config('app.default_city'));
+        $city = $request->city ?? (session('user_location')['city'] ?? config('app.default_city'));
         $ads = $ads->leftJoin('offices', 'ads.office_id', '=', 'offices.id')
             ->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$city]);
 

@@ -67,7 +67,11 @@ class ProfileController extends Controller
             $locale = 'ru';
 
             app()->setLocale($locale);
-            session(['user_city' => $city, 'locale' => $locale]);
+            session(['user_location' => [
+                'city' => $city,
+                'source' => 'default',
+                'updated_at' => now()->timestamp,
+            ], 'locale' => $locale]);
 
             return response()->json(['city' => $city]);
         }
@@ -76,19 +80,26 @@ class ProfileController extends Controller
             $result = DaDataAddress::geolocate($request->lat, $request->lon, 1, 50);
         } catch (\Exception $e) {
             $result['suggestions'][0]['data']['city'] = config('app.default_city');
+            $source = 'default';
             $result['suggestions'][0]['data']['country_iso_code'] = 'RU';
         }
 
         if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
             $city = config('app.default_city');
+            $source = 'default';
             $locale = 'ru';
         } else {
             $city = $result['suggestions'][0]['data']['city'];
+            $source = 'geo';
             $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
         }
 
         app()->setLocale($locale);
-        session(['user_city' => $city, 'locale' => $locale]);
+        session(['user_location' => [
+            'city' => $city,
+            'source' => $source,
+            'updated_at' => now()->timestamp,
+        ], 'locale' => $locale]);
 
         return response()->json(['city' => $city]);
     }

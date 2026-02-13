@@ -18,18 +18,34 @@ class CityByIp
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->has('user_city')) {
+        if (!session()->has('useruser_location_city')) {
             try {
                 $result = DaDataAddress::iplocate($request->ip(), 1);
 
-                $city = $result['data']['city'] ?? config('app.default_city');
+                if ($result['data']) {
+                    $city = $result['data']['city'];
+                    $source = 'geo';
+                    $locale = $result['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
+                } else {
+                    $city = config('app.default_city');
+                    $source = 'default';
+                    $locale = 'ru';
+                }
 
-                $locale = $result['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
+                
                 app()->setLocale($locale);
 
-                session(['user_city' => $city, 'locale' => $locale]);
+                session(['user_location' => [
+                    'city' => $city,
+                    'source' => $source,
+                    'updated_at' => now()->timestamp,
+                ], 'locale' => $locale]);
             } catch (\Exception $e) {
-                session(['user_city' => config('app.default_city'), 'locale' => 'ru']);
+                session(['user_location' => [
+                    'city' => config('app.default_city'),
+                    'source' => 'default',
+                    'updated_at' => now()->timestamp,
+                ], 'locale' => 'ru']);
             }
         }
 

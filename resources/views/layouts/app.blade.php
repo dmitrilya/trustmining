@@ -31,7 +31,11 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
+    <title>
+        @if ($attributes->has('title'))
+            {{ $attributes->get('title') }}@else{{ config('app.name') }}
+        @endif
+    </title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
@@ -181,9 +185,20 @@
         </div>
     @endif
 
-    @if (!session()->has('user_city'))
+    @php
+        $location = session('user_location');
+        $shouldAskLocation = false;
+
+        if (!$location) {
+            $shouldAskLocation = true;
+        } elseif ($location['source'] === 'default') {
+            $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
+        }
+    @endphp
+
+    @if ($shouldAskLocation)
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 if ("geolocation" in navigator) {
                     navigator.geolocation.getCurrentPosition(function(position) {
                         axios.post('{{ route('location') }}', {
@@ -197,7 +212,9 @@
                         });
                     }, function(error) {
                         pushToastAlert('{{ __('Geolocation access is denied or unavailable') }}', 'error');
-                        axios.post('{{ route('location') }}', { default: true });
+                        axios.post('{{ route('location') }}', {
+                            default: true
+                        });
                     });
                 }
             });
