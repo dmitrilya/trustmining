@@ -8,7 +8,6 @@ use App\Models\Database\AsicBrand;
 use App\Models\Database\AsicModel;
 use App\Models\Blog\BlogArticle;
 use App\Models\User\Company;
-use App\Models\Blog\Guide;
 use App\Models\User\User;
 
 trait SearchTrait
@@ -34,7 +33,7 @@ trait SearchTrait
                 'asicModel' => strtolower(str_replace(' ', '_', $asicModel->name))
             ])
         ]))->concat(BlogArticle::search($q)->query(function ($query) {
-            $query->select(['articles.title']);
+            $query->select(['blog_articles.title']);
         })->get()->map(fn($article) => [
             'model' => __('BlogArticle'),
             'name' => $article->title,
@@ -46,13 +45,6 @@ trait SearchTrait
             'model' => __('Company'),
             'name' => $company->name,
             'href' => route('company', ['user' => $company->user_url_name])
-        ]))->concat(Guide::search($q)->query(function ($query) {
-            $query->join('users', 'guides.user_id', 'users.id')
-                ->select(['guides.id', 'guides.user_id', 'guides.title']);
-        })->get()->map(fn($guide) => [
-            'model' => __('Guide'),
-            'name' => $guide->title,
-            'href' => route('guide', ['user' => $guide->user_id, 'guide' => $guide->id . '-' . mb_strtolower(str_replace(' ', '-', $guide->title))])
         ]))->concat(User::search($q)->query(function ($query) {
             $query->whereHas('ads')->select(['users.name', 'users.url_name']);
         })->get()->map(fn($user) => [
