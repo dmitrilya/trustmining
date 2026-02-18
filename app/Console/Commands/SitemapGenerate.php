@@ -118,7 +118,7 @@ class SitemapGenerate extends Command
 
         $out .= $this->addUrl('insight');
         foreach (Channel::select(['id', 'slug'])
-            ->with(['moderatedArticles:id,title,channel_id', 'moderatedPost:id,channel_id', 'moderatedVideo:id,title,channel_id'])->get() as $channel) {
+            ->with(['moderatedArticles:id,title,channel_id', 'moderatedPosts:id,channel_id', 'moderatedVideos:id,title,channel_id'])->get() as $channel) {
             $out .= $this->addUrl('insight/' . $channel->slug);
 
             foreach ($channel->moderatedArticles as $article)
