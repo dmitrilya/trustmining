@@ -36,14 +36,27 @@ window.addComment = async (form, text, parentId) => {
 window.carousel = () => {
     return {
         isDown: false,
+        isDraggingX: false,
         startX: 0,
         deltaX: 0,
         scrollLeft: 0,
         velocity: 0,
         lastX: 0,
         lastTime: 0,
+        init() {
+            const container = this.$refs.container;
+
+            container.addEventListener(
+                'touchmove',
+                (e) => this.move(e),
+                { passive: false }
+            );
+        },
         start(e) {
             this.isDown = true;
+
+            this.startY = e.pageY || e.touches[0].pageY;
+            this.isDraggingX = false;
 
             const container = this.$refs.container;
             const pageX = e.pageX || e.touches[0].pageX;
@@ -63,18 +76,29 @@ window.carousel = () => {
 
             const container = this.$refs.container;
             const pageX = e.pageX || e.touches[0].pageX;
+            const pageY = e.pageY || e.touches[0].pageY;
             const now = performance.now();
 
-            this.deltaX = pageX - this.startX;
+            const dx = pageX - this.startX;
+            const dy = pageY - (this.startY || pageY);
+
+            // если направление ещё не определено
+            if (!this.isDraggingX) {
+                if (Math.abs(dx) > 5) {
+                    this.isDraggingX = Math.abs(dx) > Math.abs(dy);
+                }
+                if (!this.isDraggingX) return;
+            }
+
+            e.preventDefault(); // блокируем ТОЛЬКО если горизонтальный свайп
+
+            this.deltaX = dx;
 
             const walk = this.deltaX * 1.2;
             container.scrollLeft = this.scrollLeft - walk;
 
-            // считаем скорость
-            const dx = pageX - this.lastX;
             const dt = now - this.lastTime;
-
-            this.velocity = dx / dt; // px per ms
+            this.velocity = (pageX - this.lastX) / dt;
 
             this.lastX = pageX;
             this.lastTime = now;
@@ -129,6 +153,7 @@ window.carousel = () => {
 
             this.deltaX = 0;
             this.velocity = 0;
+            this.isDraggingX = false;
         }
     }
 }
