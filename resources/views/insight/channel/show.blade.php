@@ -5,7 +5,7 @@
             class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
     @endif
 
-    <div class="border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 mb-4 lg:mb-6">
+    <div class="border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
         <div class="flex items-start justify-between mb-1 sm:mb-2">
             @include('insight.components.channel', [
                 'name' => $channel->name,
