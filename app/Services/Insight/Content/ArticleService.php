@@ -33,7 +33,7 @@ class ArticleService extends ContentService
             'tags' => $data['tags'],
         ]);
 
-        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id);
+        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, 'public', false, true, 100);
         $article->save();
 
         if ($data['series_id']) $article->series()->attach($data['series_id']);
@@ -62,7 +62,7 @@ class ArticleService extends ContentService
         if ($data['title'] != $article->title) $changings['title'] = $data['title'];
         if ($data['subtitle'] != $article->subtitle) $changings['subtitle'] = $data['subtitle'];
         if ($content != $article->content) $changings['content'] = $content;
-        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id);
+        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, 'public', false, true, 100);
         if (count(array_diff($article->tags, $data['tags'])) || count(array_diff($data['tags'], $article->tags))) $changings['tags'] = $data['tags'];
 
         if ($data['series_id']) $article->series()->sync([$data['series_id']]);

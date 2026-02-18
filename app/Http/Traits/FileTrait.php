@@ -52,12 +52,12 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, int $id, $disk = 'public', $resize = false, $withTime = true)
+    public function saveFile($file, $folder, $type, int $id, $disk = 'public', $resize = false, $withTime = true, $quality = 30)
     {
         $filename = $type . '_' . $id;
         if ($withTime) $filename .= '_' . time();
         $ext = $file->getClientOriginalExtension();
-        if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize);
+        if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
         else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
@@ -86,7 +86,7 @@ trait FileTrait
         return $result;
     }
 
-    private function compress($file, $disk, $folder, $filename, $resize = false)
+    private function compress($file, $disk, $folder, $filename, $resize = false, $quality)
     {
         $info = getimagesize($file->getPathName());
 
