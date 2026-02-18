@@ -14,7 +14,6 @@ use App\Http\Traits\HostingTrait;
 use App\Http\Traits\FileTrait;
 
 use App\Models\Ad\Hosting;
-use App\Models\Morph\Moderation;
 
 class HostingController extends Controller
 {
@@ -85,11 +84,7 @@ class HostingController extends Controller
 
         $hosting->save();
 
-        Moderation::create([
-            'moderationable_type' => 'App\Models\Ad\Hosting',
-            'moderationable_id' => $hosting->id,
-            'data' => $hosting->attributesToArray()
-        ]);
+        $hosting->moderation()->create(['data' => $hosting->attributesToArray()]);
 
         return redirect()->route('company.hosting', ['user' => $user->url_name]);
     }
@@ -151,11 +146,7 @@ class HostingController extends Controller
         if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
 
         if (!empty($data))
-            Moderation::create([
-                'moderationable_type' => 'App\Models\Ad\Hosting',
-                'moderationable_id' => $hosting->id,
-                'data' => $data
-            ]);
+            $hosting->moderation()->create(['data' => $data]);
 
         return redirect()->route('company.hosting', ['user' => $user->url_name]);
     }

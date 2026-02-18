@@ -102,7 +102,7 @@
                             <div class="text-sm text-gray-600">{{ __('Phone number') }}</div>
                         </div>
                     @endif
-                    @if ($tariff->can_create_guide)
+                    @if ($tariff->can_create_insight)
                         <div class="flex items-center">
                             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600"
                                 aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">

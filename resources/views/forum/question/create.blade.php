@@ -8,14 +8,14 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
+            class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border border-gray-300 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
             @if (!Auth::user())
                 <div class="flex items-center justify-center w-full h-full">
                     <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
                 </div>
             @else
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
-                    @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters.') }}', 'error');
+                    @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters') }}', 'error');
                         if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"
                     enctype=multipart/form-data>
                     @csrf

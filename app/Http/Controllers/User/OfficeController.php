@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\OfficeTrait;
-use App\Models\Morph\Moderation;
 use App\Models\User\Office;
 
 class OfficeController extends Controller
@@ -103,11 +102,7 @@ class OfficeController extends Controller
         $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
         $office->save();
 
-        Moderation::create([
-            'moderationable_type' => 'App\Models\User\Office',
-            'moderationable_id' => $office->id,
-            'data' => $office->attributesToArray()
-        ]);
+        $office->moderation()->create(['data' => $office->attributesToArray()]);
 
         return redirect()->route('profile');
     }
@@ -149,12 +144,7 @@ class OfficeController extends Controller
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
 
-        if (!empty($data))
-            Moderation::create([
-                'moderationable_type' => 'App\Models\User\Office',
-                'moderationable_id' => $office->id,
-                'data' => $data
-            ]);
+        if (!empty($data)) $office->moderation()->create(['data' => $data]);
 
         return redirect()->route('company.office', ['user' => $user->url_name, 'office' => $office->id]);
     }

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white/60 dark:bg-zinc-900/60 border-b border-gray-100 dark:border-zinc-800">
+<nav x-data="{ open: false }" class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
         <div class="flex justify-between h-10 lg:h-14">
@@ -105,9 +105,15 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-                                @if ($auth->ads->count())
+                                @if ($auth->passport || $auth->company)
                                     <x-dropdown-link :href="route('company', ['user' => $auth->url_name])">
                                         {{ __('My shop') }}
+                                    </x-dropdown-link>
+                                @endif
+
+                                @if ($auth->channel)
+                                    <x-dropdown-link :href="route('insight.channel.show', ['channel' => $auth->channel->slug])">
+                                        {{ __('My channel') }}
                                     </x-dropdown-link>
                                 @endif
 
@@ -197,9 +203,15 @@
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
-                    @if ($auth->ads->count())
+                    @if ($auth->passport || $auth->company)
                         <x-responsive-nav-link :href="route('company', ['user' => $auth->url_name])">
                             {{ __('My shop') }}
+                        </x-responsive-nav-link>
+                    @endif
+
+                    @if ($auth->channel)
+                        <x-responsive-nav-link :href="route('insight.channel.show', ['channel' => $auth->channel->slug])">
+                            {{ __('My channel') }}
                         </x-responsive-nav-link>
                     @endif
 

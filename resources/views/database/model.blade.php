@@ -13,7 +13,7 @@
         'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
     ]) }}">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6">
+        <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
                     class="flex items-center space-x-1 sm:space-x-2">

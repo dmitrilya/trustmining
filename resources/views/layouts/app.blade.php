@@ -31,7 +31,11 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
+    <title>
+        @if ($attributes->has('title'))
+            {{ $attributes->get('title') }}@else{{ config('app.name') }}
+        @endif
+    </title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
@@ -91,11 +95,12 @@
                 theme = 'light';
                 axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
             }" @endif>
-    <div class="min-h-screen" x-data="{ filter: false }">
+    <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}"
+        x-data="{ filter: false }">
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white/60 dark:bg-zinc-900/60 shadow">
+            <header class="bg-white/60 dark:bg-zinc-900/60 shadow shadow-logo-color">
                 <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -172,12 +177,12 @@
         </main>
     </div>
 
-    @if (!request()->route() || request()->route()->action['as'] !== 'roadmap')
+    @if ((!request()->route() || request()->route()->action['as'] !== 'roadmap') && !$attributes->has('without_footer'))
         @include('layouts.footer')
     @endif
 
     @if (!$attributes->has('noindex'))
-        <div id="toasts" class="fixed bottom-5 right-5 w-full max-w-xs space-y-2"
+        <div id="toasts" class="fixed {{ request()->routeIs('insight.*') ? 'bottom-[4.25rem] lg:bottom-5' : 'bottom-5' }} right-2 sm:right-5 w-full max-w-xs space-y-2"
             @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror
             @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror>
         </div>

@@ -68,7 +68,7 @@ class ForumController extends Controller
 
     public function updateAvatar(Request $request)
     {
-        $this->saveFile($request->file('avatar'), 'forum', 'avatar', $request->user()->id, 'public/', 80, false);
+        $this->saveFile($request->file('avatar'), 'forum', 'avatar', $request->user()->id, 'public', 80, false);
 
         return back();
     }

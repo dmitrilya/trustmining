@@ -17,7 +17,13 @@ use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\Morph\ReviewController;
 use App\Http\Controllers\Morph\ModerationController;
 use App\Http\Controllers\Blog\BlogArticleController;
-use App\Http\Controllers\Blog\GuideController;
+use App\Http\Controllers\Insight\InsightController;
+use App\Http\Controllers\Insight\ChannelController;
+use App\Http\Controllers\Insight\SeriesController;
+use App\Http\Controllers\Insight\Content\ArticleController;
+use App\Http\Controllers\Insight\Content\PostController;
+use App\Http\Controllers\Insight\Content\VideoController;
+use App\Http\Controllers\Insight\CommentController;
 use App\Http\Controllers\Forum\ForumController;
 use App\Http\Controllers\Forum\ForumQuestionController;
 use App\Http\Controllers\Forum\ForumAnswerController;
@@ -99,11 +105,6 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/article/{article}', [BlogArticleController::class, 'show'])->name('blog.article');
 });
 
-Route::group(['prefix' => 'guides'], function () {
-    Route::get('/', [GuideController::class, 'index'])->name('guides');
-    Route::get('/{user:id}/guide/{guide}', [GuideController::class, 'show'])->scopeBindings()->name('guide');
-});
-
 Route::group(['prefix' => 'database'], function () {
     Route::get('/', [DatabaseController::class, 'index'])->name('database');
     Route::get('/get-models', [DatabaseController::class, 'getModels']);
@@ -156,12 +157,38 @@ Route::middleware('auth')->group(function () {
         Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
     });
 
-    Route::group(['prefix' => 'guides'], function () {
-        Route::get('/create', [GuideController::class, 'create'])->name('guide.create');
-        Route::post('/store', [GuideController::class, 'store'])->name('guide.store');
+    Route::group(['prefix' => 'insight'], function () {
+        Route::post('/channel/check-slug', [ChannelController::class, 'checkSlug'])->name('insight.channel.check-slug');
+        Route::get('/channel/create', [ChannelController::class, 'create'])->name('insight.channel.create');
+        Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');
+        Route::post('/subscriptions', [InsightController::class, 'subscriptions'])->name('insight.subscriptions.index');
+        Route::post('/comment/{comment}/reaction/{type}', [CommentController::class, 'reaction'])->name('insight.comment.reaction');
         Route::middleware('owner')->group(function () {
-            Route::put('/{guide}/update', [GuideController::class, 'update'])->name('guide.update');
-            Route::delete('/{guide}/destroy', [GuideController::class, 'destroy'])->name('guide.destroy');
+            Route::get('/channel/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
+            Route::put('/channel/{channel}/update', [ChannelController::class, 'update'])->name('insight.channel.update');
+            Route::delete('/channel/{channel}/destroy', [ChannelController::class, 'destroy'])->name('insight.channel.destroy');
+        });
+
+        Route::group(['prefix' => '/{channel}'], function () {
+            Route::post('/toggle-subscription', [ChannelController::class, 'toggleSubscription'])->name('insight.channel.subscription');
+            Route::post('/series/store', [SeriesController::class, 'store'])->name('insight.series.store');
+            Route::put('/series/{series}/update', [SeriesController::class, 'update'])->scopeBindings()->name('insight.series.update');
+            Route::delete('/series/{series}/destroy', [SeriesController::class, 'destroy'])->scopeBindings()->name('insight.series.destroy');
+            Route::get('/article/create', [ArticleController::class, 'create'])->name('insight.article.create');
+            Route::post('/article/store', [ArticleController::class, 'store'])->name('insight.article.store');
+            Route::put('/article/{article}/update', [ArticleController::class, 'update'])->scopeBindings()->name('insight.article.update');
+            Route::delete('/article/{article}/destroy', [ArticleController::class, 'destroy'])->scopeBindings()->name('insight.article.destroy');
+            Route::post('/article/{article}/comment', [ArticleController::class, 'comment'])->scopeBindings()->name('insight.article.comment');
+            Route::get('/video/create', [VideoController::class, 'create'])->name('insight.video.create');
+            Route::post('/video/store', [VideoController::class, 'store'])->name('insight.video.store');
+            Route::put('/video/{video}/update', [VideoController::class, 'update'])->scopeBindings()->name('insight.video.update');
+            Route::delete('/video/{video}/destroy', [VideoController::class, 'destroy'])->scopeBindings()->name('insight.video.destroy');
+            Route::post('/video/{video}/comment', [VideoController::class, 'comment'])->scopeBindings()->name('insight.video.comment');
+            Route::get('/post/create', [PostController::class, 'create'])->name('insight.post.create');
+            Route::post('/post/store', [PostController::class, 'store'])->name('insight.post.store');
+            Route::put('/post/{post}/update', [PostController::class, 'update'])->scopeBindings()->name('insight.post.update');
+            Route::delete('/post/{post}/destroy', [PostController::class, 'destroy'])->scopeBindings()->name('insight.post.destroy');
+            Route::post('/post/{post}/comment', [PostController::class, 'comment'])->scopeBindings()->name('insight.post.comment');
         });
     });
 
@@ -304,6 +331,20 @@ Route::group(['prefix' => 'forum'], function () {
             Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
             Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
         });
+    });
+});
+
+Route::group(['prefix' => 'insight'], function () {
+    Route::get('/', [InsightController::class, 'index'])->name('insight.index');
+    Route::get('/articles', [ArticleController::class, 'index'])->name('insight.article.index');
+    Route::get('/posts', [PostController::class, 'index'])->name('insight.post.index');
+    Route::get('/videos', [VideoController::class, 'index'])->name('insight.video.index');
+    Route::group(['prefix' => '{channel}'], function () {
+        Route::get('/', [ChannelController::class, 'show'])->name('insight.channel.show');
+        Route::get('/series/{series}', [SeriesController::class, 'show'])->name('insight.channel.series.show');
+        Route::get('/article/{article}', [ArticleController::class, 'show'])->name('insight.article.show');
+        Route::get('/post/{post}', [PostController::class, 'show'])->name('insight.post.show');
+        Route::get('/video/{video}', [VideoController::class, 'show'])->name('insight.video.show');
     });
 });
 

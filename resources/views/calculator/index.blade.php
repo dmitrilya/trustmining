@@ -31,11 +31,11 @@
                 @include('calculator.components.difficulty')
 
                 @php
-                    $guide = App\Models\Blog\Guide::find(10000004);
+                    $article = App\Models\Insight\Content\Article::find(10000004);
                 @endphp
 
-                @if ($guide)
-                    @include('guide.components.card', ['guide' => $guide])
+                @if ($article)
+                    @include('insight.article.components.card', ['article' => $article])
                 @endif
             </div>
         </div>

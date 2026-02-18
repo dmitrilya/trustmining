@@ -1,4 +1,4 @@
-<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white/60 dark:bg-zinc-900/60 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between offer-card"
+<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between offer-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
@@ -95,7 +95,7 @@
             <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs">{{ __('The price includes VAT') }}</div>
         @endif
 
-        <div class="text-gray-950 dark:text-white text-sm sm:text-base md:text-lg lg:text-xl font-bold">
+        <div class="text-gray-800 dark:text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl font-bold">
             @if ($ad->price != 0)
                 {{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin->abbreviation }}</span>
             @else

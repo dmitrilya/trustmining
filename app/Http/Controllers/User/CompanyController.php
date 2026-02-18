@@ -12,7 +12,6 @@ use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\Tinkoff;
 use App\Jobs\CheckInvoice;
-use App\Models\Morph\Moderation;
 use App\Models\User\Company;
 use App\Models\User\Order;
 
@@ -131,12 +130,7 @@ class CompanyController extends Controller
         if ($request->bg_logo)
             $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id);
 
-        if (!empty($data))
-            Moderation::create([
-                'moderationable_type' => 'App\Models\User\Company',
-                'moderationable_id' => $company->id,
-                'data' => $data
-            ]);
+        if (!empty($data)) $company->moderation()->create(['data' => $data]);
 
         return redirect()->route('company.about', ['user' => $user->url_name]);
     }

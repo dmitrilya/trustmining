@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 104.4px)"
         x-data="{ tab: '{{ request()->tab ? request()->tab : 'faq' }}' }">
         <div
-            class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
+            class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border border-gray-300 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
             <ul class="flex text-sm text-center text-gray-600 rounded-t-2xl divide-x divide-gray-200 border-b border-gray-300 dark:border-zinc-700 dark:divide-zinc-700 dark:text-gray-200 rtl:divide-x-reverse"
                 role="tablist">
                 <li class="w-full">
@@ -31,7 +31,7 @@
                 @include('support.components.faq')
                 @include('support.components.video')
 
-                <div x-show="tab == 'chat'" class="h-full flex flex-col bg-white/60 dark:bg-zinc-900/60 rounded-b-2xl p-1 sm:p-4"
+                <div x-show="tab == 'chat'" class="h-full flex flex-col bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-2xl p-1 sm:p-4"
                     role="tabpanel" aria-labelledby="question-tab">
                     @if (!$auth)
                         <div class="flex items-center justify-center w-full h-full">

@@ -18,6 +18,8 @@ class Moderation extends Model
         'moderationable_type',
         'moderationable_id',
         'data',
+        'moderation_status_id',
+        'user_id'
     ];
 
     /**

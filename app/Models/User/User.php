@@ -86,9 +86,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->ads()->where('moderation', 0);
     }
 
-    public function guides()
+    public function channel()
     {
-        return $this->hasMany(\App\Models\Blog\Guide::class);
+        return $this->hasOne(\App\Models\Insight\Channel::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(\App\Models\Insight\Channel::class, 'subscriptions', 'user_id', 'channel_id');
+    }
+
+    public function activeSubscriptions()
+    {
+        return $this->subscriptions()->wherePivotNull('unsubscribed_at');
     }
 
     public function company()

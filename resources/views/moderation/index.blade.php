@@ -6,7 +6,7 @@
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-zinc-900/60 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">
@@ -20,19 +20,6 @@
 
                 @php
                     $model = request()->model;
-                    $moderationTypes = [
-                        'App\Models\User\Company' => __('Company'),
-                        'App\Models\Ad\Hosting' => __('Hosting'),
-                        'App\Models\Ad\Ad' => __('Ad'),
-                        'App\Models\Morph\Review' => __('Review'),
-                        'App\Models\User\Office' => __('Office'),
-                        'App\Models\Contact' => __('Contacts'),
-                        'App\Models\User\Passport' => __('Passport'),
-                        'App\Models\Blog\Guide' => __('Guide'),
-                        'App\Models\Forum\ForumQuestion' => __('Forum Question'),
-                        'App\Models\Forum\ForumAnswer' => __('Forum Answer'),
-                        'App\Models\Forum\ForumComment' => __('Forum Comment'),
-                    ];
                 @endphp
 
                 <x-slot name="content">
@@ -60,8 +47,16 @@
                         {{ __('Passport') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'guide' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'guide'])">
-                        {{ __('Guide') }}
+                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'channel' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'channel'])">
+                        {{ __('Channel') }}
+                    </x-dropdown-link>
+
+                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'article' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'article'])">
+                        {{ __('Article') }}
+                    </x-dropdown-link>
+
+                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'post' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'post'])">
+                        {{ __('Post') }}
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
@@ -69,27 +64,41 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+        <div
+            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-zinc-700">
                 @foreach ($moderations as $moderation)
+                    @php
+                        $user = $moderation->moderationable->user
+                            ? $moderation->moderationable->user
+                            : $moderation->moderationable->channel->user;
+                        $logo = $moderation->moderationable->user
+                            ? ($user->company
+                                ? $user->company->logo
+                                : null)
+                            : $moderation->moderationable->channel->logo;
+                        $name = $moderation->moderationable->user
+                            ? $user->name
+                            : $moderation->moderationable->channel->name;
+                    @endphp
+
                     <a href="{{ route('moderation', ['moderation' => $moderation->id]) }}"
                         class="rounded-md hover:bg-gray-200 dark:hover:bg-zinc-950 block p-4">
                         <li>
                             <div class="flex">
-                                @if ($moderation->moderationable->user->company && $moderation->moderationable->user->company->logo)
+                                @if ($logo)
                                     <img class="h-12 w-12 flex-none rounded-full bg-gray-50 mr-4"
-                                        src="{{ Storage::url($moderation->moderationable->user->company->logo) }}"
-                                        alt="">
+                                        src="{{ Storage::url($logo) }}" alt="">
                                 @endif
 
                                 <div class="w-full">
                                     <p class="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-200">
-                                        {{ $moderation->moderationable->user->name }}
+                                        {{ $name }}
                                     </p>
 
                                     <div class="flex justify-between">
                                         <p class="mt-1 truncate text-xs leading-5 text-gray-600 dark:text-gray-400">
-                                            {{ $moderationTypes[$moderation->moderationable_type] }}
+                                            {{ __('types.' . $moderation->moderationable_type) }}
                                         </p>
 
                                         <p class="date-transform mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400"

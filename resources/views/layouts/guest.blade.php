@@ -62,7 +62,7 @@
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white/60 dark:bg-zinc-900/60 shadow-md shadow-logo-color overflow-hidden rounded-lg">
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg">
             {{ $slot }}
         </div>
     </div>

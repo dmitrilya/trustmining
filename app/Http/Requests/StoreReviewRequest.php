@@ -26,7 +26,7 @@ class StoreReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'reviewable_type' => ['required', Rule::in(['App\Models\User\User', 'App\Models\Database\AsicModel'])],
+            'reviewable_type' => ['required', Rule::in(['user', 'asic-model', 'gpu-model'])],
             'reviewable_id' => [
                 'required',
                 'exists:' . $this->reviewable_type . ',id',
@@ -51,12 +51,12 @@ class StoreReviewRequest extends FormRequest
     public function messages()
     {
         return [
-            'review.required' => __('Review is required.'),
+            'review.required' => __('Review is required'),
             'review.max' => __('validation.max.string', ['max' => 500]),
-            'image.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'image.max' => __('The maximum file size should not exceed 1 MB.'),
+            'image.mimes' => __('Valid types are png, jpg and jpeg'),
+            'image.max' => __('The maximum file size should not exceed 1 MB'),
             'document.mimes' => __('Valid types are pdf, doc (word).'),
-            'document.max' => __('The maximum file size should not exceed 1 MB.'),
+            'document.max' => __('The maximum file size should not exceed 1 MB'),
         ];
     }
 }

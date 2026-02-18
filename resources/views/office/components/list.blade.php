@@ -1,7 +1,7 @@
 <x-filter>@include('office.components.filter')</x-filter>
 
 @if (!$offices->count())
-    <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+    <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
         <p class="text-base text-gray-600">
             {{ __('There is no information about open offices and points of sale.') }}
         </p>
@@ -11,7 +11,7 @@
         <ul role="list" class="divide-y divide-gray-100 dark:divide-zinc-700">
             <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-1 xl:grid-cols-2 gap-2">
                 @foreach ($offices as $office)
-                    <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 xl:p-5">
+                    <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 xl:p-5">
                         @include('office.components.card')
                     </div>
                 @endforeach

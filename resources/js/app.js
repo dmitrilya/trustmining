@@ -5,6 +5,7 @@ import './chat';
 import { adsStatistics } from './statistics';
 import './suggestions';
 import './broadcast';
+import './insight';
 
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
@@ -13,6 +14,7 @@ Alpine.plugin(mask);
 
 window.Alpine = Alpine;
 
+window.locale = document.documentElement.lang;
 window.measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 window.now = Date.now();
 window.dateDiffs = {
@@ -72,7 +74,7 @@ document.addEventListener('alpine:init', () => {
 
 window.calculateProfitCAGR = (dailyProfit, days, percent) => {
     if (percent == 0) return dailyProfit * days;
-    
+
     let coef = 1 / Math.pow(1 + (percent / 100), 1 / 365);
 
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
@@ -81,7 +83,7 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
 Alpine.start();
 
 window.like = function (type, id) {
-    axios.post('/like', { likeableType: 'App\\Models\\' + type, likeableId: id }).then(r => {
+    axios.post('/like', { likeableType: type, likeableId: id }).then(r => {
         if (!r.data.success) pushToastAlert(r.data.message, "error");
     });
 }

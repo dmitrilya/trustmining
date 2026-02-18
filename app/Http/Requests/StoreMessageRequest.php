@@ -41,10 +41,10 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'message.max' => __('validation.max.string', ['max' => 1000]),
-            'images.max' => __('File limit exceeded.'),
-            'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
+            'images.max' => __('File limit exceeded'),
+            'images.*.mimes' => __('Valid types are png, jpg and jpeg'),
             'images.*.max' => __('validaion.size.file', ['size' => 1024]),
-            'files.max' => __('File limit exceeded.'),
+            'files.max' => __('File limit exceeded'),
             'files.*.mimes' => __('Valid types are pdf, doc (word).'),
             'files.*.max' => __('validaion.max.file', ['size' => 512]),
         ];

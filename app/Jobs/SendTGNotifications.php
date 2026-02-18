@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
@@ -58,26 +57,25 @@ class SendTGNotifications implements ShouldQueue
         $users = $this->users->splice(0, 30);
 
         switch ($this->nt) {
-            case 'App\Models\Chat\Message':
+            case 'message':
                 $text = $this->n->user->name . "\n\n" . $this->n->message;
                 $keyboard = [[['text' => __('Contact'), 'url' => route('support', ['chat' => true])]]];
                 break;
 
-            case 'App\Models\Morph\Review':
+            case 'review':
                 $rating = "";
                 for ($i = 0; $i < $this->n->rating; $i++) $rating .= "⭐";
                 $text = "$rating\n\n" . $this->n->review;
                 $keyboard = [[['text' => __('Details'), 'url' => route('company.reviews', ['user' => $this->n->reviewable->url_name])]]];
                 break;
 
-            case 'App\Models\Morph\Moderation':
-                $moderationTypes = ['App\Models\User\Company' => __('Company'), 'App\Models\Ad\Hosting' => __('Hosting'), 'App\Models\Ad\Ad' => __('Ad'), 'App\Models\Morph\Review' => __('Review'), 'App\Models\User\Office' => __('Office'), 'App\Models\Contact' => __('Contacts'), 'App\Models\User\Passport' => __('Passport'), 'App\Models\Blog\Guide' => __('Guide')];
-                $text = $moderationTypes[$this->n->moderationable_type];
+            case 'moderation':
+                $text = __('types.' . $this->n->moderationable_type);
                 if ($this->n->comment) $text .= "\n\n" . $this->n->comment;
                 $keyboard = null;
                 break;
 
-            case 'App\Models\Ad\Ad':
+            case 'ad':
                 switch ($this->type) {
                     case 'Price change':
                         $lastModeration = $this->n->moderations()->whereNotNull('data->price')->latest()->limit(2)->get()[1];

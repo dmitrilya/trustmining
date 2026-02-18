@@ -37,9 +37,9 @@ class StorePassportRequest extends FormRequest
     public function messages()
     {
         return [
-            'images.size' => __('File limit exceeded.'),
-            'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
+            'images.size' => __('File limit exceeded'),
+            'images.*.mimes' => __('Valid types are png, jpg and jpeg'),
+            'images.*.max' => __('The maximum file size should not exceed 2 MB'),
         ];
     }
 }

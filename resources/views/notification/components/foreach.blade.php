@@ -1,19 +1,3 @@
-@php
-    $moderationTypes = [
-        'App\Models\User\Company' => __('Company'),
-        'App\Models\Ad\Hosting' => __('Hosting'),
-        'App\Models\Ad\Ad' => __('Ad'),
-        'App\Models\Morph\Review' => __('Review'),
-        'App\Models\User\Office' => __('Office'),
-        'App\Models\Contact' => __('Contacts'),
-        'App\Models\User\Passport' => __('Passport'),
-        'App\Models\Blog\Guide' => __('Guide'),
-        'App\Models\Forum\ForumQuestion' => __('Forum Question'),
-        'App\Models\Forum\ForumAnswer' => __('Forum Answer'),
-        'App\Models\Forum\ForumComment' => __('Forum Comment'),
-    ];
-@endphp
-
 @foreach ($notifications as $notification)
     @continue ($notification->notificationable_id && !$notification->notificationable)
 
@@ -23,22 +7,22 @@
     @endphp
 
     @switch($notification->notificationable_type)
-        @case('App\Models\Chat\Message')
+        @case('message')
             <x-notification :href="route('support', ['chat' => true])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name"
                 :text="$n->message"></x-notification>
         @break
 
-        @case('App\Models\Morph\Review')
+        @case('review')
             <x-notification :href="route('company.reviews', ['user' => $n->reviewable->url_name])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating"
                 :text="$n->review"></x-notification>
         @break
 
-        @case('App\Models\Morph\Moderation')
-            <x-notification href="#" :type="$ntName" :date="$notification->created_at" :pretext="$moderationTypes[$n->moderationable_type]"
+        @case('moderation')
+            <x-notification href="#" :type="$ntName" :date="$notification->created_at" :pretext="__('types.' . $n->moderationable_type)"
                 :text="$n->comment"></x-notification>
         @break
 
-        @case('App\Models\Ad\Ad')
+        @case('ad')
             @switch($ntName)
                 @case('Price change')
                     <x-notification :href="route('ads.show', ['adCategory' => $n->adCategory->name, 'ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"

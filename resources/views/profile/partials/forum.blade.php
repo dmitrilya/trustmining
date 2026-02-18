@@ -13,7 +13,8 @@
     @endphp
 
     <a href="{{ route('forum.question.index') }}">
-        <x-secondary-button class="bg-secondary-gradient dark:text-gray-800">{{ __('My questions') }}</x-secondary-button>
+        <x-secondary-button
+            class="bg-secondary-gradient dark:text-gray-800">{{ __('My questions') }}</x-secondary-button>
     </a>
 
     @include('forum.components.author', [
@@ -29,8 +30,8 @@
 
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" />
-            <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" :value="old('avatar')"
-                accept=".png,.jpg,.jpeg,.webp" required />
+            <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
+                required />
             <p class="mt-1 text-xxs text-gray-600" id="avatar_help">PNG, JPG
                 or JPEG (max. 1MB)</p>
             <x-input-error :messages="$errors->get('avatar')" />

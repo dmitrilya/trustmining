@@ -114,7 +114,7 @@ class DatabaseController extends Controller
         return view('review.index', [
             'auth' => \Auth::user(),
             'name' => $asicModel->name,
-            'type' => 'App\Models\Database\AsicModel',
+            'type' => 'asic-model',
             'id' => $asicModel->id,
             'reviews' => $asicModel->reviews
         ]);
@@ -141,7 +141,7 @@ class DatabaseController extends Controller
         return view('review.index', [
             'auth' => \Auth::user(),
             'name' => $gpuModel->name,
-            'type' => 'App\Models\Database\GPUModel',
+            'type' => 'gpu-model',
             'id' => $gpuModel->id,
             'reviews' => $gpuModel->reviews
         ]);

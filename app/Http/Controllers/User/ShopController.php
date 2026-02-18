@@ -70,7 +70,7 @@ class ShopController extends Controller
         return view('review.index', [
             'auth' => $request->user(),
             'name' => $user->name,
-            'type' => 'App\Models\User\User',
+            'type' => 'user',
             'id' => $user->id,
             'reviews' => $user->reviews
         ]);

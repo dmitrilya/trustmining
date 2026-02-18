@@ -1,4 +1,4 @@
-<footer class="bg-white/60 dark:bg-zinc-900/60 border-b border-gray-100 dark:border-zinc-800">
+<footer class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <a href="{{ route('home') }}">
             <x-application-logo class="max-h-11" />
@@ -104,7 +104,7 @@
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('blog') }}">{{ __('Blog') }}</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
-                    href="{{ route('guides') }}">{{ __('Guides') }}</a>
+                    href="{{ route('insight.index') }}">TM Insight</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('forum') }}">{{ __('Forum') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50"

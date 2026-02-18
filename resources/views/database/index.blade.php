@@ -1,7 +1,7 @@
 <x-app-layout title="Каталог ASIC майнеров"
     description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6" x-data="{ search: '' }">
+        <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6" x-data="{ search: '' }">
             <nav class="mb-3" aria-label="Breadcrumb">
                 <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
                     class="flex items-center space-x-2">
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="mt-4 sm:mt-6 bg-white/60 dark:bg-zinc-900/60 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6"
+        <div class="mt-4 sm:mt-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6"
             x-data="modelsData">
             <div
                 class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">

@@ -2,10 +2,7 @@
 
 namespace App\Http\Traits;
 
-use App\Models\Morph\View;
 use Illuminate\Support\Facades\Log;
-
-use Carbon\Carbon;
 
 trait ViewTrait
 {
@@ -22,23 +19,23 @@ trait ViewTrait
         Log::channel('agents')->info("UserAgent={$agent} ip={$ip}");
 
         $auth = $request->user();
+        if ($auth && (
+            $model->user && $model->user->id == $auth->id ||
+            $model->channel && $model->channel->user->id == $auth->id ||
+            $auth->role->name != 'user'
+        )) return;
 
-        if ($auth && ($model->user && $model->user->id == $auth->id || $auth->role->name != 'user')) return;
-
-        $class = get_class($model);
-
-        $data = [
-            'viewable_id' => $model->id,
-            'viewable_type' => $class,
-            'viewer' => $ip,
-            'created_at' => Carbon::now()->format('Y-m-d')
-        ];
-
+        $now = now()->format('Y-m-d');
+        $data = ['viewer' => $ip, 'created_at' => $now];
         if ($adId) $data['ad_id'] = $adId;
 
-        $view = View::firstOrCreate($data);
+        $view = $model->views()->where($data)->first();
 
-        $view->increment('count');
+        if ($view) $view->increment('count');
+        else {
+            $data['count'] = 1;
+            $view = $model->views()->create($data);
+        }
 
         return $view;
     }

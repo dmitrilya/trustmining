@@ -19,6 +19,7 @@ class View extends Model
         'viewable_type',
         'viewer',
         'ad_id',
+        'count',
         'created_at'
     ];
 

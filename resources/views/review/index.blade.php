@@ -1,5 +1,5 @@
 @php
-    if ($type == 'App\Models\User\User') {
+    if ($type == 'user') {
         $user = App\Models\User\User::find($id);
         $href = route('company', ['user' => $user->url_name]);
         $title = 'компании ' . $user->name . ' - мнения клиентов и экспертов';
@@ -7,7 +7,7 @@
             'Реальные отзывы о компании ' .
             $user->name .
             ' от клиентов, партнёров и экспертов: качество услуг, надёжность, условия сотрудничества и опыт работы';
-    } elseif ($type == 'App\Models\Database\AsicModel') {
+    } elseif ($type == 'asic-model') {
         $model = App\Models\Database\AsicModel::find($id);
         $href = route('database.model', [
             'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
@@ -20,7 +20,7 @@
             ' ' .
             $model->name .
             ': реальный опыт эксплуатации, доходность, энергопотребление, надёжность и мнения экспертов';
-    } elseif ($type == 'App\Models\Database\GPUModel') {
+    } elseif ($type == 'gpu-model') {
         $model = App\Models\Database\GPUModel::find($id);
         $href = route('database.gpu.model', [
             'gpuBrand' => strtolower(str_replace(' ', '_', $model->gpuBrand->name)),
@@ -59,7 +59,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="w-full bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
+            class="w-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
             <div class="bg-gray-100 dark:bg-zinc-950 p-1 rounded-t-md min-h-72">
                 <div class="bg-gray-100 dark:bg-zinc-950 p-1 sm:p-5 h-full space-y-8 duration-100">
                     @foreach ($reviews as $review)

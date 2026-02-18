@@ -73,7 +73,7 @@
                 theme = 'light';
             }" @endif>
     <div class="min-h-screen bg-gray-100 dark:bg-zinc-950">
-        <nav class="bg-white/60 dark:bg-zinc-900/60 border-b border-gray-100 dark:border-zinc-800">
+        <nav class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
             <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
                 <div class="flex justify-between h-10 lg:h-14">
                     <div class="w-full flex">

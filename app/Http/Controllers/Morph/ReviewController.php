@@ -12,7 +12,6 @@ use App\Jobs\CheckReview;
 
 use App\Http\Traits\FileTrait;
 
-use App\Models\Morph\Moderation;
 use App\Models\Morph\Review;
 
 class ReviewController extends Controller
@@ -40,26 +39,11 @@ class ReviewController extends Controller
 
         $review->save();
 
-        Moderation::create([
-            'moderationable_type' => 'App\Models\Morph\Review',
-            'moderationable_id' => $review->id,
-            'data' => $review->attributesToArray()
-        ]);
+        $review->moderation()->create(['data' => $review->attributesToArray()]);
 
         CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
 
         return response()->json(['success' => true], 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Morph\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Review $review)
-    {
-        return view('ad.show', compact('ad'));
     }
 
     /**

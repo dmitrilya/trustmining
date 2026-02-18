@@ -35,6 +35,13 @@ window.dateTransform = function (el) {
                 day: "numeric",
             });
             break;
+        case 'adaptive':
+            let relativeDate = getRelativeTime(date);
+            date = relativeDate ? relativeDate : date.toLocaleDateString(window.locale, {
+                month: "short",
+                day: "numeric",
+            });
+            break;
         case 'month':
             date = date.toLocaleDateString(window.locale, {
                 year: "numeric",
@@ -52,4 +59,23 @@ window.dateTransform = function (el) {
     }
 
     el.textContent = date;
+}
+
+function getRelativeTime(date) {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    const diffInDays = Math.floor(diffInSeconds / 86400);
+
+    // Если прошло больше 7 дней, возвращаем null (чтобы вывести обычную дату)
+    if (diffInDays > 7) return null;
+
+    if (diffInSeconds < 60) return window.locale == 'ru' ? "только что" : 'just now';
+
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) return `${diffInMinutes} ${window.locale == 'ru' ? 'мин' : 'min'}`;
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) return `${diffInHours} ${window.locale == 'ru' ? 'ч' : 'h'}`;
+
+    return `${diffInDays} ${window.locale == 'ru' ? 'дн' : 'd'}`;
 }

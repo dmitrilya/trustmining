@@ -10,7 +10,9 @@ use App\Models\User\User;
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
 use App\Models\Blog\BlogArticle;
-use App\Models\Blog\Guide;
+use App\Models\Insight\Channel;
+use App\Models\Insight\Content\Article;
+use App\Models\Insight\Content\Post;
 use App\Models\Database\Coin;
 use App\Models\Forum\ForumCategory;
 
@@ -113,9 +115,20 @@ class SitemapGenerate extends Command
         foreach (BlogArticle::select(['id', 'title'])->get() as $article) {
             $out .= $this->addUrl('blog/article/' . $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title)));
         }
-        $out .= $this->addUrl('guides');
-        foreach (Guide::select(['id', 'title', 'user_id'])->with(['user:id'])->get() as $guide) {
-            $out .= $this->addUrl('guides/' . $guide->user->id . '/guide/' . $guide->id . '-' . mb_strtolower(str_replace(' ', '-', $guide->title)));
+
+        $out .= $this->addUrl('insight');
+        foreach (Channel::select(['id', 'slug'])
+            ->with(['moderatedArticles:id,title,channel_id', 'moderatedPost:id,channel_id', 'moderatedVideo:id,title,channel_id'])->get() as $channel) {
+            $out .= $this->addUrl('insight/' . $channel->slug);
+
+            foreach ($channel->moderatedArticles as $article)
+                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title)));
+
+            foreach ($channel->moderatedPosts as $post)
+                $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
+
+            foreach ($channel->moderatedVideo as $video)
+                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . mb_strtolower(str_replace(' ', '-', $video->title)));
         }
 
         $out .= $this->addUrl('forum');
@@ -126,9 +139,8 @@ class SitemapGenerate extends Command
             foreach ($forumCategory->forumSubcategories as $forumSubcategory) {
                 $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
-                foreach ($forumSubcategory->forumQuestions as $forumQuestion) {
+                foreach ($forumSubcategory->forumQuestions as $forumQuestion)
                     $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(str_replace(' ', '-', $forumQuestion->theme)));
-                }
             }
         }
 

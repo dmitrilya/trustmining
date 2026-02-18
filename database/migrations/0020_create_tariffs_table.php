@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('can_have_phone');
             $table->boolean('can_site_link');
             $table->unsignedSmallInteger('max_description');
-            $table->boolean('can_create_guide');
+            $table->boolean('can_create_insight');
             $table->boolean('priority_moderation');
             $table->unsignedInteger('price');
         });

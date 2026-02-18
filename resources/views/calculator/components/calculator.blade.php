@@ -1,5 +1,5 @@
 <div itemscope itemtype="https://schema.org/ViewAction"
-    class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
+    class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 xl:col-span-3 min-h-[616px] md:min-h-[460px]">
     <meta itemprop="name"
         content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
     <meta itemprop="description"

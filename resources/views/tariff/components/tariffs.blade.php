@@ -49,7 +49,7 @@
                     <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
                 </div>
             @endif
-            @if ($tariffs[0]->can_create_guide)
+            @if ($tariffs[0]->can_create_insight)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
@@ -121,7 +121,7 @@
                     <div class="text-sm text-gray-500">{{ __('Phone number') }}</div>
                 </div>
             @endif
-            @if ($tariffs[1]->can_create_guide)
+            @if ($tariffs[1]->can_create_insight)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
@@ -194,7 +194,7 @@
                     <div class="text-sm text-gray-400">{{ __('Phone number') }}</div>
                 </div>
             @endif
-            @if ($tariffs[2]->can_create_guide)
+            @if ($tariffs[2]->can_create_insight)
                 <div class="flex items-center">
                     <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
                         viewBox="0 0 20 20">

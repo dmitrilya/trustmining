@@ -39,9 +39,9 @@ class StoreCompanyRequest extends FormRequest
     public function messages()
     {
         return [
-            'documents.size' => __('File limit exceeded.'),
-            'documents.*.mimes' => __('Valid types are doc (word).'),
-            'documents.*.max' => __('The maximum file size should not exceed 1 MB.'),
+            'documents.size' => __('File limit exceeded'),
+            'documents.*.mimes' => __('Valid types are doc (word)'),
+            'documents.*.max' => __('The maximum file size should not exceed 1 MB'),
         ];
     }
 }

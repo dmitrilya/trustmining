@@ -46,16 +46,16 @@ class UpdateAdRequest extends FormRequest
     public function messages()
     {
         return [
-            'preview.required' => __('Preview is required.'),
-            'preview.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'preview.max' => __('The maximum file size should not exceed 2 MB.'),
-            'images.max' => __('File limit exceeded.'),
-            'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
-            'price.required' => __('Price is required.'),
-            'price.numeric' => __('The price must be in numerical format.'),
+            'preview.required' => __('Preview is required'),
+            'preview.mimes' => __('Valid types are png, jpg and jpeg'),
+            'preview.max' => __('The maximum file size should not exceed 2 MB'),
+            'images.max' => __('File limit exceeded'),
+            'images.*.mimes' => __('Valid types are png, jpg and jpeg'),
+            'images.*.max' => __('The maximum file size should not exceed 1 MB'),
+            'price.required' => __('Price is required'),
+            'price.numeric' => __('The price must be in numerical format'),
             'coin_id.required' => __('Currency is required.'),
-            'coin_id.exists' => __('Invalid currency.'),
+            'coin_id.exists' => __('Invalid currency'),
         ];
     }
 }

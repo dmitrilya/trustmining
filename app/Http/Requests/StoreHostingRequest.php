@@ -49,16 +49,16 @@ class StoreHostingRequest extends FormRequest
         return [
             'description.required' => __('Description is required.'),
             //'description.max' => __('validation.max.string', ['max' => 1500]),
-            'images.max' => __('File limit exceeded.'),
-            'images.*.mimes' => __('Valid types are png, jpg and jpeg.'),
-            'images.*.max' => __('The maximum file size should not exceed 2 MB.'),
-            'contract.mimes' => __('Valid types are doc (word).'),
-            'contract.max' => __('The maximum file size should not exceed 1 MB.'),
-            'territory.mimes' => __('Valid types are doc (word).'),
-            'territory.max' => __('The maximum file size should not exceed 1 MB.'),
-            'energy_supply.mimes' => __('Valid types are doc (word).'),
-            'energy_supply.max' => __('The maximum file size should not exceed 1 MB.'),
-            'price.required' => __('Price is required.'),
+            'images.max' => __('File limit exceeded'),
+            'images.*.mimes' => __('Valid types are png, jpg and jpeg'),
+            'images.*.max' => __('The maximum file size should not exceed 2 MB'),
+            'contract.mimes' => __('Valid types are doc (word)'),
+            'contract.max' => __('The maximum file size should not exceed 1 MB'),
+            'territory.mimes' => __('Valid types are doc (word)'),
+            'territory.max' => __('The maximum file size should not exceed 1 MB'),
+            'energy_supply.mimes' => __('Valid types are doc (word)'),
+            'energy_supply.max' => __('The maximum file size should not exceed 1 MB'),
+            'price.required' => __('Price is required'),
         ];
     }
 }

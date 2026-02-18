@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Morph;
 
-use App\Http\Controllers\Controller;    
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -23,14 +24,13 @@ class ModerationController extends Controller
     public function index(Request $request)
     {
         $moderations = $this->getModerations($request)->get()
-            ->filter(fn($moderation) => $moderation->moderationable && $moderation->moderationable->user)->values();
+            ->filter(fn($moderation) => $moderation->moderationable && ($moderation->moderationable->user || $moderation->moderationable->channel))->values();
 
         return view('moderation.index', [
-            'moderations' => $moderations->sortBy(
-                fn($moderation, $i) => $moderation->moderationable->user->tariff_id ?
-                    $i - floor($moderations->count() / 10 * 3) * $moderation->moderationable->user->tariff_id :
-                    $i
-            )
+            'moderations' => $moderations->sortBy(function ($moderation, $i) use ($moderations) {
+                $user = $moderation->moderationable->user ? $moderation->moderationable->user : $moderation->moderationable->channel->user;
+                return $user->tariff_id ? $i - floor($moderations->count() / 10 * 3) * $user->tariff_id : $i;
+            })
         ]);
     }
 
@@ -44,30 +44,36 @@ class ModerationController extends Controller
     {
         $m = $moderation->moderationable;
 
-        if ($moderation->moderation_status_id != 1 && \Auth::user()->role->name != 'admin' || !$m || !$m->user)
+        if ($moderation->moderation_status_id != 1 && Auth::user()->role->name != 'admin' || !$m || !$m->user && !$m->channel)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
 
         switch ($moderation->moderationable_type) {
-            case ('App\Models\User\Company'):
+            case ('company'):
                 return view('company.show', ['company' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\Ad\Hosting'):
+            case ('hosting'):
                 return view('hosting.show', ['hosting' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\Ad\Ad'):
+            case ('ad'):
                 return view('ad.show', ['ad' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\Morph\Review'):
+            case ('review'):
                 return view('review.show', ['review' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\User\Office'):
+            case ('office'):
                 return view('office.show', ['office' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\User\Passport'):
+            case ('passport'):
                 return view('passport.show', ['passport' => $m, 'moderation' => $moderation]);
                 break;
-            case ('App\Models\Blog\Guide'):
-                return view('guide.show', ['guide' => $m, 'moderation' => $moderation]);
+            case ('article'):
+                return view('insight.article.show', ['article' => $m, 'moderation' => $moderation]);
+                break;
+            case ('post'):
+                return view('insight.post.show', ['post' => $m, 'moderation' => $moderation]);
+                break;
+            case ('video'):
+                return view('insight.video.show', ['video' => $m, 'moderation' => $moderation]);
                 break;
         }
 

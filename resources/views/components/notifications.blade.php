@@ -1,7 +1,7 @@
 @props(['notifications'])
 
 <div class="w-5 h-5" x-data="{ open: false }">
-    <button @click="open = ! open;checkNotifications()"  aria-label="{{ __('Notifications') }}"
+    <button @click="open = ! open;checkNotifications()" aria-label="{{ __('Notifications') }}"
         class="relative inline-flex items-center text-sm text-center text-gray-600 dark:text-zinc-500 hover:text-gray-500 dark:hover:text-zinc-400 focus:outline-none"
         type="button">
         <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 14 20">
@@ -16,13 +16,13 @@
         @endif
     </button>
 
-    <div x-show="open" class="absolute z-10 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden rounded-3xl backdrop-blur-2xl"
+    <div x-show="open"
+        class="absolute z-10 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden border border-gray-300 dark:border-zinc-700 rounded-3xl shadow-lg shadow-logo-color backdrop-blur-2xl"
         style="width: calc(100vw - 1rem);display: none" x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
         x-transition:leave-end="opacity-0 translate-y-1" @click.away="open = false">
-        <div
-            class="w-full flex-auto bg-white/60 dark:bg-zinc-900/60 text-sm leading-6 shadow-lg shadow-logo-color ring-1 ring-gray-900/5">
+        <div class="w-full flex-auto bg-white/60 dark:bg-zinc-900/60 text-sm leading-6">
             <div
                 class="block px-4 py-2 text-center text-gray-800 rounded-t-lg bg-gray-50 dark:bg-zinc-900 dark:text-white">
                 {{ __('Notifications') }}

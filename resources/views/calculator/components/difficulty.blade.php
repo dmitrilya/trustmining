@@ -1,4 +1,4 @@
-<div class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
+<div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
     <h2
         class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
         {{ __('Network difficulty') }} BTC
@@ -6,17 +6,17 @@
 
     @php
         $coin = App\Models\Database\Coin::where('abbreviation', 'BTC')->first();
-        $guide = App\Models\Blog\Guide::find(10000001);
+        $article = App\Models\Insight\Content\Article::find(10000001);
     @endphp
 
     <div class="text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-6">
         {{ number_format($coin->networkDifficulties()->latest()->first()->difficulty) }}
     </div>
 
-    @if ($guide)
+    @if ($article)
         <a class="text-xxs xs:text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-600 underline mt-2 sm:mt-3"
             target="_blank"
-            href="{{ route('guide', ['user' => $guide->user->id, 'guide' => $guide->id . '-' . strtolower(str_replace(' ', '-', $guide->title))]) }}">
+            href="{{ route('insight.article.show', ['channel' => $article->channel->url_name, 'article' => $article->id . '-' . strtolower(str_replace(' ', '-', $article->title))]) }}">
             {{ __('What is network difficulty?') }}
         </a>
     @endif

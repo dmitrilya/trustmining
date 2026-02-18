@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
+        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('ad.update', ['ad' => $ad->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @csrf
@@ -18,7 +18,7 @@
 
                 <div>
                     <x-input-label for="preview" :value="__('Change preview')" />
-                    <x-file-input id="preview" name="preview" class="mt-1 block w-full" autocomplete="preview"
+                    <x-file-input id="preview" name="preview" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp"
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG

@@ -1,4 +1,5 @@
-<x-app-layout title="Майнинг отель: редактировать объявление о хостинге" description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
+<x-app-layout title="Майнинг отель: редактировать объявление о хостинге"
+    description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Placement data') }}
@@ -6,7 +7,8 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
+        <div
+            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @method('put')
@@ -14,7 +16,7 @@
 
                 <div>
                     <x-input-label for="hosting-images" :value="__('Photo')" />
-                    <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full" :value="old('images')"
+                    <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-600" id="images_help">
@@ -70,8 +72,7 @@
 
                 <div>
                     <x-input-label for="hosting-contract" :value="__('Agreement for the provision of accommodation services')" />
-                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
-                        autocomplete="contract" accept=".doc,.docx" :value="old('contract')" />
+                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full" accept=".doc,.docx" />
                     <p class="mt-1 text-sm text-gray-600" id="contract_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('contract')" />
                 </div>
@@ -79,7 +80,7 @@
                 <div>
                     <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
                     <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
-                        autocomplete="territory" accept=".doc,.docx" :value="old('territory')" />
+                        accept=".doc,.docx" />
                     <p class="mt-1 text-sm text-gray-600" id="territory_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('territory')" />
                 </div>

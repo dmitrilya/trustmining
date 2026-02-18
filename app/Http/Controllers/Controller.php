@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -152,7 +153,8 @@ class Controller extends BaseController
 
     public function like(Request $request)
     {
-        if (!call_user_func_array([$request->likeableType, 'find'], [$request->likeableId]))
+        $modelClass = Relation::getMorphedModel($request->likeableType);
+        if (!$modelClass || !($modelClass::find($request->likeableId)))
             return response()->json(['success' => false, 'message' => __('Not available')]);
 
         $user = $request->user();

@@ -72,7 +72,7 @@
         class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-3 sm:gap-5 xl:gap-7 items-start">
         <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6"
             x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {let answer = document.querySelector('#answer-{{ $notificationAnswerId }}'); answer.scrollIntoView({ behavior: 'smooth' }); answer.classList.add('animate-scrolling-highlight')}">
-            <div class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4"
+            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
@@ -154,7 +154,7 @@
             </div>
 
             <div
-                class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg dark:border dark:border-zinc-700">
+                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg dark:border dark:border-zinc-700">
                 @if (!Auth::user())
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-gray-700 dark:text-gray-300 text-xs sm:text-sm lg:text-base">

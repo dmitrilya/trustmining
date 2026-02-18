@@ -1,7 +1,7 @@
 @props(['ad', 'auth', 'hidden'])
 
 <div
-    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white/60 dark:bg-zinc-900/60 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
+    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         @if (count($hosting->images))
             <div class="w-full aspect-[4/3] overflow-hidden rounded-lg">
@@ -44,7 +44,7 @@
             </div>
         @endif
 
-        <div class="sm:mt-2 text-gray-950 dark:text-white text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
+        <div class="sm:mt-2 text-gray-800 dark:text-gray-200 text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
 
         <div class="relative flex mt-2 sm:mt-4 items-center">
             <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">

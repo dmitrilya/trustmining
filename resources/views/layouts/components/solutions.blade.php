@@ -19,7 +19,7 @@
         class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-2xl origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
         <div
-            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white/60 dark:bg-zinc-900/60">
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 lg:pt-8 xl:p-14 xl:pt-12 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700">
             <div class="sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
                     <div class="text-sm text-gray-600 mb-6">{{ __('Project') }}</div>
@@ -80,7 +80,7 @@
                             </path>
                         </svg>
                         <a class="under text-sm lg:text-base text-gray-900 dark:text-gray-200 font-semibold"
-                            href="{{ route('guides') }}">{{ __('Guides') }}</a>
+                            href="{{ route('insight.index') }}">TM Insight</a>
                     </div>
 
                     <div class="group flex items-center">
@@ -221,7 +221,7 @@
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
                     @php
                         $article = App\Models\Blog\BlogArticle::latest()->first();
-                        $guide = App\Models\Blog\Guide::inRandomOrder()->first();
+                        $article = App\Models\Insight\Content\Article::inRandomOrder()->first();
                     @endphp
 
                     @if ($article)

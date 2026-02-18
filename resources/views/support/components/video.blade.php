@@ -1,4 +1,4 @@
-<div x-show="tab == 'video'" class="h-full grid sm:grid-cols-2 lg:grid-cols-3 p-4 md:p-6 bg-white/60 dark:bg-zinc-900/60 rounded-b-2xl" role="tabpanel"
+<div x-show="tab == 'video'" class="h-full grid sm:grid-cols-2 lg:grid-cols-3 p-4 md:p-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-2xl" role="tabpanel"
     aria-labelledby="video-tab">
     <div>
         <h3 class="mb-1 xs:mb-2 text-center text-xs sm:text-sm text-gray-800 dark:text-gray-200">{{ __('Getting to know the platform. Part 1') }}</h3>

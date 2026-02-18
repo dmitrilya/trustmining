@@ -1,6 +1,6 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
     itemtype="https://schema.org/Answer" x-data="{ open: false }" id="answer-{{ $answer->id }}"
-    class="bg-white/60 dark:bg-zinc-900/60 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4">
+    class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
             <svg class="flex-shrink-0 size-5 sm:size-7 text-yellow-300" aria-hidden="true"
@@ -35,7 +35,7 @@
             @else
                 <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center" x-data="{ liked: '{{ $user && $answer->likes->where('user_id', $user->id)->count() }}', likes: {{ $answer->likes_count }} }">
                     <svg x-show="liked"
-                        @if ($user) @click="liked = false; likes--; window.like('Forum\\ForumAnswer', {{ $answer->id }})" @endif
+                        @if ($user) @click="liked = false; likes--; window.like('forum-answer', {{ $answer->id }})" @endif
                         class="size-5 sm:size-6 lg:size-7 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
                         aria-hidden="true" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd"
@@ -43,7 +43,7 @@
                             clip-rule="evenodd" />
                     </svg>
                     <svg x-show="!liked"
-                        @if ($user) @click="liked = true; likes++; window.like('Forum\\ForumAnswer', {{ $answer->id }})" @endif
+                        @if ($user) @click="liked = true; likes++; window.like('forum-answer', {{ $answer->id }})" @endif
                         class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
                         aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"

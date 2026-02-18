@@ -11,7 +11,7 @@ use App\Models\Ad\Hosting;
 
 trait FileTrait
 {
-    public function saveFiles($files, $folder, $type, int $id, $disk = 'public/')
+    public function saveFiles($files, $folder, $type, int $id, $disk = 'public')
     {
         $result = [];
 
@@ -22,7 +22,7 @@ trait FileTrait
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
                 if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
-                else $file->storeAs($disk . $folder, $filename . '.' . $ext);
+                else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push(
                     $result,
@@ -33,7 +33,7 @@ trait FileTrait
         return $result;
     }
 
-    public function saveContract($file, $folder, Hosting $hosting, $disk = 'public/')
+    public function saveContract($file, $folder, Hosting $hosting, $disk = 'public')
     {
         $path = $this->saveFile($file, $folder, 'contract', $hosting->id, $disk);
 
@@ -52,18 +52,18 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, int $id, $disk = 'public/', $resize = false, $withTime = true)
+    public function saveFile($file, $folder, $type, int $id, $disk = 'public', $resize = false, $withTime = true)
     {
         $filename = $type . '_' . $id;
         if ($withTime) $filename .= '_' . time();
         $ext = $file->getClientOriginalExtension();
         if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize);
-        else $file->storeAs($disk . $folder, $filename . '.' . $ext);
+        else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName($files, $folder, $type, int $id, $disk = 'public/')
+    public function saveFilesWithName($files, $folder, $type, int $id, $disk = 'public')
     {
         $result = [];
 
@@ -75,7 +75,7 @@ trait FileTrait
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 $ext = $file->getClientOriginalExtension();
                 if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
-                else $file->storeAs($disk . $folder, $filename . '.' . $ext);
+                else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(
                     'name' => $name,
@@ -120,7 +120,9 @@ trait FileTrait
 
             imagepalettetotruecolor($image);
 
-            if (!imagewebp($image, Storage::path($disk . $folder . '/' . $filename . '.webp'), 20)) return false;
+            if (!Storage::disk($disk)->exists($folder)) Storage::disk($disk)->makeDirectory($folder);
+
+            if (!imagewebp($image, Storage::path($disk . '/' . $folder . '/' . $filename . '.webp'), 20)) return false;
 
             return 'webp';
         }

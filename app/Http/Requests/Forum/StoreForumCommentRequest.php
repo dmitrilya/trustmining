@@ -43,7 +43,7 @@ class StoreForumCommentRequest extends FormRequest
         return [
             'images.max' => __('Image limit exceeded.'),
             'images.*.mimes' => __('Valid types are jpg,png,jpeg,webp.'),
-            'images.*.max' => __('The maximum file size should not exceed 1 MB.'),
+            'images.*.max' => __('The maximum file size should not exceed 1 MB'),
         ];
     }
 }

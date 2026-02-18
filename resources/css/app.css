@@ -77,6 +77,19 @@ body {
     }
 }
 
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.cursor-grab img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -149,11 +162,15 @@ pre[contenteditable]:empty::before {
         border: none;
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 40;
         background: inherit;
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
     }
+}
+
+.relative > button {
+    will-change: transform;
 }
 
 .ql-toolbar.ql-snow .ql-formats {

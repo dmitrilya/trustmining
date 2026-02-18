@@ -21,7 +21,6 @@ use App\Models\Database\Coin;
 use App\Models\User\Office;
 use App\Models\Database\AsicModel;
 use App\Models\Database\GPUModel;
-use App\Models\Morph\Moderation;
 
 class AdController extends Controller
 {
@@ -102,11 +101,7 @@ class AdController extends Controller
 
         $ad->save();
 
-        Moderation::create([
-            'moderationable_type' => 'App\Models\Ad\Ad',
-            'moderationable_id' => $ad->id,
-            'data' => $ad->attributesToArray()
-        ]);
+        $ad->moderation()->create(['data' => $ad->attributesToArray()]);
 
         return redirect()->route('company', ['user' => $user->url_name]);
     }
@@ -210,11 +205,7 @@ class AdController extends Controller
             $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id);
 
         if (!empty($data)) {
-            $moderation = Moderation::create([
-                'moderationable_type' => 'App\Models\Ad\Ad',
-                'moderationable_id' => $ad->id,
-                'data' => $data
-            ]);
+            $moderation = $ad->moderation()->create(['data' => $data]);
 
             if (!$request->preview && !$request->images && !$request->description) {
                 $moderation->moderation_status_id = 2;
@@ -224,7 +215,7 @@ class AdController extends Controller
                 if (isset($data['price'])) $this->notify(
                     'Price change',
                     $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
-                    'App\Models\Ad\Ad',
+                    'ad',
                     $ad
                 );
 
@@ -249,20 +240,16 @@ class AdController extends Controller
                 $change = $changings->where('id', $ad->id)->first();
 
                 if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $moderation = Moderation::create([
-                        'moderationable_type' => 'App\Models\Ad\Ad',
-                        'moderationable_id' => $ad->id,
-                        'data' => $change
+                    $ad->moderation()->create([
+                        'data' => $change,
+                        'moderation_status_id' => 2,
+                        'user_id' => 10000000
                     ]);
-
-                    $moderation->moderation_status_id = 2;
-                    $moderation->user_id = 10000000;
-                    $moderation->save();
 
                     $this->notify(
                         'Price change',
                         $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
-                        'App\Models\Ad\Ad',
+                        'ad',
                         $ad
                     );
 

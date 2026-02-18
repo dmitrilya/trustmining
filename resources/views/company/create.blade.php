@@ -6,9 +6,9 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
-            <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6"
-                enctype=multipart/form-data>
+        <div
+            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
 
                 <div>
@@ -55,7 +55,7 @@
                 <div>
                     <x-input-label for="documents" :value="__('Documents')" />
                     <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple
-                        autocomplete="documents" accept=".doc,.docx" required
+                        accept=".doc,.docx" required
                         @change="if ($el.files.length > 4) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 4]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-600" id="documents_help">DOC (max. 1MB, max. 4
                         items)

@@ -1,4 +1,5 @@
-<x-app-layout title="Редактировать информацию о компании" description="Добавьте описание, фото и логотип к своей компании на сайте TrustMining" noindex="true">
+<x-app-layout title="Редактировать информацию о компании"
+    description="Добавьте описание, фото и логотип к своей компании на сайте TrustMining" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ $company->name }}
@@ -6,7 +7,8 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 shadow rounded-lg">
+        <div
+            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('company.update', ['company' => $company->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @method('put')
@@ -20,7 +22,7 @@
 
                 <div>
                     <x-input-label for="images" :value="__('Photo')" />
-                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" :value="old('images')"
+                    <x-file-input id="images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 8) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 8]) }}', 'error')}" />
                     <p class="mt-1 text-sm text-gray-600" id="images_help">PNG, JPG
@@ -33,7 +35,7 @@
 
                 <div>
                     <x-input-label for="logo" :value="__('Logo for avatar')" />
-                    <x-file-input id="logo" name="logo" class="mt-1 block w-full" :value="old('logo')"
+                    <x-file-input id="logo" name="logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
                     <p class="mt-1 text-sm text-gray-600" id="logo_help">PNG, JPG
                         or JPEG (max. 512KB, 1x1)</p>
@@ -42,7 +44,7 @@
 
                 <div>
                     <x-input-label for="bg_logo" :value="__('Logo for the card')" />
-                    <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full" :value="old('bg_logo')"
+                    <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
                     <p class="mt-1 text-sm text-gray-600" id="bg_logo_help">PNG, JPG
                         or JPEG (max. 1024KB)</p>
