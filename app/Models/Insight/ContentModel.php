@@ -47,7 +47,7 @@ abstract class ContentModel extends Model
 
     public function series()
     {
-        return $this->morphTo(\App\Models\Insight\Series::class, 'contentable', 'series_content');
+        return $this->morphToMany(\App\Models\Insight\Series::class, 'contentable', 'series_content');
     }
 
     public function comments()
