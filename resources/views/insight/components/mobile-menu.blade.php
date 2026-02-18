@@ -102,7 +102,7 @@
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
             class="flex flex-col items-center">
             @if (
-                (request()->routeIs('insight.channel.*') && $channel && auth()->user()->id == $channel->user_id) ||
+                (request()->routeIs('insight.channel.*') && $channel && auth()->check() && auth()->user()->id == $channel->user_id) ||
                     request()->routeIs('insight.channel.create'))
                 @include('insight.svg.channel-active', [
                     'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-9',
