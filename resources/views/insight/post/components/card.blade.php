@@ -1,5 +1,5 @@
 <div
-    class="relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-xl flex flex-col justify-between">
+    class="relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             <img loading="lazy" class="w-full" src="{{ Storage::url($post->preview) }}" alt="Post preview" />
