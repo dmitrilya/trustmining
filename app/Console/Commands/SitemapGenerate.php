@@ -11,8 +11,6 @@ use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
 use App\Models\Blog\BlogArticle;
 use App\Models\Insight\Channel;
-use App\Models\Insight\Content\Article;
-use App\Models\Insight\Content\Post;
 use App\Models\Database\Coin;
 use App\Models\Forum\ForumCategory;
 
@@ -127,7 +125,7 @@ class SitemapGenerate extends Command
             foreach ($channel->moderatedPosts as $post)
                 $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
 
-            foreach ($channel->moderatedVideo as $video)
+            foreach ($channel->moderatedVideos as $video)
                 $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . mb_strtolower(str_replace(' ', '-', $video->title)));
         }
 
