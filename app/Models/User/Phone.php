@@ -23,4 +23,9 @@ class Phone extends Model
     {
         return $this->belongsTo(\App\Models\User\User::class);
     }
+
+    public function views()
+    {
+        return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
+    }
 }
