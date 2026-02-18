@@ -1,8 +1,8 @@
-<div class="relative max-w-full overflow-hidden select-none" x-data="carousel()" @mousedown="start" @touchstart="start"
-    @mousemove.window="move" @touchmove.window="move" @mouseup.window="end" @touchend.window="end" @mouseleave="end">
+<div class="relative max-w-full overflow-hidden select-none" x-data="carousel()" @mousedown="start" @touchstart.prevent="start"
+    @mousemove.window="move" @touchmove.window.prevent="move" @mouseup.window="end" @touchend.window="end" @mouseleave="end">
 
     <div x-ref="container"
-        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing">
+        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing touch-pan-y">
 
         @foreach ($items as $item)
             <div draggable="false"

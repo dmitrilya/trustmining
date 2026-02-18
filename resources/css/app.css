@@ -86,6 +86,10 @@ body {
     -webkit-user-drag: none;
 }
 
+.dragging {
+    scroll-snap-type: none !important;
+}
+
 [x-cloak] {
     display: none !important;
 }

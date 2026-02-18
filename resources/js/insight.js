@@ -54,8 +54,9 @@ window.carousel = () => {
 
             this.scrollLeft = container.scrollLeft;
 
+            container.classList.add('dragging');
             container.style.scrollBehavior = 'auto';
-            container.style.scrollSnapType = 'none';
+            container.style.setProperty('scroll-snap-type', 'none');
         },
         move(e) {
             if (!this.isDown) return;
@@ -123,7 +124,7 @@ window.carousel = () => {
             });
 
             setTimeout(() => {
-                container.style.scrollSnapType = 'x mandatory';
+                container.style.removeProperty('scroll-snap-type');
             }, 350);
 
             this.deltaX = 0;
