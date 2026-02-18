@@ -120,7 +120,7 @@
         </a>
     @endif
     @if (
-        (request()->routeIs('insight.channel.*') && $channel && auth()->user()->id == $channel->user_id) ||
+        (request()->routeIs('insight.channel.*') && $channel && auth()->check() && auth()->user()->id == $channel->user_id) ||
             request()->routeIs('insight.channel.create'))
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
             class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
@@ -145,7 +145,7 @@
             </div>
         </a>
     @endif
-    @if (request()->routeIs(['insight.channel.*', 'insight.channel.statistics']) && $channel &&
+    @if (request()->routeIs(['insight.channel.*', 'insight.channel.statistics']) && $channel && auth()->check() &&
             auth()->user()->id == $channel->user_id)
         <div class="px-3 pt-4 pb-2 mt-2 border-t border-gray-300 dark:border-zinc-700 cursor-pointer group"
             x-data="{ open: false }">
