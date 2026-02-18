@@ -9,7 +9,9 @@ import './insight';
 
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
-
+import collapse from '@alpinejs/collapse'
+ 
+Alpine.plugin(collapse)
 Alpine.plugin(mask);
 
 window.Alpine = Alpine;
