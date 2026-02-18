@@ -61,8 +61,8 @@ abstract class ContentService
     {
         $startDate = now()->parse("-{$period}");
 
-        return $modelClass::query()->withCount(['views' => fn($q) => $q->where('created_at', '>=', $startDate)])
-            ->orderByDesc('views_count')->limit($limit)->get();
+        return $modelClass::query()->withCount(['views as views_count_period' => fn($q) => $q->where('created_at', '>=', $startDate)])
+            ->withCount('views')->orderByDesc('views_count_period')->limit($limit)->get();
     }
 
     /**
