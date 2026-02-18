@@ -93,6 +93,48 @@
         </section>
     @endif
 
+    @if ($videos->count())
+        <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
+            <div
+                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                    {{ __('Videos') }}
+                </h2>
+
+                <div class="flex text-xs sm:text-sm font-medium">
+                    <button @click="tab = 'latest'"
+                        :class="tab === 'latest' ? 'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('New') }}
+                    </button>
+                    <button @click="tab = 'popular'"
+                        :class="tab === 'popular' ? 'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Popular') }}
+                    </button>
+                </div>
+            </div>
+
+            <div x-show="tab === 'latest'" x-transition:enter.duration.400ms>
+                @include('insight.components.carousel', [
+                    'items' => $videos->sortByDesc('created_at'),
+                    'blade' => 'insight.video.components.card',
+                    'model' => 'video',
+                ])
+            </div>
+
+            <div x-show="tab === 'popular'" x-cloak x-transition:enter.duration.400ms>
+                @include('insight.components.carousel', [
+                    'items' => $videos->sortByDesc('views_count'),
+                    'blade' => 'insight.video.components.card',
+                    'model' => 'video',
+                ])
+            </div>
+        </section>
+    @endif
+
     @if ($series->where('contents_count', '>', 0)->count())
         <section>
             <h2
