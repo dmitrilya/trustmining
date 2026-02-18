@@ -2,7 +2,7 @@
     @mousemove.window="move" @touchmove.window.prevent="move" @mouseup.window="end" @touchend.window="end" @mouseleave="end">
 
     <div x-ref="container"
-        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing touch-pan-y">
+        class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing">
 
         @foreach ($items as $item)
             <div draggable="false"
