@@ -1,4 +1,4 @@
-<div>
+<div x-show="edit">
     <form
         action="{{ route('insight.video.update', ['channel' => $video->channel->slug, 'video' => $video->id]) }}"
         method="POST" class="space-y-6" enctype=multipart/form-data>
