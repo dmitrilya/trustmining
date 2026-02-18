@@ -53,7 +53,7 @@ class ArticleService extends ContentService
      */
     public function update(Channel $channel, ContentModel $article, array $data): ?ContentModel
     {
-        $content = Purifier::clean(htmlspecialchars_decode($data[3]), 'insight_article');
+        $content = Purifier::clean(htmlspecialchars_decode($data['content']), 'insight_article');
 
         if ($content === "") return null;
 
