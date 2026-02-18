@@ -6,7 +6,7 @@
 
     @if (request()->routeIs('insight.index'))
         <a href="{{ route('insight.index') }}"
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.home-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -29,7 +29,7 @@
     @endif
     @if (request()->routeIs('insight.post.*'))
         <a href="{{ route('insight.post.index') }}"
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.post-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -52,7 +52,7 @@
     @endif
     @if (request()->routeIs('insight.video.*'))
         <a href="{{ route('insight.video.index') }}"
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.video-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -75,7 +75,7 @@
     @endif
     @if (request()->routeIs('insight.subscriptions.*'))
         <a href="{{ route('insight.subscriptions.index') }}"
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.subscriptions-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -98,7 +98,7 @@
     @endif
     @if (request()->routeIs('insight.article.*'))
         <a href="{{ route('insight.article.index') }}"
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.article-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -123,7 +123,7 @@
         (request()->routeIs('insight.channel.*') && $channel && auth()->check() && auth()->user()->id == $channel->user_id) ||
             request()->routeIs('insight.channel.create'))
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
-            class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+            class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.channel-active', [
                 'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
             ])
@@ -193,7 +193,7 @@
 
         @if (request()->routeIs('insight.channel.statistics'))
             <a href="{{ route('insight.channel.statistics', ['channel' => $channel->slug]) }}"
-                class="flex items-center group bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-full">
+                class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
                 @include('insight.svg.statistics-active', [
                     'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
                 ])

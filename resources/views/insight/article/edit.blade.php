@@ -126,7 +126,7 @@
             ->keyBy('key')" :key="$article->series->first()?->id" />
 
         <x-editable-list name="tags" :items="$article->tags">
-            <p class="block text-sm text-gray-800 dark:text-gray-300">{{ __('Tags for search') }}</p>
+            <p class="block text-sm text-gray-700 dark:text-gray-300">{{ __('Tags for search') }}</p>
         </x-editable-list>
         <x-input-error :messages="$errors->get('tags')" />
 

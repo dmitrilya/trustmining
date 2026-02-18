@@ -93,7 +93,7 @@
 
         <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $video->title }}</h1>
 
-        <iframe src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl"></iframe>
+        <iframe src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl w-full"></iframe>
 
         @if ($user && $user->id == $channel->user_id)
             @include('insight.video.edit')

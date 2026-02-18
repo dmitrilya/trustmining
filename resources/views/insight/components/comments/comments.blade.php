@@ -1,6 +1,6 @@
 <div class="mt-4 sm:mt-6">
     <div
-        class="flex items-center w-fit bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-4">
+        class="flex items-center w-fit bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-xl px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-4">
         <h2 class="font-bold text-lg sm:text-xl text-gray-900 dark:text-gray-100">
             {{ __('Comments') }}
         </h2>

@@ -11,7 +11,7 @@
                 'slug' => $post->channel->slug,
                 'subscribers' => $post->channel->active_subscribers_count,
             ])
-            <div class="ql-editor !p-0 mt-2 sm:mt-3 text-xs h-16 overflow-hidden line-clamp-4">{!! $post->content !!}</div>
+            <div class="ql-editor !p-0 mt-2 sm:mt-3 text-xs text-gray-700 dark:text-gray-300 h-16 overflow-hidden line-clamp-4">{!! $post->content !!}</div>
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">

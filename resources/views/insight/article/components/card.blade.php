@@ -14,7 +14,7 @@
             <h3
                 class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 h-12">
                 {{ $article->title }}</h3>
-            <p class="text-xs sm:text-sm text-gray-800 dark:text-gray-300 h-12">
+            <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 h-12">
                 {{ $article->subtitle }}</p>
         </div>
     </div>

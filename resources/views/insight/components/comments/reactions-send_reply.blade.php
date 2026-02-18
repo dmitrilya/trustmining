@@ -52,7 +52,7 @@
                     :style="'transform: translateX(' + (getIndex(type) * 44) + 'px)'"
                     :class="userReaction === type ?
                         'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 ring-1 ring-indigo-500/40' :
-                        'bg-gray-50 dark:bg-zinc-800 text-gray-500 hover:bg-gray-100'"
+                        'bg-gray-200 dark:bg-zinc-800 text-gray-500 hover:bg-gray-100'"
                     class="absolute left-0 flex items-center justify-center gap-0.5 px-1 py-0.5 rounded-full transition-all duration-500 ease-in-out select-none">
                     <span x-text="reactions[type].symbol"></span>
                     <span x-text="reactions[type].count" class="font-medium min-w-[10px]"></span>
@@ -81,7 +81,7 @@
                         class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 overflow-hidden w-full"></textarea>
 
                     <button
-                        class="text-base bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 hover:dark:bg-zinc-700 shadow-sm text-gray-700 dark:text-gray-300 min-w-7 size-7 flex items-center justify-center rounded-full">↑</button>
+                        class="text-base bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 hover:dark:bg-zinc-700 shadow-md text-gray-700 dark:text-gray-300 min-w-7 size-7 flex items-center justify-center rounded-full">↑</button>
                 </div>
             </form>
         </div>
