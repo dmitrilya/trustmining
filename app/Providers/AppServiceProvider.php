@@ -56,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
             'comment' => \App\Models\Insight\Comment::class,
 
             'user' => \App\Models\User\User::class,
+            'phone' => \App\Models\User\Phone::class,
             'company' => \App\Models\User\Company::class,
             'office' => \App\Models\User\Office::class,
             'passport' => \App\Models\User\Passport::class,
