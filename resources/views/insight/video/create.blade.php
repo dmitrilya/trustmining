@@ -2,7 +2,7 @@
     description="Добавьте видео на сайте TrustMining | TM Insight" :header="__('Creation video')">
 
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
             <form action="{{ route('insight.video.store', ['channel' => $channel->slug]) }}" method="POST"
                 class="flex flex-col gap-4" enctype=multipart/form-data>
                 @csrf

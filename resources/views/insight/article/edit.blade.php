@@ -131,7 +131,7 @@
         <x-input-error :messages="$errors->get('tags')" />
 
         <div class="mt-5" style="background:inherit;">
-            <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-lg -mx-2 sm:-mx-4">
+            <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl -mx-2 sm:-mx-4">
                 <div id="editor"
                     class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-2 sm:p-4">
                 </div>

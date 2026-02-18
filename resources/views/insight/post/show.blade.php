@@ -19,7 +19,7 @@
     @endif
 
     <div x-data="{ edit: false }"
-        class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+        class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             @include('insight.components.card-channel', [
                 'name' => $channel->name,
@@ -102,7 +102,7 @@
         </h1>
 
         <img src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
-            alt="" class="rounded-lg w-full">
+            alt="" class="rounded-xl w-full">
 
         <div x-show="!edit">
             <div class="ql-editor !p-0 text-xs xs:text-sm sm:text-base">

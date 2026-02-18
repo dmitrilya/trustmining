@@ -2,7 +2,7 @@
     description="{{ $channel->name }} - {{ $channel->description }} | TM Insight" :header="$channel->name . ' / ' . $series->name" :channel="$channel">
     @if ($channel->banner)
         <img src="{{ Storage::url($channel->banner) }}" alt="{{ $channel->name }} banner"
-            class="w-full aspect-[960/360] rounded-lg mb-4 lg:mb-6">
+            class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
     @endif
 
     @if (auth()->user()->id == $channel->user_id)
@@ -12,7 +12,7 @@
     @if ($articles->count())
         <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Articles') }}
                 </h2>
@@ -54,7 +54,7 @@
     @if ($posts->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Posts') }}
                 </h2>
@@ -96,7 +96,7 @@
     @if ($videos->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Videos') }}
                 </h2>

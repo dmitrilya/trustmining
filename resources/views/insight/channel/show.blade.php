@@ -2,8 +2,35 @@
     description="{{ $channel->name }} - {{ $channel->description }} | TM Insight" :header="$channel->name" :channel="$channel">
     @if ($channel->banner)
         <img src="{{ Storage::url($channel->banner) }}" alt="{{ $channel->name }} banner"
-            class="w-full aspect-[960/360] rounded-lg mb-4 lg:mb-6">
+            class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
     @endif
+
+    <div class="border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 mb-4 lg:mb-6">
+        <div class="flex items-start justify-between mb-1 sm:mb-2">
+            @include('insight.components.channel', [
+                'name' => $channel->name,
+                'slug' => $channel->slug,
+                'logo' => $channel->logo,
+                'subscribers' => $channel->active_subscribers_count,
+                'sm' => true,
+            ])
+
+            @if (!auth()->check())
+                <x-primary-button @click="$dispatch('open-modal', 'login')">
+                    {{ __('Subscribe') }}
+                </x-primary-button>
+            @elseif (auth()->user()->id != $channel->user_id)
+                <x-primary-button
+                    @click="channelToggleSubscription($el, '{{ route('insight.channel.subscription', ['channel' => $channel->slug]) }}')">
+                    {{ $channel->activeSubscribers()->wherePivot('user_id', auth()->user()->id)->exists()? __('Unsubscribe'): __('Subscribe') }}
+                </x-primary-button>
+            @endif
+        </div>
+
+        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-2 lg:mb-4">{{ $channel->brief_description }}</p>
+
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{{ $channel->description }}</p>
+    </div>
 
     @if (auth()->check() && auth()->user()->id == $channel->user_id)
         @include('insight.channel.components.menu')
@@ -12,7 +39,7 @@
     @if ($articles->count())
         <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Articles') }}
                 </h2>
@@ -54,7 +81,7 @@
     @if ($posts->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Posts') }}
                 </h2>
@@ -96,7 +123,7 @@
     @if ($videos->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div
-                class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                     {{ __('Videos') }}
                 </h2>
@@ -138,7 +165,7 @@
     @if ($series->where('contents_count', '>', 0)->count())
         <section>
             <h2
-                class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
+                class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
                 {{ trans_choice('all.series', 2) }}</h2>
 
             @include('insight.components.carousel', [

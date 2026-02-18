@@ -3,7 +3,7 @@
     header="TM Insight">
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
         <div
-            class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Articles') }}
             </h2>
@@ -43,7 +43,7 @@
 
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
         <div
-            class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Posts') }}
             </h2>
@@ -83,7 +83,7 @@
 
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
         <div
-            class="flex items-center justify-between bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-full px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Videos') }}
             </h2>

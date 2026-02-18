@@ -24,7 +24,7 @@
     
     quill.on('text-change', () => content = quill.root.innerHTML);">
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
             <form action="{{ route('insight.post.store', ['channel' => $channel->slug]) }}" method="POST"
                 class="flex flex-col gap-4" enctype=multipart/form-data>
                 @csrf
@@ -42,7 +42,7 @@
                     ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                     ->keyBy('key')" />
 
-                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-lg mt-2 -mx-2 sm:-mx-4">
+                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
                     <div id="editor"
                         class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
                     </div>

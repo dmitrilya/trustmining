@@ -1,7 +1,7 @@
 <x-insight-layout title="Создание своего канала | TM Insight"
     description="Создайте канал на платформе TM Insight и начните делиться контентом | TM Insight" :header="__('Channel creation')">
     <div
-        class="p-2 sm:p-4 lg:p-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+        class="p-2 sm:p-4 lg:p-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
         <form method="POST" class="flex flex-col gap-2 sm:gap-4 lg:gap-6" enctype=multipart/form-data
             x-data="{ errors: [], loading: false }" action="{{ route('insight.channel.store') }}"
             @submit.prevent="

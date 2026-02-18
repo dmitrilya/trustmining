@@ -12,7 +12,7 @@
     @endif
 
     <div x-data="{ edit: false }"
-        class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+        class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             @include('insight.components.card-channel', [
                 'name' => $channel->name,
@@ -93,7 +93,7 @@
 
         <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $video->title }}</h1>
 
-        <iframe src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-lg"></iframe>
+        <iframe src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl"></iframe>
 
         @if ($user && $user->id == $channel->user_id)
             @include('insight.video.edit')

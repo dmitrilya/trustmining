@@ -1,5 +1,5 @@
 <nav
-    class="fixed z-50 bottom-0 lg:hidden w-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 backdrop-blur-2xl rounded-t-lg border-t border-gray-100 dark:border-zinc-800 px-2 xs:px-4 sm:px-6 py-1.5">
+    class="fixed z-50 bottom-0 lg:hidden w-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 backdrop-blur-2xl rounded-t-xl border-t border-gray-100 dark:border-zinc-800 px-2 xs:px-4 sm:px-6 py-1.5">
     <div class="flex items-center justify-around">
         @php
             $strokeWidth = '1.5';
