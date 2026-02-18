@@ -43,7 +43,7 @@
 
             <div x-show="tab === 'popular'" x-cloak x-transition:enter.duration.400ms>
                 @include('insight.components.carousel', [
-                    'items' => $articles->sortBy('views_count'),
+                    'items' => $articles->sortByDesc('views_count'),
                     'blade' => 'insight.article.components.card',
                     'model' => 'article',
                 ])
