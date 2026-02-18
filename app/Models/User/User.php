@@ -176,6 +176,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\App\Models\Morph\Like::class);
     }
 
+    public function views()
+    {
+        return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
+    }
+
     public function crmConnections()
     {
         return $this->hasMany(\App\Models\CRM\CRMConnection::class);
