@@ -123,7 +123,7 @@
 
         <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
-            ->keyBy('key')" :key="$article->series?->id" />
+            ->keyBy('key')" :key="$article->series->first()?->id" />
 
         <x-editable-list name="tags" :items="$article->tags">
             <p class="block text-sm text-gray-800 dark:text-gray-300">{{ __('Tags for search') }}</p>

@@ -36,7 +36,7 @@
 
         <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
-            ->keyBy('key')" :key="$post->series?->id" />
+            ->keyBy('key')" :key="$post->series->first()?->id" />
 
         <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-lg mt-2 -mx-2 sm:-mx-4">
             <div id="editor"
