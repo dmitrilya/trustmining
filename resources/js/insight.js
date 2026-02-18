@@ -37,8 +37,8 @@ window.carousel = () => {
     return {
         isDown: false,
         startX: 0,
+        deltaX: 0,
         scrollLeft: 0,
-
         start(e) {
             this.isDown = true;
 
@@ -58,7 +58,9 @@ window.carousel = () => {
             const container = this.$refs.container;
             const pageX = e.pageX || e.touches[0].pageX;
 
-            const walk = (pageX - this.startX) * 1.2;
+            this.deltaX = pageX - this.startX;
+
+            const walk = this.deltaX * 1.2;
 
             container.scrollLeft = this.scrollLeft - walk;
         },
@@ -74,12 +76,35 @@ window.carousel = () => {
 
             const style = window.getComputedStyle(card);
             const marginRight = parseInt(style.marginRight) || 0;
-            const cardWidth = card.offsetWidth + marginRight - 1;
-            console.log(cardWidth);
+            const cardWidth = card.offsetWidth + marginRight;
 
             const currentScroll = container.scrollLeft;
 
-            const index = Math.round(currentScroll / cardWidth);
+            const baseIndex = Math.floor(currentScroll / cardWidth);
+            const progress = (currentScroll % cardWidth) / cardWidth;
+
+            let index = baseIndex;
+
+            const threshold = 0.22;
+
+            if (this.deltaX < 0) {
+                if (progress > threshold) {
+                    index = baseIndex + 1;
+                }
+            } else if (this.deltaX > 0) {
+                if (progress < (1 - threshold)) {
+                    index = baseIndex;
+                } else {
+                    index = baseIndex + 1;
+                }
+            }
+
+            const maxIndex = Math.floor(
+                (container.scrollWidth - container.clientWidth) / cardWidth
+            );
+
+            index = Math.max(0, Math.min(index, maxIndex));
+
             const target = index * cardWidth;
 
             container.scrollTo({
@@ -87,10 +112,11 @@ window.carousel = () => {
                 behavior: 'smooth'
             });
 
-            // включаем snap после завершения анимации
             setTimeout(() => {
                 container.style.scrollSnapType = 'x mandatory';
             }, 350);
+
+            this.deltaX = 0;
         }
     }
 }
