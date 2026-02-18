@@ -22,7 +22,7 @@
 
         <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
-            ->keyBy('key')" :key="$article->series?->id" />
+            ->keyBy('key')" :key="$video->series?->id" />
 
         <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
     </form>

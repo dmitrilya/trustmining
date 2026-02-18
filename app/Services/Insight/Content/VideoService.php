@@ -62,7 +62,7 @@ class VideoService extends ContentService
     public function filter($request = null)
     {
         $videos = Video::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])])
-            ->select(['id', 'preview', 'channel_id', 'url', 'created_at'])->withCount(['likes', 'views']);
+            ->select(['id', 'title', 'preview', 'channel_id', 'url', 'created_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
         } else $videos = $videos->orderBy('created_at', 'desc');
