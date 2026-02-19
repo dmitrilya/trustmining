@@ -227,10 +227,6 @@ a {
     }
 }
 
-.dark a.under:after {
-    background-color: oklch(70.7% 0.022 261.325);
-}
-
 button {
     &.loading {
         position: relative;
