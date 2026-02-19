@@ -5,7 +5,7 @@
             class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
     @endif
 
-    @if (auth()->user()->id == $channel->user_id)
+    @if (auth()->check() && auth()->user()->id == $channel->user_id)
         @include('insight.channel.components.menu')
     @endif
 
