@@ -1,10 +1,11 @@
-<x-insight-layout :title="$channel->name . ' - пост | TM Insight'" :description="{{ str($post->content)->stripTags()->limit(150) }}" :header="">
+@php
+    $channel = $channel ?? $post->channel;
+@endphp
+
+<x-insight-layout :title="$channel->name . ' - пост | TM Insight'" :description="str($post->content)->stripTags()->limit(150)" header="">
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) {
-            $channel = $moderation->moderationable->channel;
-        }
     @endphp
 
     @if ($user && $user->id == $channel->user_id)
@@ -97,9 +98,6 @@
                 <p class="text-xxs sm:text-xs text-gray-500 ml-2">{{ $post->views()->count() }}</p>
             </div>
         </div>
-
-        <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $article->title }}
-        </h1>
 
         <img src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
             alt="" class="rounded-xl w-full">

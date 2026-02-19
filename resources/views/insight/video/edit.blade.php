@@ -1,14 +1,17 @@
 <div x-show="edit">
-    <form
-        action="{{ route('insight.video.update', ['channel' => $video->channel->slug, 'video' => $video->id]) }}"
-        method="POST" class="space-y-6" enctype=multipart/form-data>
+    <form action="{{ route('insight.video.update', ['channel' => $video->channel->slug, 'video' => $video->id]) }}"
+        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ errors: [] }"
+        @submit.prevent="if (Object.keys(errors).length > 0) {
+            pushToastAlert(Object.values(errors)[0], 'error');
+            $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
+        } else $el.submit();">
         @csrf
         @method('PUT')
 
         <div class="w-full">
             <x-input-label for="video-title" :value="__('Title')" />
-            <x-length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title"
-                required max="40" />
+            <x-length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title" required
+                max="40" />
             <x-input-error :messages="$errors->get('title')" />
         </div>
 

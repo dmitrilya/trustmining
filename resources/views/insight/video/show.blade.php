@@ -1,8 +1,8 @@
-<x-insight-layout :title="$video->title" :description="$video->subtitle" header="">
+<x-insight-layout :title="$video->title" :description="$video->title" header="">
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) $channel = $moderation->moderationable->channel;
+        if ($moder) $channel = $video->channel;
     @endphp
 
     @if ($moder)

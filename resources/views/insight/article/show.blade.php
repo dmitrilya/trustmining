@@ -2,7 +2,7 @@
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) $channel = $moderation->moderationable->channel;
+        if ($moder) $channel = $article->channel;
     @endphp
 
     @if ($user && $user->id == $channel->user_id)

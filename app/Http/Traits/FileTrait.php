@@ -122,7 +122,7 @@ trait FileTrait
 
             if (!Storage::disk($disk)->exists($folder)) Storage::disk($disk)->makeDirectory($folder);
 
-            if (!imagewebp($image, Storage::path($disk . '/' . $folder . '/' . $filename . '.webp'), 20)) return false;
+            if (!imagewebp($image, Storage::path($disk . '/' . $folder . '/' . $filename . '.webp'), $quality)) return false;
 
             return 'webp';
         }

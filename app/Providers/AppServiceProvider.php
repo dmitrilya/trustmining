@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Validation\Rules\Password;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -45,6 +46,10 @@ class AppServiceProvider extends ServiceProvider
                 ->line(__('Please click the button below to verify your email address and activate your account.'))
                 ->action(__('Activate account'), $url)
                 ->line(__('If you did not create an account, no further action is required.'));
+        });
+
+        Password::defaults(function () {
+            return Password::min(4);
         });
 
         Relation::enforceMorphMap([

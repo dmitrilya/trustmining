@@ -41,7 +41,7 @@ class ChannelService
         ]);
 
         $channel->logo = $this->saveFile($logo, 'insight/' . $slug, 'logo', $channel->id, 'public', 128, false);
-        if ($banner) $channel->banner = $this->saveFile($banner, 'insight/' . $slug, 'banner', $channel->id);
+        if ($banner) $channel->banner = $this->saveFile($banner, 'insight/' . $slug, 'banner', $channel->id, 'public', false, true, 90);
         $channel->save();
 
         return $channel;
@@ -64,9 +64,15 @@ class ChannelService
         $channel->name = $name;
         $channel->brief_description = $briefDescription;
         $channel->description = $description;
-        if ($logo) $channel->logo = $this->saveFile($logo, 'insight/' . $channel->slug, 'logo', $channel->id, 'public', 128, false);
+        if ($logo) {
+            Storage::disk('public')->delete([$channel->logo]);
+            $channel->logo = $this->saveFile($logo, 'insight/' . $channel->slug, 'logo', $channel->id, 'public', 128, false);
+        }
         elseif ($channel->slug != $slug) $channel->logo = str_replace($channel->slug, $slug, $channel->logo);
-        if ($banner) $channel->banner = $this->saveFile($banner, 'insight/' . $channel->slug, 'banner', $channel->id);
+        if ($banner) {
+            Storage::disk('public')->delete([$channel->banner]);
+            $channel->banner = $this->saveFile($banner, 'insight/' . $channel->slug, 'banner', $channel->id, 'public', false, true, 90);
+        }
         elseif ($channel->banner && $channel->slug != $slug) $channel->banner = str_replace($channel->slug, $slug, $channel->banner);
         if ($channel->slug != $slug) {
             Storage::disk('public')->move('insight/' . $channel->slug, 'insight/' . $slug);

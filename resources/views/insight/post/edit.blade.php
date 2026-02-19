@@ -15,14 +15,13 @@
     
     quill.root.innerHTML = `{{ $post->content }}`;
     
-    quill.clipboard.addMatcher(
-        Node.ELEMENT_NODE,
-        (node, delta) => new Delta().insert(node.innerText || node.textContent)
-    );
-    
     quill.on("text-change", () => content = quill.root.innerHTML);'>
     <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}"
-        method="POST" class="flex flex-col gap-4" enctype=multipart/form-data>
+        method="POST" class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [] }"
+        @submit.prevent="if (Object.keys(errors).length > 0) {
+            pushToastAlert(Object.values(errors)[0], 'error');
+            $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
+        } else $el.submit();">
         @csrf
         @method('PUT')
 

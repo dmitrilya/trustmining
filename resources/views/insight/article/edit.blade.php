@@ -1,14 +1,18 @@
 <div x-show="edit" x-data="{ text: `{{ old('content') }}`, attachCallback: null }"
     x-init='const Delta = Quill.import("delta");
         const Parchment = Quill.import("parchment");
+    
+    const allowedTextColors = ["ql-color-main-text-color", "ql-color-secondary-text-color"];
+    const allowedBackgroundColors = ["ql-bg-green-bg-color", "ql-bg-indigo-bg-color"];
+
     const MyColorClass = new Parchment.Attributor("color", "class", {
         scope: Parchment.Scope.INLINE,
-        whitelist: ["ql-color-main-text-color", "ql-color-secondary-text-color"]
+        whitelist: allowedTextColors
     });
     
     const MyBackgroundClass = new Parchment.Attributor("background", "class", {
         scope: Parchment.Scope.INLINE,
-        whitelist: ["ql-bg-green-bg-color", "ql-bg-indigo-bg-color"]
+        whitelist: allowedBackgroundColors
     });
     
     Quill.register(MyColorClass, true);
@@ -36,9 +40,9 @@
                         "list": "bullet"
                     }],
                     [{
-                        "color": ["ql-color-main-text-color", "ql-color-secondary-text-color"]
+                        "color": allowedTextColors
                     }, {
-                        "background": ["ql-bg-green-bg-color", "ql-bg-indigo-bg-color"]
+                        "background": allowedBackgroundColors
                     }],
                     [{
                         "align": []
@@ -87,15 +91,25 @@
     
     quill.root.innerHTML = `{{ $article->content }}`;
     
-    quill.clipboard.addMatcher(
-        Node.ELEMENT_NODE,
-        (node, delta) => new Delta().insert(node.innerText || node.textContent)
-    );
+    quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+        delta.ops.forEach(op => {
+            if (op.attributes?.color && !allowedTextColors.includes(op.attributes.color))
+                delete op.attributes.color;
+            if (op.attributes?.background && !allowedBackgroundColors.includes(op.attributes.background))
+                delete op.attributes.background;
+        });
+    
+        return delta;
+    });
     
     quill.on("text-change", () => text = quill.root.innerHTML);'>
     <form
         action="{{ route('insight.article.update', ['channel' => $article->channel->slug, 'article' => $article->id]) }}"
-        method="POST" class="space-y-6" enctype=multipart/form-data>
+        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ errors: [] }"
+        @submit.prevent="if (Object.keys(errors).length > 0) {
+            pushToastAlert(Object.values(errors)[0], 'error');
+            $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
+        } else $el.submit();">
         @csrf
         @method('PUT')
 

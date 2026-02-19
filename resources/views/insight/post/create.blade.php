@@ -17,16 +17,15 @@
         theme: 'snow'
     });
     
-    quill.clipboard.addMatcher(
-        Node.ELEMENT_NODE,
-        (node, delta) => new Delta().insert(node.innerText || node.textContent)
-    );
-    
     quill.on('text-change', () => content = quill.root.innerHTML);">
         <div
             class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
             <form action="{{ route('insight.post.store', ['channel' => $channel->slug]) }}" method="POST"
-                class="flex flex-col gap-4" enctype=multipart/form-data>
+                class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [] }"
+                @submit.prevent="if (Object.keys(errors).length > 0) {
+                    pushToastAlert(Object.values(errors)[0], 'error');
+                    $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
+                } else $el.submit();">
                 @csrf
 
                 <div>

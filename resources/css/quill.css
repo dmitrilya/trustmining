@@ -1,0 +1,132 @@
+#editor-wrap {
+    .ql-toolbar.ql-snow + .ql-container.ql-snow {
+        border: unset;
+    }
+
+    .ql-editor {
+        padding: 0;
+    }
+
+    .ql-container {
+        font-family: unset;
+        font-size: unset;
+    }
+
+    .ql-toolbar {
+        border: none;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: inherit;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+    margin-right: 13px !important;
+}
+
+.ql-color-main-text-color {
+    color: oklch(21% 0.034 264.665);
+}
+
+.ql-snow .ql-color-picker.ql-color {
+    .ql-picker-item[data-value="main-text-color"],
+    .ql-picker-item[data-value="ql-color-main-text-color"] {
+        background-color: oklch(21% 0.034 264.665);
+    }
+}
+
+.dark .ql-color-main-text-color {
+    color: oklch(96.7% 0.003 264.542);
+}
+
+.dark .ql-snow .ql-color-picker.ql-color {
+    .ql-picker-item[data-value="main-text-color"],
+    .ql-picker-item[data-value="ql-color-main-text-color"] {
+        background-color: oklch(96.7% 0.003 264.542);
+    }
+}
+
+.ql-color-secondary-text-color {
+    color: oklch(44.6% 0.03 256.802);
+}
+
+.ql-snow .ql-color-picker.ql-color {
+    .ql-picker-item[data-value="secondary-text-color"],
+    .ql-picker-item[data-value="ql-color-secondary-text-color"] {
+        background-color: oklch(44.6% 0.03 256.802);
+    }
+}
+
+.dark .ql-color-secondary-text-color {
+    color: oklch(70.7% 0.022 261.325);
+}
+
+.dark .ql-snow .ql-color-picker.ql-color {
+    .ql-picker-item[data-value="secondary-text-color"],
+    .ql-picker-item[data-value="ql-color-secondary-text-color"] {
+        background-color: oklch(70.7% 0.022 261.325);
+    }
+}
+
+.ql-bg-green-bg-color,
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="green-bg-color"],
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-green-bg-color"] {
+    background-color: oklch(87.1% 0.15 154.449);
+}
+
+.ql-bg-indigo-bg-color,
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="indigo-bg-color"],
+.ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
+    background-color: oklch(78.5% 0.115 274.713);
+}
+
+.dark .ql-bg-green-bg-color,
+.dark
+    .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="green-bg-color"],
+.dark
+    .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-reen-bg-color"] {
+    background-color: oklch(39.3% 0.095 152.535);
+}
+
+.dark .ql-bg-indigo-bg-color,
+.dark
+    .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="indigo-bg-color"],
+.dark
+    .ql-snow
+    .ql-color-picker.ql-background
+    .ql-picker-item[data-value="ql-bg-indigo-bg-color"] {
+    background-color: oklch(45.7% 0.24 277.023);
+}
+
+.quill-embed-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    max-height: 512px;
+}
+
+.quill-embed-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.5rem;
+}

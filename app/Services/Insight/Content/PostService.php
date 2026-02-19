@@ -30,7 +30,7 @@ class PostService extends ContentService
             'content' => $content,
         ]);
 
-        $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, 'public', false, true, 100);
+        $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id);
         $post->save();
 
         if ($data['series_id']) $post->series()->attach($data['series_id']);
@@ -57,7 +57,7 @@ class PostService extends ContentService
         $changings = [];
 
         if ($content != $post->content) $changings['content'] = $content;
-        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, 'public', false, true, 100);
+        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id);
 
         if ($data['series_id']) $post->series()->sync([$data['series_id']]);
 
