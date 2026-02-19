@@ -230,11 +230,11 @@
                     @endif
 
                     <div class="hidden lg:block w-full">
-                        @include('layouts.components.solutions-blurb')
+                        @include('layouts.components.solutions-blurb1')
                     </div>
 
                     <div class="hidden xl:block w-full">
-                        @include('layouts.components.solutions-blurb')
+                        @include('layouts.components.solutions-blurb2')
                     </div>
                 </div>
             </div>
