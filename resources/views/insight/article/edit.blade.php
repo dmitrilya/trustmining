@@ -17,6 +17,33 @@
     
     Quill.register(MyColorClass, true);
     Quill.register(MyBackgroundClass, true);
+
+    const Inline = Quill.import("blots/inline");
+    class CustomSpan extends Inline {
+        static create(value) {
+            let node = super.create();
+            node.setAttribute("class", value);
+            return node;
+        }
+        static formats(node) {
+            return node.getAttribute("class");
+        }
+    }
+
+    CustomSpan.blotName = "customSpan";
+    CustomSpan.tagName = "span";
+    Quill.register(CustomSpan);
+
+    const Link = Quill.import("formats/link");
+    class CustomLink extends Link {
+        static create(value) {
+            const node = super.create(value);
+            node.classList.add("inline"); 
+            return node;
+        }
+    }
+
+    Quill.register(CustomLink, true);
     
     const Image = Quill.import("formats/image");
     Image.className = "quill-embed-image";

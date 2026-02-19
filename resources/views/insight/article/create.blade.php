@@ -11,6 +11,17 @@
     
     const allowedTextColors = ['main-text-color', 'secondary-text-color'];
     const allowedBackgroundColors = ['green-bg-color', 'indigo-bg-color'];
+
+    const Link = Quill.import('formats/link');
+    class CustomLink extends Link {
+        static create(value) {
+            const node = super.create(value);
+            node.classList.add('inline'); 
+            return node;
+        }
+    }
+
+    Quill.register(CustomLink, true);
     
     const Image = Quill.import('formats/image');
     Image.className = 'quill-embed-image';

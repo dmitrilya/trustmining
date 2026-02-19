@@ -1,5 +1,16 @@
 <div x-show="edit" x-data="{ content: `{{ old('content') }}` }"
     x-init='const Delta = Quill.import("delta");    
+    const Link = Quill.import("formats/link");
+    class CustomLink extends Link {
+        static create(value) {
+            const node = super.create(value);
+            node.classList.add("inline"); 
+            return node;
+        }
+    }
+
+    Quill.register(CustomLink, true);
+    
     quill = new Quill("#editor", {
         modules: {
             toolbar: {
