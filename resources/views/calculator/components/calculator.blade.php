@@ -6,7 +6,7 @@
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5"
-        x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, uptime: 100, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
+        x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 100, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
         <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
             @include('calculator.components.schema')
 
@@ -85,10 +85,13 @@
             <template x-if="version !== null">
                 <div x-data="{
                     get dailyProfit() {
-                        return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) / (currency == 'RUB' ? {{ $rub }} : 1);
+                        return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) * count / (currency == 'RUB' ? {{ $rub }} : 1);
                     },
                     get dailyConsumption() {
-                        return version.efficiency * version.hashrate * tariff * (currency == 'USDT' ? {{ $rub }} : 1) * uptime / 100;
+                        return version.efficiency * version.hashrate * tariff * 24 * uptime / 100 * count * (currency == 'USDT' ? {{ $rub }} : 1);
+                    },
+                    get dailyIncome() {
+                        return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
                     }
                 }">
                     <div class="grid grid-cols-4 gap-2 sm:gap-4">
@@ -109,10 +112,10 @@
                             x-text="Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) * 100) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round(dailyConsumption * 24 / 10) / 100">
+                            x-text="Math.round(dailyConsumption / 10) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) - dailyConsumption * 24 / 1000) * 100) / 100">
+                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) - dailyConsumption / 1000) * 100) / 100">
                         </div>
                         <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                             {{ __('Month') }}
@@ -121,10 +124,10 @@
                             x-text="Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) * 100) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round(dailyConsumption * 720 / 10) / 100">
+                            x-text="Math.round(dailyConsumption * 30 / 10) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) - dailyConsumption * 720 / 1000) * 100) / 100">
+                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) - dailyConsumption * 30 / 1000) * 100) / 100">
                         </div>
                         <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
                             {{ __('Year') }}
@@ -133,20 +136,17 @@
                             x-text="Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) * 100) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round(dailyConsumption * 8760 / 10) / 100">
+                            x-text="Math.round(dailyConsumption * 365 / 10) / 100">
                         </div>
                         <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) - dailyConsumption * 8760 / 1000) * 100) / 100">
+                            x-text="Math.round((calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) - dailyConsumption * 365 / 1000) * 100) / 100">
                         </div>
                     </div>
 
                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300 mt-6 sm:mt-7 lg:mt-8">
                         {{ __('Payback') }}:
                         <span class="text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="version.price ? 
-                                        version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000 > 0 ?
-                                        Math.round(version.price / (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000)) + ' {{ __('Days') }}' :
-                                        '∞' : '{{ __('No data') }}'"></span>
+                            x-text="version.price ? dailyIncome > 0 ? Math.round(dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                     </div>
 
                     <h4 class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">

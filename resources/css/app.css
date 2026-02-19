@@ -215,7 +215,7 @@ a {
             bottom: -2px;
             width: 0;
             height: 1.2px;
-            background-color: rgb(55 65 81);
+            background-color: currentColor;
             content: "";
             transition: width 0.3s ease-out;
         }

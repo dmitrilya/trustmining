@@ -220,13 +220,12 @@
 
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
                     @php
-                        $article = App\Models\Blog\BlogArticle::latest()->first();
                         $article = App\Models\Insight\Content\Article::inRandomOrder()->first();
                     @endphp
 
                     @if ($article)
                         <div class="hidden md:block w-full">
-                            @include('article.components.card', ['article' => $article])
+                            @include('insight.article.components.card', ['article' => $article])
                         </div>
                     @endif
 
