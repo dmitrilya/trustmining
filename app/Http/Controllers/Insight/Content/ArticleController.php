@@ -49,7 +49,10 @@ class ArticleController extends Controller
      */
     public function create(Channel $channel)
     {
-        return view('insight.article.create', ['channel' => $channel]);
+        return view('insight.article.create', [
+            'channel' => $channel,
+            'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys()
+        ]);
     }
 
     /**

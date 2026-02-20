@@ -11,16 +11,16 @@
     
     const allowedTextColors = ['main-text-color', 'secondary-text-color'];
     const allowedBackgroundColors = ['green-bg-color', 'indigo-bg-color'];
-
+    
     const Link = Quill.import('formats/link');
     class CustomLink extends Link {
         static create(value) {
             const node = super.create(value);
-            node.classList.add('inline'); 
+            node.classList.add('inline');
             return node;
         }
     }
-
+    
     Quill.register(CustomLink, true);
     
     const Image = Quill.import('formats/image');
@@ -143,9 +143,49 @@
                     ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                     ->keyBy('key')" />
 
-                <x-editable-list name="tags">
-                    <p class="block text-sm text-gray-700 dark:text-gray-300">{{ __('Tags for search') }}</p>
-                </x-editable-list>
+                <div x-data="{ allTags: {{ $tags }}, tags: [], search: '' }">
+                    <div>
+                        <x-input-label for="search" :value="__('Hashtags')" />
+                        <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
+                            class="mt-1 flex items-center overflow-hidden bg-white dark:bg-zinc-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
+                            <input type="text" id="search" x-model="search" placeholder="#"
+                                class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-gray-700 dark:text-gray-300 w-full" />
+
+                            <button type="button"
+                                class="text-xs bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 hover:dark:bg-zinc-700 shadow-sm text-gray-700 dark:text-gray-300 px-2 py-1 rounded-full"
+                                @click="if (!search.trim().length) return; tags.push(search); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                        <template x-for="tag in tags" :key="tag">
+                            <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                        <template
+                            x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)"
+                            :key="tag">
+                            <div @click="tags.push(tag);allTags.splice(allTags.indexOf(tag), 1);search = ''"
+                                x-text="tag"
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
+                            </div>
+                        </template>
+                        <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
+                            class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
+                            <span
+                                x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
+                            {{ __('tags more') }}
+                        </div>
+                    </div>
+
+                    <template x-for="tag in tags" :key="tag">
+                        <input type="hidden" name="tags[]" :value="tag">
+                    </template>
+                </div>
                 <x-input-error :messages="$errors->get('tags')" />
 
                 <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
