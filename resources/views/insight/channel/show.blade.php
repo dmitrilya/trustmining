@@ -29,7 +29,7 @@
 
         <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-2 lg:mb-4">{{ $channel->brief_description }}</p>
 
-        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{{ $channel->description }}</p>
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">{{ $channel->description }}</p>
     </div>
 
     @if (auth()->check() && auth()->user()->id == $channel->user_id)
