@@ -2,7 +2,8 @@
     class="card relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <img itemprop="image" class="w-full" src="{{ Storage::url($video->preview) }}" alt="{{ $video->title }}" />
+            <img itemprop="thumbnailUrl" class="w-full" src="{{ Storage::url($video->preview) }}"
+                alt="{{ $video->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [
@@ -11,18 +12,17 @@
                 'slug' => $video->channel->slug,
                 'subscribers' => $video->channel->active_subscribers_count,
             ])
-            <h3 itemprop="headline"
+            <h3 itemprop="name"
                 class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 h-12">
                 {{ $video->title }}</h3>
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="text-xxs sm:text-xs text-gray-500">{{ $video->created_at->gt(now()->subWeek()) ? $video->created_at->diffForHumans() : $video->created_at->translatedFormat('j M') }}</p>
-            <meta itemprop="datePublished" content="{{ $video->created_at->toIso8601String() }}" />
-            @if ($video->updated_at)
-                <meta itemprop="dateModified" content="{{ $video->updated_at->toIso8601String() }}" />
-            @endif
+            <p class="text-xxs sm:text-xs text-gray-500">
+                {{ $video->created_at->gt(now()->subWeek()) ? $video->created_at->diffForHumans() : $video->created_at->translatedFormat('j M') }}
+            </p>
+            <meta itemprop="uploadDate" content="{{ $video->created_at->toIso8601String() }}" />
 
             <div class="flex items-center gap-2 xs:gap-3 sm:gap-4">
                 <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
@@ -55,6 +55,8 @@
                 </div>
             </div>
         </div>
+
+        <meta itemprop="embedUrl" content="{{ $video->url }}" />
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"
             href="{{ route('insight.video.show', ['channel' => $video->channel->slug, 'video' => $video->id . '-' . mb_strtolower(str_replace(' ', '-', $video->title))]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Watch') }}</x-secondary-button>
