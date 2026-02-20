@@ -181,12 +181,11 @@
         @include('layouts.footer')
     @endif
 
-    @if (!$attributes->has('noindex'))
-        <div id="toasts" class="fixed {{ request()->routeIs('insight.*') ? 'bottom-[4.25rem] lg:bottom-5' : 'bottom-5' }} right-2 sm:right-5 w-full max-w-xs space-y-2"
-            @error('forbidden')x-init="pushToastAlert('{{ $errors->first() }}', 'error')"@enderror
-            @error('success')x-init="pushToastAlert('{{ $errors->first() }}', 'success')"@enderror>
-        </div>
-    @endif
+    <div id="toasts"
+        class="fixed {{ request()->routeIs('insight.*') ? 'bottom-[4.25rem] lg:bottom-5' : 'bottom-5' }} right-2 sm:right-5 w-full max-w-xs space-y-2"
+        @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
+        @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
+    </div>
 
     @php
         $location = session('user_location');
