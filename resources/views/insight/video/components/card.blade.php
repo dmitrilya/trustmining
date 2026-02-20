@@ -18,8 +18,7 @@
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="adaptive"
-                data-date="{{ $video->created_at }}"></p>
+            <p class="text-xxs sm:text-xs text-gray-500">{{ $video->created_at->gt(now()->subWeek()) ? $video->created_at->diffForHumans() : $video->created_at->translatedFormat('j M') }}</p>
             <meta itemprop="datePublished" content="{{ $video->created_at->toIso8601String() }}" />
             @if ($video->updated_at)
                 <meta itemprop="dateModified" content="{{ $video->updated_at->toIso8601String() }}" />

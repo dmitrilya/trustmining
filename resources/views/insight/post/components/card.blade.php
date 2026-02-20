@@ -18,8 +18,7 @@
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="adaptive"
-                data-date="{{ $post->created_at }}"></p>
+            <p class="text-xxs sm:text-xs text-gray-500">{{ $post->created_at->gt(now()->subWeek()) ? $post->created_at->diffForHumans() : $post->created_at->translatedFormat('j M') }}</p>
             <meta itemprop="datePublished" content="{{ $post->created_at->toIso8601String() }}" />
             @if ($post->updated_at)
                 <meta itemprop="dateModified" content="{{ $post->updated_at->toIso8601String() }}" />
