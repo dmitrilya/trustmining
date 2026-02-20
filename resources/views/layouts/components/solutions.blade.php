@@ -224,8 +224,15 @@
                     @endphp
 
                     @if ($article)
-                        <div class="hidden md:block w-full">
-                            @include('insight.article.components.card', ['article' => $article])
+                        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList"
+                            class="hidden md:block w-full">
+                            <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                            <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <meta itemprop="position" content="1" />
+
+                                @include('insight.article.components.card', ['article' => $article])
+                            </div>
                         </div>
                     @endif
 
