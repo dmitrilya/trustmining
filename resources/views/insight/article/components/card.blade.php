@@ -23,7 +23,9 @@
             <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="adaptive"
                 data-date="{{ $article->created_at }}"></p>
             <meta itemprop="datePublished" content="{{ $article->created_at->toIso8601String() }}" />
-            <meta itemprop="dateModified" content="{{ $article->updated_at->toIso8601String() }}" />
+            @if ($article->updated_at)
+                <meta itemprop="dateModified" content="{{ $article->updated_at->toIso8601String() }}" />
+            @endif
 
             <div class="flex items-center gap-2 xs:gap-3 sm:gap-4">
                 <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
