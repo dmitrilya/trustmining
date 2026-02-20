@@ -176,7 +176,7 @@ window.toc = (article, name) => {
         link.href = `#${id}`;
 
         if (heading.tagName.toLowerCase() === 'h3') {
-            listItem.classList.add('ml-2', 'list-none', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
+            listItem.classList.add('ml-2', 'list-none', 'text-gray-600', 'dark:text-gray-400', 'group-hover:text-gray-900', 'dark:group-hover:text-gray-100', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
         } else {
             listItem.classList.add('list-none', 'text-xs', 'group', 'cursor-pointer');
         }

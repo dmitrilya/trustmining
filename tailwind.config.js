@@ -30,7 +30,7 @@ module.exports = {
                 '160': '40rem',
             },
             screens: {
-                'xs': '380px'
+                'xs': '380px',
             },
             gridTemplateColumns: {
                 '16': 'repeat(16, minmax(0, 1fr))',
@@ -39,6 +39,7 @@ module.exports = {
             maxWidth: {
                 '8xl': '88rem',
                 '9xl': '96rem',
+                '10xl': '104rem',
             },
             keyframes: {
                 'highlight': {

@@ -47,12 +47,12 @@
         </div>
     </x-slot>
 
-    <div class="max-w-9xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-10xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="lg:grid grid-cols-12 gap-4 items-start relative">
             <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
                 @include('insight.components.menu', ['channel' => $attributes->get('channel')])
 
-                <div id="toc-lg-container"></div>
+                @include('insight.components.popular-article')
             </div>
 
             <div class="lg:col-span-6 xl:col-span-7">
@@ -61,7 +61,8 @@
 
             <div class="hidden lg:flex flex-col lg:col-span-3 gap-4">
                 @include('insight.components.top-channels')
-                @include('insight.components.popular-article')
+
+                <div id="toc-lg-container"></div>
 
                 @if (isset($sidebar))
                     {{ $sidebar }}
