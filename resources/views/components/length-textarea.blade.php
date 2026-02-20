@@ -2,9 +2,15 @@
 
 <div x-data="{ max: {{ $max }}, length: {{ mb_strlen($value) }} }"
     class="{{ $class }} flex py-1.5 px-3 block mt-1 w-full rounded-md shadow-sm shadow-logo-color text-gray-950 bg-white dark:bg-zinc-950 dark:text-gray-200 border-0 ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500">
-    <textarea name="{{ $name }}" class="w-full bg-transparent border-0 p-0 focus:outline-none focus:ring-0" {{ $disabled ? 'disabled' : '' }}
-        value="{{ $value }}" {{ $attributes }}
-        @input="length = $el.value.length;
+    <textarea name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} value="{{ $value }}" {{ $attributes }}
+        class="w-full resize-none overflow-hidden bg-transparent border-0 p-0 focus:outline-none focus:ring-0"
+        x-data="{
+            resize() {
+                $el.style.height = '0px';
+                $el.style.height = $el.scrollHeight + 'px';
+            }
+        }" x-init="resize()"
+        @input="resize(); length = $el.value.length;
             if (length > max) errors['{{ $name }}'] = '{{ __('Maximum character limit exceeded') }}';
             else delete errors['{{ $name }}'];">{{ $value }}</textarea>
     <div class="min-w-fit mt-1 ml-2 sm:ml-3 text-xxs sm:text-xs text-gray-600 dark:text-gray-400">

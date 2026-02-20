@@ -2,6 +2,6 @@
 
 return [
     'headframe' => [
-        'link' => 'https://headframe.io/miningpool/?promocode=hfrc_EX5JVNDL'
+        'link' => 'https://headframe.io/?promocode=hfrc_EX5JVNDL'
     ]
 ];

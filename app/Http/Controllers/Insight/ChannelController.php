@@ -100,6 +100,17 @@ class ChannelController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\View\View
+     */
+    public function edit(Channel $channel): View
+    {
+        return view('insight.channel.edit', ['channel' => $channel]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Insight\UpdateChannelRequest  $request
@@ -110,7 +121,7 @@ class ChannelController extends Controller
     {
         $channel = $this->service->update($channel, $request->name, $request->slug, $request->brief_description, $request->description, $request->file('logo'), $request->file('banner'));
 
-        return back()->withErrors(['success' => __('Channel updated successfully')]);
+        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Channel updated successfully')]);
     }
 
     /**

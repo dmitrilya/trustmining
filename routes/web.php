@@ -160,11 +160,12 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'insight'], function () {
         Route::post('/channel/check-slug', [ChannelController::class, 'checkSlug'])->name('insight.channel.check-slug');
         Route::get('/channel/create', [ChannelController::class, 'create'])->name('insight.channel.create');
-        Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');
+        Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');        
         Route::post('/subscriptions', [InsightController::class, 'subscriptions'])->name('insight.subscriptions.index');
         Route::post('/comment/{comment}/reaction/{type}', [CommentController::class, 'reaction'])->name('insight.comment.reaction');
         Route::middleware('owner')->group(function () {
             Route::get('/channel/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
+            Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('insight.channel.edit');
             Route::put('/channel/{channel}/update', [ChannelController::class, 'update'])->name('insight.channel.update');
             Route::delete('/channel/{channel}/destroy', [ChannelController::class, 'destroy'])->name('insight.channel.destroy');
         });
