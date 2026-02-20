@@ -31,6 +31,7 @@ module.exports = {
             },
             screens: {
                 'xs': '380px',
+                'xxxl': '1664px',
             },
             gridTemplateColumns: {
                 '16': 'repeat(16, minmax(0, 1fr))',

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Insight\Content;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\Insight\Content\StoreVideoRequest;
 use App\Http\Requests\Insight\Content\UpdateVideoRequest;
 use App\Http\Requests\Insight\StoreCommentRequest;
@@ -36,8 +36,15 @@ class VideoController extends Controller
      */
     public function index(Request $request)
     {
+        $videos = $this->service->filter($request)->paginate(12);
+
+        if ($request->ajax()) return response()->json([
+            'html' => view('insight.video.components.list', compact('videos'))->render(),
+            'hasMore' => $videos->hasMorePages()
+        ]);
+
         return view('insight.video.index', [
-            'videos' => $this->service->filter($request)->paginate(30),
+            'videos' => $videos,
         ]);
     }
 

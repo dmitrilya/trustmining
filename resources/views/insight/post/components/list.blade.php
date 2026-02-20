@@ -1,14 +1,7 @@
-<x-filter>@include('insight.post.components.filter')</x-filter>
+@foreach ($posts as $post)
+    <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="position" content="{{ $loop->iteration }}" />
 
-<fieldset aria-label="Choose a post" class="w-full">
-    <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-        @foreach ($posts as $post)
-            @include('insight.post.components.card')
-        @endforeach
+        @include('insight.post.components.card')
     </div>
-</fieldset>
-
-<div class="mt-8 sm:mt-12 lg:mt-16">
-    {{ $posts->links() }}
-</div>
-
+@endforeach

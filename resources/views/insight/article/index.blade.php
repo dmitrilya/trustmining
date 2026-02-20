@@ -1,6 +1,6 @@
 <x-insight-layout title="TM Insight: статьи, руководства для майнеров, отзывы и обзоры экспертов"
     description="База знаний по майнингу: подробные обзоры ASIC-майнеров, видеокарт и комплектующих. Полезные статьи и инструкции от экспертов и сообщества. Узнайте, как эффективно добывать криптовалюту."
-    :header="__('Articles')">
+    :header="__('Articles')" itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')">
     <x-slot name="sort">
         @php
             $sort = request()->sort ?? 'newest';
@@ -71,5 +71,13 @@
         </x-header-filters>
     </x-slot>
 
-    @include('insight.article.components.list')
+    <x-filter>@include('insight.article.components.filter')</x-filter>
+
+    <div itemscope itemtype="https://schema.org/ItemList" id="infinite-loader"
+        class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xxxl:grid-cols-4"
+        x-init="new InfiniteLoader({ endpoint: '{{ route('insight.article.index') }}', page: {{ $articles->currentPage() }}, lastPage: {{ $articles->lastPage() }} });">
+        <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+        @include('insight.article.components.list')
+    </div>
 </x-insight-layout>

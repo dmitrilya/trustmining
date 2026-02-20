@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Insight\Content;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\Insight\Content\StoreArticleRequest;
 use App\Http\Requests\Insight\Content\UpdateArticleRequest;
 use App\Http\Requests\Insight\StoreCommentRequest;
@@ -35,8 +35,15 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        $articles = $this->service->filter($request)->paginate(12);
+
+        if ($request->ajax()) return response()->json([
+            'html' => view('insight.article.components.list', compact('articles'))->render(),
+            'hasMore' => $articles->hasMorePages()
+        ]);
+
         return view('insight.article.index', [
-            'articles' => $this->service->filter($request)->paginate(30),
+            'articles' => $articles,
             'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys()
         ]);
     }

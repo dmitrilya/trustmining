@@ -1,4 +1,5 @@
-<x-app-layout :title="$attributes->get('title')" :description="$attributes->get('description')" without_footer="true" :noindex="$attributes->has('noindex')">
+<x-app-layout :title="$attributes->get('title')" :description="$attributes->get('description')" without_footer="true" :itemtype="$attributes->get('itemtype')" :itemname="$attributes->get('itemname')"
+    :noindex="$attributes->has('noindex') ? 'true' : null">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">

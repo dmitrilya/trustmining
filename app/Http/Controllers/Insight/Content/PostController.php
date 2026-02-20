@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Insight\Content;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\Insight\Content\StorePostRequest;
 use App\Http\Requests\Insight\Content\UpdatePostRequest;
 use App\Http\Requests\Insight\StoreCommentRequest;
@@ -36,8 +36,15 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        $posts = $this->service->filter($request)->paginate(12);
+
+        if ($request->ajax()) return response()->json([
+            'html' => view('insight.post.components.list', compact('posts'))->render(),
+            'hasMore' => $posts->hasMorePages()
+        ]);
+
         return view('insight.post.index', [
-            'posts' => $this->service->filter($request)->paginate(30),
+            'posts' => $posts,
         ]);
     }
 

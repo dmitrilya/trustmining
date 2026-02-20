@@ -6,6 +6,7 @@ import { adsStatistics } from './statistics';
 import './suggestions';
 import './broadcast';
 import './insight';
+import './InfiniteLoader';
 
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';

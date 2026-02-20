@@ -31,17 +31,13 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>
-        @if ($attributes->has('title'))
-            {{ $attributes->get('title') }}@else{{ config('app.name') }}
-        @endif
-    </title>
+    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
     @endif
 
-    @if ($attributes->has('noindex'))
+    @if ($attributes->get('noindex'))
         <meta name="robots" content="noindex, nofollow">
     @endif
 
@@ -94,7 +90,12 @@
                 document.body.classList.remove('dark');
                 theme = 'light';
                 axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
-            }" @endif>
+            }" @endif
+    @if ($attributes->get('itemtype')) itemscope itemtype="{{ $attributes->get('itemtype') }}" @endif>
+    @if ($attributes->get('itemtype'))
+        <meta itemprop="name" content="{{ $attributes->get('itemname') }}" />
+    @endif
+
     <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}"
         x-data="{ filter: false }">
         @include('layouts.navigation')
