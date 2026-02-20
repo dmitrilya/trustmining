@@ -1,7 +1,7 @@
 @if (isset($clickable))
     <a href="{{ route('insight.channel.show', ['channel' => $slug]) }}" class="hover:opacity-80">
 @endif
-<div itemprop="author" itemscope itemtype="https://schema.org/Person"
+<div itemprop="author" itemscope itemtype="https://schema.org/Organization"
     class="mb-2 sm:mb-4{{ isset($sm) ? '' : ' lg:mb-6' }} flex items-center">
     <div
         class="{{ isset($sm) ? 'min-w-12 size-12 sm:min-w-14 sm:size-14' : 'min-w-16 size-16 sm:min-w-22 sm:size-22 lg:min-w-28 lg:size-28 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
