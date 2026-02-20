@@ -84,7 +84,7 @@ class HostingController extends Controller
 
         $hosting->save();
 
-        $hosting->moderation()->create(['data' => $hosting->attributesToArray()]);
+        $hosting->moderations()->create(['data' => $hosting->attributesToArray()]);
 
         return redirect()->route('company.hosting', ['user' => $user->url_name]);
     }
@@ -146,7 +146,7 @@ class HostingController extends Controller
         if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
 
         if (!empty($data))
-            $hosting->moderation()->create(['data' => $data]);
+            $hosting->moderations()->create(['data' => $data]);
 
         return redirect()->route('company.hosting', ['user' => $user->url_name]);
     }

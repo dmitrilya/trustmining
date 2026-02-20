@@ -102,7 +102,7 @@ class OfficeController extends Controller
         $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
         $office->save();
 
-        $office->moderation()->create(['data' => $office->attributesToArray()]);
+        $office->moderations()->create(['data' => $office->attributesToArray()]);
 
         return redirect()->route('profile');
     }
@@ -144,7 +144,7 @@ class OfficeController extends Controller
         if ($request->images)
             $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
 
-        if (!empty($data)) $office->moderation()->create(['data' => $data]);
+        if (!empty($data)) $office->moderations()->create(['data' => $data]);
 
         return redirect()->route('company.office', ['user' => $user->url_name, 'office' => $office->id]);
     }

@@ -39,7 +39,7 @@ class ReviewController extends Controller
 
         $review->save();
 
-        $review->moderation()->create(['data' => $review->attributesToArray()]);
+        $review->moderations()->create(['data' => $review->attributesToArray()]);
 
         CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
 

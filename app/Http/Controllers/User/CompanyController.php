@@ -130,7 +130,7 @@ class CompanyController extends Controller
         if ($request->bg_logo)
             $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id);
 
-        if (!empty($data)) $company->moderation()->create(['data' => $data]);
+        if (!empty($data)) $company->moderations()->create(['data' => $data]);
 
         return redirect()->route('company.about', ['user' => $user->url_name]);
     }

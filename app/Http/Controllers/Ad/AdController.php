@@ -101,7 +101,7 @@ class AdController extends Controller
 
         $ad->save();
 
-        $ad->moderation()->create(['data' => $ad->attributesToArray()]);
+        $ad->moderations()->create(['data' => $ad->attributesToArray()]);
 
         return redirect()->route('company', ['user' => $user->url_name]);
     }
@@ -205,7 +205,7 @@ class AdController extends Controller
             $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id);
 
         if (!empty($data)) {
-            $moderation = $ad->moderation()->create(['data' => $data]);
+            $moderation = $ad->moderations()->create(['data' => $data]);
 
             if (!$request->preview && !$request->images && !$request->description) {
                 $moderation->moderation_status_id = 2;
@@ -240,7 +240,7 @@ class AdController extends Controller
                 $change = $changings->where('id', $ad->id)->first();
 
                 if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $ad->moderation()->create([
+                    $ad->moderations()->create([
                         'data' => $change,
                         'moderation_status_id' => 2,
                         'user_id' => 10000000
