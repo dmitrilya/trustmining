@@ -224,8 +224,9 @@
                     @endphp
 
                     @if ($article)
-                        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList"
+                        <div itemscope itemtype="https://schema.org/ItemList"
                             class="hidden md:block w-full">
+                            <meta itemprop="name" content="Articles in menu" />
                             <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                             <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
