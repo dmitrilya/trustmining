@@ -120,8 +120,12 @@
         </a>
     @endif
     @if (
-        (request()->routeIs('insight.channel.*') && $channel && auth()->check() && auth()->user()->id == $channel->user_id) ||
-            request()->routeIs('insight.channel.create'))
+        (request()->routeIs('insight.channel.*') &&
+            $channel &&
+            auth()->check() &&
+            auth()->user()->id == $channel->user_id) ||
+            request()->routeIs('insight.channel.create') ||
+            request()->routeIs('insight.channel.edit'))
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
             class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
             @include('insight.svg.channel-active', [
@@ -145,8 +149,12 @@
             </div>
         </a>
     @endif
-    @if (request()->routeIs(['insight.channel.*', 'insight.channel.statistics']) && $channel && auth()->check() &&
-            auth()->user()->id == $channel->user_id)
+    @if (
+        (request()->routeIs(['insight.channel.*', 'insight.channel.statistics']) &&
+            $channel &&
+            auth()->check() &&
+            auth()->user()->id == $channel->user_id) ||
+            request()->routeIs('insight.channel.edit'))
         <div class="px-3 pt-4 pb-2 mt-2 border-t border-gray-300 dark:border-zinc-700 cursor-pointer group"
             x-data="{ open: false }">
             <div class="flex items-center" @click="open = !open">
@@ -165,11 +173,11 @@
             </div>
 
             <div x-show="open" x-collapse class="pl-8 space-y-1 mt-2" style="display: none;">
-                <a href="{{ route('insight.article.create', ['channel' => $channel->slug]) }}"
+                <a href="{{ route('insight.article.create', ['channel' => auth()->user()->channel->slug]) }}"
                     class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">{{ __('Article') }}</a>
-                <a href="{{ route('insight.post.create', ['channel' => $channel->slug]) }}"
+                <a href="{{ route('insight.post.create', ['channel' => auth()->user()->channel->slug]) }}"
                     class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">{{ __('Post') }}</a>
-                <a href="{{ route('insight.video.create', ['channel' => $channel->slug]) }}"
+                <a href="{{ route('insight.video.create', ['channel' => auth()->user()->channel->slug]) }}"
                     class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">{{ __('Video') }}</a>
             </div>
         </div>
@@ -192,7 +200,7 @@
         </div>
 
         @if (request()->routeIs('insight.channel.statistics'))
-            <a href="{{ route('insight.channel.statistics', ['channel' => $channel->slug]) }}"
+            <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group bg-gray-200 dark:bg-zinc-800 px-3 py-2 rounded-full">
                 @include('insight.svg.statistics-active', [
                     'svgClass' => 'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-6',
@@ -203,7 +211,7 @@
                 </div>
             </a>
         @else
-            <a href="{{ route('insight.channel.statistics', ['channel' => $channel->slug]) }}"
+            <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group px-3 py-2">
                 @include('insight.svg.statistics', [
                     'svgClass' => 'text-gray-600 dark:text-zinc-400 stroke-gray-400 dark:stroke-zinc-600 size-6',

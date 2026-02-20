@@ -68,7 +68,7 @@ class PostService extends ContentService
 
     public function filter($request = null)
     {
-        $posts = Post::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])])
+        $posts = Post::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers')])
             ->select(['id', 'preview', 'channel_id', 'content', 'created_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
