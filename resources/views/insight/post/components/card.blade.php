@@ -20,7 +20,8 @@
         <div class="flex items-center justify-between">
             <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="adaptive"
                 data-date="{{ $post->created_at }}"></p>
-            <meta itemprop="datePublished" content="{{ $post->created_at->format('Y-m-d') }}" />
+            <meta itemprop="datePublished" content="{{ $post->created_at->toIso8601String() }}" />
+            <meta itemprop="dateModified" content="{{ $post->updated_at->toIso8601String() }}" />
 
             <div class="flex items-center gap-2 xs:gap-3 sm:gap-4">
                 <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"

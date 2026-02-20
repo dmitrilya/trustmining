@@ -1,9 +1,8 @@
 <x-insight-layout title="TM Insight - экспертное медиа о крипте, майнинге и оборудовании"
     description="TM Insight - ведущая медиа-платформа о криптовалютах и майнинге. Экспертные статьи, рыночная аналитика, трейдинг, оборудование и корпоративные каналы"
-    header="TM Insight">
+    header="TM Insight" itemtype="https://schema.org/WebPage" :itemname="'TM Insight ' . __('Home')">
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
-        <div
-            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+        <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Articles') }}
             </h2>
@@ -24,7 +23,10 @@
             </div>
         </div>
 
-        <div x-show="tab === 'latest'" x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Articles') . ' ' . __('New') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $newArticles,
                 'blade' => 'insight.article.components.card',
@@ -32,7 +34,10 @@
             ])
         </div>
 
-        <div x-show="tab === 'popular'" x-cloak x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Articles') . ' ' . __('Popular') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $popularArticles,
                 'blade' => 'insight.article.components.card',
@@ -42,8 +47,7 @@
     </section>
 
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
-        <div
-            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+        <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Posts') }}
             </h2>
@@ -64,7 +68,10 @@
             </div>
         </div>
 
-        <div x-show="tab === 'latest'" x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Posts') . ' ' . __('New') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $newPosts,
                 'blade' => 'insight.post.components.card',
@@ -72,7 +79,10 @@
             ])
         </div>
 
-        <div x-show="tab === 'popular'" x-cloak x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Posts') . ' ' . __('Popular') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $popularPosts,
                 'blade' => 'insight.post.components.card',
@@ -82,8 +92,7 @@
     </section>
 
     <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
-        <div
-            class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+        <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
                 {{ __('Videos') }}
             </h2>
@@ -104,7 +113,10 @@
             </div>
         </div>
 
-        <div x-show="tab === 'latest'" x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Videos') . ' ' . __('New') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $newVideos,
                 'blade' => 'insight.video.components.card',
@@ -112,7 +124,10 @@
             ])
         </div>
 
-        <div x-show="tab === 'popular'" x-cloak x-transition:enter.duration.400ms>
+        <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+            x-transition:enter.duration.400ms>
+            <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
+
             @include('insight.components.carousel', [
                 'items' => $popularVideos,
                 'blade' => 'insight.video.components.card',

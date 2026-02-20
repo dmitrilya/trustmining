@@ -73,7 +73,7 @@
 
     <x-filter>@include('insight.article.components.filter')</x-filter>
 
-    <div itemscope itemtype="https://schema.org/ItemList" id="infinite-loader"
+    <div itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList" id="infinite-loader"
         class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xxxl:grid-cols-4"
         x-init="new InfiniteLoader({ endpoint: '{{ route('insight.article.index') }}', page: {{ $articles->currentPage() }}, lastPage: {{ $articles->lastPage() }} });">
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
