@@ -157,3 +157,64 @@ window.carousel = () => {
         }
     }
 }
+
+window.toc = (article, name) => {
+    const headings = article.querySelectorAll('h2, h3');
+    if (headings.length === 0) return;
+
+    const tocList = document.createElement('ul');
+    tocList.classList.add('space-y-1.5');
+
+    headings.forEach((heading, index) => {
+        const id = `toc-anchor-${index}`;
+        heading.id = id;
+
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+
+        link.textContent = heading.textContent;
+        link.href = `#${id}`;
+
+        if (heading.tagName.toLowerCase() === 'h3') {
+            listItem.classList.add('ml-2', 'list-none', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
+        } else {
+            listItem.classList.add('list-none', 'text-xs', 'group', 'cursor-pointer');
+        }
+
+        link.classList.add('text-gray-600', 'dark:text-gray-400', 'group-hover:text-gray-900', 'dark:group-hover:text-gray-100');
+
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, `#${heading.innerText}`);
+        });
+
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+    });
+
+    const tocLgContainer = document.getElementById('toc-lg-container');
+    const tocContainer = document.getElementById('toc-container');
+    tocLgContainer.classList.add('p-4', 'bg-white/60', 'dark:bg-zinc-900/60', 'border', 'border-gray-300', 'dark:border-zinc-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl')
+
+    const blockName = document.createElement('p');
+    blockName.textContent = name;
+    blockName.classList.add('mb-4', 'text-base', 'text-gray-700', 'dark:text-gray-300', 'font-bold');
+
+    tocLgContainer.appendChild(blockName);
+    tocLgContainer.appendChild(tocList);
+
+    const tocListClone = tocList.cloneNode(true);
+    const blockNameMobile = blockName.cloneNode(true);
+
+    tocListClone.querySelectorAll('a').forEach((link, index) => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            headings[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, `#${headings[index].innerText}`);
+        });
+    });
+
+    tocContainer.appendChild(blockNameMobile);
+    tocContainer.appendChild(tocListClone);
+}

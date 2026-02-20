@@ -10,7 +10,8 @@
                     {{ $sort }}
                 @endif
 
-                <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block ml-1 xs:ml-2 sm:ml-3 lg:ml-4">
+                <div x-data="{ open: false }" @click.outside="open = false"
+                    class="relative inline-block ml-1 xs:ml-2 sm:ml-3 lg:ml-4">
                     <div @if (auth()->check() && auth()->user()->channel) @click="open = !open" @elseif (auth()->check()) @click="window.open('{{ route('insight.channel.create') }}', '_blank')" @else @click="$dispatch('open-modal', 'login')" @endif
                         class="group flex items-center cursor-pointer rounded-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm hover:shadow-md shadow-logo-color hover:shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2 transition-all active:scale-95">
 
@@ -38,37 +39,7 @@
                             class="absolute right-0 mt-2 w-48 origin-top-left rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl shadow-xl z-50 overflow-hidden"
                             style="display: none;">
 
-                            <div class="p-1.5 space-y-1">
-                                <a href="{{ route('insight.article.create', ['channel' => auth()->user()->channel->slug]) }}"
-                                    class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors group/item">
-                                    <span
-                                        class="p-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600">📝</span>
-                                    <div class="flex flex-col">
-                                        <span class="font-medium">{{ __('Article') }}</span>
-                                        <span class="text-[10px] text-gray-500">{{ __('Long read content') }}</span>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('insight.post.create', ['channel' => auth()->user()->channel->slug]) }}"
-                                    class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors group/item">
-                                    <span
-                                        class="p-1 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600">💬</span>
-                                    <div class="flex flex-col">
-                                        <span class="font-medium">{{ __('Post') }}</span>
-                                        <span class="text-[10px] text-gray-500">{{ __('Short thoughts') }}</span>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('insight.video.create', ['channel' => auth()->user()->channel->slug]) }}"
-                                    class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-colors group/item">
-                                    <span
-                                        class="p-1 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600">🎥</span>
-                                    <div class="flex flex-col">
-                                        <span class="font-medium">{{ __('Video') }}</span>
-                                        <span class="text-[10px] text-gray-500">{{ __('Visual stories') }}</span>
-                                    </div>
-                                </a>
-                            </div>
+                            @include('insight.components.publish-menu')
                         </div>
                     @endif
                 </div>
@@ -78,8 +49,10 @@
 
     <div class="max-w-9xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div class="lg:grid grid-cols-12 gap-4 items-start relative">
-            <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
+            <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
                 @include('insight.components.menu', ['channel' => $attributes->get('channel')])
+
+                <div id="toc-lg-container"></div>
             </div>
 
             <div class="lg:col-span-6 xl:col-span-7">

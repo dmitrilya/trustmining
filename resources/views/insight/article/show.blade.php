@@ -2,7 +2,9 @@
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) $channel = $article->channel;
+        if ($moder) {
+            $channel = $article->channel;
+        }
     @endphp
 
     @if ($user && $user->id == $channel->user_id)
@@ -17,7 +19,7 @@
     @endif
 
     <div x-data="{ edit: false }"
-        class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+        class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             @include('insight.components.card-channel', [
                 'name' => $channel->name,
@@ -96,29 +98,30 @@
             </div>
         </div>
 
-        <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $article->title }}</h1>
+        <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $article->title }}
+        </h1>
+
+        <div class="lg:hidden" id="toc-container"></div>
 
         <img src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($article->preview) }}"
             alt="" class="rounded-xl w-full">
 
-        <div x-show="!edit">
-            @if ($moder)
-                <p class="mb-2 sm:mb-3 text-xs sm:text-sm text-gray-600">{{ $article->subtitle }}</p>
+        <div class="ql-snow" x-show="!edit">
+            <p class="mb-2 sm:mb-3 text-xs sm:text-sm text-gray-600">{{ $article->subtitle }}</p>
 
-                <div class="space-x-2 inline">
-                    @if (isset($moderation->data['tags']))
-                        @foreach ($moderation->data['tags'] as $tag)
-                            <span>#{{ $tag }}</span>
-                        @endforeach
-                    @else
-                        @foreach ($article->tags as $tag)
-                            <span>#{{ $tag }}</span>
-                        @endforeach
-                    @endif
-                </div>
-            @endif
+            <div class="space-x-2 inline">
+                @if (isset($moderation->data['tags']))
+                    @foreach ($moderation->data['tags'] as $tag)
+                        <span>#{{ $tag }}</span>
+                    @endforeach
+                @else
+                    @foreach ($article->tags as $tag)
+                        <span>#{{ $tag }}</span>
+                    @endforeach
+                @endif
+            </div>
 
-            <div class="ql-editor !p-0 text-xs xs:text-sm sm:text-base">
+            <div class="ql-editor !p-0 text-xs xs:text-sm sm:text-base" x-init="toc($el, '{{ __('TOC') }}')">
                 @if ($moder && isset($moderation->data['content']))
                     {!! $moderation->data['content'] !!}
                 @else
@@ -128,7 +131,9 @@
         </div>
 
         @if ($user && $user->id == $channel->user_id)
-            @include('insight.article.edit')
+            <div class="ql-snow">
+                @include('insight.article.edit')
+            </div>
         @endif
     </div>
 

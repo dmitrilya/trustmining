@@ -648,6 +648,7 @@
     "Series name is required": "Укажите название серии",
     "The maximum series name length is 30 characters": "Максимальная длина названия серии 30 символов",
     "Content is required": "Содержимое обязательно",
+    "TOC": "Содержание",
     "Article": "Статья",
     "Long read content": "Лонгрид контент",
     "Articles": "Статьи",
