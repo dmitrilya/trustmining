@@ -204,10 +204,11 @@ window.toc = (article, name) => {
     tocLgContainer.appendChild(blockName);
     tocLgContainer.appendChild(tocList);
 
-    const tocListClone = tocList.cloneNode(true);
+    const tocListMobile = tocList.cloneNode(true);
+
     const blockNameMobile = blockName.cloneNode(true);
 
-    tocListClone.querySelectorAll('a').forEach((link, index) => {
+    tocListMobile.querySelectorAll('a').forEach((link, index) => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             headings[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -215,6 +216,33 @@ window.toc = (article, name) => {
         });
     });
 
-    tocContainer.appendChild(blockNameMobile);
-    tocContainer.appendChild(tocListClone);
+    if (headings.length > 3) {
+        tocListMobile.classList.add('overflow-hidden', 'transition-all')
+        tocListMobile.style.height = '60px';
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Развернуть';
+        btn.classList.add('text-sm', 'mt-2', 'text-gray-700', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-gray-100');
+
+        let isCollapsed = true;
+
+        btn.onclick = () => {
+            if (isCollapsed) {
+                tocListMobile.style.height = tocListMobile.scrollHeight + 'px';
+                btn.textContent = 'Свернуть';
+                isCollapsed = false;
+            } else {
+                tocListMobile.style.height = '60px';
+                btn.textContent = 'Развернуть';
+                isCollapsed = true;
+            }
+        };
+
+        tocContainer.appendChild(blockNameMobile);
+        tocContainer.appendChild(tocListMobile);
+        tocContainer.appendChild(btn);
+    } else {
+        tocContainer.appendChild(blockNameMobile);
+        tocContainer.appendChild(tocListMobile);
+    }
 }
