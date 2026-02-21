@@ -15,6 +15,7 @@
             <h3 itemprop="name"
                 class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 h-12">
                 {{ $video->title }}</h3>
+            <meta itemprop="description" content="{{ __('Channel') . ' ' . $video->channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
