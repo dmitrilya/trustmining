@@ -210,7 +210,7 @@
     @endif
 
     @if ($series->where('contents_count', '>', 0)->count())
-        <section itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList">
+        <section itemscope itemtype="https://schema.org/ItemList">
             <h2 itemprop="name"
                 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
                 {{ trans_choice('insight.series', 2) }}</h2>
