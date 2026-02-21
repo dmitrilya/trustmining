@@ -11,7 +11,7 @@ class InfiniteLoader {
 
         this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
             root: this.horizontal ? this.container : null,
-            rootMargin: this.horizontal ? '0px 300px 0px 0px' : '600px',
+            rootMargin: this.horizontal ? '0px 450px 0px 0px' : '600px',
             threshold: 0
         });
 
