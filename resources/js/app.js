@@ -262,35 +262,6 @@ window.processVideoLink = src => {
     return src
 }
 
-window.formatAttachMedia = (type) => {
-    let urlInput = document.getElementById(`attach-${type}_url`);
-
-    if (urlInput.value != "") {
-        let src = urlInput.value, ta = document.querySelector("pre[contenteditable]");
-        let media = type == 'img' ? document.createElement('img') : document.createElement('iframe');
-        if (type == 'video') {
-            media.classList.add('w-full', 'aspect-[4/3]');
-            src = window.processVideoLink(src);
-        }
-        media.src = src;
-        media.classList.add('block', 'mx-auto', 'rounded-lg');
-
-        let selection = window.getSelection();
-
-        if (selection.rangeCount === 0 || !ta.contains(selection.getRangeAt(0).commonAncestorContainer)) {
-            ta.appendChild(media);
-        } else {
-            let range = selection.getRangeAt(0);
-            range.collapse(false);
-            range.insertNode(media);
-
-            selection.removeAllRanges();
-            range.setStartAfter(image);
-            selection.addRange(range);
-        }
-    }
-};
-
 window.forumEdit = function (content) {
     content.classList.add('hidden');
     content.nextElementSibling.classList.remove('hidden');
