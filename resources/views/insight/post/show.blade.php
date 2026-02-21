@@ -34,8 +34,8 @@
 
         @include('insight.components.content-info', ['type' => 'article', 'content' => $article])
 
-        <img itemprop="image" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
-            alt="" class="rounded-xl w-full">
+        <img itemprop="image" fetchpriority="high" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
+            alt="" class="rounded-xl w-full aspect-[4/3]">
 
         <div x-show="!edit">
             <div itemprop="articleBody" class="ql-editor !p-0 text-xs xs:text-sm sm:text-base">

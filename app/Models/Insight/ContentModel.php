@@ -18,7 +18,7 @@ abstract class ContentModel extends Model
 
         $this->with = array_merge($this->with, [
             'channel' => function ($q) {
-                $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers');
+                $q->select(['id', 'name', 'logo', 'slug', 'user_id'])->withCount('activeSubscribers');
             },
             'series:id,name'
         ]);

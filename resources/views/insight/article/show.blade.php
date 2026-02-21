@@ -39,8 +39,8 @@
 
         <div class="lg:hidden" id="toc-container"></div>
 
-        <img itemprop="image" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($article->preview) }}"
-            alt="" class="rounded-xl w-full">
+        <img itemprop="image" fetchpriority="high" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($article->preview) }}"
+            alt="" class="rounded-xl w-full aspect-[4/3]">
 
         <div class="ql-snow" x-show="!edit">
             <p itemprop="description" class="mb-2 sm:mb-3 text-xs sm:text-sm text-gray-600">{{ $article->subtitle }}</p>
