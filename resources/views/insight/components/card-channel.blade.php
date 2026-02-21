@@ -5,9 +5,9 @@
         </div>
 
         <div>
-            <h3 itemprop="name" class="text-xs sm:text-sm text-gray-900 dark:text-gray-100 font-bold">
+            <p itemprop="name" class="text-xs sm:text-sm text-gray-900 dark:text-gray-100 font-bold">
                 {{ $name }}
-            </h3>
+            </p>
 
             <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
                 class="flex items-center">

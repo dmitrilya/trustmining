@@ -163,7 +163,7 @@ window.toc = (article, name) => {
     if (headings.length === 0) return;
 
     const tocList = document.createElement('ul');
-    tocList.classList.add('space-y-1.5');
+    tocList.classList.add('space-y-2');
 
     headings.forEach((heading, index) => {
         const id = `toc-anchor-${index}`;

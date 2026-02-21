@@ -8,9 +8,9 @@
     </div>
 
     <div>
-        <h3 itemprop="name"
+        <p itemprop="name"
             class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-gray-900 dark:text-gray-100 font-bold">
-            {{ $name }}</h3>
+            {{ $name }}</p>
         <div itemprop="alternateName"
             class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-500 cursor-pointer' : '' }}"
             @if (!isset($clickable)) @click="navigator.clipboard.writeText('{{ url('/insight/' . $slug) }}').then(() => {
