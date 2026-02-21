@@ -46,181 +46,184 @@
                 {{ $channel->brief_description }}
             </p>
 
-            <p itemprop="description" class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">
-                {{ $channel->description }}
-            </p>
+            <div itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <p itemprop="description"
+                    class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">
+                    {{ $channel->description }}
+                </p>
+            </div>
         </div>
+    </div>
 
-        @if (auth()->check() && auth()->user()->id == $channel->user_id)
-            @include('insight.channel.components.menu')
-        @endif
+    @if (auth()->check() && auth()->user()->id == $channel->user_id)
+        @include('insight.channel.components.menu')
+    @endif
 
-        @if ($articles->count())
-            <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
-                <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                    <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
-                        {{ __('Articles') }}
-                    </h2>
+    @if ($articles->count())
+        <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
+            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                    {{ __('Articles') }}
+                </h2>
 
-                    <div class="flex text-xs sm:text-sm font-medium">
-                        <button @click="tab = 'latest'"
-                            :class="tab === 'latest' ?
-                                'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('New') }}
-                        </button>
-                        <button @click="tab = 'popular'"
-                            :class="tab === 'popular' ?
-                                'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('Popular') }}
-                        </button>
-                    </div>
+                <div class="flex text-xs sm:text-sm font-medium">
+                    <button @click="tab = 'latest'"
+                        :class="tab === 'latest' ?
+                            'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('New') }}
+                    </button>
+                    <button @click="tab = 'popular'"
+                        :class="tab === 'popular' ?
+                            'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Popular') }}
+                    </button>
                 </div>
+            </div>
 
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                    x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Articles') . ' ' . __('New') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $articles->sortByDesc('created_at'),
-                        'blade' => 'insight.article.components.card',
-                        'model' => 'article',
-                    ])
-                </div>
-
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
-                    x-cloak x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Articles') . ' ' . __('Popular') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $articles->sortByDesc('views_count'),
-                        'blade' => 'insight.article.components.card',
-                        'model' => 'article',
-                    ])
-                </div>
-            </section>
-        @endif
-
-        @if ($posts->count())
-            <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
-                <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                    <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
-                        {{ __('Posts') }}
-                    </h2>
-
-                    <div class="flex text-xs sm:text-sm font-medium">
-                        <button @click="tab = 'latest'"
-                            :class="tab === 'latest' ?
-                                'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('New') }}
-                        </button>
-                        <button @click="tab = 'popular'"
-                            :class="tab === 'popular' ?
-                                'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('Popular') }}
-                        </button>
-                    </div>
-                </div>
-
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                    x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Posts') . ' ' . __('New') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $posts->sortByDesc('created_at'),
-                        'blade' => 'insight.post.components.card',
-                        'model' => 'post',
-                    ])
-                </div>
-
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
-                    x-cloak x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Posts') . ' ' . __('Popular') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $posts->sortByDesc('views_count'),
-                        'blade' => 'insight.post.components.card',
-                        'model' => 'post',
-                    ])
-                </div>
-            </section>
-        @endif
-
-        @if ($videos->count())
-            <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
-                <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                    <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
-                        {{ __('Videos') }}
-                    </h2>
-
-                    <div class="flex text-xs sm:text-sm font-medium">
-                        <button @click="tab = 'latest'"
-                            :class="tab === 'latest' ?
-                                'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('New') }}
-                        </button>
-                        <button @click="tab = 'popular'"
-                            :class="tab === 'popular' ?
-                                'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                                'text-gray-500'"
-                            class="px-3 py-1 rounded-full transition-all">
-                            {{ __('Popular') }}
-                        </button>
-                    </div>
-                </div>
-
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                    x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Videos') . ' ' . __('New') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $videos->sortByDesc('created_at'),
-                        'blade' => 'insight.video.components.card',
-                        'model' => 'video',
-                    ])
-                </div>
-
-                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
-                    x-cloak x-transition:enter.duration.400ms>
-                    <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
-                    <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                    @include('insight.components.carousel', [
-                        'items' => $videos->sortByDesc('views_count'),
-                        'blade' => 'insight.video.components.card',
-                        'model' => 'video',
-                    ])
-                </div>
-            </section>
-        @endif
-
-        @if ($series->where('contents_count', '>', 0)->count())
-            <section itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList">
-                <h2 itemprop="name"
-                    class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
-                    {{ trans_choice('insight.series', 2) }}</h2>
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Articles') . ' ' . __('New') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $series,
-                    'blade' => 'insight.series.components.card',
-                    'model' => 'series',
+                    'items' => $articles->sortByDesc('created_at'),
+                    'blade' => 'insight.article.components.card',
+                    'model' => 'article',
                 ])
-            </section>
-        @endif
-    </div>
+            </div>
+
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Articles') . ' ' . __('Popular') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('insight.components.carousel', [
+                    'items' => $articles->sortByDesc('views_count'),
+                    'blade' => 'insight.article.components.card',
+                    'model' => 'article',
+                ])
+            </div>
+        </section>
+    @endif
+
+    @if ($posts->count())
+        <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
+            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                    {{ __('Posts') }}
+                </h2>
+
+                <div class="flex text-xs sm:text-sm font-medium">
+                    <button @click="tab = 'latest'"
+                        :class="tab === 'latest' ?
+                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('New') }}
+                    </button>
+                    <button @click="tab = 'popular'"
+                        :class="tab === 'popular' ?
+                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Popular') }}
+                    </button>
+                </div>
+            </div>
+
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Posts') . ' ' . __('New') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('insight.components.carousel', [
+                    'items' => $posts->sortByDesc('created_at'),
+                    'blade' => 'insight.post.components.card',
+                    'model' => 'post',
+                ])
+            </div>
+
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Posts') . ' ' . __('Popular') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('insight.components.carousel', [
+                    'items' => $posts->sortByDesc('views_count'),
+                    'blade' => 'insight.post.components.card',
+                    'model' => 'post',
+                ])
+            </div>
+        </section>
+    @endif
+
+    @if ($videos->count())
+        <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
+            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                    {{ __('Videos') }}
+                </h2>
+
+                <div class="flex text-xs sm:text-sm font-medium">
+                    <button @click="tab = 'latest'"
+                        :class="tab === 'latest' ?
+                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('New') }}
+                    </button>
+                    <button @click="tab = 'popular'"
+                        :class="tab === 'popular' ?
+                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
+                            'text-gray-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Popular') }}
+                    </button>
+                </div>
+            </div>
+
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Videos') . ' ' . __('New') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('insight.components.carousel', [
+                    'items' => $videos->sortByDesc('created_at'),
+                    'blade' => 'insight.video.components.card',
+                    'model' => 'video',
+                ])
+            </div>
+
+            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
+                x-cloak x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('insight.components.carousel', [
+                    'items' => $videos->sortByDesc('views_count'),
+                    'blade' => 'insight.video.components.card',
+                    'model' => 'video',
+                ])
+            </div>
+        </section>
+    @endif
+
+    @if ($series->where('contents_count', '>', 0)->count())
+        <section itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList">
+            <h2 itemprop="name"
+                class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
+                {{ trans_choice('insight.series', 2) }}</h2>
+            <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+            @include('insight.components.carousel', [
+                'items' => $series,
+                'blade' => 'insight.series.components.card',
+                'model' => 'series',
+            ])
+        </section>
+    @endif
 </x-insight-layout>

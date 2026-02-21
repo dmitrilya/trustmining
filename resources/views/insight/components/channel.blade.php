@@ -1,8 +1,7 @@
 @if (isset($clickable))
     <a href="{{ route('insight.channel.show', ['channel' => $slug]) }}" class="hover:opacity-80">
 @endif
-<div itemprop="author" itemscope itemtype="https://schema.org/Organization"
-    class="mb-2 sm:mb-4{{ isset($sm) ? '' : ' lg:mb-6' }} flex items-center">
+<div class="mb-2 sm:mb-4{{ isset($sm) ? '' : ' lg:mb-6' }} flex items-center">
     <div
         class="{{ isset($sm) ? 'min-w-12 size-12 sm:min-w-14 sm:size-14' : 'min-w-16 size-16 sm:min-w-22 sm:size-22 lg:min-w-28 lg:size-28 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
         <img itemprop="logo" src="{{ Storage::url($logo) }}" alt="{{ $name }}" class="w-full rounded-full">
@@ -12,7 +11,8 @@
         <h4 itemprop="name"
             class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-gray-900 dark:text-gray-100 font-bold">
             {{ $name }}</h4>
-        <div itemprop="alternateName" class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-500 cursor-pointer' : '' }}"
+        <div itemprop="alternateName"
+            class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-500 cursor-pointer' : '' }}"
             @if (!isset($clickable)) @click="navigator.clipboard.writeText('{{ url('/insight/' . $slug) }}').then(() => {
                 pushToastAlert('{{ __('Link successfully copied') }}', 'success');
             })" @endif>
