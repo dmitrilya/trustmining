@@ -46,12 +46,9 @@
                 {{ $channel->brief_description }}
             </p>
 
-            <div itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <p itemprop="description"
-                    class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">
-                    {{ $channel->description }}
-                </p>
-            </div>
+            <p itemprop="description" class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">
+                {{ $channel->description }}
+            </p>
         </div>
     </div>
 
@@ -198,8 +195,8 @@
                 ])
             </div>
 
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
-                x-cloak x-transition:enter.duration.400ms>
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+                x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 

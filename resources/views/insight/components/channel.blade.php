@@ -26,11 +26,12 @@
             </svg>
 
             <meta itemprop="interactionType" content="https://schema.org/SubscribeAction" />
-            <div itemprop="userInteractionCount" class="ml-1 sm:ml-2 text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500">
+            <div itemprop="userInteractionCount"
+                class="ml-1 sm:ml-2 text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500">
                 {{ __($subscribers) }}</div>
         </div>
         @if (!isset($sm))
-            <p itemprop="description"
+            <p
                 class="mt-0.5 sm:mt-1 text-xs xs:text-sm{{ isset($sm) ? '' : ' lg:text-base' }} text-gray-700 dark:text-gray-300">
                 {{ $description }}</p>
         @endif
