@@ -23,8 +23,15 @@
                 break;
             }
         }
+
+        $location = session('user_location');
+        $shouldAskLocation = false;
+
+        if (!$location) $shouldAskLocation = true;
+        elseif ($location['source'] === 'default') $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
     @endphp
 
+    <meta name="should-ask-location" content="{{ $shouldAskLocation ? 'true' : 'false' }}">
     <meta name="color-scheme" content="light dark">
 
     @auth
@@ -187,41 +194,6 @@
         @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
         @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
-
-    @php
-        $location = session('user_location');
-        $shouldAskLocation = false;
-
-        if (!$location) {
-            $shouldAskLocation = true;
-        } elseif ($location['source'] === 'default') {
-            $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
-        }
-    @endphp
-
-    @if ($shouldAskLocation)
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if ("geolocation" in navigator) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        axios.post('{{ route('location') }}', {
-                            lat: position.coords.latitude,
-                            lon: position.coords.longitude
-                        }).then(r => {
-                            if (r.data.city) {
-                                window.location.reload();
-                            } else pushToastAlert(r.data.error, 'error');
-                        });
-                    }, function(error) {
-                        pushToastAlert('{{ __('Geolocation access is denied or unavailable') }}', 'error');
-                        axios.post('{{ route('location') }}', {
-                            default: true
-                        });
-                    });
-                }
-            });
-        </script>
-    @endif
 </body>
 
 </html>

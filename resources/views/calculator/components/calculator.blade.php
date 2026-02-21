@@ -58,8 +58,8 @@
 
         <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 dark:border-zinc-700 col-span-3">
             <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                <h4 class="text-xs sm:text-sm text-gray-700 dark:text-gray-200">
-                    {{ __('Calculation result') }}</h4>
+                <h2 class="text-xs sm:text-sm text-gray-700 dark:text-gray-200">
+                    {{ __('Calculation result') }}</h2>
                 <div class="flex cursor-pointer mx-3">
                     <button
                         :class="{

@@ -11,7 +11,7 @@ import './InfiniteLoader';
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
 import collapse from '@alpinejs/collapse'
- 
+
 Alpine.plugin(collapse)
 Alpine.plugin(mask);
 
@@ -85,6 +85,27 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
 
 Alpine.start();
 
+window.askLocation = (errorMessage) => {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            axios.post('/location', {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            }).then(r => {
+                if (r.data.city) {
+                    window.location.reload();
+                } else pushToastAlert(r.data.error, 'error');
+            });
+        }, function (error) {
+            document.querySelector(`meta[name='should-ask-location']`).content = false;
+            pushToastAlert(errorMessage, 'error');
+            axios.post('/location', {
+                default: true
+            });
+        });
+    }
+}
+
 window.like = function (type, id) {
     axios.post('/like', { likeableType: type, likeableId: id }).then(r => {
         if (!r.data.success) pushToastAlert(r.data.message, "error");
@@ -153,7 +174,7 @@ window.checkNotifications = function () {
 window.onload = function () {
     let userId = document.querySelector("meta[name='user-id']");
 
-    if (userId) window.listenBroadcast(userId);
+    if (userId) window.listenBroadcast(userId.content);
 
     Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
 }

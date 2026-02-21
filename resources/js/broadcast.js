@@ -1,6 +1,4 @@
 window.listenBroadcast = function (userId) {
-    userId = userId.getAttribute('content');
-
     Echo.private(`notifications.${userId}`).listen(".notification", e => {
         console.log('here');
     });
