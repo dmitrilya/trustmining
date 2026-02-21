@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreCompanyRequest;
@@ -36,7 +37,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        if (\Auth::user()->company) return redirect()->route('profile');
+        if (Auth::user()->company) return redirect()->route('profile');
 
         return view('company.create');
     }
@@ -110,7 +111,7 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         if ($company->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
@@ -121,14 +122,18 @@ class CompanyController extends Controller
         if ($request->description != $company->description) $data['description'] = $request->description;
         if ($request->video != $company->video) $data['video'] = $request->video;
 
+        $time = time();
+
         if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'companies', 'image', $company->id);
+            $data['images'] = $this->saveFiles($request->file('images'), 'companies', 'image', $company->id, $time, [608, null]);
 
         if ($request->logo)
-            $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id);
+            $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id, $time, 80);
 
-        if ($request->bg_logo)
-            $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id);
+        if ($request->bg_logo) {
+            $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [368, 276]);
+            $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [188, 141]);
+        }
 
         if (!empty($data)) $company->moderations()->create(['data' => $data]);
 

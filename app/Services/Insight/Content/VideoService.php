@@ -27,7 +27,7 @@ class VideoService extends ContentService
             'url' => processVideoLink($data['url']),
         ]);
 
-        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id);
+        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, time(), [340, 255]);
         $video->save();
 
         if ($data['series_id']) $video->series()->attach($data['series_id']);
@@ -50,7 +50,7 @@ class VideoService extends ContentService
         $changings = [];
 
         if ($data['title'] != $video->title) $changings['title'] = $data['title'];
-        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id);
+        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, time(), [340, 255]);
 
         if ($data['series_id']) $video->series()->sync([$data['series_id']]);
 

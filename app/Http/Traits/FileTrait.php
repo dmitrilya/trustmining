@@ -11,17 +11,18 @@ use App\Models\Ad\Hosting;
 
 trait FileTrait
 {
-    public function saveFiles($files, $folder, $type, int $id, $disk = 'public')
+    public function saveFiles($files, $folder, $type, int $id, $time, $resize = null, $quality = 70, $disk = 'public')
     {
         $result = [];
-
-        $time = time();
 
         if (isset($files))
             foreach ($files as $i => $file) {
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
-                $ext = $file->getClientOriginalExtension();
-                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
+                if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
+                $ext = ($file instanceof \Illuminate\Http\UploadedFile)
+                    ? $file->getClientOriginalExtension()
+                    : $file->extension();
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push(
@@ -35,7 +36,7 @@ trait FileTrait
 
     public function saveContract($file, $folder, Hosting $hosting, $disk = 'public')
     {
-        $path = $this->saveFile($file, $folder, 'contract', $hosting->id, $disk);
+        $path = $this->saveFile($file, $folder, 'contract', $hosting->id, time(), null, 70, $disk);
 
         $document = IOFactory::load(storage_path('app/' . $disk . '/' . $path));
         $text = '';
@@ -52,18 +53,21 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, int $id, $disk = 'public', $resize = false, $withTime = true, $quality = 30)
+    public function saveFile($file, $folder, $type, int $id, $time, $resize = null, $quality = 70, $disk = 'public')
     {
         $filename = $type . '_' . $id;
-        if ($withTime) $filename .= '_' . time();
-        $ext = $file->getClientOriginalExtension();
+        if ($time) $filename .= '_' . $time;
+        if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
+        $ext = ($file instanceof \Illuminate\Http\UploadedFile)
+            ? $file->getClientOriginalExtension()
+            : $file->extension();
         if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
         else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName($files, $folder, $type, int $id, $disk = 'public')
+    public function saveFilesWithName($files, $folder, $type, int $id, $resize = null, $quality = 70, $disk = 'public')
     {
         $result = [];
 
@@ -73,8 +77,11 @@ trait FileTrait
             foreach ($files as $i => $file) {
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
-                $ext = $file->getClientOriginalExtension();
-                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename);
+                if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
+                $ext = ($file instanceof \Illuminate\Http\UploadedFile)
+                    ? $file->getClientOriginalExtension()
+                    : $file->extension();
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(
@@ -86,7 +93,7 @@ trait FileTrait
         return $result;
     }
 
-    private function compress($file, $disk, $folder, $filename, $resize = false, $quality)
+    private function compress($file, $disk, $folder, $filename, $resize, $quality)
     {
         $info = getimagesize($file->getPathName());
 
@@ -96,25 +103,44 @@ trait FileTrait
 
         if (isset($image)) {
             if ($resize) {
-                $w = $info[0];
-                $h = $info[1];
-                if ($w > $h) {
-                    $x = ($w - $h) / 2;
-                    $y = 0;
-                    $minSide = $h;
-                } else {
+                [$destW, $destH] = is_array($resize) ? $resize : [$resize, $resize];
+
+                $srcW = $info[0];
+                $srcH = $info[1];
+
+                if (is_array($resize) && (is_null($destW) || is_null($destH))) {
+                    if (is_null($destH)) $destH = (int)($destW * $srcH / $srcW);
+                    else $destW = (int)($destH * $srcW / $srcH);
+
+                    $minSideW = $srcW;
+                    $minSideH = $srcH;
                     $x = 0;
-                    $y = ($h - $w) / 2;
-                    $minSide = $w;
+                    $y = 0;
+                } else {
+                    $aspectSrc = $srcW / $srcH;
+                    $aspectDest = $destW / $destH;
+
+                    if ($aspectSrc > $aspectDest) {
+                        $minSideW = $srcH * $aspectDest;
+                        $minSideH = $srcH;
+                        $x = ($srcW - $minSideW) / 2;
+                        $y = 0;
+                    } else {
+                        $minSideW = $srcW;
+                        $minSideH = $srcW / $aspectDest;
+                        $x = 0;
+                        $y = ($srcH - $minSideH) / 2;
+                    }
                 }
 
-                $dest = imagecreatetruecolor($resize, $resize);
-                if ($info['mime'] == 'image/png') {
+                $dest = imagecreatetruecolor($destW, $destH);
+                if ($info['mime'] == 'image/png' || $info['mime'] == 'image/webp') {
                     imagealphablending($dest, false);
                     imagesavealpha($dest, true);
                 }
 
-                imagecopyresampled($dest, $image, 0, 0, $x, $y, $resize, $resize, $minSide, $minSide);
+                imagecopyresampled($dest, $image, 0, 0, (int)$x, (int)$y, $destW, $destH, (int)$minSideW, (int)$minSideH);
+
                 $image = $dest;
             }
 

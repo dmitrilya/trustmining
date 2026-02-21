@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreOrderRequest;
@@ -17,7 +18,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        return view('order.create', ['user' => \Auth::user()]);
+        return view('order.create', ['user' => Auth::user()]);
     }
 
     public function store(StoreOrderRequest $request)

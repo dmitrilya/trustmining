@@ -34,8 +34,9 @@ class ReviewController extends Controller
             'rating' => $request->rating,
         ]);
 
-        if ($request->file('image')) $review->image = $this->saveFile($request->file('image'), 'reviews', 'image', $review->id, 'private/');
-        if ($request->file('document')) $review->document = $this->saveFile($request->file('document'), 'reviews', 'doc', $review->id, 'private/');
+        $time = time();
+        if ($request->file('image')) $review->image = $this->saveFile($request->file('image'), 'reviews', 'image', $review->id, $time, null, 70, 'private');
+        if ($request->file('document')) $review->document = $this->saveFile($request->file('document'), 'reviews', 'doc', $review->id, $time, null, 70, 'private');
 
         $review->save();
 

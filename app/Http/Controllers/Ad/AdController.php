@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ad;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreAdRequest;
@@ -48,7 +49,8 @@ class AdController extends Controller
      */
     public function create()
     {
-        $user = \Auth::user();
+        /** @var \App\Models\User\User $user */
+        $user = Auth::user();
 
         if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
@@ -96,8 +98,11 @@ class AdController extends Controller
             'coin_id' => $request->coin_id,
         ]);
 
-        $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
-        $ad->preview = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id);
+        $time = time();
+        $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null]);
+        $ad->preview = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null]);
+        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [292, 219]);
+        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [188, 141]);
 
         $ad->save();
 
@@ -115,7 +120,7 @@ class AdController extends Controller
      */
     public function show(AdCategory $adCategory, Ad $ad)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
             return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
@@ -133,7 +138,8 @@ class AdController extends Controller
      */
     public function edit(Ad $ad)
     {
-        $user = \Auth::user();
+        /** @var \App\Models\User\User $user */
+        $user = Auth::user();
 
         if ($ad->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
@@ -192,8 +198,9 @@ class AdController extends Controller
 
         if ($request->description != $ad->description) $data['description'] = $request->description;
 
+        $time = time();
         if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id);
+            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [444, null]);
 
         if ($request->price != $ad->price || $request->coin_id != $ad->coin_id || $request->filled('with_vat') != $ad->with_vat) {
             $data['price'] = $request->price;
@@ -201,8 +208,11 @@ class AdController extends Controller
             $data['with_vat'] = $request->filled('with_vat');
         }
 
-        if ($request->preview)
-            $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id);
+        if ($request->preview) {
+            $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [444, null]);
+            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [292, 219]);
+            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [188, 141]);
+        }
 
         if (!empty($data)) {
             $moderation = $ad->moderations()->create(['data' => $data]);
@@ -268,7 +278,7 @@ class AdController extends Controller
      */
     public function destroy(Ad $ad)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $files = [];
         array_push($files, $ad->preview);

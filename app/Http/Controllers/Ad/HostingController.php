@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ad;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreHostingRequest;
@@ -36,7 +37,7 @@ class HostingController extends Controller
      */
     public function create()
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         if ($user->hosting) return back()->withErrors(['forbidden' => __('Hosting already exists.')]);
 
@@ -77,10 +78,13 @@ class HostingController extends Controller
             'expenses' => $request->expenses ? $request->expenses : [],
         ]);
 
-        $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);
+        $time = time();
+        $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [368, 276]);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [188, 141]);
         $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting);
-        if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id);
-        if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
+        if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
+        if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
 
         $hosting->save();
 
@@ -97,7 +101,7 @@ class HostingController extends Controller
      */
     public function edit(Hosting $hosting)
     {
-        $user = \Auth::user();
+        $user = Auth::user();
 
         if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
@@ -138,12 +142,17 @@ class HostingController extends Controller
         if (count(array_diff($hosting->conditions, $c)) || count(array_diff($c, $hosting->conditions))) $data['conditions'] = $c;
         if (count(array_diff($hosting->expenses, $e)) || count(array_diff($e, $hosting->expenses))) $data['expenses'] = $e;
 
-        if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id);
+        $time = time();
+
+        if ($request->images) {
+            $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [368, 276]);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [188, 141]);
+        }
 
         if ($request->contract) $data['contract'] = $this->saveContract($request->file('contract'), 'hostings', $hosting);
-        if ($request->territory) $data['territory'] = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id);
-        if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id);
+        if ($request->territory) $data['territory'] = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
+        if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
 
         if (!empty($data))
             $hosting->moderations()->create(['data' => $data]);

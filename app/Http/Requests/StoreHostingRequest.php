@@ -30,7 +30,7 @@ class StoreHostingRequest extends FormRequest
         return [
             'description' => 'required|max:' . $descriptionMax,
             'video' => 'nullable|active_url',
-            'images' => 'max:10',
+            'images' => 'required|min:1|max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'contract' => 'required|file|mimes:doc,docx|max:1024',
             'territory' => 'file|mimes:doc,docx|max:1024',

@@ -2,8 +2,13 @@
     class="card relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <img itemprop="thumbnailUrl" class="w-full" src="{{ Storage::url($video->preview) }}"
-                alt="{{ $video->title }}" />
+            @php
+                $preview = explode('.', $video->preview);
+                $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+                $previewxs = $baseName . '_340' . '.' . $preview[1];
+            @endphp
+
+            <img itemprop="thumbnailUrl" class="w-full" src="{{ Storage::url($previewxs) }}" alt="{{ $video->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [
@@ -15,7 +20,8 @@
             <h3 itemprop="name"
                 class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 h-12">
                 {{ $video->title }}</h3>
-            <meta itemprop="description" content="{{ __('Channel') . ' ' . $video->channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
+            <meta itemprop="description"
+                content="{{ __('Channel') . ' ' . $video->channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">

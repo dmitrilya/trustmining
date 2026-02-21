@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreOfficeRequest;
@@ -34,9 +35,9 @@ class OfficeController extends Controller
      */
     public function services(Request $request)
     {
-        $ps = $request->peculiarities ? $request->peculiarities : [];
+        $ps = $request->peculiarities ?? [];
         array_push($ps, 'Repair service');
-        $request->peculiarities = $ps;
+        $request->merge(['peculiarities' => $ps]);
 
         return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
     }
@@ -48,9 +49,9 @@ class OfficeController extends Controller
      */
     public function cryptoexchangers(Request $request)
     {
-        $ps = $request->peculiarities ? $request->peculiarities : [];
+        $ps = $request->peculiarities ?? [];
         array_push($ps, 'Cryptoexchanger');
-        $request->peculiarities = $ps;
+        $request->merge(['peculiarities' => $ps]);
 
         return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
     }
@@ -62,7 +63,8 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        $user = \Auth::user();
+        /** @var \App\Models\User\User $user */
+        $user = Auth::user();
 
         if ($user->tariff && $user->offices()->count() >= $user->tariff->max_offices || !$user->tariff && $user->offices()->count() >= 1)
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
@@ -99,7 +101,9 @@ class OfficeController extends Controller
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
         ]);
 
-        $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
+        $time = time();
+        $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null]);
+        $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159]);
         $office->save();
 
         $office->moderations()->create(['data' => $office->attributesToArray()]);
@@ -141,8 +145,11 @@ class OfficeController extends Controller
         if ($request->video != $office->video) $data['video'] = $request->video;
         if (count(array_diff($office->peculiarities, $p)) || count(array_diff($p, $office->peculiarities))) $data['peculiarities'] = $p;
 
-        if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id);
+        if ($request->images) {
+            $time = time();
+            $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null]);
+            $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159]);
+        }
 
         if (!empty($data)) $office->moderations()->create(['data' => $data]);
 

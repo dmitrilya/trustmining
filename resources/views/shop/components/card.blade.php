@@ -5,7 +5,17 @@
             class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-gray-200 dark:bg-zinc-700 @endif">
             <a class="block w-full" href="{{ route('company', ['user' => $shop->url_name]) }}">
                 @if ($shop->company)
-                    <img class="w-full" src="{{ Storage::url($shop->company->bg_logo) }}" alt="{{ $shop->url_name }}">
+                    @php
+                        $preview = explode('.', $shop->company->bg_logo);
+                        $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+                        $previewxs = $baseName . '_188' . '.' . $preview[1];
+                    @endphp
+
+                    <picture>
+                        <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+
+                        <img class="w-full object-cover" src="{{ Storage::url($shop->company->bg_logo) }}" alt="{{ $shop->name }} preview">
+                    </picture>
                 @else
                     <p class="text-sm xs:text-lg text-white dark:text-gray-800 font-bold">{{ __('No logo') }}</p>
                 @endif

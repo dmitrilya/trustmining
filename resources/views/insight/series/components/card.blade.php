@@ -2,8 +2,13 @@
     class="relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <img itemprop="image" class="w-full" src="{{ Storage::url($series->contents->first()->preview) }}"
-                alt="{{ $series->name }} preview" />
+            @php
+                $preview = explode('.', $series->contents->first()->preview);
+                $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+                $previewxs = $baseName . '_340' . '.' . $preview[1];
+            @endphp
+
+            <img itemprop="image" class="w-full" src="{{ Storage::url($previewxs) }}" alt="{{ $series->name }} preview" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [

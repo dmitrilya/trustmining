@@ -10,7 +10,7 @@
     </p>
 
     <div class="h-full sm:h-auto flex flex-col justify-between sm:grid grid-cols-2 gap-3 sm:gap-6 xl:gap-4">
-        <x-carousel :images="$office->images"></x-carousel>
+        <x-carousel :images="$office->images" model="office_card"></x-carousel>
 
         <div class="flex flex-col justify-between w-full">
             <div>

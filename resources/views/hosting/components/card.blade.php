@@ -6,7 +6,18 @@
         @if (count($hosting->images))
             <div class="w-full aspect-[4/3] overflow-hidden rounded-lg">
                 <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">
-                    <img class="w-full" src="{{ Storage::url($hosting->images[0]) }}" alt="Hosting image">
+                    @php
+                        $preview = explode('.', $hosting->images[0]);
+                        $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+                        $previewxs = $baseName . '_188' . '.' . $preview[1];
+                        $previewsm = $baseName . '_368' . '.' . $preview[1];
+                    @endphp
+
+                    <picture>
+                        <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+
+                        <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Hosting preview">
+                    </picture>
                 </a>
             </div>
         @endif

@@ -30,7 +30,18 @@
         <div class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center">
             <a class="block w-full"
                 href="{{ route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]) }}">
-                <img class="w-full" src="{{ Storage::url($ad->preview) }}">
+                @php
+                    $preview = explode('.', $ad->preview);
+                    $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+                    $previewxs = $baseName . '_188' . '.' . $preview[1];
+                    $previewsm = $baseName . '_292' . '.' . $preview[1];
+                @endphp
+
+                <picture>
+                    <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+
+                    <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Ad preview">
+                </picture>
             </a>
         </div>
 

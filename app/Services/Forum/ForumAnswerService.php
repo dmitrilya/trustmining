@@ -31,7 +31,7 @@ class ForumAnswerService
             'forum_question_id' => $forumQuestionId
         ]);
 
-        $answer->images = $this->saveFiles($images, 'forum', 'answer', $answer->id);
+        $answer->images = $this->saveFiles($images, 'forum', 'answer', $answer->id, time());
         $answer->files = $this->saveFilesWithName($files, 'forum', 'answer', $answer->id);
         $answer->save();
 
@@ -56,7 +56,7 @@ class ForumAnswerService
         $data = ['text' => $text];
 
         if ($images)
-            $data['images'] = $this->saveFiles($images, 'forum', 'answer', $answer->id);
+            $data['images'] = $this->saveFiles($images, 'forum', 'answer', $answer->id, time());
         if ($files)
             $data['files'] = $this->saveFilesWithName($files, 'forum', 'answer', $answer->id);
 
