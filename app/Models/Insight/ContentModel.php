@@ -12,8 +12,19 @@ abstract class ContentModel extends Model
 {
     use HasFactory, Searchable;
 
-    protected $withCount = ['likes', 'views'];
-    protected $with = ['series:id,name'];
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->with = array_merge($this->with, [
+            'channel' => function ($q) {
+                $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers');
+            },
+            'series:id,name'
+        ]);
+
+        $this->withCount = array_merge($this->withCount, ['likes', 'views']);
+    }
 
     /**
      * Собирает Union-запрос из всех дочерних таблиц для связи с просмотрами.

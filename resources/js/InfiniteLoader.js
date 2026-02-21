@@ -1,15 +1,17 @@
 class InfiniteLoader {
     constructor(options) {
-        this.container = document.querySelector(options.containerSelector ?? '#infinite-loader');
+        this.container = options.container ?? document.querySelector('#infinite-loader');
         this.itemSelector = options.itemSelector ?? '.card';
         this.endpoint = options.endpoint;
+        this.horizontal = options.horizontal ?? false;
 
         this.startPage = options.page;
         this.page = this.startPage == options.lastPage ? 0 : this.startPage;
         this.isLoading = false;
 
         this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
-            rootMargin: options.rootMargin || '600px',
+            root: this.horizontal ? this.container : null,
+            rootMargin: this.horizontal ? '0px 300px 0px 0px' : '600px',
             threshold: 0
         });
 

@@ -82,9 +82,12 @@ class ChannelController extends Controller
                 $series->contents_count = $series->contents->count();
                 return $series;
             }),
-            'articles' => $channel->moderatedArticles,
-            'posts' => $channel->moderatedPosts,
-            'videos' => $channel->moderatedVideos
+            'newArticles' => $channel->moderatedArticles()->orderByDesc('created_at')->paginate(4),
+            'popularArticles' => $channel->moderatedArticles()->orderByDesc('views_count')->paginate(4),
+            'newPosts' => $channel->moderatedPosts()->orderByDesc('created_at')->paginate(4),
+            'popularPosts' => $channel->moderatedPosts()->orderByDesc('views_count')->paginate(4),
+            'newVideos' => $channel->moderatedVideos()->orderByDesc('created_at')->paginate(4),
+            'popularVideos' => $channel->moderatedVideos()->orderByDesc('views_count')->paginate(4)
         ]);
     }
 
@@ -143,5 +146,125 @@ class ChannelController extends Controller
     public function toggleSubscription(Request $request, Channel $channel)
     {
         return $this->service->toggleSubscription($request->user(), $channel);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewArticles(Channel $channel)
+    {
+        $articles = $channel->moderatedArticles()->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $articles,
+                'blade' => 'insight.article.components.card',
+                'model' => 'article'
+            ])->render(),
+            'hasMore' => $articles->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularArticles(Channel $channel)
+    {
+        $articles = $channel->moderatedArticles()->orderByDesc('views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $articles,
+                'blade' => 'insight.article.components.card',
+                'model' => 'article'
+            ])->render(),
+            'hasMore' => $articles->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewPosts(Channel $channel)
+    {
+        $posts = $channel->moderatedPosts()->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $posts,
+                'blade' => 'insight.post.components.card',
+                'model' => 'post'
+            ])->render(),
+            'hasMore' => $posts->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularPosts(Channel $channel)
+    {
+        $posts = $channel->moderatedPosts()->orderByDesc('views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $posts,
+                'blade' => 'insight.post.components.card',
+                'model' => 'post'
+            ])->render(),
+            'hasMore' => $posts->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewVideos(Channel $channel)
+    {
+        $videos = $channel->moderatedVideos()->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $videos,
+                'blade' => 'insight.video.components.card',
+                'model' => 'video'
+            ])->render(),
+            'hasMore' => $videos->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularVideos(Channel $channel)
+    {
+        $videos = $channel->moderatedVideos()->orderByDesc('views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $videos,
+                'blade' => 'insight.video.components.card',
+                'model' => 'video'
+            ])->render(),
+            'hasMore' => $videos->hasMorePages()
+        ]);
     }
 }

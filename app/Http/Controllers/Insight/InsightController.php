@@ -20,28 +20,140 @@ class InsightController extends Controller
      */
     public function index(): View
     {
-        $data = Cache::remember('insight_home_data', 3600, fn() => [
+        return view('insight.index', [
             'topChannels' => Channel::orderByDesc('active_subscribers_count')->limit(10)->get(),
-            'newArticles' => Article::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])->latest()->limit(50)->get(),
+            'newArticles' => Article::where('moderation', false)->orderByDesc('created_at')->paginate(4),
             'popularArticles' => Article::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])
                 ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
-                ->orderByDesc('recent_views_count')->limit(50)->get(),
-            'newPosts' => Post::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])->latest()->limit(50)->get(),
+                ->orderByDesc('recent_views_count')->paginate(4),
+            'newPosts' => Post::where('moderation', false)->orderByDesc('created_at')->paginate(4),
             'popularPosts' => Post::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])
                 ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
-                ->orderByDesc('recent_views_count')->limit(50)->get(),
-            'newVideos' => Video::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])->latest()->limit(50)->get(),
+                ->orderByDesc('recent_views_count')->paginate(4),
+            'newVideos' => Video::where('moderation', false)->orderByDesc('created_at')->paginate(4),
             'popularVideos' => Video::where('moderation', false)
-                ->with(['channel' => fn($q) => $q->select(['id', 'name', 'logo', 'slug'])->withCount('activeSubscribers'), 'series:id,name'])
                 ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
-                ->orderByDesc('recent_views_count')->limit(50)->get()
+                ->orderByDesc('recent_views_count')->paginate(4)
         ]);
+    }
 
-        return view('insight.index', $data);
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewArticles()
+    {
+        $articles = Article::where('moderation', false)->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $articles,
+                'blade' => 'insight.article.components.card',
+                'model' => 'article'
+            ])->render(),
+            'hasMore' => $articles->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularArticles()
+    {
+        $articles = Article::where('moderation', false)
+            ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            ->orderByDesc('recent_views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $articles,
+                'blade' => 'insight.article.components.card',
+                'model' => 'article'
+            ])->render(),
+            'hasMore' => $articles->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewPosts()
+    {
+        $posts = Post::where('moderation', false)->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $posts,
+                'blade' => 'insight.post.components.card',
+                'model' => 'post'
+            ])->render(),
+            'hasMore' => $posts->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularPosts()
+    {
+        $posts = Post::where('moderation', false)
+            ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            ->orderByDesc('recent_views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $posts,
+                'blade' => 'insight.post.components.card',
+                'model' => 'post'
+            ])->render(),
+            'hasMore' => $posts->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getNewVideos()
+    {
+        $videos = Video::where('moderation', false)->orderByDesc('created_at')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $videos,
+                'blade' => 'insight.video.components.card',
+                'model' => 'video'
+            ])->render(),
+            'hasMore' => $videos->hasMorePages()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPopularVideos()
+    {
+        $videos = Video::where('moderation', false)
+            ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            ->orderByDesc('recent_views_count')->paginate(4);
+
+        return response()->json([
+            'html' => view('insight.components.carousel-list', [
+                'items' => $videos,
+                'blade' => 'insight.video.components.card',
+                'model' => 'video'
+            ])->render(),
+            'hasMore' => $videos->hasMorePages()
+        ]);
     }
 }

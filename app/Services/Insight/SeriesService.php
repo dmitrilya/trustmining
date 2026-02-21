@@ -24,11 +24,13 @@ class SeriesService
      * 
      * @param Series  $series
      * @param string  $name
+     * @param string  $description
      * @return Series
      */
-    public function update(Series $series, string $name): Series
+    public function update(Series $series, string $name, string $description): Series
     {
         $series->name = $name;
+        $series->description = $description;
         $series->save;
 
         return $series;
@@ -37,11 +39,11 @@ class SeriesService
     /**
      * Destroy the specified resource in storage.
      * 
-     * @param Channel  $channel
+     * @param Series  $series
      * @return void
      */
-    public function destroy(Channel $channel): void
+    public function destroy(Series $series): void
     {
-        $channel->delete();
+        $series->delete();
     }
 }

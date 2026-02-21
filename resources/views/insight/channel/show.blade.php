@@ -54,7 +54,7 @@
         @include('insight.channel.components.menu')
     @endif
 
-    @if ($articles->count())
+    @if ($newArticles->count())
         <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
@@ -85,9 +85,10 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $articles->sortByDesc('created_at'),
+                    'items' => $newArticles,
                     'blade' => 'insight.article.components.card',
                     'model' => 'article',
+                    'endpoint' => route('insight.channel.article.get-new', ['channel' => $channel->slug])
                 ])
             </div>
 
@@ -97,15 +98,16 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $articles->sortByDesc('views_count'),
+                    'items' => $popularArticles,
                     'blade' => 'insight.article.components.card',
                     'model' => 'article',
+                    'endpoint' => route('insight.channel.article.get-popular', ['channel' => $channel->slug])
                 ])
             </div>
         </section>
     @endif
 
-    @if ($posts->count())
+    @if ($newPosts->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
@@ -136,9 +138,10 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $posts->sortByDesc('created_at'),
+                    'items' => $newPosts,
                     'blade' => 'insight.post.components.card',
                     'model' => 'post',
+                    'endpoint' => route('insight.channel.post.get-new', ['channel' => $channel->slug])
                 ])
             </div>
 
@@ -148,15 +151,16 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $posts->sortByDesc('views_count'),
+                    'items' => $popularPosts,
                     'blade' => 'insight.post.components.card',
                     'model' => 'post',
+                    'endpoint' => route('insight.channel.post.get-popular', ['channel' => $channel->slug])
                 ])
             </div>
         </section>
     @endif
 
-    @if ($videos->count())
+    @if ($newVideos->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
@@ -187,9 +191,10 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $videos->sortByDesc('created_at'),
+                    'items' => $newVideos,
                     'blade' => 'insight.video.components.card',
                     'model' => 'video',
+                    'endpoint' => route('insight.channel.video.get-new', ['channel' => $channel->slug])
                 ])
             </div>
 
@@ -199,9 +204,10 @@
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
                 @include('insight.components.carousel', [
-                    'items' => $videos->sortByDesc('views_count'),
+                    'items' => $popularVideos,
                     'blade' => 'insight.video.components.card',
                     'model' => 'video',
+                    'endpoint' => route('insight.channel.video.get-popular', ['channel' => $channel->slug])
                 ])
             </div>
         </section>
