@@ -1,8 +1,10 @@
-<x-insight-layout :title="$video->title" :description="$video->title" header="">
+<x-insight-layout :title="$video->title" :description="$video->title" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) $channel = $video->channel;
+        if ($moder) {
+            $channel = $video->channel;
+        }
     @endphp
 
     @if ($moder)
@@ -11,7 +13,7 @@
         </div>
     @endif
 
-    <div x-data="{ edit: false }"
+    <div itemprop="mainEntity" itemscope itemtype="https://schema.org/VideoObject" x-data="{ edit: false }"
         class="ql-snow bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-gray-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             @include('insight.components.card-channel', [
@@ -21,79 +23,18 @@
                 'subscribers' => $channel->activeSubscribers()->count(),
             ])
 
-            @if (!$user)
-                <x-primary-button @click="$dispatch('open-modal', 'login')">
-                    {{ __('Subscribe') }}
-                </x-primary-button>
-            @elseif ($user->id != $channel->user_id)
-                <x-primary-button
-                    @click="channelToggleSubscription($el, '{{ route('insight.channel.subscription', ['channel' => $channel->slug]) }}')">
-                    {{ $channel->activeSubscribers()->wherePivot('user_id', $user->id)->exists() ? __('Unsubscribe') : __('Subscribe') }}
-                </x-primary-button>
-            @else
-                <div class="flex items-center">
-                    <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center"
-                        @click="edit = !edit">
-                        <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                            aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                        </svg>
-                    </div>
-
-                    <div class="text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center"
-                        @click="$dispatch('open-modal', 'delete-modal')">
-                        <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" fill="none"
-                            viewBox="0 0 26 26">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" height="18.67px"
-                                stroke-width="1.5"
-                                d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                        </svg>
-                    </div>
-                </div>
-            @endif
+            @include('insight.components.sub-edit-action')
         </div>
 
-        <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="date"
-                data-date="{{ $video->created_at }}"></p>
+        @include('insight.components.content-info', ['type' => 'article', 'content' => $article])
 
-            <div class="ml-auto flex items-end">
-                <div class="flex items-center" x-data="{ liked: '{{ $user && $video->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $video->likes->count() }} }">
-                    <svg :class="{ 'block': liked, 'hidden': !liked }"
-                        @if ($user) @click="liked = false; likes--; window.like('video', {{ $video->id }})" @endif
-                        class="w-4 h-4 text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
-                        aria-hidden="true" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd"
-                            d="M15.03 9.684h3.965c.322 0 .64.08.925.232.286.153.532.374.717.645a2.109 2.109 0 0 1 .242 1.883l-2.36 7.201c-.288.814-.48 1.355-1.884 1.355-2.072 0-4.276-.677-6.157-1.256-.472-.145-.924-.284-1.348-.404h-.115V9.478a25.485 25.485 0 0 0 4.238-5.514 1.8 1.8 0 0 1 .901-.83 1.74 1.74 0 0 1 1.21-.048c.396.13.736.397.96.757.225.36.32.788.269 1.211l-1.562 4.63ZM4.177 10H7v8a2 2 0 1 1-4 0v-6.823C3 10.527 3.527 10 4.176 10Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <svg :class="{ 'hidden': liked, 'block': !liked }"
-                        @if ($user) @click="liked = true; likes++; window.like('video', {{ $video->id }})" @endif
-                        class="w-4 h-4 text-gray-700 dark:text-white hover:text-gray-800 dark:hover:text-gray-200 cursor-pointer"
-                        aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M7 11c.889-.086 1.416-.543 2.156-1.057a22.323 22.323 0 0 0 3.958-5.084 1.6 1.6 0 0 1 .582-.628 1.549 1.549 0 0 1 1.466-.087c.205.095.388.233.537.406a1.64 1.64 0 0 1 .384 1.279l-1.388 4.114M7 11H4v6.5A1.5 1.5 0 0 0 5.5 19v0A1.5 1.5 0 0 0 7 17.5V11Zm6.5-1h4.915c.286 0 .372.014.626.15.254.135.472.332.637.572a1.874 1.874 0 0 1 .215 1.673l-2.098 6.4C17.538 19.52 17.368 20 16.12 20c-2.303 0-4.79-.943-6.67-1.475" />
-                    </svg>
+        <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $video->title }}</h1>
 
-                    <p class="text-xxs sm:text-xs text-gray-500 ml-2 mr-4" x-text="likes"></p>
-                </div>
-                <svg class="w-4 h-4 text-gray-700 dark:text-white" aria-hidden="true" width="24" height="24"
-                    fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M4.998 7.78C6.729 6.345 9.198 5 12 5c2.802 0 5.27 1.345 7.002 2.78a12.713 12.713 0 0 1 2.096 2.183c.253.344.465.682.618.997.14.286.284.658.284 1.04s-.145.754-.284 1.04a6.6 6.6 0 0 1-.618.997 12.712 12.712 0 0 1-2.096 2.183C17.271 17.655 14.802 19 12 19c-2.802 0-5.27-1.345-7.002-2.78a12.712 12.712 0 0 1-2.096-2.183 6.6 6.6 0 0 1-.618-.997C2.144 12.754 2 12.382 2 12s.145-.754.284-1.04c.153-.315.365-.653.618-.997A12.714 12.714 0 0 1 4.998 7.78ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                        clip-rule="evenodd" />
-                </svg>
+        <meta itemprop="description"
+                content="{{ __('Channel') . ' ' . $channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
+        <meta itemprop="thumbnailUrl" content="{{ Storage::url($video->preview) }}">
 
-                <p class="text-xxs sm:text-xs text-gray-500 ml-2">{{ $video->views()->count() }}</p>
-            </div>
-        </div>
-
-        <h1 class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $video->title }}</h1>
-
-        <iframe src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl w-full"></iframe>
+        <iframe itemprop="embedUrl" src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl w-full"></iframe>
 
         @if ($user && $user->id == $channel->user_id)
             @include('insight.video.edit')
@@ -105,9 +46,8 @@
     @endif
 
     <x-modal name="delete-modal" focusable>
-        <form method="post"
-            action="{{ route('insight.video.destroy', ['channel' => $video->channel->slug, 'video' => $video->id]) }}"
-            class="p-6">
+        <form method="post" class="p-6"
+            action="{{ route('insight.video.destroy', ['channel' => $video->channel->slug, 'video' => $video->id]) }}">
             @csrf
             @method('delete')
 
@@ -126,32 +66,4 @@
             </div>
         </form>
     </x-modal>
-
-    @if (isset($videos))
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pb-8">
-            <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                @foreach ($videos as $video)
-                    @php
-                        switch ($loop->index) {
-                            case 0:
-                            case 1:
-                                $classes = '!flex';
-                                break;
-                            case 2:
-                                $classes = 'md:!flex';
-                                break;
-                            case 3:
-                                $classes = 'lg:!flex';
-                                break;
-                            case 4:
-                                $classes = 'xl-!flex';
-                                break;
-                        }
-                    @endphp
-
-                    @include('insight.video.components.card')
-                @endforeach
-            </div>
-        </div>
-    @endif
 </x-insight-layout>
