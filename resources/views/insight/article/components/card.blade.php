@@ -8,7 +8,7 @@
                 $previewxs = $baseName . '_340' . '.' . $preview[1];
             @endphp
 
-            <img itemprop="image" class="w-full" src="{{ Storage::url($previewxs) }}" alt="{{ $article->title }}" />
+            <img itemprop="image" fetchpriority="high" class="w-full" src="{{ Storage::url($previewxs) }}" alt="{{ $article->title }}" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [
