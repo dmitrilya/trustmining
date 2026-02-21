@@ -46,9 +46,7 @@
                 {{ $channel->brief_description }}
             </p>
 
-            <p itemprop="description" class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">
-                {{ $channel->description }}
-            </p>
+            <p itemprop="description" class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">{{ $channel->description }}</p>
         </div>
     </div>
 

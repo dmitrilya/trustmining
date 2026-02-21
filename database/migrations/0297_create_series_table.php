@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('series', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->string('name');
+            $table->text('description');
             $table->foreignId('channel_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

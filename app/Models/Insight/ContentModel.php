@@ -13,6 +13,7 @@ abstract class ContentModel extends Model
     use HasFactory, Searchable;
 
     protected $withCount = ['likes', 'views'];
+    protected $with = ['series:id,name'];
 
     /**
      * Собирает Union-запрос из всех дочерних таблиц для связи с просмотрами.

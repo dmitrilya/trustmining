@@ -1,9 +1,9 @@
 <div itemprop="item" itemscope itemtype="https://schema.org/CreativeWorkSeries"
     class="relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
-        <div itemprop="image" class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <img loading="lazy" class="w-full" src="{{ Storage::url($series->contents->first()->preview) }}"
-                alt="" />
+        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+            <img itemprop="image" class="w-full" src="{{ Storage::url($series->contents->first()->preview) }}"
+                alt="{{ $series->name }} preview" />
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [
@@ -25,7 +25,7 @@
         </div>
 
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"
-            href="{{ route('insight.channel.series.show', ['channel' => $series->channel->slug, 'series' => $series->id . '-' . mb_strtolower(str_replace(' ', '-', $series->title))]) }}">
+            href="{{ route('insight.channel.series.show', ['channel' => $series->channel->slug, 'series' => $series->id . '-' . mb_strtolower(str_replace(' ', '-', $series->name))]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Open') }}</x-secondary-button>
         </a>
     </div>

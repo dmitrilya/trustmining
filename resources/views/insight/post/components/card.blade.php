@@ -60,4 +60,12 @@
             <x-secondary-button class="w-full justify-center">{{ __('Read') }}</x-secondary-button>
         </a>
     </div>
+
+    @if ($post->series->first())
+        <div itemprop="isPartOf" itemscope itemtype="https://schema.org/CreativeWorkSeries">
+            <meta itemprop="name" content="{{ $post->series->first()->name }}">
+            <link itemprop="url"
+                href="{{ route('insight.channel.series.show', ['channel' => $post->channel->slug, 'series' => $post->series->first()->id]) }}">
+        </div>
+    @endif
 </div>

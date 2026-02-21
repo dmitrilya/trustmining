@@ -92,7 +92,7 @@
         </div>
 
         <form method="post" action="{{ route('insight.series.store', ['channel' => $channel->slug]) }}"
-            x-data="{ errors: [] }"
+            x-data="{ errors: [] }" class="flex flex-col gap-2 sm:gap-4"
             @submit.prevent="
                     if (Object.keys(errors).length > 0) {
                         pushToastAlert(Object.values(errors)[0], 'error');
@@ -105,6 +105,13 @@
                 <x-length-input id="series-name" name="name" type="text" autocomplete="series-name" required
                     max="30" />
                 <x-input-error :messages="$errors->get('name')" />
+            </div>
+
+            <div>
+                <x-input-label for="series-description" :value="__('Series description')" />
+                <x-length-textarea id="series-description" rows="4" name="description" required max="300"
+                    :value="old('description')" />
+                <x-input-error :messages="$errors->get('description')" />
             </div>
 
             <x-primary-button class="block ml-auto mt-6">{{ __('Create') }}</x-primary-button>

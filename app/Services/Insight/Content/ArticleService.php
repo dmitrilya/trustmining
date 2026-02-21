@@ -74,7 +74,7 @@ class ArticleService extends ContentService
 
     public function filter($request = null)
     {
-        $articles = Article::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers')])
+        $articles = Article::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
             ->select(['id', 'title', 'subtitle', 'preview', 'channel_id', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {

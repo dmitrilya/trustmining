@@ -46,7 +46,7 @@
 
             <div>
                 <x-input-label for="channel-description" :value="__('Channel description')" />
-                <x-length-textarea id="channel-description" rows="4" name="description" required max="300"
+                <x-length-textarea id="channel-description" rows="4" name="description" required max="500"
                     :value="old('description')" />
                 <x-input-error :messages="$errors->get('description')" />
             </div>

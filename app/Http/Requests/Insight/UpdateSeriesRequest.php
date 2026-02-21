@@ -25,6 +25,7 @@ class UpdateSeriesRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:30',
+            'description' => 'required|string|max:300',
         ];
     }
 
@@ -38,6 +39,8 @@ class UpdateSeriesRequest extends FormRequest
         return [
             'name.required' => __('Series name is required'),
             'name.max' => __('The maximum series name length is 30 characters'),
+            'description.required' => __('Series description is required'),
+            'description.max' => __('The maximum series description length is 300 characters'),
         ];
     }
 }
