@@ -37,7 +37,7 @@
             {{ $article->title }}
         </h1>
 
-        <div class="lg:hidden" id="toc-container"></div>
+        <div class="lg:hidden min-h-[129.33px]" id="toc-container"></div>
 
         <img itemprop="image" fetchpriority="high" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($article->preview) }}"
             alt="" class="rounded-xl w-full aspect-[4/3]">
