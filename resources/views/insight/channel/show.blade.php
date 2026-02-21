@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
                 x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Articles') . ' ' . __('New') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -96,7 +96,7 @@
                 ])
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
                 x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Articles') . ' ' . __('Popular') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -135,7 +135,7 @@
                 </div>
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
                 x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Posts') . ' ' . __('New') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -147,7 +147,7 @@
                 ])
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
                 x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Posts') . ' ' . __('Popular') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -186,7 +186,7 @@
                 </div>
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
                 x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Videos') . ' ' . __('New') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -198,7 +198,7 @@
                 ])
             </div>
 
-            <div itemprop="hasPart" itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'"
                 x-cloak x-transition:enter.duration.400ms>
                 <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
                 <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
