@@ -4,7 +4,7 @@
         {{ __('Liked the calculator?') }}
     </h2>
 
-    <a href="https://t.me/trustmining_calculator_bot" target="_blank" class="mb-2 sm:mb-3">
+    <a href="https://t.me/trustmining_calculator_bot" target="_blank" class="mb-2 sm:mb-3 lg:mb-4">
         <x-secondary-button class="flex items-center bg-secondary-gradient dark:text-gray-800">
             <svg class="size-4 mr-2" width="64px" height="64px" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
@@ -16,7 +16,7 @@
         </x-secondary-button>
     </a>
 
-    <x-secondary-button class="flex items-center mb-2 sm:mb-3"
+    <x-secondary-button class="flex items-center mb-2 sm:mb-3 lg:mb-4"
         @click="navigator.clipboard.writeText(window.location.href + '?utm_source=share_button&utm_campaign=content_propagation&utm_content=calculator_page')
         .then(() => pushToastAlert('{{ __('Link successfully copied') }}', 'success'))">
         <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

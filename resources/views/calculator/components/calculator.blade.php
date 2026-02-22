@@ -20,7 +20,7 @@
             <template x-if="version !== null">
                 <div class="mt-6 sm:mt-8 lg:mt-10">
                     <div class="hidden md:block mt-6">
-                        <h3 class="sr-only">{{ __('Reviews') }}</h3>
+                        <h2 class="sr-only">{{ __('Reviews') }}</h2>
                         <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                             <x-rating></x-rating>
 
