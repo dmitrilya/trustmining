@@ -145,7 +145,7 @@ Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']
 Route::post('/amocrm/webhook/uninstall', [AmoCRMController::class, 'handleUninstallWebhook']);
 Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook']);
 
-Route::get('/phones/{phone}/show', [PhoneController::class, 'show'])->name('phone.show');
+Route::get('/phones/{user}/show', [PhoneController::class, 'show'])->name('phone.show');
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');

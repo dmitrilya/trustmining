@@ -4,7 +4,7 @@
         <div
             class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-gray-200 dark:bg-zinc-700 @endif">
             <a class="block w-full" href="{{ route('company', ['user' => $shop->url_name]) }}">
-                @if ($shop->company)
+                @if ($shop->company?->bg_logo)
                     @php
                         $preview = explode('.', $shop->company->bg_logo);
                         $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);

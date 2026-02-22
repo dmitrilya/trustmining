@@ -34,8 +34,9 @@ return new class extends Migration
             $table->float('price');
             $table->boolean('with_vat')->default(false);
             $table->unsignedInteger('ordering_id');
-            $table->index(['ad_category_id', DB::raw('ordering_id DESC')], 'ads_category_ordering');
             $table->timestamps();
+            
+            $table->index(['ad_category_id', DB::raw('ordering_id DESC')], 'ads_category_ordering');
         });
     }
 

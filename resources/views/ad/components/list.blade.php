@@ -2,7 +2,7 @@
     @continue(!$owner && ($ad->moderation || $ad->hidden))
 
     @if (isset($shop))
-        <template x-if="!ad_category_id || {{ $ad->ad_category_id }} == ad_category_id">
+        <template x-if="!ad_category_name || '{{ $ad->ad_category_name }}' == ad_category_name">
             @include('ad.components.card')
         </template>
     @else

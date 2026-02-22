@@ -54,25 +54,20 @@
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ ad_category_id: null }">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ ad_category_name: null }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            @foreach ($ads->pluck('adCategory')->unique() as $adCategory)
-                <div @click="ad_category_id = ad_category_id == {{ $adCategory->id }} ? null : {{ $adCategory->id }}"
+            @foreach ($ads->pluck('ad_category_header', 'ad_category_name')->unique() as $ad_category_name => $ad_category_header)
+                <div @click="ad_category_name = ad_category_name == '{{ $ad_category_name }}' ? null : '{{ $ad_category_name }}'"
                     class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
-                    :class="{
-                        'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': ad_category_id ==
-                            '{{ $adCategory->id }}',
-                        'border-gray-300 dark:border-zinc-700': ad_category_id !=
-                            '{{ $adCategory->id }}'
-                    }">
+                    :class="ad_category_name ==
+                        '{{ $ad_category_name }}' ?
+                        'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
+                        'border-gray-300 dark:border-zinc-700'">
                     <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-gray-100"
-                        :class="{
-                            'text-indigo-500 dark:text-gray-50': ad_category_id ==
-                                '{{ $adCategory->id }}',
-                            'text-gray-500 dark:text-gray-300': ad_category_id !=
-                                '{{ $adCategory->id }}'
-                        }">
-                        {{ __($adCategory->header) }}
+                        :class="ad_category_name ==
+                            '{{ $ad_category_name }}' ? 'text-indigo-500 dark:text-gray-50' :
+                            'text-gray-500 dark:text-gray-300'">
+                        {{ __($ad_category_header) }}
                     </h5>
                 </div>
             @endforeach

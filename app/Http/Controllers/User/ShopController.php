@@ -35,7 +35,7 @@ class ShopController extends Controller
      */
     public function shop(Request $request, User $user)
     {
-        $ads = $this->getAds($request)->where('user_id', $user->id)->paginate(150);
+        $ads = $this->getAds($request)->where('ads.user_id', $user->id)->paginate(150);
 
         return view('shop.show', compact('ads', 'user'));
     }

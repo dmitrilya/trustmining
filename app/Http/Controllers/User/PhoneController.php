@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ViewTrait;
 
 use App\Models\User\Phone;
+use App\Models\User\User;
 
 class PhoneController extends Controller
 {
@@ -37,12 +38,14 @@ class PhoneController extends Controller
      * Display the specified resource.
      *
      * @param  Illuminate\Http\Request  $request
-     * @param  \App\Models\User\Phone  $phone
+     * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Phone $phone)
+    public function show(Request $request, User $user)
     {
-        if (!$phone->user->tariff || !$phone->user->tariff->can_have_phone) return response()->json(['success' => false, 'number' => __('Not available')]);
+        if (!$user->tariff || !$user->tariff->can_have_phone) return response()->json(['success' => false, 'number' => __('Not available')]);
+
+        $phone = $user->phones()->first();
 
         $this->addView(request(), $phone, $request->ad_id);
 
