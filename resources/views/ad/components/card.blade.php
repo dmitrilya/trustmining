@@ -39,7 +39,7 @@
                 <picture>
                     <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
-                    <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Ad preview">
+                    <img fetchpriority="high" class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Ad preview">
                 </picture>
             </a>
         </div>
