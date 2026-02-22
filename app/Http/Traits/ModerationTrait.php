@@ -118,7 +118,7 @@ trait ModerationTrait
                 case ('video'):
                     if (isset($moderation->data['preview'])) {
                         array_push($files, $m->preview);
-                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [340, 284, 192]));
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [400, 340, 284, 192]));
                     }
                     break;
                 case ('forum-question'):
@@ -222,7 +222,7 @@ trait ModerationTrait
             case ('video'):
                 if (isset($moderation->data['preview'])) {
                     array_push($files, $moderation->data['preview']);
-                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [340, 284, 192]));
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [400, 340, 284, 192]));
                 }
                 break;
             case ('forum-question'):

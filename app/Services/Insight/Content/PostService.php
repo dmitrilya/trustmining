@@ -32,6 +32,7 @@ class PostService extends ContentService
 
         $time = time();
         $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, 696], 90);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [400, 300]);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255]);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213]);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144]);
@@ -68,6 +69,7 @@ class PostService extends ContentService
         if ($data['preview']) {
             $time = time();
             $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, 696], 90);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [400, 300]);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255]);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213]);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144]);

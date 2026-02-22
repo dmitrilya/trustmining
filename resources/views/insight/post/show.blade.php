@@ -34,8 +34,24 @@
 
         @include('insight.components.content-info', ['type' => 'post', 'content' => $post])
 
-        <img itemprop="image" fetchpriority="high" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
-            alt="" class="rounded-xl w-full aspect-[4/3]">
+        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+            @php
+                $preview =
+                    $moder && isset($moderation->data['preview'])
+                        ? explode('.', $moderation->data['preview'])
+                        : explode('.', $post->preview);
+                $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+
+                $previewxs = Storage::url($baseName . '_400.' . $preview[1]);
+            @endphp
+
+            <picture>
+                <source media="(min-width: 430px)" srcset="{{ $preview }}">
+
+                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}"
+                    alt="Post image" />
+            </picture>
+        </div>
 
         <div x-show="!edit">
             <div itemprop="articleBody" class="ql-editor !p-0 text-xs xs:text-sm sm:text-base">
