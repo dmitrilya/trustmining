@@ -24,8 +24,7 @@
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="date-transform text-xxs sm:text-xs text-gray-500" data-type="adaptive"
-                data-date="{{ $series->contents->first()->created_at }}"></p>
+            <p class="text-xxs sm:text-xs text-gray-500">{{ $series->contents->first()->created_at->gt(now()->subWeek()) ? $series->contents->first()->created_at->diffForHumans() : $series->contents->first()->created_at->translatedFormat('j M') }}</p>
             <meta itemprop="dateModified" content="{{ $series->contents->first()->created_at->toIso8601String() }}" />
         </div>
 
