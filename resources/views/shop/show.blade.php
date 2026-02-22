@@ -97,6 +97,10 @@
             @endif
 
             @include('ad.components.list', ['owner' => $auth && $auth->id == $user->id, 'shop' => true])
+
+            <div class="mt-8 sm:mt-12 lg:mt-16">
+                {{ $ads->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>
