@@ -32,7 +32,7 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        @include('insight.components.content-info', ['type' => 'article', 'content' => $article])
+        @include('insight.components.content-info', ['type' => 'post', 'content' => $post])
 
         <img itemprop="image" fetchpriority="high" src="{{ $moder && isset($moderation->data['preview']) ? Storage::url($moderation->data['preview']) : Storage::url($post->preview) }}"
             alt="" class="rounded-xl w-full aspect-[4/3]">
