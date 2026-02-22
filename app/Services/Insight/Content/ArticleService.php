@@ -34,8 +34,8 @@ class ArticleService extends ContentService
         ]);
 
         $time = time();
-        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 90);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300]);
+        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], 85);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
@@ -73,8 +73,8 @@ class ArticleService extends ContentService
         if ($content != $article->content) $changings['content'] = $content;
         if ($data['preview']) {
             $time = time();
-            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 90);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300]);
+            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], 85);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
