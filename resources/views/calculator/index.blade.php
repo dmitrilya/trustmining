@@ -1,16 +1,6 @@
-@php
-    $selModel = $models->first();
-    $selVersion = $rVersion
-        ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
-        : $selModel->asicVersions->first();
-    if (!$selVersion) {
-        $selVersion = $selModel->asicVersions->first();
-    }
-@endphp
-
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
-    ($rModel ? ($rVersion ? $rModel . ' ' . $rVersion : $rModel) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
-    ($rModel ? ($rVersion ? ' ' . $rModel . ' ' . $rVersion : ' ' . $rModel) : '') .
+    ($rModel ? ($rVersion ? $selModel->name . ' ' . $selVersion->hashrate : $selModel->name) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
+    ($rModel ? ($rVersion ? ' ' . $selModel->name . ' ' . $selVersion->hashrate : ' ' . $selModel->name) : '') .
     ' в удобном калькуляторе доходности майнинга'"
     canonical="{{ route('calculator.modelver', [
         'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),

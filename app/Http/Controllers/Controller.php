@@ -92,35 +92,37 @@ class Controller extends BaseController
         return view('profitable', ['models' => $models, 'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate]);
     }
 
-    public function calculator(AsicModel $asicModel, AsicVersion $asicVersion): View
+    public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
     {
         $models = Cache::get('calculator_models');
 
-        if ($asicVersion->id) $models = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersion->id)->count());
-        elseif ($asicModel->id) $models = $models->where('id', $asicModel->id);
-        else $models = $models->where('name', 'Antminer L9');
+        $selModel = $asicModel && $asicModel->exists ? $asicModel : $models->where('name', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? $asicVersion : $selModel->asicVersions->first();
 
         return view('calculator.index', [
             'models' => $models,
             'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
-            'rModel' => $asicModel->name,
-            'rVersion' => $asicVersion->hashrate,
+            'rModel' => $asicModel,
+            'rVersion' => $asicVersion,
+            'selModel' => $selModel,
+            'selVersion' => $selVersion,
         ]);
     }
 
-    public function calculatorApp(AsicModel $asicModel, AsicVersion $asicVersion): View
+    public function calculatorApp(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
     {
         $models = Cache::get('calculator_models');
 
-        if ($asicVersion->id) $models = $models->filter(fn($model) => $model->asicVersions->where('id', $asicVersion->id)->count());
-        elseif ($asicModel->id) $models = $models->where('id', $asicModel->id);
-        else $models = $models->where('name', 'Antminer L9');
+        $selModel = $asicModel && $asicModel->exists ? $asicModel : $models->where('name', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? $asicVersion : $selModel->asicVersions->first();
 
         return view('calculator.app', [
             'models' => $models,
             'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
-            'rModel' => $asicModel->name,
-            'rVersion' => $asicVersion->hashrate,
+            'rModel' => $asicModel,
+            'rVersion' => $asicVersion,
+            'selModel' => $selModel,
+            'selVersion' => $selVersion,
         ]);
     }
 

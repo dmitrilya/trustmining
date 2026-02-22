@@ -88,16 +88,6 @@
             </div>
         </nav>
 
-        @php
-            $selModel = $models->first();
-            $selVersion = $rVersion
-                ? $selModel->asicVersions->where('hashrate', $rVersion)->first()
-                : $selModel->asicVersions->first();
-            if (!$selVersion) {
-                $selVersion = $selModel->asicVersions->first();
-            }
-        @endphp
-
         <main>
             <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
                 <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">

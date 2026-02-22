@@ -1,25 +1,15 @@
 <div style="height: 118.67px" x-data="{
     models: {{ $models->values() }},
-    selectedModel: {{ isset($selectedModel) ? $selectedModel : 'null' }},
-    selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
-    search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
+    selectedModel: {{ $selectedModel }},
+    selectedVersion: {{ $selectedVersion->id }},
+    search: '{{ $selectedModel->name }}',
     get currentModel() {
         return this.models.find(m => m.id == this.selectedModel.id);
     },
     get currentVersion() {
         return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
     },
-    modelsLoaded: false
-}" x-init="const loadHeavyScriptOnUserInteraction = () => {
-    if (modelsLoaded) return;
-    scriptLoaded = true;
-
-    axios.get('/calculator/get-models').then(r => models = r.data);
-}
-
-document.addEventListener('scroll', loadHeavyScriptOnUserInteraction, { once: true });
-document.addEventListener('mousemove', loadHeavyScriptOnUserInteraction, { once: true });
-document.addEventListener('touchstart', loadHeavyScriptOnUserInteraction, { once: true });">
+}">
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
             <div class="flex items-center justify-between group border-b-2 border-gray-300 dark:border-zinc-700">
