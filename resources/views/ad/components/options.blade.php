@@ -1,6 +1,4 @@
-@props(['owner'])
-
-<div x-data="{ open: false }">
+<div x-data="{ open: false }" aria-label="Options">
     <button @click="open = ! open"
         class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm text-center text-gray-950 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-md hover:bg-gray-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700">
         <svg class="w-4 xs:w-5 h-4 xs:h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
@@ -26,7 +24,7 @@
                     $trackClick =
                         $user && $user->tariff
                             ? 'axios.post("/ads/' .
-                                $ad->adCategory->name .
+                                $ad->ad_category_name .
                                 '/' .
                                 $ad->id .
                                 '/track").then(r => {
@@ -62,7 +60,7 @@
                 </li>
                 <li>
                     <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
-                        target="_blank" href="{{ route('chat.start', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}">
+                        target="_blank" href="{{ route('chat.start', ['user' => $ad->user_id, 'ad_id' => $ad->id]) }}">
                         <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -72,11 +70,11 @@
                         {{ __('Contact') }}
                     </a>
                 </li>
-                @if ($ad->user->phones->count())
+                @if ($ad->user_has_phone)
                     <li class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
                         x-data="{ number: '{{ __('View number') }}' }"
                         @click="if (/^\d+$/.test(number)) window.open('tel:+' + number);
-                        else axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')
+                        else axios.get('{{ route('phone.show', ['user' => $ad->user_id, 'ad_id' => $ad->id]) }}')
                         .then(r => number = r.data.number);">
                         <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">

@@ -355,7 +355,7 @@
                                         <x-secondary-button
                                             class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-gray-800 xs:py-3"
                                             x-data="{ number: null, status: '{{ __('View number') }}' }"
-                                            @click="if (!number) axios.get('{{ route('phone.show', ['phone' => $ad->user->phones[0]->id, 'ad_id' => $ad->id]) }}')
+                                            @click="if (!number) axios.get('{{ route('phone.show', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}')
                                                 .then(r => {
                                                     if (r.data.success) number = '+' + r.data.number;
                                                     else status = r.data.number;
