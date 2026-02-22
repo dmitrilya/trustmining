@@ -96,8 +96,8 @@ class Controller extends BaseController
     {
         $models = Cache::get('calculator_models');
 
-        $selModel = $asicModel && $asicModel->exists ? $asicModel : $models->where('name', 'Antminer L9')->first();
-        $selVersion = $asicVersion && $asicVersion->exists ? $asicVersion : $selModel->asicVersions->first();
+        $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first : $selModel->asicVersions->first();
 
         return view('calculator.index', [
             'models' => $models,
@@ -113,8 +113,8 @@ class Controller extends BaseController
     {
         $models = Cache::get('calculator_models');
 
-        $selModel = $asicModel && $asicModel->exists ? $asicModel : $models->where('name', 'Antminer L9')->first();
-        $selVersion = $asicVersion && $asicVersion->exists ? $asicVersion : $selModel->asicVersions->first();
+        $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first : $selModel->asicVersions->first();
 
         return view('calculator.app', [
             'models' => $models,
