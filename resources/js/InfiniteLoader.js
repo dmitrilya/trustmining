@@ -3,15 +3,14 @@ class InfiniteLoader {
         this.container = options.container ?? document.querySelector('#infinite-loader');
         this.itemSelector = options.itemSelector ?? '.card';
         this.endpoint = options.endpoint;
-        this.horizontal = options.horizontal ?? false;
 
         this.startPage = options.page;
         this.page = this.startPage == options.lastPage ? 0 : this.startPage;
         this.isLoading = false;
+        console.log(this.startPage);
 
         this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
-            root: this.horizontal ? this.container : null,
-            rootMargin: this.horizontal ? '0px 450px 0px 0px' : '600px',
+            rootMargin: '600px',
             threshold: 0
         });
 

@@ -1,4 +1,4 @@
-<div class="relative sm:max-w-md p-2 h-full md:p-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between offer-card"
+<div class="card relative sm:max-w-md p-2 h-full md:p-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between offer-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {

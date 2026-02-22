@@ -149,8 +149,8 @@
                             x-text="version.price ? dailyIncome > 0 ? Math.round(dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                     </div>
 
-                    <h4 class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">
-                        {{ __('Coins per day') }}</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">
+                        {{ __('Coins per day') }}</p>
 
                     <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                         <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
