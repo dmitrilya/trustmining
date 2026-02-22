@@ -43,7 +43,7 @@ class ArticleService extends ContentService
         if ($data['series_id']) $article->series()->attach($data['series_id']);
 
         $moderation = $article->moderations()->create(['data' => $article->attributesToArray()]);
-        if (!$channel->user->company?->moderation) {
+        if ($channel->user->company && !$channel->user->company->moderation) {
             $moderation->moderation_status_id = 1;
             $this->acceptModeration(true, $moderation);
         }
@@ -83,7 +83,7 @@ class ArticleService extends ContentService
 
         if (!empty($changings)) {
             $moderation = $article->moderations()->create(['data' => $changings]);
-            if (!$channel->user->company?->moderation) {
+            if ($channel->user->company && !$channel->user->company->moderation) {
                 $moderation->moderation_status_id = 1;
                 $this->acceptModeration(true, $moderation);
             }

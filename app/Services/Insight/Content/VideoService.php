@@ -35,7 +35,7 @@ class VideoService extends ContentService
         if ($data['series_id']) $video->series()->attach($data['series_id']);
 
         $moderation = $video->moderations()->create(['data' => $video->attributesToArray()]);
-        if (!$channel->user->company?->moderation) {
+        if ($channel->user->company && !$channel->user->company->moderation) {
             $moderation->moderation_status_id = 1;
             $this->acceptModeration(true, $moderation);
         }
@@ -67,7 +67,7 @@ class VideoService extends ContentService
 
         if (!empty($changings)) {
             $moderation = $video->moderations()->create(['data' => $changings]);
-            if (!$channel->user->company?->moderation) {
+            if ($channel->user->company && !$channel->user->company->moderation) {
                 $moderation->moderation_status_id = 1;
                 $this->acceptModeration(true, $moderation);
             }
