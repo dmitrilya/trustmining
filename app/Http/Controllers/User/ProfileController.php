@@ -89,9 +89,9 @@ class ProfileController extends Controller
                 $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
             }
         } catch (\Exception $e) {
-            $result['suggestions'][0]['data']['city'] = config('app.default_city');
+            $city = config('app.default_city');
             $source = 'default';
-            $result['suggestions'][0]['data']['country_iso_code'] = 'RU';
+            $locale = 'ru';
         }
 
         app()->setLocale($locale);

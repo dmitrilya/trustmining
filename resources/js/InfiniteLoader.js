@@ -7,7 +7,6 @@ class InfiniteLoader {
         this.startPage = options.page;
         this.page = this.startPage == options.lastPage ? 0 : this.startPage;
         this.isLoading = false;
-        console.log(this.startPage);
 
         this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
             rootMargin: '600px',
