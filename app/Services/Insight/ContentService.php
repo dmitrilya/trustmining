@@ -5,6 +5,7 @@ namespace App\Services\Insight;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 
+use App\Http\Traits\ModerationTrait;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 
@@ -14,7 +15,7 @@ use App\Models\Insight\ContentModel;
 
 abstract class ContentService
 {
-    use ViewTrait, FileTrait;
+    use ViewTrait, FileTrait, ModerationTrait;
 
     /**
      * Store a newly created resource in storage.

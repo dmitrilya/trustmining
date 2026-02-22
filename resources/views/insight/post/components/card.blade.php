@@ -5,10 +5,20 @@
             @php
                 $preview = explode('.', $post->preview);
                 $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
-                $previewxs = $baseName . '_340' . '.' . $preview[1];
+
+                $previewxs = Storage::url($baseName . '_192.' . $preview[1]);
+                $previewsm = Storage::url($baseName . '_284.' . $preview[1]);
+                $previewmd = Storage::url($baseName . '_340.' . $preview[1]);
             @endphp
 
-            <img itemprop="image" fetchpriority="high" class="w-full" src="{{ Storage::url($previewxs) }}" alt="Post preview" />
+            <picture>
+                <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
+                <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
+                <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
+
+                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
+                    alt="Post preview" />
+            </picture>
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [
@@ -24,7 +34,9 @@
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="text-xxs sm:text-xs text-gray-500">{{ $post->created_at->gt(now()->subWeek()) ? $post->created_at->diffForHumans() : $post->created_at->translatedFormat('j M') }}</p>
+            <p class="text-xxs sm:text-xs text-gray-500">
+                {{ $post->created_at->gt(now()->subWeek()) ? $post->created_at->diffForHumans() : $post->created_at->translatedFormat('j M') }}
+            </p>
             <meta itemprop="datePublished" content="{{ $post->created_at->toIso8601String() }}" />
             @if ($post->updated_at)
                 <meta itemprop="dateModified" content="{{ $post->updated_at->toIso8601String() }}" />

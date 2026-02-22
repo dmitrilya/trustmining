@@ -41,6 +41,23 @@ trait ModerationTrait
         return $moderations;
     }
 
+    private function getAdditionalFiles(array $paths, array $sizes)
+    {
+        $files = [];
+
+        foreach ($paths as $path) {
+            $pathInfo = pathinfo($path);
+
+            $filename = preg_replace('/_[0-9]+$/', '', $pathInfo['filename']);
+
+            foreach ($sizes as $size) {
+                $files[] = $pathInfo['dirname'] . '/' . $filename . '_' . $size . '.' . $pathInfo['extension'];
+            }
+        }
+
+        return $files;
+    }
+
     public function acceptModeration($isUniqueContent, $moderation, $userId = null)
     {
         $userId = $userId ? $userId : Auth::id();
@@ -56,18 +73,27 @@ trait ModerationTrait
             switch ($moderation->moderationable_type) {
                 case ('company'):
                     if (isset($moderation->data['logo']) && $m->logo) array_push($files, $m->logo);
-                    if (isset($moderation->data['bg_logo']) && $m->bg_logo) array_push($files, $m->bg_logo);
+                    if (isset($moderation->data['bg_logo']) && $m->bg_logo) {
+                        array_push($files, $m->bg_logo);
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->bg_logo], [188]));
+                    }
                     if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($m->documents, 'path'));
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
                 case ('hosting'):
-                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
+                    if (isset($moderation->data['images'])) {
+                        $files = array_merge($files, $m->images);
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->images[0]], [368, 188]));
+                    }
                     if (isset($moderation->data['contract'])) array_push($files, $m->contract);
                     if (isset($moderation->data['territory']) && $m->territory) array_push($files, $m->territory);
                     if (isset($moderation->data['energy_supply']) && $m->energy_supply) array_push($files, $m->energy_supply);
                     break;
                 case ('ad'):
-                    if (isset($moderation->data['preview'])) array_push($files, $m->preview);
+                    if (isset($moderation->data['preview'])) {
+                        array_push($files, $m->preview);
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [292, 188]));
+                    }
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
                 case ('review'):
@@ -78,7 +104,10 @@ trait ModerationTrait
                         $this->notify('New review', collect([$m->reviewable]), 'review', $m);
                     break;
                 case ('office'):
-                    if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
+                    if (isset($moderation->data['images'])) {
+                        $files = array_merge($files, $m->images);
+                        $files = array_merge($files, $this->getAdditionalFiles($m->images, [212]));
+                    }
                     break;
                 case ('passport'):
                     if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
@@ -87,7 +116,10 @@ trait ModerationTrait
                 case ('article'):
                 case ('post'):
                 case ('video'):
-                    if (isset($moderation->data['preview'])) array_push($files, $m->preview);
+                    if (isset($moderation->data['preview'])) {
+                        array_push($files, $m->preview);
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [340, 284, 192]));
+                    }
                     break;
                 case ('forum-question'):
                 case ('forum-answer'):
@@ -145,18 +177,27 @@ trait ModerationTrait
         switch ($moderation->moderationable_type) {
             case ('company'):
                 if (isset($moderation->data['logo'])) array_push($files, $moderation->data['logo']);
-                if (isset($moderation->data['bg_logo'])) array_push($files, $moderation->data['bg_logo']);
+                if (isset($moderation->data['bg_logo'])) {
+                    array_push($files, $moderation->data['bg_logo']);
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['bg_logo']], [188]));
+                }
                 if (isset($moderation->data['documents'])) $files = array_merge($files, array_column($moderation->data['documents'], 'path'));
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
             case ('hosting'):
-                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
+                if (isset($moderation->data['images'])) {
+                    $files = array_merge($files, $moderation->data['images']);
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['images'][0]], [368, 188]));
+                }
                 if (isset($moderation->data['contract'])) array_push($files, $moderation->data['contract']);
                 if (isset($moderation->data['territory'])) array_push($files, $moderation->data['territory']);
                 if (isset($moderation->data['energy_supply'])) array_push($files, $moderation->data['energy_supply']);
                 break;
             case ('ad'):
-                if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
+                if (isset($moderation->data['preview'])) {
+                    array_push($files, $moderation->data['preview']);
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [292, 188]));
+                }
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;
             case ('review'):
@@ -166,7 +207,10 @@ trait ModerationTrait
                 $disk = 'private';
                 break;
             case ('office'):
-                if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
+                if (isset($moderation->data['images'])) {
+                    $files = array_merge($files, $moderation->data['images']);
+                    $files = array_merge($files, $this->getAdditionalFiles($moderation->data['images'], [212]));
+                }
                 break;
             case ('passport'):
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
@@ -176,7 +220,10 @@ trait ModerationTrait
             case ('article'):
             case ('post'):
             case ('video'):
-                if (isset($moderation->data['preview'])) array_push($files, $moderation->data['preview']);
+                if (isset($moderation->data['preview'])) {
+                    array_push($files, $moderation->data['preview']);
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [340, 284, 192]));
+                }
                 break;
             case ('forum-question'):
             case ('forum-answer'):

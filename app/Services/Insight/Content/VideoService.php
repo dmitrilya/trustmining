@@ -27,12 +27,18 @@ class VideoService extends ContentService
             'url' => processVideoLink($data['url']),
         ]);
 
-        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, time(), [340, 255]);
-        $video->save();
+        $time = time();
+        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144]);
 
         if ($data['series_id']) $video->series()->attach($data['series_id']);
 
-        $video->moderations()->create(['data' => $video->attributesToArray()]);
+        $moderation = $video->moderations()->create(['data' => $video->attributesToArray()]);
+        if (!$channel->user->company?->moderation) {
+            $moderation->moderation_status_id = 1;
+            $this->acceptModeration(true, $moderation);
+        }
 
         return $video;
     }
@@ -50,11 +56,22 @@ class VideoService extends ContentService
         $changings = [];
 
         if ($data['title'] != $video->title) $changings['title'] = $data['title'];
-        if ($data['preview']) $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, time(), [340, 255]);
+        if ($data['preview']) {
+            $time = time();
+            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144]);
+        }
 
         if ($data['series_id']) $video->series()->sync([$data['series_id']]);
 
-        if (!empty($changings)) $video->moderations()->create(['data' => $changings]);
+        if (!empty($changings)) {
+            $moderation = $video->moderations()->create(['data' => $changings]);
+            if (!$channel->user->company?->moderation) {
+                $moderation->moderation_status_id = 1;
+                $this->acceptModeration(true, $moderation);
+            }
+        }
 
         return $video;
     }

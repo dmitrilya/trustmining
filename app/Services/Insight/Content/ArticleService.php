@@ -34,13 +34,19 @@ class ArticleService extends ContentService
         ]);
 
         $time = time();
-        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, null], 85);
+        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, null], 90);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
         $article->save();
 
         if ($data['series_id']) $article->series()->attach($data['series_id']);
 
-        $article->moderations()->create(['data' => $article->attributesToArray()]);
+        $moderation = $article->moderations()->create(['data' => $article->attributesToArray()]);
+        if (!$channel->user->company?->moderation) {
+            $moderation->moderation_status_id = 1;
+            $this->acceptModeration(true, $moderation);
+        }
 
         return $article;
     }
@@ -68,12 +74,20 @@ class ArticleService extends ContentService
             $time = time();
             $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, null], 85);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
         }
         if (count(array_diff($article->tags, $data['tags'])) || count(array_diff($data['tags'], $article->tags))) $changings['tags'] = $data['tags'];
 
         if ($data['series_id']) $article->series()->sync([$data['series_id']]);
 
-        if (!empty($changings)) $article->moderations()->create(['data' => $changings]);
+        if (!empty($changings)) {
+            $moderation = $article->moderations()->create(['data' => $changings]);
+            if (!$channel->user->company?->moderation) {
+                $moderation->moderation_status_id = 1;
+                $this->acceptModeration(true, $moderation);
+            }
+        }
 
         return $article;
     }

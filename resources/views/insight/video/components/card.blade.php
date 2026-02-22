@@ -5,10 +5,20 @@
             @php
                 $preview = explode('.', $video->preview);
                 $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
-                $previewxs = $baseName . '_340' . '.' . $preview[1];
+
+                $previewxs = Storage::url($baseName . '_192.' . $preview[1]);
+                $previewsm = Storage::url($baseName . '_284.' . $preview[1]);
+                $previewmd = Storage::url($baseName . '_340.' . $preview[1]);
             @endphp
 
-            <img itemprop="thumbnailUrl" fetchpriority="high" class="w-full" src="{{ Storage::url($previewxs) }}" alt="{{ $video->title }}" />
+            <picture>
+                <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
+                <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
+                <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
+
+                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
+                    alt="{{ $video->title }}" />
+            </picture>
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             @include('insight.components.card-channel', [

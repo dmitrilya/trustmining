@@ -31,13 +31,19 @@ class PostService extends ContentService
         ]);
 
         $time = time();
-        $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, null], 85);
+        $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, null], 90);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213]);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144]);
         $post->save();
 
         if ($data['series_id']) $post->series()->attach($data['series_id']);
 
-        $post->moderations()->create(['data' => $post->attributesToArray()]);
+        $moderation = $post->moderations()->create(['data' => $post->attributesToArray()]);
+        if (!$channel->user->company?->moderation) {
+            $moderation->moderation_status_id = 1;
+            $this->acceptModeration(true, $moderation);
+        }
 
         return $post;
     }
@@ -63,11 +69,19 @@ class PostService extends ContentService
             $time = time();
             $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, null], 85);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213]);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144]);
         }
 
         if ($data['series_id']) $post->series()->sync([$data['series_id']]);
 
-        if (!empty($changings)) $post->moderations()->create(['data' => $changings]);
+        if (!empty($changings)) {
+            $moderation = $post->moderations()->create(['data' => $changings]);
+            if (!$channel->user->company?->moderation) {
+                $moderation->moderation_status_id = 1;
+                $this->acceptModeration(true, $moderation);
+            }
+        }
 
         return $post;
     }
