@@ -35,7 +35,7 @@ class SeriesController extends Controller
      */
     public function store(StoreSeriesRequest $request, Channel $channel)
     {
-        $series = $this->service->store($channel, $request->name);
+        $series = $this->service->store($channel, $request->name, $request->description);
 
         return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Series created successfully')]);
     }

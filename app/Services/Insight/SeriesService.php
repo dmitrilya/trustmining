@@ -12,11 +12,12 @@ class SeriesService
      * 
      * @param Channel  $channel
      * @param string  $name
+     * @param string  $description
      * @return Series
      */
-    public function store(Channel $channel, string $name): Series
+    public function store(Channel $channel, string $name, string $description): Series
     {
-        return $channel->series()->create(['name' => $name]);
+        return $channel->series()->create(['name' => $name, 'description' => $description]);
     }
 
     /**
