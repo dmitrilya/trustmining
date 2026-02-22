@@ -25,7 +25,7 @@
                 @endphp
 
                 @if ($article)
-                    @include('insight.article.components.card', ['article' => $article])
+                    @include('insight.article.components.card', ['channel' => $article->channel->slug, 'article' => $article])
                 @endif
             </div>
         </div>
