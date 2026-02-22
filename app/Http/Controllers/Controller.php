@@ -98,7 +98,6 @@ class Controller extends BaseController
 
         $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
-        dd($selModel, $selVersion);
 
         return view('calculator.index', [
             'models' => $models,
