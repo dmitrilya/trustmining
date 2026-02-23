@@ -19,12 +19,12 @@
                     ["link"],
                 ]
             },
-        },
-        keyboard: {
-            bindings: {
-                "list autofill": null
+            keyboard: {
+                bindings: {
+                    "list autofill": null
+                }
             }
-        }
+        },
         placeholder: "{{ __('Text of your post') }}",
         theme: "snow"
     });
