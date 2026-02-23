@@ -46,7 +46,7 @@ return [
             'AutoFormat.RemoveEmpty' => false,
         ],
         'insight_post' => [
-            'HTML.Allowed' => 'div,b,strong,a[href|title|class|target],p[class],br,span[class],pre,h2',
+            'HTML.Allowed' => 'div,b,strong,i,em,u,a[href|title|class|target],p[class],br,span[class],pre,h2',
             'URI.AllowedSchemes' => ['http' => true, 'https' => true, 'mailto' => true],
             'Attr.AllowedFrameTargets' => ['_blank'],
             'Attr.AllowedClasses' => ['inline'],
