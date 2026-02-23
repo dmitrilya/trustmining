@@ -22,7 +22,7 @@
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" value="{{ old('name') }}" name="name" id="register-name" placeholder=" "
                     required
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-800 dark:text-gray-200 border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                 <label for="register-name"
                     class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Name') . ' или ' . __('Company name') }}
@@ -33,7 +33,7 @@
             <div class="relative z-0 w-full mb-5 group">
                 <input type="email" value="{{ old('email') }}" name="email" id="register-email" placeholder=" "
                     required
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-800 dark:text-gray-200 border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                 <label for="register-email"
                     class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Email') }}
@@ -44,7 +44,7 @@
             <div class="relative z-0 w-full mb-5 group">
                 <input type="password" value="{{ old('password') }}" name="password" id="register-password"
                     placeholder=" " required
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-800 dark:text-gray-200 border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                 <label for="register-password"
                     class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Password') }}
@@ -55,7 +55,7 @@
             <div class="relative z-0 w-full group">
                 <input type="password" value="{{ old('password') }}" name="password_confirmation"
                     id="register-password_confirmation" placeholder=" " required
-                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                    class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-gray-800 dark:text-gray-200 border-gray-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                 <label for="register-password_confirmation"
                     class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Confirm Password') }}
