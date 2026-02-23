@@ -42,12 +42,12 @@
                         : explode('.', $post->preview);
                 $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
 
-                $preview = Storage::url($baseName . '_928.' . $preview[1]);
+                $previewlg = Storage::url($baseName . '_928.' . $preview[1]);
                 $previewxs = Storage::url($baseName . '_400.' . $preview[1]);
             @endphp
 
             <picture>
-                <source media="(min-width: 430px)" srcset="{{ $preview }}">
+                <source media="(min-width: 430px)" srcset="{{ $previewlg }}">
 
                 <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}"
                     alt="Post image" />
