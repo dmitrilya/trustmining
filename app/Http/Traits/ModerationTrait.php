@@ -11,7 +11,7 @@ use App\Models\Morph\Moderation;
 
 trait ModerationTrait
 {
-    use NotificationTrait;
+    use NotificationTrait, FileTrait;
 
     public function getModerations($request)
     {
@@ -39,23 +39,6 @@ trait ModerationTrait
             $moderations = $moderations->where('moderationable_type', 'like', '%' . $request->model);
 
         return $moderations;
-    }
-
-    private function getAdditionalFiles(array $paths, array $sizes)
-    {
-        $files = [];
-
-        foreach ($paths as $path) {
-            $pathInfo = pathinfo($path);
-
-            $filename = preg_replace('/_[0-9]+$/', '', $pathInfo['filename']);
-
-            foreach ($sizes as $size) {
-                $files[] = $pathInfo['dirname'] . '/' . $filename . '_' . $size . '.' . $pathInfo['extension'];
-            }
-        }
-
-        return $files;
     }
 
     public function acceptModeration($isUniqueContent, $moderation, $userId = null)

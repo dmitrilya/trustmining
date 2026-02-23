@@ -93,6 +93,23 @@ trait FileTrait
         return $result;
     }
 
+    private function getAdditionalFiles(array $paths, array $sizes)
+    {
+        $files = [];
+
+        foreach ($paths as $path) {
+            $pathInfo = pathinfo($path);
+
+            $filename = preg_replace('/_[0-9]+$/', '', $pathInfo['filename']);
+
+            foreach ($sizes as $size) {
+                $files[] = $pathInfo['dirname'] . '/' . $filename . '_' . $size . '.' . $pathInfo['extension'];
+            }
+        }
+
+        return $files;
+    }
+
     private function compress($file, $disk, $folder, $filename, $resize, $quality)
     {
         $info = getimagesize($file->getPathName());
