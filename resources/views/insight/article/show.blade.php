@@ -51,7 +51,7 @@
                 $previewxs = Storage::url($baseName . '_400.' . $preview[1]);
             @endphp
 
-            <picture>
+            <picture class="w-full">
                 <source media="(min-width: 430px)" srcset="{{ $previewlg}}">
 
                 <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}"

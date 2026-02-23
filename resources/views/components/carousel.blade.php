@@ -14,7 +14,7 @@
                                 $previewxs = $baseName . '_212' . '.' . $preview[1];
                             @endphp
 
-                            <picture>
+                            <picture class="w-full">
                                 <source media="(max-width: 480px)" srcset="{{ Storage::url($previewxs) }}">
 
                                 <img class="w-full object-cover" src="{{ Storage::url($image) }}" alt="Office preview">

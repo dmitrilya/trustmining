@@ -11,7 +11,7 @@
                 $previewmd = Storage::url($baseName . '_340.' . $preview[1]);
             @endphp
 
-            <picture>
+            <picture class="w-full">
                 <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
                 <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
                 <source media="(min-width: 380px)" srcset="{{ $previewxs }}">

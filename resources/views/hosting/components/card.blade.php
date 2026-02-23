@@ -13,7 +13,7 @@
                         $previewsm = $baseName . '_368' . '.' . $preview[1];
                     @endphp
 
-                    <picture>
+                    <picture class="w-full">
                         <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
                         <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Hosting preview">

@@ -36,7 +36,7 @@
                     $previewsm = $baseName . '_292' . '.' . $preview[1];
                 @endphp
 
-                <picture>
+                <picture class="w-full">
                     <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
                     <img fetchpriority="high" class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Ad preview">
