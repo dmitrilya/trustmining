@@ -8,13 +8,13 @@
     class CustomLink extends Link {
         static create(value) {
             const node = super.create(value);
-            node.classList.add('inline'); 
+            node.classList.add('inline');
             return node;
         }
     }
-
+    
     Quill.register(CustomLink, true);
-
+    
     quill = new Quill('#editor', {
         modules: {
             toolbar: {
@@ -23,6 +23,11 @@
                     ['link'],
                 ]
             },
+            keyboard: {
+                bindings: {
+                    'list autofill': null
+                }
+            }
         },
         placeholder: '{{ __('Text of your post') }}',
         theme: 'snow'
