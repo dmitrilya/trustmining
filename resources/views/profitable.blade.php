@@ -6,9 +6,26 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6" x-data="{ tariff: 5, currency: 'RUB' }">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6" x-data="{
+        tariff: 5,
+        currency: 'RUB',
+        rubRate: {{ $rub }},
+        models: {{ $models }},
+        getNetProfit(model) {
+            let profit = model.profit / (this.currency === 'RUB' ? this.rubRate : 1);
+            let cost = (model.power * this.tariff * (this.currency === 'RUB' ? 1 : this.rubRate) * 24) / 1000;
+            return Math.round((profit - cost) * 100) / 100;
+        },
+        get sortedModels() {
+            return this.models
+                .map(m => ({ ...m, netProfit: this.getNetProfit(m) }))
+                .sort((a, b) => b.netProfit - a.netProfit)
+                .slice(0, 15);
+        }
+    }">
         <div class="flex justify-center">
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-full p-0.5 space-x-2 flex">
+            <div
+                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-full p-0.5 space-x-2 flex">
                 <div class="relative z-0 group">
                     <input id="tariff" type="text" :value="tariff" aria-label="{{ __('Tariff') }}"
                         class="py-1 px-3 block w-28 rounded-full text-sm text-gray-950 bg-gray-50 dark:bg-zinc-950 dark:text-gray-200 border ring-0 border-gray-300 dark:border-zinc-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
@@ -42,58 +59,44 @@
             </div>
         </div>
 
-        <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-gray-300 dark:divide-zinc-700">
-            @foreach ($models as $model)
-                <a href="{{ route('database.model', ['asicBrand' => $model['brand'], 'asicModel' => $model['url_name']]) }}"
+        <div
+            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-gray-300 dark:divide-zinc-700">
+            <template x-for="(model, index) in sortedModels" :key="model.url_name">
+                <a href="`/database/${model.brand}/${model.url_name}`"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h2
                         class="relative font-semibold text-gray-600 dark:text-gray-400 text-xxs xs:text-xs sm:text-sm group-hover:text-gray-900 dark:group-hover:text-gray-200 col-span-2">
-                        @if ($loop->index == 0)
-                            <div
-                                class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
-                                <img src="/img/gold.webp" alt="gold medal">
-                            </div>
-                        @elseif ($loop->index == 1)
-                            <div
-                                class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
-                                <img src="/img/silver.webp" alt="silver medal">
-                            </div>
-                        @elseif ($loop->index == 2)
-                            <div
-                                class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
-                                <img src="/img/bronze.webp" alt="bronze medal">
-                            </div>
-                        @endif
-                        
-                        {{ $model['name'] }} {{ $model['hashrate'] }}{{ $model['measurement'] }}/s
+                        <div x-show="index < 3"
+                            class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
+                            <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')"
+                                alt="medal">
+                        </div>
+
+                        <span x-text="`${model.name} ${model.hashrate}${model.measurement}/s`"></span>
                     </h2>
-                    <div
-                        class="hidden sm:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200">
-                        {{ $model['power'] }} {{ __('W') }}</div>
-                    <div
-                        class="hidden lg:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200">
-                        {{ $model['algorithm'] }}</div>
-                    <div
-                        class="hidden xl:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200">
-                        {{ $model['original_efficiency'] }}j/{{ $model['original_measurement'] }}
+                    <div class="hidden sm:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                        x-text="Math.round(model.power * 10) / 10 + ' ' + '{{ __('W') }}'"></div>
+                    <div class="hidden lg:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                        x-text="model.algorithm"></div>
+                    <div class="hidden xl:block text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                        x-text="model.original_efficiency + 'j/' + model.original_measurement"></div>
+                    <div class="text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
+                        x-text="Math.round(model.profit / (currency === 'RUB' ? rubRate : 1) * 100) / 100">
                     </div>
                     <div class="text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
-                        x-text="Math.round({{ $model['profit'] }} / (currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100">
+                        x-text="Math.round(model.power * tariff * (currency === 'RUB' ? 1 : rubRate) * 24 / 10) / 100">
                     </div>
                     <div class="text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
-                        x-text="Math.round({{ $model['power'] }} * tariff * (currency == 'RUB' ? 1 : {{ $rub }}) * 24 / 10) / 100">
-                    </div>
-                    <div class="text-gray-600 dark:text-gray-400 text-xxs xs:text-xs group-hover:text-gray-900 dark:group-hover:text-gray-200"
-                        x-text="Math.round(({{ $model['profit'] }} / (currency == 'RUB' ? {{ $rub }} : 1) - {{ $model['power'] }} * tariff * (currency == 'RUB' ? 1 : {{ $rub }}) * 24 / 1000) * 100) / 100">
+                        x-text="model.netProfit">
                     </div>
                     <div class="hidden md:block pl-1.5 sm:pl-2">
-                        @foreach ($model['coins'] as $coin)
+                        <template x-for="coin in model.coins">
                             <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
-                                src="{{ Storage::url('coins/' . $coin . '.webp') }}" alt="{{ $coin }}">
-                        @endforeach
+                                :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                        </template>
                     </div>
                 </a>
-            @endforeach
+            </template>
         </div>
     </div>
 </x-app-layout>

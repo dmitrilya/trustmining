@@ -67,7 +67,7 @@ class Controller extends BaseController
     public function asicRating(): View
     {
         $models = Cache::get('calculator_models')->filter(fn($model) => count($model->asicVersions->first()->profits))
-            ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(15)->map(function ($model) {
+            ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(50)->map(function ($model) {
                 $version = $model->asicVersions->first();
                 $profit = $version->profits->first();
 
