@@ -221,7 +221,7 @@
             <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
             @include('insight.components.carousel', [
-                'items' => $series,
+                'items' => $series->where('contents_count', '>', 0),
                 'blade' => 'insight.series.components.card',
                 'model' => 'series',
             ])
