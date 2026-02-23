@@ -64,6 +64,8 @@
             </div>
         </div>
 
+        <meta name="url" content="{{ route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id]) }}" />
+
         @if ($user && $user->id == $channel->user_id)
             @include('insight.post.edit')
         @endif
