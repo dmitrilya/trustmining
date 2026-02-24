@@ -24,7 +24,7 @@ class UpdateVideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:40',
+            'title' => 'required|max:80',
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
         ];
@@ -39,7 +39,7 @@ class UpdateVideoRequest extends FormRequest
     {
         return [
             'title.required' => __('Title is required.'),
-            'title.max' => __('validation.max.string', ['max' => 40]),
+            'title.max' => __('validation.max.string', ['max' => 80]),
             'preview.mimes' => __('Valid types are png, jpg and jpeg'),
             'preview.max' => __('The maximum file size should not exceed 2 MB'),
         ];

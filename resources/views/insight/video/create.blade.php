@@ -14,7 +14,7 @@
             <div class="w-full">
                 <x-input-label for="video-title" :value="__('Title')" />
                 <x-length-input id="video-title" name="title" type="text" :value="old('title')" autocomplete="title"
-                    required max="40" />
+                    required max="80" />
                 <x-input-error :messages="$errors->get('title')" />
             </div>
 
