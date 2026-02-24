@@ -84,7 +84,7 @@
                     'items' => $newPosts,
                     'blade' => 'insight.post.components.card',
                     'model' => 'post',
-                    'endpoint' => route('insight.article.get-new')
+                    'endpoint' => route('insight.post.get-new')
                 ])
             </div>
 
@@ -97,7 +97,7 @@
                     'items' => $popularPosts,
                     'blade' => 'insight.post.components.card',
                     'model' => 'post',
-                    'endpoint' => route('insight.article.get-popular')
+                    'endpoint' => route('insight.post.get-popular')
                 ])
             </div>
         </section>
@@ -133,7 +133,7 @@
                     'items' => $newVideos,
                     'blade' => 'insight.video.components.card',
                     'model' => 'video',
-                    'endpoint' => route('insight.article.get-new')
+                    'endpoint' => route('insight.video.get-new')
                 ])
             </div>
 
@@ -146,7 +146,7 @@
                     'items' => $popularVideos,
                     'blade' => 'insight.video.components.card',
                     'model' => 'video',
-                    'endpoint' => route('insight.article.get-popular')
+                    'endpoint' => route('insight.video.get-popular')
                 ])
             </div>
         </section>
