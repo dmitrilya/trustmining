@@ -28,8 +28,8 @@ class UpdateChannelRequest extends FormRequest
             'slug' => 'required|string|max:20|regex:/^[a-z0-9_]+$/u|unique:channels,slug,' . $this->route('channel')->id,
             'brief_description' => 'required|string|max:100',
             'description' => 'required|string|max:300',
-            'logo' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
-            'banner' => 'file|mimes:jpg,png,jpeg,webp|max:2048|dimensions:width=960,height=360',
+            'logo' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
+            'banner' => 'file|mimes:jpg,png,jpeg,webp|max:5120|dimensions:width=960,height=360',
         ];
     }
 
@@ -52,9 +52,9 @@ class UpdateChannelRequest extends FormRequest
             'description.required' => __('Channel description is required'),
             'description.max' => __('The maximum channel description length is 300 characters'),
             'logo.mimes' => __('Valid types are png, jpg and jpeg'),
-            'logo.max' => __('The maximum file size should not exceed 1 MB'),
+            'logo.max' => __('The maximum file size should not exceed 2 MB'),
             'banner.mimes' => __('Valid types are png, jpg and jpeg'),
-            'banner.max' => __('The maximum file size should not exceed 2 MB'),
+            'banner.max' => __('The maximum file size should not exceed 5 MB'),
             'banner.dimensions' => __('Banner dimensions should be 960px by 360px'),
         ];
     }

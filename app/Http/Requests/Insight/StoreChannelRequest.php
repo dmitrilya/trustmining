@@ -28,8 +28,8 @@ class StoreChannelRequest extends FormRequest
             'slug' => 'required|string|max:20|regex:/^[a-z0-9_]+$/u|unique:channels,slug',
             'brief_description' => 'required|string|max:100',
             'description' => 'required|string|max:500',
-            'logo' => 'required|image|mimes:jpg,png,jpeg,webp|max:1024',
-            'banner' => 'image|mimes:jpg,png,jpeg,webp|max:2048|dimensions:width=960,height=360',
+            'logo' => 'required|image|mimes:jpg,png,jpeg,webp|max:2048',
+            'banner' => 'image|mimes:jpg,png,jpeg,webp|max:5120|dimensions:width=960,height=360',
         ];
     }
 
@@ -53,9 +53,9 @@ class StoreChannelRequest extends FormRequest
             'description.max' => __('The maximum channel description length is 500 characters'),
             'logo.required' => __('Logo is required'),
             'logo.mimes' => __('Valid types are png, jpg and jpeg'),
-            'logo.max' => __('The maximum file size should not exceed 1 MB'),
+            'logo.max' => __('The maximum file size should not exceed 2 MB'),
             'banner.mimes' => __('Valid types are png, jpg and jpeg'),
-            'banner.max' => __('The maximum file size should not exceed 2 MB'),
+            'banner.max' => __('The maximum file size should not exceed 5 MB'),
             'banner.dimensions' => __('Banner dimensions should be 960px by 360px'),
         ];
     }
