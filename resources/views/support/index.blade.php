@@ -1,29 +1,29 @@
 <x-app-layout title="Поддержка, часто задаваемые вопросы" description="Центр поддержки пользователей: ответы на часто задаваемые вопросы по покупке, настройке и ремонту майнинг-оборудования. Инструкции по работе с личным кабинетом, оплате и доставке. Получите помощь экспертов и решите любой вопрос быстро">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" style="height: calc(100dvh - 104.4px)"
-        x-data="{ tab: '{{ request()->tab ? request()->tab : 'faq' }}' }">
+        x-data="{ tab: '{{ request()->tab ? request()->tab : 'chat' }}' }">
         <div
             class="w-full h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border border-gray-300 dark:border-zinc-800 rounded-2xl shadow-lg shadow-logo-color">
             <ul class="flex text-sm text-center text-gray-600 rounded-t-2xl divide-x divide-gray-200 border-b border-gray-300 dark:border-zinc-700 dark:divide-zinc-700 dark:text-gray-200 rtl:divide-x-reverse"
                 role="tablist">
-                <li class="w-full">
+                {{-- <li class="w-full">
                     <button @click="tab = 'faq'" type="button" role="tab" aria-controls="faq"
                         :class="{ 'text-indigo-500': tab == 'faq' }"
                         class="inline-block w-full h-full p-4 rounded-ss-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">FAQ</button>
-                </li>
-                <li class="w-full">
-                    <button @click="tab = 'video'" type="button" role="tab" aria-controls="video"
-                        :class="{ 'text-indigo-500': tab == 'video' }"
-                        class="inline-block w-full h-full p-4 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">{{ __('Video') }}</button>
-                </li>
+                </li> --}}
                 <li class="w-full">
                     <button @click="tab = 'chat'" type="button" role="tab" aria-controls="chat"
                         :class="{ 'text-indigo-500': tab == 'chat' }"
                         class="inline-block w-full h-full p-4 rounded-se-2xl hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">
-                        {{ __('Your question') }}
+                        {{ __('We are in touch') }}
                         @if ($auth && $chat->messages->where('checked', false)->where('user_id', '!=', $auth->id)->count())
                             <span class="inline-flex w-3 h-3 bg-indigo-500 rounded-full"></span>
                         @endif
                     </button>
+                </li>
+                <li class="w-full">
+                    <button @click="tab = 'video'" type="button" role="tab" aria-controls="video"
+                        :class="{ 'text-indigo-500': tab == 'video' }"
+                        class="inline-block w-full h-full p-4 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">{{ __('Video instructions') }}</button>
                 </li>
             </ul>
 
