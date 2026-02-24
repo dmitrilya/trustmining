@@ -84,7 +84,7 @@
         </x-filter>
 
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader" x-data="{}"
-            x-init="new InfiniteLoader({ endpoint: '{{ route('ads', ['adCategory' => $adCategory->name]) }}', page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }} });">
+            x-init="new InfiniteLoader({ endpoint: '{{ route('ads', ['adCategory' => $adCategory->name]) }}', page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }}, count: 15 });">
             @include('ad.components.list', ['owner' => false])
         </div>
     </div>

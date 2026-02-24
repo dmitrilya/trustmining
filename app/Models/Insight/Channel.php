@@ -86,4 +86,9 @@ class Channel extends Model
     {
         return $this->videos()->where('moderation', false);
     }
+
+    public function getContent()
+    {
+        return $this->articles->concat($this->posts)->concat($this->videos);
+    }
 }

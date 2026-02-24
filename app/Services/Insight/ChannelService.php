@@ -81,6 +81,10 @@ class ChannelService
         }
         elseif ($channel->banner && $channel->slug != $slug) $channel->banner = str_replace($channel->slug, $slug, $channel->banner);
         if ($channel->slug != $slug) {
+            foreach ($channel->getContent() as $content) {
+                $content->preview = str_replace($channel->slug, $slug, $content->preview);
+                $content->save();
+            }
             Storage::disk('public')->move('insight/' . $channel->slug, 'insight/' . $slug);
             $channel->slug = $slug;
         }

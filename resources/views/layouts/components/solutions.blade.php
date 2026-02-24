@@ -56,6 +56,18 @@
                             </path>
                         </svg>
                         <a class="under text-sm lg:text-base text-gray-900 dark:text-gray-200 font-semibold"
+                            href="{{ route('about') }}">{{ __('About project') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="size-4 lg:size-5 text-gray-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-gray-900 dark:text-gray-200 font-semibold"
                             href="{{ route('blog') }}">{{ __('Blog') }}</a>
                     </div>
 

@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdRequest;
 use App\Http\Requests\UpdateAdRequest;
-use Illuminate\Http\Request;
 
 use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
@@ -30,7 +30,7 @@ class AdController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Illuminate\Http\Request  $request;
+     * @param  \Illuminate\Http\Request  $request;
      * @param  \App\Models\Ad\AdCategory  $adCategory;
      * @return \Illuminate\Http\Response
      */
@@ -46,6 +46,30 @@ class AdController extends Controller
         return view('ad.index', [
             'ads' => $ads,
             'adCategory' => $adCategory
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request;
+     * @param  \App\Models\Ad\AdCategory  $adCategory;
+     * @return \Illuminate\Http\Response
+     */
+    public function getAdsCarousel(Request $request, AdCategory $adCategory)
+    {
+        $ads = $this->getAds($request, $adCategory)->orderByDesc('ads.ordering_id')->paginate(4);
+
+        if ($request->ajax()) return response()->json([
+            'html' => view('home.components.carousel-list', [
+                'adCategory' => $adCategory,
+                'items' => $ads,
+                'blade' => 'ad.components.card',
+                'model' => 'ad',
+                'user' => $request->user(),
+                'owner' => false
+            ])->render(),
+            'hasMore' => $ads->hasMorePages()
         ]);
     }
 

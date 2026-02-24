@@ -73,18 +73,18 @@
             </div>
         </div>
 
+        @if ($video->series->first())
+            <div itemprop="isPartOf" itemscope itemtype="https://schema.org/CreativeWorkSeries">
+                <meta itemprop="name" content="{{ $video->series->first()->name }}">
+                <link itemprop="url"
+                    href="{{ route('insight.channel.series.show', ['channel' => $video->channel->slug, 'series' => $video->series->first()->id]) }}">
+            </div>
+        @endif
+
         <meta itemprop="embedUrl" content="{{ $video->url }}" />
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"
             href="{{ route('insight.video.show', ['channel' => $video->channel->slug, 'video' => $video->id . '-' . mb_strtolower(str_replace(' ', '-', $video->title))]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Watch') }}</x-secondary-button>
         </a>
     </div>
-
-    @if ($video->series->first())
-        <div itemprop="isPartOf" itemscope itemtype="https://schema.org/CreativeWorkSeries">
-            <meta itemprop="name" content="{{ $video->series->first()->name }}">
-            <link itemprop="url"
-                href="{{ route('insight.channel.series.show', ['channel' => $video->channel->slug, 'series' => $video->series->first()->id]) }}">
-        </div>
-    @endif
 </div>

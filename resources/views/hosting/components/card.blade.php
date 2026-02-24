@@ -1,7 +1,7 @@
 @props(['ad', 'auth', 'hidden'])
 
 <div
-    class="sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
+    class="card sm:max-w-md h-full p-2 sm:px-4 sm:py-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         @if (count($hosting->images))
             <div class="w-full aspect-[4/3] overflow-hidden rounded-lg">

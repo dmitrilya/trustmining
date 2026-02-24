@@ -58,6 +58,7 @@ Route::post('/location', [ProfileController::class, 'location'])->name('location
 Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
 Route::get('/', [Controller::class, 'home'])->name('home');
+Route::get('/about', [Controller::class, 'about'])->name('about');
 Route::get('/search', [Controller::class, 'search'])->name('search');
 Route::get('/document', [Controller::class, 'document'])->name('document');
 Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
@@ -139,6 +140,7 @@ Route::group(['prefix' => 'company/{user}'], function () {
 });
 
 Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
+Route::get('/get-hostings', [HostingController::class, 'getHostingsCarousel'])->name('hostings.get');
 
 Route::post('/order/webhook', [OrderController::class, 'webhook']);
 Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
@@ -299,6 +301,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
     Route::get('/', [AdController::class, 'index'])->name('ads');
+    Route::get('/get-ads', [AdController::class, 'getAdsCarousel'])->name('ads.get');
     Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
     Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });

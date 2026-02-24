@@ -1,4 +1,5 @@
-<x-app-layout title="Майнинг отель: разместить оборудование, проверенные хостинги" description="Найти объявления о майнинг фермах на сайте TrustMining">
+<x-app-layout title="Майнинг отель: разместить оборудование, проверенные хостинги"
+    description="Найти объявления о майнинг фермах на сайте TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
@@ -47,6 +48,14 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         @include('hosting.components.blurb')
 
-        @include('hosting.components.list')
+        <x-filter>@include('hosting.components.filter')</x-filter>
+
+        <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            @php
+                $auth = Auth::user();
+            @endphp
+
+            @include('hosting.components.list')
+        </div>
     </div>
 </x-app-layout>

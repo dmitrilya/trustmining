@@ -13,24 +13,39 @@ use Illuminate\View\View;
 
 use App\Http\Traits\SearchTrait;
 use App\Http\Traits\Telegram;
+use App\Http\Traits\HostingTrait;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
-
+use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
 use App\Models\Morph\Like;
 use App\Models\User\Role;
 use App\Models\Database\Coin;
 use App\Models\Chat\Chat;
+use App\Models\Database\AsicBrand;
+use App\Models\Insight\Content\Article;
 use App\Models\User\User;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, DaData;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, HostingTrait, DaData;
 
     public function home(): View
     {
-        return view('home');
+        return view('home.index', [
+            'asicBrands' => AsicBrand::select(['id', 'name'])->withCount('views')->orderByDesc('views_count')->get(),
+            'asicModels' => AsicModel::select(['id', 'name', 'asic_brand_id'])->with(['asicBrand:id,name'])
+                ->withCount('views')->orderByDesc('views_count')->limit(10)->get(),
+            'miners' => $this->getAds(null, AdCategory::where('name', 'miners')->first())->orderByDesc('ads.ordering_id')->limit(9)->get(),
+            'hostings' => $this->getHostings(null)->orderByDesc('ordering_id')->limit(9)->get(),
+            'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get()
+        ]);
+    }
+
+    public function about(): View
+    {
+        return view('about');
     }
 
     public function document(): View

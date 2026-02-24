@@ -107,6 +107,8 @@
                     href="{{ route('insight.index') }}">TM Insight</a>
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('forum') }}">{{ __('Forum') }}</a>
+                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                    href="{{ route('about') }}">{{ __('About project') }}</a>
                 {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
