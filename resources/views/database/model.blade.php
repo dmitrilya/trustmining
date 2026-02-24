@@ -211,7 +211,7 @@
 
                                 @if ($minPrice)
                                     <div class="text-sm text-gray-500 mt-6">{{ __('The best price') }}:
-                                        @if ($hasTariff)
+                                        {{-- @if ($hasTariff) --}}
                                             <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"
                                                 class="text-gray-700">
                                                 {{ $minPrice->price . ' ' . $minPrice->coin->abbreviation }}
@@ -219,12 +219,12 @@
                                                 <meta itemprop="priceCurrency"
                                                     content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
                                             </span>
-                                        @else
+                                        {{-- @else
                                             <span class="text-gray-700 blur-sm"
                                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                                 {{ __('Subscription') }}
                                             </span>
-                                        @endif
+                                        @endif --}}
                                     </div>
 
                                     <div class="xs:flex mt-6 md:mt-8 ">

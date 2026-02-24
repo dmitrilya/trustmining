@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <template x-if="version.ads.length">
-                        <a class="pt-3 sm:pt-4 lg:pt-6"
+                        <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
                             x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
                             <x-primary-button class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
                         </a>
