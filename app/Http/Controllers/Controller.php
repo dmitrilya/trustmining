@@ -16,6 +16,7 @@ use App\Http\Traits\Telegram;
 use App\Http\Traits\HostingTrait;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
+use App\Http\Traits\ViewTrait;
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
@@ -29,7 +30,7 @@ use App\Models\User\User;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, HostingTrait, DaData;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, HostingTrait, DaData, ViewTrait;
 
     public function home(): View
     {
@@ -110,6 +111,8 @@ class Controller extends BaseController
     public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
     {
         $models = Cache::get('calculator_models');
+
+        if ($asicModel && $asicModel->exists) $this->addView(request(), $asicModel);
 
         $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();

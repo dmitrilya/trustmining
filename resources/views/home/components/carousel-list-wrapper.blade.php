@@ -96,7 +96,7 @@
                     </p>
                 </div>
 
-                <div class="px-2 md:px-2 my-2 md:my-3">
+                <div class="p-2 md:p-3">
                     <a class="block w-full" href="{{ route('insight.index') }}">
                         <x-primary-button
                             class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
