@@ -47,7 +47,7 @@
         <div class="mt-2 md:mt-3 flex items-start justify-between">
             @if ($ad->ad_category_name == 'miners')
                 <div class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
-                    {{ $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement }}
+                    {{ $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement }}
                 </div>
             @elseif ($ad->ad_category_name == 'gpus')
                 <div class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
