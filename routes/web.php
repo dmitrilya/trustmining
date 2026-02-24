@@ -342,29 +342,29 @@ Route::group(['prefix' => 'insight'], function () {
     Route::get('/', [InsightController::class, 'index'])->name('insight.index');
     Route::get('/articles', [ArticleController::class, 'index'])->name('insight.article.index');
     Route::get('/article/get-new', [InsightController::class, 'getNewArticles'])->name('insight.article.get-new');
-    Route::get('/article/get-popular', [InsightController::class, 'getNewArticles'])->name('insight.article.get-popular');
+    Route::get('/article/get-popular', [InsightController::class, 'getPopularArticles'])->name('insight.article.get-popular');
     Route::get('/posts', [PostController::class, 'index'])->name('insight.post.index');
     Route::get('/post/get-new', [InsightController::class, 'getNewPosts'])->name('insight.post.get-new');
-    Route::get('/post/get-popular', [InsightController::class, 'getNewPosts'])->name('insight.post.get-popular');
+    Route::get('/post/get-popular', [InsightController::class, 'getPopularPosts'])->name('insight.post.get-popular');
     Route::get('/videos', [VideoController::class, 'index'])->name('insight.video.index');
     Route::get('/video/get-new', [InsightController::class, 'getNewVideos'])->name('insight.video.get-new');
-    Route::get('/video/get-popular', [InsightController::class, 'getNewVideos'])->name('insight.video.get-popular');
+    Route::get('/video/get-popular', [InsightController::class, 'getPopularVideos'])->name('insight.video.get-popular');
     Route::group(['prefix' => '{channel}'], function () {
         Route::get('/', [ChannelController::class, 'show'])->name('insight.channel.show');
         Route::get('/article/get-new', [ChannelController::class, 'getNewArticles'])->name('insight.channel.article.get-new');
-        Route::get('/article/get-popular', [ChannelController::class, 'getNewArticles'])->name('insight.channel.article.get-popular');
+        Route::get('/article/get-popular', [ChannelController::class, 'getPopularArticles'])->name('insight.channel.article.get-popular');
         Route::get('/post/get-new', [ChannelController::class, 'getNewPosts'])->name('insight.channel.post.get-new');
-        Route::get('/post/get-popular', [ChannelController::class, 'getNewPosts'])->name('insight.channel.post.get-popular');
+        Route::get('/post/get-popular', [ChannelController::class, 'getPoopularPosts'])->name('insight.channel.post.get-popular');
         Route::get('/video/get-new', [ChannelController::class, 'getNewVideos'])->name('insight.channel.video.get-new');
-        Route::get('/video/get-popular', [ChannelController::class, 'getNewVideos'])->name('insight.channel.video.get-popular');
+        Route::get('/video/get-popular', [ChannelController::class, 'getPopularVideos'])->name('insight.channel.video.get-popular');
         Route::group(['prefix' => '/series/{series}'], function () {
             Route::get('/', [SeriesController::class, 'show'])->name('insight.channel.series.show');
             Route::get('/article/get-new', [SeriesController::class, 'getNewArticles'])->name('insight.channel.series.article.get-new');
-            Route::get('/article/get-popular', [SeriesController::class, 'getNewArticles'])->name('insight.channel.series.article.get-popular');
+            Route::get('/article/get-popular', [SeriesController::class, 'getPopularArticles'])->name('insight.channel.series.article.get-popular');
             Route::get('/post/get-new', [SeriesController::class, 'getNewPosts'])->name('insight.channel.series.post.get-new');
-            Route::get('/post/get-popular', [SeriesController::class, 'getNewPosts'])->name('insight.channel.series.post.get-popular');
+            Route::get('/post/get-popular', [SeriesController::class, 'getPopularPosts'])->name('insight.channel.series.post.get-popular');
             Route::get('/video/get-new', [SeriesController::class, 'getNewVideos'])->name('insight.channel.series.video.get-new');
-            Route::get('/video/get-popular', [SeriesController::class, 'getNewVideos'])->name('insight.channel.series.video.get-popular');
+            Route::get('/video/get-popular', [SeriesController::class, 'getPopularVideos'])->name('insight.channel.series.video.get-popular');
         });
         Route::get('/article/{article}', [ArticleController::class, 'show'])->name('insight.article.show');
         Route::get('/post/{post}', [PostController::class, 'show'])->name('insight.post.show');
