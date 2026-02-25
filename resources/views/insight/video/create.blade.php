@@ -14,7 +14,7 @@
             <div class="w-full">
                 <x-input-label for="video-title" :value="__('Title')" />
                 <x-length-input id="video-title" name="title" type="text" :value="old('title')" autocomplete="title"
-                    required max="70" />
+                    required max="100" />
                 <x-input-error :messages="$errors->get('title')" />
             </div>
 
@@ -23,7 +23,7 @@
                 <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                     required />
                 <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
-                    or JPEG (max. 2MB), dimensions:ratio=4/3</p>
+                    or JPEG (max. 5MB), dimensions:ratio=4/3</p>
                 <x-input-error :messages="$errors->get('preview')" />
             </div>
 

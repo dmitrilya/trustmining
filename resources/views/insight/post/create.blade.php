@@ -49,7 +49,7 @@
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                         required />
                     <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
-                        or JPEG (max. 2MB), dimensions:ratio=4/3</p>
+                        or JPEG (max. 5MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
 

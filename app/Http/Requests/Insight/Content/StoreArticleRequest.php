@@ -26,7 +26,7 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => 'required|max:40',
             'subtitle' => 'required|max:70',
-            'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048',
+            'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:5120',
             'content' => 'required',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
         ];
@@ -46,7 +46,7 @@ class StoreArticleRequest extends FormRequest
             'subtitle.max' => __('validation.max.string', ['max' => 70]),
             'preview.required' => __('Preview is required'),
             'preview.mimes' => __('Valid types are png, jpg and jpeg'),
-            'preview.max' => __('The maximum file size should not exceed 2 MB'),
+            'preview.max' => __('The maximum file size should not exceed 5 MB'),
             'content.required' => __('Content is required'),
         ];
     }
