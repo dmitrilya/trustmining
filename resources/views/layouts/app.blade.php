@@ -13,7 +13,7 @@
 
     @php
         $theme = request()->cookie('app_theme');
-        $exceptAgents = ['bot', 'finder', 'lighthouse', 'googleother', 'crawler'];
+        $exceptAgents = ['bot', 'finder', 'lighthouse', 'googleother', 'crawler', 'inspectiontool'];
         $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
 

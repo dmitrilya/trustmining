@@ -9,7 +9,7 @@ trait ViewTrait
     public function addView($request, $model, $adId = null)
     {
         $ip = $request->ip();
-        $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
+        $exceptAgents = ['bot', 'finder', 'lighthouse', 'googleother', 'crawler', 'inspectiontool'];
         $agent = strtolower($request->header('User-Agent'));
 
         foreach ($exceptAgents as $exceptAgent) {
