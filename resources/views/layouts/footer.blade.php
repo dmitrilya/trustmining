@@ -1,7 +1,7 @@
 <footer class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <a href="{{ route('home') }}">
-            <x-application-logo class="max-h-11" />
+            <x-application-logo class="text-[13vw] xs:text-5xl" />
         </a>
 
         <div class="flex cursor-pointer my-2 sm:my-3">

@@ -5,7 +5,7 @@
                 <div class="h-full flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
                     <div>
                         <a href="/">
-                            <x-application-logo class="max-h-11" />
+                            <x-application-logo class="text-[13vw] xs:text-5xl" />
                         </a>
                     </div>
 

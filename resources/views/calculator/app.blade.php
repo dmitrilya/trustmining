@@ -78,7 +78,7 @@
                 <div class="flex justify-between h-10 lg:h-14">
                     <div class="w-full flex">
                         <div class="shrink-0 flex items-center">
-                            <x-application-logo class="h-5" />
+                            <x-application-logo class="text-xl" />
                             <h1 class="ml-2 text-[19px] text-gray-900 dark:text-gray-100 leading-tight">
                                 CALCULATOR
                             </h1>
