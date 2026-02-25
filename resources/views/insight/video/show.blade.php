@@ -36,8 +36,6 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        @include('insight.components.content-info', ['type' => 'video', 'content' => $video])
-
         <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">{{ $video->title }}</h1>
 
         <meta itemprop="description"
@@ -49,6 +47,8 @@
         @if ($user && $user->id == $channel->user_id)
             @include('insight.video.edit')
         @endif
+
+        @include('insight.components.content-info', ['type' => 'video', 'content' => $video])
     </div>
 
     @if (!$moder)

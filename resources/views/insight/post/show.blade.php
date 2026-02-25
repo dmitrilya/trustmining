@@ -42,8 +42,6 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        @include('insight.components.content-info', ['type' => 'post', 'content' => $post])
-
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             @php
                 $preview =
@@ -79,6 +77,8 @@
         @if ($user && $user->id == $channel->user_id)
             @include('insight.post.edit')
         @endif
+
+        @include('insight.components.content-info', ['type' => 'post', 'content' => $post])
     </div>
 
     @if (!$moder)
