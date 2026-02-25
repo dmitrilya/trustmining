@@ -146,7 +146,7 @@
                     <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300 mt-6 sm:mt-7 lg:mt-8">
                         {{ __('Payback') }}:
                         <span class="text-gray-900 dark:text-gray-100 font-bold"
-                            x-text="version.price ? dailyIncome > 0 ? Math.round(dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                            x-text="version.price ? dailyIncome > 0 ? Math.round(version.price / dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                     </div>
 
                     <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">
