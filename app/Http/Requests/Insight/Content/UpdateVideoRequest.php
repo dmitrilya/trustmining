@@ -24,7 +24,7 @@ class UpdateVideoRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:70',
+            'title' => 'required|max:100',
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:5120',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
         ];
