@@ -129,7 +129,8 @@ class PostController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id]);
+        return redirect()->route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id])
+            ->withErrors(['success' => __('The post has been sent for moderation')]);
     }
 
     /**
