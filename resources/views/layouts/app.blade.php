@@ -27,9 +27,16 @@
         $location = session('user_location');
         $shouldAskLocation = false;
 
-        if (!$location) $shouldAskLocation = true;
-        elseif ($location['source'] === 'default') $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
+        if (!$location) {
+            $shouldAskLocation = true;
+        } elseif ($location['source'] === 'default') {
+            $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
+        }
     @endphp
+
+    @if (isset($og))
+        {{ $og }}
+    @endif
 
     <meta name="should-ask-location" content="{{ $shouldAskLocation ? 'true' : 'false' }}">
     <meta name="color-scheme" content="light dark">
@@ -38,7 +45,7 @@
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
     @endauth
 
-    <title>@if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif</title>
+    <title>{{ $attributes->get('title') ?? config('app.name') }}</title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">

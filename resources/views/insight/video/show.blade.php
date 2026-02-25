@@ -7,6 +7,16 @@
         }
     @endphp
 
+    <x-slot name="og">
+        <meta property="og:title" content="{{ $video->title }}">
+        <meta property="og:description" content="{{ __('Video') . ' | ' . $channel->name }}">
+        <meta property="og:image" content="{{ Storage::disk('public')->url($video->preview) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="video">
+        <meta property="og:video" content="{{ $video->url }}">
+        <meta property="video:author" content="{{ route('insight.channel.show', ['channel' => $channel->slug]) }}">
+    </x-slot>
+
     @if ($moder)
         <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 pt-8">
             @include('moderation.components.buttons', ['withUniqueCheck' => false])

@@ -7,6 +7,16 @@
         }
     @endphp
 
+    <x-slot name="og">
+        <meta property="og:title" content="{{ $article->title }}">
+        <meta property="og:description" content="{{ $article->subtitle }}">
+        <meta property="og:image" content="{{ Storage::disk('public')->url($article->preview) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="article">
+        <meta property="article:published_time" content="{{ $content->created_at->toIso8601String() }}">
+        <meta property="article:author" content="{{ route('insight.channel.show', ['channel' => $channel->slug]) }}">
+    </x-slot>
+
     @if ($user && $user->id == $channel->user_id)
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     @endif
@@ -31,8 +41,6 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        @include('insight.components.content-info', ['type' => 'article', 'content' => $article])
-
         <h1 itemprop="headline" class="font-bold text-lg lg:text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ $article->title }}
         </h1>
@@ -52,7 +60,7 @@
             @endphp
 
             <picture class="w-full">
-                <source media="(min-width: 430px)" srcset="{{ $previewlg}}">
+                <source media="(min-width: 430px)" srcset="{{ $previewlg }}">
 
                 <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}"
                     alt="{{ $article->title }}" />
@@ -89,6 +97,8 @@
                 @include('insight.article.edit')
             </div>
         @endif
+
+        @include('insight.components.content-info', ['type' => 'article', 'content' => $article])
     </div>
 
     @if (!$moder)

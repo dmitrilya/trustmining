@@ -8,6 +8,16 @@
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
     @endphp
 
+    <x-slot name="og">
+        <meta property="og:title" content="{{ __('Post') . ' | ' . $channel->name }}">
+        <meta property="og:description" content="{{ str($post->content)->stripTags()->limit(150) . '...' }}">
+        <meta property="og:image" content="{{ Storage::disk('public')->url($post->preview) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="article">
+        <meta property="article:published_time" content="{{ $content->created_at->toIso8601String() }}">
+        <meta property="article:author" content="{{ route('insight.channel.show', ['channel' => $channel->slug]) }}">
+    </x-slot>
+
     @if ($user && $user->id == $channel->user_id)
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     @endif
