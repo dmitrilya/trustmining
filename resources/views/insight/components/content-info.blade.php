@@ -49,7 +49,7 @@
                 class="text-gray-600 dark:text-zinc-400 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="navigator.share({
                     title: document.title,
-                    url: window.location.href + '?utm_source=share_button&utm_campaign=content_propagation&utm_medium=insight&utm_content={{ $content->id }}'
+                    url: '{{ route('insight.' . $content->getMorphClass() . '.show', ['channel' => $content->channel->slug, $content->getMorphClass() => $content->id]) }}' + '?utm_source=share_button&utm_campaign=content_propagation&utm_medium=insight&utm_content={{ $content->id }}'
                 });">
                 <svg class="size-5 sm:size-6 lg:size-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" fill="none" viewBox="0 0 24 24">
