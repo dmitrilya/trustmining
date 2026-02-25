@@ -37,10 +37,10 @@
     </div>
 </div>
 
-<div x-data="{ show: true }" class="border-y border-gray-300 dark:border-zinc-700">
+<div x-data="{ show: window.innerWidth > 640 }" class="border-y border-gray-300 dark:border-zinc-700">
     <div>
         <button type="button" @click="show = !show"
-            class="flex items-center justify-between w-full py-2 sm:py-3 text-left rtl:text-right text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
+            class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left rtl:text-right text-gray-800 dark:text-gray-200 text-xs sm:text-sm">
             <span>{{ __('Additional settings') }}</span>
             <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

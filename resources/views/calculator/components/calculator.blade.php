@@ -17,43 +17,46 @@
 
             @include('calculator.components.expenses')
 
-            <template x-if="version !== null">
-                <div class="mt-6 sm:mt-8 lg:mt-10">
-                    <div class="hidden md:block mt-6">
-                        <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                        <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
-                            <x-rating></x-rating>
+            <div class="hidden md:block">
+                <template x-if="version !== null">
+                    <div class="mt-6 sm:mt-8 lg:mt-10">
+                        <div class="mt-6">
+                            <h2 class="sr-only">{{ __('Reviews') }}</h2>
+                            <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                <x-rating></x-rating>
 
-                            <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
-                                class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
-                                <span x-text="version.reviews_count"></span>
-                                {{ __('reviews') }}
+                                <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
+                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                    <span x-text="version.reviews_count"></span>
+                                    {{ __('reviews') }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
+                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                {{ __('Algorithm') }}:
+                                <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    x-text="version.algorithm"></span>
+                            </div>
+                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                {{ __('Power') }}:
+                                <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    x-text="version.efficiency * version.hashrate"></span> W
+                            </div>
+                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                {{ __('Average price') }}: <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
+                            </div>
+                        </div>
+                        <template x-if="version.ads.length">
+                            <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
+                                x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
+                                <x-primary-button class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
                             </a>
-                        </div>
+                        </template>
                     </div>
-                    <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                            {{ __('Algorithm') }}:
-                            <span class="text-gray-900 dark:text-gray-100 font-bold" x-text="version.algorithm"></span>
-                        </div>
-                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                            {{ __('Power') }}:
-                            <span class="text-gray-900 dark:text-gray-100 font-bold"
-                                x-text="version.efficiency * version.hashrate"></span> W
-                        </div>
-                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                            {{ __('Average price') }}: <span class="text-gray-900 dark:text-gray-100 font-bold"
-                                x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
-                        </div>
-                    </div>
-                    <template x-if="version.ads.length">
-                        <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
-                            x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
-                            <x-primary-button class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
-                        </a>
-                    </template>
-                </div>
-            </template>
+                </template>
+            </div>
         </div>
 
         <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 dark:border-zinc-700 col-span-3">
@@ -147,6 +150,49 @@
                         {{ __('Payback') }}:
                         <span class="text-gray-900 dark:text-gray-100 font-bold"
                             x-text="version.price ? dailyIncome > 0 ? Math.round(version.price / dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                    </div>
+
+                    <div class="md:hidden">
+                        <template x-if="version !== null">
+                            <div class="mt-6 sm:mt-8 lg:mt-10">
+                                <div class="mt-6">
+                                    <h2 class="sr-only">{{ __('Reviews') }}</h2>
+                                    <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                        <x-rating></x-rating>
+
+                                        <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
+                                            class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                            <span x-text="version.reviews_count"></span>
+                                            {{ __('reviews') }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
+                                    <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        {{ __('Algorithm') }}:
+                                        <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                            x-text="version.algorithm"></span>
+                                    </div>
+                                    <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        {{ __('Power') }}:
+                                        <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                            x-text="version.efficiency * version.hashrate"></span> W
+                                    </div>
+                                    <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        {{ __('Average price') }}: <span
+                                            class="text-gray-900 dark:text-gray-100 font-bold"
+                                            x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
+                                    </div>
+                                </div>
+                                <template x-if="version.ads.length">
+                                    <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
+                                        x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
+                                        <x-primary-button
+                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                    </a>
+                                </template>
+                            </div>
+                        </template>
                     </div>
 
                     <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">
