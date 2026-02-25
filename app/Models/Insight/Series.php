@@ -57,6 +57,6 @@ class Series extends Model
 
     public function getContent()
     {
-        return $this->moderatedArticles->concat($this->moderatedPosts)->concat($this->moderatedVideos)->sortByDesc('created_at');
+        return $this->moderatedArticles->concat($this->moderatedPosts)->concat($this->moderatedVideos)->sortByDesc('created_at')->values();
     }
 }

@@ -62,7 +62,7 @@
 
     @if ($content->series->first())
         @php
-            $seriesContent = $content->series->getContent();
+            $seriesContent = $content->series->first()->getContent();
             $contentIndex = $seriesContent->search(
                 fn($item) => $item->id === $content->id && $item->getMorphClass() === $content->getMorphClass(),
             );
