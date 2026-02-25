@@ -27,7 +27,8 @@
             </svg>
 
             <meta itemprop="interactionType" content="https://schema.org/LikeAction" />
-            <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-gray-500 ml-2 mr-4" x-text="likes"></p>
+            <meta itemprop="userInteractionCount" content="{{ $content->likes->count() }}" />
+            <p class="text-xxs sm:text-xs text-gray-500 ml-2 mr-4" x-text="likes"></p>
         </div>
         <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
             class="flex items-center">
