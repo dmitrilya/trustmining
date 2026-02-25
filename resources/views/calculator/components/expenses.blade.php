@@ -1,7 +1,7 @@
 <div class="flex space-x-2 sm:space-x-3 mt-2 md:mt-4 mb-4">
     <div class="w-full">
         <x-input-label for="tariff" :value="__('Tariff')" />
-        <x-text-input ::value="tariff" id="tariff" type="text"
+        <x-text-input ::value="tariff" id="tariff" type="number"
             @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
     </div>
 
@@ -32,7 +32,7 @@
                 </div>
             </template>
         </div>
-        <x-text-input ::value="fee" id="fee" type="text"
+        <x-text-input ::value="fee" id="fee" type="number"
             @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
     </div>
 </div>
@@ -53,13 +53,13 @@
                     <div class="flex space-x-2 sm:space-x-3">
                         <div class="w-full">
                             <x-input-label for="count" :value="__('Count')" />
-                            <x-text-input ::value="count" id="count" type="text"
+                            <x-text-input ::value="count" id="count" type="number"
                                 @input="count = filterDouble($el, 1, 10000, 0);$el.value = count" />
                         </div>
 
                         <div class="w-full">
                             <x-input-label for="uptime" :value="__('Uptime') . ' (%)'" />
-                            <x-text-input ::value="uptime" id="uptime" type="text"
+                            <x-text-input ::value="uptime" id="uptime" type="number"
                                 @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
                         </div>
                     </div>
