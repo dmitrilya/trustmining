@@ -58,6 +58,10 @@
                         :text="__('Before publishing, please review questions similar to yours')"></x-notification>
                 @break
 
+                @case('New moderation')
+                    <x-notification :type="$ntName" :date="$notification->created_at" pretext="" :text="__('New moderation')"></x-notification>
+                @break
+
                 @case('New forum answer')
                     <x-notification :href="route('forum.question.show', [
                         'forumCategory' => strtolower(

@@ -40,11 +40,7 @@ class PostService extends ContentService
 
         if ($data['series_id']) $post->series()->attach($data['series_id']);
 
-        $moderation = $post->moderations()->create(['data' => $post->attributesToArray()]);
-        if ($channel->user->company && !$channel->user->company->moderation) {
-            $moderation->moderation_status_id = 1;
-            $this->acceptModeration(true, $moderation);
-        }
+        $this->moderate($channel, $post, $post->attributesToArray());
 
         return $post;
     }
@@ -77,13 +73,7 @@ class PostService extends ContentService
 
         if ($data['series_id']) $post->series()->sync([$data['series_id']]);
 
-        if (!empty($changings)) {
-            $moderation = $post->moderations()->create(['data' => $changings]);
-            if ($channel->user->company && !$channel->user->company->moderation) {
-                $moderation->moderation_status_id = 1;
-                $this->acceptModeration(true, $moderation);
-            }
-        }
+        if (!empty($changings)) $this->moderate($channel, $post, $changings);
 
         return $post;
     }

@@ -111,6 +111,10 @@ class SendTGNotifications implements ShouldQueue
                         $text = __('Before publishing, please review questions similar to yours');
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.index')]]];
                         break;
+                    case 'New moderation':
+                        $text = __('New moderation');
+                        $keyboard = null;
+                        break;
                     case 'New forum answer':
                         $text = $this->n->forumQuestion->theme . "\n\n" . trim(strip_tags(str_replace(['</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", " "], $this->n->text)));
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.show', [

@@ -39,6 +39,8 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'Moderation completed'
             ], [
+                'name' => 'New moderation'
+            ], [
                 'name' => 'Similar questions'
             ], [
                 'name' => 'New forum answer'

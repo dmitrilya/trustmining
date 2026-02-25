@@ -6,16 +6,19 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\ModerationTrait;
+use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 
 use App\Models\Insight\Channel;
 use App\Models\Insight\Comment;
 use App\Models\Insight\ContentModel;
+use App\Models\Morph\Moderation;
+use App\Models\User\User;
 
 abstract class ContentService
 {
-    use ViewTrait, FileTrait, ModerationTrait;
+    use ViewTrait, FileTrait, ModerationTrait, NotificationTrait;
 
     /**
      * Store a newly created resource in storage.
@@ -82,5 +85,24 @@ abstract class ContentService
             'text' => $text,
             'parent_id' => $parentId
         ]);
+    }
+
+    /**
+     * Comment content
+     * 
+     * @param Channel  $channel
+     * @param ContentModel  $model
+     * @param array  $data
+     * @return Moderation
+     */
+    public function moderate(Channel $channel, ContentModel $model, array $data): Moderation
+    {
+        $moderation = $model->moderations()->create(['data' => $data]);
+        if ($channel->user->company && !$channel->user->company->moderation) {
+            $moderation->moderation_status_id = 1;
+            $this->acceptModeration(true, $moderation);
+        } else $this->notify('New moderation', collect([User::find(10000000)]));
+
+        return $moderation;
     }
 }
