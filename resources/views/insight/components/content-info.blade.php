@@ -61,6 +61,28 @@
     </div>
 
     @if ($content->series->first())
+        @php
+            $seriesContent = $content->series->getContent();
+            $contentIndex = $seriesContent->search(
+                fn($item) => $item->id === $content->id && $item->getMorphClass() === $content->getMorphClass(),
+            );
+            $previousContent =
+                $contentIndex < $seriesContent->count() - 1 ? $seriesContent->get($contentIndex + 1) : null;
+        @endphp
+
+        @if ($previousContent)
+            <x-slot name="sidebar">
+                <div>
+                    <p class="mb-2 sm:mb-3 lg:mb-6 text-base text-gray-700 dark:text-gray-300 font-bold ">
+                        {{ __('Previous in series') }}</p>
+
+                    @include('insight.' . $previousContent->getMorphClass() . '.components.card', [
+                        $previousContent->getMorphClass() => $previousContent,
+                    ])
+                </div>
+            </x-slot>
+        @endif
+
         <div itemprop="isPartOf" itemscope itemtype="https://schema.org/CreativeWorkSeries">
             <meta itemprop="name" content="{{ $content->series->first()->name }}">
             <link itemprop="url"

@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex">
-                <img itemprop="image" src="{{ Storage::url($series->getContents()->first()?->preview) }}"
+                <img itemprop="image" src="{{ Storage::url($series->getContent()->first()?->preview) }}"
                     alt="{{ $series->name }} preview" class="h-20 rounded-xl mr-4 lg:mr-6">
 
                 <div>

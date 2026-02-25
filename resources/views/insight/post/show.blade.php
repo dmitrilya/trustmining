@@ -14,7 +14,7 @@
         <meta property="og:image" content="{{ Storage::disk('public')->url($post->preview) }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="article">
-        <meta property="article:published_time" content="{{ $content->created_at->toIso8601String() }}">
+        <meta property="article:published_time" content="{{ $post->created_at->toIso8601String() }}">
         <meta property="article:author" content="{{ route('insight.channel.show', ['channel' => $channel->slug]) }}">
     </x-slot>
 

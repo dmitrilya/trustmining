@@ -55,7 +55,7 @@ class Series extends Model
         return $this->videos()->where('moderation', false);
     }
 
-    public function getContents()
+    public function getContent()
     {
         return $this->moderatedArticles->concat($this->moderatedPosts)->concat($this->moderatedVideos)->sortByDesc('created_at');
     }

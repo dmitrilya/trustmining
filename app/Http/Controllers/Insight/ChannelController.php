@@ -78,7 +78,7 @@ class ChannelController extends Controller
         return view('insight.channel.show', [
             'channel' => $channel,
             'series' => $channel->series->map(function ($series) {
-                $series->contents = $series->getContents();
+                $series->contents = $series->getContent();
                 $series->contents_count = $series->contents->count();
                 return $series;
             }),
