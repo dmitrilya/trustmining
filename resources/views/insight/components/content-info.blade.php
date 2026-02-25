@@ -71,9 +71,9 @@
         @endphp
 
         @if ($previousContent)
-            <x-slot name="sidebar">
+            <x-slot name="leftSidebar">
                 <div>
-                    <p class="mb-2 sm:mb-3 lg:mb-6 text-base text-gray-700 dark:text-gray-300 font-bold ">
+                    <p class="ml-2 mb-2 sm:mb-4 text-base text-gray-700 dark:text-gray-300 font-bold ">
                         {{ __('Previous in series') }}</p>
 
                     @include('insight.' . $previousContent->getMorphClass() . '.components.card', [

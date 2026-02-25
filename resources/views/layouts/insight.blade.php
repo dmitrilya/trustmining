@@ -59,6 +59,10 @@
             <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
                 @include('insight.components.menu', ['channel' => $attributes->get('channel')])
 
+                @if (isset($leftSidebar))
+                    {{ $leftSidebar }}
+                @endif
+
                 @include('insight.components.popular-article')
             </div>
 
@@ -71,8 +75,8 @@
 
                 <div id="toc-lg-container"></div>
 
-                @if (isset($sidebar))
-                    {{ $sidebar }}
+                @if (isset($rightSidebar))
+                    {{ $rightSidebar }}
                 @endif
             </div>
         </div>
