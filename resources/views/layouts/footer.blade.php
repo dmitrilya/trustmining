@@ -8,7 +8,7 @@
         <div class="flex items-center gap-2 lg:gap-3">
             <a href="https://t.me/trustmining_ru" target="_blank" area-label="Связаться в телеграм">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-transparent">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -19,7 +19,7 @@
             </a>
             <a href="mailto:trustmining.ru@gmail.com" area-label="Написать на почту">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-transparent">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
@@ -30,7 +30,7 @@
             </a>
             <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" area-label="Канал Дзен">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-transparent">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1181_4290)">
