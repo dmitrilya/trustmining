@@ -16,16 +16,23 @@
         <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">
             @include('calculator.components.calculator')
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-4 md:gap-6">
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-4">
                 @include('calculator.components.liked')
                 @include('calculator.components.difficulty')
+
+                <div class="hidden xl:block">
+                    @include('layouts.components.solutions-blurb1')
+                </div>
 
                 @php
                     $article = App\Models\Insight\Content\Article::find(10000004);
                 @endphp
 
                 @if ($article)
-                    @include('insight.article.components.card', ['channel' => $article->channel->slug, 'article' => $article])
+                    @include('insight.article.components.card', [
+                        'channel' => $article->channel->slug,
+                        'article' => $article,
+                    ])
                 @endif
             </div>
         </div>
