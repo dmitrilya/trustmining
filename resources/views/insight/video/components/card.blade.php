@@ -81,7 +81,7 @@
             @endif
 
             <meta itemprop="embedUrl" content="{{ $video->url }}" />
-            <a itemprop="url" class="block ml-auto sm:w-full mt-2"
+            <a itemprop="url" class="block ml-auto sm:w-full mt-2" draggable="false"
                 href="{{ route('insight.video.show', ['channel' => $video->channel->slug, 'video' => $video->id . '-' . mb_strtolower(str_replace(' ', '-', $video->title))]) }}">
                 <x-secondary-button class="w-full justify-center">{{ __('Watch') }}</x-secondary-button>
             </a>

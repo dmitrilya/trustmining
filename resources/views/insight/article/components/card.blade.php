@@ -83,7 +83,7 @@
                 </div>
             @endif
 
-            <a itemprop="url" class="block ml-auto sm:w-full mt-2"
+            <a itemprop="url" class="block ml-auto sm:w-full mt-2" draggable="false"
                 href="{{ route('insight.article.show', ['channel' => $article->channel->slug, 'article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))]) }}">
                 <x-secondary-button class="w-full justify-center">{{ __('Read') }}</x-secondary-button>
             </a>

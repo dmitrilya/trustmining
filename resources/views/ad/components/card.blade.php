@@ -28,7 +28,7 @@
         @endif
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <a class="block w-full"
+            <a class="block w-full" draggable="false"
                 href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
                 @php
                     $preview = explode('.', $ad->preview);
@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('company', ['user' => $ad->user_url_name]) }}"
+            <a href="{{ route('company', ['user' => $ad->user_url_name]) }}" draggable="false"
                 class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user_name }}</a>
 
             <div class="flex items-center my-1 md:my-2">
@@ -121,11 +121,11 @@
             </div>
 
             <a href="{{ route('company.office', ['user' => $ad->user_url_name, 'office' => $ad->office_id]) }}"
-                target="_blank"
+                target="_blank" draggable="false"
                 class="block hover:underline text-xxs xs:text-xs text-indigo-600 hover:text-indigo-500 mt-1 sm:mt-2">{{ $ad->city }}</a>
 
             <div class="relative flex mt-1 sm:mt-2 items-center">
-                <a class="block w-full"
+                <a class="block w-full" draggable="false"
                     href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
                     <x-primary-button
                         class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>

@@ -4,7 +4,8 @@
     class="card sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($hosting->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
-            <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">
+            <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}"
+                draggable="false">
                 @php
                     $preview = explode('.', $hosting->images[0]);
                     $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
@@ -23,7 +24,7 @@
 
     <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
         <div>
-            <a href="{{ route('company', ['user' => $hosting->user->url_name]) }}"
+            <a href="{{ route('company', ['user' => $hosting->user->url_name]) }}" draggable="false"
                 class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500">{{ $hosting->user->name }}</a>
 
             <div class="flex items-center my-1 md:my-2">
@@ -40,7 +41,8 @@
             <div class="text-gray-800 dark:text-gray-200 text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
 
             <div class="relative flex mt-2 items-center">
-                <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">
+                <a class="block w-full" draggable="false"
+                    href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}">
                     <x-primary-button class="w-full justify-center">{{ __('Details') }}</x-primary-button>
                 </a>
             </div>

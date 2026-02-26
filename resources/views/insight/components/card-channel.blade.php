@@ -1,4 +1,4 @@
-<a href="{{ route('insight.channel.show', ['channel' => $slug]) }}">
+<a href="{{ route('insight.channel.show', ['channel' => $slug]) }}" draggable="false">
     <div itemprop="author" itemscope itemtype="https://schema.org/Organization" class="flex items-center">
         <div class="min-w-6 size-6 sm:min-w-8 sm:size-8 mr-2 sm:mr-3 rounded-full border border-indigo-500 p-[0.07rem]">
             <img itemprop="logo" src="{{ Storage::url($logo) }}" alt="{{ $name }}" class="w-full rounded-full">

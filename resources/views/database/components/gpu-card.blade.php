@@ -2,7 +2,7 @@
     class="card sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($gpu->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
-            <a class="block w-full"
+            <a class="block w-full" draggable="false"
                 href="{{ route('ads', ['adCategory' => 'gpus', 'model' => strtolower(str_replace(' ', '_', $gpu->name))]) }}">
                 @php
                     $preview = explode('.', $gpu->images[0]);
@@ -33,7 +33,7 @@
 
         <div class="mt-2 sm:mt-3">
             <div class="relative flex mt-2 items-center">
-                <a class="block w-full"
+                <a class="block w-full" draggable="false"
                     href="{{ route('ads', ['adCategory' => 'gpus', 'model' => strtolower(str_replace(' ', '_', $gpu->name))]) }}">
                     <x-primary-button class="w-full justify-center">{{ __('Buy') }}</x-primary-button>
                 </a>

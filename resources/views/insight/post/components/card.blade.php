@@ -80,7 +80,7 @@
                 </div>
             @endif
 
-            <a itemprop="url" class="block ml-auto sm:w-full mt-2"
+            <a itemprop="url" class="block ml-auto sm:w-full mt-2" draggable="false"
                 href="{{ route('insight.post.show', ['channel' => $post->channel->slug, 'post' => $post->id]) }}">
                 <x-secondary-button class="w-full justify-center">{{ __('Read') }}</x-secondary-button>
             </a>
