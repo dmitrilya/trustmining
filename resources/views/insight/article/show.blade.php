@@ -45,7 +45,7 @@
             {{ $article->title }}
         </h1>
 
-        <div class="lg:hidden min-h-[129px]" id="toc-container"></div>
+        <div class="lg:hidden" id="toc-container"></div>
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             @php

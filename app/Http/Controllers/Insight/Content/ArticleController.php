@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Insight\Content;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -71,7 +72,7 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request, Channel $channel)
     {
-        $this->service->store($channel, [
+        $article = $this->service->store($channel, [
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'preview' => $request->preview,
@@ -80,7 +81,14 @@ class ArticleController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('The article has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The article has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
+        ]);
     }
 
     /**

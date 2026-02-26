@@ -3,14 +3,43 @@
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-    <div x-data="{ content: `{{ old('content') }}`, attachCallback: null }" x-init="const Delta = Quill.import('delta');
-    const ColorClass = Quill.import('attributors/class/color');
-    Quill.register(ColorClass, true);
-    const BackgroundClass = Quill.import('attributors/class/background');
-    Quill.register(BackgroundClass, true);
+    <div x-data="{
+        content: `{{ old('content') }}`,
+        attachCallback: null
+    }" x-init="const Delta = Quill.import('delta');
+    const Parchment = Quill.import('parchment');
     
-    const allowedTextColors = ['main-text-color', 'secondary-text-color'];
-    const allowedBackgroundColors = ['green-bg-color', 'indigo-bg-color'];
+    const allowedTextColors = ['ql-color-main-text-color', 'ql-color-secondary-text-color'];
+    const allowedBackgroundColors = ['ql-bg-green-bg-color', 'ql-bg-indigo-bg-color'];
+    
+    const MyColorClass = new Parchment.Attributor('color', 'class', {
+        scope: Parchment.Scope.INLINE,
+        whitelist: allowedTextColors
+    });
+    
+    const MyBackgroundClass = new Parchment.Attributor('background', 'class', {
+        scope: Parchment.Scope.INLINE,
+        whitelist: allowedBackgroundColors
+    });
+    
+    Quill.register(MyColorClass, true);
+    Quill.register(MyBackgroundClass, true);
+    
+    const Inline = Quill.import('blots/inline');
+    class CustomSpan extends Inline {
+        static create(value) {
+            let node = super.create();
+            node.setAttribute('class', value);
+            return node;
+        }
+        static formats(node) {
+            return node.getAttribute('class');
+        }
+    }
+    
+    CustomSpan.blotName = 'customSpan';
+    CustomSpan.tagName = 'span';
+    Quill.register(CustomSpan);
     
     const Link = Quill.import('formats/link');
     class CustomLink extends Link {
@@ -105,15 +134,41 @@
         return delta;
     });
     
-    quill.on('text-change', () => content = quill.root.innerHTML);">
+    if (localStorage.getItem('draft')) quill.root.innerHTML = localStorage.getItem('draft');
+    
+    const draft = debounce(() => {
+        localStorage.setItem('draft', content);
+    }, 1500);
+    
+    quill.on('text-change', () => {
+        content = quill.root.innerHTML;
+        draft();
+    });">
         <div
             class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
             <form action="{{ route('insight.article.store', ['channel' => $channel->slug]) }}" method="POST"
-                class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [] }"
+                class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [], validation: [], loading: false }"
                 @submit.prevent="if (Object.keys(errors).length > 0) {
                     pushToastAlert(Object.values(errors)[0], 'error');
                     $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
-                } else $el.submit();">
+                } else if (!loading) {
+                    loading = true;
+                    axios.post($el.action, new FormData($el), {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(r => {
+                        if (r.data.success) {
+                            localStorage.removeItem('draft'); 
+                            window.location.href = r.data.redirect;
+                        }
+                    }).catch(err => {
+                        loading = false;
+                        if (err.response && err.response.status === 422) {
+                            validation = err.response.data.errors;
+                        }
+                    });
+                }">
                 @csrf
 
                 <div class="w-full">
@@ -121,6 +176,9 @@
                     <x-length-input id="article-title" name="title" type="text" :value="old('title')"
                         autocomplete="title" required max="40" />
                     <x-input-error :messages="$errors->get('title')" />
+                    <template x-if="validation.title">
+                        <p class="text-red-500 text-xs mt-1" x-text="validation.title[0]"></p>
+                    </template>
                 </div>
 
                 <div class="w-full">
@@ -128,6 +186,9 @@
                     <x-length-input id="article-subtitle" name="subtitle" type="text" :value="old('subtitle')"
                         autocomplete="subtitle" required max="70" />
                     <x-input-error :messages="$errors->get('subtitle')" />
+                    <template x-if="validation.subtitle">
+                        <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle[0]"></p>
+                    </template>
                 </div>
 
                 <div>
@@ -137,6 +198,9 @@
                     <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 5MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
+                    <template x-if="validation.preview">
+                        <p class="text-red-500 text-xs mt-1" x-text="validation.preview[0]"></p>
+                    </template>
                 </div>
 
                 <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
@@ -187,6 +251,9 @@
                     </template>
                 </div>
                 <x-input-error :messages="$errors->get('tags')" />
+                <template x-if="validation.tags">
+                    <p class="text-red-500 text-xs mt-1" x-text="validation.tags[0]"></p>
+                </template>
 
                 <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
                     <div id="editor"
@@ -196,6 +263,9 @@
                     <input type="hidden" class="hidden" name="content" :value="content" required>
                 </div>
                 <x-input-error :messages="$errors->get('content')" />
+                <template x-if="validation.content">
+                    <p class="text-red-500 text-xs mt-1" x-text="validation.content[0]"></p>
+                </template>
 
                 <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
             </form>
