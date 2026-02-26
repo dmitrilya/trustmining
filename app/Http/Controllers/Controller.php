@@ -38,13 +38,18 @@ class Controller extends BaseController
 
     public function home(): View
     {
+        $location = session('user_location');
+        $miners = $this->getAds(null, AdCategory::where('name', 'miners')->first());
+
+        if ($location['source'] == 'geo') $miners->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
+
         return view('home.index', [
             'asicBrands' => AsicBrand::select(['id', 'name'])->withCount('views')->orderByDesc('views_count')->get(),
             'asicModels' => AsicModel::select(['id', 'name', 'asic_brand_id'])->with(['asicBrand:id,name'])
                 ->withCount('views')->orderByDesc('views_count')->limit(10)->get(),
             'gpuModels' => GPUModel::select(['id', 'name', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name'])
                 ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),
-            'miners' => $this->getAds(null, AdCategory::where('name', 'miners')->first())->orderByDesc('ads.ordering_id')->limit(9)->get(),
+            'miners' => $miners->orderByDesc('ads.ordering_id')->limit(9)->get(),
             'hostings' => $this->getHostings(null)->orderByDesc('ordering_id')->limit(9)->get(),
             'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get(),
             'forumQuestions' => ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
