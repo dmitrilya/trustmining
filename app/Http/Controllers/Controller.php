@@ -17,16 +17,18 @@ use App\Http\Traits\HostingTrait;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\ViewTrait;
+
 use App\Models\Ad\AdCategory;
+use App\Models\Database\AsicBrand;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
+use App\Models\Database\GPUModel;
+use App\Models\Database\Coin;
 use App\Models\Morph\Like;
 use App\Models\User\Role;
-use App\Models\Database\Coin;
-use App\Models\Chat\Chat;
-use App\Models\Database\AsicBrand;
-use App\Models\Insight\Content\Article;
 use App\Models\User\User;
+use App\Models\Chat\Chat;
+use App\Models\Insight\Content\Article;
 
 class Controller extends BaseController
 {

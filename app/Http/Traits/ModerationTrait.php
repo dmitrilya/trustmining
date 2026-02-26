@@ -66,7 +66,7 @@ trait ModerationTrait
                 case ('hosting'):
                     if (isset($moderation->data['images'])) {
                         $files = array_merge($files, $m->images);
-                        $files = array_merge($files, $this->getAdditionalFiles([$m->images[0]], [368, 188]));
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->images[0]], [400, 224]));
                     }
                     if (isset($moderation->data['contract'])) array_push($files, $m->contract);
                     if (isset($moderation->data['territory']) && $m->territory) array_push($files, $m->territory);
@@ -75,7 +75,7 @@ trait ModerationTrait
                 case ('ad'):
                     if (isset($moderation->data['preview'])) {
                         array_push($files, $m->preview);
-                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [292, 188]));
+                        $files = array_merge($files, $this->getAdditionalFiles([$m->preview], [320, 224]));
                     }
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
@@ -170,7 +170,7 @@ trait ModerationTrait
             case ('hosting'):
                 if (isset($moderation->data['images'])) {
                     $files = array_merge($files, $moderation->data['images']);
-                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['images'][0]], [368, 188]));
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['images'][0]], [400, 224]));
                 }
                 if (isset($moderation->data['contract'])) array_push($files, $moderation->data['contract']);
                 if (isset($moderation->data['territory'])) array_push($files, $moderation->data['territory']);
@@ -179,7 +179,7 @@ trait ModerationTrait
             case ('ad'):
                 if (isset($moderation->data['preview'])) {
                     array_push($files, $moderation->data['preview']);
-                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [292, 188]));
+                    $files = array_merge($files, $this->getAdditionalFiles([$moderation->data['preview']], [320, 224]));
                 }
                 if (isset($moderation->data['images'])) $files = array_merge($files, $moderation->data['images']);
                 break;

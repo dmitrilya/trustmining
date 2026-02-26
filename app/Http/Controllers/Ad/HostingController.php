@@ -107,8 +107,8 @@ class HostingController extends Controller
 
         $time = time();
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
-        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [368, 276]);
-        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [188, 141]);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [400, 300]);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [224, 168]);
         $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting);
         if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
         if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
@@ -173,8 +173,8 @@ class HostingController extends Controller
 
         if ($request->images) {
             $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
-            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [368, 276]);
-            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [188, 141]);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [400, 300]);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [224, 168]);
         }
 
         if ($request->contract) $data['contract'] = $this->saveContract($request->file('contract'), 'hostings', $hosting);
