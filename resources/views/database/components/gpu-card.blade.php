@@ -6,8 +6,8 @@
                 href="{{ route('ads', ['adCategory' => 'gpus', 'model' => strtolower(str_replace(' ', '_', $gpu->name))]) }}">
                 @php
                     $preview = explode('.', $gpu->images[0]);
-                    $previewxs = $preview[0] . '_224' . '.' . $preview[1];
-                    $previewsm = $preview[0] . '_320' . '.' . $preview[1];
+                    $previewxs = 'gpus/' . $preview[0] . '_224' . '.' . $preview[1];
+                    $previewsm = 'gpus/' . $preview[0] . '_320' . '.' . $preview[1];
                 @endphp
 
                 <picture class="w-full">
