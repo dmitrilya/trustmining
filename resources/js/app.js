@@ -5,6 +5,7 @@ import './chat';
 import { adsStatistics } from './statistics';
 import './suggestions';
 import './broadcast';
+import './carousel';
 import './insight';
 import './InfiniteLoader';
 
@@ -81,6 +82,14 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
     let coef = 1 / Math.pow(1 + (percent / 100), 1 / 365);
 
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
+}
+
+window.debounce = (func, timeout = 1000) => {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
 }
 
 Alpine.start();

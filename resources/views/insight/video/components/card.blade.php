@@ -16,7 +16,7 @@
                 <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
                 <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
 
-                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
+                <img itemprop="thumbnailUrl" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
                     alt="{{ $video->title }}" />
             </picture>
         </div>
