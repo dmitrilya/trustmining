@@ -101,9 +101,7 @@ window.askLocation = (errorMessage) => {
                 lat: position.coords.latitude,
                 lon: position.coords.longitude
             }).then(r => {
-                if (r.data.city) {
-                    window.location.reload();
-                } else pushToastAlert(r.data.error, 'error');
+                if (!r.data.city) pushToastAlert(r.data.error, 'error');
             });
         }, function (error) {
             document.querySelector(`meta[name='should-ask-location']`).content = false;

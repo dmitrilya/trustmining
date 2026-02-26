@@ -5,7 +5,7 @@
             <img src="{{ Storage::url($channel->logo) }}" alt="{{ $channel->name }}" class="w-full rounded-full">
         </div>
 
-        <p class="mb-0.5 sm:mb-1 lg:text-sm text-xs text-gray-900 dark:text-gray-100 font-bold">
+        <p class="mb-0.5 sm:mb-1 lg:text-sm text-xs text-gray-900 dark:text-gray-100 font-bold text-center">
             {{ $channel->name }}</p>
 
         <div class="mb-0.5 sm:mb-1 text-xxs xs:text-xs lg:text-sm text-gray-500">
