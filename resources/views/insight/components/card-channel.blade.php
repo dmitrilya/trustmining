@@ -19,7 +19,7 @@
 
                 <meta itemprop="interactionType" content="https://schema.org/SubscribeAction" />
                 <div itemprop="userInteractionCount" class="ml-1 sm:ml-2 text-xxs sm:text-xs text-gray-500">
-                    {{ __($subscribers) }}</div>
+                    {{ $subscribers }}</div>
             </div>
         </div>
 

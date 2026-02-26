@@ -10,12 +10,12 @@
         <div class="lg:grid grid-cols-12 gap-4 items-start relative">
             <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
                 @include('home.components.categories')
-
                 @include('insight.components.popular-article')
+                @include('home.components.top-channels')
             </div>
 
             <div class="lg:col-span-6 xl:col-span-7">
-                <div class="lg:hidden space-y-4 sm:space-y-6 mb-4 sm:mb-6">
+                <div class="lg:hidden mb-4 sm:mb-6">
                     @include('home.components.asic-brands')
                 </div>
 
@@ -31,10 +31,14 @@
                             'items' => $miners,
                             'blade' => 'ad.components.card',
                             'model' => 'ad',
-                            'sm' => true
+                            'sm' => true,
                         ])
                     </div>
                 </section>
+
+                <div class="lg:hidden mb-4 sm:mb-6">
+                    @include('home.components.last-forum-questions')
+                </div>
 
                 <section class="mb-4 sm:mb-6 lg:mb-8">
                     <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
@@ -48,6 +52,26 @@
                             'items' => $hostings,
                             'blade' => 'hosting.components.card',
                             'model' => 'hosting',
+                        ])
+                    </div>
+                </section>
+
+                <div class="lg:hidden mb-4 sm:mb-6">
+                    @include('home.components.top-channels')
+                </div>
+
+                <section class="mb-4 sm:mb-6 lg:mb-8">
+                    <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                        <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                            {{ __('Gas gensets') }}
+                        </h2>
+                    </div>
+
+                    <div>
+                        @include('home.components.carousel', [
+                            'items' => $gpuModels,
+                            'blade' => 'database.components.gpu-card',
+                            'model' => 'gpu',
                         ])
                     </div>
                 </section>
@@ -72,6 +96,7 @@
             <div class="hidden lg:flex flex-col lg:col-span-3 gap-4">
                 @include('home.components.asic-models')
                 @include('home.components.asic-brands')
+                @include('home.components.last-forum-questions')
 
                 @if (isset($sidebar))
                     {{ $sidebar }}

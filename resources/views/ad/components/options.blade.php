@@ -1,6 +1,6 @@
 <div x-data="{ open: false }">
     <button @click="open = ! open" aria-label="Options"
-        class="ml-2 xs:ml-3 inline-flex items-center p-2 text-sm text-center text-gray-950 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-lg hover:bg-gray-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700">
+        class="ml-2 sm:ml-3 inline-flex items-center p-2 text-sm text-center text-gray-950 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-lg hover:bg-gray-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:hover:bg-zinc-800 dark:focus:ring-zinc-700">
         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
             <path
                 d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />

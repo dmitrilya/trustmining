@@ -9,9 +9,9 @@
                 <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
                     <a class="block w-full" href="{{ route('ads', ['adCategory' => 'miners']) }}">
                         <picture class="w-full">
-                            <source media="(max-width: 430px)" srcset="/img/ads_xs.jpg">
+                            <source media="(max-width: 430px)" srcset="/img/miners_xs.jpg">
 
-                            <img class="w-full object-cover" src="/img/ads_sm.jpg" alt="Ad preview">
+                            <img class="w-full object-cover" src="/img/miners_sm.jpg" alt="Ad preview">
                         </picture>
                     </a>
                 </div>
@@ -93,6 +93,38 @@
                         <a class="block w-full" href="{{ route('insight.index') }}">
                             <x-primary-button
                                 class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
+                        </a>
+                    </div>
+                </div>
+            @break
+
+            @case('gpu')
+                <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+                    <a class="block w-full" href="{{ route('ads', ['adCategory' => 'gpus']) }}">
+                        <picture class="w-full">
+                            <source media="(max-width: 430px)" srcset="/img/gpu_xs.jpg">
+
+                            <img class="w-full object-cover" src="/img/gpu_sm.jpg" alt="Article preview">
+                        </picture>
+                    </a>
+                </div>
+
+                <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+                    <div>
+                        <p
+                            class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                            {{ __('Full catalog of GPU') }}
+                        </p>
+
+                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                            {{ __('Gas gensets in stock and on order') }}
+                        </p>
+                    </div>
+
+                    <div class="mt-2 md:mt-3">
+                        <a class="block w-full" href="{{ route('ads', ['adCategory' => 'gpus']) }}">
+                            <x-primary-button
+                                class="w-full justify-center text-xxs xs:text-xs">{{ __('Open') }}</x-primary-button>
                         </a>
                     </div>
                 </div>

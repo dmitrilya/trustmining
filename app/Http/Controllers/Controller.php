@@ -28,6 +28,8 @@ use App\Models\Morph\Like;
 use App\Models\User\Role;
 use App\Models\User\User;
 use App\Models\Chat\Chat;
+use App\Models\Forum\ForumQuestion;
+use App\Models\Insight\Channel;
 use App\Models\Insight\Content\Article;
 
 class Controller extends BaseController
@@ -40,9 +42,15 @@ class Controller extends BaseController
             'asicBrands' => AsicBrand::select(['id', 'name'])->withCount('views')->orderByDesc('views_count')->get(),
             'asicModels' => AsicModel::select(['id', 'name', 'asic_brand_id'])->with(['asicBrand:id,name'])
                 ->withCount('views')->orderByDesc('views_count')->limit(10)->get(),
+            'gpuModels' => GPUModel::select(['id', 'name', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name'])
+                ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),
             'miners' => $this->getAds(null, AdCategory::where('name', 'miners')->first())->orderByDesc('ads.ordering_id')->limit(9)->get(),
             'hostings' => $this->getHostings(null)->orderByDesc('ordering_id')->limit(9)->get(),
-            'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get()
+            'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get(),
+            'forumQuestions' => ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+                ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+                ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(3)->get(),
+            'topChannels' => Channel::select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers')->orderByDesc('active_subscribers_count')->limit(4)->get()
         ]);
     }
 

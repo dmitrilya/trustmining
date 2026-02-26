@@ -124,7 +124,7 @@
                 target="_blank"
                 class="block hover:underline text-xxs xs:text-xs text-indigo-600 hover:text-indigo-500 mt-1 sm:mt-2">{{ $ad->city }}</a>
 
-            <div class="relative flex mt-2 items-center">
+            <div class="relative flex mt-1 sm:mt-2 items-center">
                 <a class="block w-full"
                     href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
                     <x-primary-button

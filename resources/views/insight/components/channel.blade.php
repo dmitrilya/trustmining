@@ -28,7 +28,7 @@
             <meta itemprop="interactionType" content="https://schema.org/SubscribeAction" />
             <div itemprop="userInteractionCount"
                 class="ml-1 sm:ml-2 text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-gray-500">
-                {{ __($subscribers) }}</div>
+                {{ $subscribers }}</div>
         </div>
         @if (!isset($sm))
             <p

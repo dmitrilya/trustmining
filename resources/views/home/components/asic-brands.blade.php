@@ -1,6 +1,6 @@
 <div x-data="{ show: false }"
     class="transition-all px-1 py-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
-    <h2 class="pt-1 px-3 mb-6 text-base text-gray-700 dark:text-gray-300 font-bold">
+    <h2 class="pt-1 px-3 mb-4 lg:mb-6 text-base text-gray-700 dark:text-gray-300 font-bold">
         {{ __('Brands') }}
     </h2>
 
