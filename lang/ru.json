@@ -477,7 +477,8 @@
     "To the seller": "Продавцу",
     "Viewing errors or deficiencies in contracts": "Просмотр ошибок или недочетов в договорах",
     "This feature is only available with a subscription": "Эта функция доступна только с подпиской",
-    "Track price": "Отслеживать",
+    "To track": "Отслеживать",
+    "Track price": "Отслеживать цену",
     "Untrack price": "Не отслеживать",
     "You have successfully subscribed to price change notifications.": "Вы успешно подписались на уведомления об изменении цен.",
     "You have unsubscribed from notifications.": "Вы отписались от уведомлений.",
@@ -623,6 +624,7 @@
     "Gas gensets": "ГПЭС",
     "Latest forum questions": "Новые темы на форуме",
     "Top channels": "Топ каналов",
+    "Discuss purchase": "Обсудить покупку",
 
 
     "Home": "Главная",

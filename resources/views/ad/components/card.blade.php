@@ -128,7 +128,7 @@
                 <a class="block w-full" draggable="false"
                     href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
                     <x-primary-button
-                        class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
+                        class="w-full justify-center text-xxs xs:text-xs">{{ __('Buy') }}</x-primary-button>
                 </a>
 
                 @include('ad.components.options')

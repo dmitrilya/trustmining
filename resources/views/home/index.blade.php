@@ -6,7 +6,7 @@
         </div>
     </x-slot> --}}
 
-    <div class="max-w-10xl mx-auto px-2 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+    <div class="max-w-10xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="lg:grid grid-cols-12 gap-4 items-start relative">
             <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
                 @include('home.components.categories')

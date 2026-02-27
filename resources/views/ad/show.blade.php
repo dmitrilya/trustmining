@@ -1,40 +1,130 @@
-<x-app-layout :description="$ad->adCategory->description" :title="$ad->adCategory->name == 'miners'
-    ? 'Купить ASIC майнер ' .
-        $ad->asicVersion->asicModel->asicBrand->name .
-        ' ' .
-        $ad->asicVersion->asicModel->name .
-        ' ' .
-        $ad->asicVersion->hashrate .
-        $ad->asicVersion->measurement .
-        ' - ' .
-        $ad->user->name .
-        ', ' .
-        __(array_keys($ad->props)[0]) .
-        ': ' .
-        __($ad->props[array_keys($ad->props)[0]]) .
-        ', ' .
-        __(array_keys($ad->props)[1]) .
-        ': ' .
-        __($ad->props[array_keys($ad->props)[1]])
-    : $ad->adCategory->title .
-        ' - ' .
-        $ad->user->name .
-        (count($ad->props)
-            ? (is_array($ad->props[array_keys($ad->props)[0]])
-                ? ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]][0])
-                : ', ' . __(array_keys($ad->props)[0]) . ': ' . __($ad->props[array_keys($ad->props)[0]]))
-            : '')">
-    <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-            {{ __('Ad') }}
-        </h1>
+@php
+    $user = Auth::user();
+    $title =
+        $ad->adCategory->name != 'gpus'
+            ? ($ad->adCategory->name == 'miners'
+                ? "{$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
+                : "{$ad->adCategory->header} купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
+            : "{$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
+                __('kW/h') .
+                " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
+    $description =
+        $ad->adCategory->name != 'gpus'
+            ? ($ad->adCategory->name == 'miners'
+                ? 'Купите ' .
+                    ($ad->props['Condition'] == 'New' ? 'новый' : 'б/у') .
+                    " ASIC {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name}. " .
+                    ($ad->props['Availability'] == 'Preorder' ? 'Под заказ' : 'В наличии') .
+                    ' с доставкой по РФ. Смотрите фото, характеристики и отзывы на TRUSTMINING'
+                : "Купите {$ad->adCategory->header} в городе {$ad->office->city} у компании {$ad->user->name}. Доставка по всей России. Фото, характеристики, отзывы")
+            : 'Купите ' .
+                ($ad->props['Condition'] == 'New' ? 'новый' : 'б/у') .
+                " ГПЭС/ГПУ {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
+                __('kW/h') .
+                " в городе {$ad->office->city} у {$ad->user->name}. " .
+                ($ad->props['Availability'] == 'Preorder' ? 'Под заказ' : 'В наличии') .
+                ' с доставкой по РФ. Смотрите фото, характеристики и отзывы на TRUSTMINING';
+    $alt =
+        $ad->adCategory->name != 'gpus'
+            ? ($ad->adCategory->name == 'miners'
+                ? "{$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} купить у {$ad->user->name}"
+                : "{$ad->adCategory->header} купить в у {$ad->user->name}")
+            : "{$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
+                __('kW/h') .
+                " купить у {$ad->user->name}";
+@endphp
+
+<x-app-layout :description="$description" :title="$title" :noindex="isset($moderation) ? 'true' : null">
+    <x-slot name="og">
+        <meta property="og:title" content="{{ $title }}">
+        <meta property="og:description" content="{{ $description }}">
+        <meta property="og:image" content="{{ Storage::disk('public')->url($ad->preview) }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="product">
     </x-slot>
 
-    @php
-        $user = Auth::user();
-    @endphp
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 md:p-8">
+        <nav class="mb-4 sm:mb-6" aria-label="Breadcrumb">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
+                class="flex items-center space-x-0.5 sm:space-x-2">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <meta itemprop="position" content="1" />
+                    <div class="flex items-center">
+                        <a itemprop="item" href="{{ route('ads', ['adCategory' => $ad->adCategory->name]) }}"
+                            class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                            <span itemprop="name">{{ __($ad->adCategory->header) }}</span>
+                        </a>
+                        <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"
+                            class="h-5 w-3 sm:w-4 text-gray-400">
+                            <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                        </svg>
+                    </div>
+                </li>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
+                @if ($ad->adCategory->name == 'miners')
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="2" />
+                        <div class="flex items-center">
+                            <a itemprop="item"
+                                href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'brands' => [strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name))]]) }}"
+                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                <span itemprop="name">{{ $ad->asicVersion->asicModel->asicBrand->name }}</span>
+                            </a>
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="3" />
+                        <div class="flex items-center">
+                            <a itemprop="item"
+                                href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'model' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name))]) }}"
+                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                <span itemprop="name">{{ $ad->asicVersion->asicModel->name }}</span>
+                            </a>
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
+                        <meta itemprop="position" content="4" />
+                        <a itemprop="item" href="#" aria-current="page"
+                            class="text-xs xs:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
+                            <span
+                                itemprop="name">{{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}</span>
+                        </a>
+                    </li>
+                @elseif ($ad->adCategory->name == 'gpus')
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <meta itemprop="position" content="2" />
+                        <div class="flex items-center">
+                            <a itemprop="item"
+                                href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'brands' => [strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name))]]) }}"
+                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                <span itemprop="name">{{ $ad->gpuModel->gpuBrand->name }}</span>
+                            </a>
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                            </svg>
+                        </div>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
+                        <meta itemprop="position" content="3" />
+                        <a itemprop="item" href="#" aria-current="page"
+                            class="text-xs xs:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
+                            <span itemprop="name">{{ $ad->gpuModel->name }}
+                                {{ $ad->gpuModel->max_power }}{{ __('kW/h') }}</span>
+                        </a>
+                    </li>
+                @endif
+            </ol>
+        </nav>
+
         @if (isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
@@ -60,15 +150,15 @@
                     <div
                         class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-300 dark:border-zinc-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
-                            <h2
+                            <h1
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h2>
+                            </h1>
                         @elseif ($ad->adCategory->name == 'gpus')
-                            <h2
+                            <h1
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
-                            </h2>
+                            </h1>
                         @endif
 
                         <p
@@ -98,7 +188,7 @@
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                             target="_blank"
-                            class="flex items-center hover:underline text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -114,9 +204,9 @@
 
                         <div class="md:col-span-2 md:col-start-1">
                             <div class="my-5">
-                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                                <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
                                     @if ($ad->adCategory->name == 'gpus')
-                                        <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                        <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                             {{ __('Power (kW/h)') . ': ' }}
                                             <span
                                                 class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
@@ -124,7 +214,7 @@
                                     @endif
 
                                     @foreach ($props as $prop => $value)
-                                        <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                        <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                             {{ __($prop) . ': ' }}@if (!is_array($value))
                                                 <span
                                                     class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
@@ -151,12 +241,12 @@
 
                     <div class="mt-8 md:col-span-12">
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
-                                {{ __('Description') }}</h3>
+                            <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
+                                {{ __('Description') }}</h2>
 
                             <div class="space-y-6 mt-5">
                                 <p
-                                    class="whitespace-pre-line text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="whitespace-pre-line text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
                                 </p>
                             </div>
@@ -186,12 +276,14 @@
 
         <div itemscope itemtype="https://schema.org/Product"
             class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            <meta itemprop="sku" content="{{ $ad->id }}">
+            <meta itemprop="url" content="{{ url()->current() }}">
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 offer-card">
                 <div class="md:col-span-5">
                     @if (!count($ad->images))
                         <div class="w-full overflow-hidden rounded-lg col-start-2">
-                            <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
+                            <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
                                 class="w-full object-cover object-center">
                         </div>
                     @else
@@ -204,19 +296,20 @@
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
-                            <h2 itemprop="name"
+                            <h1 itemprop="name"
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h2>
+                            </h1>
                         @elseif ($ad->adCategory->name == 'gpus')
                             <meta itemprop="brand" content="{{ $ad->gpuModel->gpuBrand->name }}" />
                             <meta itemprop="name" content="{{ $ad->gpuModel->name }}" />
-                            <h2
+                            <h1
                                 class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
-                            </h2>
+                            </h1>
                         @else
-                            <meta itemprop="name" content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
+                            <meta itemprop="name"
+                                content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
                         @endif
 
                         <div
@@ -230,37 +323,44 @@
                         </div>
                     </div>
 
-                    <p itemprop="offers" itemscope itemtype="https://schema.org/Offer"
-                        class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
-                        @if ($ad->price != 0)
-                            <span itemprop="price">{{ $ad->price }}</span> <span
-                                itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
-                            @if ($ad->with_vat)
-                                <span
-                                    class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
-                            @endif
-                        @else
-                            {{ __('Price on request') }}
+                    <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                        @if ($ad->adCategory->name == 'miners' || $ad->adCategory->name == 'gpu')
+                            <link itemprop="availability"
+                                href="https://schema.org/{{ $ad->props['Availability'] == 'In stock' ? 'InStock' : 'PreOrder' }}" />
+                            <link itemprop="itemCondition"
+                                href="https://schema.org/{{ $ad->props['Condition'] == 'New' ? 'NewCondition' : 'UsedCondition' }}" />
                         @endif
-                    </p>
 
-                    <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
-                        target="_blank"
-                        class="flex items-center hover:underline text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4">
-                        <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        {{ $ad->office->address }}
-                    </a>
+                        <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
+                            @if ($ad->price != 0)
+                                <span itemprop="price">{{ $ad->price }}</span> <span
+                                    itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
+                                @if ($ad->with_vat)
+                                    <span
+                                        class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                @endif
+                            @else
+                                {{ __('Price on request') }}
+                            @endif
+                        </p>
 
-                    <div class="md:col-span-2 md:col-start-1">
+
+                        <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
+                            target="_blank"
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4">
+                            <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ $ad->office->address }}
+                        </a>
+
                         <div class="my-5">
-                            <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                            <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
                                 @if ($ad->adCategory->name == 'gpus')
-                                    <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                    <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                         {{ __('Power (kW/h)') . ': ' }}
                                         <span
                                             class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
@@ -268,7 +368,7 @@
                                 @endif
 
                                 @foreach ($ad->props as $prop => $value)
-                                    <li class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                    <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                         {{ __($prop) . ': ' }}@if (!is_array($value))
                                             <span class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
                                         @else
@@ -287,7 +387,7 @@
                         </div>
 
                         <div>
-                            @include('components.about-seller', ['user' => $ad->user])
+                            @include('ad.components.about-seller', ['user' => $ad->user])
 
                             @if ($user && $ad->user->id == $user->id)
                                 @if (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
@@ -300,7 +400,8 @@
                                         <p class="text-sm text-gray-500">
                                             {{ __('The ad did not pass moderation for the following reason:') }}</p>
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-900 dark:text-gray-200">{{ $lastM->comment }}</p>
+                                    <p class="mt-2 text-xxs xs:text-xs sm:text-sm text-gray-900 dark:text-gray-200">
+                                        {{ $lastM->comment }}</p>
                                 @endif
 
                                 <a class="block mt-6" href="{{ route('ad.edit', ['ad' => $ad->id]) }}">
@@ -347,7 +448,7 @@
                                                     stroke-linejoin="round" stroke-width="1.5"
                                                     d="M7 9h5m3 0h2M7 12h2m3 0h5M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.616a1 1 0 0 0-.67.257l-2.88 2.592A.5.5 0 0 1 8 18.477V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
                                             </svg>
-                                            {{ __('Contact') }}
+                                            {{ __('Discuss purchase') }}
                                         </x-primary-button>
                                     </a>
 
@@ -389,12 +490,12 @@
                 <div class="mt-8 md:col-span-12">
                     <div>
                         @if ($ad->description || ($ad->adcategory->name == 'miners' && $ad->asicVersion->asicModel->description))
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
-                                {{ __('Description') }}</h3>
+                            <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
+                                {{ __('Description') }}</h2>
 
                             <div class="space-y-6 mt-5">
                                 <p itemprop="description"
-                                    class="whitespace-pre-line text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                    class="whitespace-pre-line text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100">
                                     {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
                                 </p>
                             </div>

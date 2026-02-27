@@ -1,5 +1,5 @@
 <div class="space-y-6">
-    @include('ad.gpus.selectmodel')
+    @include('ad.gpus.selectmodel', ['required' => true])
 
     <input type="hidden" name="props" x-ref="props_gpus"
         value='{"Enclosure": "On frame", "Condition": "New", "Availability": "In stock"}'>

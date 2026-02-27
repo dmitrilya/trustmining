@@ -43,7 +43,7 @@
                             } else {
                                 $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
                                 $el.getElementsByTagName("span")[0].innerHTML = "' .
-                                __('Track price') .
+                                __('To track') .
                                 '";
                             }
                         })'
@@ -56,7 +56,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                     </svg>
-                    <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('Track price') }}</span>
+                    <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('To track') }}</span>
                 </li>
                 <li>
                     <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white"
