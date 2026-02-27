@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @if ($attributes->has('canonical'))
+    @if ($attributes->get('canonical'))
         <link rel="canonical" href="{{ $attributes->get('canonical') }}">
     @endif
 
