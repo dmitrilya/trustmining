@@ -75,12 +75,20 @@ trait AdTrait
             if ($request->algorithms && count($request->algorithms))
                 $ads->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->whereIn('algorithms.name', $request->algorithms);
 
+            if ($request->brands && count($request->brands)) {
+                $brands = array_map(function ($brand) {
+                    return str_replace('_', ' ', $brand);
+                }, $request->brands);
+                $ads->join('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
+                    ->whereIn(DB::raw('LOWER(asic_brands.name)'), $brands);
+            }
+
             if ($request->vat && count($request->vat) == 1) {
                 if ($request->vat[0] == 'with_vat') $ads->where('with_vat', true);
                 elseif ($request->vat[0] == 'without_vat') $ads->where('with_vat', false);
             }
 
-            $filters = $request->collect()->except(['model', 'asic_version_id', 'gpu_model', 'algorithms', 'vat', 'page', 'sort', 'city', 'display']);
+            $filters = $request->collect()->except(['brands', 'model', 'asic_version_id', 'gpu_model', 'algorithms', 'vat', 'page', 'sort', 'city', 'display']);
 
             foreach ($filters as $key => $values) {
                 $key = str_replace('_', ' ', $key);
