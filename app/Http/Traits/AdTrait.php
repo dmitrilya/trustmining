@@ -83,12 +83,34 @@ trait AdTrait
                     ->whereIn(DB::raw('LOWER(asic_brands.name)'), $brands);
             }
 
+            if ($request->manufacturers && count($request->manufacturers)) {
+                $manufacturers = array_map(function ($brand) {
+                    return str_replace('_', ' ', $brand);
+                }, $request->manufacturers);
+                $ads->whereIn(DB::raw('LOWER(gpu_brands.name)'), $manufacturers);
+            }
+
+            if ($request->max_power) {
+                $ads->where(function ($q) use ($request) {
+                    foreach ($request->max_power as $index => $val) {
+                        $method = ($index === 0) ? 'where' : 'orWhere';
+
+                        if (str_starts_with($val, '><')) {
+                            $range = explode('-', substr($val, 2));
+                            $q->{$method . 'Raw'}("CAST(gpu_models.max_power AS UNSIGNED) BETWEEN ? AND ?", [(int)$range[0], (int)$range[1]]);
+                        } elseif (str_starts_with($val, '>')) {
+                            $q->{$method . 'Raw'}("CAST(gpu_models.max_power AS UNSIGNED) > ?", [(int)substr($val, 1)]);
+                        }
+                    }
+                });
+            }
+
             if ($request->vat && count($request->vat) == 1) {
                 if ($request->vat[0] == 'with_vat') $ads->where('with_vat', true);
                 elseif ($request->vat[0] == 'without_vat') $ads->where('with_vat', false);
             }
 
-            $filters = $request->collect()->except(['brands', 'model', 'asic_version_id', 'gpu_model', 'algorithms', 'vat', 'page', 'sort', 'city', 'display']);
+            $filters = $request->collect()->except(['manufacturers', 'max_power', 'brands', 'model', 'asic_version_id', 'gpu_model', 'algorithms', 'vat', 'page', 'sort', 'city', 'display']);
 
             foreach ($filters as $key => $values) {
                 $key = str_replace('_', ' ', $key);
@@ -111,6 +133,7 @@ trait AdTrait
                     }
                 });
             }
+
             if ($request->city) $ads->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$request->city]);
 
             if ($request->display) {

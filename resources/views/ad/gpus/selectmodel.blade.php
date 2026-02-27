@@ -5,9 +5,9 @@
     openDropdown: null
 }">
     <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="gpu_model"
-        required aria-label="{{ __('Model') }}">
+        @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedModel" name="gpu_model_id"
-        required aria-label="{{ __('Model') }}">
+        @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
 
     <div>
         <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">

@@ -1,5 +1,8 @@
 @php
-    $gpuModels = \App\Models\Database\GPUModel::with(['gpuBrand:id,name,country', 'gpuEngineModel:id,name,gpu_engine_brand_id'])
+    $gpuModels = \App\Models\Database\GPUModel::with([
+        'gpuBrand:id,name,country',
+        'gpuEngineModel:id,name,gpu_engine_brand_id',
+    ])
         ->select(['id', 'name', 'gpu_brand_id', 'gpu_engine_model_id', 'max_power'])
         ->get()
         ->map(function ($model) {
@@ -10,6 +13,15 @@
 
     $rModel = request()->get('gpu_model');
     $selModel = $rModel ? $gpuModels->where('url_name', $rModel)->first() : null;
+    $brands = $gpuModels
+        ->pluck('gpuBrand')
+        ->unique()
+        ->sortBy('name')
+        ->map(function ($brand) {
+            $brand->url_name = strtolower(str_replace(' ', '_', $brand->name));
+
+            return $brand;
+        });
 @endphp
 
 @include('ad.gpus.selectmodel', [
@@ -21,7 +33,9 @@
     ['url_name' => '><300-500', 'name' => '500' . __('kW/h')],
     ['url_name' => '><500-1000', 'name' => '1000' . __('kW/h')],
     ['url_name' => '>1000', 'name' => __('more') . ' 1000' . __('kW/h')],
-]" field="Heating_area_(m²)"></x-filter-filter>
+]" field="max_power"></x-filter-filter>
+
+<x-filter-filter type="checkbox" :name="__('Manufacturer')" :items="$brands" field="manufacturers"></x-filter-filter>
 
 <x-filter-filter type="checkbox" :name="__('Condition')" :items="collect([['name' => 'New', 'url_name' => 'New'], ['name' => 'Used', 'url_name' => 'Used']])" field="Condition"></x-filter-filter>
 

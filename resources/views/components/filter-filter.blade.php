@@ -1,6 +1,6 @@
 @props(['name', 'items', 'field', 'type'])
 
-<div class="{{ $field != 'algorithms' ? 'border-t ' : '' }}border-gray-200 dark:border-zinc-700 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
+<div class="{{ $field != 'algorithms' && $field != 'Power_(kW/h)' ? 'border-t ' : '' }}border-gray-200 dark:border-zinc-700 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
     <h3 class="-mx-2 -my-3 flow-root">
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
             class="flex w-full items-center justify-between px-2 py-3 text-gray-500 dark:text-gray-400 hover:text-gray-500 dark:hover:text-gray-400"
