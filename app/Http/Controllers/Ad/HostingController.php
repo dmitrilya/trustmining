@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 use App\Http\Requests\StoreHostingRequest;
 use App\Http\Requests\UpdateHostingRequest;
@@ -93,7 +94,7 @@ class HostingController extends Controller
         $hosting = Hosting::create([
             'ordering_id' => $firstHosting ? $firstHosting->ordering_id + 1 : 1,
             'user_id' => $user->id,
-            'description' => $request->description,
+            'description' => Purifier::clean(htmlspecialchars_decode($request->description), 'description'),
             'address' => $request->address ? $request->address : 'Not specified',
             'video' => $request->video,
             'price' => $request->price,
@@ -161,7 +162,7 @@ class HostingController extends Controller
         $c = $request->conditions ? $request->conditions : [];
         $e = $request->expenses ? $request->expenses : [];
 
-        if ($request->description != $hosting->description) $data['description'] = $request->description;
+        if ($request->description != $hosting->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
         if ($request->address != $hosting->address) $data['address'] = $request->address ? $request->address : 'Not specified';
         if ($request->video != $hosting->video) $data['video'] = $request->video;
         if ($request->price != $hosting->price) $data['price'] = $request->price;

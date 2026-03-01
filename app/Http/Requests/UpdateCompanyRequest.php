@@ -23,16 +23,12 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function rules()
     {
-        $user = $this->user();
-
-        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
-
         return [
             'images' => 'max:8',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'video' => 'nullable|active_url',
             'site' => 'nullable|active_url',
-            'description' => 'nullable|max:' . $descriptionMax,
+            'description' => 'nullable',
             'logo' => 'file|mimes:jpg,png,jpeg,webp|max:512',
             'bg_logo' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
         ];

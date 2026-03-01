@@ -83,7 +83,7 @@
                 @endif
             </div>
 
-            <div itemprop="articleBody" class="ql-editor !p-0 text-xs xs:text-sm sm:text-base" x-init="toc($el, '{{ __('TOC') }}')">
+            <div itemprop="articleBody" class="ql-editor mt-6 sm:mt-8 lg:mt-10 text-xs xs:text-sm sm:text-base" x-init="toc($el, '{{ __('TOC') }}')">
                 @if ($moder && isset($moderation->data['content']))
                     {!! $moderation->data['content'] !!}
                 @else

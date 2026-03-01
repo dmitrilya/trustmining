@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdRequest;
@@ -112,6 +113,8 @@ class AdController extends Controller
 
         if (!$office) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
 
+        $description = $request->description ? Purifier::clean(htmlspecialchars_decode($request->description), 'description') : '';
+
         $firstAd = Ad::orderByDesc('ordering_id')->first();
         $ad = Ad::create([
             'ordering_id' => $firstAd ? $firstAd->ordering_id + 1 : 1,
@@ -120,7 +123,7 @@ class AdController extends Controller
             'asic_version_id' => $request->asic_version_id,
             'gpu_model_id' => $request->gpu_model_id,
             'office_id' => $request->office_id,
-            'description' => $request->description ?? '',
+            'description' => $description,
             'props' => json_decode($request->props),
             'price' => $request->price,
             'with_vat' => $request->filled('with_vat'),
@@ -227,7 +230,7 @@ class AdController extends Controller
         $propDiffs = array_merge(array_diff_assoc($ad->props, $props), array_diff_assoc($props, $ad->props));
         if (count($propDiffs)) $data['props'] = $props;
 
-        if ($request->description != $ad->description) $data['description'] = $request->description;
+        if ($request->description != $ad->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
 
         $time = time();
         if ($request->images)

@@ -1,5 +1,8 @@
 <x-app-layout title="Майнинг отель: редактировать объявление о хостинге"
     description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Placement data') }}
@@ -9,8 +12,43 @@
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
             class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
-            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}" class="mt-6 space-y-6"
-                enctype=multipart/form-data>
+            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
+                class="mt-6 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+                const Link = Quill.import('formats/link');
+                class CustomLink extends Link {
+                    static create(value) {
+                        const node = super.create(value);
+                        node.classList.add('inline');
+                        return node;
+                    }
+                }
+                
+                Quill.register(CustomLink, true);
+                
+                quill = new Quill('#editor', {
+                    modules: {
+                        toolbar: {
+                            container: [
+                                ['bold', { 'list': 'bullet' }],
+                            ]
+                        }
+                    },
+                    placeholder: '{{ __('Description') }}...',
+                    theme: 'snow'
+                });
+                
+                quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+                    delta.ops.forEach(op => {
+                        if (op.attributes?.color) delete op.attributes.color;
+                        if (op.attributes?.background) delete op.attributes.background;
+                    });
+                
+                    return delta;
+                });
+                
+                quill.root.innerHTML = `{{ $hosting->description }}`;
+                
+                quill.on('text-change', () => description = quill.root.innerHTML);">
                 @method('put')
                 @csrf
 
@@ -62,13 +100,14 @@
                     <x-input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
                 </x-editable-list>
 
-                <div>
-                    <x-input-label for="description" :value="__('Description')" />
-                    <textarea id="description" rows="16" name="description"
-                        class="mt-1 px-3 py-2 resize-none w-full px-0 text-sm text-gray-950 bg-gray-100 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm shadow-logo-color"
-                        required maxlength="1500">{{ $hosting->description }}</textarea>
-                    <x-input-error :messages="$errors->get('description')" />
+                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl">
+                    <div id="editor"
+                        class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
+                    </div>
+
+                    <input type="hidden" class="hidden" name="description" :value="description" required>
                 </div>
+                <x-input-error :messages="$errors->get('description')" />
 
                 <div>
                     <x-input-label for="hosting-contract" :value="__('Agreement for the provision of accommodation services')" />

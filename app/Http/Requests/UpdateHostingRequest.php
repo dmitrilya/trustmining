@@ -23,12 +23,8 @@ class UpdateHostingRequest extends FormRequest
      */
     public function rules()
     {
-        $user = $this->user();
-
-        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
-
         return [
-            'description' => 'required|max:' . $descriptionMax,
+            'description' => 'required',
             'video' => 'nullable|active_url',
             'images' => 'max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',

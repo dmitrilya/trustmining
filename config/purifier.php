@@ -46,7 +46,7 @@ return [
             'AutoFormat.RemoveEmpty' => false,
         ],
         'insight_post' => [
-            'HTML.Allowed' => 'div,b,strong,i,em,u,a[href|title|class|target],p[class],br,span[class],pre,h2',
+            'HTML.Allowed' => 'div,b,strong,i,em,u,a[href|title|class|target],p[class],br,span[class]',
             'URI.AllowedSchemes' => ['http' => true, 'https' => true, 'mailto' => true],
             'Attr.AllowedFrameTargets' => ['_blank'],
             'Attr.AllowedClasses' => ['inline'],
@@ -54,6 +54,14 @@ return [
             'HTML.DefinitionRev'   => 1,
             'CSS.AllowedProperties' => [],
             'AutoFormat.RemoveEmpty' => true,
+        ],
+        'description' => [
+            'HTML.Allowed' => 'div,b,strong,ul,ol,li[data-list],span[contenteditable|class],p[class],br',
+            'Attr.AllowedClasses' => ['inline', 'ql-ui'],
+            'HTML.DefinitionID'    => 'description',
+            'HTML.DefinitionRev'   => 1,
+            'CSS.AllowedProperties' => [],
+            'AutoFormat.RemoveEmpty' => false,
         ],
     ],
 ];

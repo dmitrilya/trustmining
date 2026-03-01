@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Auth;
+use Mews\Purifier\Facades\Purifier;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreCompanyRequest;
@@ -119,7 +120,7 @@ class CompanyController extends Controller
         $data = [];
 
         if ($user->tariff && $user->tariff->can_site_link && $request->site != $company->site) $data['site'] = $request->site;
-        if ($request->description != $company->description) $data['description'] = $request->description;
+        if ($request->description != $company->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
         if ($request->video != $company->video) $data['video'] = $request->video;
 
         $time = time();

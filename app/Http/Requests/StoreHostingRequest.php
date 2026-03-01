@@ -23,12 +23,8 @@ class StoreHostingRequest extends FormRequest
      */
     public function rules()
     {
-        $user = $this->user();
-
-        $descriptionMax = $user->tariff ? $user->tariff->max_description : 500;
-
         return [
-            'description' => 'required|max:' . $descriptionMax,
+            'description' => 'required',
             'video' => 'nullable|active_url',
             'images' => 'required|min:1|max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',

@@ -1,4 +1,7 @@
 <x-app-layout title="Создать объявление о продаже оборудования для майнинга">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Creating an advertisement') }}
@@ -29,11 +32,6 @@
                         or JPEG (max. 2MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
-
-                @php
-                    $descriptionMaxLength =
-                        ($user = Auth::user()) && $user->tariff ? $user->tariff->max_description : 500;
-                @endphp
 
                 <template x-if="ad_category_id == 1">
                     @include('ad.miners.create')

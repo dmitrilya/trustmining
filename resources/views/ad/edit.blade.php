@@ -1,4 +1,7 @@
 <x-app-layout title="Редактировать объявление о продаже оборудования для майнинга" noindex="true">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Editing an advertisement') }}
@@ -25,11 +28,6 @@
                         or JPEG (max. 2MB)</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
-
-                @php
-                    $descriptionMaxLength =
-                        ($user = Auth::user()) && $user->tariff ? $user->tariff->max_description : 500;
-                @endphp
 
                 @include('ad.' . $ad->adCategory->name . '.edit')
 

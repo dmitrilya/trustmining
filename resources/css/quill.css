@@ -3,10 +3,6 @@
         border: unset;
     }
 
-    .ql-editor {
-        padding: 0;
-    }
-
     .ql-container {
         font-family: unset;
         font-size: unset;
@@ -21,6 +17,11 @@
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
     }
+}
+
+.ql-editor {
+    padding: 0 !important;
+    white-space: unset !important;
 }
 
 .ql-toolbar.ql-snow .ql-formats {

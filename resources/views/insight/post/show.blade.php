@@ -63,7 +63,7 @@
         </div>
 
         <div x-show="!edit">
-            <div itemprop="articleBody" class="ql-editor !p-0 text-xs xs:text-sm sm:text-base">
+            <div itemprop="articleBody" class="ql-editor mt-6 sm:mt-8 lg:mt-10 text-xs xs:text-sm sm:text-base">
                 @if ($moder && isset($moderation->data['content']))
                     {!! $moderation->data['content'] !!}
                 @else

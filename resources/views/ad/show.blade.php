@@ -43,6 +43,8 @@
         <meta property="og:type" content="product">
     </x-slot>
 
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 md:p-8">
         <nav class="mb-4 sm:mb-6" aria-label="Breadcrumb">
             <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
@@ -54,10 +56,12 @@
                             class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
                             <span itemprop="name">{{ __($ad->adCategory->header) }}</span>
                         </a>
-                        <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true"
-                            class="h-5 w-3 sm:w-4 text-gray-400">
-                            <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                        </svg>
+                        @if ($ad->adCategory->name == 'miners' || $ad->adCategory->name == 'gpus')
+                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                            </svg>
+                        @endif
                     </div>
                 </li>
 
@@ -244,11 +248,15 @@
                             <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
                                 {{ __('Description') }}</h2>
 
-                            <div class="space-y-6 mt-5">
-                                <p
-                                    class="whitespace-pre-line text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {{ !isset($moderation->data['description']) ? (!$ad->description ? ($ad->adCategory->name == 'miners' ? $ad->asicVersion->asicModel->description : '') : $ad->description) : $moderation->data['description'] }}
-                                </p>
+                            <div itemprop="description"
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                {!! !isset($moderation->data['description'])
+                                    ? (!$ad->description
+                                        ? ($ad->adCategory->name == 'miners'
+                                            ? $ad->asicVersion->asicModel->description
+                                            : '')
+                                        : $ad->description)
+                                    : $moderation->data['description'] !!}
                             </div>
 
                             @if ($ad->adCategory->name == 'miners')
@@ -334,8 +342,10 @@
 
                         <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
                             @if ($ad->price != 0)
-                                <meta itemprop="priceCurrency" content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
-                                <span itemprop="price">{{ $ad->price }}</span> <span>{{ $ad->coin->abbreviation }}</span>
+                                <meta itemprop="priceCurrency"
+                                    content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
+                                <span itemprop="price">{{ $ad->price }}</span>
+                                <span>{{ $ad->coin->abbreviation }}</span>
                                 @if ($ad->with_vat)
                                     <span
                                         class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
@@ -494,11 +504,9 @@
                             <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
                                 {{ __('Description') }}</h2>
 
-                            <div class="space-y-6 mt-5">
-                                <p itemprop="description"
-                                    class="whitespace-pre-line text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100">
-                                    {{ $ad->description ? $ad->description : $ad->asicVersion->asicModel->description }}
-                                </p>
+                            <div itemprop="description"
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                {!! $ad->description ? $ad->description : $ad->asicVersion->asicModel->description !!}
                             </div>
                         @endif
 
