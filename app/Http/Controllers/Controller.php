@@ -131,6 +131,8 @@ class Controller extends BaseController
 
         $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
+        $ads = $this->getAds()->where('ads.asic_version_id', $selVersion->id)
+            ->orderByRaw('ads.price = 0 ASC')->orderByRaw("ads.price * coins.rate ASC")->limit(9)->get();
 
         return view('calculator.index', [
             'models' => $models,
@@ -139,6 +141,7 @@ class Controller extends BaseController
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
+            'ads' => $ads
         ]);
     }
 

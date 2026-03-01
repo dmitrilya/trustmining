@@ -2,10 +2,12 @@
     ($rModel ? ($rVersion ? $selModel->name . ' ' . $selVersion->hashrate : $selModel->name) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
     ($rModel ? ($rVersion ? ' ' . $selModel->name . ' ' . $selVersion->hashrate : ' ' . $selModel->name) : '') .
     ' в удобном калькуляторе доходности майнинга'"
-    canonical="{{ $rModel && !$rVersion ? route('calculator.modelver', [
-        'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
-        'asicVersion' => $selVersion->hashrate,
-    ]) : null }}">
+    canonical="{{ $rModel && !$rVersion
+        ? route('calculator.modelver', [
+            'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
+            'asicVersion' => $selVersion->hashrate,
+        ])
+        : null }}">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
             {{ __('Mining calculator') }}

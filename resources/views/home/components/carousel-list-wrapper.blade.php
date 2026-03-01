@@ -1,7 +1,7 @@
 @include('home.components.carousel-list')
 
 <div draggable="false"
-    class="shrink-0 snap-start mr-2 sm:mr-4 w-[calc(100%-1.4rem)] xs:w-[calc(50%-1rem)] sm:w-[calc(50%-1.6rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(50%-1.7rem)] xl:w-[calc(33.333%-1.5rem)]">
+    class="shrink-0 snap-start mr-2 sm:mr-4 w-[calc(100%-1.4rem)] xs:w-[calc(50%-1rem)] sm:w-[calc(50%-1.6rem)] md:w-[calc(33.333%-1.5rem)] {{ !isset($bigWrapper) ? 'lg:w-[calc(50%-1.7rem)] xl:w-[calc(33.333%-1.5rem)]' : 'xl:w-[calc(25%-1.5rem)]' }}">
     <div
         class="card relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col offer-card">
         @switch($model)
