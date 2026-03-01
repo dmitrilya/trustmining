@@ -6,7 +6,7 @@
         </a>
 
         <div class="flex items-center gap-2 lg:gap-3">
-            <a href="https://t.me/trustmining_ru" target="_blank" area-label="Связаться в телеграм">
+            <a href="https://t.me/trustmining_ru" target="_blank" aria-label="Связаться в телеграм">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
@@ -17,7 +17,7 @@
                     </svg>
                 </div>
             </a>
-            <a href="mailto:trustmining.ru@gmail.com" area-label="Написать на почту">
+            <a href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
 
                 </div>
             </a>
-            <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" area-label="Канал Дзен">
+            <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="Канал Дзен">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
@@ -52,7 +52,7 @@
         </div>
 
         <a class="w-max under text-sm lg:text-base text-gray-900 dark:text-gray-50" href="mailto:trustmining.ru@gmail.com"
-            area-label="Написать на почту">
+            aria-label="Написать на почту">
             trustmining.ru@gmail.com
         </a>
 

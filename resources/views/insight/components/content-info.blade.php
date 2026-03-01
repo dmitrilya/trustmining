@@ -11,7 +11,7 @@
     <div class="ml-auto flex items-center">
         <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
             class="flex items-center" x-data="{ liked: '{{ $user && $content->likes->where('user_id', $user->id)->count() > 0 }}', likes: {{ $content->likes->count() }} }">
-            <button area-label="Like"
+            <button aria-label="Like"
                 @if ($user) @click="if (liked) likes--; else likes++; liked = !liked; window.like('{{ $type }}', {{ $content->id }})" @else @click="$dispatch('open-modal', 'login')" @endif>
                 <svg x-show="liked" aria-hidden="true" height="24" fill="currentColor" viewBox="0 0 24 24"
                     class="size-5 sm:size-6 lg:size-7 text-gray-800 dark:text-zinc-200">
@@ -45,7 +45,7 @@
                 {{ $content->views()->count() }}</p>
         </div>
         <div class="flex items-center ml-4">
-            <button area-label="Share"
+            <button aria-label="Share"
                 class="text-gray-600 dark:text-zinc-400 hover:text-gray-800 dark:hover:text-gray-200"
                 @click="navigator.share({
                     title: document.title,
