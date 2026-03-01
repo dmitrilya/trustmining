@@ -110,7 +110,7 @@ trait AdTrait
                 elseif ($request->vat[0] == 'without_vat') $ads->where('with_vat', false);
             }
 
-            $filters = $request->collect()->only(['Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models[]', 'Service', 'Material']);
+            $filters = $request->collect()->only(['Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models', 'Service', 'Material']);
 
             foreach ($filters as $key => $values) {
                 $key = str_replace('_', ' ', $key);
