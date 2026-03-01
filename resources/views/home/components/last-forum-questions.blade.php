@@ -21,9 +21,9 @@
                         </div>
 
                         <div class="text-right ml-3 sm:ml-5">
-                            <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                            {{-- <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
                                 {{ __('Views') }}: <span>{{ $forumQuestion->views_count }}</span>
-                            </div>
+                            </div> --}}
                             <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
                                 {{ __('Answers') }}:
                                 <span>{{ $forumQuestion->moderated_forum_answers_count }}</span>

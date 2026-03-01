@@ -278,6 +278,7 @@
             class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <meta itemprop="sku" content="{{ $ad->id }}">
             <meta itemprop="url" content="{{ url()->current() }}">
+            <meta itemprop="description" content="{{ $description }}">
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 offer-card">
                 <div class="md:col-span-5">
@@ -333,8 +334,8 @@
 
                         <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
                             @if ($ad->price != 0)
-                                <span itemprop="price">{{ $ad->price }}</span> <span
-                                    itemprop="priceCurrency">{{ $ad->coin->abbreviation }}</span>
+                                <meta itemprop="priceCurrency" content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
+                                <span itemprop="price">{{ $ad->price }}</span> <span>{{ $ad->coin->abbreviation }}</span>
                                 @if ($ad->with_vat)
                                     <span
                                         class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>

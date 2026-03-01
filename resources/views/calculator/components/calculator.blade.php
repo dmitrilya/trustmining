@@ -1,6 +1,6 @@
 <div class="xl:col-span-3">
     <div itemscope itemtype="https://schema.org/ViewAction"
-        class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
+        class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
         <meta itemprop="name"
             content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
         <meta itemprop="description"
@@ -45,7 +45,7 @@
                                         x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
                                 <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                                    {{ __('Average price') }}: <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    {{ __('The best price') }}: <span class="text-gray-900 dark:text-gray-100 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
                             </div>
@@ -181,7 +181,7 @@
                                                 x-text="version.efficiency * version.hashrate"></span> W
                                         </div>
                                         <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                                            {{ __('Average price') }}: <span
+                                            {{ __('The best price') }}: <span
                                                 class="text-gray-900 dark:text-gray-100 font-bold"
                                                 x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                         </div>
