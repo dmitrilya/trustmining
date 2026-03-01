@@ -34,7 +34,7 @@
         <div class="mt-2 sm:mt-3">
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false"
-                    href="{{ route('ads', ['adCategory' => 'gpus', 'model' => strtolower(str_replace(' ', '_', $gpu->name))]) }}">
+                    href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => strtolower(str_replace(' ', '_', $gpu->name))]) }}">
                     <x-primary-button class="w-full justify-center">{{ __('Buy') }}</x-primary-button>
                 </a>
             </div>

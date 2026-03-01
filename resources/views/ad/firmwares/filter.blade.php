@@ -21,7 +21,7 @@
                     x-text="model"
                     class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
                 </div>
-                <input type="hidden" name="For which models[]" :value="model">
+                <input type="hidden" name="For_which_models[]" :value="model">
             </div>
         </template>
     </div>
