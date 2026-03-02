@@ -44,7 +44,7 @@
         <div>
             <x-input-label for="preview" :value="__('Preview')" />
             <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" />
-            <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
+            <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
                 or JPEG (max. 5MB), dimensions:ratio=4/3</p>
             <x-input-error :messages="$errors->get('preview')" />
         </div>
@@ -53,9 +53,9 @@
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
             ->keyBy('key')" :key="$post->series->first()?->id" />
 
-        <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
+        <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
             <div id="editor"
-                class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-2 sm:p-4">
+                class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-2 sm:p-4">
             </div>
 
             <input type="hidden" class="hidden" name="content" :value="content" required>

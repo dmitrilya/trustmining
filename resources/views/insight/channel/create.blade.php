@@ -1,7 +1,7 @@
 <x-insight-layout title="Создание своего канала | TM Insight"
     description="Создайте канал на платформе TM Insight и начните делиться контентом | TM Insight" :header="__('Channel creation')">
     <div
-        class="p-2 sm:p-4 lg:p-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
+        class="p-2 sm:p-4 lg:p-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
         <form method="POST" class="flex flex-col gap-2 sm:gap-4 lg:gap-6" enctype=multipart/form-data
             x-data="{ errors: [], loading: false }" action="{{ route('insight.channel.store') }}"
             @submit.prevent="
@@ -55,7 +55,7 @@
                 <x-input-label for="channel-logo" :value="__('Logo')" />
                 <x-file-input id="channel-logo" name="logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                     required />
-                <p class="mt-1 text-xxs text-gray-600" id="channel-logo_help">PNG, JPG
+                <p class="mt-1 text-xxs text-slate-600" id="channel-logo_help">PNG, JPG
                     or JPEG (max. 2MB)</p>
                 <x-input-error :messages="$errors->get('logo')" />
             </div>
@@ -64,7 +64,7 @@
                 <x-input-label for="channel-banner" :value="__('Banner')" />
                 <x-file-input id="channel-banner" name="banner" class="mt-1 block w-full"
                     accept=".png,.jpg,.jpeg,.webp" />
-                <p class="mt-1 text-xxs text-gray-600" id="channel-banner_help">PNG, JPG
+                <p class="mt-1 text-xxs text-slate-600" id="channel-banner_help">PNG, JPG
                     or JPEG (max. 5MB, 960x360 px)</p>
                 <x-input-error :messages="$errors->get('banner')" />
             </div>

@@ -115,7 +115,7 @@
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white/60 dark:bg-zinc-900/60 shadow shadow-logo-color">
+            <header class="bg-white/40 dark:bg-slate-900/40 shadow shadow-logo-color">
                 <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -128,12 +128,12 @@
             <x-modal name="need-subscription">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                        <h2 class="text-lg text-slate-950 dark:text-slate-50">
                             {{ __('This feature is only available with a subscription') }}
                         </h2>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
                             <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -152,12 +152,12 @@
                     <x-modal name="tg-auth">
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                                <h2 class="text-lg text-slate-950 dark:text-slate-50">
                                     {{ __('Telegram authorization') }}
                                 </h2>
 
                                 <button type="button" aria-label="{{ __('Close') }}"
-                                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                                     @click="show = false">
                                     <span class="sr-only">Close</span>
                                     <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -167,7 +167,7 @@
                                 </button>
                             </div>
 
-                            <p class="mt-1 text-sm text-gray-700 dark:text-gray-300 mb-5">
+                            <p class="mt-1 text-sm text-slate-700 dark:text-slate-300 mb-5">
                                 {{ __('You can log in using Telegram to receive notifications from our bot') }}
                             </p>
 
@@ -176,7 +176,7 @@
                             </script>
 
                             <div class="flex items-center justify-between mt-6">
-                                <x-checkbox name="dont_ask" value="true" textClasses="text-gray-500 text-xxs py-3">
+                                <x-checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
                                     {{ __("Don't ask again") }}
                                 </x-checkbox>
 

@@ -36,9 +36,9 @@ quill.root.innerHTML = `{{ $ad->description }}`;
 quill.on('text-change', () => description = quill.root.innerHTML);">
     <input type="hidden" name="props" x-ref="props_monitorings" value="{{ json_encode($ad->props) }}">
 
-    <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl">
+    <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
         <div id="editor"
-            class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
+            class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
         </div>
 
         <input type="hidden" class="hidden" name="description" :value="description" required>

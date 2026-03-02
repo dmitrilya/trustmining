@@ -1,7 +1,7 @@
 <x-app-layout title="Оповещения" description="Посмотрите оповещения на платформе TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
                 {{ __('Notifications') }}
             </h1>
 

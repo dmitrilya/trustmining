@@ -1,17 +1,17 @@
 <x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
     description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Check warranty') }}
         </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
         <section>
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Whatsminer</h3>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
@@ -43,10 +43,10 @@
         </section>
 
         <section>
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Bitmain</h3>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
@@ -78,10 +78,10 @@
         </section>
 
         <section>
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Canaan</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
@@ -90,10 +90,10 @@
         </section>
 
         <section>
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Iceriver</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
@@ -102,10 +102,10 @@
         </section>
 
         <section>
-            <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h3
-                    class="text-sm xs:text-base sm:text-lg text-gray-800 dark:text-gray-100 font-bold mb-3 xs:mb-4 sm:mb-5">
+                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Jasminer</h3>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"

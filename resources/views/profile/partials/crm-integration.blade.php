@@ -1,11 +1,11 @@
 <section>
     <header class="mb-6">
-        <h2 class="text-lg text-gray-950 dark:text-gray-50 mb-2">
+        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
             {{ __('CRM integrations') }}
         </h2>
 
         @if ((!$user->company || $user->company->moderation) && !$user->passport)
-            <p class="text-sm text-gray-700 dark:text-gray-400">
+            <p class="text-sm text-slate-700 dark:text-slate-400">
                 {{ __('Please verify your identity using your passport or register a company to create CRM integrations.') }}
             </p>
         @endif
@@ -13,7 +13,7 @@
 
     <div class="space-y-4 sm:space-y-5 lg:space-y-6">
         @foreach (App\Models\CRM\CRMSystem::all() as $crmSystem)
-            <div class="flex justify-between items-center border dark:border-zinc-700 rounded-lg p-4 xl:p-6">
+            <div class="flex justify-between items-center border dark:border-slate-700 rounded-lg p-4 xl:p-6">
                 <img src="{{ Storage::url('crm_systems/' . $crmSystem->name . '.webp') }}" alt="{{ $crmSystem->name }}"
                     class="w-[40%]" />
 

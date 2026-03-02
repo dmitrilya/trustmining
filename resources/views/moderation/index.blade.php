@@ -1,12 +1,12 @@
 <x-app-layout title="Модерация" noindex="true">
     <x-slot name="header">
         <div class="flex items-center justify-end">
-            <p class="text-gray-700 dark:text-gray-300 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
+            <p class="text-slate-700 dark:text-slate-300 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none transition ease-in-out duration-150">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">
@@ -23,39 +23,39 @@
                 @endphp
 
                 <x-slot name="content">
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'company' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'company'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'company' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'company'])">
                         {{ __('Company') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'hosting' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'hosting'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'hosting' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'hosting'])">
                         {{ __('Hosting') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'ad' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'ad'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'ad' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'ad'])">
                         {{ __('Advertisements') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'review' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'review'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'review' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'review'])">
                         {{ __('Reviews') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'office' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'office'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'office' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'office'])">
                         {{ __('Offices') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'passport' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'passport'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'passport' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'passport'])">
                         {{ __('Passport') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'channel' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'channel'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'channel' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'channel'])">
                         {{ __('Channel') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'article' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'article'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'article' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'article'])">
                         {{ __('Article') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200': {{ $model == 'post' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'post'])">
+                    <x-dropdown-link ::class="{ 'bg-slate-200': {{ $model == 'post' ? 'true' : 'false' }} }" :href="route('moderations', ['model' => 'post'])">
                         {{ __('Post') }}
                     </x-dropdown-link>
                 </x-slot>
@@ -65,8 +65,8 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
-            <ul role="list" class="divide-y divide-gray-300 dark:divide-zinc-700">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($moderations as $moderation)
                     @php
                         $user = $moderation->moderationable->user
@@ -83,25 +83,25 @@
                     @endphp
 
                     <a href="{{ route('moderation', ['moderation' => $moderation->id]) }}"
-                        class="rounded-md hover:bg-gray-200 dark:hover:bg-zinc-950 block p-4">
+                        class="rounded-md hover:bg-slate-200 dark:hover:bg-slate-950 block p-4">
                         <li>
                             <div class="flex">
                                 @if ($logo)
-                                    <img class="h-12 w-12 flex-none rounded-full bg-gray-50 mr-4"
+                                    <img class="h-12 w-12 flex-none rounded-full bg-slate-50 mr-4"
                                         src="{{ Storage::url($logo) }}" alt="">
                                 @endif
 
                                 <div class="w-full">
-                                    <p class="text-sm font-semibold leading-6 text-gray-800 dark:text-gray-200">
+                                    <p class="text-sm font-semibold leading-6 text-slate-800 dark:text-slate-200">
                                         {{ $name }}
                                     </p>
 
                                     <div class="flex justify-between">
-                                        <p class="mt-1 truncate text-xs leading-5 text-gray-600 dark:text-gray-400">
+                                        <p class="mt-1 truncate text-xs leading-5 text-slate-600 dark:text-slate-400">
                                             {{ __('types.' . $moderation->moderationable_type) }}
                                         </p>
 
-                                        <p class="date-transform mt-1 text-xs leading-5 text-gray-600 dark:text-gray-400"
+                                        <p class="date-transform mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400"
                                             data-date="{{ $moderation->created_at }}">
                                         </p>
                                     </div>

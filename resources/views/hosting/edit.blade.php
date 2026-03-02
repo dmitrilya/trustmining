@@ -4,14 +4,14 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Placement data') }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
                 class="mt-6 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
                 const Link = Quill.import('formats/link');
@@ -57,7 +57,7 @@
                     <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-600" id="images_help">
+                    <p class="mt-1 text-sm text-slate-600" id="images_help">
                         {{ __('When you upload new files, all old ones are deleted') }}</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
@@ -71,9 +71,9 @@
                             value="{{ __($hosting->address) }}"
                             @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
                             autocomplete="off"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                            class="block py-2.5 px-0 w-full text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
-                            class="absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
                         <x-input-error :messages="$errors->get('address')" />
@@ -100,9 +100,9 @@
                     <x-input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
                 </x-editable-list>
 
-                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl">
+                <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
                     <div id="editor"
-                        class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
+                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
                     </div>
 
                     <input type="hidden" class="hidden" name="description" :value="description" required>
@@ -112,7 +112,7 @@
                 <div>
                     <x-input-label for="hosting-contract" :value="__('Agreement for the provision of accommodation services')" />
                     <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full" accept=".doc,.docx" />
-                    <p class="mt-1 text-sm text-gray-600" id="contract_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-600" id="contract_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('contract')" />
                 </div>
 
@@ -120,7 +120,7 @@
                     <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
                     <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
                         accept=".doc,.docx" />
-                    <p class="mt-1 text-sm text-gray-600" id="territory_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-600" id="territory_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('territory')" />
                 </div>
 
@@ -128,7 +128,7 @@
                     <x-input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
                     <x-file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
                         autocomplete="energy_supply" accept=".doc,.docx" :value="old('energy_supply')" />
-                    <p class="mt-1 text-sm text-gray-600" id="energy_supply_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-600" id="energy_supply_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('energy_supply')" />
                 </div>
 
@@ -153,7 +153,7 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                    <h2 class="text-lg text-slate-950 dark:text-slate-50">
                         {{ __('Are you sure you want to delete this hosting?') }}
                     </h2>
 

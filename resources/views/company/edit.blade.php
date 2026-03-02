@@ -4,14 +4,14 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ $company->name }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('company.update', ['company' => $company->id]) }}"
                 class="mt-6 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
                 const Link = Quill.import('formats/link');
@@ -63,7 +63,7 @@
                     <x-file-input id="images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 8) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 8]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-600" id="images_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-600" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 8 items)</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
@@ -75,7 +75,7 @@
                     <x-input-label for="logo" :value="__('Logo for avatar')" />
                     <x-file-input id="logo" name="logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-gray-600" id="logo_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-600" id="logo_help">PNG, JPG
                         or JPEG (max. 512KB, 1x1)</p>
                     <x-input-error :messages="$errors->get('logo')" />
                 </div>
@@ -84,14 +84,14 @@
                     <x-input-label for="bg_logo" :value="__('Logo for the card')" />
                     <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-gray-600" id="bg_logo_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-600" id="bg_logo_help">PNG, JPG
                         or JPEG (max. 1024KB)</p>
                     <x-input-error :messages="$errors->get('bg_logo')" />
                 </div>
 
-                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl">
+                <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
                     <div id="editor"
-                        class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
+                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
                     </div>
 
                     <input type="hidden" class="hidden" name="description" :value="description" required>

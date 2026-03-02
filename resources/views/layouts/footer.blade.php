@@ -1,5 +1,5 @@
 <footer
-    class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <a href="{{ route('home') }}">
             <x-application-logo class="text-[12vw] xs:text-5xl" />
@@ -8,7 +8,7 @@
         <div class="flex items-center gap-2 lg:gap-3">
             <a href="https://t.me/trustmining_ru" target="_blank" aria-label="Связаться в телеграм">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -19,7 +19,7 @@
             </a>
             <a href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
                     <svg class="size-4 sm:size-5 lg:size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
@@ -30,7 +30,7 @@
             </a>
             <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="Канал Дзен">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-gray-800 dark:bg-zinc-800">
+                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
                     <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1181_4290)">
@@ -51,7 +51,7 @@
             </a>
         </div>
 
-        <a class="w-max under text-sm lg:text-base text-gray-900 dark:text-gray-50" href="mailto:trustmining.ru@gmail.com"
+        <a class="w-max under text-sm lg:text-base text-slate-900 dark:text-slate-50" href="mailto:trustmining.ru@gmail.com"
             aria-label="Написать на почту">
             trustmining.ru@gmail.com
         </a>
@@ -60,10 +60,10 @@
             <button aria-label="{{ __('Change theme to light') }}"
                 :class="{
                     'bg-primary-gradient text-white': theme == 'light',
-                    'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=
+                    'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': theme !=
                         'light'
                 }"
-                class="p-1.5 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                class="p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                 @click="if (theme != 'light') {
                     theme = 'light';
                     axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
@@ -79,10 +79,10 @@
             <button aria-label="{{ __('Change theme to dark') }}"
                 :class="{
                     'bg-primary-gradient text-white': theme == 'dark',
-                    'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': theme !=
+                    'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': theme !=
                         'dark'
                 }"
-                class="p-1.5 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                class="p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                 @click="if (theme != 'dark') {
                     theme = 'dark';
                     axios.get('{{ route('change-theme', ['theme' => 'dark']) }}');
@@ -99,82 +99,82 @@
 
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
-                <div class="text-sm text-gray-500 dark:text-gray-500 font-semibold">{{ __('To the buyer') }}</div>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <div class="text-sm text-slate-500 dark:text-slate-500 font-semibold">{{ __('To the buyer') }}</div>
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('companies') }}">{{ __('Companies') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'miners']) }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('services') }}">{{ __('Services') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'legals']) }}">{{ __('Legals') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'containers']) }}">{{ __('Containers') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'gpus']) }}">{{ __('GPU') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}">{{ __('Cryptoboilers') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'firmwares']) }}">{{ __('Firmwares') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'monitorings']) }}">{{ __('Monitoring') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'accessories']) }}">{{ __('Accessories') }}</a>
             </div>
 
             <div class="space-y-2">
-                <div class="text-sm text-gray-500 dark:text-gray-500 font-semibold">{{ __('To the seller') }}</div>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <div class="text-sm text-slate-500 dark:text-slate-500 font-semibold">{{ __('To the seller') }}</div>
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('support', ['tab' => 'chat']) }}">{{ __('Write to support') }}</a>
-                {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50" href="{{ route('roadmap') }}">Roadmap</a> --}}
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                {{-- <a class="w-max under text-sm text-slate-900 dark:text-slate-50" href="{{ route('roadmap') }}">Roadmap</a> --}}
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50" href="{{ route('support') }}">FAQ</a>
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50" href="{{ route('support') }}">FAQ</a>
             </div>
 
             <div class="space-y-2">
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('top') }}">{{ __('Top reliable companies') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('asic-rating') }}">{{ __('The most profitable ASICs') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('blog') }}">{{ __('Blog') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50" href="{{ route('insight.index') }}">TM
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50" href="{{ route('insight.index') }}">TM
                     Insight</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('forum') }}">{{ __('Forum') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('about') }}">{{ __('About project') }}</a>
-                {{-- <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                {{-- <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
-                <a class="w-max under text-sm text-gray-900 dark:text-gray-50"
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
             </div>
         </div>
 
         <div>
-            <div class="text-sm text-gray-600">ИП Дмитриева Елизавета Николаевна</div>
-            <div class="text-sm text-gray-600">ОГРНИП: 325385000082654</div>
+            <div class="text-sm text-slate-600">ИП Дмитриева Елизавета Николаевна</div>
+            <div class="text-sm text-slate-600">ОГРНИП: 325385000082654</div>
         </div>
-        <div class="text-xs text-gray-500" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
+        <div class="text-xs text-slate-500" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
             {{ __('This is not a public offer.') }}</div>
     </div>
 </footer>

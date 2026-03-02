@@ -8,7 +8,7 @@
         @endif
 
         <div
-            class="border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
+            class="border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
             <div class="flex items-start justify-between mb-1 sm:mb-2">
                 @include('insight.components.channel', [
                     'name' => $channel->name,
@@ -31,8 +31,8 @@
                     </div>
                 @else
                     <a href="{{ route('insight.channel.edit', ['channel' => $channel->slug]) }}"
-                        class="text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center">
-                        <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
+                        class="text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center">
+                        <svg class="size-5 sm:size-6 lg:size-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
                             aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5"
@@ -42,11 +42,11 @@
                 @endif
             </div>
 
-            <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-2 lg:mb-4">
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mb-2 lg:mb-4">
                 {{ $channel->brief_description }}
             </p>
 
-            <p itemprop="description" class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">{{ $channel->description }}</p>
+            <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{{ $channel->description }}</p>
         </div>
     </div>
 
@@ -57,22 +57,22 @@
     @if ($newArticles->count())
         <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Articles') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
-                            'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
                         :class="tab === 'popular' ?
-                            'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>
@@ -110,22 +110,22 @@
     @if ($newPosts->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Posts') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
-                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
                         :class="tab === 'popular' ?
-                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>
@@ -163,22 +163,22 @@
     @if ($newVideos->count())
         <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Videos') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
-                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
                         :class="tab === 'popular' ?
-                            'bg-white dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>
@@ -216,7 +216,7 @@
     @if ($series->where('contents_count', '>', 0)->count())
         <section itemscope itemtype="https://schema.org/ItemList">
             <h2 itemprop="name"
-                class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
+                class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
                 {{ trans_choice('insight.series', 2) }}</h2>
             <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 

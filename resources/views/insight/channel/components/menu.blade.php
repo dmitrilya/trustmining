@@ -5,8 +5,8 @@
 
     <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block">
         <div @click="open = !open"
-            class="flex items-center cursor-pointer rounded-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
-            <svg class="text-gray-600 dark:text-zinc-400 stroke-gray-400 dark:stroke-zinc-600 size-4 sm:size-5"
+            class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
+            <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -15,7 +15,7 @@
             </svg>
 
             <div
-                class="ml-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:dark:text-gray-200">
+                class="ml-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:dark:text-slate-200">
                 {{ __('Publish') }}
             </div>
         </div>
@@ -26,16 +26,16 @@
             x-transition:leave="transition ease-in duration-75"
             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
             x-transition:leave-end="opacity-0 scale-95 translate-y-2"
-            class="absolute left-0 mt-2 w-48 origin-top-left rounded-2xl border border-gray-200 dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl shadow-xl z-50 overflow-hidden"
+            class="absolute left-0 mt-2 w-48 origin-top-left rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl z-50 overflow-hidden"
             style="display: none;">
 
             @include('insight.components.publish-menu')
         </div>
     </div>
 
-    <div class="flex items-center cursor-pointer rounded-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2"
+    <div class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2"
         @click="$dispatch('open-modal', 'series-creation')">
-        <svg class="text-gray-600 dark:text-zinc-400 stroke-gray-400 dark:stroke-zinc-600 size-4 sm:size-5"
+        <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5"
             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
             viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -44,29 +44,29 @@
         </svg>
 
         <div
-            class="ml-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:dark:text-gray-200">
+            class="ml-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:dark:text-slate-200">
             {{ __('Create series') }}
         </div>
     </div>
 
     <a href="{{ route('insight.channel.statistics', ['channel' => $channel->slug]) }}"
-        class="flex items-center cursor-pointer rounded-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
+        class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
         @if (request()->routeIs('insight.channel.statistics'))
             @include('insight.svg.statistics-active', [
                 'svgClass' =>
-                    'text-gray-800 dark:text-zinc-200 stroke-gray-800 dark:stroke-zinc-200 size-4 sm:size-5',
+                    'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-4 sm:size-5',
             ])
 
-            <div class="ml-1 text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+            <div class="ml-1 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                 {{ __('Statistics') }}
             </div>
         @else
             @include('insight.svg.statistics', [
                 'svgClass' =>
-                    'text-gray-600 dark:text-zinc-400 stroke-gray-400 dark:stroke-zinc-600 size-4 sm:size-5',
+                    'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5',
             ])
 
-            <div class="ml-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
+            <div class="ml-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 {{ __('Statistics') }}
             </div>
         @endif
@@ -76,12 +76,12 @@
 <x-modal name="series-creation" maxWidth="md">
     <div class="p-6">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg text-gray-800 dark:text-gray-200">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Create series') }}
             </h2>
 
             <button type="button" aria-label="{{ __('Close') }}"
-                class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                 @click="show = false">
                 <span class="sr-only">Close</span>
                 <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

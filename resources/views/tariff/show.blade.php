@@ -1,11 +1,11 @@
 <x-app-layout title="Приобрести подписку {{ $tariff->name }}" description="Оформите подписку {{ $tariff->name }} для профессиональной работы на рынке майнинга. Максимальные лимиты на объявления, приоритетное размещение ASIC-майнеров в каталоге, статус проверенного партнера и доступ к расширенной аналитике продаж. Масштабируйте свой бизнес вместе с нами">
-    <div class="bg-gray-900 h-128 lg:h-144 xl:h-160 relative z-10 overflow-hidden">
+    <div class="bg-slate-900 h-128 lg:h-144 xl:h-160 relative z-10 overflow-hidden">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 py-8 relative">
             <div class="mt-4 md:mt-6 lg:mt-8 xl:mt-10 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">
                 <div
                     class="text-white font-semibold text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl mb-2 sm:mb-4 lg:mb-6">
                     {{ __('Pricing plans for teams of all sizes') }}</div>
-                <div class="max-w-2xl mx-auto text-gray-400 sm:text-lg lg:text-xl xl:text-2xl">
+                <div class="max-w-2xl mx-auto text-slate-400 sm:text-lg lg:text-xl xl:text-2xl">
                     {{ __('Choose a tariff plan according to your company request. For all questions, please contact support') }}
                 </div>
             </div>
@@ -24,14 +24,14 @@
         </div>
     </div>
 
-    <div class="bg-gray-100 relative z-20">
+    <div class="bg-slate-100 relative z-20">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16 relative">
             <div
-                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-gray-900 border-2 border-indigo-500' : 'bg-white border border-gray-300' }} rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
-                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-900' }} font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
-                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-gray-400' : 'text-gray-500' }} text-sm md:text-base">{{ __($tariff->description) }}</div>
-                <div class="h-9 flex items-end {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-gray-500' }} md:text-lg"><span
-                        class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? '' : 'text-gray-900 ' }}font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price * 30 }}</span>
+                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-slate-900 border-2 border-indigo-500' : 'bg-white border border-slate-300' }} rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-slate-900' }} font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
+                <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-slate-400' : 'text-slate-500' }} text-sm md:text-base">{{ __($tariff->description) }}</div>
+                <div class="h-9 flex items-end {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-white' : 'text-slate-500' }} md:text-lg"><span
+                        class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? '' : 'text-slate-900 ' }}font-bold text-2xl sm:text-3xl lg:text-4xl">{{ $tariff->price * 30 }}</span>
                     /{{ __('month') }}</div>
                 <div class="space-y-2 sm:space-y-3">
                     @if ($tariff->name == 'Subscription')
@@ -41,7 +41,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Possibility to sort ads by price') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Possibility to sort ads by price') }}</div>
                         </div>
                         <div class="flex items-center">
                             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -49,7 +49,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Price change alerts') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Price change alerts') }}</div>
                         </div>
                         <div class="flex items-center">
                             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -57,7 +57,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-500">{{ __('Viewing errors or deficiencies in contracts') }}
+                            <div class="text-sm text-slate-500">{{ __('Viewing errors or deficiencies in contracts') }}
                             </div>
                         </div>
                     @else
@@ -67,8 +67,8 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600"><span
-                                    class="text-gray-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
+                            <div class="text-sm text-slate-600"><span
+                                    class="text-slate-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
                                 {{ __('of ads') }}</div>
                         </div>
                         <div class="flex items-center">
@@ -77,8 +77,8 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600"><span
-                                    class="text-gray-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
+                            <div class="text-sm text-slate-600"><span
+                                    class="text-slate-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
                                 {{ __('of offices') }}</div>
                         </div>
                     @endif
@@ -89,7 +89,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600">{{ __('Hosting adding') }}</div>
+                            <div class="text-sm text-slate-600">{{ __('Hosting adding') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_have_phone)
@@ -99,7 +99,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600">{{ __('Phone number') }}</div>
+                            <div class="text-sm text-slate-600">{{ __('Phone number') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_create_insight)
@@ -109,7 +109,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600">{{ __('Guide creating') }}</div>
+                            <div class="text-sm text-slate-600">{{ __('Guide creating') }}</div>
                         </div>
                     @endif
                     @if ($tariff->priority_moderation)
@@ -119,7 +119,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-gray-600">{{ __('Priority moderation') }}</div>
+                            <div class="text-sm text-slate-600">{{ __('Priority moderation') }}</div>
                         </div>
                     @endif
                 </div>
@@ -129,7 +129,7 @@
 
     <div class="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16">
         <div class="bg-white overflow-hidden shadow-sm rounded-3xl p-4 sm:p-8 md:p-12">
-            <div class="text-center text-gray-950 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
+            <div class="text-center text-slate-950 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
                 {{ __('Pay the tariff') }}</div>
 
             <form method="post" action="{{ route('order.store') }}" class="space-y-4 sm:space-y-6">
@@ -144,7 +144,7 @@
                             checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -257,7 +257,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -276,7 +276,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm hover:shadow-lg peer peer-checked:shadow-xl peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

@@ -4,7 +4,7 @@
     $model->name .
     '. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей'">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6">
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6">
             <nav class="mb-6" aria-label="Breadcrumb">
                 <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
                     class="flex items-center space-x-1 sm:space-x-2">
@@ -12,11 +12,11 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="#"
-                                class="sm:mr-2 text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ __('Catalog of gpus') }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -25,11 +25,11 @@
                         <meta itemprop="position" content="2" />
                         <div class="flex items-center">
                             <a itemprop="item" href="#"
-                                class="sm:mr-2 text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ $brand->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -37,7 +37,7 @@
                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
                         <meta itemprop="position" content="3" />
                         <a itemprop="item" href="#" aria-current="page"
-                            class="text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
                             <span itemprop="name">{{ $model->name }}</span>
                         </a>
                     </li>
@@ -48,9 +48,9 @@
 
             <div itemscope itemtype="https://schema.org/Product"
                 class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] mt-6 md:mt-12">
-                <div class="md:col-span-2 md:border-r border-gray-300 dark:border-zinc-700 md:pr-8">
+                <div class="md:col-span-2 md:border-r border-slate-300 dark:border-slate-700 md:pr-8">
                     <h1 itemprop="name"
-                        class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                        class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
                 </div>
 
@@ -129,45 +129,45 @@
                 </div>
 
                 <div
-                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-gray-300 dark:border-zinc-700 md:pb-16 md:pr-8 md:pt-6">
+                    class="py-6 sm:py-8 md:col-span-2 md:col-start-1 md:border-r border-slate-300 dark:border-slate-700 md:pb-16 md:pr-8 md:pt-6">
                     <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400">{{ __('Manufacturer') }}:
-                            <span itemprop="name" class="text-gray-700 dark:text-gray-200">
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400">{{ __('Manufacturer') }}:
+                            <span itemprop="name" class="text-slate-700 dark:text-slate-200">
                                 {{ $brand->name }}</span>
                         </div>
                         <div itemprop="location" itemscope itemtype="http://schema.org/Country"
-                            class="text-sm sm:text-base text-gray-500 dark:text-gray-400">{{ __('Country') }}:
-                            <span itemprop="name" class="text-gray-700 dark:text-gray-200">
+                            class="text-sm sm:text-base text-slate-500 dark:text-slate-400">{{ __('Country') }}:
+                            <span itemprop="name" class="text-slate-700 dark:text-slate-200">
                                 {{ $brand->country }}</span>
                         </div>
                     </div>
 
-                    <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
+                    <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400" itemprop="additionalProperty"
                         itemscope itemtype="http://schema.org/PropertyValue">
                         <span itemprop="name">{{ __('Power (kW/h)') }}</span>:
-                        <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                        <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                             {{ $model->max_power }}</span>
                         <meta itemprop="unitText" content="kW/h" />
                     </div>
 
-                    <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
+                    <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400" itemprop="additionalProperty"
                         itemscope itemtype="http://schema.org/PropertyValue">
                         <span itemprop="name">{{ __('Phases') }}</span>:
-                        <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                        <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                             {{ $model->phases }}</span>
                     </div>
 
-                    <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
+                    <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400" itemprop="additionalProperty"
                         itemscope itemtype="http://schema.org/PropertyValue">
                         <span itemprop="name">{{ __('Gas type') }}</span>:
-                        <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                        <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                             {{ __('Natural') }}</span>
                     </div>
 
-                    <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400" itemprop="additionalProperty"
+                    <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400" itemprop="additionalProperty"
                         itemscope itemtype="http://schema.org/PropertyValue">
                         <span itemprop="name">{{ __('Fuel consumption (m³/h)') }}</span>:
-                        <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                        <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                             {{ $model->fuel_consumption }}</span>
                     </div>
 
@@ -176,92 +176,92 @@
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 
-                        <p class="text-sm sm:text-base text-gray-950">{{ $model->description }}</p>
+                        <p class="text-sm sm:text-base text-slate-950">{{ $model->description }}</p>
                     </div> --}}
 
                     <div itemprop="hasPart" itemscope itemtype="https://schema.org/Product"
                         class="mt-6 sm:mt-8 md:mt-10">
-                        <h3 itemprop="name" class="mb-1 sm:mb-2 sm:text-lg text-gray-800 dark:text-gray-200">
+                        <h3 itemprop="name" class="mb-1 sm:mb-2 sm:text-lg text-slate-800 dark:text-slate-200">
                             {{ __('Engine') }}
                         </h3>
 
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                             <span>{{ __('Model') }}</span>:
-                            <span itemprop="model" class="text-gray-700 dark:text-gray-200">
+                            <span itemprop="model" class="text-slate-700 dark:text-slate-200">
                                 {{ $model->gpuEngineModel->name }}</span>
                         </div>
 
                         <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
-                            <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                            <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                                 {{ __('Manufacturer') }}:
-                                <span itemprop="name" class="text-gray-700 dark:text-gray-200">
+                                <span itemprop="name" class="text-slate-700 dark:text-slate-200">
                                     {{ $model->gpuEngineModel->gpuEngineBrand->name }}</span>
                             </div>
                             <div itemprop="location" itemscope itemtype="http://schema.org/Country"
-                                class="text-sm sm:text-base text-gray-500 dark:text-gray-400">{{ __('Country') }}:
-                                <span itemprop="name" class="text-gray-700 dark:text-gray-200">
+                                class="text-sm sm:text-base text-slate-500 dark:text-slate-400">{{ __('Country') }}:
+                                <span itemprop="name" class="text-slate-700 dark:text-slate-200">
                                     {{ $model->gpuEngineModel->gpuEngineBrand->country }}</span>
                             </div>
                         </div>
 
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400"
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400"
                             itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                             <span itemprop="name">{{ __('Volume (l)') }}</span>:
-                            <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                            <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                                 {{ $model->gpuEngineModel->volume }}</span>
                             <meta itemprop="unitCode" content="LTR" />
                         </div>
 
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400"
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400"
                             itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                             <span itemprop="name">{{ __('Cylinders') }}</span>:
-                            <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                            <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                                 {{ $model->gpuEngineModel->cylinders }}</span>
                         </div>
 
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400"
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400"
                             itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                             <span itemprop="name">{{ __('RPM') }}</span>:
-                            <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                            <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                                 {{ $model->gpuEngineModel->rpm }}</span>
                         </div>
 
-                        <div class="text-sm sm:text-base text-gray-500 dark:text-gray-400"
+                        <div class="text-sm sm:text-base text-slate-500 dark:text-slate-400"
                             itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
                             <span itemprop="name">{{ __('Cooling type') }}</span>:
-                            <span itemprop="value" class="text-gray-700 dark:text-gray-200">
+                            <span itemprop="value" class="text-slate-700 dark:text-slate-200">
                                 {{ __('Liquid') }}</span>
                         </div>
                     </div>
 
                     <div class="mt-6 sm:mt-8 md:mt-10">
-                        <h3 class="mb-1 sm:mb-2 sm:text-lg text-gray-800 dark:text-gray-200">
+                        <h3 class="mb-1 sm:mb-2 sm:text-lg text-slate-800 dark:text-slate-200">
                             {{ __('Dimensions') }}
                         </h3>
 
                         <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                            class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                            class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                             <span itemprop="name">{{ __('Length (mm)') }}</span>:
                             <span itemprop="value"
-                                class="text-gray-700 dark:text-gray-200">{{ $model->length }}</span>
+                                class="text-slate-700 dark:text-slate-200">{{ $model->length }}</span>
                         </div>
                         <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                            class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                            class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                             <span itemprop="name">{{ __('Width (mm)') }}</span>:
                             <span itemprop="value"
-                                class="text-gray-700 dark:text-gray-200">{{ $model->width }}</span>
+                                class="text-slate-700 dark:text-slate-200">{{ $model->width }}</span>
                         </div>
                         <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                            class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                            class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                             <span itemprop="name">{{ __('Height (mm)') }}</span>:
                             <span itemprop="value"
-                                class="text-gray-700 dark:text-gray-200">{{ $model->height }}</span>
+                                class="text-slate-700 dark:text-slate-200">{{ $model->height }}</span>
                         </div>
                         <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue"
-                            class="text-sm sm:text-base text-gray-500 dark:text-gray-400">
+                            class="text-sm sm:text-base text-slate-500 dark:text-slate-400">
                             <span itemprop="name">{{ __('Weight (kg)') }}</span>:
                             <span itemprop="value"
-                                class="text-gray-700 dark:text-gray-200">{{ $model->weight }}</span>
+                                class="text-slate-700 dark:text-slate-200">{{ $model->weight }}</span>
                         </div>
                     </div>
                 </div>

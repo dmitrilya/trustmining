@@ -2,7 +2,7 @@
     description="Посмотрите историю ваших вопросов, узнайте о процессе модерации и ознакомьтесь с похожими вопросами">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
                 {{ __('My questions') }}
             </h1>
 
@@ -16,8 +16,8 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
-            <div class="divide-y divide-gray-100 dark:divide-zinc-800">
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+            <div class="divide-y divide-slate-100 dark:divide-slate-800">
                 @foreach ($questions as $question)
                     @if ($question->published)
                         <a
@@ -27,30 +27,30 @@
                                 'forumQuestion' => $question->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $question->theme)),
                             ]) }}">
                     @endif
-                    <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-gray-200 dark:hover:bg-zinc-950">
+                    <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
                         <div class="mb-1.5 sm:mb-2 flex justify-between items-start">
                             @if ($question->moderation)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                                     {{ __('Is under moderation') }}
                                 </div>
                             @elseif (!$question->published)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                                     {{ __('Check out similar questions') }}
                                 </div>
                             @else
-                                <div class="text-xxs sm:text-xs lg:text-sm text-gray-500">
+                                <div class="text-xxs sm:text-xs lg:text-sm text-slate-500">
                                     {{ __($question->forumSubcategory->forumCategory->name) }}.
                                     {{ __($question->forumSubcategory->name) }}
                                 </div>
                             @endif
 
                             <div class="text-right ml-3 sm:ml-5">
-                                <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                                <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                     {{ __('Views') }}: <span>{{ $question->views_count }}</span>
                                 </div>
-                                <div class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                                <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                     {{ __('Answers') }}:
                                     <span>{{ $question->moderated_forum_answers_count }}</span>
                                 </div>
@@ -58,17 +58,17 @@
                         </div>
 
                         <h3
-                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
+                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-700 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
                             {{ $question->theme }}
                         </h3>
 
                         @if (count($question->similar_questions_list) && !$question->published)
                             <div x-data="{ show: false }"
-                                class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-gray-300 dark:border-zinc-700">
+                                class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-slate-300 dark:border-slate-700">
                                 <div>
                                     <h3 id="accordion-flush-themes-heading">
                                         <button type="button" @click="show = !show"
-                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-gray-800 dark:text-gray-200 text-xs sm:text-sm lg:text-base">
+                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm lg:text-base">
                                             <span>{{ __('Similar questions') }}</span>
                                             <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': !show }"
                                                 fill="none" viewBox="0 0 10 6">
@@ -88,22 +88,22 @@
                                                             'forumQuestion' => $similarQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $similarQuestion->theme)),
                                                         ]) }}">
                                                         <div
-                                                            class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-gray-white dark:hover:bg-zinc-900 rounded-lg">
+                                                            class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-white dark:hover:bg-slate-900 rounded-lg">
                                                             <div class="mb-1.5 sm:mb-2 flex justify-between">
                                                                 <div
-                                                                    class="text-xxs sm:text-xs lg:text-sm text-gray-500">
+                                                                    class="text-xxs sm:text-xs lg:text-sm text-slate-500">
                                                                     {{ __($similarQuestion->forumSubcategory->forumCategory->name) }}.
                                                                     {{ __($similarQuestion->forumSubcategory->name) }}
                                                                 </div>
 
                                                                 <div class="text-right ml-3 sm:ml-5">
                                                                     <div
-                                                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                                                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                                                         {{ __('Views') }}:
                                                                         <span>{{ $similarQuestion->views_count }}</span>
                                                                     </div>
                                                                     <div
-                                                                        class="text-xxs sm:text-xs text-gray-500 whitespace-nowrap">
+                                                                        class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                                                         {{ __('Answers') }}:
                                                                         <span>{{ $similarQuestion->moderated_forum_answers_count }}</span>
                                                                     </div>
@@ -111,7 +111,7 @@
                                                             </div>
 
                                                             <h3
-                                                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100 font-bold">
+                                                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-700 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
                                                                 {{ $similarQuestion->theme }}
                                                             </h3>
                                                         </div>

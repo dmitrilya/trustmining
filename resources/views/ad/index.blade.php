@@ -7,7 +7,7 @@
 <x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
                 {{ __($adCategory->header) }}
             </h1>
 
@@ -18,7 +18,7 @@
 
             <x-header-filters>
                 <x-slot name="sort">
-                    <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                    <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->action['as'],
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
@@ -28,7 +28,7 @@
                         {{ __('Price: Low to High') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link ::class="{ 'bg-gray-200 dark:bg-zinc-700': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                    <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->action['as'],
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
@@ -58,9 +58,9 @@
                     <input type="text" id="city" name="city" x-ref="search" placeholder=" "
                         value="{{ request()->get('city') }}" autocomplete="off"
                         @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'city')"
-                        class="block py-2.5 px-0 w-full text-sm text-gray-950 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-zinc-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                        class="block py-2.5 px-0 w-full text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                     <label for="city"
-                        class="absolute text-sm text-gray-600 dark:text-gray-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('First from the city') }}
                     </label>
                 </div>

@@ -10,7 +10,7 @@
     </span>
 
     <div x-show="open" style="display: none"
-        class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-5 bg-gray-50 dark:bg-zinc-950 border border-gray-300 dark:border-zinc-700 rounded-lg z-20">
+        class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg z-20">
     
     </div>
 </div> --}}
@@ -37,10 +37,10 @@
         <div class="absolute inset-0 bg-logo-gradient rounded-full opacity-20">
         </div>
 
-        <div class="absolute bottom-0 text-gray-400" :style="`left: ${getPercent(avg)}%; transform: translateX(-50%);`">
+        <div class="absolute bottom-0 text-slate-400" :style="`left: ${getPercent(avg)}%; transform: translateX(-50%);`">
             <div class="group relative flex flex-col items-center cursor-pointer">
                 <span class="text-[10px] mb-2 w-max font-bold text-slate-400 uppercase">{{ __('Average price') }}</span>
-                <div class="w-0.5 h-3 bg-gray-300"></div>
+                <div class="w-0.5 h-3 bg-slate-300"></div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
                         <span x-text="avg.toLocaleString()"></span>
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="absolute top-0 flex flex-col items-center text-gray-400"
+        <div class="absolute top-0 flex flex-col items-center text-slate-400"
             :style="`left: ${getPercent(lower_bound)}%; transform: translateX(-50%);`">
             <div class="group relative cursor-pointer">
                 <div class="w-0.5 h-3 bg-red-600"></div>
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="absolute top-0 flex flex-col items-center text-gray-400"
+        <div class="absolute top-0 flex flex-col items-center text-slate-400"
             :style="`left: ${getPercent(upper_bound)}%; transform: translateX(-50%);`">
             <div class="group relative cursor-pointer">
                 <div class="w-0.5 h-3 bg-red-600"></div>
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-[11px] font-medium text-gray-400 uppercase">
+    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-[11px] font-medium text-slate-400 uppercase">
         <span>{{ __('Min') }}: {{ number_format($priceData['min'], 0, '.', ' ') }}</span>
         <span>{{ __('Max') }}: {{ number_format($priceData['max'], 0, '.', ' ') }}</span>
     </div>

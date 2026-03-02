@@ -1,6 +1,6 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg text-gray-950 dark:text-gray-50 mb-2">
+        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
             {{ __('Forum profile') }}
         </h2>
     </header>
@@ -14,7 +14,7 @@
 
     <a href="{{ route('forum.question.index') }}">
         <x-secondary-button
-            class="bg-secondary-gradient dark:text-gray-800">{{ __('My questions') }}</x-secondary-button>
+            class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
     </a>
 
     @include('forum.components.author', [
@@ -32,7 +32,7 @@
             <x-input-label for="avatar" :value="__('Avatar')" />
             <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                 required />
-            <p class="mt-1 text-xxs text-gray-600" id="avatar_help">PNG, JPG
+            <p class="mt-1 text-xxs text-slate-600" id="avatar_help">PNG, JPG
                 or JPEG (max. 1MB)</p>
             <x-input-error :messages="$errors->get('avatar')" />
         </div>

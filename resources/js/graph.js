@@ -80,7 +80,7 @@ window.buildGraph = (data, period, div, valueYField, visibleY = false) => {
     cursor.lineY.set("visible", false);
 
     let tooltip = Tooltip.new(root, {
-        labelHTML: '<div class="text-gray-300 dark:text-gray-300 text-xxs sm:text-xs font-bold">{valueX.formatDate()}</div><div class="text-white dark:text-gray-100 text-sm sm:text-base">{valueY}</div>'
+        labelHTML: '<div class="text-slate-300 dark:text-slate-300 text-xxs sm:text-xs font-bold">{valueX.formatDate()}</div><div class="text-white dark:text-slate-100 text-sm sm:text-base">{valueY}</div>'
     });
 
     tooltip.get("background").setAll({

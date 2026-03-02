@@ -1,5 +1,5 @@
 <div
-    class="card sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col">
+    class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($gpu->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" draggable="false"
@@ -21,13 +21,13 @@
 
     <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
         <div>
-            <div class="text-xs sm:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+            <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                 {{ $gpu->gpuBrand->name . ' ' . $gpu->name }}
             </div>
 
-            <p class="mt-1 xs:mt-2 text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+            <p class="mt-1 xs:mt-2 text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
                 {{ __('Power (kW/h)') . ': ' }}
-                <span class="text-gray-700 dark:text-gray-300">{{ __($gpu->max_power) }}</span>
+                <span class="text-slate-700 dark:text-slate-300">{{ __($gpu->max_power) }}</span>
             </p>
         </div>
 

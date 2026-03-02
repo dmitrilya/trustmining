@@ -1,6 +1,6 @@
 @props(['name', 'forName' => $name . '[]', 'items' => []])
 
-<div {{ $attributes->merge(['class' => 'bg-gray-100 dark:bg-zinc-800 p-3 rounded-lg space-y-3']) }}>
+<div {{ $attributes->merge(['class' => 'bg-slate-100 dark:bg-slate-800 p-3 rounded-lg space-y-3']) }}>
     {{ $slot }}
 
     <div class="space-y-1">

@@ -1,12 +1,12 @@
 <x-app-layout title="Пополнить баланс личного кабинета" description="Инструкция и формы для пополнения баланса. Безопасные платежи, низкие комиссии и моментальное поступление средств на счет. Выберите удобный способ и продолжайте пользоваться услугами без пауз">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Top up your balance') }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-2 xs:p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+        <div class="p-2 xs:p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('order.store') }}" class="space-y-4 sm:space-y-6">
                 @csrf
 
@@ -23,7 +23,7 @@
                             required checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -135,7 +135,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M4 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H4Zm0 6h16v6H4v-6Z" />
@@ -153,7 +153,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-gray-300 text-gray-600 hover:text-gray-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-gray-900 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-900 shadow-sm shadow-logo-color hover:shadow-lg shadow-logo-color peer peer-checked:shadow-xl shadow-logo-color peer-checked:text-slate-900 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24" height="24" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

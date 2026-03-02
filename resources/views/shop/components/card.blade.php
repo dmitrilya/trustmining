@@ -1,8 +1,8 @@
 <div
-    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
+    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
     <div>
         <div
-            class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-gray-200 dark:bg-zinc-700 @endif">
+            class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
             <a class="block w-full" href="{{ route('company', ['user' => $shop->url_name]) }}">
                 @if ($shop->company?->bg_logo)
                     @php
@@ -17,15 +17,15 @@
                         <img class="w-full object-cover" src="{{ Storage::url($shop->company->bg_logo) }}" alt="{{ $shop->name }} preview">
                     </picture>
                 @else
-                    <p class="text-sm xs:text-lg text-white dark:text-gray-800 font-bold">{{ __('No logo') }}</p>
+                    <p class="text-sm xs:text-lg text-white dark:text-slate-800 font-bold">{{ __('No logo') }}</p>
                 @endif
             </a>
         </div>
 
-        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-gray-950 dark:text-gray-50 font-bold">{{ $shop->name }}
+        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-slate-950 dark:text-slate-50 font-bold">{{ $shop->name }}
         </div>
 
-        <div class="text-xs text-gray-500 dark:text-gray-400">
+        <div class="text-xs text-slate-500 dark:text-slate-400">
             {{ $shop->company && !$shop->company->moderation ? __($shop->company->card['type']) : __('Person') }}
         </div>
 
@@ -39,14 +39,14 @@
 
         <div class="flex items-center mt-4 sm:mt-5">
             <div
-                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $shop->tf > config('trustfactor.yellow') ? ($shop->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $shop->tf > config('trustfactor.yellow') ? ($shop->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
             </div>
-            <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+            <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
         </div>
 
-        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-gray-500 dark:text-gray-400">
+        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-slate-500 dark:text-slate-400">
             {{ __('Number of offices') }}: <span
-                class="text-gray-700 dark:text-gray-300">{{ $shop->offices_count }}</span>
+                class="text-slate-700 dark:text-slate-300">{{ $shop->offices_count }}</span>
         </p>
     </div>
 

@@ -1,6 +1,6 @@
 <div class="xl:col-span-3">
     <div itemscope itemtype="https://schema.org/ViewAction"
-        class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-md shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
+        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
         <meta itemprop="name"
             content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
         <meta itemprop="description"
@@ -34,18 +34,18 @@
                                 </div>
                             </div>
                             <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                                <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                     {{ __('Algorithm') }}:
-                                    <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    <span class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.algorithm"></span>
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                     {{ __('Power') }}:
-                                    <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                    <span class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
-                                <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
-                                    {{ __('The best price') }}: <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                                    {{ __('The best price') }}: <span class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
                             </div>
@@ -61,28 +61,28 @@
                 </div>
             </div>
 
-            <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-gray-300 dark:border-zinc-700 col-span-3">
+            <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                    <h2 class="text-xs sm:text-sm text-gray-700 dark:text-gray-200">
+                    <h2 class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">
                         {{ __('Calculation result') }}</h2>
                     <div class="flex cursor-pointer mx-3">
                         <button
                             :class="{
                                 'bg-primary-gradient text-white': currency ==
                                     'RUB',
-                                'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': currency ==
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'USDT'
                             }"
-                            class="p-1 rounded-l border border-r-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                            class="p-1 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'RUB'">RUB</button>
                         <button
                             :class="{
                                 'bg-primary-gradient text-white': currency ==
                                     'USDT',
-                                'bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:text-gray-100': currency ==
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'RUB'
                             }"
-                            class="p-1 rounded-r border border-l-0 border-gray-300 dark:border-zinc-700 text-xxs font-semibold"
+                            class="p-1 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'USDT'">USDT</button>
                     </div>
                 </div>
@@ -101,56 +101,56 @@
                     }">
                         <div class="grid grid-cols-4 gap-2 sm:gap-4">
                             <div></div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Income') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Expense') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Profit') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Day') }}
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(dailyConsumption / 10) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round((calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) - dailyConsumption / 1000) * 100) / 100">
                             </div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Month') }}
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(dailyConsumption * 30 / 10) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round((calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) - dailyConsumption * 30 / 1000) * 100) / 100">
                             </div>
-                            <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Year') }}
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(dailyConsumption * 365 / 10) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-gray-900 dark:text-gray-100 font-bold"
+                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round((calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) - dailyConsumption * 365 / 1000) * 100) / 100">
                             </div>
                         </div>
 
-                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300 mt-6 sm:mt-7 lg:mt-8">
+                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Payback') }}:
-                            <span class="text-gray-900 dark:text-gray-100 font-bold"
+                            <span class="text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="version.price ? dailyIncome > 0 ? Math.round(version.price / dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
 
@@ -170,19 +170,19 @@
                                         </div>
                                     </div>
                                     <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                             {{ __('Algorithm') }}:
-                                            <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                            <span class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.algorithm"></span>
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                             {{ __('Power') }}:
-                                            <span class="text-gray-900 dark:text-gray-100 font-bold"
+                                            <span class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.efficiency * version.hashrate"></span> W
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300">
+                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                             {{ __('The best price') }}: <span
-                                                class="text-gray-900 dark:text-gray-100 font-bold"
+                                                class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@
                             </template>
                         </div>
 
-                        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mt-6 sm:mt-7 lg:mt-8">
+                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Coins per day') }}</p>
 
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
@@ -208,7 +208,7 @@
                                         <input type="radio" name="profitNumber" :value="i"
                                             :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
                                             :checked="profitNumber == i"
-                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-zinc-800 dark:border-zinc-700 cursor-pointer">
+                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
                                     </label>
                                 </div>
                                 <template x-for="coin in profit.coins" :key="coin.abbreviation">
@@ -217,15 +217,15 @@
                                             <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
                                                 :alt="coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
                                             <div>
-                                                <div class="text-xxs xs:text-xs text-gray-600 dark:text-gray-300"
+                                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
                                                     x-text="coin.abbreviation">
                                                 </div>
-                                                <div class="text-xxs xs:text-xs text-gray-500 dark:text-gray-400"
+                                                <div class="text-xxs xs:text-xs text-slate-500 dark:text-slate-400"
                                                     x-text="coin.name">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-gray-700 dark:text-gray-200 font-bold mt-1"
+                                        <div class="text-xxs xs:text-xs text-slate-700 dark:text-slate-200 font-bold mt-1"
                                             x-text="version ? Math.round(version.hashrate * coin.profit * version.coef * 100000000) / 100000000 : 0">
                                         </div>
                                     </div>
@@ -245,7 +245,7 @@
 
     <section class="mt-4 sm:mt-6 lg:mt-8">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-            <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+            <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                 {{ __('Best value offers') }} {{ $selModel->name }}
                 {{ $selVersion->hashrate }}{{ $selVersion->measurement }}
             </h2>

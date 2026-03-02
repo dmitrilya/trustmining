@@ -1,6 +1,6 @@
 <x-app-layout title="{{ $attributes->get('title') }}" description="{{ $attributes->get('description') }}">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ $attributes->get('header') }}
         </h1>
     </x-slot>
@@ -8,7 +8,7 @@
     <div class="max-w-9xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ show: false }">
         <div class="md:grid grid-cols-6 gap-4 xl:gap-6 items-start relative">
             <div :class="{ '-left-full': !show, 'left-2': show }"
-                class="absolute top-12 duration-200 md:top-0 bg-gray-100 md:left-0 md:relative md:col-span-2 lg:col-span-1 md:bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-3 sm:p-4 md:p-6">
+                class="absolute top-12 duration-200 md:top-0 bg-slate-100 md:left-0 md:relative md:col-span-2 lg:col-span-1 md:bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-3 sm:p-4 md:p-6">
                 @include('layouts.components.metrics-menu')
             </div>
 

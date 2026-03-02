@@ -3,13 +3,13 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
     
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Editing an advertisement') }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
-        <div class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('ad.update', ['ad' => $ad->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>
                 @csrf
@@ -24,7 +24,7 @@
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp"
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 2MB)</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
@@ -46,7 +46,7 @@
                             :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                     </div>
 
-                    <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-gray-500">
+                    <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-slate-500">
                         {{ __('Enter 0 to display "Price on request"') }}
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                    <h2 class="text-lg text-slate-950 dark:text-slate-50">
                         {{ __('Are you sure you want to delete this ad?') }}
                     </h2>
 

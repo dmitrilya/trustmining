@@ -55,7 +55,7 @@
                 });
 
                 var w1 = document.createElement('div');
-                w1.className = "overflow-hidden rounded-2xl shadow-md shadow-logo-color border border-gray-300";
+                w1.className = "overflow-hidden rounded-2xl shadow-md shadow-logo-color border border-slate-300";
                 w1.append(canvas);
                 wrapper.appendChild(w1);
 

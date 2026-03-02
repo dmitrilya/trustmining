@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex justify-between">
-            <h2 class="text-lg text-gray-950 dark:text-gray-50">
+            <h2 class="text-lg text-slate-950 dark:text-slate-50">
                 {{ __('Hosting') }}
             </h2>
 
@@ -27,28 +27,28 @@
 
     @if ($user->tariff && $user->tariff->can_have_hosting)
         @if (!$user->company || $user->company->moderation)
-            <p class="text-sm text-gray-700 dark:text-gray-400">
+            <p class="text-sm text-slate-700 dark:text-slate-400">
                 {{ __('To add information about placement, you must register a company.') }}
             </p>
         @elseif (!$user->hosting)
-            <p class="text-sm text-gray-700 dark:text-gray-400">
+            <p class="text-sm text-slate-700 dark:text-slate-400">
                 {{ __('If you have the opportunity to host equipment, then you can indicate all the information about the hosting so that clients can see it in the company profile.') }}
             </p>
         @else
             @if ($user->hosting->moderation)
-                <p class="text-sm text-gray-700 dark:text-gray-400 mb-2">
+                <p class="text-sm text-slate-700 dark:text-slate-400 mb-2">
                     {{ __('Is under moderation') }}
                 </p>
             @endif
 
-            <p class="text-xxs sm:text-sm text-gray-500">{{ __('Location') . ': ' }}<span
-                    class="text-gray-700">{{ __($user->hosting->address) }}</span></p>
+            <p class="text-xxs sm:text-sm text-slate-500">{{ __('Location') . ': ' }}<span
+                    class="text-slate-700">{{ __($user->hosting->address) }}</span></p>
 
-            <p class="text-xxs sm:text-sm text-gray-500">{{ __('Tariff') . ': ' }}<span
-                    class="text-gray-700">{{ $user->hosting->price }}</span></p>
+            <p class="text-xxs sm:text-sm text-slate-500">{{ __('Tariff') . ': ' }}<span
+                    class="text-slate-700">{{ $user->hosting->price }}</span></p>
         @endif
     @else
-        <p class="text-sm text-gray-700 dark:text-gray-400">
+        <p class="text-sm text-slate-700 dark:text-slate-400">
             {{ __('Not available with current plan') }}
         </p>
     @endif

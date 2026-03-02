@@ -1,5 +1,5 @@
 <div itemprop="item" itemscope itemtype="https://schema.org/CreativeWorkSeries"
-    class="relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col justify-between">
+    class="relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             @php
@@ -18,13 +18,13 @@
                 'subscribers' => $series->channel->active_subscribers_count,
             ])
             <h3 itemprop="name"
-                class="mt-2 sm:mt-3 text-sm sm:text-base lg:text-sm xl:text-base font-bold text-gray-800 dark:text-gray-200 h-8">
+                class="mt-2 sm:mt-3 text-sm sm:text-base lg:text-sm xl:text-base font-bold text-slate-800 dark:text-slate-200 h-8">
                 {{ $series->name }}</h3>
         </div>
     </div>
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
-            <p class="text-xxs sm:text-xs text-gray-500">{{ $series->contents->first()->created_at->gt(now()->subWeek()) ? $series->contents->first()->created_at->diffForHumans() : $series->contents->first()->created_at->translatedFormat('j M') }}</p>
+            <p class="text-xxs sm:text-xs text-slate-500">{{ $series->contents->first()->created_at->gt(now()->subWeek()) ? $series->contents->first()->created_at->diffForHumans() : $series->contents->first()->created_at->translatedFormat('j M') }}</p>
             <meta itemprop="dateModified" content="{{ $series->contents->first()->created_at->toIso8601String() }}" />
         </div>
 

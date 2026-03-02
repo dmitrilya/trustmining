@@ -2,16 +2,16 @@
     paybackMonths: {{ $profit > 0 ? $ad->price * $ad->coin->rate / $profit : '∞' }},
     dailyProfit: {{ $profit }}
 }">
-    <div class="relative overflow-hidden p-5 rounded-2xl bg-slate-900 dark:bg-zinc-800 text-white shadow-xl">
+    <div class="relative overflow-hidden p-5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white shadow-xl">
         <div class="relative z-10">
-            <span class="text-gray-400 text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
+            <span class="text-slate-400 text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
                 <span class="text-3xl font-black text-emerald-400">
                     {{ number_format($profit, 2, '.', ' ') }}
                 </span>
                 <span class="text-emerald-500/50 font-bold">USDT</span>
             </div>
-            <p class="text-gray-400 text-xs mt-1">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
+            <p class="text-slate-400 text-xs mt-1">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
         </div>
         <div class="absolute bottom-0 left-0 right-0 h-16 opacity-20">
             <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -26,12 +26,12 @@
         </div>
     </div>
 
-    <div class="p-5 rounded-2xl bg-white dark:bg-zinc-950 border border-gray-300 dark:border-zinc-700 shadow-sm flex items-center justify-between">
+    <div class="p-5 rounded-2xl bg-white dark:bg-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
         <div>
-            <span class="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-widest">Окупаемость</span>
+            <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Окупаемость</span>
             <div class="mt-2">
-                <span class="text-3xl font-black text-gray-800 dark:text-gray-200" x-text="(paybackMonths / 12).toFixed(1)"></span>
-                <span class="text-gray-400 font-bold text-lg">г.</span>
+                <span class="text-3xl font-black text-slate-800" x-text="Math.round(paybackMonths)"></span>
+                <span class="text-slate-400 font-bold text-lg">{{ __('d') }}.</span>
             </div>
             <!-- Бейдж статуса -->
             <div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter"

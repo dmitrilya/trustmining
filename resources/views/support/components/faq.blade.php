@@ -59,19 +59,19 @@
     ];
 @endphp
 
-<div x-show="tab == 'faq'" class="h-full flex flex-col p-4 md:p-6 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-2xl" role="tabpanel"
+<div x-show="tab == 'faq'" class="h-full flex flex-col p-4 md:p-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-2xl" role="tabpanel"
     aria-labelledby="faq-tab" x-data="{ search: '' }">
     <x-text-input class="mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}" />
 
-    <div x-data="{ item: 0 }" class="pr-4 h-full divide-y-2 divide-gray-200 dark:divide-zinc-700 overflow-y-auto"
-        data-active-classes="text-gray-950 dark:text-gray-100"
-        data-inactive-classes="text-gray-600 dark:text-gray-300">
+    <div x-data="{ item: 0 }" class="pr-4 h-full divide-y-2 divide-slate-200 dark:divide-slate-700 overflow-y-auto"
+        data-active-classes="text-slate-950 dark:text-slate-100"
+        data-inactive-classes="text-slate-600 dark:text-slate-300">
         @foreach ($themes as $theme => $faqs)
             <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                 <h2>
                     <button type="button" @click="item = {{ $loop->index }}"
                         :class="{ 'font-medium': item != {{ $loop->index }} }"
-                        class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-lg text-gray-900 dark:text-gray-100">
+                        class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-lg text-slate-900 dark:text-slate-100">
                         <span>{{ __($theme) }}</span>
                         <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': item != {{ $loop->index }} }"
                             fill="none" viewBox="0 0 10 6">
@@ -83,18 +83,18 @@
                 <div x-show="item == {{ $loop->index }}" style="display: none">
                     <div class="p-5 md:px-10">
                         <div x-data="{ item2: 0 }"
-                            class="h-full divide-y-2 divide-gray-100 dark:divide-zinc-800 overflow-y-auto"
+                            class="h-full divide-y-2 divide-slate-100 dark:divide-slate-800 overflow-y-auto"
                             :class="{
-                                'bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 text-gray-950 dark:text-gray-100': item ==
+                                'bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-slate-100': item ==
                                     {{ $loop->index }},
-                                'text-gray-600': item != {{ $loop->index }}
+                                'text-slate-600': item != {{ $loop->index }}
                             }">
                             @foreach ($faqs as $faq)
                                 <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                                     <h2>
                                         <button type="button" @click="item2 = {{ $loop->index }}"
                                             :class="{ 'font-medium': item2 != {{ $loop->index }} }"
-                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-gray-800 dark:text-gray-200">
+                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-slate-800 dark:text-slate-200">
                                             <span>{{ __($faq['q']) }}</span>
                                             <svg class="w-3 h-3 shrink-0"
                                                 :class="{ 'rotate-180': item2 != {{ $loop->index }} }" fill="none"
@@ -106,7 +106,7 @@
                                     </h2>
                                     <div x-show="item2 == {{ $loop->index }}" style="display: none">
                                         <div class="py-5">
-                                            <p class="text-gray-600 dark:text-gray-400">
+                                            <p class="text-slate-600 dark:text-slate-400">
                                                 {{ __($faq['a']) }}
                                             </p>
                                         </div>

@@ -157,7 +157,7 @@
         <div>
             <x-input-label for="preview" :value="__('Preview')" />
             <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" />
-            <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
+            <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
                 or JPEG (max. 5MB), dimensions:ratio=4/3</p>
             <x-input-error :messages="$errors->get('preview')" />
         </div>
@@ -167,14 +167,14 @@
             ->keyBy('key')" :key="$article->series->first()?->id" />
 
         <x-editable-list name="tags" :items="$article->tags">
-            <p class="block text-sm text-gray-700 dark:text-gray-300">{{ __('Tags for search') }}</p>
+            <p class="block text-sm text-slate-700 dark:text-slate-300">{{ __('Tags for search') }}</p>
         </x-editable-list>
         <x-input-error :messages="$errors->get('tags')" />
 
         <div class="mt-5" style="background:inherit;">
-            <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl -mx-2 sm:-mx-4">
+            <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl -mx-2 sm:-mx-4">
                 <div id="editor"
-                    class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-2 sm:p-4">
+                    class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-2 sm:p-4">
                 </div>
 
                 <input type="hidden" class="hidden" name="content" :value="text" required>
@@ -188,12 +188,12 @@
     <x-modal name="attach-img_modal" maxWidth="md">
         <div class="p-6">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg text-gray-950 dark:text-gray-50">
+                <h3 class="text-lg text-slate-950 dark:text-slate-50">
                     {{ __('Attach an image') }}
                 </h3>
 
                 <button type="button" aria-label="{{ __('Close') }}"
-                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                     @click="show = false">
                     <span class="sr-only">Close</span>
                     <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -224,12 +224,12 @@
     <x-modal name="attach-video_modal" maxWidth="md">
         <div class="p-6">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg text-gray-950 dark:text-gray-50">
+                <h3 class="text-lg text-slate-950 dark:text-slate-50">
                     {{ __('Attach a video') }}
                 </h3>
 
                 <button type="button" aria-label="{{ __('Close') }}"
-                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                     @click="show = false">
                     <span class="sr-only">Close</span>
                     <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

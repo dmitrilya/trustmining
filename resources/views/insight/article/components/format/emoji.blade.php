@@ -1,7 +1,7 @@
 <x-dropdown align="bottom" width="auto">
     <x-slot name="trigger">
         <button type="button" data-dropdown-placement="top"
-            class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700">
+            class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700">
             <span>&#128516</span>
             <span class="sr-only">Add emoji</span>
         </button>

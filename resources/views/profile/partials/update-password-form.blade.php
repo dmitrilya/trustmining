@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg text-gray-950 dark:text-gray-50">
+        <h2 class="text-lg text-slate-950 dark:text-slate-50">
             {{ __('Update Password') }}
         </h2>
 
-        <p class="mt-2 text-sm text-gray-700 dark:text-gray-400">
+        <p class="mt-2 text-sm text-slate-700 dark:text-slate-400">
             {{ __('Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
@@ -37,7 +37,7 @@
 
             @if (session('status') === 'password-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-700 dark:text-gray-400">{{ __('Saved.') }}</p>
+                    class="text-sm text-slate-700 dark:text-slate-400">{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>

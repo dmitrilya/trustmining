@@ -6,20 +6,20 @@
 
         <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Articles') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'popular' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>
@@ -55,20 +55,20 @@
 
         <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Posts') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'popular' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>
@@ -104,20 +104,20 @@
 
         <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'latest' }">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                     {{ __('Videos') }}
                 </h2>
 
                 <div class="flex text-xs sm:text-sm font-medium">
                     <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('New') }}
                     </button>
                     <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ? 'bg-gray-100 dark:bg-zinc-800 shadow-sm text-gray-700 dark:text-gray-300' :
-                            'text-gray-500'"
+                        :class="tab === 'popular' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
                         class="px-3 py-1 rounded-full transition-all">
                         {{ __('Popular') }}
                     </button>

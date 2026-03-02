@@ -3,7 +3,7 @@
     <x-slot name="header">
         <div class="flex flex-col lg:flex-row items-center">
             <div class="flex items-center mr-auto w-full max-w-max mr-4">
-                <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+                <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
                     {{ $user->name }}
                 </h1>
             </div>
@@ -19,7 +19,7 @@
                 <x-header-filters>
                     <x-slot name="sort">
                         @if ($auth && $auth->tariff)
-                            <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                            <x-dropdown-link ::class="{ 'bg-slate-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                                 request()->route()->action['as'],
                                 array_merge(request()->route()->originalParameters(), [
                                     'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
@@ -29,7 +29,7 @@
                                 {{ __('Price: Low to High') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link ::class="{ 'bg-gray-200': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                            <x-dropdown-link ::class="{ 'bg-slate-200': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
                                 request()->route()->action['as'],
                                 array_merge(request()->route()->originalParameters(), [
                                     'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
@@ -39,11 +39,11 @@
                                 {{ __('Price: High to Low') }}
                             </x-dropdown-link>
                         @else
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition duration-150 ease-in-out"
                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                 {{ __('Price: Low to High') }}
                             </div>
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-zinc-900 transition duration-150 ease-in-out"
+                            <div class="px-4 py-2 text-left text-sm leading-5 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition duration-150 ease-in-out"
                                 @click.prevent="$dispatch('open-modal', 'need-subscription')">
                                 {{ __('Price: High to Low') }}
                             </div>
@@ -62,11 +62,11 @@
                     :class="ad_category_name ==
                         '{{ $ad_category_name }}' ?
                         'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
-                        'border-gray-300 dark:border-zinc-700'">
-                    <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-gray-100"
+                        'border-slate-300 dark:border-slate-700'">
+                    <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-slate-100"
                         :class="ad_category_name ==
-                            '{{ $ad_category_name }}' ? 'text-indigo-500 dark:text-gray-50' :
-                            'text-gray-500 dark:text-gray-300'">
+                            '{{ $ad_category_name }}' ? 'text-indigo-500 dark:text-slate-50' :
+                            'text-slate-500 dark:text-slate-300'">
                         {{ __($ad_category_header) }}
                     </h5>
                 </div>
@@ -76,16 +76,16 @@
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             @if ($auth && $auth->id == $user->id)
                 <a href="{{ route('ad.create') }}"
-                    class="cursor-pointer bg-gray-100 dark:bg-zinc-800 group hover:bg-white dark:hover:bg-zinc-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-gray-400 dark:border-zinc-700">
+                    class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-400 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
-                        <svg class="w-[72px] h-[72px] text-gray-400 dark:text-gray-300" aria-hidden="true"
+                        <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-300" aria-hidden="true"
                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"
                                 d="M16.5 15v1.5m0 0V18m0-1.5H15m1.5 0H18M3 9V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3M3 9v6a1 1 0 0 0 1 1h5M3 9h16m0 0v1M6 12h3m12 4.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
                         </svg>
 
                         <div
-                            class="font-semibold text-xl text-gray-600 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-200 mt-2">
+                            class="font-semibold text-xl text-slate-600 dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200 mt-2">
                             {{ __('Create') }}</div>
                     </div>
                 </a>

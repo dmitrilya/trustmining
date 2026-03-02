@@ -1,4 +1,4 @@
-<div class="card relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col offer-card"
+<div class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col offer-card"
     x-data="{
         hidden: {{ $ad->hidden ? 'true' : 'false' }},
         toggle() {
@@ -9,13 +9,13 @@
         @if ($owner)
             <div class="mt-2 absolute z-10 left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->last_moderation_status == 1)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-gray-800 dark:bg-zinc-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif ($ad->last_moderation_status == 3)
@@ -51,16 +51,16 @@
         <div>
             <div class="flex items-start justify-between">
                 @if ($ad->ad_category_name == 'miners')
-                    <div class="text-xs sm:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                         {{ $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement }}
                     </div>
                 @elseif ($ad->ad_category_name == 'gpus')
-                    <div class="text-xs sm:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                         {{ $ad->gpu_brand_name . ' ' . $ad->gpu_model_name }}
                     </div>
                 @endif
 
-                <div class="bg-gray-100 rounded-full ml-3 p-1.5 tracking{{ $ad->is_tracked ? '' : ' hidden' }}">
+                <div class="bg-slate-100 rounded-full ml-3 p-1.5 tracking{{ $ad->is_tracked ? '' : ' hidden' }}">
                     <svg class="w-4 h-4 text-indigo-600" aria-hidden="true" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -74,28 +74,28 @@
 
             <div class="flex items-center my-1 md:my-2">
                 <div
-                    class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $ad->user_tf > config('trustfactor.yellow') ? ($ad->user_tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                    class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $ad->user_tf > config('trustfactor.yellow') ? ($ad->user_tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
                 </div>
-                <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+                <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
             </div>
 
             @if ($ad->ad_category_name == 'gpus')
-                <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                <p class="text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
                     {{ __('Power (kW/h)') . ': ' }}
-                    <span class="text-gray-700 dark:text-gray-300">{{ __($ad->gpu_model_max_power) }}</span>
+                    <span class="text-slate-700 dark:text-slate-300">{{ __($ad->gpu_model_max_power) }}</span>
                 </p>
             @endif
 
             @if (!isset($sm))
                 @foreach (json_decode($ad->props) as $prop => $value)
-                    <p class="text-xxs sm:text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                    <p class="text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
                         {{ __($prop) . ': ' }}@if (!is_array($value))
-                            <span class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
+                            <span class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
                         @else
                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                 @foreach ($value as $item)
                                     <div
-                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
                                         {{ $item }}
                                     </div>
                                 @endforeach
@@ -108,11 +108,11 @@
 
         <div class="mt-2 sm:mt-3">
             @if ($ad->price != 0 && $ad->with_vat)
-                <div class="text-gray-600 dark:text-gray-400 text-xxs sm:text-xs">{{ __('The price includes VAT') }}
+                <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs">{{ __('The price includes VAT') }}
                 </div>
             @endif
 
-            <div class="text-gray-800 dark:text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl font-bold">
+            <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-base md:text-lg lg:text-xl font-bold">
                 @if ($ad->price != 0)
                     {{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin }}</span>
                 @else

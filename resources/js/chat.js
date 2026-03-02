@@ -32,20 +32,20 @@ window.sendMessage = function (chatId, form) {
 
             if (data.get('message')) messageElement = messageElement + `<div class="flex justify-end">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 dark:border-slate-700 rounded-b-xl ml-6 rounded-tl-xl">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="text-xs text-gray-600">${date}</span>
+                <span class="text-xs text-slate-600">${date}</span>
             </div>
 
-            <p class="text-sm text-gray-950 dark:text-gray-50 whitespace-pre-line">${data.get('message')}</p>
+            <p class="text-sm text-slate-950 dark:text-slate-50 whitespace-pre-line">${data.get('message')}</p>
             </div>
         </div>`;
 
             if (data.get('images[]').size) {
                 messageElement = messageElement + `<div class="flex justify-end">
-            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 dark:border-slate-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs text-gray-600">${date}</span>
+                    <span class="text-xs text-slate-600">${date}</span>
                 </div>
                 <div class="grid gap-2 ${data.getAll('images[]').length > 1 ? data.getAll('images[]').length > 4 ? 'grid-cols-3' : 'grid-cols-2' : 'grid-cols-1'}">`;
 
@@ -58,17 +58,17 @@ window.sendMessage = function (chatId, form) {
 
             if (data.get('files[]').size) {
                 messageElement = messageElement + `<div class="flex justify-end">
-            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 dark:border-zinc-700 rounded-b-xl ml-6 rounded-tl-xl">
+            <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 dark:border-slate-700 rounded-b-xl ml-6 rounded-tl-xl">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="text-xs text-gray-600">${date}</span>
+                    <span class="text-xs text-slate-600">${date}</span>
                 </div>
                 <div class="space-y-2">`;
 
                 for (let file of data.getAll('files[]')) {
-                    messageElement = messageElement + `<div class="bg-gray-100 dark:bg-zinc-950 p-3 rounded-lg">
+                    messageElement = messageElement + `<div class="bg-slate-100 dark:bg-slate-950 p-3 rounded-lg">
             <div class="flex items-center">
-                <div class="rounded-md overflow-hidden min-w-14 w-14 h-14 mr-4 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 flex items-center justify-center">
-                    <svg class="w-7 h-7 text-gray-600" aria-hidden="true" fill="none" viewBox="0 0 16 20">
+                <div class="rounded-md overflow-hidden min-w-14 w-14 h-14 mr-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 flex items-center justify-center">
+                    <svg class="w-7 h-7 text-slate-600" aria-hidden="true" fill="none" viewBox="0 0 16 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M1 17V2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M5 15V1m8 18v-4">
                         </path>
@@ -76,7 +76,7 @@ window.sendMessage = function (chatId, form) {
                 </div>
 
                 <div>
-                    <div class="text-gray-950 dark:text-gray-100 font-semibold mb-1">${file.name}</div>
+                    <div class="text-slate-950 dark:text-slate-100 font-semibold mb-1">${file.name}</div>
 
                     <div class="flex h-4"></div>
                 </div>

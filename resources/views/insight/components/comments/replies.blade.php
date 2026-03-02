@@ -5,7 +5,7 @@
         </button>
     @endif
 
-    <div x-show="showReplies" x-transition class="replies-container mt-4 space-y-4 lg:space-y-5 border-l pl-4 border-gray-200 dark:border-zinc-700">
+    <div x-show="showReplies" x-transition class="replies-container mt-4 space-y-4 lg:space-y-5 border-l pl-4 border-slate-200 dark:border-slate-700">
         @foreach ($comment->replies as $reply)
             @include('insight.components.comments.reply')
         @endforeach

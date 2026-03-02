@@ -1,5 +1,5 @@
 <div>
-    <p class="ml-2 mb-2 sm:mb-4 text-base text-gray-700 dark:text-gray-300 font-bold ">
+    <p class="ml-2 mb-2 sm:mb-4 text-base text-slate-700 dark:text-slate-300 font-bold ">
         {{ __('Top weekly article') }}</p>
 
     @inject('articleService', 'App\Services\Insight\Content\ArticleService')

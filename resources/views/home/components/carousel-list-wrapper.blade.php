@@ -3,7 +3,7 @@
 <div draggable="false"
     class="shrink-0 snap-start mr-2 sm:mr-4 w-[calc(100%-1.4rem)] xs:w-[calc(50%-1rem)] sm:w-[calc(50%-1.6rem)] md:w-[calc(33.333%-1.5rem)] {{ !isset($bigWrapper) ? 'lg:w-[calc(50%-1.7rem)] xl:w-[calc(33.333%-1.5rem)]' : 'xl:w-[calc(25%-1.5rem)]' }}">
     <div
-        class="card relative sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col offer-card">
+        class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col offer-card">
         @switch($model)
             @case('ad')
                 <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
@@ -18,11 +18,11 @@
 
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
-                        <p class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                        <p class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                             {{ __('Full catalog of miners') }}
                         </p>
 
-                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Find the deal from trusted sellers only') }}
                         </p>
                     </div>
@@ -48,11 +48,11 @@
                 </div>
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
-                        <p class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                        <p class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                             {{ __('Full list of hostings') }}
                         </p>
 
-                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Find the most reliable hosting with the best plan') }}
                         </p>
                     </div>
@@ -80,11 +80,11 @@
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
                         <p
-                            class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                            class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                             {{ __('Media platform') }}<br>TM Insight
                         </p>
 
-                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Expert articles, market analysis, trading and corporate channels') }}
                         </p>
                     </div>
@@ -112,11 +112,11 @@
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
                         <p
-                            class="text-xs xs:text-sm md:text-base text-gray-950 dark:text-gray-50 font-bold">
+                            class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                             {{ __('Full catalog of GPU') }}
                         </p>
 
-                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        <p class="mt-2 md:mt-3 text-xxs xs:text-xs md:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Gas gensets in stock and on order') }}
                         </p>
                     </div>

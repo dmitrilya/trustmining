@@ -145,7 +145,7 @@
         draft();
     });">
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
             <form action="{{ route('insight.article.store', ['channel' => $channel->slug]) }}" method="POST"
                 class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [], validation: [], loading: false }"
                 @submit.prevent="if (Object.keys(errors).length > 0) {
@@ -195,7 +195,7 @@
                     <x-input-label for="preview" :value="__('Preview')" />
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                         required />
-                    <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
                         or JPEG (max. 5MB), dimensions:ratio=4/3</p>
                     <x-input-error :messages="$errors->get('preview')" />
                     <template x-if="validation.preview">
@@ -211,12 +211,12 @@
                     <div>
                         <x-input-label for="search" :value="__('Hashtags')" />
                         <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
-                            class="mt-1 flex items-center overflow-hidden bg-white dark:bg-zinc-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-gray-300 dark:ring-zinc-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
+                            class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                             <input type="text" id="search" x-model="search" placeholder="#"
-                                class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-gray-700 dark:text-gray-300 w-full" />
+                                class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-700 dark:text-slate-300 w-full" />
 
                             <button type="button"
-                                class="text-xs bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 hover:dark:bg-zinc-700 shadow-sm text-gray-700 dark:text-gray-300 px-2 py-1 rounded-full"
+                                class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-700 dark:text-slate-300 px-2 py-1 rounded-full"
                                 @click="if (!search.trim().length) return; tags.push(search); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                         <template x-for="tag in tags" :key="tag">
                             <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
-                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
                             </div>
                         </template>
                     </div>
@@ -235,11 +235,11 @@
                             :key="tag">
                             <div @click="tags.push(tag);allTags.splice(allTags.indexOf(tag), 1);search = ''"
                                 x-text="tag"
-                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
                             </div>
                         </template>
                         <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
-                            class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-gray-50 dark:bg-zinc-950 hover:bg-gray-100 dark:hover:bg-zinc-800 text-gray-800 dark:text-gray-100 text-xxs sm:text-xs">
+                            class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
                             <span
                                 x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
                             {{ __('tags more') }}
@@ -255,9 +255,9 @@
                     <p class="text-red-500 text-xs mt-1" x-text="validation.tags[0]"></p>
                 </template>
 
-                <div id="editor-wrap" class="bg-gray-100 dark:bg-zinc-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
+                <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
                     <div id="editor"
-                        class="!border-t border-gray-300 dark:border-zinc-700 text-xs xs:text-sm sm:text-base text-gray-800 dark:text-gray-100 focus:outline-0 p-4">
+                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
                     </div>
 
                     <input type="hidden" class="hidden" name="content" :value="content" required>
@@ -273,12 +273,12 @@
             <x-modal name="attach-img_modal" maxWidth="md">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg text-gray-950 dark:text-gray-50">
+                        <h3 class="text-lg text-slate-950 dark:text-slate-50">
                             {{ __('Attach an image') }}
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
                             <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -309,12 +309,12 @@
             <x-modal name="attach-video_modal" maxWidth="md">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg text-gray-950 dark:text-gray-50">
+                        <h3 class="text-lg text-slate-950 dark:text-slate-50">
                             {{ __('Attach a video') }}
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-zinc-950 text-gray-500"
+                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
                             <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

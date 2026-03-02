@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between items-center">
-            <h2 class="text-lg text-gray-950 dark:text-gray-50">
+            <h2 class="text-lg text-slate-950 dark:text-slate-50">
                 {{ __('Finance') }}
             </h2>
 
@@ -11,18 +11,18 @@
     </header>
 
     <div class="flex justify-between items-center">
-        <p class="text-sm text-gray-700 dark:text-gray-300">
+        <p class="text-sm text-slate-700 dark:text-slate-300">
             {{ __('Active tariff') }}
         </p>
 
-        <p class="text-gray-500 dark:text-gray-300">
+        <p class="text-slate-500 dark:text-slate-300">
             {{ $user->tariff ? $user->tariff->name : 'Base' }}
         </p>
     </div>
 
     <div class="flex items-center justify-between">
         <div class="flex items-center">
-            <svg class="w-6 h-6 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            <svg class="w-6 h-6 text-slate-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
                     d="M12 14a3 3 0 0 1 3-3h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-4a3 3 0 0 1-3-3Zm3-1a1 1 0 1 0 0 2h4v-2h-4Z"
@@ -32,7 +32,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <p class="text-xl text-gray-900 font-bold dark:text-gray-300 ml-3">
+            <p class="text-xl text-slate-900 font-bold dark:text-slate-300 ml-3">
                 {{ $user->balance }} ₽
             </p>
 
@@ -41,14 +41,14 @@
         </div>
 
         @if ($user->tariff)
-            <div class="flex items-end text-gray-600 md:text-lg">
+            <div class="flex items-end text-slate-600 md:text-lg">
                 <span
-                    class="text-gray-800 dark:text-gray-200 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
+                    class="text-slate-800 dark:text-slate-200 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
             </div>
         @endif
     </div>
 
-    <p class="text-sm text-gray-700 dark:text-gray-400">
+    <p class="text-sm text-slate-700 dark:text-slate-400">
         {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}
     </p>
 </section>

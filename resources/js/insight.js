@@ -51,12 +51,12 @@ window.toc = (article, name) => {
         link.href = `#${id}`;
 
         if (heading.tagName.toLowerCase() === 'h3') {
-            listItem.classList.add('ml-2', 'list-none', 'text-gray-600', 'dark:text-gray-400', 'group-hover:text-gray-900', 'dark:group-hover:text-gray-100', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
+            listItem.classList.add('ml-2', 'list-none', 'text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-900', 'dark:group-hover:text-slate-100', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
         } else {
             listItem.classList.add('list-none', 'text-xs', 'group', 'cursor-pointer');
         }
 
-        link.classList.add('text-gray-600', 'dark:text-gray-400', 'group-hover:text-gray-900', 'dark:group-hover:text-gray-100');
+        link.classList.add('text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-900', 'dark:group-hover:text-slate-100');
 
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -70,12 +70,12 @@ window.toc = (article, name) => {
 
     const tocLgContainer = document.getElementById('toc-lg-container');
     const tocContainer = document.getElementById('toc-container');
-    tocLgContainer.classList.add('p-4', 'bg-white/60', 'dark:bg-zinc-900/60', 'border', 'border-gray-300', 'dark:border-zinc-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.classList.add('p-4', 'bg-white/60', 'dark:bg-slate-900/60', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
     tocContainer.classList.add('min-h-[129px]');
 
     const blockName = document.createElement('p');
     blockName.textContent = name;
-    blockName.classList.add('mb-4', 'text-base', 'text-gray-700', 'dark:text-gray-300', 'font-bold');
+    blockName.classList.add('mb-4', 'text-base', 'text-slate-700', 'dark:text-slate-300', 'font-bold');
 
     tocLgContainer.appendChild(blockName);
     tocLgContainer.appendChild(tocList);
@@ -98,7 +98,7 @@ window.toc = (article, name) => {
 
         const btn = document.createElement('button');
         btn.textContent = 'Развернуть';
-        btn.classList.add('text-sm', 'mt-2', 'text-gray-700', 'dark:text-gray-300', 'hover:text-gray-900', 'dark:hover:text-gray-100');
+        btn.classList.add('text-sm', 'mt-2', 'text-slate-700', 'dark:text-slate-300', 'hover:text-slate-900', 'dark:hover:text-slate-100');
 
         let isCollapsed = true;
 

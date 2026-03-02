@@ -1,11 +1,11 @@
-<div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
+<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
     <h2
-        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
+        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
         {{ __('Liked the calculator?') }}
     </h2>
 
     <a href="https://t.me/trustmining_calculator_bot" target="_blank" class="mb-2 sm:mb-3 lg:mb-4">
-        <x-secondary-button class="flex items-center bg-secondary-gradient dark:text-gray-800">
+        <x-secondary-button class="flex items-center bg-secondary-gradient dark:text-slate-800">
             <svg class="size-4 mr-2" width="64px" height="64px" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
                     d="M23.073 88.132s65.458-26.782 88.16-36.212c8.702-3.772 38.215-15.843 38.215-15.843s13.621-5.28 12.486 7.544c-.379 5.281-3.406 23.764-6.433 43.756-4.54 28.291-9.459 59.221-9.459 59.221s-.756 8.676-7.188 10.185c-6.433 1.509-17.027-5.281-18.919-6.79-1.513-1.132-28.377-18.106-38.214-26.404-2.649-2.263-5.676-6.79.378-12.071 13.621-12.447 29.891-27.913 39.728-37.72 4.54-4.527 9.081-15.089-9.837-2.264-26.864 18.483-53.35 35.835-53.35 35.835s-6.053 3.772-17.404.377c-11.351-3.395-24.594-7.921-24.594-7.921s-9.08-5.659 6.433-11.693Z">

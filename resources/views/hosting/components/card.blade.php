@@ -1,7 +1,7 @@
 @props(['ad', 'auth', 'hidden'])
 
 <div
-    class="card sm:max-w-md h-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden rounded-xl flex flex-col">
+    class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($hosting->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->url_name]) }}"
@@ -29,16 +29,16 @@
 
             <div class="flex items-center my-1 md:my-2">
                 <div
-                    class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-gray-300 dark:border-zinc-700 {{ $hosting->user->tf > config('trustfactor.yellow') ? ($hosting->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                    class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $hosting->user->tf > config('trustfactor.yellow') ? ($hosting->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
                 </div>
-                <p class="text-xxs sm:text-xs md:text-sm text-gray-500">Trust Factor</p>
+                <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
             </div>
 
             <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
         </div>
 
         <div class="mt-2 sm:mt-3">
-            <div class="text-gray-800 dark:text-gray-200 text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
+            <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
 
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false"

@@ -53,12 +53,12 @@
                     <meta itemprop="position" content="1" />
                     <div class="flex items-center">
                         <a itemprop="item" href="{{ route('ads', ['adCategory' => $ad->adCategory->name]) }}"
-                            class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                            class="sm:mr-2 text-xs xs:text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                             <span itemprop="name">{{ __($ad->adCategory->header) }}</span>
                         </a>
                         @if ($ad->adCategory->name == 'miners' || $ad->adCategory->name == 'gpus')
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         @endif
@@ -71,11 +71,11 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'brands' => [strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->asicBrand->name))]]) }}"
-                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-xs xs:text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ $ad->asicVersion->asicModel->asicBrand->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -85,11 +85,11 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'model' => strtolower(str_replace(' ', '_', $ad->asicVersion->asicModel->name))]) }}"
-                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-xs xs:text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ $ad->asicVersion->asicModel->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -97,7 +97,7 @@
                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
                         <meta itemprop="position" content="4" />
                         <a itemprop="item" href="#" aria-current="page"
-                            class="text-xs xs:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
                             <span
                                 itemprop="name">{{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}</span>
                         </a>
@@ -108,11 +108,11 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'brands' => [strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name))]]) }}"
-                                class="sm:mr-2 text-xs xs:text-sm text-gray-900 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-100">
+                                class="sm:mr-2 text-xs xs:text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ $ad->gpuModel->gpuBrand->name }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-gray-400">
+                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
                                 <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
                             </svg>
                         </div>
@@ -120,7 +120,7 @@
                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
                         <meta itemprop="position" content="3" />
                         <a itemprop="item" href="#" aria-current="page"
-                            class="text-xs xs:text-sm text-gray-600 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-300">
+                            class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
                             <span itemprop="name">{{ $ad->gpuModel->name }}
                                 {{ $ad->gpuModel->max_power }}{{ __('kW/h') }}</span>
                         </a>
@@ -133,7 +133,7 @@
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div
-                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8">
                     <div
                         class="md:col-span-5{{ isset($moderation->data['preview']) || isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -152,21 +152,21 @@
                     </div>
 
                     <div
-                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-300 dark:border-zinc-700 md:pl-8">
+                        class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-slate-300 dark:border-slate-700 md:pl-8">
                         @if ($ad->adCategory->name == 'miners')
                             <h1
-                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @elseif ($ad->adCategory->name == 'gpus')
                             <h1
-                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
                             </h1>
                         @endif
 
                         <p
-                            class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             @if (isset($moderation->data['price']))
                                 @if ($moderation->data['price'] != 0)
                                     {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
@@ -210,23 +210,23 @@
                             <div class="my-5">
                                 <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
                                     @if ($ad->adCategory->name == 'gpus')
-                                        <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                                        <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                             {{ __('Power (kW/h)') . ': ' }}
                                             <span
-                                                class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
+                                                class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->max_power) }}</span>
                                         </li>
                                     @endif
 
                                     @foreach ($props as $prop => $value)
-                                        <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                                        <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                             {{ __($prop) . ': ' }}@if (!is_array($value))
                                                 <span
-                                                    class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
+                                                    class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
                                             @else
                                                 <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                                     @foreach ($value as $item)
                                                         <div
-                                                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
                                                             {{ $item }}
                                                         </div>
                                                     @endforeach
@@ -245,11 +245,11 @@
 
                     <div class="mt-8 md:col-span-12">
                         <div>
-                            <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
+                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100">
                                 {{ __('Description') }}</h2>
 
                             <div itemprop="description"
-                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                 {!! !isset($moderation->data['description'])
                                     ? (!$ad->description
                                         ? ($ad->adCategory->name == 'miners'
@@ -283,7 +283,7 @@
         @endif
 
         <div itemscope itemtype="https://schema.org/Product"
-            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <meta itemprop="sku" content="{{ $ad->id }}">
             <meta itemprop="url" content="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
@@ -301,19 +301,19 @@
                 </div>
 
                 <div
-                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-gray-300 dark:border-zinc-700 md:pl-8">
+                    class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-slate-300 dark:border-slate-700 md:pl-8">
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
                             <h1 itemprop="name"
-                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
                             </h1>
                         @elseif ($ad->adCategory->name == 'gpus')
                             <meta itemprop="brand" content="{{ $ad->gpuModel->gpuBrand->name }}" />
                             <meta itemprop="name" content="{{ $ad->gpuModel->name }}" />
                             <h1
-                                class="text-xl font-bold tracking-tight text-gray-950 dark:text-gray-100 sm:text-2xl md:text-3xl">
+                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                                 {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
                             </h1>
                         @else
@@ -322,7 +322,7 @@
                         @endif
 
                         <div
-                            class="bg-gray-100 dark:bg-zinc-950 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
+                            class="bg-slate-100 dark:bg-slate-950 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-600" aria-hidden="true"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -340,7 +340,7 @@
                                 href="https://schema.org/{{ $ad->props['Condition'] == 'New' ? 'NewCondition' : 'UsedCondition' }}" />
                         @endif
 
-                        <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50 flex items-center">
+                        <p class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
                             @if ($ad->price != 0)
                                 <meta itemprop="priceCurrency"
                                     content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
@@ -384,22 +384,22 @@
                         <div class="my-5">
                             <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
                                 @if ($ad->adCategory->name == 'gpus')
-                                    <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                                    <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                         {{ __('Power (kW/h)') . ': ' }}
                                         <span
-                                            class="text-gray-700 dark:text-gray-300">{{ __($ad->gpuModel->max_power) }}</span>
+                                            class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->max_power) }}</span>
                                     </li>
                                 @endif
 
                                 @foreach ($ad->props as $prop => $value)
-                                    <li class="text-xxs xs:text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                                    <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                         {{ __($prop) . ': ' }}@if (!is_array($value))
-                                            <span class="text-gray-700 dark:text-gray-300">{{ __($value) }}</span>
+                                            <span class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
                                         @else
                                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                                 @foreach ($value as $item)
                                                     <div
-                                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-zinc-800 text-white text-xxs sm:text-xs">
+                                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
                                                         {{ $item }}
                                                     </div>
                                                 @endforeach
@@ -421,10 +421,10 @@
                                             <path fill-rule="evenodd" clip-rule="evenodd"
                                                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
                                         </svg>
-                                        <p class="text-sm text-gray-500">
+                                        <p class="text-sm text-slate-500">
                                             {{ __('The ad did not pass moderation for the following reason:') }}</p>
                                     </div>
-                                    <p class="mt-2 text-xxs xs:text-xs sm:text-sm text-gray-900 dark:text-gray-200">
+                                    <p class="mt-2 text-xxs xs:text-xs sm:text-sm text-slate-900 dark:text-slate-200">
                                         {{ $lastM->comment }}</p>
                                 @endif
 
@@ -478,7 +478,7 @@
 
                                     @if (count($ad->user->phones))
                                         <x-secondary-button
-                                            class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-gray-800 xs:py-3"
+                                            class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3"
                                             x-data="{ number: null, status: '{{ __('View number') }}' }"
                                             @click="if (!number) axios.get('{{ route('phone.show', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}')
                                                 .then(r => {
@@ -514,11 +514,11 @@
                 <div class="mt-8 md:col-span-12">
                     <div>
                         @if ($ad->description || ($ad->adcategory->name == 'miners' && $ad->asicVersion->asicModel->description))
-                            <h2 class="font-bold tracking-tight text-gray-950 dark:text-gray-100">
+                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100">
                                 {{ __('Description') }}</h2>
 
                             <div itemprop="description"
-                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-gray-950 dark:text-gray-100">
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
                                 {!! $ad->description ? $ad->description : $ad->asicVersion->asicModel->description !!}
                             </div>
                         @endif
@@ -548,7 +548,7 @@
         @if ($ad->adCategory->name == 'miners')
             <section class="mt-4 sm:mt-6 lg:mt-8">
                 <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                    <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                    <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                         {{ __('Other offers') }} {{ $ad->asicVersion->asicModel->name }}
                     </h2>
                 </div>

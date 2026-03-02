@@ -72,14 +72,14 @@
                 document.body.classList.remove('dark');
                 theme = 'light';
             }" @endif>
-    <div class="min-h-screen bg-gray-100 dark:bg-zinc-950">
-        <nav class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 border-b border-gray-100 dark:border-zinc-800">
+    <div class="min-h-screen bg-slate-100 dark:bg-slate-950">
+        <nav class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
             <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
                 <div class="flex justify-between h-10 lg:h-14">
                     <div class="w-full flex">
                         <div class="shrink-0 flex items-center">
                             <x-application-logo class="text-xl" />
-                            <h1 class="ml-2 text-[19px] text-gray-900 dark:text-gray-100 leading-tight">
+                            <h1 class="ml-2 text-[19px] text-slate-900 dark:text-slate-100 leading-tight">
                                 CALCULATOR
                             </h1>
                         </div>

@@ -1,6 +1,6 @@
-<div class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
+<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
     <h2
-        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-bold">
+        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
         {{ __('Network difficulty') }} BTC
     </h2>
 
@@ -9,7 +9,7 @@
         $article = App\Models\Insight\Content\Article::find(10000001);
     @endphp
 
-    <div class="text-xs xs:text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-6">
+    <div class="text-xs xs:text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 lg:mb-6">
         {{ number_format($coin->networkDifficulties()->latest()->first()->difficulty) }}
     </div>
 

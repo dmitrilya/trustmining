@@ -16,12 +16,12 @@
             </div>
         @endif
 
-        <div class="font-medium text-sm text-gray-800 dark:text-gray-200">
+        <div class="font-medium text-sm text-slate-800 dark:text-slate-200">
             {{ $name }}
         </div>
     </div>
 
-    <div class="text-xs text-gray-500">
+    <div class="text-xs text-slate-500">
         {{ $comment->created_at->diffForHumans() }}
     </div>
 </div>

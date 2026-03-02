@@ -1,13 +1,13 @@
 <x-app-layout title="Зарегистрировать компанию" description="Регистрация компании на сайте TrustMining">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Company') }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
 
@@ -19,33 +19,33 @@
 
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
                     <div>
-                        <p class="text-sm sm:text-base text-gray-600 font-bold mb-3">
+                        <p class="text-sm sm:text-base text-slate-600 font-bold mb-3">
                             {{ __('For LLC') }}
                         </p>
                         <ul class="space-y-2 list-disc ms-5">
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Extract from the Unified State Register of Legal Entities') }}
                             </li>
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Decision/minutes on the establishment of LLC') }}
                             </li>
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Constituent agreement (if any)') }}
                             </li>
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Charter of LLC') }}
                             </li>
                         </ul>
                     </div>
                     <div class="space-y-2">
-                        <p class="text-sm sm:text-base text-gray-600 font-bold mb-3">
+                        <p class="text-sm sm:text-base text-slate-600 font-bold mb-3">
                             {{ __('For individual entrepreneurs') }}
                         </p>
                         <ul class="space-y-2 list-disc ms-5">
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('USRIP record sheet') }}
                             </li>
-                            <li class="text-xs sm:text-sm text-gray-800 dark:text-gray-200">
+                            <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Notification of registration with the Federal Tax Service') }}
                             </li>
                         </ul>
@@ -57,7 +57,7 @@
                     <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple
                         accept=".doc,.docx" required
                         @change="if ($el.files.length > 4) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 4]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-gray-600" id="documents_help">DOC (max. 1MB, max. 4
+                    <p class="mt-1 text-sm text-slate-600" id="documents_help">DOC (max. 1MB, max. 4
                         items)
                     </p>
                     <x-input-error :messages="$errors->get('documents')" />

@@ -2,7 +2,7 @@
     :header="__('Creation video')">
 
     <div
-        class="p-4 sm:p-8 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow shadow-logo-color rounded-xl">
+        class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
         <form action="{{ route('insight.video.store', ['channel' => $channel->slug]) }}" method="POST"
             class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [] }"
             @submit.prevent="if (Object.keys(errors).length > 0) {
@@ -22,7 +22,7 @@
                 <x-input-label for="preview" :value="__('Preview')" />
                 <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                     required />
-                <p class="mt-1 text-sm text-gray-600" id="file_input_help">PNG, JPG
+                <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
                     or JPEG (max. 5MB), dimensions:ratio=4/3</p>
                 <x-input-error :messages="$errors->get('preview')" />
             </div>

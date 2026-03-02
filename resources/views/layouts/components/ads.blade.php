@@ -1,4 +1,4 @@
-<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm leading-5 text-gray-600 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 transition duration-150 ease-in-out"
+<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm leading-5 text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none focus:text-slate-700 dark:focus:text-slate-300 transition duration-150 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
         <div>{{ __('Advertisements') }}</div>
@@ -19,7 +19,7 @@
         class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-2xl origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
         <div
-            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700">
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700">
             <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                 @include('layouts.components.ad-categories')
             </div>

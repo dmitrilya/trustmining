@@ -1,10 +1,10 @@
 <x-app-layout title="Тарифы на размещение объявлений: продажа ASIC, хостинг, услуги майнинга" description="Актуальные тарифы на продвижение ваших товаров и услуг на крупнейшей платформе для майнеров. Разместите объявление о продаже оборудования, ASIC-хостинге или ремонте. Выберите оптимальный план (бесплатный, премиум) и получите целевых клиентов уже сегодня">
-    <div class="bg-gray-900 h-128 lg:h-144 relative z-10 overflow-hidden">
+    <div class="bg-slate-900 h-128 lg:h-144 relative z-10 overflow-hidden">
         <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 relative">
             <div class="mt-4 md:mt-6 lg:mt-8 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">
                 <div class="text-white font-semibold text-lg sm:text-xl md:text-3xl lg:text-4xl mb-2 sm:mb-4 lg:mb-6">
                     {{ __('Pricing plans for teams of all sizes') }}</div>
-                <div class="max-w-3xl mx-auto text-gray-400 sm:text-lg lg:text-xl">
+                <div class="max-w-3xl mx-auto text-slate-400 sm:text-lg lg:text-xl">
                     {{ __('Choose a tariff plan according to your company request. For all questions, please contact support') }}
                 </div>
             </div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="bg-gray-100 relative z-20">
+    <div class="bg-slate-100 relative z-20">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16 relative">
             @include('tariff.components.tariffs')
         </div>

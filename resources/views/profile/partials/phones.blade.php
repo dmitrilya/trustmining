@@ -1,11 +1,11 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg text-gray-950 dark:text-gray-50">
+        <h2 class="text-lg text-slate-950 dark:text-slate-50">
             {{ __('Phone number') }}
         </h2>
 
         @if (!($user->tariff && $user->tariff->can_have_phone))
-            <p class="text-sm text-gray-700 dark:text-gray-400 mt-2">
+            <p class="text-sm text-slate-700 dark:text-slate-400 mt-2">
                 {{ __('Not available with current plan') }}
             </p>
         @endif

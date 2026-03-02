@@ -1,5 +1,5 @@
 <button type="button" @click.prevent="$dispatch('open-modal', 'attach-img_modal')"
-    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
+    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 16 16" version="1.1">
         <g>
             <path
@@ -9,7 +9,7 @@
 </button>
 
 <button type="button" @click.prevent="$dispatch('open-modal', 'attach-video_modal')"
-    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
+    class="min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 16 16" version="1.1">
         <g>
             <path

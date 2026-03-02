@@ -1,18 +1,18 @@
 <div itemprop="comment" itemscope itemtype="https://schema.org/Comment" x-data="{ open: false }">
     @if ($authId && $authId == $answer->user_id)
         <div class="flex justify-end items-center mb-2 sm:mb-3">
-            <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center"
+            <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                 @click="forumEdit($refs.comment_content)">
-                <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
+                <svg class="size-5 sm:size-6 lg:size-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
                     aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                 </svg>
             </div>
 
-            <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-gray-500 flex items-center"
+            <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                 @click="deleteHref = '{{ route('forum.comment.destroy', ['forumComment' => $comment->id]) }}'; $dispatch('open-modal', 'delete-modal')">
-                <svg class="size-5 sm:size-6 lg:size-7 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
+                <svg class="size-5 sm:size-6 lg:size-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" fill="none"
                     viewBox="0 0 26 26">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" height="18.67px"
@@ -34,7 +34,7 @@
 
         <div class="text-right ml-3 sm:ml-5">
             <div data-type="datetime" data-date="{{ $comment->created_at }}"
-                class="date-transform text-xxs xs:text-xs lg:text-sm text-gray-500">
+                class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500">
             </div>
             <meta itemprop="dateCreated" content="{{ $comment->created_at }}">
         </div>
@@ -47,7 +47,7 @@
                     <div
                         class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                         <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                            class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                            class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                         </div>
                         <img src="{{ Storage::url($image) }}" />
                     </div>
@@ -63,7 +63,7 @@
             </div>
         @endif
 
-        <div itemprop="text" class="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
+        <div itemprop="text" class="text-xs lg:text-sm text-slate-600 dark:text-slate-400">
             {!! $comment->text !!}
         </div>
     </div>
@@ -74,13 +74,13 @@
 
     <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
         class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="bg-gray-900/50 dark:bg-zinc-950/80 fixed inset-0 z-40"></div>
+        <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
         <div
             class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
-            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-zinc-800"
+            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                 @click.away="open = false">
                 <button @click="open = false" type="button"
-                    class="absolute top-1 right-1 text-gray-600 bg-transparent hover:text-gray-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-zinc-700 dark:hover:text-white">
+                    class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />

@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $office->user->url_name])"></x-back-link>
 
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
                 {{ __('Office of company') }} {{ $office->user->name }}
             </h1>
         </div>
@@ -18,18 +18,18 @@
             @include('moderation.components.buttons')
 
             <div
-                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     <div
-                        class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                        class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $office->images" min="128" max="128"></x-carousel>
                     </div>
 
                     <div
                         class="md:col-span-4 space-y-5">
                         <h3
-                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                            <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
+                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -67,17 +67,17 @@
         @endif
 
         <div
-            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
-                <div class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6">
+                <div class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
                     <x-carousel :images="$office->images" min="128" max="128"></x-carousel>
                 </div>
 
                 <div
                     class="md:col-span-4 space-y-5">
                     <h3
-                        class="flex items-center mb-4 text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
-                        <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
+                        class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg">
+                        <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd"

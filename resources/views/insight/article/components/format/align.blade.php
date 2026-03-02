@@ -1,5 +1,5 @@
 <button type="button" @click="alignText(range, $refs.editor, 'left')"
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path
@@ -16,7 +16,7 @@
     </svg>
 </button>
 <button type="button" @click="alignText(range, $refs.editor, 'center')"
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path
@@ -33,7 +33,7 @@
     </svg>
 </button>
 <button type="button" @click="alignText(range, $refs.editor, 'right')"
-    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-gray-200 dark:bg-zinc-700 text-gray-800 dark:text-gray-100">
+    class="format-text min-w-6 h-6 sm:min-w-7 sm:h-7 flex justify-center items-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
     <svg class="min-w-2.5 h-2.5 sm:min-w-3 sm:h-3" viewBox="0 0 12 12" version="1.1">
         <g>
             <path

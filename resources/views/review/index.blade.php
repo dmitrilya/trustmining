@@ -51,7 +51,7 @@
         <div class="flex items-center">
             <x-back-link :href="$href"></x-back-link>
 
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
                 {{ __('Reviews') }} {{ $name }}
             </h1>
         </div>
@@ -59,21 +59,21 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
         <div
-            class="w-full bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
-            <div class="bg-gray-100 dark:bg-zinc-950 p-1 rounded-t-md min-h-72">
-                <div class="bg-gray-100 dark:bg-zinc-950 p-1 sm:p-5 h-full space-y-8 duration-100">
+            class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg flex flex-col p-1 sm:p-4">
+            <div class="bg-slate-100 dark:bg-slate-950 p-1 rounded-t-md min-h-72">
+                <div class="bg-slate-100 dark:bg-slate-950 p-1 sm:p-5 h-full space-y-8 duration-100">
                     @foreach ($reviews as $review)
                         @continue ($review->moderation && (!$auth || $review->user->id != $auth->id))
 
                         <div class="flex w-full">
                             <div
-                                class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-990 rounded-lg">
+                                class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-990 rounded-lg">
                                 <div class="flex justify-between mb-3">
-                                    <div class="text-base font-semibold text-gray-950 dark:text-gray-50">
+                                    <div class="text-base font-semibold text-slate-950 dark:text-slate-50">
                                         {{ $review->user->name }}
                                     </div>
 
-                                    <span class="date-transform text-xs text-gray-600"
+                                    <span class="date-transform text-xs text-slate-600"
                                         data-date="{{ $review->created_at }}"></span>
                                 </div>
 
@@ -84,7 +84,7 @@
                                     </p>
                                 @endif
 
-                                <p class="text-sm text-gray-600 whitespace-pre-line mt-3 md:mt-4">
+                                <p class="text-sm text-slate-600 whitespace-pre-line mt-3 md:mt-4">
                                     {{ $review->review }}</p>
                             </div>
 
@@ -92,8 +92,8 @@
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                         <button type="button"
-                                            class="ml-4 inline-flex self-center items-center p-2 text-sm text-center text-gray-950 dark:text-gray-50 bg-white rounded-lg hover:bg-gray-200 focus:ring-2 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus:ring-zinc-700">
-                                            <svg class="w-4 h-4 text-gray-600 dark:text-gray-300" aria-hidden="true"
+                                            class="ml-4 inline-flex self-center items-center p-2 text-sm text-center text-slate-950 dark:text-slate-50 bg-white rounded-lg hover:bg-slate-200 focus:ring-2 focus:outline-none dark:text-white focus:ring-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900 dark:focus:ring-slate-700">
+                                            <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" aria-hidden="true"
                                                 fill="currentColor" viewBox="0 0 4 15">
                                                 <path
                                                     d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
@@ -122,7 +122,7 @@
                                 @csrf
                                 @method('delete')
 
-                                <h2 class="text-lg text-gray-950 dark:text-gray-50">
+                                <h2 class="text-lg text-slate-950 dark:text-slate-50">
                                     {{ __('Are you sure you want to delete this review?') }}
                                 </h2>
 
@@ -161,19 +161,19 @@
                         <input type="hidden" name="reviewable_id" value="{{ $id }}">
 
                         <div
-                            class="w-full border border-gray-300 rounded-b-lg bg-gray-50 dark:bg-zinc-900 dark:border-zinc-800">
-                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-zinc-950">
+                            class="w-full border border-slate-300 rounded-b-lg bg-slate-50 dark:bg-slate-900 dark:border-slate-800">
+                            <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-slate-950">
                                 <label for="review" class="sr-only">Your review</label>
                                 <textarea id="review" rows="4" x-ref="review" name="review"
-                                    class="resize-none w-full px-0 text-sm text-gray-950 bg-white border-0 dark:bg-zinc-950 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                                    class="resize-none w-full px-0 text-sm text-slate-950 bg-white border-0 dark:bg-slate-950 focus:ring-0 dark:text-white dark:placeholder-slate-400"
                                     placeholder="{{ __('Each review undergoes strict moderation. Attached documents and photos will not be published, but are needed only to speed up the verification...') }}"
                                     required></textarea>
                             </div>
-                            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-zinc-700">
+                            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700">
                                 <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
                                     <label for="input-document-review"
-                                        :class="document ? 'text-indigo-600' : 'text-gray-500'"
-                                        class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-zinc-700">
+                                        :class="document ? 'text-indigo-600' : 'text-slate-500'"
+                                        class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700">
                                         <input id="input-document-review" name="document" class="hidden" type="file"
                                             accept=".pdf,.doc,.docx" @change="document = true">
                                         <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
@@ -183,8 +183,8 @@
                                         <span class="sr-only">Attach document</span>
                                     </label>
 
-                                    <label for="input-image-review" :class="image ? 'text-indigo-600' : 'text-gray-500'"
-                                        class="inline-flex justify-center items-center p-2 text-gray-600 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-zinc-700">
+                                    <label for="input-image-review" :class="image ? 'text-indigo-600' : 'text-slate-500'"
+                                        class="inline-flex justify-center items-center p-2 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700">
                                         <input id="input-image-review" name="image" class="hidden" type="file"
                                             accept=".png,.jpg,.jpeg,.webp" @change="image = true">
                                         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
@@ -205,15 +205,15 @@
                             </div>
                         </div>
                     </form>
-                    <div class="w-full border border-gray-300 rounded-b-lg bg-white dark:bg-zinc-800 dark:border-zinc-700 flex items-center justify-center"
+                    <div class="w-full border border-slate-300 rounded-b-lg bg-white dark:bg-slate-800 dark:border-slate-700 flex items-center justify-center"
                         style="height: 172.7px;display:none">
-                        <p class="text-xl font-semibold text-gray-950 dark:text-gray-50 text-center">
+                        <p class="text-xl font-semibold text-slate-950 dark:text-slate-50 text-center">
                             {{ __('Sent for moderation') }}</p>
                     </div>
                 @endif
             @else
                 <div class="flex flex-col items-center justify-center py-6">
-                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-4">
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">
                         {{ __('You must be logged in to leave a review.') }}</p>
 
                     <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>

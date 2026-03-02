@@ -9,13 +9,13 @@
             @csrf
             @method('put')
 
-            <h2 class="text-lg text-gray-950 dark:text-gray-50">
+            <h2 class="text-lg text-slate-950 dark:text-slate-50">
                 {{ __('Accept moderation?') }}
             </h2>
 
             @if ($withUniqueCheck)
                 <div class="my-4">
-                    <x-checkbox name="unique_content" value="unique_content" textClasses="text-gray-600 py-5">
+                    <x-checkbox name="unique_content" value="unique_content" textClasses="text-slate-600 py-5">
                         {{ __('Unique content is used') }}
                     </x-checkbox>
                 </div>
@@ -42,11 +42,11 @@
             @csrf
             @method('put')
 
-            <h2 class="text-lg text-gray-950 dark:text-gray-50">
+            <h2 class="text-lg text-slate-950 dark:text-slate-50">
                 {{ __('Decline moderation?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+            <p class="mt-1 text-sm text-slate-700 dark:text-slate-300">
                 {{ __('You must write a comment explaining why you rejected moderation.') }}
             </p>
 

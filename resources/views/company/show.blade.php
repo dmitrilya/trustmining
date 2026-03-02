@@ -4,7 +4,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $company->user->url_name])"></x-back-link>
 
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
                 {{ $company->name }}
             </h1>
         </div>
@@ -19,11 +19,11 @@
             @include('moderation.components.buttons')
 
             <div
-                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-6">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
-                            class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                            class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                             <x-carousel :images="isset($moderation->data['images'])
                                 ? $moderation->data['images']
                                 : $company->images" min="128" max="128"></x-carousel>
@@ -44,8 +44,8 @@
 
                         @if ($company->card['type'] == 'LEGAL')
                             <h3
-                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-950 dark:text-gray-100">
-                                <svg class="w-5 h-5 text-gray-600 mr-2" aria-hidden="true" width="24" height="24"
+                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
+                                <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24"
                                     fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
@@ -80,66 +80,66 @@
                                     ];
                                 @endphp
 
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('Status') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $statuses[$company->card['state']['status']] }}</span>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('Status') . ': ' }}<span
+                                        class="text-slate-700 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
                                 </li>
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('TIN') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['inn'] }}</span>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('TIN') . ': ' }}<span
+                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['inn'] }}</span>
                                 </li>
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('OGRN') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['ogrn'] }}</span>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('OGRN') . ': ' }}<span
+                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
                                 </li>
                                 @if (array_key_exists('kpp', $company->card))
-                                    <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
-                                            class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
+                                    <li class="text-slate-500 dark:text-slate-400">{{ __('KPP') . ': ' }}<span
+                                            class="text-slate-700 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                     </li>
                                 @endif
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('Registration date') . ': ' }}<span
-                                        class="date-transform text-gray-700 dark:text-gray-200" data-type="date"
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('Registration date') . ': ' }}<span
+                                        class="date-transform text-slate-700 dark:text-slate-200" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('Employee count') . ': ' }}<span
+                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                                 </li>
 
                                 @if ($company->card['type'] == 'LEGAL')
-                                    <li class="text-gray-500 dark:text-gray-400">
+                                    <li class="text-slate-500 dark:text-slate-400">
                                         {{ __('Authorized capital') . ': ' }}<span
-                                            class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }}
+                                            class="text-slate-700 dark:text-slate-200">{{ $company->card['capital'] }}
                                             ₽</span>
                                     </li>
 
-                                    <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                    <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
                                         <div class="ml-4">
-                                            <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
-                                                    class="text-gray-700 dark:text-gray-200">{{ $founder['name'] }}
+                                            <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
+                                                    class="text-slate-700 dark:text-slate-200">{{ $founder['name'] }}
                                                     ({{ $founder['share'] }}%)
                                                 </span>
                                             </li>
-                                            <li class="text-gray-500 dark:text-gray-400 mt-1">
+                                            <li class="text-slate-500 dark:text-slate-400 mt-1">
                                                 {{ __('TIN') . ': ' }}<span
-                                                    class="text-gray-700 dark:text-gray-200">{{ $founder['inn'] }}</span>
+                                                    class="text-slate-700 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
                                 @endif
 
                                 @if (array_key_exists('managers', $company->card))
-                                    <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                    <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Managers') }}
                                     </div>
 
                                     @foreach ($company->card['managers'] as $manager)
                                         <div class="ml-4">
-                                            <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
-                                                    class="text-gray-700 dark:text-gray-200">{{ $manager['name'] }}</span>
+                                            <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
+                                                    class="text-slate-700 dark:text-slate-200">{{ $manager['name'] }}</span>
                                             </li>
-                                            <li class="text-gray-500 dark:text-gray-400 mt-1">
+                                            <li class="text-slate-500 dark:text-slate-400 mt-1">
                                                 {{ __('TIN') . ': ' }}<span
-                                                    class="text-gray-700 dark:text-gray-200">{{ $manager['inn'] }}</span>
+                                                    class="text-slate-700 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
@@ -174,12 +174,12 @@
 
                     @if ($d)
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                            <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
                                 {{ __('Description') }}</h3>
 
                             <div class="mt-5">
                                 <p
-                                    class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ $d }}
                                 </p>
                             </div>
@@ -190,10 +190,10 @@
         @endif
 
         <div
-            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                 @if (count($company->images))
-                    <div class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6">
+                    <div class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
                         <x-carousel :images="$company->images" min="128" max="128"></x-carousel>
                     </div>
                 @endif
@@ -205,8 +205,8 @@
 
                     @if ($company->card['type'] == 'LEGAL')
                         <h3
-                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-gray-950 dark:text-gray-100">
-                            <svg class="w-5 h-5 text-gray-600 mr-2" aria-hidden="true" width="24" height="24"
+                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
+                            <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
                                     d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
@@ -229,65 +229,65 @@
                                 ];
                             @endphp
 
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('Status') . ': ' }}<span
-                                    class="text-gray-700 dark:text-gray-200">{{ $statuses[$company->card['state']['status']] }}</span>
+                            <li class="text-slate-500 dark:text-slate-400">{{ __('Status') . ': ' }}<span
+                                    class="text-slate-700 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
                             </li>
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('TIN') . ': ' }}<span
-                                    class="text-gray-700 dark:text-gray-200">{{ $company->card['inn'] }}</span>
+                            <li class="text-slate-500 dark:text-slate-400">{{ __('TIN') . ': ' }}<span
+                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['inn'] }}</span>
                             </li>
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('OGRN') . ': ' }}<span
-                                    class="text-gray-700 dark:text-gray-200">{{ $company->card['ogrn'] }}</span>
+                            <li class="text-slate-500 dark:text-slate-400">{{ __('OGRN') . ': ' }}<span
+                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
                             </li>
                             @if (array_key_exists('kpp', $company->card))
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('KPP') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['kpp'] }}</span>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('KPP') . ': ' }}<span
+                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                 </li>
                             @endif
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('Registration date') . ': ' }}<span
-                                    class="date-transform text-gray-700 dark:text-gray-200" data-type="date"
+                            <li class="text-slate-500 dark:text-slate-400">{{ __('Registration date') . ': ' }}<span
+                                    class="date-transform text-slate-700 dark:text-slate-200" data-type="date"
                                     data-date="{{ $company->card['state']['registration_date'] }}"></span>
                             </li>
-                            <li class="text-gray-500 dark:text-gray-400">{{ __('Employee count') . ': ' }}<span
-                                    class="text-gray-700 dark:text-gray-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
+                            <li class="text-slate-500 dark:text-slate-400">{{ __('Employee count') . ': ' }}<span
+                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                             </li>
 
                             @if ($company->card['type'] == 'LEGAL')
-                                <li class="text-gray-500 dark:text-gray-400">
+                                <li class="text-slate-500 dark:text-slate-400">
                                     {{ __('Authorized capital') . ': ' }}<span
-                                        class="text-gray-700 dark:text-gray-200">{{ $company->card['capital'] }}
+                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['capital'] }}
                                         ₽</span>
                                 </li>
 
-                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                     {{ __('Founders') }}
                                 </div>
 
                                 @foreach ($company->card['founders'] as $founder)
                                     <div class="ml-4">
-                                        <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
-                                                class="text-gray-700 dark:text-gray-200">{{ $founder['name'] }}
+                                        <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
+                                                class="text-slate-700 dark:text-slate-200">{{ $founder['name'] }}
                                                 ({{ $founder['share'] }}%)
                                             </span>
                                         </li>
-                                        <li class="text-gray-500 dark:text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
-                                                class="text-gray-700 dark:text-gray-200">{{ $founder['inn'] }}</span>
+                                        <li class="text-slate-500 dark:text-slate-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                                class="text-slate-700 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach
                             @endif
 
                             @if (array_key_exists('managers', $company->card))
-                                <div class="text-sm md:text-lg text-gray-900 dark:text-gray-200 font-semibold mt-3">
+                                <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                     {{ __('Managers') }}
                                 </div>
 
                                 @foreach ($company->card['managers'] as $manager)
                                     <div class="ml-4">
-                                        <li class="text-gray-500 dark:text-gray-400">{{ __('Name') . ': ' }}<span
-                                                class="text-gray-700 dark:text-gray-200">{{ $manager['name'] }}</span>
+                                        <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
+                                                class="text-slate-700 dark:text-slate-200">{{ $manager['name'] }}</span>
                                         </li>
-                                        <li class="text-gray-500 dark:text-gray-400 mt-1">{{ __('TIN') . ': ' }}<span
-                                                class="text-gray-700 dark:text-gray-200">{{ $manager['inn'] }}</span>
+                                        <li class="text-slate-500 dark:text-slate-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                                class="text-slate-700 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach
@@ -329,11 +329,11 @@
 
                 @if ($company->description)
                     <div>
-                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                        <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
                             {{ __('Description') }}</h3>
 
                         <div class="mt-5">
-                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">
+                            <p class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line">
                                 {{ $company->description }}</p>
                         </div>
                     </div>

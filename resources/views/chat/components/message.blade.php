@@ -1,13 +1,13 @@
 @if ($message->message)
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="date-transform text-xs text-gray-600"
+                <span class="date-transform text-xs text-slate-600"
                     data-date="{{ $message->created_at }}"></span>
             </div>
 
-            <p class="text-sm text-gray-950 dark:text-gray-50 whitespace-pre-line">{{ $message->message }}
+            <p class="text-sm text-slate-950 dark:text-slate-50 whitespace-pre-line">{{ $message->message }}
             </p>
         </div>
     </div>
@@ -17,9 +17,9 @@
     <div x-data="{ open: false }">
         <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
             <div
-                class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+                class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="date-transform text-xs text-gray-600"
+                    <span class="date-transform text-xs text-slate-600"
                         data-date="{{ $message->created_at }}"></span>
                 </div>
 
@@ -28,10 +28,10 @@
                     @foreach ($message->images as $image)
                         <div class="group relative h-max max-h-60 max-w-max flex items-center overflow-hidden">
                             <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                                class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                                class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                                 <a data-tooltip-target="download-image-{{ $message->id }}-{{ $loop->index }}"
                                     download href="{{ Storage::url($image) }}"
-                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/30 hover:bg-white/50 focus:ring-4 focus:outline-none dark:text-gray-50 focus:ring-gray-50">
+                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/30 hover:bg-white/50 focus:ring-4 focus:outline-none dark:text-slate-50 focus:ring-slate-50">
                                     <svg class="w-4 h-4 text-white" aria-hidden="true" fill="none" viewBox="0 0 16 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
@@ -39,7 +39,7 @@
                                     </svg>
                                 </a>
                                 <div id="download-image-{{ $message->id }}-{{ $loop->index }}" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm shadow-logo-color opacity-0 tooltip dark:bg-zinc-800">
+                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm text-white transition-opacity duration-300 bg-slate-900 rounded-lg shadow-sm shadow-logo-color opacity-0 tooltip dark:bg-slate-800">
                                     Download image
                                     <div class="tooltip-arrow" data-popper-arrow></div>
                                 </div>
@@ -55,13 +55,13 @@
 
         <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
             class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="bg-gray-900/50 dark:bg-zinc-950/80 fixed inset-0 z-40"></div>
+            <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
             <div
                 class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
-                <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-zinc-800"
+                <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                     @click.away="open = false">
                     <button @click="open = false" type="button"
-                        class="absolute top-1 right-1 text-gray-600 bg-transparent hover:text-gray-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-zinc-700 dark:hover:text-white">
+                        class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -78,9 +78,9 @@
 @if (count($message->files))
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-gray-300 dark:border-zinc-700 bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="date-transform text-xs text-gray-600"
+                <span class="date-transform text-xs text-slate-600"
                     data-date="{{ $message->created_at }}"></span>
             </div>
 
@@ -93,15 +93,15 @@
     </div>
 @endif
 
-{{-- <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm text-center text-gray-950 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-gray-50 focus:ring-gray-50 dark:bg-zinc-950 dark:hover:bg-zinc-900 dark:focus:ring-zinc-700" type="button">
-<svg class="w-4 h-4 text-gray-600-d" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+{{-- <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="inline-flex self-center items-center p-2 text-sm text-center text-slate-950 bg-white rounded-lg hover:bg-slate-100 focus:ring-4 focus:outline-none dark:text-slate-50 focus:ring-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900 dark:focus:ring-slate-700" type="button">
+<svg class="w-4 h-4 text-slate-600-d" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
   <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
 </svg>
 </button>
-<div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-zinc-800 dark:divide-zinc-700">
-<ul class="py-2 text-sm text-gray-800 dark:text-gray-100" aria-labelledby="dropdownMenuIconButton">
+<div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-slate-100 rounded-lg shadow w-40 dark:bg-slate-800 dark:divide-slate-700">
+<ul class="py-2 text-sm text-slate-800 dark:text-slate-100" aria-labelledby="dropdownMenuIconButton">
   <li>
-     <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:hover:text-white">Reply</a>
+     <a href="#" class="block px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">Reply</a>
   </li>
 </ul>
 </div> --}}

@@ -4,7 +4,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
 
-            <h1 class="font-bold text-xl text-gray-900 dark:text-gray-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
                 {{ __('Placement data') }}
             </h1>
         </div>
@@ -19,17 +19,17 @@
             @include('moderation.components.buttons')
 
             <div
-                class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     <div
-                        class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                        class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                         <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
                     </div>
 
                     <div class="md:col-span-4 space-y-5">
                         <h3
-                            class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
+                            class="flex items-center text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -40,7 +40,7 @@
                         </h3>
 
                         <p
-                            class="text-lg sm:text-3xl tracking-tight text-gray-950 dark:text-gray-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="text-lg sm:text-3xl tracking-tight text-slate-950 dark:text-slate-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $hosting->price }} ₽</p>
 
                         <x-peculiarities
@@ -50,7 +50,7 @@
                                 : $hosting->peculiarities" model="hosting"></x-peculiarities>
 
                         <div>
-                            <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Conditions') }}</h3>
+                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Conditions') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['conditions']) ? ' border border-indigo-500' : '' }}">
@@ -61,17 +61,17 @@
                                 @endphp
 
                                 @if (!count($c))
-                                    <li class="text-gray-500">{{ __('Not specified') }}</li>
+                                    <li class="text-slate-500">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($c as $condition)
-                                        <li class="text-gray-500">{{ $condition }}</li>
+                                        <li class="text-slate-500">{{ $condition }}</li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
 
                         <div>
-                            <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Additional costs') }}</h3>
+                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['expenses']) ? ' border border-indigo-500' : '' }}">
@@ -82,10 +82,10 @@
                                 @endphp
 
                                 @if (!count($e))
-                                    <li class="text-gray-500 dark:text-gray-400">{{ __('Not specified') }}</li>
+                                    <li class="text-slate-500 dark:text-slate-400">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($e as $expense)
-                                        <li class="text-gray-500 dark:text-gray-400">{{ $expense }}</li>
+                                        <li class="text-slate-500 dark:text-slate-400">{{ $expense }}</li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -142,12 +142,12 @@
                         @endif
 
                         <div>
-                            <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                            <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
                                 {{ __('Description') }}</h3>
 
                             <div class="mt-5">
                                 <p
-                                    class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                    class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                     {{ isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description }}
                                 </p>
                             </div>
@@ -158,17 +158,17 @@
         @endif
 
         <div
-            class="bg-white/60 dark:bg-zinc-900/60 border border-gray-300 dark:border-zinc-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                 <div
-                    class="md:col-span-3 sm:border-r border-gray-300 dark:border-zinc-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
+                    class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                     <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
                 </div>
 
                 <div class="md:col-span-4 space-y-5">
                     <h3
-                        class="flex items-center text-sm font-bold tracking-tight text-gray-950 dark:text-gray-100 xs:text-base sm:text-lg">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" aria-hidden="true"
+                        class="flex items-center text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -178,33 +178,33 @@
                         {{ __($hosting->address) }}
                     </h3>
 
-                    <p class="text-3xl tracking-tight text-gray-950 dark:text-gray-50">{{ $hosting->price }} ₽</p>
+                    <p class="text-3xl tracking-tight text-slate-950 dark:text-slate-50">{{ $hosting->price }} ₽</p>
 
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
 
                     <div>
-                        <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Conditions') }}</h3>
+                        <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Conditions') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->conditions))
-                                <li class="text-gray-500">{{ __('Not specified') }}</li>
+                                <li class="text-slate-500">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->conditions as $condition)
-                                    <li class="text-gray-500">{{ $condition }}</li>
+                                    <li class="text-slate-500">{{ $condition }}</li>
                                 @endforeach
                             @endif
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-sm text-gray-950 dark:text-gray-100 mb-2">{{ __('Additional costs') }}</h3>
+                        <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->expenses))
-                                <li class="text-gray-500 dark:text-gray-400">{{ __('Not specified') }}</li>
+                                <li class="text-slate-500 dark:text-slate-400">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->expenses as $expense)
-                                    <li class="text-gray-500 dark:text-gray-400">{{ $expense }}</li>
+                                    <li class="text-slate-500 dark:text-slate-400">{{ $expense }}</li>
                                 @endforeach
                             @endif
                         </ul>
@@ -242,7 +242,7 @@
                     @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
                         <div x-data="{ deficiencies: [], done: false }">
                             <x-secondary-button
-                                class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-gray-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
+                                class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
                                 @click="if (!status) {
                                     if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
                                         .then(r => {
@@ -266,39 +266,39 @@
 
                             <template x-if="done">
                                 <div>
-                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-gray-600 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-slate-600 font-bold">
                                         {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[0].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
+                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[0]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-600 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
                                         {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[1].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
+                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[1]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-gray-600 font-bold">
+                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
                                         {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
                                     </h5>
 
                                     <p x-show="!deficiencies[2].length"
-                                        class="mt-1 text-xxs sm:text-xs text-gray-700 dark:text-gray-300">
+                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
                                         {{ __('No defects found') }}</p>
                                     <template x-for="problem in deficiencies[2]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-gray-700 dark:text-gray-300"
+                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
                                             x-text="problem.point + ' - ' + problem.problem"></p>
                                     </template>
                                 </div>
@@ -315,11 +315,11 @@
                     @endif
 
                     <div>
-                        <h3 class="font-bold tracking-tight text-gray-950 dark:text-gray-100 mt-8">
+                        <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
                             {{ __('Description') }}</h3>
 
                         <div class="mt-5">
-                            <p class="text-gray-800 dark:text-gray-300 text-sm whitespace-pre-line">
+                            <p class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line">
                                 {{ $hosting->description }}</p>
                         </div>
                     </div>
