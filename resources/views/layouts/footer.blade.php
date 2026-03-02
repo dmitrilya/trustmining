@@ -2,7 +2,7 @@
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <a href="{{ route('home') }}">
-            <x-application-logo class="text-[12vw] xs:text-5xl" />
+            <x-application-logo class="text-[10vw] xs:text-4xl/[1.2]" />
         </a>
 
         <div class="flex items-center gap-2 lg:gap-3">

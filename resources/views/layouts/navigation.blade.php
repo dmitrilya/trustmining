@@ -5,7 +5,7 @@
             <div class="w-full flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="xs:text-xl" />
+                        <x-application-logo class="text-sm xs:text-xl" />
                     </a>
                 </div>
 
