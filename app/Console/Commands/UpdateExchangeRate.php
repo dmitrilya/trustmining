@@ -112,8 +112,8 @@ class UpdateExchangeRate extends Command
                         $q3 = $prices->get(floor($prices->count() * 0.75));
                         $iqr = $q3 - $q1;
 
-                        $lowerBound = $q1 - (1.4 * $iqr);
-                        $upperBound = $q3 + (1.4 * $iqr);
+                        $lowerBound = $q1 - (1.25 * $iqr);
+                        $upperBound = $q3 + (1.25 * $iqr);
 
                         $average = $prices->filter(fn($p) => $p >= $lowerBound && $p <= $upperBound)->avg();
 

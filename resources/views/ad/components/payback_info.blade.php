@@ -1,15 +1,20 @@
-<div class="mt-2 sm:mt-3 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4" x-data="{
-    paybackMonths: {{ $profit > 0 ? $ad->price * $ad->coin->rate / $profit : '∞' }},
-    dailyProfit: {{ $profit }}
-}">
+<div class="mt-2 sm:mt-3 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4"
+    x-data="{
+        paybackMonths: '{{ $profit - $expense * $tariff > 0 ? ($ad->price * $ad->coin->rate) / ($profit - $expense * $tariff) : '∞' }}',
+        profit: {{ $profit }},
+        expense: {{ $expense }},
+        tariff: {{ $tariff }}
+    }">
     <div class="relative overflow-hidden p-5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white shadow-xl">
         <div class="relative z-10">
             <span class="text-slate-400 text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
-                <span class="text-3xl font-black text-emerald-400">
+                <span class="text-3xl font-black"
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-400' : 'text-red-400'">
                     {{ number_format($profit, 2, '.', ' ') }}
                 </span>
-                <span class="text-emerald-500/50 font-bold">USDT</span>
+                <span class="font-bold"
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-500/50' : 'text-red-500/50'">USDT</span>
             </div>
             <p class="text-slate-400 text-xs mt-1">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
         </div>
@@ -26,22 +31,24 @@
         </div>
     </div>
 
-    <div class="p-5 rounded-2xl bg-white dark:bg-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
+    <div
+        class="p-5 rounded-2xl bg-white dark:bg-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
         <div>
             <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Окупаемость</span>
             <div class="mt-2">
-                <span class="text-3xl font-black text-slate-800" x-text="Math.round(paybackMonths)"></span>
+                <span class="text-3xl font-black text-slate-800"
+                    x-text="paybackMonths != '∞' ? Math.round(paybackMonths) : '∞'"></span>
                 <span class="text-slate-400 font-bold text-lg">{{ __('d') }}.</span>
             </div>
             <!-- Бейдж статуса -->
             <div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter"
                 :class="{
-                    'bg-emerald-100 text-emerald-700': paybackMonths <= 24,
+                    'bg-red-100 text-red-700': paybackMonths > 48 || paybackMonths == '∞',
                     'bg-amber-100 text-amber-700': paybackMonths > 24 && paybackMonths <= 48,
-                    'bg-red-100 text-red-700': paybackMonths > 48
+                    'bg-emerald-100 text-emerald-700': paybackMonths <= 24,
                 }">
                 <span
-                    x-text="paybackMonths <= 24 ? 'Топ окупаемость' : (paybackMonths <= 48 ? 'В норме' : 'Долгая окупаемость')"></span>
+                    x-text="paybackMonths != '∞' ? paybackMonths <= 24 ? 'Топ окупаемость' : (paybackMonths <= 48 ? 'В норме' : 'Долгая окупаемость') : 'Окак'"></span>
             </div>
         </div>
     </div>

@@ -357,6 +357,8 @@
 
                                     @include('ad.components.payback_info', [
                                         'profit' => $ad->version_data->profits[0]['profit'],
+                                        'expense' => $ad->asicVersion->hashrate * $ad->asicVersion->efficiency * 24 / 1000 * $rub,
+                                        'tariff' => 5
                                     ])
                                 @endif
                                 @if ($ad->with_vat)
@@ -367,7 +369,6 @@
                                 {{ __('Price on request') }}
                             @endif
                         </p>
-
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
                             target="_blank"
