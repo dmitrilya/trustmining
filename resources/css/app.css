@@ -137,6 +137,16 @@ input[type="number"] {
     background-clip: text;
 }
 
+.bg-logo-gradient {
+    background-image: linear-gradient(
+        to right,
+        #40ff9f,
+        #14aeff,
+        #7966ff,
+        #404099
+    );
+}
+
 .text-xxs {
     font-size: 9px;
     line-height: 12px;

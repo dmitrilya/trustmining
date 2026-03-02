@@ -340,12 +340,25 @@
                                 href="https://schema.org/{{ $ad->props['Condition'] == 'New' ? 'NewCondition' : 'UsedCondition' }}" />
                         @endif
 
-                        <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50">
+                        <p class="mt-5 text-2xl font-semibold text-gray-950 dark:text-gray-50 flex items-center">
                             @if ($ad->price != 0)
                                 <meta itemprop="priceCurrency"
                                     content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
                                 <span itemprop="price">{{ $ad->price }}</span>
-                                <span>{{ $ad->coin->abbreviation }}</span>
+                                <span class="ml-2">{{ $ad->coin->abbreviation }}</span>
+
+                                @if ($ad->adCategory->name == 'miners')
+                                    @include('ad.components.price_graduation', [
+                                        'priceData' =>
+                                            $ad->version_data->price_data[$ad->props['Condition']][
+                                                $ad->props['Availability']
+                                            ],
+                                    ])
+
+                                    @include('ad.components.payback_info', [
+                                        'profit' => $ad->version_data->profits[0]['profit'],
+                                    ])
+                                @endif
                                 @if ($ad->with_vat)
                                     <span
                                         class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
@@ -531,5 +544,24 @@
                 </div>
             </div>
         </div>
+
+        @if ($ad->adCategory->name == 'miners')
+            <section class="mt-4 sm:mt-6 lg:mt-8">
+                <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                    <h2 class="font-bold text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                        {{ __('Other offers') }} {{ $ad->asicVersion->asicModel->name }}
+                    </h2>
+                </div>
+
+                <div>
+                    @include('home.components.carousel', [
+                        'items' => $ads,
+                        'blade' => 'ad.components.card',
+                        'model' => 'ad',
+                        'bigWrapper' => true,
+                    ])
+                </div>
+            </section>
+        @endif
     </div>
 </x-app-layout>

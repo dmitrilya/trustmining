@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ad;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
 
@@ -161,7 +162,14 @@ class AdController extends Controller
 
         $this->addView(request(), $ad);
 
-        return view('ad.show', compact('ad'));
+        if ($adCategory->name == 'miners') $ad->version_data = Cache::get('calculator_models')->where('id', $ad->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $ad->asic_version_id)->first();
+
+        return view('ad.show', [
+            'ad' => $ad,
+            'ads' => $this->getAds()->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
+                ->limit(9)->get(),
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+        ]);
     }
 
     /**

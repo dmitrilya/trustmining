@@ -32,7 +32,7 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        $key = config('services.coinmarketcap.key');
+        /*$key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->pluck('abbreviation');
         $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
         $data->each(fn($coin) => Coin::where('abbreviation', $coin->symbol)->update(['rate' => $coin->quote->USD->price]));
@@ -56,7 +56,7 @@ class UpdateExchangeRate extends Command
             $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
             Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
             Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
-        }
+        }*/
 
         $this->updateProfit();
 
@@ -84,13 +84,43 @@ class UpdateExchangeRate extends Command
             'algorithm:id,name,measurement',
             'asicBrand:id,name',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
-            'asicVersions.ads:asic_version_id,price,coin_id',
+            'asicVersions.ads:asic_version_id,price,coin_id,props',
             'asicVersions.ads.coin:id,rate,abbreviation',
             'moderatedReviews:reviewable_id,reviewable_type,rating'
         ])->get()->map(function ($model) use ($measurements, $algorithms) {
             $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
 
             $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $model) {
+                $ads = $version->ads->where('price', '!=', 0)->map(function ($ad) {
+                    $ad->usdt_price = round($ad->price * $ad->coin->rate, 2);
+                    return $ad;
+                });
+                $priceData = [
+                    'New' => ['In stock' => null, 'Preorder' => null],
+                    'Used' => ['In stock' => null, 'Preorder' => null],
+                ];
+                foreach ($ads->groupBy(['props.Condition', 'props.Availability']) as $condition => $conditionAds) {
+                    foreach ($conditionAds as $availbility => $groupedAds) {
+                        $prices = $groupedAds->pluck('usdt_price')->sort()->values();
+
+                        if ($prices->count() < 4) {
+                            $priceData[$condition][$availbility] = ['min' => $prices->min(), 'max' => $prices->max(), 'average' => $prices->avg()];
+                            continue;
+                        }
+
+                        $q1 = $prices->get(floor($prices->count() * 0.25));
+                        $q3 = $prices->get(floor($prices->count() * 0.75));
+                        $iqr = $q3 - $q1;
+
+                        $lowerBound = $q1 - (1.4 * $iqr);
+                        $upperBound = $q3 + (1.4 * $iqr);
+
+                        $average = $prices->filter(fn($p) => $p >= $lowerBound && $p <= $upperBound)->avg();
+
+                        $priceData[$condition][$availbility] = ['min' => $prices->min(), 'max' => $prices->max(), 'lower_bound' => $lowerBound, 'upper_bound' => $upperBound, 'average' => $average];
+                    }
+                }
+                $version->price_data = $priceData;
                 $vm = array_search($version->measurement, $measurements);
                 $am = array_search($model->algorithm->measurement, $measurements);
                 $coef = pow(1000, $vm - $am);
@@ -101,7 +131,7 @@ class UpdateExchangeRate extends Command
                 $version->coef = pow(1000, $vm - $am);
                 $version->original_hashrate = $version->hashrate * pow(1000, $vm);
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
-                $version->price = round($version->ads->where('price', '!=', 0)->min(fn($ad) => $ad->price * $ad->coin->rate), 2);
+                $version->price = $ads->min('usdt_price');
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
                 $version->model_name = strtolower(str_replace(' ', '_', $model->name));
