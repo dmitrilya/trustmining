@@ -107,7 +107,7 @@
                         <meta itemprop="position" content="2" />
                         <div class="flex items-center">
                             <a itemprop="item"
-                                href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'brands' => [strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name))]]) }}"
+                                href="{{ route('ads', ['adCategory' => $ad->adCategory->name, 'manufacturers' => [strtolower(str_replace(' ', '_', $ad->gpuModel->gpuBrand->name))]]) }}"
                                 class="sm:mr-2 text-xs xs:text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ $ad->gpuModel->gpuBrand->name }}</span>
                             </a>
