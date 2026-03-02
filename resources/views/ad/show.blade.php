@@ -294,7 +294,7 @@
                         @if (!count($ad->images))
                             <div class="w-full aspect-[4/3] rounded-lg col-start-2">
                                 <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
-                                    alt="{{ $alt }}" class="w-full object-cover object-center">
+                                    alt="{{ $alt }}" class="w-full rounded-lg object-cover object-center">
                             </div>
                         @else
                             <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
