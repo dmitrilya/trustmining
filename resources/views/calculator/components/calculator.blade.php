@@ -45,7 +45,8 @@
                                         x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
                                 <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                    {{ __('The best price') }}: <span class="text-slate-900 dark:text-slate-100 font-bold"
+                                    {{ __('The best price') }}: <span
+                                        class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
                             </div>
@@ -61,7 +62,8 @@
                 </div>
             </div>
 
-            <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
+            <div
+                class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                     <h2 class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">
                         {{ __('Calculation result') }}</h2>
@@ -93,9 +95,12 @@
                             return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) * count / (currency == 'RUB' ? {{ $rub }} : 1);
                         },
                         get dailyConsumption() {
-                            return version.efficiency * version.hashrate * tariff * 24 * uptime / 100 * count * (currency == 'USDT' ? {{ $rub }} : 1);
+                            return version.efficiency * version.hashrate / 1000 * tariff * 24 * uptime / 100 * count * (currency == 'USDT' ? {{ $rub }} : 1);
                         },
                         get dailyIncome() {
+                            return this.dailyProfit - this.dailyConsumption;
+                        },
+                        get dailyIncomeUSDT() {
                             return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
                         }
                     }">
@@ -117,10 +122,11 @@
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) * 100) / 100">
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption / 10) / 100">
+                                x-text="Math.round(dailyConsumption * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round((calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) - dailyConsumption / 1000) * 100) / 100">
+                            <div class="text-xs xs:text-s font-bold"
+                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
+                                x-text="Math.round(dailyIncome * 100) / 100">
                             </div>
                             <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Month') }}
@@ -129,10 +135,11 @@
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) * 100) / 100">
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption * 30 / 10) / 100">
+                                x-text="Math.round(dailyConsumption * 30 * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round((calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) - dailyConsumption * 30 / 1000) * 100) / 100">
+                            <div class="text-xs xs:text-sm font-bold"
+                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
+                                x-text="Math.round(dailyIncome * 30 * 100) / 100">
                             </div>
                             <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
                                 {{ __('Year') }}
@@ -141,17 +148,18 @@
                                 x-text="Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) * 100) / 100">
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption * 365 / 10) / 100">
+                                x-text="Math.round(dailyConsumption * 365 * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round((calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) - dailyConsumption * 365 / 1000) * 100) / 100">
+                            <div class="text-xs xs:text-sm font-bold"
+                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
+                                x-text="Math.round(dailyIncome * 365 * 100) / 100">
                             </div>
                         </div>
 
                         <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Payback') }}:
                             <span class="text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="version.price ? dailyIncome > 0 ? Math.round(version.price / dailyIncome) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                                x-text="version.price ? dailyIncomeUSDT > 0 ? Math.round(version.price / dailyIncomeUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
 
                         <div class="md:hidden">
