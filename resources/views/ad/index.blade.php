@@ -47,10 +47,7 @@
         @include('ad.components.filter')
 
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader"
-            x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route(
-                'ads',
-                array_merge(request()->route()->originalParameters(), [http_build_query(request()->collect())]),
-            ) }}', page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }}, count: 15 });">
+            x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route('ads', request()->route()->originalParameters()) }}', data: {{ request()->collect() }}, page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }}, count: 15 });">
             @include('ad.components.list', ['owner' => false])
         </div>
     </div>

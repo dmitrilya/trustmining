@@ -3,6 +3,7 @@ class InfiniteLoader {
         this.container = options.container ?? document.querySelector('#infinite-loader');
         this.itemSelector = options.itemSelector ?? '.card';
         this.endpoint = options.endpoint;
+        this.data = options.data ?? [];
 
         this.startPage = options.page;
         this.page = this.startPage == options.lastPage ? 0 : this.startPage;
@@ -29,7 +30,7 @@ class InfiniteLoader {
 
         try {
             const response = await axios.get(this.endpoint, {
-                params: { page: ++this.page },
+                params: { ...this.data, page: ++this.page },
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             });
 
