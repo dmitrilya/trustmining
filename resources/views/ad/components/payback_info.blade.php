@@ -5,7 +5,7 @@
         expense: {{ $expense }},
         tariff: {{ $tariff }}
     }">
-    <div class="relative overflow-hidden p-5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white shadow-xl">
+    <div class="p-3 xs:p-4 sm:p-5 rounded-2xl relative bg-slate-900 dark:bg-slate-800 shadow-xl overflow-hidden">
         <div class="relative z-10">
             <span class="text-slate-400 text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
@@ -32,7 +32,7 @@
     </div>
 
     <div
-        class="p-5 rounded-2xl bg-white dark:bg-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between">
+        class="p-3 xs:p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-100 border border-slate-300 dark:border-slate-700 shadow-sm flex items-center justify-between overflow-hidden">
         <div>
             <span class="text-slate-500 text-xs font-bold uppercase tracking-widest">Окупаемость</span>
             <div class="mt-2">
@@ -40,7 +40,6 @@
                     x-text="paybackMonths != '∞' ? Math.round(paybackMonths) : '∞'"></span>
                 <span class="text-slate-400 font-bold text-lg">{{ __('d') }}.</span>
             </div>
-            <!-- Бейдж статуса -->
             <div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter"
                 :class="{
                     'bg-red-100 text-red-700': paybackMonths > 48 || paybackMonths == '∞',

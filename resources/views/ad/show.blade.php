@@ -290,14 +290,51 @@
             <div
                 class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 md:px-8 md:py-8 offer-card">
                 <div class="md:col-span-5">
-                    @if (!count($ad->images))
-                        <div class="w-full overflow-hidden rounded-lg col-start-2">
-                            <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
-                                class="w-full object-cover object-center">
-                        </div>
-                    @else
-                        <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
-                    @endif
+                    <div class="h-full flex flex-col justify-between">
+                        @if (!count($ad->images))
+                            <div class="w-full aspect-[4/3] overflow-hidden rounded-lg col-start-2">
+                                <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
+                                    alt="{{ $alt }}" class="w-full object-cover object-center">
+                            </div>
+                        @else
+                            <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
+                        @endif
+
+                        @if ($ad->adcategory->name == 'miners')
+                            <ul role="list" class="hidden md:block space-y-2 text-xxs xs:text-xs sm:text-sm">
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Manufacturer') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->asicBrand->name }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Algorithm') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->algorithm->name }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Efficiency') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency }}j/{{ $ad->asicVersion->measurement }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Power') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }}{{ __('kW/h') }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Release date') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->release->translatedFormat('j M Y') }}</span>
+                                </li>
+                            </ul>
+                        @endif
+                    </div>
                 </div>
 
                 <div
@@ -357,8 +394,11 @@
 
                                     @include('ad.components.payback_info', [
                                         'profit' => $ad->version_data->profits[0]['profit'],
-                                        'expense' => $ad->asicVersion->hashrate * $ad->asicVersion->efficiency * 24 / 1000 * $rub,
-                                        'tariff' => 5
+                                        'expense' =>
+                                            (($ad->asicVersion->hashrate * $ad->asicVersion->efficiency * 24) /
+                                                1000) *
+                                            $rub,
+                                        'tariff' => 5,
                                     ])
                                 @endif
                                 @if ($ad->with_vat)
@@ -372,7 +412,7 @@
 
                         <a href="{{ route('company.office', ['user' => $ad->user->url_name, 'office' => $ad->office->id]) }}"
                             target="_blank"
-                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4">
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
                             <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -382,20 +422,25 @@
                             {{ $ad->office->address }}
                         </a>
 
-                        <div class="my-5">
-                            <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
+                        <div class="my-5 sm:my-6 lg:my-7">
+                            <ul role="list" class="space-y-2 text-xxs xs:text-xs sm:text-sm">
                                 @if ($ad->adCategory->name == 'gpus')
-                                    <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                                        {{ __('Power (kW/h)') . ': ' }}
+                                    <li
+                                        class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                        {{ __('Power (kW/h)') }}
+                                        <span class="dots mx-2"></span>
                                         <span
                                             class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->max_power) }}</span>
                                     </li>
                                 @endif
 
                                 @foreach ($ad->props as $prop => $value)
-                                    <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                                        {{ __($prop) . ': ' }}@if (!is_array($value))
-                                            <span class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
+                                    <li
+                                        class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                        {{ __($prop) }}<span class="dots mx-2"></span>
+                                        @if (!is_array($value))
+                                            <span
+                                                class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
                                         @else
                                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                                 @foreach ($value as $item)
@@ -513,6 +558,41 @@
                 </div>
 
                 <div class="mt-8 md:col-span-12">
+                    @if ($ad->adcategory->name == 'miners')
+                        <ul role="list" class="md:hidden space-y-2 text-xxs xs:text-xs sm:text-sm">
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Manufacturer') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->asicBrand->name }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Algorithm') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->algorithm->name }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Efficiency') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency }}j/{{ $ad->asicVersion->measurement }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Power') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }}{{ __('kW/h') }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Release date') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->release->translatedFormat('j M Y') }}</span>
+                            </li>
+                        </ul>
+                    @endif
+
                     <div>
                         @if ($ad->description || ($ad->adcategory->name == 'miners' && $ad->asicVersion->asicModel->description))
                             <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100">

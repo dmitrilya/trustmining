@@ -95,6 +95,19 @@ body {
     display: none !important;
 }
 
+ul li .dots {
+    flex-grow: 1;
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1.5px);
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+    background-position: left bottom;
+    height: 1px;
+    width: 2px;
+    position: relative;
+    top: -4px;
+    opacity: 0.2;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
