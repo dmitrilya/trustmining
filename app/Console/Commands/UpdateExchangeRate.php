@@ -32,7 +32,7 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        /*$key = config('services.coinmarketcap.key');
+        $key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->pluck('abbreviation');
         $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
         $data->each(fn($coin) => Coin::where('abbreviation', $coin->symbol)->update(['rate' => $coin->quote->USD->price]));
@@ -56,7 +56,7 @@ class UpdateExchangeRate extends Command
             $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
             Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
             Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
-        }*/
+        }
 
         $this->updateProfit();
 
@@ -112,8 +112,8 @@ class UpdateExchangeRate extends Command
                         $q3 = $prices->get(floor($prices->count() * 0.75));
                         $iqr = $q3 - $q1;
 
-                        $lowerBound = $q1 - (1.25 * $iqr);
-                        $upperBound = $q3 + (1.25 * $iqr);
+                        $lowerBound = $q1 - (1.1 * $iqr);
+                        $upperBound = $q3 + (1.1 * $iqr);
 
                         $average = $prices->filter(fn($p) => $p >= $lowerBound && $p <= $upperBound)->avg();
 
