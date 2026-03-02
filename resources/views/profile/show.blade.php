@@ -6,7 +6,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2">
             <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div

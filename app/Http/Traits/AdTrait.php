@@ -76,9 +76,7 @@ trait AdTrait
                 $ads->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->whereIn('algorithms.name', $request->algorithms);
 
             if ($request->brands && count($request->brands)) {
-                $brands = array_map(function ($brand) {
-                    return str_replace('_', ' ', $brand);
-                }, $request->brands);
+                $brands = array_map(fn($brand) => str_replace('_', ' ', $brand), $request->brands);
                 $ads->join('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
                     ->whereIn(DB::raw('LOWER(asic_brands.name)'), $brands);
             }

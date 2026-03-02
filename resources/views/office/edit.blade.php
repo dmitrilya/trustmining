@@ -5,7 +5,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-3xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
             <form method="post" action="{{ route('office.update', ['office' => $office->id]) }}" class="mt-6 space-y-6"
                 enctype=multipart/form-data>

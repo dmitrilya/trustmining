@@ -5,7 +5,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
             @if (!$chats->count())
                 <p class="text-base text-slate-600">

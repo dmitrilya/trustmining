@@ -7,7 +7,7 @@
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         @include('moderation.components.buttons')
 
         <div class="w-full bg-white shadow-sm shadow-logo-color rounded-lg lg:rounded-l-none flex flex-col p-1 sm:p-4">

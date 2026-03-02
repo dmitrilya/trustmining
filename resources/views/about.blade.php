@@ -6,7 +6,7 @@
         </div>
     </x-slot> --}}
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-8 lg:space-y-12">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-8 lg:space-y-12">
         <div class="max-w-xs lg:max-w-xl mx-auto mt-4 md:mt-8">
             <p class="text-center text-2xl sm:text-3xl lg:text-5xl text-slate-900 dark:text-slate-100 font-bold">
                 <span>{{ __('Reducing the risks') }}</span><br />

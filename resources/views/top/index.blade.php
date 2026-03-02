@@ -6,7 +6,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-8 lg:space-y-12">
+    <div class="max-w-5xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-8 lg:space-y-12">
         <div class="max-w-sm md:max-w-4xl mx-auto mt-4 md:mt-8">
             <p class="text-center text-xs sm:text-lg lg:text-xl text-slate-500">
                 {{ __('Getting into the Top trusted sellers of TrustMining is not an advertisement, but the result of a comprehensive assessment. We analyze reputation of the seller, transparency of activities, ad history and customer feedback') }}
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="max-w-xl mx-auto px-2 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6">
+    <div class="max-w-xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
         @foreach ($users as $user)
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 relative">
                 @if ($loop->index == 0)

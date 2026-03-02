@@ -54,7 +54,7 @@
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-8" x-data="{ ad_category_name: null }">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" x-data="{ ad_category_name: null }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach ($ads->pluck('ad_category_header', 'ad_category_name')->unique() as $ad_category_name => $ad_category_header)
                 <div @click="ad_category_name = ad_category_name == '{{ $ad_category_name }}' ? null : '{{ $ad_category_name }}'"
