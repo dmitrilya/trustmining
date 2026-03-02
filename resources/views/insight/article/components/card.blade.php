@@ -28,9 +28,9 @@
                 'subscribers' => $article->channel->active_subscribers_count,
             ])
             <h3 itemprop="headline"
-                class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 h-12">
+                class="mt-1.5 mb-2 sm:mt-2 sm:mb-2.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 h-8 sm:h-10 line-clamp-2">
                 {{ $article->title }}</h3>
-            <p itemprop="description" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 h-12">
+            <p itemprop="description" class="text-xs text-slate-700 dark:text-slate-300 h-12">
                 {{ $article->subtitle }}</p>
         </div>
         <div class="mt-1 xs:mt-2">
