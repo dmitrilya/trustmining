@@ -100,8 +100,8 @@
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
                 <div class="text-sm text-slate-500 dark:text-slate-500 font-semibold">{{ __('To the buyer') }}</div>
-                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
-                    href="{{ route('companies') }}">{{ __('Companies') }}</a>
+                {{-- <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
+                    href="{{ route('companies') }}">{{ __('Companies') }}</a> --}}
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('ads', ['adCategory' => 'miners']) }}">{{ __('Miners') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
