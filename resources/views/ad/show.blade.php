@@ -301,7 +301,7 @@
                         @endif
 
                         @if ($ad->adcategory->name == 'miners')
-                            <ul role="list" class="hidden md:block space-y-2 text-xxs xs:text-xs sm:text-sm">
+                            <ul role="list" class="hidden md:block mt-3 lg:mt-4 space-y-2 text-xxs xs:text-xs sm:text-sm">
                                 <li
                                     class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                     {{ __('Manufacturer') }}<span class="dots mx-2"></span>
@@ -334,12 +334,12 @@
                                 </li>
                             </ul>
                         @elseif ($ad->adcategory->name == 'gpus')
-                            <ul role="list" class="hidden md:block space-y-2 text-xxs xs:text-xs sm:text-sm">
+                            <ul role="list" class="hidden md:block mt-3 lg:mt-4 space-y-2 text-xxs xs:text-xs sm:text-sm">
                                 <li
                                     class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                     {{ __('Engine manufacturer') }}<span class="dots mx-2"></span>
                                     <span
-                                        class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
+                                        class="text-slate-700 dark:text-slate-300 text-right">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
                                         ({{ __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) }})</span>
                                 </li>
                                 <li
@@ -625,7 +625,7 @@
                                 class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                 {{ __('Engine manufacturer') }}<span class="dots mx-2"></span>
                                 <span
-                                    class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
+                                    class="text-slate-700 dark:text-slate-300 text-right">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
                                     ({{ __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) }})</span>
                             </li>
                             <li
