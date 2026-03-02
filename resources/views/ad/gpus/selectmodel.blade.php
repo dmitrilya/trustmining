@@ -19,7 +19,7 @@
 
                     <button type="button" aria-label="Clear"
                         class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500 dark:text-slate-400"
-                        @click="search = '';selectedModel = null">
+                        @click="search = '';selectedModel = null;$el.previousElementSibling.focus()">
                         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -34,7 +34,7 @@
             </div>
 
             <ul role="listbox" style="display: none" x-show="open"
-                class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
                 @foreach ($gpuModels as $gpuModel)
                     <li @click="selectedModel = {{ $gpuModel->id }}; open = false; search = '{{ $gpuModel->name }}'"
