@@ -333,6 +333,34 @@
                                         class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->release->translatedFormat('j M Y') }}</span>
                                 </li>
                             </ul>
+                        @elseif ($ad->adcategory->name == 'gpus')
+                            <ul role="list" class="hidden md:block space-y-2 text-xxs xs:text-xs sm:text-sm">
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Engine manufacturer') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
+                                        ({{ __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) }})</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Engine model') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->name }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Fuel consumption (m³/h)') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->fuel_consumption }}</span>
+                                </li>
+                                <li
+                                    class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                    {{ __('Country') }}<span class="dots mx-2"></span>
+                                    <span
+                                        class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->gpuBrand->country) }}</span>
+                                </li>
+                            </ul>
                         @endif
                     </div>
                 </div>
@@ -383,6 +411,10 @@
                                     content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
                                 <span itemprop="price">{{ $ad->price }}</span>
                                 <span class="ml-2">{{ $ad->coin->abbreviation }}</span>
+                                @if ($ad->with_vat)
+                                    <span
+                                        class="ml-1 text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
+                                @endif
 
                                 @if ($ad->adCategory->name == 'miners')
                                     @include('ad.components.price_graduation', [
@@ -400,10 +432,6 @@
                                             $rub,
                                         'tariff' => 5,
                                     ])
-                                @endif
-                                @if ($ad->with_vat)
-                                    <span
-                                        class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                                 @endif
                             @else
                                 {{ __('Price on request') }}
@@ -589,6 +617,34 @@
                                 {{ __('Release date') }}<span class="dots mx-2"></span>
                                 <span
                                     class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->asicModel->release->translatedFormat('j M Y') }}</span>
+                            </li>
+                        </ul>
+                    @elseif ($ad->adcategory->name == 'gpus')
+                        <ul role="list" class="md:hidden space-y-2 text-xxs xs:text-xs sm:text-sm">
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Engine manufacturer') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->gpuEngineBrand->name }}
+                                    ({{ __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) }})</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Engine model') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->gpuEngineModel->name }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Fuel consumption (m³/h)') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->gpuModel->fuel_consumption }}</span>
+                            </li>
+                            <li
+                                class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                                {{ __('Country') }}<span class="dots mx-2"></span>
+                                <span
+                                    class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->gpuBrand->country) }}</span>
                             </li>
                         </ul>
                     @endif
