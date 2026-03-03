@@ -99,7 +99,6 @@ class HostingController extends Controller
             'video' => $request->video,
             'price' => $request->price,
             'images' => [],
-            'contract' => '',
             'contract_deficiencies' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
             'conditions' => $request->conditions ? $request->conditions : [],
@@ -110,7 +109,7 @@ class HostingController extends Controller
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
         $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [400, 300]);
         $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id, $time, [224, 168]);
-        $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting);
+        if ($request->contract) $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting);
         if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
         if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
 

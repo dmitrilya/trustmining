@@ -109,7 +109,7 @@
 
                 <div>
                     <x-input-label for="hosting-contract" :value="'* ' . __('Agreement for the provision of accommodation services')" />
-                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full" required
+                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
                         accept=".doc,.docx" />
                     <p class="mt-1 text-sm text-slate-600" id="contract_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('contract')" />

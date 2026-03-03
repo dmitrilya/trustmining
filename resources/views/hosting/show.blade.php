@@ -71,7 +71,8 @@
                         </div>
 
                         <div>
-                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}</h3>
+                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}
+                            </h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['expenses']) ? ' border border-indigo-500' : '' }}">
@@ -108,10 +109,12 @@
                                     : $hosting->energy_supply;
                             @endphp
 
-
-                            <div class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
-                                <x-document :path="$contract" :name="__('Contract')"></x-document>
-                            </div>
+                            @if ($contract)
+                                <div
+                                    class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
+                                    <x-document :path="$contract" :name="__('Contract')"></x-document>
+                                </div>
+                            @endif
 
                             @if ($territory)
                                 <div
@@ -228,7 +231,9 @@
                     @include('components.about-seller', ['user' => $hosting->user])
 
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                        <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
+                        @if ($hosting->contract)
+                            <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
+                        @endif
 
                         @if ($hosting->territory)
                             <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>

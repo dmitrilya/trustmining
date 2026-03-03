@@ -28,7 +28,7 @@ class StoreHostingRequest extends FormRequest
             'video' => 'nullable|active_url',
             'images' => 'required|min:1|max:10',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
-            'contract' => 'required|file|mimes:doc,docx|max:1024',
+            'contract' => 'file|mimes:doc,docx|max:1024',
             'territory' => 'file|mimes:doc,docx|max:1024',
             'energy_supply' => 'file|mimes:doc,docx|max:1024',
             'price' => 'required|min:0|max:10',
