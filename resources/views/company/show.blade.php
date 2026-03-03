@@ -45,8 +45,8 @@
                         @if ($company->card['type'] == 'LEGAL')
                             <h3
                                 class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
-                                <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24"
-                                    fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24"
+                                    height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                         clip-rule="evenodd" />
@@ -94,7 +94,8 @@
                                             class="text-slate-700 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                     </li>
                                 @endif
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('Registration date') . ': ' }}<span
+                                <li class="text-slate-500 dark:text-slate-400">
+                                    {{ __('Registration date') . ': ' }}<span
                                         class="date-transform text-slate-700 dark:text-slate-200" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
@@ -109,7 +110,8 @@
                                             ₽</span>
                                     </li>
 
-                                    <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                    <div
+                                        class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
@@ -128,7 +130,8 @@
                                 @endif
 
                                 @if (array_key_exists('managers', $company->card))
-                                    <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                    <div
+                                        class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Managers') }}
                                     </div>
 
@@ -174,14 +177,12 @@
 
                     @if ($d)
                         <div>
-                            <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                                {{ __('Description') }}</h3>
+                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                                {{ __('Description') }}</h2>
 
-                            <div class="mt-5">
-                                <p
-                                    class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {{ $d }}
-                                </p>
+                            <div itemprop="description"
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                {!! $d !!}
                             </div>
                         </div>
                     @endif
@@ -269,7 +270,8 @@
                                                 ({{ $founder['share'] }}%)
                                             </span>
                                         </li>
-                                        <li class="text-slate-500 dark:text-slate-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                        <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                            {{ __('TIN') . ': ' }}<span
                                                 class="text-slate-700 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                         </li>
                                     </div>
@@ -286,7 +288,8 @@
                                         <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
                                                 class="text-slate-700 dark:text-slate-200">{{ $manager['name'] }}</span>
                                         </li>
-                                        <li class="text-slate-500 dark:text-slate-400 mt-1">{{ __('TIN') . ': ' }}<span
+                                        <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                            {{ __('TIN') . ': ' }}<span
                                                 class="text-slate-700 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                         </li>
                                     </div>
@@ -329,12 +332,12 @@
 
                 @if ($company->description)
                     <div>
-                        <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                            {{ __('Description') }}</h3>
+                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                            {{ __('Description') }}</h2>
 
-                        <div class="mt-5">
-                            <p class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line">
-                                {{ $company->description }}</p>
+                        <div itemprop="description"
+                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
+                            {!! $company->description !!}
                         </div>
                     </div>
                 @endif

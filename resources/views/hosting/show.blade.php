@@ -145,14 +145,12 @@
                         @endif
 
                         <div>
-                            <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                                {{ __('Description') }}</h3>
+                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                                {{ __('Description') }}</h2>
 
-                            <div class="mt-5">
-                                <p
-                                    class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {{ isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description }}
-                                </p>
+                            <div itemprop="description"
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                {!! isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description !!}
                             </div>
                         </div>
                     </div>
@@ -320,12 +318,12 @@
                     @endif
 
                     <div>
-                        <h3 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                            {{ __('Description') }}</h3>
+                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                            {{ __('Description') }}</h2>
 
-                        <div class="mt-5">
-                            <p class="text-slate-800 dark:text-slate-300 text-sm whitespace-pre-line">
-                                {{ $hosting->description }}</p>
+                        <div itemprop="description"
+                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
+                            {!! $hosting->description !!}
                         </div>
                     </div>
                 </div>
