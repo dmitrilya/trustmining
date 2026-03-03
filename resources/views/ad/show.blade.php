@@ -122,7 +122,7 @@
                         <a itemprop="item" href="#" aria-current="page"
                             class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
                             <span itemprop="name">{{ $ad->gpuModel->name }}
-                                {{ $ad->gpuModel->max_power }}{{ __('kW/h') }}</span>
+                                {{ $ad->gpuModel->max_power }} {{ __('kW/h') }}</span>
                         </a>
                     </li>
                 @endif
@@ -324,7 +324,7 @@
                                     class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                     {{ __('Power') }}<span class="dots mx-2"></span>
                                     <span
-                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }}{{ __('kW/h') }}</span>
+                                        class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }} {{ __('kW/h') }}</span>
                                 </li>
                                 <li
                                     class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
@@ -610,7 +610,7 @@
                                 class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                                 {{ __('Power') }}<span class="dots mx-2"></span>
                                 <span
-                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }}{{ __('kW/h') }}</span>
+                                    class="text-slate-700 dark:text-slate-300">{{ $ad->asicVersion->efficiency * $ad->asicVersion->hashrate }} {{ __('kW/h') }}</span>
                             </li>
                             <li
                                 class="flex justify-between items-end text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
