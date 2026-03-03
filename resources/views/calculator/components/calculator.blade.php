@@ -65,7 +65,7 @@
             <div
                 class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                    <h2 class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">
+                    <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
                         {{ __('Calculation result') }}</h2>
                     <div class="flex cursor-pointer mx-3">
                         <button
@@ -104,7 +104,7 @@
                             return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
                         }
                     }">
-                        <div class="grid grid-cols-4 gap-2 sm:gap-4">
+                        <div class="grid grid-cols-4 gap-2 xs:gap-3 sm:gap-4">
                             <div></div>
                             <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Income') }}
@@ -124,7 +124,7 @@
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="Math.round(dailyConsumption * 100) / 100">
                             </div>
-                            <div class="text-xs xs:text-s font-bold"
+                            <div class="text-xs xs:text-sm font-bold"
                                 :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
                                 x-text="Math.round(dailyIncome * 100) / 100">
                             </div>
