@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Morph;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
 use App\Http\Traits\ModerationTrait;
-
+use App\Models\Database\Coin;
 use App\Models\Morph\Moderation;
 
 class ModerationController extends Controller
@@ -55,7 +56,12 @@ class ModerationController extends Controller
                 return view('hosting.show', ['hosting' => $m, 'moderation' => $moderation]);
                 break;
             case ('ad'):
-                return view('ad.show', ['ad' => $m, 'moderation' => $moderation]);
+                $m->version_data = Cache::get('calculator_models')->where('id', $m->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $m->asic_version_id)->first();
+                return view('ad.show', [
+                    'ad' => $m,
+                    'moderation' => $moderation,
+                    'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+                ]);
                 break;
             case ('review'):
                 return view('review.show', ['review' => $m, 'moderation' => $moderation]);
