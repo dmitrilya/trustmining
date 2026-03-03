@@ -11,7 +11,7 @@ use App\Models\Ad\Hosting;
 
 trait FileTrait
 {
-    public function saveFiles($files, $folder, $type, int $id, $time, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFiles($files, $folder, $type, $id, $time, $resize = null, $quality = 70, $disk = 'public')
     {
         $result = [];
 
@@ -53,7 +53,7 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, int $id, $time, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFile($file, $folder, $type, $id, $time, $resize = null, $quality = 70, $disk = 'public')
     {
         $filename = $type . '_' . $id;
         if ($time) $filename .= '_' . $time;
@@ -67,7 +67,7 @@ trait FileTrait
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName($files, $folder, $type, int $id, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFilesWithName($files, $folder, $type, $id, $resize = null, $quality = 70, $disk = 'public')
     {
         $result = [];
 
