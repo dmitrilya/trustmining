@@ -1,7 +1,7 @@
 <x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}"
     description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-    
+
     <x-slot name="header">
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
@@ -94,66 +94,64 @@
                             </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mt-8 md:col-span-12">
-                        @include('components.about-seller', ['user' => $hosting->user])
+                <div class="mt-8">
+                    @include('components.about-seller', ['user' => $hosting->user])
 
-                        <div class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            @php
-                                $contract = isset($moderation->data['contract'])
-                                    ? $moderation->data['contract']
-                                    : $hosting->contract;
-                                $territory = isset($moderation->data['territory'])
-                                    ? $moderation->data['territory']
-                                    : $hosting->territory;
-                                $energySupply = isset($moderation->data['energy_supply'])
-                                    ? $moderation->data['energy_supply']
-                                    : $hosting->energy_supply;
-                            @endphp
-
-                            @if ($contract)
-                                <div
-                                    class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
-                                    <x-document :path="$contract" :name="__('Contract')"></x-document>
-                                </div>
-                            @endif
-
-                            @if ($territory)
-                                <div
-                                    class="{{ isset($moderation->data['territory']) ? 'border border-indigo-500' : '' }}">
-                                    <x-document :path="$territory" :name="__('Territory')"></x-document>
-                                </div>
-                            @endif
-
-                            @if ($energySupply)
-                                <div
-                                    class="{{ isset($moderation->data['energy_supply']) ? 'border border-indigo-500' : '' }}">
-                                    <x-document :path="$energySupply" :name="__('Energy supply agreement')"></x-document>
-                                </div>
-                            @endif
-                        </div>
-
+                    <div class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                         @php
-                            $v = isset($moderation->data['video']) ? $moderation->data['video'] : $hosting->video;
+                            $contract = isset($moderation->data['contract'])
+                                ? $moderation->data['contract']
+                                : $hosting->contract;
+                            $territory = isset($moderation->data['territory'])
+                                ? $moderation->data['territory']
+                                : $hosting->territory;
+                            $energySupply = isset($moderation->data['energy_supply'])
+                                ? $moderation->data['energy_supply']
+                                : $hosting->energy_supply;
                         @endphp
 
-                        @if ($v)
-                            <div
-                                class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
-                                <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        @if ($contract)
+                            <div class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
+                                <x-document :path="$contract" :name="__('Contract')"></x-document>
                             </div>
                         @endif
 
-                        <div>
-                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                                {{ __('Description') }}</h2>
-
-                            <div itemprop="description"
-                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                {!! isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description !!}
+                        @if ($territory)
+                            <div class="{{ isset($moderation->data['territory']) ? 'border border-indigo-500' : '' }}">
+                                <x-document :path="$territory" :name="__('Territory')"></x-document>
                             </div>
+                        @endif
+
+                        @if ($energySupply)
+                            <div
+                                class="{{ isset($moderation->data['energy_supply']) ? 'border border-indigo-500' : '' }}">
+                                <x-document :path="$energySupply" :name="__('Energy supply agreement')"></x-document>
+                            </div>
+                        @endif
+                    </div>
+
+                    @php
+                        $v = isset($moderation->data['video']) ? $moderation->data['video'] : $hosting->video;
+                    @endphp
+
+                    @if ($v)
+                        <div
+                            class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
+                            <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    @endif
+
+                    <div>
+                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                            {{ __('Description') }}</h2>
+
+                        <div itemprop="description"
+                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                            {!! isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description !!}
                         </div>
                     </div>
                 </div>
@@ -226,29 +224,30 @@
                         @endif
                     </div>
                 </div>
+            </div>
 
-                <div class="mt-8 md:col-span-12">
-                    @include('components.about-seller', ['user' => $hosting->user])
+            <div class="mt-8">
+                @include('components.about-seller', ['user' => $hosting->user])
 
-                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                        @if ($hosting->contract)
-                            <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
-                        @endif
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                    @if ($hosting->contract)
+                        <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
+                    @endif
 
-                        @if ($hosting->territory)
-                            <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>
-                        @endif
+                    @if ($hosting->territory)
+                        <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>
+                    @endif
 
-                        @if ($hosting->energy_supply)
-                            <x-document :path="$hosting->energy_supply" :name="__('Energy supply agreement')"></x-document>
-                        @endif
-                    </div>
+                    @if ($hosting->energy_supply)
+                        <x-document :path="$hosting->energy_supply" :name="__('Energy supply agreement')"></x-document>
+                    @endif
+                </div>
 
-                    @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
-                        <div x-data="{ deficiencies: [], done: false }">
-                            <x-secondary-button
-                                class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
-                                @click="if (!status) {
+                @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
+                    <div x-data="{ deficiencies: [], done: false }">
+                        <x-secondary-button
+                            class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
+                            @click="if (!status) {
                                     if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
                                         .then(r => {
                                             if (r.data.success) {
@@ -259,74 +258,73 @@
                                         });
                                     else $dispatch('open-modal', 'need-subscription');
                                 }">
-                                <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
-                                </svg>
+                            <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
+                            </svg>
 
-                                <span>{{ __('Defects of the contract') }}</span>
-                            </x-secondary-button>
+                            <span>{{ __('Defects of the contract') }}</span>
+                        </x-secondary-button>
 
-                            <template x-if="done">
-                                <div>
-                                    <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-slate-600 font-bold">
-                                        {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
-                                    </h5>
+                        <template x-if="done">
+                            <div>
+                                <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-slate-600 font-bold">
+                                    {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
+                                </h5>
 
-                                    <p x-show="!deficiencies[0].length"
-                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
-                                        {{ __('No defects found') }}</p>
-                                    <template x-for="problem in deficiencies[0]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
-                                            x-text="problem.point + ' - ' + problem.problem"></p>
-                                    </template>
+                                <p x-show="!deficiencies[0].length"
+                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    {{ __('No defects found') }}</p>
+                                <template x-for="problem in deficiencies[0]" :key="problem.problem">
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                        x-text="problem.point + ' - ' + problem.problem"></p>
+                                </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
-                                        {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
-                                    </h5>
+                                <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
+                                    {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
+                                </h5>
 
-                                    <p x-show="!deficiencies[1].length"
-                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
-                                        {{ __('No defects found') }}</p>
-                                    <template x-for="problem in deficiencies[1]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
-                                            x-text="problem.point + ' - ' + problem.problem"></p>
-                                    </template>
+                                <p x-show="!deficiencies[1].length"
+                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    {{ __('No defects found') }}</p>
+                                <template x-for="problem in deficiencies[1]" :key="problem.problem">
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                        x-text="problem.point + ' - ' + problem.problem"></p>
+                                </template>
 
-                                    <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
-                                        {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
-                                    </h5>
+                                <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
+                                    {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
+                                </h5>
 
-                                    <p x-show="!deficiencies[2].length"
-                                        class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
-                                        {{ __('No defects found') }}</p>
-                                    <template x-for="problem in deficiencies[2]" :key="problem.problem">
-                                        <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
-                                            x-text="problem.point + ' - ' + problem.problem"></p>
-                                    </template>
-                                </div>
-                            </template>
-                        </div>
-                    @endif
+                                <p x-show="!deficiencies[2].length"
+                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    {{ __('No defects found') }}</p>
+                                <template x-for="problem in deficiencies[2]" :key="problem.problem">
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                        x-text="problem.point + ' - ' + problem.problem"></p>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                @endif
 
-                    @if ($hosting->video)
-                        <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
-                            <iframe class="w-full h-full" src="{{ $hosting->video }}" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        </div>
-                    @endif
+                @if ($hosting->video)
+                    <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
+                        <iframe class="w-full h-full" src="{{ $hosting->video }}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                @endif
 
-                    <div>
-                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                            {{ __('Description') }}</h2>
+                <div>
+                    <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                        {{ __('Description') }}</h2>
 
-                        <div itemprop="description"
-                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
-                            {!! $hosting->description !!}
-                        </div>
+                    <div itemprop="description"
+                        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
+                        {!! $hosting->description !!}
                     </div>
                 </div>
             </div>
