@@ -1,4 +1,4 @@
-<div class="flex space-x-2 sm:space-x-3 mt-2 md:mt-4 mb-4">
+<div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 md:mt-5 mb-4">
     <div class="w-full">
         <x-input-label for="tariff" :value="__('Tariff')" />
         <x-text-input ::value="tariff" id="tariff" type="number"

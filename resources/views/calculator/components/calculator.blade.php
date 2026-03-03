@@ -33,19 +33,19 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                    {{ __('Algorithm') }}:
-                                    <span class="text-slate-900 dark:text-slate-100 font-bold"
+                            <div class="mt-5 space-y-1 sm:space-y-2">
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 flex items-end">
+                                    {{ __('Algorithm') }}:<span class="dots mx-2"></span><span
+                                        class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.algorithm"></span>
                                 </div>
-                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                    {{ __('Power') }}:
-                                    <span class="text-slate-900 dark:text-slate-100 font-bold"
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 flex items-end">
+                                    {{ __('Power') }}:<span class="dots mx-2"></span><span
+                                        class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.efficiency * version.hashrate"></span> W
                                 </div>
-                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                    {{ __('The best price') }}: <span
+                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 flex items-end">
+                                    {{ __('The best price') }}:<span class="dots mx-2"></span><span
                                         class="text-slate-900 dark:text-slate-100 font-bold"
                                         x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                 </div>
@@ -106,16 +106,16 @@
                     }">
                         <div class="grid grid-cols-4 gap-2 sm:gap-4">
                             <div></div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Income') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Expense') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Profit') }}
                             </div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Day') }}
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
@@ -128,7 +128,7 @@
                                 :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
                                 x-text="Math.round(dailyIncome * 100) / 100">
                             </div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Month') }}
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
@@ -141,7 +141,7 @@
                                 :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
                                 x-text="Math.round(dailyIncome * 30 * 100) / 100">
                             </div>
-                            <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
+                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
                                 {{ __('Year') }}
                             </div>
                             <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
@@ -156,7 +156,7 @@
                             </div>
                         </div>
 
-                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
+                        <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Payback') }}:
                             <span class="text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="version.price ? dailyIncomeUSDT > 0 ? Math.round(version.price / dailyIncomeUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
@@ -177,35 +177,38 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="mt-3 sm:mt-4 space-y-1 sm:space-y-2">
-                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                            {{ __('Algorithm') }}:
-                                            <span class="text-slate-900 dark:text-slate-100 font-bold"
+                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2">
+                                        <div
+                                            class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 flex items-end">
+                                            {{ __('Algorithm') }}:<span class="dots mx-2"></span><span
+                                                class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.algorithm"></span>
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                            {{ __('Power') }}:
-                                            <span class="text-slate-900 dark:text-slate-100 font-bold"
+                                        <div
+                                            class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 flex items-end">
+                                            {{ __('Power') }}:<span class="dots mx-2"></span><span
+                                                class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.efficiency * version.hashrate"></span> W
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300">
-                                            {{ __('The best price') }}: <span
+                                        <div
+                                            class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 flex items-end">
+                                            {{ __('The best price') }}:<span class="dots mx-2"></span><span
                                                 class="text-slate-900 dark:text-slate-100 font-bold"
                                                 x-text="version.price ? version.price + ' USDT' : '{{ __('No data') }}'"></span>
                                         </div>
                                     </div>
                                     <template x-if="version.ads.length">
-                                        <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
+                                        <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
                                             x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
                                             <x-primary-button
-                                                class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                                class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
                                         </a>
                                     </template>
                                 </div>
                             </template>
                         </div>
 
-                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
+                        <p class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Coins per day') }}</p>
 
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">

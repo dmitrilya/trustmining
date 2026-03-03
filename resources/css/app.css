@@ -95,7 +95,7 @@ body {
     display: none !important;
 }
 
-ul li .dots {
+.dots {
     flex-grow: 1;
     background-image: radial-gradient(circle, currentColor 1px, transparent 1.5px);
     background-size: 10px 1px;
