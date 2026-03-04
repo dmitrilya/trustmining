@@ -38,7 +38,7 @@
     @endif
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        @if ($user->company)
+        @if (isset($user) && $user->company)
             @include('shop.components.about')
         @endif
 
