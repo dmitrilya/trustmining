@@ -70,7 +70,7 @@ window.toc = (article, name) => {
 
     const tocLgContainer = document.getElementById('toc-lg-container');
     const tocContainer = document.getElementById('toc-container');
-    tocLgContainer.classList.add('p-4', 'bg-white/60', 'dark:bg-slate-900/60', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.classList.add('p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
     tocContainer.classList.add('min-h-[129px]');
 
     const blockName = document.createElement('p');
