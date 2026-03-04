@@ -111,7 +111,7 @@ class SitemapGenerate extends Command
 
         $out .= $this->addUrl('blog');
         foreach (BlogArticle::select(['id', 'title'])->get() as $article) {
-            $out .= $this->addUrl('blog/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $article->title)));
+            $out .= $this->addUrl('blog/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title)));
         }
 
         $out .= $this->addUrl('insight');
@@ -120,13 +120,13 @@ class SitemapGenerate extends Command
             $out .= $this->addUrl('insight/' . $channel->slug);
 
             foreach ($channel->moderatedArticles as $article)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $article->title)));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title)));
 
             foreach ($channel->moderatedPosts as $post)
                 $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
 
             foreach ($channel->moderatedVideos as $video)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $video->title)));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $video->title)));
         }
 
         $out .= $this->addUrl('forum');
@@ -138,7 +138,7 @@ class SitemapGenerate extends Command
                 $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
                 foreach ($forumSubcategory->forumQuestions as $forumQuestion)
-                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $forumQuestion->theme)));
+                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $forumQuestion->theme)));
             }
         }
 
@@ -155,7 +155,7 @@ class SitemapGenerate extends Command
         $out .= '
 </urlset>';
 
-        file_put_contents('public/sitemap.xml', $out);
+        file_put_contents('public_html/sitemap.xml', $out);
 
         return Command::SUCCESS;
     }

@@ -130,7 +130,7 @@ class VideoController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $video->title))])
+        return redirect()->route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $video->title))])
             ->withErrors(['success' => __('The video has been sent for moderation')]);
     }
 
