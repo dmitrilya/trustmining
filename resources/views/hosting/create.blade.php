@@ -56,7 +56,7 @@
                     <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple required
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-slate-600" id="images_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-500" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 10 items)</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
@@ -111,7 +111,7 @@
                     <x-input-label for="hosting-contract" :value="'* ' . __('Agreement for the provision of accommodation services')" />
                     <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
                         accept=".doc,.docx" />
-                    <p class="mt-1 text-sm text-slate-600" id="contract_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-500" id="contract_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('contract')" />
                 </div>
 
@@ -119,7 +119,7 @@
                     <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
                     <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
                         accept=".doc,.docx" />
-                    <p class="mt-1 text-sm text-slate-600" id="territory_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-500" id="territory_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('territory')" />
                 </div>
 
@@ -127,7 +127,7 @@
                     <x-input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
                     <x-file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
                         autocomplete="energy_supply" accept=".doc,.docx" :value="old('energy_supply')" />
-                    <p class="mt-1 text-sm text-slate-600" id="energy_supply_help">DOC (max. 1MB)</p>
+                    <p class="mt-1 text-sm text-slate-500" id="energy_supply_help">DOC (max. 1MB)</p>
                     <x-input-error :messages="$errors->get('energy_supply')" />
                 </div>
 

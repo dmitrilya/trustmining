@@ -1,22 +1,13 @@
 <x-app-layout title="{{ $company->name }}: информация о компании"
     description="Ознакомьтесь со всей информацией о компании {{ $company->name }} на сайте TrustMining">
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-
-    <x-slot name="header">
-        <div class="flex items-center">
-            <x-back-link :href="route('company', ['user' => $company->user->url_name])"></x-back-link>
-
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
-                {{ $company->name }}
-            </h1>
-        </div>
-    </x-slot>
 
     @php
         $auth = Auth::user();
     @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
+        @include('shop.components.about')
+
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons')
 
@@ -33,10 +24,6 @@
                     @endif
 
                     <div class="md:col-span-4 space-y-5">
-                        <div class="{{ isset($moderation->data['logo']) ? 'border border-indigo-500' : '' }}">
-                            @include('components.about-seller', ['user' => $company->user])
-                        </div>
-
                         @if (isset($moderation->data['bg_logo']))
                             <div class="border border-indigo-500">
                                 <img class="h-40" src="{{ Storage::url($moderation->data['bg_logo']) }}"
@@ -202,10 +189,6 @@
                 @endif
 
                 <div class="md:col-span-4 space-y-5">
-                    <div>
-                        @include('components.about-seller', ['user' => $company->user])
-                    </div>
-
                     @if ($company->card['type'] == 'LEGAL')
                         <h3
                             class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
@@ -329,18 +312,6 @@
                         <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                @endif
-
-                @if ($company->description)
-                    <div>
-                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
-                            {{ __('Description') }}</h2>
-
-                        <div itemprop="description"
-                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
-                            {!! $company->description !!}
-                        </div>
                     </div>
                 @endif
             </div>

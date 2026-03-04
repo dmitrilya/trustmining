@@ -30,7 +30,7 @@
                 <x-file-input id="passport-images" name="images[]" class="mt-1 block w-full"
                     accept=".png,.jpg,.jpeg,.webp" multiple required
                     @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                <p class="mt-1 text-xxs text-slate-600" id="images_help">PNG, JPG
+                <p class="mt-1 text-xxs text-slate-500" id="images_help">PNG, JPG
                     or JPEG (max. 2MB, 3 items)</p>
                 <x-input-error :messages="$errors->get('images')" />
                 @foreach ($errors->get('images.*') as $error)

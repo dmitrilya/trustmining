@@ -1,60 +1,22 @@
 <x-app-layout title="Майнинговая компания {{ $user->name }}: купить ASIC майнер"
-    description="Официальный представитель {{ $user->name }}: купите ASIC-майнеры Bitmain, Whatsminer и Canaan с гарантией от производителя. Большой выбор оборудования в наличии, низкие цены, быстрая доставка и профессиональная поддержка 24/7. Проверьте и заберите майнеры в наших офисах или закажите онлайн">
-    <x-slot name="header">
-        <div class="flex flex-col lg:flex-row items-center">
-            <div class="flex items-center mr-auto w-full max-w-max mr-4">
-                <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
-                    {{ $user->name }}
-                </h1>
-            </div>
-
-            @php
-                $sort = request()->sort;
-                $auth = Auth::user();
-            @endphp
-
-            <div class="flex justify-between items-center w-full mt-4 lg:mt-0">
-                @include('shop.components.menu')
-
-                <x-header-filters>
-                    <x-slot name="sort">
-                        @if ($auth && $auth->tariff)
-                            <x-dropdown-link ::class="{ 'bg-slate-200': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
-                                request()->route()->action['as'],
-                                array_merge(request()->route()->originalParameters(), [
-                                    'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
-                                    http_build_query(request()->except('sort')),
-                                ]),
-                            )">
-                                {{ __('Price: Low to High') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link ::class="{ 'bg-slate-200': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
-                                request()->route()->action['as'],
-                                array_merge(request()->route()->originalParameters(), [
-                                    'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
-                                    http_build_query(request()->except('sort')),
-                                ]),
-                            )">
-                                {{ __('Price: High to Low') }}
-                            </x-dropdown-link>
-                        @else
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition duration-150 ease-in-out"
-                                @click.prevent="$dispatch('open-modal', 'need-subscription')">
-                                {{ __('Price: Low to High') }}
-                            </div>
-                            <div class="px-4 py-2 text-left text-sm leading-5 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition duration-150 ease-in-out"
-                                @click.prevent="$dispatch('open-modal', 'need-subscription')">
-                                {{ __('Price: High to Low') }}
-                            </div>
-                        @endif
-                    </x-slot>
-                </x-header-filters>
-            </div>
-        </div>
+    description="Официальный представитель {{ $user->name }}: купите ASIC-майнеры Bitmain, Whatsminer и Canaan с гарантией от производителя. Большой выбор оборудования в наличии, низкие цены, быстрая доставка и профессиональная поддержка 24/7. Проверьте и заберите майнеры в наших офисах или закажите онлайн"
+    itemtype="https://schema.org/ProfilePage" :itemname="__('Company') . ' ' . $user->name">
+    <x-slot name="og">
+        <meta property="og:title" content="{{ $user->company ? __('Company') : __('Seller') }} {{ $user->name }}">
+        <meta property="og:description"
+            content="Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING">
+        @if ($user->company)
+            <meta property="og:image" content="{{ Storage::disk('public')->url($user->company->logo) }}">
+        @endif
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" x-data="{ ad_category_name: null }">
+        @if ($user->company)
+            @include('shop.components.about')
+        @endif
+
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach ($ads->pluck('ad_category_header', 'ad_category_name')->unique() as $ad_category_name => $ad_category_header)
                 <div @click="ad_category_name = ad_category_name == '{{ $ad_category_name }}' ? null : '{{ $ad_category_name }}'"
@@ -74,7 +36,7 @@
         </div>
 
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            @if ($auth && $auth->id == $user->id)
+            @if (auth()->check() && auth()->id() == $user->id)
                 <a href="{{ route('ad.create') }}"
                     class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-400 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
@@ -91,7 +53,10 @@
                 </a>
             @endif
 
-            @include('ad.components.list', ['owner' => $auth && $auth->id == $user->id, 'shop' => true])
+            @include('ad.components.list', [
+                'owner' => auth()->check() && auth()->id() == $user->id,
+                'shop' => true,
+            ])
 
             <div class="mt-8 sm:mt-12 lg:mt-16">
                 {{ $ads->links() }}

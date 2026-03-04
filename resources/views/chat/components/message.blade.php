@@ -3,7 +3,7 @@
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="date-transform text-xs text-slate-600"
+                <span class="date-transform text-xs text-slate-500"
                     data-date="{{ $message->created_at }}"></span>
             </div>
 
@@ -19,7 +19,7 @@
             <div
                 class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
                 <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                    <span class="date-transform text-xs text-slate-600"
+                    <span class="date-transform text-xs text-slate-500"
                         data-date="{{ $message->created_at }}"></span>
                 </div>
 
@@ -80,7 +80,7 @@
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
-                <span class="date-transform text-xs text-slate-600"
+                <span class="date-transform text-xs text-slate-500"
                     data-date="{{ $message->created_at }}"></span>
             </div>
 

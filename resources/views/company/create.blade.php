@@ -57,7 +57,7 @@
                     <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple
                         accept=".doc,.docx" required
                         @change="if ($el.files.length > 4) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 4]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-slate-600" id="documents_help">DOC (max. 1MB, max. 4
+                    <p class="mt-1 text-sm text-slate-500" id="documents_help">DOC (max. 1MB, max. 4
                         items)
                     </p>
                     <x-input-error :messages="$errors->get('documents')" />

@@ -58,7 +58,7 @@
                 <x-input-label for="images" :value="__('Photo')" />
                 <x-file-input id="images" name="images[]" x-ref="images" class="mt-1 block w-full" multiple
                     accept=".png,.jpg,.jpeg,.webp" />
-                <p class="mt-1 text-sm text-slate-600" id="file_input_help">PNG, JPG
+                <p class="mt-1 text-sm text-slate-500" id="file_input_help">PNG, JPG
                     or JPEG (max. 1MB, 3 items)</p>
                 <x-input-error :messages="$errors->get('images')" />
                 @foreach ($errors->get('images.*') as $error)

@@ -46,9 +46,9 @@ class ShopController extends Controller
      */
     public function aboutCompany(User $user)
     {
-        if (!$user->company || $user->company->moderation) return redirect()->route('company', ['user' => $user->url_name]);
+        if (!$user->company) return redirect()->route('company', ['user' => $user->url_name]);
 
-        return view('company.show', ['company' => $user->company]);
+        return view('company.show', ['user' => $user, 'company' => $user->company]);
     }
 
     /**
@@ -62,7 +62,7 @@ class ShopController extends Controller
 
         $this->addView(request(), $user->hosting);
 
-        return view('hosting.show', ['hosting' => $user->hosting]);
+        return view('hosting.show', ['user' => $user, 'hosting' => $user->hosting]);
     }
 
     public function reviews(Request $request, User $user)
@@ -83,7 +83,10 @@ class ShopController extends Controller
     {
         $limit = $user->tariff ? $user->tariff->max_offices : 1;
 
-        return view('office.index', ['offices' => $user->offices()->where('moderation', false)->limit($limit)->get()]);
+        return view('office.index', [
+            'user' => $user,
+            'offices' => $user->offices()->where('moderation', false)->limit($limit)->get()
+        ]);
     }
 
     /**

@@ -19,7 +19,7 @@
                                 {{ $review->user->name }}
                             </div>
 
-                            <span class="date-transform text-xs text-slate-600"
+                            <span class="date-transform text-xs text-slate-500"
                                 data-date="{{ $review->created_at }}"></span>
                         </div>
 

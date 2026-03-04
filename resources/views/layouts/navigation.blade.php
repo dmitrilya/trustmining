@@ -195,7 +195,7 @@
             @auth
                 <div class="px-4">
                     <div class="text-base text-slate-900 dark:text-slate-100">{{ $auth->name }}</div>
-                    <div class="text-sm text-slate-600">{{ $auth->email }}</div>
+                    <div class="text-sm text-slate-500">{{ $auth->email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">

@@ -50,10 +50,10 @@ class ModerationController extends Controller
 
         switch ($moderation->moderationable_type) {
             case ('company'):
-                return view('company.show', ['company' => $m, 'moderation' => $moderation]);
+                return view('company.show', ['user' => $m->user, 'company' => $m, 'moderation' => $moderation]);
                 break;
             case ('hosting'):
-                return view('hosting.show', ['hosting' => $m, 'moderation' => $moderation]);
+                return view('hosting.show', ['user' => $m->user, 'hosting' => $m, 'moderation' => $moderation]);
                 break;
             case ('ad'):
                 $m->version_data = Cache::get('calculator_models')->where('id', $m->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $m->asic_version_id)->first();

@@ -63,7 +63,7 @@
                     <x-file-input id="images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple
                         @change="if ($el.files.length > 8) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 8]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-slate-600" id="images_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-500" id="images_help">PNG, JPG
                         or JPEG (max. 2MB, 8 items)</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
@@ -75,7 +75,7 @@
                     <x-input-label for="logo" :value="__('Logo for avatar')" />
                     <x-file-input id="logo" name="logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-slate-600" id="logo_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-500" id="logo_help">PNG, JPG
                         or JPEG (max. 512KB, 1x1)</p>
                     <x-input-error :messages="$errors->get('logo')" />
                 </div>
@@ -84,7 +84,7 @@
                     <x-input-label for="bg_logo" :value="__('Logo for the card')" />
                     <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-slate-600" id="bg_logo_help">PNG, JPG
+                    <p class="mt-1 text-sm text-slate-500" id="bg_logo_help">PNG, JPG
                         or JPEG (max. 1024KB)</p>
                     <x-input-error :messages="$errors->get('bg_logo')" />
                 </div>

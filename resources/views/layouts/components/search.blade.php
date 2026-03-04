@@ -9,7 +9,7 @@
         class="absolute z-10 mt-1 w-full overflow-auto rounded-b-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-2xl text-base shadow-xl shadow-logo-color ring-1 ring-black/10 dark:ring-white/10 focus:outline-none sm:text-sm">
         <div class="relative select-none hover:bg-slate-100 dark:hover:bg-slate-800 ring-1 ring-inset ring-indigo-500 dark:ring-indigo-600">
             <a href="#" class="flex items-center text-sm py-2 px-3">
-                <div class="w-full text-slate-600">{{ __('Blurb') }}</div>
+                <div class="w-full text-slate-500">{{ __('Blurb') }}</div>
                 <div
                     class="ml-auto inline-flex items-center px-2 py-1 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md text-xxs text-slate-800 dark:text-slate-300 uppercase shadow-sm shadow-logo-color transition ease-in-out duration-150">
                     {{ __('Company') }}</div>

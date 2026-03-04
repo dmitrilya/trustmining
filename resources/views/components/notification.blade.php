@@ -3,7 +3,7 @@
 <a href="{{ $href }}" class="rounded-md block p-4{{ $href != '#' ? ' hover:bg-slate-200 dark:hover:bg-slate-800' : '' }}">
     <div class="flex items-center justify-between">
         <div class="text-slate-500 text-xxs sm:text-xs mr-2">{{ __($type) }}</div>
-        <div class="date-transform text-xxs sm:text-xs leading-5 text-slate-600" data-date="{{ $date }}">
+        <div class="date-transform text-xxs sm:text-xs leading-5 text-slate-500" data-date="{{ $date }}">
         </div>
     </div>
 

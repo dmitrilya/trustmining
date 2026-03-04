@@ -55,7 +55,7 @@
                 <x-input-label for="channel-logo" :value="__('Logo')" />
                 <x-file-input id="channel-logo" name="logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                     required />
-                <p class="mt-1 text-xxs text-slate-600" id="channel-logo_help">PNG, JPG
+                <p class="mt-1 text-xxs text-slate-500" id="channel-logo_help">PNG, JPG
                     or JPEG (max. 2MB)</p>
                 <x-input-error :messages="$errors->get('logo')" />
             </div>
@@ -64,7 +64,7 @@
                 <x-input-label for="channel-banner" :value="__('Banner')" />
                 <x-file-input id="channel-banner" name="banner" class="mt-1 block w-full"
                     accept=".png,.jpg,.jpeg,.webp" />
-                <p class="mt-1 text-xxs text-slate-600" id="channel-banner_help">PNG, JPG
+                <p class="mt-1 text-xxs text-slate-500" id="channel-banner_help">PNG, JPG
                     or JPEG (max. 5MB, 960x360 px)</p>
                 <x-input-error :messages="$errors->get('banner')" />
             </div>

@@ -68,7 +68,7 @@
         </div>
 
         <div class="ql-snow" x-show="!edit">
-            <p itemprop="description" class="mb-2 sm:mb-3 text-xs sm:text-sm text-slate-600">{{ $article->subtitle }}</p>
+            <p itemprop="description" class="mb-2 sm:mb-3 text-xs sm:text-sm text-slate-500">{{ $article->subtitle }}</p>
 
             <meta itemprop="keywords" content="{{ implode(', ', $article->tags) }}">
             <div class="space-x-2 inline">

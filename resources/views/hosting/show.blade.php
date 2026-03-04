@@ -2,21 +2,13 @@
     description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-    <x-slot name="header">
-        <div class="flex items-center">
-            <x-back-link :href="route('company', ['user' => $hosting->user->url_name])"></x-back-link>
-
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
-                {{ __('Placement data') }}
-            </h1>
-        </div>
-    </x-slot>
-
     @php
         $auth = Auth::user();
     @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
+        @include('shop.components.about')
+
         @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
             @include('moderation.components.buttons')
 
@@ -30,7 +22,7 @@
 
                     <div class="lg:col-span-3 space-y-5">
                         <h3
-                            class="flex items-center text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
@@ -52,7 +44,7 @@
                                 : $hosting->peculiarities" model="hosting"></x-peculiarities>
 
                         <div>
-                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Conditions') }}</h3>
+                            <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
 
                             <ul role="list"
                                 class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['conditions']) ? ' border border-indigo-500' : '' }}">
@@ -63,17 +55,17 @@
                                 @endphp
 
                                 @if (!count($c))
-                                    <li class="text-slate-500">{{ __('Not specified') }}</li>
+                                    <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($c as $condition)
-                                        <li class="text-slate-500">{{ $condition }}</li>
+                                        <li class="text-slate-600 dark:text-slate-400">{{ $condition }}</li>
                                     @endforeach
                                 @endif
                             </ul>
                         </div>
 
                         <div>
-                            <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}
+                            <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Additional costs') }}
                             </h3>
 
                             <ul role="list"
@@ -85,10 +77,10 @@
                                 @endphp
 
                                 @if (!count($e))
-                                    <li class="text-slate-500 dark:text-slate-400">{{ __('Not specified') }}</li>
+                                    <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                                 @else
                                     @foreach ($e as $expense)
-                                        <li class="text-slate-500 dark:text-slate-400">{{ $expense }}</li>
+                                        <li class="text-slate-600 dark:text-slate-400">{{ $expense }}</li>
                                     @endforeach
                                 @endif
                             </ul>
@@ -97,8 +89,6 @@
                 </div>
 
                 <div class="mt-8">
-                    @include('components.about-seller', ['user' => $hosting->user])
-
                     <div class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                         @php
                             $contract = isset($moderation->data['contract'])
@@ -146,11 +136,11 @@
                     @endif
 
                     <div>
-                        <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                        <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
                             {{ __('Description') }}</h2>
 
                         <div itemprop="description"
-                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                            class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                             {!! isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description !!}
                         </div>
                     </div>
@@ -168,7 +158,7 @@
 
                 <div class="lg:col-span-3 space-y-5">
                     <h3
-                        class="flex items-center text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg">
+                        class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
@@ -184,28 +174,28 @@
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
 
                     <div>
-                        <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Conditions') }}</h3>
+                        <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->conditions))
-                                <li class="text-slate-500">{{ __('Not specified') }}</li>
+                                <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->conditions as $condition)
-                                    <li class="text-slate-500">{{ $condition }}</li>
+                                    <li class="text-slate-600 dark:text-slate-400">{{ $condition }}</li>
                                 @endforeach
                             @endif
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-sm text-slate-950 dark:text-slate-100 mb-2">{{ __('Additional costs') }}</h3>
+                        <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Additional costs') }}</h3>
 
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                             @if (!count($hosting->expenses))
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('Not specified') }}</li>
+                                <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                             @else
                                 @foreach ($hosting->expenses as $expense)
-                                    <li class="text-slate-500 dark:text-slate-400">{{ $expense }}</li>
+                                    <li class="text-slate-600 dark:text-slate-400">{{ $expense }}</li>
                                 @endforeach
                             @endif
                         </ul>
@@ -227,8 +217,6 @@
             </div>
 
             <div class="mt-8">
-                @include('components.about-seller', ['user' => $hosting->user])
-
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                     @if ($hosting->contract)
                         <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
@@ -319,11 +307,11 @@
                 @endif
 
                 <div>
-                    <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                    <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
                         {{ __('Description') }}</h2>
 
                     <div itemprop="description"
-                        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100">
+                        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200">
                         {!! $hosting->description !!}
                     </div>
                 </div>

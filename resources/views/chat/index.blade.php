@@ -8,7 +8,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
             @if (!$chats->count())
-                <p class="text-base text-slate-600">
+                <p class="text-base text-slate-500">
                     {{ __("You don't have any open dialogues yet. Contact a company on the ad page or company profile.") }}
                 </p>
             @else
@@ -48,7 +48,7 @@
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
-                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-600"
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-500"
                                                 data-date="{{ $lastMessage->created_at }}"></p>
                                         @endif
                                     </div>

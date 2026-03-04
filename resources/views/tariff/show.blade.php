@@ -67,7 +67,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600"><span
+                            <div class="text-sm text-slate-500"><span
                                     class="text-slate-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
                                 {{ __('of ads') }}</div>
                         </div>
@@ -77,7 +77,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600"><span
+                            <div class="text-sm text-slate-500"><span
                                     class="text-slate-950 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
                                 {{ __('of offices') }}</div>
                         </div>
@@ -89,7 +89,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600">{{ __('Hosting adding') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Hosting adding') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_have_phone)
@@ -99,7 +99,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600">{{ __('Phone number') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Phone number') }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_create_insight)
@@ -109,7 +109,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600">{{ __('Guide creating') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Guide creating') }}</div>
                         </div>
                     @endif
                     @if ($tariff->priority_moderation)
@@ -119,7 +119,7 @@
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-600">{{ __('Priority moderation') }}</div>
+                            <div class="text-sm text-slate-500">{{ __('Priority moderation') }}</div>
                         </div>
                     @endif
                 </div>

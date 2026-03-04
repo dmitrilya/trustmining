@@ -153,6 +153,7 @@
     "Preview": "Превью",
     "Change preview": "Поменять превью",
     "Details": "Подробнее",
+    "Read more": "Читать далее",
     "Miner version is required": "Необходимо указать модель",
     "Non-existent miner version": "Вы указали несуществующую модель",
     "Invalid currency": "Недопустимая валюта",
@@ -848,6 +849,7 @@
     "After authorization, the Profile item will appear in the drop-down list in the upper right corner. On this page, you can change the data entered during registration, fill out the seller card and post your first ad.": "После авторизации в верхнем правом углу в раскрывающемся списке появится пункт Профиль. На этой странице вы можете поменять данные, введенные при регистрации, заполнить карточку продавца и выложить первое объявление.",
 
     "Seller card": "Карточка продавца",
+    "Company card": "Карточка компании",
     "Step one": "Шаг первый",
     "First, verify your identity using your passport. Only then will all the platform features be available to you.": "Для начала пройдите верификацию личности по паспорту. Только после этого вам откроются все возможности платформы.",
     "Step two": "Шаг второй",

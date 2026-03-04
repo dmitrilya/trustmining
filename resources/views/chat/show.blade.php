@@ -38,7 +38,7 @@
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
-                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-600"
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-500"
                                                 data-date="{{ $lastMessage->created_at }}"></p>
                                         @endif
                                     </div>

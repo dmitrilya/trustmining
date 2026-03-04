@@ -2,7 +2,7 @@
 
 @if (!$offices->count())
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
-        <p class="text-base text-slate-600">
+        <p class="text-base text-slate-500">
             {{ __('There is no information about open offices and points of sale.') }}
         </p>
     </div>

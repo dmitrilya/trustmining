@@ -111,11 +111,11 @@
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
-                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-600">
+                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
-                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-600">
+                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Network difficulty') }}</div>
-                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-600">
+                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Change') }}</div>
             </div>
             <template x-for="(item, i) in items.slice(0, items.length - 1)" key="item.date">
