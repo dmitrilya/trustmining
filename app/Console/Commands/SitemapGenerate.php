@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Models\User\User;
@@ -64,8 +65,8 @@ class SitemapGenerate extends Command
         }
 
         $users = User::where(
-            fn(Builder $q) => $q->whereHas('ads', fn(Builder $query) => $query->where('moderation', 'false')->where('hidden', 'false'))
-                ->orWhereHas('hosting', fn(Builder $query) => $query->where('moderation', 'false'))
+            fn($q) => $q->whereHas('ads', fn($q2) => $q2->where('moderation', 'false')->where('hidden', 'false'))
+                ->orWhereHas('hosting', fn($q2) => $q2->where('moderation', 'false'))
         )->with([
             'ads:id,ad_category_id,user_id,moderation,hidden',
             'ads.adCategory:id,name',
@@ -111,7 +112,7 @@ class SitemapGenerate extends Command
 
         $out .= $this->addUrl('blog');
         foreach (BlogArticle::select(['id', 'title'])->get() as $article) {
-            $out .= $this->addUrl('blog/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title)));
+            $out .= $this->addUrl('blog/article/' . $article->id . '-' . Str::slug($article->title, '-'));
         }
 
         $out .= $this->addUrl('insight');
@@ -120,13 +121,13 @@ class SitemapGenerate extends Command
             $out .= $this->addUrl('insight/' . $channel->slug);
 
             foreach ($channel->moderatedArticles as $article)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title)));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . Str::slug($article->title, '-'));
 
             foreach ($channel->moderatedPosts as $post)
                 $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
 
             foreach ($channel->moderatedVideos as $video)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $video->title)));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . Str::slug($video->title, '-'));
         }
 
         $out .= $this->addUrl('forum');
@@ -138,7 +139,7 @@ class SitemapGenerate extends Command
                 $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
                 foreach ($forumSubcategory->forumQuestions as $forumQuestion)
-                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $forumQuestion->theme)));
+                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . Str::slug($forumQuestion->theme, '-'));
             }
         }
 

@@ -16,7 +16,7 @@
     @if ($article)
         <a class="text-xxs xs:text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-600 underline mt-2 sm:mt-3"
             target="_blank"
-            href="{{ route('insight.article.show', ['channel' => $article->channel->slug, 'article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title))]) }}">
+            href="{{ route('insight.article.show', ['channel' => $article->channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')]) }}">
             {{ __('What is network difficulty?') }}
         </a>
     @endif

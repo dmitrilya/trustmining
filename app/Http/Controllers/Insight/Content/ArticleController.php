@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Insight\Content;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -87,7 +88,7 @@ class ArticleController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title))])
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
         ]);
     }
 
@@ -146,7 +147,7 @@ class ArticleController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title))])
+        return redirect()->route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
             ->withErrors(['success' => __('The article has been sent for moderation')]);
     }
 

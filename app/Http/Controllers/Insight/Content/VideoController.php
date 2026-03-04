@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Insight\Content;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -130,7 +131,7 @@ class VideoController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $video->title))])
+        return redirect()->route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
             ->withErrors(['success' => __('The video has been sent for moderation')]);
     }
 

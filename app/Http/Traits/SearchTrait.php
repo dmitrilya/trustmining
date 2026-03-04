@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Support\Str;
 use App\Http\Requests\SearchRequest;
 
 use App\Models\Database\AsicBrand;
@@ -37,7 +38,7 @@ trait SearchTrait
         })->get()->map(fn($article) => [
             'model' => __('BlogArticle'),
             'name' => $article->title,
-            'href' => route('blog.article', ['article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/[-\s]+/'], ['', '-'], $article->title))])
+            'href' => route('blog.article', ['article' => $article->id . '-' . Str::slug($article->title, '-')])
         ]))->concat(Company::search($q)->query(function ($query) {
             $query->join('users', 'companies.user_id', 'users.id')
                 ->select(['companies.id', 'companies.name', 'users.url_name as user_url_name']);
