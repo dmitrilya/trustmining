@@ -56,7 +56,7 @@ class ModerationController extends Controller
                 return view('hosting.show', ['user' => $m->user, 'hosting' => $m, 'moderation' => $moderation]);
                 break;
             case ('ad'):
-                $m->version_data = Cache::get('calculator_models')->where('id', $m->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $m->asic_version_id)->first();
+                if ($m->adCategory->name == 'miners') $m->version_data = Cache::get('calculator_models')->where('id', $m->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $m->asic_version_id)->first();
                 return view('ad.show', [
                     'ad' => $m,
                     'moderation' => $moderation,
