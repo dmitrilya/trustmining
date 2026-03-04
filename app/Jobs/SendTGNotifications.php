@@ -120,7 +120,7 @@ class SendTGNotifications implements ShouldQueue
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.show', [
                             'forumCategory' => strtolower(str_replace(' ', '_', $this->n->forumQuestion->forumSubcategory->forumCategory->name)),
                             'forumSubcategory' => strtolower(str_replace(' ', '_', $this->n->forumQuestion->forumSubcategory->name)),
-                            'forumQuestion' => $this->n->forumQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $this->n->forumQuestion->theme)),
+                            'forumQuestion' => $this->n->forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $this->n->forumQuestion->theme)),
                             'answer' => $this->n->id
                         ])]]];
                         break;
@@ -129,7 +129,7 @@ class SendTGNotifications implements ShouldQueue
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.show', [
                             'forumCategory' => strtolower(str_replace(' ', '_', $this->n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->name)),
                             'forumSubcategory' => strtolower(str_replace(' ', '_', $this->n->forumAnswer->forumQuestion->forumSubcategory->name)),
-                            'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $this->n->forumAnswer->forumQuestion->theme)),
+                            'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $this->n->forumAnswer->forumQuestion->theme)),
                             'answer' => $this->n->forum_answer_id
                         ])]]];
                         break;

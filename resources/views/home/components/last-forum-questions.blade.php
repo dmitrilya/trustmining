@@ -10,7 +10,7 @@
                 href="{{ route('forum.question.show', [
                     'forumCategory' => strtolower(str_replace(' ', '_', $forumQuestion->forumSubcategory->forumCategory->name)),
                     'forumSubcategory' => strtolower(str_replace(' ', '_', $forumQuestion->forumSubcategory->name)),
-                    'forumQuestion' => $forumQuestion->id . '-' . mb_strtolower(str_replace([' ', '/'], '-', $forumQuestion->theme)),
+                    'forumQuestion' => $forumQuestion->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $forumQuestion->theme)),
                 ]) }}">
                 <div
                     class="px-4 py-2 xs:py-3 sm:px-6 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">

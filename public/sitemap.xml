@@ -12,20 +12,28 @@
     <url><loc>https://trustmining.ru/ads/noiseboxes</loc></url>
     <url><loc>https://trustmining.ru/ads/cryptoboilers</loc></url>
     <url><loc>https://trustmining.ru/ads/water_cooling_plates</loc></url>
+    <url><loc>https://trustmining.ru/ads/firmwares</loc></url>
+    <url><loc>https://trustmining.ru/ads/monitoring</loc></url>
     <url><loc>https://trustmining.ru/ads/accessories</loc></url>
+    <url><loc>https://trustmining.ru/ads/gpus</loc></url>
     <url><loc>https://trustmining.ru/metrics</loc></url>
     <url><loc>https://trustmining.ru/metrics/network/bitcoin/difficulty</loc></url>
     <url><loc>https://trustmining.ru/metrics/network/litecoin/difficulty</loc></url>
     <url><loc>https://trustmining.ru/company/123/shop</loc></url>
-    <url><loc>https://trustmining.ru/company/123/about</loc></url>
+    <url><loc>https://trustmining.ru/company/123/hosting</loc></url>
+    <url><loc>https://trustmining.ru/company/123/offices</loc></url>
+    <url><loc>https://trustmining.ru/company/123/reviews</loc></url>
+    <url><loc>https://trustmining.ru/company/qwe/shop</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000000</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000001</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000002</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000003</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000004</loc></url>
-    <url><loc>https://trustmining.ru/company/123/offices</loc></url>
-    <url><loc>https://trustmining.ru/company/123/reviews</loc></url>
+    <url><loc>https://trustmining.ru/company/qwe/offices</loc></url>
+    <url><loc>https://trustmining.ru/company/qwe/reviews</loc></url>
     <url><loc>https://trustmining.ru/company/trust_mining/shop</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/hosting</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/about</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000005</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000007</loc></url>
     <url><loc>https://trustmining.ru/ads/miners/10000008</loc></url>
@@ -35,8 +43,21 @@
     <url><loc>https://trustmining.ru/ads/water_cooling_plates/10000013</loc></url>
     <url><loc>https://trustmining.ru/ads/cryptoboilers/10000014</loc></url>
     <url><loc>https://trustmining.ru/ads/cryptoboilers/10000015</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000018</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000019</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000020</loc></url>
+    <url><loc>https://trustmining.ru/ads/accessories/10000021</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000022</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000023</loc></url>
+    <url><loc>https://trustmining.ru/ads/gpus/10000026</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000027</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000028</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000029</loc></url>
+    <url><loc>https://trustmining.ru/ads/miners/10000030</loc></url>
+    <url><loc>https://trustmining.ru/ads/containers/10000031</loc></url>
     <url><loc>https://trustmining.ru/company/trust_mining/offices</loc></url>
     <url><loc>https://trustmining.ru/company/trust_mining/offices/10000000</loc></url>
+    <url><loc>https://trustmining.ru/company/trust_mining/offices/10000001</loc></url>
     <url><loc>https://trustmining.ru/company/trust_mining/reviews</loc></url>
     <url><loc>https://trustmining.ru/database</loc></url>
     <url><loc>https://trustmining.ru/calculator</loc></url>
@@ -3087,16 +3108,47 @@
     <url><loc>https://trustmining.ru/calculator/x1</loc></url>
     <url><loc>https://trustmining.ru/database/ipollo/x1/330</loc></url>
     <url><loc>https://trustmining.ru/calculator/x1/330</loc></url>
-    <url><loc>https://trustmining.ru/articles</loc></url>
-    <url><loc>https://trustmining.ru/guides</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwe</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000001/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
-    <url><loc>https://trustmining.ru/guides/10000000/guide/qwer</loc></url>
+    <url><loc>https://trustmining.ru/blog</loc></url>
+    <url><loc>https://trustmining.ru/insight</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000001-1</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000004-qwe</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000006-тобы-продолжить-польз</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000007-3</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000008-4</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000009-5</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto/article/10000010-сложность-криптосети:-как-высчитывается-и-на-что-влияет</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000011-сложность-криптосети:-как-высчитывается-и-на-что-влияет</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000012-1</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000013-1</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000014-1</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000015-какие-криптовалюты-выгодно-майнить-в-2026-году</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000016-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000018-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000019-с-серией</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000020-asd</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000021-zxc</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000022-zxc</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000023-zxc</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000024-asd</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000025-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000026-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000027-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000028-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000029-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000030-123-sdf-пра</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000031-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000032-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000033-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000034-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000035-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/article/10000036-asd</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/post/10000001</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/post/10000002</loc></url>
+    <url><loc>https://trustmining.ru/insight/crypto2111111114/video/10000001-как-123</loc></url>
+    <url><loc>https://trustmining.ru/insight/qwer</loc></url>
+    <url><loc>https://trustmining.ru/insight/asd</loc></url>
     <url><loc>https://trustmining.ru/forum</loc></url>
     <url><loc>https://trustmining.ru/forum/news</loc></url>
     <url><loc>https://trustmining.ru/forum/news/regulation_of_cryptocurrencies</loc></url>
@@ -3110,12 +3162,9 @@
     <url><loc>https://trustmining.ru/forum/cryptocurrency/cryptonetwork_and_blockchain</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/network_difficulty_and_halving</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/exchange_rate</loc></url>
-    <url><loc>https://trustmining.ru/forum/cryptocurrency/exchange_rate/2-и-чтобы-в-мире-не-было-бактерий</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/3-хочу-на-море-и-белый-мерин</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/4-сейчас-бы-на-морря,-а-не-вот-это-все</loc></url>
-    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/5-быть-или-не-быть?-вот-в-чем-вопрос-быть-или-не-быть?-вот-в-чем-вопрос</loc></url>
-    <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/6-не-могу-настроить</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/7-ошибка-в-асике-m50</loc></url>
     <url><loc>https://trustmining.ru/forum/cryptocurrency/forks_and_coin_listings/8-как-торговать</loc></url>
     <url><loc>https://trustmining.ru/forum/asic_miners_and_video_cards</loc></url>

@@ -87,7 +87,7 @@ class ArticleController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $article->title))])
         ]);
     }
 
@@ -146,7 +146,7 @@ class ArticleController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(str_replace(' ', '-', $article->title))])
+        return redirect()->route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $article->title))])
             ->withErrors(['success' => __('The article has been sent for moderation')]);
     }
 

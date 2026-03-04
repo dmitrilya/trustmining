@@ -73,7 +73,7 @@
                         'forumQuestion' =>
                             $n->forumQuestion->id .
                             '-' .
-                            mb_strtolower(str_replace([' ', '/'], '-', $n->forumQuestion->theme)),
+                            mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $n->forumQuestion->theme)),
                         'answer' => $n->id,
                     ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumQuestion->theme"
                         :text="$n->text"></x-notification>
@@ -94,7 +94,7 @@
                         'forumQuestion' =>
                             $n->forumAnswer->forumQuestion->id .
                             '-' .
-                            mb_strtolower(str_replace([' ', '/'], '-', $n->forumAnswer->forumQuestion->theme)),
+                            mb_strtolower(preg_replace(['/[%\/\\\]/', '/\s+/'], ['', '-'], $n->forumAnswer->forumQuestion->theme)),
                         'answer' => $n->forum_answer_id,
                     ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumAnswer->forumQuestion->theme"
                         :text="$n->text"></x-notification>
