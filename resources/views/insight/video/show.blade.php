@@ -36,13 +36,22 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-slate-900 dark:text-slate-100 leading-tight">{{ $video->title }}</h1>
+        <div>
+            <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-slate-900 dark:text-slate-100 leading-tight">
+                {{ $video->title }}</h1>
+
+            @if (str_contains($video->url, 'youtube'))
+                <p class="mt-2 text-xxs text-slate-600 dark:text-slate-400">
+                    *{{ __('YouTube video. VPN is required for viewing') }}</p>
+            @endif
+        </div>
 
         <meta itemprop="description"
-                content="{{ __('Channel') . ' ' . $channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
+            content="{{ __('Channel') . ' ' . $channel->name . ' - ' . __('Video') . ' ' . $video->title }}" />
         <meta itemprop="thumbnailUrl" content="{{ Storage::url($video->preview) }}">
 
-        <iframe itemprop="embedUrl" src="{{ $video->url }}" frameborder="0" class="aspect-[16/9] rounded-xl w-full"></iframe>
+        <iframe itemprop="embedUrl" src="{{ $video->url }}" frameborder="0"
+            class="aspect-[16/9] rounded-xl w-full"></iframe>
 
         @if ($user && $user->id == $channel->user_id)
             @include('insight.video.edit')

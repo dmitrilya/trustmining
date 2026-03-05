@@ -29,7 +29,7 @@ class StoreVideoRequest extends FormRequest
             'url' => [
                 'required',
                 'url',
-                'regex:/^https:\/\/(www\.)?(vkvideo\.ru|youtube\.com|rutube\.ru)/i'
+                'regex:/^https:\/\/(?:[a-z0-9-]+\.)*(?:vkvideo\.ru|youtube\.com|rutube\.ru|youtu\.be)/i'
             ],
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
         ];
@@ -49,7 +49,7 @@ class StoreVideoRequest extends FormRequest
             'preview.mimes' => __('Valid types are png, jpg and jpeg'),
             'preview.max' => __('The maximum file size should not exceed 5 MB'),
             'url.required' => __('Url is required'),
-            'url.regex' => __('Only links from VK Video, YouTube, or RuTube are allowed')
+            'url.regex' => __('Only links from VK Video, YouTube or RuTube are allowed')
         ];
     }
 }
