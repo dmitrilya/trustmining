@@ -239,8 +239,8 @@ class AdController extends Controller
             $data['office_id'] = $request->office_id;
         }
 
-        $props = json_decode($request->props, true);
-        $propDiffs = array_merge(array_diff_assoc($ad->props, $props), array_diff_assoc($props, $ad->props));
+        $props = collect(json_decode($request->props, true));
+        $propDiffs = $props->reject(fn($value, $key) => $value === ($ad->props[$key] ?? null))->toArray();
         if (count($propDiffs)) $data['props'] = $props;
 
         if ($request->description != $ad->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
