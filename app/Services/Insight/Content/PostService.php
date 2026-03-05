@@ -84,6 +84,8 @@ class PostService extends ContentService
             ->select(['id', 'preview', 'channel_id', 'content', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
+            if ($request->sort) {}
+            else $posts = $posts->orderBy('created_at', 'desc');
         } else $posts = $posts->orderBy('created_at', 'desc');
 
         return $posts;

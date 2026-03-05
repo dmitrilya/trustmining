@@ -72,6 +72,8 @@ class VideoService extends ContentService
             ->select(['id', 'title', 'preview', 'channel_id', 'url', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
+            if ($request->sort) {}
+            else $videos = $videos->orderBy('created_at', 'desc');
         } else $videos = $videos->orderBy('created_at', 'desc');
 
         return $videos;
