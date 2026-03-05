@@ -132,8 +132,8 @@ class CompanyController extends Controller
             $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id, $time, 80);
 
         if ($request->bg_logo) {
-            $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [368, 276]);
-            $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [188, 141]);
+            $data['bg_logo'] = $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [368, null]);
+            $this->saveFile($request->file('bg_logo'), 'companies', 'bg_logo', $company->id, $time, [188, null]);
         }
 
         if (!empty($data)) $company->moderations()->create(['data' => $data]);
