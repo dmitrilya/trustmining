@@ -29,7 +29,7 @@ class StoreVideoRequest extends FormRequest
             'url' => [
                 'required',
                 'url',
-                'regex:/^https:\/\/(?:[a-z0-9-]+\.)*(?:vkvideo\.ru|youtube\.com|rutube\.ru|youtu\.be)/i'
+                'regex:/^https:\/\/(?:[a-z0-9-]+\.)*(?:vkvideo\.ru|vk\.com|youtube\.com|rutube\.ru|youtu\.be)/i'
             ],
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
         ];

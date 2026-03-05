@@ -12,7 +12,7 @@ if (!function_exists('processVideoLink')) {
         $path = $url['path'] ?? '';
         $str = Str::of($src);
 
-        if (str_contains($host, 'vkvideo.ru')) {
+        if (str_contains($host, 'vkvideo.ru') || str_contains($host, 'vk.com')) {
             $videoPart = $str->afterLast('/video')->before('?')->trim('/');
             if ($videoPart->contains('_')) {
                 [$oid, $id] = explode('_', $videoPart);
