@@ -50,7 +50,7 @@ class Controller extends BaseController
             'gpuModels' => GPUModel::select(['id', 'name', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name'])
                 ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),
             'miners' => $miners->orderByDesc('ads.ordering_id')->limit(9)->get(),
-            'hostings' => $this->getHostings(null)->orderByDesc('ordering_id')->limit(9)->get(),
+            'hostings' => $this->getHostings(null)->inRandomOrder()->limit(9)->get(),
             'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get(),
             'forumQuestions' => ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
                 ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
