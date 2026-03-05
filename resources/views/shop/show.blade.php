@@ -20,17 +20,17 @@
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach ($ads->pluck('ad_category_header', 'ad_category_name')->unique() as $ad_category_name => $ad_category_header)
                 <div @click="ad_category_name = ad_category_name == '{{ $ad_category_name }}' ? null : '{{ $ad_category_name }}'"
-                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
+                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                     :class="ad_category_name ==
                         '{{ $ad_category_name }}' ?
                         'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
                         'border-slate-300 dark:border-slate-700'">
-                    <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-slate-100"
+                    <h4 class="font-semibold text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-slate-100"
                         :class="ad_category_name ==
                             '{{ $ad_category_name }}' ? 'text-indigo-500 dark:text-slate-50' :
                             'text-slate-500 dark:text-slate-300'">
                         {{ __($ad_category_header) }}
-                    </h5>
+                    </h4>
                 </div>
             @endforeach
         </div>
