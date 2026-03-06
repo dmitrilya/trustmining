@@ -11,11 +11,11 @@
         @endif
     </header>
 
-    <div class="space-y-4 sm:space-y-5 lg:space-y-6">
+    <div class="space-y-2 lg:space-y-4">
         @foreach (App\Models\CRM\CRMSystem::all() as $crmSystem)
             <div class="flex justify-between items-center border dark:border-slate-700 rounded-lg p-4 xl:p-6">
                 <img src="{{ Storage::url('crm_systems/' . $crmSystem->name . '.webp') }}" alt="{{ $crmSystem->name }}"
-                    class="w-[40%]" />
+                    class="w-[40%] max-w-32" />
 
                 @if ($user->crmConnections()->where('crm_system_id', $crmSystem->id)->exists())
                         <x-secondary-button>{{ __('Connected') }}</x-secondary-button>
