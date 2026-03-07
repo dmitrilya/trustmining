@@ -1,52 +1,66 @@
-<div x-show="edit" x-data="{ content: `{{ old('content') }}` }"
-    x-init='const Delta = Quill.import("delta");    
-    const Link = Quill.import("formats/link");
-    class CustomLink extends Link {
-        static create(value) {
-            const node = super.create(value);
-            node.classList.add("inline"); 
-            return node;
-        }
-    }
-
-    Quill.register(CustomLink, true);
-    
-    quill = new Quill("#editor", {
-        modules: {
-            toolbar: {
-                container: [
-                    ["bold", "italic", "underline"],
-                    ["link"],
-                ]
-            },
-            keyboard: {
-                bindings: {
-                    "list autofill": null
-                }
-            }
-        },
-        placeholder: "{{ __('Text of your post') }}",
-        theme: "snow"
-    });
-    
-    quill.root.innerHTML = `{{ $post->content }}`;
-    
-    quill.on("text-change", () => content = quill.root.innerHTML);'>
+<div x-show="edit">
     <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}"
-        method="POST" class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ errors: [] }"
-        @submit.prevent="if (Object.keys(errors).length > 0) {
-            pushToastAlert(Object.values(errors)[0], 'error');
-            $el.querySelector(`[name='${Object.keys(errors)[0]}']`).focus();
-        } else $el.submit();">
+        method="POST" class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }"
+        x-init='const Delta = Quill.import("delta");    
+        const Link = Quill.import("formats/link");
+        class CustomLink extends Link {
+            static create(value) {
+                const node = super.create(value);
+                node.classList.add("inline"); 
+                return node;
+            }
+        }
+
+        Quill.register(CustomLink, true);
+        
+        quill = new Quill("#editor", {
+            modules: {
+                toolbar: {
+                    container: [
+                        ["bold", "italic", "underline"],
+                        ["link"],
+                    ]
+                },
+                keyboard: {
+                    bindings: {
+                        "list autofill": null
+                    }
+                }
+            },
+            placeholder: "{{ __('Text of your post') }}",
+            theme: "snow"
+        });
+        
+        quill.root.innerHTML = `{{ $post->content }}`;
+        
+        quill.on("text-change", () => {
+            content = quill.root.innerHTML;
+            if (validation["content"]) delete validation["content"];
+        });'
+        @submit.prevent="if (Object.keys(validation).length > 0) {
+            pushToastAlert(Object.values(validation)[0], 'error');
+            $el.querySelector(`[name='${Object.keys(validation)[0]}']`).focus();
+        } else if (!loading) {
+            loading = true;
+            axios.post($el.action, new FormData($el), {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            }).then(r => {
+                if (r.data.success) window.location.href = r.data.redirect;
+            }).catch(err => {
+                loading = false;
+                if (err.response && err.response.status === 422) validation = err.response.data.errors;
+            });
+        }">
         @csrf
         @method('PUT')
 
         <div>
             <x-input-label for="preview" :value="__('Preview')" />
             <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" />
-            <p class="mt-1 text-sm text-slate-500" id="file_input_help">PNG, JPG
-                or JPEG (max. 5MB), dimensions:ratio=4/3</p>
-            <x-input-error :messages="$errors->get('preview')" />
+            <p class="mt-1 text-sm text-slate-500" id="file_input_help">(max. 5MB), 4/3</p>
+            <template x-if="validation.preview">
+                <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
+            </template>
         </div>
 
         <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
@@ -60,8 +74,11 @@
 
             <input type="hidden" class="hidden" name="content" :value="content" required>
         </div>
-        <x-input-error :messages="$errors->get('content')" />
+        <template x-if="validation.content">
+            <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
+        </template>
 
-        <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+        <x-primary-button class="block ml-auto" ::disabled="loading"
+            ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-primary-button>
     </form>
 </div>

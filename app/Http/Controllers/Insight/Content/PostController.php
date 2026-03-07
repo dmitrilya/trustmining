@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Insight\Content;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -68,13 +69,20 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Channel $channel)
     {
-        $this->service->store($channel, [
+        $post = $this->service->store($channel, [
             'preview' => $request->preview,
             'content' => $request->content,
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('The post has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The post has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id])
+        ]);
     }
 
     /**
@@ -129,8 +137,14 @@ class PostController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id])
-            ->withErrors(['success' => __('The post has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The post has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id])
+        ]);
     }
 
     /**

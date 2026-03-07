@@ -22,10 +22,8 @@
                 <div>
                     <x-input-label for="preview" :value="__('Change preview')" />
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp"
-                        @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-slate-500" id="file_input_help">PNG, JPG
-                        or JPEG (max. 2MB)</p>
+                        accept=".png,.jpg,.jpeg,.webp" />
+                    <p class="mt-1 text-sm text-slate-500" id="file_input_help">(max. 2MB)</p>
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
 

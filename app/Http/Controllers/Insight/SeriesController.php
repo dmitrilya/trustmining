@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Insight;
 
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
@@ -12,9 +13,6 @@ use App\Services\Insight\SeriesService;
 
 use App\Models\Insight\Channel;
 use App\Models\Insight\Series;
-use App\Models\Insight\Content\Article;
-use App\Models\Insight\Content\Post;
-use App\Models\Insight\Content\Video;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -35,9 +33,12 @@ class SeriesController extends Controller
      */
     public function store(StoreSeriesRequest $request, Channel $channel)
     {
-        $series = $this->service->store($channel, $request->name, $request->description);
+        $this->service->store($channel, $request->name, $request->description);
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Series created successfully')]);
+        return response()->json([
+            'success' => true,
+            'message' => __('Series created successfully')
+        ]);
     }
 
     /**
@@ -71,9 +72,12 @@ class SeriesController extends Controller
      */
     public function update(UpdateSeriesRequest $request, Channel $channel, Series $series)
     {
-        $series = $this->service->update($series, $request->name, $request->description);
+        $this->service->update($series, $request->name, $request->description);
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Series updated successfully')]);
+        return response()->json([
+            'success' => true,
+            'message' => __('Series updated successfully')
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Insight;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -57,14 +58,20 @@ class ChannelController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Insight\StorePostRequest  $request
-     * @param  \App\Models\Insight\Channel
      * @return \Illuminate\Http\Response
      */
     public function store(StoreChannelRequest $request)
     {
         $channel = $this->service->store($request->user(), $request->name, $request->slug, $request->brief_description, $request->description, $request->file('logo'), $request->file('banner'));
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Channel created successfully')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('Channel created successfully')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.channel.show', ['channel' => $channel->slug])
+        ]);
     }
 
     /**
@@ -124,7 +131,14 @@ class ChannelController extends Controller
     {
         $channel = $this->service->update($channel, $request->name, $request->slug, $request->brief_description, $request->description, $request->file('logo'), $request->file('banner'));
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('Channel updated successfully')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('Channel updated successfully')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.channel.show', ['channel' => $channel->slug])
+        ]);
     }
 
     /**

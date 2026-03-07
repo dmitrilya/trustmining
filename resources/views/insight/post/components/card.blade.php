@@ -27,7 +27,7 @@
                 'subscribers' => $post->channel->active_subscribers_count,
             ])
             <div itemprop="articleBody"
-                class="ql-editor mt-2 sm:mt-3 text-xs text-slate-700 dark:text-slate-300 h-16 overflow-hidden line-clamp-4">
+                class="mt-2 sm:mt-3 text-xs text-slate-700 dark:text-slate-300 h-16 overflow-hidden line-clamp-4">
                 {!! $post->content !!}</div>
         </div>
         <div class="mt-1 xs:mt-2">

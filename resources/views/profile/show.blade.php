@@ -26,10 +26,9 @@
         </div>
 
         <div x-show="category == 'ads'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2 absolute"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            x-transition:enter-end="opacity-100">
             <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
@@ -83,10 +82,9 @@
         </div>
 
         <div x-show="category == 'insight'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2 absolute"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
@@ -103,10 +101,9 @@
         </div>
 
         <div x-show="category == 'forum'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2 absolute"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
@@ -123,10 +120,9 @@
         </div>
 
         <div x-show="category == 'integrations'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2 absolute"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
@@ -143,10 +139,9 @@
         </div>
 
         <div x-show="category == 'account'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2 absolute"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+            x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">

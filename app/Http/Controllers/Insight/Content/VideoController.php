@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Insight\Content;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -69,14 +70,21 @@ class VideoController extends Controller
      */
     public function store(StoreVideoRequest $request, Channel $channel)
     {
-        $this->service->store($channel, [
+        $video = $this->service->store($channel, [
             'preview' => $request->preview,
             'title' => $request->title,
             'url' => $request->url,
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.channel.show', ['channel' => $channel->slug])->withErrors(['success' => __('The video has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The video has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
+        ]);
     }
 
     /**
@@ -131,8 +139,14 @@ class VideoController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
-            ->withErrors(['success' => __('The video has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The video has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
+        ]);
     }
 
     /**

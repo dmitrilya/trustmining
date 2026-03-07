@@ -147,8 +147,14 @@ class ArticleController extends Controller
             'series_id' => $request->series_id
         ]);
 
-        return redirect()->route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
-            ->withErrors(['success' => __('The article has been sent for moderation')]);
+        Redirect::to('/')
+            ->withErrors(['success' => __('The article has been sent for moderation')])
+            ->sendHeaders();
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
+        ]);
     }
 
     /**

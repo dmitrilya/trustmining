@@ -54,10 +54,8 @@
                 <div>
                     <x-input-label for="hosting-images" :value="'* ' . __('Photo')" />
                     <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" multiple required
-                        @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')}" />
-                    <p class="mt-1 text-sm text-slate-500" id="images_help">PNG, JPG
-                        or JPEG (max. 2MB, 10 items)</p>
+                        accept=".png,.jpg,.jpeg,.webp" multiple max="10" required />
+                    <p class="mt-1 text-sm text-slate-500" id="images_help">(max. 2MB, 10 items)</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-input-error :messages="$error" />

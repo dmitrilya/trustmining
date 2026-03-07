@@ -10,9 +10,11 @@
                 $el.style.height = $el.scrollHeight + 'px';
             }
         }" x-init="resize()"
-        @input="resize(); length = $el.value.length;
-            if (length > max) errors['{{ $name }}'] = '{{ __('Maximum character limit exceeded') }}';
-            else delete errors['{{ $name }}'];">{{ $value }}</textarea>
+        @input="resize();
+            length = $el.value.length;
+            if (length > max) validation['{{ $name }}'] = ['{{ __('Maximum character limit exceeded') }}'];
+            else if (validation['{{ $name }}']) delete validation['{{ $name }}'];
+        ">{{ $value }}</textarea>
     <div class="min-w-fit mt-1 ml-2 sm:ml-3 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
         <span :class="length > max ? 'text-red-500' : ''" x-text="length" x-text="length"></span>/<span
             x-text="max"></span>

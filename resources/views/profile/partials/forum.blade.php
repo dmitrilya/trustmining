@@ -32,8 +32,7 @@
             <x-input-label for="avatar" :value="__('Avatar')" />
             <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                 required />
-            <p class="mt-1 text-xxs text-slate-500" id="avatar_help">PNG, JPG
-                or JPEG (max. 1MB)</p>
+            <p class="mt-1 text-xxs text-slate-500" id="avatar_help">(max. 1MB)</p>
             <x-input-error :messages="$errors->get('avatar')" />
         </div>
 
