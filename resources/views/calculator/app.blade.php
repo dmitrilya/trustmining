@@ -90,7 +90,7 @@
 
         <main>
             <div class="max-w-8xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-                <div class="grid xl:grid-cols-4 gap-4 sm:gap-6 items-start">
+                <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6 items-start">
                     @include('calculator.components.calculator')
                 </div>
             </div>
