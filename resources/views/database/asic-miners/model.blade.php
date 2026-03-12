@@ -1,4 +1,4 @@
-<x-app-layout :title="`ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement} - цена, доходность и характеристики | Купить {$brand->name} {$model->name} | TRUSTMINING`" :description="`ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement}. Характеристики, энергопотребление, доходность майнинга и окупаемость. Актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING`"
+<x-app-layout :title='"ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement} - цена, доходность и характеристики | Купить {$brand->name} {$model->name} | TRUSTMINING"' :description='"ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement}. Характеристики, энергопотребление, доходность майнинга и окупаемость. Актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING"'
     canonical="{{ route('database.asic-miners.version', [
         'asicBrand' => $brand->slug,
         'asicModel' => $model->slug,
