@@ -136,7 +136,7 @@ window.scrollBottom = function (el) {
 }
 
 window.filterDouble = function (el, min, max, precision) {
-    let v = el.value.replace(/,/g, '.').replace(/[^\d.]/g, '');
+    let v = el.value.replace(/,/g, '.').replace(/[^\d.]/g, '').replace(/^0+(?=\d)/, '');
 
     let parts = v.split('.');
     if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
