@@ -111,7 +111,7 @@
                                     <div class="xs:flex mt-6 md:mt-8 ">
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                                             <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
-                                            <meta itemprop="highPrice" content="{{ $version->ads->where('price', '!=', 0)->reverse()->first() }}" />
+                                            <meta itemprop="highPrice" content="{{ $version->ads->where('price', '!=', 0)->reverse()->first()->price }}" />
                                             <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
                                             <meta itemprop="priceCurrency"
                                                 content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
