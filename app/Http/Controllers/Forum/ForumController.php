@@ -39,7 +39,7 @@ class ForumController extends Controller
             return $category;
         })->sortByDesc('published_forum_questions_count');
         $questions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(5)->get();
 
         return view('forum.index', ['categories' => $categories, 'questions' => $questions]);
@@ -51,7 +51,7 @@ class ForumController extends Controller
             ->with(['latestForumQuestion' => fn($q) => $q->select(['forum_questions.forum_subcategory_id', 'created_at'])])->get();
         $questions = ForumQuestion::where('published', true)->whereIn('forum_subcategory_id', $subcategories->pluck('id'))
             ->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(5)->get();
 
         return view('forum.category', ['category' => $forumCategory, 'subcategories' => $subcategories, 'questions' => $questions]);
@@ -60,7 +60,7 @@ class ForumController extends Controller
     public function subcategory(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory): View
     {
         $questions = $forumSubcategory->publishedForumQuestions()->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->paginate(30);
 
         return view('forum.subcategory', ['category' => $forumCategory, 'subcategory' => $forumSubcategory, 'questions' => $questions]);
