@@ -24,7 +24,7 @@ class ForumQuestionController extends ForumController
     {
         $questions = $request->user()->forumQuestions()
             ->select(['id', 'forum_subcategory_id', 'theme', 'moderation', 'similar_questions', 'published', 'created_at'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->get()->append('similar_questions_list');
 
         return view('forum.question.index', ['questions' => $questions]);
@@ -65,7 +65,7 @@ class ForumQuestionController extends ForumController
         $similarQuestions = ForumQuestion::whereIn('id', $forumQuestion->similar_questions)->get();
 
         $newQuestions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme'])
-            ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->latest()->limit(5)->get();
 
         return view('forum.question.show', [
