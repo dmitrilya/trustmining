@@ -48,7 +48,8 @@
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="mr-1 sm:mr-2">
-                                        <button class="inline-block p-1 xs:p-2 {{ $versions->count() > 12 ? '' : 'sm:p-3 lg:p-4 ' }}border-b-2 rounded-t-lg"
+                                        <button
+                                            class="inline-block p-1 xs:p-2 {{ $versions->count() > 12 ? '' : 'sm:p-3 lg:p-4 ' }}border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
                                                 'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': {{ $i }} !=
@@ -100,18 +101,21 @@
                                 </x-characteristics>
 
                                 @if ($minPrice)
-                                    @include('ad.components.payback_info', [
-                                        'profit' => $version->data->profits[0]['profit'],
-                                        'expense' =>
-                                            (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
-                                        'tariff' => 5,
-                                        'price' => $minPrice->price * $minPrice->coin->rate,
-                                    ])
+                                    @if ($version->data)
+                                        @include('ad.components.payback_info', [
+                                            'profit' => $version->data->profits[0]['profit'],
+                                            'expense' =>
+                                                (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
+                                            'tariff' => 5,
+                                            'price' => $minPrice->price * $minPrice->coin->rate,
+                                        ])
+                                    @endif
 
                                     <div class="xs:flex mt-6 md:mt-8 ">
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                                             <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
-                                            <meta itemprop="highPrice" content="{{ $version->ads->where('price', '!=', 0)->reverse()->first()->price }}" />
+                                            <meta itemprop="highPrice"
+                                                content="{{ $version->ads->where('price', '!=', 0)->reverse()->first()->price }}" />
                                             <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
                                             <meta itemprop="priceCurrency"
                                                 content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
@@ -134,13 +138,15 @@
                                         </div>
                                     </div>
                                 @else
-                                    @include('ad.components.payback_info', [
-                                        'profit' => $version->data->profits[0]['profit'],
-                                        'expense' =>
-                                            (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
-                                        'tariff' => 5,
-                                        'price' => 0,
-                                    ])
+                                    @if ($version->data)
+                                        @include('ad.components.payback_info', [
+                                            'profit' => $version->data->profits[0]['profit'],
+                                            'expense' =>
+                                                (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
+                                            'tariff' => 5,
+                                            'price' => 0,
+                                        ])
+                                    @endif
 
                                     <div class="flex mt-6 md:mt-8">
                                         <div itemprop="potentialAction" itemscope

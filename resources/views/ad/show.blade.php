@@ -259,7 +259,7 @@
                                         class="ml-1 text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                                 @endif
 
-                                @if ($ad->adCategory->name == 'miners')
+                                @if ($ad->adCategory->name == 'miners' && $ad->version_data)
                                     @include('ad.components.price_graduation', [
                                         'priceData' =>
                                             $ad->version_data->price_data[$ad->props['Condition']][

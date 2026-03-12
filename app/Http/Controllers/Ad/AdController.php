@@ -268,12 +268,11 @@ class AdController extends Controller
     public function editMass(Request $request)
     {
         return view('ad.edit-mass', [
-            'ads' => $request->user()->ads()->where('ad_category_id', 1)->where('moderation', false)->with([
-                'office:id,city',
-                'coin:id,abbreviation',
-                'asicVersion:id,hashrate,measurement,asic_model_id',
-                'asicVersion.asicModel:id,name'
-            ])->get()->sortBy(['asicVersion.asicModel.name', 'asicVersion.hashrate']),
+            'ads' => $request->user()->ads()->where('ad_category_id', 1)->where('moderation', false)
+                ->with(['office:id,city', 'coin:id,abbreviation', 'asicVersion:id,hashrate,measurement,asic_model_id', 'asicVersion.asicModel:id,name'])
+                ->orderBy('props->Availability')->orderBy('props->Condition')->join('asic_versions', 'ads.asic_version_id', '=', 'asic_versions.id')
+                ->join('asic_models', 'asic_versions.asic_model_id', '=', 'asic_models.id')->orderBy('asic_models.name')
+                ->orderBy('asic_versions.hashrate')->select('ads.*')->get(),
             'coins' => Coin::where('paymentable', true)->select(['id', 'abbreviation'])->get()
         ]);
     }
