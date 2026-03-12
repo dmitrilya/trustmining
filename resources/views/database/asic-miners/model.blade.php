@@ -100,12 +100,6 @@
                                 </x-characteristics>
 
                                 @if ($minPrice)
-                                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                        <meta itemprop="bestPrice" content="{{ $minPrice->price }}" />
-                                        <meta itemprop="priceCurrency"
-                                            content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
-                                    </div>
-
                                     @include('ad.components.payback_info', [
                                         'profit' => $version->data->profits[0]['profit'],
                                         'expense' =>
@@ -117,6 +111,8 @@
                                     <div class="xs:flex mt-6 md:mt-8 ">
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
                                             <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
+                                            <meta itemprop="highPrice" content="{{ $version->ads->where('price', '!=', 0)->latest()->first() }}" />
+                                            <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
                                             <meta itemprop="priceCurrency"
                                                 content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
                                             <meta itemprop="url"
