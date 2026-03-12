@@ -45,16 +45,16 @@ class Controller extends BaseController
         if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
 
         return view('home.index', [
-            'asicBrands' => AsicBrand::select(['id', 'name'])->withCount('views')->orderByDesc('views_count')->get(),
-            'asicModels' => AsicModel::select(['id', 'name', 'asic_brand_id'])->with(['asicBrand:id,name'])
+            'asicBrands' => AsicBrand::select(['id', 'name', 'slug'])->withCount('views')->orderByDesc('views_count')->get(),
+            'asicModels' => AsicModel::select(['id', 'name', 'slug', 'asic_brand_id'])->with(['asicBrand:id,name,slug'])
                 ->withCount('views')->orderByDesc('views_count')->limit(10)->get(),
-            'gpuModels' => GPUModel::select(['id', 'name', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name'])
+            'gpuModels' => GPUModel::select(['id', 'name', 'slug', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name,slug'])
                 ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),
             'miners' => $miners->orderByDesc('ads.ordering_id')->limit(9)->get(),
             'hostings' => $this->getHostings(null)->inRandomOrder()->limit(9)->get(),
             'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get(),
             'forumQuestions' => ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-                ->with(['forumSubcategory:id,name,forum_category_id', 'forumSubcategory.forumCategory:id,name'])
+                ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
                 ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(3)->get(),
             'topChannels' => Channel::select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers')->orderByDesc('active_subscribers_count')->limit(4)->get()
         ]);
