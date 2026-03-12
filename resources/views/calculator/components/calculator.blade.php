@@ -1,6 +1,6 @@
 <div class="xl:col-span-3">
     <div itemscope itemtype="https://schema.org/ViewAction"
-        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
+        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl p-2 pt-3 sm:p-4 min-h-[616px] md:min-h-[460px]">
         <meta itemprop="name"
             content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
         <meta itemprop="description"
@@ -75,7 +75,7 @@
                                 'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'USDT'
                             }"
-                            class="p-1 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            class="p-1 xs:p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'RUB'">RUB</button>
                         <button
                             :class="{
@@ -84,7 +84,7 @@
                                 'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'RUB'
                             }"
-                            class="p-1 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            class="p-1 xs:p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'USDT'">USDT</button>
                     </div>
                 </div>
@@ -102,57 +102,53 @@
                         },
                         get dailyIncomeUSDT() {
                             return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
-                        }
+                        },
+                        get total() { return this.dailyProfit + this.dailyConsumption },
+                        get incPercent() { return this.total > 0 ? (this.dailyProfit / this.total) * 100 : 50 },
+                        get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 }
                     }">
-                        <div class="grid grid-cols-4 gap-2 xs:gap-3 sm:gap-4">
-                            <div></div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Income') }}
+                        <div class="space-y-4" x-data="{ view: 'month' }">
+                            <div
+                                class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto mb-6">
+                                <button @click="view = 'day'"
+                                    :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
+                                <button @click="view = 'month'"
+                                    :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
+                                <button @click="view = 'year'"
+                                    :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
                             </div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Expense') }}
-                            </div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Profit') }}
-                            </div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Day') }}
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth) * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm font-bold"
-                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
-                                x-text="Math.round(dailyIncome * 100) / 100">
-                            </div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Month') }}
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth) * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption * 30 * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm font-bold"
-                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
-                                x-text="Math.round(dailyIncome * 30 * 100) / 100">
-                            </div>
-                            <div class="text-xxs xs:text-sm text-slate-600 dark:text-slate-300">
-                                {{ __('Year') }}
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth) * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="Math.round(dailyConsumption * 365 * 100) / 100">
-                            </div>
-                            <div class="text-xs xs:text-sm font-bold"
-                                :class="dailyIncome > 0 ? 'text-emerald-400' : 'text-red-400'"
-                                x-text="Math.round(dailyIncome * 365 * 100) / 100">
+
+                            <div
+                                class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+                                <div class="text-center mb-6">
+                                    <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
+                                    <div class="text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
+                                        x-text="view === 'day' ? Math.round(dailyIncome * 100)/100 : (view === 'month' ? Math.round(dailyIncome*30*100)/100 : Math.round(dailyIncome*365*100)/100)">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold uppercase italic">
+                                        <span class="text-emerald-500">{{ __('Income') }}</span>
+                                        <span class="text-rose-500">{{ __('Expense') }}</span>
+                                    </div>
+                                    <div
+                                        class="mt-2 h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
+                                        <div class="h-full bg-emerald-400 transition-all duration-500"
+                                            :style="`width: ${incPercent}%`"></div>
+                                        <div class="h-full bg-rose-400 transition-all duration-500"
+                                            :style="`width: ${expPercent}%`"></div>
+                                    </div>
+                                    <div class="mt-3 flex justify-between text-sm sm:text-base lg:text-lg font-black text-slate-800 dark:text-slate-200">
+                                        <span
+                                            x-text="view === 'day' ? Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth)*100)/100 : (view === 'month' ? Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth)*100)/100 : Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth)*100)/100)"></span>
+                                        <span
+                                            x-text="view === 'day' ? Math.round(dailyConsumption*100)/100 : (view === 'month' ? Math.round(dailyConsumption*30*100)/100 : Math.round(dailyConsumption*365*100)/100)"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -203,7 +199,7 @@
                                             <x-primary-button
                                                 class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
                                         </a>
-                                    </template> 
+                                    </template>
                                 </div>
                             </template>
                         </div>
