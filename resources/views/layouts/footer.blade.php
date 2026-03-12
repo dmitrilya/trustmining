@@ -144,7 +144,7 @@
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
-                    href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
+                    href="{{ route('database.asic-miners') }}">{{ __('Catalog of models') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('top') }}">{{ __('Top reliable companies') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"

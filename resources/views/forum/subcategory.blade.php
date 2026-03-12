@@ -22,7 +22,7 @@
                         <meta itemprop="position" content="2" />
                         <div class="flex items-center">
                             <a itemprop="item"
-                                href="{{ route('forum.category', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name))]) }}"
+                                href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
                                 class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ __($category->name) }}</span>
                             </a>
@@ -70,9 +70,9 @@
                 @foreach ($questions as $question)
                     <a
                         href="{{ route('forum.question.show', [
-                            'forumCategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->forumCategory->name)),
-                            'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
-                            'forumQuestion' => $question->id . '-' . Str::slug($question->theme, '-'),
+                            'forumCategory' => $question->forumSubcategory->forumCategory->slug,
+                            'forumSubcategory' => $question->forumSubcategory->slug,
+                            'forumQuestion' => $question->id . '-' . Str::slug($question->theme),
                         ]) }}">
                         <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
                             <div class="mb-1.5 sm:mb-2 flex justify-between">

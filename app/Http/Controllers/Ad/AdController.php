@@ -20,10 +20,12 @@ use App\Http\Traits\AdTrait;
 
 use App\Models\Ad\Ad;
 use App\Models\Ad\AdCategory;
+use App\Models\Database\AsicBrand;
+use App\Models\Database\AsicModel;
+use App\Models\Database\GPUBrand;
+use App\Models\Database\GPUModel;
 use App\Models\Database\Coin;
 use App\Models\User\Office;
-use App\Models\Database\AsicModel;
-use App\Models\Database\GPUModel;
 
 class AdController extends Controller
 {
@@ -143,7 +145,7 @@ class AdController extends Controller
 
         $ad->moderations()->create(['data' => $ad->attributesToArray()]);
 
-        return redirect()->route('company', ['user' => $user->url_name]);
+        return redirect()->route('company', ['user' => $user->slug]);
     }
 
     /**
@@ -173,6 +175,65 @@ class AdController extends Controller
         return view('ad.show', [
             'ad' => $ad,
             'ads' => $ads,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Database\AsicBrand  $asicBrand
+     * @param  \App\Models\Database\AsicModel  $asicModel
+     * @param  string  $asicVersion
+     * @param  string  $ad
+     * @return \Illuminate\Http\Response
+     */
+    public function asicMinerAd(AsicBrand $asicBrand, AsicModel $asicModel, string $asicVersion, $ad)
+    {
+        $ad = Ad::find(array_reverse(explode('-', $ad))[0]);
+        if (!$ad) abort(404);
+
+        $user = Auth::user();
+
+        if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
+            return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
+        $this->addView(request(), $ad);
+
+        $ad->version_data = Cache::get('calculator_models')->where('id', $ad->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $ad->asic_version_id)->first();
+        $ads = $this->getAds()->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
+            ->limit(9)->get();
+
+        return view('ad.show', [
+            'ad' => $ad,
+            'ads' => $ads,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Database\GPUBrand  $gpuBrand
+     * @param  \App\Models\Database\GPUModel  $gpuModel
+     * @param  string  $ad
+     * @return \Illuminate\Http\Response
+     */
+    public function gpuAd(GPUBrand $gpuBrand, GPUModel $gpuModel, $ad)
+    {
+        $ad = Ad::find(array_reverse(explode('-', $ad))[0]);
+        if (!$ad) abort(404);
+
+        $user = Auth::user();
+
+        if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
+            return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
+
+        $this->addView(request(), $ad);
+
+        return view('ad.show', [
+            'ad' => $ad,
+            'ads' => [],
             'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
         ]);
     }
@@ -342,6 +403,6 @@ class AdController extends Controller
 
         $ad->delete();
 
-        return redirect()->route('company', ['user' => $user->url_name])->withErrors(['success' => __('The ad has been removed')]);
+        return redirect()->route('company', ['user' => $user->slug])->withErrors(['success' => __('The ad has been removed')]);
     }
 }

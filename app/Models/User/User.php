@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'ordering_id',
         'name',
-        'url_name',
+        'slug',
         'email',
         'balance',
         'password'
@@ -55,7 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        return $this->where('url_name', $value)->orWhere('id', $value)->first() ?? abort(404);
+        return $this->where('slug', $value)->orWhere('id', $value)->first() ?? abort(404);
     }
 
     /**
@@ -67,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'name' => '',
-            'url_name' => '',
+            'slug' => '',
         ];
     }
 

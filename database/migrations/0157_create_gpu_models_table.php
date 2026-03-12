@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('gpu_engine_model_id')->references('id')
                 ->on('gpu_engine_models')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug');
             $table->unsignedSmallInteger('max_power');
             $table->unsignedTinyInteger('phases');
             $table->unsignedFloat('fuel_consumption', 6,3);

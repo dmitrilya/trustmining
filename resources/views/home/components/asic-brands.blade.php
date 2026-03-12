@@ -6,7 +6,7 @@
 
     <div class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1">
         @foreach ($asicBrands->slice(0, 6) as $asicBrand)
-            <a href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $asicBrand->name))]) }}"
+            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
                 class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
                 <img height="28px" width="28px" src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}"
                     alt="{{ $asicBrand->name }}" class="w-5 sm:w-7 mr-2">
@@ -20,7 +20,7 @@
 
     <div x-show="show" x-collapse class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
         @foreach ($asicBrands->slice(6) as $asicBrand)
-            <a href="{{ route('database.brand', ['asicBrand' => strtolower(str_replace(' ', '_', $asicBrand->name))]) }}"
+            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
                 class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
                 <img height="28px" width="28px"
                     src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }}"

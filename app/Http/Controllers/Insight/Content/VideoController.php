@@ -83,7 +83,7 @@ class VideoController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
+            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title)])
         ]);
     }
 
@@ -130,8 +130,10 @@ class VideoController extends Controller
      */
     public function update(UpdateVideoRequest $request, Channel $channel, Video $video)
     {
-        if ($video->moderations()->where('moderation_status_id', 1)->exists())
-            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+        if ($video->moderations()->where('moderation_status_id', 1)->exists()) return response()->json([
+            'success' => false,
+            'message' => __('Unavailable, currently under moderation')
+        ]);
 
         $this->service->update($channel, $video, [
             'preview' => $request->preview,
@@ -145,7 +147,7 @@ class VideoController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title, '-')])
+            'redirect' => route('insight.video.show', ['channel' => $channel->slug, 'video' => $video->id . '-' . Str::slug($video->title)])
         ]);
     }
 
@@ -192,10 +194,16 @@ class VideoController extends Controller
         return response()->json([
             'success' => true,
             'html_comments' => view('insight.components.comments.comment-list', [
-                'comments' => $comments, 'channel' => $channel, 'modelType' => 'video', 'model' => $video
+                'comments' => $comments,
+                'channel' => $channel,
+                'modelType' => 'video',
+                'model' => $video
             ])->render(),
             'html_reply' => $request->parent_id ? view('insight.components.comments.reply', [
-                'reply' => $comment, 'channel' => $channel, 'modelType' => 'video', 'model' => $video
+                'reply' => $comment,
+                'channel' => $channel,
+                'modelType' => 'video',
+                'model' => $video
             ])->render() : null,
             'last_id' => $comments->first()?->id
         ]);

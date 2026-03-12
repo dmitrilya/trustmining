@@ -8,9 +8,9 @@
         @foreach ($forumQuestions as $forumQuestion)
             <a
                 href="{{ route('forum.question.show', [
-                    'forumCategory' => strtolower(str_replace(' ', '_', $forumQuestion->forumSubcategory->forumCategory->name)),
-                    'forumSubcategory' => strtolower(str_replace(' ', '_', $forumQuestion->forumSubcategory->name)),
-                    'forumQuestion' => $forumQuestion->id . '-' . Str::slug($forumQuestion->theme, '-'),
+                    'forumCategory' => $forumQuestion->forumSubcategory->forumCategory->slug,
+                    'forumSubcategory' => $forumQuestion->forumSubcategory->slug,
+                    'forumQuestion' => $forumQuestion->id . '-' . Str::slug($forumQuestion->theme),
                 ]) }}">
                 <div
                     class="px-4 py-2 xs:py-3 sm:px-6 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">

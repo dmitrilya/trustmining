@@ -10,6 +10,7 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use App\Models\User\User;
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
+use App\Models\Database\GPUBrand;
 use App\Models\Blog\BlogArticle;
 use App\Models\Insight\Channel;
 use App\Models\Database\Coin;
@@ -64,82 +65,108 @@ class SitemapGenerate extends Command
             $out .= $this->addUrl('metrics/network/' . strtolower($coin->name) . '/difficulty');
         }
 
-        $users = User::where(
-            fn($q) => $q->whereHas('ads', fn($q2) => $q2->where('moderation', 'false')->where('hidden', 'false'))
-                ->orWhereHas('hosting', fn($q2) => $q2->where('moderation', 'false'))
-        )->with([
-            'ads:id,ad_category_id,user_id,moderation,hidden',
+        $users = User::whereHas('offices', fn($q) => $q->where('moderation', 'false'))->with([
+            'ads' => fn($q) => $q->whereHas('adCategory', fn($q1) => $q1->whereNotIn('name', ['miners', 'gpus']))->select(['id', 'ad_category_id', 'user_id', 'moderation', 'hidden']),
             'ads.adCategory:id,name',
             'hosting:user_id,moderation',
             'company:user_id,moderation',
             'offices:id,user_id'
-        ])->select(['id', 'url_name'])->get();
+        ])->select(['id', 'slug'])->get();
 
         foreach ($users as $user) {
-            $out .= $this->addUrl('company/' . $user->url_name . '/shop');
-            if ($user->hosting && !$user->hosting->moderation) $out .= $this->addUrl('company/' . $user->url_name . '/hosting');
-            if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->url_name . '/about');
+            $out .= $this->addUrl('company/' . $user->slug . '/shop');
+            if ($user->hosting && !$user->hosting->moderation) $out .= $this->addUrl('company/' . $user->slug . '/hosting');
+            if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->slug . '/about');
 
             foreach ($user->ads->where('moderation', false)->where('hidden', false) as $ad) {
                 $out .= $this->addUrl('ads/' . $ad->adCategory->name . '/' . $ad->id);
             }
 
-            $out .= $this->addUrl('company/' . $user->url_name . '/offices');
+            $out .= $this->addUrl('company/' . $user->slug . '/offices');
             foreach ($user->offices->where('moderation', false) as $office) {
-                $out .= $this->addUrl('company/' . $user->url_name . '/offices/' . $office->id);
+                $out .= $this->addUrl('company/' . $user->slug . '/offices/' . $office->id);
             }
 
-            $out .= $this->addUrl('company/' . $user->url_name . '/reviews');
+            $out .= $this->addUrl('company/' . $user->slug . '/reviews');
         }
 
-        $out .= $this->addUrl('database');
+        $out .= $this->addUrl('asic-miners');
         $out .= $this->addUrl('calculator');
 
-        foreach (AsicBrand::select(['id', 'name'])->with(['asicModels:id,asic_brand_id,name', 'asicModels.asicVersions:asic_model_id,hashrate'])->get() as $asicBrand) {
-            $asicBrandName = strtolower(str_replace(' ', '_', $asicBrand->name));
-            $out .= $this->addUrl('database/' . $asicBrandName);
+        foreach (
+            AsicBrand::select(['id', 'slug'])->with([
+                'asicModels:id,asic_brand_id,slug',
+                'asicModels.asicVersions:id,asic_model_id,hashrate,measurement',
+                'asicModels.asicVersions.moderatedAds:id,asic_version_id,user_id',
+                'asicModels.asicVersions.moderatedAds.user:id,slug'
+            ])->get() as $asicBrand
+        ) {
+            $out .= $this->addUrl('asic-miners/' . $asicBrand->slug);
             foreach ($asicBrand->asicModels as $asicModel) {
-                $asicModelName = strtolower(str_replace(' ', '_', $asicModel->name));
-                $out .= $this->addUrl('database/' . $asicBrandName . '/' . $asicModelName);
-                $out .= $this->addUrl('database/' . $asicBrandName . '/' . $asicModelName . '/reviews');
-                $out .= $this->addUrl('calculator/' . $asicModelName);
+                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug);
+                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/reviews');
+                $out .= $this->addUrl('calculator/' . $asicModel->slug);
                 foreach ($asicModel->asicVersions as $asicVersion) {
-                    $out .= $this->addUrl('database/' . $asicBrandName . '/' . $asicModelName . '/' . $asicVersion->hashrate);
-                    $out .= $this->addUrl('calculator/' . $asicModelName . '/' . $asicVersion->hashrate);
+                    $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
+                    $out .= $this->addUrl('calculator/' . $asicModel->slug . '/' . $asicVersion->hashrate);
+                    foreach ($asicVersion->moderatedAds as $ad) {
+                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id);
+                    }
+                }
+            }
+        }
+
+        $out .= $this->addUrl('gpus');
+
+        foreach (
+            GPUBrand::select(['id', 'slug'])->with([
+                'gpuModels:id,gpu_brand_id,slug',
+                'gpuModels.moderatedAds:id,gpu_model_id,user_id',
+                'gpuModels.moderatedAds.user:id,slug'
+            ])->get() as $gpuBrand
+        ) {
+            $out .= $this->addUrl('gpus/' . $gpuBrand->slug);
+            foreach ($gpuBrand->gpuModels as $gpuModel) {
+                $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug);
+                $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug . '/reviews');
+                foreach ($gpuModel->moderatedAds as $ad) {
+                    $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug . '/ads/' . $ad->user->slug . '-' . $ad->id);
                 }
             }
         }
 
         $out .= $this->addUrl('blog');
         foreach (BlogArticle::select(['id', 'title'])->get() as $article) {
-            $out .= $this->addUrl('blog/article/' . $article->id . '-' . Str::slug($article->title, '-'));
+            $out .= $this->addUrl('blog/article/' . $article->id . '-' . Str::slug($article->title));
         }
 
         $out .= $this->addUrl('insight');
-        foreach (Channel::select(['id', 'slug'])
-            ->with(['moderatedArticles:id,title,channel_id', 'moderatedPosts:id,channel_id', 'moderatedVideos:id,title,channel_id'])->get() as $channel) {
+        foreach (
+            Channel::select(['id', 'slug'])
+                ->with(['moderatedArticles:id,title,channel_id', 'moderatedPosts:id,channel_id', 'moderatedVideos:id,title,channel_id'])->get() as $channel
+        ) {
             $out .= $this->addUrl('insight/' . $channel->slug);
 
             foreach ($channel->moderatedArticles as $article)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . Str::slug($article->title, '-'));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . Str::slug($article->title));
 
             foreach ($channel->moderatedPosts as $post)
                 $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
 
             foreach ($channel->moderatedVideos as $video)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . Str::slug($video->title, '-'));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . Str::slug($video->title));
         }
 
         $out .= $this->addUrl('forum');
 
-        foreach (ForumCategory::select(['id', 'name'])->with(['forumSubcategories:id,forum_category_id,name', 'forumSubcategories.forumQuestions:id,forum_subcategory_id,theme'])->get() as $forumCategory) {
-            $forumCategoryName = strtolower(str_replace(' ', '_', $forumCategory->name));
+        foreach (ForumCategory::select(['id', 'slug'])->with(['forumSubcategories:id,forum_category_id,slug', 'forumSubcategories.forumQuestions:id,forum_subcategory_id,theme'])->get() as $forumCategory) {
+            $forumCategoryName = $forumCategory->slug;
             $out .= $this->addUrl('forum/' . $forumCategoryName);
             foreach ($forumCategory->forumSubcategories as $forumSubcategory) {
-                $forumSubcategoryName = strtolower(str_replace(' ', '_', $forumSubcategory->name));
+                $forumSubcategoryName = $forumSubcategory->slug;
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
                 foreach ($forumSubcategory->forumQuestions as $forumQuestion)
-                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . Str::slug($forumQuestion->theme, '-'));
+                    $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . Str::slug($forumQuestion->theme));
             }
         }
 

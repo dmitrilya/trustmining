@@ -128,8 +128,10 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Channel $channel, Post $post)
     {
-        if ($post->moderations()->where('moderation_status_id', 1)->exists())
-            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+        if ($post->moderations()->where('moderation_status_id', 1)->exists()) return response()->json([
+            'success' => false,
+            'message' => __('Unavailable, currently under moderation')
+        ]);
 
         $this->service->update($channel, $post, [
             'preview' => $request->preview,

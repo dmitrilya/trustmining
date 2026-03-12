@@ -2,7 +2,7 @@
     @case(1)
         <div class="mx-auto sm:grid sm:grid-cols-3 lg:gap-8">
             <div class="col-start-2">
-                <img src="{{ Storage::url('gpus/' . $model->images[0]) }}" alt="{{ $model->name }}"
+                <img itemprop="image" src="{{ Storage::url('gpus/' . $model->images[0]) }}" alt="{{ $model->name }}"
                     class="w-full rounded-lg object-cover object-center">
             </div>
         </div>

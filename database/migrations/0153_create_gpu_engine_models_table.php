@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('gpu_engine_brand_id')->references('id')
                 ->on('gpu_engine_brands')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug');
             $table->unsignedFloat('volume', 6, 3);
             $table->unsignedTinyInteger('cylinders');
             $table->unsignedSmallInteger('rpm');

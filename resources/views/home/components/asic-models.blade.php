@@ -6,7 +6,7 @@
 
     <div class="space-y-1">
         @foreach ($asicModels as $asicModel)
-            <a href="{{ route('ads', ['adCategory' => 'miners', 'model' => strtolower(str_replace(' ', '_', $asicModel->name))]) }}"
+            <a href="{{ route('ads', ['adCategory' => 'miners', 'model' => $asicModel->slug]) }}"
                 class="flex items-center px-3 py-2 hover:bg-white dark:hover:bg-slate-800 text-sm text-slate-800 dark:text-slate-200 rounded-full">
                 <img height="20px" width="20px"
                     src="{{ Storage::url('public/brands/' . $asicModel->asicBrand->name . '.webp') }}"

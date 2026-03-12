@@ -1,5 +1,5 @@
 <div class="mt-4 sm:mt-5 md:mt-6 lg:mt-7 grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-    <a href="{{ route('company', ['user' => $user->url_name]) }}"
+    <a href="{{ route('company', ['user' => $user->slug]) }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
@@ -19,7 +19,7 @@
                 {{ __('Current price') }}</p>
         </div>
     </a>
-    <a href="{{ $user->company ? route('company.about', ['user' => $user->url_name]) : '#' }}"
+    <a href="{{ $user->company ? route('company.about', ['user' => $user->slug]) : '#' }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ !$user->company ? ' opacity-60' : '' }}">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
@@ -39,7 +39,7 @@
                 {{ __('Information and documents') }}</p>
         </div>
     </a>
-    <a href="{{ $user->hosting && !$user->hosting->moderation ? route('company.hosting', ['user' => $user->url_name]) : '#' }}"
+    <a href="{{ $user->hosting && !$user->hosting->moderation ? route('company.hosting', ['user' => $user->slug]) : '#' }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ !$user->hosting || $user->hosting->moderation ? ' opacity-50' : '' }}">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
@@ -60,7 +60,7 @@
             </p>
         </div>
     </a>
-    <a href="{{ route('company.offices', ['user' => $user->url_name]) }}"
+    <a href="{{ route('company.offices', ['user' => $user->slug]) }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">

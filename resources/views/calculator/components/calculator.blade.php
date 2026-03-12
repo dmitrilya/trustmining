@@ -26,7 +26,7 @@
                                 <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                                     <x-rating></x-rating>
 
-                                    <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
+                                    <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
                                         class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
                                         <span x-text="version.reviews_count"></span>
                                         {{ __('reviews') }}
@@ -170,7 +170,7 @@
                                         <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
                                             <x-rating></x-rating>
 
-                                            <a :href="'/database/' + version.brand_name + '/' + version.model_name + '/reviews'"
+                                            <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
                                                 class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
                                                 <span x-text="version.reviews_count"></span>
                                                 {{ __('reviews') }}
@@ -203,7 +203,7 @@
                                             <x-primary-button
                                                 class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
                                         </a>
-                                    </template>
+                                    </template> 
                                 </div>
                             </template>
                         </div>
@@ -245,7 +245,7 @@
                         </template>
 
                         <a class="block mt-6 xl:mt-8"
-                            x-bind:href="version ? ('/database/' + version.brand_name + '/' + version.model_name) : '#'">
+                            x-bind:href="version ? ('/asic-miners/' + version.brand_slug + '/' + version.model_slug) : '#'">
                             <x-secondary-button>{{ __('More details about miner') }}</x-secondary-button>
                         </a>
                     </div>

@@ -145,6 +145,7 @@
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then(r => {
                 if (r.data.success) window.location.href = r.data.redirect;
+                else pushToastAlert(r.data.message, 'error');
             }).catch(err => {
                 loading = false;
                 if (err.response && err.response.status === 422) validation = err.response.data.errors;
@@ -184,7 +185,7 @@
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
             ->keyBy('key')" :key="$article->series->first()?->id" />
 
-        <div x-data="{ allTags: {{ $tags }}, tags: {{ $article->tags }}, search: '' }">
+        <div x-data="{ allTags: {{ $tags }}, tags: {{ collect($article->tags) }}, search: '' }">
             <div>
                 <x-input-label for="search" :value="__('Hashtags')" />
                 <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif

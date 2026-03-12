@@ -32,7 +32,8 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5 xl:gap-7">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+        <div
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
             <h2
                 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
                 {{ __('New posts') }}
@@ -42,9 +43,9 @@
                 @foreach ($questions as $question)
                     <a
                         href="{{ route('forum.question.show', [
-                            'forumCategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->forumCategory->name)),
-                            'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
-                            'forumQuestion' => $question->id . '-' . Str::slug($question->theme, '-'),
+                            'forumCategory' => $question->forumSubcategory->forumCategory->slug,
+                            'forumSubcategory' => $question->forumSubcategory->slug,
+                            'forumQuestion' => $question->id . '-' . Str::slug($question->theme),
                         ]) }}">
                         <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
                             <div class="mb-1.5 sm:mb-2 flex justify-between">
@@ -75,9 +76,10 @@
         </div>
 
         @foreach ($categories as $category)
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+            <div
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
                 <h2 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6">
-                    <a href="{{ route('forum.category', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name))]) }}"
+                    <a href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
                         class="xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
                         {{ __($category->name) }}
                     </a>
@@ -86,21 +88,17 @@
                 <div class="divide-y divide-slate-100 dark:divide-slate-800">
                     @foreach ($category->forumSubcategories as $subcategory)
                         <a
-                            href="{{ route('forum.subcategory', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name)), 'forumSubcategory' => strtolower(str_replace(' ', '_', $subcategory->name))]) }}">
+                            href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">
                             <div
                                 class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-slate-200 dark:hover:bg-slate-950 flex items-center justify-between">
                                 <div class="flex items-center">
                                     <div
                                         class="mr-3 sm:mr-4 size-6 min-w-6 xs:size-8 xs:min-w-8 sm:size-10 sm:min-w-10 lg:size-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
-                                        @include(
-                                            'forum.components.svg.' .
-                                                strtolower(str_replace(' ', '_', $subcategory->name)),
-                                            [
-                                                'class' =>
-                                                    'text-slate-500 dark:text-slate-500 group-hover:text-slate-900 dark:group-hover:text-slate-100',
-                                                'w' => '55%',
-                                            ]
-                                        )
+                                        @include('forum.components.svg.' . $subcategory->slug, [
+                                            'class' =>
+                                                'text-slate-500 dark:text-slate-500 group-hover:text-slate-900 dark:group-hover:text-slate-100',
+                                            'w' => '55%',
+                                        ])
                                     </div>
                                     <h3
                                         class="text-xs xs:text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">

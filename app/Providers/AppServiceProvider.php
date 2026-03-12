@@ -71,6 +71,7 @@ class AppServiceProvider extends ServiceProvider
             'message' => \App\Models\Chat\Message::class,
             'asic-brand' => \App\Models\Database\AsicBrand::class,
             'asic-model' => \App\Models\Database\AsicModel::class,
+            'gpu-brand' => \App\Models\Database\GPUBrand::class,
             'gpu-model' => \App\Models\Database\GPUModel::class,
             'blog-article' => \App\Models\Blog\BlogArticle::class,
             'review' => \App\Models\Morph\Review::class,

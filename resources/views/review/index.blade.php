@@ -1,7 +1,7 @@
 @php
     if ($type == 'user') {
         $user = App\Models\User\User::find($id);
-        $href = route('company', ['user' => $user->url_name]);
+        $href = route('company', ['user' => $user->slug]);
         $title = 'компании ' . $user->name . ' - мнения клиентов и экспертов';
         $description =
             'Реальные отзывы о компании ' .
@@ -9,9 +9,9 @@
             ' от клиентов, партнёров и экспертов: качество услуг, надёжность, условия сотрудничества и опыт работы';
     } elseif ($type == 'asic-model') {
         $model = App\Models\Database\AsicModel::find($id);
-        $href = route('database.model', [
-            'asicBrand' => strtolower(str_replace(' ', '_', $model->asicBrand->name)),
-            'asicModel' => strtolower(str_replace(' ', '_', $model->name)),
+        $href = route('database.asic-miners.model', [
+            'asicBrand' => $model->asicBrand->slug,
+            'asicModel' => $model->slug,
         ]);
         $title = 'ASIC майнере ' . $model->asicBrand->name . ' ' . $model->name . ' - реальный опыт, плюсы и минусы';
         $description =
@@ -22,9 +22,9 @@
             ': реальный опыт эксплуатации, доходность, энергопотребление, надёжность и мнения экспертов';
     } elseif ($type == 'gpu-model') {
         $model = App\Models\Database\GPUModel::find($id);
-        $href = route('database.gpu.model', [
-            'gpuBrand' => strtolower(str_replace(' ', '_', $model->gpuBrand->name)),
-            'gpuModel' => strtolower(str_replace(' ', '_', $model->name)),
+        $href = route('database.gas-gensets.model', [
+            'gpuBrand' => $model->gpuBrand->slug,
+            'gpuModel' => $model->slug,
         ]);
         $title =
             'газопоршневой электростанции ' .

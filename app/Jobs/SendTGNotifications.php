@@ -67,7 +67,7 @@ class SendTGNotifications implements ShouldQueue
                 $rating = "";
                 for ($i = 0; $i < $this->n->rating; $i++) $rating .= "⭐";
                 $text = "$rating\n\n" . $this->n->review;
-                $keyboard = [[['text' => __('Details'), 'url' => route('company.reviews', ['user' => $this->n->reviewable->url_name])]]];
+                $keyboard = [[['text' => __('Details'), 'url' => route('company.reviews', ['user' => $this->n->reviewable->slug])]]];
                 break;
 
             case 'moderation':
@@ -119,18 +119,18 @@ class SendTGNotifications implements ShouldQueue
                     case 'New forum answer':
                         $text = $this->n->forumQuestion->theme . "\n\n" . trim(strip_tags(str_replace(['</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", " "], $this->n->text)));
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.show', [
-                            'forumCategory' => strtolower(str_replace(' ', '_', $this->n->forumQuestion->forumSubcategory->forumCategory->name)),
-                            'forumSubcategory' => strtolower(str_replace(' ', '_', $this->n->forumQuestion->forumSubcategory->name)),
-                            'forumQuestion' => $this->n->forumQuestion->id . '-' . Str::slug($this->n->forumQuestion->theme, '-'),
+                            'forumCategory' => $this->n->forumQuestion->forumSubcategory->forumCategory->slug,
+                            'forumSubcategory' => $this->n->forumQuestion->forumSubcategory->slug,
+                            'forumQuestion' => $this->n->forumQuestion->id . '-' . Str::slug($this->n->forumQuestion->theme),
                             'answer' => $this->n->id
                         ])]]];
                         break;
                     case 'New forum comment':
                         $text = $this->n->forumAnswer->forumQuestion->theme . "\n\n" . trim(strip_tags(str_replace(['</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", " "], $this->n->text)));
                         $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.show', [
-                            'forumCategory' => strtolower(str_replace(' ', '_', $this->n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->name)),
-                            'forumSubcategory' => strtolower(str_replace(' ', '_', $this->n->forumAnswer->forumQuestion->forumSubcategory->name)),
-                            'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . Str::slug($this->n->forumAnswer->forumQuestion->theme, '-'),
+                            'forumCategory' => $this->n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->slug,
+                            'forumSubcategory' => $this->n->forumAnswer->forumQuestion->forumSubcategory->slug,
+                            'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . Str::slug($this->n->forumAnswer->forumQuestion->theme),
                             'answer' => $this->n->forum_answer_id
                         ])]]];
                         break;

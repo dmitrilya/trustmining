@@ -29,7 +29,7 @@
         </div>
 
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"
-            href="{{ route('insight.channel.series.show', ['channel' => $series->channel->slug, 'series' => $series->id . '-' . mb_strtolower(str_replace(' ', '-', $series->name))]) }}">
+            href="{{ route('insight.channel.series.show', ['channel' => $series->channel->slug, 'series' => $series->id . '-' . Str::slug($series->name)]) }}">
             <x-secondary-button class="w-full justify-center">{{ __('Open') }}</x-secondary-button>
         </a>
     </div>

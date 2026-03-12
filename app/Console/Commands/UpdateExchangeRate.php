@@ -80,9 +80,9 @@ class UpdateExchangeRate extends Command
             return $algorithm;
         });
 
-        $models = AsicModel::select(['id', 'name', 'algorithm_id', 'asic_brand_id', 'release'])->with([
-            'algorithm:id,name,measurement',
-            'asicBrand:id,name',
+        $models = AsicModel::select(['id', 'name', 'slug', 'algorithm_id', 'asic_brand_id', 'release'])->with([
+            'algorithm:id,name,slug,measurement',
+            'asicBrand:id,name,slug',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
             'asicVersions.ads:asic_version_id,price,coin_id,props',
             'asicVersions.ads.coin:id,rate,abbreviation',
@@ -133,8 +133,10 @@ class UpdateExchangeRate extends Command
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
                 $version->price = $ads->min('usdt_price');
                 $version->algorithm = $model->algorithm->name;
-                $version->brand_name = strtolower(str_replace(' ', '_', $model->asicBrand->name));
-                $version->model_name = strtolower(str_replace(' ', '_', $model->name));
+                $version->brand_name = $model->asicBrand->name;
+                $version->brand_slug = $model->asicBrand->slug;
+                $version->model_name = $model->name;
+                $version->model_slug = $model->slug;
                 $version->reviews_count = $model->moderatedReviews->count();
                 $version->reviews_avg = $model->moderatedReviews->avg('rating');
 

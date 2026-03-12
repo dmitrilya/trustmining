@@ -13,7 +13,7 @@
         @break
 
         @case('review')
-            <x-notification :href="route('company.reviews', ['user' => $n->reviewable->url_name])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating"
+            <x-notification :href="route('company.reviews', ['user' => $n->reviewable->slug])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating"
                 :text="$n->review"></x-notification>
         @break
 
@@ -64,16 +64,9 @@
 
                 @case('New forum answer')
                     <x-notification :href="route('forum.question.show', [
-                        'forumCategory' => strtolower(
-                            str_replace(' ', '_', $n->forumQuestion->forumSubcategory->forumCategory->name),
-                        ),
-                        'forumSubcategory' => strtolower(
-                            str_replace(' ', '_', $n->forumQuestion->forumSubcategory->name),
-                        ),
-                        'forumQuestion' =>
-                            $n->forumQuestion->id .
-                            '-' .
-                            Str::slug($n->forumQuestion->theme, '-'),
+                        'forumCategory' => $n->forumQuestion->forumSubcategory->forumCategory->slug,
+                        'forumSubcategory' => $n->forumQuestion->forumSubcategory->slug,
+                        'forumQuestion' => $n->forumQuestion->id . '-' . Str::slug($n->forumQuestion->theme),
                         'answer' => $n->id,
                     ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumQuestion->theme"
                         :text="$n->text"></x-notification>
@@ -81,20 +74,12 @@
 
                 @case('New forum comment')
                     <x-notification :href="route('forum.question.show', [
-                        'forumCategory' => strtolower(
-                            str_replace(
-                                ' ',
-                                '_',
-                                $n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->name,
-                            ),
-                        ),
-                        'forumSubcategory' => strtolower(
-                            str_replace(' ', '_', $n->forumAnswer->forumQuestion->forumSubcategory->name),
-                        ),
+                        'forumCategory' => $n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->slug,
+                        'forumSubcategory' => $n->forumAnswer->forumQuestion->forumSubcategory->slug,
                         'forumQuestion' =>
                             $n->forumAnswer->forumQuestion->id .
                             '-' .
-                            Str::slug($n->forumAnswer->forumQuestion->theme, '-'),
+                            Str::slug($n->forumAnswer->forumQuestion->theme),
                         'answer' => $n->forum_answer_id,
                     ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumAnswer->forumQuestion->theme"
                         :text="$n->text"></x-notification>

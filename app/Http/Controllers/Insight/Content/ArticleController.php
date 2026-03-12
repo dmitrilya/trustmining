@@ -88,7 +88,7 @@ class ArticleController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title)])
         ]);
     }
 
@@ -121,7 +121,8 @@ class ArticleController extends Controller
                 'replies.user.company:user_id,logo',
                 'replies.user.channel:user_id,name,logo',
                 'replies.reactions'
-            ])->get()
+            ])->get(),
+            'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys()
         ]);
     }
 
@@ -135,8 +136,10 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Channel $channel, Article $article)
     {
-        if ($article->moderations()->where('moderation_status_id', 1)->exists())
-            return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
+        if ($article->moderations()->where('moderation_status_id', 1)->exists()) return response()->json([
+            'success' => false,
+            'message' => __('Unavailable, currently under moderation')
+        ]);
 
         $this->service->update($channel, $article, [
             'title' => $request->title,
@@ -153,7 +156,7 @@ class ArticleController extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title, '-')])
+            'redirect' => route('insight.article.show', ['channel' => $channel->slug, 'article' => $article->id . '-' . Str::slug($article->title)])
         ]);
     }
 

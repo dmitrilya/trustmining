@@ -14,9 +14,9 @@
         <meta itemprop="bestRating" content="5" />
         <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
         <link itemprop="url"
-            href="{{ route('database.reviews', [
-                'asicBrand' => strtolower(str_replace(' ', '_', $selVersion->brand_name)),
-                'asicModel' => strtolower(str_replace(' ', '_', $selVersion->model_name)),
+            href="{{ route('database.asic-miners.reviews', [
+                'asicBrand' => $selVersion->brand_slug,
+                'asicModel' => $selVersion->model_slug,
             ]) }}" />
     </div>
 @endif

@@ -9,9 +9,9 @@
             @foreach ($similarQuestions as $similarQuestion)
                 <a
                     href="{{ route('forum.question.show', [
-                        'forumCategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->forumCategory->name)),
-                        'forumSubcategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->name)),
-                        'forumQuestion' => $similarQuestion->id . '-' . Str::slug($similarQuestion->theme, '-'),
+                        'forumCategory' => $similarQuestion->forumSubcategory->forumCategory->slug,
+                        'forumSubcategory' => $similarQuestion->forumSubcategory->slug,
+                        'forumQuestion' => $similarQuestion->id . '-' . Str::slug($similarQuestion->theme),
                     ]) }}">
                     <div class="p-2 xs:p-3 md:p-4 group hover:bg-slate-200 dark:hover:bg-slate-950">
                         <div class="mb-1.5 sm:mb-2 text-xxs sm:text-xs lg:text-sm text-slate-500">
@@ -39,9 +39,9 @@
             @foreach ($newQuestions as $newQuestion)
                 <a
                     href="{{ route('forum.question.show', [
-                        'forumCategory' => strtolower(str_replace(' ', '_', $newQuestion->forumSubcategory->forumCategory->name)),
-                        'forumSubcategory' => strtolower(str_replace(' ', '_', $newQuestion->forumSubcategory->name)),
-                        'forumQuestion' => $newQuestion->id . '-' . Str::slug($newQuestion->theme, '-'),
+                        'forumCategory' => $newQuestion->forumSubcategory->forumCategory->slug,
+                        'forumSubcategory' => $newQuestion->forumSubcategory->slug,
+                        'forumQuestion' => $newQuestion->id . '-' . Str::slug($newQuestion->theme),
                     ]) }}">
                     <div class="p-2 xs:p-3 md:p-4 group hover:bg-slate-200 dark:hover:bg-slate-950">
                         <div class="mb-1.5 sm:mb-2 text-xxs sm:text-xs lg:text-sm text-slate-500">

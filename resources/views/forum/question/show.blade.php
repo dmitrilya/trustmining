@@ -22,7 +22,7 @@
                         <meta itemprop="position" content="2" />
                         <div class="flex items-center">
                             <a itemprop="item"
-                                href="{{ route('forum.category', ['forumCategory' => strtolower(str_replace(' ', '_', $category->name))]) }}"
+                                href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
                                 class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
                                 <span itemprop="name">{{ __($category->name) }}</span>
                             </a>

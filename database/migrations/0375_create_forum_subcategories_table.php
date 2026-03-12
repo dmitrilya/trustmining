@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('forum_subcategories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
             $table->unsignedBigInteger('forum_category_id');
             $table->foreign('forum_category_id')->references('id')
                 ->on('forum_categories')->onUpdate('cascade');

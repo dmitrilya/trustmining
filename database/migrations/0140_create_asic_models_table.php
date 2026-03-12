@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('algorithm_id')->references('id')
                 ->on('algorithms')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->string('slug');
             $table->text('description')->nullable();
             $table->json('characteristics');
             $table->json('images');

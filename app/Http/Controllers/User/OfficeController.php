@@ -153,7 +153,7 @@ class OfficeController extends Controller
 
         if (!empty($data)) $office->moderations()->create(['data' => $data]);
 
-        return redirect()->route('company.office', ['user' => $user->url_name, 'office' => $office->id]);
+        return redirect()->route('company.office', ['user' => $user->slug, 'office' => $office->id]);
     }
 
     /**

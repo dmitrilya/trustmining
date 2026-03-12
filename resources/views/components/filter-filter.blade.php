@@ -24,11 +24,11 @@
         <div class="space-y-3">
             @foreach ($items as $item)
                 @if ($type == 'checkbox')
-                    <x-checkbox :name="$field . '[]'" :value="$item['url_name']" textClasses="text-slate-600 dark:text-slate-400" :checked="request()->get($field) && in_array($item['url_name'], request()->get($field))">
+                    <x-checkbox :name="$field . '[]'" :value="$item['slug']" textClasses="text-slate-600 dark:text-slate-400" :checked="request()->get($field) && in_array($item['slug'], request()->get($field))">
                         {{ __($item['name']) }}
                     </x-checkbox>
                 @else
-                    <x-radio :name="$field" :value="$item['url_name']" textClasses="text-slate-600 dark:text-slate-400" :checked="request()->get($field) == $item['url_name']">
+                    <x-radio :name="$field" :value="$item['slug']" textClasses="text-slate-600 dark:text-slate-400" :checked="request()->get($field) == $item['slug']">
                         {{ __($item['name']) }}
                     </x-radio>
                 @endif

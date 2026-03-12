@@ -18,7 +18,7 @@
             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
         </div>
 
-        <a href="{{ route('company', ['user' => $user->url_name]) }}"
+        <a href="{{ route('company', ['user' => $user->slug]) }}"
             class="hover:underline text-sm text-indigo-600 hover:text-indigo-500">{{ $user->name }}</a>
     </div>
 </div>
@@ -30,7 +30,7 @@
     <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
         <x-rating></x-rating>
 
-        <a href="{{ route('company.reviews', ['user' => $user->url_name]) }}"
+        <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
             class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $user->moderatedReviews->count() }}
             {{ __('reviews') }}</a>
     </div>

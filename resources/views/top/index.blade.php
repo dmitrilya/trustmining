@@ -33,7 +33,7 @@
 
                 @include('components.about-seller')
 
-                <a href="{{ route('company', ['user' => $user->url_name]) }}" class="block w-fit ml-auto mt-2 sm:mt-4">
+                <a href="{{ route('company', ['user' => $user->slug]) }}" class="block w-fit ml-auto mt-2 sm:mt-4">
                     <x-primary-button>{{ __('Visit the store') }}</x-primary-button>
                 </a>
             </div>

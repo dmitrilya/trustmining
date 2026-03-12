@@ -1,12 +1,12 @@
 @php
     $types = [
-        ['name' => 'Blog article', 'url_name' => 'blog-article'],
-        ['name' => 'Article', 'url_name' => 'article'],
-        ['name' => 'Post', 'url_name' => 'post'],
-        ['name' => 'Message', 'url_name' => 'message'],
-        ['name' => 'Moderation', 'url_name' => 'moderation'],
-        ['name' => 'Review', 'url_name' => 'review'],
-        ['name' => 'Track', 'url_name' => 'track'],
+        ['name' => 'Blog article', 'slug' => 'blog-article'],
+        ['name' => 'Article', 'slug' => 'article'],
+        ['name' => 'Post', 'slug' => 'post'],
+        ['name' => 'Message', 'slug' => 'message'],
+        ['name' => 'Moderation', 'slug' => 'moderation'],
+        ['name' => 'Review', 'slug' => 'review'],
+        ['name' => 'Track', 'slug' => 'track'],
     ];
 @endphp
 

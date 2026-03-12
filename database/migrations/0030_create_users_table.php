@@ -24,7 +24,7 @@ return new class extends Migration
                 ->on('tariffs')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tariff_from')->nullable();
             $table->string('name');
-            $table->string('url_name');
+            $table->string('slug');
             $table->unsignedTinyInteger('tf')->default(50);
             $table->unsignedSmallInteger('art')->default(0);
             $table->unsignedSmallInteger('forum_score')->default(0);

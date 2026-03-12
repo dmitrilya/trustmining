@@ -22,6 +22,7 @@ trait AdTrait
             ->leftJoin('offices', 'offices.id', '=', 'ads.office_id')
             ->leftJoin('asic_versions', 'asic_versions.id', '=', 'ads.asic_version_id')
             ->leftJoin('asic_models', 'asic_models.id', '=', 'asic_versions.asic_model_id')
+            ->leftJoin('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
             ->leftJoin('gpu_models', 'gpu_models.id', '=', 'ads.gpu_model_id')
             ->leftJoin('gpu_brands', 'gpu_brands.id', '=', 'gpu_models.gpu_brand_id')
             ->leftJoin('coins', 'coins.id', '=', 'ads.coin_id')
@@ -42,7 +43,7 @@ trait AdTrait
 
                 'users.id as user_id',
                 'users.name as user_name',
-                'users.url_name as user_url_name',
+                'users.slug as user_slug',
                 'users.tf as user_tf',
 
                 'offices.id as office_id',
@@ -51,10 +52,15 @@ trait AdTrait
                 'asic_versions.hashrate as asic_version_hashrate',
                 'asic_versions.measurement as asic_version_measurement',
                 'asic_models.name as asic_model_name',
+                'asic_models.slug as asic_model_slug',
+                'asic_brands.name as asic_brand_name',
+                'asic_brands.slug as asic_brand_slug',
 
                 'gpu_models.name as gpu_model_name',
+                'gpu_models.slug as gpu_model_slug',
                 'gpu_models.max_power as gpu_model_max_power',
                 'gpu_brands.name as gpu_brand_name',
+                'gpu_brands.slug as gpu_brand_slug',
                 'coins.abbreviation as coin',
                 'coins.rate as coin_rate',
 
@@ -66,27 +72,20 @@ trait AdTrait
         if ($adCategory) $ads->where('ads.ad_category_id', $adCategory->id);
 
         if ($request) {
-            if ($request->model) $ads->where('asic_models.name', str_replace('_', ' ', $request->model));
+            if ($request->model) $ads->where('asic_models.slug', $request->model);
 
             if ($request->asic_version_id) $ads->where('ads.asic_version_id', $request->asic_version_id);
 
-            if ($request->gpu_model) $ads->where('gpu_models.name', str_replace('_', ' ', $request->gpu_model));
+            if ($request->gpu_model) $ads->where('gpu_models.slug', $request->gpu_model);
 
             if ($request->algorithms && count($request->algorithms))
-                $ads->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->whereIn('algorithms.name', $request->algorithms);
+                $ads->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->whereIn('algorithms.slug', $request->algorithms);
 
-            if ($request->brands && count($request->brands)) {
-                $brands = array_map(fn($brand) => str_replace('_', ' ', $brand), $request->brands);
-                $ads->join('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
-                    ->whereIn(DB::raw('LOWER(asic_brands.name)'), $brands);
-            }
+            if ($request->brands && count($request->brands))
+                $ads->whereIn('asic_brands.slug', $request->brands);
 
-            if ($request->manufacturers && count($request->manufacturers)) {
-                $manufacturers = array_map(function ($brand) {
-                    return str_replace('_', ' ', $brand);
-                }, $request->manufacturers);
-                $ads->whereIn(DB::raw('LOWER(gpu_brands.name)'), $manufacturers);
-            }
+            if ($request->manufacturers && count($request->manufacturers))
+                $ads->whereIn('gpu_brands.slug', $request->manufacturers);
 
             if ($request->max_power) {
                 $ads->where(function ($q) use ($request) {
@@ -111,7 +110,7 @@ trait AdTrait
             $filters = $request->collect()->only(['Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models', 'Service', 'Material']);
 
             foreach ($filters as $key => $values) {
-                $key = str_replace('_', ' ', $key);
+                $key = str_replace('-', ' ', $key);
                 $values = is_array($values) ? $values : [$values];
 
                 $ads->where(function ($q) use ($key, $values) {

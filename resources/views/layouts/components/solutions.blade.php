@@ -171,7 +171,7 @@
                 <div class="space-y-4 w-full">
                     <div class="text-sm text-slate-600 mb-6">{{ __('Knowledge Base') }}</div>
 
-                    <div class="group flex items-center">
+                    {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             class="size-4 lg:size-5 text-slate-500 mr-2">
@@ -180,8 +180,8 @@
                             </path>
                         </svg>
                         <a class="text-sm lg:text-base text-slate-400 font-semibold"
-                            href="#">{{ __('Events') }}</a>{{-- {{ route('events') }} --}}
-                    </div>
+                            href="{{ route('events') }}">{{ __('Events') }}</a>
+                    </div> --}}
 
                     <div class="group flex items-center">
                         <svg class="size-4 lg:size-5 text-slate-500 mr-2" aria-hidden="true"
@@ -191,7 +191,7 @@
                                 d="M5.005 11.19V12l6.998 4.042L19 12v-.81M5 16.15v.81L11.997 21l6.998-4.042v-.81M12.003 3 5.005 7.042l6.998 4.042L19 7.042 12.003 3Z" />
                         </svg>
                         <a class="under text-sm lg:text-base text-slate-900 dark:text-slate-200 font-semibold"
-                            href="{{ route('database') }}">{{ __('Catalog of models') }}</a>
+                            href="{{ route('database.asic-miners') }}">{{ __('Catalog of models') }}</a>
                     </div>
 
                     <div class="group flex items-center">

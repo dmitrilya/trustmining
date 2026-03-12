@@ -49,6 +49,7 @@
                         headers: { 'Content-Type': 'multipart/form-data' }
                     }).then(r => {
                         if (r.data.success) window.location.href = r.data.redirect;
+                        else pushToastAlert(r.data.message, 'error');
                     }).catch(err => {
                         loading = false;
                         if (err.response && err.response.status === 422) validation = err.response.data.errors;

@@ -1,49 +1,33 @@
 <x-app-layout :title="'ASIC майнеры от производителя ' . $brand->name"
     description="ASIC майнеры от производителя {{ $brand->name }}. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6" x-data="modelsData">
-            <nav class="mb-6" aria-label="Breadcrumb">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
-                    class="flex items-center space-x-2 sm:space-x-2">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                        <meta itemprop="position" content="1" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="{{ route('database') }}"
-                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
-                                <span itemprop="name">{{ __('Catalog of models') }}</span>
-                            </a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="2" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="#"
-                                class="text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
-                                <span itemprop="name">{{ $brand->name }}</span>
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
+        <x-breadcrumbs>
+            <x-breadcrumb position="1" :href="route('database.asic-miners')" :name="__('ASIC-miners')" />
+            <x-breadcrumb position="2" :name="$brand->name" />
+        </x-breadcrumbs>
 
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6"
+            x-data="modelsData">
             <div
                 class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">
                 @foreach ($algos as $algo)
                     <div @click="algo && algo == '{{ $algo->name }}' ? filter(null, search) : filter('{{ $algo->name }}', search)"
                         class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
-                        :class="{ 'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo ==
-                                '{{ $algo->name }}', 'border-slate-300 dark:border-slate-700': algo !=
-                                '{{ $algo->name }}' }">
+                        :class="{
+                            'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo ==
+                                '{{ $algo->name }}',
+                            'border-slate-300 dark:border-slate-700': algo !=
+                                '{{ $algo->name }}'
+                        }">
                         <img src="{{ Storage::url('public/coins/' . $algo->coins->first()->abbreviation . '.webp') }}"
                             alt="{{ $algo->coins->first()->abbreviation }}" class="w-4 sm:w-5 mr-2">
                         <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-slate-100"
-                            :class="{ 'text-indigo-500 dark:text-slate-50': algo ==
-                                '{{ $algo->name }}', 'text-slate-500 dark:text-slate-300': algo !=
-                                    '{{ $algo->name }}' }">
+                            :class="{
+                                'text-indigo-500 dark:text-slate-50': algo ==
+                                    '{{ $algo->name }}',
+                                'text-slate-500 dark:text-slate-300': algo !=
+                                    '{{ $algo->name }}'
+                            }">
                             {{ $algo->name }}
                         </h5>
                     </div>
@@ -130,8 +114,8 @@
                 </div>
             </div>
 
-            <template x-for="model in models" :key="model.brand + '_' + model.name">
-                <a :href="'/database/' + model.brand + '/' + model.url_name"
+            <template x-for="model in models" :key="model.brand_slug + '_' + model.name">
+                <a :href="'/asic-miners/' + model.brand_slug + '/' + model.slug"
                     class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2"
                         x-text="model.name">
@@ -163,10 +147,7 @@
 
         @foreach ($brand->asicModels as $asicModel)
             <a
-                href="{{ route('database.model', [
-                    'asicBrand' => str_replace(' ', '_', $brand->name),
-                    'asicModel' => str_replace(' ', '_', $asicModel->name),
-                ]) }}"></a>
+                href="{{ route('database.asic-miners.model', ['asicBrand' => $brand->slug, 'asicModel' => $asicModel->slug]) }}"></a>
         @endforeach
     </div>
 </x-app-layout>

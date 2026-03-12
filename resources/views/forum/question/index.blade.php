@@ -22,9 +22,9 @@
                     @if ($question->published)
                         <a
                             href="{{ route('forum.question.show', [
-                                'forumCategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->forumCategory->name)),
-                                'forumSubcategory' => strtolower(str_replace(' ', '_', $question->forumSubcategory->name)),
-                                'forumQuestion' => $question->id . '-' . Str::slug($question->theme, '-'),
+                                'forumCategory' => $question->forumSubcategory->forumCategory->slug,
+                                'forumSubcategory' => $question->forumSubcategory->slug,
+                                'forumQuestion' => $question->id . '-' . Str::slug($question->theme),
                             ]) }}">
                     @endif
                     <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
@@ -83,9 +83,9 @@
                                                 @foreach ($question->similar_questions_list as $similarQuestion)
                                                     <a target="_blank"
                                                         href="{{ route('forum.question.show', [
-                                                            'forumCategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->forumCategory->name)),
-                                                            'forumSubcategory' => strtolower(str_replace(' ', '_', $similarQuestion->forumSubcategory->name)),
-                                                            'forumQuestion' => $similarQuestion->id . '-' . Str::slug($similarQuestion->theme, '-'),
+                                                            'forumCategory' => $similarQuestion->forumSubcategory->forumCategory->slug,
+                                                            'forumSubcategory' => $similarQuestion->forumSubcategory->slug,
+                                                            'forumQuestion' => $similarQuestion->id . '-' . Str::slug($similarQuestion->theme),
                                                         ]) }}">
                                                         <div
                                                             class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-white dark:hover:bg-slate-900 rounded-lg">

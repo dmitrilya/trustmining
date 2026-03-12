@@ -106,7 +106,7 @@
                                 </x-dropdown-link>
 
                                 @if ($auth->passport || $auth->company)
-                                    <x-dropdown-link :href="route('company', ['user' => $auth->url_name])">
+                                    <x-dropdown-link :href="route('company', ['user' => $auth->slug])">
                                         {{ __('My shop') }}
                                     </x-dropdown-link>
                                 @endif
@@ -117,7 +117,7 @@
                                     </x-dropdown-link>
                                 @endif
 
-                                <x-dropdown-link :href="route('company.reviews', ['user' => $auth->url_name])">
+                                <x-dropdown-link :href="route('company.reviews', ['user' => $auth->slug])">
                                     {{ __('Reviews') }}
                                 </x-dropdown-link>
 
@@ -204,7 +204,7 @@
                     </x-responsive-nav-link>
 
                     @if ($auth->passport || $auth->company)
-                        <x-responsive-nav-link :href="route('company', ['user' => $auth->url_name])">
+                        <x-responsive-nav-link :href="route('company', ['user' => $auth->slug])">
                             {{ __('My shop') }}
                         </x-responsive-nav-link>
                     @endif
@@ -215,7 +215,7 @@
                         </x-responsive-nav-link>
                     @endif
 
-                    <x-responsive-nav-link :href="route('company.reviews', ['user' => $auth->url_name])">
+                    <x-responsive-nav-link :href="route('company.reviews', ['user' => $auth->slug])">
                         {{ __('Reviews') }}
                     </x-responsive-nav-link>
 

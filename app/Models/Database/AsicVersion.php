@@ -42,4 +42,9 @@ class AsicVersion extends Model
     {
         return $this->hasMany(\App\Models\Ad\Ad::class);
     }
+
+    public function moderatedAds()
+    {
+        return $this->ads()->where('moderation', false);
+    }
 }

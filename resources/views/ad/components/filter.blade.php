@@ -2,8 +2,8 @@
     @include('ad.' . $adCategory->name . '.filter')
 
     <x-filter-filter type="checkbox" :name="__('VAT')" :items="collect([
-        ['name' => 'Price including VAT', 'url_name' => 'with_vat'],
-        ['name' => 'Price without VAT', 'url_name' => 'without_vat'],
+        ['name' => 'Price including VAT', 'slug' => 'with_vat'],
+        ['name' => 'Price without VAT', 'slug' => 'without_vat'],
     ])" field="vat"></x-filter-filter>
 
     <div class="relative mt-4" x-data="{ open: false, sugs: false }" @click.away="open = false">
@@ -27,11 +27,11 @@
             ($user = Auth::user()) &&
             $user->id == request()->user->id)
         <x-filter-filter type="radio" :name="__('Display')" :items="collect([
-            ['name' => 'View all', 'url_name' => ''],
-            ['name' => 'Active', 'url_name' => 'active'],
-            ['name' => 'Is under moderation', 'url_name' => 'moderation'],
-            ['name' => 'Rejected', 'url_name' => 'rejected'],
-            ['name' => 'Hidden', 'url_name' => 'hidden'],
+            ['name' => 'View all', 'slug' => ''],
+            ['name' => 'Active', 'slug' => 'active'],
+            ['name' => 'Is under moderation', 'slug' => 'moderation'],
+            ['name' => 'Rejected', 'slug' => 'rejected'],
+            ['name' => 'Hidden', 'slug' => 'hidden'],
         ])" field="display"></x-filter-filter>
     @endif
 </x-filter>

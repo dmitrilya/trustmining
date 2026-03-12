@@ -3,7 +3,7 @@
     <div>
         <div
             class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
-            <a class="block w-full" href="{{ route('company', ['user' => $shop->url_name]) }}">
+            <a class="block w-full" href="{{ route('company', ['user' => $shop->slug]) }}">
                 @if ($shop->company?->bg_logo)
                     @php
                         $preview = explode('.', $shop->company->bg_logo);
@@ -50,7 +50,7 @@
         </p>
     </div>
 
-    <a class="block w-full mt-3 sm:mt-4 lg:mt-5" href="{{ route('company', ['user' => $shop->url_name]) }}">
+    <a class="block w-full mt-3 sm:mt-4 lg:mt-5" href="{{ route('company', ['user' => $shop->slug]) }}">
         <x-primary-button class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
     </a>
 </div>

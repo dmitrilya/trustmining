@@ -70,7 +70,7 @@
             <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
                 <x-rating></x-rating>
 
-                <a href="{{ route('company.reviews', ['user' => $user->url_name]) }}"
+                <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
                     class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $user->moderatedReviews->count() }}
                     {{ __('reviews') }}</a>
             </div>
@@ -87,7 +87,7 @@
             class="ql-editor mt-3 sm:mt-4 lg:mt-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">{!! $user->company->description !!}</div>
         
         @if (!request()->routeIs('company.about'))
-            <a href="{{ route('company.about', ['user' => $user->url_name]) }}" target="_blank"
+            <a href="{{ route('company.about', ['user' => $user->slug]) }}" target="_blank"
                 class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600">{{ __('Read more') }}</a>
         @endif
 

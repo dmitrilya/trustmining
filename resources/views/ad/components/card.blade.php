@@ -5,6 +5,28 @@
             toggleHidden({{ $ad->id }}).then(r => this.hidden = r ? !this.hidden : this.hidden);
         }
     }">
+    @php
+        $preview = explode('.', $ad->preview);
+        $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
+        $previewxs = $baseName . '_224' . '.' . $preview[1];
+        $previewsm = $baseName . '_320' . '.' . $preview[1];
+        $href =
+            $ad->ad_category_name == 'miners'
+                ? route('ads.asic.show', [
+                    'asicBrand' => $ad->asic_brand_slug,
+                    'asicModel' => $ad->asic_model_slug,
+                    'asicVersion' => $ad->asic_version_hashrate . $ad->asic_version_measurement,
+                    'ad' => $ad->user_slug . '-' . $ad->id,
+                ])
+                : ($ad->ad_category_name == 'gpus'
+                    ? route('ads.gpu.show', [
+                        'gpuBrand' => $ad->gpu_brand_slug,
+                        'gpuModel' => $ad->gpu_model_slug,
+                        'ad' => $ad->user_slug . '-' . $ad->id,
+                    ])
+                    : route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]));
+    @endphp
+
     <div>
         @if ($owner)
             <div class="mt-2 absolute z-10 left-0 top-4">
@@ -28,15 +50,7 @@
         @endif
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <a class="block w-full" draggable="false"
-                href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
-                @php
-                    $preview = explode('.', $ad->preview);
-                    $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
-                    $previewxs = $baseName . '_224' . '.' . $preview[1];
-                    $previewsm = $baseName . '_320' . '.' . $preview[1];
-                @endphp
-
+            <a class="block w-full" draggable="false" href="{{ $href }}">
                 <picture class="w-full">
                     <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
@@ -69,7 +83,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('company', ['user' => $ad->user_url_name]) }}" draggable="false"
+            <a href="{{ route('company', ['user' => $ad->user_slug]) }}" draggable="false"
                 class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user_name }}</a>
 
             <div class="flex items-center my-1 md:my-2">
@@ -120,13 +134,12 @@
                 @endif
             </div>
 
-            <a href="{{ route('company.office', ['user' => $ad->user_url_name, 'office' => $ad->office_id]) }}"
+            <a href="{{ route('company.office', ['user' => $ad->user_slug, 'office' => $ad->office_id]) }}"
                 target="_blank" draggable="false"
                 class="block hover:underline text-xxs xs:text-xs text-indigo-600 hover:text-indigo-500 mt-1 sm:mt-2">{{ $ad->city }}</a>
 
             <div class="relative flex mt-1 sm:mt-2 items-center">
-                <a class="block w-full" draggable="false"
-                    href="{{ route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]) }}">
+                <a class="block w-full" draggable="false" href="{{ $href }}">
                     <x-primary-button
                         class="w-full justify-center text-xxs xs:text-xs">{{ __('Buy') }}</x-primary-button>
                 </a>

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -91,7 +92,7 @@ class Controller extends BaseController
 
     public function top(): View
     {
-        return view('top.index', ['users' => User::select(['id', 'name', 'url_name', 'tf', 'tariff_id'])->orderByDesc('tf')->limit(10)
+        return view('top.index', ['users' => User::select(['id', 'name', 'slug', 'tf', 'tariff_id'])->orderByDesc('tf')->limit(10)
             ->with(['company:user_id,logo,card,moderation', 'moderatedReviews', 'passport:moderation'])->get()]);
     }
 
@@ -104,7 +105,7 @@ class Controller extends BaseController
 
                 return [
                     'name' => $model->name,
-                    'url_name' => $version->model_name,
+                    'slug' => $version->model_slug,
                     'hashrate' => $version->hashrate,
                     'original_hashrate' => $version->original_hashrate,
                     'profit' => $profit ? $profit['profit'] : 0,
@@ -116,7 +117,7 @@ class Controller extends BaseController
                     'measurement' => $version->measurement,
                     'original_measurement' => $model->algorithm->measurement,
                     'release' => $model->release,
-                    'brand' => $version->brand_name
+                    'brand_slug' => $version->brand_slug
                 ];
             })->values();
 
@@ -172,7 +173,8 @@ class Controller extends BaseController
 
     public function support(): View
     {
-        $auth = \Auth::user();
+        /** @var \App\Models\User\User $auth */
+        $auth = Auth::user();
         $chat = null;
 
         if ($auth) {

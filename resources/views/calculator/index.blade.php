@@ -4,7 +4,7 @@
     ' в удобном калькуляторе доходности майнинга'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
-            'asicModel' => strtolower(str_replace(' ', '_', $selModel->name)),
+            'asicModel' => $selModel->slug,
             'asicVersion' => $selVersion->hashrate,
         ])
         : null }}">

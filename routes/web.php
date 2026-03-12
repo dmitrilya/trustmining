@@ -72,8 +72,8 @@ Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [Controller::class, 'calculator'])->name('calculator');
     Route::get('/app', [Controller::class, 'calculatorApp'])->name('calculator.app');
     Route::get('/get-models', [Controller::class, 'calculatorModels'])->name('calculator-models');
-    Route::get('/{asicModel}', [Controller::class, 'calculator'])->name('calculator.model');
-    Route::get('/{asicModel}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->name('calculator.modelver');
+    Route::get('/{asicModel:slug}', [Controller::class, 'calculator'])->scopeBindings()->name('calculator.model');
+    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->scopeBindings()->name('calculator.modelver');
 });
 
 Route::group(['prefix' => 'metrics'], function () {
@@ -106,21 +106,34 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/article/{article}', [BlogArticleController::class, 'show'])->name('blog.article');
 });
 
-Route::group(['prefix' => 'database'], function () {
-    Route::get('/', [DatabaseController::class, 'index'])->name('database');
-    Route::get('/get-models', [DatabaseController::class, 'getModels']);
+Route::group(['prefix' => 'gas-gensets'], function () {
+    Route::get('/', [DatabaseController::class, 'gpusIndex'])->name('database.gas-gensets');
 
-    Route::get('/gpu/{gpuBrand}/{gpuModel}', [DatabaseController::class, 'gpuModel'])->name('database.gpu.model');
-    Route::get('/gpu/{gpuBrand}/{gpuModel}/reviews', [DatabaseController::class, 'gpuReviews'])->name('database.gpu.reviews');
+    Route::group(['prefix' => '{gpuBrand:slug}'], function () {
+        Route::get('/', [DatabaseController::class, 'gpusBrand'])->name('database.gas-gensets.brand');
 
-    Route::group(['prefix' => '{asicBrand}'], function () {
-        Route::get('/', [DatabaseController::class, 'brand'])->name('database.brand');
-        Route::get('/get-models', [DatabaseController::class, 'getModels']);
+        Route::group(['prefix' => '{gpuModel:slug}'], function () {
+            Route::get('/', [DatabaseController::class, 'gpusModel'])->scopeBindings()->name('database.gas-gensets.model');
+            Route::get('/get-ads', [DatabaseController::class, 'getGpusModelAds'])->scopeBindings()->name('database.gas-gensets.model.get-ads');
+            Route::get('/reviews', [DatabaseController::class, 'gpusReviews'])->scopeBindings()->name('database.gas-gensets.reviews');
+        });
+    });
+});
 
-        Route::group(['prefix' => '{asicModel}'], function () {
-            Route::get('/', [DatabaseController::class, 'model'])->name('database.model');
-            Route::get('/reviews', [DatabaseController::class, 'reviews'])->name('database.reviews');
-            Route::get('/{asicVersion:hashrate}', [DatabaseController::class, 'version'])->name('database.version');
+Route::group(['prefix' => 'asic-miners'], function () {
+    Route::get('/', [DatabaseController::class, 'asicMinersIndex'])->name('database.asic-miners');
+    Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
+
+    Route::group(['prefix' => '{asicBrand:slug}'], function () {
+        Route::get('/', [DatabaseController::class, 'asicMinersBrand'])->name('database.asic-miners.brand');
+        Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
+
+        Route::group(['prefix' => '{asicModel:slug}'], function () {
+            Route::get('/', [DatabaseController::class, 'asicMinersModel'])->scopeBindings()->name('database.asic-miners.model');
+            Route::get('/get-ads', [DatabaseController::class, 'getAsicMinersModelAds'])->scopeBindings()->name('database.asic-miners.model.get-ads');
+            Route::get('/reviews', [DatabaseController::class, 'asicMinersReviews'])->scopeBindings()->name('database.asic-miners.reviews');
+            Route::get('/{asicVersion}', [DatabaseController::class, 'asicMinersVersion'])->name('database.asic-miners.version');
+            Route::get('/{asicVersion}/get-ads', [DatabaseController::class, 'getasicMinersVersionAds'])->name('database.asic-miners.version.get-ads');
         });
     });
 });
@@ -306,6 +319,9 @@ Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
     Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });
 
+Route::get('asic-miners/{asicBrand:slug}/{asicModel:slug}/{asicVersion}/ads/{ad}', [AdController::class, 'asicMinerAd'])->name('ads.asic.show');
+Route::get('gas-gensets/{gpuBrand:slug}/{gpuModel:slug}/ads/{ad}', [AdController::class, 'gpuAd'])->name('ads.gpu.show');
+
 Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
 
 Route::group(['prefix' => 'forum'], function () {
@@ -329,9 +345,9 @@ Route::group(['prefix' => 'forum'], function () {
             Route::delete('/{forumComment}/destroy', [ForumCommentController::class, 'destroy'])->middleware('owner')->name('forum.comment.destroy');
         });
     });
-    Route::group(['prefix' => '{forumCategory}'], function () {
+    Route::group(['prefix' => '{forumCategory:slug}'], function () {
         Route::get('/', [ForumController::class, 'category'])->name('forum.category');
-        Route::group(['prefix' => '{forumSubcategory}'], function () {
+        Route::group(['prefix' => '{forumSubcategory:slug}'], function () {
             Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
             Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
         });

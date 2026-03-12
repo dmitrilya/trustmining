@@ -1,6 +1,6 @@
 @php
     $model = request()->model
-        ? \App\Models\Database\AsicModel::where('name', str_replace('_', ' ', request()->model))->first('name')
+        ? \App\Models\Database\AsicModel::where('slug', request()->model)->first('name')
         : null;
 @endphp
 

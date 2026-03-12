@@ -26,24 +26,13 @@ class GPUEngineModel extends Model
         'rpm',
     ];
 
-    /**
-     * Retrieve the model for a bound value.
-     *
-     * @param  mixed  $value
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return $this->where('name', str_replace('_', ' ', $value))->first() ?? abort(404);
-    }
-
     public function gpuEngineBrand()
     {
-        return $this->belongsTo(\App\Models\Database\GPUEngineBrand::class);
+        return $this->belongsTo(\App\Models\Database\GPUEngineBrand::class, 'gpu_engine_brand_id', 'id');
     }
 
     public function gpuModels()
     {
-        return $this->hasMany(\App\Models\Database\GPUModel::class);
+        return $this->hasMany(\App\Models\Database\GPUModel::class, 'gpu_engine_id', 'id');
     }
 }

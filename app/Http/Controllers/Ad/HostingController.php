@@ -117,7 +117,7 @@ class HostingController extends Controller
 
         $hosting->moderations()->create(['data' => $hosting->attributesToArray()]);
 
-        return redirect()->route('company.hosting', ['user' => $user->url_name]);
+        return redirect()->route('company.hosting', ['user' => $user->slug]);
     }
 
     /**
@@ -184,7 +184,7 @@ class HostingController extends Controller
         if (!empty($data))
             $hosting->moderations()->create(['data' => $data]);
 
-        return redirect()->route('company.hosting', ['user' => $user->url_name]);
+        return redirect()->route('company.hosting', ['user' => $user->slug]);
     }
 
     /**

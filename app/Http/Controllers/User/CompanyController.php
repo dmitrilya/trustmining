@@ -138,7 +138,7 @@ class CompanyController extends Controller
 
         if (!empty($data)) $company->moderations()->create(['data' => $data]);
 
-        return redirect()->route('company.about', ['user' => $user->url_name]);
+        return redirect()->route('company.about', ['user' => $user->slug]);
     }
 
     /**

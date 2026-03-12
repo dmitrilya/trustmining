@@ -46,7 +46,7 @@ class ShopController extends Controller
      */
     public function aboutCompany(User $user)
     {
-        if (!$user->company) return redirect()->route('company', ['user' => $user->url_name]);
+        if (!$user->company) return redirect()->route('company', ['user' => $user->slug]);
 
         return view('company.show', ['user' => $user, 'company' => $user->company]);
     }
@@ -58,7 +58,7 @@ class ShopController extends Controller
     public function hosting(User $user)
     {
         if (!$user->tariff || !$user->tariff->can_have_hosting || !$user->hosting || $user->hosting->moderation)
-            return redirect()->route('company', ['user' => $user->url_name]);
+            return redirect()->route('company', ['user' => $user->slug]);
 
         $this->addView(request(), $user->hosting);
 
@@ -98,7 +98,7 @@ class ShopController extends Controller
         $officeIds = $user->offices()->where('moderation', false)->pluck('id')->toArray();
 
         if ($office->user->id != $user->id || $office->moderation || array_search($office->id, $officeIds) >= $limit)
-            return redirect()->route('company.offices', ['user' => $user->url_name]);
+            return redirect()->route('company.offices', ['user' => $user->slug]);
 
         $this->addView(request(), $office);
 

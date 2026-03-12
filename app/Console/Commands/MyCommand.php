@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Forum\ForumSubcategory;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class MyCommand extends Command
 {
@@ -27,6 +29,11 @@ class MyCommand extends Command
      */
     public function handle()
     {
+        foreach (ForumSubcategory::all() as $model) {
+            $model->slug = Str::slug($model->name);
+            $model->save();
+        }
+
         return Command::SUCCESS;
     }
 }

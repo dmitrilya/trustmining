@@ -24,7 +24,7 @@
                     {{ $office->address }}
                 </p>
 
-                <a href="{{ route('company', ['user' => $office->user->url_name]) }}"
+                <a href="{{ route('company', ['user' => $office->user->slug]) }}"
                     class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500">{{ $office->user->name }}</a>
 
                 <div class="flex items-center mt-1 md:mt-2 mb-3 sm:mb-4">
@@ -39,7 +39,7 @@
 
             <div class="flex flex-col sm:flex-row sm:ml-auto mt-3">
                 <a class="block w-full sm:w-auto"
-                    href="{{ route('company.office', ['user' => $office->user->url_name, 'office' => $office->id]) }}">
+                    href="{{ route('company.office', ['user' => $office->user->slug, 'office' => $office->id]) }}">
                     <x-primary-button
                         class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
                 </a>

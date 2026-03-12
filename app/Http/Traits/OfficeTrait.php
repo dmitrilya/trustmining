@@ -10,7 +10,7 @@ trait OfficeTrait
 {
     public function getOffices($request = null)
     {
-        $offices = Office::where('moderation', false)->with('user:id,name,url_name,tf');
+        $offices = Office::where('moderation', false)->with('user:id,name,slug,tf');
 
         if (isset($request)) {
             if ($request->peculiarities && count($request->peculiarities))
