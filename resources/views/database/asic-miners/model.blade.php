@@ -48,7 +48,7 @@
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="mr-1 sm:mr-2">
-                                        <button class="inline-block p-1 xs:p-2 sm:p-3 {{ $versions->count() > 12 ? '' : 'lg:p-4 ' }}border-b-2 rounded-t-lg"
+                                        <button class="inline-block p-1 xs:p-2 {{ $versions->count() > 12 ? '' : 'sm:p-3 lg:p-4 ' }}border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
                                                 'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': {{ $i }} !=
