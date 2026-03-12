@@ -44,11 +44,11 @@
 
                     <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion->id, $versions->pluck('id')->toArray()) }} }">
                         <div
-                            class="text-xxs xs:text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-300 dark:border-slate-800">
+                            class="text-xxs xs:text-xs{{ $versions->count() > 12 ? '' : ' sm:text-sm ' }}text-center text-slate-600 border-b border-slate-300 dark:text-slate-300 dark:border-slate-800">
                             <ul class="flex flex-wrap -mb-px">
                                 @foreach ($versions as $i => $version)
                                     <li class="mr-1 sm:mr-2">
-                                        <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                        <button class="inline-block p-1 xs:p-2 sm:p-3{{ $versions->count() > 12 ? '' : ' lg:p-4 ' }}border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
                                                 'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': {{ $i }} !=
