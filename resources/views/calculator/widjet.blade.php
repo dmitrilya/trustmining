@@ -61,7 +61,7 @@
     @vite(['resources/css/calculator.css', 'resources/js/calculator.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}"
+<body class="font-sans antialiased overflow-hidden {{ $theme ?? 'light' }}"
     @if (!$theme) x-init="if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.body.classList.add('dark');
         document.body.classList.remove('light');
@@ -71,7 +71,7 @@
     }" @endif>
     <main>
         <div itemscope itemtype="https://schema.org/ViewAction" class="bg-slate-100 dark:bg-slate-950 p-2 pt-3 sm:p-4">
-            <a href="{{ route('home') }}" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
+            <a href="{{ route('home') }}" target="_blank" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-base font-bold text-slate-900 dark:text-slate-100">
                     CALCULATOR
