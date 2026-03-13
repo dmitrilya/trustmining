@@ -210,7 +210,7 @@ class DatabaseController extends Controller
             'ads.coin:id,abbreviation,rate'
         ])->get()->sortByDesc('hashrate');
 
-        preg_match('/(\d+)([a-zA-Z]+)/', $asicVersion, $matches);
+        preg_match('/(\d+(?:\.\d+)?)([a-zA-Z]+)/', $asicVersion, $matches);
         if (!isset($matches[1])) abort(404);
         $selectedVersion = $versions->where('hashrate', $matches[1])->first();
         if (!$selectedVersion) abort(404);

@@ -101,7 +101,7 @@
                                 </x-characteristics>
 
                                 @if ($minPrice)
-                                    @if ($version->data)
+                                    @if ($version->data && count($version->data->profits))
                                         @include('ad.components.payback_info', [
                                             'profit' => $version->data->profits[0]['profit'],
                                             'expense' =>
@@ -138,7 +138,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if ($version->data)
+                                    @if ($version->data && count($version->data->profits))
                                         @include('ad.components.payback_info', [
                                             'profit' => $version->data->profits[0]['profit'],
                                             'expense' =>

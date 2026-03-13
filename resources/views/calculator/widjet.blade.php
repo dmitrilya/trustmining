@@ -9,7 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
-        $theme = request()->cookie('app_theme');
         $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
         $agent = strtolower(request()->header('User-Agent'));
         $isBot = false;
@@ -59,49 +58,31 @@
         </noscript>
     @endif
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/calculator.css', 'resources/js/calculator.js'])
 </head>
 
-<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }"
+<body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}"
     @if (!$theme) x-init="if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.body.classList.add('dark');
-                document.body.classList.remove('light');
-                theme = 'dark';
-            } else {
-                document.body.classList.add('light');
-                document.body.classList.remove('dark');
-                theme = 'light';
-            }" @endif>
-    <div class="min-h-screen">
-        <nav
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
-                <div class="flex justify-between h-10 lg:h-14">
-                    <div class="w-full flex">
-                        <div class="shrink-0 flex items-center">
-                            <x-application-logo class="text-xl" />
-                            <h1 class="ml-2 text-[19px] text-slate-900 dark:text-slate-100 leading-tight">
-                                CALCULATOR
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <main>
-            <div class="max-w-8xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-                <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6 items-start">
-                    <div class="xl:col-span-3">
-                        <div itemscope itemtype="https://schema.org/ViewAction"
-                            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl min-h-[616px] md:min-h-[460px] p-2 pt-3 sm:p-4">
-                            @include('calculator.components.calculator')
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        document.body.classList.add('dark');
+        document.body.classList.remove('light');
+    } else {
+        document.body.classList.add('light');
+        document.body.classList.remove('dark');
+    }" @endif>
+    <main>
+        <div itemscope itemtype="https://schema.org/ViewAction" class="bg-slate-100 dark:bg-slate-950 p-2 pt-3 sm:p-4">
+            <a href="{{ route('home') }}" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
+                <x-application-logo lang="en" />
+                <h1 class="ml-1.5 text-base font-bold text-slate-900 dark:text-slate-100">
+                    CALCULATOR
+                </h1>
+            </a>
+            @include('calculator.components.calculator', ['widjet' => true])
+        </div>
+    </main>
 </body>
 
 </html>
+
+
+{{-- http://localhost:8000/api/calculator-widjet?blocks=[]=additional-params&blocks[]=coins&blocks[]=characteristics&blocks[]=currency&theme=light --}}

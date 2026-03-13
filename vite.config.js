@@ -7,8 +7,11 @@ export default defineConfig({
             publicDirectory: 'public',
             input: [
                 'resources/css/app.css',
+                'resources/css/calculator.css',
                 'resources/js/app.js',
                 'resources/js/graph.js',
+                'resources/js/graph.js',
+                'resources/js/calculator.js',
             ],
             refresh: true,
         }),

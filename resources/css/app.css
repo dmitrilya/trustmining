@@ -104,8 +104,8 @@ body {
     height: 1px;
     width: 2px;
     position: relative;
-    top: -4px;
-    opacity: 0.2;
+    top: -3px;
+    opacity: 0.3;
 }
 
 input::-webkit-outer-spin-button,

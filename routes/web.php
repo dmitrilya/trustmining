@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\MetricsController;
+use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\Ad\AdController;
 use App\Http\Controllers\Ad\HostingController;
 use App\Http\Controllers\User\ProfileController;
@@ -69,11 +70,11 @@ Route::get('/top', [Controller::class, 'top'])->name('top');
 Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
 
 Route::group(['prefix' => 'calculator'], function () {
-    Route::get('/', [Controller::class, 'calculator'])->name('calculator');
-    Route::get('/app', [Controller::class, 'calculatorApp'])->name('calculator.app');
-    Route::get('/get-models', [Controller::class, 'calculatorModels'])->name('calculator-models');
-    Route::get('/{asicModel:slug}', [Controller::class, 'calculator'])->scopeBindings()->name('calculator.model');
-    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [Controller::class, 'calculator'])->scopeBindings()->name('calculator.modelver');
+    Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
+    Route::get('/app', [CalculatorController::class, 'calculatorApp'])->name('calculator.app');
+    Route::get('/get-models', [CalculatorController::class, 'calculatorModels'])->name('calculator-models');
+    Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.model');
+    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.modelver');
 });
 
 Route::group(['prefix' => 'metrics'], function () {
