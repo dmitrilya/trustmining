@@ -45,11 +45,14 @@
                                             x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
                                     @endif
                                 </x-characteristics>
-                                <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
-                                    x-bind:href="version ? '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
-                                        version.hashrate + version.measurement : '#'">
-                                    {{ __('All characteristics') }}
-                                </a>
+                                @if (!$widjet)
+                                    <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
+                                        x-bind:href="version ?
+                                            '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                            version.hashrate + version.measurement : '#'">
+                                        {{ __('All characteristics') }}
+                                    </a>
+                                @endif
                             </div>
                             @if (!$widjet)
                                 <template x-if="version.ads.length">
@@ -194,12 +197,14 @@
                                                     x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
                                             @endif
                                         </x-characteristics>
-                                        <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
-                                            x-bind:href="version ?
-                                                '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
-                                                version.hashrate + version.measurement : '#'">
-                                            {{ __('All characteristics') }}
-                                        </a>
+                                        @if (!$widjet)
+                                            <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
+                                                x-bind:href="version ?
+                                                    '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                                    version.hashrate + version.measurement : '#'">
+                                                {{ __('All characteristics') }}
+                                            </a>
+                                        @endif
                                     </div>
 
                                     @if (!$widjet)
