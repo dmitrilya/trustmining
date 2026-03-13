@@ -65,7 +65,7 @@ class CalculatorController extends Controller
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
-            'blocks' => $request->blocks,
+            'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
         ]);
     }

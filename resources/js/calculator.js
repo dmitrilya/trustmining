@@ -29,4 +29,25 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
 }
 
+document.addEventListener('alpine:initialized', () => {
+    const sendHeight = () => {
+        setTimeout(() => {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({
+                type: 'resize-calculator',
+                height: height
+            }, '*');
+        }, 50);
+    };
+
+    sendHeight();
+
+    Alpine.effect(() => { 
+       const dummy = Alpine.store('calc').someValue; 
+       sendHeight(); 
+    });
+
+    window.addEventListener('resize', sendHeight);
+});
+
 Alpine.start();
