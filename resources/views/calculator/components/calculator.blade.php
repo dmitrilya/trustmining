@@ -126,10 +126,10 @@
                         </div>
 
                         <div
-                            class="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+                            class="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700">
                             <div class="text-center mb-6">
                                 <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
-                                <div class="text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
+                                <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
                                     x-text="view === 'day' ? Math.round(dailyIncome * 100)/100 : (view === 'month' ? Math.round(dailyIncome*30*100)/100 : Math.round(dailyIncome*365*100)/100)">
                                 </div>
                             </div>
