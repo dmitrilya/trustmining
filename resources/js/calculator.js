@@ -31,21 +31,24 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
 
 document.addEventListener('alpine:initialized', () => {
     const sendHeight = () => {
-        setTimeout(() => {
-            const height = document.body.scrollHeight;
-            window.parent.postMessage({
-                type: 'resize-calculator',
-                height: height
-            }, '*');
-        }, 50);
+        const height = document.body.scrollHeight;
+        window.parent.postMessage({
+            type: 'resize-calculator',
+            height: height
+        }, '*');
     };
 
-    sendHeight();
-
-    Alpine.effect(() => { 
-       const dummy = Alpine.store('calc').someValue; 
-       sendHeight(); 
+    const observer = new MutationObserver(() => {
+        sendHeight();
     });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true
+    });
+
+    sendHeight();
 
     window.addEventListener('resize', sendHeight);
 });
