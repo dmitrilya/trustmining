@@ -4,7 +4,7 @@
     const theme = me.getAttribute('data-theme') || 'light';
     const blocks = me.getAttribute('data-blocks') || 'additional-params,coins,characteristics,currency';
 
-    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks={encodeURIComponent(blocks)}&theme={theme}`;
+    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}`;
 
     const iframe = document.createElement('iframe');
     iframe.src = widgetUrl;
