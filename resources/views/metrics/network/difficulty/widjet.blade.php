@@ -73,11 +73,13 @@
         document.body.classList.remove('dark');
     }" @endif>
     <main>
-        <div class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4" x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
-            window.buildGraph(r.data.difficulties, period, 'graph', 'value');
-            difficulties = r.data.difficulties.reverse().slice(0, 61);
-            items = difficulties.slice(0, 60).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
-        })">
+        <div class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4" x-data="{ period: '1y', items: [] }" x-init="fetch('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}')
+            .then(r => r.json())
+            .then(data => {
+                window.buildGraph(data.difficulties, period, 'graph', 'value');
+                difficulties = data.difficulties.reverse().slice(0, 61);
+                items = difficulties.slice(0, 60).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
+            })">
             <a href="{{ route('home') }}" target="_blank" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-base font-bold text-slate-900 dark:text-slate-100">
