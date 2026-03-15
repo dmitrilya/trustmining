@@ -89,7 +89,7 @@
                     DIFFICULTY
                 </h1>
             </a>
-            <div class="graph-container">
+            <div class="graph-container overflow-hidden">
                 @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
             </div>
 
