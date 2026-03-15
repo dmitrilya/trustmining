@@ -209,7 +209,7 @@
 
             <div itemscope itemtype="https://schema.org/ViewAction" class="mt-4 sm:mt-6 lg:mt-8 flex">
                 <iframe id="diff-widjet_preview" class="mx-auto max-w-full rounded-xl overflow-hidden"
-                    :src="`https://trustmining.ru/api/difficulty-widjet?blocks=${blocks.join(',')}&theme=${theme}`"
+                    :src="`https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${blocks.join(',')}&theme=${theme}`"
                     frameborder="0"
                     :style="`min-width: ${screen}px; width: ${screen}px; overflow: hidden; border: none; display: block; transform: scale(${scale});transform-origin: top left`"></iframe>
 
