@@ -77,7 +77,7 @@
             .then(r => r.json())
             .then(data => {
                 @if(in_array('graph', $blocks))
-                    window.buildGraph(data.difficulties, period, 'graph', 'value');
+                window.buildGraph(data.difficulties, period, 'graph', 'value');
                 @endif
                 difficulties = data.difficulties.reverse().slice(0, 76);
                 items = difficulties.slice(0, 75).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
@@ -89,7 +89,9 @@
                     DIFFICULTY
                 </h1>
             </a>
-            @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
+            <div class="graph-container">
+                @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
+            </div>
 
             @if (in_array('history', $blocks))
                 <div class="mt-2 sm:mt-4 lg:mt-6 grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
