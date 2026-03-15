@@ -20,9 +20,9 @@
         }
     @endphp
 
-    <title>Калькулятор доходности майнинга — расчет прибыли и окупаемости TrustMining</title>
+    <title>Сложность сети {{ $coin->name }} | TRUSTMINING</title>
     <meta name="description"
-        content="Онлайн-калькулятор доходности оборудования TrustMining: узнайте ежедневную прибыль, сроки окупаемости и чистый доход с учетом затрат на электроэнергию и актуального курса">
+        content="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
 
     @if (!$isBot)
         <script type="text/javascript">
@@ -57,7 +57,11 @@
         </noscript>
     @endif
 
-    @vite(['resources/css/calculator.css', 'resources/js/calculator.js'])
+    @vite(['resources/css/difficulty.css', 'resources/js/difficulty.js'])
+
+    @if (in_array('graph', $blocks))
+        @vite(['resources/js/graph.js'])
+    @endif
 </head>
 
 <body class="font-sans antialiased overflow-hidden {{ $theme ?? 'light' }}"
@@ -69,14 +73,49 @@
         document.body.classList.remove('dark');
     }" @endif>
     <main>
-        <div itemscope itemtype="https://schema.org/ViewAction" class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4">
+        <div class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4" x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
+            window.buildGraph(r.data.difficulties, period, 'graph', 'value');
+            difficulties = r.data.difficulties.reverse().slice(0, 6);
+            items = difficulties.slice(0, 5).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
+        })">
             <a href="{{ route('home') }}" target="_blank" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-base font-bold text-slate-900 dark:text-slate-100">
-                    CALCULATOR
+                    DIFFICULTY
                 </h1>
             </a>
-            @include('calculator.components.calculator', ['widjet' => true])
+            @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
+
+            <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
+                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
+                    {{ __('Date') }}</div>
+                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
+                    {{ __('Network difficulty') }}</div>
+                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
+                    {{ __('Change') }}</div>
+            </div>
+            <template x-for="(item, i) in items.slice(0, items.length - 1)" key="item.date">
+                <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
+                    <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                        x-text="new Date(item.date).toLocaleString(window.locale, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                        })">
+                    </div>
+                    <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                        x-text="item.value"></div>
+                    <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
+                        :class="{
+                            'text-green-500': item.value > items[i + 1].value,
+                            'text-red-500': item.value < items[i +
+                                1].value,
+                            'text-slate-700 dark:text-slate-200': item.value == items[i + 1].value
+                        }"
+                        x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">
+                    </div>
+                </div>
+            </template>
         </div>
     </main>
 </body>

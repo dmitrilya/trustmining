@@ -90,6 +90,23 @@ class Controller extends BaseController
         return view('warranty.index');
     }
 
+    public function widjets(): View
+    {
+        $models = Cache::get('calculator_models');
+
+        $selModel = $models->where('name', 'Antminer L9')->first();
+        $selVersion = $selModel->asicVersions->first();
+
+        return view('widjets.index', [
+            'models' => $models,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rModel' => null,
+            'rVersion' => null,
+            'selModel' => $selModel,
+            'selVersion' => $selVersion,
+        ]);
+    }
+
     public function top(): View
     {
         return view('top.index', ['users' => User::select(['id', 'name', 'slug', 'tf', 'tariff_id'])->orderByDesc('tf')->limit(10)

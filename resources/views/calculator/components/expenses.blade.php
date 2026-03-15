@@ -37,42 +37,44 @@
     </div>
 </div>
 
-@if (in_array('characteristics', $blocks))
-    <div x-data="{ show: window.innerWidth > 640 }" class="border-y border-slate-300 dark:border-slate-700">
-        <div>
-            <button type="button" @click="show = !show"
-                class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
-                <span>{{ __('Additional settings') }}</span>
-                <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 5 5 1 1 5" />
-                </svg>
-            </button>
-            <div x-show="show" style="display: none">
-                <div class="py-3">
-                    <div class="space-y-2 md:space-y-4">
-                        <div class="flex space-x-2 sm:space-x-3">
-                            <div class="w-full">
-                                <x-input-label for="count" :value="__('Count')" />
-                                <x-text-input ::value="count" id="count" type="text"
-                                    @input="count = filterDouble($el, 1, 10000, 0);$el.value = count" />
+@if (in_array('additional-params', $blocks))
+    <template x-if="blocks && blocks.includes('additional-params')">
+        <div x-data="{ show: window.innerWidth > 640 }" class="border-y border-slate-300 dark:border-slate-700">
+            <div>
+                <button type="button" @click="show = !show"
+                    class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
+                    <span>{{ __('Additional settings') }}</span>
+                    <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5 5 1 1 5" />
+                    </svg>
+                </button>
+                <div x-show="show" style="display: none">
+                    <div class="py-3">
+                        <div class="space-y-2 md:space-y-4">
+                            <div class="flex space-x-2 sm:space-x-3">
+                                <div class="w-full">
+                                    <x-input-label for="count" :value="__('Count')" />
+                                    <x-text-input ::value="count" id="count" type="text"
+                                        @input="count = filterDouble($el, 1, 10000, 0);$el.value = count" />
+                                </div>
+
+                                <div class="w-full">
+                                    <x-input-label for="uptime" :value="__('Uptime') . ' (%)'" />
+                                    <x-text-input ::value="uptime" id="uptime" type="text"
+                                        @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
+                                </div>
                             </div>
 
-                            <div class="w-full">
-                                <x-input-label for="uptime" :value="__('Uptime') . ' (%)'" />
-                                <x-text-input ::value="uptime" id="uptime" type="text"
-                                    @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
-                            </div>
-                        </div>
-
-                        {{-- <div>
+                            {{-- <div>
                         <x-input-label for="difficulty-growth" :value="__('Annualized difficulty growth') . ' (%)'" />
                         <x-text-input ::value="difficultyGrowth" id="difficulty-growth" type="text"
                             @input="difficultyGrowth = filterDouble($el, -20, 120, 2);$el.value = difficultyGrowth" />
                     </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </template>
 @endif

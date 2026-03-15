@@ -51,12 +51,25 @@ class CalculatorController extends Controller
         ]);
     }
 
-    public function calculatorWidjet(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
+    public function calculatorWidjet(Request $request): View
     {
         $models = Cache::get('calculator_models');
 
-        $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
-        $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
+        if ($request->model) {
+            $selModel = $asicModel = $models->where('slug', $request->model)->first();
+            if (!$selModel) $selModel = $models->where('name', 'Antminer L9')->first();
+        } else {
+            $asicModel = null;
+            $selModel = $models->where('name', 'Antminer L9')->first();
+        }
+
+        if ($request->version) {
+            $selVersion = $asicVersion = $selModel->asicVersions->where('hashrate', $request->version)->first();
+            if (!$selVersion) $selVersion = $selModel->asicVersions->first();
+        } else {
+            $asicVersion = null;
+            $selModel->asicVersions->first();
+        }
 
         return view('calculator.widjet', [
             'models' => $models,

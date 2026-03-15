@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\MetricsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/calculator-widjet', [CalculatorController::class, 'calculatorWidjet']);
+Route::get('/difficulty-widjet', [MetricsController::class, 'difficultyWidjet']);
+Route::get('/metrics/network/{coin:name}/get-difficulty', [MetricsController::class, 'getDifficulty'])->name('metrics.network.get_difficulty');

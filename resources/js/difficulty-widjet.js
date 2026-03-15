@@ -2,11 +2,9 @@
     const me = document.currentScript;
 
     const theme = me.getAttribute('data-theme') || 'light';
-    const blocks = me.getAttribute('data-blocks') || 'additional-params,coins,characteristics,currency';
-    const model = me.getAttribute('data-model') || 'antminer-l9';
-    const version = me.getAttribute('data-version') || '17';
+    const blocks = me.getAttribute('data-blocks') || 'period,graph,prediction,history';
 
-    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&model=${model}&version=${version}`;
+    const widgetUrl = `https://trustmining.ru/api/difficulty-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}`;
 
     const iframe = document.createElement('iframe');
     iframe.src = widgetUrl;
@@ -18,7 +16,7 @@
     me.parentNode.insertBefore(iframe, me.nextSibling);
 
     window.addEventListener('message', function (event) {
-        if (event.data && event.data.type === 'resize-calculator') {
+        if (event.data && event.data.type === 'resize-difficulty') {
             iframe.style.height = event.data.height + 'px';
         }
     }, false);

@@ -68,6 +68,7 @@ Route::get('/events', [Controller::class, 'events'])->name('events');
 Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty');
 Route::get('/top', [Controller::class, 'top'])->name('top');
 Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
+Route::get('/widjets', [Controller::class, 'widjets'])->name('widjets');
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
@@ -84,7 +85,6 @@ Route::group(['prefix' => 'metrics'], function () {
             Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
             Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
             Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
-            Route::get('/get-difficulty', [MetricsController::class, 'getDifficulty'])->name('metrics.network.get_difficulty');
         });
     });
 });
