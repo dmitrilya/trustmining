@@ -216,7 +216,7 @@
                 <script>
                     window.addEventListener('message', function(event) {
                         if (event.data && event.data.type === 'resize-difficulty') {
-                            document.querySelector('#calc-widjet_preview').style.height = event.data.height + 'px';
+                            document.querySelector('#diff-widjet_preview').style.height = event.data.height + 'px';
                         }
                     }, false);
                 </script>
