@@ -77,8 +77,8 @@
             .then(r => r.json())
             .then(data => {
                 @if (in_array('graph', $blocks)) window.buildGraph(data.difficulties, period, 'graph', 'value'); @endif
-                difficulties = data.difficulties.reverse().slice(0, 61);
-                items = difficulties.slice(0, 60).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
+                difficulties = data.difficulties.reverse().slice(0, 76);
+                items = difficulties.slice(0, 75).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
             })">
             <a href="{{ route('home') }}" target="_blank" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
@@ -88,7 +88,7 @@
             </a>
             @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
 
-            <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
+            <div class="mt-2 sm:mt-4 lg:mt-6 grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
                 <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
