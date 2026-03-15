@@ -89,9 +89,7 @@
                     DIFFICULTY
                 </h1>
             </a>
-            <div class="graph-container overflow-hidden">
-                @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
-            </div>
+            @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
 
             @if (in_array('history', $blocks))
                 <div class="mt-2 sm:mt-4 lg:mt-6 grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">

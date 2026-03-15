@@ -105,5 +105,7 @@
 </div>
 
 @if (in_array('graph', $blocks))
-    <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
+    <div class="graph-container overflow-hidden">
+        <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
+    </div>
 @endif
