@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/calculator-widjet', [CalculatorController::class, 'calculatorWidjet']);
-Route::get('/difficulty-widjet', [MetricsController::class, 'difficultyWidjet']);
+Route::get('/difficulty-widjet/{coin:name}', [MetricsController::class, 'difficultyWidjet']);
 Route::get('/metrics/network/{coin:name}/get-difficulty', [MetricsController::class, 'getDifficulty'])->name('metrics.network.get_difficulty');
