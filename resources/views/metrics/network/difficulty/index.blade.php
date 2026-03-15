@@ -2,7 +2,7 @@
     description="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
-    <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => $coin->name]) }}').then(r => {
+    <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period, 'graph', 'value');
         difficulties = r.data.difficulties.reverse().slice(0, 366);
         items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);

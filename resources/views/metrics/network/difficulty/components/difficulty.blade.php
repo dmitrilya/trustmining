@@ -63,16 +63,18 @@
                 </div>
             </div>
 
-            <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkDifficulties')
-                ->get()
-                ->map(
-                    fn($coin) => [
-                        'key' => $coin->id,
-                        'value' => $coin->abbreviation,
-                        'href' => route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]),
-                    ],
-                )
-                ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+            @if (!$widjet)
+                <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkDifficulties')
+                    ->get()
+                    ->map(
+                        fn($coin) => [
+                            'key' => $coin->id,
+                            'value' => $coin->abbreviation,
+                            'href' => route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]),
+                        ],
+                    )
+                    ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+            @endif
         </div>
     @endif
 </div>
