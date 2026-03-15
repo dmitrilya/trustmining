@@ -206,6 +206,21 @@
                     </div>
                 </div>
             </div>
+
+            <div itemscope itemtype="https://schema.org/ViewAction" class="mt-4 sm:mt-6 lg:mt-8 flex">
+                <iframe id="diff-widjet_preview" class="mx-auto max-w-full rounded-xl overflow-hidden"
+                    :src="`https://trustmining.ru/api/difficulty-widjet?blocks=${blocks.join(',')}&theme=${theme}`"
+                    frameborder="0"
+                    :style="`min-width: ${screen}px; width: ${screen}px; overflow: hidden; border: none; display: block; transform: scale(${scale});transform-origin: top left`"></iframe>
+
+                <script>
+                    window.addEventListener('message', function(event) {
+                        if (event.data && event.data.type === 'resize-difficulty') {
+                            document.querySelector('#calc-widjet_preview').style.height = event.data.height + 'px';
+                        }
+                    }, false);
+                </script>
+            </div>
         </div>
     </div>
 </x-app-layout>
