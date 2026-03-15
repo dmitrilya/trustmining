@@ -19,87 +19,82 @@
             @include('calculator.components.expenses')
 
             @if (in_array('characteristics', $blocks))
-                <template x-if="blocks && blocks.includes('characteristics')">
-                    <div class="hidden md:block">
-                        <template x-if="version !== null">
-                            <div class="mt-6 sm:mt-8 lg:mt-10">
-                                @if (!$widjet)
-                                    <div class="mt-6">
-                                        <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                        <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
-                                            <x-rating></x-rating>
+                <div class="hidden md:block">
+                    <template x-if="version !== null">
+                        <div class="mt-6 sm:mt-8 lg:mt-10">
+                            @if (!$widjet)
+                                <div class="mt-6">
+                                    <h2 class="sr-only">{{ __('Reviews') }}</h2>
+                                    <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                        <x-rating></x-rating>
 
-                                            <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
-                                                class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
-                                                <span x-text="version.reviews_count"></span>
-                                                {{ __('reviews') }}
-                                            </a>
-                                        </div>
+                                        <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
+                                            class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                            <span x-text="version.reviews_count"></span>
+                                            {{ __('reviews') }}
+                                        </a>
                                     </div>
-                                @endif
-                                <div class="mt-5 space-y-1 sm:space-y-2">
-                                    <x-characteristics>
-                                        <x-characteristic name="Algorithm" x-value="version.algorithm" />
-                                        <x-characteristic name="Power"
-                                            x-value="version.efficiency * version.hashrate" />
-                                        @if (!$widjet)
-                                            <x-characteristic name="The best price"
-                                                x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
-                                        @endif
-                                    </x-characteristics>
-                                    @if (!$widjet)
-                                        <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
-                                            x-bind:href="version ?
-                                                '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
-                                                version.hashrate + version.measurement : '#'">
-                                            {{ __('All characteristics') }}
-                                        </a>
-                                    @endif
                                 </div>
+                            @endif
+                            <div class="mt-5 space-y-1 sm:space-y-2">
+                                <x-characteristics>
+                                    <x-characteristic name="Algorithm" x-value="version.algorithm" />
+                                    <x-characteristic name="Power" x-value="version.efficiency * version.hashrate" />
+                                    @if (!$widjet)
+                                        <x-characteristic name="The best price"
+                                            x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
+                                    @endif
+                                </x-characteristics>
                                 @if (!$widjet)
-                                    <template x-if="version.ads.length">
-                                        <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
-                                            x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
-                                            <x-primary-button
-                                                class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
-                                        </a>
-                                    </template>
+                                    <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
+                                        x-bind:href="version ?
+                                            '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                            version.hashrate + version.measurement : '#'">
+                                        {{ __('All characteristics') }}
+                                    </a>
                                 @endif
                             </div>
-                        </template>
-                    </div>
-                </template>
+                            @if (!$widjet)
+                                <template x-if="version.ads.length">
+                                    <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
+                                        x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
+                                        <x-primary-button
+                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                    </a>
+                                </template>
+                            @endif
+                        </div>
+                    </template>
+                </div>
             @endif
         </div>
 
         <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
             @if (in_array('currency', $blocks))
-                <template x-if="blocks && blocks.includes('currency')">
-                    <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                        <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
-                            {{ __('Calculation result') }}</h2>
-                        <div class="flex cursor-pointer mx-3">
-                            <button
-                                :class="{
-                                    'bg-primary-gradient text-white': currency ==
-                                        'RUB',
-                                    'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
-                                        'USDT'
-                                }"
-                                class="p-1 xs:p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-                                @click="currency = 'RUB'">RUB</button>
-                            <button
-                                :class="{
-                                    'bg-primary-gradient text-white': currency ==
-                                        'USDT',
-                                    'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
-                                        'RUB'
-                                }"
-                                class="p-1 xs:p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-                                @click="currency = 'USDT'">USDT</button>
-                        </div>
+                <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
+                    <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
+                        {{ __('Calculation result') }}</h2>
+                    <div class="flex cursor-pointer mx-3">
+                        <button
+                            :class="{
+                                'bg-primary-gradient text-white': currency ==
+                                    'RUB',
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
+                                    'USDT'
+                            }"
+                            class="p-1 xs:p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            @click="currency = 'RUB'">RUB</button>
+                        <button
+                            :class="{
+                                'bg-primary-gradient text-white': currency ==
+                                    'USDT',
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
+                                    'RUB'
+                            }"
+                            class="p-1 xs:p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            @click="currency = 'USDT'">USDT</button>
                     </div>
-                </template>
+                </div>
             @endif
 
             <template x-if="version !== null">
@@ -174,96 +169,90 @@
                     @endif
 
                     @if (in_array('characteristics', $blocks))
-                        <template x-if="blocks && blocks.includes('characteristics')">
-                            <div class="md:hidden">
-                                <template x-if="version !== null">
-                                    <div class="mt-6 sm:mt-8 lg:mt-10">
-                                        @if (!$widjet)
-                                            <div class="mt-6">
-                                                <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                                <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
-                                                    <x-rating></x-rating>
+                        <div class="md:hidden">
+                            <template x-if="version !== null">
+                                <div class="mt-6 sm:mt-8 lg:mt-10">
+                                    @if (!$widjet)
+                                        <div class="mt-6">
+                                            <h2 class="sr-only">{{ __('Reviews') }}</h2>
+                                            <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                                <x-rating></x-rating>
 
-                                                    <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug +
-                                                        '/reviews'"
-                                                        class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
-                                                        <span x-text="version.reviews_count"></span>
-                                                        {{ __('reviews') }}
-                                                    </a>
-                                                </div>
+                                                <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug +
+                                                    '/reviews'"
+                                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                                    <span x-text="version.reviews_count"></span>
+                                                    {{ __('reviews') }}
+                                                </a>
                                             </div>
-                                        @endif
-                                        <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2">
-                                            <x-characteristics>
-                                                <x-characteristic name="Algorithm" x-value="version.algorithm" />
-                                                <x-characteristic name="Power"
-                                                    x-value="version.efficiency * version.hashrate" />
-                                                @if (!$widjet)
-                                                    <x-characteristic name="The best price"
-                                                        x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
-                                                @endif
-                                            </x-characteristics>
-                                            @if (!$widjet)
-                                                <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
-                                                    x-bind:href="version ?
-                                                        '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
-                                                        version.hashrate + version.measurement : '#'">
-                                                    {{ __('All characteristics') }}
-                                                </a>
-                                            @endif
                                         </div>
-
+                                    @endif
+                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2">
+                                        <x-characteristics>
+                                            <x-characteristic name="Algorithm" x-value="version.algorithm" />
+                                            <x-characteristic name="Power"
+                                                x-value="version.efficiency * version.hashrate" />
+                                            @if (!$widjet)
+                                                <x-characteristic name="The best price"
+                                                    x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
+                                            @endif
+                                        </x-characteristics>
                                         @if (!$widjet)
-                                            <template x-if="version.ads.length">
-                                                <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
-                                                    x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
-                                                    <x-primary-button
-                                                        class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
-                                                </a>
-                                            </template>
+                                            <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
+                                                x-bind:href="version ?
+                                                    '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                                    version.hashrate + version.measurement : '#'">
+                                                {{ __('All characteristics') }}
+                                            </a>
                                         @endif
                                     </div>
-                                </template>
-                            </div>
-                        </template>
+
+                                    @if (!$widjet)
+                                        <template x-if="version.ads.length">
+                                            <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
+                                                x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
+                                                <x-primary-button
+                                                    class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                            </a>
+                                        </template>
+                                    @endif
+                                </div>
+                            </template>
+                        </div>
                     @endif
 
                     @if (in_array('coins', $blocks))
-                        <template x-if="blocks && blocks.includes('coins')">
-                            <div>
-                                <p class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
-                                    {{ __('Coins per day') }}</p>
+                        <p class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
+                            {{ __('Coins per day') }}</p>
 
-                                <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
-                                    <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                        @click="profitNumber = i, fee = version.profits[i].coins[0].fee">
-                                        <div>
-                                            <label class="flex items-center">
-                                                <input type="radio" name="profitNumber" :value="i"
-                                                    :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
-                                                    :checked="profitNumber == i"
-                                                    class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
-                                            </label>
-                                        </div>
-                                        <template x-for="coin in profit.coins" :key="coin.abbreviation">
+                        <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
+                            <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
+                                @click="profitNumber = i, fee = version.profits[i].coins[0].fee">
+                                <div>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="profitNumber" :value="i"
+                                            :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
+                                            :checked="profitNumber == i"
+                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                                    </label>
+                                </div>
+                                <template x-for="coin in profit.coins" :key="coin.abbreviation">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
+                                                :alt="coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
                                             <div>
-                                                <div class="flex items-center">
-                                                    <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
-                                                        :alt="coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
-                                                    <div>
-                                                        <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
-                                                            x-text="coin.abbreviation">
-                                                        </div>
-                                                        <div class="text-xxs xs:text-xs text-slate-500 dark:text-slate-400"
-                                                            x-text="coin.name">
-                                                        </div>
-                                                    </div>
+                                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
+                                                    x-text="coin.abbreviation">
                                                 </div>
-                                                <div class="text-xxs xs:text-xs text-slate-700 dark:text-slate-200 font-bold mt-1"
-                                                    x-text="version ? Math.round(version.hashrate * coin.profit * version.coef * 100000000) / 100000000 : 0">
+                                                <div class="text-xxs xs:text-xs text-slate-500 dark:text-slate-400"
+                                                    x-text="coin.name">
                                                 </div>
                                             </div>
-                                        </template>
+                                        </div>
+                                        <div class="text-xxs xs:text-xs text-slate-700 dark:text-slate-200 font-bold mt-1"
+                                            x-text="version ? Math.round(version.hashrate * coin.profit * version.coef * 100000000) / 100000000 : 0">
+                                        </div>
                                     </div>
                                 </template>
                             </div>
