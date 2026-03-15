@@ -1,18 +1,19 @@
 @props(['blocks' => ['period', 'graph', 'prediction', 'history'], 'widjet' => false])
 
-<div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-    @if (!$widjet)
-        <div class="bg-slate-100 dark:bg-slate-900 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
-            @click="show = !show">
-            <svg class="size-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
-                fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
-            </svg>
-        </div>
-    @endif
+@if (in_array('period', $blocks))
+    <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
+        @if (!$widjet)
+            <div class="bg-slate-100 dark:bg-slate-900 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
+                @click="show = !show">
+                <svg class="size-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
+                    fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
+                </svg>
+            </div>
+        @endif
 
-    @if (in_array('period', $blocks))
+
         <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
             <div
                 class="flex bg-slate-100 dark:bg-slate-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
@@ -76,8 +77,8 @@
                     ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
             @endif
         </div>
-    @endif
-</div>
+    </div>
+@endif
 
 <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
     <h3 class="text-lg sm:text-xl lg:text-2xl text-slate-900 dark:text-slate-100 font-bold mb-2 sm:mb-3 lg:mb-4">
