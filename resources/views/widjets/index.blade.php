@@ -101,7 +101,7 @@
 
             <div itemscope itemtype="https://schema.org/ViewAction" class="mt-4 sm:mt-6 lg:mt-8 flex">
                 <iframe id="calc-widjet_preview" class="mx-auto max-w-full rounded-xl overflow-hidden"
-                    :src="`https://trustmining.ru/api/calculator-widjet?blocks=${blocks.join(',')}&theme=${theme}&model=antminer-t21&version=190`"
+                    :src="`https://trustmining.ru/api/calculator-widjet?blocks=${blocks.join(',')}&theme=${theme}&model=antminer-l9&version=17`"
                     frameborder="0"
                     :style="`min-width: ${screen}px; width: ${screen}px; overflow: hidden; border: none; display: block; transform: scale(${scale});transform-origin: top left`"></iframe>
 

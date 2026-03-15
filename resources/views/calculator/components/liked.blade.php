@@ -1,10 +1,11 @@
-<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
+<div
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4">
     <h2
         class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
         {{ __('Liked the calculator?') }}
     </h2>
 
-    <a href="https://t.me/trustmining_calculator_bot" target="_blank" class="mb-2 sm:mb-3 lg:mb-4">
+    <a href="https://t.me/trustmining_calculator_bot" target="_blank" class="mb-2 sm:mb-3">
         <x-secondary-button class="flex items-center bg-secondary-gradient dark:text-slate-800">
             <svg class="size-4 mr-2" width="64px" height="64px" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
@@ -16,7 +17,7 @@
         </x-secondary-button>
     </a>
 
-    <x-secondary-button class="flex items-center mb-2 sm:mb-3 lg:mb-4"
+    <x-secondary-button class="flex items-center mb-2 sm:mb-3"
         @click="navigator.clipboard.writeText(window.location.href + '?utm_source=share_button&utm_campaign=content_propagation&utm_content=calculator_page')
         .then(() => pushToastAlert('{{ __('Link successfully copied') }}', 'success'))">
         <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -32,7 +33,7 @@
         {{ __('Copy link') }}
     </x-secondary-button>
 
-    <x-primary-button class="flex items-center"
+    <x-primary-button class="flex items-center mb-2 sm:mb-3"
         @click="navigator.share({
                 title: document.title,
                 url: window.location.href + '?utm_source=share_button&utm_campaign=content_propagation&utm_content=calculator_page'
@@ -45,4 +46,16 @@
 
         {{ __('Share') }}
     </x-primary-button>
+
+    <a href="{{ route('widjets') }}" target="_blank" class="mb-2 sm:mb-3 lg:mb-4">
+        <x-secondary-button class="flex items-center">
+            <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14" />
+            </svg>
+
+            {{ __('Embed on site') }}
+        </x-secondary-button>
+    </a>
 </div>
