@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
+window.now = Date.now();
 window.dateDiffs = {
     '1d': now - 86400000,
     '1dbefore': now - (86400000 * 2),

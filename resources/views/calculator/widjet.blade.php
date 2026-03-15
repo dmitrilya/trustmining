@@ -72,7 +72,7 @@
         <div itemscope itemtype="https://schema.org/ViewAction" class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4">
             <a href="{{ route('home') }}" target="_blank" class="flex mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
-                <h1 class="ml-1.5 text-base font-bold text-slate-900 dark:text-slate-100">
+                <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-900 dark:text-slate-100">
                     CALCULATOR
                 </h1>
             </a>
