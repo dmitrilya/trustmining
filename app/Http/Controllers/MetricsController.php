@@ -149,7 +149,7 @@ class MetricsController extends Controller
             $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalcuateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalcuateDates[1]), Carbon::createFromTimestamp($recalcuateDates[0])])->avg('hashrate') - 1) * 100, 2);
         }
 
-        return view('metrics.network.difficulty.index', [
+        return view('metrics.network.difficulty.widjet', [
             'coin' => $coin,
             'difficulty' => $lastDifficulty,
             'needBlocksTime' => $needBlocksTime,
