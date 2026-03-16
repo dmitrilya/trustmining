@@ -76,7 +76,8 @@ class UpdateCoinProfit extends Command
             collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' .
                 config('services.minerstat.key' . $i) . '&list=' . $coins->implode(','))))
                 ->each(function ($coin) use ($mes, $algos) {
-                    if ($coin->coin == 'GRIN') return;
+                    //if ($coin->coin == 'GRIN') return;
+                    if ($coin->coin == 'ALEO') return;
 
                     $coinData = [];
                     if ($coin->algorithm == 'Radiant') $coin->algorithm = 'SHA512256d';
