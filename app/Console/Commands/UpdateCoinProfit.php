@@ -95,6 +95,8 @@ class UpdateCoinProfit extends Command
             $i++;
         }
 
+        Coin::where('abbreviation', 'QUAI')->update(['profit' => file_get_contents('https://pool.kryptex.com/api/v1/daily-revenue/quai_scrypt?hashrate=1000000000')]);
+
         return Command::SUCCESS;
     }
 }
