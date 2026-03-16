@@ -7,7 +7,7 @@
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5"
-        x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 100, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
+        x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 99.7, tax: 0, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
         <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
             @include('calculator.components.schema')
 

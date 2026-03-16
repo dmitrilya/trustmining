@@ -47,7 +47,7 @@
         {{ __('Share') }}
     </x-primary-button>
 
-    <a href="{{ route('widjets') }}" target="_blank" class="mb-2 sm:mb-3 lg:mb-4">
+    <a href="{{ route('widjets') }}" target="_blank">
         <x-secondary-button class="flex items-center">
             <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">

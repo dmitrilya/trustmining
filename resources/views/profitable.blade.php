@@ -61,7 +61,7 @@
 
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-slate-300 dark:divide-slate-700">
-            <template x-for="(model, index) in sortedModels" :key="model.slug">
+            <template x-for="(model, index) in sortedModels" :key="model.id">
                 <a :href="`/asic-miners/${model.brand_slug}/${model.slug}`"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h2

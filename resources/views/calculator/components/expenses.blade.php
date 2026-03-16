@@ -1,4 +1,4 @@
-<div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 md:mt-5 mb-4">
+<div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
     <div class="w-full">
         <x-input-label for="tariff" :value="__('Tariff')" />
         <x-text-input ::value="tariff" id="tariff" type="text"
@@ -50,7 +50,7 @@
             </button>
             <div x-show="show" style="display: none">
                 <div class="py-3">
-                    <div class="space-y-2 md:space-y-4">
+                    <div class="space-y-2 md:space-y-3">
                         <div class="flex space-x-2 sm:space-x-3">
                             <div class="w-full">
                                 <x-input-label for="count" :value="__('Count')" />
