@@ -121,6 +121,7 @@ class Controller extends BaseController
                 $profit = $version->profits->first();
 
                 return [
+                    'id' => $model->id,
                     'name' => $model->name,
                     'slug' => $version->model_slug,
                     'hashrate' => $version->hashrate,
