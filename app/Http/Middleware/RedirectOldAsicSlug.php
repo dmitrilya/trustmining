@@ -21,10 +21,7 @@ class RedirectOldAsicSlug
         if ($slug && str_contains($slug, '_')) {
             $newSlug = str_replace('_', '-', $slug);
 
-            $parameters = $request->route()->parameters();
-            $parameters['asicModel'] = $newSlug;
-
-            return redirect()->route($request->route()->getName(), $parameters, 301);
+            return redirect()->route($request->route()->getName(), ['asicModel' => $newSlug, 'asicVersion' => $request->route('asicVersion')], 301);
         }
 
         return $next($request);
