@@ -34,14 +34,15 @@
                     <div x-show="search === '' || '{{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1"
                         class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center py-1 sm:py-2 relative ad"
                         data-id="{{ $ad->id }}">
-                        <div class="absolute size-1.5 rounded-full bg-indigo-500 -left-3 top-1/2 -translate-y-1/2" x-show="changings.find(el => el.id == {{ $ad->id }})" x-cloak></div>
+                        <div class="absolute size-1.5 rounded-full bg-indigo-500 -left-3 top-1/2 -translate-y-1/2"
+                            x-show="changings.find(el => el.id == {{ $ad->id }})" x-cloak></div>
                         <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-1">
                             {{ $ad->office->city }}
                         </div>
-                        <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-2">
+                        <a href="{{ route('ads.show', ['adCategory' => 'miners', 'ad' => $ad->id]) }}" class="text-indigo-500 hover:text-indigo-600 text-xxs sm:text-sm col-span-2">
                             {{ $ad->asicVersion->asicModel->name }}
                             {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
-                        </div>
+                        </a>
                         <div class="hidden xs:block text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-1">
                             @if (isset($ad->props['Condition']))
                                 <p>{{ __($ad->props['Condition']) }}</p>
@@ -60,25 +61,20 @@
                         </div>
                         <div class="col-span-2">
                             <div class="flex items-center">
-                                <x-text-input
+                                <x-text-input autocomplete="price"
                                     class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md !px-2"
                                     id="price" name="price" type="number" required value="{{ $ad->price }}"
-                                    autocomplete="price"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
-                                let index = changings.findIndex(el => el.id == id);
-                                if (index === -1) changings.push({ id: id, price: $el.value });
-                                else {
-                                    let ad = changings[index];
-                                    console.log(ad);
-                                    console.log('price' in ad);
-                                    console.log($el.value);
-                                    console.log({{ $ad->price }});
-                                    if ('price' in ad && $el.value == {{ $ad->price }}) {
-                                        delete ad.price;
-                                        if (Object.keys(ad).length == 1) changings.splice(index, 1);
-                                    }
-                                    else ad.price = $el.value;
-                                }" />
+                                    let index = changings.findIndex(el => el.id == id);
+                                    if (index === -1) changings.push({ id: id, price: $el.value });
+                                    else {
+                                        let ad = changings[index];
+                                        if ('price' in ad && $el.value == {{ $ad->price }}) {
+                                            delete ad.price;
+                                            if (Object.keys(ad).length == 1) changings.splice(index, 1);
+                                        }
+                                        else ad.price = $el.value;
+                                    }" />
 
                                 <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat" sm="true"
                                     handleChange="(checked => {
