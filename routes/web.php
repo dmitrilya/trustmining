@@ -74,8 +74,10 @@ Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
     Route::get('/app', [CalculatorController::class, 'calculatorApp'])->name('calculator.app');
     Route::get('/get-models', [CalculatorController::class, 'calculatorModels'])->name('calculator-models');
-    Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.model');
-    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.modelver');
+    Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.model')
+        ->missing(fn() => redirect()->route('calculator', 301));
+    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->scopeBindings()->name('calculator.modelver')
+        ->missing(fn() => redirect()->route('calculator', 301));
 });
 
 Route::group(['prefix' => 'metrics'], function () {
@@ -124,6 +126,7 @@ Route::group(['prefix' => 'gas-gensets'], function () {
 Route::group(['prefix' => 'asic-miners'], function () {
     Route::get('/', [DatabaseController::class, 'asicMinersIndex'])->name('database.asic-miners');
     Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
+    Route::get('/compare/{compareRequest}', [DatabaseController::class, 'compareAsics']);
 
     Route::group(['prefix' => '{asicBrand:slug}'], function () {
         Route::get('/', [DatabaseController::class, 'asicMinersBrand'])->name('database.asic-miners.brand');

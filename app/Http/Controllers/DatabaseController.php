@@ -259,6 +259,37 @@ class DatabaseController extends Controller
         ]);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request;
+     * @param  string  $compareRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function compareAsics(Request $request, $compareRequest)
+    {
+        $models = AsicModel::whereIn('slug', explode('-vs-', $compareRequest))->with([
+            'asicBrand:id,name,slug',
+            'asicVersions:asic_model_id,hashrate,measurement',
+            'algorithm:id,name',
+        ]);
+
+        if ($models->count() != 2) abort(404);
+
+        $calculatorModels = Cache::get('calculator_models');
+        $models->map(function ($model) use ($calculatorModels) {
+            $model->calculatorData = $calculatorModels->where('id', $model->id);
+            return $model;
+        });
+
+        $ads = $this->getAds()->where('ads.asic_version_id', $models->pluck('asicVersions.id'))->get();
+
+        return view('database.compare.index', [
+            'models' => $models,
+            'ads' => $ads
+        ]);
+    }
+
     public function asicMinersReviews(AsicBrand $asicBrand, AsicModel $asicModel)
     {
         return view('review.index', [
