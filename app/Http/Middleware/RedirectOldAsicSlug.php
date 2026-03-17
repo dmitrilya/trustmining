@@ -16,10 +16,14 @@ class RedirectOldAsicSlug
      */
     public function handle(Request $request, Closure $next)
     {
-        $slug = $request->route()->rawParameter('asicModel');
+        $slug = $request->route('asicModel');
 
-        if ($slug && str_contains($slug, '_')) {
-            $newSlug = str_replace('_', '-', $slug);
+        $slugValue = $slug instanceof \Illuminate\Database\Eloquent\Model
+            ? $slug->getRouteKey()
+            : $slug;
+
+        if ($slugValue && str_contains($slugValue, '_')) {
+            $newSlug = str_replace('_', '-', $slugValue);
 
             $parameters = $request->route()->parameters();
             $parameters['asicModel'] = $newSlug;
