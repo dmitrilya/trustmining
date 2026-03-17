@@ -29,11 +29,12 @@
                 </x-primary-button>
             </div>
 
-            <div class="space-y-1 sm:space-y-2 lg:space-y-3 divide-y divide-slate-400 dark:divide-slate-700">
+            <div class="divide-y divide-slate-400 dark:divide-slate-700">
                 @foreach ($ads as $ad)
                     <div x-show="search === '' || '{{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1"
-                        class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center pt-1 sm:pt-2 ad"
+                        class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center py-1 sm:py-2 relative ad"
                         data-id="{{ $ad->id }}">
+                        <div class="absolute size-1.5 rounded-full bg-indigo-500 -left-3 top-1/2 -translate-y-1/2" x-show="changings.find(el => el.id == {{ $ad->id }})" x-cloak></div>
                         <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-1">
                             {{ $ad->office->city }}
                         </div>
@@ -64,17 +65,34 @@
                                     id="price" name="price" type="number" required value="{{ $ad->price }}"
                                     autocomplete="price"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
-                                let ad = changings.find(el => el.id == id);
-                                if (!ad) changings.push({ id: id, price: $el.value });
-                                else ad.price = $el.value;" />
+                                let index = changings.findIndex(el => el.id == id);
+                                if (index === -1) changings.push({ id: id, price: $el.value });
+                                else {
+                                    let ad = changings[index];
+                                    console.log(ad);
+                                    console.log('price' in ad);
+                                    console.log($el.value);
+                                    console.log({{ $ad->price }});
+                                    if ('price' in ad && $el.value == {{ $ad->price }}) {
+                                        delete ad.price;
+                                        if (Object.keys(ad).length == 1) changings.splice(index, 1);
+                                    }
+                                    else ad.price = $el.value;
+                                }" />
 
                                 <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat" sm="true"
                                     handleChange="(checked => {
-                                        console.log(checked);
                                         let id = $el.closest('.ad').getAttribute('data-id');
-                                        let ad = changings.find(el => el.id == id);
-                                        if (!ad) changings.push({ id: id, with_vat: checked });
-                                        else ad.with_vat = checked;
+                                        let index = changings.findIndex(el => el.id == id);
+                                        if (index === -1) changings.push({ id: id, with_vat: checked });
+                                        else {
+                                            let ad = changings[index];
+                                            if ('with_vat' in ad && checked == {{ $ad->with_vat }}) {
+                                                delete ad.with_vat;
+                                                if (Object.keys(ad).length == 1) changings.splice(index, 1);
+                                            }
+                                            else ad.with_vat = checked;
+                                        }
                                     })">
                                     {{ __('VAT') }}
                                 </x-checkbox>
@@ -84,9 +102,16 @@
                             <x-select name="coin_id" size="sm" :key="$ad->coin_id"
                                 handleChange="(coinId => {
                                     let id = $el.closest('.ad').getAttribute('data-id');
-                                    let ad = changings.find(el => el.id == id);
-                                    if (!ad) changings.push({ id: id, coin_id: coinId });
-                                    else ad.coin_id = coinId;
+                                    let index = changings.findIndex(el => el.id == id);
+                                    if (index === -1) changings.push({ id: id, coin_id: coinId });
+                                    else {
+                                        let ad = changings[index];
+                                        if ('coin_id' in ad && coinId == {{ $ad->coin_id }}) {
+                                            delete ad.coin_id;
+                                            if (Object.keys(ad).length == 1) changings.splice(index, 1);
+                                        }
+                                        else ad.coin_id = coinId;
+                                    }
                                 })"
                                 :items="$coins
                                     ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
