@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'has-company' => \App\Http\Middleware\HasCompany::class,
         'identified' => \App\Http\Middleware\Identified::class,
         'owner' => \App\Http\Middleware\EnsureOwner::class,
+        'old-slug' => \App\Http\Middleware\RedirectOldAsicSlug::class,
     ];
 }
