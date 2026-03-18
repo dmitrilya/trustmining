@@ -124,4 +124,6 @@
             </table>
         </div>
     </div>
+
+    @include('metrics.network.hashrate.components.faq')
 </x-metrics-layout>

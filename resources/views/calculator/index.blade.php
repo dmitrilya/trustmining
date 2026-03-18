@@ -60,5 +60,7 @@
                 @endif
             </div>
         </div>
+
+        @include('calculator.components.faq')
     </div>
 </x-app-layout>
