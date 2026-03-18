@@ -61,11 +61,22 @@
 
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-slate-300 dark:divide-slate-700">
+            <div
+                class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs xs:text-xs">
+                <p class="col-span-2">{{ __('Model') }}</p>
+                <p class="hidden sm:block">{{ __('Power') }}</p>
+                <p class="hidden lg:block">{{ __('Algorithm') }}</p>
+                <p class="hidden xl:block">{{ __('Efficiency') }}</p>
+                <p>{{ __('Income') }}</p>
+                <p>{{ __('Expense') }}</p>
+                <p>{{ __('Profit') }}</p>
+                <p class="hidden md:block">{{ __('Coins') }}</p>
+            </div>
             <template x-for="(model, index) in sortedModels" :key="model.id">
                 <a :href="`/asic-miners/${model.brand_slug}/${model.slug}`"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h2
-                        class="relative font-semibold text-slate-600 dark:text-slate-400 text-xxs xs:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2">
+                        class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs xs:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
                             class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
                             <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')"
@@ -98,5 +109,24 @@
                 </a>
             </template>
         </div>
+
+        <section class="mt-4 sm:mt-6 lg:mt-8">
+            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                    {{ __('Offers') }}
+                </h2>
+            </div>
+
+            <div>
+                @include('home.components.carousel', [
+                    'items' => $ads,
+                    'blade' => 'ad.components.card',
+                    'model' => 'ad',
+                    'bigWrapper' => true,
+                ])
+            </div>
+        </section>
+
+        @include('profitable.components.faq')
     </div>
 </x-app-layout>

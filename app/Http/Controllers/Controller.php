@@ -139,7 +139,13 @@ class Controller extends BaseController
                 ];
             })->values();
 
-        return view('profitable', ['models' => $models, 'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate]);
+        $ads = $this->getAds()->whereIn('asic_models.id', $models->take(5)->pluck('id'))->orderByDesc('ads.ordering_id')->limit(14)->get();
+
+        return view('profitable.index', [
+            'models' => $models,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'ads' => $ads
+        ]);
     }
 
     public function support(): View
