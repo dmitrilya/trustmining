@@ -28,11 +28,11 @@ class ComparisonTextService
             'm1' => $m1->name,
             'a1' => $m1->data->algorithm->name,
             'c1' => isset($m1->data->asicVersions->first()->profits) && count($m1->data->asicVersions->first()->profits) ? $m1->data->asicVersions->first()->profits[0]['coins']->pluck('name')->flatten()->unique()->implode(', ') : '',
-            'all1' => isset($m1->data->asicVersions->first()->profits) && count($m1->data->asicVersions->first()->profits) ? $m1->data->asicVersions->pluck('profits.*.coins.*.name')->flatten()->implode(', ') : '',
+            'all1' => isset($m1->data->asicVersions->first()->profits) && count($m1->data->asicVersions->first()->profits) ? $m1->data->asicVersions->pluck('profits.*.coins.*.name')->flatten()->unique()->implode(', ') : '',
             'm2' => $m2->name,
             'a2' => $m2->data->algorithm->name,
             'c2' => isset($m2->data->asicVersions->first()->profits) && count($m2->data->asicVersions->first()->profits) ? $m2->data->asicVersions->first()->profits[0]['coins']->pluck('name')->flatten()->unique()->implode(', ') : '',
-            'all2' => isset($m2->data->asicVersions->first()->profits) && count($m2->data->asicVersions->first()->profits) ? $m2->data->asicVersions->pluck('profits.*.coins.*.name')->flatten()->implode(', ') : ''
+            'all2' => isset($m2->data->asicVersions->first()->profits) && count($m2->data->asicVersions->first()->profits) ? $m2->data->asicVersions->pluck('profits.*.coins.*.name')->flatten()->unique()->implode(', ') : ''
         ]);
 
         $sections[] = "\n\n";
@@ -117,7 +117,7 @@ class ComparisonTextService
                 'm' => $m1->name,
                 'count' => $modelAds->count(),
                 'price' => !$best ? '\"' . __('Price on request') . '\"' : $best->price . ' ' . $best->coin,
-                'hashrate' => !$best ? $modelAds->first() : $best->asic_version_hashrate,
+                'hashrate' => !$best ? $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : $best->asic_version_hashrate . $best->asic_version_measurement,
             ]);
         } else {
             $sections[] = $this->getTrans("descriptions.compare.ads.not", $m1->id, [
@@ -134,7 +134,7 @@ class ComparisonTextService
                 'm' => $m2->name,
                 'count' => $modelAds->count(),
                 'price' => !$best ? '\"' . __('Price on request') . '\"' : $best->price . ' ' . $best->coin,
-                'hashrate' => !$best ? $modelAds->first() : $best->asic_version_hashrate,
+                'hashrate' => !$best ? $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : $best->asic_version_hashrate . $best->asic_version_measurement,
             ]);
         } else {
             $sections[] = $this->getTrans("descriptions.compare.ads.not", $m2->id, [

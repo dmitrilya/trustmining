@@ -9,7 +9,7 @@
             ? $model->data->asicVersions
                 ->where(
                     'hashrate',
-                    $ads->where('price', '!=', 0)->sortByDesc('asic_version_hashrate')->first()->asic_version_hashrate,
+                    $ads->where('asic_model_slug', $model->slug)->where('price', '!=', 0)->sortByDesc('asic_version_hashrate')->first()->asic_version_hashrate,
                 )
                 ->first()
             : null;
