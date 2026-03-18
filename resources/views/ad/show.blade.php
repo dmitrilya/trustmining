@@ -33,14 +33,14 @@
                 __('kW/h') .
                 " купить у {$ad->user->name}";
     $href =
-        $ad->ad_category_name == 'miners'
+        $ad->adCategory->name == 'miners'
             ? route('ads.asic.show', [
                 'asicBrand' => $ad->asicVersion->asicModel->asicBrand->slug,
                 'asicModel' => $ad->asicVersion->asicModel->slug,
                 'asicVersion' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
                 'ad' => $ad->user->slug . '-' . $ad->id,
             ])
-            : ($ad->ad_category_name == 'gpus'
+            : ($ad->adCategory->name == 'gpus'
                 ? route('ads.gpu.show', [
                     'gpuBrand' => $ad->gpuModel->gpuBrand->slug,
                     'gpuModel' => $ad->gpuModel->slug,
