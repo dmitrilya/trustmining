@@ -5,6 +5,10 @@
         </h2>
     </div>
 
+    @php
+        $article = App\Models\Insight\Content\Article::find(10000001);
+    @endphp
+
     <div itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-4" x-data="{ active: null }">
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
             class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
@@ -23,6 +27,12 @@
                 <div itemprop="text"
                     class="p-4 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
                     {{ __('faq.metrics.network.difficulty.answer_1', ['name' => $coin->name, 'short' => $coin->abbreviation]) }}
+                    @if ($article)
+                        <a href="{{ route('insight.article.show', ['channel' => $article->channel->slug, 'article' => $article->id . '-' . Str::slug($article->title)]) }}"
+                            class="inline text-indigo-500 hover:text-indigo-600">
+                            {{ __('What is network difficulty?') }}
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
