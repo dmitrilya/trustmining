@@ -162,7 +162,7 @@ class AdController extends Controller
         if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
             return back()->withErrors(['forbidden' => __('Unavailable ad.')]);
 
-        if ($user->id != $ad->user_id) {
+        if (!$user || $user->id != $ad->user_id) {
             $this->addView(request(), $ad);
             if ($adCategory->name == 'miners') $this->addView(request(), $ad->asicVersion->asicModel);
             elseif ($adCategory->name == 'gpus') $this->addView(request(), $ad->gpuModel);
