@@ -6,6 +6,7 @@ class ComparisonTextService
 {
     public function generate($m1, $m2, $ads)
     {
+        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
         $hash = $m1->id + $m2->id; // Для фиксации выбора синонимов
         $data = $this->analyzeModels($m1, $m2);
 
@@ -79,7 +80,7 @@ class ComparisonTextService
                 'diffPercent' => $m1->data->asicVersions->first()->original_hashrate > $m2->data->asicVersions->first()->original_hashrate ?
                     round(($m1->data->asicVersions->first()->original_hashrate - $m2->data->asicVersions->first()->original_hashrate) / $m1->data->asicVersions->first()->original_hashrate * 100, 2) :
                     round(($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) / $m2->data->asicVersions->first()->original_hashrate * 100, 2),
-                'diffValue' => abs($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) . ' ' . $m1->data->algorithm->measurement,
+                'diffValue' => abs($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) / pow(1000, array_search($m1->data->algorithm->measurement, $measurements)) . ' ' . $m1->data->algorithm->measurement,
             ]);
         }
 
@@ -88,10 +89,10 @@ class ComparisonTextService
         // Потребление
         $sections[] = $this->getTrans("descriptions.compare.power.diff", $hash, [
             'b1' => $m1->data->asicBrand->name,
-            'm1' => $m1->name,
+            'm1' => $m1->name . ' ' . $m1->data->asicVersions->first()->hashrate . $m1->data->asicVersions->first()->measurement,
             'p1' => $m1->data->asicVersions->first()->efficiency * $m1->data->asicVersions->first()->hashrate,
             'b2' => $m2->data->asicBrand->name,
-            'm2' => $m2->name,
+            'm2' => $m2->name . ' ' . $m2->data->asicVersions->first()->hashrate . $m2->data->asicVersions->first()->measurement,
             'p2' => $m2->data->asicVersions->first()->efficiency * $m2->data->asicVersions->first()->hashrate,
         ]);
 
