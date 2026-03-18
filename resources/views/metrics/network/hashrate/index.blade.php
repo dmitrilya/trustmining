@@ -125,5 +125,21 @@
         </div>
     </div>
 
+    <section class="mb-4 sm:mb-6 lg:mb-8">
+        <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+            <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                {{ __('Miners for') }} {{ $coin->abbreviation }}
+            </h2>
+        </div>
+
+        <div>
+            @include('home.components.carousel', [
+                'items' => $ads,
+                'blade' => 'ad.components.card',
+                'model' => 'ad',
+            ])
+        </div>
+    </section>
+
     @include('metrics.network.hashrate.components.faq')
 </x-metrics-layout>
