@@ -4,17 +4,20 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 use App\Models\User\User;
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
+use App\Models\Database\AsicModel;
 use App\Models\Database\GPUBrand;
 use App\Models\Blog\BlogArticle;
 use App\Models\Insight\Channel;
 use App\Models\Database\Coin;
 use App\Models\Forum\ForumCategory;
+use App\Models\Morph\View;
 
 class SitemapGenerate extends Command
 {
@@ -103,16 +106,26 @@ class SitemapGenerate extends Command
         ) {
             $out .= $this->addUrl('asic-miners/' . $asicBrand->slug);
             foreach ($asicBrand->asicModels as $asicModel) {
-                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug);
-                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/reviews');
+                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug);
+                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/reviews');
                 $out .= $this->addUrl('calculator/' . $asicModel->slug);
                 foreach ($asicModel->asicVersions as $asicVersion) {
-                    $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
+                    $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
                     $out .= $this->addUrl('calculator/' . $asicModel->slug . '/' . $asicVersion->hashrate);
                     foreach ($asicVersion->moderatedAds as $ad) {
-                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug. '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id);
+                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id);
                     }
                 }
+            }
+        }
+
+        $models = AsicModel::whereIn('id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(50)->pluck('viewable_id'))->pluck('slug');
+        $count = $models->count();
+
+        for ($i = 0; $i < $count; $i++) {
+            for ($j = $i + 1; $j < $count; $j++) {
+                $out .= $this->addUrl("asic-miners/compare/$models[$i]-vs-$models[$j]");
             }
         }
 

@@ -102,7 +102,7 @@ body {
     background-repeat: repeat-x;
     background-position: left bottom;
     height: 1px;
-    width: 2px;
+    min-width: 6px;
     position: relative;
     top: -3px;
     opacity: 0.3;

@@ -4,7 +4,7 @@
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
     openDropdown: null
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '_')" name="gpu_model"
+    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '-')" name="gpu_model"
         @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedModel" name="gpu_model_id"
         @if (isset($required)) required @endif aria-label="{{ __('Model') }}">

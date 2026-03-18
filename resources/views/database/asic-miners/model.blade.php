@@ -201,7 +201,7 @@
                         <x-characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
                         <x-characteristic name="Algorithm" :value="$algorithm->name" itemprop="additionalProperty" />
                         <x-characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
-                        <x-characteristic name="Release date" :value="$model->release->locale('ru')->translatedFormat('F Y')" />
+                        <x-characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
                         <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
                     </x-characteristics>
 

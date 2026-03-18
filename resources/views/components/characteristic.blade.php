@@ -4,9 +4,9 @@
     class="flex justify-between items-end text-xs sm:text-sm text-slate-500 dark:text-slate-400">
     <span
         @if ($itemprop) itemprop="{{ $itemprop == 'additionalProperty' ? 'name' : 'valueReference' }}" @endif>{{ __($name) }}</span>
-    <span class="dots mx-2"></span>
+    <span class="dots mx-1 xs:mx-2 win-w-[1.25rem]"></span>
     @if (!is_array($value))
-        <span @if ($itemprop) itemprop="value" @endif class="text-slate-700 dark:text-slate-300"
+        <span @if ($itemprop) itemprop="value" @endif class="text-slate-700 dark:text-slate-300 text-right truncate"
             @if ($xValue) x-text="{{ $xValue }}" @endif>{{ __($value) }}</span>
     @else
         <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">

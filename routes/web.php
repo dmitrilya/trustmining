@@ -124,7 +124,7 @@ Route::group(['prefix' => 'gas-gensets'], function () {
 Route::group(['prefix' => 'asic-miners'], function () {
     Route::get('/', [DatabaseController::class, 'asicMinersIndex'])->name('database.asic-miners');
     Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
-    Route::get('/compare/{compareRequest}', [DatabaseController::class, 'compareAsics']);
+    Route::get('/compare/{compareRequest}', [DatabaseController::class, 'compareAsics'])->name('database.asic-miners.compare');
 
     Route::group(['prefix' => '{asicBrand:slug}'], function () {
         Route::get('/', [DatabaseController::class, 'asicMinersBrand'])->name('database.asic-miners.brand');

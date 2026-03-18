@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -15,6 +16,7 @@ use App\Models\Database\AsicModel;
 use App\Models\Database\Coin;
 use App\Models\Database\GPUBrand;
 use App\Models\Database\GPUModel;
+use App\Models\Morph\View;
 
 class DatabaseController extends Controller
 {
@@ -268,25 +270,41 @@ class DatabaseController extends Controller
      */
     public function compareAsics(Request $request, $compareRequest)
     {
-        $models = AsicModel::whereIn('slug', explode('-vs-', $compareRequest))->with([
-            'asicBrand:id,name,slug',
-            'asicVersions:asic_model_id,hashrate,measurement',
-            'algorithm:id,name',
-        ]);
+        $noindex = null;
+        $modelSlugs = explode('-vs-', $compareRequest);
+        if (count($modelSlugs) != 2) abort(404);
 
-        if ($models->count() != 2) abort(404);
+        $modelA = AsicModel::where('slug', $modelSlugs[0])->select(['id', 'name', 'slug', 'characteristics'])->first();
+        $modelB = AsicModel::where('slug', $modelSlugs[1])->select(['id', 'name', 'slug', 'characteristics'])->first();
+
+        if ($modelA->id > $modelB->id) $noindex = 'true';
+        else {
+            $popularModels = View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(50)->get();
+
+            if ($popularModels->whereIn('viewable_id', [$modelA->id, $modelB->id])->count() != 2) $noindex = 'true';
+        }
+
+        if (!$modelA || !$modelB) abort(404);
 
         $calculatorModels = Cache::get('calculator_models');
-        $models->map(function ($model) use ($calculatorModels) {
-            $model->calculatorData = $calculatorModels->where('id', $model->id);
-            return $model;
-        });
+        $modelA->data = $calculatorModels->where('id', $modelA->id)->first();
+        $modelB->data = $calculatorModels->where('id', $modelB->id)->first();
 
-        $ads = $this->getAds()->where('ads.asic_version_id', $models->pluck('asicVersions.id'))->get();
+        $ads = $this->getAds()->whereIn('asic_models.id', [$modelA->id, $modelB->id])->orderByDesc('ads.ordering_id')->get();
 
-        return view('database.compare.index', [
-            'models' => $models,
-            'ads' => $ads
+        return view('compare.index', [
+            'modelA' => $modelA,
+            'modelB' => $modelB,
+            'models' => AsicModel::select(['id', 'name', 'slug'])->whereIn('id', $calculatorModels->filter(
+                fn($model) => $model->asicVersions->contains(
+                    fn($version) => $version->profits && $version->profits->isNotEmpty()
+                )
+            )->pluck('id'))->get(),
+            'ads' => $ads,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'noindex' => $noindex,
+            'user' => $request->user()
         ]);
     }
 
