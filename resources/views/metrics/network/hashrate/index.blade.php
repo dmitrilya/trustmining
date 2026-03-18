@@ -6,12 +6,13 @@
         window.buildGraph(r.data.hashrates, period, 'graph', 'value');
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 graph-container">
+        <div
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 graph-container">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-slate-100 dark:bg-slate-900 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
                     @click="show = !show">
-                    <svg class="size-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
-                        fill="none" viewBox="0 0 24 24">
+                    <svg class="size-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
                     </svg>
@@ -91,7 +92,8 @@
             <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
         </div>
 
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
+        <div
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
@@ -100,32 +102,45 @@
                 <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Change') }}</div>
             </div>
-            <template x-for="(item, i) in items.slice(0, 90)" key="item.date">
-                <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
-                    <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                        x-text="new Date(item.date).toLocaleString(window.locale, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                        })">
+            <div x-data="{ show: false }">
+                <template x-for="(item, i) in items.slice(0, 90)" :key="item.date">
+                    <div x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
+                        <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                            x-text="new Date(item.date).toLocaleString(window.locale, {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                            })">
+                        </div>
+
+                        <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                            x-text="item.value.toLocaleString('fullwide', {useGrouping:false})"></div>
+
+                        <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
+                            :class="{
+                                'text-green-500': items[i + 1] && item.value > items[i + 1].value,
+                                'text-red-500': items[i + 1] && item.value < items[i + 1].value,
+                                'text-slate-700 dark:text-slate-200': !items[i + 1] || item.value == items[i + 1].value
+                            }"
+                            x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
+                        </div>
                     </div>
-                    <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                        x-text="item.value.toLocaleString('fullwide', {useGrouping:false})"></div>
-                    <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
-                        :class="{
-                            'text-green-500': item.value > items[i + 1].value,
-                            'text-red-500': item.value < items[i + 1].value,
-                            'text-slate-700 dark:text-slate-200': item.value == items[i + 1].value
-                        }"
-                        x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">
-                    </div>
-                </div>
-            </template>
-            </table>
+                </template>
+
+                <template x-if="items.length > 5">
+                    <button @click="show = !show"
+                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+                        <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
+                    </button>
+                </template>
+            </div>
         </div>
     </div>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    <section class="mt-4 sm:mt-6 lg:mt-8">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                 {{ __('Miners for') }} {{ $coin->abbreviation }}
@@ -137,7 +152,7 @@
                 'items' => $ads,
                 'blade' => 'ad.components.card',
                 'model' => 'ad',
-                'bigWrapper' => true
+                'bigWrapper' => true,
             ])
         </div>
     </section>

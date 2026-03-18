@@ -22,32 +22,45 @@
                 <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Change') }}</div>
             </div>
-            <template x-for="(item, i) in items.slice(0, items.length - 1)" key="item.date">
-                <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
-                    <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                        x-text="new Date(item.date).toLocaleString(window.locale, {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric',
-                        })">
+            <div x-data="{ show: false }">
+                <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
+                    <div x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
+                        <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                            x-text="new Date(item.date).toLocaleString(window.locale, {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric',
+                            })">
+                        </div>
+
+                        <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
+                            x-text="item.value"></div>
+
+                        <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
+                            :class="{
+                                'text-green-500': item.value > items[i + 1]?.value,
+                                'text-red-500': item.value < items[i + 1]?.value,
+                                'text-slate-700 dark:text-slate-200': item.value == items[i + 1]?.value
+                            }"
+                            x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
+                        </div>
                     </div>
-                    <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                        x-text="item.value"></div>
-                    <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
-                        :class="{
-                            'text-green-500': item.value > items[i + 1].value,
-                            'text-red-500': item.value < items[i +
-                                1].value,
-                            'text-slate-700 dark:text-slate-200': item.value == items[i + 1].value
-                        }"
-                        x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">
-                    </div>
-                </div>
-            </template>
+                </template>
+
+                <template x-if="items.length > 5">
+                    <button @click="show = !show"
+                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors duration-200">
+                        <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
+                    </button>
+                </template>
+            </div>
         </div>
     </div>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    <section class="mt-4 sm:mt-6 lg:mt-8">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
                 {{ __('Miners for') }} {{ $coin->abbreviation }}
@@ -59,7 +72,7 @@
                 'items' => $ads,
                 'blade' => 'ad.components.card',
                 'model' => 'ad',
-                'bigWrapper' => true
+                'bigWrapper' => true,
             ])
         </div>
     </section>
