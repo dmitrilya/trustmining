@@ -42,7 +42,7 @@
             <span class="text-xl sm:text-3xl font-black text-slate-800"
                 x-text="paybackMonths != '∞' ? paybackMonths != 0 ? Math.round(paybackMonths) : '{{ __('No data') }}' : '∞'"></span>
             @if ($price != 0)
-                <span class="text-slate-400 font-bold text-lg">{{ __('d') }}.</span>
+                <span class="text-slate-500 font-bold text-lg">{{ __('d') }}.</span>
             @endif
         </div>
         @if ($price != 0)

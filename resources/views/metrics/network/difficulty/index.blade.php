@@ -46,4 +46,6 @@
             </template>
         </div>
     </div>
+
+    @include('metrics.network.difficulty.components.faq')
 </x-metrics-layout>
