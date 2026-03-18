@@ -59,6 +59,7 @@
                 'items' => $ads,
                 'blade' => 'ad.components.card',
                 'model' => 'ad',
+                'bigWrapper' => true
             ])
         </div>
     </section>
