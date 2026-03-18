@@ -4,57 +4,86 @@ return [
     'compare' => [
         'intro' => [
             'same_brand' => [
-                'Сравниваем два аппарата от :b1: — модели :m1 (:d1 г.) и :m2 (:d2 г.).',
-                'Производитель :b1 представил обе модели (:m1 и :m2) в разное время, и сегодня мы разберем их ключевые отличия.',
-                'В линейке :b1 модели :m1 и :m2 занимают разные ниши, несмотря на схожее происхождение.'
+                'We are comparing two devices from :b1 — models :m1 (:d1) and :m2 (:d2).',
+                'Manufacturer :b1 introduced both models (:m1 and :m2) at different times, and today we will analyze their key differences.',
+                'In the :b1 lineup, models :m1 and :m2 occupy different niches despite their similar origin.'
             ],
             'old_gen' => [
-                'Рассматриваем проверенные временем решения :m1 и :m2. Несмотря на выход новых поколений, эти модели всё еще активны на рынке.',
-                'Перед нами представители прошлых серий майнеров. Сравним, насколько :m1 актуален на фоне :m2 в текущих условиях.',
+                'We are reviewing time-tested solutions :m1 and :m2. Despite the release of new generations, these models are still active on the market.',
+                'Let\'s compare how relevant :m1 is compared to :m2 in current conditions.',
             ],
             'diff_brand' => [
-                'Сегодня в битве сошлись :m1 от :b1 и :m2 от конкурента :b2.',
-                'Выбор между :b1 :m1 и :b2 :m2 — это классическая дилемма для инвестора в майнинг.',
+                'Today in the battle we have :m1 from :b1 against competitor :b2\'s :m2.',
+                'The choice between :b1 :m1 and :b2 :m2 is a classic dilemma for mining investors.',
             ]
         ],
         'algo' => [
             'same' => [
-                'Оба устройства работают на :a1, добывая :all1. Основной фокус профита сейчас на :c1.',
-                'Единый алгоритм (:a1) позволяет переключаться между монетами (:all1) на обоих асиках.',
+                'Both devices operate on :a1, mining :all1. The main profit focus is currently on :c1.',
+                'The unified algorithm (:a1) allows switching between coins (:all1) on both ASICs, but maximum profit is currently achieved when mining :c1.',
             ],
             'diff' => [
-                'Разные алгоритмы (:a1 против :a2) означают разную стратегию: :m1 качает :c1, а :m2 ориентирован на :c2.',
-                ':m1 и :m2 нельзя сравнивать напрямую по хешрейту, так как они работают на разных протоколах: :a1 и :a2 соответственно.',
+                'Different algorithms (:a1 vs :a2) mean different strategies: :m1 mines :c1, while :m2 is focused on :c2.',
+                ':m1 and :m2 cannot be directly compared by hashrate as they operate on different protocols: :a1 and :a2 respectively.',
             ]
         ],
         'hashrate' => [
-            'one' => ':b :m выпущен в единственном варианте на :hashrate.',
-            'more' => ':b :m имеет несколько версий, а хэшрейт начинается от :minhashrate и доходит до :maxhashrate.',
+            'one' => [
+                ':b :m is released in a single version with :hashrate.',
+                'Model :m from manufacturer :b is a unique solution with :hashrate power, available in a single version.',
+                'Model :b :m is presented exclusively in a configuration with :hashrate, other power options are not provided for this series.',
+                'The :m device has a single available configuration — :hashrate'
+            ],
+            'more' => [
+                ':b :m has several versions, with hashrate starting from :minhashrate and going up to :maxhashrate.',
+                'The :b :m lineup includes :count modifications: starting performance is :minhashrate, while top solutions reach :maxhashrate.',
+                'The :m device from :b is available in a wide range of powers. Versions from :minhashrate to :maxhashrate are available.',
+                'Choose the right :m version for your needs from :count options with power ranging from :minhashrate to :maxhashrate inclusive.'
+            ],
             'diff' => [
-                'Разница в вычислительной мощности составляет :$diffPercent %, но итоговое преимущество может показать только энергоэффективность оборудования. У :m1 :e1, а у :m2 :e2.',
-                'Разница в :diffValue с одной стороны показывает преимущество одной модели, но стоит обратить еще внимание на эффективность моделей. :e1 показатель модели :m1 и :e2 у :m2.',
+                'The difference in computing power is :diffPercent%, but the final advantage can only be shown by the energy efficiency of the equipment. Model :m1 has :e1, while :m2 has :e2.',
+                'The difference in :diffValue shows the advantage of one model, but it\'s also worth paying attention to the efficiency of the models. Model :m1 has an efficiency of :e1 and :m2 has :e2.'
+            ]
+        ],
+        'power' => [
+            'diff' => [
+                'Model :m1 has a power consumption of :p1 Watts, while :m2 consumes :p2 Watts.',
+                'The power consumption of :b1 :m1 is :p1 Watts. :b2 :m2, in turn, consumes :p2 Watts.'
             ]
         ],
         'cooling' => [
             'same_Air' => [
-                'Оба майнера используют воздушное охлаждение, что требует качественной вентиляции помещения.',
-                'Тип охлаждения у моделей идентичен — классический обдув вентиляторами.',
+                'Both miners use air cooling, which requires good room ventilation.',
+                'The cooling type for both models is identical — classic fan airflow.',
             ],
             'same_Hydro' => [
-                'Оба майнера относятся к серии Hydro и требуют подключения к водяному контуру. Это обеспечивает минимальный уровень шума и стабильный хешрейт даже в жарком климате.',
-                'Использование водяного охлаждения на :m1 и :m2 позволяет эффективно отводить тепло от чипов, что значительно продлевает срок службы оборудования по сравнению с воздушными аналогами.',
-                'Для эксплуатации этих моделей (Hydro edition) вам потребуется внешняя система охлаждения (градирня). Взамен вы получаете возможность размещения оборудования в помещениях без мощной приточно-вытяжной вентиляции.',
-                'Технология Hydro в моделях :m1 и :m2 исключает накопление пыли внутри корпуса, что является критическим преимуществом для стабильной работы 24/7.',
+                'Both miners belong to the Hydro series and require connection to a water cooling system. This ensures minimal noise levels and stable hashrate even in hot climates.',
+                'Using water cooling on :m1 and :m2 allows for efficient heat dissipation from chips, significantly extending equipment lifespan compared to air-cooled counterparts.',
+                'To operate these Hydro edition models, you need an external cooling system (cooling tower). In return, you get the ability to place equipment in rooms without powerful ventilation.',
+                'Hydro technology in models :m1 and :m2 prevents dust accumulation inside the case, which is a critical advantage for 24/7 stable operation.',
             ],
             'same_Immersion' => [
-                'Обе модели предназначены для работы в иммерсионных ваннах. Это гарантирует отсутствие шума и идеальный теплоотвод для чипов.',
-                'Данные устройства (Immersion edition) требуют погружения в диэлектрический теплоноситель, что позволяет эксплуатировать :m1 и :m2 в закрытых помещениях без мощной вытяжки.',
-                'Использование иммерсионного охлаждения на обоих асиках открывает возможности для безопасного разгона и продления срока службы компонентов.',
+                'Both models are designed to work in immersion baths. This guarantees no noise and perfect heat dissipation for chips.',
+                'These devices (Immersion edition) require immersion in dielectric coolant, allowing :m1 and :m2 to operate in enclosed spaces without powerful exhaust systems.',
+                'Using immersion cooling on both ASICs opens up opportunities for safe overclocking and extending component lifespan.',
             ],
             'diff' => [
-                'Принципиальное различие в типе охлаждения: :m1 использует :c1, а :m2 работает на :c2.',
-                'Майнер :m1 (:c1) будет значительно отличаться по уровню шума от :m2 (:c2).',
+                'There is a fundamental difference in cooling type: :m1 uses :c1, while :m2 operates on :c2.',
+                'Miner :m1 (:c1) will significantly differ in noise level from :m2 (:c2).',
             ]
         ],
+        'ads' => [
+            'have' => [
+                'Our platform has :count offers of :b :m from different companies, available both in stock and on order. The best price for the :hashrate version is currently :price.',
+                'Compare :count offers for :b :m from verified suppliers. Right now, the :hashrate configuration can be purchased at the minimum price of :price.',
+                ':count ads found for :b :m. The current cost for :hashrate power is from :price. Both new and used devices are available.',
+                ':count active listings available for :b :m. The best price-to-performance ratio: :hashrate for :price.',
+            ],
+            'not' => [
+                'Currently, there are no :b :m offers on the platform. If you are interested in this model, you can contact us or one of the verified companies listed on our platform.',
+                'Offers for :b :m are temporarily unavailable, but our catalog contains many other profitable models.',
+                'Unfortunately, :m is currently not available either in stock or on order. Please try looking at other models.'
+            ]
+        ]
     ]
 ];
