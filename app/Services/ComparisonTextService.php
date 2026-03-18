@@ -111,7 +111,7 @@ class ComparisonTextService
         // Объявления
         $modelAds = $ads->where('asic_model_slug', $m1->slug);
         if ($modelAds->count()) {
-            $best = $modelAds->sortBy(fn($ad) => $ad->price * $ad->coin_rate)->first();
+            $best = $modelAds->where('price', '!=', 0)->sortBy(fn($ad) => $ad->price * $ad->coin_rate)->first();
             $sections[] = $this->getTrans("descriptions.compare.ads.have", $m1->id, [
                 'b' => $m1->data->asicBrand->name,
                 'm' => $m1->name,
