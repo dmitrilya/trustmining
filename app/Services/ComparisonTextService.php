@@ -118,7 +118,7 @@ class ComparisonTextService
                 'm' => $m1->name,
                 'count' => $modelAds->count(),
                 'price' => !$best ? '\"' . __('Price on request') . '\"' : $best->price . ' ' . $best->coin,
-                'hashrate' => !$best ? $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : $best->asic_version_hashrate . $best->asic_version_measurement,
+                'hashrate' => !$best ? (float) $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : (float) $best->asic_version_hashrate . $best->asic_version_measurement,
             ]);
         } else {
             $sections[] = $this->getTrans("descriptions.compare.ads.not", $m1->id, [
@@ -135,7 +135,7 @@ class ComparisonTextService
                 'm' => $m2->name,
                 'count' => $modelAds->count(),
                 'price' => !$best ? '\"' . __('Price on request') . '\"' : $best->price . ' ' . $best->coin,
-                'hashrate' => !$best ? $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : $best->asic_version_hashrate . $best->asic_version_measurement,
+                'hashrate' => !$best ? (float) $modelAds->first()->asic_version_hashrate . $modelAds->first()->asic_version_measurement : (float) $best->asic_version_hashrate . $best->asic_version_measurement,
             ]);
         } else {
             $sections[] = $this->getTrans("descriptions.compare.ads.not", $m2->id, [

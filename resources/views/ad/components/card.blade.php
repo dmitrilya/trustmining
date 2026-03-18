@@ -15,7 +15,7 @@
                 ? route('ads.asic.show', [
                     'asicBrand' => $ad->asic_brand_slug,
                     'asicModel' => $ad->asic_model_slug,
-                    'asicVersion' => $ad->asic_version_hashrate . $ad->asic_version_measurement,
+                    'asicVersion' => (float) $ad->asic_version_hashrate . $ad->asic_version_measurement,
                     'ad' => $ad->user_slug . '-' . $ad->id,
                 ])
                 : ($ad->ad_category_name == 'gpus'
