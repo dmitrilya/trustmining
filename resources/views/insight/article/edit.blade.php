@@ -1,7 +1,7 @@
 <div x-show="edit">
     <form
         action="{{ route('insight.article.update', ['channel' => $article->channel->slug, 'article' => $article->id]) }}"
-        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ validation: [], loading: false, text: `{{ old('content') }}`, attachCallback: null }"
+        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}`, attachCallback: null }"
         x-init='const Delta = Quill.import("delta");
         const Parchment = Quill.import("parchment");
     
