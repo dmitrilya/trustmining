@@ -185,7 +185,7 @@
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
             ->keyBy('key')" :key="$article->series->first()?->id" />
 
-        <div x-data="{ allTags: {{ $tags }}, tags: {{ collect($article->tags) }}, search: '' }">
+        <div x-data="{ allTags: {{ $tags->diff($article->tags)->values() }}, tags: {{ collect($article->tags) }}, search: '' }">
             <div>
                 <x-input-label for="search" :value="__('Hashtags')" />
                 <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
@@ -201,7 +201,7 @@
 
             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                 <template x-for="tag in tags" :key="tag">
-                    <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
+                    <div @click="tags.splice(tags.indexOf(tag), 1);allTags.unshift(tag)" x-text="tag"
                         class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
                     </div>
                 </template>
