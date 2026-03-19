@@ -5,7 +5,7 @@
         $momentRating = $reviewsCount ? $model->moderatedReviews->avg('rating') : 0;
         $modelAds = $ads->where('asic_model_slug', $model->slug);
         $version = $model->data->asicVersions->first();
-        $versionWithAds = $modelAds->count()
+        $versionWithAds = $modelAds->where('price', '!=', 0)->count()
             ? $model->data->asicVersions
                 ->where(
                     'hashrate',
