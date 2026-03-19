@@ -246,77 +246,77 @@
 
         <x-primary-button class="block ml-auto" ::disabled="loading"
             ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-primary-button>
+
+        <x-modal name="attach-img_modal" maxWidth="md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg text-slate-950 dark:text-slate-50">
+                        {{ __('Attach an image') }}
+                    </h3>
+
+                    <button type="button" aria-label="{{ __('Close') }}"
+                        class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
+                        @click="show = false">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div>
+                    <x-input-label for="attach-img_url" :value="__('Link to the image')" />
+                    <x-text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
+                </div>
+
+                <x-primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto" type="button"
+                    @click="
+                        show = false;
+                        const input = $el.previousElementSibling.querySelector('input');
+                        attachCallback(input.value);
+                        input.value = null;
+                        attachCallback = null;
+                    ">
+                    {{ __('Attach') }}
+                </x-primary-button>
+            </div>
+        </x-modal>
+
+        <x-modal name="attach-video_modal" maxWidth="md">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg text-slate-950 dark:text-slate-50">
+                        {{ __('Attach a video') }}
+                    </h3>
+
+                    <button type="button" aria-label="{{ __('Close') }}"
+                        class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
+                        @click="show = false">
+                        <span class="sr-only">Close</span>
+                        <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div>
+                    <x-input-label for="attach-video_url" :value="__('Link to the video') . ' (vkvideo, youtube, rutube)'" />
+                    <x-text-input id="attach-video_url" type="text" autocomplete="attach-video_url" />
+                </div>
+
+                <x-primary-button class="mt-2 sm:mt-4 block ml-auto" type="button"
+                    @click="
+                        show = false;
+                        const input = $el.previousElementSibling.querySelector('input');
+                        attachCallback(processVideoLink(input.value));
+                        input.value = null;
+                        attachCallback = null;
+                    ">
+                    {{ __('Attach') }}
+                </x-primary-button>
+            </div>
+        </x-modal>
     </form>
-
-    <x-modal name="attach-img_modal" maxWidth="md">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg text-slate-950 dark:text-slate-50">
-                    {{ __('Attach an image') }}
-                </h3>
-
-                <button type="button" aria-label="{{ __('Close') }}"
-                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                    @click="show = false">
-                    <span class="sr-only">Close</span>
-                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <div>
-                <x-input-label for="attach-img_url" :value="__('Link to the image')" />
-                <x-text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
-            </div>
-
-            <x-primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto"
-                @click="
-                show = false;
-                const input = $el.previousElementSibling.querySelector('input');
-                attachCallback(input.value);
-                input.value = null;
-                attachCallback = null;
-            ">
-                {{ __('Attach') }}
-            </x-primary-button>
-        </div>
-    </x-modal>
-
-    <x-modal name="attach-video_modal" maxWidth="md">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg text-slate-950 dark:text-slate-50">
-                    {{ __('Attach a video') }}
-                </h3>
-
-                <button type="button" aria-label="{{ __('Close') }}"
-                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                    @click="show = false">
-                    <span class="sr-only">Close</span>
-                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <div>
-                <x-input-label for="attach-video_url" :value="__('Link to the video') . ' (vkvideo, youtube, rutube)'" />
-                <x-text-input id="attach-video_url" type="text" autocomplete="attach-video_url" />
-            </div>
-
-            <x-primary-button class="mt-2 sm:mt-4 block ml-auto"
-                @click="
-                show = false;
-                const input = $el.previousElementSibling.querySelector('input');
-                attachCallback(processVideoLink(input.value));
-                input.value = null;
-                attachCallback = null;
-            ">
-                {{ __('Attach') }}
-            </x-primary-button>
-        </div>
-    </x-modal>
 </div>
