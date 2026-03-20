@@ -12,6 +12,10 @@
         rubRate: {{ $rub }},
         models: {{ $models }},
         getNetProfit(model) {
+            let cost = (model.power * this.tariff * 24) / 1000;
+            return Math.round((model.profit - cost) * 100) / 100;
+        },
+        getNetProfitCurrency(model) {
             let profit = model.profit / (this.currency === 'RUB' ? this.rubRate : 1);
             let cost = (model.power * this.tariff * (this.currency === 'RUB' ? 1 : this.rubRate) * 24) / 1000;
             return Math.round((profit - cost) * 100) / 100;
@@ -103,7 +107,7 @@
                         x-text="model.min_price_text ?? '-'">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.netProfit">
+                        x-text="model.netProfitCurrency">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="model.min_price ? Math.round(model.min_price / model.netProfit) + ' {{ __('days') }}' : '-'">
