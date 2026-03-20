@@ -12,7 +12,7 @@
         rubRate: {{ $rub }},
         models: {{ $models }},
         getNetProfit(model) {
-            let cost = (model.power * this.tariff * 24) / 1000;
+            let cost = (model.power * this.tariff * this.rubRate * 24) / 1000;
             return Math.round((model.profit - cost) * 100) / 100;
         },
         getNetProfitCurrency(model) {
