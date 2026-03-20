@@ -22,7 +22,7 @@
         },
         get sortedModels() {
             return this.models
-                .map(m => ({ ...m, netProfit: this.getNetProfit(m) }))
+                .map(m => ({ ...m, netProfit: this.getNetProfit(m), netProfitCurrency: this.getNetProfitCurrency(m) }))
                 .sort((a, b) => b.netProfit - a.netProfit)
                 .slice(0, 15);
         }
