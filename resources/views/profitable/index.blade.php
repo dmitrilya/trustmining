@@ -106,7 +106,7 @@
                         x-text="model.netProfit">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.min_price ? Math.round(midel.min_price / model.netProfit) + ' {{ __('days') }}' : '-'">
+                        x-text="model.min_price ? Math.round(model.min_price / model.netProfit) + ' {{ __('days') }}' : '-'">
                     </div>
                     <div class="hidden lg:block pl-1.5 sm:pl-2">
                         <template x-for="coin in model.coins">

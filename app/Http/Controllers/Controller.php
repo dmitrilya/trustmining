@@ -118,7 +118,7 @@ class Controller extends BaseController
         $models = Cache::get('calculator_models')->filter(fn($model) => count($model->asicVersions->first()->profits))
             ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(50);
 
-        $ads = $this->getAds()->whereIn('asic_models.id', $models->take(5)->pluck('id'))->orderByDesc('ads.ordering_id')->limit(14)->get();
+        $ads = $this->getAds()->whereIn('asic_models.id', $models->take(5)->pluck('id'))->orderByDesc('ads.ordering_id')->get();
 
         $models = $models->map(function ($model) use ($ads) {
             $version = $model->asicVersions->first();
@@ -148,7 +148,7 @@ class Controller extends BaseController
         return view('profitable.index', [
             'models' => $models,
             'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
-            'ads' => $ads
+            'ads' => $ads->take(14)
         ]);
     }
 
