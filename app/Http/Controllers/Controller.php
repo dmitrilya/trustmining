@@ -141,7 +141,8 @@ class Controller extends BaseController
                 'original_measurement' => $model->algorithm->measurement,
                 'release' => $model->release,
                 'brand_slug' => $version->brand_slug,
-                'min_price' => $ad ? $ad->price . ' ' . $ad->coin : null
+                'min_price' => $ad ? $ad->price * $ad->coin_rate : null,
+                'min_price_text' => $ad ? $ad->price . ' ' . $ad->coin : null,
             ];
         })->values();
 

@@ -100,7 +100,7 @@
                         x-text="Math.round(model.power * tariff * (currency === 'RUB' ? 1 : rubRate) * 24 / 10) / 100">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.min_price ?? '-'">
+                        x-text="model.min_price_text ?? '-'">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="model.netProfit">
