@@ -31,6 +31,7 @@ module.exports = {
             },
             screens: {
                 'xs': '380px',
+                'xxl': '1420px',
                 'xxxl': '1664px',
             },
             gridTemplateColumns: {

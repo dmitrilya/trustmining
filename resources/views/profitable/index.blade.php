@@ -6,7 +6,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6" x-data="{
+    <div class="max-w-8xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6" x-data="{
         tariff: 5,
         currency: 'RUB',
         rubRate: {{ $rub }},
@@ -62,19 +62,21 @@
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 md:p-6 lg:p-8 relative divide-y divide-slate-300 dark:divide-slate-700">
             <div
-                class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs xs:text-xs">
+                class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs xs:text-xs">
                 <p class="col-span-2">{{ __('Model') }}</p>
-                <p class="hidden sm:block">{{ __('Power') }}</p>
-                <p class="hidden lg:block">{{ __('Algorithm') }}</p>
-                <p class="hidden xl:block">{{ __('Efficiency') }}</p>
-                <p>{{ __('Income') }}</p>
-                <p>{{ __('Expense') }}</p>
+                <p class="hidden xl:block">{{ __('Power') }}</p>
+                <p class="hidden xl:block">{{ __('Algorithm') }}</p>
+                <p class="hidden xxl:block">{{ __('Eff.') }}</p>
+                <p class="hidden md:block">{{ __('Income') }}</p>
+                <p class="hidden sm:block">{{ __('Expense') }}</p>
+                <p>{{ __('Min. price') }}</p>
                 <p>{{ __('Profit') }}</p>
-                <p class="hidden md:block">{{ __('Coins') }}</p>
+                <p>{{ __('Pback') }}</p>
+                <p class="hidden lg:block">{{ __('Coins') }}</p>
             </div>
             <template x-for="(model, index) in sortedModels" :key="model.id">
                 <a :href="`/asic-miners/${model.brand_slug}/${model.slug}`"
-                    class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
+                    class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center">
                     <h2
                         class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs xs:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
@@ -85,22 +87,28 @@
 
                         <span x-text="`${model.name} ${model.hashrate}${model.measurement}/s`"></span>
                     </h2>
-                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="Math.round(model.power * 10) / 10 + ' ' + '{{ __('W') }}'"></div>
-                    <div class="hidden lg:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.algorithm"></div>
                     <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                        x-text="Math.round(model.power * 10) / 10 + ' ' + '{{ __('W') }}'"></div>
+                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                        x-text="model.algorithm"></div>
+                    <div class="hidden xxl:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="model.original_efficiency + 'j/' + model.original_measurement"></div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.profit / (currency === 'RUB' ? rubRate : 1) * 100) / 100">
                     </div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.power * tariff * (currency === 'RUB' ? 1 : rubRate) * 24 / 10) / 100">
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                        x-text="model.min_price ?? '-'">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
                         x-text="model.netProfit">
                     </div>
-                    <div class="hidden md:block pl-1.5 sm:pl-2">
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs xs:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                        x-text="model.min_price ? Math.round(midel.min_price / model.netProfit) + ' {{ __('days') }}' : '-'">
+                    </div>
+                    <div class="hidden lg:block pl-1.5 sm:pl-2">
                         <template x-for="coin in model.coins">
                             <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
                                 :src="'/storage/coins/' + coin + '.webp'" :alt="coin">

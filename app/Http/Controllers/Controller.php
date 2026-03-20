@@ -116,30 +116,34 @@ class Controller extends BaseController
     public function asicRating(): View
     {
         $models = Cache::get('calculator_models')->filter(fn($model) => count($model->asicVersions->first()->profits))
-            ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(50)->map(function ($model) {
-                $version = $model->asicVersions->first();
-                $profit = $version->profits->first();
-
-                return [
-                    'id' => $model->id,
-                    'name' => $model->name,
-                    'slug' => $version->model_slug,
-                    'hashrate' => $version->hashrate,
-                    'original_hashrate' => $version->original_hashrate,
-                    'profit' => $profit ? $profit['profit'] : 0,
-                    'coins' => $profit ? $profit['coins']->pluck('abbreviation') : [],
-                    'power' => $version->hashrate * $version->efficiency,
-                    'efficiency' => $version->efficiency,
-                    'original_efficiency' => $version->original_efficiency,
-                    'algorithm' => $version->algorithm,
-                    'measurement' => $version->measurement,
-                    'original_measurement' => $model->algorithm->measurement,
-                    'release' => $model->release,
-                    'brand_slug' => $version->brand_slug
-                ];
-            })->values();
+            ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(50);
 
         $ads = $this->getAds()->whereIn('asic_models.id', $models->take(5)->pluck('id'))->orderByDesc('ads.ordering_id')->limit(14)->get();
+
+        $models = $models->map(function ($model) use ($ads) {
+            $version = $model->asicVersions->first();
+            $ad = $ads->where('asic_model_slug', $model->slug)->where('asic_version_hashrate', $version->hashrate)->sortBy(fn ($ad) => $ad->price * $ad->coin_rate)->first();
+            $profit = $version->profits->first();
+
+            return [
+                'id' => $model->id,
+                'name' => $model->name,
+                'slug' => $version->model_slug,
+                'hashrate' => $version->hashrate,
+                'original_hashrate' => $version->original_hashrate,
+                'profit' => $profit ? $profit['profit'] : 0,
+                'coins' => $profit ? $profit['coins']->pluck('abbreviation') : [],
+                'power' => $version->hashrate * $version->efficiency,
+                'efficiency' => $version->efficiency,
+                'original_efficiency' => $version->original_efficiency,
+                'algorithm' => $version->algorithm,
+                'measurement' => $version->measurement,
+                'original_measurement' => $model->algorithm->measurement,
+                'release' => $model->release,
+                'brand_slug' => $version->brand_slug,
+                'min_price' => $ad ? $ad->price . ' ' . $ad->coin : null
+            ];
+        })->values();
 
         return view('profitable.index', [
             'models' => $models,
