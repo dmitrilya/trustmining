@@ -122,7 +122,8 @@ class Controller extends BaseController
 
         $models = $models->map(function ($model) use ($ads) {
             $version = $model->asicVersions->first();
-            $ad = $ads->where('asic_model_slug', $model->slug)->where('asic_version_hashrate', $version->hashrate)->sortBy(fn ($ad) => $ad->price * $ad->coin_rate)->first();
+            $ad = $ads->where('asic_model_slug', $model->slug)->where('asic_version_hashrate', $version->hashrate)->where('price', '!=', 0)
+                ->sortBy(fn ($ad) => $ad->price * $ad->coin_rate)->first();
             $profit = $version->profits->first();
 
             return [
