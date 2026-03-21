@@ -17,7 +17,7 @@
             $minPrice = $ads
                 ->where('asic_version_hashrate', $versionWithAds->hashrate)
                 ->where('price', '!=', 0)
-                ->sortBy('price')
+                ->sortBy(fn ($ad) => $ad->price * $ad->coin_rate)
                 ->first();
         }
     @endphp

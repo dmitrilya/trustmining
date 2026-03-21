@@ -20,6 +20,8 @@
                 <div itemscope itemtype="https://schema.org/ViewAction"
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl min-h-[616px] md:min-h-[460px] p-2 pt-3 sm:p-4">
                     @include('calculator.components.calculator')
+
+                    @include('calculator.components.description')
                 </div>
 
                 <section class="mt-4 sm:mt-6 lg:mt-8">

@@ -6,9 +6,9 @@
     <meta itemprop="description"
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
-    <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5"
+    <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12"
         x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 99.7, tax: 0, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
-        <div class="md:p-6 lg:p-9 xl:p-12 col-span-2">
+        <div class="col-span-2">
             @include('calculator.components.schema')
 
             @include('calculator.components.selectversion', [
@@ -69,7 +69,7 @@
             @endif
         </div>
 
-        <div class="mt-6 md:mt-0 md:p-6 lg:p-9 xl:p-12 md:border-l border-slate-300 dark:border-slate-700 col-span-3">
+        <div class="md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
             @if (in_array('currency', $blocks))
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                     <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
@@ -99,20 +99,20 @@
 
             <template x-if="version !== null">
                 <div x-data="{
-                    get dailyProfit() {
+                    get dailyIncome() {
                         return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) * count / (currency == 'RUB' ? {{ $rub }} : 1);
                     },
                     get dailyConsumption() {
                         return version.efficiency * version.hashrate / 1000 * tariff * 24 * uptime / 100 * count * (currency == 'USDT' ? {{ $rub }} : 1);
                     },
-                    get dailyIncome() {
-                        return this.dailyProfit - this.dailyConsumption;
+                    get dailyProfit() {
+                        return this.dailyIncome - this.dailyConsumption;
                     },
-                    get dailyIncomeUSDT() {
+                    get dailyProfitUSDT() {
                         return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
                     },
-                    get total() { return this.dailyProfit + this.dailyConsumption },
-                    get incPercent() { return this.total > 0 ? (this.dailyProfit / this.total) * 100 : 50 },
+                    get total() { return this.dailyIncome + this.dailyConsumption },
+                    get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
                     get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 }
                 }">
                     <div class="space-y-2 sm:space-y-3 lg:space-y-4" x-data="{ view: 'month' }">
@@ -133,7 +133,7 @@
                             <div class="text-center mb-6">
                                 <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
                                 <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
-                                    x-text="view === 'day' ? Math.round(dailyIncome * 100)/100 : (view === 'month' ? Math.round(dailyIncome*30*100)/100 : Math.round(dailyIncome*365*100)/100)">
+                                    x-text="view === 'day' ? Math.round(dailyProfit * 100)/100 : (view === 'month' ? Math.round(dailyProfit*30*100)/100 : Math.round(dailyProfit*365*100)/100)">
                                 </div>
                             </div>
 
@@ -152,7 +152,7 @@
                                 <div
                                     class="mt-3 flex justify-between text-sm sm:text-base lg:text-lg font-black text-slate-800 dark:text-slate-200">
                                     <span
-                                        x-text="view === 'day' ? Math.round(calculateProfitCAGR(dailyProfit, 1, difficultyGrowth)*100)/100 : (view === 'month' ? Math.round(calculateProfitCAGR(dailyProfit, 30, difficultyGrowth)*100)/100 : Math.round(calculateProfitCAGR(dailyProfit, 365, difficultyGrowth)*100)/100)"></span>
+                                        x-text="view === 'day' ? Math.round(calculateProfitCAGR(dailyIncome, 1, difficultyGrowth)*100)/100 : (view === 'month' ? Math.round(calculateProfitCAGR(dailyIncome, 30, difficultyGrowth)*100)/100 : Math.round(calculateProfitCAGR(dailyIncome, 365, difficultyGrowth)*100)/100)"></span>
                                     <span
                                         x-text="view === 'day' ? Math.round(dailyConsumption*100)/100 : (view === 'month' ? Math.round(dailyConsumption*30*100)/100 : Math.round(dailyConsumption*365*100)/100)"></span>
                                 </div>
@@ -164,7 +164,7 @@
                         <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Payback') }}:
                             <span class="text-slate-900 dark:text-slate-100 font-bold"
-                                x-text="version.price ? dailyIncomeUSDT > 0 ? Math.round(version.price / dailyIncomeUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                                x-text="version.price ? dailyProfitUSDT > 0 ? Math.round(version.price / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
                     @endif
 
@@ -240,7 +240,7 @@
                                     <div>
                                         <div class="flex items-center">
                                             <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
-                                                :alt="coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
+                                                :alt="'{{ __('Calculator') }} ' + coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
                                             <div>
                                                 <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
                                                     x-text="coin.abbreviation">
