@@ -6,8 +6,9 @@
     <meta itemprop="description"
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
-    <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12"
-        x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 99.7, tax: 0, difficultyGrowth: 0 }" x-init="fee = version.profits[0].coins[0].fee">
+    <div itemprop="object" itemscope itemtype="https://schema.org/Product"
+        class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 99.7, tax: 0, difficultyGrowth: 0 }"
+        x-init="fee = version.profits[0].coins[0].fee">
         <div class="col-span-2">
             @include('calculator.components.schema')
 
@@ -39,6 +40,8 @@
                             <div class="mt-5 space-y-1 sm:space-y-2">
                                 <x-characteristics>
                                     <x-characteristic name="Algorithm" x-value="version.algorithm" />
+                                    <x-characteristic name="Efficiency"
+                                        x-value="version.efficiency + ' j/' + version.measurement" />
                                     <x-characteristic name="Power" x-value="version.efficiency * version.hashrate" />
                                     @if (!$widjet)
                                         <x-characteristic name="The best price"
@@ -190,6 +193,8 @@
                                     <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2">
                                         <x-characteristics>
                                             <x-characteristic name="Algorithm" x-value="version.algorithm" />
+                                            <x-characteristic name="Efficiency"
+                                                x-value="version.efficiency + ' j/' + version.measurement" />
                                             <x-characteristic name="Power"
                                                 x-value="version.efficiency * version.hashrate" />
                                             @if (!$widjet)
@@ -240,7 +245,8 @@
                                     <div>
                                         <div class="flex items-center">
                                             <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
-                                                :alt="'{{ __('Calculator') }} ' + coin.name" class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
+                                                :alt="'{{ __('Calculator') }} ' + coin.name"
+                                                class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
                                             <div>
                                                 <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
                                                     x-text="coin.abbreviation">
