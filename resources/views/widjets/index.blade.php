@@ -80,7 +80,7 @@
                 <div class="w-full md:w-md max-w-md mx-auto">
                     <div
                         class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
-                        <div class="break-all" x-text='`<script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="${theme}"
+                        <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="${theme}"
                             data-blocks="${blocks.join(",")}" data-model="antminer-l9" data-version="17"></script>`'></div>
 
                         <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
@@ -188,7 +188,7 @@
                 <div class="w-full md:w-md max-w-md mx-auto">
                     <div
                         class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
-                        <div class="break-all" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}"
+                        <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}"
                             data-blocks="${blocks.join(",")}"></script>`'></div>
 
                         <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
