@@ -85,5 +85,13 @@ return [
                 'Unfortunately, :m is currently not available either in stock or on order. Please try looking at other models.'
             ]
         ]
+    ],
+    'calculator' => [
+        'main' => 'Currently, :brand :model :version generates :incomeU USDT (:incomeR RUB) per day, with daily electricity costs at the :tariff R/kWh rate amounting to :expenseU USDT (:expenseR RUB). The final daily net profit is :profitU USDT (:profitR RUB).',
+        'payback' => [
+            'have' => 'On the TrustMining platform, the best offer to purchase :brand :model :version is currently an ad from :seller at a price of :price USDT. Based on this, we can estimate the approximate payback period as :payback days. Please note that the payback period is an estimate and is only valid at current coin rates and today\'s network difficulty.',
+            'not' => 'Unfortunately, there are currently no offers to purchase :brand :model :version on the TrustMining platform, so we cannot estimate the payback period. Please check the ads for :model with different hashrate specifications at the link below.',
+        ],
+        'params' => 'For the most accurate calculation, the TrustMining profitability calculator took into account parameters such as: electricity price (:tariff R per kilowatt), model energy efficiency (:efficiency), power consumption of the :model :version (:power watts), and current profitability for all coins mineable on the :algorithm algorithm: :coins. The TrustMining calculator also considers additional parameters: mining pool fee (:comission%) and hardware uptime (:uptime%).'
     ]
 ];
