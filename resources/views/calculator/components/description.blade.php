@@ -4,11 +4,14 @@
 
     <div itemprop="description"
         class="ql-editor text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400 transition-all ease-in-out"
-        style="overflow-y: hidden; max-height: 3.75rem" :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
+        style="overflow-y: hidden; max-height: 3.75rem"
+        :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php
             $haveProfits = $selVersion->profits && count($selVersion->profits);
-            $income =
-                ($selVersion->profits[0]['profit'] * (100 - $selVersion->profits[0]['coins'][0]['fee']) * 99.7) / 10000;
+            $income = $haveProfits
+                ? ($selVersion->profits[0]['profit'] * (100 - $selVersion->profits[0]['coins'][0]['fee']) * 99.7) /
+                    10000
+                : 0;
             $expense = ((($selVersion->efficiency * $selVersion->hashrate) / 1000) * 5 * 24 * 99.7) / 100;
             $profitU = ($haveProfits ? $income : 0) - $expense * $rub;
         @endphp
@@ -16,8 +19,8 @@
             'brand' => $selModel->asicBrand->name,
             'model' => $selModel->name,
             'version' => $selVersion->hashrate . $selVersion->measurement,
-            'incomeU' => $haveProfits ? round($income, 2) : 0,
-            'incomeR' => $haveProfits ? round($income / $rub, 2) : 0,
+            'incomeU' => round($income, 2),
+            'incomeR' => round($income / $rub, 2),
             'expenseU' => round($expense * $rub, 2),
             'expenseR' => round($expense, 2),
             'profitU' => round($profitU, 2),

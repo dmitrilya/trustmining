@@ -68,7 +68,7 @@ class CalculatorController extends Controller
             if (!$selVersion) $selVersion = $selModel->asicVersions->first();
         } else {
             $asicVersion = null;
-            $selModel->asicVersions->first();
+            $selVersion = $selModel->asicVersions->first();
         }
 
         return view('calculator.widjet', [
