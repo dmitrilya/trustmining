@@ -21,11 +21,11 @@ class CalculatorController extends Controller
         $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
         $ads = $this->getAds()->where('asic_models.id', $selModel->id)
-            ->orderByRaw('ads.price = 0 ASC')->orderByRaw("ads.price * coins.rate ASC")->limit(9)->get();
+            ->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get();
 
         return view('calculator.index', [
             'models' => $models,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
@@ -43,7 +43,7 @@ class CalculatorController extends Controller
 
         return view('calculator.app', [
             'models' => $models,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
@@ -73,7 +73,7 @@ class CalculatorController extends Controller
 
         return view('calculator.widjet', [
             'models' => $models,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,

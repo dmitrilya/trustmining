@@ -111,8 +111,8 @@ class DatabaseController extends Controller
     {
         $versions = $asicModel->asicVersions()->with([
             'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
-            'ads.coin:id,abbreviation,rate'
+                ->orderByRaw('`price` * (SELECT `rate` FROM `coin_rates` WHERE `coin_rates`.`coin_id` = `ads`.`coin_id` ORDER BY `created_at` DESC LIMIT 1)'),
+            'ads.coin:id,abbreviation'
         ])->get()->sortByDesc('hashrate');
 
         $this->addView(request(), $asicModel);
@@ -133,7 +133,7 @@ class DatabaseController extends Controller
             'versions' => $versions,
             'algorithm' => $asicModel->algorithm()->with('coins')->first(),
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
@@ -155,7 +155,7 @@ class DatabaseController extends Controller
             'brand' => $gpuBrand,
             'model' => $gpuModel,
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
@@ -208,8 +208,8 @@ class DatabaseController extends Controller
     {
         $versions = $asicModel->asicVersions()->with([
             'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->orderByRaw('`price` * (SELECT `rate` from `coins` where `coins`.`id` = `ads`.`coin_id` LIMIT 1)'),
-            'ads.coin:id,abbreviation,rate'
+                ->orderByRaw('`price` * (SELECT `rate` FROM `coin_rates` WHERE `coin_rates`.`coin_id` = `ads`.`coin_id` ORDER BY `created_at` DESC LIMIT 1)'),
+            'ads.coin:id,abbreviation'
         ])->get()->sortByDesc('hashrate');
 
         preg_match('/(\d+(?:\.\d+)?)([a-zA-Z]+)/', $asicVersion, $matches);
@@ -233,7 +233,7 @@ class DatabaseController extends Controller
             'versions' => $versions,
             'algorithm' => $asicModel->algorithm()->with('coins')->first(),
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
@@ -302,7 +302,7 @@ class DatabaseController extends Controller
                 )
             )->pluck('id'))->get(),
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'noindex' => $noindex,
             'user' => $request->user()
         ]);

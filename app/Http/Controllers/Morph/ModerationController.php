@@ -60,7 +60,7 @@ class ModerationController extends Controller
                 return view('ad.show', [
                     'ad' => $m,
                     'moderation' => $moderation,
-                    'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+                    'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
                 ]);
                 break;
             case ('review'):

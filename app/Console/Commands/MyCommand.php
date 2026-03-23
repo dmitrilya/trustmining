@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Database\Coin;
 use App\Models\Forum\ForumSubcategory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -29,9 +30,8 @@ class MyCommand extends Command
      */
     public function handle()
     {
-        foreach (ForumSubcategory::all() as $model) {
-            $model->slug = Str::slug($model->name);
-            $model->save();
+        foreach (Coin::all() as $coin) {
+            if ($coin->rate) $coin->coinRates()->create(['rate' => $coin->rate]);
         }
 
         return Command::SUCCESS;

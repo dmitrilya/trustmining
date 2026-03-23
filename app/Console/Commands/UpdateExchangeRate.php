@@ -35,7 +35,12 @@ class UpdateExchangeRate extends Command
         $key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->pluck('abbreviation');
         $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
-        $data->each(fn($coin) => Coin::where('abbreviation', $coin->symbol)->update(['rate' => $coin->quote->USD->price]));
+        $data->each(function ($coinData) {
+            $coin = Coin::where('abbreviation', $coinData->symbol)->first();
+            if (!$coin || !$coinData->quote->USD->price) return;
+
+            $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
+        });
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -53,9 +58,9 @@ class UpdateExchangeRate extends Command
         else {
             $rates = json_decode($out)->rates;
 
-            $btcRate = Coin::where('abbreviation', 'BTC')->first('rate')->rate;
-            Coin::where('abbreviation', 'RUB')->update(['rate' => $btcRate / $rates->rub->value]);
-            Coin::where('abbreviation', 'CNY')->update(['rate' => $btcRate / $rates->cny->value]);
+            $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
+            Coin::where('abbreviation', 'RUB')->first('id')->coinRates->create(['rate' => $btcRate / $rates->rub->value]);
+            Coin::where('abbreviation', 'CNY')->first('id')->coinRates->create(['rate' => $btcRate / $rates->cny->value]);
         }
 
         $this->updateProfit();
@@ -67,8 +72,8 @@ class UpdateExchangeRate extends Command
     {
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
         $algorithms = Algorithm::select(['id'])->with([
-            'coins' => fn($q) => $q->where('profit', '>', 0)->where('rate', '>', 0)
-                ->select(['abbreviation', 'name', 'algorithm_id', 'profit', 'rate', 'merged_group', 'fee'])
+            'coins' => fn($q) => $q->where('profit', '>', 0)->whereHas('latestRate', fn($q1) => $q1->where('rate', '>', 0))
+                ->select(['abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
         ])->get()->map(function ($algorithm) {
             $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
                 fn($mergedGroup) => [
@@ -85,7 +90,7 @@ class UpdateExchangeRate extends Command
             'asicBrand:id,name,slug',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
             'asicVersions.ads:asic_version_id,price,coin_id,props,user_id',
-            'asicVersions.ads.coin:id,rate,abbreviation',
+            'asicVersions.ads.coin:id,abbreviation',
             'asicVersions.ads.user:id,name',
             'moderatedReviews:reviewable_id,reviewable_type,rating'
         ])->get()->map(function ($model) use ($measurements, $algorithms) {

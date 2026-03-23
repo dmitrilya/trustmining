@@ -99,7 +99,7 @@ class Controller extends BaseController
 
         return view('widjets.index', [
             'models' => $models,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => null,
             'rVersion' => null,
             'selModel' => $selModel,
@@ -149,7 +149,7 @@ class Controller extends BaseController
 
         return view('profitable.index', [
             'models' => $models,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'ads' => $ads->whereIn('asic_model_slug', $models->take(5)->pluck('slug'))->take(14)
         ]);
     }

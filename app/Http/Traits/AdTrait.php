@@ -26,6 +26,12 @@ trait AdTrait
             ->leftJoin('gpu_models', 'gpu_models.id', '=', 'ads.gpu_model_id')
             ->leftJoin('gpu_brands', 'gpu_brands.id', '=', 'gpu_models.gpu_brand_id')
             ->leftJoin('coins', 'coins.id', '=', 'ads.coin_id')
+            ->leftJoin(
+                'coin_rates',
+                fn($join) =>
+                $join->on('coin_rates.coin_id', '=', 'ads.coin_id')
+                    ->whereRaw('coin_rates.id = (SELECT MAX(id) FROM coin_rates WHERE coin_id = ads.coin_id)')
+            )
 
             ->select([
                 'ads.id',
@@ -62,7 +68,8 @@ trait AdTrait
                 'gpu_brands.name as gpu_brand_name',
                 'gpu_brands.slug as gpu_brand_slug',
                 'coins.abbreviation as coin',
-                'coins.rate as coin_rate',
+                'coin_rates.rate as coin_rate',
+
 
                 DB::raw("EXISTS (SELECT 1 FROM phones WHERE phones.user_id = users.id) as user_has_phone"),
                 DB::raw("(SELECT m2.moderation_status_id FROM moderations m2 WHERE m2.moderationable_id = ads.id AND m2.moderationable_type = '{$adClass}' ORDER BY m2.id DESC LIMIT 1) as last_moderation_status"),
@@ -158,7 +165,7 @@ trait AdTrait
             }
 
             if ($request->sort) {
-                $convertedPrice = 'ads.price * coins.rate';
+                $convertedPrice = 'ads.price * coin_rates.rate';
 
                 switch ($request->sort) {
                     case 'price_low_to_high':

@@ -179,7 +179,7 @@ class AdController extends Controller
         return view('ad.show', [
             'ad' => $ad,
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
@@ -211,7 +211,7 @@ class AdController extends Controller
         return view('ad.show', [
             'ad' => $ad,
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
@@ -238,7 +238,7 @@ class AdController extends Controller
         return view('ad.show', [
             'ad' => $ad,
             'ads' => [],
-            'rub' => Coin::where('abbreviation', 'RUB')->first('rate')->rate,
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
         ]);
     }
 
