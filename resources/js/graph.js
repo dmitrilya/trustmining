@@ -2,7 +2,7 @@ import { Root, Theme, Tooltip, color, LinearGradient, RoundedRectangle, DataProc
 import { XYChart, DateAxis, AxisRendererX, ValueAxis, AxisRendererY, XYCursor, LineSeries } from "@amcharts/amcharts5/xy";
 import am5locales_ru_RU from "@amcharts/amcharts5/locales/ru_RU";
 
-window.buildGraph = (data, period, div, valueYField, visibleY = false) => {
+window.buildGraph = (data, period, div, valueYField, visibleY = true) => {
     let isDark = document.body.classList.contains('dark');
     let root = Root.new(div);
 
