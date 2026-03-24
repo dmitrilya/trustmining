@@ -86,7 +86,7 @@
                     class="text-lg sm:text-xl lg:text-2xl text-slate-900 dark:text-slate-100 font-bold mb-2 sm:mb-3 lg:mb-4">
                     {{ __('Current rate') }}</h3>
                 <div class="text-xs sm:text-sm lg:text-lg text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 lg:mb-6">
-                    {{ number_format($rate) }}</div>
+                    {{ number_format($rate) }} USDT</div>
             </div>
 
             <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>

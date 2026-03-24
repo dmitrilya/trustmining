@@ -97,7 +97,11 @@ body {
 
 .dots {
     flex-grow: 1;
-    background-image: radial-gradient(circle, currentColor 1px, transparent 1.5px);
+    background-image: radial-gradient(
+        circle,
+        currentColor 1px,
+        transparent 1.5px
+    );
     background-size: 10px 1px;
     background-repeat: repeat-x;
     background-position: left bottom;
@@ -209,6 +213,18 @@ pre[contenteditable]:empty::before {
 
 .graph-container {
     height: calc-size(max-content, size - 36px);
+}
+
+@media (min-width: 640px) {
+    .graph-container {
+        height: calc-size(max-content, size - 40px);
+    }
+}
+
+@media (min-width: 768px) {
+    .graph-container {
+        height: calc-size(max-content, size - 44px);
+    }
 }
 
 input::file-selector-button {

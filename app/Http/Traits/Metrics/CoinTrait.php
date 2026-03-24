@@ -13,7 +13,7 @@ trait CoinTrait
 {
     public function getCoinRate(Request $request, Coin $coin)
     {
-        return response()->json(['rates' => $coin->coinRates()->select(['rate', DB::raw('Date(created_at) as date')])->get()
-            ->groupBy('date')->map(fn($day, $date) => ['date' => Carbon::create($date)->timestamp * 1000, 'value' => $day->avg('rate')])->values()], 200);
+        return response()->json(['rates' => $coin->coinRates()->whereTime('created_at', '00:00:00')->orderBy('created_at')->select(['rate', 'created_at'])->get()
+            ->map(fn($rate) => ['date' => $rate->created_at->timestamp * 1000, 'value' => $rate->rate])], 200);
     }
 }

@@ -22,15 +22,6 @@ class CoinRate extends Model
         'created_at',
     ];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'created_at' => 'timestamp',
-    ];
-
     public function coin()
     {
         return $this->belongsTo(\App\Models\Database\Coin::class);
