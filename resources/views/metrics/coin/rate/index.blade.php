@@ -157,5 +157,5 @@
         </div>
     </section>
 
-    @include('metrics.network.hashrate.components.faq')
+    @include('metrics.coin.rate.components.faq')
 </x-metrics-layout>
