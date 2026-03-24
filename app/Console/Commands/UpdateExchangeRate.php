@@ -73,7 +73,7 @@ class UpdateExchangeRate extends Command
         $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
         $algorithms = Algorithm::select(['id'])->with([
             'coins' => fn($q) => $q->where('profit', '>', 0)->whereHas('latestRate', fn($q1) => $q1->where('rate', '>', 0))
-                ->select(['abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
+                ->select(['id', 'abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
         ])->get()->map(function ($algorithm) {
             $algorithm['maxProfit'] = $algorithm->coins->groupBy('merged_group')->map(
                 fn($mergedGroup) => [

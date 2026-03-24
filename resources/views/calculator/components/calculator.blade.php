@@ -47,6 +47,7 @@
                                         <x-characteristic name="The best price"
                                             x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
                                     @endif
+                                    <x-characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
                                 </x-characteristics>
                                 @if (!$widjet)
                                     <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
@@ -72,7 +73,7 @@
             @endif
         </div>
 
-        <div class="md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
+        <div class="mt-4 md:mt-0 md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
             @if (in_array('currency', $blocks))
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                     <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
@@ -201,6 +202,7 @@
                                                 <x-characteristic name="The best price"
                                                     x-value="version.price ? version.price + ' USDT' : '{{ __('No data') }}'" />
                                             @endif
+                                            <x-characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
                                         </x-characteristics>
                                         @if (!$widjet)
                                             <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"

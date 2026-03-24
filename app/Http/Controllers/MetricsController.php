@@ -40,6 +40,22 @@ class MetricsController extends Controller
         ]);
     }
 
+    public function coinRate(Request $request, Coin $coin)
+    {
+        $latestRate = $coin->rate;
+
+        $ads = $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
+            ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
+            ->orderByDesc('ads.ordering_id')->limit(14)->get();
+
+        return view('metrics.coin.rate.index', [
+            'coin' => $coin,
+            'rate' => $latestRate,
+            'ads' => $ads
+        ]);
+    }
+
     public function difficulty(Request $request, Coin $coin)
     {
         $difficulties = $coin->networkDifficulties()->where('created_at', '>', Carbon::now()->subDays(31))
