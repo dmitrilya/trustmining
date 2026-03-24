@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use App\Http\Traits\AdTrait;
 use Illuminate\Http\Request;
 
 use App\Http\Traits\Metrics\NetworkTrait;
+use App\Http\Traits\Metrics\CoinTrait;
+use App\Http\Traits\AdTrait;
 
 use App\Models\Database\Coin;
 use App\Models\Morph\View;
@@ -15,11 +16,11 @@ use Carbon\Carbon;
 
 class MetricsController extends Controller
 {
-    use NetworkTrait, AdTrait;
+    use NetworkTrait, CoinTrait, AdTrait;
 
     public function index(Request $request)
     {
-        return redirect()->route('metrics.network.difficulty', ['coin' => 'bitcoin']);
+        return redirect()->route('metrics.coin.rate', ['coin' => 'bitcoin']);
     }
 
     public function hashrate(Request $request, Coin $coin)

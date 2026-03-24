@@ -80,12 +80,14 @@ Route::group(['prefix' => 'calculator'], function () {
 
 Route::group(['prefix' => 'metrics'], function () {
     Route::get('/', [MetricsController::class, 'index'])->name('metrics');
-    Route::group(['prefix' => 'network'], function () {
-        Route::group(['prefix' => '{coin:name}'], function () {
-            Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
-            Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
-            Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
-        });
+    Route::group(['prefix' => 'network/{coin:name}'], function () {
+        Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
+        Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
+        Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
+    });
+    Route::group(['prefix' => 'coin/{coin:name}'], function () {
+        Route::get('/rate', [MetricsController::class, 'coinRate'])->name('metrics.coin.rate');
+        Route::get('/get-rate', [MetricsController::class, 'getCoinRate'])->name('metrics.coin.get_rate');
     });
 });
 

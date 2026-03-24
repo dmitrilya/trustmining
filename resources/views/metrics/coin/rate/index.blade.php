@@ -1,10 +1,10 @@
-<x-metrics-layout title="Хэшрейт сети {{ $coin->name }}" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
-    description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+<x-metrics-layout title="Курс {{ $coin->name }} ({{ $coin->abbreviation }}) к USDT: онлайн график и история за все время" :header="__('Coin rate') . ' ' . $coin->name" active="coin_rate"
+    description="Актуальный курс {{ $coin->name }} на сегодня. Интерактивный график {{ $coin->abbreviation }}/USDT, история изменений цены по дням и годам, динамика курса в реальном времени.">
     @vite(['resources/js/graph.js'])
 
-    <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_hashrate', ['coin' => strtolower($coin->name)]) }}').then(r => {
-        window.buildGraph(r.data.hashrates, period, 'graph', 'value');
-        items = r.data.hashrates.reverse().splice(0, 91);
+    <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.coin.get_rate', ['coin' => strtolower($coin->name)]) }}').then(r => {
+        window.buildGraph(r.data.rates, period, 'graph', 'value');
+        items = r.data.rates.reverse().splice(0, 91);
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 graph-container">
@@ -68,13 +68,13 @@
                         </div>
                     </div>
 
-                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkHashrates')
+                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('coinRates')
                         ->get()
                         ->map(
                             fn($coin) => [
                                 'key' => $coin->id,
                                 'value' => $coin->abbreviation,
-                                'href' => route('metrics.network.hashrate', ['coin' => strtolower($coin->name)]),
+                                'href' => route('metrics.coin.rate', ['coin' => strtolower($coin->name)]),
                             ],
                         )
                         ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
@@ -84,9 +84,9 @@
             <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
                 <h3
                     class="text-lg sm:text-xl lg:text-2xl text-slate-900 dark:text-slate-100 font-bold mb-2 sm:mb-3 lg:mb-4">
-                    {{ __('Current hashrate') }}</h3>
+                    {{ __('Current rate') }}</h3>
                 <div class="text-xs sm:text-sm lg:text-lg text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 lg:mb-6">
-                    {{ number_format($hashrate) }}</div>
+                    {{ number_format($rate) }}</div>
             </div>
 
             <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
@@ -98,7 +98,7 @@
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
                 <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
-                    {{ __('Network hashrate') }}</div>
+                    {{ __('Rate') }}</div>
                 <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Change') }}</div>
             </div>
