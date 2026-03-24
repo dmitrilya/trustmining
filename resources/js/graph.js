@@ -1,4 +1,4 @@
-import { Root, Theme, Tooltip, color, LinearGradient, RoundedRectangle, DataProcessor } from "@amcharts/amcharts5";
+import { Root, Theme, Tooltip, color, LinearGradient, RoundedRectangle, DataProcessor, NumberFormatter } from "@amcharts/amcharts5";
 import { XYChart, DateAxis, AxisRendererX, ValueAxis, AxisRendererY, XYCursor, LineSeries } from "@amcharts/amcharts5/xy";
 import am5locales_ru_RU from "@amcharts/amcharts5/locales/ru_RU";
 
@@ -70,8 +70,15 @@ window.buildGraph = (data, period, div, valueYField, visibleY = true) => {
 
     let yAxis = chart.yAxes.push(ValueAxis.new(root, {
         visible: visibleY,
-        renderer: AxisRendererY.new(root, {})
+        renderer: AxisRendererY.new(root, {}),
     }));
+
+    yAxis.get("renderer").labels.template.adapters.add("text", function (text, target) {
+        if (target.dataItem && target.dataItem.get("value") !== undefined) {
+            return root.numberFormatter.format(target.dataItem.get("value"), "#.0a");
+        }
+        return text;
+    });
 
     let cursor = chart.set("cursor", XYCursor.new(root, {
         behavior: "none",
