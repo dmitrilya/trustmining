@@ -111,7 +111,8 @@ class DatabaseController extends Controller
     {
         $versions = $asicModel->asicVersions()->with([
             'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->orderByRaw('`price` * (SELECT `rate` FROM `coin_rates` WHERE `coin_rates`.`coin_id` = `ads`.`coin_id` ORDER BY `created_at` DESC LIMIT 1)'),
+                ->selectSub(fn($q1) => $q1->select('rate')->from('coin_rates')->whereColumn('coin_rates.coin_id', 'ads.coin_id')->latest()->limit(1), 'coin_rate')
+                ->orderByRaw('price * coin_rate'),
             'ads.coin:id,abbreviation'
         ])->get()->sortByDesc('hashrate');
 
@@ -208,7 +209,8 @@ class DatabaseController extends Controller
     {
         $versions = $asicModel->asicVersions()->with([
             'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->orderByRaw('`price` * (SELECT `rate` FROM `coin_rates` WHERE `coin_rates`.`coin_id` = `ads`.`coin_id` ORDER BY `created_at` DESC LIMIT 1)'),
+                ->selectSub(fn($q1) => $q1->select('rate')->from('coin_rates')->whereColumn('coin_rates.coin_id', 'ads.coin_id')->latest()->limit(1), 'coin_rate')
+                ->orderByRaw('price * coin_rate'),
             'ads.coin:id,abbreviation'
         ])->get()->sortByDesc('hashrate');
 

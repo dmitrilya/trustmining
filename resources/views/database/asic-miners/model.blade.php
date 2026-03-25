@@ -38,7 +38,7 @@
                         $hasTariff = ($user = Auth::user()) && $user->tariff;
                         $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                         $modelAds = $versions->pluck('ads')->flatten();
-                        $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();
+                        $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->first();
                         $reviewsCount = $model->moderatedReviews->count();
                     @endphp
 
@@ -107,7 +107,7 @@
                                             'expense' =>
                                                 (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
                                             'tariff' => 5,
-                                            'price' => $minPrice->price * $minPrice->coin->rate,
+                                            'price' => $minPrice->price * $minPrice->coin_rate,
                                         ])
                                     @endif
 
@@ -118,7 +118,7 @@
                                                 content="{{ $version->ads->where('price', '!=', 0)->reverse()->first()->price }}" />
                                             <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
                                             <meta itemprop="priceCurrency"
-                                                content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
+                                                content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $minPrice->coin->abbreviation }}" />
                                             <meta itemprop="url"
                                                 content="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug, 'asic_version_id' => $version->id]) }}" />
                                         </div>
@@ -282,8 +282,7 @@
         <section class="mt-4 sm:mt-6 lg:mt-8">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                 <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
-                    {{ __('Offers') }}
-                    {{ request()->routeIs('database.asic-miners.model') ? $model->name : $model->name . ' ' . $selectedVersion->hashrate . $selectedVersion->measurement }}
+                    {{ __('Offers') }} {{ $brand->name }} {{ $model->name }}
                 </h2>
             </div>
 
