@@ -60,7 +60,7 @@
 
                 <div>
                     <x-input-label for="images" :value="__('Photo')" />
-                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" max="8" />
+                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8" />
                     <p class="mt-1 text-sm text-slate-500" id="images_help">(max. 2MB, 8 items)</p>
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
