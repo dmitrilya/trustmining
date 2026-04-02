@@ -32,7 +32,7 @@
             </nav>
 
             <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
-                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.index') }}">
+                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
                     <x-secondary-button
                         class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
                 </a>

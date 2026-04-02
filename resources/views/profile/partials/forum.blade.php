@@ -12,7 +12,7 @@
         $bestAnswerPoints = config('forum.best');
     @endphp
 
-    <a href="{{ route('forum.question.index') }}">
+    <a href="{{ route('forum.question.mine') }}">
         <x-secondary-button
             class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
     </a>

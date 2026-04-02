@@ -110,7 +110,7 @@ class SendTGNotifications implements ShouldQueue
                         break;
                     case 'Similar questions':
                         $text = __('Before publishing, please review questions similar to yours');
-                        $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.index')]]];
+                        $keyboard = [[['text' => __('Details'), 'url' => route('forum.question.mine')]]];
                         break;
                     case 'New moderation':
                         $text = __('New moderation');

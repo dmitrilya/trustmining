@@ -15,6 +15,15 @@ class ForumQuestionController extends ForumController
 {
     use ViewTrait;
 
+    public function index(): View
+    {
+        $questions = ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
+            ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
+            ->withCount('moderatedForumAnswers')->withCount('views')->latest()->paginate(30);
+
+        return view('forum.question.index', ['questions' => $questions]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +36,7 @@ class ForumQuestionController extends ForumController
             ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
             ->withCount('moderatedForumAnswers')->withCount('views')->latest()->get()->append('similar_questions_list');
 
-        return view('forum.question.index', ['questions' => $questions]);
+        return view('forum.question.mine', ['questions' => $questions]);
     }
 
     /**

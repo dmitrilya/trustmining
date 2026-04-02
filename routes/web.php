@@ -228,7 +228,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'forum/questions'], function () {
-        Route::get('/', [ForumQuestionController::class, 'myQuestions'])->name('forum.question.index');
+        Route::get('/my-questions', [ForumQuestionController::class, 'myQuestions'])->name('forum.question.mine');
         Route::get('/publish/{forumQuestion}', [ForumQuestionController::class, 'publish'])->middleware('owner')->name('forum.question.publish');
     });
 
@@ -330,6 +330,7 @@ Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::clas
 
 Route::group(['prefix' => 'forum'], function () {
     Route::get('/', [ForumController::class, 'index'])->name('forum');
+    Route::get('/questions', [ForumQuestionController::class, 'index'])->name('forum.question.index');
     Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
     Route::middleware('auth')->group(function () {
         Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');

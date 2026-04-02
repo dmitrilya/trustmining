@@ -54,7 +54,7 @@
                 @break
 
                 @case('Similar questions')
-                    <x-notification :href="route('forum.question.index')" :type="$ntName" :date="$notification->created_at" pretext=""
+                    <x-notification :href="route('forum.question.mine')" :type="$ntName" :date="$notification->created_at" pretext=""
                         :text="__('Before publishing, please review questions similar to yours')"></x-notification>
                 @break
 
