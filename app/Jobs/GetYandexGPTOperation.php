@@ -78,6 +78,7 @@ class GetYandexGPTOperation implements ShouldQueue
                 $this->model->save();
                 break;
             case 'forum-question':
+                if (!isset($res->alternatives)) info(json_encode($res));
                 $res = $res->alternatives[0]->status == 'ALTERNATIVE_STATUS_FINAL' ?
                     $this->service->parseJsonSafe($res->alternatives[0]->message->text, $this->fallbacks[0]) :
                     $this->fallbacks[1];

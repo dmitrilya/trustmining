@@ -3,7 +3,7 @@
     <div
         class="{{ isset($sm) ? 'win-w-10 size-10 sm:min-w-12 sm:size-12' : 'min-w-12 size-12 sm:min-w-14 sm:size-14 lg:min-w-16 lg:size-16 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
         <img itemprop="image"
-            src="{{ Storage::disk('public')->exists('forum/avatar_' . $id . '.webp') ? Storage::url('public/forum/avatar_' . $id . '.webp') : Storage::url('public/forum/avatar_0.webp') }}"
+            src="{{ Storage::disk('public')->exists('forum/avatar_' . $id . '_80.webp') ? Storage::url('public/forum/avatar_' . $id . '_80.webp') : Storage::url('public/forum/avatar_0.webp') }}"
             alt="{{ $name }}" class="w-full rounded-full">
     </div>
 
