@@ -98,7 +98,7 @@
             @endif
 
             @if ($offices->count() == 1)
-                <p>{{ __('descriptions.can_trust.offices.one') }}</p>
+                <p>{{ __('descriptions.can_trust.offices.one', ['city' => $offices->first()->city]) }}</p>
             @endif
             {{-- RED --}}
         @else
@@ -142,7 +142,7 @@
             @endif
 
             @if ($offices->count() == 1)
-                <p>{{ __('descriptions.can_trust.offices.one') }}</p>
+                <p>{{ __('descriptions.can_trust.offices.one', ['city' => $offices->first()->city]) }}</p>
             @endif
         @endif
         <br>
