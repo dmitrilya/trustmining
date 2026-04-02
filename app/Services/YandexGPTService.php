@@ -70,7 +70,7 @@ class YandexGPTService
             ]
         ];
 
-        GetYandexGPTOperation::dispatch($response->id, 'moderation', $fallbacks, $model)->delay(now()->addMinutes(1));
+        GetYandexGPTOperation::dispatch($response->id, 'moderation', $fallbacks, $model)->delay(now()->addMinutes(2));
 
         return $response;
     }
@@ -178,7 +178,7 @@ class YandexGPTService
             ]
         ];
 
-        GetYandexGPTOperation::dispatch($response->id, 'forum-question', $fallbacks, $question)->delay(now()->addMinutes(1));
+        GetYandexGPTOperation::dispatch($response->id, 'forum-question', $fallbacks, $question)->delay(now()->addMinutes(2));
 
         return $response;
     }
@@ -189,7 +189,7 @@ class YandexGPTService
      * Получение результата async-операции YandexGPT
      * ---------------------------------------------------------
      */
-    public function getOperation(string $id)
+    public function getOperation(string $id, string $folder, array|null $fallbacks, $model)
     {
         $operation = $this->request('GET', "{$this->baseOperation}/$id");
 
@@ -197,7 +197,7 @@ class YandexGPTService
 
         // операция ещё не завершена — отправляем повторную попытку
         if (!$operation->done) {
-            return GetYandexGPTOperation::dispatch($id)
+            return GetYandexGPTOperation::dispatch($id, $folder, $fallbacks, $model)
                 ->delay(now()->addMinutes(1));
         }
 

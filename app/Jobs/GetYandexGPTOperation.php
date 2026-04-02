@@ -47,7 +47,7 @@ class GetYandexGPTOperation implements ShouldQueue
      */
     public function handle()
     {
-        $res = $this->service->getOperation($this->operationId);
+        $res = $this->service->getOperation($this->operationId, $this->folder, $this->fallbacks, $this->model);
 
         if (!$res) return;
 
