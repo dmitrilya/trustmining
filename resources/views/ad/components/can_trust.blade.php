@@ -9,7 +9,7 @@
             $offices = $ad->user->offices;
         @endphp
 
-        @if ($user->tf > config('trustfactor.green'))
+        @if ($ad->user->tf > config('trustfactor.green'))
             <p>{{ __('descriptions.can_trust.trust.green', ['seller' => $ad->user->name]) }}</p>
             <br>
             @if ($ad->user->company)
@@ -50,7 +50,7 @@
                 <p>{{ __('descriptions.can_trust.company.offices.one') }}</p>
             @endif
             {{-- YELLOW --}}
-        @elseif ($user->tf > config('trustfactor.yellow'))
+        @elseif ($ad->user->tf > config('trustfactor.yellow'))
             <p>{{ __('descriptions.can_trust.trust.yellow', ['seller' => $ad->user->name]) }}</p>
             <br>
             @if (!$ad->user->company)
