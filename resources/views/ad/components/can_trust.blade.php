@@ -47,7 +47,7 @@
             @endif
 
             @if ($offices->count() == 1)
-                <p>{{ __('descriptions.can_trust.company.offices.one') }}</p>
+                <p>{{ __('descriptions.can_trust.offices.one') }}</p>
             @endif
             {{-- YELLOW --}}
         @elseif ($ad->user->tf > config('trustfactor.yellow'))
