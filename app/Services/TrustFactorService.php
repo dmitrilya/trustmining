@@ -73,7 +73,7 @@ class TrustFactorService
         // возраст компании
         $years = Carbon::now()->diffInYears(Carbon::createFromTimestampMs($card['state']['registration_date']));
 
-        if ($years > 3)      $score += 5;
+        if ($years > 4)      $score += 5;
         elseif ($years > 2)  $score += 2;
         elseif ($years < 1)  $score -= 3;
 
@@ -101,7 +101,6 @@ class TrustFactorService
         elseif ($emp > 1)   $score += 1;
         else                $score -= 5;
 
-        // некорректные документы
         if (isset($card['invalid'])) {
             $score -= 15;
         }

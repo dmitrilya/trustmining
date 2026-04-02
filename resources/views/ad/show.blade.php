@@ -301,6 +301,8 @@
 
             <div class="mt-8">
                 @include('ad.components.description', ['description' => $ad->description])
+
+                @include('ad.components.can_trust')
             </div>
         </div>
 

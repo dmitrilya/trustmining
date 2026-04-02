@@ -93,5 +93,39 @@ return [
             'not' => 'Unfortunately, there are currently no offers to purchase :brand :model :version on the TrustMining platform, so we cannot estimate the payback period. Please check the ads for :model with different hashrate specifications at the link below.',
         ],
         'params' => 'For the most accurate calculation, the TrustMining profitability calculator took into account parameters such as: electricity price (:tariff R per kilowatt), model energy efficiency (:efficiency), power consumption of the :model :version (:power watts), and current profitability for all coins mineable on the :algorithm algorithm: :coins. The TrustMining calculator also considers additional parameters: mining pool fee (:comission%) and hardware uptime (:uptime%).'
+    ],
+    'can_trust' => [
+        'trust' => [
+            'green' => 'The Trust system has determined that the seller :seller can be fully trusted, based on the positive factors listed below.',
+            'yellow' => 'TrustMining security algorithms indicate that the seller :seller can be trusted, but you should pay attention to some risks listed below.',
+            'red' => 'We have analysed numerous facts about :seller and can say that you should start working with this seller only after clarifying some details regarding the risks listed below.'
+        ],
+        'company' => [
+            'llc' => 'The seller is a legal entity. The company :name is registered :registration.',
+            'ip' => 'The seller operates on behalf of :name, registered :registration.',
+            'person' => 'The seller does not have a verified legal entity or registered individual entrepreneur. This is worth paying close attention to when deciding whether to cooperate.',
+            'registration' => [
+                '>4' => 'The company’s registration date indicates extensive experience and allows this parameter to be completely removed from the risk list.',
+                '2-4' => 'The company has been on the market for more than two years. This does not completely eliminate cooperation risks, but it does increase the level of trust in this seller.',
+                '<1' => 'The seller has been operating for less than a year. This does not mean that they cannot be trusted, but it also does not provide an opportunity to raise their trust score.'
+            ],
+            'employers' => [
+                'have' => 'There are :count employee officially employed at :seller company.|There are :count employees officially employed at :seller company.|There are :count employees officially employed at :seller company.',
+                '>10' => 'Having this number of employees significantly increases confidence in the seller’s добросовестной (in good faith) operations.',
+                '4-10' => 'Fraud schemes usually do not involve officially hiring employees, so we can increase the trust score for this seller.',
+                '1-4' => 'Officially employing a few employees does not increase trust in the seller. One might think this is an attempt to give the appearance of legitimacy to fraudulent activities, but there may be other reasons.',
+                'not' => 'There are no officially employed employees at :seller company, which, according to the TrustFactor formula, lowers the level of trust in the seller.',
+                'registration' => 'Do not forget that the seller has been on the market for less than two years. This is a stage of organisational development where there may not yet have been an opportunity to officially hire employees.'
+            ]
+        ],
+        'offices' => [
+            'many' => 'The seller operates in :count cities.',
+            'one' => 'The seller has a single office in the city of :city. This is not an indicator.'
+        ],
+        'unique_content' => [
+            'unique' => 'The company’s listings use original content. That is, the seller does not simply take all images from the internet, but conducts their own photo shoots or at least creates unique preview designs.',
+            'not' => 'Most images in the seller’s listings are taken from the internet, which is clearly not a sign of a large, trustworthy company.'
+        ],
+        'conclusion' => 'The formula for assessing trust in a seller takes into account more than 40 criteria: from public reputation and reviews to information about the company’s official revenues. We do not provide a full list of formula parameters to avoid giving unscrupulous companies instructions on how to artificially boost their Trust Factor score.'
     ]
 ];

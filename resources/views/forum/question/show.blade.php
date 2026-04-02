@@ -1,5 +1,5 @@
-<x-app-layout title="Форум по майнингу и криптовалюте TrustMining: {{ $question->theme }}"
-    description="Найдите ответ на вопрос среди постов или задайте свой: {{ $question->text }}">
+<x-app-layout title="{{ $question->theme }} | TRUSTMINING Forum"
+    description="{{ str($question->text)->stripTags()->limit(150) }}">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">
             <nav aria-label="Breadcrumb">
@@ -71,7 +71,11 @@
     <div
         class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-3 sm:gap-5 xl:gap-7 items-start">
         <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6"
-            x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {let answer = document.querySelector('#answer-{{ $notificationAnswerId }}'); answer.scrollIntoView({ behavior: 'smooth' }); answer.classList.add('animate-scrolling-highlight')}">
+            x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {
+                let answer = document.querySelector('#answer-{{ $notificationAnswerId }}');
+                answer.scrollIntoView({ behavior: 'smooth' });
+                answer.classList.add('animate-scrolling-highlight')
+            }">
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
@@ -104,14 +108,16 @@
                 @endif
 
                 @if (count($question->files))
-                    <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
+                    <div
+                        class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                         @foreach ($question->files as $file)
                             <x-document :path="$file['path']" :name="$file['name']"></x-document>
                         @endforeach
                     </div>
                 @endif
 
-                <div itemprop="text" class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400">
+                <div itemprop="text"
+                    class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400">
                     {!! $question->text !!}
                 </div>
 

@@ -17,7 +17,7 @@
         }
     @endphp
     <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200">
-        {{ __('Description') }}</h2>
+        {{ __('Ad description') }}</h2>
 
     <div itemprop="description"
         class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
