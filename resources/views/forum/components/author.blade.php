@@ -7,10 +7,11 @@
                 alt="{{ $name }}" class="w-full rounded-full">
         @else
             @php
+                $firstChar = mb_substr($input, 0, 1, "UTF-8");
                 $c1 = [0x40, 0xff, 0x9f]; // #40ff9f
                 $c2 = [0x40, 0x40, 0x99]; // #404099
 
-                $t = sprintf('%u', crc32($name[0])) / 4294967295;
+                $t = sprintf('%u', crc32($firstChar)) / 4294967295;
                 $r = (int) ($c1[0] + ($c2[0] - $c1[0]) * $t);
                 $g = (int) ($c1[1] + ($c2[1] - $c1[1]) * $t);
                 $b = (int) ($c1[2] + ($c2[2] - $c1[2]) * $t);
@@ -24,7 +25,7 @@
                 $contrastColor = sprintf('#%02x%02x%02x', $cr, $cg, $cb);
             @endphp
             <div class="w-full h-full flex items-center justify-center rounded-full text-3xl font-bold"
-                style="background-color: {{ $mainColor }}; color: {{ $contrastColor }}">{{ mb_strtoupper($name[0]) }}</div>
+                style="background-color: {{ $mainColor }}; color: {{ $contrastColor }}">{{ mb_strtoupper($firstChar, "UTF-8") }}</div>
             <meta itemprop="image" content="{{ Storage::url('public/forum/avatar_0.webp') }}" />
         @endif
     </div>
