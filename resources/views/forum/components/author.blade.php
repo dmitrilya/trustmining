@@ -7,7 +7,7 @@
                 alt="{{ $name }}" class="w-full rounded-full">
         @else
             @php
-                $firstChar = mb_substr($input, 0, 1, "UTF-8");
+                $firstChar = mb_substr($name, 0, 1, "UTF-8");
                 $c1 = [0x40, 0xff, 0x9f]; // #40ff9f
                 $c2 = [0x40, 0x40, 0x99]; // #404099
 
