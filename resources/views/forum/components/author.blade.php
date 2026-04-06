@@ -2,9 +2,31 @@
     class="mb-2 sm:mb-4{{ isset($sm) ? '' : ' lg:mb-6' }} flex items-center">
     <div
         class="{{ isset($sm) ? 'win-w-10 size-10 sm:min-w-12 sm:size-12' : 'min-w-12 size-12 sm:min-w-14 sm:size-14 lg:min-w-16 lg:size-16 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
-        <img itemprop="image"
-            src="{{ Storage::disk('public')->exists('forum/avatar_' . $id . '_80.webp') ? Storage::url('public/forum/avatar_' . $id . '_80.webp') : Storage::url('public/forum/avatar_0.webp') }}"
-            alt="{{ $name }}" class="w-full rounded-full">
+        @if (Storage::disk('public')->exists('forum/avatar_' . $id . '_80.webp'))
+            <img itemprop="image" src="{{ Storage::url('public/forum/avatar_' . $id . '_80.webp') }}"
+                alt="{{ $name }}" class="w-full rounded-full">
+        @else
+            @php
+                $c1 = [0x40, 0xff, 0x9f]; // #40ff9f
+                $c2 = [0x40, 0x40, 0x99]; // #404099
+
+                $t = sprintf('%u', crc32($name[0])) / 4294967295;
+                $r = (int) ($c1[0] + ($c2[0] - $c1[0]) * $t);
+                $g = (int) ($c1[1] + ($c2[1] - $c1[1]) * $t);
+                $b = (int) ($c1[2] + ($c2[2] - $c1[2]) * $t);
+
+                $mainColor = sprintf('#%02x%02x%02x', $r, $g, $b);
+
+                $cr = 255 - $r;
+                $cg = 255 - $g;
+                $cb = 255 - $b;
+
+                $contrastColor = sprintf('#%02x%02x%02x', $cr, $cg, $cb);
+            @endphp
+            <div class="w-full h-full flex items-center justify-center rounded-full text-3xl font-bold"
+                style="background-color: {{ $mainColor }}; color: {{ $contrastColor }}">{{ mb_strtoupper($name[0]) }}</div>
+            <meta itemprop="image" content="{{ Storage::url('public/forum/avatar_0.webp') }}" />
+        @endif
     </div>
 
     @php
@@ -52,8 +74,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                                 d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
                         </svg>
-                        <div
-                            class="ml-2 sm:ml-3 text-xs xs:text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                        <div class="ml-2 sm:ml-3 text-xs xs:text-sm sm:text-base text-slate-700 dark:text-slate-300">
                             {{ __($rank) }} ({{ $forumScore }})
                         </div>
                     </div>
@@ -70,14 +91,22 @@
 
                     <div class="space-y-0.5 sm:space-y-1">
                         @foreach ($ranks as $rankScore => $rank)
-                            <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">{{ __($rank) }} <span class="text-slate-500">- {{ $rankScore }} {{ __('points') }}</span></p>
+                            <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                                {{ __($rank) }} <span class="text-slate-500">- {{ $rankScore }}
+                                    {{ __('points') }}</span></p>
                         @endforeach
                     </div>
 
                     <div class="space-y-0.5 sm:space-y-1">
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">{{ __('Answer to the question') }} <span class="text-slate-500">- {{ $answerPoints }} {{ __('point') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">{{ __('Helpful answer') }} <span class="text-slate-500">- {{ $helpfulAnswerPoints }} {{ __('points') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">{{ __('Best answer') }} <span class="text-slate-500">- {{ $bestAnswerPoints }} {{ __('points') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                            {{ __('Answer to the question') }} <span class="text-slate-500">- {{ $answerPoints }}
+                                {{ __('point') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                            {{ __('Helpful answer') }} <span class="text-slate-500">- {{ $helpfulAnswerPoints }}
+                                {{ __('points') }}</span></p>
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                            {{ __('Best answer') }} <span class="text-slate-500">- {{ $bestAnswerPoints }}
+                                {{ __('points') }}</span></p>
                     </div>
                 </div>
             </div>
