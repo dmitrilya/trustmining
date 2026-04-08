@@ -1,4 +1,4 @@
-<x-metrics-layout title="Хэшрейт сети {{ $coin->name }} ({{ $coin->abbreviation }})" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
+<x-metrics-layout title="Хэшрейт сети {{ $coin->name }} ({{ $coin->abbreviation }}): история и график | TRUSTMINING" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
     description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 

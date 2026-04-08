@@ -43,7 +43,7 @@
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false"
                     href="{{ route('company.hosting', ['user' => $hosting->user->slug]) }}">
-                    <x-primary-button class="w-full justify-center">{{ __('Details') }}</x-primary-button>
+                    <x-secondary-button class="w-full justify-center">{{ __('Details') }}</x-secondary-button>
                 </a>
             </div>
         </div>

@@ -126,6 +126,11 @@ return [
             'unique' => 'The company’s listings use original content. That is, the seller does not simply take all images from the internet, but conducts their own photo shoots or at least creates unique preview designs.',
             'not' => 'Most images in the seller’s listings are taken from the internet, which is clearly not a sign of a large, trustworthy company.'
         ],
-        'conclusion' => 'The formula for assessing trust in a seller takes into account more than 40 criteria: from public reputation and reviews to information about the company’s official revenues. We do not provide a full list of formula parameters to avoid giving unscrupulous companies instructions on how to artificially boost their Trust Factor score.'
+        'conclusion' => [
+            'The formula for assessing trust in a seller takes into account more than 40 criteria: from public reputation and reviews to information about the company’s official revenues. We do not provide a full list of formula parameters to avoid giving unscrupulous companies instructions on how to artificially boost their Trust Factor score.',
+            'The seller`s trust rating is based on 40+ indicators, including reviews, online reputation, and official financial reporting. We keep the specific Trust Factor algorithm confidential to prevent manipulation by bad actors and to ensure a fair and impartial assessment.',
+            'The Trust Factor is calculated automatically using 40 criteria, ranging from review analysis to company revenue data. The full list of parameters is not disclosed to protect the system from artificial inflation and to provide users with reliable information on seller credibility.',
+            'We evaluate seller reliability based on more than 40 parameters—everything from their reputation and reviews to official financial transparency. To make sure no one can "hack" the system or artificially boost their Trust Factor, we do not go public with the full list of criteria. This keeps your shopping experience safe and honest.'
+        ]
     ]
 ];

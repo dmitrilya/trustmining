@@ -1,4 +1,4 @@
-<x-insight-layout :title="$video->title" :description="$video->title" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="$video->title . ' | TM Insight'" :description="$video->title . ' - видео ' . $channel->name" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);

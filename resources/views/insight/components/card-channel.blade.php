@@ -23,6 +23,6 @@
             </div>
         </div>
 
-        <meta itemprop="url" content="{{ route('insight.channel.show', ['channel' => $slug]) }}" />
+        <link itemprop="url" href="{{ route('insight.channel.show', ['channel' => $slug]) }}" />
     </div>
 </a>

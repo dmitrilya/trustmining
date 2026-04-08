@@ -119,8 +119,8 @@
                                             <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
                                             <meta itemprop="priceCurrency"
                                                 content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $minPrice->coin->abbreviation }}" />
-                                            <meta itemprop="url"
-                                                content="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug, 'asic_version_id' => $version->id]) }}" />
+                                            <link itemprop="url"
+                                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug, 'asic_version_id' => $version->id]) }}" />
                                         </div>
 
                                         <div itemprop="potentialAction" itemscope

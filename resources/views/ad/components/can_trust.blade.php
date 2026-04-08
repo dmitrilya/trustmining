@@ -146,6 +146,6 @@
             @endif
         @endif
         <br>
-        <p>{{ __('descriptions.can_trust.conclusion') }}</p>
+        <p>{{ __('descriptions.can_trust.conclusion')[$ad->id % 4] }}</p>
     </div>
 </div>

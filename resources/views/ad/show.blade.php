@@ -3,11 +3,11 @@
     $title =
         $ad->adCategory->name != 'gpus'
             ? ($ad->adCategory->name == 'miners'
-                ? "{$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
+                ? "Купить {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
                 : "{$ad->adCategory->header} купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
-            : "{$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
+            : "Купить {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
                 __('kW/h') .
-                " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
+                " в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
     $description =
         $ad->adCategory->name != 'gpus'
             ? ($ad->adCategory->name == 'miners'
@@ -172,7 +172,16 @@
                             </div>
 
                             <div>
-                                @include('components.about-seller', ['user' => $ad->user, 'auth' => $user])
+                                @include('ad.components.about-seller', [
+                                    'user' => $ad->user,
+                                    'address' => [
+                                        'city' => $ad->office->city,
+                                        'street' => trim(
+                                            implode(',', array_slice(explode(',', $ad->office->address), 2))),
+                                    ],
+                                    'phone' => $ad->user->phones->first(),
+                                    'auth' => $user,
+                                ])
                             </div>
                         </div>
                     </div>
@@ -191,7 +200,7 @@
         <div itemscope itemtype="https://schema.org/Product"
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-14">
             <meta itemprop="sku" content="{{ $ad->id }}">
-            <meta itemprop="url" content="{{ url()->current() }}">
+            <link itemprop="url" href="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
             <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 offer-card">
                 <div class="md:col-span-5">
@@ -291,7 +300,15 @@
                         </x-characteristics>
 
                         <div>
-                            @include('ad.components.about-seller', ['user' => $ad->user])
+                            @include('ad.components.about-seller', [
+                                'user' => $ad->user,
+                                'address' => [
+                                    'city' => $ad->office->city,
+                                    'street' => trim(
+                                        implode(',', array_slice(explode(',', $ad->office->address), 2))),
+                                ],
+                                'phone' => $ad->user->phones->first(),
+                            ])
 
                             @include('ad.components.action-buttons')
                         </div>

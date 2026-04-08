@@ -1,7 +1,7 @@
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
     ($rModel ? ($rVersion ? $selModel->name . ' ' . $selVersion->hashrate : $selModel->name) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
     ($rModel ? ($rVersion ? ' ' . $selModel->name . ' ' . $selVersion->hashrate : ' ' . $selModel->name) : '') .
-    ' в удобном калькуляторе доходности майнинга'"
+    ' в удобном калькуляторе доходности асиков'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
             'asicModel' => $selModel->slug,

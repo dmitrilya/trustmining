@@ -2,7 +2,7 @@
     $channel = $channel ?? $post->channel;
 @endphp
 
-<x-insight-layout :title="$channel->name . ' - пост | TM Insight'" :description="str($post->content)->stripTags()->limit(150)" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="str($post->content)->stripTags()->limit(70) . ' - ' . $channel->name . ' | TM Insight'" :description="str($post->content)->stripTags()->limit(150)" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
         $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);

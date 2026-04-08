@@ -25,6 +25,15 @@
         </div>
     </div>
 
+    <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <meta itemprop="addressLocality" content="{{ $address['city'] }}">
+        <meta itemprop="streetAddress" content="{{ $address['street'] }}">
+    </div>
+
+    @if ($phone)
+        <meta itemprop="telephone" content="{{ $phone->number }}">
+    @endif
+
     @include('components.about-seller_tables')
 
     <div class="mt-4">
