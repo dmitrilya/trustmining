@@ -178,6 +178,7 @@
                                         'city' => $ad->office->city,
                                         'street' => trim(
                                             implode(',', array_slice(explode(',', $ad->office->address), 2))),
+                                        'postal' => $ad->office->postal_code,
                                     ],
                                     'phone' => $ad->user->phones->first(),
                                     'auth' => $user,
@@ -269,13 +270,22 @@
                                 href="https://schema.org/{{ $ad->props['Condition'] == 'New' ? 'NewCondition' : 'UsedCondition' }}" />
                             <div itemprop="shippingDetails" itemscope
                                 itemtype="https://schema.org/OfferShippingDetails">
-                                <meta itemprop="shippingRate" content="0" />
+                                <div itemprop="shippingRate" itemscope itemtype="https://schema.org/MonetaryAmount">
+                                    <meta itemprop="value" content="0" />
+                                    <meta itemprop="currency" content="RUB" />
+                                </div>
                                 <div itemprop="deliveryTime" itemscope
                                     itemtype="https://schema.org/ShippingDeliveryTime">
+                                    <div itemprop="handlingTime" itemscope
+                                        itemtype="https://schema.org/QuantitativeValue">
+                                            <meta itemprop="minValue" content="0" />
+                                            <meta itemprop="maxValue" content="1" />
+                                            <meta itemprop="unitCode" content="d" />
+                                    </div>
                                     <div itemprop="transitTime" itemscope
                                         itemtype="https://schema.org/QuantitativeValue">
                                         @if ($ad->props['Availability'] == 'In stock')
-                                            <meta itemprop="minValue" content="1" />
+                                            <meta itemprop="minValue" content="0" />
                                             <meta itemprop="maxValue" content="3" />
                                             <meta itemprop="unitCode" content="d" />
                                         @else
@@ -293,17 +303,19 @@
                             </div>
 
                             @if ($ad->props['Condition'] == 'New')
-                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="https://schema.org/MerchantReturnPolicy">
+                                <div itemprop="hasMerchantReturnPolicy" itemscope
+                                    itemtype="https://schema.org/MerchantReturnPolicy">
                                     <link itemprop="returnPolicyCategory"
                                         href="https://schema.org/MerchantReturnFiniteReturnWindow" />
                                     <link itemprop="returnMethod" href="https://schema.org/ReturnInStore" />
-                                    <link itemprop="returnFees" href="https://schema.org/RestockingFees" />
+                                    <link itemprop="returnFees" href="https://schema.org/ReturnFeesCustomerResponsibility" />
                                     <link itemprop="refundType" href="https://schema.org/FullRefund" />
                                     <meta itemprop="applicableCountry" content="RU" />
                                     <meta itemprop="merchantReturnDays" content="14" />
                                 </div>
                             @else
-                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="https://schema.org/MerchantReturnPolicy">
+                                <div itemprop="hasMerchantReturnPolicy" itemscope
+                                    itemtype="https://schema.org/MerchantReturnPolicy">
                                     <link itemprop="returnPolicyCategory"
                                         href="https://schema.org/MerchantReturnNotPermitted" />
                                     <meta itemprop="applicableCountry" content="RU" />
@@ -360,6 +372,7 @@
                                     'city' => $ad->office->city,
                                     'street' => trim(
                                         implode(',', array_slice(explode(',', $ad->office->address), 2))),
+                                    'postal' => $ad->office->postal_code,
                                 ],
                                 'phone' => $ad->user->phones->first(),
                             ])

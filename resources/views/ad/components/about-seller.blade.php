@@ -2,16 +2,22 @@
     <h2 class="sr-only">Информация о продавце</h2>
 
     <div class="flex items-center">
-        @if (
-            $user->company &&
-                ($user->company->logo ||
+        @if ($user->company)
+            @if (
+                $user->company->logo ||
                     (isset($moderation) &&
+                        isset($moderation->data['logo']) &&
                         isset($auth) &&
-                        in_array($auth->role->name, ['admin', 'moderator']) &&
-                        isset($moderation->data['logo']))))
-            <img itemprop="logo" class="rounded-full mr-2 {{ isset($bg) ? 'size-12 sm:size-14 lg:size-16' : 'size-12' }}"
-                src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}"
-                alt="">
+                        in_array($auth->role->name, ['admin', 'moderator'])))
+                <img itemprop="logo"
+                    class="rounded-full mr-2 {{ isset($bg) ? 'size-12 sm:size-14 lg:size-16' : 'size-12' }}"
+                    src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}"
+                    alt="{{ $user->name }} {{ __('logo') }}">
+            @endif
+
+            @if (count($user->company->images))
+                <link itemtype="image" href="{{ Storage::url($user->company->images[0]) }}">
+            @endif
         @endif
 
         <div>
@@ -26,8 +32,10 @@
     </div>
 
     <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <meta itemprop="addressCountry" content="RU">
         <meta itemprop="addressLocality" content="{{ $address['city'] }}">
         <meta itemprop="streetAddress" content="{{ $address['street'] }}">
+        <meta itemprop="postalCode" content="{{ $address['postal'] }}">
     </div>
 
     @if ($phone)

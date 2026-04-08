@@ -87,15 +87,13 @@ class OfficeController extends Controller
 
         $suggestions = $this->dadataSearchAddress($request->address);
 
-        if (!count($suggestions)) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
-
-        $address = $suggestions[0]['value'];
-        $city = $suggestions[0]['data']['city'];
+        if (!count($suggestions) || !$suggestions[0]['data']['postal_code']) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
         $office = Office::create([
             'user_id' => $user->id,
-            'address' => $address,
-            'city' => $city,
+            'address' => $suggestions[0]['value'],
+            'city' => $suggestions[0]['data']['city'],
+            'postal_code' => $suggestions[0]['data']['postal_code'],
             'video' => $request->video,
             'images' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],

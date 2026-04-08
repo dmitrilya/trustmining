@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('video')->nullable();
             $table->string('address');
             $table->string('city');
+            $table->unsignedInteger('postal_code');
             $table->json('peculiarities');
             $table->boolean('moderation')->default(1);
             $table->timestamps();

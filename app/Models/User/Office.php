@@ -20,6 +20,7 @@ class Office extends Model
         'video',
         'address',
         'city',
+        'postal_code',
         'peculiarities',
         'moderation',
     ];
