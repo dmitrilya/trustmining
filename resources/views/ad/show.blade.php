@@ -218,7 +218,7 @@
                     </div>
                 </div>
 
-                <div itemprop="aggregateRating" itemscope itemtype="AggregateRating">
+                <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                     @php
                         $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
                     @endphp
