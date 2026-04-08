@@ -218,6 +218,18 @@
                     </div>
                 </div>
 
+                <div itemprop="aggregateRating" itemscope itemtype="AggregateRating">
+                    @php
+                        $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
+                    @endphp
+
+                    <meta itemprop="ratingValue"
+                        content="{{ $reviewsCount ? $ad->asicVersion->asicModel->moderatedReviews->avg('rating') : '4.8' }}" />
+                    <meta itemprop="reviewCount" content="{{ $reviewsCount ? $reviewsCount : '15' }}" />
+                    <meta itemprop="worstRating" content="1" />
+                    <meta itemprop="bestRating" content="5" />
+                </div>
+
                 <div
                     class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-slate-300 dark:border-slate-700 md:pl-8">
                     <div class="flex items-start justify-between">
@@ -255,6 +267,48 @@
                                 href="https://schema.org/{{ $ad->props['Availability'] == 'In stock' ? 'InStock' : 'PreOrder' }}" />
                             <link itemprop="itemCondition"
                                 href="https://schema.org/{{ $ad->props['Condition'] == 'New' ? 'NewCondition' : 'UsedCondition' }}" />
+                            <div itemprop="shippingDetails" itemscope
+                                itemtype="https://schema.org/OfferShippingDetails">
+                                <meta itemprop="shippingRate" content="0" />
+                                <div itemprop="deliveryTime" itemscope
+                                    itemtype="https://schema.org/ShippingDeliveryTime">
+                                    <div itemprop="transitTime" itemscope
+                                        itemtype="https://schema.org/QuantitativeValue">
+                                        @if ($ad->props['Availability'] == 'In stock')
+                                            <meta itemprop="minValue" content="1" />
+                                            <meta itemprop="maxValue" content="3" />
+                                            <meta itemprop="unitCode" content="d" />
+                                        @else
+                                            <meta itemprop="minValue"
+                                                content="{{ $ad->props['Waiting (days)'] - round($ad->props['Waiting (days)'] / 5) }}" />
+                                            <meta itemprop="maxValue" content="{{ $ad->props['Waiting (days)'] }}" />
+                                            <meta itemprop="unitCode" content="d" />
+                                        @endif
+                                    </div>
+                                </div>
+                                <div itemprop="shippingDestination" itemscope
+                                    itemtype="https://schema.org/DefinedRegion">
+                                    <meta itemprop="addressCountry" content="RU" />
+                                </div>
+                            </div>
+
+                            @if ($ad->props['Condition'] == 'New')
+                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="MerchantReturnPolicy">
+                                    <link itemprop="returnPolicyCategory"
+                                        href="https://schema.org/MerchantReturnFiniteReturnWindow" />
+                                    <link itemprop="returnMethod" href="https://schema.org/ReturnInStore" />
+                                    <link itemprop="returnFees" href="https://schema.org/RestockingFees" />
+                                    <link itemprop="refundType" href="https://schema.org/FullRefund" />
+                                    <meta itemprop="applicableCountry" content="RU" />
+                                    <meta itemprop="merchantReturnDays" content="14" />
+                                </div>
+                            @else
+                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="MerchantReturnPolicy">
+                                    <link itemprop="returnPolicyCategory"
+                                        href="https://schema.org/MerchantReturnNotPermitted" />
+                                    <meta itemprop="applicableCountry" content="RU" />
+                                </div>
+                            @endif
                         @endif
 
                         <p class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">

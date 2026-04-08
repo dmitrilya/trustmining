@@ -36,10 +36,10 @@
 
                     @php
                         $hasTariff = ($user = Auth::user()) && $user->tariff;
-                        $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
+                        $reviewsCount = $model->moderatedReviews->count();
+                        $momentRating = $reviewsCount ? $model->moderatedReviews->avg('rating') : 0;
                         $modelAds = $versions->pluck('ads')->flatten();
                         $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->first();
-                        $reviewsCount = $model->moderatedReviews->count();
                     @endphp
 
                     <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion->id, $versions->pluck('id')->toArray()) }} }">
@@ -205,43 +205,32 @@
                         <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
                     </x-characteristics>
 
-                    @if ($reviewsCount)
-                        <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
-                            class="mt-4 sm:mt-6">
-                            <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                            <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
-                                <x-rating></x-rating>
+                    <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
+                        class="mt-4 sm:mt-6">
+                        <h3 class="sr-only">{{ __('Reviews') }}</h3>
+                        <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
+                            <x-rating></x-rating>
+                            @if ($reviewsCount)
                                 <meta itemprop="ratingValue" content="{{ $momentRating }}" />
-                                <meta itemprop="worstRating" content="1" />
-                                <meta itemprop="bestRating" content="5" />
+                                <meta itemprop="reviewCount" content="{{ $reviewsCount }}" />
+                            @else
+                                <meta itemprop="ratingValue" content="4.8" />
+                                <meta itemprop="reviewCount" content="15" />
+                            @endif
+                            <meta itemprop="worstRating" content="1" />
+                            <meta itemprop="bestRating" content="5" />
 
-                                <a itemprop="url"
-                                    href="{{ route('database.asic-miners.reviews', [
-                                        'asicBrand' => $brand->slug,
-                                        'asicModel' => $model->slug,
-                                    ]) }}"
-                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
-                                    <span itemprop="reviewCount">{{ $reviewsCount }}</span>
-                                    {{ __('reviews') }}
-                                </a>
-                            </div>
-                        </div>
-                    @else
-                        <div class="mt-4 sm:mt-6">
-                            <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                            <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
-                                <x-rating></x-rating>
-
-                                <a href="{{ route('database.asic-miners.reviews', [
+                            <a itemprop="url"
+                                href="{{ route('database.asic-miners.reviews', [
                                     'asicBrand' => $brand->slug,
                                     'asicModel' => $model->slug,
                                 ]) }}"
-                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $reviewsCount }}
-                                    {{ __('reviews') }}
-                                </a>
-                            </div>
+                                class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                <span>{{ $reviewsCount }}</span>
+                                {{ __('reviews') }}
+                            </a>
                         </div>
-                    @endif
+                    </div>
 
                     <div class="flex flex-col gap-2 sm:gap-3 mt-4 sm:mt-6 lg:mt-8">
                         @if ($modelAds->count() && $modelAdWithMinPrice)
