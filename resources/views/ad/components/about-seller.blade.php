@@ -16,7 +16,7 @@
             @endif
 
             @if (count($user->company->images))
-                <link itemtype="image" href="{{ Storage::url($user->company->images[0]) }}">
+                <link itemprop="image" href="{{ Storage::url($user->company->images[0]) }}">
             @endif
         @endif
 
