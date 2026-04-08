@@ -293,7 +293,7 @@
                             </div>
 
                             @if ($ad->props['Condition'] == 'New')
-                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="MerchantReturnPolicy">
+                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="https://schema.org/MerchantReturnPolicy">
                                     <link itemprop="returnPolicyCategory"
                                         href="https://schema.org/MerchantReturnFiniteReturnWindow" />
                                     <link itemprop="returnMethod" href="https://schema.org/ReturnInStore" />
@@ -303,7 +303,7 @@
                                     <meta itemprop="merchantReturnDays" content="14" />
                                 </div>
                             @else
-                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="MerchantReturnPolicy">
+                                <div itemprop="hasMerchantReturnPolicy" itemscope itemtype="https://schema.org/MerchantReturnPolicy">
                                     <link itemprop="returnPolicyCategory"
                                         href="https://schema.org/MerchantReturnNotPermitted" />
                                     <meta itemprop="applicableCountry" content="RU" />
