@@ -203,6 +203,17 @@
             <meta itemprop="sku" content="{{ $ad->id }}">
             <link itemprop="url" href="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
+            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                @php
+                    $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
+                @endphp
+
+                <meta itemprop="ratingValue"
+                    content="{{ $reviewsCount ? $ad->asicVersion->asicModel->moderatedReviews->avg('rating') : '4.8' }}" />
+                <meta itemprop="reviewCount" content="{{ $reviewsCount ? $reviewsCount : '15' }}" />
+                <meta itemprop="worstRating" content="1" />
+                <meta itemprop="bestRating" content="5" />
+            </div>
             <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 offer-card">
                 <div class="md:col-span-5">
                     <div class="h-full flex flex-col justify-between">
@@ -217,18 +228,6 @@
 
                         @include('ad.components.characteristics')
                     </div>
-                </div>
-
-                <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    @php
-                        $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
-                    @endphp
-
-                    <meta itemprop="ratingValue"
-                        content="{{ $reviewsCount ? $ad->asicVersion->asicModel->moderatedReviews->avg('rating') : '4.8' }}" />
-                    <meta itemprop="reviewCount" content="{{ $reviewsCount ? $reviewsCount : '15' }}" />
-                    <meta itemprop="worstRating" content="1" />
-                    <meta itemprop="bestRating" content="5" />
                 </div>
 
                 <div
@@ -278,9 +277,9 @@
                                     itemtype="https://schema.org/ShippingDeliveryTime">
                                     <div itemprop="handlingTime" itemscope
                                         itemtype="https://schema.org/QuantitativeValue">
-                                            <meta itemprop="minValue" content="0" />
-                                            <meta itemprop="maxValue" content="1" />
-                                            <meta itemprop="unitCode" content="d" />
+                                        <meta itemprop="minValue" content="0" />
+                                        <meta itemprop="maxValue" content="1" />
+                                        <meta itemprop="unitCode" content="d" />
                                     </div>
                                     <div itemprop="transitTime" itemscope
                                         itemtype="https://schema.org/QuantitativeValue">
@@ -308,7 +307,8 @@
                                     <link itemprop="returnPolicyCategory"
                                         href="https://schema.org/MerchantReturnFiniteReturnWindow" />
                                     <link itemprop="returnMethod" href="https://schema.org/ReturnInStore" />
-                                    <link itemprop="returnFees" href="https://schema.org/ReturnFeesCustomerResponsibility" />
+                                    <link itemprop="returnFees"
+                                        href="https://schema.org/ReturnFeesCustomerResponsibility" />
                                     <link itemprop="refundType" href="https://schema.org/FullRefund" />
                                     <meta itemprop="applicableCountry" content="RU" />
                                     <meta itemprop="merchantReturnDays" content="14" />
