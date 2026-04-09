@@ -7,13 +7,13 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
-            @if (!Auth::user())
-                <div class="flex items-center justify-center w-full h-full">
-                    <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
-                </div>
-            @else
+        @if (!Auth::user())
+            <div class="flex items-center justify-center w-full h-full">
+                <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+            </div>
+        @else
+            <div
+                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
                     @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters') }}', 'error');
                         if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"
@@ -129,8 +129,8 @@
                             </x-dropdown>
 
                             <div class="flex flex-col justify-center ml-2">
-                                <div class="text-xxs sm:text-xs text-slate-500"
-                                    style="display: hidden" x-show="files > 0">
+                                <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden"
+                                    x-show="files > 0">
                                     {{ __('File') }}: <span class="text-slate-700 dark:text-slate-300"
                                         x-text="files"></span>
                                 </div>
@@ -164,7 +164,7 @@
                         </div>
                     @endif
                 </form>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 </x-app-layout>
