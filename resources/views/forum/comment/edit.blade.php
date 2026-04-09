@@ -8,7 +8,7 @@
         <input type="hidden" name="text" :value="text">
         <pre required id="edit-comment-text_{{ $answer->id }}" aria-placeholder="{{ __('Your comment...') }}"
             contenteditable="true" x-ref="pre"
-            class="whitespace-normal resize-none w-full px-0 text-slate-950 dark:text-slate-200 bg-slate-50 border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
+            class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-950 dark:text-slate-200 bg-slate-50 border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
             style="min-height: 48px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"
             x-init="$el.innerHTML = `{{ $comment->text }}`"></pre>

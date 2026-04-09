@@ -91,6 +91,26 @@
     <!-- /Yandex.Metrika counter -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script type="module">
+        import {
+            onINP
+        } from 'https://unpkg.com/web-vitals@5?module';
+
+        onINP(({
+            value,
+            entries
+        }) => {
+            if (value > 100) {
+                axios.post('{{ route('inp') }}', {
+                    value: value,
+                    event: entries[0].name,
+                    url: entries[0].target.baseURI,
+                    target: entries[0].target.outerHTML
+                });
+            }
+        });
+    </script>
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }"

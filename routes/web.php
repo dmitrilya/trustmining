@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\MetricsController;
@@ -53,6 +54,8 @@ Route::get('private/temp', function (Request $request) {
 
     return Storage::disk('private')->download($request->path);
 })->name('private.temp');
+
+Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');
 
 Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
 Route::post('/location', [ProfileController::class, 'location'])->name('location');

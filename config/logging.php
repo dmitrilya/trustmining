@@ -63,6 +63,12 @@ return [
             'level' => 'info',
         ],
 
+        'analytics' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/analytics.log'),
+            'level' => 'info',
+        ],
+
         'forum-score' => [
             'driver' => 'single',
             'path' => storage_path('logs/forum_score.log'),
