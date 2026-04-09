@@ -203,17 +203,19 @@
             <meta itemprop="sku" content="{{ $ad->id }}">
             <link itemprop="url" href="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
-            <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                @php
-                    $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
-                @endphp
+            @if ($ad->adCategory->name == 'miners' || $ad->adCategory->name == 'gpu')
+                <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    @php
+                        $reviewsCount = $ad->asicVersion->asicModel->moderatedReviews->count();
+                    @endphp
 
-                <meta itemprop="ratingValue"
-                    content="{{ $reviewsCount ? $ad->asicVersion->asicModel->moderatedReviews->avg('rating') : '4.8' }}" />
-                <meta itemprop="reviewCount" content="{{ $reviewsCount ? $reviewsCount : '15' }}" />
-                <meta itemprop="worstRating" content="1" />
-                <meta itemprop="bestRating" content="5" />
-            </div>
+                    <meta itemprop="ratingValue"
+                        content="{{ $reviewsCount ? $ad->asicVersion->asicModel->moderatedReviews->avg('rating') : '4.8' }}" />
+                    <meta itemprop="reviewCount" content="{{ $reviewsCount ? $reviewsCount : '15' }}" />
+                    <meta itemprop="worstRating" content="1" />
+                    <meta itemprop="bestRating" content="5" />
+                </div>
+            @endif
             <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 offer-card">
                 <div class="md:col-span-5">
                     <div class="h-full flex flex-col justify-between">
