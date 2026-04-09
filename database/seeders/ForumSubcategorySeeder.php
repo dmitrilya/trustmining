@@ -50,6 +50,7 @@ class ForumSubcategorySeeder extends Seeder
             ['name' => 'Metaverses and P2E', 'forum_category_id' => 9],
             ['name' => 'NFT', 'forum_category_id' => 9],
             ['name' => 'Airdrops', 'forum_category_id' => 9],
+            ['name' => 'Artificial Intelligence', 'forum_category_id' => 9],
         ]);
     }
 }

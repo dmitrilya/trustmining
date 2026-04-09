@@ -38,5 +38,27 @@ return [
         "answer_5" => "The data is updated in real-time, taking into account current network difficulty and market value of selected coins. However, keep in mind that :b :m profitability may change tomorrow due to sudden price fluctuations or changes in the :a algorithm hashrate.",
         "question_6" => "What factors affect the payback period for :b :m?",
         "answer_6" => "The payback period depends on your electricity price, chosen pool fees, and market price of mined coins. Use our calculator to find the most profitable coin/algorithm pair for :b :m :v and reduce investment return time."
-    ]
+    ],
+    'profitable' => [
+        'question_1' => 'How to use the most profitable ASIC miners calculator?',
+        'answer_1' => 'Select the currency (RUB or USDT) and specify your electricity rate (from 0 to 20 RUB per kWh). The rating will automatically recalculate the net profit for 50 models and display the top 15 most profitable devices. This allows you to instantly see which ASICs remain profitable specifically at your electricity cost.',
+        'question_2' => 'How is the net profit of mining equipment calculated?',
+        'answer_2' => 'Profit is calculated using the formula: (Gross income from mined coins) minus (ASIC power consumption * Electricity rate). We take into account the current network difficulty and the latest exchange rates. The table shows the result after deducting electricity costs.',
+        'question_3' => 'What is the most profitable mining equipment in :y?',
+        'answer_3' => 'In :y, the leadership is held by models with the best energy efficiency. With a low electricity rate, high-power SHA-256 devices lead the way; however, when the plug cost exceeds 5-7 rubles, specialized ASIC miners for alternative algorithms with higher yield per watt move to the top spots.',
+        'question_4' => 'Why does the list of profitable models change when the rate is updated?',
+        'answer_4' => 'Electricity is the main variable cost. High-consumption models may be leaders with "free" electricity but instantly become unprofitable at a rate of 10-15 rubles. Our tool rearranges the rating to show you only those devices that generate a real surplus based on your input data.',
+        'question_5' => 'How accurately is the income displayed in RUB and USDT?',
+        'answer_5' => 'Data is updated in real-time. When USDT is selected, the calculation is tied to the exchange rate, and when RUB is selected, the current quotation is used, allowing for an accurate estimation of fiat profitability and equipment payback periods in the local currency.',
+    ],
+    'warranty' => [
+        'question_1' => 'Where can I find the serial number (S/N) on my miner?',
+        'answer_1' => 'The serial number is usually located on a white sticker on the device chassis or the control board. You can also find the S/N remotely via the miner web interface under the "Status" or "System Information" section. It consists of a combination of digits and Latin letters.',
+        'question_2' => 'Why does the warranty status on the manufacturer website differ from my purchase date?',
+        'answer_2' => 'The manufacturer warranty period typically begins from the date the equipment is shipped from the factory warehouse in China, not from the date of retail sale. If your ASIC was purchased from a reseller, the actual remaining warranty may be less than the stated 6 or 12 months.',
+        'question_3' => 'What should I do if the warranty on my ASIC miner has already expired?',
+        'answer_3' => 'If the check shows an "Out of Warranty" status, you can still contact specialized service centers. Post-warranty repairs are performed on a paid basis. We recommend using only original spare parts to maintain a stable hashrate and prevent hardware overheating.',
+        'question_4' => 'Is the warranty voided by overclocking the miner or using custom firmware?',
+        'answer_4' => 'Yes, most manufacturers (Bitmain, MicroBT) will void the warranty if they detect the use of third-party software, signs of overheating due to overclocking, or operation in improper conditions (high humidity, dust). The warranty is also voided if the factory seals are damaged.',
+    ],
 ];

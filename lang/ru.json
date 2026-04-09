@@ -571,6 +571,9 @@
     "6-year difficulty CAGR": "CAGR сложности за 6 лет",
     "Change calculation to": "Сменить расчет на",
     "Check warranty": "Проверить гарантию",
+    "Check warranty by serial number": "Проверить гарантию по серийному номеру",
+    "Get the real-time warranty status of your mining hardware in just one click. For Whatsminer and Bitmain devices, instant verification is available directly on this page thanks to our direct integration with manufacturer databases. Simply enter your ASIC serial number in the field below.": "Узнайте актуальный статус гарантийного обслуживания вашего оборудования для майнинга в один клик. Для устройств брендов Whatsminer и Bitmain проверка доступна мгновенно прямо на этой странице благодаря прямой интеграции с базами производителей. Просто введите серийный номер вашего асика в поле ниже.",
+    "If you are using other hardware brands, please use the manufacturers official verification services. Follow the links below to check the remaining warranty for Canaan (Avalon), IceRiver, or Jasminer on their official websites.": "Если вы используете оборудование других брендов, воспользуйтесь официальными сервисами проверки производителей. Перейдите по ссылкам ниже, чтобы уточнить остаток гарантии для Canaan (Avalon), IceRiver или Jasminer на их официальных сайтах.",
     "Serial number": "Серийный номер",
     "Warranty": "Гарантия",
     "Warranty until": "Гарантия до",
@@ -886,6 +889,7 @@
     "Metaverses and P2E": "Метавселенные и P2E",
     "NFT": "NFT",
     "Airdrops": "Airdrops",
+    "Artificial Intelligence": "Искусственный Интеллект",
 
     "Moderation failed": "Модерация не пройдена",
     "Moderation completed": "Модерация пройдена",

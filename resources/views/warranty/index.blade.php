@@ -1,18 +1,27 @@
 <x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
-    description="Узнать остаток гарантии Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
+    description="Узнать остаток гарантии асика Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
-            {{ __('Check warranty') }}
+            {{ __('Check warranty by serial number') }}
         </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
+        <div class="max-w-4xl mx-auto sm:pt-2 lg:pt-6">
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-2 sm:mb-3 lg:mb-4 text-center">
+                {{ __('Get the real-time warranty status of your mining hardware in just one click. For Whatsminer and Bitmain devices, instant verification is available directly on this page thanks to our direct integration with manufacturer databases. Simply enter your ASIC serial number in the field below.') }}
+            </p>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-6 sm:mb-10 lg:mb-14 text-center">
+                {{ __('If you are using other hardware brands, please use the manufacturers official verification services. Follow the links below to check the remaining warranty for Canaan (Avalon), IceRiver, or Jasminer on their official websites.') }}
+            </p>
+        </div>
+
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
-                <h3
+                <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
-                    Whatsminer</h3>
+                    Whatsminer</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
@@ -45,9 +54,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h3
+                <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
-                    Bitmain</h3>
+                    Bitmain</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
@@ -80,9 +89,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h3
+                <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
-                    Canaan</h3>
+                    Canaan</h2>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.canaan.io/support/warranty_check">{{ __('Check on the official website') }}</a>
@@ -92,9 +101,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h3
+                <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
-                    Iceriver</h3>
+                    Iceriver</h2>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.iceriver.io/warranty-inquiry">{{ __('Check on the official website') }}</a>
@@ -104,14 +113,16 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h3
+                <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
-                    Jasminer</h3>
+                    Jasminer</h2>
                 <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.jasminer.com/#/support/searchsn">{{ __('Check on the official website') }}</a>
             </div>
         </section>
+
+        @include('warranty.components.faq')
     </div>
 
     {{-- 
