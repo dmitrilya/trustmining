@@ -73,13 +73,13 @@ class ModerationController extends Controller
                 return view('passport.show', ['passport' => $m, 'moderation' => $moderation]);
                 break;
             case ('article'):
-                return view('insight.article.show', ['article' => $m, 'moderation' => $moderation]);
+                return view('insight.article.show', ['channel' => $m->channel, 'article' => $m, 'moderation' => $moderation]);
                 break;
             case ('post'):
-                return view('insight.post.show', ['post' => $m, 'moderation' => $moderation]);
+                return view('insight.post.show', ['channel' => $m->channel, 'post' => $m, 'moderation' => $moderation]);
                 break;
             case ('video'):
-                return view('insight.video.show', ['video' => $m, 'moderation' => $moderation]);
+                return view('insight.video.show', ['channel' => $m->channel, 'video' => $m, 'moderation' => $moderation]);
                 break;
         }
 
