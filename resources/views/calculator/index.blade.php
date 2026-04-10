@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6 items-start">
             <div class="xl:col-span-3">
                 <div itemscope itemtype="https://schema.org/ViewAction"
-                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl min-h-[616px] md:min-h-[460px] p-2 pt-3 sm:p-4">
+                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl p-2 pt-3 sm:p-4">
                     @include('calculator.components.calculator')
 
                     @include('calculator.components.description')

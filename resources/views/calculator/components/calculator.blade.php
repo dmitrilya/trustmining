@@ -1,13 +1,40 @@
 @props(['blocks' => ['additional-params', 'coins', 'characteristics', 'currency'], 'widjet' => false])
 
-<div itemscope itemtype="https://schema.org/ViewAction">
+<div class="min-h-[990px] md:min-h-[660px]">
     <meta itemprop="name"
         content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
     <meta itemprop="description"
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product"
-        class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{ currency: 'RUB', tariff: 5, version: {{ $selVersion }}, profitNumber: 0, fee: 0, count: 1, uptime: 99.7, tax: 0, difficultyGrowth: 0 }"
+        class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{
+            currency: 'RUB',
+            tariff: 5,
+            version: {{ $selVersion }},
+            profitNumber: 0,
+            fee: 0,
+            count: 1,
+            uptime: 99.7,
+            tax: 0,
+            difficultyGrowth: 0,
+            view: 'month',
+            get dailyIncome() {
+                return (this.version.profits[this.profitNumber].profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
+            },
+            get dailyConsumption() {
+                return this.version.efficiency * this.version.hashrate / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
+            },
+            get dailyProfit() {
+                return this.dailyIncome - this.dailyConsumption;
+            },
+            get dailyProfitUSDT() {
+                return (this.version.profits[this.profitNumber].profit * (100 - this.fee) * this.uptime / 10000 - this.version.efficiency * this.version.hashrate * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count;
+            },
+            get total() { return this.dailyIncome + this.dailyConsumption },
+            get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
+            get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 },
+            get momentRating() { return this.version.reviews_avg }
+        }"
         x-init="fee = version.profits[0].coins[0].fee">
         <div class="col-span-2">
             @include('calculator.components.schema')
@@ -26,7 +53,7 @@
                             @if (!$widjet)
                                 <div class="mt-6">
                                     <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                    <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                    <div class="flex items-center">
                                         <x-rating></x-rating>
 
                                         <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
@@ -37,7 +64,7 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="mt-5 space-y-1 sm:space-y-2">
+                            <div class="mt-5 space-y-1 sm:space-y-2" style="min-height: 152px">
                                 <x-characteristics>
                                     <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                     <x-characteristic name="Efficiency"
@@ -104,33 +131,17 @@
             @endif
 
             <template x-if="version !== null">
-                <div x-data="{
-                    get dailyIncome() {
-                        return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000) * count / (currency == 'RUB' ? {{ $rub }} : 1);
-                    },
-                    get dailyConsumption() {
-                        return version.efficiency * version.hashrate / 1000 * tariff * 24 * uptime / 100 * count * (currency == 'USDT' ? {{ $rub }} : 1);
-                    },
-                    get dailyProfit() {
-                        return this.dailyIncome - this.dailyConsumption;
-                    },
-                    get dailyProfitUSDT() {
-                        return (version.profits[profitNumber].profit * (100 - fee) * uptime / 10000 - version.efficiency * version.hashrate * tariff * {{ $rub }} * 24 * uptime / 100000) * count;
-                    },
-                    get total() { return this.dailyIncome + this.dailyConsumption },
-                    get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
-                    get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 }
-                }">
-                    <div class="space-y-2 sm:space-y-3 lg:space-y-4" x-data="{ view: 'month' }">
+                <div>
+                    <div style="min-height: 228px" class="space-y-2 sm:space-y-3 lg:space-y-4">
                         <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
                             <button @click="view = 'day'"
-                                :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-70'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
                             <button @click="view = 'month'"
-                                :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-70'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
                             <button @click="view = 'year'"
-                                :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                                :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-70'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
                         </div>
 
@@ -181,7 +192,7 @@
                                     @if (!$widjet)
                                         <div class="mt-6">
                                             <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                            <div class="flex items-center" x-data="{ momentRating: version.reviews_avg }">
+                                            <div class="flex items-center">
                                                 <x-rating></x-rating>
 
                                                 <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug +
@@ -193,7 +204,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2">
+                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2" style="min-height: 120px">
                                         <x-characteristics>
                                             <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                             <x-characteristic name="Efficiency"
