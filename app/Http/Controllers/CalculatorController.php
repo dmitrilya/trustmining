@@ -24,7 +24,26 @@ class CalculatorController extends Controller
             ->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get();
 
         return view('calculator.index', [
-            'models' => $models,
+            'models' => $models->map(fn($model) => [
+                'id' => $model->id,
+                'name' => $model->name,
+                'asic_versions' => $model->asicVersions->map(function ($version) {
+                    $versionData = $version->toArray();
+                    $versionData['ads_count'] = count($version->ads);
+                    unset($versionData['ads']);
+                    unset($versionData['price_data']);
+                    unset($versionData['asic_model_id']);
+                    unset($versionData['original_hashrate']);
+                    unset($versionData['original_efficiency']);
+                    unset($versionData['brand_name']);
+                    $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                        'profit' => $profit['profit'],
+                        'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
+                    ])->toArray();
+
+                    return $versionData;
+                })->toArray()
+            ]),
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
@@ -42,7 +61,26 @@ class CalculatorController extends Controller
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
 
         return view('calculator.app', [
-            'models' => $models,
+            'models' => $models->map(fn($model) => [
+                'id' => $model->id,
+                'name' => $model->name,
+                'asic_versions' => $model->asicVersions->map(function ($version) {
+                    $versionData = $version->toArray();
+                    $versionData['ads_count'] = count($version->ads);
+                    unset($versionData['ads']);
+                    unset($versionData['price_data']);
+                    unset($versionData['asic_model_id']);
+                    unset($versionData['original_hashrate']);
+                    unset($versionData['original_efficiency']);
+                    unset($versionData['brand_name']);
+                    $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                        'profit' => $profit['profit'],
+                        'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
+                    ])->toArray();
+
+                    return $versionData;
+                })->toArray()
+            ]),
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
@@ -72,7 +110,26 @@ class CalculatorController extends Controller
         }
 
         return view('calculator.widjet', [
-            'models' => $models,
+            'models' => $models->map(fn($model) => [
+                'id' => $model->id,
+                'name' => $model->name,
+                'asic_versions' => $model->asicVersions->map(function ($version) {
+                    $versionData = $version->toArray();
+                    $versionData['ads_count'] = count($version->ads);
+                    unset($versionData['ads']);
+                    unset($versionData['price_data']);
+                    unset($versionData['asic_model_id']);
+                    unset($versionData['original_hashrate']);
+                    unset($versionData['original_efficiency']);
+                    unset($versionData['brand_name']);
+                    $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                        'profit' => $profit['profit'],
+                        'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
+                    ])->toArray();
+
+                    return $versionData;
+                })->toArray()
+            ]),
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,

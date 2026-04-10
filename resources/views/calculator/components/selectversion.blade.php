@@ -1,13 +1,10 @@
 <div style="height: 118.67px" x-data="{
     models: {{ $models->values() }},
     selectedModel: {{ $selectedModel }},
-    selectedVersion: {{ $selectedVersion->id }},
+    selectedVersion: {{ $selectedVersion }},
     search: '{{ $selectedModel->name }}',
-    get currentModel() {
-        return this.models.find(m => m.id == this.selectedModel.id);
-    },
-    get currentVersion() {
-        return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
+    get filteredModels() {
+        return !this.search ? this.models : this.models.filter(m => m.name.toLowerCase().includes(this.search.toLowerCase()));
     },
 }">
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
@@ -35,11 +32,10 @@
 
         <ul role="listbox" x-show="open"
             class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
-            <template x-for="asicModel in models" :key="asicModel.id">
+            <template x-for="asicModel in filteredModels" :key="asicModel.id">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name"
                     class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white"
-                    role="option"
-                    x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
+                    role="option">
                     <div class="flex items-center">
                         <span class="ml-3 block truncate" x-text="asicModel.name"></span>
                     </div>
@@ -64,7 +60,7 @@
             <div class="relative mt-1" x-data="{ show: false }" @click.away="show = false">
                 <button type="button" @click="show = !show"
                     class="h-9 w-full cursor-pointer rounded-md text-slate-950 dark:text-slate-50 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
-                    <span class="block truncate" x-text="currentVersion?.hashrate ?? ''"></span>
+                    <span class="block truncate" x-text="selectedVersion?.hashrate ?? ''"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">
                         <svg class="h-5 w-5 text-slate-500 dark:text-slate-400" viewBox="0 0 20 20" fill="currentColor">
@@ -77,11 +73,11 @@
                 <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg"
                     x-show="show">
                     <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
-                        <li @click="selectedVersion = asicVersion.id; version = asicVersion; show = false;"
+                        <li @click="selectedVersion = asicVersion; version = asicVersion; show = false;"
                             class="cursor-default relative select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white">
                             <span class="block truncate" x-text="asicVersion.hashrate"></span>
 
-                            <span x-show="selectedVersion == asicVersion.id"
+                            <span x-show="selectedVersion?.id == asicVersion.id"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" clip-rule="evenodd"

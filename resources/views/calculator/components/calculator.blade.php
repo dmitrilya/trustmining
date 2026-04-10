@@ -52,14 +52,15 @@
                                 @if (!$widjet)
                                     <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                         x-bind:href="version ?
-                                            '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                            '/asic-miners/{{ $selModel->asicBrand->slug }}/' +
+                                            version.model_slug + '/' +
                                             version.hashrate + version.measurement : '#'">
                                         {{ __('All characteristics') }}
                                     </a>
                                 @endif
                             </div>
                             @if (!$widjet)
-                                <template x-if="version.ads.length">
+                                <template x-if="version.ads_count">
                                     <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
                                         x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
                                         <x-primary-button
@@ -73,7 +74,8 @@
             @endif
         </div>
 
-        <div class="mt-4 md:mt-0 md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
+        <div
+            class="mt-4 md:mt-0 md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
             @if (in_array('currency', $blocks))
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                     <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
@@ -207,7 +209,8 @@
                                         @if (!$widjet)
                                             <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                                 x-bind:href="version ?
-                                                    '/asic-miners/{{ $selModel->asicBrand->slug }}/{{ $selModel->slug }}/' +
+                                                    '/asic-miners/{{ $selModel->asicBrand->slug }}/' +
+                                                    version.model_slug + '/' +
                                                     version.hashrate + version.measurement : '#'">
                                                 {{ __('All characteristics') }}
                                             </a>
@@ -215,7 +218,7 @@
                                     </div>
 
                                     @if (!$widjet)
-                                        <template x-if="version.ads.length">
+                                        <template x-if="version.ads_count">
                                             <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
                                                 x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
                                                 <x-primary-button
