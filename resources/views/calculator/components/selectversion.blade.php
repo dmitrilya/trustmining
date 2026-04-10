@@ -19,9 +19,9 @@
         this.openModel = false;
     },
     selectVersion(v) {
-        selectedVersion = v;
+        this.selectedVersion = v;
         version = v;
-        openVersion = false;
+        this.openVersion = false;
     }
 }" x-init="$nextTick(() => init = true)">
     <template x-if="init">
@@ -31,7 +31,7 @@
                     <div
                         class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                         <input type="text" autocomplete="off" :value="search" id="search_model"
-                            @input.debounce.300ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
+                            @input.debounce.1000ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
                             class="block py-2.5 px-0 w-full text-sm xs:text-base text-slate-950 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
 
                         <button type="button" aria-label="Clear"
@@ -54,7 +54,7 @@
                     class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-950 dark:text-slate-50 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
                     <template x-for="asicModel in filteredModels" :key="asicModel.id">
                         <li @click.debounce.10ms="selectModel(asicModel)" role="option"
-                            class="relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
+                            class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
                             <div class="flex items-center">
                                 <span class="ml-3 block truncate" x-text="asicModel.name"></span>
                             </div>
@@ -94,7 +94,7 @@
                             x-show="openVersion">
                             <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
                                 <li @click.debounce.10ms="selectVersion(asicVersion)"
-                                    class="cursor-default relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
+                                    class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
                                     <span class="block truncate" x-text="asicVersion.hashrate"></span>
 
                                     <span x-show="selectedVersion?.id == asicVersion.id"
