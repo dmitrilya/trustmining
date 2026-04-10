@@ -237,7 +237,7 @@
 
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                @click="profitNumber = i, fee = version.profits[i].coins[0].fee">
+                                @click="profitNumber = i, fee = profit.coins[0].fee; console.log(profit)">
                                 <div>
                                     <label class="flex items-center">
                                         <input type="radio" name="profitNumber" :value="i"

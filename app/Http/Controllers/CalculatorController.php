@@ -39,7 +39,7 @@ class CalculatorController extends Controller
                 unset($versionData['brand_name']);
                 $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
                     'profit' => $profit['profit'],
-                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
+                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit', 'fee']))->toArray()
                 ])->toArray();
 
                 return $versionData;
@@ -66,27 +66,31 @@ class CalculatorController extends Controller
         $selModel = $asicModel && $asicModel->exists ? $models->where('id', $asicModel->id)->first() : $models->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? $selModel->asicVersions->where('id', $asicVersion->id)->first() : $selModel->asicVersions->first();
 
-        return view('calculator.app', [
-            'models' => $models->map(fn($model) => [
-                'id' => $model->id,
-                'name' => $model->name,
-                'asic_versions' => $model->asicVersions->map(function ($version) {
-                    $versionData = $version->toArray();
-                    $versionData['ads_count'] = count($version->ads);
-                    unset($versionData['ads']);
-                    unset($versionData['price_data']);
-                    unset($versionData['asic_model_id']);
-                    unset($versionData['original_hashrate']);
-                    unset($versionData['original_efficiency']);
-                    unset($versionData['brand_name']);
-                    $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
-                        'profit' => $profit['profit'],
-                        'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
-                    ])->toArray();
+        $models = $models->map(fn($model) => [
+            'id' => $model->id,
+            'name' => $model->name,
+            'asic_versions' => $model->asicVersions->map(function ($version) {
+                $versionData = $version->toArray();
+                $versionData['ads_count'] = count($version->ads);
+                unset($versionData['ads']);
+                unset($versionData['price_data']);
+                unset($versionData['asic_model_id']);
+                unset($versionData['original_hashrate']);
+                unset($versionData['original_efficiency']);
+                unset($versionData['brand_name']);
+                $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                    'profit' => $profit['profit'],
+                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit', 'fee']))->toArray()
+                ])->toArray();
 
-                    return $versionData;
-                })->toArray()
-            ]),
+                return $versionData;
+            })->toArray()
+        ]);
+
+        return view('calculator.app', [
+            'models' => $models,
+            'popularModels' => $models->whereIn('id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id')),
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
@@ -115,27 +119,31 @@ class CalculatorController extends Controller
             $selVersion = $selModel->asicVersions->first();
         }
 
-        return view('calculator.widjet', [
-            'models' => $models->map(fn($model) => [
-                'id' => $model->id,
-                'name' => $model->name,
-                'asic_versions' => $model->asicVersions->map(function ($version) {
-                    $versionData = $version->toArray();
-                    $versionData['ads_count'] = count($version->ads);
-                    unset($versionData['ads']);
-                    unset($versionData['price_data']);
-                    unset($versionData['asic_model_id']);
-                    unset($versionData['original_hashrate']);
-                    unset($versionData['original_efficiency']);
-                    unset($versionData['brand_name']);
-                    $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
-                        'profit' => $profit['profit'],
-                        'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit']))->toArray()
-                    ])->toArray();
+        $models = $models->map(fn($model) => [
+            'id' => $model->id,
+            'name' => $model->name,
+            'asic_versions' => $model->asicVersions->map(function ($version) {
+                $versionData = $version->toArray();
+                $versionData['ads_count'] = count($version->ads);
+                unset($versionData['ads']);
+                unset($versionData['price_data']);
+                unset($versionData['asic_model_id']);
+                unset($versionData['original_hashrate']);
+                unset($versionData['original_efficiency']);
+                unset($versionData['brand_name']);
+                $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                    'profit' => $profit['profit'],
+                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit', 'fee']))->toArray()
+                ])->toArray();
 
-                    return $versionData;
-                })->toArray()
-            ]),
+                return $versionData;
+            })->toArray()
+        ]);
+
+        return view('calculator.widjet', [
+            'models' => $models,
+            'popularModels' => $models->whereIn('id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id')),
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
