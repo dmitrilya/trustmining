@@ -38,17 +38,17 @@
 </div>
 
 @if (in_array('additional-params', $blocks))
-    <div x-data="{ show: window.innerWidth > 640 }" class="border-y border-slate-300 dark:border-slate-700">
+    <div class="border-y border-slate-300 dark:border-slate-700">
         <div>
-            <button type="button" @click="show = !show"
+            <button type="button" @click="addParamsShow = !addParamsShow"
                 class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
                 <span>{{ __('Additional settings') }}</span>
-                <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
+                <svg class="size-2 shrink-0" :class="{ 'rotate-180': !addParamsShow }" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 5 5 1 1 5" />
                 </svg>
             </button>
-            <div x-show="show" style="display: none">
+            <div x-show="addParamsShow" style="display: none">
                 <div class="py-3">
                     <div class="space-y-2 md:space-y-3">
                         <div class="flex space-x-2 sm:space-x-3">

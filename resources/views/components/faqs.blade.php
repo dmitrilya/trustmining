@@ -7,7 +7,7 @@
         </h2>
     </div>
 
-    <div itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-4" x-data="{ active: null }">
+    <div itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-2 sm:space-y-4" x-data="{ active: null }">
         {{ $slot }}
     </div>
 </section>

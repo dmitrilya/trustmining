@@ -101,7 +101,7 @@
             value,
             entries
         }) => {
-            if (value > 100) {
+            if (value > 200) {
                 axios.post('{{ route('inp') }}', {
                     value: value,
                     event: entries[0].name,

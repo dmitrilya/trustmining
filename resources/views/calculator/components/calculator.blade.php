@@ -18,6 +18,7 @@
             tax: 0,
             difficultyGrowth: 0,
             view: 'month',
+            addParamsShow: window.innerWidth > 640,
             get dailyIncome() {
                 return (this.version.profits[this.profitNumber].profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
             },
