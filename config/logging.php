@@ -99,6 +99,12 @@ return [
             'level' => 'info',
         ],
 
+        'integration-errors' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/integration_errors.log'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

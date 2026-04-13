@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 use App\Models\Database\Coin;
 
@@ -39,10 +39,14 @@ class UpdateNetworkData extends Command
 
         // LTC
         $coin = Coin::where('abbreviation', 'LTC')->first();
-        $dataRate = json_decode(file_get_contents('https://litecoinspace.org/api/v1/mining/hashrate/3d'));
-        $dataDif = json_decode(file_get_contents('https://litecoinspace.org/api/v1/difficulty-adjustment'));
-        $coin->networkHashrates()->create(['hashrate' => $dataRate->currentHashrate]);
-        $coin->networkDifficulties()->create(['difficulty' => $dataRate->currentDifficulty, 'need_blocks' => $dataDif->remainingBlocks]);
+        try {
+            $dataRate = json_decode(file_get_contents('https://litecoinspace.org/api/v1/mining/hashrate/3d'));
+            $dataDif = json_decode(file_get_contents('https://litecoinspace.org/api/v1/difficulty-adjustment'));
+            $coin->networkHashrates()->create(['hashrate' => $dataRate->currentHashrate]);
+            $coin->networkDifficulties()->create(['difficulty' => $dataRate->currentDifficulty, 'need_blocks' => $dataDif->remainingBlocks]);
+        } catch (Exception $e) {
+            Log::channel('integration-errors')->info("[litecoinspace] {$e->getMessage()}");
+        }
 
         return Command::SUCCESS;
     }

@@ -29,7 +29,7 @@ trait NotificationTrait
                 'notificationable_id' => $notifId,
             ];
 
-            event(new NotificationEvent($user, $type, $notificationable));
+            //TODO event(new NotificationEvent($user, $type, $notificationable));
         }
 
         Notification::upsert($notifications, ['id']);
