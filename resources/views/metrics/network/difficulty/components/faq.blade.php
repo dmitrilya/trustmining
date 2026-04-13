@@ -3,7 +3,7 @@
     $answer1 = !$article
         ? __('faq.metrics.network.difficulty.answer_1', ['name' => $coin->name, 'short' => $coin->abbreviation])
         : __('faq.metrics.network.difficulty.answer_1', ['name' => $coin->name, 'short' => $coin->abbreviation]) .
-            '<a href="' .
+            ' <a href="' .
             route('insight.article.show', [
                 'channel' => $article->channel->slug,
                 'article' => $article->id . '-' . Str::slug($article->title),

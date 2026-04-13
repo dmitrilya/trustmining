@@ -9,7 +9,7 @@
             <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
                 class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
                 <img height="28px" width="28px" src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}"
-                    alt="{{ $asicBrand->name }}" class="w-5 sm:w-7 mr-2">
+                    alt="{{ $asicBrand->name }} logo" class="w-5 sm:w-7 mr-2">
                 <p
                     class="font-semibold text-slate-600 dark:text-slate-300 text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200">
                     {{ $asicBrand->name }}
