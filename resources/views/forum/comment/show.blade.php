@@ -1,5 +1,5 @@
 <div itemprop="comment" itemscope itemtype="https://schema.org/Comment" x-data="{ open: false }">
-    @if ($authId && $authId == $answer->user_id)
+    @if ($authId && $authId == $comment->user_id)
         <div class="flex justify-end items-center mb-2 sm:mb-3">
             <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                 @click="forumEdit($refs.comment_content)">
