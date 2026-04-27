@@ -1,13 +1,17 @@
 <div style="height: 118.67px" x-data="{
     models: {{ $models->values() }},
     popular_models: {{ $popularModels->values() }},
-    selectedModel: {{ $selectedModel }},
-    selectedVersion: {{ $selectedVersion }},
-    search: '{{ $selectedModel->name }}',
+    selectedModel: {{ collect($selectedModel) }},
+    selectedVersion: {{ collect($selectedVersion) }},
+    search: '{{ $selectedModel['name'] }}',
     openModel: false,
     openVersion: false,
     get filteredModels() {
         if (!this.search) return this.popular_models;
+        else if (this.selectedModel) {
+        console.log('here');
+        return [this.selectedModel];
+}
 
         const s = this.search.toLowerCase();
         return this.models.filter(m => m.name.toLowerCase().includes(s));

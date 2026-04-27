@@ -2,15 +2,15 @@
 
 <div class="min-h-[990px] md:min-h-[660px]">
     <meta itemprop="name"
-        content="{{ __('Income calculator') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }}" />
+        content="{{ __('Income calculator') }} {{ $selVersion['brand_name'] }} {{ $selModel['name'] }} {{ $selVersion['hashrate'] }}{{ $selVersion['measurement'] }}" />
     <meta itemprop="description"
-        content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel->asicBrand->name }} {{ $selModel->name }} {{ $selVersion->hashrate }}{{ $selVersion->measurement }} {{ __('in a convenient mining calculator') }}" />
+        content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selVersion['brand_name'] }} {{ $selModel['name'] }} {{ $selVersion['hashrate'] }}{{ $selVersion['measurement'] }} {{ __('in a convenient mining calculator') }}" />
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product"
         class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{
             currency: 'RUB',
             tariff: 5,
-            version: {{ $selVersion }},
+            version: {{ collect($selVersion) }},
             profitNumber: 0,
             fee: 0,
             count: 1,
@@ -80,7 +80,7 @@
                                 @if (!$widjet)
                                     <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                         x-bind:href="version ?
-                                            '/asic-miners/{{ $selModel->asicBrand->slug }}/' +
+                                            '/asic-miners/{{ $selVersion['brand_slug'] }}/' +
                                             version.model_slug + '/' +
                                             version.hashrate + version.measurement : '#'">
                                         {{ __('All characteristics') }}
@@ -156,15 +156,15 @@
                             </div>
 
                             <div>
-                                <div class="flex justify-between text-xs font-bold uppercase italic">
-                                    <span class="text-emerald-700">{{ __('Income') }}</span>
-                                    <span class="text-rose-700">{{ __('Expense') }}</span>
+                                <div class="flex justify-between text-xs font-bold uppercase">
+                                    <span class="text-emerald-700 dark:text-emerald-500">{{ __('Income') }}</span>
+                                    <span class="text-red-700 dark:text-red-500">{{ __('Expense') }}</span>
                                 </div>
                                 <div
                                     class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
                                     <div class="h-full bg-emerald-400 transition-all duration-500"
                                         :style="`width: ${incPercent}%`"></div>
-                                    <div class="h-full bg-rose-400 transition-all duration-500"
+                                    <div class="h-full bg-red-400 transition-all duration-500"
                                         :style="`width: ${expPercent}%`"></div>
                                 </div>
                                 <div
@@ -221,7 +221,7 @@
                                         @if (!$widjet)
                                             <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                                 x-bind:href="version ?
-                                                    '/asic-miners/{{ $selModel->asicBrand->slug }}/' +
+                                                    '/asic-miners/{{ $selVersion['brand_slug'] }}/' +
                                                     version.model_slug + '/' +
                                                     version.hashrate + version.measurement : '#'">
                                                 {{ __('All characteristics') }}

@@ -75,6 +75,7 @@ class MetricsController extends Controller
                 if (!isset($difficulties[$i + 1])) return back();
 
                 if (!$needBlocksTime && $i == 6) {
+                    if ($difficulty->need_blocks - $lastDifficulty->need_blocks == 0) continue;
                     $time = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
                     $days = intdiv($time, 60 * 60 * 24);
                     $time %= (60 * 60 * 24);

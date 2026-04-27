@@ -7,18 +7,18 @@
         style="overflow-y: hidden; max-height: 3.75rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php
-            $haveProfits = $selVersion->profits && count($selVersion->profits);
+            $haveProfits = $selVersion['profits'] && count($selVersion['profits']);
             $income = $haveProfits
-                ? ($selVersion->profits[0]['profit'] * (100 - $selVersion->profits[0]['coins'][0]['fee']) * 99.7) /
+                ? ($selVersion['profits'][0]['profit'] * (100 - $selVersion['profits'][0]['coins'][0]['fee']) * 99.7) /
                     10000
                 : 0;
-            $expense = ((($selVersion->efficiency * $selVersion->hashrate) / 1000) * 5 * 24 * 99.7) / 100;
+            $expense = ((($selVersion['efficiency'] * $selVersion['hashrate']) / 1000) * 5 * 24 * 99.7) / 100;
             $profitU = ($haveProfits ? $income : 0) - $expense * $rub;
         @endphp
         {{ __('descriptions.calculator.main', [
-            'brand' => $selModel->asicBrand->name,
-            'model' => $selModel->name,
-            'version' => $selVersion->hashrate . $selVersion->measurement,
+            'brand' => $selVersion['brand_name'],
+            'model' => $selModel['name'],
+            'version' => $selVersion['hashrate'] . $selVersion['measurement'],
             'incomeU' => round($income, 2),
             'incomeR' => round($income / $rub, 2),
             'expenseU' => round($expense * $rub, 2),
@@ -27,34 +27,34 @@
             'profitR' => round(($haveProfits ? $income / $rub : 0) - $expense, 2),
             'tariff' => 5,
         ]) }}
-        @if ($selVersion->price)
+        @if ($selVersion['price'])
             {{ __('descriptions.calculator.payback.have', [
-                'brand' => $selModel->asicBrand->name,
-                'model' => $selModel->name,
-                'version' => $selVersion->hashrate . $selVersion->measurement,
-                'seller' => $selVersion->seller,
-                'price' => $selVersion->price,
-                'payback' => $profitU > 0 ? round($selVersion->price / $profitU) : '∞',
+                'brand' => $selVersion['brand_name'],
+                'model' => $selModel['name'],
+                'version' => $selVersion['hashrate'] . $selVersion['measurement'],
+                'seller' => $selVersion['seller'],
+                'price' => $selVersion['price'],
+                'payback' => $profitU > 0 ? round($selVersion['price'] / $profitU) : '∞',
             ]) }}
         @else
             {{ __('descriptions.calculator.payback.not', [
-                'brand' => $selModel->asicBrand->name,
-                'model' => $selModel->name,
-                'version' => $selVersion->hashrate . $selVersion->measurement,
+                'brand' => $selVersion['brand_name'],
+                'model' => $selModel['name'],
+                'version' => $selVersion['hashrate'] . $selVersion['measurement'],
             ]) }}
-            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selModel->asicBrand->slug, 'asicModel' => $selModel->slug]) }}"
-                class="inline text-indigo-500 hover:text-indigo-600">{{ __('Offers') }} {{ $selModel->name }}</a>
+            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selVersion['brand_slug'], 'asicModel' => $selVersion['model_slug']]) }}"
+                class="inline text-indigo-500 hover:text-indigo-600">{{ __('Offers') }} {{ $selModel['name'] }}</a>
         @endif
         {{ __('descriptions.calculator.params', [
-            'model' => $selModel->name,
-            'version' => $selVersion->hashrate . $selVersion->measurement,
-            'efficiency' => $selVersion->efficiency . ' j/' . $selVersion->measurement,
-            'power' => $selVersion->efficiency * $selVersion->hashrate,
+            'model' => $selModel['name'],
+            'version' => $selVersion['hashrate'] . $selVersion['measurement'],
+            'efficiency' => $selVersion['efficiency'] . ' j/' . $selVersion['measurement'],
+            'power' => $selVersion['efficiency'] * $selVersion['hashrate'],
             'tariff' => 5,
-            'coins' => $selModel->algorithm['coins']->pluck('abbreviation')->implode(', '),
-            'comission' => $haveProfits ? $selVersion->profits[0]['coins'][0]['fee'] : 0,
+            'coins' => collect($selVersion['profits'])->pluck('coins.abbreviation')->implode(', '),
+            'comission' => $haveProfits ? $selVersion['profits'][0]['coins'][0]['fee'] : 0,
             'uptime' => 99.7,
-            'algorithm' => $selModel->algorithm->name,
+            'algorithm' => $selVersion['algorithm'],
         ]) }}
     </div>
 

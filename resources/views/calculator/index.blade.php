@@ -1,11 +1,11 @@
 <x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
-    ($rModel ? ($rVersion ? $selModel->name . ' ' . $selVersion->hashrate : $selModel->name) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
-    ($rModel ? ($rVersion ? ' ' . $selModel->name . ' ' . $selVersion->hashrate : ' ' . $selModel->name) : '') .
+    ($rModel ? ($rVersion ? $selModel['name'] . ' ' . $selVersion['hashrate'] : $selModel['name']) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
+    ($rModel ? ($rVersion ? ' ' . $selModel['name'] . ' ' . $selVersion['hashrate'] : ' ' . $selModel['name']) : '') .
     ' в удобном калькуляторе доходности асиков'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
-            'asicModel' => $selModel->slug,
-            'asicVersion' => $selVersion->hashrate,
+            'asicModel' => $selVersion['model_slug'],
+            'asicVersion' => $selVersion['hashrate'],
         ])
         : null }}">
     <x-slot name="header">
@@ -27,7 +27,7 @@
                 <section class="mt-4 sm:mt-6 lg:mt-8">
                     <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
                         <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
-                            {{ __('Best value offers') }} {{ $selModel->name }}
+                            {{ __('Best value offers') }} {{ $selModel['name'] }}
                         </h2>
                     </div>
 

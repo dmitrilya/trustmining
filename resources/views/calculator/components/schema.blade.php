@@ -1,61 +1,61 @@
-<meta itemprop="name" content="{{ $selModel->asicBrand->name . ' ' . $selModel->name }}" />
+<meta itemprop="name" content="{{ $selVersion['brand_name'] . ' ' . $selModel['name'] }}" />
 <meta itemprop="description"
-    content="ASIC майнер от производителя {{ $selModel->asicBrand->name }} модели {{ $selModel->name }} на {{ $selVersion->hashrate }} {{ $selVersion->measurement }}" />
+    content="ASIC майнер от производителя {{ $selVersion['brand_name'] }} модели {{ $selModel['name'] }} на {{ $selVersion['hashrate'] }} {{ $selVersion['measurement'] }}" />
 <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
-    <meta itemprop="name" content="{{ $selModel->asicBrand->name }}" />
+    <meta itemprop="name" content="{{ $selVersion['brand_name'] }}" />
 </div>
 <div itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
-    <meta itemprop="name" content="{{ $selModel->name }}">
+    <meta itemprop="name" content="{{ $selModel['name'] }}">
 </div>
-@if ($selVersion->reviews_count)
+@if ($selVersion['reviews_count'])
     <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-        <meta itemprop="ratingValue" content="{{ $selVersion->reviews_avg }}" />
+        <meta itemprop="ratingValue" content="{{ $selVersion['reviews_avg'] }}" />
         <meta itemprop="worstRating" content="1">
         <meta itemprop="bestRating" content="5" />
-        <meta itemprop="reviewCount" content="{{ $selVersion->reviews_count }}" />
+        <meta itemprop="reviewCount" content="{{ $selVersion['reviews_count'] }}" />
         <link itemprop="url"
             href="{{ route('database.asic-miners.reviews', [
-                'asicBrand' => $selVersion->brand_slug,
-                'asicModel' => $selVersion->model_slug,
+                'asicBrand' => $selVersion['brand_slug'],
+                'asicModel' => $selVersion['model_slug'],
             ]) }}" />
     </div>
 @endif
 <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
     <meta itemprop="name" content="{{ __('Algorithm') }}">
-    <meta itemprop="value" content=" {{ $selVersion->algorithm }}">
+    <meta itemprop="value" content=" {{ $selVersion['algorithm'] }}">
 </div>
 <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
     <meta itemprop="valueReference" content="{{ __('Power') }}" />
     <meta itemprop="unitCode" content="W" />
-    <meta itemprop="value" content="{{ $selVersion->efficiency * $selVersion->hashrate }}" />
+    <meta itemprop="value" content="{{ $selVersion['efficiency'] * $selVersion['hashrate'] }}" />
 </div>
 <div itemprop="additionalProperty" itemscope itemtype="http://schema.org/PropertyValue">
     <meta itemprop="name" content="{{ __('Average price') }}">
-    <meta itemprop="value" content="{{ $selVersion->price ? $selVersion->price : __('No data') }}">
+    <meta itemprop="value" content="{{ $selVersion['price'] ? $selVersion['price'] : __('No data') }}">
 </div>
-@if (count($selVersion->profits))
+@if (count($selVersion['profits']))
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round($selVersion->profits[0]['profit'] / $rub, 2) }}" />
+        <meta itemprop="value" content="{{ round($selVersion['profits'][0]['profit'] / $rub, 2) }}" />
     </div>
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round(($selVersion->profits[0]['profit'] / $rub) * 30, 2) }}" />
+        <meta itemprop="value" content="{{ round(($selVersion['profits'][0]['profit'] / $rub) * 30, 2) }}" />
     </div>
-    @if ($selVersion->price)
+    @if ($selVersion['price'])
         <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
             <meta itemprop="valueReference" content="{{ __('Payback') }}" />
             <meta itemprop="unitCode" content="DAY" />
             <meta itemprop="value"
-                content="{{ $selVersion->profits[0]['profit'] -
-                    ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000 >
+                content="{{ $selVersion['profits'][0]['profit'] -
+                    ($selVersion['efficiency'] * $selVersion['hashrate'] * 5 * $rub * 24) / 1000 >
                 0
                     ? round(
-                        $selVersion->price /
-                            ($selVersion->profits[0]['profit'] -
-                                ($selVersion->efficiency * $selVersion->hashrate * 5 * $rub * 24) / 1000),
+                        $selVersion['price'] /
+                            ($selVersion['profits'][0]['profit'] -
+                                ($selVersion['efficiency'] * $selVersion['hashrate'] * 5 * $rub * 24) / 1000),
                     )
                     : 0 }}" />
         </div>
@@ -63,7 +63,7 @@
 @endif
 
 @php
-    $modelAds = $selModel->asicVersions->pluck('ads')->flatten();
+    $modelAds = collect($selModel['asic_versions'])->pluck('ads')->flatten();
     $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();
 @endphp
 
@@ -74,7 +74,7 @@
         <meta itemprop="priceCurrency"
             content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
         <link itemprop="url"
-            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['model_name']]) }}" />
     </div>
 @else
     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
@@ -82,6 +82,6 @@
         <meta itemprop="lowPrice" content="0" />
         <meta itemprop="priceCurrency" content="RUB" />
         <link itemprop="url"
-            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion->model_name]) }}" />
+            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['model_name']]) }}" />
     </div>
 @endif

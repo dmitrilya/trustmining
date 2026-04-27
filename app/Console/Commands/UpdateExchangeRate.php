@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 
 use App\Models\Database\AsicModel;
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
+use App\Models\Morph\View;
 
 class UpdateExchangeRate extends Command
 {
@@ -155,5 +157,32 @@ class UpdateExchangeRate extends Command
         });
 
         Cache::put('calculator_models', $models);
+
+        $models = $models->map(fn($model) => [
+            'id' => $model->id,
+            'name' => $model->name,
+            'asic_versions' => $model->asicVersions->map(function ($version) {
+                $versionData = $version->toArray();
+                $versionData['ads_count'] = count($version->ads);
+                unset($versionData['ads']);
+                unset($versionData['price_data']);
+                unset($versionData['asic_model_id']);
+                unset($versionData['original_hashrate']);
+                unset($versionData['original_efficiency']);
+                $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
+                    'profit' => $profit['profit'],
+                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit', 'fee']))->toArray()
+                ])->toArray();
+
+                return $versionData;
+            })->toArray()
+        ]);
+
+        Cache::put('optimized_calculator_models', [
+            'all' => $models,
+            'popular' => $models->whereIn('id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id')),
+            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate
+        ]);
     }
 }
