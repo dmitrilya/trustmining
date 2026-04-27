@@ -26,6 +26,7 @@
                 'slug' => $post->channel->slug,
                 'subscribers' => $post->channel->active_subscribers_count,
             ])
+            <meta itemprop="headline" content="{{ str($post->content)->stripTags()->limit(70) }}" />
             <div itemprop="articleBody"
                 class="mt-2 sm:mt-3 text-xs text-slate-700 dark:text-slate-300 h-16 overflow-hidden line-clamp-4">
                 {!! $post->content !!}</div>

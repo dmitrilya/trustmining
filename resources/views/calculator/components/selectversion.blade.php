@@ -8,10 +8,7 @@
     openVersion: false,
     get filteredModels() {
         if (!this.search) return this.popular_models;
-        else if (this.selectedModel) {
-        console.log('here');
-        return [this.selectedModel];
-}
+        else if (this.selectedModel) return [this.selectedModel];
 
         const s = this.search.toLowerCase();
         return this.models.filter(m => m.name.toLowerCase().includes(s));
