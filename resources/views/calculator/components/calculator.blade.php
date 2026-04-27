@@ -157,8 +157,8 @@
 
                             <div>
                                 <div class="flex justify-between text-xs font-bold uppercase italic">
-                                    <span class="text-emerald-600">{{ __('Income') }}</span>
-                                    <span class="text-rose-600">{{ __('Expense') }}</span>
+                                    <span class="text-emerald-700">{{ __('Income') }}</span>
+                                    <span class="text-rose-700">{{ __('Expense') }}</span>
                                 </div>
                                 <div
                                     class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
