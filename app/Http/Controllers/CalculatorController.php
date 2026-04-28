@@ -19,8 +19,12 @@ class CalculatorController extends Controller
 
         $selModel = $asicModel && $asicModel->exists ? $models['all']->where('id', $asicModel->id)->first() : $models['all']->where('name', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['asic_versions'])->where('id', $asicVersion->id)->first() : $selModel['asic_versions'][0];
-        $ads = $this->getAds()->where('asic_models.id', $selModel['id'])
-            ->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get();
+        $ads = Cache::remember(
+            'asic_model_ads_' . $selModel['id'],
+            now()->endOfDay(),
+            fn() => $this->getAds()->where('asic_models.id', $selModel['id'])
+                ->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get()
+        );
 
         return view('calculator.index', [
             'models' => $models['all'],

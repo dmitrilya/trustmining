@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -29,10 +30,14 @@ class MetricsController extends Controller
 
         if (!$latestHashrate) return back();
 
-        $ads = $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
-            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
-            ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
-            ->orderByDesc('ads.ordering_id')->limit(14)->get();
+        $ads = Cache::remember(
+            'algorithm_ads_' . $coin->algorithm->slug,
+            now()->endOfDay(),
+            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
+                ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
+                ->orderByDesc('ads.ordering_id')->limit(14)->get()
+        );
 
         return view('metrics.network.hashrate.index', [
             'coin' => $coin,
@@ -45,10 +50,14 @@ class MetricsController extends Controller
     {
         $latestRate = $coin->rate;
 
-        $ads = $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
-            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
-            ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
-            ->orderByDesc('ads.ordering_id')->limit(14)->get();
+        $ads = Cache::remember(
+            'algorithm_ads_' . $coin->algorithm->slug,
+            now()->endOfDay(),
+            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
+                ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
+                ->orderByDesc('ads.ordering_id')->limit(14)->get()
+        );
 
         return view('metrics.coin.rate.index', [
             'coin' => $coin,
@@ -113,10 +122,14 @@ class MetricsController extends Controller
             $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalcuateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalcuateDates[1]), Carbon::createFromTimestamp($recalcuateDates[0])])->avg('hashrate') - 1) * 100, 2);
         }
 
-        $ads = $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
-            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
-            ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
-            ->orderByDesc('ads.ordering_id')->limit(14)->get();
+        $ads = Cache::remember(
+            'algorithm_ads_' . $coin->algorithm->slug,
+            now()->endOfDay(),
+            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
+                ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
+                ->orderByDesc('ads.ordering_id')->limit(14)->get()
+        );
 
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,

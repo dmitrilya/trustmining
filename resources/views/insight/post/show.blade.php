@@ -62,6 +62,8 @@
             </picture>
         </div>
 
+        <meta itemprop="headline" content="{{ str($post->content)->stripTags()->limit(70) }}" />
+
         <div x-show="!edit">
             <div itemprop="articleBody" class="ql-editor mt-6 sm:mt-8 lg:mt-10 text-xs xs:text-sm sm:text-base">
                 @if ($moder && isset($moderation->data['content']))
@@ -72,7 +74,7 @@
             </div>
         </div>
 
-        <meta name="url" content="{{ route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id]) }}" />
+        <link itemprop="url" href="{{ route('insight.post.show', ['channel' => $channel->slug, 'post' => $post->id]) }}" />
 
         @if ($user && $user->id == $channel->user_id)
             @include('insight.post.edit')
