@@ -2,7 +2,9 @@
 
 namespace App\Services\Insight;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\ModerationTrait;
@@ -11,6 +13,7 @@ use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 
 use App\Models\Insight\Channel;
+use App\Models\Insight\Series;
 use App\Models\Insight\Comment;
 use App\Models\Insight\ContentModel;
 use App\Models\Morph\Moderation;
@@ -61,12 +64,31 @@ abstract class ContentService
     /**
      * Получить популярный контент за период
      */
-    public function getPopular(string $modelClass, int $limit = 5, string $period = 'week'): Collection
+    public function getPopular(string $modelType, int $limit = 5, string $period = 'week'): Collection
     {
-        $startDate = now()->parse("-{$period}");
+        $modelClass = Relation::getMorphedModel($modelType);
 
-        return $modelClass::query()->withCount(['views as views_count_period' => fn($q) => $q->where('created_at', '>=', $startDate)])
-            ->withCount('views')->orderByDesc('views_count_period')->limit($limit)->get();
+        $data = Cache::remember(
+            "popular_{$modelType}_{$period}_{$limit}",
+            now()->addHours(6),
+            function () use ($modelType, $modelClass, $period, $limit) {
+                return $modelClass::query()
+                    ->withCount('views')
+                    ->withCount(['views as views_count_period' => fn($q) => $q->where('created_at', '>=', now()->parse("-{$period}"))])
+                    ->orderByDesc('views_count_period')
+                    ->limit($limit)
+                    ->get()
+                    ->toArray();
+            }
+        );
+
+        return $modelClass::hydrate($data)->map(function ($content) {
+            $content->setRelation('channel', Channel::hydrate([$content->channel])->first());
+            $content->offsetUnset('channel');
+            $content->setRelation('series', Series::hydrate($content->series));
+            $content->offsetUnset('series');
+            return $content;
+        });
     }
 
     /**

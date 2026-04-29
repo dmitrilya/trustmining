@@ -230,11 +230,7 @@
                 </div>
 
                 <div class="lg:col-span-2 xl:col-span-3 flex items-stretch gap-6">
-                    @php
-                        $article = App\Models\Insight\Content\Article::inRandomOrder()->first();
-                    @endphp
-
-                    @if ($article)
+                    @if ($popularArticle)
                         <div itemscope itemtype="https://schema.org/ItemList" class="hidden md:block w-full">
                             <meta itemprop="name" content="Articles in menu" />
                             <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
@@ -242,7 +238,7 @@
                             <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                                 <meta itemprop="position" content="1" />
 
-                                @include('insight.article.components.card', ['article' => $article])
+                                @include('insight.article.components.card', ['article' => $popularArticle])
                             </div>
                         </div>
                     @endif
