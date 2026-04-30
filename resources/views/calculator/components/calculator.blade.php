@@ -17,8 +17,6 @@
             uptime: 99.7,
             tax: 0,
             difficultyGrowth: 0,
-            view: 'month',
-            addParamsShow: window.innerWidth > 640,
             get dailyIncome() {
                 return (this.version.profits[this.profitNumber].profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
             },
@@ -133,7 +131,7 @@
 
             <template x-if="version !== null">
                 <div>
-                    <div style="min-height: 228px" class="space-y-2 sm:space-y-3 lg:space-y-4">
+                    <div x-data="{ view: 'month' }" style="min-height: 228px" class="space-y-2 sm:space-y-3 lg:space-y-4">
                         <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
                             <button @click="view = 'day'"
                                 :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-80'"
@@ -249,7 +247,7 @@
 
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                @click="profitNumber = i, fee = profit.coins[0].fee; console.log(profit)">
+                                @click="profitNumber = i, fee = profit.coins[0].fee;">
                                 <div>
                                     <label class="flex items-center">
                                         <input type="radio" name="profitNumber" :value="i"

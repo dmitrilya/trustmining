@@ -1,6 +1,6 @@
 <div style="height: 118.67px" x-data="{
-    models: {{ $models->values() }},
-    popular_models: {{ $popularModels->values() }},
+    models: Object.freeze({{ $models->values() }}),
+    popular_models: Object.freeze({{ $popularModels->values() }}),
     selectedModel: {{ collect($selectedModel) }},
     selectedVersion: {{ collect($selectedVersion) }},
     search: '{{ $selectedModel['name'] }}',
