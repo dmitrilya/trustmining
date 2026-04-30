@@ -1,7 +1,12 @@
 @layer base {
     @font-face {
         font-family: "Nunito";
-        src: url("../fonts/Nunito.ttf");
+        src:
+            url("../fonts/Nunito.woff2") format("woff2"),
+            url("../fonts/Nunito.woff") format("woff"),
+            url("../fonts/Nunito.ttf") format("truetype");
+        font-weight: 100 900;
+        font-style: normal;
         font-display: swap;
     }
 }

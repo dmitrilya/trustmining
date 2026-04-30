@@ -42,7 +42,7 @@
                     </div>
                 @elseif ($ad->last_moderation_status == 3)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-900 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
                         {{ __('Rejected') }}
                     </div>
                 @endif

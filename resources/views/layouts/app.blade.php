@@ -95,7 +95,7 @@
     <script type="module">
         import {
             onINP
-        } from 'https://unpkg.com/web-vitals@5?module';
+        } from 'https://unpkg.com/web-vitals@5.2.0/dist/web-vitals.js?module';
 
         onINP(({
             value,

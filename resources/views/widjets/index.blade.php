@@ -62,7 +62,7 @@
                             <button @click="toggleBlock(key)"
                                 class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-200"
                                 :class="blocks.includes(key) ?
-                                    'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-300' :
+                                    'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
                                     'bg-white border-slate-200 text-slate-500 opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
 
                                 <span x-text="item"></span>
@@ -170,7 +170,7 @@
                             <button @click="toggleBlock(key)"
                                 class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-200"
                                 :class="blocks.includes(key) ?
-                                    'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-300' :
+                                    'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
                                     'bg-white border-slate-200 text-slate-500 opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
 
                                 <span x-text="item"></span>

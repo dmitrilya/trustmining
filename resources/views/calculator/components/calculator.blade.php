@@ -255,7 +255,7 @@
                                         <input type="radio" name="profitNumber" :value="i"
                                             :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
                                             :checked="profitNumber == i"
-                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-blue-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
                                     </label>
                                 </div>
                                 <template x-for="coin in profit.coins" :key="coin.abbreviation">
