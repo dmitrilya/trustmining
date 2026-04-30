@@ -51,7 +51,7 @@
             'efficiency' => $selVersion['efficiency'] . ' j/' . $selVersion['measurement'],
             'power' => $selVersion['efficiency'] * $selVersion['hashrate'],
             'tariff' => 5,
-            'coins' => collect($selVersion['profits'])->pluck('coins.abbreviation')->implode(', '),
+            'coins' => collect($selVersion['profits'])->pluck('coins')->flatten(1)->pluck('name')->implode(', '),
             'comission' => $haveProfits ? $selVersion['profits'][0]['coins'][0]['fee'] : 0,
             'uptime' => 99.7,
             'algorithm' => $selVersion['algorithm'],
