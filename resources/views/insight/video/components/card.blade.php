@@ -1,6 +1,7 @@
 <div itemprop="item" itemscope itemtype="https://schema.org/VideoObject"
     class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
-    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center" x-data="{ shown: false }"
+        x-intersect.once.margin.300px="shown = true">
         @php
             $preview = explode('.', $video->preview);
             $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
@@ -10,14 +11,16 @@
             $previewmd = Storage::url($baseName . '_340.' . $preview[1]);
         @endphp
 
-        <picture class="w-full">
-            <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
-            <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
-            <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
+        <template x-if="shown">
+            <picture class="w-full">
+                <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
+                <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
+                <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
 
-            <img itemprop="thumbnailUrl" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
-                alt="{{ $video->title }}" />
-        </picture>
+                <img itemprop="thumbnailUrl" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
+                    alt="{{ $video->title }}" />
+            </picture>
+        </template>
     </div>
     <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
         <div>

@@ -5,7 +5,7 @@
     @if (count($hosting->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->slug]) }}"
-                draggable="false">
+                draggable="false" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true">
                 @php
                     $preview = explode('.', $hosting->images[0]);
                     $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
@@ -13,11 +13,13 @@
                     $previewsm = $baseName . '_400' . '.' . $preview[1];
                 @endphp
 
-                <picture class="w-full">
-                    <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+                <template x-if="shown">
+                    <picture class="w-full">
+                        <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
-                    <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Hosting preview">
-                </picture>
+                        <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Hosting preview">
+                    </picture>
+                </template>
             </a>
         </div>
     @endif
