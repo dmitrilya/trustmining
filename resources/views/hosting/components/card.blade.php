@@ -5,7 +5,8 @@
     @if (count($hosting->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->slug]) }}"
-                draggable="false" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true">
+                draggable="false" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true"
+                aria-label="{{ $hosting->user->name }} hosting">
                 @php
                     $preview = explode('.', $hosting->images[0]);
                     $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);

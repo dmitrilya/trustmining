@@ -51,7 +51,8 @@
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             <a class="block w-full h-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }"
-                x-intersect.once.margin.300px="shown = true" aria-label="{{ $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement }} offer">
+                x-intersect.once.margin.300px="shown = true"
+                aria-label="{{ $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement }} offer">
                 <template x-if="shown">
                     <picture class="w-full">
                         <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
