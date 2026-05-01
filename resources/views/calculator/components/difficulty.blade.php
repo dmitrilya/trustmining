@@ -4,24 +4,17 @@
         {{ __('Network difficulty') }} BTC
     </h2>
 
-    @php
-        $coin = App\Models\Database\Coin::where('abbreviation', 'BTC')->first();
-        $article = App\Models\Insight\Content\Article::find(10000001);
-    @endphp
-
     <div class="text-xs xs:text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 mb-3 sm:mb-4 lg:mb-6">
-        {{ number_format($coin->networkDifficulties()->latest()->first()->difficulty) }}
+        {{ $difficultyData['difficulty'] }}
     </div>
 
-    @if ($article)
-        <a class="text-xxs xs:text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-600 underline mt-2 sm:mt-3"
-            target="_blank"
-            href="{{ route('insight.article.show', ['channel' => $article->channel->slug, 'article' => $article->id . '-' . Str::slug($article->title)]) }}">
-            {{ __('What is network difficulty?') }}
-        </a>
-    @endif
+    <a class="text-xxs xs:text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-600 underline mt-2 sm:mt-3"
+        target="_blank"
+        href="{{ route('insight.article.show', ['channel' => $difficultyData['article']['channel_slug'], 'article' => $difficultyData['article']['id'] . '-' . $difficultyData['article']['slug']]) }}">
+        {{ __('What is network difficulty?') }}
+    </a>
 
-    <a href="{{ route('metrics.network.difficulty', ['coin' => $coin->name]) }}" target="_blank">
+    <a href="{{ route('metrics.network.difficulty', ['coin' => $difficultyData['coin']]) }}" target="_blank">
         <x-primary-button class="flex items-center mt-2 sm:mt-3">
             <svg class="size-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">

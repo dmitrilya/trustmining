@@ -8,6 +8,7 @@ use Illuminate\View\View as ViewBlade;
 
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
+use App\Models\Database\Coin;
 
 class CalculatorController extends Controller
 {
@@ -34,7 +35,8 @@ class CalculatorController extends Controller
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
-            'ads' => $ads
+            'ads' => $ads,
+            'difficultyData' => Cache::get('calculator_difficulty_data')
         ]);
     }
 

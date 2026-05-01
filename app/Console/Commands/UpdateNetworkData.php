@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
@@ -36,6 +37,16 @@ class UpdateNetworkData extends Command
         $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
         $coin->networkHashrates()->create(['hashrate' => $data->hash_rate * 1000000000]);
         $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
+
+        Cache::put('calculator_difficulty_data', [
+            'coin' => $coin->name,
+            'difficulty' => $data->difficulty,
+            'article' => [
+                'id' => 10000001,
+                'slug' => 'sloznost-kriptoseti-rascet-i-vliianie',
+                'channel_slug' => 'trustmining'
+            ]
+        ]);
 
         // LTC
         $coin = Coin::where('abbreviation', 'LTC')->first();
