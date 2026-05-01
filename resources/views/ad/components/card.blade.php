@@ -50,13 +50,15 @@
         @endif
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <a class="block w-full" draggable="false" href="{{ $href }}">
-                <picture class="w-full">
-                    <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+            <a class="block w-full h-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }"
+                x-intersect.once.margin.200px="shown = true">
+                <template x-if="shown">
+                    <picture class="w-full">
+                        <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
 
-                    <img fetchpriority="high" class="w-full object-cover" src="{{ Storage::url($previewsm) }}"
-                        alt="Ad preview">
-                </picture>
+                        <img class="w-full object-cover" src="{{ Storage::url($previewsm) }}" alt="Ad preview">
+                    </picture>
+                </template>
             </a>
         </div>
     </div>

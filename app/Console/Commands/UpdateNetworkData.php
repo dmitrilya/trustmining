@@ -40,7 +40,7 @@ class UpdateNetworkData extends Command
 
         Cache::put('calculator_difficulty_data', [
             'coin' => $coin->name,
-            'difficulty' => $data->difficulty,
+            'difficulty' => number_format($data->difficulty),
             'article' => [
                 'id' => 10000001,
                 'slug' => 'sloznost-kriptoseti-rascet-i-vliianie',

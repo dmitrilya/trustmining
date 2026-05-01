@@ -37,6 +37,7 @@
                             'blade' => 'ad.components.card',
                             'model' => 'ad',
                             'bigWrapper' => true,
+                            'lazy' => true
                         ])
                     </div>
                 </section>

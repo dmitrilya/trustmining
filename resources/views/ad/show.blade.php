@@ -221,7 +221,7 @@
                     <div class="h-full flex flex-col justify-between">
                         @if (!count($ad->images))
                             <div class="w-full aspect-[4/3] rounded-lg col-start-2">
-                                <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
+                                <img fetchpriority="high" itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
                                     class="w-full rounded-lg object-cover object-center">
                             </div>
                         @else

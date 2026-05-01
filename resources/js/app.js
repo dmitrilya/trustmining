@@ -12,9 +12,11 @@ import './InfiniteLoader';
 import Alpine from 'alpinejs';
 import mask from '@alpinejs/mask';
 import collapse from '@alpinejs/collapse'
+import intersect from '@alpinejs/intersect';
 
-Alpine.plugin(collapse)
 Alpine.plugin(mask);
+Alpine.plugin(collapse)
+Alpine.plugin(intersect);
 
 window.Alpine = Alpine;
 
