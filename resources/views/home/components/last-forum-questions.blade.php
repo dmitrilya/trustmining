@@ -15,7 +15,7 @@
                 <div
                     class="px-4 py-2 xs:py-3 sm:px-6 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">
                     <div class="mb-1.5 sm:mb-2 flex justify-between">
-                        <div class="text-xxs sm:text-xs text-slate-500">
+                        <div class="text-xxs sm:text-xs text-slate-600 dark:text-slate-500">
                             {{ __($forumQuestion->forumSubcategory->forumCategory->name) }}.
                             {{ __($forumQuestion->forumSubcategory->name) }}
                         </div>
@@ -24,7 +24,7 @@
                             {{-- <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                 {{ __('Views') }}: <span>{{ $forumQuestion->views_count }}</span>
                             </div> --}}
-                            <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
+                            <div class="text-xxs sm:text-xs text-slate-600 dark:text-slate-500 whitespace-nowrap">
                                 {{ __('Answers') }}:
                                 <span>{{ $forumQuestion->moderated_forum_answers_count }}</span>
                             </div>
