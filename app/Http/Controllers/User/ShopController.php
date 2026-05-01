@@ -57,7 +57,7 @@ class ShopController extends Controller
      */
     public function hosting(User $user)
     {
-        if (!$user->tariff || !$user->tariff->can_have_hosting || !$user->hosting || $user->hosting->moderation)
+        if (!$user->tariff || !$user->tariff->can_have_hosting || !$user->hosting || $user->hosting->moderation || !$user->company)
             return redirect()->route('company', ['user' => $user->slug]);
 
         $this->addView(request(), $user->hosting);

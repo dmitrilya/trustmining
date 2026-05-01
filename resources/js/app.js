@@ -51,14 +51,14 @@ document.addEventListener('alpine:init', () => {
         sortAsc: true,
         async init() {
             let resp = await fetch(window.location.origin + window.location.pathname + '/get-models');
-            this.models = await resp.json();
-            this.sourceModels = this.models;
+            this.sourceModels = Object.freeze(await resp.json());
+            this.models = [...this.sourceModels];
         },
         sort(col, asc = true) {
             if (this.sortCol === col) this.sortAsc = !this.sortAsc;
             else this.sortAsc = asc;
             this.sortCol = col;
-            this.models.sort((a, b) => {
+            this.models = [...this.models].sort((a, b) => {
                 if (a[this.sortCol] < b[this.sortCol]) return this.sortAsc ? 1 : -1;
                 if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
                 return 0;
