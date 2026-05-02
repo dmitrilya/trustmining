@@ -29,7 +29,7 @@ class StoreReviewRequest extends FormRequest
             'reviewable_type' => ['required', Rule::in(['user', 'asic-model', 'gpu-model'])],
             'reviewable_id' => [
                 'required',
-                'exists:' . $this->reviewable_type . ',id',
+                'exists:' . str_replace('-', '_', $this->reviewable_type) . 's,id',
                 Rule::notIn([$this->user()->id]),
                 Rule::unique('reviews')->where(
                     fn($query) => $query->where('reviewable_type', $this->reviewable_type)

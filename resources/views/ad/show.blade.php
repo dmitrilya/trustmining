@@ -58,6 +58,7 @@
         <meta property="og:type" content="product">
     </x-slot>
 
+    <script src="https://api-maps.yandex.ru/v3/?apikey=edbdf37c-6677-43bf-8434-455e393b7362&lang=ru_RU"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 md:p-8">
@@ -199,7 +200,7 @@
         @endif
 
         <div itemscope itemtype="https://schema.org/Product"
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-14">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
             <meta itemprop="sku" content="{{ $ad->id }}">
             <link itemprop="url" href="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
@@ -219,16 +220,45 @@
             <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 offer-card">
                 <div class="md:col-span-5">
                     <div class="h-full flex flex-col justify-between">
-                        @if (!count($ad->images))
-                            <div class="w-full aspect-[4/3] rounded-lg col-start-2">
-                                <img fetchpriority="high" itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
-                                    class="w-full rounded-lg object-cover object-center">
-                            </div>
-                        @else
-                            <x-carousel :images="array_merge([$ad->preview], $ad->images)"></x-carousel>
-                        @endif
+                        <div class="flex gap-2" x-data="{ active: 0 }">
+                            <div class="min-w-16 w-16 flex flex-col gap-2">
+                                <div @click="active = 0"
+                                    class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                    :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-70 hover:opacity-100'">
+                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
+                                        class="w-full h-full rounded-lg object-cover">
+                                </div>
 
-                        @include('ad.components.characteristics')
+                                @foreach ($ad->images as $index => $image)
+                                    <div @click="active = {{ $index + 1 }}"
+                                        class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                        :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
+                                            'opacity-70 hover:opacity-100'">
+                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }}"
+                                            class="w-full h-full rounded-lg object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                                <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
+                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
+                                        class="w-full h-full object-cover">
+                                </div>
+
+                                @foreach ($ad->images as $index => $image)
+                                    <div x-show="active === {{ $index + 1 }}" x-transition.opacity.duration.300ms
+                                        class="absolute inset-0">
+                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }}"
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="hidden md:block">
+                            @include('ad.components.characteristics')
+                        </div>
                     </div>
                 </div>
 
@@ -249,7 +279,8 @@
                                 {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
                             </h1>
                         @else
-                            <meta itemprop="name" content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
+                            <meta itemprop="name"
+                                content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
                         @endif
 
                         <div
@@ -385,10 +416,84 @@
                 </div>
             </div>
 
-            <div class="mt-8">
-                @include('ad.components.description', ['description' => $ad->description])
+            <div class="mt-8" x-data="{ selectedTab: 'description' }">
+                <div
+                    class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-300 dark:border-slate-800">
+                    <ul class="flex flex-wrap -mb-px">
+                        <li class="mr-0.5 sm:mr-2">
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'description'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'description' !=
+                                        selectedTab,
+                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'description' ==
+                                        selectedTab
+                                }">
+                                {{ __('Description') }}
+                            </button>
+                        </li>
+                        <li class="mr-0.5 sm:mr-2 md:hidden">
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'characteristics'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'characteristics' !=
+                                        selectedTab,
+                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'characteristics' ==
+                                        selectedTab
+                                }">
+                                {{ __('Characteristics') }}
+                            </button>
+                        </li>
+                        <li class="mr-0.5 sm:mr-2">
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'reviews'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'reviews' !=
+                                        selectedTab,
+                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'reviews' ==
+                                        selectedTab
+                                }">
+                                {{ __('Reviews') }}
+                            </button>
+                        </li>
+                        <li>
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'location'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'location' !=
+                                        selectedTab,
+                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'location' ==
+                                        selectedTab
+                                }">
+                                {{ __('Location') }}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
 
-                @include('ad.components.can_trust')
+                <div x-show="selectedTab == 'description'">
+                    @include('ad.components.description', ['description' => $ad->description])
+
+                    @include('ad.components.can_trust')
+                </div>
+
+                <div x-show="selectedTab == 'characteristics'" style="display: none">
+                    @include('ad.components.characteristics')
+                </div>
+
+                <div class="space-y-6" x-show="selectedTab == 'reviews'" style="display: none">
+                    @include('review.reviews', ['auth' => $user, 'reviews' => $ad->user->reviews])
+                    @include('review.send', [
+                        'auth' => $user,
+                        'reviews' => $ad->user->reviews,
+                        'type' => 'user',
+                        'id' => $ad->user->id,
+                    ])
+                </div>
+
+                <div x-show="selectedTab == 'location'" style="display: none">
+                    @include('ad.components.location')
+                </div>
             </div>
         </div>
 
