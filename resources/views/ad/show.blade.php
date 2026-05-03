@@ -491,7 +491,7 @@
                     ])
                 </div>
 
-                <div x-show="selectedTab == 'location'" style="display: none">
+                <div x-show="selectedTab == 'location'" X-init="initMap()" style="display: none">
                     @include('ad.components.location')
                 </div>
             </div>
