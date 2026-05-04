@@ -3,7 +3,7 @@
     selectedModel: {{ isset($selectedModel) ? $selectedModel : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '-')" required
+    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replaceAll(' ', '-')" required
         aria-label="{{ __('Model') }}">
 
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
