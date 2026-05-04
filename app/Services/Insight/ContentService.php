@@ -110,7 +110,7 @@ abstract class ContentService
     }
 
     /**
-     * Comment content
+     * Moderate content
      * 
      * @param Channel  $channel
      * @param ContentModel  $model
@@ -120,7 +120,16 @@ abstract class ContentService
     public function moderate(Channel $channel, ContentModel $model, array $data): Moderation
     {
         $moderation = $model->moderations()->create(['data' => $data]);
-        if ($channel->user->company && !$channel->user->company->moderation) {
+
+        $hasCompany = $channel->user->company && !$channel->user->company->moderation;
+
+        $hasRecentModeratedContent = $model->newQuery()
+            ->where('channel_id', $channel->id)
+            ->where('moderation', false)
+            ->where('created_at', '>=', now()->subMonths(3))
+            ->exists();
+
+        if ($hasCompany || $hasRecentModeratedContent) {
             $moderation->moderation_status_id = 1;
             $this->acceptModeration(true, $moderation);
         } else $this->notify('New moderation', collect([User::find(10000000)]));
