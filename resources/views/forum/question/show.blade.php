@@ -1,4 +1,4 @@
-<x-app-layout title="{{ $question->theme }} | TRUSTMINING Forum"
+<x-app-layout title="{{ $question->theme }} | TRUSTMINING Форум"
     description="{{ str($question->text)->stripTags()->limit(150) }}">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">

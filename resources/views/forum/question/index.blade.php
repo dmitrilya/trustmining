@@ -1,4 +1,4 @@
-<x-app-layout title="Список вопросов | TRUSTMINING Forum"
+<x-app-layout title="Список вопросов | TRUSTMINING Форум"
     description="Список всех вопросов на форуме TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">

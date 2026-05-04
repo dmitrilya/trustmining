@@ -1,4 +1,4 @@
-<x-app-layout title="Форум TrustMining"
+<x-app-layout title="TRUSTMINING Форум"
     description="Найдите ответ на вопрос среди постов на форуме TrustMining или задайте свой на любую тему из криптосферы">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">
