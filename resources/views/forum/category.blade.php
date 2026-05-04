@@ -1,4 +1,4 @@
-<x-app-layout title="Форум TrustMining: {{ __($category->name) }}"
+<x-app-layout title="{{ __($category->name) }} | Форум TrustMining"
     description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} или задайте свой">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">

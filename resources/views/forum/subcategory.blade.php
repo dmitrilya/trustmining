@@ -1,5 +1,5 @@
-<x-app-layout title="Форум TrustMining: {{ __($subcategory->name) }}"
-    description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} категории {{ __($category->name) }} или задайте свой">
+<x-app-layout title="{{ __($category->name) }} - {{ __($subcategory->name) }} | Форум TrustMining"
+    description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} категории {{ __($subcategory->name) }} или задайте свой">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">
             <nav aria-label="Breadcrumb">
