@@ -133,7 +133,7 @@ trait AdTrait
             $filters = $request->collect()->only(['Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models', 'Service', 'Material']);
 
             foreach ($filters as $key => $values) {
-                $key = str_replace('-', ' ', $key);
+                $key = str_replace('_', ' ', $key);
                 $values = is_array($values) ? $values : [$values];
 
                 $ads->where(function ($q) use ($key, $values) {
