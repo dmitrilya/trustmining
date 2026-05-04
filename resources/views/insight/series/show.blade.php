@@ -1,5 +1,5 @@
-<x-insight-layout title="{{ $channel->name }} - {{ $channel->brief_description }} | TM Insight"
-    description="{{ $channel->name }} - {{ $channel->description }} | TM Insight" :header="$channel->name" :channel="$channel"
+<x-insight-layout title="{{ $channel->name }} - {{ $channel->brief_description }} | {{ $series->name }} | TM Insight"
+    description="{{ $channel->name }} - {{ $channel->description }} | {{ $series->name }} | TM Insight" :header="$channel->name" :channel="$channel"
     itemtype="https://schema.org/CollectionPage" :itemname="trans_choice('insight.series', 1) . ' ' . $series->name">
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWorkSeries">
         @if ($channel->banner)
