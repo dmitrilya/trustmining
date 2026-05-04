@@ -91,7 +91,15 @@ trait AdTrait
 
             if ($request->asic_version_id) $ads->where('ads.asic_version_id', $request->asic_version_id);
 
-            if ($request->gpu_model) $ads->where('gpu_models.slug', $request->gpu_model);
+            if ($request->gpu_model) {
+                if (!DB::table('gpu_models')
+                    ->where('slug', $request->gpu_model)
+                    ->exists()) {
+                    abort(404, 'Model not found');
+                }
+                
+                $ads->where('gpu_models.slug', $request->gpu_model);
+            }
 
             if ($request->algorithms && count($request->algorithms))
                 $ads->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->whereIn('algorithms.slug', $request->algorithms);
