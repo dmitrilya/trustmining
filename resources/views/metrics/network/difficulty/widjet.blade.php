@@ -20,6 +20,8 @@
         }
     @endphp
 
+    <meta name="robots" content="noindex, nofollow">
+
     <title>Сложность сети {{ $coin->name }}: история, график и прогноз | TRUSTMINING</title>
     <meta name="description"
         content="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
