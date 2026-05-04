@@ -3,7 +3,7 @@
     $allModels = App\Models\Database\AsicModel::select(['id', 'name', 'slug'])->get();
 @endphp
 
-<div x-data="{ allModels: {{ $allModels->whereNotIn('slug', $requestModels)->values() }}, models: {{ $allModels->whereIn('slug', $requestModels) }}, search: '' }">
+<div x-data="{ allModels: {{ $allModels->whereNotIn('slug', $requestModels)->values() }}, models: {{ $allModels->whereIn('slug', $requestModels)->values() }}, search: '' }">
     <div>
         <x-input-label for="search" :value="__('For which models')" />
         <x-text-input id="search" type="text" ::value="search" placeholder="" @input="search = $el.value" />
