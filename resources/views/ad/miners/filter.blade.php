@@ -1,7 +1,7 @@
 @php
     $models = \App\Models\Database\AsicModel::where('release', '>', '2010-03-01')
         ->with(['asicBrand:id,name,slug', 'asicVersions:id,asic_model_id,hashrate', 'algorithm:id,name,slug'])
-        ->select(['id', 'name', 'algorithm_id', 'asic_brand_id'])
+        ->select(['id', 'name', 'slug', 'algorithm_id', 'asic_brand_id'])
         ->get();
 
     $rModel = request()->get('model');

@@ -1,5 +1,5 @@
 <div x-data="{
-    models: {{ $models }},
+    models: Object.freeze({{ $models }}),
     withAllVersions: {{ isset($withAllVersions) ? 'true' : 'false' }},
     selectedModel: {{ isset($selectedModel) ? $selectedModel : 'null' }},
     selectedVersion: {{ isset($selectedVersion) ? $selectedVersion->id : 'null' }},
@@ -11,7 +11,7 @@
         return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
     },
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="search.toLowerCase().replace(' ', '-')" name="model"
+    <input class="block h-0 p-0 border-0" type="text" :value="selectedModel?.slug" name="model"
         @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif aria-label="{{ __('Version') }}">

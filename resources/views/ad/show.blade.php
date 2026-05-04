@@ -4,7 +4,7 @@
         $ad->adCategory->name != 'gpus'
             ? ($ad->adCategory->name == 'miners'
                 ? "Купить {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
-                : "{$ad->adCategory->header} купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
+                : __($ad->adCategory->header) . " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
             : "Купить {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
                 __('kW/h') .
                 " в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
