@@ -1,10 +1,20 @@
 @php
     $model = request()->model
         ? \App\Models\Database\AsicModel::where('slug', request()->model)->first('name')
-        : null;
+        : (request()->gpu_model
+            ? \App\Models\Database\GPUModel::where('slug', request()->gpu_model)->first('name')
+            : null);
+
+    $seoParams = request()->only(['model', 'gpu_model', 'page']);
+
+    if (isset($params['page']) && $params['page'] == 1) {
+        unset($params['page']);
+    }
+
+    $canonicalUrl = request()->url() . (count($seoParams) ? '?' . http_build_query($seoParams) : '');
 @endphp
 
-<x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')">
+<x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')" :canonical="$canonicalUrl">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
