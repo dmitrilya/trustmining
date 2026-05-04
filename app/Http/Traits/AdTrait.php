@@ -79,7 +79,15 @@ trait AdTrait
         if ($adCategory) $ads->where('ads.ad_category_id', $adCategory->id);
 
         if ($request) {
-            if ($request->model) $ads->where('asic_models.slug', $request->model);
+            if ($request->model) {
+                if (!DB::table('asic_models')
+                    ->where('slug', $request->model)
+                    ->exists()) {
+                    abort(404, 'Model not found');
+                }
+                
+                $ads->where('asic_models.slug', $request->model);
+            }
 
             if ($request->asic_version_id) $ads->where('ads.asic_version_id', $request->asic_version_id);
 
