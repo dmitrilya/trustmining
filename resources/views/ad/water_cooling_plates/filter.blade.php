@@ -14,9 +14,6 @@
                 <div @click="
                         models.splice(models.indexOf(model), 1);
                         allModels.push(model);
-                        let props = JSON.parse($refs.props_water_cooling_plates.value);
-                        props['For which models'] = models;
-                        $refs.props_water_cooling_plates.value = JSON.stringify(props);
                     "
                     x-text="model"
                     class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
@@ -33,9 +30,6 @@
             <div @click="
                         models.push(model);
                         allModels.splice(allModels.indexOf(model), 1);
-                        let props = JSON.parse($refs.props_water_cooling_plates.value);
-                        props['For which models'] = models;
-                        $refs.props_water_cooling_plates.value = JSON.stringify(props);
                     "
                 x-text="model"
                 class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
