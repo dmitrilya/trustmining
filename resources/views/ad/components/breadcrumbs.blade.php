@@ -21,6 +21,7 @@
         ])" :name="$ad->gpuModel->name" />
         <x-breadcrumb position="4" :name="$ad->user->name" />
     @else
-        <x-breadcrumb position="1" :name="__($ad->adCategory->header)" />
+        <x-breadcrumb position="1" :href="route('ads', ['adCategory' => $ad->adCategory->name])" :name="__($ad->adCategory->header)" />
+        <x-breadcrumb position="2" :name="__($ad->user->name)" />
     @endif
 </x-breadcrumbs>
