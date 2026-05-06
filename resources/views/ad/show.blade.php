@@ -225,7 +225,7 @@
                                 <div @click="active = 0"
                                     class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
                                     :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-70 hover:opacity-100'">
-                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
+                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }} {{ __('Preview') }}"
                                         class="w-full h-full rounded-lg object-cover">
                                 </div>
 
@@ -234,7 +234,7 @@
                                         class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
                                         :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
                                             'opacity-70 hover:opacity-100'">
-                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }}"
+                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
                                             class="w-full h-full rounded-lg object-cover">
                                     </div>
                                 @endforeach
@@ -249,7 +249,7 @@
                                 @foreach ($ad->images as $index => $image)
                                     <div x-show="active === {{ $index + 1 }}" x-transition.opacity.duration.300ms
                                         class="absolute inset-0">
-                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }}"
+                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ $index + 2 }}"
                                             class="w-full h-full object-cover">
                                     </div>
                                 @endforeach
