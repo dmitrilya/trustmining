@@ -47,7 +47,7 @@ class SendDifficultyNotification extends Command
         }
 
         $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name'])
-            ->whereHas('type', fn($q) => $q->whereIn('name', $types))->get()->groupBy('coin_id')->map(fn($group) => [
+            ->whereHas('difficultySubscriptionType', fn($q) => $q->whereIn('name', $types))->get()->groupBy('coin_id')->map(fn($group) => [
                 'name' => $group[0]->coin->name,
                 'difficultyData' => $this->difficultyData($group[0]->coin),
                 'tgIds' => $group->pluck('user.tg_id')->filter()->unique()->values()
