@@ -32,7 +32,7 @@ class SendTGNotifications implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Collection $tgIds, string $type, string $notificationableType, $notificationable, ?array $data = null)
+    public function __construct(Collection $tgIds, string $type, ?string $notificationableType, $notificationable, ?array $data = null)
     {
         $this->tgIds = $tgIds;
         $this->type = $type;

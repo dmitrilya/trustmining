@@ -25,7 +25,7 @@
                 if (!r.data.success) pushToastAlert(r.data.message, 'error');
                 else {
                     pushToastAlert(r.data.message, 'success');
-                    $dispatch('close-modal', 'difficulty-subscription');
+                    $dispatch('close');
                 }
             })">
             @csrf
