@@ -799,6 +799,7 @@
     "Metrics": "Метрики",
     "Cryptonetwork": "Криптосеть",
     "Network difficulty": "Сложность сети",
+    "Previous difficulty": "Прошлая сложность",
     "Current difficulty": "Текущая сложность",
     "Would you like to receive notifications about network difficulty changes?": "Хотите получать оповещения об изменении сложности сети?",
     "Network difficulty subscription": "Подписка на сложность сети",

@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('network_data:update')->everyThirtyMinutes();
         $schedule->command('art:update')->twiceDaily(0, 12);
         $schedule->command('sitemap:generate')->twiceDaily(1, 13);
+        $schedule->command('difficulty-notification:send')->twiceDaily(2, 14);
         $schedule->command('trustfactors:update')->dailyAt('00:30');
         $schedule->command('forumscore:update')->dailyAt('01:30');
         $schedule->command('auth:clear-resets')->daily();

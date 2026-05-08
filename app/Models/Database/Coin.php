@@ -51,8 +51,18 @@ class Coin extends Model
         return $this->hasMany(\App\Models\Metrics\NetworkHashrate::class);
     }
 
+    public function latestNetworkHashrate()
+    {
+        return $this->hasOne(\App\Models\Metrics\NetworkHashrate::class)->latestOfMany();
+    }
+
     public function networkDifficulties()
     {
         return $this->hasMany(\App\Models\Metrics\NetworkDifficulty::class);
+    }
+
+    public function latestNetworkDifficulty()
+    {
+        return $this->hasOne(\App\Models\Metrics\NetworkDifficulty::class)->latestOfMany();
     }
 }
