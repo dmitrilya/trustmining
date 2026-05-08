@@ -11,12 +11,10 @@
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
-            @if (auth()->user()?->id == 10000004)
             <div class="text-right mb-3 sm:mb-4 cursor-pointer text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline"
                 @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">
                 {{ __('Would you like to receive notifications about network difficulty changes?') }}
             </div>
-            @endif
 
             @include('metrics.network.difficulty.components.difficulty')
         </div>
