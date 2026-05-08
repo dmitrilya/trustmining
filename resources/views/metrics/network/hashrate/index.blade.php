@@ -7,7 +7,7 @@
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 graph-container">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
             <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
                 <div class="bg-slate-100 dark:bg-slate-900 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
                     @click="show = !show">

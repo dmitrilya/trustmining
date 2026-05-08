@@ -1,4 +1,6 @@
-<x-metrics-layout title="Сложность сети {{ $coin->name }} ({{ $coin->abbreviation }}): история, график и прогноз | TRUSTMINING" :header="__('Network difficulty') . ' ' . $coin->name" active="network_difficulty"
+<x-metrics-layout
+    title="Сложность сети {{ $coin->name }} ({{ $coin->abbreviation }}): история, график и прогноз | TRUSTMINING"
+    :header="__('Network difficulty') . ' ' . $coin->name" active="network_difficulty"
     description="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
@@ -9,6 +11,13 @@
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            @if (auth()->user()?->id == 10000004)
+            <div class="text-right mb-3 sm:mb-4 cursor-pointer text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline"
+                @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">
+                {{ __('Would you like to receive notifications about network difficulty changes?') }}
+            </div>
+            @endif
+
             @include('metrics.network.difficulty.components.difficulty')
         </div>
 
@@ -78,4 +87,8 @@
     </section>
 
     @include('metrics.network.difficulty.components.faq')
+
+    @include('metrics.network.difficulty.components.subscription')
+    @include('auth.login-modal')
+    @include('auth.register-modal')
 </x-metrics-layout>

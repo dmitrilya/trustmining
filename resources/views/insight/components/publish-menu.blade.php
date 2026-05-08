@@ -1,7 +1,7 @@
 <div class="p-1.5 space-y-1">
     <a href="{{ route('insight.article.create', ['channel' => auth()->user()->channel->slug]) }}"
         class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
-        <span class="p-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600">📝</span>
+        <span class="p-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500">📝</span>
         <div class="flex flex-col">
             <span class="font-medium">{{ __('Article') }}</span>
             <span class="text-[10px] text-slate-500">{{ __('Long read content') }}</span>

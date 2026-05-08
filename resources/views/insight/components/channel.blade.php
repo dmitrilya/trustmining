@@ -12,7 +12,7 @@
             class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-900 dark:text-slate-100 font-bold">
             {{ $name }}</p>
         <div itemprop="alternateName"
-            class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-slate-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-500 cursor-pointer' : '' }}"
+            class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-slate-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-600 cursor-pointer' : '' }}"
             @if (!isset($clickable)) @click="navigator.clipboard.writeText('{{ url('/insight/' . $slug) }}').then(() => {
                 pushToastAlert('{{ __('Link successfully copied') }}', 'success');
             })" @endif>

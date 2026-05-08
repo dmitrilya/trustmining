@@ -26,7 +26,7 @@
                         <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                             {{ __('The commission is indicated when working on a mining pool') }} <a
                                 href="{{ config('partners.headframe.link') }}"
-                                class="inline font-bold text-indigo-500 under" target="_blank">HeadFrame
+                                class="inline font-bold text-indigo-500 hover:text-indigo-600 under" target="_blank">HeadFrame
                                 (0.9%)</a></p>
                     </div>
                 </div>

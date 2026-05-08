@@ -28,7 +28,7 @@
     <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
         <div>
             <a href="{{ route('company', ['user' => $hosting->user->slug]) }}" draggable="false"
-                class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500">{{ $hosting->user->name }}</a>
+                class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">{{ $hosting->user->name }}</a>
 
             <div class="flex items-center my-1 md:my-2">
                 <div

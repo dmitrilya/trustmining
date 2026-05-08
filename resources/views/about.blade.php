@@ -75,7 +75,7 @@
                     {{ __('A unique metric of trust in a company') }}</p>
                 <a href="#confidence-factor-info"
                     @click="event.preventDefault();document.querySelector(event.target.getAttribute('href')).scrollIntoView({behavior: 'smooth'});"
-                    class="mt-2 md:mt-3 text-xxs sm:text-xs underline text-indigo-600 dark:text-indigo-500">{{ __('Details') }}</a>
+                    class="mt-2 md:mt-3 text-xxs sm:text-xs underline text-indigo-500">{{ __('Details') }}</a>
             </div>
         </div>
 

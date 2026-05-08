@@ -128,7 +128,7 @@
                                         'gpuBrand' => $brand->name,
                                         'gpuModel' => $model->name,
                                     ]) }}"
-                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                    class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                     <span itemprop="reviewCount">{{ $reviewsCount }}</span>
                                     {{ __('reviews') }}
                                 </a>
@@ -144,7 +144,7 @@
                                     'gpuBrand' => $brand->name,
                                     'gpuModel' => $model->name,
                                 ]) }}"
-                                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $reviewsCount }}
+                                    class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">{{ $reviewsCount }}
                                     {{ __('reviews') }}
                                 </a>
                             </div>

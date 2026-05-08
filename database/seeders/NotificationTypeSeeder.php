@@ -46,6 +46,8 @@ class NotificationTypeSeeder extends Seeder
                 'name' => 'New forum answer'
             ], [
                 'name' => 'New forum comment'
+            ], [
+                'name' => 'Difficulty alert'
             ]
         ]);
     }

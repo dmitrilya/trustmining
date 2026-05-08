@@ -67,7 +67,7 @@
 
                     <span x-show="'{{ $item['key'] }}' == itemKey" class="flex items-center">
                         <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5 min-w-2.5 sm:h-4 sm:w-4 sm:min-w-4 ml-1 xs:ml-2 sm:ml-3' : 'h-4 w-4 min-w-4 ml-2 xs:ml-3' }}"
-                            viewBox="0 0 20 20" fill="currentColor" class="text-indigo-600 hover:text-white"
+                            viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white"
                             aria-hidden="true">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />

@@ -127,7 +127,7 @@
 
                         <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                             target="_blank"
-                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
                             <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -285,7 +285,7 @@
 
                         <div
                             class="bg-slate-100 dark:bg-slate-950 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-600" aria-hidden="true"
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-indigo-500" aria-hidden="true"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="1.5"
@@ -382,7 +382,7 @@
 
                         <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => $ad->office->id]) }}"
                             target="_blank"
-                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-600 hover:text-indigo-500 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
                             <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -426,7 +426,7 @@
                                 :class="{
                                     'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'description' !=
                                         selectedTab,
-                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'description' ==
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'description' ==
                                         selectedTab
                                 }">
                                 {{ __('Description') }}
@@ -438,7 +438,7 @@
                                 :class="{
                                     'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'characteristics' !=
                                         selectedTab,
-                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'characteristics' ==
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'characteristics' ==
                                         selectedTab
                                 }">
                                 {{ __('Characteristics') }}
@@ -450,7 +450,7 @@
                                 :class="{
                                     'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'reviews' !=
                                         selectedTab,
-                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'reviews' ==
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'reviews' ==
                                         selectedTab
                                 }">
                                 {{ __('Reviews') }}
@@ -462,7 +462,7 @@
                                 :class="{
                                     'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'location' !=
                                         selectedTab,
-                                    'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': 'location' ==
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'location' ==
                                         selectedTab
                                 }">
                                 {{ __('Location') }}

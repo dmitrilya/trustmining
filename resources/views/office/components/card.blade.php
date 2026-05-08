@@ -25,7 +25,7 @@
                 </p>
 
                 <a href="{{ route('company', ['user' => $office->user->slug]) }}"
-                    class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500">{{ $office->user->name }}</a>
+                    class="block hover:underline text-xs md:text-sm text-indigo-500 hover:text-indigo-600">{{ $office->user->name }}</a>
 
                 <div class="flex items-center mt-1 md:mt-2 mb-3 sm:mb-4">
                     <div

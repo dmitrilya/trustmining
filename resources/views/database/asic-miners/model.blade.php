@@ -54,7 +54,7 @@
                                             :class="{
                                                 'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': {{ $i }} !=
                                                     selectedTab,
-                                                'text-indigo-600 border-indigo-600 active dark:text-indigo-600 dark:border-indigo-600': {{ $i }} ==
+                                                'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': {{ $i }} ==
                                                     selectedTab
                                             }">
                                             {{ $version->hashrate }}{{ $version->measurement }}
@@ -225,7 +225,7 @@
                                     'asicBrand' => $brand->slug,
                                     'asicModel' => $model->slug,
                                 ]) }}"
-                                class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">
+                                class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                 <span>{{ $reviewsCount }}</span>
                                 {{ __('reviews') }}
                             </a>

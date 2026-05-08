@@ -8,7 +8,7 @@
         {{ $difficultyData['difficulty'] }}
     </div>
 
-    <a class="text-xxs xs:text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-600 underline mt-2 sm:mt-3"
+    <a class="text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 underline mt-2 sm:mt-3"
         target="_blank"
         href="{{ route('insight.article.show', ['channel' => $difficultyData['article']['channel_slug'], 'article' => $difficultyData['article']['id'] . '-' . $difficultyData['article']['slug']]) }}">
         {{ __('What is network difficulty?') }}

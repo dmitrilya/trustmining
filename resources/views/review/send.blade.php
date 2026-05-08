@@ -27,7 +27,7 @@
                 </div>
                 <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700">
                     <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
-                        <label for="input-document-review" :class="document ? 'text-indigo-600' : 'text-slate-500'"
+                        <label for="input-document-review" :class="document ? 'text-indigo-500' : 'text-slate-500'"
                             class="inline-flex justify-center items-center p-2 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700">
                             <input id="input-document-review" name="document" class="hidden" type="file"
                                 accept=".pdf,.doc,.docx" @change="document = true">
@@ -38,7 +38,7 @@
                             <span class="sr-only">Attach document</span>
                         </label>
 
-                        <label for="input-image-review" :class="image ? 'text-indigo-600' : 'text-slate-500'"
+                        <label for="input-image-review" :class="image ? 'text-indigo-500' : 'text-slate-500'"
                             class="inline-flex justify-center items-center p-2 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-700">
                             <input id="input-image-review" name="image" class="hidden" type="file"
                                 accept=".png,.jpg,.jpeg,.webp" @change="image = true">

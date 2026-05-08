@@ -18,7 +18,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="name"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Name') . ' или ' . __('Company name') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('name')" />
@@ -29,7 +29,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="email"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Email') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('email')" />
@@ -40,7 +40,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="password"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Password') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('password')" />
@@ -51,7 +51,7 @@
                                     id="password_confirmation" placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="password_confirmation"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Confirm Password') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('password_confirmation')" />
@@ -298,7 +298,7 @@
                     <ul class="space-y-2 md:space-y-3 list-disc pl-8">
                         <li class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 pl-2">
                             {{ __('Integration with Yandex maps') }}
-                            <a class="inline-block text-indigo-500 hover:text-indigo-400" target="_blank"
+                            <a class="inline-block text-indigo-500 hover:text-indigo-600" target="_blank"
                                 href="https://yandex.ru/maps-api/products">Yandex api</a>
                         </li>
                         <li class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 pl-2">

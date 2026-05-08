@@ -3,7 +3,7 @@
     <div class="h-full flex flex-col justify-between">
         <div class="mb-16">
             <h3 class="text-2xl text-slate-100 font-bold">
-                {{ __('Mining pool') }}<br /><span class="text-indigo-600 text-3xl font-extrabold">HeadFrame</span></h3>
+                {{ __('Mining pool') }}<br /><span class="text-indigo-500 text-3xl font-extrabold">HeadFrame</span></h3>
             <p class="text-xs text-slate-100 mt-4">
                 {{ __('Headframe offers FPPS Bitcoin mining with low fees, security and stability, daily free payouts, and unique features for data centers and hashrate managers') }}
             </p>

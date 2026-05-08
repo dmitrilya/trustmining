@@ -71,7 +71,7 @@
                 <x-rating></x-rating>
 
                 <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
-                    class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $user->moderatedReviews->count() }}
+                    class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">{{ $user->moderatedReviews->count() }}
                     {{ __('reviews') }}</a>
             </div>
         </div>

@@ -19,7 +19,7 @@
         </div>
 
         <a href="{{ route('company', ['user' => $user->slug]) }}"
-            class="hover:underline text-sm text-indigo-600 hover:text-indigo-500">{{ $user->name }}</a>
+            class="hover:underline text-sm text-indigo-500 hover:text-indigo-600">{{ $user->name }}</a>
     </div>
 </div>
 
@@ -31,7 +31,7 @@
         <x-rating></x-rating>
 
         <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
-            class="ml-3 text-sm text-indigo-600 hover:text-indigo-500">{{ $user->moderatedReviews->count() }}
+            class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">{{ $user->moderatedReviews->count() }}
             {{ trans_choice('navigation.reviews', $user->moderatedReviews->count()) }}</a>
     </div>
 </div>

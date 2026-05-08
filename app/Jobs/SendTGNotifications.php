@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,22 +21,24 @@ class SendTGNotifications implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Telegram;
 
-    private $users;
-    private $type;
-    private $nt;
+    private Collection $tgIds;
+    private string $type;
+    private string $nt;
     private $n;
+    private ?array $data;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($users, $type, $notificationableType, $notificationable)
+    public function __construct(Collection $tgIds, string $type, string $notificationableType, $notificationable, ?array $data = null)
     {
-        $this->users = $users->whereNotNull('tg_id')->where('tg_id', '!=', 0);
+        $this->tgIds = $tgIds;
         $this->type = $type;
         $this->nt = $notificationableType;
         $this->n = $notificationable;
+        $this->data = $data;
     }
 
     /**
@@ -55,7 +58,7 @@ class SendTGNotifications implements ShouldQueue
      */
     public function handle()
     {
-        $users = $this->users->splice(0, 30);
+        $tgIds = $this->tgIds->splice(0, 30);
 
         switch ($this->nt) {
             case 'message':
@@ -87,6 +90,9 @@ class SendTGNotifications implements ShouldQueue
                             ['text' => __('Details'), 'url' => route('ads.show', ['adCategory' => $this->n->adCaategory->name, 'ad' => $this->n->id])],
                         ]];
                         break;
+                    default:
+                        $text = __('New notification');
+                        $keyboard = null;
                 }
                 break;
 
@@ -134,13 +140,20 @@ class SendTGNotifications implements ShouldQueue
                             'answer' => $this->n->forum_answer_id
                         ])]]];
                         break;
+                    case 'Difficulty alert':
+                        $text = $this->data['text'];
+                        $keyboard = [[['text' => __('View on the website'), 'url' => route('metrics.network.difficulty', ['coin' => $this->data['coin']])]]];
+                        break;
+                    default:
+                        $text = __('New notification');
+                        $keyboard = null;
                 }
                 break;
         }
 
         try {
             $this->tgSendNotifications(
-                $users->pluck('tg_id'),
+                $tgIds,
                 "<b>" . __('New notification') . "</b>\n\n<pre><code class='language-" . __($this->type) . "'>" . $text . "</code></pre>",
                 $keyboard
             );
@@ -148,7 +161,7 @@ class SendTGNotifications implements ShouldQueue
             info('Exception - Job->SendTGNotifications: ' . $e->getMessage());
         }
 
-        if ($this->users->count())
-            SendTGNotifications::dispatch($this->users, $this->type, $this->nt, $this->n)->delay(now()->addSecond());
+        if ($this->tgIds->count())
+            SendTGNotifications::dispatch($this->tgIds, $this->type, $this->nt, $this->n)->delay(now()->addSecond());
     }
 }

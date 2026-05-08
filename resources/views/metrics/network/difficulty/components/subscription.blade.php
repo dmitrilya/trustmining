@@ -1,8 +1,8 @@
-<x-modal name="difficulty-subscription" maxWidth="sm" rounded="rounded-xl">
-    <div class="p-6 lg:p-8">
-        <div class="flex justify-between items-center mb-6">
+<x-modal name="difficulty-subscription" maxWidth="xs" rounded="rounded-xl">
+    <div class="p-4 lg:p-6">
+        <div class="flex justify-between items-start mb-6">
             <h2 class="text-lg text-slate-800 dark:text-slate-200">
-                {{ __('Network difficulty subscription') }}
+                {{ __('Network difficulty subscription') }} {{ $coin->abbreviation }}
             </h2>
 
             <button type="button" aria-label="{{ __('Close') }}"
@@ -20,33 +20,25 @@
             data-size="medium" data-radius="6" data-auth-url="https://trustmining.ru/tg/auth" data-request-access="write">
         </script>
 
-        <form method="POST" action="{{ route('difficulty-subscribe') }}">
+        <form method="POST" action="{{ route('difficulty-subscribe', ['coin' => strtolower($coin->name)]) }}"
+            @submit.prevent="axios.post($el.action).then(r => {
+                if (!r.data.success) pushToastAlert(r.data.message, 'error');
+                else pushToastAlert(r.data.message, 'success');
+            })">
             @csrf
 
-            <x-select name="type_id" :key="$coin->id" :items="\App\Models\Metrics\DifficultySubscriptionType::all()
+            <x-select name="type_id" :items="\App\Models\Metrics\DifficultySubscriptionType::all()
                 ->map(
                     fn($type) => [
                         'key' => $type->id,
-                        'value' => $type->name,
+                        'value' => __($type->name),
                     ],
                 )
                 ->keyBy('key')" />
 
-            <div class="flex items-center justify-end mt-4">
-                <button type="button" @click="show = false; $dispatch('open-modal', 'register');"
-                    class="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-900">
-                    {{ __('Register') }}
-                </button>
-
-                <x-primary-button class="ml-3">
-                    {{ __('Login') }}
-                </x-primary-button>
-            </div>
-
-            <a class="mt-3 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-900"
-                href="{{ route('password.request') }}" target="_blank">
-                {{ __('Forgot your password?') }}
-            </a>
+            <x-primary-button class="mt-4 block w-full">
+                {{ __('Subscribe') }}
+            </x-primary-button>
         </form>
     </div>
 </x-modal>

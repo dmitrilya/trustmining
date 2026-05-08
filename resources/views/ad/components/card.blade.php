@@ -78,7 +78,7 @@
                 @endif
 
                 <div class="bg-slate-100 rounded-full ml-3 p-1.5 tracking{{ $ad->is_tracked ? '' : ' hidden' }}">
-                    <svg class="w-4 h-4 text-indigo-600" aria-hidden="true" width="24" height="24" fill="none"
+                    <svg class="w-4 h-4 text-indigo-500" aria-hidden="true" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
@@ -87,7 +87,7 @@
             </div>
 
             <a href="{{ route('company', ['user' => $ad->user_slug]) }}" draggable="false"
-                class="block hover:underline text-xs md:text-sm text-indigo-600 hover:text-indigo-500 mt-1">{{ $ad->user_name }}</a>
+                class="block hover:underline text-xs md:text-sm text-indigo-500 hover:text-indigo-600 mt-1">{{ $ad->user_name }}</a>
 
             <div class="flex items-center my-1 md:my-2">
                 <div
@@ -139,7 +139,7 @@
 
             <a href="{{ route('company.office', ['user' => $ad->user_slug, 'office' => $ad->office_id]) }}"
                 target="_blank" draggable="false"
-                class="block hover:underline text-xxs xs:text-xs text-indigo-600 hover:text-indigo-500 mt-1 sm:mt-2">{{ $ad->city }}</a>
+                class="block hover:underline text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 mt-1 sm:mt-2">{{ $ad->city }}</a>
 
             <div class="relative flex mt-1 sm:mt-2 items-center">
                 <a class="block w-full" draggable="false" href="{{ $href }}">

@@ -10,7 +10,7 @@
             href="{{ route('tariff', ['tariff' => $tariffs[0]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -20,7 +20,7 @@
                     {{ __('of ads') }}</div>
             </div>
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -31,7 +31,7 @@
             </div>
             @if ($tariffs[0]->can_have_hosting)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -41,7 +41,7 @@
             @endif
             @if ($tariffs[0]->can_have_phone)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -51,7 +51,7 @@
             @endif
             @if ($tariffs[0]->can_create_insight)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -61,7 +61,7 @@
             @endif
             @if ($tariffs[0]->priority_moderation)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -82,7 +82,7 @@
             href="{{ route('tariff', ['tariff' => $tariffs[1]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
         <div class="space-y-2 sm:space-y-3">
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -92,7 +92,7 @@
                     {{ __('of ads') }}</div>
             </div>
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -103,7 +103,7 @@
             </div>
             @if ($tariffs[1]->can_have_hosting)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -113,7 +113,7 @@
             @endif
             @if ($tariffs[1]->can_have_phone)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -123,7 +123,7 @@
             @endif
             @if ($tariffs[1]->can_create_insight)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -133,7 +133,7 @@
             @endif
             @if ($tariffs[1]->priority_moderation)
                 <div class="flex items-center">
-                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                    <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                         fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -242,7 +242,7 @@
         </div>
         <div class="space-y-2 sm:space-y-0 sm:flex sm:space-x-10">
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -252,7 +252,7 @@
                     {{ __('of ads') }}</div>
             </div>
             <div class="flex items-center">
-                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-600 dark:text-indigo-500" aria-hidden="true"
+                <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />

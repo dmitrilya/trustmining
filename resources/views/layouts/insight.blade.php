@@ -84,6 +84,6 @@
 
     @include('insight.components.mobile-menu', ['channel' => $attributes->get('channel')])
 
-    @include('insight.components.auth.login')
-    @include('insight.components.auth.register')
+    @include('auth.login-modal')
+    @include('auth.register-modal')
 </x-app-layout>

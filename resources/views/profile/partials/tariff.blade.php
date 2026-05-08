@@ -5,7 +5,7 @@
                 {{ __('Finance') }}
             </h2>
 
-            <a class="block hover:underline text-xs sm:text-sm text-indigo-600 hover:text-indigo-500"
+            <a class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600"
                 href="{{ route('tariffs') }}">{{ __('Tariffs') }} ➚</a>
         </div>
     </header>

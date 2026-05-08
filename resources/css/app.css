@@ -211,22 +211,6 @@ pre[contenteditable]:empty::before {
     }
 }
 
-.graph-container {
-    height: calc-size(max-content, size - 36px);
-}
-
-@media (min-width: 640px) {
-    .graph-container {
-        height: calc-size(max-content, size - 40px);
-    }
-}
-
-@media (min-width: 768px) {
-    .graph-container {
-        height: calc-size(max-content, size - 44px);
-    }
-}
-
 input::file-selector-button {
     padding-top: 6px !important;
     padding-bottom: 6px !important;

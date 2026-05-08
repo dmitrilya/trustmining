@@ -25,7 +25,7 @@
                         '{{ $ad_category_name }}' ?
                         'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
                         'border-slate-300 dark:border-slate-700'">
-                    <h4 class="font-semibold text-xs lg:text-sm group-hover:text-indigo-500 dark:group-hover:text-slate-100"
+                    <h4 class="font-semibold text-xs lg:text-sm group-hover:text-indigo-600 dark:group-hover:text-slate-100"
                         :class="ad_category_name ==
                             '{{ $ad_category_name }}' ? 'text-indigo-500 dark:text-slate-50' :
                             'text-slate-500 dark:text-slate-300'">

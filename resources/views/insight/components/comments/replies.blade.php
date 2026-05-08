@@ -1,6 +1,6 @@
 <div x-data="{ showReplies: false }" class="mt-2 sm:mt-3">
     @if ($comment->replies->count())
-        <button @click="showReplies = !showReplies" class="hover:text-indigo-600 transition-colors" :class="showReplies ? 'text-indigo-600' : ''">
+        <button @click="showReplies = !showReplies" class="hover:text-indigo-600 transition-colors" :class="showReplies ? 'text-indigo-500' : ''">
             {{ $comment->replies->count() }} {{ trans_choice('insight.replies', $comment->replies->count()) }}
         </button>
     @endif

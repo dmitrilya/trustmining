@@ -2,22 +2,22 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Events\Notification as NotificationEvent;
 use App\Jobs\SendTGNotifications;
-use App\Jobs\SendTGNotifucations;
 
 use App\Models\User\NotificationType;
 use App\Models\User\Notification;
 
 trait NotificationTrait
 {
-    public function notify($type, $users, $notificationableType = null, $notificationable = null)
+    public function notify(string $type, Collection $users, $notificationableType = null, $notificationable = null)
     {
         $notifications = [];
-        $typeId = NotificationType::where('name', $type)->first()->id;
+        $typeId = NotificationType::where('name', $type)->first('id')->id;
         $notifId = $notificationable ? $notificationable->id : null;
         $users = $users->unique();
 
@@ -34,8 +34,9 @@ trait NotificationTrait
 
         Notification::upsert($notifications, ['id']);
 
-        if ($users->whereNotNull('tg_id')->where('tg_id', '!=', 0)->count())
-            SendTGNotifications::dispatch($users, $type, $notificationableType, $notificationable);
+        $tgIds = $users->whereNotNull('tg_id')->where('tg_id', '!=', 0)->pluck('tg_id')->unique();
+
+        if ($tgIds->count()) SendTGNotifications::dispatch($tgIds, $type, $notificationableType, $notificationable);
 
         return true;
     }

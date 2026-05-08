@@ -33,7 +33,7 @@
                 </button>
 
                 <label for="search_model"
-                    class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Model') }}
                 </label>
             </div>
@@ -54,7 +54,7 @@
                     <span x-show="selectedModel && selectedModel.id == asicModel.id"
                         class="absolute inset-y-0 right-0 flex items-center pr-4">
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                            class="text-indigo-600 hover:text-white" aria-hidden="true">
+                            class="text-indigo-500 hover:text-white" aria-hidden="true">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                         </svg>
@@ -92,7 +92,7 @@
                             <span x-show="selectedVersion == null"
                                 class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                                    class="text-indigo-600 hover:text-white" aria-hidden="true">
+                                    class="text-indigo-500 hover:text-white" aria-hidden="true">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                                 </svg>

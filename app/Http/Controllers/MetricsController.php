@@ -68,59 +68,9 @@ class MetricsController extends Controller
 
     public function difficulty(Request $request, Coin $coin)
     {
-        $difficulties = $coin->networkDifficulties()->where('created_at', '>', Carbon::now()->subDays(31))
-            ->latest()->select(['difficulty', 'need_blocks', 'created_at'])->get();
+        $data = $this->difficultyData($coin);
 
-        if (!$difficulties->count()) return back();
-
-        $lastDifficulty = $difficulties->first();
-        $prediction = null;
-        $needBlocksTime = null;
-
-        if ($coin->predictionable) {
-            $recalcuateDates = [];
-
-            foreach ($difficulties as $i => $difficulty) {
-                if (!isset($difficulties[$i + 1])) return back();
-
-                if (!$needBlocksTime && $i == 6) {
-                    if ($difficulty->need_blocks - $lastDifficulty->need_blocks == 0) continue;
-                    $time = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                    $days = intdiv($time, 60 * 60 * 24);
-                    $time %= (60 * 60 * 24);
-                    $hours = intdiv($time, 60 * 60);
-                    $time %= (60 * 60);
-                    $minutes = intdiv($time, 60);
-                    $needBlocksTime = '~';
-                    if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days) . ' ';
-                    if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours) . ' ';
-                    if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
-                }
-
-                if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
-                    if (!$needBlocksTime) {
-                        if ($i == 0) $needBlocksTime = __('Time calculation');
-                        else {
-                            $time = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                            $days = intdiv($time, 60 * 60 * 24);
-                            $time %= (60 * 60 * 24);
-                            $hours = intdiv($time, 60 * 60);
-                            $time %= (60 * 60);
-                            $minutes = intdiv($time, 60);
-                            $needBlocksTime = '~';
-                            if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days) . ' ';
-                            if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours) . ' ';
-                            if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
-                        }
-                    }
-
-                    array_push($recalcuateDates, $difficulty->created_at);
-                    if (count($recalcuateDates) == 2) break;
-                }
-            }
-
-            $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalcuateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalcuateDates[1]), Carbon::createFromTimestamp($recalcuateDates[0])])->avg('hashrate') - 1) * 100, 2);
-        }
+        if (!$data) return back();
 
         $ads = Cache::remember(
             'algorithm_ads_' . $coin->algorithm->slug,
@@ -133,79 +83,30 @@ class MetricsController extends Controller
 
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,
-            'difficulty' => $lastDifficulty,
-            'needBlocksTime' => $needBlocksTime,
-            'prediction' => $prediction,
+            'difficulty' => $data['lastDifficulty'],
+            'needBlocksTime' => $data['needBlocksTime'],
+            'prediction' => $data['prediction'],
             'ads' => $ads
         ]);
     }
 
     public function difficultyWidjet(Request $request, Coin $coin)
     {
-        $difficulties = $coin->networkDifficulties()->where('created_at', '>', Carbon::now()->subDays(31))
-            ->latest()->select(['difficulty', 'need_blocks', 'created_at'])->get();
+        $data = $this->difficultyData($coin);
 
-        if (!$difficulties->count()) return back();
-
-        $lastDifficulty = $difficulties->first();
-        $prediction = null;
-        $needBlocksTime = null;
-
-        if ($coin->predictionable) {
-            $recalcuateDates = [];
-
-            foreach ($difficulties as $i => $difficulty) {
-                if (!isset($difficulties[$i + 1])) return back();
-
-                if (!$needBlocksTime && $i == 6) {
-                    $time = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                    $days = intdiv($time, 60 * 60 * 24);
-                    $time %= (60 * 60 * 24);
-                    $hours = intdiv($time, 60 * 60);
-                    $time %= (60 * 60);
-                    $minutes = intdiv($time, 60);
-                    $needBlocksTime = '~';
-                    if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days) . ' ';
-                    if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours) . ' ';
-                    if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
-                }
-
-                if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
-                    if (!$needBlocksTime) {
-                        if ($i == 0) $needBlocksTime = __('Time calculation');
-                        else {
-                            $time = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks) * $lastDifficulty->need_blocks;
-                            $days = intdiv($time, 60 * 60 * 24);
-                            $time %= (60 * 60 * 24);
-                            $hours = intdiv($time, 60 * 60);
-                            $time %= (60 * 60);
-                            $minutes = intdiv($time, 60);
-                            $needBlocksTime = '~';
-                            if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days) . ' ';
-                            if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours) . ' ';
-                            if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);
-                        }
-                    }
-
-                    array_push($recalcuateDates, $difficulty->created_at);
-                    if (count($recalcuateDates) == 2) break;
-                }
-            }
-
-            $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalcuateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalcuateDates[1]), Carbon::createFromTimestamp($recalcuateDates[0])])->avg('hashrate') - 1) * 100, 2);
-        }
+        if (!$data) return back();
 
         return view('metrics.network.difficulty.widjet', [
             'coin' => $coin,
-            'difficulty' => $lastDifficulty,
-            'needBlocksTime' => $needBlocksTime,
-            'prediction' => $prediction,
+            'difficulty' => $data['lastDifficulty'],
+            'needBlocksTime' => $data['needBlocksTime'],
+            'prediction' => $data['prediction'],
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
         ]);
     }
 
-    public function difficultySubscription(Request $request, Coin $coin)
+    public function difficultySubscribe(Request $request, Coin $coin)
     {
         $user = $request->user();
 
@@ -225,6 +126,16 @@ class MetricsController extends Controller
         return response()->json([
             'success' => true,
             'message' => $message
+        ]);
+    }
+
+    public function difficultyUnsubscribe(Request $request, Coin $coin)
+    {
+        $request->user()->difficultySubscriptions()->where('coin_id', $coin->id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => __('You have unsubscribed to difficulty') . ' ' . $coin->abbreviation
         ]);
     }
 }

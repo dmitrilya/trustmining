@@ -1,10 +1,10 @@
 <div
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden graph-container">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden">
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 mb-6 sm:mb-8 lg:mb-10">
         <label class="flex cursor-pointer" for="metric_views" @click="changeMetric('views')">
             <input type="radio" :checked="metric == 'views'"
-                class="mr-2 size-3 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
@@ -26,7 +26,7 @@
 
         <label class="flex cursor-pointer" for="metric_visits" @click="changeMetric('visits')">
             <input type="radio" :checked="metric == 'visits'"
-                class="mr-2 size-3 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
@@ -48,7 +48,7 @@
 
         <label class="flex cursor-pointer" for="metric_phone_views" @click="changeMetric('phone_views')">
             <input type="radio" :checked="metric == 'phone_views'"
-                class="mr-2 size-3 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
@@ -70,7 +70,7 @@
 
         <label class="flex cursor-pointer" for="metric_tracks" @click="changeMetric('tracks')">
             <input type="radio" :checked="metric == 'tracks'"
-                class="mr-2 size-3 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
@@ -92,7 +92,7 @@
 
         <label class="flex cursor-pointer" for="metric_chats" @click="changeMetric('chats')">
             <input type="radio" :checked="metric == 'chats'"
-                class="mr-2 size-3 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">

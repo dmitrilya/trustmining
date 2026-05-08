@@ -45,7 +45,7 @@
                         </x-primary-button>
                     </div>
                 </div>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.whatsminer.com/src/views/support.html">{{ __('Check on the official website') }}</a>
             </div>
@@ -80,7 +80,7 @@
                         </x-primary-button>
                     </div>
                 </div>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://m.bitmain.com/support/warranty">{{ __('Check on the official website') }}</a>
             </div>
@@ -92,7 +92,7 @@
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Canaan</h2>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.canaan.io/support/warranty_check">{{ __('Check on the official website') }}</a>
             </div>
@@ -104,7 +104,7 @@
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Iceriver</h2>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.iceriver.io/warranty-inquiry">{{ __('Check on the official website') }}</a>
             </div>
@@ -116,7 +116,7 @@
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Jasminer</h2>
-                <a class="text-xxs sm:text-xs text-indigo-400 hover:text-indigo-600 underline    mt-2 sm:mt-3"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
                     target="_blank"
                     href="https://www.jasminer.com/#/support/searchsn">{{ __('Check on the official website') }}</a>
             </div>
