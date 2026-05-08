@@ -50,23 +50,29 @@ trait Telegram
         return response()->json(['success' => true]);
     }
 
-    public function tgSendNotifications(Collection $chatIds, $text, $keyboard = null)
+    public function tgSendNotifications(Collection $chatIds, string $text, $keyboard = null)
     {
         $token = config('services.tgbot.token');
-        $link = "https://api.telegram.org/bot$token/sendMessage?" . http_build_query([
-            'text' => $text,
-            'parse_mode' => 'HTML',
-        ]);
+        $link = "https://api.telegram.org/bot$token/sendMessage";
 
-        if ($keyboard) $link .= '&reply_markup=' . json_encode(['inline_keyboard' => $keyboard]);
-
-        $chatIds->each(function ($chatId) use ($link) {
+        $chatIds->each(function ($chatId) use ($link, $text, $keyboard) {
             try {
+                $params = [
+                    'chat_id' => $chatId,
+                    'text' => $text,
+                    'parse_mode' => 'HTML',
+                ];
+
+                if ($keyboard) {
+                    $params['reply_markup'] = json_encode(['inline_keyboard' => $keyboard]);
+                }
+
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($curl, CURLOPT_URL, $link . "&chat_id=$chatId");
+                curl_setopt($curl, CURLOPT_URL, $link);
 
                 if (($out = curl_exec($curl)) === false || !json_decode($out)->ok)
                     info('CURL Error - Telegram->tgSendNotification: ' . $out . ' ' . curl_error($curl) . ' ' . curl_errno($curl));
