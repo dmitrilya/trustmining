@@ -52,7 +52,6 @@ class SendDifficultyNotification extends Command
                 'difficultyData' => $this->difficultyData($group[0]->coin),
                 'tgIds' => $group->pluck('user.tg_id')->filter()->unique()->values()
             ]);
-        dd($coins);
 
         foreach ($coins as $coin) {
             $text = "🔔 *{$coin['name']} difficulty alert*\n\n";
