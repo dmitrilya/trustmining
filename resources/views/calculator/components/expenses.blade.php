@@ -22,7 +22,7 @@
                     </div>
 
                     <div x-show="open" style="display: none"
-                        class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg z-20">
+                        class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg z-20">
                         <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                             {{ __('The commission is indicated when working on a mining pool') }} <a
                                 href="{{ config('partners.headframe.link') }}"

@@ -40,7 +40,7 @@
         </button>
 
         <ul x-show="open" @click.away="open = false" style="display: none"
-            class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-2xl py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
+            class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
             @foreach ($items as $item)
                 <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'"
                     @elseif ($handleChange) @click="{{ $handleChange }}('{{ $item['key'] }}');itemKey = '{{ $item['key'] }}';open = false"
