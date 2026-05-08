@@ -179,6 +179,11 @@ Route::middleware('auth')->group(function () {
         Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
     });
 
+    Route::group(['prefix' => 'metrics/network/{coin:name}/difficulty'], function () {
+        Route::post('/subscribe', [MetricsController::class, 'difficultySubscribe'])->name('difficulty-subscribe');
+        Route::post('/unsubscribe', [MetricsController::class, 'difficultyUnsubscribe'])->name('difficulty-unsubscribe');
+    });
+
     Route::group(['prefix' => 'insight'], function () {
         Route::post('/channel/check-slug', [ChannelController::class, 'checkSlug'])->name('insight.channel.check-slug');
         Route::get('/channel/create', [ChannelController::class, 'create'])->name('insight.channel.create');

@@ -166,6 +166,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(\App\Models\Ad\Ad::class, 'tracks');
     }
 
+    public function difficultySubscriptions()
+    {
+        return $this->hasMany(\App\Models\Metrics\DifficultySubscription::class);
+    }
+
     public function phones()
     {
         return $this->hasMany(\App\Models\User\Phone::class)->where('destroyed', false);
