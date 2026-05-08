@@ -23,7 +23,7 @@ class SendTGNotifications implements ShouldQueue
 
     private Collection $tgIds;
     private string $type;
-    private string $nt;
+    private ?string $nt;
     private $n;
     private ?array $data;
 
