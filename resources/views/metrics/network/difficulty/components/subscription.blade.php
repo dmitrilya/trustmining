@@ -21,7 +21,7 @@
         </script>
 
         <form method="POST" action="{{ route('difficulty-subscribe', ['coin' => strtolower($coin->name)]) }}"
-            @submit.prevent="axios.post($el.action).then(r => {
+            @submit.prevent="axios.post($el.action, new FormData($el)).then(r => {
                 if (!r.data.success) pushToastAlert(r.data.message, 'error');
                 else pushToastAlert(r.data.message, 'success');
             })">
