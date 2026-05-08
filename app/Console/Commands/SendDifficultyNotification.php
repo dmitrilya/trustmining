@@ -57,7 +57,7 @@ class SendDifficultyNotification extends Command
         foreach ($coins as $coin) {
             $text = "🔔 *{$coin['name']} difficulty alert*\n\n";
             $text .= __('Current difficulty') . ': ' . $coin['difficultyData']['needBlocksTime'] . "\n";
-            $text .= __('Blocks before recalculation') . ': ' . $coin['difficultyData']['lastDifficulty'] . "\n";
+            $text .= __('Blocks before recalculation') . ': ' . $coin['difficultyData']['lastDifficulty']['difficulty'] . "\n";
             $text .= __('Next difficulty prediction') . ': ' . ($coin['difficultyData']['prediction'] > 0 ?? '+') . $coin['difficultyData']['prediction'] . '%';
 
             SendTGNotifications::dispatch($coin['tgIds'], 'Difficulty alert', null, null, ['coin' => $coin['name'], 'text' => $text]);
