@@ -141,7 +141,6 @@ class SendTGNotifications implements ShouldQueue
                         ])]]];
                         break;
                     case 'Difficulty alert':
-                        info(route('metrics.network.difficulty', ['coin' => strtolower($this->data['coin'])]));
                         $text = $this->data['text'];
                         $keyboard = [[['text' => __('View on the website'), 'url' => route('metrics.network.difficulty', ['coin' => strtolower($this->data['coin'])])]]];
                         break;

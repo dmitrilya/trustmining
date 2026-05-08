@@ -46,7 +46,7 @@ class SendDifficultyNotification extends Command
             if ($now->diffInDays(Carbon::parse('2026-01-01')) % 3 === 0) $types[] = 'Every 3 days';
         }
 
-        $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name'])
+        $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name,predictionable'])
             ->whereHas('difficultySubscriptionType', fn($q) => $q->whereIn('name', $types))->get()->groupBy('coin_id')->map(fn($group) => [
                 'name' => $group[0]->coin->name,
                 'difficultyData' => $this->difficultyData($group[0]->coin),
@@ -54,9 +54,9 @@ class SendDifficultyNotification extends Command
             ]);
 
         foreach ($coins as $coin) {
-            $text = "🔔 *{$coin['name']} difficulty alert*\n\n";
-            $text .= __('Current difficulty') . ': ' . $coin['difficultyData']['needBlocksTime'] . "\n";
-            $text .= __('Blocks before recalculation') . ': ' . $coin['difficultyData']['lastDifficulty']['difficulty'] . "\n";
+            $text = "{$coin['name']} difficulty alert\n\n";
+            $text .= __('Current difficulty') . ': ' . $coin['difficultyData']['lastDifficulty']['difficulty'] . "\n";
+            $text .= __('Blocks before recalculation') . ': ' . $coin['difficultyData']['needBlocksTime'] . "\n";
             $text .= __('Next difficulty prediction') . ': ' . ($coin['difficultyData']['prediction'] > 0 ?? '+') . $coin['difficultyData']['prediction'] . '%';
 
             SendTGNotifications::dispatch($coin['tgIds'], 'Difficulty alert', null, null, ['coin' => $coin['name'], 'text' => $text]);
