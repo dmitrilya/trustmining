@@ -47,8 +47,6 @@ class SitemapGenerate extends Command
         $out = '<?xml version="1.0" encoding="UTF-8"?>';
         $out .= '
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-        $out .= '
-<lastmod>' . now()->toW3cString() . '</lastmod>';
 
         $out .= $this->addUrl('');
         $out .= $this->addUrl('hostings');
