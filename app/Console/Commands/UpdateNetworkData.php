@@ -66,7 +66,7 @@ class UpdateNetworkData extends Command
             $coin->networkHashrates()->create(['hashrate' => $dataRate->currentHashrate]);
             $coin->networkDifficulties()->create(['difficulty' => $dataRate->currentDifficulty, 'need_blocks' => $dataDif->remainingBlocks]);
 
-            if ($coin->latestNetworkDifficulty->need_blocks < $data->remainingBlocks)
+            if ($coin->latestNetworkDifficulty->need_blocks < $dataDif->remainingBlocks)
                 array_push($changed, ['id' => $coin->id, 'pd' => $coin->latestNetworkDifficulty->difficulty, 'cd' => $dataRate->currentDifficulty]);
         } catch (Exception $e) {
             Log::channel('integration-errors')->info("[litecoinspace] {$e->getMessage()}");
