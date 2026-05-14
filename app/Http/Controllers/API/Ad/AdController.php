@@ -33,7 +33,7 @@ class AdController extends Controller
             ];
             
             if ($ad->props['Condition'] == 'Used') $props['warranty'] = $ad->props['Warranty (months)'];
-            if ($ad->props['Availability'] == 'Preorder') $props['warranty'] = $ad->props['Warranty (months)'];
+            if ($ad->props['Availability'] == 'Preorder') $props['waiting'] = $ad->props['Waiting (days)'];
 
             return [
                 'id' => $ad->id,
