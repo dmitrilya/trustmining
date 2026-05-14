@@ -25,7 +25,7 @@ class AdController extends Controller
      */
     public function get(Request $request)
     {
-        $ads = $this->getAds($request, AdCategory::where('name', 'miners')->first())->where('user_id', $request->user()->id)
+        $ads = $this->getAds($request, AdCategory::where('name', 'miners')->first())->where('users.id', $request->user()->id)
             ->get()->map(function ($ad) {
                 $ad->props = json_decode($ad->props, true);
                 $props = [
