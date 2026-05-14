@@ -311,7 +311,7 @@
                                         </td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Количество
-                                            месяцев гарантии <span class="italic text-amber-500">(применимо только для
+                                            месяцев гарантии <span class="italic text-amber-500">(только для
                                                 Б/У)</span></td>
                                     </tr>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/10">
@@ -319,7 +319,7 @@
                                         </td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Срок ожидания
-                                            в днях <span class="italic text-amber-500">(применимо только для
+                                            в днях <span class="italic text-amber-500">(только для
                                                 предзаказа)</span>
                                         </td>
                                     </tr>
@@ -328,7 +328,6 @@
                         </div>
                     </div>
 
-                    <!-- Пример тела запроса JSON -->
                     <div class="space-y-2">
                         <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                             Пример передаваемого
