@@ -126,7 +126,7 @@
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
                 <div
                     class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
-                    @include('profile.partials.tg-auth')
+                    @include('profile.partials.api')
                 </div>
             </div>
 

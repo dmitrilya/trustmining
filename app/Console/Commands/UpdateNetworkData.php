@@ -85,12 +85,16 @@ class UpdateNetworkData extends Command
                 'tgIds' => $group->pluck('user.tg_id')->filter()->unique()->values()
             ]);
 
-        foreach ($changed as $changedCoin) {
+        foreach (
+            collect($changed)->filter(function ($item) use ($coins) {
+                return $coins->has($item['id']);
+            })->values()->all() as $changedCoin
+        ) {
             $coin = $coins[$changedCoin['id']];
             $text = "{$coin['name']} difficulty alert\n\n";
             $text .= __('Previous difficulty') . ': ' . number_format($changedCoin['pd']) . "\n";
             $text .= __('Current difficulty') . ': ' . number_format($changedCoin['cd']) . "\n";
-            $text .= ($changedCoin['cd'] > $changedCoin['pd'] ? '+' : '-') . round(abs($changedCoin['cd'] - $changedCoin['pd']) / $changedCoin['pd'] * 100, 2) . '%';
+            $text .= ($changedCoin['cd'] >= $changedCoin['pd'] ? '+' : '-') . round(abs($changedCoin['cd'] - $changedCoin['pd']) / $changedCoin['pd'] * 100, 2) . '%';
 
             SendTGNotifications::dispatch($coin['tgIds'], 'Difficulty alert', null, null, ['coin' => $coin['name'], 'text' => $text]);
         }

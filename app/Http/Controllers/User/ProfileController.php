@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cookie;
 use MoveMoveIo\DaData\Facades\DaDataAddress;
@@ -109,6 +110,18 @@ class ProfileController extends Controller
         return response('', 200);
     }
 
+    public function generateToken(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        $token = $request->user()->createToken('api-access');
+
+        return response()->json([
+            'success' => true,
+            'token' => $token->plainTextToken
+        ]);
+    }
+
     /**
      * Delete the user's account.
      */
@@ -120,7 +133,7 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        \Auth::logout();
+        Auth::logout();
 
         $user->delete();
 

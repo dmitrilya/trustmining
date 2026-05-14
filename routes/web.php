@@ -72,6 +72,7 @@ Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty')
 Route::get('/top', [Controller::class, 'top'])->name('top');
 Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
 Route::get('/widjets', [Controller::class, 'widjets'])->name('widjets');
+Route::get('/api/doc', [Controller::class, 'api'])->name('api.doc');
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
@@ -173,6 +174,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');
 
     Route::get('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
+    Route::get('/api/token/generate', [ProfileController::class, 'generateToken'])->name('api.token.generate');
 
     Route::group(['prefix' => 'tg'], function () {
         Route::get('/auth', [Controller::class, 'tgAuth']);

@@ -90,6 +90,11 @@ class Controller extends BaseController
         return view('warranty.index');
     }
 
+    public function api(): View
+    {
+        return view('api.index');
+    }
+
     public function widjets(): View
     {
         $models = Cache::get('calculator_models');

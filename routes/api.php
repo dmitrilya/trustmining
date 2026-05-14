@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\MetricsController;
+use App\Http\Controllers\API\Ad\AdController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +17,10 @@ use App\Http\Controllers\MetricsController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
+    Route::group(['prefix' => 'v1'], function () {
+        Route::get('/ads/get', [AdController::class, 'getUserAds']);
+    });
 });
 
 Route::get('/calculator-widjet', [CalculatorController::class, 'calculatorWidjet']);

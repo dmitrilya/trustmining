@@ -693,6 +693,10 @@
     "Desktop": "Компьютер",
     "Light": "Светлая",
     "Dark": "Темная",
+    "Documentation": "Документация",
+    "Generate a token to create your own integration. It will only appear once. You need to save it immediately.": "Сгенерируйте токен для создания собственной интеграции. Он отобразится только один раз. Вам нужно сразу его сохранить.",
+    "Token is active. In case of loss or for security purposes, you can generate a new one.": "Токен активен. В случае утери или в целях безопасности, вы можете сгенерировать новый.",
+    "Generate": "Сгенерировать",
 
 
     "Home": "Главная",

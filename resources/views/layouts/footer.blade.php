@@ -134,6 +134,8 @@
                 <div class="text-sm text-slate-500 dark:text-slate-500 font-semibold">{{ __('To the seller') }}</div>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('support', ['tab' => 'chat']) }}">{{ __('Write to support') }}</a>
+                <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
+                    href="{{ route('api.doc') }}">{{ __('API') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50" href="{{ route('widjets') }}">{{ __('Website widgets') }}</a>
                 {{-- <a class="w-max under text-sm text-slate-900 dark:text-slate-50" href="{{ route('roadmap') }}">Roadmap</a> --}}
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"

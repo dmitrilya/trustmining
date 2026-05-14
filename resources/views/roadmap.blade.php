@@ -1,4 +1,4 @@
-<x-app-layout title="TrustMining: дорожная карта, карта развития проекта">
+<x-app-layout title="Дорожная карта Trustmining — Планы развития и обновления проекта" description="Ознакомьтесь с официальной дорожной картой проекта Trustmining. Узнайте о планах развития платформы, запуске новых инструментов для майнинга, графике обновлений и стратегических целях нашей команды">
     <div class="lg:grid lg:grid-cols-5" style="height: calc(100vh - 64.4px)">
         @guest
             <div class="col-span-2 bg-slate-900 hidden lg:flex flex-col h-full w-full relative z-10 overflow-hidden">
