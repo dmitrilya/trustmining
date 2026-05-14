@@ -27,21 +27,21 @@ class AdController extends Controller
     {
         $ads = $this->getAds($request, AdCategory::where('name', 'miners')->first())->get()->map(function ($ad) {
             $props = [
-                'condition' => $ad['props']['Condition'] == 'Used' ? 'used' : 'new',
-                'availability' => $ad['props']['Availability'] == 'Preorder' ? 'preorder' : 'in_stock',
+                'condition' => $ad->props['Condition'] == 'Used' ? 'used' : 'new',
+                'availability' => $ad->props['Availability'] == 'Preorder' ? 'preorder' : 'in_stock',
             ];
             
-            if ($ad['props']['Condition'] == 'Used') $props['warranty'] = $ad['props']['Warranty (months)'];
-            if ($ad['props']['Availability'] == 'Preorder') $props['warranty'] = $ad['props']['Warranty (months)'];
+            if ($ad->props['Condition'] == 'Used') $props['warranty'] = $ad->props['Warranty (months)'];
+            if ($ad->props['Availability'] == 'Preorder') $props['warranty'] = $ad->props['Warranty (months)'];
 
             return [
-                'id' => $ad['id'],
-                'name' => $ad['asic_brand_name'] . ' ' . $ad['asic_model_name'] . ' ' . $ad['asic_version_hashrate'] . $ad['asic_version_measurement'],
+                'id' => $ad->id,
+                'name' => $ad->asic_brand_name . ' ' . $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement,
                 'props' => $props,
-                'price' => $ad['price'],
-                'coin' => strtolower($ad['coin']),
-                'with_vat' => $ad['with_vat'],
-                'hidden' => $ad['hidden'],
+                'price' => $ad->price,
+                'coin' => strtolower($ad->coin),
+                'with_vat' => $ad->with_vat,
+                'hidden' => $ad->hidden,
             ];
         });
 
