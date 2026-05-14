@@ -26,6 +26,7 @@ class AdController extends Controller
     public function get(Request $request)
     {
         $ads = $this->getAds($request, AdCategory::where('name', 'miners')->first())->get()->map(function ($ad) {
+            $ad->props = json_decode($ad->props);
             $props = [
                 'condition' => $ad->props['Condition'] == 'Used' ? 'used' : 'new',
                 'availability' => $ad->props['Availability'] == 'Preorder' ? 'preorder' : 'in_stock',
