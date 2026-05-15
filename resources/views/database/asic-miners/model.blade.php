@@ -44,17 +44,17 @@
 
                     <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion->id, $versions->pluck('id')->toArray()) }} }">
                         <div
-                            class="text-xs text-center text-slate-600 border-b border-slate-300 dark:text-slate-300 dark:border-slate-800">
+                            class="text-xs font-semibold text-center text-slate-600 dark:text-slate-300 border-b-2 border-slate-300 dark:border-slate-700">
                             <ul class="flex -mb-px overflow-x-auto no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
                                 @foreach ($versions as $i => $version)
-                                    <li class="mr-1 sm:mr-2">
+                                    <li class="mr-1 sm:mr-2 -mb-[1px]">
                                         <button
                                             class="inline-block p-1 xs:p-2 border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
-                                                'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': {{ $i }} !=
+                                                'border-transparent hover:text-slate-600 dark:hover:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600': {{ $i }} !=
                                                     selectedTab,
-                                                'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': {{ $i }} ==
+                                                'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500': {{ $i }} ==
                                                     selectedTab
                                             }">
                                             {{ $version->hashrate }}{{ $version->measurement }}
@@ -178,7 +178,7 @@
                                                 <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-500">
                                                     {{ $coin->abbreviation }}
                                                 </div>
-                                                <div class="text-xxs sm:text-xs text-slate-400 dark:text-slate-300">
+                                                <div class="text-xxs xs:text-xs text-slate-400 dark:text-slate-300">
                                                     {{ $coin->name }}
                                                 </div>
                                                 <div
