@@ -27,6 +27,7 @@ class Ad extends Model
         'props',
         'price',
         'moderation',
+        'hidden',
         'coin_id',
         'with_vat'
     ];
