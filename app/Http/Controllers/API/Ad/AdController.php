@@ -91,6 +91,42 @@ class AdController extends Controller
                 continue;
             }
 
+            if (array_key_exists('price', $adChanges) && !is_int($adChanges['price'])) {
+                array_push($errors, [
+                    'id' => $adChanges['id'],
+                    'error' => [
+                        'field' => 'price',
+                        'message' => 'Valid type of field "price" is int.'
+                    ]
+                ]);
+
+                continue;
+            }
+
+            if (array_key_exists('with_vat', $adChanges) && (is_bool($adChanges['with_vat']) || $adChanges['with_vat'] === 1 || $adChanges['with_vat'] === 0)) {
+                array_push($errors, [
+                    'id' => $adChanges['id'],
+                    'error' => [
+                        'field' => 'with_vat',
+                        'message' => 'Valid type of field "with_vat" is boolean.'
+                    ]
+                ]);
+
+                continue;
+            }
+
+            if (array_key_exists('hidden', $adChanges) && (is_bool($adChanges['hidden']) || $adChanges['hidden'] === 1 || $adChanges['hidden'] === 0)) {
+                array_push($errors, [
+                    'id' => $adChanges['id'],
+                    'error' => [
+                        'field' => 'hidden',
+                        'message' => 'Valid type of field "hidden" is boolean.'
+                    ]
+                ]);
+
+                continue;
+            }
+
             $changes = collect($adChanges)->only(['price', 'with_vat', 'hidden']);
 
             if (array_key_exists('coin', $adChanges)) {
