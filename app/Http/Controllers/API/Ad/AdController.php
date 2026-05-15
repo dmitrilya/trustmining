@@ -103,7 +103,7 @@ class AdController extends Controller
                 continue;
             }
 
-            if (array_key_exists('with_vat', $adChanges) && (is_bool($adChanges['with_vat']) || $adChanges['with_vat'] === 1 || $adChanges['with_vat'] === 0)) {
+            if (array_key_exists('with_vat', $adChanges) && !(is_bool($adChanges['with_vat']) || $adChanges['with_vat'] === 1 || $adChanges['with_vat'] === 0)) {
                 array_push($errors, [
                     'id' => $adChanges['id'],
                     'error' => [
@@ -115,7 +115,7 @@ class AdController extends Controller
                 continue;
             }
 
-            if (array_key_exists('hidden', $adChanges) && (is_bool($adChanges['hidden']) || $adChanges['hidden'] === 1 || $adChanges['hidden'] === 0)) {
+            if (array_key_exists('hidden', $adChanges) && !(is_bool($adChanges['hidden']) || $adChanges['hidden'] === 1 || $adChanges['hidden'] === 0)) {
                 array_push($errors, [
                     'id' => $adChanges['id'],
                     'error' => [
