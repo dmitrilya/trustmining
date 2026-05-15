@@ -194,7 +194,7 @@ class AdController extends Controller
                 'user_id' => 10000000
             ]);
 
-            $ad->update($changes->all);
+            $ad->update($changes->all());
 
             if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat)
                 $this->notify(
