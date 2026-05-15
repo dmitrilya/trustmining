@@ -187,36 +187,38 @@
                             Пример успешного
                             JSON-ответа (200 OK):</h4>
                         <pre class="bg-slate-900 text-slate-300 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
-[
-  {
-    <span class="text-indigo-400">"id"</span>: 1045,
-    <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"Bitmain Antminer S19 Pro 110Th"</span>,
-    <span class="text-indigo-400">"props"</span>: {
-      <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"used"</span>,
-      <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"in_stock"</span>,
-      <span class="text-indigo-400">"warranty"</span>: 3,
-      <span class="text-indigo-400">"waiting"</span>: <span class="text-sky-400">null</span>
+{
+  <span class="text-indigo-400">"ads"</span>: [
+    {
+      <span class="text-indigo-400">"id"</span>: 1045,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"Bitmain Antminer S19 Pro 110Th"</span>,
+      <span class="text-indigo-400">"props"</span>: {
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"used"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"in_stock"</span>,
+        <span class="text-indigo-400">"warranty"</span>: 3,
+        <span class="text-indigo-400">"waiting"</span>: <span class="text-sky-400">null</span>
+      },
+      <span class="text-indigo-400">"price"</span>: 145000,
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"rub"</span>,
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
     },
-    <span class="text-indigo-400">"price"</span>: 145000,
-    <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"rub"</span>,
-    <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>,
-    <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
-  },
-  {
-    <span class="text-indigo-400">"id"</span>: 1046,
-    <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"MicroBT Whatsminer M50 120Th"</span>,
-    <span class="text-indigo-400">"props"</span>: {
-      <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"new"</span>,
-      <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"preorder"</span>,
-      <span class="text-indigo-400">"warranty"</span>: <span class="text-sky-400">null</span>,
-      <span class="text-indigo-400">"waiting"</span>: 14
-    },
-    <span class="text-indigo-400">"price"</span>: 1850,
-    <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"usdt"</span>,
-    <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">true</span>,
-    <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
-  }
-]</pre>
+    {
+      <span class="text-indigo-400">"id"</span>: 1046,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"MicroBT Whatsminer M50 120Th"</span>,
+      <span class="text-indigo-400">"props"</span>: {
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"new"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"preorder"</span>,
+        <span class="text-indigo-400">"warranty"</span>: <span class="text-sky-400">null</span>,
+        <span class="text-indigo-400">"waiting"</span>: 14
+      },
+      <span class="text-indigo-400">"price"</span>: 1850,
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"usdt"</span>,
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">true</span>,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
+    }
+  ]
+}</pre>
                     </div>
                 </div>
             </div>
@@ -270,21 +272,21 @@
                                 <tbody
                                     class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-400">
                                     <tr>
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">id</td>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.id</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Обязательное | Существующий
                                             ID вашего
                                             объявления</td>
                                     </tr>
                                     <tr>
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">price</td>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.price</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Целое
                                             положительное число (> 0)
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">coin</td>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.coin</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">string</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Допустимые
                                             значения: <code
@@ -293,33 +295,33 @@
                                                 class="text-slate-800 dark:text-slate-200 font-bold">cny</code></td>
                                     </tr>
                                     <tr>
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">with_vat</td>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.with_vat</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">boolean</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Логическое
                                             значение (true/false)
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">hidden</td>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.hidden</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">boolean</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Логическое
                                             значение (true/false)
                                         </td>
                                     </tr>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/10">
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">props.warranty
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.props.warranty
                                         </td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Количество
-                                            месяцев гарантии <span class="italic text-amber-500">(только для
+                                            месяцев гарантии от 0 до 12 <span class="italic text-amber-500">(только для
                                                 Б/У)</span></td>
                                     </tr>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/10">
-                                        <td class="pr-2 py-2 text-indigo-500 font-bold">props.waiting
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">ads.props.waiting
                                         </td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Опционально | Срок ожидания
-                                            в днях <span class="italic text-amber-500">(только для
+                                            в днях от 1 до 120 <span class="italic text-amber-500">(только для
                                                 предзаказа)</span>
                                         </td>
                                     </tr>
@@ -333,25 +335,26 @@
                             Пример передаваемого
                             JSON-массива в запросе:</h4>
                         <pre class="bg-slate-900 text-slate-300 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
-[
-  {
-    <span class="text-indigo-400">"id"</span>: 1045,
-    <span class="text-indigo-400">"price"</span>: 149000,
-    <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>,
-    <span class="text-indigo-400">"props"</span>: {
-      <span class="text-indigo-400">"warranty"</span>: 6
+{
+  <span class="text-indigo-400">"ads"</span>: [
+    {
+      <span class="text-indigo-400">"id"</span>: 1045,
+      <span class="text-indigo-400">"price"</span>: 149000,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>,
+      <span class="text-indigo-400">"props"</span>: {
+        <span class="text-indigo-400">"warranty"</span>: 6
+      }
+    },
+    {
+      <span class="text-indigo-400">"id"</span>: 1046,
+      <span class="text-indigo-400">"price"</span>: 1810,
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>
     }
-  },
-  {
-    <span class="text-indigo-400">"id"</span>: 1046,
-    <span class="text-indigo-400">"price"</span>: 1810,
-    <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>
-  }
-]</pre>
+  ]
+}</pre>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </x-app-layout>

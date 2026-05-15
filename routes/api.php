@@ -19,7 +19,10 @@ use App\Http\Controllers\API\Ad\AdController;
 
 Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     Route::group(['prefix' => 'v1'], function () {
-        Route::get('/ads/get', [AdController::class, 'get']);
+        Route::group(['prefix' => 'ads'], function () {
+            Route::get('/get', [AdController::class, 'get']);
+            Route::post('/update', [AdController::class, 'update']);
+        });
     });
 });
 

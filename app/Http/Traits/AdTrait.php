@@ -206,9 +206,10 @@ trait AdTrait
      */
     public function toggleHidden(Request $request, Ad $ad)
     {
-        $user = $request->user();
+        $user = $request->user()->load('tariff:id,max_ads');
 
-        if ($ad->hidden && ($user->tariff && $user->ads()->where('hidden', false)->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->where('hidden', false)->count() >= 2))
+        $activeAdsCount = $user->activeAds()->count();
+        if ($ad->hidden && ($user->tariff && $activeAdsCount >= $user->tariff->max_ads || !$user->tariff && $activeAdsCount >= 2))
             return response()->json(['success' => false, 'message' => __('Not available with current plan')]);
 
         $ad->hidden = !$ad->hidden;

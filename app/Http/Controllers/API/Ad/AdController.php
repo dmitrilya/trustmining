@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use App\Http\Traits\NotificationTrait;
-use App\Http\Traits\FileTrait;
-use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
+use App\Models\Database\Coin;
+use App\Models\Ad\Ad;
 use App\Models\Ad\AdCategory;
 
 class AdController extends Controller
 {
-    use NotificationTrait, FileTrait, ViewTrait, AdTrait;
+    use AdTrait;
 
     /**
      * Display a listing of the resource.
@@ -38,7 +37,7 @@ class AdController extends Controller
 
                 return [
                     'id' => $ad->id,
-                    'name' => $ad->asic_brand_name . ' ' . $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement,
+                    'name' => $ad->asic_brand_name . ' ' . $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement,
                     'props' => $props,
                     'price' => $ad->price,
                     'coin' => strtolower($ad->coin),
@@ -50,5 +49,140 @@ class AdController extends Controller
         return response()->json([
             'ads' => $ads
         ], 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $user = $request->user()->load('tariff:id,max_ads');
+        $activeAdsCount = $user->activeAds()->count();
+
+        $coins = array_change_key_case(Coin::whereIn('abbreviation', ['usdt', 'rub', 'cny'])->pluck('id', 'abbreviation')->all(), CASE_LOWER);
+        $errors = [];
+
+        foreach (
+            collect($request->ads)->sortByDesc(function ($adChanges) {
+                return array_key_exists('hidden', $adChanges) && $adChanges['hidden'];
+            })->values()->all() as $adChanges
+        ) {
+            $ad = Ad::select(['id', 'hidden', 'props'])->find($adChanges['id']);
+
+            if (!$ad) {
+                array_push($errors, [
+                    'id' => $adChanges['id'],
+                    'error' => [
+                        'field' => 'id',
+                        'message' => "Ad with id {$adChanges['id']} does not exists."
+                    ]
+                ]);
+
+                continue;
+            }
+
+            $changes = collect($adChanges)->only(['price', 'with_vat', 'hidden']);
+
+            if (array_key_exists('coin', $adChanges)) {
+                if (!array_key_exists($adChanges['coin'], $coins)) {
+                    array_push($errors, [
+                        'id' => $adChanges['id'],
+                        'error' => [
+                            'field' => 'coin',
+                            'message' => "Coin {$adChanges['coin']} does not exists."
+                        ]
+                    ]);
+
+                    continue;
+                }
+
+                $changes['coin_id'] = $coins[$adChanges['coin']];
+            }
+
+            if (array_key_exists('hidden', $adChanges)) {
+                if (!$adChanges['hidden']) {
+                    if ($ad->hidden && $activeAdsCount >= $user->tariff->max_ads) {
+                        array_push($errors, [
+                            'id' => $adChanges['id'],
+                            'error' => [
+                                'field' => 'hidden',
+                                'message' => 'The maximum number of active ads has been exceeded.'
+                            ]
+                        ]);
+
+                        continue;
+                    }
+
+                    $activeAdsCount++;
+                } else $activeAdsCount--;
+            }
+
+            if (array_key_exists('props', $adChanges)) {
+                $props = $ad->props;
+
+                if (array_key_exists('warranty', $adChanges['props'])) {
+                    if ($props['Condition'] != 'Used') {
+                        array_push($errors, [
+                            'id' => $adChanges['id'],
+                            'error' => [
+                                'field' => 'props.warranty',
+                                'message' => 'The "warranty" property is only valid for "condition == used".'
+                            ]
+                        ]);
+
+                        continue;
+                    }
+
+                    if (!is_int($adChanges['props']['warranty']) || $adChanges['props']['warranty'] < 0 || $adChanges['props']['warranty'] > 12) {
+                        array_push($errors, [
+                            'id' => $adChanges['id'],
+                            'error' => [
+                                'field' => 'props.warranty',
+                                'message' => 'Valid type of field "warranty" is int. Min is 0, max is 12.'
+                            ]
+                        ]);
+
+                        continue;
+                    }
+
+                    $props['Warranty (months)'] = $adChanges['props']['warranty'];
+                }
+
+                if (array_key_exists('waiting', $adChanges['props'])) {
+                    if ($props['Availability'] != 'Preorder') {
+                        array_push($errors, [
+                            'id' => $adChanges['id'],
+                            'error' => [
+                                'field' => 'props.waiting',
+                                'message' => 'The "waiting" property is only valid for "availability == preorder".'
+                            ]
+                        ]);
+
+                        continue;
+                    }
+
+                    if (!is_int($adChanges['props']['waiting']) || $adChanges['props']['waiting'] < 1 || $adChanges['props']['waiting'] > 120) {
+                        array_push($errors, [
+                            'id' => $adChanges['id'],
+                            'error' => [
+                                'field' => 'props.waiting',
+                                'message' => 'Valid type of field "waiting" is int. Min is 1, max is 120.'
+                            ]
+                        ]);
+
+                        continue;
+                    }
+
+                    $props['Waiting (days)'] = $adChanges['props']['waiting'];
+                }
+
+                $changes['props'] = json_encode($props);
+            }
+
+            $ad->update($changes);
+        }
     }
 }
