@@ -60,6 +60,11 @@ class AdController extends Controller
      */
     public function update(Request $request)
     {
+        if (!$request->ads) return response()->json([
+            'success' => false,
+            'message' => 'Array ads not found in request bodyfix'
+        ], 200);
+
         $user = $request->user()->load('tariff:id,max_ads');
         $activeAdsCount = $user->activeAds()->count();
 
@@ -189,7 +194,7 @@ class AdController extends Controller
                 'user_id' => 10000000
             ]);
 
-            $ad->update($changes);
+            $ad->update($changes->all);
 
             if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat)
                 $this->notify(
@@ -201,6 +206,7 @@ class AdController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'errors' => $errors
         ], 200);
     }
