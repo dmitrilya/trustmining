@@ -200,7 +200,7 @@ trait AdTrait
     /**
      * Update the specified resource in storage.
      *
-     * @param  Illuminate\Http\Request;
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Ad\Ad  $ad
      * @return \Illuminate\Http\Response
      */
@@ -209,8 +209,8 @@ trait AdTrait
         $user = $request->user()->load('tariff:id,max_ads');
 
         $activeAdsCount = $user->activeAds()->count();
-        if ($ad->hidden && ($user->tariff && $activeAdsCount >= $user->tariff->max_ads || !$user->tariff && $activeAdsCount >= 2))
-            return response()->json(['success' => false, 'message' => __('Not available with current plan')]);
+        if ($ad->hidden && ($user->tariff && $activeAdsCount >= $user->tariff->max_ads || !$user->tariff && $activeAdsCount >= config('settings.ads.max_count_without_tariff')))
+            return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
 
         $ad->hidden = !$ad->hidden;
         $ad->save();
@@ -221,8 +221,8 @@ trait AdTrait
     /**
      * Update the specified resource in storage.
      *
-     * @param  Illuminate\Http\Request;
-     * @param  \App\Models\Ad\AdCategory  $adCategory;
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Ad\AdCategory  $adCategory
      * @param  \App\Models\Ad\Ad  $ad
      * @return \Illuminate\Http\Response
      */

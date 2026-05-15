@@ -6,7 +6,7 @@
 
         @if (!($user->tariff && $user->tariff->can_have_phone))
             <p class="text-sm text-slate-700 dark:text-slate-400 mt-2">
-                {{ __('Not available with current plan') }}
+                {{ __('Not available with current plan.') }}
             </p>
         @endif
     </header>

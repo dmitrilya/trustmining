@@ -48,7 +48,7 @@ class SubscriptionPayment extends Command
                 $user->tariff_from = null;
 
                 $adIds = $user->ads->where('hidden', false)->pluck('id');
-                $countToHide = $adIds->count() - 2;
+                $countToHide = $adIds->count() - config('settings.ads.max_count_without_tariff');
 
                 if ($countToHide > 0) $adIdsToHide = $adIdsToHide->merge($adIds->random($countToHide));
             } else {

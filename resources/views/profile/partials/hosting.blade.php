@@ -49,7 +49,7 @@
         @endif
     @else
         <p class="text-sm text-slate-700 dark:text-slate-400">
-            {{ __('Not available with current plan') }}
+            {{ __('Not available with current plan.') }}
         </p>
     @endif
 </section>

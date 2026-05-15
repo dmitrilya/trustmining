@@ -26,7 +26,7 @@ class PhoneController extends Controller
         $user = $request->user();
 
         if (!$user->tariff || !$user->tariff->can_have_phone)
-            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $pattern = '/[^0-9]/';
         Phone::create(['user_id' => $request->user()->id, 'number' => preg_replace($pattern, "", $request->number)]);
@@ -64,7 +64,7 @@ class PhoneController extends Controller
         $user = $request->user();
 
         if (!$user->tariff || !$user->tariff->can_have_phone)
-            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
         $pattern = '/[^0-9]/';
         $phone->number = preg_replace($pattern, "", $request->number);
