@@ -38,6 +38,7 @@ class AdController extends Controller
                 return [
                     'id' => $ad->id,
                     'name' => $ad->asic_brand_name . ' ' . $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement,
+                    'office' => $ad->city,
                     'props' => $props,
                     'price' => $ad->price,
                     'coin' => strtolower($ad->coin),
@@ -70,7 +71,7 @@ class AdController extends Controller
                 return array_key_exists('hidden', $adChanges) && $adChanges['hidden'];
             })->values()->all() as $adChanges
         ) {
-            $ad = Ad::select(['id', 'hidden', 'props'])->find($adChanges['id']);
+            $ad = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat'])->find($adChanges['id']);
 
             if (!$ad) {
                 array_push($errors, [
@@ -182,7 +183,25 @@ class AdController extends Controller
                 $changes['props'] = json_encode($props);
             }
 
+            $ad->moderations()->create([
+                'data' => $changes,
+                'moderation_status_id' => 2,
+                'user_id' => 10000000
+            ]);
+
             $ad->update($changes);
+
+            if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat)
+                $this->notify(
+                    'Price change',
+                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                    'ad',
+                    $ad
+                );
         }
+
+        return response()->json([
+            'errors' => $errors
+        ], 200);
     }
 }

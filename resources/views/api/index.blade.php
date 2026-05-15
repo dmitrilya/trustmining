@@ -111,6 +111,12 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="pr-2 py-2 text-indigo-500 font-bold">office</td>
+                                        <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">string</td>
+                                        <td class="py-2 text-slate-600 dark:text-slate-400">Город точки продаж
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="pr-2 py-2 text-indigo-500 font-bold">props</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">object</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Объект со специфическими
@@ -192,6 +198,7 @@
     {
       <span class="text-indigo-400">"id"</span>: 1045,
       <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"Bitmain Antminer S19 Pro 110Th"</span>,
+      <span class="text-indigo-400">"office"</span>: <span class="text-emerald-400">"Москва"</span>,
       <span class="text-indigo-400">"props"</span>: {
         <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"used"</span>,
         <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"in_stock"</span>,
@@ -241,6 +248,8 @@
                             <p class="text-xs text-rose-600 dark:text-rose-400 mt-1">
                                 Поля <code
                                     class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">name</code>,
+                                <code
+                                    class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">office</code>,
                                 <code
                                     class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">props.condition</code>
                                 и
