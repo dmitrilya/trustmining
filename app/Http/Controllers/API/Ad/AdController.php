@@ -111,19 +111,21 @@ class AdController extends Controller
 
             if (array_key_exists('hidden', $adChanges)) {
                 if (!$adChanges['hidden']) {
-                    if ($ad->hidden && $activeAdsCount >= $maxAds) {
-                        array_push($errors, [
-                            'id' => $adChanges['id'],
-                            'error' => [
-                                'field' => 'hidden',
-                                'message' => 'The maximum number of active ads has been exceeded.'
-                            ]
-                        ]);
+                    if ($ad->hidden) {
+                        if ($activeAdsCount >= $maxAds) {
+                            array_push($errors, [
+                                'id' => $adChanges['id'],
+                                'error' => [
+                                    'field' => 'hidden',
+                                    'message' => 'The maximum number of active ads has been exceeded.'
+                                ]
+                            ]);
 
-                        continue;
+                            continue;
+                        }
+
+                        $activeAdsCount++;
                     }
-
-                    $activeAdsCount++;
                 } else $activeAdsCount--;
             }
 
