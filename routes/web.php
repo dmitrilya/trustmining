@@ -316,7 +316,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::middleware('role:admin,moderator')->group(function () {
+    Route::middleware('role:admin,moderator,support')->group(function () {
         Route::group(['prefix' => 'moderations'], function () {
             Route::get('/', [ModerationController::class, 'index'])->name('moderations');
             Route::get('/{moderation}', [ModerationController::class, 'show'])->name('moderation');
