@@ -108,7 +108,7 @@ class AdController extends Controller
     public function store(StoreAdRequest $request)
     {
         $user = $request->user();
-        $activeAdsCount = $user->aciveAds()->count();
+        $activeAdsCount = $user->activeAds()->count();
         $maxAds = $user->tariff?->max_ads ?? config('settings.ads.max_count_without_tariff');
 
         if ($activeAdsCount >= $maxAds) return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
