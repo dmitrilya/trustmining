@@ -11,7 +11,7 @@
             @include('shop.components.about')
         @endif
 
-        @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
+        @if (isset($moderation))
             @include('moderation.components.buttons')
 
             <div

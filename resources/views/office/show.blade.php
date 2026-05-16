@@ -14,7 +14,7 @@
     @endphp
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 py-8">
-        @if (isset($moderation) && $auth && in_array($auth->role->name, ['admin', 'moderator']))
+        @if (isset($moderation))
             @include('moderation.components.buttons')
 
             <div

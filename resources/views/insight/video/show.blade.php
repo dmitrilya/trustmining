@@ -1,10 +1,7 @@
 <x-insight-layout :title="$video->title . ' | TM Insight'" :description="$video->title . ' - видео ' . $channel->name" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
-        $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
-        if ($moder) {
-            $channel = $video->channel;
-        }
+        if (isset($moderation)) $channel = $video->channel;
     @endphp
 
     <x-slot name="og">
@@ -17,7 +14,7 @@
         <meta property="video:author" content="{{ route('insight.channel.show', ['channel' => $channel->slug]) }}">
     </x-slot>
 
-    @if ($moder)
+    @if (isset($moderation))
         <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 pt-8">
             @include('moderation.components.buttons', ['withUniqueCheck' => false])
         </div>
@@ -60,7 +57,7 @@
         @include('insight.components.content-info', ['type' => 'video', 'content' => $video])
     </div>
 
-    @if (!$moder)
+    @if (!isset($moderation))
         @include('insight.components.comments.comments', ['modelType' => 'video', 'model' => $video])
     @endif
 

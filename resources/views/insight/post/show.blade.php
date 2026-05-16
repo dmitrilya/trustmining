@@ -5,7 +5,6 @@
 <x-insight-layout :title="str($post->content)->stripTags()->limit(70) . ' - ' . $channel->name . ' | TM Insight'" :description="str($post->content)->stripTags()->limit(150)" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
-        $moder = isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']);
     @endphp
 
     <x-slot name="og">
@@ -23,7 +22,7 @@
     @endif
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-    @if ($moder)
+    @if (isset($moderation))
         <div class="max-w-7xl mx-auto px-2 sm:px-6 md:px-8 pt-8">
             @include('moderation.components.buttons', ['withUniqueCheck' => false])
         </div>
@@ -45,7 +44,7 @@
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             @php
                 $preview =
-                    $moder && isset($moderation->data['preview'])
+                    isset($moderation) && isset($moderation->data['preview'])
                         ? explode('.', $moderation->data['preview'])
                         : explode('.', $post->preview);
                 $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
@@ -66,7 +65,7 @@
 
         <div x-show="!edit">
             <div itemprop="articleBody" class="ql-editor mt-6 sm:mt-8 lg:mt-10 text-xs xs:text-sm sm:text-base">
-                @if ($moder && isset($moderation->data['content']))
+                @if (isset($moderation) && isset($moderation->data['content']))
                     {!! $moderation->data['content'] !!}
                 @else
                     {!! $post->content !!}
@@ -83,7 +82,7 @@
         @include('insight.components.content-info', ['type' => 'post', 'content' => $post])
     </div>
 
-    @if (!$moder)
+    @if (!isset($moderation))
         @include('insight.components.comments.comments', ['modelType' => 'post', 'model' => $post])
     @endif
 

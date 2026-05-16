@@ -64,7 +64,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 md:p-8">
         @include('ad.components.breadcrumbs')
 
-        @if (isset($moderation) && $user && in_array($user->role->name, ['admin', 'moderator']))
+        @if (isset($moderation))
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div
