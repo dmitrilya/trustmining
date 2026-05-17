@@ -1,12 +1,10 @@
 <div x-data="{
-    models: {{ $gpuModels }},
-    selectedModel: {{ isset($selectedModel) ? $selectedModel->id : 'null' }},
+    models: Object.freeze({{ $gpuModels }}),
+    selectedModel: {{ isset($selectedModel) ? $selectedModel : 'null' }},
     search: '{{ isset($selectedModel) ? $selectedModel->name : '' }}',
     openDropdown: null
 }">
     <input class="block h-0 p-0 border-0" type="text" :value="selectedModel?.slug" name="gpu_model"
-        @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
-    <input class="block h-0 p-0 border-0" type="text" :value="selectedModel" name="gpu_model_id"
         @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
 
     <div>
@@ -36,17 +34,16 @@
             <ul role="listbox" style="display: none" x-show="open"
                 class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
 
-                @foreach ($gpuModels as $gpuModel)
-                    <li @click="selectedModel = {{ $gpuModel->id }}; open = false; search = '{{ $gpuModel->name }}'"
+                <template x-for="gpuModel in models" :key="gpuModel.id">
+                    <li @click="selectedModel = gpuModel; open = false; search = gpuModel.name" role="option"
                         class="cursor-pointer relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white"
-                        role="option"
-                        x-show="search === '' || '{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name . ' ' . $gpuModel->gpuEngineModel->name }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1">
+                        x-show="search === '' || (gpuModel.gpu_brand.name + ' ' + gpuModel.name + ' ' + gpuModel.gpu_engine_model.gpu_engine_brand.name + ' ' + gpuModel.gpu_engine_model.name).toLowerCase().indexOf(search.toLowerCase()) !== -1">
                         <div class="flex items-center">
-                            <span
-                                class="ml-3 block truncate">{{ $gpuModel->gpuBrand->name . ' ' . $gpuModel->name . ' | ' . $gpuModel->gpuEngineModel->gpuEngineBrand->name . ' ' . $gpuModel->gpuEngineModel->name . ' | ' . $gpuModel->max_power . __('kW') }}</span>
+                            <span class="ml-3 block truncate"
+                                x-text="gpuModel.gpu_brand.name + ' ' + gpuModel.name + ' | ' + gpuModel.gpu_engine_model.gpu_engine_brand.name + ' ' + gpuModel.gpu_engine_model.name + ' | ' + gpuModel.max_power + '{{ __('kW') }}'"></span>
                         </div>
 
-                        <span x-show="selectedModel == {{ $gpuModel->id }}"
+                        <span x-show="selectedModel && selectedModel.id == gpuModel.id"
                             class="absolute inset-y-0 right-0 flex items-center pr-4">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                                 class="text-indigo-500 hover:text-white" aria-hidden="true">
@@ -55,7 +52,7 @@
                             </svg>
                         </span>
                     </li>
-                @endforeach
+                </template>
             </ul>
         </div>
     </div>

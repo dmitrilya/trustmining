@@ -2,6 +2,7 @@
     $gpuModels = \App\Models\Database\GPUModel::with([
         'gpuBrand:id,name,slug,country',
         'gpuEngineModel:id,name,slug,gpu_engine_brand_id',
+        'gpuEngineModel.gpuEngineBrand:id,name',
     ])
         ->select(['id', 'name', 'slug', 'gpu_brand_id', 'gpu_engine_model_id', 'max_power'])
         ->get();
