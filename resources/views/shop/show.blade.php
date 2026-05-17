@@ -2,10 +2,10 @@
     description="Официальный представитель {{ $user->name }}: купите ASIC-майнеры Bitmain, Whatsminer и Canaan с гарантией от производителя. Большой выбор оборудования в наличии, низкие цены, быстрая доставка и профессиональная поддержка 24/7. Проверьте и заберите майнеры в наших офисах или закажите онлайн"
     itemtype="https://schema.org/ProfilePage" :itemname="__('Company') . ' ' . $user->name">
     <x-slot name="og">
-        <meta property="og:title" content="{{ $user->company ? __('Company') : __('Seller') }} {{ $user->name }}">
+        <meta property="og:title" content="{{ $user->company && !$user->company->moderation ? __('Company') : __('Seller') }} {{ $user->name }}">
         <meta property="og:description"
             content="Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING">
-        @if ($user->company)
+        @if ($user->company && !$user->company->moderation)
             <meta property="og:image" content="{{ Storage::disk('public')->url($user->company->logo) }}">
         @endif
         <meta property="og:url" content="{{ url()->current() }}">
@@ -13,7 +13,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" x-data="{ ad_category_name: null }">
-        @if ($user->company)
+        @if ($user->company && !$user->company->moderation)
             @include('shop.components.about')
         @endif
 

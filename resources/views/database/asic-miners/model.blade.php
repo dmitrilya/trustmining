@@ -227,7 +227,7 @@
                                 ]) }}"
                                 class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                 <span>{{ $reviewsCount }}</span>
-                                {{ __('reviews') }}
+                                {{ trans_choice('navigation.reviews', $reviewCount) }}
                             </a>
                         </div>
                     </div>

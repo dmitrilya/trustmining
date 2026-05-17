@@ -33,7 +33,7 @@
             <x-rating sm="true"></x-rating>
 
             <p class="ml-3 text-xxs xs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">
-                {{ $shop->moderatedReviews->count() }} {{ __('reviews') }}
+                {{ $shop->moderatedReviews->count() }} {{ trans_choice('navigation.reviews', $shop->moderatedReviews->count()) }}
             </p>
         </div>
 

@@ -30,8 +30,8 @@
 
             <div class="flex items-center ml-4">
                 <a href="{{ route('chat.start', ['user' => $user->id]) }}" aria-label="Contact" target="_blank">
-                    <svg class="size-5 sm:size-6 lg:size-7 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200" aria-hidden="true" width="24" height="24"
-                        fill="none" viewBox="0 0 24 24">
+                    <svg class="size-5 sm:size-6 lg:size-7 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                        aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M7 9h5m3 0h2M7 12h2m3 0h5M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.616a1 1 0 0 0-.67.257l-2.88 2.592A.5.5 0 0 1 8 18.477V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
                     </svg>
@@ -72,7 +72,7 @@
 
                 <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
                     class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">{{ $user->moderatedReviews->count() }}
-                    {{ __('reviews') }}</a>
+                    {{ trans_choice('navigation.reviews', $user->moderatedReviews->count()) }}</a>
             </div>
         </div>
 
@@ -84,8 +84,9 @@
         </div>
 
         <div itemprop="description"
-            class="ql-editor mt-3 sm:mt-4 lg:mt-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">{!! $user->company->description !!}</div>
-        
+            class="ql-editor mt-3 sm:mt-4 lg:mt-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">
+            {!! $user->company->description !!}</div>
+
         @if (!request()->routeIs('company.about'))
             <a href="{{ route('company.about', ['user' => $user->slug]) }}" target="_blank"
                 class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600">{{ __('Read more') }}</a>

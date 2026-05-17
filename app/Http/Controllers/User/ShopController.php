@@ -20,7 +20,7 @@ class ShopController extends Controller
     /**
      * Display a listing of the resource.
      * 
-     * @param  Illuminate\Http\Request;
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function shops(Request $request)
@@ -29,7 +29,7 @@ class ShopController extends Controller
     }
 
     /**
-     * @param  Illuminate\Http\Request;
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
@@ -41,23 +41,30 @@ class ShopController extends Controller
     }
 
     /**
-     * @param  \App\Models\User\Company  $company
+     * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
     public function aboutCompany(User $user)
     {
-        if (!$user->company) return redirect()->route('company', ['user' => $user->slug]);
+        if (!$user->company || $user->company->moderation && !(auth() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
+            return redirect()->route('company', ['user' => $user->slug]);
 
         return view('company.show', ['user' => $user, 'company' => $user->company]);
     }
 
     /**
-     * @param  \App\Models\User\Company  $company
+     * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
     public function hosting(User $user)
     {
-        if (!$user->tariff || !$user->tariff->can_have_hosting || !$user->hosting || $user->hosting->moderation || !$user->company)
+        $canSee = auth() && (auth()->id() == $user->id || auth()->user()->role->name != 'user');
+
+        if (
+            !$user->tariff || !$user->tariff->can_have_hosting ||
+            !$user->hosting || $user->hosting->moderation && !$canSee ||
+            !$user->company || $user->company->moderation && !$canSee
+        )
             return redirect()->route('company', ['user' => $user->slug]);
 
         $this->addView(request(), $user->hosting);
