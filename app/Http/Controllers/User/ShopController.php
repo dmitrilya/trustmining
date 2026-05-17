@@ -46,7 +46,7 @@ class ShopController extends Controller
      */
     public function aboutCompany(User $user)
     {
-        if (!$user->company || $user->company->moderation && !(auth() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
+        if (!$user->company || $user->company->moderation && !(auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
         return view('company.show', ['user' => $user, 'company' => $user->company]);
@@ -58,7 +58,7 @@ class ShopController extends Controller
      */
     public function hosting(User $user)
     {
-        $canSee = auth() && (auth()->id() == $user->id || auth()->user()->role->name != 'user');
+        $canSee = auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user');
 
         if (
             !$user->tariff || !$user->tariff->can_have_hosting ||
