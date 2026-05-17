@@ -3,7 +3,7 @@
     @if (count($gpu->images))
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" draggable="false"
-                href="{{ route('ads', ['adCategory' => 'gpus', 'model' => $gpu->slug]) }}" x-data="{ shown: false }"
+                href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $gpu->slug]) }}" x-data="{ shown: false }"
                 x-intersect.once.margin.300px="shown = true"
                 aria-label="{{ $gpu->gpuBrand->name . ' ' . $gpu->name }} offers">
                 @php
