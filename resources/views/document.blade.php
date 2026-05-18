@@ -7,7 +7,7 @@
         <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
         <script type="module">
-            var url = "/storage/{{ request()->path }}";
+            var url = window.location.origin + "/storage/{{ request()->path }}";
 
             var currPage = 1;
             var numPages = 0;
