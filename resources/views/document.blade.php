@@ -7,32 +7,23 @@
         <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
         <script type="module">
-            var url = window.location.origin + "/storage/{{ request()->path }}";
+            var url = "/storage/{{ request()->path }}";
 
             var currPage = 1;
             var numPages = 0;
             var thePDF = null;
             var wrapper = document.getElementById('doc-wrapper');
 
-            // Loaded via <script> tag, create shortcut to access PDF.js exports.
             var {
                 pdfjsLib
             } = globalThis;
 
-            // The workerSrc property shall be specified.
             pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
 
-            // Asynchronous download of PDF
-            var loadingTask = pdfjsLib.getDocument(url);
+            var loadingTask = pdfjsLib.getDocument({ url: url });
             loadingTask.promise.then(function(pdf) {
-
-                //Set PDFJS global object (so we can easily access in our page functions
                 thePDF = pdf;
-
-                //How many pages it has
                 numPages = pdf.numPages;
-
-                //Start with first page
                 pdf.getPage(1).then(handlePages);
             });
 
