@@ -230,7 +230,7 @@
                                     @if (!$widjet)
                                         <template x-if="version.ads_count">
                                             <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
-                                                x-bind:href="version ? '/ads/miners?model=' + version.model_name : ' # '">
+                                                x-bind:href="version ? '/ads/miners?model=' + version.model_slug : ' # '">
                                                 <x-primary-button
                                                     class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
                                             </a>
