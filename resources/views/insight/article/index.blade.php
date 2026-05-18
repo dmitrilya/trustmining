@@ -1,11 +1,13 @@
-<x-insight-layout title="TM Insight: статьи, руководства для майнеров, отзывы и обзоры экспертов"
-    description="База знаний по майнингу: подробные обзоры ASIC-майнеров, видеокарт и комплектующих. Полезные статьи и инструкции от экспертов и сообщества. Узнайте, как эффективно добывать криптовалюту."
-    :header="__('Articles')" itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')">
-    <x-slot name="sort">
-        @php
-            $sort = request()->sort ?? 'newest';
-        @endphp
+@php
+    $sort = request()->sort ?? 'newest';
+    $selectedTags = request()->input('tags', []);
+    $tagsCount = count($selectedTags);
+@endphp
 
+<x-insight-layout title="TM Insight{{ $tagsCount === 1 ?  ' | ' . $selectedTags[0] : '' }}: статьи, руководства для майнеров, отзывы и обзоры экспертов"
+    description="Главная база знаний о криптовалютах и майнинге{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}. Информационные статьи, пошаговые инструкции, прогнозы экспертов и обзоры рынка в одном месте | TM Insight"
+    header="{{ __('Articles') }}{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}" itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')" :noindex="$tagsCount > 1 ? 'true' : null">
+    <x-slot name="sort">
         <x-header-filters>
             <x-slot name="sort">
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'newest' ? 'true' : 'false' }} }" :href="route(

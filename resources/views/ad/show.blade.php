@@ -472,9 +472,9 @@
                 </div>
 
                 <div x-show="selectedTab == 'description'">
-                    @include('ad.components.description', ['description' => $ad->description])
-
                     @include('ad.components.can_trust')
+                    
+                    @include('ad.components.description', ['description' => $ad->description])
                 </div>
 
                 <div x-show="selectedTab == 'characteristics'" style="display: none">

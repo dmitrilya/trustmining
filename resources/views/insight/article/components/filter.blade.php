@@ -1,4 +1,4 @@
-<div x-data="{ allTags: {{ $tags }}, tags: [], search: '' }">
+<div x-data="{ allTags: {{ $tags->diff($selectedTags)->values() }}, tags: {{ collect($selectedTags) }}, search: '' }">
     <div>
         <x-input-label for="search" :value="__('Hashtag')" />
         <x-text-input id="search" type="text" ::value="search" placeholder="#" @input="search = $el.value" />
