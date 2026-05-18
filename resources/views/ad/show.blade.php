@@ -242,7 +242,7 @@
 
                             <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
                                 <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
-                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
+                                    <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
                                         class="w-full h-full object-cover">
                                 </div>
 
