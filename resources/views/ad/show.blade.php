@@ -386,6 +386,8 @@
                             <div itemprop="priceSpecification" itemscope
                                 itemtype="https://schema.org/PriceSpecification">
                                 <meta itemprop="price" content="0" />
+                                <meta itemprop="priceCurrency"
+                                    content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
                                 <meta itemprop="valueAddedTaxIncluded"
                                     content="{{ $ad->with_vat ? 'true' : 'false' }}" />
                                 <p itemprop="description"
