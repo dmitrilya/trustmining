@@ -11,14 +11,15 @@
             $previewmd = Storage::url($baseName . '_340.' . $preview[1]);
         @endphp
 
+        <link itemprop="image" href="{{ $previewmd }}" />
+
         <template x-if="shown">
             <picture class="w-full">
                 <source media="(min-width: 768px)" srcset="{{ $previewsm }}">
                 <source media="(min-width: 430px)" srcset="{{ $previewmd }}">
                 <source media="(min-width: 380px)" srcset="{{ $previewxs }}">
 
-                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewmd }}"
-                    alt="{{ $article->title }}" />
+                <img fetchpriority="high" class="w-full" src="{{ $previewmd }}" alt="{{ $article->title }}" />
             </picture>
         </template>
     </div>
