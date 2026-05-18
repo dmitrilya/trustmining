@@ -65,6 +65,8 @@ Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/about', [Controller::class, 'about'])->name('about');
 Route::get('/search', [Controller::class, 'search'])->name('search');
 Route::get('/document', [Controller::class, 'document'])->name('document');
+Route::get('/privacy', [Controller::class, 'privacy'])->name('privacy');
+Route::get('/terms', [Controller::class, 'terms'])->name('terms');
 Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
 Route::get('/career', [Controller::class, 'career'])->name('career');
 Route::get('/events', [Controller::class, 'events'])->name('events');

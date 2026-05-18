@@ -1,13 +1,13 @@
 <x-app-layout
-    title="{{ request()->path == 'documents/agreement.pdf' ? 'Пользовательское соглашение - условия использования TrustMining' : 'Политика конфиденциальности - условия обработки данных TrustMining' }}"
-    description="{{ request()->path == 'documents/agreement.pdf' ? 'Пользовательское соглашение TrustMining: правила использования платформы, права и обязанности пользователей, ответственность сторон и условия работы с сервисами сайта' : 'Политика конфиденциальности TrustMining: правила сбора, хранения и защиты персональной информации пользователей, использование файлов cookie и гарантии безопасности данных' }}">
+    title="{{ request()->routeIs('terms') ? 'Пользовательское соглашение - условия использования TrustMining' : 'Политика конфиденциальности - условия обработки данных TrustMining' }}"
+    description="{{ request()->routeIs('terms') ? 'Пользовательское соглашение TrustMining: правила использования платформы, права и обязанности пользователей, ответственность сторон и условия работы с сервисами сайта' : 'Политика конфиденциальности TrustMining: правила сбора, хранения и защиты персональной информации пользователей, использование файлов cookie и гарантии безопасности данных' }}">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div id="doc-wrapper" class="mx-auto px-0 space-y-4" style="max-width:596px"></div>
 
         <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
 
         <script type="module">
-            var url = "/storage/{{ request()->path }}";
+            var url = "/storage/{{ request()->routeIs('privacy') ? 'documents/privacy.pdf' : 'documents/agreement.pdf' }}";
 
             var currPage = 1;
             var numPages = 0;

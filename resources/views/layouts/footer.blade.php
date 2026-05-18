@@ -167,9 +167,9 @@
                 {{-- <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
-                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
+                    href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a>
                 <a class="w-max under text-sm text-slate-900 dark:text-slate-50"
-                    href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
+                    href="{{ route('terms') }}">{{ __('User Agreement') }}</a>
             </div>
         </div>
 

@@ -70,6 +70,16 @@ class Controller extends BaseController
         return view('document');
     }
 
+    public function privacy(): View
+    {
+        return view('document');
+    }
+
+    public function terms(): View
+    {
+        return view('document');
+    }
+
     public function roadmap(): View
     {
         return view('roadmap');
