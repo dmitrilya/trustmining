@@ -4,7 +4,8 @@
         $ad->adCategory->name != 'gpus'
             ? ($ad->adCategory->name == 'miners'
                 ? "Купить {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
-                : __($ad->adCategory->header) . " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
+                : __($ad->adCategory->header) .
+                    " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
             : "Купить {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
                 __('kW/h') .
                 " в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
@@ -225,7 +226,8 @@
                                 <div @click="active = 0"
                                     class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
                                     :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-70 hover:opacity-100'">
-                                    <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }} {{ __('Preview') }}"
+                                    <img src="{{ Storage::url($ad->preview) }}"
+                                        alt="{{ $alt }} {{ __('Preview') }}"
                                         class="w-full h-full rounded-lg object-cover">
                                 </div>
 
@@ -234,7 +236,8 @@
                                         class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
                                         :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
                                             'opacity-70 hover:opacity-100'">
-                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
+                                        <img src="{{ Storage::url($image) }}"
+                                            alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
                                             class="w-full h-full rounded-lg object-cover">
                                     </div>
                                 @endforeach
@@ -242,14 +245,15 @@
 
                             <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
                                 <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
-                                    <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
-                                        class="w-full h-full object-cover">
+                                    <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
+                                        alt="{{ $alt }}" class="w-full h-full object-cover">
                                 </div>
 
                                 @foreach ($ad->images as $index => $image)
                                     <div x-show="active === {{ $index + 1 }}" x-transition.opacity.duration.300ms
                                         class="absolute inset-0">
-                                        <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ $index + 2 }}"
+                                        <img src="{{ Storage::url($image) }}"
+                                            alt="{{ $alt }} {{ $index + 2 }}"
                                             class="w-full h-full object-cover">
                                     </div>
                                 @endforeach
@@ -356,12 +360,14 @@
                             @endif
                         @endif
 
-                        <p class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
-                            @if ($ad->price != 0)
+                        @if ($ad->price != 0)
+                            <p class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
                                 <meta itemprop="priceCurrency"
                                     content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
                                 <span itemprop="price">{{ $ad->price }}</span>
                                 <span class="ml-2">{{ $ad->coin->abbreviation }}</span>
+                                <meta itemprop="valueAddedTaxIncluded"
+                                    content="{{ $ad->with_vat ? 'true' : 'false' }}" />
                                 @if ($ad->with_vat)
                                     <span
                                         class="ml-1 text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
@@ -375,10 +381,19 @@
                                             ],
                                     ])
                                 @endif
-                            @else
-                                {{ __('Price on request') }}
-                            @endif
-                        </p>
+                            </p>
+                        @else
+                            <div itemprop="priceSpecification" itemscope
+                                itemtype="https://schema.org/PriceSpecification">
+                                <meta itemprop="price" content="0" />
+                                <meta itemprop="valueAddedTaxIncluded"
+                                    content="{{ $ad->with_vat ? 'true' : 'false' }}" />
+                                <p itemprop="description"
+                                    class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
+                                    {{ __('Price on request') }}
+                                </p>
+                            </div>
+                        @endif
 
                         <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => $ad->office->id]) }}"
                             target="_blank"
@@ -473,7 +488,7 @@
 
                 <div x-show="selectedTab == 'description'">
                     @include('ad.components.can_trust')
-                    
+
                     @include('ad.components.description', ['description' => $ad->description])
                 </div>
 
