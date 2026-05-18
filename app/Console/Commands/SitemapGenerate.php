@@ -185,8 +185,8 @@ class SitemapGenerate extends Command
 
         $out .= $this->addUrl('support');
         $out .= $this->addUrl('support?chat=1');
-        $out .= $this->addUrl('document?path=documents/privacy.pdf');
-        $out .= $this->addUrl('document?path=documents/agreement.pdf');
+        $out .= $this->addUrl('privacy');
+        $out .= $this->addUrl('agreement');
         $out .= $this->addUrl('tariffs');
         $out .= $this->addUrl('roadmap');
         $out .= $this->addUrl('login');
