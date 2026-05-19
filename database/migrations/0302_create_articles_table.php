@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('content');
             $table->json('tags');
             $table->boolean('moderation')->default(1);
-            $table->foreignId('channel_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

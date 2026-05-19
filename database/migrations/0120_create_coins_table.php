@@ -17,9 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('abbreviation');
-            $table->unsignedBigInteger('algorithm_id')->nullable();
-            $table->foreign('algorithm_id')->references('id')
-                ->on('algorithms')->onUpdate('cascade');
+            $table->foreignId('algorithm_id')->constrained()->cascadeOnUpdate()->nullable();
             $table->unsignedFloat('profit', 12, 8)->nullable();
             $table->unsignedDouble('difficulty', 24, 2)->nullable();
             $table->unsignedTinyInteger('fee')->default(0);

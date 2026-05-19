@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('coin_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('coin_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
             $table->unsignedFloat('rate', 16, 8);
             $table->timestamp('created_at')->useCurrent();
         });

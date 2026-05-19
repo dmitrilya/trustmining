@@ -19,12 +19,8 @@ return new class extends Migration
             $table->json('images');
             $table->json('files');
             $table->boolean('moderation')->default(1);
-            $table->unsignedBigInteger('forum_answer_id');
-            $table->foreign('forum_answer_id')->references('id')
-                ->on('forum_answers')->onUpdate('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade');
+            $table->foreignId('forum_answer_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

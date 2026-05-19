@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('asic_versions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('asic_model_id');
-            $table->foreign('asic_model_id')->references('id')
-                ->on('asic_models')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('asic_model_id')->constrained()->cascadeOnUpdate();
             $table->unsignedDecimal('hashrate', 10, 4);
             $table->unsignedFloat('efficiency', 7, 3);
             $table->string('measurement');

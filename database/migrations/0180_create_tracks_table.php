@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('tracks', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('ad_id');
-            $table->foreign('ad_id')->references('id')
-                ->on('ads')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('ad_id')->constrained()->cascadeOnUpdate();
             $table->timestamp('created_at')->useCurrent();
         });
     }

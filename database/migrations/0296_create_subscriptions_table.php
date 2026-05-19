@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('channel_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('channel_id')->constrained()->cascadeOnUpdate();
             $table->timestamp('subscribed_at')->useCurrent();
             $table->timestamp('unsubscribed_at')->nullable();
             $table->index(['channel_id', 'unsubscribed_at']);

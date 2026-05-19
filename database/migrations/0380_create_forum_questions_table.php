@@ -23,12 +23,8 @@ return new class extends Migration
             $table->boolean('moderation')->default(1);
             $table->json('similar_questions');
             $table->boolean('published')->default(0);
-            $table->unsignedBigInteger('forum_subcategory_id')->nullable();
-            $table->foreign('forum_subcategory_id')->references('id')
-                ->on('forum_subcategories')->onUpdate('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade');
+            $table->foreignId('forum_subcategory_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

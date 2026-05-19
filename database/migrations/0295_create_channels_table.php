@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('logo');
             $table->string('banner');
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

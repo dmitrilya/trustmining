@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('crm_connections', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade');
-            $table->unsignedBigInteger('crm_system_id');
-            $table->foreign('crm_system_id')->references('id')
-                ->on('crm_systems')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('crm_system_id')->constrained()->cascadeOnUpdate();
             $table->string('account_id');
             $table->string('external_id');
             $table->timestamps();

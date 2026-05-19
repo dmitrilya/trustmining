@@ -14,12 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chat_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('chat_id');
-            $table->foreign('chat_id')->references('id')
-                ->on('chats')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('chat_id')->constrained()->cascadeOnUpdate();
         });
     }
 

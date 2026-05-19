@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('difficulty_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('difficulty_subscription_type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('coin_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('difficulty_subscription_type_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

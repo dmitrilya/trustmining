@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('asic_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('asic_brand_id');
-            $table->foreign('asic_brand_id')->references('id')
-                ->on('asic_brands')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('algorithm_id');
-            $table->foreign('algorithm_id')->references('id')
-                ->on('algorithms')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('asic_brand_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('algorithm_id')->constrained()->cascadeOnUpdate();
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();

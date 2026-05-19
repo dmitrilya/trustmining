@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('passports', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->json('images');
             $table->boolean('moderation')->default(1);
             $table->timestamp('created_at')->useCurrent();

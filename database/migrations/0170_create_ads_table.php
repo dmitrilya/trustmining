@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
 
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('ad_category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('asic_version_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('gpu_model_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('office_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('ad_category_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('asic_version_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('gpu_model_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('office_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
 
             $table->text('description')->nullable();
             $table->json('images')->nullable();

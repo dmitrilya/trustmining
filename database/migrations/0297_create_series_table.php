@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id()->startingValue(10000000);
             $table->string('name');
             $table->text('description');
-            $table->foreignId('channel_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

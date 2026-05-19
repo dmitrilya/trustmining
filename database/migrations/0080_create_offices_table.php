@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('offices', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->json('images');
             $table->string('video')->nullable();
             $table->string('address');

@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
-            $table->unsignedBigInteger('chat_id');
-            $table->foreign('chat_id')->references('id')
-                ->on('chats')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('chat_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->text('message')->nullable();
             $table->json('images');
             $table->json('files');

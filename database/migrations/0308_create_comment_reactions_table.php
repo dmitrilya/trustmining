@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('comment_reactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comment_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('comment_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->string('type');
             $table->unique(['comment_id', 'user_id']);
             $table->timestamps();

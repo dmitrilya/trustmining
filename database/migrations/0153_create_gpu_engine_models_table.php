@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('gpu_engine_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('gpu_engine_brand_id');
-            $table->foreign('gpu_engine_brand_id')->references('id')
-                ->on('gpu_engine_brands')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('gpu_engine_brand_id')->constrained()->cascadeOnUpdate();
             $table->string('name');
             $table->string('slug');
             $table->unsignedFloat('volume', 6, 3);

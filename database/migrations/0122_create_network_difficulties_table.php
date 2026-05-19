@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('network_difficulties', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('coin_id');
-            $table->foreign('coin_id')->references('id')
-                ->on('coins')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
             $table->unsignedDouble('difficulty', 26, 4);
             $table->unsignedSmallInteger('need_blocks');
             $table->timestamp('created_at')->useCurrent();

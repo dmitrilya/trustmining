@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('preview');
             $table->string('url');
             $table->boolean('moderation')->default(1);
-            $table->foreignId('channel_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('channel_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

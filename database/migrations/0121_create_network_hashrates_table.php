@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('network_hashrates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('coin_id');
-            $table->foreign('coin_id')->references('id')
-                ->on('coins')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
             $table->unsignedDouble('hashrate', 24, 2);
             $table->timestamp('created_at')->useCurrent();
         });

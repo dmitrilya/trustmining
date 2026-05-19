@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')
-                ->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->unsignedInteger('amount');
             $table->string('method');
             $table->string('invoice_id')->nullable();

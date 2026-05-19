@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('series_content', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('series_id')->constrained()->onDelete('cascade');
+            $table->foreignId('series_id')->constrained()->cascadeOnUpdate();
             $table->morphs('contentable');
             $table->integer('sort_order')->default(0);
         });
