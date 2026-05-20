@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->unsignedInteger('ordering_id');
-            $table->foreignId('role_id')->constrained()->cascadeOnUpdate()->default(2);
-            $table->foreignId('tariff_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('role_id')->default(2)->constrained()->cascadeOnUpdate();
+            $table->foreignId('tariff_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->date('tariff_from')->nullable();
             $table->string('name');
             $table->string('slug');

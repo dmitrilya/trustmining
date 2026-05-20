@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('moderation')->default(1);
             $table->json('similar_questions');
             $table->boolean('published')->default(0);
-            $table->foreignId('forum_subcategory_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('forum_subcategory_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });

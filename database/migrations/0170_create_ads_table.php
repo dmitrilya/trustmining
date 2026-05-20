@@ -19,8 +19,8 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('ad_category_id')->constrained()->cascadeOnUpdate();
-            $table->foreignId('asic_version_id')->constrained()->cascadeOnUpdate()->nullable();
-            $table->foreignId('gpu_model_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('asic_version_id')->nullable()->constrained()->cascadeOnUpdate();
+            $table->foreignId('gpu_model_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->foreignId('office_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('coin_id')->constrained()->cascadeOnUpdate();
 

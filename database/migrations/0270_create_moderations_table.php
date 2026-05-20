@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('moderations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('moderation_status_id')->constrained()->cascadeOnUpdate()->default(1);
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->nullable();
+            $table->foreignId('moderation_status_id')->default(1)->constrained()->cascadeOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->morphs('moderationable');
             $table->json('data');
             $table->string('comment')->nullable();

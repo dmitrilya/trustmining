@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->morphs('viewable');
-            $table->foreignId('ad_id')->constrained()->cascadeOnUpdate()->onDelete('set null')->nullable();
+            $table->foreignId('ad_id')->nullable()->constrained()->cascadeOnUpdate()->onDelete('set null');
             $table->unsignedInteger('count')->default(0);
             $table->ipAddress('viewer');
             $table->timestamps();

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('commentable');
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
-            $table->foreignId('parent_id')->constrained('comments')->cascadeOnUpdate()->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->cascadeOnUpdate();
             $table->text('text');
             $table->timestamps();
             $table->index(['commentable_id', 'commentable_type']);
