@@ -4,7 +4,7 @@
         {{ __('Latest forum questions') }}
     </h2>
 
-    <div class="divide-y divide-slate-100 dark:divide-slate-800">
+    <div class="divide-y divide-slate-300 dark:divide-slate-700">
         @foreach ($forumQuestions as $forumQuestion)
             <a
                 href="{{ route('forum.question.show', [

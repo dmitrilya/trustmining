@@ -8,7 +8,7 @@
     </div>
 @else
     <fieldset aria-label="Choose an office" class="w-full">
-        <ul role="list" class="divide-y divide-slate-100 dark:divide-slate-700">
+        <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
             <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-1 xl:grid-cols-2 gap-2">
                 @foreach ($offices as $office)
                     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 xl:p-5">

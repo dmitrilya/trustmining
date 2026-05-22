@@ -39,7 +39,7 @@
                 {{ __('New posts') }}
             </h2>
 
-            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     <a
                         href="{{ route('forum.question.show', [
@@ -85,7 +85,7 @@
                     </a>
                 </h2>
 
-                <div class="divide-y divide-slate-100 dark:divide-slate-800">
+                <div class="divide-y divide-slate-300 dark:divide-slate-700">
                     @foreach ($category->forumSubcategories as $subcategory)
                         <a
                             href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">

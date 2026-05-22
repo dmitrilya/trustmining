@@ -87,6 +87,4 @@
     @include('metrics.network.difficulty.components.faq')
 
     @include('metrics.network.difficulty.components.subscription')
-    @include('auth.login-modal')
-    @include('auth.register-modal')
 </x-metrics-layout>

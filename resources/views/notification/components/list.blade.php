@@ -7,7 +7,7 @@
                 {{ __('No notifications yet') }}
             </p>
         @else
-            <ul role="list" class="divide-y divide-slate-200 dark:divide-slate-700">
+            <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
                 @include('notification.components.foreach')
             </ul>
 

@@ -1,4 +1,4 @@
-<div class="mt-8">
+<div class="mb-8">
     <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200">
         {{ __('Can I trust the seller') }} {{ $ad->user->name }}?</h2>
 

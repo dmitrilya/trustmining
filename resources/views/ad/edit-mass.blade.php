@@ -29,7 +29,7 @@
                 </x-primary-button>
             </div>
 
-            <div class="divide-y divide-slate-400 dark:divide-slate-700">
+            <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($ads as $ad)
                     <div x-show="search === '' || '{{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1"
                         class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center py-1 sm:py-2 relative ad"

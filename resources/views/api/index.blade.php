@@ -97,7 +97,7 @@
                                     </tr>
                                 </thead>
                                 <tbody
-                                    class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-400">
+                                    class="divide-y divide-slate-300 dark:divide-slate-700 text-slate-600 dark:text-slate-400">
                                     <tr>
                                         <td class="pr-2 py-2 text-indigo-500 font-bold">id</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
@@ -279,7 +279,7 @@
                                     </tr>
                                 </thead>
                                 <tbody
-                                    class="divide-y divide-slate-200 dark:divide-slate-800 text-slate-600 dark:text-slate-400">
+                                    class="divide-y divide-slate-300 dark:divide-slate-700 text-slate-600 dark:text-slate-400">
                                     <tr>
                                         <td class="pr-2 py-2 text-indigo-500 font-bold">ads.id</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>

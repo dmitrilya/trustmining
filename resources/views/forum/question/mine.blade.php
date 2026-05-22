@@ -17,7 +17,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
-            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     @if ($question->published)
                         <a

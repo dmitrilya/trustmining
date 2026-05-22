@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="divide-y divide-slate-300">
+    <div class="divide-y divide-slate-300 dark:divide-slate-700">
         <template x-for="ad in ads" :key="ad.id">
             <div class="py-1 sm:py-2 grid grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-1 xs:gap-2 items-center">
                 <div class="rounded-md sm:rounded-lg overflow-hidden w-3/4 mx-auto">

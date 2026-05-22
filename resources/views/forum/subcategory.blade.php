@@ -67,7 +67,7 @@
                 {{ __($subcategory->name) }}
             </h1>
 
-            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     <a
                         href="{{ route('forum.question.show', [

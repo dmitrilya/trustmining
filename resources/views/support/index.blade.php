@@ -3,7 +3,7 @@
         x-data="{ tab: '{{ request()->tab ? request()->tab : 'chat' }}' }">
         <div
             class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
-            <ul class="flex text-sm text-center text-slate-600 rounded-t-2xl divide-x divide-slate-200 border-b border-slate-300 dark:border-slate-700 dark:divide-slate-700 dark:text-slate-200 rtl:divide-x-reverse"
+            <ul class="flex text-sm text-center text-slate-600 dark:text-slate-200 rounded-t-2xl divide-x divide-slate-300 dark:divide-slate-700 border-b border-slate-300 dark:border-slate-700 rtl:divide-x-reverse"
                 role="tablist">
                 {{-- <li class="w-full">
                     <button @click="tab = 'faq'" type="button" role="tab" aria-controls="faq"

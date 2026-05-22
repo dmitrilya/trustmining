@@ -63,7 +63,7 @@
     aria-labelledby="faq-tab" x-data="{ search: '' }">
     <x-text-input class="mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}" />
 
-    <div x-data="{ item: 0 }" class="pr-4 h-full divide-y-2 divide-slate-200 dark:divide-slate-700 overflow-y-auto"
+    <div x-data="{ item: 0 }" class="pr-4 h-full divide-y-2 divide-slate-300 dark:divide-slate-700 overflow-y-auto"
         data-active-classes="text-slate-950 dark:text-slate-100"
         data-inactive-classes="text-slate-600 dark:text-slate-300">
         @foreach ($themes as $theme => $faqs)
@@ -83,7 +83,7 @@
                 <div x-show="item == {{ $loop->index }}" style="display: none">
                     <div class="p-5 md:px-10">
                         <div x-data="{ item2: 0 }"
-                            class="h-full divide-y-2 divide-slate-100 dark:divide-slate-800 overflow-y-auto"
+                            class="h-full divide-y-2 divide-slate-300 dark:divide-slate-700 overflow-y-auto"
                             :class="{
                                 'bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-slate-100': item ==
                                     {{ $loop->index }},

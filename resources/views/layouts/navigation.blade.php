@@ -1,11 +1,15 @@
-<nav x-data="{ open: false }" class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
-    <!-- Primary Navigation Menu -->
+<nav x-data="{ open: false }"
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
     <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
         <div class="flex justify-between h-10 lg:h-14">
             <div class="w-full flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="text-sm xs:text-xl" />
+                        @auth
+                            <x-application-logo class="text-xs xs:text-base" />
+                        @else
+                            <x-application-logo class="text-sm xs:text-xl" />
+                        @endauth
                     </a>
                 </div>
 
@@ -50,9 +54,9 @@
                         ->take(5)
                         ->get()"></x-notifications></div>
 
-                    <div class="mr-5 w-5 h-5">
-                        <a aria-label="{{ __('Chats') }}"
-                            href="{{ route('chats') }}"class="relative inline-flex items-center text-sm text-center text-slate-600 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none">
+                    <div class="mr-4 sm:mr-5 w-5 h-5">
+                        <a aria-label="{{ __('Chats') }}" href="{{ route('chats') }}"
+                            class="relative inline-flex items-center text-sm text-center text-slate-600 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none">
                             <svg class="w-5 h-5 me-2.5" aria-hidden="true" viewBox="0 0 20 18" fill="currentColor">
                                 <path
                                     d="M18 4H16V9C16 10.0609 15.5786 11.0783 14.8284 11.8284C14.0783 12.5786 13.0609 13 12 13H9L6.846 14.615C7.17993 14.8628 7.58418 14.9977 8 15H11.667L15.4 17.8C15.5731 17.9298 15.7836 18 16 18C16.2652 18 16.5196 17.8946 16.7071 17.7071C16.8946 17.5196 17 17.2652 17 17V15H18C18.5304 15 19.0391 14.7893 19.4142 14.4142C19.7893 14.0391 20 13.5304 20 13V6C20 5.46957 19.7893 4.96086 19.4142 4.58579C19.0391 4.21071 18.5304 4 18 4Z"
@@ -69,6 +73,18 @@
                         </a>
                     </div>
                 @endauth
+
+                {{-- <div class="mr-4 sm:mr-5 w-5 h-5">
+                    <button aria-label="{{ __('TM Roulette') }}" @click="$dispatch('open-modal', 'roulette')"
+                        class="relative inline-flex items-center text-sm text-center text-slate-600 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none">
+                        <svg class="w-5 h-5 me-2.5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M17 1L13 3.5L16.5 7L17 1Z" fill="currentColor" />
+                            <path
+                                d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 4C10.55 4 11 4.45 11 5V6.18C12.46 6.54 13.46 7.54 13.82 9H15C15.55 9 16 9.45 16 10C16 10.55 15.55 11 15 11H13.82C13.46 12.46 12.46 13.46 11 13.82V15C11 15.55 10.55 16 10 16C9.45 16 9 15.55 9 15V13.82C7.54 13.46 6.54 12.46 6.18 11H5C4.45 11 4 10.55 4 10C4 9.45 4.45 9 5 9H6.18C6.54 7.54 7.54 6.54 9 6.18V5C9 4.45 9.45 4 10 4ZM10 8C8.9 8 8 8.9 8 10C8 11.1 8.9 12 10 12C11.1 12 12 11.1 12 10C12 8.9 11.1 8 10 8Z"
+                                fill="currentColor" />
+                        </svg>
+                    </button>
+                </div> --}}
 
                 <div class="flex cursor-pointer mr-3">
                     <div
@@ -143,9 +159,9 @@
                             </x-slot>
                         </x-dropdown>
                     @else
-                        <x-nav-link :href="route('login')">
-                            {{ __('Login') }}
-                        </x-nav-link>
+                        <button
+                            class="inline-flex items-center border-b-2 border-transparent text-sm leading-5 text-slate-600 dark:text-slate-300 hover:text-slate-700 dark:hover:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600 focus:outline-none focus:text-slate-700 dark:focus:text-slate-300 focus:border-slate-300 dark:focus:border-slate-600 transition duration-150 ease-in-out"
+                            @click="$dispatch('open-modal', 'login')"">{{ __('Login') }}</button>
                     @endauth
                 </div>
 
@@ -240,9 +256,9 @@
                     </form>
                 </div>
             @else
-                <x-responsive-nav-link :href="route('login')">
-                    {{ __('Login') }}
-                </x-responsive-nav-link>
+                <button
+                    class="block w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-700 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-300 dark:focus:border-slate-700 transition duration-150 ease-in-out"
+                    @click="$dispatch('open-modal', 'login')"">{{ __('Login') }}</button>
             @endauth
         </div>
     </div>

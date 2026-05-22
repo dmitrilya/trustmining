@@ -27,7 +27,7 @@
                 class="block px-4 py-2 text-center text-slate-800 rounded-t-lg bg-slate-50 dark:bg-slate-900 dark:text-white">
                 {{ __('Notifications') }}
             </div>
-            <div class="divide-y divide-slate-100 dark:divide-slate-800">
+            <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @if (!$notifications->count())
                     <x-notification :type="__('No notifications yet')" :date="now()" :text="__('Notifications will be displayed here')"></x-notification>
                 @else

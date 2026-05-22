@@ -5,7 +5,7 @@
             {{ __('Similar posts') }}
         </h2>
 
-        <div class="divide-y divide-slate-100 dark:divide-slate-800">
+        <div class="divide-y divide-slate-300 dark:divide-slate-700">
             @foreach ($similarQuestions as $similarQuestion)
                 <a
                     href="{{ route('forum.question.show', [
@@ -35,7 +35,7 @@
             {{ __('New posts') }}
         </h2>
 
-        <div class="divide-y divide-slate-100 dark:divide-slate-800">
+        <div class="divide-y divide-slate-300 dark:divide-slate-700">
             @foreach ($newQuestions as $newQuestion)
                 <a
                     href="{{ route('forum.question.show', [
