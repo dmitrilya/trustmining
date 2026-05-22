@@ -41,22 +41,26 @@ class UpdateNetworkData extends Command
 
         // BTC
         $coin = Coin::where('abbreviation', 'BTC')->with('latestNetworkDifficulty')->first();
-        $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
-        $coin->networkHashrates()->create(['hashrate' => $data->hash_rate * 1000000000]);
-        $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
+        try {
+            $data = json_decode(file_get_contents('https://api.blockchain.info/stats'));
+            $coin->networkHashrates()->create(['hashrate' => $data->hash_rate * 1000000000]);
+            $coin->networkDifficulties()->create(['difficulty' => $data->difficulty, 'need_blocks' => $data->nextretarget - $data->n_blocks_total]);
 
-        Cache::put('calculator_difficulty_data', [
-            'coin' => $coin->name,
-            'difficulty' => number_format($data->difficulty),
-            'article' => [
-                'id' => 10000001,
-                'slug' => 'sloznost-kriptoseti-rascet-i-vliianie',
-                'channel_slug' => 'trustmining'
-            ]
-        ]);
+            Cache::put('calculator_difficulty_data', [
+                'coin' => $coin->name,
+                'difficulty' => number_format($data->difficulty),
+                'article' => [
+                    'id' => 10000001,
+                    'slug' => 'sloznost-kriptoseti-rascet-i-vliianie',
+                    'channel_slug' => 'trustmining'
+                ]
+            ]);
 
-        if ($coin->latestNetworkDifficulty->need_blocks < $data->nextretarget - $data->n_blocks_total)
-            array_push($changed, ['id' => $coin->id, 'pd' => $coin->latestNetworkDifficulty->difficulty, 'cd' => $data->difficulty]);
+            if ($coin->latestNetworkDifficulty->need_blocks < $data->nextretarget - $data->n_blocks_total)
+                array_push($changed, ['id' => $coin->id, 'pd' => $coin->latestNetworkDifficulty->difficulty, 'cd' => $data->difficulty]);
+        } catch (Exception $e) {
+            Log::channel('integration-errors')->info("[blockchain.info] {$e->getMessage()}");
+        }
 
         // LTC
         $coin = Coin::where('abbreviation', 'LTC')->with('latestNetworkDifficulty')->first();
