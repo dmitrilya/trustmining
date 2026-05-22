@@ -6,5 +6,6 @@ return [
     'days' => 'day|days',
     'hours' => 'hour|hours',
     'minutes' => 'minute|minutes',
-    'seconds' => 'second|seconds'
+    'seconds' => 'second|seconds',
+    'period_choice' => 'every day|every :count days',
 ];
