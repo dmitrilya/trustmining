@@ -16,9 +16,7 @@
             </button>
         </div>
 
-        <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="trust_m_notifications_bot"
-            data-size="medium" data-radius="6" data-auth-url="https://trustmining.ru/tg/auth" data-request-access="write">
-        </script>
+        <x-tg-auth />
 
         <form method="POST" action="{{ route('difficulty-subscribe', ['coin' => strtolower($coin->name)]) }}"
             @submit.prevent="axios.post($el.action, new FormData($el)).then(r => {

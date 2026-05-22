@@ -92,6 +92,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <script src="https://telegram.org/js/telegram-widget.js" async defer></script>
+
     <script type="module">
         import {
             onINP
@@ -191,9 +193,7 @@
                                 {{ __('You can log in using Telegram to receive notifications from our bot') }}
                             </p>
 
-                            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="trust_m_notifications_bot"
-                                data-size="medium" data-radius="6" data-auth-url="https://trustmining.ru/tg/auth" data-request-access="write">
-                            </script>
+                            <x-tg-auth />
 
                             <div class="flex items-center justify-between mt-6">
                                 <x-checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
