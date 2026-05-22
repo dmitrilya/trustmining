@@ -44,6 +44,7 @@ return [
     ],
 
     'tgbot' => [
+        'id' => env('NOTIFICATION_BOT_ID'),
         'token' => env('NOTIFICATION_BOT_TOKEN'),
     ],
 
