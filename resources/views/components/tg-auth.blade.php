@@ -1,6 +1,4 @@
 <div x-data="{ tgWidgetLoaded: false, tgTimeout: false }" x-init="setTimeout(() => {
-    console.log(window.Telegram);
-    console.log(window.Telegram.Login);
     if (window.Telegram && window.Telegram.Login) tgWidgetLoaded = true;
     tgTimeout = true;
 }, 2500);"
