@@ -69,25 +69,25 @@ class SitemapGenerate extends Command
         }
 
         $users = User::whereHas('offices', fn($q) => $q->where('moderation', 'false'))->with([
-            'ads' => fn($q) => $q->whereHas('adCategory', fn($q1) => $q1->whereNotIn('name', ['miners', 'gpus']))->select(['id', 'ad_category_id', 'user_id', 'moderation', 'hidden']),
+            'ads' => fn($q) => $q->whereHas('adCategory', fn($q1) => $q1->whereNotIn('name', ['miners', 'gpus']))->select(['id', 'ad_category_id', 'user_id', 'moderation', 'hidden', 'updated_at']),
             'ads.adCategory:id,name',
-            'hosting:user_id,moderation',
-            'company:user_id,moderation',
-            'offices:id,user_id'
+            'hosting:user_id,moderation,updated_at',
+            'company:user_id,moderation,updated_at',
+            'offices:id,user_id,updated_at'
         ])->select(['id', 'slug'])->get();
 
         foreach ($users as $user) {
             $out .= $this->addUrl('company/' . $user->slug . '/shop');
-            if ($user->hosting && !$user->hosting->moderation) $out .= $this->addUrl('company/' . $user->slug . '/hosting');
-            if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->slug . '/about');
+            if ($user->hosting && !$user->hosting->moderation) $out .= $this->addUrl('company/' . $user->slug . '/hosting', $user->hosting->updated_at);
+            if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->slug . '/about', $user->company->updated_at);
 
             foreach ($user->ads->where('moderation', false)->where('hidden', false) as $ad) {
-                $out .= $this->addUrl('ads/' . $ad->adCategory->name . '/' . $ad->id);
+                $out .= $this->addUrl('ads/' . $ad->adCategory->name . '/' . $ad->id, $ad->updated_at);
             }
 
             $out .= $this->addUrl('company/' . $user->slug . '/offices');
             foreach ($user->offices->where('moderation', false) as $office) {
-                $out .= $this->addUrl('company/' . $user->slug . '/offices/' . $office->id);
+                $out .= $this->addUrl('company/' . $user->slug . '/offices/' . $office->id, $office->updated_at);
             }
 
             $out .= $this->addUrl('company/' . $user->slug . '/reviews');
@@ -100,7 +100,7 @@ class SitemapGenerate extends Command
             AsicBrand::select(['id', 'slug'])->with([
                 'asicModels:id,asic_brand_id,slug',
                 'asicModels.asicVersions:id,asic_model_id,hashrate,measurement',
-                'asicModels.asicVersions.moderatedAds:id,asic_version_id,user_id',
+                'asicModels.asicVersions.moderatedAds:id,asic_version_id,user_id,updated_at',
                 'asicModels.asicVersions.moderatedAds.user:id,slug'
             ])->get() as $asicBrand
         ) {
@@ -113,7 +113,7 @@ class SitemapGenerate extends Command
                     $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
                     $out .= $this->addUrl('calculator/' . $asicModel->slug . '/' . $asicVersion->hashrate);
                     foreach ($asicVersion->moderatedAds as $ad) {
-                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id);
+                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id, $ad->updated_at);
                     }
                 }
             }
@@ -134,7 +134,7 @@ class SitemapGenerate extends Command
         foreach (
             GPUBrand::select(['id', 'slug'])->with([
                 'gpuModels:id,gpu_brand_id,slug',
-                'gpuModels.moderatedAds:id,gpu_model_id,user_id',
+                'gpuModels.moderatedAds:id,gpu_model_id,user_id,updated_at',
                 'gpuModels.moderatedAds.user:id,slug'
             ])->get() as $gpuBrand
         ) {
@@ -143,7 +143,7 @@ class SitemapGenerate extends Command
                 $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug);
                 $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug . '/reviews');
                 foreach ($gpuModel->moderatedAds as $ad) {
-                    $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug . '/ads/' . $ad->user->slug . '-' . $ad->id);
+                    $out .= $this->addUrl('gpus/' . $gpuBrand->slug . '/' . $gpuModel->slug . '/ads/' . $ad->user->slug . '-' . $ad->id, $ad->updated_at);
                 }
             }
         }
@@ -156,18 +156,18 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('insight');
         foreach (
             Channel::select(['id', 'slug'])
-                ->with(['moderatedArticles:id,title,channel_id', 'moderatedPosts:id,channel_id', 'moderatedVideos:id,title,channel_id'])->get() as $channel
+                ->with(['moderatedArticles:id,title,channel_id,updated_at', 'moderatedPosts:id,channel_id,updated_at', 'moderatedVideos:id,title,channel_id,updated_at'])->get() as $channel
         ) {
             $out .= $this->addUrl('insight/' . $channel->slug);
 
             foreach ($channel->moderatedArticles as $article)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . Str::slug($article->title));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/article/' . $article->id . '-' . Str::slug($article->title), $article->updated_at);
 
             foreach ($channel->moderatedPosts as $post)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id);
+                $out .= $this->addUrl('insight/' . $channel->slug . '/post/' . $post->id, $post->updated_at);
 
             foreach ($channel->moderatedVideos as $video)
-                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . Str::slug($video->title));
+                $out .= $this->addUrl('insight/' . $channel->slug . '/video/' . $video->id . '-' . Str::slug($video->title), $video->updated_at);
         }
 
         $out .= $this->addUrl('forum');
@@ -201,9 +201,18 @@ class SitemapGenerate extends Command
         return Command::SUCCESS;
     }
 
-    private function addUrl($url)
+    private function addUrl($url, $updatedAt = null)
     {
-        return '
-    <url><loc>https://trustmining.ru/' . $url . '</loc></url>';
+        $url = '
+    <url>
+        <loc>https://trustmining.ru/' . $url . '</loc>';
+
+        if ($updatedAt) $url .= '
+        <lastmod>' . $updatedAt->toIso8601String() . '</lastmod>';
+
+        $url .= '
+    </url>';
+
+        return $url;
     }
 }
