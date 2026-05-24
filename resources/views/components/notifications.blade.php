@@ -11,7 +11,7 @@
 
         @if ($notifications->where('checked', false)->count())
             <div id="notifications-signal"
-                class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-slate-950">
+                class="absolute block w-3 h-3 bg-red-600 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-slate-950">
             </div>
         @endif
     </button>

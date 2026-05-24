@@ -161,6 +161,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(\App\Models\User\Order::class);
     }
 
+    public function ownPrizes()
+    {
+        return $this->hasMany(\App\Models\Roulette\RoulettePrize::class, 'user_id');
+    }
+
+    public function rouletteSpins()
+    {
+        return $this->hasMany(\App\Models\Roulette\RouletteSpin::class);
+    }
+
+    public function prizes()
+    {
+        return $this->hasManyThrough(\App\Models\Roulette\RoulettePrize::class, \App\Models\Roulette\RouletteSpin::class);
+    }
+
     public function tracks()
     {
         return $this->hasMany(\App\Models\Ad\Track::class);

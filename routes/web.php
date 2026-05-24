@@ -32,6 +32,8 @@ use App\Http\Controllers\Forum\ForumAnswerController;
 use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\Roulette\RoulettePrizeController;
+use App\Http\Controllers\Roulette\RouletteSpinController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -75,6 +77,10 @@ Route::get('/top', [Controller::class, 'top'])->name('top');
 Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
 Route::get('/widjets', [Controller::class, 'widjets'])->name('widjets');
 Route::get('/api/doc', [Controller::class, 'api'])->name('api.doc');
+
+Route::group(['prefix' => 'roulette'], function () {
+    Route::get('/spin', [RouletteSpinController::class, 'spin'])->name('roulette.spin');
+});
 
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
@@ -266,6 +272,12 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    Route::group(['prefix' => 'roulette'], function () {
+        Route::group(['prefix' => 'prize'], function () {
+            Route::get('/{roulettePrize}', [RoulettePrizeController::class, 'downloadResults'])->name('roulette.download-results');
+        });
+    });
+
     Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
 
     Route::group(['prefix' => 'companies'], function () {
@@ -324,6 +336,16 @@ Route::middleware('auth')->group(function () {
             Route::get('/{moderation}', [ModerationController::class, 'show'])->name('moderation');
             Route::put('/{moderation}/accept', [ModerationController::class, 'accept'])->name('moderation.accept');
             Route::put('/{moderation}/decline', [ModerationController::class, 'decline'])->name('moderation.decline');
+        });
+
+        Route::group(['prefix' => 'roulette/prize'], function () {
+            Route::get('/', [RoulettePrizeController::class, 'index'])->name('roulette.prize.index');
+            Route::post('/store', [RoulettePrizeController::class, 'store'])->name('roulette.prize.store');
+
+            Route::group(['prefix' => '{roulettePrize}'], function () {
+                Route::put('/update', [RoulettePrizeController::class, 'update'])->name('roulette.prize.update');
+                Route::put('/toggle-active', [RoulettePrizeController::class, 'toggleActive'])->name('roulette.prize.toggle-active');
+            });
         });
     });
 });

@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-//use App\Services\RouletteSpinService;
+use App\Services\RouletteSpinService;
 use App\Models\User\User;
 
 class RegisteredUserController extends Controller
@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        //(new RouletteSpinService)->compareSpinsAfterLogin($user->id);
+        (new RouletteSpinService)->compareSpinsAfterLogin($user->id);
 
         return $request->redirect ? redirect($request->redirect) : back();
     }

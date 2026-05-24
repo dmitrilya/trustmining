@@ -26,12 +26,12 @@
                         кабинете. Аутентификация выполняется на базе технологии <strong
                             class="text-slate-800 dark:text-slate-200">Laravel Sanctum</strong>.
                     </p>
-                    <div class="bg-amber-50 dark:bg-amber-950/30 border-l-4 border-amber-500 p-4 rounded-r-md">
+                    <div class="bg-amber-500/10 border-l-4 border-amber-500/30 p-4 rounded-r-md">
                         <div class="flex">
                             <div class="flex-shrink-0">⚠️</div>
                             <div class="ml-3">
                                 <p class="text-sm text-amber-800 dark:text-amber-200 font-bold">Важное требование</p>
-                                <p class="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                                <p class="text-xs text-amber-500 mt-1">
                                     Каждый запрос к API обязан содержать заголовок <code
                                         class="bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Accept:
                                         application/json</code>. Без него сервер вернет некорректный ответ в формате
@@ -47,14 +47,14 @@
                     <div class="text-slate-500 font-semibold uppercase tracking-wider text-[10px]">Обязательные
                         HTTP-заголовки</div>
                     <div class="space-y-1">
-                        <div class="text-emerald-600 dark:text-emerald-400 font-bold">Authorization:</div>
+                        <div class="text-emerald-500 font-bold">Authorization:</div>
                         <div
                             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
                             Bearer 1|plainTextTokenValue...
                         </div>
                     </div>
                     <div class="space-y-1">
-                        <div class="text-emerald-600 dark:text-emerald-400 font-bold">Accept:</div>
+                        <div class="text-emerald-500 font-bold">Accept:</div>
                         <div
                             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
                             application/json
@@ -66,7 +66,7 @@
                         <p class="mt-1 text-slate-600 dark:text-slate-400 text-[11px]">Максимум <strong>60 запросов в
                                 минуту</strong> на один
                             аккаунт. При превышении возвращается код <code
-                                class="text-rose-600 dark:text-rose-400 font-bold">429 Too Many
+                                class="text-rose-500 font-bold">429 Too Many
                                 Requests</code>.</p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             <div class="border-t border-slate-200 dark:border-slate-700 pt-8 space-y-6">
                 <div class="flex flex-wrap items-center gap-3">
                     <span
-                        class="bg-amber-500 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">GET</span>
+                        class="bg-amber-500/10 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">GET</span>
                     <code class="text-sm font-bold text-slate-800 dark:text-slate-200">/api/v1/ads/get</code>
                     <span class="text-slate-600 dark:text-slate-400 text-sm">— Получение списка объявлений
                         ASIC-майнеров</span>
@@ -143,7 +143,7 @@
                                         <td class="pr-2 py-2 pl-4 text-indigo-500 whitespace-nowrap">└ warranty</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int|null</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Гарантия в месяцах. <span
-                                                class="italic text-amber-600 dark:text-amber-400">(обязательно, только
+                                                class="italic text-amber-500">(обязательно, только
                                                 если condition ==
                                                 used)</span></td>
                                     </tr>
@@ -151,7 +151,7 @@
                                         <td class="pr-2 py-2 pl-4 text-indigo-500 whitespace-nowrap">└ waiting</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int|null</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">Срок ожидания поставки в
-                                            днях. <span class="italic text-amber-600 dark:text-amber-400">(обязательно,
+                                            днях. <span class="italic text-amber-500">(обязательно,
                                                 только если availability ==
                                                 preorder)</span></td>
                                     </tr>
@@ -197,32 +197,32 @@
   <span class="text-indigo-400">"ads"</span>: [
     {
       <span class="text-indigo-400">"id"</span>: 1045,
-      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"Bitmain Antminer S19 Pro 110Th"</span>,
-      <span class="text-indigo-400">"office"</span>: <span class="text-emerald-400">"Москва"</span>,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-500">"Bitmain Antminer S19 Pro 110Th"</span>,
+      <span class="text-indigo-400">"office"</span>: <span class="text-emerald-500">"Москва"</span>,
       <span class="text-indigo-400">"props"</span>: {
-        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"used"</span>,
-        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"in_stock"</span>,
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-500">"used"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-500">"in_stock"</span>,
         <span class="text-indigo-400">"warranty"</span>: 3,
-        <span class="text-indigo-400">"waiting"</span>: <span class="text-sky-400">null</span>
+        <span class="text-indigo-400">"waiting"</span>: <span class="text-indigo-500">null</span>
       },
       <span class="text-indigo-400">"price"</span>: 145000,
-      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"rub"</span>,
-      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>,
-      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-500">"rub"</span>,
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-indigo-500">false</span>,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-indigo-500">false</span>
     },
     {
       <span class="text-indigo-400">"id"</span>: 1046,
-      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-400">"MicroBT Whatsminer M50 120Th"</span>,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-500">"MicroBT Whatsminer M50 120Th"</span>,
       <span class="text-indigo-400">"props"</span>: {
-        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-400">"new"</span>,
-        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-400">"preorder"</span>,
-        <span class="text-indigo-400">"warranty"</span>: <span class="text-sky-400">null</span>,
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-500">"new"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-500">"preorder"</span>,
+        <span class="text-indigo-400">"warranty"</span>: <span class="text-indigo-500">null</span>,
         <span class="text-indigo-400">"waiting"</span>: 14
       },
       <span class="text-indigo-400">"price"</span>: 1850,
-      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-400">"usdt"</span>,
-      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">true</span>,
-      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-500">"usdt"</span>,
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-indigo-500">true</span>,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-indigo-500">false</span>
     }
   ]
 }</pre>
@@ -233,28 +233,28 @@
             <div class="border-t border-slate-200 dark:border-slate-700 pt-8 space-y-6">
                 <div class="flex flex-wrap items-center gap-3">
                     <span
-                        class="bg-amber-500 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">POST</span>
+                        class="bg-amber-500/10 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">POST</span>
                     <code class="text-sm font-bold text-slate-800 dark:text-slate-200">/api/v1/ads/update</code>
                     <span class="text-slate-600 dark:text-slate-400 text-sm">— Массовое редактирование параметров
                         объявлений</span>
                 </div>
 
-                <div class="bg-rose-50 dark:bg-rose-950/20 border-l-4 border-rose-500 p-4 rounded-r-md">
+                <div class="bg-rose-50 dark:bg-rose-950/20 border-l-4 border-rose-500/30 p-4 rounded-r-md">
                     <div class="flex">
                         <div class="flex-shrink-0">🚫</div>
                         <div class="ml-3">
                             <p class="text-sm text-rose-800 dark:text-rose-200 font-bold">Ограничение на редактирование
                             </p>
-                            <p class="text-xs text-rose-600 dark:text-rose-400 mt-1">
+                            <p class="text-xs text-rose-500 mt-1">
                                 Поля <code
-                                    class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">name</code>,
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">name</code>,
                                 <code
-                                    class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">office</code>,
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">office</code>,
                                 <code
-                                    class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">props.condition</code>
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">props.condition</code>
                                 и
                                 <code
-                                    class="bg-rose-100 dark:bg-rose-900/50 px-1 py-0.5 rounded font-bold">props.availability</code>
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">props.availability</code>
                                 являются <strong class="uppercase">нередактируемыми</strong>. Их изменение в этом
                                 методе заблокировано. Если вам нужно выставить товар с другим названием, состоянием или
                                 статусом наличия, вам необходимо создать абсолютно новое объявление.
@@ -349,7 +349,7 @@
     {
       <span class="text-indigo-400">"id"</span>: 1045,
       <span class="text-indigo-400">"price"</span>: 149000,
-      <span class="text-indigo-400">"hidden"</span>: <span class="text-sky-400">false</span>,
+      <span class="text-indigo-400">"hidden"</span>: <span class="text-indigo-500">false</span>,
       <span class="text-indigo-400">"props"</span>: {
         <span class="text-indigo-400">"warranty"</span>: 6
       }
@@ -357,7 +357,7 @@
     {
       <span class="text-indigo-400">"id"</span>: 1046,
       <span class="text-indigo-400">"price"</span>: 1810,
-      <span class="text-indigo-400">"with_vat"</span>: <span class="text-sky-400">false</span>
+      <span class="text-indigo-400">"with_vat"</span>: <span class="text-indigo-500">false</span>
     }
   ]
 }</pre>

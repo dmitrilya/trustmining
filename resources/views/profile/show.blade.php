@@ -25,95 +25,84 @@
             @endforeach
         </div>
 
-        <div x-show="category == 'ads'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
+        @php
+            $partialClasses =
+                'p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg';
+        @endphp
+
+        <div x-show="category == 'ads'" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100">
             <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.ads')
                 </div>
 
-                <div
-                    class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="{{ $partialClasses }}">
                     @include('profile.partials.company')
                 </div>
 
-                <div
-                    class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="{{ $partialClasses }}">
                     @include('profile.partials.hosting')
                 </div>
 
                 <div class="sm:col-span-2 grid sm:grid-cols-2 gap-2">
-                    <div
-                        class="{{ !$user->passport ? 'sm:col-span-2 order-1' : 'order-2' }} p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                    <div class="{{ !$user->passport ? 'sm:col-span-2 order-1' : 'order-2' }} {{ $partialClasses }}">
                         @include('profile.partials.passport')
                     </div>
 
-                    <div
-                        class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                    <div class="sm:col-span-2 {{ $partialClasses }}">
                         @include('profile.partials.tg-auth')
                     </div>
                 </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.tariff')
                 </div>
 
-                <div
-                    class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="{{ $partialClasses }}">
                     @include('profile.partials.offices')
                 </div>
 
-                <div
-                    class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="{{ $partialClasses }}">
                     @include('profile.partials.registry')
                 </div>
 
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.phones')
                 </div>
             </div>
         </div>
 
-        <div x-show="category == 'insight'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
+        <div x-show="category == 'insight'" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.tg-auth')
                 </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.insight')
                 </div>
             </div>
         </div>
 
-        <div x-show="category == 'forum'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
+        <div x-show="category == 'forum'" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.tg-auth')
                 </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.forum')
                 </div>
             </div>
@@ -124,49 +113,50 @@
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100">
             <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.api')
                 </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.crm-integration')
                 </div>
             </div>
         </div>
 
-        <div x-show="category == 'account'"
-            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
+        <div x-show="category == 'account'" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
             x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100">
-            <div class="order-2 lg:order-1 xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <div
-                    class="sm:col-span-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+            <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
+                    @include('profile.partials.spins-history')
+                </div>
+
+                <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.tg-auth')
                 </div>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
                 <div class="sm:col-span-2 grid sm:grid-cols-2 gap-2">
-                    <div
-                        class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
-                        @include('profile.partials.update-password-form')
+                    <div class="{{ $partialClasses }}">
+                        @include('profile.partials.update-profile-information-form')
                     </div>
 
                     <div>
-                        <div
-                            class="p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
-                            @include('profile.partials.update-profile-information-form')
+                        <div class="{{ $partialClasses }}">
+                            @include('profile.partials.update-password-form')
                         </div>
 
                         {{-- <div
-                                class="mt-2 p-3 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+                                class="mt-2 {{ $partialClasses }}">
                                 @include('profile.partials.delete-user-form')
                             </div> --}}
                     </div>
+                </div>
+                <div class="sm:col-span-2 {{ $partialClasses }}">
+                    @include('profile.partials.roulette-results')
                 </div>
             </div>
         </div>

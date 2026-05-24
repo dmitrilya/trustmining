@@ -3,6 +3,7 @@ import './date';
 import './toast';
 import './chat';
 import { adsStatistics } from './statistics';
+import { roulette } from './roulette';
 import './suggestions';
 import './broadcast';
 import './carousel';
@@ -74,6 +75,8 @@ document.addEventListener('alpine:init', () => {
             );
         },
     }));
+
+    Alpine.data('roulette', roulette);
 
     Alpine.data('adsStatisticsData', adsStatistics);
 });

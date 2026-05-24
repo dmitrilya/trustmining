@@ -77,7 +77,7 @@
             :style="`left: ${getPercent(price)}%; transform: translate(-50%, -50%);`">
             <div class="group relative cursor-pointer">
                 <div class="size-3 rounded-full border-2 border-white shadow-md"
-                    :class="price > upper_bound || price < lower_bound ? 'bg-red-500' : 'bg-transparent'">
+                    :class="price > upper_bound || price < lower_bound ? 'bg-red-600' : 'bg-transparent'">
                 </div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">

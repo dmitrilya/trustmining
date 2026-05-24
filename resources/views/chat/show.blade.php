@@ -22,7 +22,7 @@
                             class="rounded-lg hover:bg-slate-100 dark:hover:bg-slate-950 block p-2 xs:p-3{{ $activeChat->id != $chat->id ? ($isUnchecked ? ' bg-slate-50 dark:bg-slate-800' : '') : ' border border-indigo-500' }}">
                             <li>
                                 <div id="chat-signal-{{ $chat->id }}"
-                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-500 border xs:border-2 border-white dark:border-slate-950 rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1">
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-600 border xs:border-2 border-white dark:border-slate-950 rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1">
                                 </div>
 
                                 <div class="flex">

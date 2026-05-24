@@ -106,7 +106,7 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateCompanyRequest  $request
+     * @param  \App\Http\Requests\UpdateCompanyRequest  $request
      * @param  \App\Models\User\Company  $company
      * @return \Illuminate\Http\Response
      */

@@ -6,7 +6,7 @@
         }, 2500);" class="relative min-h-[40px] flex justify-center">
             <div x-show="tgTimeout && !tgWidgetLoaded" x-transition
                 class="text-center p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl max-w-xs" x-cloak>
-                <p class="text-xs font-medium text-amber-600 dark:text-amber-400">
+                <p class="text-xs font-medium text-amber-500">
                     ⚠️ <strong>{{ __('Attention') }}:</strong>
                     {{ __('To authorize via Telegram in the Russian Federation, you must enable') }}
                     <strong>VPN</strong>.
