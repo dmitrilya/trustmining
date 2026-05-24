@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('roulette_prizes', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->string('name');
             $table->text('caption');
             $table->string('partner_link');
             $table->string('href');
             $table->unsignedSmallInteger('chance')->default(0);
+            $table->boolean('active')->default(0);
+            $table->timestamp('activated_at')->nullable();
+            $table->timestamp('deactivated_at')->nullable();
             $table->timestamps();
         });
     }
