@@ -27,7 +27,9 @@
                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Name') . ' или ' . __('Company name') }}
                 </label>
-                <x-input-error :messages="$errors->get('name')" />
+                @if (isset($errors))
+                    <x-input-error :messages="$errors->get('name')" />
+                @endif
             </div>
 
             <div class="relative z-0 w-full mb-5 group">
@@ -38,7 +40,9 @@
                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Email') }}
                 </label>
-                <x-input-error :messages="$errors->get('email')" />
+                @if (isset($errors))
+                    <x-input-error :messages="$errors->get('email')" />
+                @endif
             </div>
 
             <div x-data="{ show: false }" class="relative z-0 w-full mb-5 group">
@@ -66,7 +70,9 @@
                         </svg>
                     </template>
                 </button>
-                <x-input-error :messages="$errors->get('password')" />
+                @if (isset($errors))
+                    <x-input-error :messages="$errors->get('password')" />
+                @endif
             </div>
 
             <div x-data="{ show: false }" class="relative z-0 w-full group">
@@ -94,7 +100,9 @@
                         </svg>
                     </template>
                 </button>
-                <x-input-error :messages="$errors->get('password_confirmation')" />
+                @if (isset($errors))
+                    <x-input-error :messages="$errors->get('password_confirmation')" />
+                @endif
             </div>
 
             <div class="flex items-center justify-end mt-6 lg:mt-8">
