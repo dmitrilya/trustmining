@@ -31,7 +31,7 @@
                                 <a class="size-12 rounded-full overflow-hidden hover:ring ring-indigo-600 pointer-events-auto z-20"
                                     :href="prize.partner_link" target="_blank"
                                     :aria-label="`${prize.name} partner link`">
-                                    <img class="w-full" :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
+                                    <img class="w-full" :src="prize?.id != 3 ? `/storage/${prize.user.company.logo}` : '/img/hf_logo.webp'" :alt="`${prize.name} icon`">
                                 </a>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
             </h3>
             <a class="size-18 rounded-full overflow-hidden hover:ring ring-indigo-600 mb-3"
                 :href="wonPrize?.partner_link">
-                <img class="w-full" :src="`/storage/${wonPrize?.user.company.logo}`" :alt="`${wonPrize?.name} icon`">
+                <img class="w-full" :src="wonPrize?.id != 3 ? `/storage/${wonPrize?.user.company.logo}` : '/img/hf_logo.webp'" :alt="`${wonPrize?.name} icon`">
             </a>
             <p class="text-indigo-500 mb-2 font-bold" x-text="wonPrize?.name">
             </p>

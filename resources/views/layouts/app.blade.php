@@ -216,7 +216,7 @@
         @include('layouts.footer')
     @endif
 
-    <x-roulette />
+    @include('roulette.roulette')
 
     @include('auth.login-modal')
     @include('auth.register-modal')
