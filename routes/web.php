@@ -77,6 +77,7 @@ Route::get('/top', [Controller::class, 'top'])->name('top');
 Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
 Route::get('/widjets', [Controller::class, 'widjets'])->name('widjets');
 Route::get('/api/doc', [Controller::class, 'api'])->name('api.doc');
+Route::get('/legal', [Controller::class, 'legal'])->name('legal');
 
 Route::group(['prefix' => 'roulette'], function () {
     Route::get('/spin', [RouletteSpinController::class, 'spin'])->name('roulette.spin');

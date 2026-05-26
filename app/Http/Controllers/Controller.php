@@ -105,6 +105,11 @@ class Controller extends BaseController
         return view('api.index');
     }
 
+    public function legal(): View
+    {
+        return view('legal.index');
+    }
+
     public function widjets(): View
     {
         $models = Cache::get('calculator_models');

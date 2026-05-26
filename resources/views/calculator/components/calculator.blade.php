@@ -160,7 +160,7 @@
                                 </div>
                                 <div
                                     class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
-                                    <div class="h-full bg-emerald-500/10 transition-all duration-500"
+                                    <div class="h-full bg-emerald-500 transition-all duration-500"
                                         :style="`width: ${incPercent}%`"></div>
                                     <div class="h-full bg-red-600 transition-all duration-500"
                                         :style="`width: ${expPercent}%`"></div>
