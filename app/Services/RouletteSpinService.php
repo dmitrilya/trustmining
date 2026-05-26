@@ -15,7 +15,7 @@ class RouletteSpinService
      */
     public function getPrize(): RoulettePrize
     {
-        $prizes = RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')->with('user.company.logo')->get();
+        $prizes = RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')->with(['user:id', 'user.company:user_id,logo'])->get();
 
         $totalChance = $prizes->sum('chance');
         $randomPoint = mt_rand(1, $totalChance);

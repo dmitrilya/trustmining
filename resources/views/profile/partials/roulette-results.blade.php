@@ -6,7 +6,7 @@
             </h2>
 
             @if ($user->company && !$user->company->moderation)
-                <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
+                <a
                     href="{{ route('support', ['tab' => 'chat', 'message' => __('Hello! Our company is offering a roulette prize draw. We are giving away... conditions are...')]) }}">
                     <x-secondary-button
                         class="bg-secondary-gradient dark:text-slate-800">{{ __('Start draw') }}</x-secondary-button>
