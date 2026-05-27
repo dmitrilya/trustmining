@@ -23,7 +23,7 @@
         </ul>
     </div>
 
-    @if (in_array(request()->route()->action['as'], ['company']) &&
+    @if (in_array(request()->route()->getName(), ['company']) &&
             ($user = Auth::user()) &&
             $user->id == request()->user->id)
         <x-filter-filter type="radio" :name="__('Display')" :items="collect([

@@ -14,7 +14,7 @@ export var roulette = (prizes, timeToSpin) => ({
             if (this.timeToSpin === 0) {
                 setTimeout(() => {
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
-                }, 30000);
+                }, 15000);
             } else {
                 let timer = setInterval(() => {
                     if (this.timeToSpin > 0) {

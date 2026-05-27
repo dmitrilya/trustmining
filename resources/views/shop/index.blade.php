@@ -12,7 +12,7 @@
             <x-header-filters>
                 <x-slot name="sort">
                     <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'tf_high_to_low' ? 'true' : 'false' }} }" :href="route(
-                        request()->route()->action['as'],
+                        request()->route()->getName(),
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'tf_high_to_low' ? null : 'tf_high_to_low',
                             http_build_query(request()->except('sort')),
@@ -22,7 +22,7 @@
                     </x-dropdown-link>
 
                     <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'tf_low_to_high' ? 'true' : 'false' }} }" :href="route(
-                        request()->route()->action['as'],
+                        request()->route()->getName(),
                         array_merge(request()->route()->originalParameters(), [
                             'sort' => $sort && $sort == 'tf_low_to_high' ? null : 'tf_low_to_high',
                             http_build_query(request()->except('sort')),

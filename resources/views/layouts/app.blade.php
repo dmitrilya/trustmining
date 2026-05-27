@@ -212,7 +212,7 @@
         </main>
     </div>
 
-    @if ((!request()->route() || request()->route()->action['as'] !== 'roadmap') && !$attributes->has('without_footer'))
+    @if ((!request()->route() || request()->route()->getName() !== 'roadmap') && !$attributes->has('without_footer'))
         @include('layouts.footer')
     @endif
 

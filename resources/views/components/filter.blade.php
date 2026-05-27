@@ -24,7 +24,7 @@
         </div>
 
         <form class="mt-5"
-            action="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}"
+            action="{{ route(request()->route()->getName(), request()->route()->originalParameters()) }}"
             @submit.prevent="$el.querySelectorAll('input').forEach(item => {if (item.value == null || item.value == '') item.remove()});$el.submit()">
             @if ($sort = request()->sort)
                 <input type="hidden" name="sort" value="{{ $sort }}">
@@ -34,7 +34,7 @@
 
             <x-primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-primary-button>
 
-            <a href="{{ route(request()->route()->action['as'], request()->route()->originalParameters()) }}">
+            <a href="{{ route(request()->route()->getName(), request()->route()->originalParameters()) }}">
                 <x-secondary-button type="button"
                     class="w-full justify-center mt-2">{{ __('Reset') }}</x-secondary-button>
             </a>

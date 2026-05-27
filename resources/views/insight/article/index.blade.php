@@ -11,7 +11,7 @@
         <x-header-filters>
             <x-slot name="sort">
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'newest' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'newest' ? null : 'newest',
                         http_build_query(request()->except('sort')),
@@ -21,7 +21,7 @@
                 </x-dropdown-link>
 
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'oldest' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'oldest' ? null : 'oldest',
                         http_build_query(request()->except('sort')),
@@ -31,7 +31,7 @@
                 </x-dropdown-link>
 
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'more_likes' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'more_likes' ? null : 'more_likes',
                         http_build_query(request()->except('sort')),
@@ -41,7 +41,7 @@
                 </x-dropdown-link>
 
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'less_likes' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'less_likes' ? null : 'less_likes',
                         http_build_query(request()->except('sort')),
@@ -51,7 +51,7 @@
                 </x-dropdown-link>
 
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'more_views' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'more_views' ? null : 'more_views',
                         http_build_query(request()->except('sort')),
@@ -61,7 +61,7 @@
                 </x-dropdown-link>
 
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'less_views' ? 'true' : 'false' }} }" :href="route(
-                    request()->route()->action['as'],
+                    request()->route()->getName(),
                     array_merge(request()->route()->originalParameters(), [
                         'sort' => $sort && $sort == 'less_views' ? null : 'less_views',
                         http_build_query(request()->except('sort')),

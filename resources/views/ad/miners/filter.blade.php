@@ -31,7 +31,7 @@
 
 <x-filter-filter type="checkbox" :name="__('Availability')" :items="collect([['name' => 'In stock', 'slug' => 'In stock'], ['name' => 'Preorder', 'slug' => 'Preorder']])" field="Availability"></x-filter-filter>
 
-@if (in_array(request()->route()->action['as'], ['company']) &&
+@if (in_array(request()->route()->getName(), ['company']) &&
         ($user = Auth::user()) &&
         $user->id == request()->user->id)
     <x-filter-filter type="radio" :name="__('Display')" :items="collect([
