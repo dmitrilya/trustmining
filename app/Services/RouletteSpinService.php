@@ -64,6 +64,9 @@ class RouletteSpinService
     {
         $user = auth()->user();
         $deviceUuid = request()->cookie('tm_device_uuid');
+
+        if (!$user && !$deviceUuid) return 0;
+
         $EXTRA_SPIN_NAME = config('settings.roulette.extra_spin_name');
         $PERIOD = config('settings.roulette.period', 7);
 
