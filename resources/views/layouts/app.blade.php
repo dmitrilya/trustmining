@@ -92,8 +92,6 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script src="https://telegram.org/js/telegram-widget.js" async defer></script>
-
     <script type="module">
         import {
             onINP
@@ -226,6 +224,7 @@
         @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
         @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
+
 </body>
 
 </html>
