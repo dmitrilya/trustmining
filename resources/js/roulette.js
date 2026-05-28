@@ -8,7 +8,7 @@ export var roulette = (prizes, timeToSpin) => ({
     formattedTime: '',
 
     init() {
-        if (prizes.length > 1 && !this.isClosed) {
+        if (prizes.length > 1 && !this.isClosedForToday()) {
             this.updateFormattedTime();
 
             if (this.timeToSpin === 0) {
@@ -53,6 +53,8 @@ export var roulette = (prizes, timeToSpin) => ({
     isClosedForToday() {
         const hideUntil = localStorage.getItem('roulette_hide_until');
         if (!hideUntil) return false;
+        console.log(Date.now());
+        console.log(parseInt(hideUntil, 10));
 
         return Date.now() < parseInt(hideUntil, 10);
     },
