@@ -1,70 +1,56 @@
-window.TelegramLoader = {
+const TelegramPingManager = {
     promise: null,
-    controller: null,
-    status: 'idle',
 
-    load(timeoutMs = 2500) {
+    check() {
         if (this.promise) return this.promise;
 
-        this.status = 'loading';
-        this.controller = new AbortController();
+        this.promise = new Promise(async (resolve) => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 1500);
 
-        this.promise = new Promise((resolve, reject) => {
-            const timer = setTimeout(() => {
-                if (this.status === 'loading') {
-                    this.controller.abort();
-                    this.status = 'timeout';
-                    reject(new Error('Telegram load timeout'));
-                }
-            }, timeoutMs);
-
-            axios.get('https://telegram.org/js/telegram-widget.js', {
-                signal: this.controller.signal,
-                responseType: 'text'
-            })
-                .then(response => {
-                    clearTimeout(timer);
-
-                    const script = document.createElement('script');
-                    script.text = response.data;
-                    document.head.appendChild(script);
-
-                    this.status = 'loaded';
-                    resolve();
-                })
-                .catch(error => {
-                    clearTimeout(timer);
-                    if (axios.isCancel(error)) {
-                        this.status = 'timeout';
-                    } else {
-                        this.status = 'error';
-                    }
-                    reject(error);
+            try {
+                await fetch('https://telegram.org/js/telegram-widget.js', {
+                    method: 'HEAD',
+                    mode: 'no-cors',
+                    signal: controller.signal
                 });
+                clearTimeout(timeoutId);
+                resolve(true);
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.warn('Telegram servers are unreachable. Probably VPN is off.');
+                resolve(false);
+            }
         });
 
         return this.promise;
     }
 };
 
-window.tgAuth = (botId) => ({
+export var tgAuth = (botId) => ({
     botId: botId,
     tgWidgetLoaded: false,
     tgTimeout: false,
 
     async init() {
-        window.TelegramLoader.load(2500)
-            .then(() => {
-                this.tgWidgetLoaded = true;
-                this.tgTimeout = true;
-            })
-            .catch(() => {
-                this.tgWidgetLoaded = false;
-                this.tgTimeout = true;
-            });
+        if (!window.Telegram || !window.Telegram.Login) {
+            this.tgWidgetLoaded = false;
+            this.tgTimeout = true;
+            return;
+        }
+
+        const isAvailable = await TelegramPingManager.check();
+
+        this.tgWidgetLoaded = isAvailable;
+        this.tgTimeout = true;
     },
 
     auth() {
+        if (!this.tgWidgetLoaded) {
+            console.error('Cannot auth: Telegram is unreachable');
+            return;
+        }
+
         Telegram.Login.auth({ bot_id: this.botId, request_access: true }, (data) => {
             if (data) {
                 let query = Object.keys(data).map(key => key + '=' + encodeURIComponent(data[key])).join('&');

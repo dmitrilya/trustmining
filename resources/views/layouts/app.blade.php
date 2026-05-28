@@ -43,6 +43,7 @@
 
     @auth
         <meta name="user-id" content="{{ ($user = Auth::user())->id }}">
+        <script src="/js/telegram-widget.js" async defer></script>
     @endauth
 
     <title>{{ $attributes->get('title') ?? config('app.name') }}</title>
@@ -90,7 +91,7 @@
     @endif
     <!-- /Yandex.Metrika counter -->
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])    
 
     <script type="module">
         import {
@@ -224,7 +225,6 @@
         @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
         @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
-
 </body>
 
 </html>

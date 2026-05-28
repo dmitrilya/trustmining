@@ -4,7 +4,7 @@ import './toast';
 import './chat';
 import { adsStatistics } from './statistics';
 import { roulette } from './roulette';
-import './tgAuth';
+import { tgAuth } from './tgAuth';
 import './suggestions';
 import './broadcast';
 import './carousel';
@@ -79,7 +79,7 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.data('roulette', roulette);
 
-    Alpine.data('tgAuth', window.tgAuth);
+    Alpine.data('tgAuth', tgAuth);
 
     Alpine.data('adsStatisticsData', adsStatistics);
 });
