@@ -33,7 +33,7 @@ export var tgAuth = (botId) => ({
     tgTimeout: false,
 
     async init() {
-        if (!window.Telegram || !window.Telegram.Login) {
+        if (!window.TelegramLogin || !window.TelegramLogin.auth) {
             this.tgWidgetLoaded = false;
             this.tgTimeout = true;
             return;
@@ -51,7 +51,7 @@ export var tgAuth = (botId) => ({
             return;
         }
 
-        Telegram.Login.auth({ bot_id: this.botId, request_access: true }, (data) => {
+        TelegramLogin.auth({ bot_id: this.botId, request_access: true }, (data) => {
             if (data) {
                 let query = Object.keys(data).map(key => key + '=' + encodeURIComponent(data[key])).join('&');
                 window.location.href = 'https://trustmining.ru/tg/auth?' + query;
