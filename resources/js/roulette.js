@@ -8,7 +8,7 @@ export var roulette = (prizes, timeToSpin) => ({
     formattedTime: '',
 
     init() {
-        if (prizes.length > 1) {
+        if (prizes.length > 1 && !this.isClosed) {
             this.updateFormattedTime();
 
             if (this.timeToSpin === 0) {
@@ -42,6 +42,19 @@ export var roulette = (prizes, timeToSpin) => ({
         result += `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
         this.formattedTime = result;
+    },
+
+    closeRoulette() {
+        const now = new Date();
+        const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+        localStorage.setItem('roulette_hide_until', endOfDay.getTime().toString());
+    },
+
+    isClosedForToday() {
+        const hideUntil = localStorage.getItem('roulette_hide_until');
+        if (!hideUntil) return false;
+
+        return Date.now() < parseInt(hideUntil, 10);
     },
 
     async spinWheel() {
