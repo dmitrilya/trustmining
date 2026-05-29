@@ -38,7 +38,9 @@ return [
                 'ql-color-main-text-color',
                 'ql-color-secondary-text-color',
                 'ql-bg-green-bg-color',
-                'ql-bg-indigo-bg-color'
+                'ql-bg-indigo-bg-color',
+                'ql-code-block-container',
+                'ql-code-block'
             ],
             'HTML.DefinitionID' => 'insight_article',
             'HTML.DefinitionRev' => 1,
