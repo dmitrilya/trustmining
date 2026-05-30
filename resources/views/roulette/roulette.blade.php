@@ -34,10 +34,9 @@
 
                             <div
                                 class="absolute top-4 xs:top-5 w-[88px] xs:w-28 h-20 xs:h-[104px] flex flex-col items-center justify-between origin-center">
-                                <span class="font-black uppercase tracking-wider select-none text-center max-w-full"
+                                <span class="font-black uppercase tracking-wider select-none text-center max-w-full text-xxs xs:text-xs"
                                     :class="[
                                         index % 2 === 0 ? 'text-slate-800' : 'text-slate-200',
-                                        prize.name.length > 16 ? 'text-xxs xs:text-xs' : 'text-xs xs:text-sm'
                                     ]"
                                     x-text="prize.name">
                                 </span>
