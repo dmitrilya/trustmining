@@ -2,7 +2,8 @@
     <x-modal name="roulette" maxWidth="sm" rounded="rounded-xl">
         <div class="p-2 xs:p-4 sm:p-6" x-init="$watch('isSpinning', value => { if (!value && wonPrize) $dispatch('close'); })">
             <div class="flex justify-between items-center mb-2">
-                <h2 class="text-2xl font-black text-slate-800 dark:text-slate-200 tracking-tight">TM Roulette</h2>
+                <h2 class="text-2xl font-black text-slate-800 dark:text-slate-200 tracking-tight">
+                    {{ __('Try your luck') }}</h2>
 
                 <button type="button" aria-label="{{ __('Close') }}"
                     class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
@@ -15,7 +16,7 @@
                 </button>
             </div>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-8">
-                {{ __('Win VIP tools and prizes from partners') }}
+                {{ __('Just spin the wheel and win real prizes') }}
                 {{ trans_choice('time.period_choice', config('settings.roulette.period'), ['count' => config('settings.roulette.period')]) }}
             </p>
 
@@ -32,7 +33,7 @@
                             :style="`transform: rotate(${(index * sectorAngle) + (sectorAngle / 2)}deg)`">
 
                             <div
-                                class="absolute top-4 xs:top-5 w-[88px] xs:w-28 h-[74px] xs:h-[88px] flex flex-col items-center justify-between origin-center">
+                                class="absolute top-4 xs:top-5 w-[88px] xs:w-28 h-20 xs:h-[104px] flex flex-col items-center justify-between origin-center">
                                 <span class="font-black uppercase tracking-wider select-none text-center max-w-full"
                                     :class="[
                                         index % 2 === 0 ? 'text-slate-800' : 'text-slate-200',
@@ -40,13 +41,20 @@
                                     ]"
                                     x-text="prize.name">
                                 </span>
-                                <a class="size-9 xs:size-12 rounded-full overflow-hidden hover:ring ring-indigo-600 pointer-events-auto z-20"
-                                    :href="prize.partner_link" target="_blank"
-                                    :aria-label="`${prize.name} partner link`">
-                                    <img class="w-full"
-                                        :src="prize?.id != 3 ? `/storage/${prize.user.company.logo}` : '/img/hf_logo.webp'"
-                                        :alt="`${prize.name} icon`">
-                                </a>
+                                <div class="flex flex-col items-center">
+                                    <a class="mb-1 size-9 xs:size-12 rounded-full overflow-hidden hover:ring ring-indigo-600 pointer-events-auto z-20"
+                                        :href="prize.partner_link" target="_blank"
+                                        :aria-label="`${prize.name} partner link`">
+                                        <img class="w-full"
+                                            :src="prize?.id != 3 ? `/storage/${prize.user.company.logo}` : '/img/hf_logo.webp'"
+                                            :alt="`${prize.name} icon`">
+                                    </a>
+                                    <span class="text-xxs"
+                                        :class="[
+                                            index % 2 === 0 ? 'text-slate-600' : 'text-slate-400',
+                                        ]"
+                                        x-text="prize.chance + '%'"></span>
+                                </div>
                             </div>
                         </div>
                     </template>
@@ -62,7 +70,7 @@
                 @click="spinWheel" :disabled="isSpinning || timeToSpin > 0">
 
                 <span x-show="isSpinning" class="animate-pulse">{{ __('The wheel is spinning') }}...</span>
-                <span x-show="!isSpinning && timeToSpin === 0">{{ __('Try your luck') }}</span>
+                <span x-show="!isSpinning && timeToSpin === 0">{{ __('Spin') }}</span>
                 <span x-show="!isSpinning && timeToSpin > 0" class="font-mono">
                     {{ __('Available via') }}: <span x-text="formattedTime"></span>
                 </span>
