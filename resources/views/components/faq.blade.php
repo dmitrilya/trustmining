@@ -14,7 +14,7 @@
     <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"
         x-show="active === {{ $i }}" x-collapse x-cloak>
         <div itemprop="text"
-            class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+            class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
             {!! $answer !!}
         </div>
     </div>

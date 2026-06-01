@@ -53,8 +53,6 @@ export var roulette = (prizes, timeToSpin) => ({
     isClosedForToday() {
         const hideUntil = localStorage.getItem('roulette_hide_until');
         if (!hideUntil) return false;
-        console.log(Date.now());
-        console.log(parseInt(hideUntil, 10));
 
         return Date.now() < parseInt(hideUntil, 10);
     },

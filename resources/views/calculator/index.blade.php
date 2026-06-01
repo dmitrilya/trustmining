@@ -1,4 +1,4 @@
-<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность ' .
+<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность и окупаемость' .
     ($rModel ? ($rVersion ? $selModel['name'] . ' ' . $selVersion['hashrate'] : $selModel['name']) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
     ($rModel ? ($rVersion ? ' ' . $selModel['name'] . ' ' . $selVersion['hashrate'] : ' ' . $selModel['name']) : '') .
     ' в удобном калькуляторе доходности асиков'"
@@ -10,7 +10,9 @@
         : null }}">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
-            {{ __('Mining calculator') }}
+            {{ __('Mining calculator') }} @if ($rModel)
+                <span class="hidden xs:inline">{{ $selModel['name']}}</span>
+            @endif
         </h1>
     </x-slot>
 

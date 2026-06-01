@@ -59,6 +59,23 @@
     <!-- Yandex.Metrika counter -->
     @if (!$isBot)
         <script type="text/javascript">
+            function isWeakDevice() {
+                const hasVeryLowMemory = navigator.deviceMemory && navigator.deviceMemory < 2;
+                const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 4;
+                const lowResolution = window.innerWidth < 360;
+                const isMobile = /android|iphone|ipad/.test(navigator.userAgent.toLowerCase());
+
+                if (hasVeryLowMemory || hasLowMemory && isMobile && lowResolution) return true;
+
+                return false;
+            }
+
+            let weakDevice = localStorage.getItem('weakDevice');
+            if (weakDevice === null) {
+                weakDevice = isWeakDevice();
+                localStorage.setItem('weakDevice', weakDevice);
+            }
+
             (function(m, e, t, r, i, k, a) {
                 m[i] = m[i] || function() {
                     (m[i].a = m[i].a || []).push(arguments)
@@ -76,11 +93,10 @@
 
             ym(103577303, 'init', {
                 ssr: true,
-                webvisor: true,
-                clickmap: true,
-                ecommerce: "dataLayer",
-                accurateTrackBounce: true,
-                trackLinks: true
+                webvisor: !weakDevice,
+                clickmap: !weakDevice,
+                accurateTrackBounce: !weakDevice,
+                trackLinks: !weakDevice
             });
         </script>
         <noscript>
@@ -91,7 +107,7 @@
     @endif
     <!-- /Yandex.Metrika counter -->
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])    
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script type="module">
         import {
@@ -107,7 +123,8 @@
                     value: value,
                     event: entries[0].name,
                     url: entries[0].target.baseURI,
-                    target: entries[0].target.outerHTML
+                    target: entries[0].target.outerHTML,
+                    weakDevice:  localStorage.getItem('weakDevice')
                 });
             }
         });

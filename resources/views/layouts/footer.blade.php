@@ -9,8 +9,8 @@
             <a href="https://t.me/trustmining_ru" target="_blank" aria-label="Связаться в телеграм">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M16.4809 3.69261C16.6868 3.60594 16.9122 3.57605 17.1336 3.60605C17.355 3.63604 17.5643 3.72484 17.7398 3.86319C17.9152 4.00153 18.0504 4.18438 18.1312 4.39268C18.212 4.60099 18.2355 4.82715 18.1992 5.04761L16.3092 16.5118C16.1259 17.6176 14.9125 18.2518 13.8984 17.7009C13.05 17.2401 11.79 16.5301 10.6567 15.7893C10.09 15.4184 8.3542 14.2309 8.56754 13.3859C8.75087 12.6634 11.6675 9.94845 13.3342 8.33428C13.9884 7.70011 13.69 7.33428 12.9175 7.91761C10.9992 9.36595 7.9192 11.5684 6.90087 12.1884C6.00254 12.7351 5.5342 12.8284 4.9742 12.7351C3.95254 12.5651 3.00504 12.3018 2.2317 11.9809C1.1867 11.5476 1.23754 10.1109 2.23087 9.69261L16.4809 3.69261Z"
                             fill="white" />
@@ -20,19 +20,18 @@
             <a href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M17 6h-2V5h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2h-.541A5.965 5.965 0 0 1 14 10v4a1 1 0 1 1-2 0v-4c0-2.206-1.794-4-4-4-.075 0-.148.012-.22.028C7.686 6.022 7.596 6 7.5 6A4.505 4.505 0 0 0 3 10.5V16a1 1 0 0 0 1 1h7v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3h5a1 1 0 0 0 1-1v-6c0-2.206-1.794-4-4-4Zm-9 8.5H7a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2Z" />
                     </svg>
-
                 </div>
             </a>
             <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="Канал Дзен">
                 <div
                     class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6" width="20" height="20" viewBox="0 0 20 20"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
+                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1181_4290)">
                             <path
                                 d="M9.96539 18.501H10.0334C13.4091 18.501 15.369 18.161 16.7569 16.8131C18.1721 15.3839 18.4994 13.4113 18.4994 10.0483V9.95362C18.4994 6.59187 18.1721 4.63201 16.7569 3.18823C15.3702 1.84098 13.3964 1.50098 10.0346 1.50098H9.96661C6.59089 1.50098 4.62982 1.84098 3.24189 3.18883C1.82786 4.61744 1.5 6.59126 1.5 9.95301V10.0477C1.5 13.4095 1.82664 15.3693 3.2425 16.8131C4.61646 18.161 6.59089 18.501 9.96539 18.501Z"

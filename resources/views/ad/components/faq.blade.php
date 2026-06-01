@@ -22,7 +22,7 @@
             <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 1"
                 x-collapse x-cloak>
                 <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     @if ($ad->props['Availability'] == 'In stock')
                         <p class="mb-2">Оборудование находится в г. <b>{{ $ad->office->city }}</b>, отгрузка со склада
                             <b>{{ $ad->user->name }}</b> в течение 1-2 дней партнерской транспортной компанией.
@@ -50,7 +50,7 @@
             <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 2"
                 x-collapse x-cloak>
                 <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     На новое оборудование действует официальная гарантия производителя. Вы можете <a target="_blank"
                         href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600 under font-medium">проверить
                         остаток
@@ -74,7 +74,7 @@
             <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 3"
                 x-collapse x-cloak>
                 <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     Доход зависит от хешрейта, курса
                     {{ $ad->asicVersion->asicModel->algorithm->coins()->first('name')->name }} и сложности сети.
                     @if ($ad->version_data && count($ad->version_data->profits))
@@ -102,7 +102,7 @@
             <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 4"
                 x-collapse x-cloak>
                 <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800 space-y-2">
                     <p>Для безопасности пользователей в нашем сервисе внедрена уникальная метрика Trust Factor.
                         Перейдите в карточку компании или посмотрите на значок в объявлении</p>
                     <div class="flex items-center gap-2"><span
@@ -137,7 +137,7 @@
                 <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 5"
                     x-collapse x-cloak>
                     <div itemprop="text"
-                        class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+                        class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                         Да, вы можете разместить <b>{{ $ad->asicVersion->asicModel->name }}</b> в дата-центре в
                         {{ $ad->user->hosting->address }}. Тарифы начинаются от
                         <br><b>{{ $ad->user->hosting->price }}р за кВт/ч</b>. Ознакомьтесь с <a

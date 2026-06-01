@@ -88,7 +88,7 @@
                             @if (!$widjet)
                                 <template x-if="version.ads_count">
                                     <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
-                                        x-bind:href="version ? '/ads/miners?model=' + version.model_slug : '#'">
+                                        x-bind:href="version ? '/ads/miners?model=' + version.model_slug : ' # '">
                                         <x-primary-button
                                             class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
                                     </a>
@@ -145,7 +145,7 @@
                         </div>
 
                         <div
-                            class="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+                            class="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700">
                             <div class="text-center mb-6">
                                 <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
                                 <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
@@ -177,7 +177,10 @@
                     </div>
 
                     @if (!$widjet)
-                        <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-300 mt-6 sm:mt-7 lg:mt-8">
+                        <div class="text-xxs text-slate-500 mt-3">
+                            *{{ __('The data is current at the time of calculation. The cryptocurrency market is volatile, and figures are subject to change') }}
+                        </div>
+                        <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('Payback') }}:
                             <span class="text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="version.price ? dailyProfitUSDT > 0 ? Math.round(version.price / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>

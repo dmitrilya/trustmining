@@ -20,7 +20,7 @@
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach ($ads->pluck('ad_category_header', 'ad_category_name')->unique() as $ad_category_name => $ad_category_header)
                 <div @click="ad_category_name = ad_category_name == '{{ $ad_category_name }}' ? null : '{{ $ad_category_name }}'"
-                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-400 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
+                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                     :class="ad_category_name ==
                         '{{ $ad_category_name }}' ?
                         'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
@@ -38,7 +38,7 @@
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             @if (auth()->check() && auth()->id() == $user->id)
                 <a href="{{ route('ad.create') }}"
-                    class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-400 dark:border-slate-700">
+                    class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
                         <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-300" aria-hidden="true"
                             width="24" height="24" fill="none" viewBox="0 0 24 24">

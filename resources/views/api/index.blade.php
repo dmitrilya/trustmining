@@ -43,24 +43,24 @@
                 </div>
 
                 <div
-                    class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg p-4 text-xs space-y-3">
+                    class="bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg p-4 text-xs space-y-3">
                     <div class="text-slate-500 font-semibold uppercase tracking-wider text-[10px]">Обязательные
                         HTTP-заголовки</div>
                     <div class="space-y-1">
                         <div class="text-emerald-500 font-bold">Authorization:</div>
                         <div
-                            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
+                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
                             Bearer 1|plainTextTokenValue...
                         </div>
                     </div>
                     <div class="space-y-1">
                         <div class="text-emerald-500 font-bold">Accept:</div>
                         <div
-                            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
+                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
                             application/json
                         </div>
                     </div>
-                    <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <div class="pt-2 border-t border-slate-300 dark:border-slate-700">
                         <span class="font-bold text-slate-800 dark:text-slate-200">Ограничение частоты (Rate
                             Limit):</span>
                         <p class="mt-1 text-slate-600 dark:text-slate-400 text-[11px]">Максимум <strong>60 запросов в
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-slate-200 dark:border-slate-700 pt-8 space-y-6">
+            <div class="border-t border-slate-300 dark:border-slate-700 pt-8 space-y-6">
                 <div class="flex flex-wrap items-center gap-3">
                     <span
                         class="bg-amber-500/10 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">GET</span>
@@ -90,7 +90,7 @@
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead>
                                     <tr
-                                        class="border-b border-slate-200 dark:border-slate-700 text-slate-500 uppercase tracking-wider">
+                                        class="border-b border-slate-300 dark:border-slate-700 text-slate-500 uppercase tracking-wider">
                                         <th class="pr-2 py-2 font-semibold">Поле</th>
                                         <th class="pr-2 py-2 font-semibold">Тип</th>
                                         <th class="py-2 font-semibold">Описание / Валидация</th>
@@ -230,7 +230,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-slate-200 dark:border-slate-700 pt-8 space-y-6">
+            <div class="border-t border-slate-300 dark:border-slate-700 pt-8 space-y-6">
                 <div class="flex flex-wrap items-center gap-3">
                     <span
                         class="bg-amber-500/10 text-slate-200 text-xs font-bold px-2.5 py-1.5 rounded-md uppercase tracking-wide">POST</span>
@@ -272,7 +272,7 @@
                             <table class="w-full text-left text-xs border-collapse">
                                 <thead>
                                     <tr
-                                        class="border-b border-slate-200 dark:border-slate-700 text-slate-500 uppercase tracking-wider">
+                                        class="border-b border-slate-300 dark:border-slate-700 text-slate-500 uppercase tracking-wider">
                                         <th class="pr-2 py-2 font-semibold">Поле</th>
                                         <th class="pr-2 py-2 font-semibold">Тип</th>
                                         <th class="py-2 font-semibold">Правила валидации</th>

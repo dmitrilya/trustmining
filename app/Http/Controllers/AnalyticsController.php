@@ -9,6 +9,6 @@ class AnalyticsController extends Controller
 {
     public function inp(Request $request): void
     {
-        Log::channel('analytics')->info("[⚠️ POOR INP]\nvalue={$request->value}\nevent={$request->event}\nurl={$request->url}\ntarget={$request->target}");
+        Log::channel('analytics')->info("[⚠️ POOR INP]\nvalue={$request->value}\nevent={$request->event}\nurl={$request->url}\ntarget={$request->target}\nweak={$request->weakDevice}");
     }
 }
