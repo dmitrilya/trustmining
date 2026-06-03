@@ -2,7 +2,7 @@
     <div class="relative z-0 w-full group" @click="open = true">
         <input type="text" name="search" placeholder="{{ __('Find a miner, company or article...') }}"
             @input.debounce.1000ms="sugs = search($el.value, $refs.suggestionList, open)" autocomplete="off"
-            class="block w-full text-sm placeholder:text-xs sm:placeholder:text-sm placeholder:text-slate-500 text-slate-950 bg-transparent border-slate-300 appearance-none dark:text-slate-50 {{ isset($border) ? $border : 'px-0 py-2.5 border-0 border-b-2' }} dark:border-slate-700 dark:focus:border-slate-600 focus:outline-none focus:ring-0 focus:border-slate-800 peer" />
+            class="block w-full placeholder:text-xs sm:placeholder:text-sm placeholder:text-slate-500 text-slate-950 bg-transparent border-slate-300 appearance-none dark:text-slate-50 {{ isset($border) ? $border : 'px-0 py-2.5 border-0 border-b-2' }} dark:border-slate-700 dark:focus:border-slate-600 focus:outline-none focus:ring-0 focus:border-slate-800 peer" />
     </div>
 
     <div role="listbox" style="display: none" x-show="open && sugs"

@@ -58,7 +58,7 @@
                                         <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
                                             class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                             <span x-text="version.reviews_count"></span>
-                                            {{ __('reviews') }}
+                                            <span x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                                                     '/reviews'"
                                                     class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                                     <span x-text="version.reviews_count"></span>
-                                                    {{ __('reviews') }}
+                                                    <span x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                                 </a>
                                             </div>
                                         </div>
