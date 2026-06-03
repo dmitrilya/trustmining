@@ -60,8 +60,8 @@
 
                 <div>
                     <x-input-label for="images" :value="__('Photo')" />
-                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8" />
-                    <p class="mt-1 text-sm text-slate-500" id="images_help">(max. 2MB, 8 items)</p>
+                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8"
+                        label='max. 2MB, 8 items' />
                     <x-input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-input-error :messages="$error" />
@@ -71,16 +71,14 @@
                 <div>
                     <x-input-label for="logo" :value="__('Logo for avatar')" />
                     <x-file-input id="logo" name="logo" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-slate-500" id="logo_help">(max. 512KB, 1x1)</p>
+                        accept=".png,.jpg,.jpeg,.webp" label="max. 512KB, 1x1" />
                     <x-input-error :messages="$errors->get('logo')" />
                 </div>
 
                 <div>
                     <x-input-label for="bg_logo" :value="__('Logo for the card')" />
                     <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-slate-500" id="bg_logo_help">(max. 1024KB)</p>
+                        accept=".png,.jpg,.jpeg,.webp" label="max. 1024KB" />
                     <x-input-error :messages="$errors->get('bg_logo')" />
                 </div>
 

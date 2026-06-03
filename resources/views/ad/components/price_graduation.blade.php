@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-[11px] font-medium text-slate-400 uppercase">
+    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-[11px] text-slate-400 uppercase">
         <span>{{ __('Min') }}: {{ number_format($priceData['min'], 0, '.', ' ') }}</span>
         <span>{{ __('Max') }}: {{ number_format($priceData['max'], 0, '.', ' ') }}</span>
     </div>

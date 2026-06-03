@@ -52,7 +52,7 @@
                 <div itemprop="text"
                     class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     На новое оборудование действует официальная гарантия производителя. Вы можете <a target="_blank"
-                        href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600 under font-medium">проверить
+                        href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600 under>проверить
                         остаток
                         гарантии по S/N</a>. Уточните у <b>{{ $ad->user->name }}</b> возможность оформления расширенной
                     гарантии от их сервиса.
@@ -84,7 +84,7 @@
                     @endif Расход — это стоимость вашей электроэнергии.
                     Рассчитайте прибыль в один клик в нашем <a target="_blank"
                         href="{{ route('calculator.modelver', ['asicModel' => $ad->asicVersion->asicModel->slug, 'asicVersion' => $ad->asicVersion->hashrate]) }}"
-                        class="inline text-indigo-500 hover:text-indigo-600 under font-medium ">калькуляторе доходности майнинга</a>.
+                        class="inline text-indigo-500 hover:text-indigo-600 under ">калькуляторе доходности майнинга</a>.
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
                         {{ $ad->user->hosting->address }}. Тарифы начинаются от
                         <br><b>{{ $ad->user->hosting->price }}р за кВт/ч</b>. Ознакомьтесь с <a
                             href="{{ route('company.hosting', ['user' => $ad->user->slug]) }}"
-                            class="inline text-indigo-500 hover:text-indigo-600 under font-medium" target="_blank">информацией о хостинге
+                            class="inline text-indigo-500 hover:text-indigo-600 under target="_blank">информацией о хостинге
                             компании
                             {{ $ad->user->name }}</a>
                     </div>

@@ -55,7 +55,7 @@
                         'bg-slate-200 dark:bg-slate-800 text-slate-500 hover:bg-slate-100'"
                     class="absolute left-0 flex items-center justify-center gap-0.5 px-1 py-0.5 rounded-full transition-all duration-500 ease-in-out select-none">
                     <span x-text="reactions[type].symbol"></span>
-                    <span x-text="reactions[type].count" class="font-medium min-w-[10px]"></span>
+                    <span x-text="reactions[type].count" class="min-w-[10px]"></span>
                 </button>
             </template>
         </div>

@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <div class="font-medium text-sm text-slate-800 dark:text-slate-200">
+        <div class="text-sm text-slate-800 dark:text-slate-200">
             {{ $name }}
         </div>
     </div>

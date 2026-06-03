@@ -91,8 +91,7 @@
         <div>
             <x-input-label for="channel-logo" :value="!$channel ? __('Logo') : __('Change logo')" />
             <x-file-input id="channel-logo" name="logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                :required="!$channel" />
-            <p class="mt-1 text-xxs text-slate-500" id="channel-logo_help">(max. 2MB)</p>
+                :required="!$channel" label="max. 2MB" />
             <template x-if="validation.logo">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.logo?.[0]"></p>
             </template>
@@ -100,8 +99,7 @@
 
         <div>
             <x-input-label for="channel-banner" :value="!$channel || !$channel->banner ? __('Banner') : __('Change banner')" />
-            <x-file-input id="channel-banner" name="banner" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" />
-            <p class="mt-1 text-xxs text-slate-500" id="channel-banner_help">(max. 5MB, 960x360 px)</p>
+            <x-file-input id="channel-banner" name="banner" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 960x360 px" />
             <template x-if="validation.banner">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.banner?.[0]"></p>
             </template>

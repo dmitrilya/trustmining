@@ -34,7 +34,8 @@
 
                             <div
                                 class="absolute top-4 xs:top-5 w-[88px] xs:w-28 h-20 xs:h-[104px] flex flex-col items-center justify-between origin-center">
-                                <span class="font-black uppercase tracking-wider select-none text-center max-w-full text-xxs xs:text-xs"
+                                <span
+                                    class="font-black uppercase tracking-wider select-none text-center max-w-full text-xxs xs:text-xs"
                                     :class="[
                                         index % 2 === 0 ? 'text-slate-800' : 'text-slate-200',
                                     ]"
@@ -85,9 +86,11 @@
             </h3>
             <a class="w-20 h-20 rounded-full overflow-hidden hover:ring ring-indigo-600 mb-3"
                 :href="wonPrize?.partner_link">
-                <img class="w-full"
-                    :src="wonPrize?.id != 3 ? `/storage/${wonPrize?.user.company.logo}` : '/img/hf_logo.webp'"
-                    :alt="`${wonPrize?.name} icon`">
+                <template x-if="wonPrize">
+                    <img class="w-full"
+                        :src="wonPrize.id != 3 ? `/storage/${wonPrize.user.company.logo}` : '/img/hf_logo.webp'"
+                        :alt="`${wonPrize.name} icon`">
+                </template>
             </a>
             <p class="text-indigo-500 mb-2 font-bold" x-text="wonPrize?.name">
             </p>

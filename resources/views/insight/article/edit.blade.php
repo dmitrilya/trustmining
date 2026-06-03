@@ -174,8 +174,7 @@
 
         <div>
             <x-input-label for="preview" :value="__('Preview')" />
-            <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" />
-            <p class="mt-1 text-sm text-slate-500" id="file_input_help">(max. 5MB), 4/3</p>
+            <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>

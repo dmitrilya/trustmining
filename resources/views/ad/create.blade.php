@@ -26,8 +26,7 @@
                 <div>
                     <x-input-label for="preview" :value="__('Preview')" />
                     <x-file-input id="preview" name="preview" class="mt-1 block w-full" required
-                        accept=".png,.jpg,.jpeg,.webp" />
-                    <p class="mt-1 text-sm text-slate-500" id="file_input_help">(max. 2MB), 4/3</p>
+                        accept=".png,.jpg,.jpeg,.webp" label="max. 2MB, 4/3" />
                     <x-input-error :messages="$errors->get('preview')" />
                 </div>
 

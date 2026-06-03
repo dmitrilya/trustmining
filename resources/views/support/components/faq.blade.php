@@ -70,7 +70,6 @@
             <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                 <h2>
                     <button type="button" @click="item = {{ $loop->index }}"
-                        :class="{ 'font-medium': item != {{ $loop->index }} }"
                         class="flex items-center justify-between w-full py-5 text-left text-lg text-slate-900 dark:text-slate-100">
                         <span>{{ __($theme) }}</span>
                         <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': item != {{ $loop->index }} }"
@@ -93,7 +92,6 @@
                                 <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                                     <h2>
                                         <button type="button" @click="item2 = {{ $loop->index }}"
-                                            :class="{ 'font-medium': item2 != {{ $loop->index }} }"
                                             class="flex items-center justify-between w-full py-5 text-left text-slate-800 dark:text-slate-200">
                                             <span>{{ __($faq['q']) }}</span>
                                             <svg class="w-3 h-3 shrink-0"

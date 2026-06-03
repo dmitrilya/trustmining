@@ -10,7 +10,7 @@
                     {{ __('Articles') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm font-medium">
+                <div class="flex text-xs sm:text-sm>
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
                             'text-slate-500'"
@@ -59,7 +59,7 @@
                     {{ __('Posts') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm font-medium">
+                <div class="flex text-xs sm:text-sm>
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
                             'text-slate-500'"
@@ -108,7 +108,7 @@
                     {{ __('Videos') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm font-medium">
+                <div class="flex text-xs sm:text-sm>
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ? 'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
                             'text-slate-500'"
