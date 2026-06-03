@@ -59,7 +59,7 @@
                                             class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                             <span x-text="version.reviews_count"></span>
                                             <span
-                                                x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
+                                                x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 1) }}', '{{ trans_choice('navigation.reviews', 2) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                                                     class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                                     <span x-text="version.reviews_count"></span>
                                                     <span
-                                                        x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
+                                                        x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 1) }}', '{{ trans_choice('navigation.reviews', 2) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                                 </a>
                                             </div>
                                         </div>
