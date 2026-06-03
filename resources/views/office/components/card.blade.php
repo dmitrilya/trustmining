@@ -29,7 +29,7 @@
 
                 <div class="flex items-center mt-1 md:mt-2 mb-3 sm:mb-4">
                     <div
-                        class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $office->user->tf > config('trustfactor.yellow') ? ($office->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                        class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $office->user->tf > config('trustfactor.yellow') ? ($office->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
                     </div>
                     <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
                 </div>
@@ -41,7 +41,7 @@
                 <a class="block w-full sm:w-auto"
                     href="{{ route('company.office', ['user' => $office->user->slug, 'office' => $office->id]) }}">
                     <x-primary-button
-                        class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
+                        class="w-full justify-center">{{ __('Details') }}</x-primary-button>
                 </a>
 
                 @if ($auth && $auth->id == $office->user->id)

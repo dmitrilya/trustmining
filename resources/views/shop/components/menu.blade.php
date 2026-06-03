@@ -1,4 +1,4 @@
-<div class="mt-4 sm:mt-5 md:mt-6 lg:mt-7 grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="mt-4 sm:mt-5 md:mt-6 lg:mt-8 grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-3">
     <a href="{{ route('company', ['user' => $user->slug]) }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg">
         <div

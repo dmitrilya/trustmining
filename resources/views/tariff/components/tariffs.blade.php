@@ -1,6 +1,6 @@
 <div class="grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 -mt-72">
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-slate-300 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg bg-white border border-slate-300 rounded-2xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-slate-950 font-semibold text-lg md:text-2xl">{{ $tariffs[0]->name }}</div>
         <div class="text-slate-500 text-sm md:text-base">{{ __($tariffs[0]->description) }}</div>
         <div class="h-9 flex items-end text-slate-500 md:text-lg"><span
@@ -8,7 +8,7 @@
             /{{ __('month') }}</div>
         <a
             href="{{ route('tariff', ['tariff' => $tariffs[0]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
-        <div class="space-y-2 sm:space-y-3">
+        <div class="space-y-2 sm:space-y-4">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div
-        class="w-full max-w-md shadow-lg bg-white border border-slate-300 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg bg-white border border-slate-300 rounded-2xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-slate-950 font-semibold text-lg md:text-2xl">{{ $tariffs[1]->name }}</div>
         <div class="text-slate-500 text-sm md:text-base">{{ __($tariffs[1]->description) }}</div>
         <div class="h-9 flex items-end text-slate-500 md:text-lg"><span
@@ -80,7 +80,7 @@
             /{{ __('month') }}</div>
         <a
             href="{{ route('tariff', ['tariff' => $tariffs[1]->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
-        <div class="space-y-2 sm:space-y-3">
+        <div class="space-y-2 sm:space-y-4">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
                     fill="currentColor" viewBox="0 0 20 20">
@@ -144,7 +144,7 @@
         </div>
     </div>
     <div
-        class="w-full max-w-md shadow-lg bg-slate-900 border-2 border-indigo-500 rounded-3xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+        class="w-full max-w-md shadow-lg bg-slate-900 border-2 border-indigo-500 rounded-2xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
         <div class="text-white font-semibold text-lg md:text-2xl">{{ $tariffs[2]->name }}</div>
         <div class="text-slate-400 text-sm md:text-base">{{ __($tariffs[2]->description) }}</div>
         <div class="h-9 flex items-end text-white md:text-lg"><span
@@ -153,7 +153,7 @@
         
         <a
             href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}"><x-primary-button>{{ __('Contact') }}</x-primary-button></a>
-        <div class="space-y-2 sm:space-y-3">
+        <div class="space-y-2 sm:space-y-4">
             <div class="flex items-center">
                 <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
                     viewBox="0 0 20 20">
@@ -235,7 +235,7 @@
 
 <div class="grid justify-items-center mt-4 lg:mt-8">
     <div
-        class="w-full max-w-md lg:max-w-none bg-white border border-slate-300 rounded-3xl px-10 py-8 sm:px-12 sm:py-10 lg:px-18 lg:py-14 space-y-3 sm:space-y-5">
+        class="w-full max-w-md lg:max-w-none bg-white border border-slate-300 rounded-2xl px-10 py-8 sm:px-12 sm:py-10 lg:px-18 lg:py-14 space-y-3 sm:space-y-4">
         <div class="text-slate-950 font-semibold text-lg md:text-2xl">Base</div>
         <div class="text-slate-500 text-xs sm:text-sm">
             {{ __('Starter plan to test all the platform functionality. Adding third-party contacts and posting hosting information is not available') }}

@@ -1,6 +1,6 @@
 <div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl">
     <div
-        class="w-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mb-3 lg:mb-4">
+        class="w-full overflow-hidden rounded-lg flex justify-center items-center mb-3 lg:mb-4">
         <svg class="w-14 h-14 text-slate-400 dark:text-slate-800" width="24" height="24" fill="currentColor"
             viewBox="0 0 24 24">
             <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z" clip-rule="evenodd" />

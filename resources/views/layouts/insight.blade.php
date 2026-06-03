@@ -14,9 +14,9 @@
                 <div x-data="{ open: false }" @click.outside="open = false"
                     class="relative inline-block ml-1 xs:ml-2 sm:ml-3 lg:ml-4">
                     <div @if (auth()->check() && auth()->user()->channel) @click="open = !open" @elseif (auth()->check()) @click="window.open('{{ route('insight.channel.create') }}', '_blank')" @else @click="$dispatch('open-modal', 'login')" @endif
-                        class="group flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm hover:shadow-md shadow-logo-color hover:shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2 transition-all active:scale-95">
+                        class="group flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm hover:shadow-lg shadow-logo-color hover:shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2 transition-all active:scale-95">
 
-                        <svg class="hidden xs:block text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 group-hover:text-slate-800 dark:group-hover:text-slate-200 size-4 sm:size-5"
+                        <svg class="hidden xs:block text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 group-hover:text-slate-800 dark:group-hover:text-slate-200 w-4 h-4 sm:w-5 sm:h-5"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -31,13 +31,13 @@
                     </div>
 
                     @if (auth()->check() && auth()->user()->channel)
-                        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        <div x-show="open" x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 scale-95 translate-y-2"
                             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                             x-transition:leave-end="opacity-0 scale-95 translate-y-2"
-                            class="absolute right-0 mt-2 w-48 origin-top-left rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl z-50 overflow-hidden"
+                            class="absolute right-0 mt-2 w-48 origin-top-left rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-lg z-50 overflow-hidden"
                             style="display: none;">
 
                             @include('insight.components.publish-menu')

@@ -76,7 +76,7 @@
                 answer.scrollIntoView({ behavior: 'smooth' });
                 answer.classList.add('animate-scrolling-highlight')
             }">
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-3 md:p-4"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
@@ -117,7 +117,7 @@
                 @endif
 
                 <div itemprop="text"
-                    class="mb-1 sm:mb-3 lg:mb-5 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400">
+                    class="mb-1 sm:mb-3 lg:mb-6 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400">
                     {!! $question->text !!}
                 </div>
 
@@ -146,7 +146,7 @@
                         <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                             @click.away="open = false">
                             <button @click="open = false" type="button"
-                                class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
+                                class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -160,7 +160,7 @@
             </div>
 
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg dark:border dark:border-slate-700">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl dark:border dark:border-slate-700">
                 @if (!Auth::user())
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-slate-700 dark:text-slate-300 text-xs sm:text-sm lg:text-base">

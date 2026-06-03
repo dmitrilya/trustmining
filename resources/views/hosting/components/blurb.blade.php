@@ -1,7 +1,7 @@
 <div class="flex flex-col md:flex-row gap-2 sm:gap-3 lg:gap-4 mb-4">
     <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl md:grid grid-cols-9">
         <div
-            class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
+            class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-slate-400 dark:text-slate-800" width="24" height="24" fill="currentColor"
                 viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z"
@@ -29,7 +29,7 @@
 
     <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl md:grid grid-cols-9">
         <div
-            class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg overflow-hidden flex justify-center items-center mr-3 lg:mr-4">
+            class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg flex justify-center items-center mr-3 lg:mr-4">
             <svg class="w-14 h-14 text-slate-400 dark:text-slate-800" width="24" height="24" fill="currentColor"
                 viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z"

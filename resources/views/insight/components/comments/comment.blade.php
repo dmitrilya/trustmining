@@ -1,5 +1,5 @@
 <div data-comment_id="{{ $comment->id }}"
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color p-2 sm:p-4 lg:p-6 rounded-xl shadow-sm">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 rounded-xl shadow-sm">
     @include('insight.components.comments.author-date')
 
     <div class="text-sm text-slate-700 dark:text-slate-300 mb-3">

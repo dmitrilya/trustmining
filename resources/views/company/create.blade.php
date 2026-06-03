@@ -7,7 +7,7 @@
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
             <form method="post" action="{{ route('company.store') }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
 
@@ -22,7 +22,7 @@
                         <p class="text-sm sm:text-base text-slate-600 font-bold mb-3">
                             {{ __('For LLC') }}
                         </p>
-                        <ul class="space-y-2 list-disc ms-5">
+                        <ul class="space-y-2 list-disc ml-5">
                             <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('Extract from the Unified State Register of Legal Entities') }}
                             </li>
@@ -41,7 +41,7 @@
                         <p class="text-sm sm:text-base text-slate-600 font-bold mb-3">
                             {{ __('For individual entrepreneurs') }}
                         </p>
-                        <ul class="space-y-2 list-disc ms-5">
+                        <ul class="space-y-2 list-disc ml-5">
                             <li class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                                 {{ __('USRIP record sheet') }}
                             </li>

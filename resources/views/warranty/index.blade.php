@@ -17,7 +17,7 @@
         </div>
 
         <section>
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -27,7 +27,7 @@
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
-                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-3">
+                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
                             <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r"
                                 type="text" :placeholder="__('Warranty')" disabled readonly />
@@ -52,7 +52,7 @@
         </section>
 
         <section>
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -62,7 +62,7 @@
                         <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
-                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-3">
+                    <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
                             <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r"
                                 type="text" :placeholder="__('Warranty until')" disabled readonly />
@@ -87,7 +87,7 @@
         </section>
 
         <section>
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -99,7 +99,7 @@
         </section>
 
         <section>
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">
@@ -111,7 +111,7 @@
         </section>
 
         <section>
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
                 <h2
                     class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-100 font-bold mb-3 xs:mb-4 sm:mb-5">

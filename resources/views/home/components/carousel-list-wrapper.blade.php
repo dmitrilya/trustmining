@@ -30,7 +30,7 @@
                     <div class="mt-2 md:mt-3">
                         <a class="block w-full" href="{{ route('ads', ['adCategory' => 'miners']) }}">
                             <x-primary-button
-                                class="w-full justify-center text-xxs xs:text-xs">{{ __('Open') }}</x-primary-button>
+                                class="w-full justify-center">{{ __('Open') }}</x-primary-button>
                         </a>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="mt-2 md:mt-3">
                         <a class="block w-full" href="{{ route('hostings') }}">
                             <x-primary-button
-                                class="w-full justify-center text-xxs xs:text-xs">{{ __('Open') }}</x-primary-button>
+                                class="w-full justify-center">{{ __('Open') }}</x-primary-button>
                         </a>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                     <div class="mt-2 md:mt-3">
                         <a class="block w-full" href="{{ route('insight.index') }}">
                             <x-primary-button
-                                class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
+                                class="w-full justify-center">{{ __('Details') }}</x-primary-button>
                         </a>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                     <div class="mt-2 md:mt-3">
                         <a class="block w-full" href="{{ route('ads', ['adCategory' => 'gpus']) }}">
                             <x-primary-button
-                                class="w-full justify-center text-xxs xs:text-xs">{{ __('Open') }}</x-primary-button>
+                                class="w-full justify-center">{{ __('Open') }}</x-primary-button>
                         </a>
                     </div>
                 </div>

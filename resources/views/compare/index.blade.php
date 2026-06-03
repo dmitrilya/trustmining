@@ -9,7 +9,7 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6" x-data="{ model_a: '{{ $modelA->slug }}', model_b: '{{ $modelB->slug }}' }">
                 @include('compare.components.select-model', [
                     'name' => 'model_a',
@@ -39,7 +39,7 @@
 
         @inject('textGenerator', 'App\Services\ComparisonTextService')
 
-        <div class="border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg p-4 lg:p-6">
+        <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6">
             <p class="text-xs:xs:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{{ $textGenerator->generate($modelA, $modelB, $ads) }}</p>
         </div>
 

@@ -10,7 +10,7 @@
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
             <button type="button" @click="open = ! open"
-                class="relative w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10 rounded-sm sm:rounded-md' : 'pr-10 rounded-md' }} text-left text-slate-950 dark:text-slate-200 shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-600">
+                class="relative w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10' : 'pr-10' }} rounded-md text-left text-slate-950 dark:text-slate-200 shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-600">
                 <span class="flex items-center">
                     @if ($icon)
                         @switch($icon['type'])

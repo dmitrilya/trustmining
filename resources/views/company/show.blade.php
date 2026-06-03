@@ -12,7 +12,7 @@
             @include('moderation.components.buttons')
 
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-6">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mb-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
@@ -180,7 +180,7 @@
         @endif
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
                 @if (count($company->images))
                     <div class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">

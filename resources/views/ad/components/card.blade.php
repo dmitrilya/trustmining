@@ -31,18 +31,18 @@
         @if ($owner)
             <div class="mt-2 absolute z-10 left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->last_moderation_status == 1)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif ($ad->last_moderation_status == 3)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-150">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                         {{ __('Rejected') }}
                     </div>
                 @endif
@@ -91,7 +91,7 @@
 
             <div class="flex items-center my-1 md:my-2">
                 <div
-                    class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $ad->user_tf > config('trustfactor.yellow') ? ($ad->user_tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                    class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $ad->user_tf > config('trustfactor.yellow') ? ($ad->user_tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
                 </div>
                 <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
             </div>
@@ -144,7 +144,7 @@
             <div class="relative flex mt-1 sm:mt-2 items-center">
                 <a class="block w-full" draggable="false" href="{{ $href }}">
                     <x-primary-button
-                        class="w-full justify-center text-xxs xs:text-xs">{{ __('Buy') }}</x-primary-button>
+                        class="w-full justify-center">{{ __('Buy') }}</x-primary-button>
                 </a>
 
                 @include('ad.components.options')

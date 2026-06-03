@@ -114,7 +114,7 @@
                                 'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'USDT'
                             }"
-                            class="p-1 xs:p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            class="p-1 xs:p-1.5 rounded-l-md border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'RUB'">RUB</button>
                         <button
                             :class="{
@@ -123,7 +123,7 @@
                                 'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
                                     'RUB'
                             }"
-                            class="p-1 xs:p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                            class="p-1 xs:p-1.5 rounded-r-md border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                             @click="currency = 'USDT'">USDT</button>
                     </div>
                 </div>
@@ -131,16 +131,16 @@
 
             <template x-if="version !== null">
                 <div>
-                    <div x-data="{ view: 'month' }" style="min-height: 228px" class="space-y-2 sm:space-y-3 lg:space-y-4">
+                    <div x-data="{ view: 'month' }" style="min-height: 228px" class="space-y-2 sm:space-y-4">
                         <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
                             <button @click="view = 'day'"
-                                :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-80'"
+                                :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
                             <button @click="view = 'month'"
-                                :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-80'"
+                                :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
                             <button @click="view = 'year'"
-                                :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-80'"
+                                :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
                                 class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
                         </div>
 
@@ -209,7 +209,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-2" style="min-height: 120px">
+                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-1.5" style="min-height: 120px">
                                         <x-characteristics>
                                             <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                             <x-characteristic name="Efficiency"

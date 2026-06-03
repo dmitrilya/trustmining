@@ -3,17 +3,17 @@
         x-data="{ tab: '{{ request()->tab ? request()->tab : 'chat' }}' }">
         <div
             class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
-            <ul class="flex text-sm text-center text-slate-600 dark:text-slate-200 rounded-t-2xl divide-x divide-slate-300 dark:divide-slate-700 border-b border-slate-300 dark:border-slate-700 rtl:divide-x-reverse"
+            <ul class="flex text-sm text-center text-slate-600 dark:text-slate-200 rounded-t-2xl divide-x divide-slate-300 dark:divide-slate-700 border-b border-slate-300 dark:border-slate-700"
                 role="tablist">
                 {{-- <li class="w-full">
                     <button @click="tab = 'faq'" type="button" role="tab" aria-controls="faq"
                         :class="{ 'text-indigo-500': tab == 'faq' }"
-                        class="inline-block w-full h-full p-4 rounded-ss-2xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">FAQ</button>
+                        class="inline-block w-full h-full p-4 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">FAQ</button>
                 </li> --}}
                 <li class="w-full">
                     <button @click="tab = 'chat'" type="button" role="tab" aria-controls="chat"
                         :class="{ 'text-indigo-500': tab == 'chat' }"
-                        class="inline-block w-full h-full p-4 rounded-se-2xl hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">
+                        class="inline-block w-full h-full p-4 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">
                         {{ __('We are in touch') }}
                         @if ($auth && $chat->messages->where('checked', false)->where('user_id', '!=', $auth->id)->count())
                             <span class="inline-flex w-3 h-3 bg-indigo-500 rounded-full"></span>

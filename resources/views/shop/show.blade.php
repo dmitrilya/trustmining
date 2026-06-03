@@ -38,7 +38,7 @@
         <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             @if (auth()->check() && auth()->id() == $user->id)
                 <a href="{{ route('ad.create') }}"
-                    class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-md shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-300 dark:border-slate-700">
+                    class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-lg shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
                         <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-300" aria-hidden="true"
                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@
                 'shop' => true,
             ])
 
-            <div class="mt-8 sm:mt-12 lg:mt-16">
+            <div class="mt-8 sm:mt-12 lg:mt-14">
                 {{ $ads->links() }}
             </div>
         </div>

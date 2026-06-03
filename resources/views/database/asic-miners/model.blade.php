@@ -22,7 +22,7 @@
         </x-breadcrumbs>
 
         <div itemscope itemtype="https://schema.org/Product"
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 lg:p-14">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
             {{-- <div class="mb-6 md:mb-12">
                 @include('database.components.model-images')
             </div> --}}

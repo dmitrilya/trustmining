@@ -11,7 +11,7 @@
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-lg">
+            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
             <p class="text-xxs sm:text-xs text-slate-600 mt-6">* - {{ __('required fields') }}</p>
 
             <form method="post" action="{{ route('hosting.store') }}" class="mt-2 space-y-6" enctype=multipart/form-data
@@ -69,7 +69,7 @@
                             autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
-                            class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
                         <x-input-error :messages="$errors->get('address')" />

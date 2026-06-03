@@ -1,5 +1,5 @@
 <div class="sticky top-0 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-lg shadow-logo-color rounded-lg p-4 z-10">
-    <div class="flex max-w-max bg-slate-100 dark:bg-slate-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
+    <div class="flex max-w-max bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
         <div @click="changePeriod('1d');"
             :class="{
                 'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==

@@ -8,7 +8,7 @@
         @endif
 
         <div
-            class="border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
+            class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
             <div class="flex items-start justify-between mb-1 sm:mb-2">
                 @include('insight.components.channel', [
                     'name' => $channel->name,
@@ -32,7 +32,7 @@
                 @else
                     <a href="{{ route('insight.channel.edit', ['channel' => $channel->slug]) }}"
                         class="text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center">
-                        <svg class="size-5 sm:size-6 lg:size-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
                             aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5"

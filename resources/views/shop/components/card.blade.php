@@ -1,8 +1,8 @@
 <div
-    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color overflow-hidden rounded-lg flex flex-col justify-between">
+    class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div
-            class="w-full aspect-[4/3] overflow-hidden rounded-lg overflow-hidden flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
+            class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
             <a class="block w-full" href="{{ route('company', ['user' => $shop->slug]) }}">
                 @if ($shop->company?->bg_logo)
                     @php
@@ -39,7 +39,7 @@
 
         <div class="flex items-center mt-4 sm:mt-5">
             <div
-                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $shop->tf > config('trustfactor.yellow') ? ($shop->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $shop->tf > config('trustfactor.yellow') ? ($shop->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
             </div>
             <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
         </div>
@@ -50,7 +50,7 @@
         </p>
     </div>
 
-    <a class="block w-full mt-3 sm:mt-4 lg:mt-5" href="{{ route('company', ['user' => $shop->slug]) }}">
-        <x-primary-button class="w-full justify-center text-xxs xs:text-xs">{{ __('Details') }}</x-primary-button>
+    <a class="block w-full mt-3 sm:mt-4 lg:mt-6" href="{{ route('company', ['user' => $shop->slug]) }}">
+        <x-primary-button class="w-full justify-center">{{ __('Details') }}</x-primary-button>
     </a>
 </div>

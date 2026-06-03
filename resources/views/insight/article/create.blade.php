@@ -270,10 +270,10 @@
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
+                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -306,10 +306,10 @@
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
+                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                             @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>

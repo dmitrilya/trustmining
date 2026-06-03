@@ -16,7 +16,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     @if ($question->published)
@@ -31,12 +31,12 @@
                         <div class="mb-1.5 sm:mb-2 flex justify-between items-start">
                             @if ($question->moderation)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
                                     {{ __('Is under moderation') }}
                                 </div>
                             @elseif (!$question->published)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-e-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-150">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
                                     {{ __('Check out similar questions') }}
                                 </div>
                             @else
@@ -68,7 +68,7 @@
                                 <div>
                                     <h3 id="accordion-flush-themes-heading">
                                         <button type="button" @click="show = !show"
-                                            class="flex items-center justify-between w-full py-5 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm lg:text-base">
+                                            class="flex items-center justify-between w-full py-5 text-left text-slate-800 dark:text-slate-200 text-xs sm:text-sm lg:text-base">
                                             <span>{{ __('Similar questions') }}</span>
                                             <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': !show }"
                                                 fill="none" viewBox="0 0 10 6">

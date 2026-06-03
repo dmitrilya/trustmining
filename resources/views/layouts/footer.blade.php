@@ -8,8 +8,8 @@
         <div class="flex items-center gap-2 lg:gap-3">
             <a href="https://t.me/trustmining_ru" target="_blank" aria-label="Связаться в телеграм">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
+                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M16.4809 3.69261C16.6868 3.60594 16.9122 3.57605 17.1336 3.60605C17.355 3.63604 17.5643 3.72484 17.7398 3.86319C17.9152 4.00153 18.0504 4.18438 18.1312 4.39268C18.212 4.60099 18.2355 4.82715 18.1992 5.04761L16.3092 16.5118C16.1259 17.6176 14.9125 18.2518 13.8984 17.7009C13.05 17.2401 11.79 16.5301 10.6567 15.7893C10.09 15.4184 8.3542 14.2309 8.56754 13.3859C8.75087 12.6634 11.6675 9.94845 13.3342 8.33428C13.9884 7.70011 13.69 7.33428 12.9175 7.91761C10.9992 9.36595 7.9192 11.5684 6.90087 12.1884C6.00254 12.7351 5.5342 12.8284 4.9742 12.7351C3.95254 12.5651 3.00504 12.3018 2.2317 11.9809C1.1867 11.5476 1.23754 10.1109 2.23087 9.69261L16.4809 3.69261Z"
@@ -19,8 +19,8 @@
             </a>
             <a href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-slate-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M17 6h-2V5h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2h-.541A5.965 5.965 0 0 1 14 10v4a1 1 0 1 1-2 0v-4c0-2.206-1.794-4-4-4-.075 0-.148.012-.22.028C7.686 6.022 7.596 6 7.5 6A4.505 4.505 0 0 0 3 10.5V16a1 1 0 0 0 1 1h7v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3h5a1 1 0 0 0 1-1v-6c0-2.206-1.794-4-4-4Zm-9 8.5H7a1 1 0 1 1 0-2h1a1 1 0 1 1 0 2Z" />
@@ -29,8 +29,8 @@
             </a>
             <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="Канал Дзен">
                 <div
-                    class="size-8 sm:size-10 lg:size-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
-                    <svg class="size-4 sm:size-5 lg:size-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
+                    class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800 dark:bg-slate-800">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-slate-200" width="20" height="20" viewBox="0 0 20 20"
                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1181_4290)">
                             <path
@@ -62,7 +62,7 @@
                     'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': theme !=
                         'light'
                 }"
-                class="p-1.5 rounded-l border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                class="p-1.5 rounded-l-md border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                 @click="if (theme != 'light') {
                     theme = 'light';
                     axios.get('{{ route('change-theme', ['theme' => 'light']) }}');
@@ -81,7 +81,7 @@
                     'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': theme !=
                         'dark'
                 }"
-                class="p-1.5 rounded-r border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
+                class="p-1.5 rounded-r-md border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
                 @click="if (theme != 'dark') {
                     theme = 'dark';
                     axios.get('{{ route('change-theme', ['theme' => 'dark']) }}');

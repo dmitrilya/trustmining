@@ -13,7 +13,7 @@
                 <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false"
                     @click="open = !open" @click.away="open = false">
                     <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
-                        <svg class="size-4 sm:size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5"
@@ -22,7 +22,7 @@
                     </div>
 
                     <div x-show="open" style="display: none"
-                        class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-lg z-20">
+                        class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
                         <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                             {{ __('The commission is indicated when working on a mining pool') }} <a
                                 href="{{ config('partners.headframe.link') }}"
@@ -41,9 +41,9 @@
     <div class="border-y border-slate-300 dark:border-slate-700">
         <div x-data="{ show: window.innerWidth > 640 }">
             <button type="button" @click="show = !show"
-                class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left rtl:text-right text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
+                class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
                 <span>{{ __('Additional settings') }}</span>
-                <svg class="size-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
+                <svg class="w-2 h-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 5 5 1 1 5" />
                 </svg>

@@ -35,7 +35,7 @@
                         class="py-1 px-3 block w-28 rounded-full text-sm text-slate-950 bg-slate-50 dark:bg-slate-950 dark:text-slate-200 border ring-0 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
                         @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
                     <label for="tariff"
-                        class="z-10 flex items-center absolute text-sm text-slate-600 dark:text-slate-300 duration-300 right-0 top-1/2 -translate-y-1/2 scale-75 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="z-10 flex items-center absolute text-sm text-slate-600 dark:text-slate-300 duration-300 right-0 top-1/2 -translate-y-1/2 scale-75 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('rub./kW') }}
                     </label>
                 </div>
@@ -84,7 +84,7 @@
                     <h2
                         class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
-                            class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 size-3 sm:size-4 md:size-5 lg:size-6">
+                            class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
                             <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')"
                                 alt="medal">
                         </div>

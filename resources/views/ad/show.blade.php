@@ -69,7 +69,7 @@
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6 lg:p-14">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 lg:p-14">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8">
                     <div
                         class="md:col-span-5{{ isset($moderation->data['preview']) || isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
@@ -243,7 +243,7 @@
                                 @endforeach
                             </div>
 
-                            <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                            <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
                                 <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
                                     <img itemprop="image" src="{{ Storage::url($ad->preview) }}"
                                         alt="{{ $alt }}" class="w-full h-full object-cover">
@@ -399,7 +399,7 @@
 
                         <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => $ad->office->id]) }}"
                             target="_blank"
-                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
+                            class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-6">
                             <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"

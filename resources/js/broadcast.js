@@ -80,7 +80,7 @@ window.messagesChannelEvent = function (e) {
         if (e.message) messageElement = messageElement + `<div class="flex justify-start">
         <div
             class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl mr-6 rounded-tr-xl">
-            <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
+            <div class="flex items-center space-x-2 mb-2">
                 <span class="text-xs text-slate-500">${date}</span>
             </div>
 
@@ -91,7 +91,7 @@ window.messagesChannelEvent = function (e) {
         if (e.images.length) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl mr-6 rounded-tr-xl">
-                <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
+                <div class="flex items-center space-x-2 mb-2">
                     <span class="text-xs text-slate-500">${date}</span>
                 </div>
                 <div class="grid gap-2 ${e.images.length > 1 ? e.images.length > 4 ? 'grid-cols-3' : 'grid-cols-2' : 'grid-cols-1'}">`;
@@ -106,7 +106,7 @@ window.messagesChannelEvent = function (e) {
         if (e.files.length) {
             messageElement = messageElement + `<div class="flex justify-start">
             <div class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl mr-6 rounded-tr-xl">
-                <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
+                <div class="flex items-center space-x-2 mb-2">
                     <span class="text-xs text-slate-500">${date}</span>
                 </div>
                 <div class="space-y-2">`;

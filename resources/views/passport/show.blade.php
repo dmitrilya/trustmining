@@ -7,7 +7,7 @@
         @if (isset($moderation))
             @include('moderation.components.buttons')
 
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
                 <div class="grid gap-6">
                     <img src="{{ Storage::disk('private')->temporaryUrl($moderation->data['images'][0], now()->addSeconds(2)) }}"
                         class="w-full">

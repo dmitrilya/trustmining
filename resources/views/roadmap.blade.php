@@ -18,7 +18,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="name"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Name') . ' или ' . __('Company name') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('name')" />
@@ -29,7 +29,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="email"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Email') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('email')" />
@@ -40,7 +40,7 @@
                                     placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="password"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Password') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('password')" />
@@ -51,7 +51,7 @@
                                     id="password_confirmation" placeholder=" " required
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="password_confirmation"
-                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Confirm Password') }}
                                 </label>
                                 <x-input-error :messages="$errors->get('password_confirmation')" />
@@ -107,13 +107,13 @@
                 x-init="$refs.timeline.style.height = $el.scrollHeight + 75 + 'px'">
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('22-08-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Project launch') }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('Opening a demo version of a marketplace with a narrow specialization in mining for large companies') }}
@@ -121,11 +121,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/3.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-xl shadow-logo-color -rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-lg shadow-logo-color -rotate-[15deg]">
                         <img src="{{ Storage::url('public/roadmap/1.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-1/2 rounded-xl shadow-xl shadow-logo-color z-10">
+                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-1/2 rounded-xl shadow-lg shadow-logo-color z-10">
                         <img src="{{ Storage::url('public/roadmap/2.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-xl shadow-logo-color rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-lg shadow-logo-color rotate-[15deg]">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -142,13 +142,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Update') . ' v 1.1' }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('Running Advertising Ads') }}
@@ -166,13 +166,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('10-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Entering the market') }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('Launching an advertising campaign and actively attracting sellers and buyers to the site') }}
@@ -180,11 +180,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/6.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-xl shadow-logo-color -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-lg shadow-logo-color -rotate-[6deg]">
                         <img src="{{ Storage::url('public/roadmap/5.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[50%] rounded-xl shadow-xl shadow-logo-color">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[50%] rounded-xl shadow-lg shadow-logo-color">
                         <img src="{{ Storage::url('public/roadmap/4.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-xl shadow-logo-color rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-lg shadow-logo-color rotate-[6deg]">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -201,13 +201,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Update') . ' v 1.2' }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('SEO') }}
@@ -226,13 +226,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-09-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Advertising with bloggers and collaborations') }}</div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -248,13 +248,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-10-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Ability to write manuals') }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('Useful articles and guides') }}
@@ -276,22 +276,22 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-11-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Update') . ' v 1.3' }}
 
                     </div>
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/7.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-xl shadow-logo-color -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-lg shadow-logo-color -rotate-[6deg]">
                         <img src="{{ Storage::url('public/roadmap/8.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-xl shadow-logo-color rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-lg shadow-logo-color rotate-[6deg]">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
@@ -310,13 +310,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('1-12-2026')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Update') . ' v 1.4' }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('Analytics of ad quality and chosen promotion method') }}
@@ -335,13 +335,13 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-2xl">
+                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-700 dark:text-slate-300 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-02-2025')->timestamp * 1000 }}"></div>
                     </header>
 
-                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-3">
+                    <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl text-slate-900 dark:text-slate-100 font-semibold mb-2 lg:mb-4">
                         {{ __('Launching a mobile application') }}</div>
                     <div class="text-xs lg:text-sm text-slate-600 mb-6 md:mb-8">
                         {{ __('TrustMining in your pocket') }}

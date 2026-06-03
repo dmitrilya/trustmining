@@ -39,28 +39,28 @@
                 <div class="w-full md:w-md max-w-md mx-auto">
                     <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                         <button @click="screen = 430"
-                            :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Mobile') }}</button>
                         <button @click="screen = 768"
-                            :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Tablet') }}</button>
                         <button @click="screen = 1280"
-                            :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Desktop') }}</button>
                     </div>
                     <div class="mt-2 flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                         <button @click="theme = 'light'"
-                            :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Light') }}</button>
                         <button @click="theme = 'dark'"
-                            :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Dark') }}</button>
                     </div>
                     <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                         <template
                             x-for="(item, key) in {'additional-params': '{{ __('Add. settings') }}', 'currency': '{{ __('Currency') }}', 'coins': '{{ __('Coins') }}', 'characteristics': '{{ __('Characteristics') }}'}">
                             <button @click="toggleBlock(key)"
-                                class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-200"
+                                class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
                                 :class="blocks.includes(key) ?
                                     'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
                                     'bg-white border-slate-300 text-slate-500 opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
@@ -85,7 +85,7 @@
 
                         <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
                             .then(() => pushToastAlert('{{ __('Code successfully copied') }}', 'success'))"
-                            class="cursor-pointer min-w-5 size-5 ml-3 sm:ml-4" aria-hidden="true"
+                            class="cursor-pointer min-w-5 w-5 h-5 ml-3 sm:ml-4" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -147,28 +147,28 @@
                 <div class="w-full md:w-md max-w-md mx-auto">
                     <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                         <button @click="screen = 430"
-                            :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Mobile') }}</button>
                         <button @click="screen = 768"
-                            :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Tablet') }}</button>
                         <button @click="screen = 1280"
-                            :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Desktop') }}</button>
                     </div>
                     <div class="mt-2 flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                         <button @click="theme = 'light'"
-                            :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Light') }}</button>
                         <button @click="theme = 'dark'"
-                            :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-md' : 'opacity-50'"
+                            :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                             class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Dark') }}</button>
                     </div>
                     <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                         <template
                             x-for="(item, key) in {'period': '{{ __('Period') }}', 'prediction': '{{ __('Prediction') }}', 'graph': '{{ __('Graph') }}', 'history': '{{ __('History') }}'}">
                             <button @click="toggleBlock(key)"
-                                class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-200"
+                                class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
                                 :class="blocks.includes(key) ?
                                     'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
                                     'bg-white border-slate-300 text-slate-500 opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
@@ -193,7 +193,7 @@
 
                         <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
                             .then(() => pushToastAlert('{{ __('Code successfully copied') }}', 'success'))"
-                            class="cursor-pointer min-w-5 size-5 ml-3 sm:ml-4" aria-hidden="true"
+                            class="cursor-pointer min-w-5 w-5 h-5 ml-3 sm:ml-4" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
                             <path fill-rule="evenodd"

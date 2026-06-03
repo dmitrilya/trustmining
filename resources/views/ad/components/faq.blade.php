@@ -106,14 +106,14 @@
                     <p>Для безопасности пользователей в нашем сервисе внедрена уникальная метрика Trust Factor.
                         Перейдите в карточку компании или посмотрите на значок в объявлении</p>
                     <div class="flex items-center gap-2"><span
-                            class="size-3 md:size-4 rounded-full bg-green-500"></span>
+                            class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-green-500"></span>
                         <span>— Надежный партнер.</span>
                     </div>
                     <div class="flex items-center gap-2"><span
-                            class="size-3 md:size-4 rounded-full bg-yellow-300"></span>
+                            class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-300"></span>
                         <span>— Есть замечания или мало опыта.</span>
                     </div>
-                    <div class="flex items-center gap-2"><span class="size-3 md:size-4 rounded-full bg-red-600"></span>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-600"></span>
                         <span>— Мало информации / Риски.</span>
                     </div>
                 </div>

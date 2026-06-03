@@ -35,7 +35,7 @@ const pushToast = function (type, title, pretext, text, alert) {
     toast.role = 'alert';
     toast.innerHTML = type == 'alert' ? `<div class="flex items-center justify-between">
     ${alertIcons[alert]}
-    <div class="ms-3 text-sm text-slate-600 dark:text-slate-300">${text}</div>
+    <div class="ml-3 text-sm text-slate-600 dark:text-slate-300">${text}</div>
     <button type="button" onclick="this.parentElement.parentElement.style.opacity = 0;setTimeout(() => { this.parentElement.parentElement.remove() }, 300)"
         class="block ml-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 justify-center items-center flex-shrink-0 text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 rounded-lg p-1.5 hover:bg-slate-100 dark:hover:border-slate-800 inline-flex h-8 w-8 dark:text-slate-400" aria-label="Close">
         <span class="sr-only">Close</span>

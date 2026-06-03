@@ -104,7 +104,7 @@
             });
 
             const markerElement = document.createElement('div');
-            markerElement.className = 'size-4 rounded-full cursor-pointer bg-indigo-500 border-2 border-white';
+            markerElement.className = 'w-4 h-4 rounded-full cursor-pointer bg-indigo-500 border-2 border-white';
 
             const marker = new YMapMarker({
                 coordinates: coords

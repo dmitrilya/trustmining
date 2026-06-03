@@ -6,7 +6,7 @@
     <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block">
         <div @click="open = !open"
             class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
-            <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5"
+            <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                 viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -20,13 +20,13 @@
             </div>
         </div>
 
-        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+        <div x-show="open" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-95 translate-y-2"
             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave="transition ease-in duration-100"
             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
             x-transition:leave-end="opacity-0 scale-95 translate-y-2"
-            class="absolute left-0 mt-2 w-48 origin-top-left rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-xl z-50 overflow-hidden"
+            class="absolute left-0 mt-2 w-48 origin-top-left rounded-2xl border border-slate-300 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-lg z-50 overflow-hidden"
             style="display: none;">
 
             @include('insight.components.publish-menu')
@@ -35,7 +35,7 @@
 
     <div class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2"
         @click="$dispatch('open-modal', 'series-creation')">
-        <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5"
+        <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5"
             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
             viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -54,7 +54,7 @@
         @if (request()->routeIs('insight.channel.statistics'))
             @include('insight.svg.statistics-active', [
                 'svgClass' =>
-                    'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-4 sm:size-5',
+                    'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-4 h-4 sm:w-5 sm:h-5',
             ])
 
             <div class="ml-1 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
@@ -63,7 +63,7 @@
         @else
             @include('insight.svg.statistics', [
                 'svgClass' =>
-                    'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-4 sm:size-5',
+                    'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5',
             ])
 
             <div class="ml-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">

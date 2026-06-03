@@ -15,9 +15,9 @@
     </div>
 
     <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ images: {{ count($answer->images) }}, files: {{ count($answer->files) }} }">
-        <div class="flex ps-0 space-x-1 rtl:space-x-reverse">
+        <div class="flex ps-0 space-x-1">
             <label for="edit-input-file-answer_{{ $answer->id }}"
-                class="inline-flex justify-center items-center p-2 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
                 <input id="edit-input-file-answer_{{ $answer->id }}" name="files[]" class="hidden" type="file"
                     accept=".pdf,.doc,.docx,.txt" multiple
                     @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
@@ -29,11 +29,11 @@
             </label>
 
             <label for="edit-input-image-answer_{{ $answer->id }}"
-                class="inline-flex justify-center items-center p-2 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
                 <input id="edit-input-image-answer_{{ $answer->id }}" name="images[]" class="hidden" type="file"
                     accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
-                <svg class="size-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
+                <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                     <path
                         d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
                 </svg>
@@ -42,8 +42,8 @@
 
             <div @click="$dispatch('open-modal', 'edit-create-answer-link_{{ $answer->id }}');link_text = prepareLink(range, $refs.answer)"
                 aria-label="Create hyperlink"
-                class="inline-flex justify-center items-center p-1 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
-                <svg class="size-5" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                class="inline-flex justify-center items-center p-1 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                <svg class="w-5 h-5" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
                 </svg>
@@ -60,7 +60,7 @@
                             :value="link_text" @change="link_text = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="hyper-answer_{{ $answer->id }}"
-                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Text') }}
                         </label>
                     </div>
@@ -70,7 +70,7 @@
                             :value="link_url" @change="link_url = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="url-answer_{{ $answer->id }}"
-                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             URL
                         </label>
                     </div>
@@ -89,7 +89,7 @@
             <x-dropdown align="bottom" width="auto">
                 <x-slot name="trigger">
                     <button type="button" data-dropdown-placement="top"
-                        class="inline-flex justify-center items-center p-2 text-slate-600 rounded cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                        class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
                         <span>&#128516</span>
                         <span class="sr-only">Add emoji</span>
                     </button>
@@ -114,7 +114,7 @@
         </div>
 
         <button type="submit" id="send_button-answer_{{ $answer->id }}" @click="$el.classList.add('hidden')"
-            class="inline-flex items-center py-2.5 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-4 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
+            class="inline-flex items-center py-2.5 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
             {{ __('Send') }}
         </button>
     </div>

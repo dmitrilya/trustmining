@@ -3,9 +3,9 @@
 @if (in_array('period', $blocks))
     <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
         @if (!$widjet)
-            <div class="bg-slate-100 dark:bg-slate-900 size-7 sm:size-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
+            <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
                 @click="show = !show">
-                <svg class="size-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
+                <svg class="w-4 h-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
                     fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
@@ -16,7 +16,7 @@
 
         <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
             <div
-                class="flex bg-slate-100 dark:bg-slate-900 rounded-s-lg rounded-e-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
+                class="flex bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
                 <div @click="period = '3m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3m'])"
                     :class="{
                         'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==

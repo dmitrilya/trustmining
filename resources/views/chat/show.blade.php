@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" style="height: calc(100dvh - 64.4px)">
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
-                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-y-auto lg:shadow-sm shadow-logo-color border-r dark:border-slate-950 lg:border-0 lg:rounded-l-lg p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-150 lg:h-full absolute lg:static">
+                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-y-auto lg:shadow-sm shadow-logo-color border-r dark:border-slate-950 lg:border-0 lg:rounded-l-lg p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-100 lg:h-full absolute lg:static">
                 <ul role="list" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
@@ -53,7 +53,7 @@
                 </ul>
             </div>
 
-            <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg lg:rounded-l-none flex flex-col p-1 sm:p-4 h-full">
+            <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl lg:rounded-l-none flex flex-col p-1 sm:p-4 h-full">
                 @php
                     $user = $activeChat->users()->where('id', '!=', $auth->id)->first();
                 @endphp
@@ -61,7 +61,7 @@
                 <div class="flex">
                     <div class="flex items-center lg:hidden p-1 -ml-1">
                         <button @click="open = ! open"
-                            class="inline-flex items-center justify-center p-1 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-950 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-950 focus:text-slate-500 dark:focus:text-slate-400 transition duration-150 ease-in-out">
+                            class="inline-flex items-center justify-center p-1 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-950 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-950 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
                             <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

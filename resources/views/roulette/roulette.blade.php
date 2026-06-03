@@ -6,10 +6,10 @@
                     {{ __('Try your luck') }}</h2>
 
                 <button type="button" aria-label="{{ __('Close') }}"
-                    class="ml-4 flex size-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
+                    class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                     @click="$dispatch('close'); closeRoulette()">
                     <span class="sr-only">Close</span>
-                    <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -41,7 +41,7 @@
                                     x-text="prize.name">
                                 </span>
                                 <div class="flex flex-col items-center">
-                                    <a class="mb-1 size-9 xs:size-12 rounded-full overflow-hidden hover:ring ring-indigo-600 pointer-events-auto z-20"
+                                    <a class="mb-1 w-9 h-9 xs:w-12 xs:h-12 rounded-full overflow-hidden hover:ring ring-indigo-600 pointer-events-auto z-20"
                                         :href="prize.partner_link" target="_blank"
                                         :aria-label="`${prize.name} partner link`">
                                         <img class="w-full"
@@ -59,13 +59,13 @@
                     </template>
 
                     <div
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-slate-900 border-2 border-slate-700 dark:border-slate-300 rounded-full z-20 shadow-md">
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-slate-900 border-2 border-slate-700 dark:border-slate-300 rounded-full z-20 shadow-lg">
                     </div>
                 </div>
             </div>
 
             <button
-                class="w-full items-center px-4 py-2.5 bg-primary-gradient rounded-lg font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 focus:outline-none focus:opacity-90 transition-all disabled:cursor-not-allowed shadow-md"
+                class="w-full items-center px-4 py-2.5 bg-primary-gradient rounded-lg font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 focus:outline-none focus:opacity-90 transition-all disabled:cursor-not-allowed shadow-lg"
                 @click="spinWheel" :disabled="isSpinning || timeToSpin > 0">
 
                 <span x-show="isSpinning" class="animate-pulse">{{ __('The wheel is spinning') }}...</span>
@@ -83,7 +83,7 @@
             <h3 class="text-2xl font-extrabold text-slate-800 dark:text-slate-200 mb-6">
                 {{ __('Congratulations!') }}
             </h3>
-            <a class="size-18 rounded-full overflow-hidden hover:ring ring-indigo-600 mb-3"
+            <a class="w-20 h-20 rounded-full overflow-hidden hover:ring ring-indigo-600 mb-3"
                 :href="wonPrize?.partner_link">
                 <img class="w-full"
                     :src="wonPrize?.id != 3 ? `/storage/${wonPrize?.user.company.logo}` : '/img/hf_logo.webp'"
@@ -97,7 +97,7 @@
             @auth
                 <template x-if="wonPrize?.name != '{{ config('settings.roulette.extra_spin_name') }}'">
                     <a :href="wonPrize?.href"
-                        class="mt-8 w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
+                        class="mt-8 w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-100">
                         {{ __('Take the prize') }}
                     </a>
                 </template>
@@ -106,7 +106,7 @@
                     {{ __('Login to claim your prize') }}
                 </p>
                 <button
-                    class="w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-150"
+                    class="w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-100"
                     @click="$dispatch('close');$dispatch('open-modal', 'login')">
                     {{ __('Login') }}
                 </button>

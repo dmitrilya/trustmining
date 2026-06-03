@@ -1,7 +1,7 @@
 <x-app-layout title="Список всех розыгрышей" noindex="true">
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 md:p-8" x-data="{ selectedPrize: null }">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6 mb-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
             <x-primary-button class="block ml-auto mb-4"
                 x-on:click.prevent="$dispatch('open-modal', 'roulette-prize-create')">
                 {{ __('Create') }}
@@ -11,7 +11,7 @@
                 @foreach ($prizes as $prize)
                     <div class="border border-slate-300 dark:border-slate-700 p-2 sm:p-4 rounded-lg">
                         <div class="flex mb-3">
-                            <div class="rounded-full overflow-hidden min-w-16 size-16 mr-2">
+                            <div class="rounded-full overflow-hidden min-w-16 w-16 h-16 mr-2">
                                 <img src="{{ Storage::url($prize->user->company->logo) }}" alt="">
                             </div>
 

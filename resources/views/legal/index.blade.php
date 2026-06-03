@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 p-4 rounded-r-2xl">
+            <div class="bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 p-4 rounded-r-md">
                 <div class="flex items-start gap-3">
                     <div class="text-lg">⚠️</div>
                     <div class="space-y-1">

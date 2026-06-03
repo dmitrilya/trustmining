@@ -6,7 +6,7 @@
         </x-breadcrumbs>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-4 md:p-6 text-slate-800 dark:text-slate-200 space-y-12">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 text-slate-800 dark:text-slate-200 space-y-12">
             <div class="border-b border-slate-300 dark:border-slate-700 pb-6">
                 <h1 class="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-200">Trustmining API v1
                 </h1>
@@ -49,14 +49,14 @@
                     <div class="space-y-1">
                         <div class="text-emerald-500 font-bold">Authorization:</div>
                         <div
-                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
+                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded-md text-slate-600 dark:text-slate-400">
                             Bearer 1|plainTextTokenValue...
                         </div>
                     </div>
                     <div class="space-y-1">
                         <div class="text-emerald-500 font-bold">Accept:</div>
                         <div
-                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded text-slate-600 dark:text-slate-400">
+                            class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded-md text-slate-600 dark:text-slate-400">
                             application/json
                         </div>
                     </div>
@@ -247,14 +247,14 @@
                             </p>
                             <p class="text-xs text-rose-500 mt-1">
                                 Поля <code
-                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">name</code>,
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded-md font-bold">name</code>,
                                 <code
-                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">office</code>,
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded-md font-bold">office</code>,
                                 <code
-                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">props.condition</code>
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded-md font-bold">props.condition</code>
                                 и
                                 <code
-                                    class="bg-rose-500/10 px-1 py-0.5 rounded font-bold">props.availability</code>
+                                    class="bg-rose-500/10 px-1 py-0.5 rounded-md font-bold">props.availability</code>
                                 являются <strong class="uppercase">нередактируемыми</strong>. Их изменение в этом
                                 методе заблокировано. Если вам нужно выставить товар с другим названием, состоянием или
                                 статусом наличия, вам необходимо создать абсолютно новое объявление.

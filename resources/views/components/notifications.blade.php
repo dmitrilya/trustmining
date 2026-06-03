@@ -17,11 +17,11 @@
     </button>
 
     <div x-show="open"
-        class="absolute z-10 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden border border-slate-300 dark:border-slate-700 rounded-3xl shadow-lg shadow-logo-color backdrop-blur-xl"
-        style="width: calc(100vw - 1rem);display: none" x-transition:enter="transition ease-out duration-200"
-        x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-1" @click.away="open = false">
+        class="absolute z-10 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden border border-slate-300 dark:border-slate-700 rounded-2xl shadow-lg shadow-logo-color backdrop-blur-xl"
+        style="width: calc(100vw - 1rem);display: none" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-2" @click.away="open = false">
         <div class="w-full flex-auto bg-white/40 dark:bg-slate-900/40 text-sm leading-6">
             <div
                 class="block px-4 py-2 text-center text-slate-800 rounded-t-lg bg-slate-50 dark:bg-slate-900 dark:text-white">
@@ -37,7 +37,7 @@
             <a href="{{ route('notifications') }}"
                 class="block py-2 text-sm text-center text-slate-950 rounded-b-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-white">
                 <div class="inline-flex items-center ">
-                    <svg class="w-4 h-4 me-2 text-slate-500 dark:text-slate-400" aria-hidden="true" fill="currentColor"
+                    <svg class="w-4 h-4 mr-2 text-slate-500 dark:text-slate-400" aria-hidden="true" fill="currentColor"
                         viewBox="0 0 20 14">
                         <path
                             d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />

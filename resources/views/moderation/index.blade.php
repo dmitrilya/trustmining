@@ -6,7 +6,7 @@
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none transition ease-in-out duration-150">
+                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none transition ease-in-out duration-100">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">
@@ -65,7 +65,7 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
             <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($moderations as $moderation)
                     @php

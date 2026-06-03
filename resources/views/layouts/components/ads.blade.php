@@ -1,4 +1,4 @@
-<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm leading-5 text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none focus:text-slate-700 dark:focus:text-slate-300 transition duration-150 ease-in-out"
+<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm leading-5 text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none focus:text-slate-700 dark:focus:text-slate-300 transition duration-100 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
         <div>{{ __('Advertisements') }}</div>
@@ -12,9 +12,9 @@
         </div>
     </button>
 
-    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+    <div x-show="open" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-100" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
         class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-xl border border-t-0 border-slate-300 dark:border-slate-700 origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">

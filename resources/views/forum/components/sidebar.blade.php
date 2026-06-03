@@ -1,5 +1,5 @@
 <div class="w-full mt-4 sm:mt-6 lg:mt-0 space-y-4 sm:space-y-6 col-span-1">
-    <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+    <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
         <h2
             class="mb-1 sm:mb-3 p-2 xs:p-3 md:p-4 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
             {{ __('Similar posts') }}
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+    <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
         <h2
             class="mb-1 sm:mb-3 p-2 xs:p-3 md:p-4 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
             {{ __('New posts') }}

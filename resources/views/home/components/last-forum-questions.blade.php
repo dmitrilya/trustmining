@@ -13,7 +13,7 @@
                     'forumQuestion' => $forumQuestion->id . '-' . Str::slug($forumQuestion->theme),
                 ]) }}">
                 <div
-                    class="px-4 py-2 xs:py-3 sm:px-6 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">
+                    class="px-4 py-2 xs:py-3 sm:px-4 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">
                     <div class="mb-1.5 sm:mb-2 flex justify-between">
                         <div class="text-xxs sm:text-xs text-slate-600 dark:text-slate-500">
                             {{ __($forumQuestion->forumSubcategory->forumCategory->name) }}.

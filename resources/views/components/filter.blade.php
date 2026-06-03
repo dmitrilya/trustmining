@@ -5,7 +5,7 @@
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
 
     <div x-show="filter"
-        class="fixed top-0 right-0 p-4 h-max w-full sm:max-w-sm flex-col overflow-y-auto bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl shadow-md shadow-logo-color flex ml-auto"
+        class="fixed top-0 right-0 p-4 h-max w-full sm:max-w-sm flex-col overflow-y-auto bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl shadow-lg shadow-logo-color flex ml-auto"
         x-transition:enter="transition ease-in-out duration-300 transform" x-transition:enter-start="translate-x-full"
         x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-300 transform"
         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" @click.away="filter = false">

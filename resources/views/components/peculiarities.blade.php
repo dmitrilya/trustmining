@@ -21,7 +21,7 @@
     }
 @endphp
 
-<div {{ $attributes->merge(['class' => 'space-y-1.5 sm:space-y-2']) }}>
+<div {{ $attributes->merge(['class' => 'space-y-1.5 sm:space-y-1.5']) }}>
     @foreach ($peculiarities as $peculiarity)
         <x-checkbox name="peculiarities[]" :checked="in_array($peculiarity, $ps)" :disabled="!$isForm ||
             (Route::current()->getName() == 'services' && $peculiarity == 'Repair service') ||

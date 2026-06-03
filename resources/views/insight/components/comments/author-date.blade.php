@@ -10,7 +10,7 @@
         @endphp
 
         @if ($logo)
-            <div class="min-w-6 size-6 sm:min-w-8 sm:size-8 mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
+            <div class="min-w-6 w-6 h-6 sm:min-w-8 sm:w-8 sm:h-8 mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
                 <img itemprop="image" src="{{ Storage::url($logo) }}" alt="{{ 'logo_' . $name }}"
                     class="w-full rounded-full">
             </div>

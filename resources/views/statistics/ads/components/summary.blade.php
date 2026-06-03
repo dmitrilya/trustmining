@@ -1,16 +1,16 @@
 <div
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden">
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 mb-6 sm:mb-8 lg:mb-10">
         <label class="flex cursor-pointer" for="metric_views" @click="changeMetric('views')">
             <input type="radio" :checked="metric == 'views'"
-                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 w-3 h-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
                     {{ __('Views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                         x-text="all_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -26,13 +26,13 @@
 
         <label class="flex cursor-pointer" for="metric_visits" @click="changeMetric('visits')">
             <input type="radio" :checked="metric == 'visits'"
-                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 w-3 h-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
                     {{ __('Visits') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                         x-text="all_visits_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -48,13 +48,13 @@
 
         <label class="flex cursor-pointer" for="metric_phone_views" @click="changeMetric('phone_views')">
             <input type="radio" :checked="metric == 'phone_views'"
-                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 w-3 h-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
                     {{ __('Phone views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                         x-text="all_phone_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -70,13 +70,13 @@
 
         <label class="flex cursor-pointer" for="metric_tracks" @click="changeMetric('tracks')">
             <input type="radio" :checked="metric == 'tracks'"
-                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 w-3 h-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
                     {{ __('Tracks') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                         x-text="all_tracks_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -92,13 +92,13 @@
 
         <label class="flex cursor-pointer" for="metric_chats" @click="changeMetric('chats')">
             <input type="radio" :checked="metric == 'chats'"
-                class="mr-2 size-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
+                class="mr-2 w-3 h-3 text-indigo-500 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">
                     {{ __('Chats') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                         x-text="all_chats_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -115,7 +115,7 @@
         <div>
             <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-500 mb-1 lg:mb-2">CR</div>
             <div class="flex items-end">
-                <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2 lg:mr-3"
+                <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-900 dark:text-slate-100 mr-1 sm:mr-2"
                     x-text="all_cr">
                 </div>
                 <div class="text-xxs lg:text-xs"

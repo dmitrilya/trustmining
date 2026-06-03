@@ -1,10 +1,10 @@
-<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
+<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
     <div class="sticky top-16 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700">
         <div class="py-4 grid grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-1 xs:gap-2">
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 col-start-2"
                 @click="sort('city')">
                 <span class="w-4/5 max-w-max truncate">{{ __('City') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -13,7 +13,7 @@
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 col-span-2"
                 @click="sort('ad')">
                 {{ __('Ad') }}
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -22,7 +22,7 @@
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('views_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Views') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -31,7 +31,7 @@
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('visits_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Visits') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -40,7 +40,7 @@
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('phone_views_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Phone') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -49,7 +49,7 @@
             <div class="hidden md:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('tracks_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Tracks') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -58,7 +58,7 @@
             <div class="hidden lg:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('chats_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Chats') }}</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -67,7 +67,7 @@
             <div class="hidden xl:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
                 @click="sort('cr')">
                 <span class="w-4/5 max-w-max truncate">CR</span>
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 size-3 sm:size-4">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
                     <path
                         d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>

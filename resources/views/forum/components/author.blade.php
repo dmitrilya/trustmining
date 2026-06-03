@@ -1,7 +1,7 @@
 <div itemprop="author" itemscope itemtype="https://schema.org/Person"
     class="mb-2 sm:mb-4{{ isset($sm) ? '' : ' lg:mb-6' }} flex items-center">
     <div
-        class="{{ isset($sm) ? 'win-w-10 size-10 sm:min-w-12 sm:size-12' : 'min-w-12 size-12 sm:min-w-14 sm:size-14 lg:min-w-16 lg:size-16 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
+        class="{{ isset($sm) ? 'win-w-10 w-10 h-10 sm:min-w-12 sm:w-12 sm:h-12' : 'min-w-12 w-12 h-12 sm:min-w-14 sm:w-14 sm:h-14 lg:min-w-16 lg:w-16 lg:h-16 lg:mr-4' }} mr-2 sm:mr-3 rounded-full border border-indigo-500 p-0.5">
         @if (Storage::disk('public')->exists('forum/avatar_' . $id . '_80.webp'))
             <img itemprop="image" src="{{ Storage::url('public/forum/avatar_' . $id . '_80.webp') }}"
                 alt="{{ $name }}" class="w-full rounded-full">
@@ -46,7 +46,7 @@
             class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-700 dark:text-slate-300 font-bold">
             {{ $name }}</h4>
         <div class="flex items-center{{ isset($sm) ? '' : ' xs:mb-0.5' }}" x-data="{ open: false }">
-            <svg class="{{ isset($sm) ? 'size-3 sm:size-4' : 'size-4 sm:size-5' }} text-slate-500" aria-hidden="true"
+            <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-500" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                     d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
@@ -59,7 +59,7 @@
                 <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
                     @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open"
                     @click.away="open = false">
-                    <svg class="size-4 sm:size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -67,9 +67,9 @@
                 </div>
 
                 <div x-show="open" style="display: none"
-                    class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-5 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg z-20">
+                    class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-4 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl z-20">
                     <div class="flex justify-center items-center">
-                        <svg class="{{ isset($sm) ? 'size-3 sm:size-4' : 'size-4 sm:size-5' }} text-slate-500"
+                        <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
@@ -113,7 +113,7 @@
             </div>
         </div>
         <div class="flex items-center">
-            <svg class="{{ isset($sm) ? 'size-3 sm:size-4' : 'size-4 sm:size-5' }} text-slate-500" aria-hidden="true"
+            <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-500" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                     d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />

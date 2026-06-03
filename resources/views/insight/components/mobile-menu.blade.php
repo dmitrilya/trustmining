@@ -7,7 +7,7 @@
         <a href="{{ route('insight.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.index'))
                 @include('insight.svg.home-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -15,7 +15,7 @@
                 </div>
             @else
                 @include('insight.svg.home', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
@@ -26,7 +26,7 @@
         <a href="{{ route('insight.post.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.post.*'))
                 @include('insight.svg.post-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -34,7 +34,7 @@
                 </div>
             @else
                 @include('insight.svg.post', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
@@ -45,7 +45,7 @@
         <a href="{{ route('insight.video.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.video.*'))
                 @include('insight.svg.video-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -53,7 +53,7 @@
                 </div>
             @else
                 @include('insight.svg.video', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
@@ -64,7 +64,7 @@
         <a href="{{ route('insight.subscriptions.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.subscriptions.*'))
                 @include('insight.svg.subscriptions-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -72,7 +72,7 @@
                 </div>
             @else
                 @include('insight.svg.subscriptions', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
@@ -83,7 +83,7 @@
         <a href="{{ route('insight.article.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.article.*'))
                 @include('insight.svg.article-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -91,7 +91,7 @@
                 </div>
             @else
                 @include('insight.svg.article', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
@@ -105,7 +105,7 @@
                 (request()->routeIs('insight.channel.*') && $channel && auth()->check() && auth()->user()->id == $channel->user_id) ||
                     request()->routeIs('insight.channel.create'))
                 @include('insight.svg.channel-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
@@ -113,7 +113,7 @@
                 </div>
             @else
                 @include('insight.svg.channel', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-7 sm:size-9',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
                 ])
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">

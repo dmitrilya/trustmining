@@ -4,9 +4,8 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        "./node_modules/flowbite/**/*.js"
+        '!./resources/views/roadmap.blade.php',
     ],
 
     safelist: ['z-100', 'min-h-[129px]', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full', 'min-h-56', 'min-h-128', 'max-h-96', 'max-h-128', 'group-hover:bg-slate-200', 'w-32', 'max-h-10', 'rounded-2xl', 'text-green-500', 'bg-green-100', 'rounded-full', 'dark:bg-green-800', 'dark:text-green-200', 'text-red-500', 'bg-red-100', 'rounded-full', 'rounded-full'],
@@ -61,6 +60,5 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/aspect-ratio'),
-        require('flowbite/plugin')
     ],
 };

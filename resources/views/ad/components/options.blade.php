@@ -1,6 +1,6 @@
 <div x-data="{ open: false }">
     <button @click="open = ! open" aria-label="Options"
-        class="ml-2 sm:ml-3 inline-flex items-center p-2 text-sm text-center text-slate-950 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-100 focus:ring-inset focus:ring-4 focus:outline-none dark:text-white focus:ring-slate-50 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
+        class="ml-2 sm:ml-3 inline-flex items-center p-2 sm:p-2.5 text-sm text-center text-slate-950 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-100 focus:ring-inset focus:ring-2 focus:outline-none dark:text-white focus:ring-slate-50 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
             <path
                 d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
@@ -16,7 +16,7 @@
                         class="block px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">{{ __('Edit') }}</a>
                 </li>
                 <li
-                    class="flex px-3 py-2 sm:px-4 rounded hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">
+                    class="flex px-3 py-2 sm:px-4 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">
                     <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
                 </li>
             @else

@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-lg p-2 sm:p-4 md:p-6"
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '', changings: [] }">
             <div class="flex justify-between items-center my-6">
                 <div class="relative z-0">
@@ -14,7 +14,7 @@
                         autocomplete="off" :value="search"
                         class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-600 peer" />
                     <label for="asic-model_search-name"
-                        class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-indigo-600 peer-focus:dark:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                                 d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -34,7 +34,7 @@
                     <div x-show="search === '' || '{{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}'.toLowerCase().indexOf(search.toLowerCase()) !== -1"
                         class="grid grid-cols-6 xs:grid-cols-7 xl:grid-cols-8 gap-1 xs:gap-2 sm:gap-3 items-center py-1 sm:py-2 relative ad"
                         data-id="{{ $ad->id }}">
-                        <div class="absolute size-1.5 rounded-full bg-indigo-500 -left-3 top-1/2 -translate-y-1/2"
+                        <div class="absolute w-1.5 h-1.5 rounded-full bg-indigo-500 -left-3 top-1/2 -translate-y-1/2"
                             x-show="changings.find(el => el.id == {{ $ad->id }})" x-cloak></div>
                         <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-1">
                             {{ $ad->office->city }}
@@ -62,7 +62,7 @@
                         <div class="col-span-2">
                             <div class="flex items-center">
                                 <x-text-input autocomplete="price"
-                                    class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-sm sm:rounded-md !px-2"
+                                    class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-md !px-2"
                                     id="price" name="price" type="number" required value="{{ $ad->price }}"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
                                     let index = changings.findIndex(el => el.id == id);

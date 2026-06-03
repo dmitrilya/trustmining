@@ -7,11 +7,11 @@
     @endif
 
     <div
-        class="border border-slate-300 dark:border-slate-700 shadow-md shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
+        class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
         <div class="flex justify-between items-start mb-1 sm:mb-2">
             <div class="flex items-center">
                 @if ($user->company->logo)
-                    <img itemprop="logo" class="rounded-full mr-2 sm:mr-3 size-12 sm:size-14 lg:size-16"
+                    <img itemprop="logo" class="rounded-full mr-2 sm:mr-3 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
                         src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }} logo">
                 @endif
 
@@ -30,7 +30,7 @@
 
             <div class="flex items-center ml-4">
                 <a href="{{ route('chat.start', ['user' => $user->id]) }}" aria-label="Contact" target="_blank">
-                    <svg class="size-5 sm:size-6 lg:size-7 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                         aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M7 9h5m3 0h2M7 12h2m3 0h5M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.616a1 1 0 0 0-.67.257l-2.88 2.592A.5.5 0 0 1 8 18.477V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
@@ -38,8 +38,8 @@
                 </a>
 
                 {{-- @if ($user->company->site)
-                    <a href="{{ $user->company->site }}" aria-label="Site link" class="ml-2 lg:ml-3">
-                        <svg class="size-4 sm:size-5 lg:size-6 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                    <a href="{{ $user->company->site }}" aria-label="Site link" class="ml-2 sm:ml-3">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
@@ -49,14 +49,14 @@
                 @endif --}}
 
                 <button aria-label="Share"
-                    class="ml-2 lg:ml-3 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                    class="ml-2 sm:ml-3 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                     @click="navigator.share({
                             title: '{{ __('Company') . ' ' . $user->name }}',
                             description: 'Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING',
                             image: '{{ Storage::disk('public')->url($user->company->logo) }}',
                             url: '{{ url()->current() }}' + '?utm_source=share_button&utm_campaign=content_propagation&utm_medium=company&utm_content={{ $user->company->id }}'
                         });">
-                    <svg class="size-5 sm:size-6 lg:size-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="m15.141 6 5.518 4.95a1.05 1.05 0 0 1 0 1.549l-5.612 5.088m-6.154-3.214v1.615a.95.95 0 0 0 1.525.845l5.108-4.251a1.1 1.1 0 0 0 0-1.646l-5.108-4.251a.95.95 0 0 0-1.525.846v1.7c-3.312 0-6 2.979-6 6.654v1.329a.7.7 0 0 0 1.344.353 5.174 5.174 0 0 1 4.652-3.191l.004-.003Z" />
@@ -78,13 +78,13 @@
 
         <div class="flex items-center mt-2 sm:mt-3">
             <div
-                class="trust mr-1 sm:mr-2 size-3 md:size-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
+                class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
             </div>
             <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Trust Factor</p>
         </div>
 
         <div itemprop="description"
-            class="ql-editor mt-3 sm:mt-4 lg:mt-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">
+            class="ql-editor mt-3 sm:mt-4 lg:mt-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">
             {!! $user->company->description !!}</div>
 
         @if (!request()->routeIs('company.about'))

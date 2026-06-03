@@ -8,7 +8,7 @@
         <a href="{{ route('insight.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.home-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -18,7 +18,7 @@
     @else
         <a href="{{ route('insight.index') }}" class="flex items-center group px-3 py-2">
             @include('insight.svg.home', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -31,7 +31,7 @@
         <a href="{{ route('insight.post.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.post-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -41,7 +41,7 @@
     @else
         <a href="{{ route('insight.post.index') }}" class="flex items-center group px-3 py-2">
             @include('insight.svg.post', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -54,7 +54,7 @@
         <a href="{{ route('insight.video.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.video-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -64,7 +64,7 @@
     @else
         <a href="{{ route('insight.video.index') }}" class="flex items-center group px-3 py-2">
             @include('insight.svg.video', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -77,7 +77,7 @@
         <a href="{{ route('insight.subscriptions.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.subscriptions-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -87,7 +87,7 @@
     @else
         <a href="{{ route('insight.subscriptions.index') }}" class="flex items-center group px-3 py-2">
             @include('insight.svg.subscriptions', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -100,7 +100,7 @@
         <a href="{{ route('insight.article.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.article-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -110,7 +110,7 @@
     @else
         <a href="{{ route('insight.article.index') }}" class="flex items-center group px-3 py-2">
             @include('insight.svg.article', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -129,7 +129,7 @@
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
             @include('insight.svg.channel-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
             ])
 
             <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -140,7 +140,7 @@
         <a @if (auth()->check()) href="{{ auth()->user()->channel ? route('insight.channel.show', ['channel' => auth()->user()->channel->slug]) : route('insight.channel.create') }}" @else href="#" @click="$dispatch('open-modal', 'login')" @endif
             class="flex items-center group px-3 py-2">
             @include('insight.svg.channel', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
             ])
 
             <div
@@ -159,7 +159,7 @@
             x-data="{ open: false }">
             <div class="flex items-center" @click="open = !open">
                 <svg :class="open ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400'"
-                    class="stroke-slate-400 dark:stroke-slate-600 size-6" aria-hidden="true"
+                    class="stroke-slate-400 dark:stroke-slate-600 w-6 h-6" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
@@ -184,7 +184,7 @@
 
         <div class="px-3 py-2 cursor-pointer group">
             <div class="flex items-center" @click="$dispatch('open-modal', 'series-creation')">
-                <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6"
+                <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                     viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -203,7 +203,7 @@
             <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
                 @include('insight.svg.statistics-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 size-6',
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
                 ])
 
                 <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -214,7 +214,7 @@
             <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group px-3 py-2">
                 @include('insight.svg.statistics', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 size-6',
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
                 ])
 
                 <div

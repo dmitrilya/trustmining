@@ -61,9 +61,9 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
             <h1
-                class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+                class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
                 {{ __($subcategory->name) }}
             </h1>
 
@@ -103,7 +103,7 @@
             </div>
 
             @if ($questions->hasPages())
-                <div class="mt-8 sm:mt-12 lg:mt-16">
+                <div class="mt-8 sm:mt-12 lg:mt-14">
                     {{ $questions->links() }}
                 </div>
             @endif

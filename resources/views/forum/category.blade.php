@@ -47,9 +47,9 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5 xl:gap-7">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
             <h2
-                class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+                class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
                 {{ __('New posts') }}
             </h2>
 
@@ -90,8 +90,8 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-lg">
-            <h2 class="mb-1 sm:mb-3 lg:mb-5 p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
+            <h2 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6">
                 <a href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
                     class="xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
                     {{ __($category->name) }}
@@ -106,7 +106,7 @@
                             class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-slate-200 dark:hover:bg-slate-950 flex items-center justify-between">
                             <div class="flex items-center">
                                 <div
-                                    class="mr-3 sm:mr-4 size-6 min-w-6 xs:size-8 xs:min-w-8 sm:size-10 sm:min-w-10 lg:size-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
+                                    class="mr-3 sm:mr-4 w-6 h-6 min-w-6 xs:w-8 xs:h-8 xs:min-w-8 sm:w-10 sm:h-10 sm:min-w-10 lg:w-12 lg:h-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
                                     @include('forum.components.svg.' . $subcategory->slug, [
                                         'class' =>
                                             'text-slate-500 dark:text-slate-500 group-hover:text-slate-900 dark:group-hover:text-slate-100',

@@ -7,7 +7,7 @@
     <div class="space-y-2">
         <a href="{{ route('ads', ['adCategory' => 'miners']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.miner', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -20,7 +20,7 @@
         </a>
         <a href="{{ route('hostings') }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.hosting', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -33,7 +33,7 @@
         </a>
         <a href="{{ route('services') }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.service', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -46,7 +46,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'legals']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.legal', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -59,7 +59,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'containers']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.container', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -72,7 +72,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.noisebox', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -85,7 +85,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.cryptoboiler', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -98,7 +98,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.water_cooling_plate', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -111,7 +111,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'gpus']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.gpu', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -124,7 +124,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'firmwares']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.firmware', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -137,7 +137,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'monitorings']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.monitoring', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -150,7 +150,7 @@
         </a>
         <a href="{{ route('cryptoexchangers') }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.cryptoexchanger', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
@@ -163,7 +163,7 @@
         </a>
         <a href="{{ route('ads', ['adCategory' => 'accessories']) }}" class="flex items-center group">
             {{-- <div
-                class="mr-4 size-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
+                class="mr-4 w-6 h-6 rounded-full group-hover:shadow-lg shadow-logo-color flex items-center justify-center">
                 @include('layouts.components.svg.accessories', [
                     'class' =>
                         'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100',
