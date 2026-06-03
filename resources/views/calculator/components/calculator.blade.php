@@ -58,7 +58,8 @@
                                         <a :href="'/asic-miners/' + version.brand_slug + '/' + version.model_slug + '/reviews'"
                                             class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                             <span x-text="version.reviews_count"></span>
-                                            <span x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
+                                            <span
+                                                x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -204,12 +205,14 @@
                                                     '/reviews'"
                                                     class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                                                     <span x-text="version.reviews_count"></span>
-                                                    <span x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
+                                                    <span
+                                                        x-text="window.pluralize(version.reviews_count, '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
                                                 </a>
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-1.5" style="min-height: 120px">
+                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-1.5"
+                                        style="min-height: 120px">
                                         <x-characteristics>
                                             <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                             <x-characteristic name="Efficiency"
@@ -254,14 +257,8 @@
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
                                 @click="profitNumber = i, fee = profit.coins[0].fee;">
-                                <div>
-                                    <label class="flex items-center">
-                                        <input type="radio" name="profitNumber" :value="i"
-                                            :aria-label="'{{ __('Change calculation to') }}' + ' ' + profit.coins[0].name"
-                                            :checked="profitNumber == i"
-                                            class="mr-2 w-3 h-3 sm:w-4 sm:h-4 text-indigo-600 bg-slate-100 border-slate-300 focus:ring-0 dark:bg-slate-800 dark:border-slate-700 cursor-pointer">
-                                    </label>
-                                </div>
+                                <x-radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${profit.coins[0].name}`" />
+
                                 <template x-for="coin in profit.coins" :key="coin.abbreviation">
                                     <div>
                                         <div class="flex items-center">
