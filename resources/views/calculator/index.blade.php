@@ -1,7 +1,15 @@
-<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность и окупаемость' .
-    ($rModel ? ($rVersion ? $selModel['name'] . ' ' . $selVersion['hashrate'] : $selModel['name']) : 'ASIC')" :description="'Рассчитать доход, расход, прибыль и окупаемость асиков' .
-    ($rModel ? ($rVersion ? ' ' . $selModel['name'] . ' ' . $selVersion['hashrate'] : ' ' . $selModel['name']) : '') .
-    ' в удобном калькуляторе доходности асиков'"
+<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность и окупаемость ' .
+    ($rModel
+        ? ($rVersion
+            ? $selModel['name'] . ' ' . $selVersion['hashrate'] . $selVersion['measurement']
+            : $selModel['name'])
+        : 'ASIC') .
+    ' | TRUSTMINING'" :description="($rModel
+    ? ($rVersion
+        ? 'Узнайте, сколько приносит ' . $selModel['name'] . ' ' . $selVersion['hashrate'] . $selVersion['measurement'] . ' сегодня. '
+        : 'Узнайте, сколько приносит ' . $selModel['name'] . ' сегодня. ')
+    : '') .
+    'Рассчитайте доход, расход, прибыль и срок окупаемости асиков в онлайн калькуляторе доходности майнинга'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
             'asicModel' => $selVersion['model_slug'],
@@ -11,7 +19,7 @@
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Mining calculator') }} @if ($rModel)
-                <span class="hidden xs:inline">{{ $selModel['name']}}</span>
+                <span class="hidden xs:inline">{{ $selModel['name'] }}</span>
             @endif
         </h1>
     </x-slot>

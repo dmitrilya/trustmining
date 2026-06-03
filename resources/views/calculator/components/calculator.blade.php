@@ -48,7 +48,7 @@
             @if (in_array('characteristics', $blocks))
                 <div class="hidden md:block">
                     <template x-if="version !== null">
-                        <div class="mt-6 sm:mt-8 lg:mt-10">
+                        <div class="mt-8 lg:mt-10">
                             @if (!$widjet)
                                 <div class="mt-6">
                                     <h2 class="sr-only">{{ __('Reviews') }}</h2>
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="mt-5 space-y-1 sm:space-y-2" style="min-height: 152px">
+                            <div class="mt-5 space-y-2" style="min-height: 152px">
                                 <x-characteristics>
                                     <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                     <x-characteristic name="Efficiency"
@@ -76,7 +76,7 @@
                                     <x-characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
                                 </x-characteristics>
                                 @if (!$widjet)
-                                    <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
+                                    <a class="block mt-6 ml-auto w-fit text-sm text-indigo-500 hover:text-indigo-600"
                                         x-bind:href="version ?
                                             '/asic-miners/{{ $selVersion['brand_slug'] }}/' +
                                             version.model_slug + '/' +
@@ -87,7 +87,7 @@
                             </div>
                             @if (!$widjet)
                                 <template x-if="version.ads_count">
-                                    <a class="pt-3 sm:pt-4 lg:pt-6 w-fit"
+                                    <a class="mt-4 lg:mt-6 w-fit"
                                         x-bind:href="version ? '/ads/miners?model=' + version.model_slug : ' # '">
                                         <x-primary-button
                                             class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
@@ -105,7 +105,7 @@
             @if (in_array('currency', $blocks))
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
                     <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
-                        {{ __('Calculation result') }}</h2>
+                        {{ __('Profit calculation') }}</h2>
                     <div class="flex cursor-pointer mx-3">
                         <button
                             :class="{
@@ -154,7 +154,7 @@
                             </div>
 
                             <div>
-                                <div class="flex justify-between text-xs font-bold uppercase">
+                                <div class="flex justify-between text-xs font-extrabold uppercase">
                                     <span class="text-emerald-500">{{ __('Income') }}</span>
                                     <span class="text-red-700 dark:text-red-500">{{ __('Expense') }}</span>
                                 </div>
@@ -180,17 +180,20 @@
                         <div class="text-xxs text-slate-500 mt-3">
                             *{{ __('The data is current at the time of calculation. The cryptocurrency market is volatile, and figures are subject to change') }}
                         </div>
-                        <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
-                            {{ __('Payback') }}:
-                            <span class="text-slate-900 dark:text-slate-100 font-bold"
+                        <div class="flex text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
+                            <h3>{{ __('Payback period') }}</h3>:
+                            <span class="ml-1 text-slate-900 dark:text-slate-100 font-bold"
                                 x-text="version.price ? dailyProfitUSDT > 0 ? Math.round(version.price / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                        </div>
+                        <div class="text-xxs text-slate-500 mt-2">
+                            *{{ __('The best offer at the moment is used for payback calculation') }}
                         </div>
                     @endif
 
                     @if (in_array('characteristics', $blocks))
                         <div class="md:hidden">
                             <template x-if="version !== null">
-                                <div class="mt-6 sm:mt-8 lg:mt-10">
+                                <div class="mt-6 sm:mt-8">
                                     @if (!$widjet)
                                         <div class="mt-6">
                                             <h2 class="sr-only">{{ __('Reviews') }}</h2>
@@ -232,7 +235,7 @@
 
                                     @if (!$widjet)
                                         <template x-if="version.ads_count">
-                                            <a class="pt-3 xs:pt-4 sm:pt-5 lg:pt-6 w-fit"
+                                            <a class="mt-3 xs:mt-4 sm:mt-5 w-fit"
                                                 x-bind:href="version ? '/ads/miners?model=' + version.model_slug : ' # '">
                                                 <x-primary-button
                                                     class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
@@ -245,8 +248,8 @@
                     @endif
 
                     @if (in_array('coins', $blocks))
-                        <p class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
-                            {{ __('Coins per day') }}</p>
+                        <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
+                            {{ __('How many coins does it mine per day') }}</h2>
 
                         <template x-for="(profit, i) in version.profits" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
