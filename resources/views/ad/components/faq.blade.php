@@ -52,7 +52,7 @@
                 <div itemprop="text"
                     class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     На новое оборудование действует официальная гарантия производителя. Вы можете <a target="_blank"
-                        href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600 under>проверить
+                        href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600 under">проверить
                         остаток
                         гарантии по S/N</a>. Уточните у <b>{{ $ad->user->name }}</b> возможность оформления расширенной
                     гарантии от их сервиса.

@@ -3,7 +3,7 @@
     @csrf
 
     <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
-        class="py-2 flex items-end overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus-within:ring-1 focus-within:ring-indigo-500 pr-2">
+        class="p-2 sm:px-4 flex items-end overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus-within:ring-1 focus-within:ring-indigo-500">
         <textarea name="text" x-model="text" rows="1" placeholder="{{ __('Your comment...') }}" x-data="{
             resize() {
                 $el.style.height = '0px';
