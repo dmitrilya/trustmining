@@ -100,8 +100,8 @@ class OfficeController extends Controller
         ]);
 
         $time = time();
-        $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null]);
-        $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159]);
+        $office->images = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null], $user->name);
+        $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159], $user->name);
         $office->save();
 
         $office->moderations()->create(['data' => $office->attributesToArray()]);
@@ -145,8 +145,8 @@ class OfficeController extends Controller
 
         if ($request->images) {
             $time = time();
-            $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null]);
-            $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159]);
+            $data['images'] = $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [608, null], $user->name);
+            $this->saveFiles($request->file('images'), 'offices', 'photo', $office->id, $time, [212, 159], $user->name);
         }
 
         if (!empty($data)) $office->moderations()->create(['data' => $data]);

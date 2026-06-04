@@ -11,7 +11,7 @@ use App\Models\Ad\Hosting;
 
 trait FileTrait
 {
-    public function saveFiles($files, $folder, $type, $id, $time, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFiles($files, $folder, $type, $id, $time, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
     {
         $result = [];
 
@@ -22,7 +22,7 @@ trait FileTrait
                 $ext = ($file instanceof \Illuminate\Http\UploadedFile)
                     ? $file->getClientOriginalExtension()
                     : $file->extension();
-                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push(
@@ -53,7 +53,7 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, $id, $time, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFile($file, $folder, $type, $id, $time, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
     {
         $filename = $type . '_' . $id;
         if ($time) $filename .= '_' . $time;
@@ -61,13 +61,13 @@ trait FileTrait
         $ext = ($file instanceof \Illuminate\Http\UploadedFile)
             ? $file->getClientOriginalExtension()
             : $file->extension();
-        if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
+        if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
         else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName($files, $folder, $type, $id, $resize = null, $quality = 70, $disk = 'public')
+    public function saveFilesWithName($files, $folder, $type, $id, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
     {
         $result = [];
 
@@ -81,7 +81,7 @@ trait FileTrait
                 $ext = ($file instanceof \Illuminate\Http\UploadedFile)
                     ? $file->getClientOriginalExtension()
                     : $file->extension();
-                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality);
+                if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
                 array_push($result, array(
@@ -110,7 +110,7 @@ trait FileTrait
         return $files;
     }
 
-    private function compress($file, $disk, $folder, $filename, $resize, $quality)
+    private function compress($file, $disk, $folder, $filename, $resize, $quality, $watermark)
     {
         $info = getimagesize($file->getPathName());
 
@@ -119,34 +119,34 @@ trait FileTrait
         elseif ($info['mime'] == 'image/webp') $image = imagecreatefromwebp($file->getPathName());
 
         if (isset($image)) {
+            $w = $info[0];
+            $h = $info[1];
+
             if ($resize) {
                 [$destW, $destH] = is_array($resize) ? $resize : [$resize, $resize];
 
-                $srcW = $info[0];
-                $srcH = $info[1];
-
                 if (is_array($resize) && (is_null($destW) || is_null($destH))) {
-                    if (is_null($destH)) $destH = (int)($destW * $srcH / $srcW);
-                    else $destW = (int)($destH * $srcW / $srcH);
+                    if (is_null($destH)) $destH = (int)($destW * $h / $w);
+                    else $destW = (int)($destH * $w / $h);
 
-                    $minSideW = $srcW;
-                    $minSideH = $srcH;
+                    $minSideW = $w;
+                    $minSideH = $h;
                     $x = 0;
                     $y = 0;
                 } else {
-                    $aspectSrc = $srcW / $srcH;
+                    $aspectSrc = $w / $h;
                     $aspectDest = $destW / $destH;
 
                     if ($aspectSrc > $aspectDest) {
-                        $minSideW = $srcH * $aspectDest;
-                        $minSideH = $srcH;
-                        $x = ($srcW - $minSideW) / 2;
+                        $minSideW = $h * $aspectDest;
+                        $minSideH = $h;
+                        $x = ($w - $minSideW) / 2;
                         $y = 0;
                     } else {
-                        $minSideW = $srcW;
-                        $minSideH = $srcW / $aspectDest;
+                        $minSideW = $w;
+                        $minSideH = $w / $aspectDest;
                         $x = 0;
-                        $y = ($srcH - $minSideH) / 2;
+                        $y = ($h - $minSideH) / 2;
                     }
                 }
 
@@ -158,8 +158,12 @@ trait FileTrait
 
                 imagecopyresampled($dest, $image, 0, 0, (int)$x, (int)$y, $destW, $destH, (int)$minSideW, (int)$minSideH);
 
+                $w = $destW;
+                $h = $destH;
                 $image = $dest;
             }
+
+            if ($watermark) $this->addWatermark($image, $w, $h, $watermark);
 
             imagepalettetotruecolor($image);
 
@@ -171,5 +175,26 @@ trait FileTrait
         }
 
         return false;
+    }
+
+    private function addWatermark($image, $w, $h, $watermark)
+    {
+        info($watermark);
+        $textColor = imagecolorallocatealpha($image, 255, 255, 255, 80);
+        $fontSize = max(10, min(20, $w / 50));
+        $font = public_path('fonts/Nunito-ExtraBold.ttf');
+        $angle = 0;
+
+        $textBox = imagettfbbox($fontSize, $angle, $font, 'TRUSTMINING');
+        $textHeight = abs($textBox[5] - $textBox[3]);
+        $posX = 30;
+        $posY = 30 + $textHeight;
+        imagettftext($image, $fontSize, $angle, $posX, $posY, $textColor, $font, 'TRUSTMINING');
+
+        $textBox = imagettfbbox($fontSize, $angle, $font, "$watermark");
+        $textWidth = abs($textBox[2] - $textBox[0]);
+        $posX = $w - $textWidth - 30;
+        $posY = $h - 30;
+        imagettftext($image, $fontSize, $angle, $posX, $posY, $textColor, $font, "$watermark");
     }
 }

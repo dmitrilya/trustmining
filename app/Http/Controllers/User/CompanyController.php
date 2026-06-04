@@ -126,7 +126,7 @@ class CompanyController extends Controller
         $time = time();
 
         if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'companies', 'image', $company->id, $time, [608, null]);
+            $data['images'] = $this->saveFiles($request->file('images'), 'companies', 'image', $company->id, $time, [608, null], $user->name);
 
         if ($request->logo)
             $data['logo'] = $this->saveFile($request->file('logo'), 'companies', 'logo', $company->id, $time, 80);

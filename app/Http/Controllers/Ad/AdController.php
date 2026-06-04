@@ -137,10 +137,10 @@ class AdController extends Controller
         ]);
 
         $time = time();
-        $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null]);
-        $ad->preview = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null]);
-        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240]);
-        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168]);
+        $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null], $user->name);
+        $ad->preview = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null], $user->name);
+        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240], $user->name);
+        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168], $user->name);
 
         $ad->save();
 
@@ -312,12 +312,12 @@ class AdController extends Controller
 
         $time = time();
         if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null]);
+            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null], $ad->user->name);
 
         if ($request->preview) {
-            $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null]);
-            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240]);
-            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168]);
+            $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null], $ad->user->name);
+            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240], $ad->user->name);
+            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168], $ad->user->name);
         }
 
         if ($request->price != $ad->price || $request->coin_id != $ad->coin_id || $request->filled('with_vat') != $ad->with_vat) {

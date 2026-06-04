@@ -34,11 +34,11 @@ class ArticleService extends ContentService
         ]);
 
         $time = time();
-        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 85);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], 85);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
+        $article->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255], $channel->name);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213], $channel->name);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144], $channel->name);
         $article->save();
 
         if ($data['series_id']) $article->series()->attach($data['series_id']);
@@ -69,11 +69,11 @@ class ArticleService extends ContentService
         if ($content != $article->content) $changings['content'] = $content;
         if ($data['preview']) {
             $time = time();
-            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], 85);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], 85);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255]);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213]);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144]);
+            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [928, 696], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [400, 300], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [340, 255], $channel->name);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [284, 213], $channel->name);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'article_preview', $article->id, $time, [192, 144], $channel->name);
         }
         if (count(array_diff($article->tags, $data['tags'])) || count(array_diff($data['tags'], $article->tags))) $changings['tags'] = $data['tags'];
 

@@ -106,9 +106,9 @@ class HostingController extends Controller
         ]);
 
         $time = time();
-        $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
-        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [400, 300]);
-        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [224, 168]);
+        $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null], $user->name);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [400, 300], $user->name);
+        $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [224, 168], $user->name);
         if ($request->contract) $hosting->contract = $this->saveContract($request->file('contract'), 'hostings', $hosting);
         if ($request->territory) $hosting->territory = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
         if ($request->energy_supply) $hosting->energy_supply = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
@@ -172,9 +172,9 @@ class HostingController extends Controller
         $time = time();
 
         if ($request->images) {
-            $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null]);
-            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [400, 300]);
-            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [224, 168]);
+            $data['images'] = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null], $user->name);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [400, 300], $user->name);
+            $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [224, 168], $user->name);
         }
 
         if ($request->contract) $data['contract'] = $this->saveContract($request->file('contract'), 'hostings', $hosting);
