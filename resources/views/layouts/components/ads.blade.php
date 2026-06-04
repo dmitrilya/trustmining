@@ -19,7 +19,7 @@
         class="w-full absolute z-50 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-xl border border-t-0 border-slate-300 dark:border-slate-700 origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
         <div
-            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:pb-10 lg:px-8 lg:pt-8 xl:pb-14 xl:px-12 xl:pt-12">
+            class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 xl:p-14">
             <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                 @include('layouts.components.ad-categories')
             </div>
