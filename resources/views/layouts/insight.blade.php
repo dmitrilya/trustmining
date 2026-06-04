@@ -70,7 +70,7 @@
                 {{ $slot }}
             </div>
 
-            <div class="hidden lg:flex flex-col lg:col-span-3 gap-4">
+            <div class="hidden lg:flex flex-col h-full lg:col-span-3 gap-4">
                 @include('insight.components.top-channels')
 
                 <div id="toc-lg-container"></div>
