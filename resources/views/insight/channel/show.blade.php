@@ -61,7 +61,7 @@
                     {{ __('Articles') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm>
+                <div class="flex text-xs s m:text-sm">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
                             'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
@@ -114,7 +114,7 @@
                     {{ __('Posts') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm>
+                <div class="flex text-xs s m:text-sm">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
                             'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
@@ -167,7 +167,7 @@
                     {{ __('Videos') }}
                 </h2>
 
-                <div class="flex text-xs sm:text-sm>
+                <div class="flex text-xs s m:text-sm">
                     <button @click="tab = 'latest'"
                         :class="tab === 'latest' ?
                             'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :

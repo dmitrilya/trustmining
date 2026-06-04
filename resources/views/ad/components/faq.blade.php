@@ -142,7 +142,7 @@
                         {{ $ad->user->hosting->address }}. Тарифы начинаются от
                         <br><b>{{ $ad->user->hosting->price }}р за кВт/ч</b>. Ознакомьтесь с <a
                             href="{{ route('company.hosting', ['user' => $ad->user->slug]) }}"
-                            class="inline text-indigo-500 hover:text-indigo-600 under" target="_blank">информацией о хостинге
+                            class="inline text-indigo-500 hover:text-indigo-600" target="_blank">информацией о хостинге
                             компании
                             {{ $ad->user->name }}</a>
                     </div>
