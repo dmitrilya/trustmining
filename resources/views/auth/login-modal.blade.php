@@ -62,18 +62,14 @@
                 @endif
             </div>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded-md dark:bg-slate-950 border-slate-300 dark:border-slate-800 text-indigo-500 shadow-sm shadow-logo-color focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-slate-900"
-                        name="remember">
-                    <span class="ml-2 text-sm text-slate-600 dark:text-slate-400">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+            <x-checkbox class="block mt-4" textClasses="text-slate-600 dark:text-slate-400" name="remember"
+                value="with_vat">
+                {{ __('Remember me') }}
+            </x-checkbox>
 
             <div class="flex items-center justify-end mt-4">
                 <button type="button" @click="show = false; $dispatch('open-modal', 'register');"
-                    class="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-900">
+                    class="text-sm text-slate-800 dark:text-slate-200 under">
                     {{ __('Register') }}
                 </button>
 

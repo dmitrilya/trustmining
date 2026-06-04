@@ -35,9 +35,12 @@ class SeriesController extends Controller
     {
         $this->service->store($channel, $request->name, $request->description);
 
+        Redirect::to('/')
+            ->withErrors(['success' => __('Series created successfully')])
+            ->sendHeaders();
+
         return response()->json([
             'success' => true,
-            'message' => __('Series created successfully')
         ]);
     }
 

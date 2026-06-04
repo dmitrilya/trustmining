@@ -26,7 +26,10 @@
                 axios.post($el.action, new FormData($el), {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 }).then(r => {
-                    if (r.data.success) window.location.href = r.data.redirect;
+                    if (r.data.success) {
+                        if (r.data.redirect) window.location.href = r.data.redirect;
+                        else window.location.reload();
+                    }
                 }).catch(err => {
                     loading = false;
                     if (err.response && err.response.status === 422) validation = err.response.data.errors;

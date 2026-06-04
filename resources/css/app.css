@@ -118,7 +118,8 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input:focus-visible, textarea:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
     outline: 2px solid transparent;
     outline-offset: 2px;
     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
@@ -233,24 +234,27 @@ a {
     text-decoration: none;
     display: block;
     position: relative;
+}
 
-    &.under {
-        &:after {
-            display: block;
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 0;
-            height: 1.2px;
-            background-color: currentColor;
-            content: "";
-            transition: width 0.3s ease-out;
-        }
+a.under,
+button.under {
+    position: relative;
 
-        &:hover:after,
-        &:focus:after {
-            width: 100%;
-        }
+    &:after {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 1.2px;
+        background-color: currentColor;
+        content: "";
+        transition: width 0.3s ease-out;
+    }
+
+    &:hover:after,
+    &:focus:after {
+        width: 100%;
     }
 }
 
