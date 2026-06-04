@@ -181,20 +181,20 @@ trait FileTrait
     {
         info($watermark);
         $textColor = imagecolorallocatealpha($image, 255, 255, 255, 80);
-        $fontSize = max(10, min(20, $w / 50));
+        $fontSize = max(8, min(20, $w / 50));
         $font = public_path('fonts/Nunito-ExtraBold.ttf');
         $angle = 0;
 
         $textBox = imagettfbbox($fontSize, $angle, $font, 'TRUSTMINING');
         $textHeight = abs($textBox[5] - $textBox[3]);
-        $posX = 30;
-        $posY = 30 + $textHeight;
+        $posX = $w / 30;
+        $posY = $w / 30 + $textHeight;
         imagettftext($image, $fontSize, $angle, $posX, $posY, $textColor, $font, 'TRUSTMINING');
 
         $textBox = imagettfbbox($fontSize, $angle, $font, "$watermark");
         $textWidth = abs($textBox[2] - $textBox[0]);
-        $posX = $w - $textWidth - 30;
-        $posY = $h - 30;
+        $posX = $w - $textWidth - $w / 30;
+        $posY = $h - $w / 30;
         imagettftext($image, $fontSize, $angle, $posX, $posY, $textColor, $font, "$watermark");
     }
 }

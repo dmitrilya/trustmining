@@ -33,9 +33,9 @@ class PostService extends ContentService
         $time = time();
         $post->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, 696], $channel->name, 85);
         $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [400, 300], $channel->name, 85);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255], $channel->name);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213], $channel->name);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144], $channel->name);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144], $channel->name, 85);
         $post->save();
 
         if ($data['series_id']) $post->series()->attach($data['series_id']);
@@ -66,9 +66,9 @@ class PostService extends ContentService
             $time = time();
             $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [928, 696], $channel->name, 85);
             $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [400, 300], $channel->name, 85);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255], $channel->name);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213], $channel->name);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144], $channel->name);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [340, 255], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [284, 213], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'post_preview', $post->id, $time, [192, 144], $channel->name, 85);
         }
 
         if ($data['series_id']) $post->series()->sync([$data['series_id']]);

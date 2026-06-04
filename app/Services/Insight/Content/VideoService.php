@@ -28,9 +28,9 @@ class VideoService extends ContentService
         ]);
 
         $time = time();
-        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255], $channel->name);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213], $channel->name);
-        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144], $channel->name);
+        $video->preview = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213], $channel->name, 85);
+        $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144], $channel->name, 85);
 
         if ($data['series_id']) $video->series()->attach($data['series_id']);
 
@@ -54,9 +54,9 @@ class VideoService extends ContentService
         if ($data['title'] != $video->title) $changings['title'] = $data['title'];
         if ($data['preview']) {
             $time = time();
-            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255], $channel->name);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213], $channel->name);
-            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144], $channel->name);
+            $changings['preview'] = $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [340, 255], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [284, 213], $channel->name, 85);
+            $this->saveFile($data['preview'], 'insight/' . $channel->slug, 'video_preview', $video->id, $time, [192, 144], $channel->name, 85);
         }
 
         if ($data['series_id']) $video->series()->sync([$data['series_id']]);
