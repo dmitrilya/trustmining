@@ -179,7 +179,6 @@ trait FileTrait
 
     private function addWatermark($image, $w, $h, $watermark)
     {
-        info($watermark);
         $textColor = imagecolorallocatealpha($image, 255, 255, 255, 110);
         $fontSize = max(8, min(20, $w / 50));
         $font = public_path('fonts/Nunito-ExtraBold.ttf');

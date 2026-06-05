@@ -45,11 +45,11 @@
                     <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion->id, $versions->pluck('id')->toArray()) }} }">
                         <div
                             class="text-xs font-semibold text-center text-slate-600 dark:text-slate-300 border-b-2 border-slate-300 dark:border-slate-700">
-                            <ul class="flex -mb-px overflow-x-auto no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
+                            <ul
+                                class="flex -mb-px overflow-x-auto no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
                                 @foreach ($versions as $i => $version)
                                     <li class="mr-1 sm:mr-2 -mb-[1px]">
-                                        <button
-                                            class="inline-block p-1 xs:p-2 border-b-2 rounded-t-lg"
+                                        <button class="inline-block p-1 xs:p-2 border-b-2 rounded-t-lg"
                                             @click="selectedTab = {{ $i }}"
                                             :class="{
                                                 'border-transparent hover:text-slate-600 dark:hover:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600': {{ $i }} !=
@@ -171,20 +171,22 @@
 
                                 <div class="grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                                     @foreach ($algorithm->coins->where('profit', '>', 0) as $coin)
-                                        <div class="flex items-center">
-                                            <img alt="{{ $coin->name }}" class="w-6 sm:w-7 mr-2"
-                                                src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
-                                            <div>
-                                                <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-500">
-                                                    {{ $coin->abbreviation }}
+                                        <div>
+                                            <div class="flex items-center">
+                                                <img alt="{{ $coin->name }}" class="w-5 sm:w-6 mr-1 xs:mr-2"
+                                                    src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
+                                                <div>
+                                                    <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400">
+                                                        {{ $coin->abbreviation }}
+                                                    </div>
+                                                    <div class="text-xxs xs:text-xs text-slate-500">
+                                                        {{ $coin->name }}
+                                                    </div>
                                                 </div>
-                                                <div class="text-xxs xs:text-xs text-slate-400 dark:text-slate-300">
-                                                    {{ $coin->name }}
-                                                </div>
-                                                <div
-                                                    class="mt-1 text-xxs xs:text-xs text-sm text-slate-600 dark:text-slate-400">
-                                                    {{ number_format($version->hashrate * $coin->profit, 8) }}
-                                                </div>
+                                            </div>
+                                            <div
+                                                class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1">
+                                                {{ number_format($version->hashrate * $coin->profit, 8) }}
                                             </div>
                                         </div>
                                     @endforeach

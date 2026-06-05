@@ -264,17 +264,16 @@
                                         <div class="flex items-center">
                                             <img :src="'/storage/coins/' + coin.abbreviation + '.webp'"
                                                 :alt="'{{ __('Calculator') }} ' + coin.name"
-                                                class="w-3 xs:w-4 sm:w-5 mr-1 xs:mr-2">
+                                                class="w-5 xs:w-6 mr-1 xs:mr-2">
                                             <div>
-                                                <div class="text-xxs xs:text-xs text-slate-600 dark:text-slate-300"
+                                                <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400"
                                                     x-text="coin.abbreviation">
                                                 </div>
-                                                <div class="text-xxs xs:text-xs text-slate-500 dark:text-slate-400"
-                                                    x-text="coin.name">
+                                                <div class="text-xxs xs:text-xs text-slate-500" x-text="coin.name">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="text-xxs xs:text-xs text-slate-700 dark:text-slate-200 font-bold mt-1"
+                                        <div class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1"
                                             x-text="version ? Math.round(version.hashrate * coin.profit * version.coef * 100000000) / 100000000 : 0">
                                         </div>
                                     </div>
