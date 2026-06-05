@@ -173,7 +173,7 @@
                                     @foreach ($algorithm->coins->where('profit', '>', 0) as $coin)
                                         <div>
                                             <div class="flex items-center">
-                                                <img alt="{{ $coin->name }}" class="w-5 sm:w-6 mr-1 xs:mr-2"
+                                                <img alt="{{ $coin->name }}" class="w-5 xs:w-6 mr-1 xs:mr-2"
                                                     src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
                                                 <div>
                                                     <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400">
