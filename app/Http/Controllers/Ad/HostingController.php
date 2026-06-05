@@ -142,7 +142,7 @@ class HostingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\UpdateHostingRequest  $request
+     * @param  \App\Http\Requests\UpdateHostingRequest  $request
      * @param  \App\Models\Ad\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */

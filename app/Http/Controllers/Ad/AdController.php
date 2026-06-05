@@ -267,7 +267,7 @@ class AdController extends Controller
     /**
      * Show the form for editing listings of the resource.
      *
-     * @param  Illuminate\Http\Request;
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function editMass(Request $request)
@@ -351,7 +351,7 @@ class AdController extends Controller
     /**
      * Update listing of the resource in storage.
      *
-     * @param  Illuminate\Http\Request;
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function updateMass(Request $request)

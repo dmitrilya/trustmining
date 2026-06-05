@@ -75,7 +75,7 @@ class OfficeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\StoreOfficeRequest  $request
+     * @param  \App\Http\Requests\StoreOfficeRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOfficeRequest $request)
@@ -126,7 +126,7 @@ class OfficeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateOfficeRequest
+     * @param  \App\Http\Requests\UpdateOfficeRequest  $request
      * @param  \App\Models\User\Office  $office
      * @return \Illuminate\Http\Response
      */

@@ -3,7 +3,7 @@
         {{ __('Can I trust the seller') }} {{ $ad->user->name }}?</h2>
 
     <div itemprop="description"
-        class="mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">
+        class="mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">
         {{-- GREEN --}}
         @php
             $offices = $ad->user->offices;

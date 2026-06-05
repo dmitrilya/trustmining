@@ -20,7 +20,7 @@
         {{ __('Ad description') }}</h2>
 
     <div itemprop="description"
-        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+        class="ql-editor mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
         {!! $description !!}
     </div>
 </div>

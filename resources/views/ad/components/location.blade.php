@@ -117,7 +117,7 @@
     }
 </script>
 
-<div id="map" class="w-full aspect-[2/1] rounded-lg overflow-hidden" x-init="initMap(theme);
+<div id="map" class="w-full aspect-[4/3] sm:aspect-[2/1] rounded-lg overflow-hidden" x-init="initMap(theme);
 $watch('theme', value => {
     window.themeLayer.update(value == 'dark' ? window.darkMapTheme : window.lightMapTheme);
 })"></div>
