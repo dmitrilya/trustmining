@@ -37,7 +37,7 @@
 
     <div
         class="px-3 py-2 xs:px-4 xs:py-3 sm:p-4 lg:p-5 rounded-2xl bg-white dark:bg-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm overflow-hidden">
-        <span class="text-slate-500 text-xxs xs:text-xs font-bold uppercase tracking-widest">Окупаемость</span>
+        <span class="text-slate-500 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Payback') }}</span>
         <div class="mt-2">
             <span class="text-xl sm:text-3xl font-black text-slate-800"
                 x-text="payback != '∞' ? payback != 0 ? Math.round(payback) : '{{ __('No data') }}' : '∞'"></span>

@@ -1,5 +1,5 @@
 <div
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-1 xs:p-2 sm:p-4 lg:p-6 space-y-4 lg:space-y-6">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-4 lg:space-y-6">
     @php
         $reviewsCount = $model->moderatedReviews->count();
         $momentRating = $reviewsCount ? $model->moderatedReviews->avg('rating') : 0;
@@ -22,7 +22,7 @@
         }
     @endphp
 
-    <h2 class="text-lg sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-bold">{{ $model->data->name }}</h2>
+    <h2 class="text-sm xs:text-base sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-bold">{{ $model->data->name }}</h2>
     <x-characteristics>
         <x-characteristic name="Hashrate" :value="$model->data->asicVersions->count() > 1
             ? $model->data->asicVersions->last()->hashrate . '-' . $version->hashrate . ' ' . $version->measurement
