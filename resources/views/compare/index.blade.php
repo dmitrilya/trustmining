@@ -39,7 +39,7 @@
 
         @inject('textGenerator', 'App\Services\ComparisonTextService')
 
-        <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6">
+        <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{{ $textGenerator->generate($modelA, $modelB, $ads) }}</p>
         </div>
 
