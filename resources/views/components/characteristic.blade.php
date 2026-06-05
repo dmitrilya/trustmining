@@ -1,7 +1,7 @@
 @props(['name', 'value' => null, 'xValue' => null, 'itemprop' => null, 'unit' => null])
 
 <li @if ($itemprop) itemprop="{{ $itemprop }}" itemscope itemtype="{{ $itemprop == 'additionalProperty' ? 'http://schema.org/PropertyValue' : 'http://schema.org/QuantitativeValue' }}" @endif
-    class="flex justify-between items-end text-sm text-slate-600 dark:text-slate-400">
+    class="flex justify-between items-end text-xxs xxs:text-xs xs:text-sm text-slate-600 dark:text-slate-400">
     <span
         @if ($itemprop) itemprop="{{ $itemprop == 'additionalProperty' ? 'name' : 'valueReference' }}" @endif>{{ __($name) }}</span>
     <span class="dots mx-1 xs:mx-2 win-w-[1.25rem]"></span>

@@ -35,7 +35,7 @@
 
     @if ($versionWithAds && count($versionWithAds->profits))
         <div>
-            <p class="text-xxs xs:text-xs text-slate-500 mb-2">{{ __('Calculation for') }}
+            <p class="text-xxs xxs:text-xs text-slate-500 mb-2">{{ __('Calculation for') }}
                 {{ $versionWithAds->hashrate }}{{ $versionWithAds->measurement }}</p>
 
             @include('ad.components.payback_info', [
@@ -56,7 +56,7 @@
         </x-characteristics>
     @elseif (count($version->profits))
         <div>
-            <p class="text-xxs xs:text-xs text-slate-500 mb-2">{{ __('Calculation for') }}
+            <p class="text-xxs xxs:text-xs text-slate-500 mb-2">{{ __('Calculation for') }}
                 {{ $version->hashrate }}{{ $version->measurement }}</p>
 
             @include('ad.components.payback_info', [

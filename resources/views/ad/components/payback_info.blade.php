@@ -9,7 +9,7 @@
         class="px-3 py-2 xs:px-4 xs:py-3 sm:p-4 lg:p-5 rounded-2xl relative bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
         <div class="relative z-10">
             <span
-                class="text-slate-400 text-xxs xs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
+                class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
                 <span class="text-xl sm:text-3xl font-black"
                     :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-400'">
@@ -46,7 +46,7 @@
             @endif
         </div>
         @if ($price != 0)
-            <div class="mt-1 sm:mt-1.5 w-fit px-2 py-0.5 rounded-md text-xxs font-bold uppercase tracking-tighter"
+            <div class="mt-1 sm:mt-1.5 w-fit px-2 py-0.5 rounded text-xxs font-bold uppercase tracking-tighter"
                 :class="{
                     'bg-rose-500/10 text-rose-500': payback > 1460 || payback == '∞',
                     'bg-amber-500/10 text-amber-500': payback > 730 && payback <= 1460,
