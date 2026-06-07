@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Services\YandexGPTService;
 use App\Models\Ad\Hosting;
+use GdImage;
+use Illuminate\Http\UploadedFile;
 
 trait FileTrait
 {
-    public function saveFiles($files, $folder, $type, $id, $time, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
+    public function saveFiles(?array $files, string $folder, string $type, int $id, int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $result = [];
 
@@ -19,9 +21,7 @@ trait FileTrait
             foreach ($files as $i => $file) {
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
-                $ext = ($file instanceof \Illuminate\Http\UploadedFile)
-                    ? $file->getClientOriginalExtension()
-                    : $file->extension();
+                $ext = ($file instanceof UploadedFile) ? $file->getClientOriginalExtension() : $file->extension();
                 if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
@@ -34,7 +34,7 @@ trait FileTrait
         return $result;
     }
 
-    public function saveContract($file, $folder, Hosting $hosting, $disk = 'public')
+    public function saveContract(UploadedFile $file, string $folder, Hosting $hosting, string $disk = 'public')
     {
         $path = $this->saveFile($file, $folder, 'contract', $hosting->id, time(), null, 70, $disk);
 
@@ -53,21 +53,19 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile($file, $folder, $type, $id, $time, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
+    public function saveFile(UploadedFile $file, string $folder, string $type, int $id, int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $filename = $type . '_' . $id;
         if ($time) $filename .= '_' . $time;
         if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
-        $ext = ($file instanceof \Illuminate\Http\UploadedFile)
-            ? $file->getClientOriginalExtension()
-            : $file->extension();
+        $ext = ($file instanceof UploadedFile) ? $file->getClientOriginalExtension() : $file->extension();
         if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
         else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName($files, $folder, $type, $id, $resize = null, $watermark = null, $quality = 70, $disk = 'public')
+    public function saveFilesWithName(?array $files, string $folder, string $type, int $id, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $result = [];
 
@@ -78,9 +76,7 @@ trait FileTrait
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
-                $ext = ($file instanceof \Illuminate\Http\UploadedFile)
-                    ? $file->getClientOriginalExtension()
-                    : $file->extension();
+                $ext = ($file instanceof UploadedFile) ? $file->getClientOriginalExtension() : $file->extension();
                 if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
                 else $file->storeAs($disk . '/' . $folder, $filename . '.' . $ext);
 
@@ -110,7 +106,7 @@ trait FileTrait
         return $files;
     }
 
-    private function compress($file, $disk, $folder, $filename, $resize, $quality, $watermark)
+    private function compress(UploadedFile $file, string $disk, string $folder, string $filename, int|array|null $resize, int $quality, ?string $watermark)
     {
         $info = getimagesize($file->getPathName());
 
@@ -163,9 +159,9 @@ trait FileTrait
                 $image = $dest;
             }
 
-            if ($watermark) $this->addWatermark($image, $w, $h, $watermark);
-
             imagepalettetotruecolor($image);
+
+            if ($watermark) $this->addWatermark($image, $w, $h, $watermark);
 
             if (!Storage::disk($disk)->exists($folder)) Storage::disk($disk)->makeDirectory($folder);
 
@@ -177,9 +173,10 @@ trait FileTrait
         return false;
     }
 
-    private function addWatermark($image, $w, $h, $watermark)
+    private function addWatermark(GdImage $image, int $w, int $h, string $watermark)
     {
-        $textColor = imagecolorallocatealpha($image, 255, 255, 255, 110);
+        imagealphablending($image, true);
+        $textColor = imagecolorallocatealpha($image, 255, 255, 255, 90);
         $fontSize = max(8, min(20, $w / 50));
         $font = public_path('fonts/Nunito-ExtraBold.ttf');
         $angle = 0;
