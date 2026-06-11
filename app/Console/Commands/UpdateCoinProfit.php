@@ -41,7 +41,7 @@ class UpdateCoinProfit extends Command
      */
     public function handle()
     {
-        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
         $algos = Algorithm::all();
 
         collect(json_decode(file_get_contents('https://www.antpool.com/auth/v3/index/poolcoins'))->data->items)->whereNotIn('coinType', ['FB'])
