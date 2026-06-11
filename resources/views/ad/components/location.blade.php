@@ -100,6 +100,7 @@
             text: '{{ $ad->user->name }}, {{ $ad->office->address }}',
             bounds: map.bounds
         });
+        console.log(results);
 
         if (results.length > 0) {
             const firstResult = results[0];
