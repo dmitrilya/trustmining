@@ -1,6 +1,6 @@
 <x-insight-layout title="Редактирование своего канала | TM Insight" noindex="true"
     description="Отредактируйте канал на платформе TM Insight и начните делиться контентом | TM Insight"
-    :header="__('Channel edit')">
+    :header="__('Channel editing')">
     <div
         class="p-2 sm:p-4 lg:p-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
         <form method="POST" class="flex flex-col gap-2 sm:gap-4 lg:gap-6" enctype=multipart/form-data
@@ -70,7 +70,7 @@
             </div>
 
             <div>
-                <x-input-label for="channel-banner" :value="__('Change Banner')" />
+                <x-input-label for="channel-banner" :value="__('Change banner')" />
                 <x-file-input id="channel-banner" name="banner" class="mt-1 block w-full"
                     accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 960x360 px" />
                 <template x-if="validation.banner">
