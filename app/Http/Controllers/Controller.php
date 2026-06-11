@@ -42,7 +42,7 @@ class Controller extends BaseController
         $location = session('user_location');
         $miners = $this->getAds(null, AdCategory::where('name', 'miners')->first());
 
-        if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
+        if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
 
         return view('home.index', [
             'asicBrands' => AsicBrand::select(['id', 'name', 'slug'])->withCount('views')->orderByDesc('views_count')->get(),

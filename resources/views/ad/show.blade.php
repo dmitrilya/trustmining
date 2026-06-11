@@ -1,56 +1,9 @@
 @php
     $user = Auth::user();
-    $title =
-        $ad->adCategory->name != 'gpus'
-            ? ($ad->adCategory->name == 'miners'
-                ? "Купить {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING"
-                : __($ad->adCategory->header) .
-                    " купить в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING")
-            : "Купить {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
-                __('kW/h') .
-                " в городе {$ad->office->city} у {$ad->user->name} по выгодной цене | TRUSTMINING";
-    $description =
-        $ad->adCategory->name != 'gpus'
-            ? ($ad->adCategory->name == 'miners'
-                ? 'Купите ' .
-                    ($ad->props['Condition'] == 'New' ? 'новый' : 'б/у') .
-                    " ASIC {$ad->asicVersion->asicModel->asicBrand->name} {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} в городе {$ad->office->city} у {$ad->user->name}. " .
-                    ($ad->props['Availability'] == 'Preorder' ? 'Под заказ' : 'В наличии') .
-                    ' с доставкой по РФ. Смотрите фото, характеристики и отзывы на TRUSTMINING'
-                : "Купите {$ad->adCategory->header} в городе {$ad->office->city} у компании {$ad->user->name}. Доставка по всей России. Фото, характеристики, отзывы")
-            : 'Купите ' .
-                ($ad->props['Condition'] == 'New' ? 'новый' : 'б/у') .
-                " ГПЭС/ГПУ {$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
-                __('kW/h') .
-                " в городе {$ad->office->city} у {$ad->user->name}. " .
-                ($ad->props['Availability'] == 'Preorder' ? 'Под заказ' : 'В наличии') .
-                ' с доставкой по РФ. Смотрите фото, характеристики и отзывы на TRUSTMINING';
-    $alt =
-        $ad->adCategory->name != 'gpus'
-            ? ($ad->adCategory->name == 'miners'
-                ? "{$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate}{$ad->asicVersion->measurement} купить у {$ad->user->name}"
-                : "{$ad->adCategory->header} купить в у {$ad->user->name}")
-            : "{$ad->gpuModel->gpuBrand->name} {$ad->gpuModel->name} {$ad->gpuModel->max_power}" .
-                __('kW/h') .
-                " купить у {$ad->user->name}";
-    $href =
-        $ad->adCategory->name == 'miners'
-            ? route('ads.asic.show', [
-                'asicBrand' => $ad->asicVersion->asicModel->asicBrand->slug,
-                'asicModel' => $ad->asicVersion->asicModel->slug,
-                'asicVersion' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
-                'ad' => $ad->user->slug . '-' . $ad->id,
-            ])
-            : ($ad->adCategory->name == 'gpus'
-                ? route('ads.gpu.show', [
-                    'gpuBrand' => $ad->gpuModel->gpuBrand->slug,
-                    'gpuModel' => $ad->gpuModel->slug,
-                    'ad' => $ad->user->slug . '-' . $ad->id,
-                ])
-                : route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]));
+    [$title, $description, $alt, $canonicalHref, $name] = (new App\Services\AdService())->getMetaData($ad);
 @endphp
 
-<x-app-layout :description="$description" :title="$title" :noindex="isset($moderation) ? 'true' : null" :canonical="$href">
+<x-app-layout :description="$description" :title="$title" :noindex="isset($moderation) ? 'true' : null" :canonical="$canonicalHref">
     <x-slot name="og">
         <meta property="og:title" content="{{ $title }}">
         <meta property="og:description" content="{{ $description }}">
@@ -60,7 +13,10 @@
     </x-slot>
 
     <script src="https://api-maps.yandex.ru/v3/?apikey=edbdf37c-6677-43bf-8434-455e393b7362&lang=ru_RU"></script>
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
+    @if ($ad->description || isset($moderation->data['description']))
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    @endif
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 md:p-8">
         @include('ad.components.breadcrumbs')
@@ -89,17 +45,10 @@
 
                     <div
                         class="mt-4 sm:mt-8 md:mt-0 md:col-span-7 md:border-l border-slate-300 dark:border-slate-700 md:pl-8">
-                        @if ($ad->adCategory->name == 'miners')
-                            <h1
-                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
-                                {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h1>
-                        @elseif ($ad->adCategory->name == 'gpus')
-                            <h1
-                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
-                                {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
-                            </h1>
-                        @endif
+                        <h1
+                            class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
+                            {{ $name }}
+                        </h1>
 
                         <p
                             class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
@@ -143,35 +92,11 @@
                         @endphp
 
                         <div class="md:col-span-2 md:col-start-1">
-                            <div class="my-5">
-                                <ul role="list" class="list-disc space-y-2 pl-4 text-xxs xs:text-xs sm:text-sm">
-                                    @if ($ad->adCategory->name == 'gpus')
-                                        <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                                            {{ __('Power (kW/h)') . ': ' }}
-                                            <span
-                                                class="text-slate-700 dark:text-slate-300">{{ __($ad->gpuModel->max_power) }}</span>
-                                        </li>
-                                    @endif
-
-                                    @foreach ($props as $prop => $value)
-                                        <li class="text-xxs xs:text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                                            {{ __($prop) . ': ' }}@if (!is_array($value))
-                                                <span
-                                                    class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
-                                            @else
-                                                <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                                                    @foreach ($value as $item)
-                                                        <div
-                                                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
-                                                            {{ $item }}
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            <x-characteristics class="my-5 sm:my-6 lg:my-7">
+                                @foreach ($ad->props as $prop => $value)
+                                    <x-characteristic :name="$prop" :value="$value" />
+                                @endforeach
+                            </x-characteristics>
 
                             <div>
                                 @include('ad.components.about-seller', [
@@ -190,13 +115,13 @@
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    @if (!isset($moderation->data['description']))
+                @if (isset($moderation->data['description']))
+                    <div class="mt-8">
                         @include('ad.components.description', [
                             'description' => $moderation->data['description'],
                         ])
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         @endif
 
@@ -271,21 +196,15 @@
                     <div class="flex items-start justify-between">
                         @if ($ad->adCategory->name == 'miners')
                             <meta itemprop="brand" content="{{ $ad->asicVersion->asicModel->asicBrand->name }}" />
-                            <h1 itemprop="name"
-                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
-                                {{ $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement }}
-                            </h1>
                         @elseif ($ad->adCategory->name == 'gpus')
                             <meta itemprop="brand" content="{{ $ad->gpuModel->gpuBrand->name }}" />
                             <meta itemprop="name" content="{{ $ad->gpuModel->name }}" />
-                            <h1
-                                class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
-                                {{ $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name }}
-                            </h1>
-                        @else
-                            <meta itemprop="name"
-                                content="{{ $ad->user->name }} {{ __($ad->adCategory->title) }}" />
                         @endif
+
+                        <h1 itemprop="name"
+                            class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
+                            {{ $name }}
+                        </h1>
 
                         <div
                             class="bg-slate-100 dark:bg-slate-950 rounded-full ml-3 p-1.5 sm:p-2 lg:p-2.5 tracking{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? '' : ' hidden' }}">
@@ -373,8 +292,11 @@
                                         class="ml-1 text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
                                 @endif
 
-                                @if ($ad->adCategory->name == 'miners' && $ad->version_data)
-                                    @include('ad.components.price_graduation', [
+                                @if (
+                                    $ad->adCategory->name == 'miners' &&
+                                        data_get($ad, 'version_data.price_data.' . $ad->props['Condition'] . '.' . $ad->props['Availability'], null) !==
+                                            null)
+                                    @include('ad.components.price-graduation', [
                                         'priceData' =>
                                             $ad->version_data->price_data[$ad->props['Condition']][
                                                 $ad->props['Availability']
@@ -489,7 +411,7 @@
                 </div>
 
                 <div x-show="selectedTab == 'description'">
-                    @include('ad.components.can_trust')
+                    @include('ad.components.can-trust')
 
                     @include('ad.components.description', ['description' => $ad->description])
                 </div>

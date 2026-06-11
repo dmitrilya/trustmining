@@ -7,16 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
-use Mews\Purifier\Facades\Purifier;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdRequest;
 use App\Http\Requests\UpdateAdRequest;
 
-use App\Http\Traits\NotificationTrait;
-use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
+
+use App\Services\AdService;
 
 use App\Models\Ad\Ad;
 use App\Models\Ad\AdCategory;
@@ -25,11 +24,17 @@ use App\Models\Database\AsicModel;
 use App\Models\Database\GPUBrand;
 use App\Models\Database\GPUModel;
 use App\Models\Database\Coin;
-use App\Models\User\Office;
 
 class AdController extends Controller
 {
-    use NotificationTrait, FileTrait, ViewTrait, AdTrait;
+    use ViewTrait, AdTrait;
+
+    protected $service;
+
+    public function __construct(AdService $service)
+    {
+        $this->service = $service;
+    }
 
     /**
      * Display a listing of the resource.
@@ -113,38 +118,7 @@ class AdController extends Controller
 
         if ($activeAdsCount >= $maxAds) return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
 
-        $office = Office::find($request->office_id);
-
-        if (!$office) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
-
-        $description = $request->description ? Purifier::clean(htmlspecialchars_decode($request->description), 'description') : '';
-
-        $firstAd = Ad::orderByDesc('ordering_id')->first();
-        $ad = Ad::create([
-            'ordering_id' => $firstAd ? $firstAd->ordering_id + 1 : 1,
-            'user_id' => $user->id,
-            'ad_category_id' => $request->ad_category_id,
-            'asic_version_id' => $request->asic_version_id,
-            'gpu_model_id' => $request->gpu_model_id,
-            'office_id' => $request->office_id,
-            'description' => $description,
-            'props' => json_decode($request->props),
-            'price' => $request->price,
-            'with_vat' => $request->filled('with_vat'),
-            'images' => [],
-            'preview' => '',
-            'coin_id' => $request->coin_id,
-        ]);
-
-        $time = time();
-        $ad->images = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null], $user->name);
-        $ad->preview = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null], $user->name);
-        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240], $user->name);
-        $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168], $user->name);
-
-        $ad->save();
-
-        $ad->moderations()->create(['data' => $ad->attributesToArray()]);
+        $this->service->store($request->validated(), $request->file('images'), $request->file('preview'), $user);
 
         return redirect()->route('company', ['user' => $user->slug]);
     }
@@ -274,7 +248,7 @@ class AdController extends Controller
     {
         return view('ad.edit-mass', [
             'ads' => $request->user()->ads()->where('ad_category_id', 1)->where('moderation', false)
-                ->with(['office:id,city', 'coin:id,abbreviation', 'asicVersion:id,hashrate,measurement,asic_model_id', 'asicVersion.asicModel:id,name'])
+                ->with(['office:id,city_id', 'office.cityRelation:id,name', 'coin:id,abbreviation', 'asicVersion:id,hashrate,measurement,asic_model_id', 'asicVersion.asicModel:id,name'])
                 ->orderBy('props->Availability')->orderBy('props->Condition')->join('asic_versions', 'ads.asic_version_id', '=', 'asic_versions.id')
                 ->join('asic_models', 'asic_versions.asic_model_id', '=', 'asic_models.id')->orderBy('asic_models.name')
                 ->orderBy('asic_versions.hashrate')->select('ads.*')->get(),
@@ -294,56 +268,7 @@ class AdController extends Controller
         if ($ad->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
-        $data = [];
-
-        if ($request->office_id != $ad->office_id) {
-            $office = Office::find($request->office_id);
-
-            if (!$office || $office->moderation) return back()->withErrors(['forbidden' => __('Unavailable office.')]);
-
-            $data['office_id'] = $request->office_id;
-        }
-
-        $props = collect(json_decode($request->props, true));
-        $propDiffs = $props->reject(fn($value, $key) => $value === ($ad->props[$key] ?? null))->toArray();
-        if (count($propDiffs)) $data['props'] = $props;
-
-        if ($request->description != $ad->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
-
-        $time = time();
-        if ($request->images)
-            $data['images'] = $this->saveFiles($request->file('images'), 'ads', 'photo', $ad->id, $time, [686, null], $ad->user->name);
-
-        if ($request->preview) {
-            $data['preview'] = $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [686, null], $ad->user->name);
-            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [320, 240], $ad->user->name);
-            $this->saveFile($request->file('preview'), 'ads', 'preview', $ad->id, $time, [224, 168], $ad->user->name);
-        }
-
-        if ($request->price != $ad->price || $request->coin_id != $ad->coin_id || $request->filled('with_vat') != $ad->with_vat) {
-            $data['price'] = $request->price;
-            $data['coin_id'] = $request->coin_id;
-            $data['with_vat'] = $request->filled('with_vat');
-        }
-
-        if (!empty($data)) {
-            $moderation = $ad->moderations()->create(['data' => $data]);
-
-            if (!$request->preview && !$request->images && !$request->description) {
-                $moderation->moderation_status_id = 2;
-                $moderation->user_id = 10000000;
-                $moderation->save();
-
-                if (isset($data['price'])) $this->notify(
-                    'Price change',
-                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
-                    'ad',
-                    $ad
-                );
-
-                $ad->update($data);
-            }
-        }
+        $this->service->update($ad, $request->validated(), $request->file('images'), $request->file('preview'));
 
         return redirect()->route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]);
     }
@@ -356,28 +281,7 @@ class AdController extends Controller
      */
     public function updateMass(Request $request)
     {
-        $changings = collect($request->changings);
-        $request->user()->ads()->whereIn('id', $changings->pluck('id'))->get()
-            ->each(function ($ad) use ($changings) {
-                $change = $changings->where('id', $ad->id)->first();
-
-                if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $ad->moderations()->create([
-                        'data' => $change,
-                        'moderation_status_id' => 2,
-                        'user_id' => 10000000
-                    ]);
-
-                    $this->notify(
-                        'Price change',
-                        $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
-                        'ad',
-                        $ad
-                    );
-
-                    $ad->update($change);
-                }
-            });
+        $this->service->updateMass($request->changings, $request->user());
 
         return response()->json(['success' => true, 'message' => __('Prices successfully updated')], 200);
     }

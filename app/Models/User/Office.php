@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Office extends Model
 {
@@ -16,10 +17,10 @@ class Office extends Model
      */
     protected $fillable = [
         'user_id',
+        'city_id',
+        'address',
         'images',
         'video',
-        'address',
-        'city',
         'postal_code',
         'peculiarities',
         'moderation',
@@ -35,9 +36,30 @@ class Office extends Model
         'peculiarities' => 'array',
     ];
 
+    protected $with = ['cityRelation'];
+
+    protected function city(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->cityRelation->name
+        );
+    }
+
+    protected function cityWhere(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->cityRelation->name_where
+        );
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class);
+    }
+
+    public function cityRelation()
+    {
+        return $this->belongsTo(\App\Models\City::class, 'city_id');
     }
 
     public function moderations()

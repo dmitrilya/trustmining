@@ -16,7 +16,7 @@ trait ShopTrait
 
         if ($request->city) $users = $users->whereHas(
             'offices',
-            fn($q) => $q->where('moderation', false)->where('address', 'like', '%' . $request->city . '%')
+            fn($q) => $q->where('moderation', false)->whereHas('cityRelation', fn($q2) => $q2->where('name', $request->city))
         );
 
         if ($request->filled('is_company')) $users = $users->whereHas('company', fn($q) => $q->where('moderation', false));

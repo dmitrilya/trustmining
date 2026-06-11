@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+
+use App\Rules\OfficeBelongsToUser;
+use App\Rules\PaymentableCoin;
 
 class StoreAdRequest extends FormRequest
 {
@@ -28,12 +30,15 @@ class StoreAdRequest extends FormRequest
             'ad_category_id' => 'required|exists:ad_categories,id',
             'asic_version_id' => 'exists:asic_versions,id',
             'gpu_model_id' => 'exists:gpu_models,id',
-            'office_id' => 'required|exists:offices,id',
+            'office_id' => ['required', new OfficeBelongsToUser],
             'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048',
-            'images' => 'max:3',
+            'images' => 'nullable|array|max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
+            'props' => 'nullable',
+            'description' => 'sometimes|string',
             'price' => 'required|numeric',
-            'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
+            'coin_id' => ['required', new PaymentableCoin],
+            'with_vat' => 'sometimes',
         ];
     }
 
@@ -56,7 +61,6 @@ class StoreAdRequest extends FormRequest
             'price.required' => __('Price is required'),
             'price.numeric' => __('The price must be in numerical format'),
             'coin_id.required' => __('Currency is required.'),
-            'coin_id.exists' => __('Invalid currency'),
         ];
     }
 }

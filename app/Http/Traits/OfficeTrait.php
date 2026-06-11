@@ -16,7 +16,7 @@ trait OfficeTrait
             if ($request->peculiarities && count($request->peculiarities))
                 $offices = $offices->whereJsonContains('peculiarities', $request->peculiarities);
 
-            if ($request->city) $offices = $offices->where('address', 'like', '%' . $request->city . '%');
+            if ($request->city) $offices = $offices->whereHas('cityRelation', fn($q) => $q->where('name', $request->city));
         }
 
         return $offices;

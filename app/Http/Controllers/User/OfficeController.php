@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\OfficeTrait;
+
+use App\Models\City;
 use App\Models\User\Office;
 
 class OfficeController extends Controller
@@ -92,7 +94,9 @@ class OfficeController extends Controller
         $office = Office::create([
             'user_id' => $user->id,
             'address' => $suggestions[0]['value'],
-            'city' => $suggestions[0]['data']['city'],
+            'city_id' => City::firstOrCreate([
+                'name' => $suggestions[0]['data']['city']
+            ])->id,
             'postal_code' => $suggestions[0]['data']['postal_code'],
             'video' => $request->video,
             'images' => [],

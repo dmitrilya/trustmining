@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+
+use App\Rules\OfficeBelongsToUser;
+use App\Rules\PaymentableCoin;
 
 class UpdateAdRequest extends FormRequest
 {
@@ -25,11 +27,15 @@ class UpdateAdRequest extends FormRequest
     public function rules()
     {
         return [
-            'office_id' => 'required|exists:offices,id',
+            'office_id' => ['required', new OfficeBelongsToUser],
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
+            'images' => 'nullable|array|max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
+            'props' => 'nullable',
+            'description' => 'sometimes|string',
             'price' => 'required|numeric',
-            'coin_id' => ['required', Rule::exists('coins', 'id')->where(fn($q) => $q->where('paymentable', true))],
+            'coin_id' => ['required', new PaymentableCoin],
+            'with_vat' => 'sometimes',
         ];
     }
 

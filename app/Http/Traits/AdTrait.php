@@ -20,6 +20,7 @@ trait AdTrait
             ->leftJoin('users', 'users.id', '=', 'ads.user_id')
             ->leftJoin('ad_categories', 'ad_categories.id', '=', 'ads.ad_category_id')
             ->leftJoin('offices', 'offices.id', '=', 'ads.office_id')
+            ->leftJoin('cities', 'cities.id', '=', 'offices.city_id') 
             ->leftJoin('asic_versions', 'asic_versions.id', '=', 'ads.asic_version_id')
             ->leftJoin('asic_models', 'asic_models.id', '=', 'asic_versions.asic_model_id')
             ->leftJoin('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
@@ -53,7 +54,7 @@ trait AdTrait
                 'users.tf as user_tf',
 
                 'offices.id as office_id',
-                'offices.city',
+                'cities.name as city',
 
                 'asic_versions.hashrate as asic_version_hashrate',
                 'asic_versions.measurement as asic_version_measurement',
@@ -130,7 +131,7 @@ trait AdTrait
                 elseif ($request->vat[0] == 'without_vat') $ads->where('with_vat', false);
             }
 
-            $filters = $request->collect()->only(['Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models', 'Service', 'Material']);
+            $filters = $request->collect()->only(['Category', 'Capacity', 'Power_(kW)', 'Heating_area_(m²)', 'For_which_models', 'Service', 'Material']);
 
             foreach ($filters as $key => $values) {
                 $key = str_replace('_', ' ', $key);
@@ -154,7 +155,7 @@ trait AdTrait
                 });
             }
 
-            if ($request->city) $ads->orderByRaw("CASE WHEN offices.city = ? THEN 1 ELSE 0 END DESC", [$request->city]);
+            if ($request->city) $ads->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$request->city]);
 
             if ($request->display) {
                 switch ($request->display) {
