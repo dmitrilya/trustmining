@@ -34,41 +34,49 @@ quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
 quill.root.innerHTML = `{{ $ad->description }}`;
 
 quill.on('text-change', () => description = quill.root.innerHTML);">
-    <input type="hidden" name="props" x-ref="props_containers" value="{{ json_encode($ad->props) }}" />
+    <input type="hidden" name="props" x-ref="props_cryptoboilers" value="{{ json_encode($ad->props) }}" />
+
+    <div>
+        <x-input-label for="designation" :value="__('Designation')" />
+        <x-length-input id="designation" name="designation" type="text" :value="$ad->props['Designation']"
+            autocomplete="designation" required max="20"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Designation'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-input-error :messages="$errors->get('designation')" />
+    </div>
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
         <x-text-input id="capacity" name="capacity" type="number" min="1" autocomplete="capacity"
             :value="$ad->props['Capacity']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Capacity'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Capacity'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('capacity')" />
     </div>
 
     <div>
         <x-input-label for="heating_area" :value="__('Heating area (m²)')" />
         <x-text-input id="heating_area" name="heating_area" type="number" autocomplete="heating_area" :value="$ad->props['Heating area (m²)']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Heating area (m²)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Heating area (m²)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('heating_area')" />
     </div>
 
     <div>
         <x-input-label for="length" :value="__('Length (cm)')" />
         <x-text-input id="length" name="length" type="number" autocomplete="length" :value="$ad->props['Length (cm)']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Length (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Length (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('length')" />
     </div>
 
     <div>
         <x-input-label for="width" :value="__('Width (cm)')" />
         <x-text-input id="width" name="width" type="number" autocomplete="width" :value="$ad->props['Width (cm)']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Width (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Width (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('width')" />
     </div>
 
     <div>
         <x-input-label for="height" :value="__('Height (cm)')" />
         <x-text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
-            @change="let props = JSON.parse($refs.props_containers.value);props['Height (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Height (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('height')" />
     </div>
 

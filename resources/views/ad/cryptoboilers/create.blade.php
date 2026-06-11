@@ -33,11 +33,20 @@ quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
 
 quill.on('text-change', () => description = quill.root.innerHTML);">
     <input type="hidden" name="props" x-ref="props_cryptoboilers"
-        value='{"Capacity": 1, "Heating area (m²)": 40, "Length (cm)": 0, "Width (cm)": 0, "Height (cm)": 0}'>
+        value='{"Designation": "{{ __('Not specified') }}", "Capacity": 1, "Heating area (m²)": 40, "Length (cm)": 0, "Width (cm)": 0, "Height (cm)": 0}'>
+
+    <div>
+        <x-input-label for="designation" :value="__('Designation')" />
+        <x-length-input id="designation" name="designation" type="text" value="{{ __('Not specified') }}"
+            autocomplete="designation" required max="20"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Designation'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-input-error :messages="$errors->get('designation')" />
+    </div>
 
     <div>
         <x-input-label for="capacity" :value="__('Capacity')" />
-        <x-text-input id="capacity" name="capacity" type="number" min="1" autocomplete="capacity" value="1"
+        <x-text-input id="capacity" name="capacity" type="number" min="1" autocomplete="capacity"
+            value="1"
             @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Capacity'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
         <x-input-error :messages="$errors->get('capacity')" />
     </div>
