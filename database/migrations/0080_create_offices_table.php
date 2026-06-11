@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
+            $table->foreignId('city_id')->constrained()->cascadeOnUpdate();
+            $table->string('address');
             $table->json('images');
             $table->string('video')->nullable();
-            $table->string('address');
-            $table->string('city');
             $table->unsignedInteger('postal_code');
             $table->json('peculiarities');
             $table->boolean('moderation')->default(1);

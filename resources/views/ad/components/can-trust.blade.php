@@ -1,6 +1,6 @@
 <div class="mb-8">
     <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200">
-        {{ __('Can I trust the seller') }} {{ $ad->user->name }}?</h2>
+        {{ __('Can you trust') }} {{ $ad->user->name }}?</h2>
 
     <div itemprop="description"
         class="mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">

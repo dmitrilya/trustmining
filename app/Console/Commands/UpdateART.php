@@ -23,7 +23,7 @@ class UpdateART extends Command
 
         $users = User::whereHas('ads', fn($q) => $q->where('moderation', 'false')->where('hidden', 'false'))
             ->orWhereHas('hosting', fn($q) => $q->where('moderation', 'false'))
-            ->select(['id'])->with([
+            ->select(['id', 'art'])->with([
                 'chats:id',
                 'chats.messages' => fn($q) => $q->where('created_at', '>', $twoWeeksAgo)->orderBy('created_at')
                     ->select(['chat_id', 'user_id', 'created_at'])
@@ -37,7 +37,7 @@ class UpdateART extends Command
             $user->art = $service->calculateForUser($user);
             $user->save();
 
-            Log::channel('art')->info('ART updated', [
+            if ($old != $user->art) Log::channel('art')->info('ART updated', [
                 'user_id'  => $user->id,
                 'old'      => $old,
                 'new'      => $user->art,

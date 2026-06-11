@@ -1,6 +1,16 @@
 <script>
     window.initMap = async function(theme) {
-        await ymaps3.ready;
+        if (typeof ymaps3 === 'undefined') {
+            console.error('ymaps3 не загружен');
+            return;
+        }
+
+        try {
+            await ymaps3.ready;
+        } catch (error) {
+            console.error('Ошибка загрузки ymaps3:', error);
+            return;
+        }
 
         const {
             YMap,
