@@ -1,10 +1,8 @@
-<x-app-layout :title="'Калькулятор майнинга: рассчитать доходность и окупаемость ' .
-    ($rModel
+<x-app-layout :title="'Калькулятор майнинга ' . ($rModel
         ? ($rVersion
             ? $selModel['name'] . ' ' . $selVersion['hashrate'] . $selVersion['measurement']
             : $selModel['name'])
-        : 'ASIC') .
-    ' | TRUSTMINING'" :description="($rModel
+        : 'онлайн') . ': доходность и окупаемость'" :description="($rModel
     ? ($rVersion
         ? 'Узнайте, сколько приносит ' . $selModel['name'] . ' ' . $selVersion['hashrate'] . $selVersion['measurement'] . ' сегодня. '
         : 'Узнайте, сколько приносит ' . $selModel['name'] . ' сегодня. ')

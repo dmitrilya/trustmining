@@ -1,8 +1,8 @@
-<x-app-layout :title="'Газопоршневые электростанции от производителя ' . $brand->name"
+<x-app-layout title="Газовые генераторы от производителя  {{ $brand->name }}"
     description="Газопоршневые электростанции от производителя {{ $brand->name }}. Цены, характеристики, реальные отзывы, фото. Каталог гпу.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs>
-            <x-breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas gensets')" />
+            <x-breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas generators')" />
             <x-breadcrumb position="2" :name="$brand->name" />
         </x-breadcrumbs>
 

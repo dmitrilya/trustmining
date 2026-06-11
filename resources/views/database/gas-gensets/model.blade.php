@@ -1,9 +1,9 @@
-<x-app-layout :title='"ГПЭС {$brand->name} {$model->name} {$model->max_power} кВт/ч - цена, доходность и характеристики | Купить {$brand->name} {$model->name} | TRUSTMINING"' :description='"Газопоршневая установка {$brand->name} {$model->name} {$model->max_power} кВт/ч. Характеристики, отзывы, актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING"'>
+<x-app-layout :title='"Газовый генератор {$brand->name} {$model->name} {$model->max_power} кВт/ч купить"' :description='"Газопоршневая установка {$brand->name} {$model->name} {$model->max_power} кВт/ч. Характеристики, отзывы, актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING"'>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs>
-            <x-breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas gensets')" />
+            <x-breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas generators')" />
             <x-breadcrumb position="2" :href="route('database.gas-gensets.brand', ['gpuBrand' => $brand->slug])" :name="$brand->name" />
             <x-breadcrumb position="3" :name="$model->name" />
         </x-breadcrumbs>

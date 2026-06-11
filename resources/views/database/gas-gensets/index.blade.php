@@ -1,8 +1,8 @@
-<x-app-layout title="Каталог газопоршневых электростанций"
+<x-app-layout title="Каталог газовых генераторов"
     description="Газопоршневые электростанции. Цены, характеристики, реальные отзывы, фото. Каталог ГПУ.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs>
-            <x-breadcrumb position="1" :name="__('Gas gensets')" />
+            <x-breadcrumb position="1" :name="__('Gas generators')" />
         </x-breadcrumbs>
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
