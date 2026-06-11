@@ -98,10 +98,8 @@
 
         const results = await ymaps3.search({
             text: '{{ $ad->user->name }}, {{ $ad->office->address }}',
-            type: 'biz',
             bounds: map.bounds
         });
-        console.log(results);
 
         if (results.length > 0) {
             const firstResult = results[0];
