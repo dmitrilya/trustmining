@@ -25,6 +25,7 @@
                         'ad' => $ad->user_slug . '-' . $ad->id,
                     ])
                     : route('ads.show', ['adCategory' => $ad->ad_category_name, 'ad' => $ad->id]));
+        $props = json_decode($ad->props, true);
     @endphp
 
     <div>
@@ -75,6 +76,10 @@
                     <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
                         {{ $ad->gpu_brand_name . ' ' . $ad->gpu_model_name }}
                     </div>
+                @elseif ($ad->ad_category_name == 'cryptoboilers')
+                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                        {{ __('Cryptoboiler') . ' ' . $props['Designation'] }}
+                    </div>
                 @endif
 
                 <div class="bg-slate-100 rounded-full ml-3 p-1.5 tracking{{ $ad->is_tracked ? '' : ' hidden' }}">
@@ -104,7 +109,7 @@
             @endif
 
             @if (!isset($sm))
-                @foreach (json_decode($ad->props) as $prop => $value)
+                @foreach ($props as $prop => $value)
                     <p class="text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
                         {{ __($prop) . ': ' }}@if (!is_array($value))
                             <span class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>

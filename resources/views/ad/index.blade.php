@@ -1,20 +1,34 @@
 @php
-    $model = request()->model
-        ? \App\Models\Database\AsicModel::where('slug', request()->model)->first('name')
-        : (request()->gpu_model
-            ? \App\Models\Database\GPUModel::where('slug', request()->gpu_model)->first('name')
-            : null);
-
-    $seoParams = request()->only(['model', 'gpu_model', 'page']);
-
-    if (isset($params['page']) && $params['page'] == 1) {
-        unset($params['page']);
+    $seoParams = request()->only(['model', 'gpu_model', 'page', 'Category']);
+    if (isset($seoParams['page']) && $seoParams['page'] == 1) {
+        unset($seoParams['page']);
+    }
+    if (isset($seoParams['Category']) && count($seoParams['Category']) > 1) {
+        unset($seoParams['Category']);
     }
 
+    $model = isset($seoParams['model'])
+        ? \App\Models\Database\AsicModel::where('slug', $seoParams['model'])->first('name')
+        : (isset($seoParams['gpu_model'])
+            ? \App\Models\Database\GPUModel::where('slug', $seoParams['gpu_model'])->first('name')
+            : null);
+
+    $addParams = [];
+    if ($model) {
+        array_push($addParams, $model->name);
+    }
+    if (isset($seoParams['Category'])) {
+        array_push($addParams, __(str_replace('_', ' ', $seoParams['Category'][0])));
+    }
+    if (isset($seoParams['page'])) {
+        array_push($addParams, "ст {$seoParams['page']}");
+    }
+
+    $addParams = count($addParams) ? ': ' . implode(', ', $addParams) : '';
     $canonicalUrl = request()->url() . (count($seoParams) ? '?' . http_build_query($seoParams) : '');
 @endphp
 
-<x-app-layout :title="$adCategory->title . ($model ? ' - модель ' . $model->name : '')" :description="$adCategory->description . ($model ? ' - модель ' . $model->name : '')" :canonical="$canonicalUrl">
+<x-app-layout :title="$adCategory->title . $addParams" :description="$adCategory->description . $addParams" :canonical="$canonicalUrl">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
