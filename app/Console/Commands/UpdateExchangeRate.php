@@ -72,7 +72,7 @@ class UpdateExchangeRate extends Command
 
     private function updateProfit()
     {
-        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
         $algorithms = Algorithm::select(['id'])->with([
             'coins' => fn($q) => $q->where('profit', '>', 0)->whereHas('latestRate', fn($q1) => $q1->where('rate', '>', 0))
                 ->select(['id', 'abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
@@ -97,8 +97,10 @@ class UpdateExchangeRate extends Command
             'moderatedReviews:reviewable_id,reviewable_type,rating'
         ])->get()->map(function ($model) use ($measurements, $algorithms) {
             $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
+            $am = in_array(strtolower($model->algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                array_search(substr($model->algorithm->measurement, 0, 1), $measurements);
 
-            $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $model) {
+            $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model) {
                 $ads = $version->ads->where('price', '!=', 0)->map(function ($ad) {
                     $ad->usdt_price = round($ad->price * $ad->coin->rate, 2);
                     return $ad;
@@ -130,14 +132,13 @@ class UpdateExchangeRate extends Command
                     }
                 }
                 $version->price_data = $priceData;
-                $vm = array_search($version->measurement, $measurements);
-                $am = array_search($model->algorithm->measurement, $measurements);
-                $coef = pow(1000, $vm - $am);
+                $vm = in_array(strtolower($version->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                    array_search(substr($version->measurement, 0, 1), $measurements);
+                $version->coef = pow(1000, $vm - $am);
                 $version->profits = $algorithm->maxProfit->map(fn($profit) => [
-                    'profit' => round($profit['profit'] * $version->hashrate * $coef, 4),
+                    'profit' => round($profit['profit'] * $version->hashrate * $version->coef, 4),
                     'coins' => $profit['coins']
                 ]);
-                $version->coef = pow(1000, $vm - $am);
                 $version->original_hashrate = $version->hashrate * pow(1000, $vm);
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
                 $version->price = $minPrice ? $minPrice->usdt_price : null;

@@ -23,7 +23,6 @@ Alpine.plugin(intersect);
 window.Alpine = Alpine;
 
 window.locale = document.documentElement.lang;
-window.measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
 window.now = Date.now();
 window.dateDiffs = {
     '1d': now - 86400000,

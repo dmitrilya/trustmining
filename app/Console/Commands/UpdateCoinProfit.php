@@ -41,11 +41,11 @@ class UpdateCoinProfit extends Command
      */
     public function handle()
     {
-        $mes = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
         $algos = Algorithm::all();
 
         collect(json_decode(file_get_contents('https://www.antpool.com/auth/v3/index/poolcoins'))->data->items)->whereNotIn('coinType', ['FB'])
-            ->each(function ($coin) use ($mes, $algos) {
+            ->each(function ($coin) use ($measurements, $algos) {
                 if ($coin->algorithm == 'SHA256d') $coin->algorithm = 'SHA-256';
                 elseif ($coin->algorithm == 'Blake2B+SHA3') $coin->algorithm = 'Handshake';
                 elseif ($coin->algorithm == 'Blake2S') $coin->algorithm = 'Blake (2s-Kadena)';
@@ -54,7 +54,9 @@ class UpdateCoinProfit extends Command
                 $algorithm = $algos->where('name', $coin->algorithm)->first();
                 if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
 
-                $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, array_search($algorithm->measurement, $mes));
+                $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                    array_search(substr($algorithm->measurement, 0, 1), $measurements);
+                $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, $coef);
                 $fee = $coin->coinType == 'BTC' ? 0.9 : (1 - collect($coin->miningType)->min('percent')) * 100;
                 Coin::where('abbreviation', $coin->coinType)->update([
                     'profit' => $profit,
@@ -75,7 +77,7 @@ class UpdateCoinProfit extends Command
         ) {
             collect(json_decode(file_get_contents('https://api.minerstat.com/v2/coins?key=' .
                 config('services.minerstat.key' . $i) . '&list=' . $coins->implode(','))))
-                ->each(function ($coin) use ($mes, $algos) {
+                ->each(function ($coin) use ($measurements, $algos) {
                     //if ($coin->coin == 'GRIN') return;
                     if ($coin->coin == 'ALEO') return;
 
@@ -86,7 +88,9 @@ class UpdateCoinProfit extends Command
                     $algorithm = $algos->where('name', $coin->algorithm)->first();
                     if (!$algorithm) return;
 
-                    if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, array_search($algorithm->measurement, $mes));
+                    $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                    array_search(substr($algorithm->measurement, 0, 1), $measurements);
+                    if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, $coef);
                     if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
 
                     if (count($coinData)) Coin::where('abbreviation', $coin->coin)->update($coinData);

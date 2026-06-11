@@ -6,7 +6,7 @@ class ComparisonTextService
 {
     public function generate($m1, $m2, $ads)
     {
-        $measurements = ['h', 'kh', 'Mh', 'Gh', 'Th', 'Ph', 'Eh', 'Zh'];
+        $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
         $hash = $m1->id + $m2->id; // Для фиксации выбора синонимов
         $data = $this->analyzeModels($m1, $m2);
 
@@ -80,7 +80,9 @@ class ComparisonTextService
                 'diffPercent' => $m1->data->asicVersions->first()->original_hashrate > $m2->data->asicVersions->first()->original_hashrate ?
                     round(($m1->data->asicVersions->first()->original_hashrate - $m2->data->asicVersions->first()->original_hashrate) / $m1->data->asicVersions->first()->original_hashrate * 100, 2) :
                     round(($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) / $m2->data->asicVersions->first()->original_hashrate * 100, 2),
-                'diffValue' => abs($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) / pow(1000, array_search($m1->data->algorithm->measurement, $measurements)) . ' ' . $m1->data->algorithm->measurement,
+                'diffValue' => abs($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) /
+                    pow(1000, (in_array(strtolower($m1->data->algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                        array_search(substr($m1->data->algorithm->measurement, 0, 1), $measurements))) . ' ' . $m1->data->algorithm->measurement,
             ]);
         }
 
