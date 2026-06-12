@@ -34,6 +34,7 @@ class AdService
         $this->saveFile($preview, 'ads', 'preview', $ad->id, $time, [320, 240], $user->name);
         $this->saveFile($preview, 'ads', 'preview', $ad->id, $time, [224, 168], $user->name);
 
+        $ad->save();
         $ad->moderations()->create(['data' => $ad->attributesToArray()]);
     }
 
