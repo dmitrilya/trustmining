@@ -1,4 +1,4 @@
-@props(['name', 'max' => null, 'label', 'multiple' => false, 'accept' => null])
+@props(['name', 'max' => null, 'label', 'multiple' => false, 'accept' => null, 'id' => null])
 
 <div class="w-full mt-1" x-data="{
     filesCount: 0,
@@ -7,6 +7,7 @@
     isMultiple: {{ $multiple ? 'true' : 'false' }},
     isDragOver: false,
     allowedTypes: '{{ $accept }}',
+    id: '{{ $id }}',
 
     isValidType(file) {
         if (!this.allowedTypes) return true;
@@ -55,6 +56,12 @@
         this.fileName = '';
     },
 
+    handleClearFiles(event) {
+        if (event.detail.id === this.id) {
+            this.resetInput();
+        }
+    }
+
     getLabelText() {
         if (this.filesCount === 0)
             return this.isDragOver ? '{{ __('Release files for download') }}' : '{{ __('Select files or drag them here') }}';
@@ -62,7 +69,7 @@
         if (this.isMultiple) return '{{ __('Selected files') }}: ' + this.filesCount;
         else return '{{ __('Selected file') }}: ' + this.fileName;
     }
-}" @clear-files.window="resetInput()">
+}" @clear-files.window="handleClearFiles($event)">
     <label
         class="flex flex-col items-center justify-center w-full h-28 sm:h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors group"
         :class="isDragOver ? 'border-indigo-500' :
@@ -84,7 +91,7 @@
             <p class="text-xs text-slate-500 mt-2" x-show="filesCount === 0">{{ $label }}</p>
         </div>
 
-        <input type="file" x-ref="fileInput" name="{{ $name }}"
+        <input id="{{ $id }}" type="file" x-ref="fileInput" name="{{ $name }}"
             @if ($accept) accept="{{ $accept }}" @endif
             @if ($multiple) multiple @endif {{ $attributes->merge(['class' => 'sr-only']) }}
             @change="updateFiles($event)" />

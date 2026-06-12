@@ -38,7 +38,7 @@
     <div x-data="{ anew: true }">
         <label class="inline-flex items-center cursor-pointer">
             <input type="checkbox" :value="anew" class="sr-only peer" name="new"
-                @change="anew = ! anew;$dispatch('clear-files');let props = JSON.parse($refs.props_gpus.value);if (anew) {props.Condition = 'New';delete props['Warranty (months)'];} else {props.Condition = 'Used';props['Warranty (months)'] = 0;$refs.warranty.value = 0;}$refs.props_gpus.value = JSON.stringify(props);">
+                @change="anew = ! anew;$dispatch('clear-files', { id: 'images' });let props = JSON.parse($refs.props_gpus.value);if (anew) {props.Condition = 'New';delete props['Warranty (months)'];} else {props.Condition = 'Used';props['Warranty (months)'] = 0;$refs.warranty.value = 0;}$refs.props_gpus.value = JSON.stringify(props);">
             <div
                 class="relative w-11 h-6 bg-slate-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-700 peer-checked:bg-indigo-600">
             </div>
