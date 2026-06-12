@@ -60,7 +60,7 @@
         if (event.detail.id === this.id) {
             this.resetInput();
         }
-    }
+    },
 
     getLabelText() {
         if (this.filesCount === 0)
