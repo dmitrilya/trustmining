@@ -176,7 +176,7 @@ trait FileTrait
     private function addWatermark(GdImage $image, int $w, int $h, string $watermark)
     {
         imagealphablending($image, true);
-        $textColor = imagecolorallocatealpha($image, 255, 255, 255, 90);
+        $textColor = imagecolorallocatealpha($image, 230, 230, 230, 90);
         $fontSize = max(8, min(20, $w / 50));
         $font = public_path('fonts/Nunito-ExtraBold.ttf');
         $angle = 0;
