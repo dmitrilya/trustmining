@@ -156,12 +156,12 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            Http::withHeaders([
-                'Authorization: ' . $this->apiToken,
-                'Accept: application/json'
-            ])->post(route('api.ads.update'), $changings);
+            if (count($changings)) Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->apiToken,
+                'Accept'        => 'application/json',
+            ])->post(route('api.ads.update'), ['ads' => $changings]);
 
-            Log::channel('price-updating-check')->info("[PUSHMINER] \n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[PUSHMINER] \n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[PUSHMINER] {$e->getMessage()}");
         }
