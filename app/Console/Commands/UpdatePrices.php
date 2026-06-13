@@ -2,12 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Collection;
+
 use App\Models\Database\AsicModel;
 use App\Models\User\User;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
+
 use Exception;
-use Illuminate\Support\Facades\Http;
 
 class UpdatePrices extends Command
 {
@@ -25,15 +28,31 @@ class UpdatePrices extends Command
      */
     protected $description = 'Command description';
 
+    /**
+     * Asic models collection.
+     *
+     * @var Collection
+     */
     protected $models;
+
+    /**
+     * Admin api token.
+     *
+     * @var string
+     */
+    protected $apiToken;
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->models = AsicModel::with(['asicBrand:id,name', 'asicVersions:id,asic_model_id,hashrate'])->select(['id', 'name'])->get()
             ->map(function ($model) {
                 $model->name = str_replace(' ', '', strtolower($model->name));
                 return $model;
-            });;
+            });
+
+        $this->apiToken = '4|hUdnSZEuKCXHOlHcMlXToUKNk0LAruPrWEKl73Ywa4385733';
     }
 
     /**
@@ -138,7 +157,7 @@ class UpdatePrices extends Command
             }
 
             Http::withHeaders([
-                'Authorization: 4|hUdnSZEuKCXHOlHcMlXToUKNk0LAruPrWEKl73Ywa4385733',
+                'Authorization: ' . $this->apiToken,
                 'Accept: application/json'
             ])->post(route('api.ads.update'), $changings);
 
