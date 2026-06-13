@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 vite.config.js
 public_html/*
+/app/Console/Commands/MyCommand.php
