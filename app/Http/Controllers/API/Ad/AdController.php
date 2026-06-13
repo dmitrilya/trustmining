@@ -73,7 +73,7 @@ class AdController extends Controller
         $errors = [];
 
         $changings = collect($request->ads);
-        $adsToChange = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat, user_id'])
+        $adsToChange = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat', 'user_id'])
             ->where('moderation', false)->whereIn('id', $changings->pluck('id'))->get();
 
         foreach (
