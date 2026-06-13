@@ -74,7 +74,7 @@ class AdController extends Controller
 
         $changings = collect($request->ads);
         $adsToChange = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat, user_id'])
-            ->where('moderation', false)->whereIn($changings->pluck('id'))->get();
+            ->where('moderation', false)->whereIn('id', $changings->pluck('id'))->get();
 
         foreach (
             $changings->sortByDesc(function ($adChanges) {
