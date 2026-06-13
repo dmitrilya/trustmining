@@ -9,7 +9,8 @@ use Illuminate\Support\Collection;
 
 use App\Models\Database\AsicModel;
 use App\Models\User\User;
-
+use DOMDocument;
+use DOMXPath;
 use Exception;
 
 class UpdatePrices extends Command
@@ -62,19 +63,29 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $this->pushminer();
+        $users = User::whereIn('name', ['Pushminer', 'GIS mining'])->with('moderatedAds')->get();
+        $changings = [];
+
+        $changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
+        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+
+        if (count($changings)) Http::withHeaders([
+            'Authorization' => 'Bearer ' . $this->apiToken,
+            'Accept'        => 'application/json',
+        ])->post(route('api.ads.update'), ['ads' => $changings]);
 
         return Command::SUCCESS;
     }
 
-    private function pushminer()
+    private function pushminer(?User $user): array
     {
+        $changings = collect();
+
         try {
             $data = collect(json_decode(file_get_contents('https://pushminer.ru/price/price_cache.json'), true));
-            $ads = User::where('name', 'Pushminer')->first()->moderatedAds;
+            $ads = $user->moderatedAds;
 
             $check = collect();
-            $changings = collect();
             $conditions = [
                 'Новое' => 'New',
                 'б/у' => 'Used'
@@ -156,14 +167,94 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if (count($changings)) Http::withHeaders([
-                'Authorization' => 'Bearer ' . $this->apiToken,
-                'Accept'        => 'application/json',
-            ])->post(route('api.ads.update'), ['ads' => $changings]);
-
             if ($check->count()) Log::channel('price-updating-check')->info("[PUSHMINER] \n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[PUSHMINER] {$e->getMessage()}");
         }
+
+        return $changings->toArray();
+    }
+
+    private function gismining(?User $user): array
+    {
+        $changings = collect();
+
+        try {
+            $html = file_get_contents('https://gis-mining.ru/pricelist/');
+            $ads = $user->moderatedAds;
+
+            $check = collect();
+
+            $dom = new DOMDocument();
+            @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+            $xpath = new DOMXPath($dom);
+
+            foreach ($xpath->query('//tr') as $i => $row) {
+                $data[$i] = [];
+                $tds = $xpath->query('.//td', $row);
+                $gisName = trim($tds->item(0)->textContent);
+
+                $name = implode('', $this->parseModelGis($gisName));
+                $variants = [
+                    $name,
+                    str_replace('hydro', 'hyd', $name),
+                    str_replace('-', '', $name)
+                ];
+
+                $corrs = $this->models->whereIn('name', $variants);
+                if ($corrs->count() != 1) {
+                    $check->push('[Нет модели] ' . $gisName);
+                    continue;
+                }
+
+                $model = $corrs->first();
+                $rate = (float) explode(' ', $tds->item(3)->textContent)[0];
+                $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                if (!$version) {
+                    $check->push('[Нет версии] ' . $gisName);
+                    continue;
+                }
+ 
+                $ad = null;
+                $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                    if ($item->asic_version_id == $version->id) {
+                        $ad = $ads->pull($key);
+                        return false;
+                    }
+                });
+
+                if (!$ad) {
+                    $check->push('[Нет объявления] ' . $gisName);
+                    continue;
+                }
+
+                $price = (float) (int) preg_replace('/\D/', '', $tds->item(1)->textContent);
+                if ($ad->price != $price) $changings->push([
+                    'id' => $ad->id,
+                    'price' => $price,
+                    'coin_id' => 2
+                ]);
+            }
+        } catch (Exception $e) {
+            Log::channel('price-updating-errors')->info("[GIS MINING] {$e->getMessage()}");
+        }
+
+        return $changings->toArray();
+    }
+
+    private function parseModelGis(string $name): array
+    {
+        $lower = mb_strtolower($name, 'UTF-8');
+        $cleaned = preg_replace('/\b\d+(?:[,.]\d+)?\s*(th|mh|gh|ksol|w)\b/u', '', $lower);
+        $words = array_values(array_filter(explode(' ', $cleaned)));
+
+        if (empty($words)) return ['', ''];
+
+        $brand = $words[0];
+
+        $modelParts = array_slice($words, 1);
+        $model = implode('', $modelParts);
+
+        return [$brand, $model];
     }
 }
