@@ -55,7 +55,7 @@
                         </div>
                     @else
                         <div
-                            class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-xxs text-emerald-500 font-black uppercase tracking-wider">
+                            class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-xxs text-emerald-600 font-black uppercase tracking-wider">
                             🟢 {{ __('Launched') }}
                         </div>
                     @endif
@@ -107,7 +107,7 @@
                             <span
                                 class="block text-xxs font-bold text-slate-500 dark:text-slate-500 uppercase tracking-wider mb-1">4.
                                 С привязкой TG</span>
-                            <span class="text-lg font-black text-emerald-500 font-mono">
+                            <span class="text-lg font-black text-emerald-600 font-mono">
                                 {{ $withTgIdSpins->count() }}
                             </span>
                         </div>

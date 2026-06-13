@@ -10,7 +10,7 @@
 
     <a href="{{ route('insight.post.create', ['channel' => auth()->user()->channel->slug]) }}"
         class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
-        <span class="p-1 rounded-lg bg-emerald-500/10 text-emerald-500">💬</span>
+        <span class="p-1 rounded-lg bg-emerald-500/10 text-emerald-600">💬</span>
         <div class="flex flex-col">
             <span>{{ __('Post') }}</span>
             <span class="text-[10px] text-slate-500">{{ __('Short thoughts') }}</span>

@@ -47,14 +47,14 @@
                     <div class="text-slate-500 font-semibold uppercase tracking-wider text-[10px]">Обязательные
                         HTTP-заголовки</div>
                     <div class="space-y-1">
-                        <div class="text-emerald-500 font-bold">Authorization:</div>
+                        <div class="text-emerald-600 font-bold">Authorization:</div>
                         <div
                             class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded-md text-slate-600 dark:text-slate-400">
                             Bearer 1|plainTextTokenValue...
                         </div>
                     </div>
                     <div class="space-y-1">
-                        <div class="text-emerald-500 font-bold">Accept:</div>
+                        <div class="text-emerald-600 font-bold">Accept:</div>
                         <div
                             class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-2 rounded-md text-slate-600 dark:text-slate-400">
                             application/json
@@ -197,30 +197,30 @@
   <span class="text-indigo-400">"ads"</span>: [
     {
       <span class="text-indigo-400">"id"</span>: 1045,
-      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-500">"Bitmain Antminer S19 Pro 110Th"</span>,
-      <span class="text-indigo-400">"office"</span>: <span class="text-emerald-500">"Москва"</span>,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-600">"Bitmain Antminer S19 Pro 110Th"</span>,
+      <span class="text-indigo-400">"office"</span>: <span class="text-emerald-600">"Москва"</span>,
       <span class="text-indigo-400">"props"</span>: {
-        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-500">"used"</span>,
-        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-500">"in_stock"</span>,
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-600">"used"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-600">"in_stock"</span>,
         <span class="text-indigo-400">"warranty"</span>: 3,
         <span class="text-indigo-400">"waiting"</span>: <span class="text-indigo-500">null</span>
       },
       <span class="text-indigo-400">"price"</span>: 145000,
-      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-500">"rub"</span>,
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-600">"rub"</span>,
       <span class="text-indigo-400">"with_vat"</span>: <span class="text-indigo-500">false</span>,
       <span class="text-indigo-400">"hidden"</span>: <span class="text-indigo-500">false</span>
     },
     {
       <span class="text-indigo-400">"id"</span>: 1046,
-      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-500">"MicroBT Whatsminer M50 120Th"</span>,
+      <span class="text-indigo-400">"name"</span>: <span class="text-emerald-600">"MicroBT Whatsminer M50 120Th"</span>,
       <span class="text-indigo-400">"props"</span>: {
-        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-500">"new"</span>,
-        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-500">"preorder"</span>,
+        <span class="text-indigo-400">"condition"</span>: <span class="text-emerald-600">"new"</span>,
+        <span class="text-indigo-400">"availability"</span>: <span class="text-emerald-600">"preorder"</span>,
         <span class="text-indigo-400">"warranty"</span>: <span class="text-indigo-500">null</span>,
         <span class="text-indigo-400">"waiting"</span>: 14
       },
       <span class="text-indigo-400">"price"</span>: 1850,
-      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-500">"usdt"</span>,
+      <span class="text-indigo-400">"coin"</span>: <span class="text-emerald-600">"usdt"</span>,
       <span class="text-indigo-400">"with_vat"</span>: <span class="text-indigo-500">true</span>,
       <span class="text-indigo-400">"hidden"</span>: <span class="text-indigo-500">false</span>
     }
