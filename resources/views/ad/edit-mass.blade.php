@@ -24,7 +24,10 @@
                 </div>
 
                 <x-primary-button
-                    @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => pushToastAlert(r.data.message, r.data.success ? 'success' : 'error'))">
+                    @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => {
+                        pushToastAlert(r.data.message, r.data.success ? 'success' : 'error');
+                        changings = [];
+                    })">
                     {{ __('Save') }}
                 </x-primary-button>
             </div>

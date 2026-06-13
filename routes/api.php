@@ -21,7 +21,7 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
     Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'ads'], function () {
             Route::get('/get', [AdController::class, 'get']);
-            Route::post('/update', [AdController::class, 'update']);
+            Route::post('/update', [AdController::class, 'update'])->name('api.ads.update');
         });
     });
 });

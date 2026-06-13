@@ -105,6 +105,18 @@ return [
             'level' => 'info',
         ],
 
+        'price-updating-errors' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/price_updating_errors.log'),
+            'level' => 'info',
+        ],
+
+        'price-updating-check' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/price_updating_check.log'),
+            'level' => 'info',
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

@@ -65,26 +65,42 @@ class AdController extends Controller
             'message' => 'Array ads not found in request bodyfix'
         ], 200);
 
-        $user = $request->user()->load('tariff:id,max_ads');
+        $user = $request->user()->load(['role:id,name', 'tariff:id,max_ads']);
         $activeAdsCount = $user->activeAds()->count();
         $maxAds = $user->tariff?->max_ads ?? config('settings.ads.max_count_without_tariff');
 
         $coins = array_change_key_case(Coin::whereIn('abbreviation', ['usdt', 'rub', 'cny'])->pluck('id', 'abbreviation')->all(), CASE_LOWER);
         $errors = [];
 
+        $changings = collect($request->ads);
+        $adsToChange = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat, user_id'])
+            ->where('moderation', false)->whereIn($changings->pluck('id'))->get();
+
         foreach (
-            collect($request->ads)->sortByDesc(function ($adChanges) {
+            $changings->sortByDesc(function ($adChanges) {
                 return array_key_exists('hidden', $adChanges) && $adChanges['hidden'];
             })->values()->all() as $adChanges
         ) {
-            $ad = Ad::select(['id', 'hidden', 'props', 'price', 'coin_id', 'with_vat'])->find($adChanges['id']);
+            $ad = $adsToChange->where('id', $adChanges['id'])->first();
 
             if (!$ad) {
                 array_push($errors, [
                     'id' => $adChanges['id'],
                     'error' => [
                         'field' => 'id',
-                        'message' => "Ad with id {$adChanges['id']} does not exists."
+                        'message' => "Ad with id {$adChanges['id']} does not exists or is under moderation."
+                    ]
+                ]);
+
+                continue;
+            }
+
+            if (!($user->role->name == 'admin' || $ad->user_id == $user->id)) {
+                array_push($errors, [
+                    'id' => $adChanges['id'],
+                    'error' => [
+                        'field' => 'forbidden',
+                        'message' => "You do not have permission to edit this ad."
                     ]
                 ]);
 

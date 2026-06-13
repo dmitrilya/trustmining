@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('difficulty-notification:send')->twiceDaily(2, 14);
         $schedule->command('trustfactors:update')->dailyAt('00:30');
         $schedule->command('forumscore:update')->dailyAt('01:30');
+        $schedule->command('price:update')->dailyAt('10:12');
         $schedule->command('auth:clear-resets')->daily();
     }
 
