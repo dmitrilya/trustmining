@@ -63,11 +63,12 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['Pushminer', 'GIS mining'])->with('moderatedAds')->get();
+        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology'])->with('moderatedAds')->get();
         $changings = [];
 
         //$changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
         //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
         dd($changings);
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -224,7 +225,10 @@ class UpdatePrices extends Command
 
                 $ad = null;
                 $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
-                    if ($item->asic_version_id == $version->id) {
+                    if (
+                        $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                        && 'Preorder' == $item->props['Availability']
+                    ) {
                         $ad = $ads->pull($key);
                         return false;
                     }
@@ -294,18 +298,12 @@ class UpdatePrices extends Command
                 if ($tds->item(0) === null) continue;
 
                 $name = trim($xpath->query('.//a', $tds->item(0))->item(0)->textContent);
-                if (explode(' ', $name)[0] == 'Bitmain') $name = str_replace('Bitmain ', '', $name); 
+                if (explode(' ', $name)[0] == 'Bitmain') $name = str_replace('Bitmain ', '', $name);
                 $name = str_replace(' ', '', strtolower($name));
                 $rate = (float) explode(' ', trim($tds->item(2)->textContent))[0];
                 $price = (float) str_replace(' ', '', str_replace('$', '', trim($tds->item(4)->textContent)));
 
-                $variants = [
-                    $name,
-                    str_replace('hydro', 'hyd', $name),
-                    str_replace('-', '', $name)
-                ];
-
-                $corrs = $this->models->whereIn('name', $variants);
+                $corrs = $this->models->where('name', $name);
                 if ($corrs->count() != 1) {
                     $check->push('[Нет модели] ' . $name . ' ' . $rate);
                     continue;
@@ -314,13 +312,21 @@ class UpdatePrices extends Command
                 $model = $corrs->first();
                 $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                 if (!$version) {
-                    $check->push('[Нет версии] ' . $name . ' ' . $rate);
-                    continue;
+                    $model = $this->models->where('name', $name . 'hyd');
+                    $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+
+                    $if (!$version) {
+                        $check->push('[Нет версии] ' . $name . ' ' . $rate);
+                        continue;
+                    }
                 }
 
                 $ad = null;
                 $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
-                    if ($item->asic_version_id == $version->id) {
+                    if (
+                        $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                        && 'Preorder' == $item->props['Availability']
+                    ) {
                         $ad = $ads->pull($key);
                         return false;
                     }
@@ -334,7 +340,7 @@ class UpdatePrices extends Command
                 if ($ad->price != $price) $changings->push([
                     'id' => $ad->id,
                     'price' => $price,
-                    'coin_id' => 2
+                    'coin_id' => 1
                 ]);
             }
 
