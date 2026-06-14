@@ -63,13 +63,14 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology', 'Mining Depot'])->with('moderatedAds')->get();
+        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems'])->with('moderatedAds')->get();
         $changings = [];
 
         //$changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
         //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
         //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
         dd($changings);
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -447,7 +448,7 @@ class UpdatePrices extends Command
                     if ($ad->price != $price) $changings->push([
                         'id' => $ad->id,
                         'price' => $price,
-                        'coin_id' => 1
+                        'coin_id' => 2
                     ]);
                 }
             } while (trim($xpath->query('.//div[contains(@class, "price")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'Цена по запросу');
@@ -462,6 +463,97 @@ class UpdatePrices extends Command
             if ($check->count()) Log::channel('price-updating-check')->info("[MINING DEPOT]\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[MINING DEPOT] {$e->getMessage()}");
+        }
+
+        return $changings->toArray();
+    }
+
+    private function intelion(?User $user): array
+    {
+        $changings = collect();
+
+        try {
+            $ads = $user->moderatedAds;
+            $check = collect();
+            $p = 1;
+
+            do {
+                $html = file_get_contents('https://intelionmine.ru/catalog/asic-miners?sort=price_desc&page=' . $p);
+                $p++;
+
+                $dom = new DOMDocument();
+                @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                $xpath = new DOMXPath($dom);
+
+                $currentPageCards = $xpath->query('//div[contains(@class, "catalog__grid__main")]//div[contains(@class, "i-catalog-item__info")]');
+
+                if ($currentPageCards->length === 0) break;
+
+                foreach ($currentPageCards as $i => $card) {
+                    $price = trim($xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $card)->item(0)->textContent);
+                    if ($price === 'По запросу') break;
+
+                    $fullName = trim($xpath->query('.//span[contains(@class, "i-catalog-item__name")]', $card)->item(0)->textContent);
+                    $name = $this->parseModelName($fullName, true);
+                    //if ($name[1] == 'antmineru3s21exph') $name[1] = 'antminers21exphyd3u';
+                    $nameWithBrand = $name[0] . $name[1];
+
+                    $variants = [
+                        $name[1],
+                        $nameWithBrand,
+                        str_replace('hydro', 'hyd', $nameWithBrand),
+                        str_replace('-', '', $nameWithBrand)
+                    ];
+                    $rate = (float) $name[2];
+                    $price = (float) preg_replace('/\D/u', '', $price);
+
+                    $corrs = $this->models->whereIn('name', $variants);
+                    if ($corrs->count() != 1) {
+                        $check->push('[Нет модели] ' . $fullName);
+                        continue;
+                    }
+
+                    $model = $corrs->first();
+                    $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                    if (!$version) {
+                        $check->push('[Нет версии] ' . $fullName);
+                        continue;
+                    }
+
+                    $ad = null;
+                    $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                        if (
+                            $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                            && 'Preorder' == $item->props['Availability']
+                        ) {
+                            $ad = $ads->pull($key);
+                            return false;
+                        }
+                    });
+
+                    if (!$ad) {
+                        $check->push('[Нет объявления] ' . $fullName);
+                        continue;
+                    }
+
+                    if ($ad->price != $price) $changings->push([
+                        'id' => $ad->id,
+                        'price' => $price,
+                        'coin_id' => 2
+                    ]);
+                }
+            } while (trim($xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'По запросу');
+
+            foreach ($ads->where('price', '!=', 0) as $ad) {
+                $changings->push([
+                    'id' => $ad->id,
+                    'price' => 0,
+                ]);
+            }
+
+            if ($check->count()) Log::channel('price-updating-check')->info("[INTELION]\n" . implode("\n", $check->toArray()));
+        } catch (Exception $e) {
+            Log::channel('price-updating-errors')->info("[INTELION] {$e->getMessage()}");
         }
 
         return $changings->toArray();
