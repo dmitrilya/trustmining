@@ -300,6 +300,7 @@ class UpdatePrices extends Command
                 $name = trim($xpath->query('.//a', $tds->item(0))->item(0)->textContent);
                 if (explode(' ', $name)[0] == 'Bitmain') $name = str_replace('Bitmain ', '', $name);
                 $name = preg_replace('/[\s\p{Cyrillic}]+/u', '', strtolower($name));
+                if ($name == 'antmineru3s21exph') $name = 'antminers21exphyd3u';
                 $rate = (float) explode(' ', trim($tds->item(2)->textContent))[0];
                 $price = (float) str_replace(' ', '', str_replace('$', '', trim($tds->item(4)->textContent)));
 
