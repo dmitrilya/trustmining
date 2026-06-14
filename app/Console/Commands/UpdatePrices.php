@@ -85,14 +85,13 @@ class UpdatePrices extends Command
 
         $rate = null;
 
-        if ($withRate && preg_match('/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol)\b/u', $lower, $matches)) {
+        if ($withRate && preg_match('/(?<!\w)(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol)(?!\w)/u', $lower, $matches)) {
             $rateValue = str_replace(',', '.', $matches[1]);
             $rate = is_numeric($rateValue) ? (float)$rateValue : null;
 
             if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
         }
-
-        $cleaned = preg_replace('/\b\d+(?:[,.]\d+)?\s*(th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol|w)\b/u', '', $lower);
+        $cleaned = preg_replace('/(?<!\w)\d+(?:[,.]\d+)?\s*(th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol|w)(?!\w)/u', '', $lower);
         $words = array_values(array_filter(explode(' ', $cleaned)));
 
         if (empty($words)) return $withRate ? ['', '', null] : ['', ''];
