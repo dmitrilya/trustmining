@@ -54,7 +54,7 @@ class UpdateCoinProfit extends Command
                 $algorithm = $algos->where('name', $coin->algorithm)->first();
                 if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
 
-                $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                     array_search(substr($algorithm->measurement, 0, 1), $measurements);
                 $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, $coef);
                 $fee = $coin->coinType == 'BTC' ? 0.9 : (1 - collect($coin->miningType)->min('percent')) * 100;
@@ -88,7 +88,7 @@ class UpdateCoinProfit extends Command
                     $algorithm = $algos->where('name', $coin->algorithm)->first();
                     if (!$algorithm) return;
 
-                    $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                    $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                     array_search(substr($algorithm->measurement, 0, 1), $measurements);
                     if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, $coef);
                     if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;

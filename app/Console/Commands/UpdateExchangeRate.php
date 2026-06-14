@@ -97,7 +97,7 @@ class UpdateExchangeRate extends Command
             'moderatedReviews:reviewable_id,reviewable_type,rating'
         ])->get()->map(function ($model) use ($measurements, $algorithms) {
             $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
-            $am = in_array(strtolower($model->algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+            $am = in_array(strtolower($model->algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                 array_search(substr($model->algorithm->measurement, 0, 1), $measurements);
 
             $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model) {
@@ -132,7 +132,7 @@ class UpdateExchangeRate extends Command
                     }
                 }
                 $version->price_data = $priceData;
-                $vm = in_array(strtolower($version->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                $vm = in_array(strtolower($version->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                     array_search(substr($version->measurement, 0, 1), $measurements);
                 $version->coef = pow(1000, $vm - $am);
                 $version->profits = $algorithm->maxProfit->map(fn($profit) => [

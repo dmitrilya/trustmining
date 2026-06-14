@@ -81,7 +81,7 @@ class ComparisonTextService
                     round(($m1->data->asicVersions->first()->original_hashrate - $m2->data->asicVersions->first()->original_hashrate) / $m1->data->asicVersions->first()->original_hashrate * 100, 2) :
                     round(($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) / $m2->data->asicVersions->first()->original_hashrate * 100, 2),
                 'diffValue' => abs($m2->data->asicVersions->first()->original_hashrate - $m1->data->asicVersions->first()->original_hashrate) /
-                    pow(1000, (in_array(strtolower($m1->data->algorithm->measurement), ['h', 'sol', 'g', 'c']) ? 0 :
+                    pow(1000, (in_array(strtolower($m1->data->algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                         array_search(substr($m1->data->algorithm->measurement, 0, 1), $measurements))) . ' ' . $m1->data->algorithm->measurement,
             ]);
         }
