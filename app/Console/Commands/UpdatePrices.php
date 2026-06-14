@@ -490,8 +490,11 @@ class UpdatePrices extends Command
                 if ($currentPageCards->length === 0) break;
 
                 foreach ($currentPageCards as $i => $card) {
-                    $price = trim($xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $card)->item(0)->textContent);
-                    if ($price === 'По запросу') break;
+                    $price = $xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $card)->item(0);
+                    if (!$price) {
+                        $price = $xpath->query('.//span[contains(@class, "i-catalog-item__price__on-request")]', $card)->item(0);
+                        if ($price) break;
+                    }
 
                     $fullName = trim($xpath->query('.//span[contains(@class, "i-catalog-item__name")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
@@ -505,7 +508,7 @@ class UpdatePrices extends Command
                         str_replace('-', '', $nameWithBrand)
                     ];
                     $rate = (float) $name[2];
-                    $price = (float) preg_replace('/\D/u', '', $price);
+                    $price = (float) preg_replace('/\D/u', '', trim($price->textContent));
 
                     $corrs = $this->models->whereIn('name', $variants);
                     if ($corrs->count() != 1) {
@@ -542,7 +545,7 @@ class UpdatePrices extends Command
                         'coin_id' => 2
                     ]);
                 }
-            } while (trim($xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'По запросу');
+            } while (!$xpath->query('.//span[contains(@class, "i-catalog-item__price__on-request")]', $currentPageCards->item($currentPageCards->length - 1))->item(0));
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
                 $changings->push([
