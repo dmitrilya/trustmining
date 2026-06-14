@@ -394,12 +394,12 @@ class UpdatePrices extends Command
                 @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
                 $xpath = new DOMXPath($dom);
 
-                $currentPageCards = $xpath->query('//div[contains(@class, "list-catalog")]//div[contains(@class, "info")]');
+                $currentPageCards = $xpath->query('//div[@class="list-catalog"]//div[@class="info"]');
 
                 if ($currentPageCards->length === 0) break;
 
                 foreach ($currentPageCards as $i => $card) {
-                    $price = trim($xpath->query('.//div[contains(@class, "price")]', $card)->item(0)->textContent);
+                    $price = trim($xpath->query('.//div[@class="price"]', $card)->item(0)->textContent);
                     if ($price === 'Цена по запросу') break;
 
                     $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
@@ -451,7 +451,7 @@ class UpdatePrices extends Command
                         'coin_id' => 2
                     ]);
                 }
-            } while (trim($xpath->query('.//div[contains(@class, "price")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'Цена по запросу');
+            } while (trim($xpath->query('.//div[@class="price"]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'Цена по запросу');
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
                 $changings->push([
@@ -485,15 +485,15 @@ class UpdatePrices extends Command
                 @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
                 $xpath = new DOMXPath($dom);
 
-                $currentPageCards = $xpath->query('//div[contains(@class, "catalog__grid__main")]//div[contains(@class, "i-catalog-item__info")]');
+                $currentPageCards = $xpath->query('//div[@class="catalog__grid__main"]//div[@class="i-catalog-item__info"]');
 
                 if ($currentPageCards->length === 0) break;
 
                 foreach ($currentPageCards as $i => $card) {
-                    $price = trim($xpath->query('.//span[contains(@class, "i-catalog-item__price__number")]', $card)->item(0)->textContent);
+                    $price = trim($xpath->query('.//span[@class="i-catalog-item__price__number"]', $card)->item(0)->textContent);
                     if ($price === 'По запросу') break;
 
-                    $fullName = trim($xpath->query('.//span[contains(@class, "i-catalog-item__name")]', $card)->item(0)->textContent);
+                    $fullName = trim($xpath->query('.//span[@class="i-catalog-item__name"]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
                     //if ($name[1] == 'antmineru3s21exph') $name[1] = 'antminers21exphyd3u';
                     $nameWithBrand = $name[0] . $name[1];
