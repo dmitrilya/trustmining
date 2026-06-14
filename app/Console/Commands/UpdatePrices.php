@@ -63,12 +63,13 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology'])->with('moderatedAds')->get();
+        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology', 'Mining Depot'])->with('moderatedAds')->get();
         $changings = [];
 
         //$changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
         //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        $changings = array_merge($changings, $this->ibmm($users->where('name', 'Mining Depot')->first()));
         dd($changings);
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -76,6 +77,32 @@ class UpdatePrices extends Command
         ])->post(route('api.ads.update'), ['ads' => $changings]);
 
         return Command::SUCCESS;
+    }
+
+    private function parseModelName(string $name, bool $withRate = false): array
+    {
+        $lower = mb_strtolower($name, 'UTF-8');
+
+        $rate = null;
+
+        if ($withRate && preg_match('/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol)\b/u', $lower, $matches)) {
+            $rateValue = str_replace(',', '.', $matches[1]);
+            $rate = is_numeric($rateValue) ? (float)$rateValue : null;
+
+            if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
+        }
+
+        $cleaned = preg_replace('/\b\d+(?:[,.]\d+)?\s*(th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol|w)\b/u', '', $lower);
+        $words = array_values(array_filter(explode(' ', $cleaned)));
+
+        if (empty($words)) return $withRate ? ['', '', null] : ['', ''];
+
+        $brand = $words[0];
+        $model = implode('', array_slice($words, 1));
+
+        if ($withRate) return [$brand, $model, $rate];
+
+        return [$brand, $model];
     }
 
     private function pushminer(?User $user): array
@@ -195,13 +222,15 @@ class UpdatePrices extends Command
 
                 if ($tds->item(0) === null) continue;
 
-                $gisName = trim($tds->item(0)->textContent);
+                $fullName = trim($tds->item(0)->textContent);
+                $name = $this->parseModelName($fullName);
 
-                $name = $this->parseModelGis($gisName);
                 if ($name[1] == 'l11hu2') $name[1] = 'l11hyd2u';
                 elseif ($name[1] == 'l11' && explode(' ', $tds->item(3)->textContent)[0] == 21000) $name[1] = 'l11pro';
                 elseif ($name[1] == 'dghome1+') $name[1] = 'dghome1';
+
                 $nameWithBrand = implode('', $name);
+
                 $variants = [
                     $name[1],
                     $nameWithBrand,
@@ -211,7 +240,7 @@ class UpdatePrices extends Command
 
                 $corrs = $this->models->whereIn('name', $variants);
                 if ($corrs->count() != 1) {
-                    $check->push('[Нет модели] ' . $gisName);
+                    $check->push('[Нет модели] ' . $fullName);
                     continue;
                 }
 
@@ -219,7 +248,7 @@ class UpdatePrices extends Command
                 $rate = (float) explode(' ', $tds->item(3)->textContent)[0];
                 $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                 if (!$version) {
-                    $check->push('[Нет версии] ' . $gisName);
+                    $check->push('[Нет версии] ' . $fullName);
                     continue;
                 }
 
@@ -235,7 +264,7 @@ class UpdatePrices extends Command
                 });
 
                 if (!$ad) {
-                    $check->push('[Нет объявления] ' . $gisName);
+                    $check->push('[Нет объявления] ' . $fullName);
                     continue;
                 }
 
@@ -260,22 +289,6 @@ class UpdatePrices extends Command
         }
 
         return $changings->toArray();
-    }
-
-    private function parseModelGis(string $name): array
-    {
-        $lower = mb_strtolower($name, 'UTF-8');
-        $cleaned = preg_replace('/\b\d+(?:[,.]\d+)?\s*(th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol|w)\b/u', '', $lower);
-        $words = array_values(array_filter(explode(' ', $cleaned)));
-
-        if (empty($words)) return ['', ''];
-
-        $brand = $words[0];
-
-        $modelParts = array_slice($words, 1);
-        $model = implode('', $modelParts);
-
-        return [$brand, $model];
     }
 
     private function ibmm(?User $user): array
@@ -307,7 +320,7 @@ class UpdatePrices extends Command
                 $corrs = $this->models->where('name', $name);
                 if ($corrs->count() != 1) {
                     $corrs = $this->models->where('name', $name . 'hyd');
-                    
+
                     if ($corrs->count() != 1) {
                         $check->push('[Нет модели] ' . $name . ' ' . $rate);
                         continue;
@@ -359,6 +372,99 @@ class UpdatePrices extends Command
             if ($check->count()) Log::channel('price-updating-check')->info("[IBMM]\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[IBMM] {$e->getMessage()}");
+        }
+
+        return $changings->toArray();
+    }
+
+    private function miningdepot(?User $user): array
+    {
+        $changings = collect();
+
+        try {
+            $cards = [];
+            $p = 1;
+
+            do {
+                $html = file_get_contents('https://mining-depot.ru/catalog/asicminers/?sort=price_desc&PAGEN_1=' . $p);
+                $p++;
+                $ads = $user->moderatedAds;
+
+                $check = collect();
+
+                $dom = new DOMDocument();
+                @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                $xpath = new DOMXPath($dom);
+
+                $currentPageCards = $xpath->query('//div[contains(@class, "list-catalog")]//div[contains(@class, "info")]');
+
+                if ($currentPageCards->length === 0) break;
+
+                $cards = array_merge($cards, iterator_to_array($currentPageCards));
+            } while (trim($xpath->query('.//div[contains(@class, "price")]', end($cards))->item(0)->textContent) !== 'Цена по запросу');
+
+            foreach ($cards as $i => $card) {
+                $price = trim($xpath->query('.//div[contains(@class, "price")]', $card)->item(0)->textContent);
+                if ($price === 'Цена по запросу') break;
+
+                $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
+                $name = $this->parseModelName($fullName, true);
+                $nameWithBrand = $name[0].$name[1];
+
+                $variants = [
+                    $name[1],
+                    $nameWithBrand,
+                    str_replace('hydro', 'hyd', $nameWithBrand),
+                    str_replace('-', '', $nameWithBrand)
+                ];
+                $rate = (float) $name[2];
+
+                $corrs = $this->models->whereIn('name', $variants);
+                if ($corrs->count() != 1) {
+                    $check->push('[Нет модели] ' . $fullName);
+                    continue;
+                }
+
+                $model = $corrs->first();
+                $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                if (!$version) {
+                    $check->push('[Нет версии] ' . $fullName);
+                    continue;
+                }
+
+                $ad = null;
+                $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                    if (
+                        $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                        && 'Preorder' == $item->props['Availability']
+                    ) {
+                        $ad = $ads->pull($key);
+                        return false;
+                    }
+                });
+
+                if (!$ad) {
+                    $check->push('[Нет объявления] ' . $fullName);
+                    continue;
+                }
+
+                if ($ad->price != $price) $changings->push([
+                    'id' => $ad->id,
+                    'price' => $price,
+                    'coin_id' => 1
+                ]);
+            }
+
+            foreach ($ads->where('price', '!=', 0) as $ad) {
+                $changings->push([
+                    'id' => $ad->id,
+                    'price' => 0,
+                ]);
+            }
+
+            if ($check->count()) Log::channel('price-updating-check')->info("[MINING DEPOT]\n" . implode("\n", $check->toArray()));
+        } catch (Exception $e) {
+            Log::channel('price-updating-errors')->info("[MINING DEPOT] {$e->getMessage()}");
         }
 
         return $changings->toArray();
