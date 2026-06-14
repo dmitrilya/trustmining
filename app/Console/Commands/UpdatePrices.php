@@ -414,6 +414,7 @@ class UpdatePrices extends Command
                         str_replace('-', '', $nameWithBrand)
                     ];
                     $rate = (float) $name[2];
+                    $price = (float) preg_replace('/\D/u', '', $price);
 
                     $corrs = $this->models->whereIn('name', $variants);
                     if ($corrs->count() != 1) {
