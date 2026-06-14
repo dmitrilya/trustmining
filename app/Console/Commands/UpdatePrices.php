@@ -69,7 +69,7 @@ class UpdatePrices extends Command
         //$changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
         //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
         //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        $changings = array_merge($changings, $this->ibmm($users->where('name', 'Mining Depot')->first()));
+        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
         dd($changings);
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -382,13 +382,12 @@ class UpdatePrices extends Command
         $changings = collect();
 
         try {
-            $cards = [];
+            $ads = $user->moderatedAds;
             $p = 1;
 
             do {
                 $html = file_get_contents('https://mining-depot.ru/catalog/asicminers/?sort=price_desc&PAGEN_1=' . $p);
                 $p++;
-                $ads = $user->moderatedAds;
 
                 $check = collect();
 
@@ -400,60 +399,58 @@ class UpdatePrices extends Command
 
                 if ($currentPageCards->length === 0) break;
 
-                $cards = array_merge($cards, iterator_to_array($currentPageCards));
-            } while (trim($xpath->query('.//div[contains(@class, "price")]', end($cards))->item(0)->textContent) !== 'Цена по запросу');
+                foreach ($currentPageCards as $i => $card) {
+                    $price = trim($xpath->query('.//div[contains(@class, "price")]', $card)->item(0)->textContent);
+                    if ($price === 'Цена по запросу') break;
 
-            foreach ($cards as $i => $card) {
-                $price = trim($xpath->query('.//div[contains(@class, "price")]', $card)->item(0)->textContent);
-                if ($price === 'Цена по запросу') break;
+                    $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
+                    $name = $this->parseModelName($fullName, true);
+                    $nameWithBrand = $name[0] . $name[1];
 
-                $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
-                $name = $this->parseModelName($fullName, true);
-                $nameWithBrand = $name[0].$name[1];
+                    $variants = [
+                        $name[1],
+                        $nameWithBrand,
+                        str_replace('hydro', 'hyd', $nameWithBrand),
+                        str_replace('-', '', $nameWithBrand)
+                    ];
+                    $rate = (float) $name[2];
 
-                $variants = [
-                    $name[1],
-                    $nameWithBrand,
-                    str_replace('hydro', 'hyd', $nameWithBrand),
-                    str_replace('-', '', $nameWithBrand)
-                ];
-                $rate = (float) $name[2];
-
-                $corrs = $this->models->whereIn('name', $variants);
-                if ($corrs->count() != 1) {
-                    $check->push('[Нет модели] ' . $fullName);
-                    continue;
-                }
-
-                $model = $corrs->first();
-                $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
-                if (!$version) {
-                    $check->push('[Нет версии] ' . $fullName);
-                    continue;
-                }
-
-                $ad = null;
-                $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
-                    if (
-                        $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
-                        && 'Preorder' == $item->props['Availability']
-                    ) {
-                        $ad = $ads->pull($key);
-                        return false;
+                    $corrs = $this->models->whereIn('name', $variants);
+                    if ($corrs->count() != 1) {
+                        $check->push('[Нет модели] ' . $fullName);
+                        continue;
                     }
-                });
 
-                if (!$ad) {
-                    $check->push('[Нет объявления] ' . $fullName);
-                    continue;
+                    $model = $corrs->first();
+                    $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                    if (!$version) {
+                        $check->push('[Нет версии] ' . $fullName);
+                        continue;
+                    }
+
+                    $ad = null;
+                    $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                        if (
+                            $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                            && 'Preorder' == $item->props['Availability']
+                        ) {
+                            $ad = $ads->pull($key);
+                            return false;
+                        }
+                    });
+
+                    if (!$ad) {
+                        $check->push('[Нет объявления] ' . $fullName);
+                        continue;
+                    }
+
+                    if ($ad->price != $price) $changings->push([
+                        'id' => $ad->id,
+                        'price' => $price,
+                        'coin_id' => 1
+                    ]);
                 }
-
-                if ($ad->price != $price) $changings->push([
-                    'id' => $ad->id,
-                    'price' => $price,
-                    'coin_id' => 1
-                ]);
-            }
+            } while (trim($xpath->query('.//div[contains(@class, "price")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'Цена по запросу');
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
                 $changings->push([
