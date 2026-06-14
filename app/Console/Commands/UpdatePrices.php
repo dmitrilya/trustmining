@@ -505,6 +505,7 @@ class UpdatePrices extends Command
                         $name[1],
                         $nameWithBrand,
                         str_replace('hydro', 'hyd', $nameWithBrand),
+                        str_replace('hydro', 'hyd', $name[1]),
                         str_replace('-', '', $nameWithBrand)
                     ];
                     $rate = (float) $name[2];
