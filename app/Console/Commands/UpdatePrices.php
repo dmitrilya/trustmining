@@ -383,13 +383,12 @@ class UpdatePrices extends Command
 
         try {
             $ads = $user->moderatedAds;
+            $check = collect();
             $p = 1;
 
             do {
                 $html = file_get_contents('https://mining-depot.ru/catalog/asicminers/?sort=price_desc&PAGEN_1=' . $p);
                 $p++;
-
-                $check = collect();
 
                 $dom = new DOMDocument();
                 @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
@@ -405,6 +404,7 @@ class UpdatePrices extends Command
 
                     $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
+                    if ($name[1] == 'antmineru3s21exph') $name[1] = 'antminers21exphyd3u';
                     $nameWithBrand = $name[0] . $name[1];
 
                     $variants = [
