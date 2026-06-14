@@ -299,23 +299,27 @@ class UpdatePrices extends Command
 
                 $name = trim($xpath->query('.//a', $tds->item(0))->item(0)->textContent);
                 if (explode(' ', $name)[0] == 'Bitmain') $name = str_replace('Bitmain ', '', $name);
-                $name = str_replace(' ', '', strtolower($name));
+                $name = preg_replace('/[\s\p{Cyrillic}]+/u', '', strtolower($name));
                 $rate = (float) explode(' ', trim($tds->item(2)->textContent))[0];
                 $price = (float) str_replace(' ', '', str_replace('$', '', trim($tds->item(4)->textContent)));
 
                 $corrs = $this->models->where('name', $name);
                 if ($corrs->count() != 1) {
-                    $check->push('[Нет модели] ' . $name . ' ' . $rate);
-                    continue;
+                    $corrs = $this->models->where('name', $name . 'hyd');
+                    
+                    if ($corrs->count() != 1) {
+                        $check->push('[Нет модели] ' . $name . ' ' . $rate);
+                        continue;
+                    }
                 }
 
                 $model = $corrs->first();
                 $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                 if (!$version) {
-                    $model = $this->models->where('name', $name . 'hyd');
-                    $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                    $model = $this->models->where('name', $name . 'hyd')->first();
+                    if ($model) $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
 
-                    $if (!$version) {
+                    if (!$version) {
                         $check->push('[Нет версии] ' . $name . ' ' . $rate);
                         continue;
                     }
