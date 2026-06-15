@@ -82,7 +82,7 @@ class UpdatePrices extends Command
 
     private function parseModelName(string $name, bool $withRate = false): array
     {
-        $lower = mb_strtolower(str_replace("\xc2\xa0", ' ', $name), 'UTF-8');
+        $lower = preg_replace('/\b-?mix\b/u', '', mb_strtolower(str_replace("\xc2\xa0", ' ', $name), 'UTF-8'));
         $rate = null;
 
         if ($withRate && preg_match('/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol)\b/u', $lower, $matches)) {
