@@ -63,10 +63,10 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems'])->with('moderatedAds')->get();
+        $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems'])->with('moderatedAds')->get();
         $changings = [];
 
-        $changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
+        $changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
         $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
         $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
         $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
