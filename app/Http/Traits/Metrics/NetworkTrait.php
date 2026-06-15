@@ -52,13 +52,6 @@ trait NetworkTrait
             foreach ($difficulties as $i => $difficulty) {
                 if (!isset($difficulties[$i + 1])) return null;
 
-                if (!$needBlocksTime && $i == 6) {
-                    if ($difficulty->need_blocks - $lastDifficulty->need_blocks == 0) continue;
-                    $blockTime = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks);
-                    $needBlocksTime = $this->needBlocksTime($lastDifficulty, $blockTime);
-                    $prediction = round((($coin->target / $blockTime) - 1) * 100, 2);
-                }
-
                 if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
                     if (!$needBlocksTime) {
                         if ($i == 0) $needBlocksTime = __('Time calculation');

@@ -66,10 +66,10 @@ class UpdatePrices extends Command
         $users = User::whereIn('name', ['Pushminer', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems'])->with('moderatedAds')->get();
         $changings = [];
 
-        //$changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
-        //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        $changings = array_merge($changings, $this->pushminer($users->where('name', 'Pushminer')->first()));
+        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
         $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
         dd($changings);
         if (count($changings)) Http::withHeaders([
