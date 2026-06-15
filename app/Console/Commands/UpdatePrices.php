@@ -71,7 +71,7 @@ class UpdatePrices extends Command
         $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
         $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
         $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
-        dd($changings);
+
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
             'Accept'        => 'application/json',
@@ -133,6 +133,7 @@ class UpdatePrices extends Command
 
                 if ($row['Производитель'] == 'Bitmain') $name = 'antminer' . $name;
                 elseif ($row['Производитель'] == 'Whatsminer') $name = 'whatsminer' . explode(' ', $name)[0];
+                elseif ($row['Модель'] == 'EZ100' && $row['Хэшрэйт'] == 4000) $name = 'ez100-c';
 
                 $name = str_replace(' ', '', $name);
                 $variants = [
@@ -199,7 +200,7 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if ($check->count()) Log::channel('price-updating-check')->info("[PUSHMINER]\n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[PUSHMINER]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[PUSHMINER] {$e->getMessage()}");
         }
@@ -287,7 +288,7 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if ($check->count()) Log::channel('price-updating-check')->info("[GIS MINING]\n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[GIS MINING]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[GIS MINING] {$e->getMessage()}");
         }
@@ -373,7 +374,7 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if ($check->count()) Log::channel('price-updating-check')->info("[IBMM]\n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[IBMM]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[IBMM] {$e->getMessage()}");
         }
@@ -464,7 +465,7 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if ($check->count()) Log::channel('price-updating-check')->info("[MINING DEPOT]\n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[MINING DEPOT]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[MINING DEPOT] {$e->getMessage()}");
         }
@@ -558,7 +559,7 @@ class UpdatePrices extends Command
                 ]);
             }
 
-            if ($check->count()) Log::channel('price-updating-check')->info("[INTELION]\n" . implode("\n", $check->toArray()));
+            if ($check->count()) Log::channel('price-updating-check')->info("[INTELION]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[INTELION] {$e->getMessage()}");
         }
