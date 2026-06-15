@@ -456,6 +456,8 @@ class UpdatePrices extends Command
                         'coin_id' => 2
                     ]);
                 }
+
+                usleep(100000);
             } while (trim($xpath->query('.//div[contains(@class, "price")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) !== 'Цена по запросу');
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
@@ -550,6 +552,8 @@ class UpdatePrices extends Command
                         'coin_id' => 2
                     ]);
                 }
+
+                usleep(100000);
             } while (!$xpath->query('.//span[contains(@class, "i-catalog-item__price__on-request")]', $currentPageCards->item($currentPageCards->length - 1))->item(0));
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
