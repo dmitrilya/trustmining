@@ -85,14 +85,18 @@ class UpdatePrices extends Command
         $lower = preg_replace('/\b-?mix\b/u', '', mb_strtolower(str_replace("\xc2\xa0", ' ', $name), 'UTF-8'));
         $rate = null;
 
-        if ($withRate && preg_match('/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol)\b/u', $lower, $matches)) {
+        $rateRegex = '/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|(?:[tkmg](?![a-z0-9+])))\b/u';
+
+        if ($withRate && preg_match($rateRegex, $lower, $matches)) {
             $rateValue = str_replace(',', '.', $matches[1]);
             $rate = is_numeric($rateValue) ? (float)$rateValue : null;
 
             if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
         }
+        
+        $cleanRegex = '/\b\d+(?:[,.]\d+)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
+        $cleaned = preg_replace($cleanRegex, '', $lower);
 
-        $cleaned = preg_replace('/\b\d+(?:[,.]\d+)?\s*(th\/s|th|mh\/s|mh|gh\/s|gh|ksol\/s|ksol|w)\b/u', '', $lower);
         $words = array_values(array_filter(explode(' ', $cleaned)));
 
         if (empty($words)) return $withRate ? ['', '', null] : ['', ''];
