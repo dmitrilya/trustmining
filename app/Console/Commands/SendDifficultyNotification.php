@@ -46,7 +46,7 @@ class SendDifficultyNotification extends Command
             if ($now->diffInDays(Carbon::parse('2026-01-01')) % 3 === 0) $types[] = 'Every 3 days';
         }
 
-        $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name,predictionable'])
+        $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name,target'])
             ->whereHas('difficultySubscriptionType', fn($q) => $q->whereIn('name', $types))->get()->groupBy('coin_id')->map(fn($group) => [
                 'name' => $group[0]->coin->name,
                 'difficultyData' => $this->difficultyData($group[0]->coin),

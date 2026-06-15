@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedDouble('reward_block', 16, 8)->nullable();
             $table->unsignedTinyInteger('merged_group')->nullable();
             $table->boolean('paymentable')->default(false);
-            $table->boolean('predictionable')->default(false);
+            $table->smallInteger('target')->nullable();
             $table->timestamps();
         });
     }

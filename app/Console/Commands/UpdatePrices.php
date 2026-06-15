@@ -93,7 +93,7 @@ class UpdatePrices extends Command
 
             if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
         }
-        
+
         $cleanRegex = '/\b\d+(?:[,.]\d+)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
         $cleaned = preg_replace($cleanRegex, '', $lower);
 
@@ -502,7 +502,6 @@ class UpdatePrices extends Command
 
                     $fullName = trim($xpath->query('.//span[contains(@class, "i-catalog-item__name")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
-                    //if ($name[1] == 'antmineru3s21exph') $name[1] = 'antminers21exphyd3u';
                     $nameWithBrand = $name[0] . $name[1];
 
                     $variants = [

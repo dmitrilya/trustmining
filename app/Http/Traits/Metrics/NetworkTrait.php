@@ -46,7 +46,7 @@ trait NetworkTrait
         $prediction = null;
         $needBlocksTime = null;
 
-        if ($coin->predictionable) {
+        if ($coin->target) {
             $recalculateDates = [];
 
             foreach ($difficulties as $i => $difficulty) {
@@ -54,21 +54,25 @@ trait NetworkTrait
 
                 if (!$needBlocksTime && $i == 6) {
                     if ($difficulty->need_blocks - $lastDifficulty->need_blocks == 0) continue;
-                    $needBlocksTime = $this->needBlocksTime($lastDifficulty, $difficulty);
+                    $blockTime = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks);
+                    $needBlocksTime = $this->needBlocksTime($lastDifficulty, $blockTime);
+                    $prediction = round((($coin->target / $blockTime) - 1) * 100, 2);
                 }
 
                 if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
                     if (!$needBlocksTime) {
                         if ($i == 0) $needBlocksTime = __('Time calculation');
-                        else $needBlocksTime = $this->needBlocksTime($lastDifficulty, $difficulty);
+                        else {
+                            $blockTime = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks);
+                            $needBlocksTime = $this->needBlocksTime($lastDifficulty, $blockTime);
+                            $prediction = round((($coin->target / $blockTime) - 1) * 100, 2);
+                        }
                     }
 
                     array_push($recalculateDates, $difficulty->created_at);
                     if (count($recalculateDates) == 2) break;
                 }
             }
-
-            $prediction = round(($coin->networkHashrates()->where('created_at', '>', Carbon::createFromTimestamp($recalculateDates[0]))->avg('hashrate') / $coin->networkHashrates()->whereBetween('created_at', [Carbon::createFromTimestamp($recalculateDates[1]), Carbon::createFromTimestamp($recalculateDates[0])])->avg('hashrate') - 1) * 100, 2);
         }
 
         return [
@@ -78,9 +82,9 @@ trait NetworkTrait
         ];
     }
 
-    public function needBlocksTime(NetworkDifficulty $ld, NetworkDifficulty $d): string
+    public function needBlocksTime(NetworkDifficulty $ld, float $blockTime): string
     {
-        $time = ($ld->created_at - $d->created_at) / ($d->need_blocks - $ld->need_blocks) * $ld->need_blocks;
+        $time = $blockTime * $ld->need_blocks;
         $days = intdiv($time, 60 * 60 * 24);
         $time %= (60 * 60 * 24);
         $hours = intdiv($time, 60 * 60);
