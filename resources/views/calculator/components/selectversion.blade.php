@@ -1,9 +1,9 @@
 <div style="height: 118.67px" x-data="{
     models: [],
     popular_models: [],
-    selectedModel: {{ collect($selectedModel) }},
-    selectedVersion: {{ collect($selectedVersion) }},
-    search: '{{ $selectedModel['name'] }}',
+    selectedModel: {{ collect($selModel) }},
+    selectedVersion: {{ collect($selVersion) }},
+    search: '{{ $selModel['n'] }}',
     openModel: false,
     openVersion: false,
     isLoading: false,
@@ -12,11 +12,11 @@
         else if (this.selectedModel) return [this.selectedModel];
 
         const s = this.search.toLowerCase();
-        return this.models.filter(m => m.name.toLowerCase().includes(s));
+        return this.models.filter(m => m.n.toLowerCase().includes(s));
     },
     selectModel(m) {
         this.selectedModel = m;
-        this.search = m.name;
+        this.search = m.n;
         this.openModel = false;
     },
     selectVersion(v) {
@@ -24,15 +24,16 @@
         version = v;
         this.openVersion = false;
     },
-    async loadModels() {
-        if (this.models.length) return;
+    async loadData() {
+        if (Object.keys(this.models).length || this.isLoading) return;
 
         this.isLoading = true;
 
-        axios.get('{{ route('calculator.get-models') }}')
-            .then(response => {
-                this.models = Object.freeze(response.data.all);
-                this.popular_models = Object.freeze(response.data.popular);
+        axios.get('{{ route('calculator.get-data') }}')
+            .then(r => {
+                this.models = Object.freeze(r.data.m);
+                this.popular_models = Object.freeze(r.data.p.map(id => r.data.m[id]).filter(Boolean));
+                algorithms = Object.freeze(r.data.a);
             })
             .catch(error => {
                 console.error('Ошибка загрузки моделей:', error);
@@ -44,7 +45,7 @@
 }">
     <div>
         <div class="relative mt-1" @click.away="openModel = false">
-            <div class="relative z-0 w-full" @click="openModel = true;loadModels()">
+            <div class="relative z-0 w-full" @click="openModel = true;loadData()">
                 <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                     <input type="text" autocomplete="off" :value="search" id="search_model"
                         @input.debounce.1000ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
@@ -68,14 +69,14 @@
 
             <ul role="listbox" x-show="openModel"
                 class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-950 dark:text-slate-50 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
-                <template x-for="asicModel in filteredModels" :key="asicModel.id">
+                <template x-for="asicModel in filteredModels" :key="asicModel.i">
                     <li @click.debounce.10ms="selectModel(asicModel)" role="option"
                         class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
                         <div class="flex items-center">
-                            <span class="ml-3 block truncate" x-text="asicModel.name"></span>
+                            <span class="ml-3 block truncate" x-text="asicModel.n"></span>
                         </div>
 
-                        <span x-show="selectedModel && selectedModel.id == asicModel.id"
+                        <span x-show="selectedModel && selectedModel.i == asicModel.i"
                             class="absolute inset-y-0 right-0 flex items-center pr-4">
                             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
                                 class="text-indigo-500 hover:text-white" aria-hidden="true">
@@ -95,7 +96,7 @@
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
                         class="h-9 w-full cursor-pointer rounded-md text-slate-950 dark:text-slate-50 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
-                        <span class="block truncate" x-text="selectedVersion?.hashrate ?? ''"></span>
+                        <span class="block truncate" x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
                             <svg class="h-5 w-5 text-slate-500 dark:text-slate-400" viewBox="0 0 20 20"
@@ -108,12 +109,12 @@
 
                     <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-950 dark:text-slate-50 shadow-lg"
                         x-show="openVersion">
-                        <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
+                        <template x-for="asicVersion in selectedModel.v" :key="asicVersion.i">
                             <li @click.debounce.10ms="selectVersion(asicVersion)"
                                 class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
-                                <span class="block truncate" x-text="asicVersion.hashrate"></span>
+                                <span class="block truncate" x-text="asicVersion.h"></span>
 
-                                <span x-show="selectedVersion?.id == asicVersion.id"
+                                <span x-show="selectedVersion?.i == asicVersion.i"
                                     class="absolute inset-y-0 right-0 flex items-center pr-4">
                                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" clip-rule="evenodd"

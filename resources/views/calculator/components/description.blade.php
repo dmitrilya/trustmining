@@ -7,18 +7,18 @@
         style="overflow-y: hidden; max-height: 3.75rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php
-            $haveProfits = $selVersion['profits'] && count($selVersion['profits']);
+            $haveProfits = count($selVersion['ps']);
             $income = $haveProfits
-                ? ($selVersion['profits'][0]['profit'] * (100 - $selVersion['profits'][0]['coins'][0]['fee']) * 99.7) /
+                ? ($selVersion['ps'][0]['p'] * (100 - $fee) * 99.7) /
                     10000
                 : 0;
-            $expense = ((($selVersion['efficiency'] * $selVersion['hashrate']) / 1000) * 5 * 24 * 99.7) / 100;
+            $expense = ((($selVersion['e'] * $selVersion['h']) / 1000) * 5 * 24 * 99.7) / 100;
             $profitU = ($haveProfits ? $income : 0) - $expense * $rub;
         @endphp
         {{ __('descriptions.calculator.main', [
-            'brand' => $selVersion['brand_name'],
-            'model' => $selModel['name'],
-            'version' => $selVersion['hashrate'] . $selVersion['measurement'],
+            'brand' => $selVersion['b'],
+            'model' => $selModel['n'],
+            'version' => $selVersion['h'] . $selVersion['m'],
             'incomeU' => round($income, 2),
             'incomeR' => round($income / $rub, 2),
             'expenseU' => round($expense * $rub, 2),
@@ -27,34 +27,34 @@
             'profitR' => round(($haveProfits ? $income / $rub : 0) - $expense, 2),
             'tariff' => 5,
         ]) }}
-        @if ($selVersion['price'])
+        @if ($selVersion['p'])
             {{ __('descriptions.calculator.payback.have', [
-                'brand' => $selVersion['brand_name'],
-                'model' => $selModel['name'],
-                'version' => $selVersion['hashrate'] . $selVersion['measurement'],
-                'seller' => $selVersion['seller'],
-                'price' => $selVersion['price'],
-                'payback' => $profitU > 0 ? round($selVersion['price'] / $profitU) : '∞',
+                'brand' => $selVersion['b'],
+                'model' => $selModel['n'],
+                'version' => $selVersion['h'] . $selVersion['m'],
+                'seller' => $selVersion['s'],
+                'price' => $selVersion['p'],
+                'payback' => $profitU > 0 ? round($selVersion['p'] / $profitU) : '∞',
             ]) }}
         @else
             {{ __('descriptions.calculator.payback.not', [
-                'brand' => $selVersion['brand_name'],
-                'model' => $selModel['name'],
-                'version' => $selVersion['hashrate'] . $selVersion['measurement'],
+                'brand' => $selVersion['b'],
+                'model' => $selModel['n'],
+                'version' => $selVersion['h'] . $selVersion['m'],
             ]) }}
-            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selVersion['brand_slug'], 'asicModel' => $selVersion['model_slug']]) }}"
-                class="inline text-indigo-500 hover:text-indigo-600">{{ __('Offers') }} {{ $selModel['name'] }}</a>
+            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selVersion['bs'], 'asicModel' => $selVersion['ns']]) }}"
+                class="inline text-indigo-500 hover:text-indigo-600">{{ __('Offers') }} {{ $selModel['n'] }}</a>
         @endif
         {{ __('descriptions.calculator.params', [
-            'model' => $selModel['name'],
-            'version' => $selVersion['hashrate'] . $selVersion['measurement'],
-            'efficiency' => $selVersion['efficiency'] . ' j/' . $selVersion['measurement'],
-            'power' => $selVersion['efficiency'] * $selVersion['hashrate'],
+            'model' => $selModel['n'],
+            'version' => $selVersion['h'] . $selVersion['m'],
+            'efficiency' => $selVersion['e'] . ' j/' . $selVersion['m'],
+            'power' => $selVersion['e'] * $selVersion['h'],
             'tariff' => 5,
-            'coins' => collect($selVersion['profits'])->pluck('coins')->flatten(1)->pluck('name')->implode(', '),
-            'comission' => $haveProfits ? $selVersion['profits'][0]['coins'][0]['fee'] : 0,
+            'coins' => $coins,
+            'comission' => $haveProfits ? $fee : 0,
             'uptime' => 99.7,
-            'algorithm' => $selVersion['algorithm'],
+            'algorithm' => $algorithm,
         ]) }}
     </div>
 

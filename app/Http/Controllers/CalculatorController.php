@@ -14,25 +14,29 @@ class CalculatorController extends Controller
 {
     public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
     {
-        $models = Cache::get('optimized_calculator_models');
+        $data = Cache::get('optimized_calculator_data');
 
         if ($asicModel && $asicModel->exists) $this->addView(request(), $asicModel);
 
-        $selModel = $asicModel && $asicModel->exists ? $models['all']->where('id', $asicModel->id)->first() : $models['all']->where('name', 'Antminer L9')->first();
-        $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['asic_versions'])->where('id', $asicVersion->id)->first() : $selModel['asic_versions'][0];
+        $selModel = $asicModel && $asicModel->exists ? $data['m']->where('i', $asicModel->id)->first() : $data['m']->where('n', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['v'])->where('i', $asicVersion->id)->first() : $selModel['v'][0];
         $ads = Cache::remember(
-            'asic_model_ads_' . $selModel['id'],
+            'asic_model_ads_' . $selModel['i'],
             now()->endOfDay(),
-            fn() => $this->getAds()->where('asic_models.id', $selModel['id'])
+            fn() => $this->getAds()->where('asic_models.id', $selModel['i'])
                 ->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get()
         );
 
         return view('calculator.index', [
-            'rub' => $models['rub'],
+            'rub' => $data['r'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
+            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selVersion['a']]['n'],
+            'coins' => collect($data['a'][$selVersion['a']]['c'])->pluck('n')->implode(', '),
+            'fee' => $data['a'][$selVersion['a']]['c'][$selVersion['ps'][0]['c'][0]]['f'],
             'ads' => $ads,
             'difficultyData' => Cache::get('calculator_difficulty_data')
         ]);
@@ -40,53 +44,59 @@ class CalculatorController extends Controller
 
     public function calculatorApp(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
     {
-        $models = Cache::get('optimized_calculator_models');
+        $data = Cache::get('optimized_calculator_data');
 
-        $selModel = $asicModel && $asicModel->exists ? $models['all']->where('id', $asicModel->id)->first() : $models['all']->where('name', 'Antminer L9')->first();
-        $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['asic_versions'])->where('id', $asicVersion->id)->first() : $selModel['asic_versions'][0];
+        $selModel = $asicModel && $asicModel->exists ? $data['m']->where('i', $asicModel->id)->first() : $data['m']->where('n', 'Antminer L9')->first();
+        $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['v'])->where('i', $asicVersion->id)->first() : $selModel['v'][0];
 
         return view('calculator.app', [
-            'rub' => $models['rub'],
+            'rub' => $data['r'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
+            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selVersion['a']]['n'],
+            'fee' => $data['a'][$selVersion['a']]['c'][$selVersion['ps'][0]['c'][0]]['f'],
         ]);
     }
 
     public function calculatorWidjet(Request $request): ViewBlade
     {
-        $models = Cache::get('optimized_calculator_models');
+        $data = Cache::get('optimized_calculator_data');
 
         if ($request->model) {
-            $selModel = $asicModel = $models['all']->where('slug', $request->model)->first();
-            if (!$selModel) $selModel = $models['all']->where('name', 'Antminer L9')->first();
+            $selModel = $asicModel = $data['m']->where('s', $request->model)->first();
+            if (!$selModel) $selModel = $data['m']->where('n', 'Antminer L9')->first();
         } else {
             $asicModel = null;
-            $selModel = $models['all']->where('name', 'Antminer L9')->first();
+            $selModel = $data['m']->where('n', 'Antminer L9')->first();
         }
 
         if ($request->version) {
-            $selVersion = $asicVersion = collect($selModel['asic_versions'])->where('hashrate', $request->version)->first();
-            if (!$selVersion) $selVersion = $selModel['asic_versions'][0];
+            $selVersion = $asicVersion = collect($selModel['v'])->where('h', $request->version)->first();
+            if (!$selVersion) $selVersion = $selModel['v'][0];
         } else {
             $asicVersion = null;
-            $selVersion = $selModel['asic_versions'][0];
+            $selVersion = $selModel['v'][0];
         }
 
         return view('calculator.widjet', [
-            'rub' => $models['rub'],
+            'rub' => $data['r'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
+            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selVersion['a']]['n'],
+            'fee' => $data['a'][$selVersion['a']]['c'][$selVersion['ps'][0]['c'][0]]['f'],
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
         ]);
     }
 
-    public function calculatorModels()
+    public function calculatorData()
     {
-        return response()->json(Cache::get('optimized_calculator_models'), 200);
+        return response()->json(Cache::get('optimized_calculator_data'), 200);
     }
 }

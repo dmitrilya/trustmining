@@ -34,36 +34,36 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        $key = config('services.coinmarketcap.key');
-        $coins = Coin::where('paymentable', false)->pluck('abbreviation');
-        $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
-        $data->each(function ($coinData) {
-            $coin = Coin::where('abbreviation', $coinData->symbol)->first();
-            if (!$coin || !$coinData->quote->USD->price) return;
+        // $key = config('services.coinmarketcap.key');
+        // $coins = Coin::where('paymentable', false)->pluck('abbreviation');
+        // $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
+        // $data->each(function ($coinData) {
+        //     $coin = Coin::where('abbreviation', $coinData->symbol)->first();
+        //     if (!$coin || !$coinData->quote->USD->price) return;
 
-            $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
-        });
+        //     $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
+        // });
 
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($curl, CURLOPT_URL, 'https://api.coingecko.com/api/v3/exchange_rates');
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'x-cg-demo-api-key:' . config('services.coingecko.key'),
-            'User-Agent: TrustMining/1.0 (contact: admin@trustmining.ru)',
-            'accept: application/json',
-        ]);
+        // $curl = curl_init();
+        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+        // curl_setopt($curl, CURLOPT_URL, 'https://api.coingecko.com/api/v3/exchange_rates');
+        // curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        //     'x-cg-demo-api-key:' . config('services.coingecko.key'),
+        //     'User-Agent: TrustMining/1.0 (contact: admin@trustmining.ru)',
+        //     'accept: application/json',
+        // ]);
 
-        $out = curl_exec($curl);
+        // $out = curl_exec($curl);
 
-        if ($out === false) info(curl_error($curl) . ', ' . curl_errno($curl));
-        else {
-            $rates = json_decode($out)->rates;
+        // if ($out === false) info(curl_error($curl) . ', ' . curl_errno($curl));
+        // else {
+        //     $rates = json_decode($out)->rates;
 
-            $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
-            Coin::where('abbreviation', 'RUB')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
-            Coin::where('abbreviation', 'CNY')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
-        }
+        //     $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
+        //     Coin::where('abbreviation', 'RUB')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
+        //     Coin::where('abbreviation', 'CNY')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
+        // }
 
         $this->updateProfit();
 
@@ -73,7 +73,7 @@ class UpdateExchangeRate extends Command
     private function updateProfit()
     {
         $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
-        $algorithms = Algorithm::select(['id'])->with([
+        $algorithms = Algorithm::select(['id', 'name'])->with([
             'coins' => fn($q) => $q->where('profit', '>', 0)->whereHas('latestRate', fn($q1) => $q1->where('rate', '>', 0))
                 ->select(['id', 'abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
         ])->get()->map(function ($algorithm) {
@@ -143,6 +143,7 @@ class UpdateExchangeRate extends Command
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
                 $version->price = $minPrice ? $minPrice->usdt_price : null;
                 $version->seller = $minPrice ? $minPrice->user->name : null;
+                $version->algorithm_id = $model->algorithm->id;
                 $version->algorithm = $model->algorithm->name;
                 $version->brand_name = $model->asicBrand->name;
                 $version->brand_slug = $model->asicBrand->slug;
@@ -160,30 +161,51 @@ class UpdateExchangeRate extends Command
         Cache::put('calculator_models', $models);
 
         $models = $models->map(fn($model) => [
-            'id' => $model->id,
-            'name' => $model->name,
-            'asic_versions' => $model->asicVersions->map(function ($version) {
-                $versionData = $version->toArray();
-                $versionData['ads_count'] = count($version->ads);
-                unset($versionData['ads']);
-                unset($versionData['price_data']);
-                unset($versionData['asic_model_id']);
-                unset($versionData['original_hashrate']);
-                unset($versionData['original_efficiency']);
-                $versionData['profits'] = $versionData['profits']->map(fn($profit) => [
-                    'profit' => $profit['profit'],
-                    'coins' => $profit['coins']->map(fn($coin) => $coin->only(['name', 'abbreviation', 'profit', 'fee']))->toArray()
-                ])->toArray();
+            'i' => $model->id,
+            'n' => $model->name,
+            's' => $model->slug,
+            'v' => $model->asicVersions->map(fn($v) => [
+                'i' => $v->id,
+                'h' => $v->hashrate,
+                'e' => $v->efficiency,
+                'm' => $v->measurement,
+                'c' => $v->coef,
+                'p' => $v->price,
+                's' => $v->seller,
+                'a' => $v->algorithm_id,
+                'b' => $v->brand_name,
+                'bs' => $v->brand_slug,
+                'n' => $v->model_name,
+                'ns' => $v->model_slug,
+                'r' => $v->reviews_count,
+                'ra' => $v->reviews_avg,
+                'ac' => count($v->ads),
+                'ps' => $v->profits->map(fn($p) => [
+                    'p' => $p['profit'],
+                    'c' => $p['coins']->pluck('id')
+                ])->toArray()
+            ])->toArray()
+        ])->keyBy('i');
+        
 
-                return $versionData;
-            })->toArray()
-        ]);
+        $algorithms = $algorithms->map(fn($a) => [
+            'i' => $a->id,
+            'n' => $a->name,
+            'c' => $a->coins->map(fn($c) => [
+                'i' => $c->id,
+                'n' => $c->name,
+                'a' => $c->abbreviation,
+                'p' => $c->profit,
+                'f' => $c->fee
+            ])->keyBy('i')
+        ])->keyBy('i');
 
-        Cache::put('optimized_calculator_models', [
-            'all' => $models,
-            'popular' => $models->whereIn('id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
-                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id')),
-            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate
+        Cache::put('optimized_calculator_data', [
+            'm' => $models,
+            'p' => View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+                ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'),
+            'a' => $algorithms,
+            'r' => Coin::where('abbreviation', 'RUB')->first('id')->rate
         ]);
     }
 }
