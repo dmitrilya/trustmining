@@ -35,7 +35,7 @@ class CalculatorController extends Controller
             'selVersion' => $selVersion,
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'coins' => collect($data['a'][$selVersion['a']]['p'])->pluck('coins')->flatten(1)->pluck('n')->implode(', '),
+            'coins' => collect($data['a'][$selVersion['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', '),
             'fee' => $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'],
             'ads' => $ads,
             'difficultyData' => Cache::get('calculator_difficulty_data')

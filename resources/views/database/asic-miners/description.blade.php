@@ -27,25 +27,27 @@
             <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                     class="ql-color-secondary-text-color"><b>Хэшрейт:</b></span> Номинальная
                 вычислительная мощность составляет
-                <b>{{ $selectedVersion->hashrate . $selectedVersion->measurement }}</b>, что позволяет
+                <b>{{ $selectedVersion['h'] . $selectedVersion['m'] }}</b>, что позволяет
                 эффективно конкурировать в современных условиях сложности сети.
             </li>
             <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                     class="ql-color-secondary-text-color"><b>Потребление:</b></span>
                 Энергопотребление устройства зафиксировано на отметке
-                <b>{{ $selectedVersion->efficiency * $selectedVersion->hashrate }} Вт</b>, обеспечивая
+                <b>{{ $selectedVersion['e'] * $selectedVersion['h'] }} Вт</b>, обеспечивая
                 баланс между мощностью и затратами на электричество.
             </li>
             <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                     class="ql-color-secondary-text-color"><b>Энергоэффективность:</b></span>
-                Показатель составляет <b>{{ $selectedVersion->efficiency }} J/TH</b>, что является
+                Показатель составляет <b>{{ $selectedVersion['e'] }} J/TH</b>, что является
                 ключевым фактором для быстрой окупаемости инвестиций.</li>
         </ol>
         <p></br></p>
         <h2>Поддерживаемые активы</h2>
         <p>Благодаря использованию алгоритма <b>{{ $model->algorithm->name }}</b>, данный
             майнер позволяет добывать широкий спектр криптовалют. В список наиболее актуальных
-            монет входят: <b>{{ $model->algorithm->coins->where('profit', '>', 0)->pluck('name')->implode(', ') }}</b>. Это дает
+            монет входят:
+            <b>{{ collect($algorithms[$selectedVersion['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', ') }}</b>.
+            Это дает
             владельцу гибкость в выборе стратегии майнинга и возможность переключения между
             активами в зависимости от текущей рыночной ситуации.
         </p>

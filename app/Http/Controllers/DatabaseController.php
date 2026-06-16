@@ -109,32 +109,26 @@ class DatabaseController extends Controller
      */
     public function asicMinersModel(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
     {
-        $versions = $asicModel->asicVersions()->with([
-            'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->selectSub(fn($q1) => $q1->select('rate')->from('coin_rates')->whereColumn('coin_rates.coin_id', 'ads.coin_id')->latest()->limit(1), 'coin_rate')
-                ->orderByRaw('price * coin_rate'),
-            'ads.coin:id,abbreviation'
-        ])->get()->sortByDesc('hashrate');
+        $data = Cache::get('optimized_calculator_data');
+        $modelData = $data['m']->where('i', $asicModel->id)->first();
 
-        $this->addView(request(), $asicModel);
-
+        $versions = collect($modelData['v']);
         $selectedVersion = $versions->first();
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('id'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
+        
+        $this->addView(request(), $asicModel);
+        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
-        $calculatorModel = Cache::get('calculator_models')->where('id', $asicModel->id)->first();
-        $versions = $versions->map(function ($version) use ($calculatorModel) {
-            $version->data = $calculatorModel->asicVersions->where('id', $version->id)->first();
-            return $version;
-        });
+        $asicModel->reviews_count = $modelData['r'];
+        $asicModel->reviews_avg = $modelData['ra'];
 
         return view('database.asic-miners.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
             'selectedVersion' => $selectedVersion,
+            'algorithms' => $data['a'],
             'versions' => $versions,
-            'algorithm' => $asicModel->algorithm()->with('coins')->first(),
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
+            'rub' => $data['r']
         ]);
     }
 
@@ -207,35 +201,30 @@ class DatabaseController extends Controller
      */
     public function asicMinersVersion(Request $request, AsicBrand $asicBrand, AsicModel $asicModel, $asicVersion)
     {
-        $versions = $asicModel->asicVersions()->with([
-            'ads' => fn($q) => $q->select(['asic_version_id', 'price', 'coin_id'])
-                ->selectSub(fn($q1) => $q1->select('rate')->from('coin_rates')->whereColumn('coin_rates.coin_id', 'ads.coin_id')->latest()->limit(1), 'coin_rate')
-                ->orderByRaw('price * coin_rate'),
-            'ads.coin:id,abbreviation'
-        ])->get()->sortByDesc('hashrate');
+        $data = Cache::get('optimized_calculator_data');
+        $modelData = $data['m']->where('i', $asicModel->id)->first();
 
         preg_match('/(\d+(?:\.\d+)?)([a-zA-Z]+)/', $asicVersion, $matches);
         if (!isset($matches[1])) abort(404);
-        $selectedVersion = $versions->where('hashrate', $matches[1])->first();
+
+        $versions = collect($modelData['v']);
+        $selectedVersion = $versions->where('h', $matches[1])->first();
         if (!$selectedVersion) abort(404);
 
         $this->addView(request(), $asicModel);
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('id'))->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
-        $calculatorModel = Cache::get('calculator_models')->where('id', $asicModel->id)->first();
-        $versions = $versions->map(function ($version) use ($calculatorModel) {
-            $version->data = $calculatorModel->asicVersions->where('id', $version->id)->first();
-            return $version;
-        });
+        $asicModel->reviews_count = $modelData['r'];
+        $asicModel->reviews_avg = $modelData['ra'];
 
         return view('database.asic-miners.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
             'selectedVersion' => $selectedVersion,
+            'algorithms' => $data['a'],
             'versions' => $versions,
-            'algorithm' => $asicModel->algorithm()->with('coins')->first(),
             'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
+            'rub' => $data['r']
         ]);
     }
 

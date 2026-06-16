@@ -22,7 +22,7 @@
             @else
                 @php
                     $trackClick =
-                        $user && $user->tariff
+                        auth()->check() && auth()->user()->tariff
                             ? 'axios.post("/ads/' .
                                 $ad->ad_category_name .
                                 '/' .
@@ -36,7 +36,7 @@
                                 __('Untrack price') .
                                 '";
                                 ' .
-                                ($user->tg_id === null
+                                (auth()->user()->tg_id === null
                                     ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");'
                                     : '') .
                                 '
@@ -56,7 +56,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                     </svg>
-                    <span>{{ $user && $user->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('To track') }}</span>
+                    <span>{{ auth()->check() && auth()->user()->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('To track') }}</span>
                 </li>
                 <li>
                     <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white"

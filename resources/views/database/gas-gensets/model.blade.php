@@ -22,7 +22,6 @@
                         {{ $model->name }}</h1>
 
                     @php
-                        $hasTariff = ($user = Auth::user()) && $user->tariff;
                         $momentRating = $model->moderatedReviews->count() ? $model->moderatedReviews->avg('rating') : 0;
                         $modelAds = $model->ads;
                         $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->sortBy('price')->first();

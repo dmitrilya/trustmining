@@ -1,8 +1,10 @@
-<x-app-layout :title='"ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement} - цена, доходность и характеристики | Купить {$brand->name} {$model->name} | TRUSTMINING"' :description='"ASIC {$brand->name} {$model->name} {$selectedVersion->hashrate}{$selectedVersion->measurement}. Характеристики, энергопотребление, доходность майнинга и окупаемость. Актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING"'
+<x-app-layout
+    title="{{ $brand->name }} {{ $model->name }} {{ $selectedVersion['h'] }}{{ $selectedVersion['m'] }}/s - доходность и объявления"
+    description="{{ $brand->name }} {{ $model->name }} {{ $selectedVersion['h'] }}{{ $selectedVersion['m'] }}/s. Характеристики, потребление, доходность и окупаемость. Актуальные предложения и цены. Купить {{ $model->name }} с доставкой по РФ на TRUSTMINING"
     canonical="{{ route('database.asic-miners.version', [
         'asicBrand' => $brand->slug,
         'asicModel' => $model->slug,
-        'asicVersion' => $selectedVersion->hashrate . $selectedVersion->measurement,
+        'asicVersion' => $selectedVersion['h'] . $selectedVersion['m'],
     ]) }}">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
@@ -17,7 +19,7 @@
                     'asicBrand' => $brand->slug,
                     'asicModel' => $model->slug,
                 ])" :name="$model->name" />
-                <x-breadcrumb position="4" :name="$selectedVersion->hashrate . $selectedVersion->measurement" />
+                <x-breadcrumb position="4" :name="$selectedVersion['h'] . $selectedVersion['m']" />
             @endif
         </x-breadcrumbs>
 
@@ -34,103 +36,89 @@
                         class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
                         {{ $model->name }}</h1>
 
-                    @php
-                        $hasTariff = ($user = Auth::user()) && $user->tariff;
-                        $reviewsCount = $model->moderatedReviews->count();
-                        $momentRating = $reviewsCount ? $model->moderatedReviews->avg('rating') : 0;
-                        $modelAds = $versions->pluck('ads')->flatten();
-                        $modelAdWithMinPrice = $modelAds->where('price', '!=', 0)->first();
-                    @endphp
-
-                    <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion->id, $versions->pluck('id')->toArray()) }} }">
+                    <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion['i'], $versions->pluck('i')->toArray()) }} }">
                         <div
                             class="text-xs font-semibold text-center text-slate-600 dark:text-slate-300 border-b-2 border-slate-300 dark:border-slate-700">
-                            <ul
+                            <div
                                 class="flex -mb-px overflow-x-auto no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
                                 @foreach ($versions as $i => $version)
-                                    <li class="mr-1 sm:mr-2 -mb-[1px]">
-                                        <button class="inline-block p-1 xs:p-2 border-b-2 rounded-t-lg"
-                                            @click="selectedTab = {{ $i }}"
-                                            :class="{
-                                                'border-transparent hover:text-slate-600 dark:hover:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600': {{ $i }} !=
-                                                    selectedTab,
-                                                'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500': {{ $i }} ==
-                                                    selectedTab
-                                            }">
-                                            {{ $version->hashrate }}{{ $version->measurement }}
-                                        </button>
-                                    </li>
+                                    <button
+                                        class="mr-1 sm:mr-2 -mb-[1px] inline-block p-1 xs:p-2 border-b-2 rounded-t-lg"
+                                        @click="selectedTab = {{ $i }}"
+                                        :class="{
+                                            'border-transparent hover:text-slate-600 dark:hover:text-slate-300 hover:border-slate-400 dark:hover:border-slate-600': {{ $i }} !=
+                                                selectedTab,
+                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500': {{ $i }} ==
+                                                selectedTab
+                                        }">
+                                        {{ $version['h'] }}{{ $version['m'] }}
+                                    </button>
 
                                     <a href="{{ route('database.asic-miners.version', [
                                         'asicBrand' => $brand->slug,
                                         'asicModel' => $model->slug,
-                                        'asicVersion' => $selectedVersion->hashrate . $selectedVersion->measurement,
+                                        'asicVersion' => $version['h'] . $version['m'],
                                     ]) }}"
-                                        aria-label="{{ $model->name . ' ' . $selectedVersion->hashrate . $selectedVersion->measurement }}"></a>
+                                        aria-label="{{ $model->name . ' ' . $version['h'] . $version['m'] }}"></a>
                                 @endforeach
-                            </ul>
+                            </div>
                         </div>
 
                         @foreach ($versions as $i => $version)
                             <div x-show="selectedTab == {{ $i }}" itemprop="model" itemscope
                                 itemtype="http://schema.org/ProductModel"
-                                style="display: {{ $version->id == $selectedVersion->id ? 'block' : 'none' }}">
-                                @php
-                                    $minPrice = $version->ads->where('price', '!=', 0)->first();
-                                @endphp
-
+                                style="display: {{ $version['i'] == $selectedVersion['i'] ? 'block' : 'none' }}">
                                 <meta itemprop="name"
-                                    content="{{ $model->name . ' ' . $version->hashrate . $version->measurement }}" />
+                                    content="{{ $model->name . ' ' . $version['h'] . $version['m'] }}" />
 
                                 <x-characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
-                                    <x-characteristic name="Hashrate" :value="$version->hashrate" itemprop="hasMeasurement"
+                                    <x-characteristic name="Hashrate" :value="$version['h']" itemprop="hasMeasurement"
                                         :unit="[
                                             'prop' => 'unitText',
-                                            'content' => $version->measurement . '/s',
+                                            'content' => $version['m'] . '/s',
                                         ]" />
-                                    <x-characteristic name="Efficiency" :value="$version->efficiency" itemprop="hasMeasurement"
+                                    <x-characteristic name="Efficiency" :value="$version['e']" itemprop="hasMeasurement"
                                         :unit="[
                                             'prop' => 'unitText',
-                                            'content' => 'j/' . $version->measurement,
+                                            'content' => 'j/' . $version['m'],
                                         ]" />
-                                    <x-characteristic name="Power" :value="$version->efficiency * $version->hashrate" itemprop="hasMeasurement"
+                                    <x-characteristic name="Power" :value="$version['e'] * $version['h']" itemprop="hasMeasurement"
                                         :unit="['prop' => 'unitCode', 'content' => 'W']" />
-                                    @if ($minPrice)
-                                        <x-characteristic name="The best price" :value="$minPrice->price . ' ' . $minPrice->coin->abbreviation" />
+                                    @if ($version['p'])
+                                        <x-characteristic name="The best price" :value="$version['p'] . ' USDT'" />
                                     @endif
                                 </x-characteristics>
 
-                                @if ($minPrice)
-                                    @if ($version->data && count($version->data->profits))
+                                @if ($version['p'])
+                                    @if (count($algorithms[$version['a']]['p']))
                                         @include('ad.components.payback_info', [
-                                            'profit' => $version->data->profits[0]['profit'],
-                                            'expense' =>
-                                                (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
+                                            'profit' =>
+                                                $algorithms[$version['a']]['p'][0]['p'] *
+                                                $version['h'] *
+                                                $version['c'],
+                                            'expense' => (($version['h'] * $version['e'] * 24) / 1000) * $rub,
                                             'tariff' => 5,
-                                            'price' => $minPrice->price * $minPrice->coin_rate,
+                                            'price' => $version['p'],
                                         ])
                                     @endif
 
                                     <div class="xs:flex mt-6 md:mt-8 ">
                                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                                            <meta itemprop="lowPrice" content="{{ $minPrice->price }}" />
-                                            <meta itemprop="highPrice"
-                                                content="{{ $version->ads->where('price', '!=', 0)->reverse()->first()->price }}" />
-                                            <meta itemprop="offerCount" content="{{ $version->ads->count() }}" />
-                                            <meta itemprop="priceCurrency"
-                                                content="{{ $minPrice->coin->abbreviation == 'USDT' ? 'USD' : $minPrice->coin->abbreviation }}" />
+                                            <meta itemprop="lowPrice" content="{{ $version['p'] }}" />
+                                            <meta itemprop="offerCount" content="{{ $version['ac'] }}" />
+                                            <meta itemprop="priceCurrency" content="USD" />
                                             <link itemprop="url"
-                                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug, 'asic_version_id' => $version->id]) }}" />
+                                                href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug, 'asic_version_id' => $version['i']]) }}" />
                                         </div>
 
                                         <div itemprop="potentialAction" itemscope
                                             itemtype="https://schema.org/ViewAction" class="mt-2 xs:mt-0">
                                             <meta itemprop="name"
-                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
+                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version['h'] }}{{ $version['m'] }}" />
 
                                             <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
                                                 <a itemprop="urlTemplate" class="block w-full xs:w-fit"
-                                                    href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version->hashrate]) }}">
+                                                    href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version['h']]) }}">
                                                     <x-secondary-button
                                                         class="bg-secondary-gradient dark:text-slate-800 w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
@@ -138,11 +126,13 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if ($version->data && count($version->data->profits))
+                                    @if (count($algorithms[$version['a']]['p']))
                                         @include('ad.components.payback_info', [
-                                            'profit' => $version->data->profits[0]['profit'],
-                                            'expense' =>
-                                                (($version->hashrate * $version->efficiency * 24) / 1000) * $rub,
+                                            'profit' =>
+                                                $algorithms[$version['a']]['p'][0]['p'] *
+                                                $version['h'] *
+                                                $version['c'],
+                                            'expense' => (($version['h'] * $version['e'] * 24) / 1000) * $rub,
                                             'tariff' => 5,
                                             'price' => 0,
                                         ])
@@ -152,11 +142,11 @@
                                         <div itemprop="potentialAction" itemscope
                                             itemtype="https://schema.org/ViewAction">
                                             <meta itemprop="name"
-                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version->hashrate }}{{ $version->measurement }}" />
+                                                content="{{ __('Income calculator') }} {{ $brand->name }} {{ $model->name }} {{ $version['h'] }}{{ $version['m'] }}" />
 
                                             <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
                                                 <a itemprop="urlTemplate" class="block w-fit"
-                                                    href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version->hashrate]) }}">
+                                                    href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version['h']]) }}">
                                                     <x-secondary-button
                                                         class="bg-secondary-gradient dark:text-slate-800">{{ __('Income calculator') }}</x-secondary-button>
                                                 </a>
@@ -165,28 +155,28 @@
                                     </div>
                                 @endif
 
-                                <h3 class="text-sm text-slate-950 dark:text-slate-100 mt-8 mb-3">
-                                    {{ __('Coins') }}
-                                </h3>
+                                <h2 class="text-sm text-slate-950 dark:text-slate-100 mt-8 mb-3">
+                                    {{ __('How many coins does it mine per day') }}
+                                </h2>
 
                                 <div class="grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                                    @foreach ($algorithm->coins->where('profit', '>', 0) as $coin)
+                                    @foreach (collect($algorithms[$version['a']]['p'])->pluck('c')->flatten(1)->where('p', '>', 0) as $coin)
                                         <div>
                                             <div class="flex items-center">
-                                                <img alt="{{ $coin->name }}" class="w-5 xs:w-6 mr-1 xs:mr-2"
-                                                    src="{{ Storage::url('public/coins/' . $coin->abbreviation . '.webp') }}" />
+                                                <img alt="{{ $coin['n'] }}" class="w-5 xs:w-6 mr-1 xs:mr-2"
+                                                    src="{{ Storage::url('public/coins/' . $coin['a'] . '.webp') }}" />
                                                 <div>
                                                     <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400">
-                                                        {{ $coin->abbreviation }}
+                                                        {{ $coin['a'] }}
                                                     </div>
                                                     <div class="text-xxs xs:text-xs text-slate-500">
-                                                        {{ $coin->name }}
+                                                        {{ $coin['n'] }}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div
                                                 class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1">
-                                                {{ number_format($version->hashrate * $coin->profit, 8) }}
+                                                {{ number_format($version['h'] * $coin['p'], 8) }}
                                             </div>
                                         </div>
                                     @endforeach
@@ -201,7 +191,7 @@
 
                     <x-characteristics>
                         <x-characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
-                        <x-characteristic name="Algorithm" :value="$algorithm->name" itemprop="additionalProperty" />
+                        <x-characteristic name="Algorithm" :value="$algorithms[$version['a']]['n']" itemprop="additionalProperty" />
                         <x-characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
                         <x-characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
                         <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
@@ -210,11 +200,11 @@
                     <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating"
                         class="mt-4 sm:mt-6">
                         <h3 class="sr-only">{{ __('Reviews') }}</h3>
-                        <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
+                        <div class="flex items-center" x-data="{ momentRating: {{ $model->reviews_avg ?? 0 }} }">
                             <x-rating></x-rating>
-                            @if ($reviewsCount)
-                                <meta itemprop="ratingValue" content="{{ $momentRating }}" />
-                                <meta itemprop="reviewCount" content="{{ $reviewsCount }}" />
+                            @if ($model->reviews_count)
+                                <meta itemprop="ratingValue" content="{{ $model->reviews_avg }}" />
+                                <meta itemprop="reviewCount" content="{{ $model->reviews_count }}" />
                             @else
                                 <meta itemprop="ratingValue" content="4.8" />
                                 <meta itemprop="reviewCount" content="15" />
@@ -228,18 +218,17 @@
                                     'asicModel' => $model->slug,
                                 ]) }}"
                                 class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
-                                <span>{{ $reviewsCount }}</span>
-                                {{ trans_choice('navigation.reviews', $reviewsCount) }}
+                                <span>{{ $model->reviews_count }}</span>
+                                {{ trans_choice('navigation.reviews', $model->reviews_count) }}
                             </a>
                         </div>
                     </div>
 
                     <div class="flex flex-col gap-2 sm:gap-3 mt-4 sm:mt-6 lg:mt-8">
-                        @if ($modelAds->count() && $modelAdWithMinPrice)
+                        @if ($versions->min('p'))
                             <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                                <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice->price }}" />
-                                <meta itemprop="priceCurrency"
-                                    content="{{ $modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation }}" />
+                                <meta itemprop="lowPrice" content="{{ $versions->min('p') }}" />
+                                <meta itemprop="priceCurrency" content="USD" />
                                 <link itemprop="url"
                                     content="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
 
@@ -282,7 +271,7 @@
                     : route('database.asic-miners.version.get-ads', [
                         'asicBrand' => $brand->slug,
                         'asicModel' => $model->slug,
-                        'asicVersion' => $selectedVersion->hashrate . $selectedVersion->measurement,
+                        'asicVersion' => $selectedVersion['h'] . $selectedVersion['m'],
                     ]) --}}
 
             <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader"
