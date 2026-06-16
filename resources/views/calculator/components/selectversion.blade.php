@@ -25,13 +25,13 @@
         this.openVersion = false;
     },
     async loadData() {
-        if (Object.keys(this.models).length || this.isLoading) return;
+        if (this.models.length || this.isLoading) return;
 
         this.isLoading = true;
 
         axios.get('{{ route('calculator.get-data') }}')
             .then(r => {
-                this.models = Object.freeze(r.data.m);
+                this.models = Object.freeze(Object.values(r.data.m));
                 this.popular_models = Object.freeze(r.data.p.map(id => r.data.m[id]).filter(Boolean));
                 algorithms = Object.freeze(r.data.a);
             })
