@@ -36,7 +36,7 @@ class CalculatorController extends Controller
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
             'coins' => collect($data['a'][$selVersion['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', '),
-            'fee' => $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'],
+            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
             'ads' => $ads,
             'difficultyData' => Cache::get('calculator_difficulty_data')
         ]);
@@ -57,7 +57,7 @@ class CalculatorController extends Controller
             'selVersion' => $selVersion,
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'fee' => $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'],
+            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
         ]);
     }
 
@@ -89,7 +89,7 @@ class CalculatorController extends Controller
             'selVersion' => $selVersion,
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'fee' => $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'],
+            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
         ]);
