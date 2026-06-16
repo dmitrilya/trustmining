@@ -34,36 +34,36 @@ class UpdateExchangeRate extends Command
      */
     public function handle()
     {
-        // $key = config('services.coinmarketcap.key');
-        // $coins = Coin::where('paymentable', false)->pluck('abbreviation');
-        // $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
-        // $data->each(function ($coinData) {
-        //     $coin = Coin::where('abbreviation', $coinData->symbol)->first();
-        //     if (!$coin || !$coinData->quote->USD->price) return;
+        $key = config('services.coinmarketcap.key');
+        $coins = Coin::where('paymentable', false)->pluck('abbreviation');
+        $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
+        $data->each(function ($coinData) {
+            $coin = Coin::where('abbreviation', $coinData->symbol)->first();
+            if (!$coin || !$coinData->quote->USD->price) return;
 
-        //     $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
-        // });
+            $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
+        });
 
-        // $curl = curl_init();
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
-        // curl_setopt($curl, CURLOPT_URL, 'https://api.coingecko.com/api/v3/exchange_rates');
-        // curl_setopt($curl, CURLOPT_HTTPHEADER, [
-        //     'x-cg-demo-api-key:' . config('services.coingecko.key'),
-        //     'User-Agent: TrustMining/1.0 (contact: admin@trustmining.ru)',
-        //     'accept: application/json',
-        // ]);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($curl, CURLOPT_URL, 'https://api.coingecko.com/api/v3/exchange_rates');
+        curl_setopt($curl, CURLOPT_HTTPHEADER, [
+            'x-cg-demo-api-key:' . config('services.coingecko.key'),
+            'User-Agent: TrustMining/1.0 (contact: admin@trustmining.ru)',
+            'accept: application/json',
+        ]);
 
-        // $out = curl_exec($curl);
+        $out = curl_exec($curl);
 
-        // if ($out === false) info(curl_error($curl) . ', ' . curl_errno($curl));
-        // else {
-        //     $rates = json_decode($out)->rates;
+        if ($out === false) info(curl_error($curl) . ', ' . curl_errno($curl));
+        else {
+            $rates = json_decode($out)->rates;
 
-        //     $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
-        //     Coin::where('abbreviation', 'RUB')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
-        //     Coin::where('abbreviation', 'CNY')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
-        // }
+            $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
+            Coin::where('abbreviation', 'RUB')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
+            Coin::where('abbreviation', 'CNY')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
+        }
 
         $this->updateProfit();
 
