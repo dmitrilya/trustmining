@@ -215,8 +215,6 @@ class AdService
                 $alt = "Прошивка и удаленное управление $user для $models";
                 break;
             case 'monitorings':
-                $models = implode(', ', $ad->props['For which models']);
-
                 $name = "Мониторинг асиков $user";
                 $title = $name;
                 $description = "Как подключиться к асику удаленно? Программа мониторинга $user. Помощь в настройке";
