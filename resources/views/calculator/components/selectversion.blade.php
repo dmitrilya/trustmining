@@ -1,11 +1,12 @@
 <div style="height: 118.67px" x-data="{
-    models: Object.freeze({{ $models->values() }}),
-    popular_models: Object.freeze({{ $popularModels->values() }}),
+    models: [],
+    popular_models: [],
     selectedModel: {{ collect($selectedModel) }},
     selectedVersion: {{ collect($selectedVersion) }},
     search: '{{ $selectedModel['name'] }}',
     openModel: false,
     openVersion: false,
+    isLoading: false,
     get filteredModels() {
         if (!this.search) return this.popular_models;
         else if (this.selectedModel) return [this.selectedModel];
@@ -22,11 +23,28 @@
         this.selectedVersion = v;
         version = v;
         this.openVersion = false;
+    },
+    async loadModels() {
+        if (this.models.length) return;
+
+        this.isLoading = true;
+
+        axios.get('{{ route('calculator.get-models') }}')
+            .then(response => {
+                this.models = Object.freeze(response.data.all);
+                this.popular_models = Object.freeze(response.data.popular);
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки моделей:', error);
+            })
+            .finally(() => {
+                this.isLoading = false;
+            });
     }
 }">
     <div>
         <div class="relative mt-1" @click.away="openModel = false">
-            <div class="relative z-0 w-full" @click="openModel = true">
+            <div class="relative z-0 w-full" @click="openModel = true;loadModels()">
                 <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                     <input type="text" autocomplete="off" :value="search" id="search_model"
                         @input.debounce.1000ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"

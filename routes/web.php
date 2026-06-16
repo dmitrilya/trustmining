@@ -86,7 +86,7 @@ Route::group(['prefix' => 'roulette'], function () {
 Route::group(['prefix' => 'calculator'], function () {
     Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
     Route::get('/app', [CalculatorController::class, 'calculatorApp'])->name('calculator.app');
-    Route::get('/get-models', [CalculatorController::class, 'calculatorModels'])->name('calculator-models');
+    Route::get('/get-models', [CalculatorController::class, 'calculatorModels'])->name('calculator.get-models');
     Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.model');
     Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.modelver');
 });

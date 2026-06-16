@@ -28,8 +28,6 @@ class CalculatorController extends Controller
         );
 
         return view('calculator.index', [
-            'models' => $models['all'],
-            'popularModels' => $models['popular'],
             'rub' => $models['rub'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
@@ -48,8 +46,6 @@ class CalculatorController extends Controller
         $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['asic_versions'])->where('id', $asicVersion->id)->first() : $selModel['asic_versions'][0];
 
         return view('calculator.app', [
-            'models' => $models['all'],
-            'popularModels' => $models['popular'],
             'rub' => $models['rub'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,
@@ -79,8 +75,6 @@ class CalculatorController extends Controller
         }
 
         return view('calculator.widjet', [
-            'models' => $models['all'],
-            'popularModels' => $models['popular'],
             'rub' => $models['rub'],
             'rModel' => $asicModel,
             'rVersion' => $asicVersion,

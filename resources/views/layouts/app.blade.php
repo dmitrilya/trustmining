@@ -60,6 +60,7 @@
     @if (!$isBot)
         <script type="text/javascript">
             function isWeakDevice() {
+                return false;
                 const hasVeryLowMemory = navigator.deviceMemory && navigator.deviceMemory < 2;
                 const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 4;
                 const lowResolution = window.innerWidth < 360;
