@@ -164,6 +164,10 @@ class UpdateExchangeRate extends Command
             'i' => $model->id,
             'n' => $model->name,
             's' => $model->slug,
+            'b' => $model->asicBrand->name,
+            'bs' => $model->asicBrand->slug,
+            'r' => $model->moderatedReviews->count(),
+            'ra' => $model->moderatedReviews->avg('rating'),
             'v' => $model->asicVersions->map(fn($v) => [
                 'i' => $v->id,
                 'h' => $v->hashrate,
@@ -173,31 +177,23 @@ class UpdateExchangeRate extends Command
                 'p' => $v->price,
                 's' => $v->seller,
                 'a' => $v->algorithm_id,
-                'b' => $v->brand_name,
-                'bs' => $v->brand_slug,
-                'n' => $v->model_name,
-                'ns' => $v->model_slug,
-                'r' => $v->reviews_count,
-                'ra' => $v->reviews_avg,
                 'ac' => count($v->ads),
-                'ps' => $v->profits->map(fn($p) => [
-                    'p' => $p['profit'],
-                    'c' => $p['coins']->pluck('id')
-                ])->toArray()
             ])->toArray()
         ])->keyBy('i');
-        
+
 
         $algorithms = $algorithms->map(fn($a) => [
             'i' => $a->id,
             'n' => $a->name,
-            'c' => $a->coins->map(fn($c) => [
-                'i' => $c->id,
-                'n' => $c->name,
-                'a' => $c->abbreviation,
-                'p' => $c->profit,
-                'f' => $c->fee
-            ])->keyBy('i')
+            'p' => $a->maxProfit->map(fn($p) => [
+                'p' => $p['profit'],
+                'c' => $p['coins']->map(fn($c) => [
+                    'n' => $c->name,
+                    'a' => $c->abbreviation,
+                    'p' => $c->profit,
+                    'f' => $c->fee
+                ])
+            ])
         ])->keyBy('i');
 
         Cache::put('optimized_calculator_data', [

@@ -10,7 +10,7 @@
     'Рассчитайте доход, расход, прибыль и срок окупаемости асиков в онлайн калькуляторе доходности майнинга'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
-            'asicModel' => $selVersion['ns'],
+            'asicModel' => $selModel['s'],
             'asicVersion' => $selVersion['h'],
         ])
         : null }}">

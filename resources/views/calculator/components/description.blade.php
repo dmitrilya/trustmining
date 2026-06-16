@@ -7,16 +7,16 @@
         style="overflow-y: hidden; max-height: 3.75rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php
-            $haveProfits = count($selVersion['ps']);
+            $haveProfits = count($algorithms[$selVersion['a']]['p']);
             $income = $haveProfits
-                ? ($selVersion['ps'][0]['p'] * (100 - $fee) * 99.7) /
+                ? ($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] * (100 - $fee) * 99.7) /
                     10000
                 : 0;
             $expense = ((($selVersion['e'] * $selVersion['h']) / 1000) * 5 * 24 * 99.7) / 100;
             $profitU = ($haveProfits ? $income : 0) - $expense * $rub;
         @endphp
         {{ __('descriptions.calculator.main', [
-            'brand' => $selVersion['b'],
+            'brand' => $selModel['b'],
             'model' => $selModel['n'],
             'version' => $selVersion['h'] . $selVersion['m'],
             'incomeU' => round($income, 2),
@@ -29,7 +29,7 @@
         ]) }}
         @if ($selVersion['p'])
             {{ __('descriptions.calculator.payback.have', [
-                'brand' => $selVersion['b'],
+                'brand' => $selModel['b'],
                 'model' => $selModel['n'],
                 'version' => $selVersion['h'] . $selVersion['m'],
                 'seller' => $selVersion['s'],
@@ -38,11 +38,11 @@
             ]) }}
         @else
             {{ __('descriptions.calculator.payback.not', [
-                'brand' => $selVersion['b'],
+                'brand' => $selModel['b'],
                 'model' => $selModel['n'],
                 'version' => $selVersion['h'] . $selVersion['m'],
             ]) }}
-            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selVersion['bs'], 'asicModel' => $selVersion['ns']]) }}"
+            <a href="{{ route('database.asic-miners.model', ['asicBrand' => $selModel['bs'], 'asicModel' => $selModel['s']]) }}"
                 class="inline text-indigo-500 hover:text-indigo-600">{{ __('Offers') }} {{ $selModel['n'] }}</a>
         @endif
         {{ __('descriptions.calculator.params', [

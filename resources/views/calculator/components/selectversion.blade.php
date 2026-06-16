@@ -21,7 +21,15 @@
     },
     selectVersion(v) {
         this.selectedVersion = v;
-        version = v;
+        version = {
+            ...v,
+            n: this.selectedModel.n,
+            ns: this.selectedModel.s,
+            b: this.selectedModel.b,
+            bs: this.selectedModel.bs,
+            r: this.selectedModel.r,
+            ra: this.selectedModel.ra
+        };
         this.openVersion = false;
     },
     async loadData() {
@@ -96,7 +104,8 @@
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
                         class="h-9 w-full cursor-pointer rounded-md text-slate-950 dark:text-slate-50 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
-                        <span class="block truncate" x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
+                        <span class="block truncate"
+                            x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
                             <svg class="h-5 w-5 text-slate-500 dark:text-slate-400" viewBox="0 0 20 20"

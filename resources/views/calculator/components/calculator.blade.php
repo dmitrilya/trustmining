@@ -2,15 +2,23 @@
 
 <div class="min-h-[990px] md:min-h-[660px]">
     <meta itemprop="name"
-        content="{{ __('Income calculator') }} {{ $selVersion['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }}" />
+        content="{{ __('Income calculator') }} {{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }}" />
     <meta itemprop="description"
-        content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selVersion['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }} {{ __('in a convenient mining calculator') }}" />
+        content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }} {{ __('in a convenient mining calculator') }}" />
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product"
         class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{
             currency: 'RUB',
             tariff: 5,
-            version: {{ collect($selVersion) }},
+            version: {
+                ...{{ collect($selVersion) }},
+                n: '{{ $selModel['n'] }}',
+                ns: '{{ $selModel['s'] }}',
+                b: '{{ $selModel['b'] }}',
+                bs: '{{ $selModel['bs'] }}',
+                r: {{ $selModel['r'] }},
+                ra: @json($selModel['ra'])
+            },
             profitNumber: 0,
             algorithms: {{ $algorithms }},
             fee: {{ $fee }},
@@ -18,8 +26,11 @@
             uptime: 99.7,
             tax: 0,
             difficultyGrowth: 0,
+            get profit() {
+                return this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
+            },
             get dailyIncome() {
-                return (this.version.ps[this.profitNumber].p * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
+                return (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
             },
             get dailyConsumption() {
                 return this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
@@ -28,7 +39,7 @@
                 return this.dailyIncome - this.dailyConsumption;
             },
             get dailyProfitUSDT() {
-                return (this.version.ps[this.profitNumber].p * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count;
+                return (this.profit * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count;
             },
             get total() { return this.dailyIncome + this.dailyConsumption },
             get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
@@ -210,8 +221,7 @@
                                             <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
                                             <x-characteristic name="Efficiency"
                                                 x-value="version.e + ' j/' + version.m" />
-                                            <x-characteristic name="Power"
-                                                x-value="version.e * version.h" />
+                                            <x-characteristic name="Power" x-value="version.e * version.h" />
                                             @if (!$widjet)
                                                 <x-characteristic name="The best price"
                                                     x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
@@ -221,7 +231,8 @@
                                         @if (!$widjet)
                                             <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                                 x-bind:href="version ?
-                                                    `/asic-miners/${version.bs}/${version.ns}/${version.h}${version.m}` : '#'">
+                                                    `/asic-miners/${version.bs}/${version.ns}/${version.h}${version.m}` :
+                                                    '#'">
                                                 {{ __('All characteristics') }}
                                             </a>
                                         @endif
@@ -245,27 +256,27 @@
                         <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('How many coins does it mine per day') }}</h2>
 
-                        <template x-for="(profit, i) in version?.ps" :key="'profit_' + i">
+                        <template x-for="(profit, i) in algorithms[version?.a].p" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                @click="profitNumber = i, fee = algorithms[version.a].c[profit.c[0]].f;">
-                                <x-radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${algorithms[version.a].c[profit.c[0]].n}`" />
+                                @click="profitNumber = i, fee = profit.c[0].f;">
+                                <x-radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${profit.c[0].n}`" />
 
-                                <template x-for="coin in profit.c" :key="coin">
+                                <template x-for="coin in profit.c" :key="coin.a">
                                     <div>
                                         <div class="flex items-center">
-                                            <img :src="`/storage/coins/${algorithms[version.a].c[coin].a}.webp`"
-                                                :alt="'{{ __('Calculator') }} ' + algorithms[version.a].c[coin].n"
+                                            <img :src="`/storage/coins/${coin.a}.webp`"
+                                                :alt="'{{ __('Calculator') }} ' + coin.n"
                                                 class="w-5 xs:w-6 mr-1 xs:mr-2">
                                             <div>
                                                 <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400"
-                                                    x-text="algorithms[version.a].c[coin].a">
+                                                    x-text="coin.a">
                                                 </div>
-                                                <div class="text-xxs xs:text-xs text-slate-500" x-text="algorithms[version.a].c[coin].n">
+                                                <div class="text-xxs xs:text-xs text-slate-500" x-text="coin.n">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1"
-                                            x-text="version ? Math.round(version.h * algorithms[version.a].c[coin].p * version.c * 100000000) / 100000000 : 0">
+                                            x-text="version ? Math.round(version.h * coin.p * version.c * 100000000) / 100000000 : 0">
                                         </div>
                                     </div>
                                 </template>

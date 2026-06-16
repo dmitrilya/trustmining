@@ -1,22 +1,22 @@
-<meta itemprop="name" content="{{ $selVersion['b'] . ' ' . $selModel['n'] }}" />
+<meta itemprop="name" content="{{ $selModel['b'] . ' ' . $selModel['n'] }}" />
 <meta itemprop="description"
-    content="ASIC майнер от производителя {{ $selVersion['b'] }} модели {{ $selModel['n'] }} на {{ $selVersion['h'] }} {{ $selVersion['m'] }}" />
+    content="ASIC майнер от производителя {{ $selModel['b'] }} модели {{ $selModel['n'] }} на {{ $selVersion['h'] }} {{ $selVersion['m'] }}" />
 <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
-    <meta itemprop="name" content="{{ $selVersion['b'] }}" />
+    <meta itemprop="name" content="{{ $selModel['b'] }}" />
 </div>
 <div itemprop="model" itemscope itemtype="http://schema.org/ProductModel">
     <meta itemprop="name" content="{{ $selModel['n'] }}">
 </div>
-@if ($selVersion['r'])
+@if ($selModel['r'])
     <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-        <meta itemprop="ratingValue" content="{{ $selVersion['ra'] }}" />
+        <meta itemprop="ratingValue" content="{{ $selModel['ra'] }}" />
         <meta itemprop="worstRating" content="1">
         <meta itemprop="bestRating" content="5" />
-        <meta itemprop="reviewCount" content="{{ $selVersion['r'] }}" />
+        <meta itemprop="reviewCount" content="{{ $selModel['r'] }}" />
         <link itemprop="url"
             href="{{ route('database.asic-miners.reviews', [
-                'asicBrand' => $selVersion['bs'],
-                'asicModel' => $selVersion['ns'],
+                'asicBrand' => $selModel['bs'],
+                'asicModel' => $selModel['s'],
             ]) }}" />
     </div>
 @endif
@@ -33,28 +33,28 @@
     <meta itemprop="name" content="{{ __('Average price') }}">
     <meta itemprop="value" content="{{ $selVersion['p'] ? $selVersion['p'] : __('No data') }}">
 </div>
-@if (count($selVersion['ps']))
+@if (count($algorithms[$selVersion['a']]['p']))
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round($selVersion['ps'][0]['p'] / $rub, 2) }}" />
+        <meta itemprop="value" content="{{ round($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub, 2) }}" />
     </div>
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round(($selVersion['ps'][0]['p'] / $rub) * 30, 2) }}" />
+        <meta itemprop="value" content="{{ round(($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub) * 30, 2) }}" />
     </div>
     @if ($selVersion['p'])
         <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
             <meta itemprop="valueReference" content="{{ __('Payback') }}" />
             <meta itemprop="unitCode" content="DAY" />
             <meta itemprop="value"
-                content="{{ $selVersion['ps'][0]['p'] -
+                content="{{ $algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
                     ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000 >
                 0
                     ? round(
                         $selVersion['p'] /
-                            ($selVersion['ps'][0]['p'] -
+                            ($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
                                 ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000),
                     )
                     : 0 }}" />
