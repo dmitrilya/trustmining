@@ -11,11 +11,11 @@
             <div
                 class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">
                 @foreach ($algos as $algo)
-                    <div @click="algo && algo == '{{ $algo->name }}' ? filter(null, search) : filter('{{ $algo->name }}', search)"
+                    <div @click="algo && algo == '{{ $algo->id }}' ? filter(null, search) : filter('{{ $algo->id }}', search)"
                         class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                         :class="{
                             'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo ==
-                                '{{ $algo->name }}',
+                                '{{ $algo->id }}',
                             'border-slate-300 dark:border-slate-700': algo !=
                                 '{{ $algo->name }}'
                         }">
@@ -24,7 +24,7 @@
                         <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-600 dark:group-hover:text-slate-100"
                             :class="{
                                 'text-indigo-500 dark:text-slate-50': algo ==
-                                    '{{ $algo->name }}',
+                                    '{{ $algo->id }}',
                                 'text-slate-500 dark:text-slate-300': algo !=
                                     '{{ $algo->name }}'
                             }">
@@ -51,7 +51,7 @@
             <div
                 class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-slate-300 dark:border-slate-700">
                 <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200 col-span-2"
-                    @click="sort('name')">
+                    @click="sort('n')">
                     {{ __('Model') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -60,7 +60,7 @@
                     </svg>
                 </div>
                 <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('original_hashrate')">
+                    @click="sort('oh')">
                     {{ __('Hashrate') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -69,7 +69,7 @@
                     </svg>
                 </div>
                 <div class="hidden sm:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('power')">
+                    @click="sort('po')">
                     {{ __('Power') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -78,7 +78,7 @@
                     </svg>
                 </div>
                 <div class="hidden md:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('release')">
+                    @click="sort('r')">
                     {{ __('Release') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -87,7 +87,7 @@
                     </svg>
                 </div>
                 <div class="hidden lg:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('algorithm')">
+                    @click="sort('a')">
                     {{ __('Algorithm') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -96,7 +96,7 @@
                     </svg>
                 </div>
                 <div class="hidden xl:flex flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('original_efficiency', false)">j/Th
+                    @click="sort('oe', false)">j
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
                             d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
@@ -104,7 +104,7 @@
                     </svg>
                 </div>
                 <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
-                    @click="sort('profit')">
+                    @click="sort('p')">
                     {{ __('Profit') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -114,29 +114,29 @@
                 </div>
             </div>
 
-            <template x-for="model in models" :key="model.brand_slug + '_' + model.name">
-                <a :href="'/asic-miners/' + model.brand_slug + '/' + model.slug"
-                    class="py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
+            <template x-for="model in models.slice(0, pageCount * page)" :key="model.b + '_' + model.n">
+                <a :href="'/asic-miners/' + model.b + '/' + model.s"
+                    class="model py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
                     <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2"
-                        x-text="model.name">
+                        x-text="model.n">
                     </h5>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="(Math.round(model.hashrate * 1000) / 1000) + model.measurement + '/s'"></div>
+                        x-text="(Math.round(model.h * 1000) / 1000) + model.m + '/s'"></div>
                     <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="Math.round(model.power) + ' {{ __('W') }}'"></div>
+                        x-text="Math.round(model.po) + ' {{ __('W') }}'"></div>
                     <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="new Date(model.release).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
+                        x-text="new Date(model.r).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
                     </div>
                     <div class="hidden lg:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.algorithm"></div>
+                        x-text="algorithms[model.a].n"></div>
                     <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="(Math.round(model.original_efficiency * 10000) / 10000) + 'j/' + model.original_measurement">
+                        x-text="(Math.round(model.oe * 10000) / 10000) + 'j/' + model.om">
                     </div>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                        x-text="model.profit + ' USDT'">
+                        x-text="model.p + ' USDT'">
                     </div>
                     <div class="pl-1.5 sm:pl-2">
-                        <template x-for="coin in model.coins" :key="model.name + coin + 'img'">
+                        <template x-for="coin in algorithms[model.a].c" :key="model.n + coin + 'img'">
                             <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
                                 :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
                         </template>

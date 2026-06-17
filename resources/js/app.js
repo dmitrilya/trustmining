@@ -48,15 +48,28 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('modelsData', () => ({
         models: [],
         sourceModels: [],
+        algorithms: [],
         search: '',
         algo: null,
         sortCol: null,
         sortAsc: true,
+        observer: null,
+        pageCount: 10,
+        page: 1,
+
         async init() {
             let resp = await fetch(window.location.origin + window.location.pathname + '/get-models');
-            this.sourceModels = Object.freeze(await resp.json());
+            const data = await resp.json();
+
+            this.sourceModels = Object.freeze(data.m);
+            this.algorithms = Object.freeze(data.a);
             this.models = [...this.sourceModels];
+
+            this.$nextTick(() => {
+                this.setupObserver();
+            });
         },
+
         sort(col, asc = true) {
             if (this.sortCol === col) this.sortAsc = !this.sortAsc;
             else this.sortAsc = asc;
@@ -66,14 +79,53 @@ document.addEventListener('alpine:init', () => {
                 if (a[this.sortCol] > b[this.sortCol]) return this.sortAsc ? -1 : 1;
                 return 0;
             });
+
+            this.page = 1;
+            this.$nextTick(() => {
+                this.setupObserver();
+            });
         },
+
         filter(algo, search) {
             this.algo = algo;
             this.search = search.toLowerCase();
             this.models = this.sourceModels.filter(
-                model => (!this.algo || this.algo && model.algorithm == this.algo) && model.name.toLowerCase().includes(this.search)
+                model => (!this.algo || this.algo && model.a == this.algo) && model.n.toLowerCase().includes(this.search)
             );
+
+            this.page = 1;
+            this.$nextTick(() => {
+                this.setupObserver();
+            });
         },
+
+        setupObserver() {
+            if (this.observer) this.observer.disconnect();
+
+            const rows = Array.from(document.querySelectorAll('.model'));
+            const lastRow = rows[rows.length - 1];
+
+            if (!lastRow || this.pageCount * this.page >= this.models?.length) return;
+
+            this.observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.page++;
+                        this.observer.unobserve(entry.target);
+
+                        this.$nextTick(() => {
+                            this.setupObserver();
+                        });
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '200px',
+                threshold: 0.1
+            });
+
+            this.observer.observe(lastRow);
+        }
     }));
 
     Alpine.data('roulette', roulette);
@@ -99,7 +151,7 @@ window.debounce = (func, timeout = 1000) => {
     };
 }
 
-window.pluralize = function(count, one, two, five) {
+window.pluralize = function (count, one, two, five) {
     let n = Math.abs(count) % 100;
     let n1 = n % 10;
     if (n > 10 && n < 20) return five;

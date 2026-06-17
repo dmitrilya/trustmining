@@ -327,28 +327,33 @@ class DatabaseController extends Controller
 
         if ($request->asicBrand) $models = $models->where('asic_brand_id', AsicBrand::where('slug', $request->asicBrand)->first('id')->id);
 
-        $models = $models->map(function ($model) {
+        $algorithms = collect();
+        $models = $models->map(function ($model) use ($algorithms) {
             $version = $model->asicVersions->first();
             $profit = $version->profits->first();
 
-            return [
-                'name' => $model->name,
-                'slug' => $version->model_slug,
-                'hashrate' => $version->hashrate,
-                'original_hashrate' => $version->original_hashrate,
-                'profit' => $profit ? $profit['profit'] : 0,
-                'coins' => $profit ? $profit['coins']->pluck('abbreviation') : [],
-                'power' => $version->hashrate * $version->efficiency,
-                'efficiency' => $version->efficiency,
-                'original_efficiency' => $version->original_efficiency,
-                'algorithm' => $version->algorithm,
-                'measurement' => $version->measurement,
-                'original_measurement' => $model->algorithm->measurement,
-                'release' => $model->release,
-                'brand_slug' => $version->brand_slug
-            ];
-        })->sortByDesc('profit')->values();
+            $algorithms->put($version->algorithm_id, [
+                'n' => $version->algorithm,
+                'c' => $profit ? $profit['coins']->pluck('abbreviation') : []
+            ]);
 
-        return response()->json($models);
+            return [
+                'n' => $model->name,
+                's' => $version->model_slug,
+                'h' => $version->hashrate,
+                'oh' => $version->original_hashrate,
+                'p' => $profit ? $profit['profit'] : 0,
+                'po' => $version->hashrate * $version->efficiency,
+                'e' => $version->efficiency,
+                'oe' => $version->original_efficiency,
+                'a' => $version->algorithm_id,
+                'm' => $version->measurement,
+                'om' => $model->algorithm->measurement,
+                'r' => $model->release,
+                'b' => $version->brand_slug
+            ];
+        })->sortByDesc('p')->values();
+
+        return response()->json(['m' => $models, 'a' => $algorithms]);
     }
 }
