@@ -146,7 +146,7 @@
         </div>
 
         @foreach ($brand->asicModels as $asicModel)
-            <a
+            <a aria-label="{{ $brand->name }} {{ $asicModel->name }}"
                 href="{{ route('database.asic-miners.model', ['asicBrand' => $brand->slug, 'asicModel' => $asicModel->slug]) }}"></a>
         @endforeach
     </div>
