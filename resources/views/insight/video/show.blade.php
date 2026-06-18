@@ -1,4 +1,4 @@
-<x-insight-layout :title="$video->title . ' | TM Insight'" :description="$video->title . ' - видео ' . $channel->name" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="$video->title" :description="$video->title . ' | ' . $channel->name . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
         if (isset($moderation)) $channel = $video->channel;

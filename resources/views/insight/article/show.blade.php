@@ -1,4 +1,4 @@
-<x-insight-layout :title="$article->title" :description="$article->subtitle" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="$article->subtitle" :description="$article->title  . ' | ' . $channel->name . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
         if (isset($moderation)) $channel = $article->channel;
