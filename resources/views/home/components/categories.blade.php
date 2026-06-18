@@ -14,9 +14,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Miners') }}</h4>
+                {{ __('Miners') }}</h3>
         </a>
         <a href="{{ route('hostings') }}" class="flex items-center group">
             {{-- <div
@@ -27,9 +27,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Hostings') }}</h4>
+                {{ __('Hostings') }}</h3>
         </a>
         <a href="{{ route('services') }}" class="flex items-center group">
             {{-- <div
@@ -40,9 +40,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Services') }}</h4>
+                {{ __('Services') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'legals']) }}" class="flex items-center group">
             {{-- <div
@@ -53,9 +53,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Legals') }}</h4>
+                {{ __('Legals') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'containers']) }}" class="flex items-center group">
             {{-- <div
@@ -66,9 +66,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Containers') }}</h4>
+                {{ __('Containers') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}" class="flex items-center group">
             {{-- <div
@@ -79,9 +79,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Noiseboxes') }}</h4>
+                {{ __('Noiseboxes') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}" class="flex items-center group">
             {{-- <div
@@ -92,9 +92,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Cryptoboilers') }}</h4>
+                {{ __('Cryptoboilers') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}" class="flex items-center group">
             {{-- <div
@@ -105,9 +105,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Water cooling plates') }}</h4>
+                {{ __('Water cooling plates') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'gpus']) }}" class="flex items-center group">
             {{-- <div
@@ -118,9 +118,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('GPU') }}</h4>
+                {{ __('GPU') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'firmwares']) }}" class="flex items-center group">
             {{-- <div
@@ -131,9 +131,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Firmwares') }}</h4>
+                {{ __('Firmwares') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'monitorings']) }}" class="flex items-center group">
             {{-- <div
@@ -144,9 +144,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Monitoring') }}</h4>
+                {{ __('Monitoring') }}</h3>
         </a>
         <a href="{{ route('cryptoexchangers') }}" class="flex items-center group">
             {{-- <div
@@ -157,9 +157,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Exchangers') }}</h4>
+                {{ __('Exchangers') }}</h3>
         </a>
         <a href="{{ route('ads', ['adCategory' => 'accessories']) }}" class="flex items-center group">
             {{-- <div
@@ -170,9 +170,9 @@
                     'w' => '100%',
                 ])
             </div> --}}
-            <h4
+            <h3
                 class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
-                {{ __('Accessories') }}</h4>
+                {{ __('Accessories') }}</h3>
         </a>
     </div>
 </div>

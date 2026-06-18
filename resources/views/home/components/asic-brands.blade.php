@@ -18,7 +18,7 @@
         @endforeach
     </div>
 
-    <div x-show="show" x-collapse class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
+    <div x-show="show" x-collapse x-cloak class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
         @foreach ($asicBrands->slice(6) as $asicBrand)
             <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
                 class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
