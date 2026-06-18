@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('homepage:cache')->hourlyAt(7);
         $schedule->command('ordering:update')->hourlyAt(15);
         $schedule->command('subscription:check')->daily();
         $schedule->command('coinprofit:update')->cron('3 2,10,18 * * *');;

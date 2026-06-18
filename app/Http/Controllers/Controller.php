@@ -12,52 +12,25 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-use App\Http\Traits\SearchTrait;
-use App\Http\Traits\Telegram;
-use App\Http\Traits\HostingTrait;
 use App\Http\Traits\AdTrait;
-use App\Http\Traits\DaData;
-use App\Http\Traits\ViewTrait;
 
-use App\Models\Ad\AdCategory;
-use App\Models\Database\AsicBrand;
-use App\Models\Database\AsicModel;
-use App\Models\Database\AsicVersion;
-use App\Models\Database\GPUModel;
 use App\Models\Database\Coin;
 use App\Models\Morph\Like;
 use App\Models\User\Role;
 use App\Models\User\User;
 use App\Models\Chat\Chat;
-use App\Models\Forum\ForumQuestion;
-use App\Models\Insight\Channel;
 use App\Models\Insight\Content\Article;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, SearchTrait, Telegram, AdTrait, HostingTrait, DaData, ViewTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, AdTrait;
 
     public function home(): View
     {
-        $location = session('user_location');
-        $miners = $this->getAds(null, AdCategory::where('name', 'miners')->first());
+        $data = Cache::get('home_page_data');
+        $data['articles'] = Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get();
 
-        if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
-
-        return view('home.index', [
-            'asicBrands' => AsicBrand::select(['id', 'name', 'slug'])->withCount('views')->orderByDesc('views_count')->get(),
-            'asicModels' => AsicModel::select(['id', 'name', 'slug', 'asic_brand_id'])->with(['asicBrand:id,name,slug'])
-                ->withCount('views')->orderByDesc('views_count')->limit(10)->get(),
-            'gpuModels' => GPUModel::select(['id', 'name', 'slug', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name,slug'])
-                ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),
-            'miners' => $miners->orderByDesc('ads.ordering_id')->limit(9)->get(),
-            'hostings' => $this->getHostings(null)->inRandomOrder()->limit(9)->get(),
-            'articles' => Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get(),
-            'forumQuestions' => ForumQuestion::where('published', true)->select(['id', 'forum_subcategory_id', 'theme', 'created_at'])
-                ->with(['forumSubcategory:id,name,slug,forum_category_id', 'forumSubcategory.forumCategory:id,name,slug'])
-                ->withCount('moderatedForumAnswers')->withCount('views')->latest()->limit(3)->get(),
-            'topChannels' => Channel::select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers')->orderByDesc('active_subscribers_count')->limit(4)->get()
-        ]);
+        return view('home.index', $data);
     }
 
     public function about(): View
