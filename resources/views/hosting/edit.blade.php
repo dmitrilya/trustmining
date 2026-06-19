@@ -108,21 +108,21 @@
 
                 <div>
                     <x-input-label for="hosting-contract" :value="__('Agreement for the provision of accommodation services')" />
-                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full" accept=".doc,.docx" label="DOC, max. 1MB" />
+                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full" accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
                     <x-input-error :messages="$errors->get('contract')" />
                 </div>
 
                 <div>
                     <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
                     <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
-                        accept=".doc,.docx" label="DOC, max. 1MB" />
+                        accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
                     <x-input-error :messages="$errors->get('territory')" />
                 </div>
 
                 <div>
                     <x-input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
                     <x-file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
-                        autocomplete="energy_supply" accept=".doc,.docx" :value="old('energy_supply')" label="DOC, max. 1MB" />
+                        autocomplete="energy_supply" accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
                     <x-input-error :messages="$errors->get('energy_supply')" />
                 </div>
 

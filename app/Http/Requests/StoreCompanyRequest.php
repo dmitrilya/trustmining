@@ -27,7 +27,7 @@ class StoreCompanyRequest extends FormRequest
         return [
             'inn' => 'required|string',
             'documents' => 'max:4',
-            'documents.*' => 'file|mimes:doc,docx|max:1024',
+            'documents.*' => 'file|mimes:doc,docx,pdf|max:1024',
         ];
     }
 
@@ -40,7 +40,7 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             'documents.size' => __('File limit exceeded'),
-            'documents.*.mimes' => __('Valid types are doc (word)'),
+            'documents.*.mimes' => __('Valid types are doc (word) or pdf'),
             'documents.*.max' => __('The maximum file size should not exceed 1 MB'),
         ];
     }

@@ -192,7 +192,7 @@
     "Preview is required": "Необходимо загрузить превью",
     "The preview aspect ratio should be 4:3": "Соотношение сторон превью должно быть 4 к 3",
     "Valid types are png, jpg and jpeg": "Допустимые типы png, jpg и jpeg",
-    "Valid types are doc (word)": "Допустимые типы doc (word)",
+    "Valid types are doc (word) or pdf": "Допустимые типы doc (word) или pdf",
     "The maximum file size should not exceed 5 MB": "Максимальный размер файла не должен превышать 5 МБ",
     "The maximum file size should not exceed 2 MB": "Максимальный размер файла не должен превышать 2 МБ",
     "The maximum file size should not exceed 1 MB": "Максимальный размер файла не должен превышать 1 МБ",
