@@ -77,7 +77,7 @@
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
-                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        class="absolute z-10 mt-1 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     </ul>
                 </div>
 

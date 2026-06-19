@@ -11,7 +11,7 @@ window.dadataSuggs = function (address, list, open, method) {
         for (let suggestion of r.data.suggestions) {
             list.insertAdjacentHTML(
                 'beforeend',
-                `<li role="option" class="cursor-default select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
+                `<li role="option" class="cursor-pointer select-none" @click="$refs.search.value = $el.firstElementChild.textContent; open = false">
                     <div class="w-full py-2 px-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800">${suggestion}</div>
                 </li>`
             );
