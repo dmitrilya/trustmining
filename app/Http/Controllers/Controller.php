@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Http\Traits\AdTrait;
+use App\Http\Traits\DaData;
 
 use App\Models\Database\Coin;
 use App\Models\Morph\Like;
@@ -23,7 +24,7 @@ use App\Models\Insight\Content\Article;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, AdTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, AdTrait, DaData;
 
     public function home(): View
     {
