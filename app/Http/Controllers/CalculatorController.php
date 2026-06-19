@@ -6,12 +6,14 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Illuminate\View\View as ViewBlade;
 
+use App\Http\Traits\ViewTrait;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
-use App\Models\Database\Coin;
 
 class CalculatorController extends Controller
 {
+    use ViewTrait;
+
     public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
     {
         $data = Cache::get('optimized_calculator_data');
