@@ -172,8 +172,8 @@ class AdService
 
                 $name = 'Контейнер для майнинга';
                 $title = 'Контейнеры для майнинга ';
-                if ($ad->props['Length (cm)'] >= 1200) $title .= '40 футов';
-                else if ($ad->props['Length (cm)'] >= 600) $title .= '20 футов';
+                if ($ad->props['Length (cm)'] >= 800) $title .= '40 футов';
+                else if ($ad->props['Length (cm)'] >= 400) $title .= '20 футов';
                 else $title .= "на $capacity устройств";
                 $title .= " купить у $user $city";
                 $description = "Контейнер для $capacity асиков на $power кВт/ч $city у компании $user. Доставка по всей России. Выгодные предложения";
