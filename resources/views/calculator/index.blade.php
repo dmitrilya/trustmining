@@ -13,7 +13,7 @@
             'asicModel' => $selModel['s'],
             'asicVersion' => $selVersion['h'],
         ])
-        : null }}">
+        : url()->current() }}">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
             {{ __('Mining calculator') }} @if ($rModel)
