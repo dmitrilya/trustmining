@@ -76,7 +76,7 @@
                                 <x-characteristics>
                                     <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                     <x-characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
-                                    <x-characteristic name="Power" x-value="version.e * version.h" />
+                                    <x-characteristic name="Power" x-value="Math.round(version.e * version.h) + {{ __('W') }}" />
                                     @if (!$widjet)
                                         <x-characteristic name="The best price"
                                             x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
@@ -221,7 +221,7 @@
                                             <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
                                             <x-characteristic name="Efficiency"
                                                 x-value="version.e + ' j/' + version.m" />
-                                            <x-characteristic name="Power" x-value="version.e * version.h" />
+                                            <x-characteristic name="Power" x-value="Math.round(version.e * version.h) + {{ __('W') }}" />
                                             @if (!$widjet)
                                                 <x-characteristic name="The best price"
                                                     x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
