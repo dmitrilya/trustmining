@@ -13,7 +13,7 @@ use Illuminate\Http\UploadedFile;
 
 trait FileTrait
 {
-    public function saveFiles(?array $files, string $folder, string $type, int $id, int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
+    public function saveFiles(?array $files, string $folder, string $type, int|string $id, int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $result = [];
 
@@ -53,7 +53,7 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile(UploadedFile $file, string $folder, string $type, int $id, ?int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
+    public function saveFile(UploadedFile $file, string $folder, string $type, int|string $id, ?int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $filename = $type . '_' . $id;
         if ($time) $filename .= '_' . $time;
@@ -65,7 +65,7 @@ trait FileTrait
         return $folder . '/' . $filename . '.' . $ext;
     }
 
-    public function saveFilesWithName(?array $files, string $folder, string $type, int $id, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
+    public function saveFilesWithName(?array $files, string $folder, string $type, int|string $id, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $result = [];
 
