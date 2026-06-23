@@ -37,12 +37,6 @@ return [
         'key' => env('YANDEXGPT_APP_KEY'),
     ],
 
-    'yandexfeeds' => [
-        'id' => env('YANDEX_FEEDS_ID'),
-        'secret' => env('YANDEX_FEEDS_SECRET'),
-        'key' => env('YANDEX_FEEDS_KEY'),
-    ],
-
     'tgbot' => [
         'id' => env('NOTIFICATION_BOT_ID'),
         'token' => env('NOTIFICATION_BOT_TOKEN'),

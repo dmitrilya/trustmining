@@ -9,6 +9,7 @@
     <div itemprop="object" itemscope itemtype="https://schema.org/Product"
         class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12" x-data="{
             currency: 'RUB',
+            view: 'month',
             tariff: 5,
             version: {
                 ...{{ collect($selVersion) }},
@@ -137,7 +138,7 @@
 
             <template x-if="version !== null">
                 <div>
-                    <div x-data="{ view: 'month' }" style="min-height: 228px" class="space-y-2 sm:space-y-4">
+                    <div style="min-height: 228px" class="space-y-2 sm:space-y-4">
                         <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
                             <button @click="view = 'day'"
                                 :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"

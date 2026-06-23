@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Ad\Ad;
 use App\Models\User\User;
@@ -46,7 +47,7 @@ class UpdateOrdering extends Command
 
             $query .= ' END';
 
-            Ad::withoutTimestamps(fn() => Ad::query()->update(['ordering_id' => \DB::raw($query)]));
+            Ad::withoutTimestamps(fn() => Ad::query()->update(['ordering_id' => DB::raw($query)]));
         }
 
         $users = User::get(['id', 'ordering_id']);
@@ -64,7 +65,7 @@ class UpdateOrdering extends Command
 
             $query .= ' END';
 
-            User::withoutTimestamps(fn() => User::query()->update(['ordering_id' => \DB::raw($query)]));
+            User::withoutTimestamps(fn() => User::query()->update(['ordering_id' => DB::raw($query)]));
         }
 
         $hostings = Hosting::get(['id', 'ordering_id']);
@@ -82,7 +83,7 @@ class UpdateOrdering extends Command
 
             $query .= ' END';
 
-            Hosting::withoutTimestamps(fn() => Hosting::query()->update(['ordering_id' => \DB::raw($query)]));
+            Hosting::withoutTimestamps(fn() => Hosting::query()->update(['ordering_id' => DB::raw($query)]));
         }
 
         return Command::SUCCESS;
