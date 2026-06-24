@@ -7,26 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
 
-    @php
-        $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
-        $agent = strtolower(request()->header('User-Agent'));
-        $isBot = false;
-
-        foreach ($exceptAgents as $exceptAgent) {
-            if (str_contains($agent, $exceptAgent)) {
-                $isBot = true;
-                break;
-            }
-        }
-    @endphp
-
     <meta name="robots" content="noindex, nofollow">
 
     <title>Сложность сети {{ $coin->name }}: история, график и прогноз | TRUSTMINING</title>
     <meta name="description"
         content="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
 
-    @if (!$isBot)
+    @if (!is_bot_request())
         <script type="text/javascript">
             (function(m, e, t, r, i, k, a) {
                 m[i] = m[i] || function() {

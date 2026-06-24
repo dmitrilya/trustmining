@@ -38,7 +38,8 @@
     },
     "autoload-dev": {
         "files": [
-            "app/Helpers/video.php"
+            "app/Helpers/video.php",
+            "app/Helpers/functions.php"
         ],
         "psr-4": {
             "Tests\\": "tests/"

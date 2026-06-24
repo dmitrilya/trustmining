@@ -8,13 +8,10 @@ trait ViewTrait
 {
     public function addView($request, $model, $adId = null)
     {
-        $ip = $request->ip();
-        $exceptAgents = ['bot', 'finder', 'lighthouse', 'googleother', 'crawler', 'inspectiontool', 'spider'];
-        $agent = strtolower($request->header('User-Agent'));
+        if (is_bot_request()) return;
 
-        foreach ($exceptAgents as $exceptAgent) {
-            if (str_contains($agent, $exceptAgent)) return;
-        }
+        $ip = $request->ip();
+        $agent = strtolower($request->header('User-Agent'));
 
         Log::channel('agents')->info("UserAgent={$agent} ip={$ip}");
 

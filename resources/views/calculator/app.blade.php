@@ -10,23 +10,13 @@
 
     @php
         $theme = request()->cookie('app_theme');
-        $exceptAgents = ['bot', 'finder', 'Chrome-Lighthouse', 'googleother', 'crawler'];
-        $agent = strtolower(request()->header('User-Agent'));
-        $isBot = false;
-
-        foreach ($exceptAgents as $exceptAgent) {
-            if (str_contains($agent, $exceptAgent)) {
-                $isBot = true;
-                break;
-            }
-        }
     @endphp
 
     <title>Калькулятор доходности майнинга — расчет прибыли и окупаемости TrustMining</title>
     <meta name="description"
         content="Онлайн-калькулятор доходности оборудования TrustMining: узнайте ежедневную прибыль, сроки окупаемости и чистый доход с учетом затрат на электроэнергию и актуального курса">
 
-    @if (!$isBot)
+    @if (!is_bot_request())
         <script type="text/javascript">
             (function(m, e, t, r, i, k, a) {
                 m[i] = m[i] || function() {

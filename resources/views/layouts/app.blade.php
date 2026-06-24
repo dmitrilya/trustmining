@@ -13,16 +13,6 @@
 
     @php
         $theme = request()->cookie('app_theme');
-        $exceptAgents = ['bot', 'finder', 'lighthouse', 'googleother', 'crawler', 'inspectiontool', 'spider'];
-        $agent = strtolower(request()->header('User-Agent'));
-        $isBot = false;
-
-        foreach ($exceptAgents as $exceptAgent) {
-            if (str_contains($agent, $exceptAgent)) {
-                $isBot = true;
-                break;
-            }
-        }
 
         $location = session('user_location');
         $shouldAskLocation = false;
@@ -57,7 +47,7 @@
     @endif
 
     <!-- Yandex.Metrika counter -->
-    @if (!$isBot)
+    @if (!is_bot_request())
         <script type="text/javascript">
             function isWeakDevice() {
                 return false;
