@@ -2,7 +2,7 @@
     $channel = $channel ?? $post->channel;
 @endphp
 
-<x-insight-layout :title="str($post->content)->stripTags()->limit(40) . ' | ' . $channel->name" :description="str($post->content)->stripTags()->limit(140) . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="str($post->content)->stripTags()->limit(65)" :description="str($post->content)->stripTags()->limit(130) . ' | ' . $channel->name . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
     @endphp
