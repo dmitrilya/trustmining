@@ -1,6 +1,6 @@
 <div
     class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
-    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
+    <div class="w-full overflow-hidden rounded-xl justify-center items-center">
         <a class="block w-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }"
             x-intersect.once.margin.300px="shown = true" aria-label="{{ $model->name }}">
             @php
