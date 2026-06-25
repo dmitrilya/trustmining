@@ -124,6 +124,8 @@ class DatabaseController extends Controller
                 $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
                     ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
                 $maxViews = log($models->max('views_count') + 1);
+                
+                if ($maxViews == 0) $maxViews = 1;
 
                 return [
                     'same_algo' => $models->except($asicModel->id)->where('algorithm_id', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
@@ -248,6 +250,8 @@ class DatabaseController extends Controller
                 $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
                     ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
                 $maxViews = log($models->max('views_count') + 1);
+
+                if ($maxViews == 0) $maxViews = 1;
 
                 return [
                     'same_algo' => $models->except($asicModel->id)->where('algorithm_id', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
