@@ -10,6 +10,7 @@ use App\Services\YandexGPTService;
 use App\Models\Ad\Hosting;
 use GdImage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Http\File;
 
 trait FileTrait
 {
@@ -34,7 +35,7 @@ trait FileTrait
         return $result;
     }
 
-    public function saveContract(UploadedFile $file, string $folder, Hosting $hosting, string $disk = 'public')
+    public function saveContract(UploadedFile|File $file, string $folder, Hosting $hosting, string $disk = 'public')
     {
         $path = $this->saveFile($file, $folder, 'contract', $hosting->id, time(), null, 70, $disk);
 
@@ -53,7 +54,7 @@ trait FileTrait
         return $path;
     }
 
-    public function saveFile(UploadedFile $file, string $folder, string $type, int|string $id, ?int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
+    public function saveFile(UploadedFile|File $file, string $folder, string $type, int|string $id, ?int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $filename = $type . '_' . $id;
         if ($time) $filename .= '_' . $time;
@@ -106,7 +107,7 @@ trait FileTrait
         return $files;
     }
 
-    private function compress(UploadedFile $file, string $disk, string $folder, string $filename, int|array|null $resize, int $quality, ?string $watermark)
+    private function compress(UploadedFile|File $file, string $disk, string $folder, string $filename, int|array|null $resize, int $quality, ?string $watermark)
     {
         $info = getimagesize($file->getPathName());
 
