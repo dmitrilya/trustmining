@@ -191,17 +191,8 @@
                     <h2 class="sr-only">Информация</h2>
 
                     <div class="w-full mb-4 sm:mb-6">
-                        @php
-                            $previewxs = 'asic-miners/' . $model->slug . '_224' . '.webp';
-                            $previewsm = 'asic-miners/' . $model->slug . '_320' . '.webp';
-                        @endphp
-
-                        <picture class="w-full">
-                            <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
-
-                            <img itemprop="image" class="w-full object-cover" src="{{ Storage::url($previewsm) }}"
-                                alt="{{ $brand->name }} {{ $model->name }}">
-                        </picture>
+                        <img itemprop="image" class="w-full object-cover" src="{{ Storage::url('asic-miners/' . $model->slug . '_380.webp') }}"
+                            alt="{{ $brand->name }} {{ $model->name }}">
                     </div>
 
                     <x-characteristics>

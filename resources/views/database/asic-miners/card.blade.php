@@ -5,7 +5,7 @@
             x-intersect.once.margin.300px="shown = true" aria-label="{{ $model->name }}">
             @php
                 $previewxs = 'asic-miners/' . $model->slug . '_224' . '.webp';
-                $previewsm = 'asic-miners/' . $model->slug . '_320' . '.webp';
+                $previewsm = 'asic-miners/' . $model->slug . '_380' . '.webp';
             @endphp
 
             <template x-if="shown">

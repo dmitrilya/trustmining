@@ -107,7 +107,7 @@ trait FileTrait
         return $files;
     }
 
-    private function compress(UploadedFile|File $file, string $disk, string $folder, string $filename, int|array|null $resize, int $quality, ?string $watermark)
+    private function compress(UploadedFile|File $file, string $disk, string $folder, string $filename, int|array|null $resize, int $quality, ?string $watermark = null)
     {
         $info = getimagesize($file->getPathName());
 
