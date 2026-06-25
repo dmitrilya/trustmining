@@ -24,7 +24,8 @@
         </x-breadcrumbs>
 
         <div itemscope itemtype="https://schema.org/Product"
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14"
+            x-data={} x-init="axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $model->id }} })">
             {{-- <div class="mb-6 md:mb-12">
                 @include('database.components.model-images')
             </div> --}}
@@ -186,8 +187,22 @@
                     </div>
                 </div>
 
-                <div class="mt-4 md:mt-0">
+                <div class="mt-6 md:mt-0">
                     <h2 class="sr-only">Информация</h2>
+
+                    <div class="w-full mb-4 sm:mb-6">
+                        @php
+                            $previewxs = 'asic-miners/' . $model->slug . '_224' . '.webp';
+                            $previewsm = 'asic-miners/' . $model->slug . '_320' . '.webp';
+                        @endphp
+
+                        <picture class="w-full">
+                            <source media="(max-width: 430px)" srcset="{{ Storage::url($previewxs) }}">
+
+                            <img itemprop="image" class="w-full object-cover" src="{{ Storage::url($previewsm) }}"
+                                alt="{{ $brand->name }} {{ $model->name }}">
+                        </picture>
+                    </div>
 
                     <x-characteristics>
                         <x-characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
@@ -254,10 +269,109 @@
                 </div>
             </div>
 
-            <div class="mt-4 sm:mt-8">
-                @include('database.asic-miners.description')
+            <div class="mt-8" x-data="{ selectedTab: 'description' }">
+                <div
+                    class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-300 dark:border-slate-800">
+                    <ul class="flex flex-wrap -mb-px">
+                        <li class="mr-0.5 sm:mr-2">
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'description'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'description' !=
+                                        selectedTab,
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'description' ==
+                                        selectedTab
+                                }">
+                                {{ __('Description') }}
+                            </button>
+                        </li>
+                        <li class="mr-0.5 sm:mr-2">
+                            <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg"
+                                @click="selectedTab = 'reviews'"
+                                :class="{
+                                    'border-transparent hover:text-slate-600 hover:border-slate-300 dark:hover:text-slate-300': 'reviews' !=
+                                        selectedTab,
+                                    'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'reviews' ==
+                                        selectedTab
+                                }">
+                                {{ __('Reviews') }}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div x-show="selectedTab == 'description'">
+                    @include('database.asic-miners.description')
+                </div>
+
+                <div class="space-y-6" x-show="selectedTab == 'reviews'" style="display: none">
+                    @include('review.reviews', ['auth' => auth()->user(), 'reviews' => $model->reviews])
+                    @include('review.send', [
+                        'auth' => auth()->user(),
+                        'reviews' => $model->reviews,
+                        'type' => 'asic-model',
+                        'id' => $model->id,
+                    ])
+                </div>
             </div>
         </div>
+
+        <section class="mt-4 sm:mt-6 lg:mt-8" x-data="{ tab: 'simmilar' }">
+            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
+                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                    {{ __('Compare with') }}
+                </h2>
+
+                <div class="flex text-xs s m:text-sm">
+                    <button @click="tab = 'simmilar'"
+                        :class="tab === 'simmilar' ?
+                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Similar') }}
+                    </button>
+                    <button @click="tab = 'popular'"
+                        :class="tab === 'popular' ?
+                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                            'text-slate-500'"
+                        class="px-3 py-1 rounded-full transition-all">
+                        {{ __('Popular') }}
+                    </button>
+                </div>
+            </div>
+
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'simmilar'"
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Comparing with') . ' ' . __('Similar') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('database.asic-miners.compare-carousel', [
+                    'asicModels' => $comparing['same_algo'],
+                    'characteristics' => [
+                        [
+                            'name' => __('Speed'),
+                            'value' => fn($model) => $model->maxRate . ' ' . $model->algorithm->measurement . '/s',
+                        ],
+                    ],
+                ])
+            </div>
+
+            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
+                x-transition:enter.duration.400ms>
+                <meta itemprop="name" content="{{ __('Comparing with') . ' ' . __('Popular') }}" />
+                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                @include('database.asic-miners.compare-carousel', [
+                    'asicModels' => $comparing['diff_algo'],
+                    'characteristics' => [
+                        [
+                            'name' => __('Release'),
+                            'value' => fn($model) => $model->release->locale(app()->getLocale())->translatedFormat('F Y'),
+                        ],
+                    ],
+                ])
+            </div>
+        </section>
 
         <section class="mt-4 sm:mt-6 lg:mt-8">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">

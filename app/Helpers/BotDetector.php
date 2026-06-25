@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 
 class BotDetector
 {
-    /**
-     * Список сигнатур ботов, парсеров, консольных утилит и мертвых движков.
-     */
     protected static array $exceptAgents = [
-        // Базовые роботы
+        // Роботы автоматизации, которые умеют исполнять JS (Puppeteer, Selenium и др.)
+        'headless',
+        'selenium',
+        'puppeteer',
+        'playwright',
+        'phantomjs',
+
+        // Инструменты ручного тестирования API (если кто-то штурмует ваш API напрямую)
+        'postman',
+        'insomnia',
+
+        // Официальные тяжелые краулеры (на случай, если они начнут исполнять JS на странице)
         'bot',
         'finder',
         'lighthouse',
@@ -19,32 +27,6 @@ class BotDetector
         'inspectiontool',
         'spider',
         'scraper',
-
-        // Мертвые / фейковые движки и старые IE
-        'presto',
-        'trident/4.0',
-        'trident/5.0',
-        'msie 7.0',
-        'msie 8.0',
-        'msie 9.0',
-
-        // Библиотеки для парсинга и скрипты
-        'curl',
-        'python',
-        'guzzle',
-        'httpclient',
-        'axios',
-        'wget',
-        'go-http',
-        'okhttp',
-
-        // Инструменты автоматизации и тестов
-        'headless',
-        'postman',
-        'selenium',
-        'puppeteer',
-        'playwright',
-        'phantomjs'
     ];
 
     /**
@@ -57,26 +39,16 @@ class BotDetector
     {
         $agent = trim(strtolower($request->header('User-Agent') ?? ''));
 
-        // 1. Проверка на пустой или слишком короткий User-Agent
-        if (empty($agent) || strlen($agent) < 20) {
+        // Защита от пустых заголовков при прямых запросах к API
+        if (empty($agent)) {
             return true;
         }
 
-        // 2. Проверка по черному списку сигнатур
+        // Проверка по лаконичному черному списку
         foreach (self::$exceptAgents as $exceptAgent) {
             if (str_contains($agent, $exceptAgent)) {
                 return true;
             }
-        }
-
-        // 3. Проверка на соответствие базовым стандартам реальных браузеров
-        $isStandardBrowser = str_contains($agent, 'mozilla')
-            || str_contains($agent, 'safari')
-            || str_contains($agent, 'opera')
-            || str_contains($agent, 'chrome');
-
-        if (!$isStandardBrowser) {
-            return true;
         }
 
         return false;

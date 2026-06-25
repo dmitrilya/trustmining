@@ -66,8 +66,6 @@ class DatabaseController extends Controller
      */
     public function asicMinersBrand(AsicBrand $asicBrand)
     {
-        $this->addView(request(), $asicBrand);
-
         return view('database.asic-miners.brand', [
             'brand' => $asicBrand->load(['asicModels' => fn($q) => $q->where('release', '>', '2010-03-01')
                 ->select(['id', 'slug', 'asic_brand_id', 'algorithm_id'])
@@ -84,8 +82,6 @@ class DatabaseController extends Controller
      */
     public function gpusBrand(GPUBrand $gpuBrand)
     {
-        $this->addView(request(), $gpuBrand);
-
         $gpuBrand->load(['gpuModels' => fn($q) => $q->select(['id', 'name', 'slug', 'gpu_brand_id', 'max_power', 'fuel_consumption'])]);
 
         $gpuBrand->gpuModels->map(function ($model) use ($gpuBrand) {
@@ -114,17 +110,47 @@ class DatabaseController extends Controller
 
         $versions = collect($modelData['v']);
         $selectedVersion = $versions->first();
-        
-        $this->addView(request(), $asicModel);
+
         $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         $asicModel->reviews_count = $modelData['r'];
         $asicModel->reviews_avg = $modelData['ra'];
 
+        $comparing = Cache::remember(
+            'compare_with_' . $asicModel->slug,
+            now()->endOfWeek(),
+            function () use ($asicModel, $versions, $data) {
+                $asicModel->maxRate = $versions->max(fn($version) => $version['h'] * $version['c']);
+                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
+                    ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
+                $maxViews = log($models->max('views_count') + 1);
+
+                return [
+                    'same_algo' => $models->except($asicModel->id)->where('algorithm_id', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
+                        $model->maxRate = collect($data['m']->where('i', $model->id)->first()['v'])->max(fn($version) => $version['h'] * $version['c']);
+                        $rateScore = min($model->maxRate, $asicModel->maxRate) / max($model->maxRate, $asicModel->maxRate) * 50;
+                        $popularityScore = log($model->views_count + 1) / $maxViews * 10;
+
+                        return $rateScore + $popularityScore;
+                    })->take(10),
+                    'diff_algo' => $models->except($asicModel->id)->where('algorithm_id', '!=', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
+                        $releaseScore = max(
+                            0,
+                            1 - abs($asicModel->release->diffInMonths($model->release)) / 48
+                        ) * 30;
+                        $popularityScore = log($model->views_count + 1) / $maxViews * 20;
+
+                        return $releaseScore + $popularityScore;
+                    })->take(10)
+                ];
+            }
+        );
+
         return view('database.asic-miners.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
             'selectedVersion' => $selectedVersion,
+            'comparing' => $comparing,
             'algorithms' => $data['a'],
             'versions' => $versions,
             'ads' => $ads,
@@ -142,8 +168,6 @@ class DatabaseController extends Controller
      */
     public function gpusModel(Request $request, GPUBrand $gpuBrand, GPUModel $gpuModel)
     {
-        $this->addView(request(), $gpuModel);
-
         $ads = $this->getAds()->where('ads.gpu_model_id', $gpuModel->id)->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         return view('database.gas-gensets.model', [
@@ -211,16 +235,46 @@ class DatabaseController extends Controller
         $selectedVersion = $versions->where('h', $matches[1])->first();
         if (!$selectedVersion) abort(404);
 
-        $this->addView(request(), $asicModel);
         $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         $asicModel->reviews_count = $modelData['r'];
         $asicModel->reviews_avg = $modelData['ra'];
 
+        $comparing = Cache::remember(
+            'compare_with_' . $asicModel->slug,
+            now()->endOfWeek(),
+            function () use ($asicModel, $versions, $data) {
+                $asicModel->maxRate = $versions->max(fn($version) => $version['h'] * $version['c']);
+                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
+                    ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
+                $maxViews = log($models->max('views_count') + 1);
+
+                return [
+                    'same_algo' => $models->except($asicModel->id)->where('algorithm_id', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
+                        $model->maxRate = collect($data['m']->where('i', $model->id)->first()['v'])->max(fn($version) => $version['h'] * $version['c']);
+                        $rateScore = min($model->maxRate, $asicModel->maxRate) / max($model->maxRate, $asicModel->maxRate) * 50;
+                        $popularityScore = log($model->views_count + 1) / $maxViews * 10;
+
+                        return $rateScore + $popularityScore;
+                    })->take(10),
+                    'diff_algo' => $models->except($asicModel->id)->where('algorithm_id', '!=', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
+                        $releaseScore = max(
+                            0,
+                            1 - abs($asicModel->release->diffInMonths($model->release)) / 48
+                        ) * 30;
+                        $popularityScore = log($model->views_count + 1) / $maxViews * 20;
+
+                        return $releaseScore + $popularityScore;
+                    })->take(10)
+                ];
+            }
+        );
+
         return view('database.asic-miners.model', [
             'brand' => $asicBrand,
             'model' => $asicModel,
             'selectedVersion' => $selectedVersion,
+            'comparing' => $comparing,
             'algorithms' => $data['a'],
             'versions' => $versions,
             'ads' => $ads,
@@ -268,6 +322,8 @@ class DatabaseController extends Controller
         $modelA = AsicModel::where('slug', $modelSlugs[0])->select(['id', 'name', 'slug', 'characteristics'])->first();
         $modelB = AsicModel::where('slug', $modelSlugs[1])->select(['id', 'name', 'slug', 'characteristics'])->first();
 
+        if (!$modelA || !$modelB) abort(404);
+
         if ($modelA->id > $modelB->id) $noindex = 'true';
         else {
             $popularModels = View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
@@ -275,8 +331,6 @@ class DatabaseController extends Controller
 
             if ($popularModels->whereIn('viewable_id', [$modelA->id, $modelB->id])->count() != 2) $noindex = 'true';
         }
-
-        if (!$modelA || !$modelB) abort(404);
 
         $calculatorModels = Cache::get('calculator_models');
         $modelA->data = $calculatorModels->where('id', $modelA->id)->first();

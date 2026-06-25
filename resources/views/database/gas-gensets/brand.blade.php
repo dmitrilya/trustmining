@@ -22,7 +22,7 @@
                         return 0;
                     });
                 },
-            }">
+            }" x-init="axios.post('/view/store', { viewable_type: 'gpu-brand', viewable_id: {{ $brand->id }} })">
             <div class="relative z-0 group ml-auto my-6">
                 <input type="text" id="gpu-model_input" placeholder=" " x-model="search" autocomplete="off"
                     class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />

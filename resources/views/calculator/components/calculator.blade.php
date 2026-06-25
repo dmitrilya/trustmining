@@ -46,7 +46,9 @@
             get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
             get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 },
             get momentRating() { return this.version.ra }
-        }">
+        }" @if ($rModel)
+        x-init="axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $selModel['i'] }} })"
+        @endif>
         <div class="col-span-2">
             @include('calculator.components.schema')
 
@@ -77,7 +79,8 @@
                                 <x-characteristics>
                                     <x-characteristic name="Algorithm" x-value="version.algorithm" />
                                     <x-characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
-                                    <x-characteristic name="Power" x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
+                                    <x-characteristic name="Power"
+                                        x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
                                     @if (!$widjet)
                                         <x-characteristic name="The best price"
                                             x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
@@ -222,7 +225,8 @@
                                             <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
                                             <x-characteristic name="Efficiency"
                                                 x-value="version.e + ' j/' + version.m" />
-                                            <x-characteristic name="Power" x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
+                                            <x-characteristic name="Power"
+                                                x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
                                             @if (!$widjet)
                                                 <x-characteristic name="The best price"
                                                     x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />

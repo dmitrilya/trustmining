@@ -18,8 +18,6 @@ class CalculatorController extends Controller
     {
         $data = Cache::get('optimized_calculator_data');
 
-        if ($asicModel && $asicModel->exists) $this->addView(request(), $asicModel);
-
         $selModel = $asicModel && $asicModel->exists ? $data['m']->where('i', $asicModel->id)->first() : $data['m']->where('n', 'Antminer L9')->first();
         $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['v'])->where('i', $asicVersion->id)->first() : $selModel['v'][0];
         $ads = Cache::remember(

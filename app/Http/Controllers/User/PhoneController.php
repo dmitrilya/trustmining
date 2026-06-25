@@ -18,7 +18,7 @@ class PhoneController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -37,7 +37,7 @@ class PhoneController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
@@ -55,8 +55,8 @@ class PhoneController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Illuminate\Http\Request  $request
-     * @param  \App\Models\User\Phone  $track
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User\Phone  $phone
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Phone $phone)

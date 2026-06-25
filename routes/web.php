@@ -32,6 +32,7 @@ use App\Http\Controllers\Forum\ForumAnswerController;
 use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\Morph\ViewController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use Illuminate\Support\Facades\Route;
@@ -178,6 +179,7 @@ Route::post('/amocrm/webhook/uninstall', [AmoCRMController::class, 'handleUninst
 Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook']);
 
 Route::get('/phones/{user}/show', [PhoneController::class, 'show'])->name('phone.show');
+Route::post('/view/store', [ViewController::class, 'store'])->name('view.store');
 
 Route::middleware('auth')->group(function () {
     Route::post('/like', [Controller::class, 'like'])->name('like');
