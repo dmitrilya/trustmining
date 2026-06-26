@@ -1,6 +1,5 @@
 <div x-data="{ show: false }" class="ql-snow">
-    <h2 class="sr-only">
-        {{ __('Description') }}</h2>
+    <h2 class="sr-only">{{ __('Description') }}</h2>
 
     <div itemprop="description" style="overflow-y: hidden; max-height: 5rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '5rem' }"
