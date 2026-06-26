@@ -27,6 +27,7 @@ class BotDetector
         'inspectiontool',
         'spider',
         'scraper',
+        'search',
     ];
 
     /**
