@@ -1,4 +1,4 @@
-<div class="space-y-2 sm:space-y-4 lg:space-y-6 duration-100">
+<div class="space-y-2 sm:space-y-4 duration-100">
     @foreach ($reviews as $review)
         @continue ($review->moderation && (!$auth || $review->user->id != $auth->id))
 

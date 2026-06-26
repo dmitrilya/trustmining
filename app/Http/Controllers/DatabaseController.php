@@ -121,7 +121,7 @@ class DatabaseController extends Controller
             now()->endOfWeek(),
             function () use ($asicModel, $versions, $data) {
                 $asicModel->maxRate = $versions->max(fn($version) => $version['h'] * $version['c']);
-                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
+                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])->whereHas('asicVersions.ads')
                     ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
                 $maxViews = log($models->max('views_count') + 1);
                 
@@ -247,7 +247,7 @@ class DatabaseController extends Controller
             now()->endOfWeek(),
             function () use ($asicModel, $versions, $data) {
                 $asicModel->maxRate = $versions->max(fn($version) => $version['h'] * $version['c']);
-                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])
+                $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])->whereHas('asicVersions.ads')
                     ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
                 $maxViews = log($models->max('views_count') + 1);
 
