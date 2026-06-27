@@ -77,7 +77,7 @@
                             @endif
                             <div class="mt-5 space-y-2" style="min-height: 152px">
                                 <x-characteristics>
-                                    <x-characteristic name="Algorithm" x-value="version.algorithm" />
+                                    <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
                                     <x-characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
                                     <x-characteristic name="Power"
                                         x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />

@@ -106,9 +106,7 @@ class SitemapGenerate extends Command
         ) {
             $out .= $this->addUrl('asic-miners/' . $asicBrand->slug);
             foreach ($asicBrand->asicModels as $asicModel) {
-                $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug);
                 $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/reviews');
-                $out .= $this->addUrl('calculator/' . $asicModel->slug);
                 foreach ($asicModel->asicVersions as $asicVersion) {
                     $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
                     $out .= $this->addUrl('calculator/' . $asicModel->slug . '/' . $asicVersion->hashrate);
