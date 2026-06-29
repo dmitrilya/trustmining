@@ -47,8 +47,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function yandexAuth(Request $request): RedirectResponse
     {
-        if ($request->has('error')) return redirect()->route('login')
-            ->withErrors(['forbidden' => 'Ошибка авторизации через Яндекс: ' . $request->input('error_description', $request->input('error'))]);
+        if ($request->has('error')) {
+            Log::channel('socials-auth')->info("[YANDEX] {Error after link}\n{$request->error_description}");
+            return redirect()->route('login')->withErrors(['forbidden' => 'Ошибка авторизации через Яндекс: ' . $request->input('error_description', $request->error)]);
+        }
 
         if (!$request->has('code')) return redirect()->route('login')->withErrors(['forbidden' => 'Код подтверждения не получен.']);
 
@@ -61,11 +63,13 @@ class AuthenticatedSessionController extends Controller
                 'Authorization' => 'Basic ' . $credentials,
             ])->post('https://oauth.yandex.ru/', [
                 'grant_type' => 'authorization_code',
-                'code'       => $request->input('code'),
+                'code'       => $request->code,
             ]);
 
-            if ($tokenResponse->failed()) return redirect()->route('login')
-                ->withErrors(['forbidden' => 'Не удалось получить токен доступа.']);
+            if ($tokenResponse->failed()) {
+                Log::channel('socials-auth')->info("[YANDEX] {Getting OAuth}\n{$tokenResponse->body()}");
+                return redirect()->route('login')->withErrors(['forbidden' => 'Не удалось получить токен доступа.']);
+            }
 
             $accessToken = $tokenResponse->json('access_token');
 
@@ -75,8 +79,10 @@ class AuthenticatedSessionController extends Controller
                 'format' => 'json',
             ]);
 
-            if ($userResponse->failed()) return redirect()->route('login')
-                ->withErrors(['forbidden' => 'Не удалось получить данные пользователя.']);
+            if ($userResponse->failed()) {
+                Log::channel('socials-auth')->info("[YANDEX] {Getting user info}\n{$userResponse->body()}");
+                return redirect()->route('login')->withErrors(['forbidden' => 'Не удалось получить данные пользователя.']);
+            }
 
             $yandexUser = $userResponse->json();
             $rawPhone = $yandexUser['default_phone']['number'] ?? null;
@@ -110,7 +116,7 @@ class AuthenticatedSessionController extends Controller
 
             return $request->redirect ? redirect($request->redirect) : redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Exception $e) {
-            Log::error('Yandex Auth Error: ' . $e->getMessage());
+            Log::channel('socials-auth')->info("[YANDEX] {Error catching}\n{$e->getMessage()}");
             return redirect()->route('login')->withErrors(['yandex' => 'Произошла непредвиденная ошибка при авторизации.']);
         }
     }

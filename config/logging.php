@@ -69,6 +69,12 @@ return [
             'level' => 'info',
         ],
 
+        'socials-auth' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/socials_auth.log'),
+            'level' => 'info',
+        ],
+
         'forum-score' => [
             'driver' => 'single',
             'path' => storage_path('logs/forum_score.log'),
