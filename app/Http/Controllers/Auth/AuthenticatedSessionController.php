@@ -45,7 +45,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication from yandex.
      */
-    public function yandex(Request $request): RedirectResponse
+    public function yandexAuth(Request $request): RedirectResponse
     {
         if ($request->has('error')) return redirect()->route('login')
             ->withErrors(['yandex' => 'Ошибка авторизации через Яндекс: ' . $request->input('error_description', $request->input('error'))]);
