@@ -1,4 +1,5 @@
-<x-guest-layout title="Регистрация аккаунта — доступ к платформе TrustMining" description="Создайте аккаунт на TrustMining и получите доступ к каталогу майнингового оборудования, сервисных компаний, экспертов и возможностям взаимодействия внутри криптоэкосистемы">
+<x-guest-layout title="Регистрация аккаунта — доступ к платформе TrustMining"
+    description="Создайте аккаунт на TrustMining и получите доступ к каталогу майнингового оборудования, сервисных компаний, экспертов и возможностям взаимодействия внутри криптоэкосистемы">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -39,7 +40,11 @@
 
         <div class="mt-4">
             <p class="text-slate-700 dark:text-slate-300 text-xxs sm:text-xs">
-                {{ __('By clicking the "Register" button, I accept the terms of') }} <a class="inline text-indigo-300 hover:text-indigo-600" href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('the User Agreement') }}</a> {{ __('and the terms of') }} <a class="inline text-indigo-300 hover:text-indigo-600" href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('the Privacy Policy') }}</a>.
+                {{ __('By clicking the "Register" button, I accept the terms of') }} <a
+                    class="inline text-indigo-300 hover:text-indigo-600"
+                    href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('the User Agreement') }}</a>
+                {{ __('and the terms of') }} <a class="inline text-indigo-300 hover:text-indigo-600"
+                    href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('the Privacy Policy') }}</a>.
             </p>
         </div>
 
@@ -54,4 +59,6 @@
             </x-primary-button>
         </div>
     </form>
+
+    @include('auth.socials')
 </x-guest-layout>

@@ -116,5 +116,7 @@
                 </x-primary-button>
             </div>
         </form>
+
+        @include('auth.socials')
     </div>
 </x-modal>
