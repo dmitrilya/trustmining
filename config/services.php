@@ -31,6 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'yandex_auth' => [
+        'id' => env('YANDEXAUTH_CLIENT_ID'),
+        'secret' => env('YANDEXAUTH_CLIENT_SECRET'),
+    ],
+
     'yandexgpt' => [
         'folder' => env('YANDEXGPT_FOLDER_ID'),
         'id' => env('YANDEXGPT_APP_ID'),

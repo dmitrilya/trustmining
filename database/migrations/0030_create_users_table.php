@@ -25,7 +25,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('art')->default(0);
             $table->unsignedSmallInteger('forum_score')->default(0);
             $table->unsignedInteger('balance')->default(0);
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
+            $table->string('phone')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('tg_id')->nullable();
