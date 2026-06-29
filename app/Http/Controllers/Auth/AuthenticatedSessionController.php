@@ -48,9 +48,9 @@ class AuthenticatedSessionController extends Controller
     public function yandexAuth(Request $request): RedirectResponse
     {
         if ($request->has('error')) return redirect()->route('login')
-            ->withErrors(['yandex' => 'Ошибка авторизации через Яндекс: ' . $request->input('error_description', $request->input('error'))]);
+            ->withErrors(['forbidden' => 'Ошибка авторизации через Яндекс: ' . $request->input('error_description', $request->input('error'))]);
 
-        if (!$request->has('code')) return redirect()->route('login')->withErrors(['yandex' => 'Код подтверждения не получен.']);
+        if (!$request->has('code')) return redirect()->route('login')->withErrors(['forbidden' => 'Код подтверждения не получен.']);
 
         try {
             $clientId = config('services.yandex_auth.id');
@@ -65,7 +65,7 @@ class AuthenticatedSessionController extends Controller
             ]);
 
             if ($tokenResponse->failed()) return redirect()->route('login')
-                ->withErrors(['yandex' => 'Не удалось получить токен доступа.']);
+                ->withErrors(['forbidden' => 'Не удалось получить токен доступа.']);
 
             $accessToken = $tokenResponse->json('access_token');
 
@@ -76,13 +76,13 @@ class AuthenticatedSessionController extends Controller
             ]);
 
             if ($userResponse->failed()) return redirect()->route('login')
-                ->withErrors(['yandex' => 'Не удалось получить данные пользователя.']);
+                ->withErrors(['forbidden' => 'Не удалось получить данные пользователя.']);
 
             $yandexUser = $userResponse->json();
             $rawPhone = $yandexUser['default_phone']['number'] ?? null;
 
             if (!$rawPhone) return redirect()->route('login')
-                ->withErrors(['yandex' => 'В вашем Яндекс-аккаунте не привязан номер телефона. Пожалуйста, привяжите его в Яндексе или обратитесь в нашу поддержку.']);
+                ->withErrors(['forbidden' => 'В вашем Яндекс-аккаунте не привязан номер телефона. Пожалуйста, привяжите его в Яндексе или обратитесь в нашу поддержку.']);
 
             $cleanedPhone = preg_replace('/[^0-9]/', '', $rawPhone);
             $user = User::where('phone', $cleanedPhone)->first();

@@ -8,14 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        @if ($attributes->has('title')){{ $attributes->get('title') }}@else{{ config('app.name') }}@endif
+        @if ($attributes->has('title'))
+            {{ $attributes->get('title') }}@else{{ config('app.name') }}
+        @endif
     </title>
 
     @if ($attributes->has('description'))
         <meta name="description" content="{{ $attributes->get('description') }}">
     @endif
 
-    @if($attributes->has('noindex'))
+    @if ($attributes->has('noindex'))
         <meta name="robots" content="noindex, nofollow">
     @endif
 
@@ -62,9 +64,16 @@
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-lg">
+        <div
+            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-lg">
             {{ $slot }}
         </div>
+    </div>
+
+    <div id="toasts"
+        class="fixed {{ request()->routeIs('insight.*') ? 'bottom-[4.25rem] sm:bottom-[5rem] lg:bottom-5' : 'bottom-5' }} right-2 sm:right-5 w-full max-w-xs space-y-2"
+        @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
+        @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
 </body>
 
