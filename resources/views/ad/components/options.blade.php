@@ -21,33 +21,21 @@
                 </li>
             @else
                 @php
-                    $trackClick =
-                        auth()->check() && auth()->user()->tariff
-                            ? 'axios.post("/ads/' .
-                                $ad->ad_category_name .
-                                '/' .
-                                $ad->id .
-                                '/track").then(r => {
-                            pushToastAlert(r.data.message, r.data.success ? "success" : "error");
+                    $trackClick = auth()->user()
+                        ? 'axios.post("/ads/' .
+                            ($ad->adCategory->name . '/' . $ad->id) .
+                            '/track").then(r => {
+                                pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
-                            if (r.data.tracking) {
-                                $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
-                                $el.getElementsByTagName("span")[0].innerHTML = "' .
-                                __('Untrack price') .
-                                '";
-                                ' .
-                                (auth()->user()->tg_id === null
-                                    ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");'
-                                    : '') .
-                                '
-                            } else {
-                                $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
-                                $el.getElementsByTagName("span")[0].innerHTML = "' .
-                                __('To track') .
-                                '";
-                            }
-                        })'
-                            : '$dispatch("open-modal", "need-subscription")';
+                                if (r.data.tracking) {
+                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('Untrack price') . '";' .
+                                    (auth()->user()->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') .
+                                '} else {
+                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                                    $el.getElementsByTagName("span")[0].innerHTML = "' . __('To track') . '";
+                                }
+                            })' : '$dispatch("open-modal", "login")';
                 @endphp
 
                 <li @click="{{ $trackClick }}"

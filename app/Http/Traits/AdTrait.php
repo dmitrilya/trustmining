@@ -231,7 +231,7 @@ trait AdTrait
     {
         $user = $request->user();
 
-        if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
+        //if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
 
         if ($ad->trackingUsers()->where('users.id', $user->id)->exists()) {
             $ad->trackingUsers()->detach($user->id);

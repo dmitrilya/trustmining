@@ -17,31 +17,21 @@
     </a>
 @else
     @php
-        $trackClick =
-            $user && $user->tariff
-                ? 'axios.post("/ads/' .
-                    $ad->adCategory->name .
-                    '/' .
-                    $ad->id .
-                    '/track").then(r => {
-                                                pushToastAlert(r.data.message, r.data.success ? "success" : "error");
+        $trackClick = $user
+            ? 'axios.post("/ads/' .
+                ($ad->adCategory->name . '/' . $ad->id) .
+                '/track").then(r => {
+                    pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
-                                                if (r.data.tracking) {
-                                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
-                                                    $el.getElementsByTagName("span")[0].innerHTML = "' .
-                    __('Untrack price') .
-                    '";
-                                                    ' .
-                    ($user->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') .
-                    '
-                                                } else {
-                                                    $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
-                                                    $el.getElementsByTagName("span")[0].innerHTML = "' .
-                    __('Track price') .
-                    '";
-                                                }
-                                            })'
-                : '$dispatch("open-modal", "need-subscription")';
+                    if (r.data.tracking) {
+                        $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.remove("hidden");
+                        $el.getElementsByTagName("span")[0].innerHTML = "' . __('Untrack price') . '";' .
+                        ($user->tg_id === null ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");' : '') .
+                    '} else {
+                        $el.closest(".offer-card").getElementsByClassName("tracking")[0].classList.add("hidden");
+                        $el.getElementsByTagName("span")[0].innerHTML = "' . __('Track price') . '";
+                    }
+                })' : '$dispatch("open-modal", "login")';
     @endphp
 
     <div class="flex flex-wrap gap-3 sm:gap-4 mt-6">
@@ -61,10 +51,10 @@
             <x-secondary-button class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3"
                 x-data="{ number: null, status: '{{ __('View number') }}' }"
                 @click="if (!number) axios.get('{{ route('phone.show', ['user' => $ad->user->id, 'ad_id' => $ad->id]) }}')
-                                                .then(r => {
-                                                    if (r.data.success) number = '+' + r.data.number;
-                                                    else status = r.data.number;
-                                                }); else window.open('tel:' + number);">
+                    .then(r => {
+                        if (r.data.success) number = '+' + r.data.number;
+                        else status = r.data.number;
+                    }); else window.open('tel:' + number);">
                 <svg class="min-w-4 h-4 mr-1 xs:mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z" />
