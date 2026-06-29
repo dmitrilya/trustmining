@@ -61,7 +61,7 @@ class AuthenticatedSessionController extends Controller
 
             $tokenResponse = Http::asForm()->withHeaders([
                 'Authorization' => 'Basic ' . $credentials,
-            ])->post('https://oauth.yandex.ru/', [
+            ])->post('https://oauth.yandex.ru/token', [
                 'grant_type' => 'authorization_code',
                 'code'       => $request->code,
             ]);
