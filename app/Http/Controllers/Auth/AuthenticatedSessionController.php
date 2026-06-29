@@ -91,7 +91,7 @@ class AuthenticatedSessionController extends Controller
                 ->withErrors(['forbidden' => 'В вашем Яндекс-аккаунте не привязан номер телефона. Пожалуйста, привяжите его в Яндексе или обратитесь в нашу поддержку.']);
 
             $cleanedPhone = preg_replace('/[^0-9]/', '', $rawPhone);
-            $user = User::where('phone', $cleanedPhone)->first();
+            $user = User::where('phone', $cleanedPhone)->orWhere('email', $yandexUser['default_email'])->first();
 
             if (!$user) {
                 $firstUser = User::orderByDesc('ordering_id')->first();
