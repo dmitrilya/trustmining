@@ -111,6 +111,10 @@ class AuthenticatedSessionController extends Controller
                 ]);
 
                 event(new Registered($user));
+            } else {
+                if (!$user->phone && $rawPhone) $user->phone = $cleanedPhone;
+                if (!$user->email && $email) $user->email = $email;
+                $user->save();
             }
 
             $request->session()->regenerate();
