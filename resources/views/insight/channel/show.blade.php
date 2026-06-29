@@ -46,7 +46,8 @@
                 {{ $channel->brief_description }}
             </p>
 
-            <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{{ $channel->description }}</p>
+            <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">
+                {{ $channel->description }}</p>
         </div>
     </div>
 
@@ -55,162 +56,33 @@
     @endif
 
     @if ($newArticles->count())
-        <section class="mb-4 lg:mb-6" x-data="{ tab: 'latest' }">
-            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
-                    {{ __('Articles') }}
-                </h2>
-
-                <div class="flex text-xs s m:text-sm">
-                    <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ?
-                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('New') }}
-                    </button>
-                    <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ?
-                            'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('Popular') }}
-                    </button>
-                </div>
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Articles') . ' ' . __('New') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $newArticles,
-                    'blade' => 'insight.article.components.card',
-                    'model' => 'article',
-                    'endpoint' => route('insight.channel.article.get-new', ['channel' => $channel->slug])
-                ])
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Articles') . ' ' . __('Popular') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $popularArticles,
-                    'blade' => 'insight.article.components.card',
-                    'model' => 'article',
-                    'endpoint' => route('insight.channel.article.get-popular', ['channel' => $channel->slug])
-                ])
-            </div>
-        </section>
+        @include('insight.components.content', [
+            'title' => 'Articles',
+            'model' => 'article',
+            'items' => [$newArticles, $popularArticles],
+            'route' => 'insight.channel.content.get',
+            'routeData' => ['channel' => $channel->slug],
+        ])
     @endif
 
     @if ($newPosts->count())
-        <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
-            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
-                    {{ __('Posts') }}
-                </h2>
-
-                <div class="flex text-xs s m:text-sm">
-                    <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ?
-                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('New') }}
-                    </button>
-                    <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ?
-                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('Popular') }}
-                    </button>
-                </div>
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Posts') . ' ' . __('New') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $newPosts,
-                    'blade' => 'insight.post.components.card',
-                    'model' => 'post',
-                    'endpoint' => route('insight.channel.post.get-new', ['channel' => $channel->slug])
-                ])
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Posts') . ' ' . __('Popular') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $popularPosts,
-                    'blade' => 'insight.post.components.card',
-                    'model' => 'post',
-                    'endpoint' => route('insight.channel.post.get-popular', ['channel' => $channel->slug])
-                ])
-            </div>
-        </section>
+        @include('insight.components.content', [
+            'title' => 'Posts',
+            'model' => 'post',
+            'items' => [$newPosts, $popularPosts],
+            'route' => 'insight.channel.content.get',
+            'routeData' => ['channel' => $channel->slug],
+        ])
     @endif
 
     @if ($newVideos->count())
-        <section class="my-4 lg:my-6" x-data="{ tab: 'latest' }">
-            <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
-                    {{ __('Videos') }}
-                </h2>
-
-                <div class="flex text-xs s m:text-sm">
-                    <button @click="tab = 'latest'"
-                        :class="tab === 'latest' ?
-                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('New') }}
-                    </button>
-                    <button @click="tab = 'popular'"
-                        :class="tab === 'popular' ?
-                            'bg-white dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
-                            'text-slate-500'"
-                        class="px-3 py-1 rounded-full transition-all">
-                        {{ __('Popular') }}
-                    </button>
-                </div>
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'latest'"
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Videos') . ' ' . __('New') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $newVideos,
-                    'blade' => 'insight.video.components.card',
-                    'model' => 'video',
-                    'endpoint' => route('insight.channel.video.get-new', ['channel' => $channel->slug])
-                ])
-            </div>
-
-            <div itemscope itemtype="https://schema.org/ItemList" x-show="tab === 'popular'" x-cloak
-                x-transition:enter.duration.400ms>
-                <meta itemprop="name" content="{{ __('Videos') . ' ' . __('Popular') }}" />
-                <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
-
-                @include('insight.components.carousel', [
-                    'items' => $popularVideos,
-                    'blade' => 'insight.video.components.card',
-                    'model' => 'video',
-                    'endpoint' => route('insight.channel.video.get-popular', ['channel' => $channel->slug])
-                ])
-            </div>
-        </section>
+        @include('insight.components.content', [
+            'title' => 'Videos',
+            'model' => 'video',
+            'items' => [$newVideos, $popularVideos],
+            'route' => 'insight.channel.content.get',
+            'routeData' => ['channel' => $channel->slug],
+        ])
     @endif
 
     @if ($series->where('contents_count', '>', 0)->count())

@@ -27,6 +27,29 @@
             </div>
         </a>
     @endif
+    @if (request()->routeIs('insight.article.*'))
+        <a href="{{ route('insight.article.index') }}"
+            class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
+            @include('insight.svg.article-active', [
+                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
+            ])
+
+            <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
+                {{ __('Articles') }}
+            </div>
+        </a>
+    @else
+        <a href="{{ route('insight.article.index') }}" class="flex items-center group px-3 py-2">
+            @include('insight.svg.article', [
+                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
+            ])
+
+            <div
+                class="ml-1.5 sm:ml-2 text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:dark:text-slate-200">
+                {{ __('Articles') }}
+            </div>
+        </a>
+    @endif
     @if (request()->routeIs('insight.post.*'))
         <a href="{{ route('insight.post.index') }}"
             class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
@@ -93,29 +116,6 @@
             <div
                 class="ml-1.5 sm:ml-2 text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:dark:text-slate-200">
                 {{ __('Subscriptions') }}
-            </div>
-        </a>
-    @endif
-    @if (request()->routeIs('insight.article.*'))
-        <a href="{{ route('insight.article.index') }}"
-            class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
-            @include('insight.svg.article-active', [
-                'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
-            ])
-
-            <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
-                {{ __('Articles') }}
-            </div>
-        </a>
-    @else
-        <a href="{{ route('insight.article.index') }}" class="flex items-center group px-3 py-2">
-            @include('insight.svg.article', [
-                'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
-            ])
-
-            <div
-                class="ml-1.5 sm:ml-2 text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:dark:text-slate-200">
-                {{ __('Articles') }}
             </div>
         </a>
     @endif
@@ -203,7 +203,8 @@
             <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group bg-slate-200 dark:bg-slate-800 px-3 py-2 rounded-full">
                 @include('insight.svg.statistics-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
+                    'svgClass' =>
+                        'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-6 h-6',
                 ])
 
                 <div class="ml-1.5 sm:ml-2 text-base text-slate-800 dark:text-slate-200">
@@ -214,7 +215,8 @@
             <a href="{{ route('insight.channel.statistics', ['channel' => auth()->user()->channel->slug]) }}"
                 class="flex items-center group px-3 py-2">
                 @include('insight.svg.statistics', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
+                    'svgClass' =>
+                        'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-6 h-6',
                 ])
 
                 <div

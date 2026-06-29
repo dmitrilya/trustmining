@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Insight;
 
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Http\Requests\Insight\StoreSeriesRequest;
@@ -13,7 +15,6 @@ use App\Services\Insight\SeriesService;
 
 use App\Models\Insight\Channel;
 use App\Models\Insight\Series;
-use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
@@ -28,7 +29,7 @@ class SeriesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\Insight\StoreSeriesRequest  $request
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSeriesRequest $request, Channel $channel)
@@ -105,124 +106,26 @@ class SeriesController extends Controller
      *
      * @param  \App\Models\Insight\Channel  $channel
      * @param  \App\Models\Insight\Series  $series
+     * @param  string  $type
+     * @param  string  $order
      * @return \Illuminate\Http\Response
      */
-    public function getNewArticles(Channel $channel, Series $series)
+    public function getContent(Channel $channel, Series $series, string $type, string $order)
     {
-        $articles = $series->moderatedArticles()->orderByDesc('created_at')->paginate(4);
+        $modelClass = Relation::getMorphedModel($type);
+
+        if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
+
+        $content = $modelClass::where('moderation', false)->where('series_id', $series->id)
+            ->orderByDesc($order == 'new' ? 'created_at' : 'views_count')->paginate(4);
 
         return response()->json([
             'html' => view('insight.components.carousel-list', [
-                'items' => $articles,
-                'blade' => 'insight.article.components.card',
-                'model' => 'article'
+                'items' => $content,
+                'blade' => "insight.{$type}.components.card",
+                'model' => $type
             ])->render(),
-            'hasMore' => $articles->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @param  \App\Models\Insight\Series  $series
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularArticles(Channel $channel, Series $series)
-    {
-        $articles = $series->moderatedArticles()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $articles,
-                'blade' => 'insight.article.components.card',
-                'model' => 'article'
-            ])->render(),
-            'hasMore' => $articles->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @param  \App\Models\Insight\Series  $series
-     * @return \Illuminate\Http\Response
-     */
-    public function getNewPosts(Channel $channel, Series $series)
-    {
-        $posts = $series->moderatedPosts()->orderByDesc('created_at')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $posts,
-                'blade' => 'insight.post.components.card',
-                'model' => 'post'
-            ])->render(),
-            'hasMore' => $posts->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @param  \App\Models\Insight\Series  $series
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularPosts(Channel $channel, Series $series)
-    {
-        $posts = $series->moderatedPosts()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $posts,
-                'blade' => 'insight.post.components.card',
-                'model' => 'post'
-            ])->render(),
-            'hasMore' => $posts->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @param  \App\Models\Insight\Series  $series
-     * @return \Illuminate\Http\Response
-     */
-    public function getNewVideos(Channel $channel, Series $series)
-    {
-        $videos = $series->moderatedVideos()->orderByDesc('created_at')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $videos,
-                'blade' => 'insight.video.components.card',
-                'model' => 'video'
-            ])->render(),
-            'hasMore' => $videos->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @param  \App\Models\Insight\Series  $series
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularVideos(Channel $channel, Series $series)
-    {
-        $videos = $series->moderatedVideos()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $videos,
-                'blade' => 'insight.video.components.card',
-                'model' => 'video'
-            ])->render(),
-            'hasMore' => $videos->hasMorePages()
+            'hasMore' => $content->hasMorePages()
         ]);
     }
 }

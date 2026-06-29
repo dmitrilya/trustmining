@@ -23,6 +23,25 @@
                 </div>
             @endif
         </a>
+        <a href="{{ route('insight.article.index') }}" class="flex flex-col items-center">
+            @if (request()->routeIs('insight.article.*'))
+                @include('insight.svg.article-active', [
+                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
+                ])
+
+                <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
+                    {{ __('Articles') }}
+                </div>
+            @else
+                @include('insight.svg.article', [
+                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
+                ])
+
+                <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
+                    {{ __('Articles') }}
+                </div>
+            @endif
+        </a>
         <a href="{{ route('insight.post.index') }}" class="flex flex-col items-center">
             @if (request()->routeIs('insight.post.*'))
                 @include('insight.svg.post-active', [
@@ -77,25 +96,6 @@
 
                 <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
                     {{ __('Subscriptions') }}
-                </div>
-            @endif
-        </a>
-        <a href="{{ route('insight.article.index') }}" class="flex flex-col items-center">
-            @if (request()->routeIs('insight.article.*'))
-                @include('insight.svg.article-active', [
-                    'svgClass' => 'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-7 h-7 sm:w-9 sm:h-9',
-                ])
-
-                <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-800 dark:text-slate-200">
-                    {{ __('Articles') }}
-                </div>
-            @else
-                @include('insight.svg.article', [
-                    'svgClass' => 'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-7 h-7 sm:w-9 sm:h-9',
-                ])
-
-                <div class="mt-0.5 sm:mt-1 text-xxs xs:text-xs text-slate-600 dark:text-slate-400">
-                    {{ __('Articles') }}
                 </div>
             @endif
         </a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Insight;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,10 +15,6 @@ use App\Http\Requests\Insight\UpdateChannelRequest;
 use App\Services\Insight\ChannelService;
 
 use App\Models\Insight\Channel;
-use App\Models\Insight\Content\Article;
-use App\Models\Insight\Content\Post;
-
-use Carbon\Carbon;
 
 class ChannelController extends Controller
 {
@@ -57,7 +54,7 @@ class ChannelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\StorePostRequest  $request
+     * @param  \App\Http\Requests\Insight\StoreChannelRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreChannelRequest $request)
@@ -77,7 +74,7 @@ class ChannelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Models\Insight\Channel
+     * @param \App\Models\Insight\Channel  $channel
      * @return \Illuminate\View\View
      */
     public function show(Channel $channel): View
@@ -101,7 +98,7 @@ class ChannelController extends Controller
     /**
      * Display a channel statistics.
      *
-     * @param \App\Models\Insight\Channel
+     * @param \App\Models\Insight\Channel  $channel
      * @return \Illuminate\View\View
      */
     public function statistics(Channel $channel): View
@@ -166,119 +163,26 @@ class ChannelController extends Controller
      * Display a listing of the resource.
      *
      * @param  \App\Models\Insight\Channel  $channel
+     * @param  string  $type
+     * @param  string  $order
      * @return \Illuminate\Http\Response
      */
-    public function getNewArticles(Channel $channel)
+    public function getContent(Channel $channel, string $type, string $order)
     {
-        $articles = $channel->moderatedArticles()->orderByDesc('created_at')->paginate(4);
+        $modelClass = Relation::getMorphedModel($type);
+
+        if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
+
+        $content = $modelClass::where('moderation', false)->where('channel_id', $channel->id)
+            ->orderByDesc($order == 'new' ? 'created_at' : 'views_count')->paginate(4);
 
         return response()->json([
             'html' => view('insight.components.carousel-list', [
-                'items' => $articles,
-                'blade' => 'insight.article.components.card',
-                'model' => 'article'
+                'items' => $content,
+                'blade' => "insight.{$type}.components.card",
+                'model' => $type
             ])->render(),
-            'hasMore' => $articles->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularArticles(Channel $channel)
-    {
-        $articles = $channel->moderatedArticles()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $articles,
-                'blade' => 'insight.article.components.card',
-                'model' => 'article'
-            ])->render(),
-            'hasMore' => $articles->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function getNewPosts(Channel $channel)
-    {
-        $posts = $channel->moderatedPosts()->orderByDesc('created_at')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $posts,
-                'blade' => 'insight.post.components.card',
-                'model' => 'post'
-            ])->render(),
-            'hasMore' => $posts->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularPosts(Channel $channel)
-    {
-        $posts = $channel->moderatedPosts()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $posts,
-                'blade' => 'insight.post.components.card',
-                'model' => 'post'
-            ])->render(),
-            'hasMore' => $posts->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function getNewVideos(Channel $channel)
-    {
-        $videos = $channel->moderatedVideos()->orderByDesc('created_at')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $videos,
-                'blade' => 'insight.video.components.card',
-                'model' => 'video'
-            ])->render(),
-            'hasMore' => $videos->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Insight\Channel  $channel
-     * @return \Illuminate\Http\Response
-     */
-    public function getPopularVideos(Channel $channel)
-    {
-        $videos = $channel->moderatedVideos()->orderByDesc('views_count')->paginate(4);
-
-        return response()->json([
-            'html' => view('insight.components.carousel-list', [
-                'items' => $videos,
-                'blade' => 'insight.video.components.card',
-                'model' => 'video'
-            ])->render(),
-            'hasMore' => $videos->hasMorePages()
+            'hasMore' => $content->hasMorePages()
         ]);
     }
 }
