@@ -75,7 +75,7 @@
             <div
                 class="bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between">
                 <div>
-                    <h2 class="text-xs xs:text-sm font-semibold tracking-wider text-slate-500 uppercase block mb-2">
+                    <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-500 uppercase block mb-2">
                         {{ __('Next difficulty prediction') }}
                     </h2>
                     <span
