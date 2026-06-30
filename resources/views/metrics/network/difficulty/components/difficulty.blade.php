@@ -1,7 +1,7 @@
 @props(['blocks' => ['period', 'graph', 'prediction', 'dynamics', 'history'], 'widjet' => false])
 
 @if (!$widjet)
-    <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
+    <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4">
         <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
             @click="show = !show">
             <svg class="w-4 h-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
@@ -44,7 +44,7 @@
         let d30 = value.find(i => new Date(i.date) <= new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
         let d90 = value.find(i => new Date(i.date) <= new Date(Date.now() - 90 * 24 * 60 * 60 * 1000));
         let d180 = value.find(i => new Date(i.date) <= new Date(Date.now() - 180 * 24 * 60 * 60 * 1000));
-        let d365 = value.find(i => new Date(i.date) <= new Date(Date.now() - 365 * 24 * 60 * 60 * 1000));
+        let d365 = value.find(i => new Date(i.date) <= new Date(Date.now() - 364 * 24 * 60 * 60 * 1000));
 
         diff30d = d30 ? calculateDiff(current, d30.value) : null;
         diff90d = d90 ? calculateDiff(current, d90.value) : null;
@@ -61,7 +61,7 @@
                     {{ __('Current difficulty') }}
                 </h2>
                 <span
-                    class="text-xl sm:text-2xl md:text-base lg:text-xl xl:text-2xl font-black text-slate-800 dark:text-slate-200">
+                    class="text-xl xs:text-2xl md:text-base lg:text-xl xl:text-2xl font-black text-slate-800 dark:text-slate-200">
                     {{ number_format($difficulty->difficulty) }}
                 </span>
             </div>
@@ -75,7 +75,7 @@
             <div
                 class="bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between">
                 <div>
-                    <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-500 uppercase block mb-2">
+                    <h2 class="text-xs xs:text-sm font-semibold tracking-wider text-slate-500 uppercase block mb-2">
                         {{ __('Next difficulty prediction') }}
                     </h2>
                     <span
@@ -108,7 +108,7 @@
                     $blocksPassed = max(0, 2016 - $difficulty->need_blocks);
                     $progressPercent = ($blocksPassed / 2016) * 100;
                 @endphp
-                <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 mt-3 overflow-hidden">
+                <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 mt-2 overflow-hidden">
                     <div class="bg-gradient-to-r from-indigo-500 to-indigo-500 h-2 rounded-full transition-all duration-500"
                         style="width: {{ $progressPercent }}%">
                     </div>
@@ -134,7 +134,7 @@
                         class="text-xxs sm:text-xs text-slate-500 block font-semibold tracking-wider uppercase mb-1 lg:mb-2">
                         30 {{ __('days') }}
                     </span>
-                    <span class="text-xs sm:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
+                    <span class="text-xs xs:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
                         x-text="diff30d ? (diff30d > 0 ? '+' + diff30d : diff30d) + '%' : '...'"
                         :class="diff30d > 0 ? 'text-green-500' : 'text-red-400'">
                     </span>
@@ -146,7 +146,7 @@
                         class="text-xxs sm:text-xs text-slate-500 block font-semibold tracking-wider uppercase mb-1 lg:mb-2">
                         90 {{ __('days') }}
                     </span>
-                    <span class="text-xs sm:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
+                    <span class="text-xs xs:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
                         x-text="diff90d ? (diff90d > 0 ? '+' + diff90d : diff90d) + '%' : '...'"
                         :class="diff90d > 0 ? 'text-green-500' : 'text-red-400'">
                     </span>
@@ -158,7 +158,7 @@
                         class="text-xxs sm:text-xs text-slate-500 block font-semibold tracking-wider uppercase mb-1 lg:mb-2">
                         180 {{ __('days') }}
                     </span>
-                    <span class="text-xs sm:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
+                    <span class="text-xs xs:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
                         x-text="diff180d ? (diff180d > 0 ? '+' + diff180d : diff180d) + '%' : '...'"
                         :class="diff180d > 0 ? 'text-green-500' : 'text-red-400'">
                     </span>
@@ -170,7 +170,7 @@
                         class="text-xxs sm:text-xs text-slate-500 block font-semibold tracking-wider uppercase mb-1 lg:mb-2">
                         1 {{ __('year') }}
                     </span>
-                    <span class="text-xs sm:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
+                    <span class="text-xs xs:text-sm lg:text-xl xl:text-2xl font-bold tracking-tight"
                         x-text="diff1y ? (diff1y > 0 ? '+' + diff1y : diff1y) + '%' : '...'"
                         :class="diff1y > 0 ? 'text-green-500' : 'text-red-400'">
                     </span>
