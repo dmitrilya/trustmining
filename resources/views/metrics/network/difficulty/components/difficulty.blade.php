@@ -1,7 +1,7 @@
 @props(['blocks' => ['period', 'graph', 'prediction', 'dynamics', 'history'], 'widjet' => false])
 
 @if (!$widjet)
-    <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4">
+    <div class="flex justify-between lg:justify-end items-start">
         <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
             @click="show = !show">
             <svg class="w-4 h-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
@@ -27,7 +27,7 @@
     </div>
 @endif
 
-<div class="my-6 lg:my-8" x-data="{
+<div class="my-4 lg:my-8" x-data="{
     diff30d: null,
     diff90d: null,
     diff180d: null,
@@ -101,7 +101,7 @@
                 </div>
                 <div class="text-right">
                     <h3 class="sr-only">{{ __('Time left until the calculation') }}</h3>
-                    <span class="text-xxs sm:text-xs text-amber-500">{{ $needBlocksTime }}</span>
+                    <span class="text-xxs xs:text-sm md:text-xs lg:text-sm text-amber-500">{{ $needBlocksTime }}</span>
                 </div>
 
                 @php
