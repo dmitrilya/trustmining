@@ -7,7 +7,7 @@
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period, 'graph', 'value');
         difficulties = [];
-        const = targetDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
+        const targetDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
         for (const difficulty of r.data.difficulties.reverse()) {
             if (new Date(difficulty.date) <= targetDate) difficulties.push(difficulty);
             else break;
