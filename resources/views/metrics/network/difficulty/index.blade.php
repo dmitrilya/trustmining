@@ -6,8 +6,8 @@
 
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period, 'graph', 'value');
-        difficulties = r.data.difficulties.reverse().slice(0, 366);
-        items = difficulties.slice(0, 365).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
+        difficulties = r.data.difficulties.reverse().slice(0, 378);
+        items = difficulties.slice(0, 377).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">

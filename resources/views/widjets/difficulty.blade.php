@@ -49,7 +49,7 @@
             </div>
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                 <template
-                    x-for="(item, key) in {'period': '{{ __('Period') }}', 'prediction': '{{ __('Prediction') }}', 'graph': '{{ __('Graph') }}', 'history': '{{ __('History') }}', 'dynamics': '{{ __('Dynamics') }}'}">
+                    x-for="(item, key) in {'period': '{{ __('Period') }}', 'prediction': '{{ __('Prediction') }}', 'graph': '{{ __('Graph') }}', 'history': '{{ __('History') }}'}">
                     <button @click="toggleBlock(key)"
                         class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
                         :class="blocks.includes(key) ?
@@ -71,7 +71,7 @@
             <div
                 class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
                 <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}"
-                    data-blocks="${blocks.join(" ,")}"></script>`'></div>
+                    data-blocks="${blocks.join(",")}"></script>`'></div>
 
                 <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
                             .then(() => pushToastAlert('{{ __('Code successfully copied') }}', 'success'))"

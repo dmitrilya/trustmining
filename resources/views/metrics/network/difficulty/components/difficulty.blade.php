@@ -44,7 +44,7 @@
         let d30 = value.find(i => new Date(i.date) <= new Date(Date.now() - 30 * 24 * 60 * 60 * 1000));
         let d90 = value.find(i => new Date(i.date) <= new Date(Date.now() - 90 * 24 * 60 * 60 * 1000));
         let d180 = value.find(i => new Date(i.date) <= new Date(Date.now() - 180 * 24 * 60 * 60 * 1000));
-        let d365 = value.find(i => new Date(i.date) <= new Date(Date.now() - 364 * 24 * 60 * 60 * 1000));
+        let d365 = value.at(-1);
 
         diff30d = d30 ? calculateDiff(current, d30.value) : null;
         diff90d = d90 ? calculateDiff(current, d90.value) : null;
