@@ -9,7 +9,7 @@
         difficulties = [];
         const targetDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
         for (const difficulty of r.data.difficulties.reverse()) {
-            if (new Date(difficulty.date) <= targetDate) difficulties.push(difficulty);
+            if (new Date(difficulty.date) > targetDate) difficulties.push(difficulty);
             else break;
         }
         items = difficulties.slice(0, difficulties.length - 1).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
