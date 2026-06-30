@@ -23,7 +23,7 @@
                 @php
                     $trackClick = auth()->user()
                         ? 'axios.post("/ads/' .
-                            ($ad->adCategory->name . '/' . $ad->id) .
+                            ($ad->ad_category_name . '/' . $ad->id) .
                             '/track").then(r => {
                                 pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
