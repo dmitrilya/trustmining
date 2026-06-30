@@ -49,7 +49,7 @@
             </div>
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                 <template
-                    x-for="(item, key) in {'period': '{{ __('Period') }}', 'prediction': '{{ __('Prediction') }}', 'graph': '{{ __('Graph') }}', 'history': '{{ __('History'), 'dynamics': '{{ __('Dynamics') }}'}">
+                    x-for="(item, key) in {'period': '{{ __('Period') }}', 'prediction': '{{ __('Prediction') }}', 'graph': '{{ __('Graph') }}', 'history': '{{ __('History') }}', 'dynamics': '{{ __('Dynamics') }}'}">
                     <button @click="toggleBlock(key)"
                         class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
                         :class="blocks.includes(key) ?
