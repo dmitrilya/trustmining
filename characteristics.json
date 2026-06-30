@@ -1,0 +1,221 @@
+[
+    {
+        "Name": "WhatsMiner M10",
+        "Length (mm)": 130,
+        "Width (mm)": 220,
+        "Height (mm)": 390,
+        "Weight (kg)": 8.1,
+        "Power connector": "C13",
+        "Noise level (db)": 72,
+        "Cooling": "Air",
+        "PSU model": ["P6"],
+        "Hash board count": 3,
+        "Chip size (nm)": 16,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "0°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M20S",
+        "Length (mm)": 390,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 12.5,
+        "Power connector": "C19",
+        "Noise level (db)": 75,
+        "Cooling": "Air",
+        "PSU model": ["P21-GB-12-3300"],
+        "Hash board count": 3,
+        "Chip size (nm)": 12,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "5°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M21S",
+        "Length (mm)": 390,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 12.5,
+        "Power connector": "C19",
+        "Noise level (db)": 75,
+        "Cooling": "Air",
+        "PSU model": ["P21-GB-12-3300"],
+        "Hash board count": 3,
+        "Chip size (nm)": 12,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "5°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M30S",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 12.8,
+        "Power connector": "C19",
+        "Noise level (db)": 76,
+        "Cooling": "Air",
+        "PSU model": ["P21-GB-12-3600"],
+        "Hash board count": 3,
+        "Chip size (nm)": 8,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "5°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M30S+",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 12.8,
+        "Power connector": "C19",
+        "Noise level (db)": 76,
+        "Cooling": "Air",
+        "PSU model": ["P21-GB-12-3600"],
+        "Hash board count": 3,
+        "Chip size (nm)": 8,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "5°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M30S++",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 12.8,
+        "Power connector": "C19",
+        "Noise level (db)": 77,
+        "Cooling": "Air",
+        "PSU model": ["P21-GB-12-3600"],
+        "Hash board count": 3,
+        "Chip size (nm)": 8,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "5°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M50",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 13.5,
+        "Power connector": "C19",
+        "Noise level (db)": 78,
+        "Cooling": "Air",
+        "PSU model": ["P221B", "P222B"],
+        "Hash board count": 3,
+        "Chip size (nm)": 5,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "0°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M50S",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 13.5,
+        "Power connector": "C19",
+        "Noise level (db)": 78,
+        "Cooling": "Air",
+        "PSU model": ["P221B", "P222B"],
+        "Hash board count": 3,
+        "Chip size (nm)": 5,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "0°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 7.2, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M60",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 13.5,
+        "Power connector": "C19",
+        "Noise level (db)": 79,
+        "Cooling": "Air",
+        "PSU model": ["P222B"],
+        "Hash board count": 3,
+        "Chip size (nm)": 3,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "0°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": null,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    },
+
+    {
+        "Name": "WhatsMiner M60S",
+        "Length (mm)": 430,
+        "Width (mm)": 155,
+        "Height (mm)": 240,
+        "Weight (kg)": 13.5,
+        "Power connector": "C19",
+        "Noise level (db)": 80,
+        "Cooling": "Air",
+        "PSU model": ["P222B"],
+        "Hash board count": 3,
+        "Chip size (nm)": 3,
+        "Voltage": "220V ~ 240V",
+        "Working temperature": "0°C ~ 40°C",
+        "Internet connection": "Ethernet",
+        "Air Flow (CFM)": 350,
+        "Fans": [
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" },
+            { "Size (mm)": 140, "Amperage (A)": 9.0, "Connector (pin)": "6" }
+        ]
+    }
+]

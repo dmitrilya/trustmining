@@ -10,8 +10,8 @@
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
-            <div class="flex justify-between md:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center md:hidden"
+            <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
+                <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
                     @click="show = !show">
                     <svg class="w-4 h-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">
