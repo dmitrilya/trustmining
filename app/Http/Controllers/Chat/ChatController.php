@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Events\NewMessage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\StoreMessageRequest;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ChatController extends Controller
     /**
      * Start the chat.
      *
-     * @param  \App\Http\Requests\Request  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
@@ -68,7 +69,8 @@ class ChatController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
+        /** @var \App\Models\User\User $user */
+        $user = Auth::user();
 
         return view('chat.index', [
             'auth' => $user,
@@ -90,7 +92,8 @@ class ChatController extends Controller
      */
     public function show(Chat $chat)
     {
-        $user = \Auth::user();
+        /** @var \App\Models\User\User $user */
+        $user = Auth::user();
 
         $chat->messages()->where('user_id', '!=', $user->id)->update(['checked' => 1]);
 
@@ -111,7 +114,7 @@ class ChatController extends Controller
     /**
      * Send chat message.
      *
-     * @param  \App\Http\Requests\Request  $request
+     * @param  \App\Http\Requests\StoreMessageRequest  $request
      * @param  \App\Models\Chat\Chat  $chat
      * @return \Illuminate\Http\Response
      */

@@ -14,11 +14,13 @@ use Illuminate\Http\File;
 
 trait FileTrait
 {
-    public function saveFiles(?array $files, string $folder, string $type, int|string $id, int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
+    public function saveFiles(?array $files, string $folder, string $type, int|string $id, ?int $time = null, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
         $result = [];
 
-        if (isset($files))
+        if (isset($files)) {
+            if (!$time) $time = time();
+
             foreach ($files as $i => $file) {
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
                 if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
@@ -31,6 +33,7 @@ trait FileTrait
                     $folder . '/' . $filename . '.' . $ext
                 );
             }
+        }
 
         return $result;
     }
@@ -70,9 +73,9 @@ trait FileTrait
     {
         $result = [];
 
-        $time = time();
+        if (isset($files)) {
+            $time = time();
 
-        if (isset($files))
             foreach ($files as $i => $file) {
                 $name = explode('.', $file->getClientOriginalName())[0];
                 $filename = $type . '_' . $id . '_' . $i . '_' . $time;
@@ -86,6 +89,7 @@ trait FileTrait
                     'path' => $folder . '/' . $filename . '.' . $ext
                 ));
             }
+        }
 
         return $result;
     }
