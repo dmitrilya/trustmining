@@ -63,14 +63,16 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems'])->with('moderatedAds')->get();
+        $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems', 'Global Mining'])->with('moderatedAds')->get();
         $changings = [];
 
-        $changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
-        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
-        $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
+        //$changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
+        //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        //$changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
+        $changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
+        dd($changings);
 
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -567,6 +569,102 @@ class UpdatePrices extends Command
             Log::channel('price-updating-check')->info("[INTELION]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[INTELION] {$e->getMessage()}");
+        }
+
+        return $changings->toArray();
+    }
+
+    private function globalMining(?User $user): array
+    {
+        $changings = collect();
+
+        try {
+            $firstAd = null;
+            $ads = $user->moderatedAds;
+            $check = collect();
+            $p = 1;
+
+            do {
+                $html = file_get_contents('https://globalmining.ru/catalog/asic_maynery/filter/price-base-from-1/apply/?ajax_get_page=Y&PAGEN_1=' . $p);
+                $p++;
+
+                $dom = new DOMDocument();
+                @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+                $xpath = new DOMXPath($dom);
+
+                $currentPageCards = $xpath->query('//div[contains(@class, "productCard__container")]');
+
+                if ($currentPageCards->length === 0) break;
+
+                $firstCardName = trim($xpath->query('.//div[contains(@class, "productCard__title")]', $currentPageCards->item(0))->item(0)->textContent);
+                if ($p == 2) $firstAd = $firstCardName;
+                elseif ($firstAd == $firstCardName) break;
+
+                foreach ($currentPageCards as $i => $card) {
+                    $price = $xpath->query('.//div[contains(@class, "productCard__price")]', $card)->item(0);
+                    $fullName = trim($xpath->query('.//div[contains(@class, "productCard__title")]', $card)->item(0)->textContent);
+                    $name = $this->parseModelName($fullName, true);
+                    $nameWithBrand = $name[0] . $name[1];
+
+                    $variants = [
+                        $name[1],
+                        $nameWithBrand,
+                        str_replace('hydro', 'hyd', $nameWithBrand),
+                        str_replace('hydro', 'hyd', $name[1]),
+                        str_replace('-', '', $nameWithBrand)
+                    ];
+                    $rate = (float) $name[2];
+                    $price = (float) preg_replace('/\D/u', '', trim($price->textContent));
+
+                    $corrs = $this->models->whereIn('name', $variants);
+                    if ($corrs->count() != 1) {
+                        $check->push('[Нет модели] ' . $fullName);
+                        continue;
+                    }
+
+                    $model = $corrs->first();
+                    $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                    if (!$version) {
+                        $check->push('[Нет версии] ' . $fullName);
+                        continue;
+                    }
+
+                    $ad = null;
+                    $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                        if (
+                            $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                            && 'Preorder' == $item->props['Availability']
+                        ) {
+                            $ad = $ads->pull($key);
+                            return false;
+                        }
+                    });
+
+                    if (!$ad) {
+                        $check->push('[Нет объявления] ' . $fullName);
+                        continue;
+                    }
+
+                    if ($ad->price != $price) $changings->push([
+                        'id' => $ad->id,
+                        'price' => $price,
+                        'coin_id' => 2
+                    ]);
+                }
+
+                usleep(100000);
+            } while (true);
+
+            foreach ($ads->where('price', '!=', 0) as $ad) {
+                $changings->push([
+                    'id' => $ad->id,
+                    'price' => 0,
+                ]);
+            }
+
+            Log::channel('price-updating-check')->info("[GLOBAL MINING]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
+        } catch (Exception $e) {
+            Log::channel('price-updating-errors')->info("[GLOBAL MINING] {$e->getMessage()}");
         }
 
         return $changings->toArray();
