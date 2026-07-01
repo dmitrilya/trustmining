@@ -579,14 +579,22 @@ class UpdatePrices extends Command
         $changings = collect();
 
         try {
-            $firstAd = null;
             $ads = $user->moderatedAds;
             $check = collect();
             $p = 1;
 
+            $context = stream_context_create([
+                'http' => [
+                    'ignore_errors' => true
+                ]
+            ]);
+
             do {
-                $html = file_get_contents('https://globalmining.ru/catalog/asic_maynery/filter/price-base-from-1/apply/?ajax_get_page=Y&PAGEN_1=' . $p);
+                $url = 'https://globalmining.ru/catalog/asic_maynery/filter/price-base-from-1/apply/?ajax_get_page=Y&PAGEN_1=' . $p;
+                $html = file_get_contents($url, false, $context);
                 $p++;
+
+                if (isset($http_response_header) && str_contains($http_response_header[0], '404') || $html === false) break;
 
                 $dom = new DOMDocument();
                 @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
@@ -595,10 +603,6 @@ class UpdatePrices extends Command
                 $currentPageCards = $xpath->query('//div[contains(@class, "productCard__container")]');
 
                 if ($currentPageCards->length === 0) break;
-
-                $firstCardName = trim($xpath->query('.//div[contains(@class, "productCard__title")]', $currentPageCards->item(0))->item(0)->textContent);
-                if ($p == 2) $firstAd = $firstCardName;
-                elseif ($firstAd == $firstCardName) break;
 
                 foreach ($currentPageCards as $i => $card) {
                     $price = $xpath->query('.//div[contains(@class, "productCard__price")]', $card)->item(0);
