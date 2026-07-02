@@ -47,7 +47,7 @@ class UpdatePrices extends Command
     {
         parent::__construct();
 
-        $this->models = AsicModel::with(['asicBrand:id,name', 'asicVersions:id,asic_model_id,hashrate'])->select(['id', 'name'])->get()
+        $this->models = AsicModel::with(['asicBrand:id,name', 'asicVersions:id,asic_model_id,hashrate'])->select(['id', 'name', 'release'])->get()
             ->map(function ($model) {
                 $model->name = str_replace(' ', '', strtolower($model->name));
                 return $model;
@@ -64,19 +64,15 @@ class UpdatePrices extends Command
     public function handle()
     {
         $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems', 'Global Mining'])
-            ->with(['moderatedAds' => fn($q) => $q->whereHas(
-                'adCategory',
-                fn($q1) => $q1->where('name', 'miners')
-            )])->get();
+            ->with(['moderatedAds' => fn($q) => $q->where('ad_category_id', 1)])->get();
         $changings = [];
 
-        //$changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
-        //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
-        //$changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
+        $changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
+        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
         $changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
-        dd($changings);
 
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -91,7 +87,7 @@ class UpdatePrices extends Command
         $lower = preg_replace('/\b-?mix\b/u', '', mb_strtolower(str_replace("\xc2\xa0", ' ', $name), 'UTF-8'));
         $rate = null;
 
-        $rateRegex = '/\b(\d+(?:[,.]\d+)?)\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|(?:[tkmg](?![a-z0-9+])))\b/u';
+        $rateRegex = '/\b(\d+(?:[,.]\d+)?)(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|(?:[tkmg](?![a-z0-9+])))\b/u';
 
         if ($withRate && preg_match($rateRegex, $lower, $matches)) {
             $rateValue = str_replace(',', '.', $matches[1]);
@@ -100,7 +96,7 @@ class UpdatePrices extends Command
             if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
         }
 
-        $cleanRegex = '/\b\d+(?:[,.]\d+)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
+        $cleanRegex = '/\b\d+(?:[,.]\d+)?(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
         $cleaned = preg_replace($cleanRegex, '', $lower);
 
         $words = array_values(array_filter(explode(' ', $cleaned)));
@@ -612,7 +608,19 @@ class UpdatePrices extends Command
                     $price = $xpath->query('.//div[contains(@class, "productCard__price")]', $card)->item(0);
                     $fullName = trim($xpath->query('.//div[contains(@class, "productCard__title")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
+                    $rate = strpos($name[2], '-') !== false ? (float) explode('-', $name[2])[0] : (float) $name[2];
+                    
+                    $name[1] = str_replace('м', 'm', $name[1]);
+                    if ($name[1] == 'l11' && $rate == 21) $name[1] = 'l11pro';
+                    elseif ($name[1] == 's21+hydro' && $rate == 335) $name[1] = 's21hyd';
+                    elseif ($name[1] == 'ckbminerk7') $name[1] = 'k7';
+                    elseif ($name[1] == 'dghome') $name[1] = 'dghome1';
+                    elseif ($name[1] == 's21hydroxp') $name[1] = 's21xphyd';
+                    elseif ($name[1] == 's19еxphydro') $name[1] = 's19exphyd';
+                    
                     $nameWithBrand = $name[0] . $name[1];
+                    
+                    if ($nameWithBrand == 'bitcoinminers19jxp') $nameWithBrand = 'antminers19jxp';
 
                     $variants = [
                         $name[1],
@@ -621,7 +629,6 @@ class UpdatePrices extends Command
                         str_replace('hydro', 'hyd', $name[1]),
                         str_replace('-', '', $nameWithBrand)
                     ];
-                    $rate = (float) $name[2];
                     $price = (float) preg_replace('/\D/u', '', trim($price->textContent));
 
                     $corrs = $this->models->whereIn('name', $variants);
@@ -633,8 +640,13 @@ class UpdatePrices extends Command
                     $model = $corrs->first();
                     $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                     if (!$version) {
-                        $check->push('[Нет версии] ' . $fullName);
-                        continue;
+                        $model = $this->models->where('name', str_replace('+', '', $nameWithBrand))->first();
+                        if ($model) $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+    
+                        if (!$version) {
+                            $check->push('[Нет версии] ' . $fullName);
+                            continue;
+                        }
                     }
 
                     $ad = null;
@@ -649,7 +661,7 @@ class UpdatePrices extends Command
                     });
 
                     if (!$ad) {
-                        $check->push('[Нет объявления] ' . $fullName);
+                        if ($model->release > '2024-07-01') $check->push('[Нет объявления] ' . $fullName);
                         continue;
                     }
 
