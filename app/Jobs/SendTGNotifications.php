@@ -84,7 +84,7 @@ class SendTGNotifications implements ShouldQueue
                     case 'Price change':
                         $lastModeration = $this->n->moderations()->whereNotNull('data->price')->latest()->limit(2)->get()[1];
                         $price = $this->n->price != 0 ? $this->n->price : __('Price on request');
-                        $text = $this->n->asicVersion->asicModel->name . ' ' . $this->n->asicVersion->hashrate . $this->n->asicVersion->measurement . "\n" . $this->n->user->name . "\n\n" . $lastModeration->data['price'] . Coin::find($lastModeration->data['coin_id'])->abbreviation . " => " . $price . $this->n->coin->abbreviation;
+                        $text = $this->n->asicVersion->asicModel->name . ' ' . $this->n->asicVersion->hashrate . $this->n->asicVersion->measurement . "\n" . $this->n->user->name . "\n\n" . $lastModeration->data['price'] . (isset($lastModeration->data['coin_id']) ? Coin::find($lastModeration->data['coin_id'])->abbreviation : $this->n->coin->abbreviation) . " => " . $price . $this->n->coin->abbreviation;
                         $keyboard = [[
                             ['text' => __('Contact'), 'url' => route('chat.start', ['user' => $this->n->user->id, 'ad' => $this->n->id])],
                             ['text' => __('Details'), 'url' => route('ads.show', ['adCategory' => $this->n->adCaategory->name, 'ad' => $this->n->id])],
