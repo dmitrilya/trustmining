@@ -78,42 +78,6 @@
                             </a>
                         </div>
                     </div>
-
-                    @php
-                        $trackClick = auth()->user()
-                            ? 'axios.post("/track/handle", {trackable_type: "asic-model", trackable_id: ' .
-                                $model->id .
-                                '}).then(r => {
-                                                        pushToastAlert(r.data.message, r.data.success ? "success" : "error");
-
-                                                        if (r.data.tracking) {
-                                                            document.getElementsByClassName("tracking")[0].classList.remove("hidden");
-                                                            $el.getElementsByTagName("span")[0].innerHTML = "' .
-                                __('Untrack price') .
-                                '";' .
-                                (auth()->user()->tg_id === null
-                                    ? 'if (!window.tgDontAsk) $dispatch("open-modal", "tg-auth");'
-                                    : '') .
-                                '} else {
-                                                            document.getElementsByClassName("tracking")[0].classList.add("hidden");
-                                                            $el.getElementsByTagName("span")[0].innerHTML = "' .
-                                __('To track') .
-                                '";
-                                                        }
-                                                    })'
-                            : '$dispatch("open-modal", "login")';
-                    @endphp
-
-                    <x-secondary-button class="w-full xs:w-fit mt-2 xs:mt-0 xs:ml-2 lg:ml-3 justify-center"
-                        @click="{{ $trackClick }}">
-                        <svg class="min-w-4 h-4 mr-1 xs:mr-2" aria-hidden="true" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
-                        </svg>
-                        <span>{{ auth()->user() && auth()->user()->trackedAsicModels->where('id', $model->id)->count() ? __('Untrack price') : __('Track price') }}</span>
-                    </x-secondary-button>
                 </div>
             @else
                 @if (count($algorithms[$version['a']]['p']))
