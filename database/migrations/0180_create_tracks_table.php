@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
-            $table->foreignId('ad_id')->constrained()->cascadeOnUpdate();
+            $table->morphs('trackable');
             $table->timestamp('created_at')->useCurrent();
         });
     }

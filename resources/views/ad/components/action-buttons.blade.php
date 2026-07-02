@@ -18,9 +18,7 @@
 @else
     @php
         $trackClick = $user
-            ? 'axios.post("/ads/' .
-                ($ad->adCategory->name . '/' . $ad->id) .
-                '/track").then(r => {
+            ? 'axios.post("/track/handle", {trackable_type: "ad", trackable_id: ' . $ad->id . '}).then(r => {
                     pushToastAlert(r.data.message, r.data.success ? "success" : "error");
 
                     if (r.data.tracking) {

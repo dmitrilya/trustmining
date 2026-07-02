@@ -77,7 +77,7 @@ class AdService
 
                 if (isset($changings['price'])) $this->notify(
                     'Price change',
-                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
                     'ad',
                     $ad
                 );
@@ -104,7 +104,7 @@ class AdService
 
                     $this->notify(
                         'Price change',
-                        $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                        $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
                         'ad',
                         $ad
                     );

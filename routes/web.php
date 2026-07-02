@@ -356,13 +356,14 @@ Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
     Route::get('/', [AdController::class, 'index'])->name('ads');
     Route::get('/get-ads', [AdController::class, 'getAdsCarousel'])->name('ads.get');
     Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
-    Route::post('/{ad}/track', [AdController::class, 'track'])->name('ads.track');
 });
 
 Route::get('asic-miners/{asicBrand:slug}/{asicModel:slug}/{asicVersion}/ads/{ad}', [AdController::class, 'asicMinerAd'])->name('ads.asic.show');
 Route::get('gas-gensets/{gpuBrand:slug}/{gpuModel:slug}/ads/{ad}', [AdController::class, 'gpuAd'])->name('ads.gpu.show');
 
 Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
+
+Route::post('/track/handle', [Controller::class, 'track'])->name('track');
 
 Route::group(['prefix' => 'forum'], function () {
     Route::get('/', [ForumController::class, 'index'])->name('forum');

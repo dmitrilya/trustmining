@@ -257,7 +257,7 @@ class DatabaseController extends Controller
                     'same_algo' => $models->except($asicModel->id)->where('algorithm_id', $asicModel->algorithm_id)->sortByDesc(function ($model) use ($asicModel, $data, $maxViews) {
                         $model->maxRate = collect($data['m']->where('i', $model->id)->first()['v'])->max(fn($version) => $version['h'] * $version['c']);
                         $rateScore = min($model->maxRate, $asicModel->maxRate) / max($model->maxRate, $asicModel->maxRate) * 50;
-                        $popularityScore = log($model->views_count + 1) / $maxViews * 10;
+                        $popularityScore = log($model->views_count + 1) / $maxViews * 20;
 
                         return $rateScore + $popularityScore;
                     })->take(10),

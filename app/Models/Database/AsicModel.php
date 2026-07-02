@@ -78,4 +78,15 @@ class AsicModel extends Model
     {
         return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
     }
+
+    public function tracks()
+    {
+        return $this->morphMany(\App\Models\Morph\Track::class, 'trackable');
+    }
+
+    public function trackingUsers()
+    {
+        return \App\Models\User\User::query()->join('tracks', 'users.id', '=', 'tracks.user_id')
+            ->where('tracks.trackable_type', $this->getMorphClass())->where('tracks.trackable_id', $this->id);
+    }
 }

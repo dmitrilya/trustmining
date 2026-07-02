@@ -20,7 +20,7 @@ trait AdTrait
             ->leftJoin('users', 'users.id', '=', 'ads.user_id')
             ->leftJoin('ad_categories', 'ad_categories.id', '=', 'ads.ad_category_id')
             ->leftJoin('offices', 'offices.id', '=', 'ads.office_id')
-            ->leftJoin('cities', 'cities.id', '=', 'offices.city_id') 
+            ->leftJoin('cities', 'cities.id', '=', 'offices.city_id')
             ->leftJoin('asic_versions', 'asic_versions.id', '=', 'ads.asic_version_id')
             ->leftJoin('asic_models', 'asic_models.id', '=', 'asic_versions.asic_model_id')
             ->leftJoin('asic_brands', 'asic_brands.id', '=', 'asic_models.asic_brand_id')
@@ -74,7 +74,7 @@ trait AdTrait
 
                 DB::raw("EXISTS (SELECT 1 FROM phones WHERE phones.user_id = users.id) as user_has_phone"),
                 DB::raw("(SELECT m2.moderation_status_id FROM moderations m2 WHERE m2.moderationable_id = ads.id AND m2.moderationable_type = '{$adClass}' ORDER BY m2.id DESC LIMIT 1) as last_moderation_status"),
-                DB::raw("EXISTS (SELECT 1 FROM tracks t WHERE t.ad_id = ads.id AND t.user_id = {$authId}) as is_tracked"),
+                DB::raw("EXISTS (SELECT 1 FROM tracks t WHERE t.trackable_type = 'ad' AND t.trackable_id = ads.id AND t.user_id = {$authId}) as is_tracked"),
             ]);
 
         if ($adCategory) $ads->where('ads.ad_category_id', $adCategory->id);
@@ -86,7 +86,7 @@ trait AdTrait
                     ->exists()) {
                     abort(404, 'Model not found');
                 }
-                
+
                 $ads->where('asic_models.slug', $request->model);
             }
 
@@ -98,7 +98,7 @@ trait AdTrait
                     ->exists()) {
                     abort(404, 'Model not found');
                 }
-                
+
                 $ads->where('gpu_models.slug', $request->gpu_model);
             }
 
@@ -217,32 +217,5 @@ trait AdTrait
         $ad->save();
 
         return response()->json(['success' => true]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ad\AdCategory  $adCategory
-     * @param  \App\Models\Ad\Ad  $ad
-     * @return \Illuminate\Http\Response
-     */
-    public function track(Request $request, AdCategory $adCategory, Ad $ad)
-    {
-        $user = $request->user();
-
-        //if (!$user || !$user->tariff) return response()->json(['success' => false, 'message' => __('This feature is only available with a subscription')]);
-
-        if ($ad->trackingUsers()->where('users.id', $user->id)->exists()) {
-            $ad->trackingUsers()->detach($user->id);
-            $tracking = false;
-            $message = 'You have unsubscribed from notifications.';
-        } else {
-            $ad->trackingUsers()->attach($user->id);
-            $tracking = true;
-            $message = 'You have successfully subscribed to price change notifications.';
-        }
-
-        return response()->json(['success' => true, 'tracking' => $tracking, 'message' => __($message)]);
     }
 }

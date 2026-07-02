@@ -67,7 +67,7 @@ class AppServiceProvider extends ServiceProvider
             'passport' => \App\Models\User\Passport::class,
             'hosting' => \App\Models\Ad\Hosting::class,
             'ad' => \App\Models\Ad\Ad::class,
-            'track' => \App\Models\Ad\Track::class,
+            'track' => \App\Models\Morph\Track::class,
             'message' => \App\Models\Chat\Message::class,
             'asic-brand' => \App\Models\Database\AsicBrand::class,
             'asic-model' => \App\Models\Database\AsicModel::class,

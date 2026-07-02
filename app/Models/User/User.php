@@ -179,12 +179,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function tracks()
     {
-        return $this->hasMany(\App\Models\Ad\Track::class);
+        return $this->hasMany(\App\Models\Morph\Track::class);
     }
 
     public function trackedAds()
     {
-        return $this->belongsToMany(\App\Models\Ad\Ad::class, 'tracks');
+        return $this->morphedByMany(\App\Models\Ad\Ad::class, 'trackable', 'tracks', 'user_id', 'trackable_id');
+    }
+
+    public function trackedAsicModels()
+    {
+        return $this->morphedByMany(\App\Models\Database\AsicModel::class, 'trackable', 'tracks', 'user_id', 'trackable_id');
     }
 
     public function difficultySubscriptions()

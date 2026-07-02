@@ -121,7 +121,7 @@ trait ModerationTrait
 
             if (isset($data['price'])) $this->notify(
                 'Price change',
-                $m->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                $m->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($m->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
                 'ad',
                 $m
             );

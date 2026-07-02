@@ -254,7 +254,7 @@ class AdController extends Controller
             if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat)
                 $this->notify(
                     'Price change',
-                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get(),
+                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
                     'ad',
                     $ad
                 );
