@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Console\Command;
+use Exception;
 
 use App\Models\Database\AsicModel;
 use App\Models\Database\Algorithm;
@@ -36,13 +38,17 @@ class UpdateExchangeRate extends Command
     {
         $key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->pluck('abbreviation');
-        $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
-        $data->each(function ($coinData) {
-            $coin = Coin::where('abbreviation', $coinData->symbol)->first();
-            if (!$coin || !$coinData->quote->USD->price) return;
+        try {
+            $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
+            $data->each(function ($coinData) {
+                $coin = Coin::where('abbreviation', $coinData->symbol)->first();
+                if (!$coin || !$coinData->quote->USD->price) return;
 
-            $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
-        });
+                $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
+            });
+        } catch (Exception $e) {
+            Log::channel('integration-errors')->info("[pro-api.coinmarketcap] {$e->getMessage()}");
+        }
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
