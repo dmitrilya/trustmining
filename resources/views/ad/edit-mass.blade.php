@@ -25,8 +25,8 @@
 
                 <x-primary-button
                     @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => {
+                        if (r.data.success) changings = [];
                         pushToastAlert(r.data.message, r.data.success ? 'success' : 'error');
-                        changings = [];
                     })">
                     {{ __('Save') }}
                 </x-primary-button>
@@ -42,7 +42,8 @@
                         <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-sm col-span-1">
                             {{ $ad->office->city }}
                         </div>
-                        <a href="{{ route('ads.show', ['adCategory' => 'miners', 'ad' => $ad->id]) }}" class="text-indigo-500 hover:text-indigo-600 text-xxs sm:text-sm col-span-2">
+                        <a href="{{ route('ads.show', ['adCategory' => 'miners', 'ad' => $ad->id]) }}"
+                            class="text-indigo-500 hover:text-indigo-600 text-xxs sm:text-sm col-span-2">
                             {{ $ad->asicVersion->asicModel->name }}
                             {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}
                         </a>
@@ -120,7 +121,10 @@
                 @endforeach
             </div>
             <x-primary-button class="block ml-auto mt-6"
-                @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => pushToastAlert(r.data.message, r.data.success ? 'success' : 'error'))">
+                @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => {
+                    if (r.data.success) changings = [];
+                    pushToastAlert(r.data.message, r.data.success ? 'success' : 'error');
+                })">
                 {{ __('Save') }}
             </x-primary-button>
         </div>
