@@ -116,7 +116,7 @@ class SeriesController extends Controller
 
         if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
 
-        $content = $modelClass::where('moderation', false)->where('series_id', $series->id)
+        $content = $modelClass::where('moderation', false)->whereHas('series', fn($q) => $q->where('id', $series->id))
             ->orderByDesc($order == 'new' ? 'created_at' : 'views_count')->paginate(4);
 
         return response()->json([
