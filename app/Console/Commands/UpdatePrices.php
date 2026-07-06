@@ -322,7 +322,8 @@ class UpdatePrices extends Command
                 $name = preg_replace('/[\s\p{Cyrillic}]+/u', '', strtolower($name));
                 if ($name == 'antmineru3s21exph') $name = 'antminers21exphyd3u';
                 elseif ($name == 'antmineru2l9h') $name = 'antminerl9hyd2u';
-                elseif ($name == 'antmineru3s23h') $name = 'antminers23hydu3';
+                elseif ($name == 'antmineru3s23h') $name = 'antminers23hyd3u';
+                elseif ($name == 'antminers23eu2h') $name = 'antminers23ehyd2u';
                 $rate = (float) explode(' ', trim($tds->item(2)->textContent))[0];
                 $price = (float) str_replace(' ', '', str_replace('$', '', trim($tds->item(4)->textContent)));
 
