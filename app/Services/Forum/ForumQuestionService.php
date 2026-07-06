@@ -4,6 +4,8 @@ namespace App\Services\Forum;
 
 use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection;
+
 use App\Services\YandexGPTService;
 use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
@@ -103,7 +105,7 @@ class ForumQuestionService
         if (count($similarQuestions)) {
             $question->similar_questions = $similarQuestions;
             $question->save();
-            $this->notify('Similar questions', collect([$question->user]), 'forum-question', $question);
+            $this->notify('Similar questions', new Collection([$question->user]), 'forum-question', $question);
         } elseif (!$question->moderation) {
             $question->published = true;
             $question->save();

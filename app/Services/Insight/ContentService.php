@@ -132,7 +132,7 @@ abstract class ContentService
         if ($hasCompany || $hasRecentModeratedContent) {
             $moderation->moderation_status_id = 1;
             $this->acceptModeration(true, $moderation);
-        } else $this->notify('New moderation', collect([User::find(10000000)]));
+        } else $this->notify('New moderation', new Collection([User::find(10000000)]));
 
         return $moderation;
     }

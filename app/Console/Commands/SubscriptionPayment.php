@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -42,7 +43,7 @@ class SubscriptionPayment extends Command
                 ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance', 'tg_id'])->get() as $user
         ) {
             if ($user->balance < $user->tariff->price) {
-                $this->notify('Subscription renewal failed', collect([$user]));
+                $this->notify('Subscription renewal failed', new Collection([$user]));
 
                 $user->tariff_id = null;
                 $user->tariff_from = null;
@@ -52,9 +53,9 @@ class SubscriptionPayment extends Command
 
                 if ($countToHide > 0) $adIdsToHide = $adIdsToHide->merge($adIds->random($countToHide));
             } else {
-                if ($user->balance < $user->tariff->price * 8 && $user->balance >= $user->tariff->price * 7) $this->notify('Top up your balance (7 days)', collect([$user]));
-                elseif ($user->balance < $user->tariff->price * 4 && $user->balance >= $user->tariff->price * 3) $this->notify('Top up your balance (3 days)', collect([$user]));
-                elseif ($user->balance < $user->tariff->price * 2 && $user->balance >= $user->tariff->price) $this->notify('Top up your balance (1 day)', collect([$user]));
+                if ($user->balance < $user->tariff->price * 8 && $user->balance >= $user->tariff->price * 7) $this->notify('Top up your balance (7 days)', new Collection([$user]));
+                elseif ($user->balance < $user->tariff->price * 4 && $user->balance >= $user->tariff->price * 3) $this->notify('Top up your balance (3 days)', new Collection([$user]));
+                elseif ($user->balance < $user->tariff->price * 2 && $user->balance >= $user->tariff->price) $this->notify('Top up your balance (1 day)', new Collection([$user]));
 
                 $user->balance -= $user->tariff->price;
             }

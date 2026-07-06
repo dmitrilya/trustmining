@@ -8,9 +8,11 @@ use App\Events\NewMessage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreMessageRequest;
-use Illuminate\Http\Request;
 
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\NotificationTrait;
@@ -24,7 +26,6 @@ use App\Services\CRM\AmoCRMService;
 use App\Services\CRM\CRMServiceFactory;
 
 use Carbon\Carbon;
-use Illuminate\Http\UploadedFile;
 
 class ChatController extends Controller
 {
@@ -165,7 +166,7 @@ class ChatController extends Controller
         $message->save();
 
         if ($user->role->name == 'support')
-            $this->notify('New message from support', collect([$addressee]), 'message', $message);
+            $this->notify('New message from support', new Collection([$addressee]), 'message', $message);
         else {
             if ($addressee->role->name == 'user' && $user->role->name == 'user') {
                 foreach ($user->crmConnections()->with('crmSystem')->get() as $crmConnection) {
@@ -183,7 +184,7 @@ class ChatController extends Controller
                 }
             }
             
-            $this->notify('New message', collect([$addressee]), 'message', $message);
+            $this->notify('New message', new Collection([$addressee]), 'message', $message);
             
             event(new NewMessage($addressee, $message));
         }
