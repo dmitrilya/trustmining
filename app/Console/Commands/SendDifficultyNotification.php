@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\NotificationTrait;
 use App\Models\Metrics\DifficultySubscription;
@@ -36,7 +37,7 @@ class SendDifficultyNotification extends Command
 
         foreach ($subscriptions->groupBy('coin_id') as $group) {
             $coin = $group->first()->coin;
-            $users = $group->pluck('user')->filter()->unique('id');
+            $users = new Collection($group->pluck('user')->filter()->unique('id'));
 
             if ($users->isEmpty()) continue;
 

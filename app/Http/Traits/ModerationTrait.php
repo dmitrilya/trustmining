@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -133,14 +134,14 @@ trait ModerationTrait
         $moderation->save();
 
         if ($moderation->moderationable_type != 'ad')
-            $this->notify('Moderation completed', collect([$m->user]), 'moderation', $moderation);
+            $this->notify('Moderation completed', new Collection([$m->user]), 'moderation', $moderation);
 
         if ($moderation->moderationable_type == 'review' && $m->reviewable_type == 'user')
-            $this->notify(isset($data['moderation']) ? 'New review' : 'Review edited', collect([$m->reviewable]), 'review', $m);
+            $this->notify(isset($data['moderation']) ? 'New review' : 'Review edited', new Collection([$m->reviewable]), 'review', $m);
         elseif ($moderation->moderationable_type == 'forum-answer' && isset($data['moderation']) /* Не сработает на редактирование */)
-            $this->notify('New forum answer', collect([$m->forumQuestion->user]), 'forum-answer', $m);
+            $this->notify('New forum answer', new Collection([$m->forumQuestion->user]), 'forum-answer', $m);
         elseif ($moderation->moderationable_type == 'forum-comment' && isset($data['moderation']) /* Не сработает на редактирование */)
-            $this->notify('New forum comment', collect([$m->forumAnswer->user, $m->forumAnswer->forumQuestion->user]), 'forum-comment', $m);
+            $this->notify('New forum comment', new Collection([$m->forumAnswer->user, $m->forumAnswer->forumQuestion->user]), 'forum-comment', $m);
 
         return redirect()->route('moderations');
     }
@@ -221,7 +222,7 @@ trait ModerationTrait
         $moderation->user_id = $userId;
         $moderation->save();
 
-        $this->notify('Moderation failed', collect([$m->user]), 'moderation', $moderation);
+        $this->notify('Moderation failed', new Collection([$m->user]), 'moderation', $moderation);
 
         return redirect()->route('moderations');
     }

@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use Exception;
 
 use App\Http\Traits\NotificationTrait;
@@ -37,7 +37,7 @@ class UpdateNetworkData extends Command
      */
     public function handle()
     {
-        $changed = collect();
+        $changed = new Collection();
 
         // BTC
         $coin = Coin::where('abbreviation', 'BTC')->with('latestNetworkDifficulty')->first();
@@ -88,7 +88,7 @@ class UpdateNetworkData extends Command
 
             $coinSubscriptions = $groupedSubscriptions->get($changedCoin->id);
 
-            $users = $coinSubscriptions->pluck('user')->filter()->unique('id');
+            $users = new Collection($coinSubscriptions->pluck('user')->filter()->unique('id'));
 
             if ($users->isEmpty()) continue;
 

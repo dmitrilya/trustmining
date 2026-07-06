@@ -59,7 +59,7 @@ abstract class ContentModel extends Model
 
     public function user()
     {
-        return $this->hasOneThrough(\App\Models\User\User::class, \App\Models\Insight\Channel::class);
+        return $this->hasOneThrough(\App\Models\User\User::class, \App\Models\Insight\Channel::class, 'id', 'id', 'channel_id', 'user_id');
     }
 
     public function series()
