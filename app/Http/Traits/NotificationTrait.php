@@ -57,7 +57,7 @@ trait NotificationTrait
 
             if (!$allowedByConfig) return false;
 
-            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId], $notificationable) : true;
+            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['tg'], $notificationable) : true;
         })->pluck('tg_id')->unique();
 
         if ($tgIds->isNotEmpty()) {
@@ -72,7 +72,7 @@ trait NotificationTrait
 
             if (!$allowedByConfig) return false;
 
-            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId], $notificationable) : true;
+            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['email'], $notificationable) : true;
         });
 
         if ($emailUsers->isNotEmpty()) {

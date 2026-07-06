@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -63,7 +64,7 @@ class SubscriptionPayment extends Command
             $user->save();
         }
 
-        if ($adIdsToHide->count()) \DB::table('ads')->whereIn('id', $adIdsToHide)->update(['hidden' => true]);
+        if ($adIdsToHide->count()) DB::table('ads')->whereIn('id', $adIdsToHide)->update(['hidden' => true]);
 
         return Command::SUCCESS;
     }
