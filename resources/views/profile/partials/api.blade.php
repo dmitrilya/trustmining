@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex justify-between">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('API') }}
             </h2>
 
@@ -12,11 +12,11 @@
     </header>
 
     @if (auth()->user()->tokens()->exists())
-        <p class="text-sm text-slate-700 dark:text-slate-400 mb-3">
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
             {{ __('Token is active. In case of loss or for security purposes, you can generate a new one.') }}
         </p>
     @else
-        <p class="text-sm text-slate-700 dark:text-slate-400 mb-3">
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
             {{ __('Generate a token to create your own integration. It will only appear once. You need to save it immediately.') }}
         </p>
     @endif

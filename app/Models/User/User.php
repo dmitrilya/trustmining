@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\User\NotificationType;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, Searchable;
@@ -26,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'email',
         'balance',
-        'password'
+        'password',
     ];
 
     /**
@@ -47,6 +49,25 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function booted()
+    {
+        static::created(function (User $user) {
+            $notificationTypes = NotificationType::all();
+
+            $user->settings()->create([
+                'notifications' => [
+                    $notificationTypes->where('name', 'Moderation completed')->first()->id => ['email' => ['enabled' => true], 'tg' => ['enabled' => true]],
+                    $notificationTypes->where('name', 'Moderation failed')->first()->id => ['email' => ['enabled' => true], 'tg' => ['enabled' => true]],
+                    $notificationTypes->where('name', 'New message')->first()->id => ['email' => ['enabled' => true, 'frequency' => 'first'], 'tg' => ['enabled' => true, 'frequency' => 'all']],
+                    $notificationTypes->where('name', 'New review')->first()->id => ['email' => ['enabled' => true, 'condition' => 'negative'], 'tg' => ['enabled' => true, 'condition' => 'all']],
+                    $notificationTypes->where('name', 'Review edited')->first()->id => ['email' => ['enabled' => true, 'condition' => 'negative'], 'tg' => ['enabled' => true, 'condition' => 'all']],
+                    $notificationTypes->where('name', 'Price change')->first()->id => ['email' => ['enabled' => true, 'condition' => 'drop'], 'tg' => ['enabled' => true, 'condition' => 'changing']],
+                    $notificationTypes->where('name', 'Difficulty changing')->first()->id => ['email' => ['enabled' => true, 'frequency' => 'change'], 'tg' => ['enabled' => true, 'frequency' => 'change']],
+                ]
+            ]);
+        });
+    }
 
     /**
      * Retrieve the model for a bound value.
@@ -77,6 +98,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(\App\Models\User\Role::class);
     }
 
+    public function settings()
+    {
+        return $this->hasOne(\App\Models\User\Settings::class);
+    }
+
     public function ads()
     {
         return $this->hasMany(\App\Models\Ad\Ad::class);
@@ -95,6 +121,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function channel()
     {
         return $this->hasOne(\App\Models\Insight\Channel::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOneThrough(\App\Models\User\User::class, \App\Models\Insight\Channel::class);
     }
 
     public function subscriptions()

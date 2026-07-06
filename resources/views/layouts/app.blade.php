@@ -157,7 +157,7 @@
             <x-modal name="need-subscription">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-lg text-slate-950 dark:text-slate-50">
+                        <h2 class="text-lg text-slate-800 dark:text-slate-200">
                             {{ __('This feature is only available with a subscription') }}
                         </h2>
 
@@ -181,7 +181,7 @@
                     <x-modal name="tg-auth">
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-lg text-slate-950 dark:text-slate-50">
+                                <h2 class="text-lg text-slate-800 dark:text-slate-200">
                                     {{ __('Telegram authorization') }}
                                 </h2>
 

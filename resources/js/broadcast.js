@@ -84,7 +84,7 @@ window.messagesChannelEvent = function (e) {
                 <span class="text-xs text-slate-500">${date}</span>
             </div>
 
-            <p class="text-sm text-slate-950 dark:text-slate-50 whitespace-pre-line">${e.message}</p>
+            <p class="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-line">${e.message}</p>
             </div>
         </div>`;
 

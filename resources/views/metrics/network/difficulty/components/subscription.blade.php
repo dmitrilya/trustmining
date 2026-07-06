@@ -28,15 +28,6 @@
             })">
             @csrf
 
-            <x-select name="type_id" :items="\App\Models\Metrics\DifficultySubscriptionType::all()
-                ->map(
-                    fn($type) => [
-                        'key' => $type->id,
-                        'value' => __($type->name),
-                    ],
-                )
-                ->keyBy('key')" />
-
             <x-primary-button class="mt-4 block w-full">
                 {{ __('Subscribe') }}
             </x-primary-button>

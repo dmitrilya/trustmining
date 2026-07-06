@@ -37,7 +37,7 @@ window.sendMessage = function (chatId, form) {
                 <span class="text-xs text-slate-500">${date}</span>
             </div>
 
-            <p class="text-sm text-slate-950 dark:text-slate-50 whitespace-pre-line">${data.get('message')}</p>
+            <p class="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-line">${data.get('message')}</p>
             </div>
         </div>`;
 

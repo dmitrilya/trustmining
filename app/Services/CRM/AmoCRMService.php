@@ -22,6 +22,11 @@ class AmoCRMService extends BaseCRMService
         $this->botId = config('services.amocrm.channel.bot_id');
     }
 
+    public function getAppId(): string
+    {
+        return $this->appId;
+    }
+
     /**
      * Получение access token по auth code
      */
@@ -77,7 +82,7 @@ class AmoCRMService extends BaseCRMService
      * Универсальный метод отправки сообщений в amoCRM Chat API
      *
      * @param string $scopeId
-     * @param string $conversationId
+     * @param int $conversationId
      * @param string $userId — ID отправителя
      * @param string $addresseeId — ID получателя
      * @param string|array $content — текст или массив файлов
@@ -164,9 +169,9 @@ class AmoCRMService extends BaseCRMService
     /**
      * Формирование Signature для проверки вебхука об отключении интеграции
      */
-    public function uninstallSignature($accountId)
+    public function uninstallSignature(string $accountId)
     {
-        return hash_hmac('sha256', sprintf('%s|%s', $this->integration, $accountId), $this->appSecret);
+        return hash_hmac('sha256', sprintf('%s|%s', $this->appId, $accountId), $this->appSecret);
     }
 
     /**

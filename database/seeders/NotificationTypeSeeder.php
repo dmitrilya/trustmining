@@ -25,7 +25,11 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'New message to support',
             ], [
+                'name' => 'New message',
+            ], [
                 'name' => 'New review',
+            ], [
+                'name' => 'Review edited',
             ], [
                 'name' => 'Subscription renewal failed'
             ], [
@@ -47,7 +51,7 @@ class NotificationTypeSeeder extends Seeder
             ], [
                 'name' => 'New forum comment'
             ], [
-                'name' => 'Difficulty alert'
+                'name' => 'Difficulty changing'
             ]
         ]);
     }

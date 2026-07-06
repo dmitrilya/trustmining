@@ -11,6 +11,7 @@ use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+use App\Http\Traits\Metrics\NetworkTrait;
 use \App\Http\Traits\Telegram;
 
 use \App\Models\Database\Coin;
@@ -19,7 +20,7 @@ use Exception;
 
 class SendTGNotifications implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Telegram;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, NetworkTrait, Telegram;
 
     private Collection $tgIds;
     private string $type;
@@ -63,7 +64,11 @@ class SendTGNotifications implements ShouldQueue
         switch ($this->nt) {
             case 'message':
                 $text = $this->n->user->name . "\n\n" . $this->n->message;
-                $keyboard = [[['text' => __('Contact'), 'url' => route('support', ['chat' => true])]]];
+                $keyboard = [[[
+                    'text' => __('Contact'),
+                    'url' => $this->n->user->role->name == 'support' ? route('support', ['chat' => true]) :
+                        route('chat', ['chat' => $this->n->message->chat_id])
+                ]]];
                 break;
 
             case 'review':
@@ -89,6 +94,35 @@ class SendTGNotifications implements ShouldQueue
                             ['text' => __('Contact'), 'url' => route('chat.start', ['user' => $this->n->user->id, 'ad' => $this->n->id])],
                             ['text' => __('Details'), 'url' => route('ads.show', ['adCategory' => $this->n->adCategory->name, 'ad' => $this->n->id])],
                         ]];
+                        break;
+                    default:
+                        $text = __('New notification');
+                        $keyboard = null;
+                }
+                break;
+
+            case 'coin':
+                switch ($this->type) {
+                    case 'Difficulty changing':
+                        $difficulties = $this->n->networkDifficulties()->latest()->take(2)->get();
+                        $pd = $difficulties[1]->difficulty;
+                        $cd = $difficulties[0]->difficulty;
+
+                        if ($pd != $cd) {
+                            $text = "{$this->n->name} Difficulty changing\n\n";
+                            $text .= __('Previous difficulty') . ': ' . number_format($pd) . "\n";
+                            $text .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
+                            $text .= ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
+                        } else {
+                            $difficultyData = $this->difficultyData($this->n);
+
+                            $text = "{$this->n->name} Difficulty changing\n\n";
+                            $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
+                            $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
+                            $text .= __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
+                        }
+
+                        $keyboard = [[['text' => __('View on the website'), 'url' => route('metrics.network.difficulty', ['coin' => strtolower($this->n->name)])]]];
                         break;
                     default:
                         $text = __('New notification');
@@ -139,10 +173,6 @@ class SendTGNotifications implements ShouldQueue
                             'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . Str::slug($this->n->forumAnswer->forumQuestion->theme),
                             'answer' => $this->n->forum_answer_id
                         ])]]];
-                        break;
-                    case 'Difficulty alert':
-                        $text = $this->data['text'];
-                        $keyboard = [[['text' => __('View on the website'), 'url' => route('metrics.network.difficulty', ['coin' => strtolower($this->data['coin'])])]]];
                         break;
                     default:
                         $text = __('New notification');

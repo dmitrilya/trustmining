@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between items-center">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Finance') }}
             </h2>
 
@@ -48,7 +48,7 @@
         @endif
     </div>
 
-    <p class="text-sm text-slate-700 dark:text-slate-400">
+    <p class="text-sm text-slate-600 dark:text-slate-400">
         {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}
     </p>
 </section>

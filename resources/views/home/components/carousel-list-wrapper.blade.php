@@ -18,7 +18,7 @@
 
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
-                        <p class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                        <p class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Full catalog of miners') }}
                         </p>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
-                        <p class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                        <p class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Full list of hostings') }}
                         </p>
 
@@ -80,7 +80,7 @@
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
                         <p
-                            class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                            class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Media platform') }}<br>TM Insight
                         </p>
 
@@ -112,7 +112,7 @@
                 <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
                     <div>
                         <p
-                            class="text-xs xs:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                            class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Full catalog of GPU') }}
                         </p>
 

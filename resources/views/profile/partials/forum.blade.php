@@ -1,6 +1,6 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
+        <h2 class="text-lg text-slate-800 dark:text-slate-200 mb-2">
             {{ __('Forum profile') }}
         </h2>
     </header>

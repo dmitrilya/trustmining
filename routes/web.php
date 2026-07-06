@@ -245,6 +245,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::get('/notifications', [ProfileController::class, 'notifications'])->name('notifications');
         Route::get('/notifications/check', [ProfileController::class, 'notificationsCheck'])->name('notifications.check');
+        Route::patch('/settings/{setting}/update', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
     });
 
     Route::group(['prefix' => 'forum/questions'], function () {

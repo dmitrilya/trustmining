@@ -69,15 +69,15 @@
         <div>
             <div class="flex items-start justify-between">
                 @if ($ad->ad_category_name == 'miners')
-                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                    <div class="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                         {{ $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement }}
                     </div>
                 @elseif ($ad->ad_category_name == 'gpus')
-                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                    <div class="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                         {{ $ad->gpu_brand_name . ' ' . $ad->gpu_model_name }}
                     </div>
                 @elseif ($ad->ad_category_name == 'cryptoboilers')
-                    <div class="text-xs sm:text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+                    <div class="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                         {{ __('Cryptoboiler') . ' ' . $props['Designation'] }}
                     </div>
                 @endif

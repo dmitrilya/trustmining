@@ -4,6 +4,9 @@ namespace App\Models\Ad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Database\Coin;
 
 class Ad extends Model
 {
@@ -75,6 +78,33 @@ class Ad extends Model
     public function moderations()
     {
         return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPreviousPrice(): ?float
+    {
+        $currentModerationId = $this->moderations()->latest('id')->value('id');
+        $currentPrice = $this->price * $this->coin->rate;
+
+        $pastModerations = $this->moderations()->where('id', '<', $currentModerationId)
+            ->whereNotNull('data->price')->whereNotNull('data->coin_id')->latest('id')->get();
+
+        foreach ($pastModerations as $moderation) {
+            $oldModerationPrice = (float) data_get($moderation->data, 'price');
+            $oldModerationCoinId = data_get($moderation->data, 'coin_id');
+
+            $historicalRate = DB::table('coin_rates')->where('coin_id', $oldModerationCoinId)
+                ->where('created_at', '<=', $moderation->created_at)->latest('created_at')->value('rate');
+
+            $oldCoinRate = $historicalRate ?? (Coin::find($oldModerationCoinId)?->rate ?? 1.0);
+            $oldPrice = $oldModerationPrice * $oldCoinRate;
+
+            if (abs($currentPrice - $oldPrice) > 0.01) return $oldPrice;
+        }
+
+        return null;
     }
 
     public function views()

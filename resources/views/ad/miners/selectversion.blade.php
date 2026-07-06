@@ -44,7 +44,7 @@
 
             <template x-for="asicModel in models" :key="asicModel.id">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name"
-                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white"
+                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white"
                     role="option"
                     x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                     <div class="flex items-center">
@@ -70,7 +70,7 @@
 
             <div class="relative mt-1" x-data="{ show: false }" @click.away="show = false">
                 <button type="button" @click="show = !show"
-                    class="h-9 w-full cursor-pointer rounded-md text-slate-950 dark:text-slate-50 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
+                    class="h-9 w-full cursor-pointer rounded-md text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
                     <span class="block truncate" x-text="currentVersion?.hashrate ?? '{{ isset($withAllVersions) ? __('All') : '' }}'"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -86,7 +86,7 @@
 
                     @if (isset($withAllVersions))
                         <li @click="selectedVersion = null; show = false;" role="option"
-                            class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white">
+                            class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white">
                             <span class="block truncate">{{ __('All') }}</span>
 
                             <span x-show="selectedVersion == null"
@@ -102,7 +102,7 @@
 
                     <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
                         <li @click="selectedVersion = asicVersion.id; show = false;"
-                            class="cursor-default relative select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white">
+                            class="cursor-default relative select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white">
                             <span class="block truncate" x-text="asicVersion.hashrate"></span>
 
                             <span x-show="selectedVersion == asicVersion.id"

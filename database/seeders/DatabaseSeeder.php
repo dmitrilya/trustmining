@@ -31,8 +31,6 @@ class DatabaseSeeder extends Seeder
 
             ForumCategorySeeder::class,
             ForumSubcategorySeeder::class,
-
-            DifficultySubscriptionTypeSeeder::class,
         ]);
     }
 }

@@ -1,15 +1,15 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
+        <h2 class="text-lg text-slate-800 dark:text-slate-200 mb-2">
             {{ __('Are you a member of the mining registry?') }}
         </h2>
 
         @if (!$user->registry)
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('Send a confirmation to the support manager and receive the "Mining operator" badge, as well as additional Trust points') }}
             </p>
         @else
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('You have confirmed the operator\'s status') }}
             </p>
         @endif

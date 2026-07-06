@@ -62,7 +62,7 @@
         </form>
         <div class="w-full border border-slate-300 rounded-b-lg dark:border-slate-700 flex items-center justify-center"
             style="height: 172.7px;display:none">
-            <p class="text-xl font-semibold text-slate-950 dark:text-slate-50 text-center">
+            <p class="text-xl font-semibold text-slate-800 dark:text-slate-200 text-center">
                 {{ __('Sent for moderation') }}</p>
         </div>
     @endif

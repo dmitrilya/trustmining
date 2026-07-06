@@ -115,17 +115,11 @@ class MetricsController extends Controller
             'message' => __('Log in via Telegram')
         ]);
 
-        $subscription = $user->difficultySubscriptions()->updateOrCreate(
-            ['coin_id' => $coin->id],
-            ['difficulty_subscription_type_id' => $request->type_id]
-        );
-
-        if ($subscription->wasRecentlyCreated) $message = __('You have subscribed to difficulty') . ' ' . $coin->abbreviation;
-        else $message = __('Subscription type updated successfully');
+        $user->difficultySubscriptions()->firstOrCreate(['coin_id' => $coin->id]);
 
         return response()->json([
             'success' => true,
-            'message' => $message
+            'message' => __('You have subscribed to difficulty') . ' ' . $coin->abbreviation
         ]);
     }
 

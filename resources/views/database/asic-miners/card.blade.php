@@ -20,7 +20,7 @@
 
     <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
         <div>
-            <div class="text-sm md:text-base text-slate-950 dark:text-slate-50 font-bold">
+            <div class="text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                 {{ $model->name }}
             </div>
 

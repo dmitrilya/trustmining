@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative" x-data="{ category: 'ads' }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'account' => 'Account'] as $category => $category_header)
+            @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'account' => 'Account'] as $category => $category_header)
                 <div @click="category = '{{ $category }}'"
                     class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                     :class="category ==
@@ -121,6 +121,27 @@
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
                 <div class="sm:col-span-2 {{ $partialClasses }}">
                     @include('profile.partials.crm-integration')
+                </div>
+            </div>
+        </div>
+
+        <div x-show="category == 'notifications'"
+            class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-5 items-start gap-2"
+            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100">
+            <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
+                    @include('profile.partials.tg-auth')
+                </div>
+
+                <div class="sm:col-span-2 {{ $partialClasses }}">
+                    @include('profile.partials.update-email')
+                </div>
+            </div>
+
+            <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
+                <div class="sm:col-span-2 {{ $partialClasses }}">
+                    @include('profile.partials.notifications')
                 </div>
             </div>
         </div>

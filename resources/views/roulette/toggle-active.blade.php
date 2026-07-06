@@ -3,7 +3,7 @@
         @csrf
         @method('PUT')
 
-        <h2 class="text-lg text-slate-950 dark:text-slate-50"
+        <h2 class="text-lg text-slate-800 dark:text-slate-200"
             x-text="`{{ __('Are you sure you want to') }} ${selectedPrize?.activated_at ? '{{ __('deactivate') }}' : '{{ __('activate') }}'} {{ __('the draw') }} ${selectedPrize?.name}`">
         </h2>
 

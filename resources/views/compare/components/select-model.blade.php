@@ -35,7 +35,7 @@
             <template :key="asicModel.id"
                 x-for="asicModel in models.filter(m => m.slug !== {{ $name === 'model_a' ? 'model_b' : 'model_a' }})">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name; $data['{{ $name }}'] = asicModel.slug"
-                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white"
+                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white"
                     role="option"
                     x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                     <div class="flex items-center">

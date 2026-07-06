@@ -249,7 +249,7 @@
         <x-modal name="attach-img_modal" maxWidth="md">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg text-slate-950 dark:text-slate-50">
+                    <h3 class="text-lg text-slate-800 dark:text-slate-200">
                         {{ __('Attach an image') }}
                     </h3>
 
@@ -285,7 +285,7 @@
         <x-modal name="attach-video_modal" maxWidth="md">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg text-slate-950 dark:text-slate-50">
+                    <h3 class="text-lg text-slate-800 dark:text-slate-200">
                         {{ __('Attach a video') }}
                     </h3>
 

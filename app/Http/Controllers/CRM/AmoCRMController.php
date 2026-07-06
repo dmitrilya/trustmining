@@ -10,8 +10,27 @@ use App\Services\CRM\AmoCRMService;
 
 class AmoCRMController extends BaseController
 {
-    protected $crmSystem;
+    /**
+     * The CRM system model.
+     *
+     * @var \App\Models\CRM\CRMSystem
+     */
+    protected CRMSystem $crmSystem;
 
+    /**
+     * @return \App\Services\CRM\AmoCRMService
+     */
+    protected function amoService(): AmoCRMService
+    {
+        return $this->service;
+    }
+
+    /**
+     * AmoCRMController constructor.
+     *
+     * @param \App\Services\CRM\AmoCRMService  $service
+     * @return void
+     */
     public function __construct(AmoCRMService $service)
     {
         parent::__construct($service);
@@ -31,10 +50,10 @@ class AmoCRMController extends BaseController
         $accessToken = $this->service->getAccessToken($request->referer, $request->code);
         if (!$accessToken) return redirect()->route('profile')->withErrors($this->authError);
 
-        $accountData = $this->service->getAccountDataWithAmojoId($request->referer, $accessToken);
+        $accountData = $this->amoService()->getAccountDataWithAmojoId($request->referer, $accessToken);
         if (!$accountData) return redirect()->route('profile')->withErrors($this->authError);
 
-        $scopeId = $this->service->connectChannelToAccount($accountData['amojo_id']);
+        $scopeId = $this->amoService()->connectChannelToAccount($accountData['amojo_id']);
         if (!$scopeId) return redirect()->route('profile')->withErrors($this->authError);
 
         $user->crmConnections()->create([
@@ -51,10 +70,10 @@ class AmoCRMController extends BaseController
      */
     public function handleUninstallWebhook(Request $request)
     {
-        if (!$request->client_uuid || $request->client_uuid != $this->service->integrationId)
+        if (!$request->client_uuid || $request->client_uuid != $this->amoService()->getAppId())
             throw new \Exception('Invalid hook signature');
 
-        if (!hash_equals($this->service->uninstallSignature($request->account_id), $request->signature))
+        if (!hash_equals($this->amoService()->uninstallSignature($request->account_id), $request->signature))
             throw new \Exception('Invalid hook signature');
 
         $this->crmSystem->crmConnections()->where('account_id', $request->account_id)->delete();

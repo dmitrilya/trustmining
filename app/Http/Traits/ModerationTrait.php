@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,7 @@ trait ModerationTrait
 {
     use NotificationTrait, FileTrait;
 
-    public function getModerations($request)
+    public function getModerations(Request $request)
     {
         $moderations = Moderation::where('moderation_status_id', 1)->select(['id', 'moderationable_type', 'moderationable_id', 'created_at'])
             ->with([
@@ -41,7 +42,7 @@ trait ModerationTrait
         return $moderations;
     }
 
-    public function acceptModeration($isUniqueContent, $moderation, $userId = null)
+    public function acceptModeration(?bool $isUniqueContent, Moderation $moderation, ?int $userId = null)
     {
         $userId = $userId ? $userId : Auth::id();
 
@@ -83,8 +84,6 @@ trait ModerationTrait
                     if (isset($moderation->data['document']) && $m->document) array_push($files, $m->document);
                     if (isset($moderation->data['image']) && $m->image) array_push($files, $m->image);
                     $disk = 'private';
-                    if ($m && $m->reviewable)
-                        $this->notify('New review', collect([$m->reviewable]), 'review', $m);
                     break;
                 case ('office'):
                     if (isset($moderation->data['images'])) {
@@ -134,10 +133,10 @@ trait ModerationTrait
         $moderation->save();
 
         if ($moderation->moderationable_type != 'ad')
-            $this->notify('Moderation completed', $m->user ? collect([$m->user]) : collect([$m->channel->user]), 'moderation', $moderation);
+            $this->notify('Moderation completed', collect([$m->user]), 'moderation', $moderation);
 
-        if ($moderation->moderationable_type == 'review' && $m->reviewable_type == 'user' && isset($data['moderation']))
-            $this->notify('New review', collect([$m->reviewable]), 'review', $m);
+        if ($moderation->moderationable_type == 'review' && $m->reviewable_type == 'user')
+            $this->notify(isset($data['moderation']) ? 'New review' : 'Review edited', collect([$m->reviewable]), 'review', $m);
         elseif ($moderation->moderationable_type == 'forum-answer' && isset($data['moderation']) /* Не сработает на редактирование */)
             $this->notify('New forum answer', collect([$m->forumQuestion->user]), 'forum-answer', $m);
         elseif ($moderation->moderationable_type == 'forum-comment' && isset($data['moderation']) /* Не сработает на редактирование */)
@@ -146,7 +145,7 @@ trait ModerationTrait
         return redirect()->route('moderations');
     }
 
-    public function declineModeration($comment, $moderation, $userId = null)
+    public function declineModeration(string $comment, Moderation $moderation, ?int $userId = null)
     {
         $userId = $userId ? $userId : Auth::id();
 
@@ -222,7 +221,7 @@ trait ModerationTrait
         $moderation->user_id = $userId;
         $moderation->save();
 
-        $this->notify('Moderation failed', $m->user ? collect([$m->user]) : collect([$m->channel->user]), 'moderation', $moderation);
+        $this->notify('Moderation failed', collect([$m->user]), 'moderation', $moderation);
 
         return redirect()->route('moderations');
     }

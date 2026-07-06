@@ -8,12 +8,12 @@
     </div>
 
     <div class="font-semibold text-slate-950 dark:text-slate-100 mb-1">
-        @if ($type != 'New review')
-            {{ $pretext }}
-        @else
+        @if ($type == 'New review' || $type == 'Review edited')
             <div class="flex items-center" x-data="{ momentRating: {{ $pretext }} }">
                 <x-rating></x-rating>
             </div>
+        @else
+            {{ $pretext }}
         @endif
     </div>
 

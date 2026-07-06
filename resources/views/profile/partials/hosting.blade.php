@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex justify-between">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Hosting') }}
             </h2>
 
@@ -27,16 +27,16 @@
 
     @if ($user->tariff && $user->tariff->can_have_hosting)
         @if (!$user->company || $user->company->moderation)
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('To add information about placement, you must register a company.') }}
             </p>
         @elseif (!$user->hosting)
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('If you have the opportunity to host equipment, then you can indicate all the information about the hosting so that clients can see it in the company profile.') }}
             </p>
         @else
             @if ($user->hosting->moderation)
-                <p class="text-sm text-slate-700 dark:text-slate-400 mb-2">
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">
                     {{ __('Is under moderation') }}
                 </p>
             @endif
@@ -48,7 +48,7 @@
                     class="text-slate-700">{{ $user->hosting->price }}</span></p>
         @endif
     @else
-        <p class="text-sm text-slate-700 dark:text-slate-400">
+        <p class="text-sm text-slate-600 dark:text-slate-400">
             {{ __('Not available with current plan.') }}
         </p>
     @endif

@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between">
-            <h2 class="w-full text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="w-full text-lg text-slate-800 dark:text-slate-200">
                 {{ __('My advertisements') }}
             </h2>
 
@@ -16,17 +16,17 @@
     </header>
 
     <div class="text-slate-500 text-sm">
-        <span class="text-slate-950 dark:text-slate-50 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
+        <span class="text-slate-800 dark:text-slate-200 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
             {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
         {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
     </div>
 
     @if (!$user->passport && (!$user->company || $user->company->moderation))
-        <p class="text-sm text-slate-700 dark:text-slate-400">
+        <p class="text-sm text-slate-600 dark:text-slate-400">
             {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
         </p>
     @elseif (!$user->offices->count())
-        <p class="text-sm text-slate-700 dark:text-slate-400">
+        <p class="text-sm text-slate-600 dark:text-slate-400">
             {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
         </p>
     @else

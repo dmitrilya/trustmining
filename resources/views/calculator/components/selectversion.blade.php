@@ -76,7 +76,7 @@
             </div>
 
             <ul role="listbox" x-show="openModel"
-                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-950 dark:text-slate-50 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
                 <template x-for="asicModel in filteredModels" :key="asicModel.i">
                     <li @click.debounce.10ms="selectModel(asicModel)" role="option"
                         class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-white">
@@ -103,7 +103,7 @@
 
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
-                        class="h-9 w-full cursor-pointer rounded-md text-slate-950 dark:text-slate-50 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
+                        class="h-9 w-full cursor-pointer rounded-md text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
                         <span class="block truncate"
                             x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
@@ -116,7 +116,7 @@
                         </span>
                     </button>
 
-                    <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-950 dark:text-slate-50 shadow-lg"
+                    <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg"
                         x-show="openVersion">
                         <template x-for="asicVersion in selectedModel.v" :key="asicVersion.i">
                             <li @click.debounce.10ms="selectVersion(asicVersion)"

@@ -7,7 +7,7 @@
                     data-date="{{ $message->created_at }}"></span>
             </div>
 
-            <p class="text-sm text-slate-950 dark:text-slate-50 whitespace-pre-line">{{ $message->message }}
+            <p class="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-line">{{ $message->message }}
             </p>
         </div>
     </div>

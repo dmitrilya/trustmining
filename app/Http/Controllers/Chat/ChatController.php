@@ -167,9 +167,7 @@ class ChatController extends Controller
         if ($user->role->name == 'support')
             $this->notify('New message from support', collect([$addressee]), 'message', $message);
         else {
-            if ($addressee->role->name == 'support')
-                $this->notify('New message to support', collect([$addressee]), 'message', $message);
-            else {
+            if ($addressee->role->name == 'user' && $user->role->name == 'user') {
                 foreach ($user->crmConnections()->with('crmSystem')->get() as $crmConnection) {
                     $service = CRMServiceFactory::createService($crmConnection->crmSystem->name);
 
@@ -184,7 +182,9 @@ class ChatController extends Controller
                     if (count($files)) $service->sendMessage($crmConnection->external_id, $chat->id, $user->id, $addressee->id, $files, $message->id, true, $user->name, $user->email);
                 }
             }
-
+            
+            $this->notify('New message', collect([$addressee]), 'message', $message);
+            
             event(new NewMessage($addressee, $message));
         }
 

@@ -51,7 +51,7 @@
                         </h1>
 
                         <p
-                            class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             @if (isset($moderation->data['price']))
                                 @if ($moderation->data['price'] != 0)
                                     {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
@@ -280,7 +280,7 @@
                         @endif
 
                         @if ($ad->price != 0)
-                            <p class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
+                            <p class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200 flex items-center">
                                 <meta itemprop="priceCurrency"
                                     content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
                                 <span itemprop="price">{{ $ad->price }}</span>
@@ -313,7 +313,7 @@
                                 <meta itemprop="valueAddedTaxIncluded"
                                     content="{{ $ad->with_vat ? 'true' : 'false' }}" />
                                 <p itemprop="description"
-                                    class="mt-5 text-2xl font-semibold text-slate-950 dark:text-slate-50 flex items-center">
+                                    class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200 flex items-center">
                                     {{ __('Price on request') }}
                                 </p>
                             </div>

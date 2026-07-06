@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex items-center justify-between">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Roulette results') }}
             </h2>
 
@@ -16,7 +16,7 @@
     </header>
 
     @if (!$user->company || $user->company->moderation)
-        <p class="text-sm text-slate-700 dark:text-slate-400 mb-6">
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">
             {{ __('You can also launch a roulette draw. To do this, you need to add a company, verify it, and submit a request to our support team.') }}
         </p>
     @endif

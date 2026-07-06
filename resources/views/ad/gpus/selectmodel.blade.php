@@ -36,7 +36,7 @@
 
                 <template x-for="gpuModel in models" :key="gpuModel.id">
                     <li @click="selectedModel = gpuModel; open = false; search = gpuModel.name" role="option"
-                        class="cursor-pointer relative cursor-default select-none py-2 pl-3 pr-9 text-slate-950 dark:text-slate-50 hover:bg-indigo-600 hover:text-white"
+                        class="cursor-pointer relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white"
                         x-show="search === '' || (gpuModel.gpu_brand.name + ' ' + gpuModel.name + ' ' + gpuModel.gpu_engine_model.gpu_engine_brand.name + ' ' + gpuModel.gpu_engine_model.name).toLowerCase().indexOf(search.toLowerCase()) !== -1">
                         <div class="flex items-center">
                             <span class="ml-3 block truncate"

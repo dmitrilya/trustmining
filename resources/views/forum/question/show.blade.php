@@ -181,7 +181,7 @@
                     @csrf
                     @method('delete')
 
-                    <h2 class="text-lg text-slate-950 dark:text-slate-50">
+                    <h2 class="text-lg text-slate-800 dark:text-slate-200">
                         {{ __('Are you sure?') }}
                     </h2>
 

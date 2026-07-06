@@ -51,7 +51,7 @@
 
             <x-modal name="edit-create-answer-link_{{ $answer->id }}" maxWidth="sm">
                 <div class="p-4">
-                    <h3 class="text-lg text-slate-950 dark:text-slate-50 mb-6">
+                    <h3 class="text-lg text-slate-800 dark:text-slate-200 mb-6">
                         {{ __('Create link') }}
                     </h3>
 

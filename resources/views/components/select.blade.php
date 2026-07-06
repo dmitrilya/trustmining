@@ -1,7 +1,21 @@
-@props(['label' => null, 'name', 'size' => 'base', 'items', 'key' => null, 'icon' => null, 'handleChange' => null])
+@props([
+    'label' => null,
+    'name',
+    'size' => 'base',
+    'items',
+    'key' => null,
+    'icon' => null,
+    'handleChange' => null,
+    'disabled' => false,
+])
 
 @if (count($items))
-    <div x-data="{ open: false, items: {{ $items }}, itemKey: '{{ $key ? $key : $items->first()['key'] }}' }">
+    <div x-data="{
+        open: false,
+        items: {{ $items }},
+        itemKey: '{{ $key ? $key : $items->first()['key'] }}',
+        isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }}
+    }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }}">
         @if (isset($label))
             <x-input-label :value="$label" />
         @endif
@@ -9,7 +23,8 @@
         <input type="hidden" name="{{ $name }}" :value="itemKey">
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
-            <button type="button" @click="open = ! open"
+            <button type="button" @click="if (!isDisabled) open = ! open"
+                :class="{ 'opacity-70 cursor-not-allowed': isDisabled }"
                 class="relative w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10' : 'pr-10' }} rounded-md text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color focus:outline-none focus:ring-1 focus:ring-indigo-500">
                 <span class="flex items-center">
                     @if ($icon)

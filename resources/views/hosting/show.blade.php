@@ -36,7 +36,7 @@
                         </h3>
 
                         <p
-                            class="text-lg sm:text-3xl tracking-tight text-slate-950 dark:text-slate-50{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
+                            class="text-lg sm:text-3xl tracking-tight text-slate-800 dark:text-slate-200{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
                             {{ isset($moderation->data['price']) ? $moderation->data['price'] : $hosting->price }} ₽</p>
 
                         <x-peculiarities
@@ -171,7 +171,7 @@
                         {{ __($hosting->address) }}
                     </h3>
 
-                    <p class="text-3xl tracking-tight text-slate-950 dark:text-slate-50">{{ $hosting->price }} ₽</p>
+                    <p class="text-3xl tracking-tight text-slate-800 dark:text-slate-200">{{ $hosting->price }} ₽</p>
 
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
 

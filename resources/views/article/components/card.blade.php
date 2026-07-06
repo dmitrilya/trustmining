@@ -6,7 +6,7 @@
         </div>
         <div class="px-2 pt-2 md:px-3 md:pt-3">
             <h3
-                class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-slate-950 dark:text-slate-50">
+                class="my-1 sm:my-2 text-sm sm:text-lg font-bold !leading-6 tracking-tight text-slate-800 dark:text-slate-200">
                 {{ $article->title }}</h3>
             <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-300">
                 {{ $article->subtitle }}</p>

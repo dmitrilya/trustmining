@@ -69,17 +69,15 @@
             <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($moderations as $moderation)
                     @php
-                        $user = $moderation->moderationable->user
-                            ? $moderation->moderationable->user
-                            : $moderation->moderationable->channel->user;
-                        $logo = $moderation->moderationable->user
-                            ? ($user->company
+                        $user = $moderation->moderationable->user;
+                        $logo = $moderation->moderationable->channel
+                            ? $moderation->moderationable->channel->logo
+                            : ($user->company
                                 ? $user->company->logo
-                                : null)
-                            : $moderation->moderationable->channel->logo;
-                        $name = $moderation->moderationable->user
-                            ? $user->name
-                            : $moderation->moderationable->channel->name;
+                                : null);
+                        $name = $moderation->moderationable->channel
+                            ? $moderation->moderationable->channel->name
+                            : $user->name;
                     @endphp
 
                     <a href="{{ route('moderation', ['moderation' => $moderation->id]) }}"

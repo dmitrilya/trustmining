@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex items-center justify-between">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Spins history') }}
             </h2>
 
@@ -17,7 +17,7 @@
         </div>
     </header>
 
-    <p class="text-sm text-slate-700 dark:text-slate-400 mb-6">
+    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">
         {{ __('To activate your prizes, you need to log in through your Telegram account.') }}
     </p>
 

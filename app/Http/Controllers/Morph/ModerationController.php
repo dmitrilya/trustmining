@@ -29,7 +29,7 @@ class ModerationController extends Controller
 
         return view('moderation.index', [
             'moderations' => $moderations->sortBy(function ($moderation, $i) use ($moderations) {
-                $user = $moderation->moderationable->user ? $moderation->moderationable->user : $moderation->moderationable->channel->user;
+                $user = $moderation->moderationable->user;
                 return $user->tariff_id ? $i - floor($moderations->count() / 10 * 3) * $user->tariff_id : $i;
             })
         ]);

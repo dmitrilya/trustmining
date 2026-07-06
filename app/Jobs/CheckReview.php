@@ -12,6 +12,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\Morph\Review;
+
 class CheckReview implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, ModerationTrait;
@@ -23,15 +25,20 @@ class CheckReview implements ShouldQueue
      */
     public $tries = 3;
 
-
-    public $review;
+    /**
+     * The review.
+     *
+     * @var \App\Models\Morph\Review
+     */
+    public Review $review;
 
     /**
      * Create a new job instance.
      *
+     * @param \App\Models\Morph\Review  $review
      * @return void
      */
-    public function __construct($review)
+    public function __construct(Review $review)
     {
         $this->review = $review;
     }

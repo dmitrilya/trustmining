@@ -15,15 +15,9 @@ class DifficultySubscription extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'difficulty_subscription_type_id',
         'user_id',
         'coin_id',
     ];
-
-    public function difficultySubscriptionType()
-    {
-        return $this->belongsTo(\App\Models\Metrics\DifficultySubscriptionType::class);
-    }
 
     public function user()
     {

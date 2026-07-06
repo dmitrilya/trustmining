@@ -1,11 +1,11 @@
 <section>
     <header class="mb-6">
-        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
+        <h2 class="text-lg text-slate-800 dark:text-slate-200 mb-2">
             {{ __('CRM integrations') }}
         </h2>
 
         @if ((!$user->company || $user->company->moderation) && !$user->passport)
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('Please verify your identity using your passport or register a company to create CRM integrations.') }}
             </p>
         @endif

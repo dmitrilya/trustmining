@@ -20,7 +20,7 @@
                         </div>
 
                         <h3
-                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-700 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
+                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
                             {{ $similarQuestion->theme }}
                         </h3>
                     </div>
@@ -50,7 +50,7 @@
                         </div>
 
                         <h3
-                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-700 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
+                            class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
                             {{ $newQuestion->theme }}
                         </h3>
                     </div>

@@ -18,7 +18,6 @@ trait ViewTrait
         $auth = $request->user();
         if ($auth && (
             $model->user && $model->user->id == $auth->id ||
-            $model->channel && $model->channel->user->id == $auth->id ||
             $auth->role->name != 'user'
         )) return;
 

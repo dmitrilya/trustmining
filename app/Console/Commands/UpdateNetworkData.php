@@ -5,16 +5,16 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Collection;
 use Exception;
 
-use App\Http\Traits\Metrics\NetworkTrait;
-use App\Jobs\SendTGNotifications;
+use App\Http\Traits\NotificationTrait;
 use App\Models\Database\Coin;
 use App\Models\Metrics\DifficultySubscription;
 
 class UpdateNetworkData extends Command
 {
-    use NetworkTrait;
+    use NotificationTrait;
 
     /**
      * The name and signature of the console command.
@@ -37,7 +37,7 @@ class UpdateNetworkData extends Command
      */
     public function handle()
     {
-        $changed = [];
+        $changed = collect();
 
         // BTC
         $coin = Coin::where('abbreviation', 'BTC')->with('latestNetworkDifficulty')->first();
@@ -56,8 +56,7 @@ class UpdateNetworkData extends Command
                 ]
             ]);
 
-            if ($coin->latestNetworkDifficulty->need_blocks < $data->nextretarget - $data->n_blocks_total)
-                array_push($changed, ['id' => $coin->id, 'pd' => $coin->latestNetworkDifficulty->difficulty, 'cd' => $data->difficulty]);
+            if ($coin->latestNetworkDifficulty->need_blocks < $data->nextretarget - $data->n_blocks_total) $changed->push($coin);
         } catch (Exception $e) {
             Log::channel('integration-errors')->info("[blockchain.info] {$e->getMessage()}");
         }
@@ -70,37 +69,30 @@ class UpdateNetworkData extends Command
             $coin->networkHashrates()->create(['hashrate' => $dataRate->currentHashrate]);
             $coin->networkDifficulties()->create(['difficulty' => $dataRate->currentDifficulty, 'need_blocks' => $dataDif->remainingBlocks]);
 
-            if ($coin->latestNetworkDifficulty->need_blocks < $dataDif->remainingBlocks)
-                array_push($changed, ['id' => $coin->id, 'pd' => $coin->latestNetworkDifficulty->difficulty, 'cd' => $dataRate->currentDifficulty]);
+            if ($coin->latestNetworkDifficulty->need_blocks < $dataDif->remainingBlocks) $changed->push($coin);
         } catch (Exception $e) {
             Log::channel('integration-errors')->info("[litecoinspace] {$e->getMessage()}");
         }
 
-        if (count($changed)) $this->sendNotifications($changed);
+        $this->sendNotifications($changed);
 
         return Command::SUCCESS;
     }
 
-    private function sendNotifications(array $changed)
+    private function sendNotifications(Collection $changed)
     {
-        $coins = DifficultySubscription::with(['user:id,tg_id', 'coin:id,name'])
-            ->whereHas('difficultySubscriptionType', fn($q) => $q->where('name', 'On difficulty change'))->get()->groupBy('coin_id')->map(fn($group) => [
-                'name' => $group[0]->coin->name,
-                'tgIds' => $group->pluck('user.tg_id')->filter()->unique()->values()
-            ]);
+        $groupedSubscriptions = DifficultySubscription::with(['user', 'coin'])->get()->groupBy('coin_id');
 
-        foreach (
-            collect($changed)->filter(function ($item) use ($coins) {
-                return $coins->has($item['id']);
-            })->values()->all() as $changedCoin
-        ) {
-            $coin = $coins[$changedCoin['id']];
-            $text = "{$coin['name']} difficulty alert\n\n";
-            $text .= __('Previous difficulty') . ': ' . number_format($changedCoin['pd']) . "\n";
-            $text .= __('Current difficulty') . ': ' . number_format($changedCoin['cd']) . "\n";
-            $text .= ($changedCoin['cd'] >= $changedCoin['pd'] ? '+' : '-') . round(abs($changedCoin['cd'] - $changedCoin['pd']) / $changedCoin['pd'] * 100, 2) . '%';
+        foreach ($changed as $changedCoin) {
+            if (!$groupedSubscriptions->has($changedCoin->id)) continue;
 
-            SendTGNotifications::dispatch($coin['tgIds'], 'Difficulty alert', null, null, ['coin' => $coin['name'], 'text' => $text]);
+            $coinSubscriptions = $groupedSubscriptions->get($changedCoin->id);
+
+            $users = $coinSubscriptions->pluck('user')->filter()->unique('id');
+
+            if ($users->isEmpty()) continue;
+
+            $this->notify('Difficulty changing', $users, 'coin', $changedCoin);
         }
     }
 }

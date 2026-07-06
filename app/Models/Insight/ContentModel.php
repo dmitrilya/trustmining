@@ -57,6 +57,11 @@ abstract class ContentModel extends Model
         return $this->belongsTo(\App\Models\Insight\Channel::class);
     }
 
+    public function user()
+    {
+        return $this->hasOneThrough(\App\Models\User\User::class, \App\Models\Insight\Channel::class);
+    }
+
     public function series()
     {
         return $this->morphToMany(\App\Models\Insight\Series::class, 'contentable', 'series_content');

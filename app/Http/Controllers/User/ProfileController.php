@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cookie;
 use MoveMoveIo\DaData\Facades\DaDataAddress;
+use MoveMoveIo\DaData\Enums\Language;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -32,15 +33,15 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill([
+        $data = ['email' => $request->email];
+        if ($request->name) array_merge($data, [
             'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'email' => $request->email,
+            'slug' => Str::slug($request->name)
         ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $request->user()->fill($data);
+
+        if ($request->user()->isDirty('email')) $request->user()->email_verified_at = null;
 
         $request->user()->save();
 
@@ -76,7 +77,8 @@ class ProfileController extends Controller
         }
 
         try {
-            $result = DaDataAddress::geolocate($request->lat, $request->lon, 1, 50);
+            /** @var array $result */
+            $result = (array) DaDataAddress::geolocate($request->lat, $request->lon, 1, 100, Language::RU);
 
             if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
                 $city = config('app.default_city');
@@ -108,6 +110,15 @@ class ProfileController extends Controller
         Cookie::queue('app_theme', $request->theme, 60 * 24 * 30);
 
         return response('', 200);
+    }
+
+    public function updateSettings(Request $request, string $setting)
+    {
+        $settings = $request->user()->settings;
+        $settings->{$setting} = $request->settings;
+        $settings->save();
+
+        return response()->json(['success' => true, 'message' => __('Settings updated successfully')] , 200);
     }
 
     public function generateToken(Request $request)

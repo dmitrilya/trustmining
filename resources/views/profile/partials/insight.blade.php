@@ -5,7 +5,7 @@
 
     <header>
         <div class="flex justify-between mb-2">
-            <h2 class="text-lg text-slate-950 dark:text-slate-50">
+            <h2 class="text-lg text-slate-800 dark:text-slate-200">
                 {{ __('TM Insight channel') }}
             </h2>
 

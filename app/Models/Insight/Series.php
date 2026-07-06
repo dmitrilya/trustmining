@@ -25,6 +25,11 @@ class Series extends Model
         return $this->belongsTo(\App\Models\Insight\Channel::class);
     }
 
+    public function user()
+    {
+        return $this->hasOneThrough(\App\Models\User\User::class, \App\Models\Insight\Channel::class);
+    }
+
     public function articles()
     {
         return $this->morphedByMany(\App\Models\Insight\Content\Article::class, 'contentable', 'series_content');

@@ -22,7 +22,7 @@
             </a>
         </div>
 
-        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-slate-950 dark:text-slate-50 font-bold">{{ $shop->name }}
+        <div class="mt-2 sm:mt-4 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-bold">{{ $shop->name }}
         </div>
 
         <div class="text-xs text-slate-500 dark:text-slate-400">

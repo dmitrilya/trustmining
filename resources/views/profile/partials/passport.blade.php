@@ -1,21 +1,21 @@
 <section class="space-y-6">
     <header>
-        <h2 class="text-lg text-slate-950 dark:text-slate-50 mb-2">
+        <h2 class="text-lg text-slate-800 dark:text-slate-200 mb-2">
             {{ __('Personal identification') }}
         </h2>
 
         @if ($user->passport)
             @if (!$user->passport->moderation)
-                <p class="text-sm text-slate-700 dark:text-slate-400">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Identity confirmed') }}
                 </p>
             @else
-                <p class="text-sm text-slate-700 dark:text-slate-400">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Is under moderation') }}
                 </p>
             @endif
         @else
-            <p class="text-sm text-slate-700 dark:text-slate-400">
+            <p class="text-sm text-slate-600 dark:text-slate-400">
                 {{ __('Attach 3 scans or photos of your passport. 2-3 and 4-5 pages, also a selfie with a passport. Make sure the images are high quality and all characters are legible. After passing moderation, many seller functions will become available to you.') }}
             </p>
         @endif
