@@ -67,7 +67,7 @@ class SendTGNotifications implements ShouldQueue
                 $keyboard = [[[
                     'text' => __('Contact'),
                     'url' => $this->n->user->role->name == 'support' ? route('support', ['chat' => true]) :
-                        route('chat', ['chat' => $this->n->message->chat_id])
+                        route('chat', ['chat' => $this->n->chat_id])
                 ]]];
                 break;
 
