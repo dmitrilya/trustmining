@@ -20,7 +20,7 @@
                     {{ __('Open') }}
                 </a> --}}
 
-                <a class="hover:underline text-slate-600 dark:text-slate-400" download href="{{ Storage::url($path) }}">
+                <a class="hover:underline text-slate-600 dark:text-slate-400" download href="{{ $path }}">
                     {{ __('Download') }}
                 </a>
             </div>

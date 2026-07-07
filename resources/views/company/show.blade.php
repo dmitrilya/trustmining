@@ -144,7 +144,7 @@
                 <div class="mt-8">
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                         @foreach ($company->documents as $document)
-                            <x-document :path="$document['path']" :name="$document['name']"></x-document>
+                            <x-document :path="Storage::url($document['path'])" :name="$document['name']"></x-document>
                         @endforeach
                     </div>
 
@@ -302,7 +302,7 @@
                 @if (count($company->documents))
                     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                         @foreach ($company->documents as $document)
-                            <x-document :path="$document['path']" :name="$document['name']"></x-document>
+                            <x-document :path="Storage::url($document['path'])" :name="$document['name']"></x-document>
                         @endforeach
                     </div>
                 @endif

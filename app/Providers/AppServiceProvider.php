@@ -32,7 +32,10 @@ class AppServiceProvider extends ServiceProvider
     {
         \Carbon\Carbon::setLocale(app()->getLocale());
 
-        Storage::disk('private')->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('private');
+
+        $disk->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
             return URL::temporarySignedRoute(
                 'private.temp',
                 $expiration,

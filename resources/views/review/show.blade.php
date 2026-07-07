@@ -35,13 +35,13 @@
 
                     @if ($review->image)
                         <img class="mx-auto min-w-64"
-                            src="{{ Storage::disk('private')->temporaryUrl($review->image, now()->addSeconds(2)) }}"
+                            src="{{ Storage::disk('private')->temporaryUrl($review->image, now()->addSeconds(15)) }}"
                             alt="">
                     @endif
 
                     @if ($review->document)
                         <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            <x-document :path="$review->document" name="Документ к отзыву" class="bg-white"></x-document>
+                            <x-document :path="Storage::disk('private')->temporaryUrl($review->document, now()->addSeconds(60))" name="Документ к отзыву" class="bg-white"></x-document>
                         </div>
                     @endif
                 </div>

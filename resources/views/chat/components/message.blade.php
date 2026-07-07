@@ -81,7 +81,7 @@
 
             <div class="space-y-2">
                 @foreach ($message->files as $file)
-                    <x-document :path="$file['path']" :name="$file['name']"></x-document>
+                    <x-document :path="Storage::url($file['path'])" :name="$file['name']"></x-document>
                 @endforeach
             </div>
         </div>

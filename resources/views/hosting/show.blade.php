@@ -106,20 +106,20 @@
 
                         @if ($contract)
                             <div class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
-                                <x-document :path="$contract" :name="__('Contract')"></x-document>
+                                <x-document :path="Storage::url($contract)" :name="__('Contract')"></x-document>
                             </div>
                         @endif
 
                         @if ($territory)
                             <div class="{{ isset($moderation->data['territory']) ? 'border border-indigo-500' : '' }}">
-                                <x-document :path="$territory" :name="__('Territory')"></x-document>
+                                <x-document :path="Storage::url($territory)" :name="__('Territory')"></x-document>
                             </div>
                         @endif
 
                         @if ($energySupply)
                             <div
                                 class="{{ isset($moderation->data['energy_supply']) ? 'border border-indigo-500' : '' }}">
-                                <x-document :path="$energySupply" :name="__('Energy supply agreement')"></x-document>
+                                <x-document :path="Storage::url($energySupply)" :name="__('Energy supply agreement')"></x-document>
                             </div>
                         @endif
                     </div>
@@ -221,15 +221,15 @@
             <div class="mt-8">
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
                     @if ($hosting->contract)
-                        <x-document :path="$hosting->contract" :name="__('Contract')"></x-document>
+                        <x-document :path="Storage::url($hosting->contract)" :name="__('Contract')"></x-document>
                     @endif
 
                     @if ($hosting->territory)
-                        <x-document :path="$hosting->territory" :name="__('Territory')"></x-document>
+                        <x-document :path="Storage::url($hosting->territory)" :name="__('Territory')"></x-document>
                     @endif
 
                     @if ($hosting->energy_supply)
-                        <x-document :path="$hosting->energy_supply" :name="__('Energy supply agreement')"></x-document>
+                        <x-document :path="Storage::url($hosting->energy_supply)" :name="__('Energy supply agreement')"></x-document>
                     @endif
                 </div>
 

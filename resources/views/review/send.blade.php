@@ -25,10 +25,10 @@
                         placeholder="{{ __('Each review undergoes strict moderation. Attached documents and photos will not be published, but are needed only to speed up the verification...') }}"
                         required></textarea>
                 </div>
-                <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700">
+                <div class="flex items-center justify-between p-2 border-t dark:border-slate-700">
                     <div class="flex ps-0 space-x-1">
                         <label for="input-document-review" :class="document ? 'text-indigo-500' : 'text-slate-500'"
-                            class="inline-flex justify-center items-center p-2 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
+                            class="inline-flex justify-center items-center p-1 xs:p-2 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                             <input id="input-document-review" name="document" class="hidden" type="file"
                                 accept=".pdf,.doc,.docx" @change="document = true">
                             <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
@@ -39,7 +39,7 @@
                         </label>
 
                         <label for="input-image-review" :class="image ? 'text-indigo-500' : 'text-slate-500'"
-                            class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
+                            class="inline-flex justify-center items-center p-1 xs:p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                             <input id="input-image-review" name="image" class="hidden" type="file"
                                 accept=".png,.jpg,.jpeg,.webp" @change="image = true">
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
@@ -52,10 +52,27 @@
                         <input type="hidden" name="rating" :value="rating" required>
 
                         <x-rating :clickable="true"></x-rating>
+
+                        <div class="flex flex-col justify-center ml-2">
+                            <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="document">
+                                {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400">1</span>
+                            </div>
+                            <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="image">
+                                {{ __('Photo') }}: <span class="text-slate-600 dark:text-slate-400">1</span>
+                            </div>
+                        </div>
                     </div>
+
                     <button type="submit"
-                        class="inline-flex items-center py-2.5 px-4 text-xs text-center text-white bg-indigo-600 rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
-                        {{ __('Send') }}
+                        class="inline-flex items-center p-1.5 xs:py-2.5 xs:px-4 text-xs text-center text-white bg-indigo-600 rounded-full xs:rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
+                        <span class="hidden xs:block">{{ __('Send') }}</span>
+                        <span class="xs:hidden">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"></line>
+                                <polyline points="5 12 12 5 19 12"></polyline>
+                            </svg>
+                        </span>
                     </button>
                 </div>
             </div>

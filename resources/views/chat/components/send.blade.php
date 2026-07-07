@@ -7,10 +7,10 @@
                 class="resize-none w-full px-0 text-sm text-slate-800 bg-white border-0 dark:bg-slate-950 focus:ring-0 dark:text-slate-200 dark:placeholder-slate-400"
                 @change="text = $el.value"></textarea>
         </div>
-        <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ files: 0, photos: 0 }">
+        <div class="flex items-center justify-between p-2 border-t dark:border-slate-700" x-data="{ files: 0, photos: 0 }">
             <div class="flex ps-0 space-x-1">
                 <label for="input-file-chat"
-                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
+                    class="inline-flex justify-center items-center p-1 xs:p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                     <input id="input-file-chat" name="files[]" class="hidden" type="file" accept=".pdf,.doc,.docx"
                         multiple
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
@@ -22,7 +22,7 @@
                 </label>
 
                 <label for="input-image-chat"
-                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
+                    class="inline-flex justify-center items-center p-1 xs:p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                     <input id="input-image-chat" name="images[]" class="hidden" type="file" accept=".png,.jpg,.jpeg,.webp"
                         multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')};photos = $el.files.length">
@@ -36,7 +36,7 @@
                 <x-dropdown align="bottom" width="auto">
                     <x-slot name="trigger">
                         <button type="button" data-dropdown-placement="top"
-                            class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
+                            class="inline-flex justify-center items-center p-1 xs:p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                             <span>&#128516</span>
                             <span class="sr-only">Add emoji</span>
                         </button>

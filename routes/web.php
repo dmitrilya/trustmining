@@ -53,7 +53,7 @@ use Illuminate\Http\Request;
 Route::get('private/temp', function (Request $request) {
     if (!$request->hasValidSignature()) abort(401);
 
-    /** @var \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\FilesystemAdapter $disk */
+    /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
     $disk = Storage::disk('private');
 
     return $disk->download($request->path);
