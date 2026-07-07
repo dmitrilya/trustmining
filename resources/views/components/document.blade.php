@@ -12,7 +12,7 @@
         </div>
 
         <div class="grow min-w-0">
-            <div class="text-slate-950 dark:text-slate-100 font-semibold mb-1 truncate">{{ $name }}</div>
+            <div class="text-slate-800 dark:text-slate-200 font-semibold mb-1 truncate">{{ $name }}</div>
 
             <div class="flex">
                 {{-- <a class="hover:underline text-slate-600 mr-4" target="_blank"

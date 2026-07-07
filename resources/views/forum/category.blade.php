@@ -9,7 +9,7 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="{{ route('forum') }}"
-                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
+                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span itemprop="name">{{ __('Forum') }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
@@ -23,7 +23,7 @@
                         <meta itemprop="position" content="2" />
                         <div class="flex items-center">
                             <a itemprop="item" href="#"
-                                class="text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
+                                class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span itemprop="name">{{ __($category->name) }}</span>
                             </a>
                         </div>
@@ -49,7 +49,7 @@
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
             <h2
-                class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+                class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 font-extrabold">
                 {{ __('New posts') }}
             </h2>
 
@@ -80,7 +80,7 @@
                             </div>
 
                             <h3
-                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
+                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
                                 {{ $question->theme }}
                             </h3>
                         </div>
@@ -93,7 +93,7 @@
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
             <h2 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6">
                 <a href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
-                    class="xs:text-lg sm:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+                    class="xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-extrabold">
                     {{ __($category->name) }}
                 </a>
             </h2>
@@ -109,7 +109,7 @@
                                     class="mr-3 sm:mr-4 w-6 h-6 min-w-6 xs:w-8 xs:h-8 xs:min-w-8 sm:w-10 sm:h-10 sm:min-w-10 lg:w-12 lg:h-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
                                     @include('forum.components.svg.' . $subcategory->slug, [
                                         'class' =>
-                                            'text-slate-500 dark:text-slate-500 group-hover:text-slate-900 dark:group-hover:text-slate-100',
+                                            'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200',
                                         'w' => '55%',
                                     ])
                                 </div>

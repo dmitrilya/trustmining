@@ -2,9 +2,9 @@
     style="background-image: url('/img/headframe.webp');background-size: auto 100%">
     <div class="h-full flex flex-col justify-between">
         <div class="mb-16">
-            <h3 class="text-2xl text-slate-100 font-bold">
+            <h3 class="text-2xl text-slate-200 font-bold">
                 {{ __('Mining pool') }}<br /><span class="text-indigo-500 text-3xl font-extrabold">HeadFrame</span></h3>
-            <p class="text-xs text-slate-100 mt-4">
+            <p class="text-xs text-slate-200 mt-4">
                 {{ __('Headframe offers FPPS Bitcoin mining with low fees, security and stability, daily free payouts, and unique features for data centers and hashrate managers') }}
             </p>
         </div>
@@ -19,7 +19,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </div>
-                    <p class="ml-3 text-sm text-slate-100">{{ __('Fee – 0.9%') }}</p>
+                    <p class="ml-3 text-sm text-slate-200">{{ __('Fee – 0.9%') }}</p>
                 </div>
                 <div class="flex items-center">
                     <div class="bg-indigo-600 p-[3px] rounded-full">
@@ -30,7 +30,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </div>
-                    <p class="ml-3 text-sm text-slate-100">{{ __('Stable FPPS payouts') }}</p>
+                    <p class="ml-3 text-sm text-slate-200">{{ __('Stable FPPS payouts') }}</p>
                 </div>
                 <div class="flex items-center">
                     <div class="bg-indigo-600 p-[3px] rounded-full">
@@ -41,7 +41,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </div>
-                    <p class="ml-3 text-sm text-slate-100">{{ __('Daily payouts') }}</p>
+                    <p class="ml-3 text-sm text-slate-200">{{ __('Daily payouts') }}</p>
                 </div>
                 <div class="flex items-center">
                     <div class="bg-indigo-600 p-[3px] rounded-full">
@@ -52,7 +52,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </div>
-                    <p class="ml-3 text-sm text-slate-100">{{ __('Support always in touch') }}</p>
+                    <p class="ml-3 text-sm text-slate-200">{{ __('Support always in touch') }}</p>
                 </div>
             </div>
 

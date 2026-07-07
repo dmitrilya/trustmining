@@ -18,7 +18,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 space-y-6">
-                    <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                    <h2 class="text-2xl font-extrabold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                         🔑 Авторизация и Ограничения
                     </h2>
                     <p class="text-slate-600 dark:text-slate-400">
@@ -192,7 +192,7 @@
                         <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                             Пример успешного
                             JSON-ответа (200 OK):</h4>
-                        <pre class="bg-slate-900 text-slate-300 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
+                        <pre class="bg-slate-900 text-slate-200 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
 {
   <span class="text-indigo-400">"ads"</span>: [
     {
@@ -343,7 +343,7 @@
                         <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                             Пример передаваемого
                             JSON-массива в запросе:</h4>
-                        <pre class="bg-slate-900 text-slate-300 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
+                        <pre class="bg-slate-900 text-slate-200 text-xs p-4 rounded-lg overflow-x-auto border border-slate-800 shadow-inner">
 {
   <span class="text-indigo-400">"ads"</span>: [
     {

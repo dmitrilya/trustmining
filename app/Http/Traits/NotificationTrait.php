@@ -52,7 +52,7 @@ trait NotificationTrait
         $tgIds = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->tg_id || $user->tg_id == 0) return false;
 
-            $isEnabled = data_get($user->settings->notifications[$typeId], "tg.enabled");
+            $isEnabled = data_get($user->settings->notifications, "{$typeId}.tg.enabled");
             $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;
 
             if (!$allowedByConfig) return false;
@@ -67,7 +67,7 @@ trait NotificationTrait
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->email) return false;
 
-            $isEnabled = data_get($user->settings->notifications[$typeId], "email.enabled");
+            $isEnabled = data_get($user->settings->notifications, "{$typeId}.email.enabled");
             $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;
 
             if (!$allowedByConfig) return false;

@@ -5,7 +5,7 @@
         </div>
 
         <div>
-            <p itemprop="name" class="text-xs sm:text-sm text-slate-900 dark:text-slate-100 font-bold">
+            <p itemprop="name" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-bold">
                 {{ $name }}
             </p>
 

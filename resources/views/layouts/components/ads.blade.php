@@ -1,4 +1,4 @@
-<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full text-sm leading-5 text-slate-600 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none focus:text-slate-700 dark:focus:text-slate-300 transition duration-100 ease-in-out"
+<div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full focus:outline-none transition duration-100 ease-in-out"
     x-data="{ open: false }" @if (!isset($relative) || !$relative) @mouseover="open = true" @mouseleave="open = false" @endif>
     <button class="{{ $classes }}" @click="open = ! open">
         <div>{{ __('Advertisements') }}</div>

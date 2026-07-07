@@ -1,6 +1,6 @@
 <div class="p-1.5 space-y-1">
     <a href="{{ route('insight.article.create', ['channel' => auth()->user()->channel->slug]) }}"
-        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
+        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
         <span class="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">📝</span>
         <div class="flex flex-col">
             <span>{{ __('Article') }}</span>
@@ -9,7 +9,7 @@
     </a>
 
     <a href="{{ route('insight.post.create', ['channel' => auth()->user()->channel->slug]) }}"
-        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
+        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
         <span class="p-1 rounded-lg bg-emerald-500/10 text-emerald-500">💬</span>
         <div class="flex flex-col">
             <span>{{ __('Post') }}</span>
@@ -18,7 +18,7 @@
     </a>
 
     <a href="{{ route('insight.video.create', ['channel' => auth()->user()->channel->slug]) }}"
-        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
+        class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group/item">
         <span class="p-1 rounded-lg bg-amber-500/10 text-amber-500">🎥</span>
         <div class="flex flex-col">
             <span>{{ __('Video') }}</span>

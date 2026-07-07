@@ -2,7 +2,7 @@
     <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg flex justify-center items-center mr-3 lg:mr-4">
-            <svg class="w-14 h-14 text-slate-400 dark:text-slate-800" width="24" height="24" fill="currentColor"
+            <svg class="w-14 h-14 text-slate-500" width="24" height="24" fill="currentColor"
                 viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z"
                     clip-rule="evenodd" />
@@ -14,9 +14,9 @@
 
         <div class="col-span-6 md:col-span-5 flex flex-col justify-between">
             <div>
-                <h6 class="text-xs xs:text-sm lg:text-base text-slate-900 dark:text-slate-100 font-bold">
+                <h6 class="text-xs xs:text-sm lg:text-base text-slate-800 dark:text-slate-200 font-bold">
                     {{ __('Blurb') }}</h6>
-                <p class="text-xxs xs:text-xs lg:text-sm text-slate-700 dark:text-slate-300 mt-2">
+                <p class="text-xxs xs:text-xs lg:text-sm text-slate-600 dark:text-slate-400 mt-2">
                     {{ __('An ad for selling equipment can be placed here. It is always at the top and attracts the attention of the resource visitor') }}
                 </p>
             </div>
@@ -30,7 +30,7 @@
     <div class="hidden w-full p-2 sm:p-3 md:p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl md:grid grid-cols-9">
         <div
             class="col-span-3 md:col-span-4 h-full overflow-hidden rounded-lg flex justify-center items-center mr-3 lg:mr-4">
-            <svg class="w-14 h-14 text-slate-400 dark:text-slate-800" width="24" height="24" fill="currentColor"
+            <svg class="w-14 h-14 text-slate-500" width="24" height="24" fill="currentColor"
                 viewBox="0 0 24 24">
                 <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z"
                     clip-rule="evenodd" />
@@ -42,9 +42,9 @@
 
         <div class="col-span-6 md:col-span-5 flex flex-col justify-between">
             <div>
-                <h6 class="text-xs xs:text-sm lg:text-base text-slate-900 dark:text-slate-100 font-bold">
+                <h6 class="text-xs xs:text-sm lg:text-base text-slate-800 dark:text-slate-200 font-bold">
                     {{ __('Blurb') }}</h6>
-                <p class="text-xxs xs:text-xs lg:text-sm text-slate-700 dark:text-slate-300 mt-2">
+                <p class="text-xxs xs:text-xs lg:text-sm text-slate-600 dark:text-slate-400 mt-2">
                     {{ __('An ad for selling equipment can be placed here. It is always at the top and attracts the attention of the resource visitor') }}
                 </p>
             </div>

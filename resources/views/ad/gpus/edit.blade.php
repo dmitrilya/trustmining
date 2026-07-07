@@ -1,8 +1,8 @@
 <div class="relative z-0 w-full group">
     <input type="text" id="gpu_model" disabled value="{{ $ad->gpuModel->name }}"
-        class="block py-2.5 px-0 w-full text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+        class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
     <label for="gpu_model"
-        class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+        class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
         {{ __('Model') }}
     </label>
 </div>
@@ -16,7 +16,7 @@
         <div
             class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-700 peer-checked:bg-indigo-300">
         </div>
-        <span class="ml-3 text-sm text-slate-950 dark:text-slate-200">{{ __('In stock') }}</span>
+        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('In stock') }}</span>
     </label>
 
     <div x-show="!inStock" class="mt-4">
@@ -35,7 +35,7 @@
         <div
             class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-700 peer-checked:bg-indigo-300">
         </div>
-        <span class="ml-3 text-sm text-slate-950 dark:text-slate-200">{{ __('New') }}</span>
+        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('New') }}</span>
     </label>
 
     <div x-show="!anew">

@@ -2,7 +2,7 @@
     description="Список всех вопросов на форуме TrustMining">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+            <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
                 {{ __('All forum questions') }}
             </h1>
 
@@ -44,7 +44,7 @@
                             </div>
 
                             <h3
-                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 font-bold">
+                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
                                 {{ $question->theme }}
                             </h3>
                         </div>

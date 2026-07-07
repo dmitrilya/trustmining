@@ -35,9 +35,9 @@
 
             <div class="space-y-6">
                 <div class="text-center">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Спектр наших услуг
+                    <h2 class="text-2xl font-black text-slate-800 dark:text-slate-200 tracking-tight">Спектр наших услуг
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Специализированная практика в
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Специализированная практика в
                         сфере блокчейн-технологий и энергетики</p>
                 </div>
 
@@ -50,9 +50,9 @@
                                 class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 📋</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
                                 Регистрация и лицензирование</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Помощь в регистрации и лицензировании деятельности, связанной с ЦФА и криптовалютой.
                                 Создание легальных обменников, криптофондов и IT-компаний в соответствии с актуальным
                                 законодательством.
@@ -67,9 +67,9 @@
                                 class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 💸</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition-colors">
                                 Возврат от криптомошенников</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Поиск и возврат денежных средств, утерянных в результате действий мошеннических
                                 платформ, фишинговых бирж и скам-проектов. Инициирование уголовных дел и процедур
                                 чарджбэка.
@@ -84,9 +84,9 @@
                                 class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 ⚡</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
                                 Энергоснабжение для майнинга</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Юридическая поддержка в сфере энергоснабжения. Заключение прямых договоров со сбытовыми
                                 компаниями, увеличение мощности, защита от обвинений в «безучетном потреблении» и споры
                                 по тарифам.
@@ -101,9 +101,9 @@
                                 class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 📦</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition-colors">
                                 Сопровождение поставок оборудования</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Сопровождение сделок по приобретению и поставке оборудования для майнинга (ASIC-майнеры,
                                 контейнеры). Контроль таможенного оформления, договоров лизинга и международных
                                 инвойсов.
@@ -118,9 +118,9 @@
                                 class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 🏗️</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
                                 Юридическое сопровождение майнинга</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Абонентское обслуживание майнинг-отелей и дата-центров. Разработка договоров размещения
                                 оборудования (хостинга), регламентов безопасности и трудовых соглашений с персоналом.
                             </p>
@@ -134,9 +134,9 @@
                                 class="w-10 h-10 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
                                 🚨</div>
                             <h3
-                                class="text-base font-bold text-slate-900 dark:text-white group-hover:text-rose-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-rose-400 transition-colors">
                                 Споры по 115-ФЗ и 161-ФЗ</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            <p class="text-xs text-slate-500 leading-relaxed">
                                 Защита прав при блокировке банковских счетов, карт и P2P-сделок. Подготовка пакета
                                 документов для комплаенса, разблокировка фиатных шлюзов и обжалование отказов в банках.
                             </p>
@@ -163,9 +163,9 @@
             <div id="consultation"
                 class="border-t border-slate-300 dark:border-slate-700 pt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="space-y-3">
-                    <h3 class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Нужна помощь
+                    <h3 class="text-xl font-extrabold text-slate-800 dark:text-slate-200 tracking-tight">Нужна помощь
                         адвоката?</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    <p class="text-xs text-slate-500 leading-relaxed">
                         Опишите вашу ситуацию в форме. Наши профильные юристы изучат материалы дела и свяжутся с
                         вами в течение 15 минут для первичного анализа перспектив спора.
                     </p>

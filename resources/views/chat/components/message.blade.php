@@ -31,18 +31,13 @@
                                 class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                                 <a data-tooltip-target="download-image-{{ $message->id }}-{{ $loop->index }}"
                                     download href="{{ Storage::url($image) }}"
-                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/30 hover:bg-white/50 focus:ring-2 focus:outline-none dark:text-slate-50 focus:ring-slate-50">
-                                    <svg class="w-4 h-4 text-white" aria-hidden="true" fill="none" viewBox="0 0 16 18">
+                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/30 hover:bg-white/50 focus:ring-2 focus:outline-none focus:ring-slate-50">
+                                    <svg class="w-4 h-4 text-slate-200" aria-hidden="true" fill="none" viewBox="0 0 16 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
                                             d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3" />
                                     </svg>
                                 </a>
-                                <div id="download-image-{{ $message->id }}-{{ $loop->index }}" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm text-white transition-opacity duration-300 bg-slate-900 rounded-lg shadow-sm shadow-logo-color opacity-0 tooltip dark:bg-slate-800">
-                                    Download image
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
                             </div>
                             <img src="{{ Storage::url($image) }}"
                                 @load="scrollBottom($el.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement)"
@@ -61,7 +56,7 @@
                 <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                     @click.away="open = false">
                     <button @click="open = false" type="button"
-                        class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
+                        class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />

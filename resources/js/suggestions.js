@@ -35,7 +35,7 @@ window.search = function (query, list, open) {
                         `<li role="option" class="relative select-none hover:bg-slate-100 dark:hover:bg-slate-800">
                             <a href="${suggestion.href}" class="flex items-center text-sm py-2 px-3">
                                 <div class="w-full text-slate-600 dark:text-slate-400">${suggestion.name}</div>
-                                <div class="ml-auto inline-flex items-center px-2 py-1 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md text-xxs text-slate-800 dark:text-slate-300 uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">${suggestion.model}</div>
+                                <div class="ml-auto inline-flex items-center px-2 py-1 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-md text-xxs text-slate-800 dark:text-slate-400 uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">${suggestion.model}</div>
                             </a>
                         </li>`
                     );

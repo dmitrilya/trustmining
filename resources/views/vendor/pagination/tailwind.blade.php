@@ -6,13 +6,13 @@
                     {!! __('pagination.previous') !!}
                 </span>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-700 dark:active:text-slate-300 transition ease-in-out duration-100">
+                <a href="{{ $paginator->previousPageUrl() }}" class="relative inline-flex items-center px-4 py-2 text-sm text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-800 dark:active:text-slate-200 transition ease-in-out duration-100">
                     {!! __('pagination.previous') !!}
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-700 dark:active:text-slate-300 transition ease-in-out duration-100">
+                <a href="{{ $paginator->nextPageUrl() }}" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 rounded-md hover:text-slate-500 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-800 dark:active:text-slate-200 transition ease-in-out duration-100">
                     {!! __('pagination.next') !!}
                 </a>
             @else
@@ -56,7 +56,7 @@
                         {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
                             <span aria-disabled="true">
-                                <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-default leading-5">{{ $element }}</span>
+                                <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-default leading-5">{{ $element }}</span>
                             </span>
                         @endif
 
@@ -65,10 +65,10 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     <span aria-current="page">
-                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-default leading-5">{{ $page }}</span>
+                                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-500 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-default leading-5">{{ $page }}</span>
                                     </span>
                                 @else
-                                    <a href="{{ $url }}" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 hover:text-slate-500 focus:z-10 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-700 dark:active:text-slate-300 transition ease-in-out duration-100" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                    <a href="{{ $url }}" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 leading-5 hover:text-slate-500 focus:z-10 focus:outline-none focus:ring ring-slate-300 dark:ring-slate-700 focus:border-indigo-300 active:bg-slate-100 active:bg-slate-900 active:text-slate-800 dark:active:text-slate-200 transition ease-in-out duration-100" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                         {{ $page }}
                                     </a>
                                 @endif

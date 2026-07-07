@@ -6,7 +6,7 @@
             <div
                 class="flex flex-col w-full leading-1.5 p-2 sm:p-4 border border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 rounded-xl">
                 <div class="flex justify-between mb-2">
-                    <div class="text-base font-semibold text-slate-900 dark:text-slate-200">
+                    <div class="text-base font-semibold text-slate-800 dark:text-slate-200">
                         {{ $review->user->name }}
                     </div>
 
@@ -28,8 +28,8 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button type="button"
-                            class="ml-2 sm:ml-3 inline-flex self-center items-center p-2 text-sm text-center rounded-xl text-slate-900 dark:text-slate-50 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-950 focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700 focus:outline-none">
-                            <svg class="w-4 h-4 text-slate-700 dark:text-slate-300" aria-hidden="true"
+                            class="ml-2 sm:ml-3 inline-flex self-center items-center p-2 text-sm text-center rounded-xl text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-950 focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700 focus:outline-none">
+                            <svg class="w-4 h-4 text-slate-600 dark:text-slate-400" aria-hidden="true"
                                 fill="currentColor" viewBox="0 0 4 15">
                                 <path
                                     d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />

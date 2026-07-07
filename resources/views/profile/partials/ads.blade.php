@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between">
-            <h2 class="w-full text-lg text-slate-800 dark:text-slate-200">
+            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
                 {{ __('My advertisements') }}
             </h2>
 
@@ -32,31 +32,31 @@
     @else
         <div>
             <div class="flex justify-between">
-                <p class="text-sm text-slate-700 dark:text-slate-300">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Active') }}
                 </p>
 
-                <p class="text-base text-slate-700 dark:text-slate-300">
+                <p class="text-base text-slate-600 dark:text-slate-400">
                     {{ $user->ads->where('hidden', false)->where('moderation', false)->count() }}
                 </p>
             </div>
 
             <div class="flex justify-between mt-2">
-                <p class="text-sm text-slate-700 dark:text-slate-300">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Is under moderation') }}
                 </p>
 
-                <p class="text-base text-slate-700 dark:text-slate-300">
+                <p class="text-base text-slate-600 dark:text-slate-400">
                     {{ $user->ads->where('moderation', true)->count() }}
                 </p>
             </div>
 
             <div class="flex justify-between mt-2">
-                <p class="text-sm text-slate-700 dark:text-slate-300">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Hidden') }}
                 </p>
 
-                <p class="text-base text-slate-700 dark:text-slate-300">
+                <p class="text-base text-slate-600 dark:text-slate-400">
                     {{ $user->ads->where('hidden', true)->count() }}
                 </p>
             </div>

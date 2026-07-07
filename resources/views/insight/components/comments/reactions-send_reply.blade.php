@@ -81,7 +81,7 @@
                         class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 overflow-hidden w-full"></textarea>
 
                     <button
-                        class="text-base bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-lg text-slate-700 dark:text-slate-300 min-w-7 w-7 h-7 flex items-center justify-center rounded-full">↑</button>
+                        class="text-base bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-lg text-slate-600 dark:text-slate-400 min-w-7 w-7 h-7 flex items-center justify-center rounded-full">↑</button>
                 </div>
             </form>
         </div>

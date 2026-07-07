@@ -33,7 +33,7 @@
 
                         @if ($company->card['type'] == 'LEGAL')
                             <h3
-                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
+                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
                                 <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24"
                                     height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -69,50 +69,50 @@
                                     ];
                                 @endphp
 
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('Status') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
+                                <li class="text-slate-500">{{ __('Status') . ': ' }}<span
+                                        class="text-slate-800 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
                                 </li>
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('TIN') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['inn'] }}</span>
+                                <li class="text-slate-500">{{ __('TIN') . ': ' }}<span
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['inn'] }}</span>
                                 </li>
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('OGRN') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
+                                <li class="text-slate-500">{{ __('OGRN') . ': ' }}<span
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
                                 </li>
                                 @if (array_key_exists('kpp', $company->card))
-                                    <li class="text-slate-500 dark:text-slate-400">{{ __('KPP') . ': ' }}<span
-                                            class="text-slate-700 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
+                                    <li class="text-slate-500">{{ __('KPP') . ': ' }}<span
+                                            class="text-slate-800 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                     </li>
                                 @endif
-                                <li class="text-slate-500 dark:text-slate-400">
+                                <li class="text-slate-500">
                                     {{ __('Registration date') . ': ' }}<span
-                                        class="date-transform text-slate-700 dark:text-slate-200" data-type="date"
+                                        class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('Employee count') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
+                                <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                                 </li>
 
                                 @if ($company->card['type'] == 'LEGAL')
-                                    <li class="text-slate-500 dark:text-slate-400">
+                                    <li class="text-slate-500">
                                         {{ __('Authorized capital') . ': ' }}<span
-                                            class="text-slate-700 dark:text-slate-200">{{ $company->card['capital'] }}
+                                            class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
                                             ₽</span>
                                     </li>
 
                                     <div
-                                        class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                        class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
                                         <div class="ml-4">
-                                            <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
-                                                    class="text-slate-700 dark:text-slate-200">{{ $founder['name'] }}
+                                            <li class="text-slate-500">{{ __('Name') . ': ' }}<span
+                                                    class="text-slate-800 dark:text-slate-200">{{ $founder['name'] }}
                                                     ({{ $founder['share'] }}%)
                                                 </span>
                                             </li>
-                                            <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                            <li class="text-slate-500 mt-1">
                                                 {{ __('TIN') . ': ' }}<span
-                                                    class="text-slate-700 dark:text-slate-200">{{ $founder['inn'] }}</span>
+                                                    class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
@@ -120,18 +120,18 @@
 
                                 @if (array_key_exists('managers', $company->card))
                                     <div
-                                        class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                        class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Managers') }}
                                     </div>
 
                                     @foreach ($company->card['managers'] as $manager)
                                         <div class="ml-4">
-                                            <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
-                                                    class="text-slate-700 dark:text-slate-200">{{ $manager['name'] }}</span>
+                                            <li class="text-slate-500">{{ __('Name') . ': ' }}<span
+                                                    class="text-slate-800 dark:text-slate-200">{{ $manager['name'] }}</span>
                                             </li>
-                                            <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                            <li class="text-slate-500 mt-1">
                                                 {{ __('TIN') . ': ' }}<span
-                                                    class="text-slate-700 dark:text-slate-200">{{ $manager['inn'] }}</span>
+                                                    class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
@@ -166,11 +166,11 @@
 
                     @if ($d)
                         <div>
-                            <h2 class="font-bold tracking-tight text-slate-950 dark:text-slate-100 mt-8">
+                            <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
                                 {{ __('Description') }}</h2>
 
                             <div itemprop="description"
-                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-950 dark:text-slate-100{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                 {!! $d !!}
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                 <div class="md:col-span-4 space-y-5">
                     @if ($company->card['type'] == 'LEGAL')
                         <h3
-                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-950 dark:text-slate-100">
+                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
                             <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
@@ -215,67 +215,67 @@
                                 ];
                             @endphp
 
-                            <li class="text-slate-500 dark:text-slate-400">{{ __('Status') . ': ' }}<span
-                                    class="text-slate-700 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
+                            <li class="text-slate-500">{{ __('Status') . ': ' }}<span
+                                    class="text-slate-800 dark:text-slate-200">{{ $statuses[$company->card['state']['status']] }}</span>
                             </li>
-                            <li class="text-slate-500 dark:text-slate-400">{{ __('TIN') . ': ' }}<span
-                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['inn'] }}</span>
+                            <li class="text-slate-500">{{ __('TIN') . ': ' }}<span
+                                    class="text-slate-800 dark:text-slate-200">{{ $company->card['inn'] }}</span>
                             </li>
-                            <li class="text-slate-500 dark:text-slate-400">{{ __('OGRN') . ': ' }}<span
-                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
+                            <li class="text-slate-500">{{ __('OGRN') . ': ' }}<span
+                                    class="text-slate-800 dark:text-slate-200">{{ $company->card['ogrn'] }}</span>
                             </li>
                             @if (array_key_exists('kpp', $company->card))
-                                <li class="text-slate-500 dark:text-slate-400">{{ __('KPP') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
+                                <li class="text-slate-500">{{ __('KPP') . ': ' }}<span
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                 </li>
                             @endif
-                            <li class="text-slate-500 dark:text-slate-400">{{ __('Registration date') . ': ' }}<span
-                                    class="date-transform text-slate-700 dark:text-slate-200" data-type="date"
+                            <li class="text-slate-500">{{ __('Registration date') . ': ' }}<span
+                                    class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
                                     data-date="{{ $company->card['state']['registration_date'] }}"></span>
                             </li>
-                            <li class="text-slate-500 dark:text-slate-400">{{ __('Employee count') . ': ' }}<span
-                                    class="text-slate-700 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
+                            <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
+                                    class="text-slate-800 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
                             </li>
 
                             @if ($company->card['type'] == 'LEGAL')
-                                <li class="text-slate-500 dark:text-slate-400">
+                                <li class="text-slate-500">
                                     {{ __('Authorized capital') . ': ' }}<span
-                                        class="text-slate-700 dark:text-slate-200">{{ $company->card['capital'] }}
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
                                         ₽</span>
                                 </li>
 
-                                <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                <div class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                     {{ __('Founders') }}
                                 </div>
 
                                 @foreach ($company->card['founders'] as $founder)
                                     <div class="ml-4">
-                                        <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
-                                                class="text-slate-700 dark:text-slate-200">{{ $founder['name'] }}
+                                        <li class="text-slate-500">{{ __('Name') . ': ' }}<span
+                                                class="text-slate-800 dark:text-slate-200">{{ $founder['name'] }}
                                                 ({{ $founder['share'] }}%)
                                             </span>
                                         </li>
-                                        <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                        <li class="text-slate-500 mt-1">
                                             {{ __('TIN') . ': ' }}<span
-                                                class="text-slate-700 dark:text-slate-200">{{ $founder['inn'] }}</span>
+                                                class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach
                             @endif
 
                             @if (array_key_exists('managers', $company->card))
-                                <div class="text-sm md:text-lg text-slate-900 dark:text-slate-200 font-semibold mt-3">
+                                <div class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                     {{ __('Managers') }}
                                 </div>
 
                                 @foreach ($company->card['managers'] as $manager)
                                     <div class="ml-4">
-                                        <li class="text-slate-500 dark:text-slate-400">{{ __('Name') . ': ' }}<span
-                                                class="text-slate-700 dark:text-slate-200">{{ $manager['name'] }}</span>
+                                        <li class="text-slate-500">{{ __('Name') . ': ' }}<span
+                                                class="text-slate-800 dark:text-slate-200">{{ $manager['name'] }}</span>
                                         </li>
-                                        <li class="text-slate-500 dark:text-slate-400 mt-1">
+                                        <li class="text-slate-500 mt-1">
                                             {{ __('TIN') . ': ' }}<span
-                                                class="text-slate-700 dark:text-slate-200">{{ $manager['inn'] }}</span>
+                                                class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach

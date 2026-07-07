@@ -21,7 +21,7 @@
     @endif
 
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/VideoObject" x-data="{ edit: false }"
-        class="ql-snow bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+        class="ql-snow bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             @include('insight.components.card-channel', [
                 'name' => $channel->name,
@@ -34,7 +34,7 @@
         </div>
 
         <div>
-            <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-slate-900 dark:text-slate-100 leading-tight">
+            <h1 itemprop="name" class="font-bold text-lg lg:text-xl text-slate-800 dark:text-slate-200 leading-tight">
                 {{ $video->title }}</h1>
 
             @if (str_contains($video->url, 'youtube'))

@@ -19,7 +19,7 @@
                 x-data={} x-init="axios.post('/view/store', { viewable_type: 'gpu-model', viewable_id: {{ $model->id }} })">
                 <div class="md:col-span-2 md:border-r border-slate-300 dark:border-slate-700 md:pr-8">
                     <h1 itemprop="name"
-                        class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl mb-4 sm:mb-6 lg:mb-8">
+                        class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl mb-4 sm:mb-6 lg:mb-8">
                         {{ $model->name }}</h1>
 
                     @php
@@ -52,7 +52,7 @@
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 
-                        <p class="text-sm sm:text-base text-slate-950">{{ $model->description }}</p>
+                        <p class="text-sm sm:text-base text-slate-800">{{ $model->description }}</p>
                     </div> --}}
 
                     <div itemprop="hasPart" itemscope itemtype="https://schema.org/Product" class="mt-4 md:mt-6">
@@ -190,7 +190,7 @@
 
         <section class="mt-4 sm:mt-6 lg:mt-8">
             <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                     {{ __('Offers') }} {{ $brand->name }} {{ $model->name }}
                 </h2>
             </div>

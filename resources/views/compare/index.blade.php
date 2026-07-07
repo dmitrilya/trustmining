@@ -2,7 +2,7 @@
     title="Сравнение {{ $modelA->data->asicBrand->name }} {{ $modelA->data->name }} и {{ $modelB->data->asicBrand->name }} {{ $modelB->data->name }}: что лучше купить в {{ now()->year }}? Характеристики, окупаемость и цены | TRUSTMINING"
     description="Подробное сравнение ASIC майнеров {{ $modelA->data->asicBrand->name }} {{ $modelA->data->name }} и {{ $modelB->data->asicBrand->name }} {{ $modelB->data->name }}. Сравните доходность, энергопотребление и срок окупаемости. Актуальные цены от проверенных поставщиков в нашем агрегаторе.">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Which is better?') }}
         </h1>
     </x-slot>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="flex items-center justify-between px-4 lg:px-5 gap-4 my-2 sm:mb-3 sm:mt-4 lg:mt-6">
-            <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+            <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Conclusion') }}
             </h2>
         </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="flex items-center justify-between px-4 lg:px-5 gap-4 my-2 sm:mb-3 sm:mt-4 lg:mt-6">
-            <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+            <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Offers') }}
             </h2>
         </div>

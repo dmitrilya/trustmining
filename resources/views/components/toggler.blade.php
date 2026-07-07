@@ -6,5 +6,5 @@
     <div
         class="relative w-9 h-5 bg-slate-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-slate-700 peer-checked:bg-indigo-600">
     </div>
-    <span class="ml-3 text-sm text-slate-950 dark:text-slate-200">{{ $slot }}</span>
+    <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ $slot }}</span>
 </label>

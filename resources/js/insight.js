@@ -51,12 +51,12 @@ window.toc = (article, name) => {
         link.href = `#${id}`;
 
         if (heading.tagName.toLowerCase() === 'h3') {
-            listItem.classList.add('ml-2', 'list-none', 'text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-900', 'dark:group-hover:text-slate-100', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
+            listItem.classList.add('ml-2', 'list-none', 'text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-800', 'dark:group-hover:text-slate-200', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
         } else {
             listItem.classList.add('list-none', 'text-xs', 'group', 'cursor-pointer');
         }
 
-        link.classList.add('text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-900', 'dark:group-hover:text-slate-100');
+        link.classList.add('text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-800', 'dark:group-hover:text-slate-200');
 
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -75,7 +75,7 @@ window.toc = (article, name) => {
 
     const blockName = document.createElement('p');
     blockName.textContent = name;
-    blockName.classList.add('mb-4', 'text-base', 'text-slate-700', 'dark:text-slate-300', 'font-bold');
+    blockName.classList.add('mb-4', 'text-base', 'text-slate-600', 'dark:text-slate-400', 'font-bold');
 
     tocLgContainer.appendChild(blockName);
     tocLgContainer.appendChild(tocList);
@@ -98,7 +98,7 @@ window.toc = (article, name) => {
 
         const btn = document.createElement('button');
         btn.textContent = 'Развернуть';
-        btn.classList.add('text-sm', 'mt-2', 'text-slate-700', 'dark:text-slate-300', 'hover:text-slate-900', 'dark:hover:text-slate-100');
+        btn.classList.add('text-sm', 'mt-2', 'text-slate-600', 'dark:text-slate-400', 'hover:text-slate-800', 'dark:hover:text-slate-200');
 
         let isCollapsed = true;
 

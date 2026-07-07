@@ -1,12 +1,12 @@
 <section>
     <header class="mb-2">
         <div class="flex items-center justify-between">
-            <h2 class="text-lg text-slate-800 dark:text-slate-200">
+            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Spins history') }}
             </h2>
 
             <button aria-label="{{ __('TM Roulette') }}" @click="$dispatch('open-modal', 'roulette')"
-                class="relative inline-flex items-center text-sm text-center text-slate-600 dark:text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 focus:outline-none">
+                class="relative inline-flex items-center text-sm text-center text-slate-500 hover:text-slate-600 dark:hover:text-slate-400 focus:outline-none">
                 <svg class="w-5 h-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M17 1L13 3.5L16.5 7L17 1Z" fill="currentColor" />
                     <path

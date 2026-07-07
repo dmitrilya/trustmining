@@ -4,7 +4,7 @@
     <meta itemprop="position" content="{{ $position }}" />
     <div class="flex items-center gap-1 sm:gap-2">
         <a itemprop="item" href="{{ $href }}"
-            class="text-xs xs:text-sm {{ $href != '#' ? 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200' }}">
+            class="text-xs xs:text-sm {{ $href != '#' ? 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200' : 'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200' }}">
             <span itemprop="name">{{ $name }}</span>
         </a>
         @if ($href != '#')

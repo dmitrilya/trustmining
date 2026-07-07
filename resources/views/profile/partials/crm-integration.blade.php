@@ -1,6 +1,6 @@
 <section>
     <header class="mb-6">
-        <h2 class="text-lg text-slate-800 dark:text-slate-200 mb-2">
+        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200 mb-2">
             {{ __('CRM integrations') }}
         </h2>
 

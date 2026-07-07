@@ -138,7 +138,7 @@
                     @endif
 
                     <div>
-                        <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
+                        <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
                             {{ __('Description') }}</h2>
 
                         <div itemprop="description"
@@ -265,10 +265,10 @@
                                 </h5>
 
                                 <p x-show="!deficiencies[0].length"
-                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
                                     {{ __('No defects found') }}</p>
                                 <template x-for="problem in deficiencies[0]" :key="problem.problem">
-                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
                                         x-text="problem.point + ' - ' + problem.problem"></p>
                                 </template>
 
@@ -277,10 +277,10 @@
                                 </h5>
 
                                 <p x-show="!deficiencies[1].length"
-                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
                                     {{ __('No defects found') }}</p>
                                 <template x-for="problem in deficiencies[1]" :key="problem.problem">
-                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
                                         x-text="problem.point + ' - ' + problem.problem"></p>
                                 </template>
 
@@ -289,10 +289,10 @@
                                 </h5>
 
                                 <p x-show="!deficiencies[2].length"
-                                    class="mt-1 text-xxs sm:text-xs text-slate-700 dark:text-slate-300">
+                                    class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
                                     {{ __('No defects found') }}</p>
                                 <template x-for="problem in deficiencies[2]" :key="problem.problem">
-                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-700 dark:text-slate-300"
+                                    <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
                                         x-text="problem.point + ' - ' + problem.problem"></p>
                                 </template>
                             </div>
@@ -309,7 +309,7 @@
                 @endif
 
                 <div>
-                    <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
+                    <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
                         {{ __('Description') }}</h2>
 
                     <div itemprop="description"

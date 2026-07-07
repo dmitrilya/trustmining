@@ -22,7 +22,7 @@
         }
     @endphp
 
-    <h2 class="text-sm xs:text-base sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-bold">{{ $model->data->name }}</h2>
+    <h2 class="text-sm xs:text-base sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-extrabold">{{ $model->data->name }}</h2>
     <x-characteristics>
         <x-characteristic name="Brand" :value="$model->data->asicBrand->name" />
         <x-characteristic name="Hashrate" :value="$model->data->asicVersions->count() > 1

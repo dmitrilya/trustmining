@@ -1,5 +1,5 @@
 <div class="max-w-xs lg:max-w-xl mx-auto mt-4 md:mt-8">
-    <h2 class="text-center text-2xl sm:text-3xl lg:text-5xl text-slate-900 dark:text-slate-100 font-bold">
+    <h2 class="text-center text-2xl sm:text-3xl lg:text-5xl text-slate-800 dark:text-slate-200 font-extrabold">
         {{ __('Income calculator') }}
     </h2>
 </div>
@@ -31,21 +31,21 @@
             <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                 <button @click="screen = 430"
                     :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Mobile') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Mobile') }}</button>
                 <button @click="screen = 768"
                     :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Tablet') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Tablet') }}</button>
                 <button @click="screen = 1280"
                     :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Desktop') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Desktop') }}</button>
             </div>
             <div class="mt-2 flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                 <button @click="theme = 'light'"
                     :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Light') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Light') }}</button>
                 <button @click="theme = 'dark'"
                     :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Dark') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Dark') }}</button>
             </div>
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                 <template

@@ -9,7 +9,7 @@
         <input type="hidden" name="text" :value="text">
         <pre required id="comment-text_{{ $answer->id }}" aria-placeholder="{{ __('Your comment...') }}"
             contenteditable="true" x-ref="pre"
-            class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-950 dark:text-slate-200 bg-slate-50 border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
+            class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-slate-50 border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
             style="min-height: 48px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"></pre>
         <x-input-error :messages="$errors->get('text')" />
@@ -18,7 +18,7 @@
     <div class="flex items-center justify-between px-3 py-1 border-t dark:border-slate-700" x-data="{ images: 0, files: 0 }">
         <div class="flex ps-0 space-x-1">
             <label for="input-file-comment_{{ $answer->id }}"
-                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                 <input id="input-file-comment_{{ $answer->id }}" name="files[]" class="hidden" type="file"
                     accept=".pdf,.doc,.docx,.txt" multiple
                     @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
@@ -30,7 +30,7 @@
             </label>
 
             <label for="input-image-comment_{{ $answer->id }}"
-                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                 <input id="input-image-comment_{{ $answer->id }}" name="images[]" class="hidden" type="file"
                     accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
@@ -43,7 +43,7 @@
 
             <div @click="$dispatch('open-modal', 'create-comment-link_{{ $answer->id }}');link_text = prepareLink(range, $refs.pre)"
                 aria-label="Create hyperlink"
-                class="inline-flex justify-center items-center p-1 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                class="inline-flex justify-center items-center p-1 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                 <svg class="w-5 h-5" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961" />
@@ -59,7 +59,7 @@
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="text" id="comment-hyper_{{ $answer->id }}" placeholder=" "
                             :value="link_text" @change="link_text = $el.value"
-                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="comment-hyper_{{ $answer->id }}"
                             class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Text') }}
@@ -69,7 +69,7 @@
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="url" id="comment-url_{{ $answer->id }}" placeholder=" "
                             :value="link_url" @change="link_url = $el.value"
-                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
+                            class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="comment-url_{{ $answer->id }}"
                             class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             URL
@@ -90,7 +90,7 @@
             <x-dropdown align="bottom" width="auto">
                 <x-slot name="trigger">
                     <button type="button" data-dropdown-placement="top"
-                        class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                        class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                         <span>&#128516</span>
                         <span class="sr-only">Add emoji</span>
                     </button>
@@ -106,10 +106,10 @@
 
             <div class="flex flex-col justify-center ml-2">
                 <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="files > 0">
-                    {{ __('File') }}: <span class="text-slate-700 dark:text-slate-300" x-text="files"></span>
+                    {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400" x-text="files"></span>
                 </div>
                 <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="images > 0">
-                    {{ __('Image') }}: <span class="text-slate-700 dark:text-slate-300" x-text="images"></span>
+                    {{ __('Image') }}: <span class="text-slate-600 dark:text-slate-400" x-text="images"></span>
                 </div>
             </div>
         </div>

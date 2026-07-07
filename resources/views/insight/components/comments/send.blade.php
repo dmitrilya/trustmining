@@ -11,9 +11,9 @@
             }
         }"
             x-init="resize()" @input="resize()" @readonly(!auth()->check())
-            class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 text-slate-700 dark:text-slate-300 overflow-hidden w-full"></textarea>
+            class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 text-slate-600 dark:text-slate-400 overflow-hidden w-full"></textarea>
 
         <button
-            class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-full">{{ __('Send') }}</button>
+            class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-full">{{ __('Send') }}</button>
     </div>
 </form>

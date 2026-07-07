@@ -3,7 +3,7 @@
         <div class="flex justify-end items-center mb-2 sm:mb-3">
             <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                 @click="forumEdit($refs.comment_content)">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                     aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
@@ -12,7 +12,7 @@
 
             <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                 @click="deleteHref = '{{ route('forum.comment.destroy', ['forumComment' => $comment->id]) }}'; $dispatch('open-modal', 'delete-modal')">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" fill="none"
                     viewBox="0 0 26 26">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" height="18.67px"
@@ -80,7 +80,7 @@
             <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                 @click.away="open = false">
                 <button @click="open = false" type="button"
-                    class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
+                    class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />

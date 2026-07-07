@@ -1,5 +1,5 @@
 <div class="mb-8">
-    <h2 class="font-bold tracking-tight text-slate-800 dark:text-slate-200">
+    <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
         {{ __('Can you trust') }} {{ $ad->user->name }}?</h2>
 
     <div itemprop="description"

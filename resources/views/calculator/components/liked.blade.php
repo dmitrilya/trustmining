@@ -1,7 +1,7 @@
 <div
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4">
     <h2
-        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+        class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
         {{ __('Liked the calculator?') }}
     </h2>
 

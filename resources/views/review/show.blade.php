@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center">
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight ml-3">
                 {{ $review->id }}
             </h1>
         </div>
@@ -15,7 +15,7 @@
                 <div class="bg-slate-100 p-1 sm:p-5 h-full space-y-8 duration-100">
                     <div class="flex flex-col w-full leading-1.5 p-4 md-p-6 border-slate-300 bg-white rounded-lg">
                         <div class="flex justify-between mb-3">
-                            <div class="text-base font-semibold text-slate-950">
+                            <div class="text-base font-semibold text-slate-800">
                                 {{ $review->user->name }}
                             </div>
 

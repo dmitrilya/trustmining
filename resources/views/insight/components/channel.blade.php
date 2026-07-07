@@ -9,7 +9,7 @@
 
     <div>
         <p itemprop="name"
-            class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-900 dark:text-slate-100 font-bold">
+            class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-800 dark:text-slate-200 font-bold">
             {{ $name }}</p>
         <div itemprop="alternateName"
             class="text-xxs xs:text-xs{{ isset($sm) ? '' : ' lg:text-sm' }} text-slate-500 {{ !isset($clickable) ? ' hover:underline hover:text-indigo-600 cursor-pointer' : '' }}"
@@ -32,7 +32,7 @@
         </div>
         @if (!isset($sm))
             <p
-                class="mt-0.5 sm:mt-1 text-xs xs:text-sm{{ isset($sm) ? '' : ' lg:text-base' }} text-slate-700 dark:text-slate-300">
+                class="mt-0.5 sm:mt-1 text-xs xs:text-sm{{ isset($sm) ? '' : ' lg:text-base' }} text-slate-600 dark:text-slate-400">
                 {{ $description }}</p>
         @endif
     </div>

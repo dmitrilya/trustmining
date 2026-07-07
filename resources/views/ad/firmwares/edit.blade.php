@@ -72,11 +72,11 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
                         $refs.props_firmwares.value = JSON.stringify(props);
                     "
                     x-text="model"
-                    class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
+                    class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
                 </div>
             </template>
             <div x-show="allModels.filter(allModel => `${allModel.toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).length > 20"
-                class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
+                class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
                 <span x-text="allModels.filter(allModel => `${allModel}`.indexOf(search) !== -1).length - 20"></span>
                 {{ __('models more') }}
             </div>
@@ -85,7 +85,7 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
         <div id="editor"
-            class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
+            class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-4">
         </div>
 
         <input type="hidden" class="hidden" name="description" :value="description" required>

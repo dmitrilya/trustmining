@@ -21,7 +21,7 @@
         @endif
 
         <div>
-            <div class="text-xs text-slate-500 dark:text-slate-400">
+            <div class="text-xs text-slate-500">
                 {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
             </div>
 
@@ -59,6 +59,6 @@
         <div
             class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
         </div>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Trust Factor</p>
+        <p class="text-xs sm:text-sm text-slate-500">Trust Factor</p>
     </div>
 </div>

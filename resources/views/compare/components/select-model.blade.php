@@ -11,10 +11,10 @@
             <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                 <input type="text" autocomplete="off" :value="search" id="search_model"
                     @input="search = $el.value;selectedModel = null; $data['{{ $name }}'] = null"
-                    class="block py-2.5 px-0 w-full text-sm text-slate-950 bg-transparent border-0 appearance-none dark:text-white group-focus:outline-none focus:ring-0 peer" />
+                    class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 group-focus:outline-none focus:ring-0 peer" />
 
                 <button type="button" aria-label="Clear"
-                    class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500 dark:text-slate-400"
+                    class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
                     @click="search = '';selectedModel = null; $data['{{ $name }}'] = null; $el.previousElementSibling.focus()">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
@@ -23,7 +23,7 @@
                 </button>
 
                 <label for="search_model"
-                    class="absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Model') }}
                 </label>
             </div>
@@ -35,7 +35,7 @@
             <template :key="asicModel.id"
                 x-for="asicModel in models.filter(m => m.slug !== {{ $name === 'model_a' ? 'model_b' : 'model_a' }})">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name; $data['{{ $name }}'] = asicModel.slug"
-                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-white"
+                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200"
                     role="option"
                     x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                     <div class="flex items-center">

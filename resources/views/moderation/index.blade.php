@@ -1,12 +1,12 @@
 <x-app-layout title="Модерация" noindex="true">
     <x-slot name="header">
         <div class="flex items-center justify-end">
-            <p class="text-slate-700 dark:text-slate-300 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
+            <p class="text-slate-600 dark:text-slate-400 text-semibold text-lg mr-6">{{ $moderations->count() }}</p>
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-300 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none transition ease-in-out duration-100">
+                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">

@@ -8,7 +8,7 @@
             <p class="text-sm text-slate-500">
                 {{ __('The ad did not pass moderation for the following reason:') }}</p>
         </div>
-        <p class="mt-2 text-xxs xs:text-xs sm:text-sm text-slate-900 dark:text-slate-200">
+        <p class="mt-2 text-xxs xs:text-xs sm:text-sm text-slate-800 dark:text-slate-200">
             {{ $lastM->comment }}</p>
     @endif
 

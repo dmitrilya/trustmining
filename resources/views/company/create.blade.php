@@ -1,6 +1,6 @@
 <x-app-layout title="Зарегистрировать компанию" description="Регистрация компании на сайте TrustMining">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Company') }}
         </h1>
     </x-slot>

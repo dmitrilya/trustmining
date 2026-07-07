@@ -190,10 +190,10 @@
                 <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
                     class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                     <input type="text" id="search" x-model="search" placeholder="#"
-                        class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-700 dark:text-slate-300 w-full" />
+                        class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-600 dark:text-slate-400 w-full" />
 
                     <button type="button"
-                        class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-700 dark:text-slate-300 px-2 py-1 rounded-full"
+                        class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-2 py-1 rounded-full"
                         @click="if (!search.trim().length) return; tags.push(search); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
                 </div>
             </div>
@@ -211,11 +211,11 @@
                     x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)"
                     :key="tag">
                     <div @click="tags.push(tag);allTags.splice(allTags.indexOf(tag), 1);search = ''" x-text="tag"
-                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
+                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
                     </div>
                 </template>
                 <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
-                    class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 text-xxs sm:text-xs">
+                    class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
                     <span
                         x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
                     {{ __('tags more') }}
@@ -233,7 +233,7 @@
         <div class="mt-5" style="background:inherit;">
             <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl -mx-2 sm:-mx-4">
                 <div id="editor"
-                    class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-2 sm:p-4">
+                    class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-2 sm:p-4">
                 </div>
 
                 <input type="hidden" class="hidden" name="content" :value="content" required>

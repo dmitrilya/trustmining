@@ -1,7 +1,7 @@
 <section>
     <header class="mb-2">
         <div class="flex justify-between">
-            <h2 class="text-lg text-slate-800 dark:text-slate-200">
+            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Hosting') }}
             </h2>
 
@@ -41,11 +41,11 @@
                 </p>
             @endif
 
-            <p class="text-xxs sm:text-sm text-slate-500">{{ __('Location') . ': ' }}<span
-                    class="text-slate-700">{{ __($user->hosting->address) }}</span></p>
+            <p class="text-xxs sm:text-sm text-slate-600 dark:text-slate-400">{{ __('Location') . ': ' }}<span
+                    class="text-slate-800 dark:text-slate-200">{{ __($user->hosting->address) }}</span></p>
 
-            <p class="text-xxs sm:text-sm text-slate-500">{{ __('Tariff') . ': ' }}<span
-                    class="text-slate-700">{{ $user->hosting->price }}</span></p>
+            <p class="text-xxs sm:text-sm text-slate-600 dark:text-slate-400">{{ __('Tariff') . ': ' }}<span
+                    class="text-slate-800 dark:text-slate-200">{{ $user->hosting->price }}</span></p>
         @endif
     @else
         <p class="text-sm text-slate-600 dark:text-slate-400">

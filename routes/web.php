@@ -51,11 +51,12 @@ use Illuminate\Http\Request;
 */
 
 Route::get('private/temp', function (Request $request) {
-    if (!$request->hasValidSignature()) {
-        abort(401);
-    }
+    if (!$request->hasValidSignature()) abort(401);
 
-    return Storage::disk('private')->download($request->path);
+    /** @var \Illuminate\Contracts\Filesystem\Filesystem|\Illuminate\Filesystem\FilesystemAdapter $disk */
+    $disk = Storage::disk('private');
+
+    return $disk->download($request->path);
 })->name('private.temp');
 
 Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');

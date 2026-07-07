@@ -25,9 +25,9 @@
             }" x-init="axios.post('/view/store', { viewable_type: 'gpu-brand', viewable_id: {{ $brand->id }} })">
             <div class="relative z-0 group ml-auto my-6">
                 <input type="text" id="gpu-model_input" placeholder=" " x-model="search" autocomplete="off"
-                    class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                    class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="gpu-model_input"
-                    class="flex items-center absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -37,7 +37,7 @@
             </div>
 
             <div class="py-2 mb-2 grid grid-cols-4 gap-1 xs:gap-2 border-b border-slate-300 dark:border-slate-700">
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('brand')">
                     {{ __('Brand') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -46,7 +46,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('name')">
                     {{ __('Model') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -55,7 +55,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('max_power')">
                     {{ __('Power') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -64,7 +64,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('fuel_consumption')">
                     {{ __('Gas consumption') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -78,14 +78,14 @@
             <template x-for="model in models" :key="model.id">
                 <a :href="'/gas-gensets/' + model.brand_slug + '/' + model.slug"
                     class="py-1 sm:py-2 group rounded-md grid grid-cols-4 gap-1 xs:gap-2 items-center">
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.brand_name"></div>
-                    <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.name">
                     </h5>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.max_power) + ' {{ __('kW/h') }}'"></div>
-                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.fuel_consumption) + ' {{ __('m³/h') }}'"></div>
                 </a>
             </template>

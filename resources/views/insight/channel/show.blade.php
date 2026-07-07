@@ -32,7 +32,7 @@
                 @else
                     <a href="{{ route('insight.channel.edit', ['channel' => $channel->slug]) }}"
                         class="text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                             aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="1.5"
@@ -42,7 +42,7 @@
                 @endif
             </div>
 
-            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mb-2 lg:mb-4">
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 lg:mb-4">
                 {{ $channel->brief_description }}
             </p>
 
@@ -88,7 +88,7 @@
     @if ($series->where('contents_count', '>', 0)->count())
         <section itemscope itemtype="https://schema.org/ItemList">
             <h2 itemprop="name"
-                class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
+                class="font-bold text-xl sm:text-2xl text-slate-800 dark:text-slate-200 px-4 py-1.5 lg:px-5 w-fit mb-2 sm:mb-3">
                 {{ trans_choice('insight.series', 2) }}</h2>
             <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 

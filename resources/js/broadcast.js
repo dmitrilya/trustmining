@@ -59,10 +59,10 @@ window.messagesChannelEvent = function (e) {
                 </div>
 
                 <div class="flex">
-                    <p class="w-full text-xs font-semibold text-slate-950 dark:text-slate-100">${e.from}</p>
+                    <p class="w-full text-xs font-semibold text-slate-800 dark:text-slate-200">${e.from}</p>
 
                     <div class="min-w-fit text-right ml-2">
-                        <p class="text-xxs text-slate-950 dark:text-slate-100">${e.from_status}</p>
+                        <p class="text-xxs text-slate-800 dark:text-slate-200">${e.from_status}</p>
                         <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-500">${date}</p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ window.messagesChannelEvent = function (e) {
                         </div>
 
                         <div>
-                            <div class="text-slate-950 dark:text-slate-100 font-semibold mb-1">${file.name}</div>
+                            <div class="text-slate-800 dark:text-slate-200 font-semibold mb-1">${file.name}</div>
 
                             <div class="flex">
                                 <a class="hover:underline text-slate-500" download href="/storage/${file.path}">

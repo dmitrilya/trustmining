@@ -4,13 +4,13 @@
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-slate-950">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
             <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}" :value="text"
-                class="resize-none w-full px-0 text-sm text-slate-950 bg-white border-0 dark:bg-slate-950 focus:ring-0 dark:text-slate-50 dark:placeholder-slate-400"
+                class="resize-none w-full px-0 text-sm text-slate-800 bg-white border-0 dark:bg-slate-950 focus:ring-0 dark:text-slate-200 dark:placeholder-slate-400"
                 @change="text = $el.value"></textarea>
         </div>
         <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ files: 0, photos: 0 }">
             <div class="flex ps-0 space-x-1">
                 <label for="input-file-chat"
-                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                     <input id="input-file-chat" name="files[]" class="hidden" type="file" accept=".pdf,.doc,.docx"
                         multiple
                         @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
@@ -22,7 +22,7 @@
                 </label>
 
                 <label for="input-image-chat"
-                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                    class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                     <input id="input-image-chat" name="images[]" class="hidden" type="file" accept=".png,.jpg,.jpeg,.webp"
                         multiple
                         @change="if ($el.files.length > 10) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 10]) }}', 'error')};photos = $el.files.length">
@@ -36,7 +36,7 @@
                 <x-dropdown align="bottom" width="auto">
                     <x-slot name="trigger">
                         <button type="button" data-dropdown-placement="top"
-                            class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-slate-100 dark:hover:bg-slate-700">
+                            class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
                             <span>&#128516</span>
                             <span class="sr-only">Add emoji</span>
                         </button>
@@ -50,12 +50,12 @@
                 </x-dropdown>
 
                 <div class="flex flex-col justify-center ml-2">
-                    <div class="text-xxs sm:text-xs text-slate-500 dark:text-slate-400" style="display: hidden"
+                    <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden"
                         x-show="files > 0">
-                        {{ __('File') }}: <span class="text-slate-700 dark:text-slate-300" x-text="files"></span>
+                        {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400" x-text="files"></span>
                     </div>
                     <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="photos > 0">
-                        {{ __('Photo') }}: <span class="text-slate-700 dark:text-slate-300" x-text="photos"></span>
+                        {{ __('Photo') }}: <span class="text-slate-600 dark:text-slate-400" x-text="photos"></span>
                     </div>
                 </div>
             </div>

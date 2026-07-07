@@ -102,17 +102,17 @@
             </div>
 
             @if ($ad->ad_category_name == 'gpus')
-                <p class="text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
+                <p class="text-xxs sm:text-xs md:text-sm text-slate-500">
                     {{ __('Power (kW/h)') . ': ' }}
-                    <span class="text-slate-700 dark:text-slate-300">{{ __($ad->gpu_model_max_power) }}</span>
+                    <span class="text-slate-600 dark:text-slate-400">{{ __($ad->gpu_model_max_power) }}</span>
                 </p>
             @endif
 
             @if (!isset($sm))
                 @foreach ($props as $prop => $value)
-                    <p class="text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
+                    <p class="text-xxs sm:text-xs md:text-sm text-slate-500">
                         {{ __($prop) . ': ' }}@if (!is_array($value))
-                            <span class="text-slate-700 dark:text-slate-300">{{ __($value) }}</span>
+                            <span class="text-slate-600 dark:text-slate-400">{{ __($value) }}</span>
                         @else
                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                 @foreach ($value as $item)

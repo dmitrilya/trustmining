@@ -74,7 +74,7 @@
             <a href="{{ route('home') }}" target="_blank"
                 class="flex items-center mb-6 md:mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
-                <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-900 dark:text-slate-100">
+                <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-800 dark:text-slate-200">
                     DIFFICULTY
                 </h1>
             </a>
@@ -105,7 +105,7 @@
                                 'text-green-500': item.value > items[i + 1].value,
                                 'text-red-500': item.value < items[i +
                                     1].value,
-                                'text-slate-700 dark:text-slate-200': item.value == items[i + 1].value
+                                'text-slate-800 dark:text-slate-200': item.value == items[i + 1].value
                             }"
                             x-text="item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%'">
                         </div>

@@ -26,7 +26,7 @@
 
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 sm:mt-6 p-2 sm:p-4 lg:p-6">
-            <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-bold">
+            <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                 {{ __('History of changes') }}
             </h2>
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
@@ -58,7 +58,7 @@
                             :class="{
                                 'text-green-500': item.value > items[i + 1]?.value,
                                 'text-red-500': item.value < items[i + 1]?.value,
-                                'text-slate-700 dark:text-slate-200': item.value == items[i + 1]?.value
+                                'text-slate-800 dark:text-slate-200': item.value == items[i + 1]?.value
                             }"
                             x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
                         </div>
@@ -77,7 +77,7 @@
 
     <section class="mt-4 sm:mt-6 lg:mt-8">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-            <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+            <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Miners for') }} {{ $coin->abbreviation }}
             </h2>
         </div>

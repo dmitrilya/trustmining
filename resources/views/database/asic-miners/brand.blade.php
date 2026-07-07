@@ -14,19 +14,19 @@
                     <div @click="algo && algo == '{{ $algo->id }}' ? filter(null, search) : filter('{{ $algo->id }}', search)"
                         class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                         :class="{
-                            'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700': algo ==
+                            'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700': algo ==
                                 '{{ $algo->id }}',
-                            'border-slate-300 dark:border-slate-700': algo !=
-                                '{{ $algo->name }}'
+                            'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700': algo !=
+                                '{{ $algo->id }}'
                         }">
                         <img src="{{ Storage::url('public/coins/' . $algo->coins->first()->abbreviation . '.webp') }}"
                             alt="{{ $algo->coins->first()->abbreviation }}" class="w-4 sm:w-5 mr-2">
-                        <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm group-hover:text-indigo-600 dark:group-hover:text-slate-100"
+                        <h5 class="font-semibold text-xxs sm:text-xs lg:text-sm"
                             :class="{
-                                'text-indigo-500 dark:text-slate-50': algo ==
+                                'text-indigo-500 dark:text-slate-200': algo ==
                                     '{{ $algo->id }}',
-                                'text-slate-500 dark:text-slate-300': algo !=
-                                    '{{ $algo->name }}'
+                                'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200': algo !=
+                                    '{{ $algo->id }}'
                             }">
                             {{ $algo->name }}
                         </h5>
@@ -37,9 +37,9 @@
             <div class="relative z-0 group ml-auto my-6">
                 <input type="text" id="asic-model_input" placeholder=" " @input="filter(algo, $el.value)"
                     autocomplete="off" :value="search"
-                    class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-950 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-white dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
+                    class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-model_input"
-                    class="flex items-center absolute text-sm text-slate-600 dark:text-slate-300 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
@@ -50,7 +50,7 @@
 
             <div
                 class="py-2 mb-2 grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 border-b border-slate-300 dark:border-slate-700">
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200 col-span-2"
+                <div class="flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200 col-span-2"
                     @click="sort('n')">
                     {{ __('Model') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -59,7 +59,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('oh')">
                     {{ __('Hashrate') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -68,7 +68,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden sm:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="hidden sm:flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('po')">
                     {{ __('Power') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -77,7 +77,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden md:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="hidden md:flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('r')">
                     {{ __('Release') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -86,7 +86,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden lg:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="hidden lg:flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('a')">
                     {{ __('Algorithm') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -95,7 +95,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="hidden xl:flex flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="hidden xl:flex flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('oe', false)">j
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
                         <path
@@ -103,7 +103,7 @@
                             fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 dark:hover:text-slate-200"
+                <div class="flex items-center cursor-pointer text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 dark:hover:text-slate-200"
                     @click="sort('p')">
                     {{ __('Profit') }}
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 h-4 w-4">
@@ -117,22 +117,22 @@
             <template x-for="model in models.slice(0, pageCount * page)" :key="model.b + '_' + model.n">
                 <a :href="'/asic-miners/' + model.b + '/' + model.s"
                     class="model py-1 sm:py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-9 gap-1 xs:gap-2 items-center">
-                    <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-900 dark:group-hover:text-slate-200 col-span-2"
+                    <h5 class="font-semibold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2"
                         x-text="model.n">
                     </h5>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="(Math.round(model.h * 1000) / 1000) + model.m + '/s'"></div>
-                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.po) + ' {{ __('W') }}'"></div>
-                    <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="new Date(model.r).toLocaleDateString(window.locale, {month: 'short', year: 'numeric'})">
                     </div>
-                    <div class="hidden lg:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden lg:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="algorithms[model.a].n"></div>
-                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="(Math.round(model.oe * 10000) / 10000) + 'j/' + model.om">
                     </div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.p + ' USDT'">
                     </div>
                     <div class="pl-1.5 sm:pl-2">

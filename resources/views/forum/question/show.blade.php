@@ -9,7 +9,7 @@
                         <meta itemprop="position" content="1" />
                         <div class="flex items-center">
                             <a itemprop="item" href="{{ route('forum') }}"
-                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
+                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span itemprop="name">{{ __('Forum') }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
@@ -23,7 +23,7 @@
                         <div class="flex items-center">
                             <a itemprop="item"
                                 href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
-                                class="sm:mr-2 text-sm text-slate-900 dark:text-slate-100 hover:text-slate-900 dark:hover:text-slate-100">
+                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span itemprop="name">{{ __($category->name) }}</span>
                             </a>
                             <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
@@ -37,7 +37,7 @@
                         <meta itemprop="position" content="3" />
                         <div class="flex items-center">
                             <a itemprop="item" href="#"
-                                class="text-slate-600 dark:text-slate-300 hover:text-slate-600 dark:hover:text-slate-300">
+                                class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span itemprop="name">{{ __($subcategory->name) }}</span>
                             </a>
                         </div>
@@ -81,7 +81,7 @@
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
                 <h1 itemprop="name"
-                    class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 font-bold">
+                    class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-slate-800 dark:text-slate-200 font-bold">
                     {{ __($question->theme) }}
                 </h1>
 
@@ -146,7 +146,7 @@
                         <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                             @click.away="open = false">
                             <button @click="open = false" type="button"
-                                class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-white">
+                                class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -163,7 +163,7 @@
                 class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl dark:border dark:border-slate-700">
                 @if (!Auth::user())
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
-                        <p class="mb-3 sm:mb-5 text-slate-700 dark:text-slate-300 text-xs sm:text-sm lg:text-base">
+                        <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">
                             {{ __('Please log in to leave a reply') }}</p>
                         <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
                     </div>

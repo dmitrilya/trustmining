@@ -70,7 +70,7 @@
                     <div class="w-full flex">
                         <div class="shrink-0 flex items-center">
                             <x-application-logo class="text-xl" />
-                            <h1 class="ml-2 text-[19px] text-slate-900 dark:text-slate-100 leading-tight">
+                            <h1 class="ml-2 text-[19px] text-slate-800 dark:text-slate-200 leading-tight">
                                 CALCULATOR
                             </h1>
                         </div>

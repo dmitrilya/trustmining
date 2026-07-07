@@ -10,7 +10,7 @@
             <meta itemprop="brand" content="{{ $brand->name }}" />
             <div class="flex justify-between">
                 <h1 itemprop="name"
-                    class="text-xl font-bold tracking-tight text-slate-950 dark:text-slate-100 sm:text-2xl md:text-3xl">
+                    class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl">
                     {{ $model->name }}</h1>
 
                 <div

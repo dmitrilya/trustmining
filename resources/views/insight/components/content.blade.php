@@ -1,20 +1,20 @@
 <section class="mb-4 sm:mb-6 lg:mb-8" x-data="{ tab: 'new' }">
     <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-        <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+        <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
             {{ __($title) }}
         </h2>
 
         <div class="flex text-xs s m:text-sm">
             <button @click="tab = 'new'"
                 :class="tab === 'new' ?
-                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400' :
                     'text-slate-500'"
                 class="px-3 py-1 rounded-full transition-all">
                 {{ __('New') }}
             </button>
             <button @click="tab = 'popular'"
                 :class="tab === 'popular' ?
-                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-700 dark:text-slate-300' :
+                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400' :
                     'text-slate-500'"
                 class="px-3 py-1 rounded-full transition-all">
                 {{ __('Popular') }}

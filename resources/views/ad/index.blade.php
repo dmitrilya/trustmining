@@ -31,7 +31,7 @@
 <x-app-layout :title="$adCategory->title . $addParams" :description="$adCategory->description . $addParams" :canonical="$canonicalUrl">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+            <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
                 {{ __($adCategory->header) }}
             </h1>
 

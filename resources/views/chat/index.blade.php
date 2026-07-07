@@ -1,6 +1,6 @@
 <x-app-layout title="Онлайн чат: диалоги" description="Все диалоги с пользователями на сайте TrustMining">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Chats') }}
         </h1>
     </x-slot>
@@ -40,11 +40,11 @@
                                             src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }}">
                                     @endif
 
-                                    <p class="w-full text-xs font-semibold text-slate-950 dark:text-slate-100">
+                                    <p class="w-full text-xs font-semibold text-slate-800 dark:text-slate-200">
                                         {{ $user->name }}</p>
 
                                     <div class="min-w-fit text-right ml-2">
-                                        <p class="text-xxs text-slate-950 dark:text-slate-100">
+                                        <p class="text-xxs text-slate-800 dark:text-slate-200">
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)

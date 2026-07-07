@@ -2,7 +2,7 @@
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 rounded-xl shadow-sm">
     @include('insight.components.comments.author-date')
 
-    <div class="text-sm text-slate-700 dark:text-slate-300 mb-3">
+    <div class="text-sm text-slate-600 dark:text-slate-400 mb-3">
         {!! nl2br(e($comment->text)) !!}
     </div>
 

@@ -39,7 +39,7 @@
         </div>
 
         <div class="mt-4">
-            <p class="text-slate-700 dark:text-slate-300 text-xxs sm:text-xs">
+            <p class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs">
                 {{ __('By clicking the "Register" button, I accept the terms of') }} <a
                     class="inline text-indigo-300 hover:text-indigo-600"
                     href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('the User Agreement') }}</a>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-800"
+            <a class="underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-800"
                 href="{{ route('login') }}">
                 {{ __('Login') }}
             </a>

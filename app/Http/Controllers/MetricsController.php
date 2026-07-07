@@ -110,11 +110,6 @@ class MetricsController extends Controller
     {
         $user = $request->user();
 
-        if (!$user->tg_id) return response()->json([
-            'success' => false,
-            'message' => __('Log in via Telegram')
-        ]);
-
         $user->difficultySubscriptions()->firstOrCreate(['coin_id' => $coin->id]);
 
         return response()->json([

@@ -3,9 +3,9 @@
 <div class="{{ $field != 'algorithms' && $field != 'Power_(kW/h)' ? 'border-t ' : '' }}border-slate-300 dark:border-slate-700 py-5" x-data="{ open: {{ request()->get($field) ? 'true' : 'false' }} }">
     <h3 class="-mx-2 -my-3 flow-root">
         <button type="button" @click="open = !open" x-bind:aria-expanded="open.toString()"
-            class="flex w-full items-center justify-between px-2 py-3 text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400"
+            class="flex w-full items-center justify-between px-2 py-3 text-slate-500 hover:text-slate-500 dark:hover:text-slate-400"
             aria-controls="filter-section-mobile-{{ $name }}" aria-expanded="false">
-            <span class="text-slate-950 dark:text-slate-100">{{ $name }}</span>
+            <span class="text-slate-800 dark:text-slate-200">{{ $name }}</span>
             <span class="ml-6 flex items-center">
                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path

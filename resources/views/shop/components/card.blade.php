@@ -17,7 +17,7 @@
                         <img class="w-full object-cover" src="{{ Storage::url($shop->company->bg_logo) }}" alt="{{ $shop->name }} preview">
                     </picture>
                 @else
-                    <p class="text-sm xs:text-lg text-white dark:text-slate-800 font-bold">{{ __('No logo') }}</p>
+                    <p class="text-sm xs:text-lg text-slate-600 dark:text-slate-400 font-bold">{{ __('No logo') }}</p>
                 @endif
             </a>
         </div>
@@ -25,7 +25,7 @@
         <div class="mt-2 sm:mt-4 text-sm sm:text-base text-slate-800 dark:text-slate-200 font-bold">{{ $shop->name }}
         </div>
 
-        <div class="text-xs text-slate-500 dark:text-slate-400">
+        <div class="text-xs text-slate-500">
             {{ $shop->company && !$shop->company->moderation ? __($shop->company->card['type']) : __('Person') }}
         </div>
 
@@ -44,9 +44,9 @@
             <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
         </div>
 
-        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-slate-500 dark:text-slate-400">
+        <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-slate-500">
             {{ __('Number of offices') }}: <span
-                class="text-slate-700 dark:text-slate-300">{{ $shop->offices_count }}</span>
+                class="text-slate-600 dark:text-slate-400">{{ $shop->offices_count }}</span>
         </p>
     </div>
 

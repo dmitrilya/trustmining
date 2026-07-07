@@ -64,13 +64,13 @@
     <x-text-input class="mb-4" @input="search = $el.value" placeholder="{{ __('Search question') }}" />
 
     <div x-data="{ item: 0 }" class="pr-4 h-full divide-y-2 divide-slate-300 dark:divide-slate-700 overflow-y-auto"
-        data-active-classes="text-slate-950 dark:text-slate-100"
-        data-inactive-classes="text-slate-600 dark:text-slate-300">
+        data-active-classes="text-slate-800 dark:text-slate-200"
+        data-inactive-classes="text-slate-600 dark:text-slate-400">
         @foreach ($themes as $theme => $faqs)
             <div x-show="search === '' || $el.textContent.toLowerCase().indexOf(search) !== -1">
                 <h2>
                     <button type="button" @click="item = {{ $loop->index }}"
-                        class="flex items-center justify-between w-full py-5 text-left text-lg text-slate-900 dark:text-slate-100">
+                        class="flex items-center justify-between w-full py-5 text-left text-lg text-slate-800 dark:text-slate-200">
                         <span>{{ __($theme) }}</span>
                         <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': item != {{ $loop->index }} }"
                             fill="none" viewBox="0 0 10 6">
@@ -84,7 +84,7 @@
                         <div x-data="{ item2: 0 }"
                             class="h-full divide-y-2 divide-slate-300 dark:divide-slate-700 overflow-y-auto"
                             :class="{
-                                'bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-slate-100': item ==
+                                'bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200': item ==
                                     {{ $loop->index }},
                                 'text-slate-600': item != {{ $loop->index }}
                             }">

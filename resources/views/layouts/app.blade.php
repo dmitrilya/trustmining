@@ -196,7 +196,7 @@
                                 </button>
                             </div>
 
-                            <p class="mt-1 text-sm text-slate-700 dark:text-slate-300 mb-5">
+                            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400 mb-5">
                                 {{ __('You can log in using Telegram to receive notifications from our bot') }}
                             </p>
 

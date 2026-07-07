@@ -1,7 +1,7 @@
 <x-app-layout title="Личный кабинет, профиль компании"
     description="Ваш личный кабинет: управление профилем компании и контроль баланса. Редактируйте данные и управляйте всеми услугами">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Profile') }}
         </h1>
     </x-slot>
@@ -13,12 +13,12 @@
                     class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
                     :class="category ==
                         '{{ $category }}' ?
-                        'border-indigo-500 bg-indigo-200 dark:bg-indigo-600 dark:border-indigo-700' :
-                        'border-slate-300 dark:border-slate-700'">
-                    <h4 class="font-semibold text-xs lg:text-sm group-hover:text-indigo-600 dark:group-hover:text-slate-100"
+                        'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700' :
+                        'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700'">
+                    <h4 class="font-semibold text-xs lg:text-sm"
                         :class="category ==
-                            '{{ $category }}' ? 'text-indigo-500 dark:text-slate-50' :
-                            'text-slate-500 dark:text-slate-300'">
+                            '{{ $category }}' ? 'text-indigo-500 dark:text-slate-200' :
+                            'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200'">
                         {{ __($category_header) }}
                     </h4>
                 </div>

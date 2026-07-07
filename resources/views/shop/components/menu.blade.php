@@ -11,11 +11,11 @@
         </div>
         <div>
             <div
-                class="font-bold text-xxs xs:text-xs sm:text-base {{ request()->routeIs('company') ? 'text-slate-900 dark:text-slate-100' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100' }}">
+                class="font-bold text-xxs xs:text-xs sm:text-base {{ request()->routeIs('company') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200' }}">
                 {{ __('Advertisements') }}
             </div>
             <p
-                class="hidden sm:block mt-1 text-sm {{ request()->routeIs('company') ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300' }}">
+                class="hidden sm:block mt-1 text-sm {{ request()->routeIs('company') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200' }}">
                 {{ __('Current price') }}</p>
         </div>
     </a>
@@ -42,11 +42,11 @@
         </div>
         <div>
             <div
-                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasCompany ? (request()->routeIs('company.about') ? 'text-slate-900 dark:text-slate-100' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100') : 'text-slate-600 dark:text-slate-400' }}">
+                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasCompany ? (request()->routeIs('company.about') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-600 dark:text-slate-400' }}">
                 {{ __('About company') }}
             </div>
             <p
-                class="hidden sm:block mt-1 text-sm {{ $hasCompany ? (request()->routeIs('company.about') ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300') : 'text-slate-500' }}">
+                class="hidden sm:block mt-1 text-sm {{ $hasCompany ? (request()->routeIs('company.about') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-500' }}">
                 {{ __('Information and documents') }}</p>
         </div>
     </a>
@@ -62,11 +62,11 @@
         </div>
         <div>
             <div
-                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-900 dark:text-slate-100' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100') : 'text-slate-600 dark:text-slate-400' }}">
+                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-600 dark:text-slate-400' }}">
                 {{ __('Hosting') }}
             </div>
             <p
-                class="hidden sm:block mt-1 text-sm {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300') : 'text-slate-500' }}">
+                class="hidden sm:block mt-1 text-sm {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-500' }}">
                 {{ __('Placement data') }}
             </p>
         </div>
@@ -83,11 +83,11 @@
         </div>
         <div>
             <div
-                class="font-bold text-xxs xs:text-xs sm:text-base {{ request()->routeIs('company.offices') ? 'text-slate-900 dark:text-slate-100' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100' }}">
+                class="font-bold text-xxs xs:text-xs sm:text-base {{ request()->routeIs('company.offices') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200' }}">
                 {{ __('Offices') }}
             </div>
             <p
-                class="hidden sm:block mt-1 text-sm {{ request()->routeIs('company.offices') ? 'text-slate-700 dark:text-slate-300' : 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300' }}">
+                class="hidden sm:block mt-1 text-sm {{ request()->routeIs('company.offices') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200' }}">
                 {{ __('Offices and points of sale') }}
             </p>
         </div>

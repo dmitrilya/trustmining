@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h2 class="text-lg text-slate-800 dark:text-slate-200">
+        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
             {{ __('Email for notifications') }}
         </h2>
 
@@ -25,11 +25,11 @@
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 xs:mt-3 sm:mt-4 text-slate-900 dark:text-slate-100">
+                    <p class="text-sm mt-2 xs:mt-3 sm:mt-4 text-slate-800 dark:text-slate-200">
                         {{ __('Your email address is unverified.') }}
 
                         <button form="send-verification"
-                            class="mt-1 sm:mt-2 text-left underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-800">
+                            class="mt-1 sm:mt-2 text-left underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-800">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>

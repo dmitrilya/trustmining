@@ -4,7 +4,7 @@
     <div class="flex justify-between lg:justify-end items-start">
         <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
             @click="show = !show">
-            <svg class="w-4 h-4 text-slate-900 dark:text-slate-100" aria-hidden="true" width="24" height="24"
+            <svg class="w-4 h-4 text-slate-800 dark:text-slate-200" aria-hidden="true" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
@@ -184,7 +184,7 @@
     <div class="overflow-hidden">
         @if (in_array('period', $blocks))
             <div class="flex items-center justify-between mb-4 lg:mb-6">
-                <h2 class="text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-bold">
+                <h2 class="text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                     {{ __('Online chart') }}
                 </h2>
 
@@ -192,45 +192,45 @@
                     class="flex bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
                     <div @click="period = '3m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3m'])"
                         :class="{
-                            'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
                                 '3m',
-                            'text-slate-700 dark:text-slate-200': period != '3m'
+                            'text-slate-800 dark:text-slate-200': period != '3m'
                         }"
                         class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
                         {{ '3' . __('m') }}
                     </div>
                     <div @click="period = '6m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['6m'])"
                         :class="{
-                            'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
                                 '6m',
-                            'text-slate-700 dark:text-slate-200': period != '6m'
+                            'text-slate-800 dark:text-slate-200': period != '6m'
                         }"
                         class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
                         {{ '6' . __('m') }}
                     </div>
                     <div @click="period = '1y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['1y'])"
                         :class="{
-                            'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
                                 '1y',
-                            'text-slate-700 dark:text-slate-200': period != '1y'
+                            'text-slate-800 dark:text-slate-200': period != '1y'
                         }"
                         class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
                         {{ '1' . __('y') }}
                     </div>
                     <div @click="period = '3y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3y'])"
                         :class="{
-                            'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
                                 '3y',
-                            'text-slate-700 dark:text-slate-200': period != '3y'
+                            'text-slate-800 dark:text-slate-200': period != '3y'
                         }"
                         class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
                         {{ '3' . __('y') }}
                     </div>
                     <div @click="period = 'all';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['all'])"
                         :class="{
-                            'text-slate-800 dark:text-slate-100 bg-slate-200 dark:bg-slate-800': period ==
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
                                 'all',
-                            'text-slate-700 dark:text-slate-200': period != 'all'
+                            'text-slate-800 dark:text-slate-200': period != 'all'
                         }"
                         class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
                         {{ __('All') }}

@@ -44,8 +44,8 @@
                             @if ($prize->activated_at)
                                 <button type="button"
                                     data-url="{{ route('roulette.download-results', ['roulettePrize' => $prize->id]) }}"
-                                    class="download-tg-ids inline-flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm cursor-pointer">
-                                    <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none"
+                                    class="download-tg-ids inline-flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm cursor-pointer">
+                                    <svg class="w-4 h-4 text-slate-500" fill="none"
                                         stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>

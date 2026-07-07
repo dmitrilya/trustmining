@@ -46,7 +46,7 @@
                 {{ __('Decline moderation?') }}
             </h2>
 
-            <p class="mt-1 text-sm text-slate-700 dark:text-slate-300">
+            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
                 {{ __('You must write a comment explaining why you rejected moderation.') }}
             </p>
 

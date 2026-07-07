@@ -1,7 +1,7 @@
 <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
     <div class="sticky top-16 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700">
         <div class="py-4 grid grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-1 xs:gap-2">
-            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 col-start-2"
+            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 col-start-2"
                 @click="sort('city')">
                 <span class="w-4/5 max-w-max truncate">{{ __('City') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -10,7 +10,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900 col-span-2"
+            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 col-span-2"
                 @click="sort('ad')">
                 {{ __('Ad') }}
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -19,7 +19,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('views_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Views') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -28,7 +28,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('visits_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Visits') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -37,7 +37,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('phone_views_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Phone') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -46,7 +46,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="hidden md:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="hidden md:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('tracks_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Tracks') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -55,7 +55,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="hidden lg:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="hidden lg:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('chats_count')">
                 <span class="w-4/5 max-w-max truncate">{{ __('Chats') }}</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">
@@ -64,7 +64,7 @@
                         fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            <div class="hidden xl:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-900"
+            <div class="hidden xl:flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800"
                 @click="sort('cr')">
                 <span class="w-4/5 max-w-max truncate">CR</span>
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none"class="ml-1 w-3 h-3 sm:w-4 sm:h-4">

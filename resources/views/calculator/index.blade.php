@@ -15,7 +15,7 @@
         ])
         : url()->current() }}">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Mining calculator') }} @if ($rModel)
                 <span class="hidden xs:inline">{{ $selModel['n'] }}</span>
             @endif
@@ -34,7 +34,7 @@
 
                 <section class="mt-4 sm:mt-6 lg:mt-8">
                     <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
-                        <h2 class="font-bold text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+                        <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                             {{ __('Best value offers') }} {{ $selModel['n'] }}
                         </h2>
                     </div>

@@ -5,7 +5,7 @@
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
                 <button
-                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-300 hover:text-slate-700 dark:hover:text-slate-300 focus:outline-none transition ease-in-out duration-100">
+                    class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
                     <span class="hidden xs:block">{{ __('Sort') }}</span>
                     <span class="xs:hidden">{{ __('Sort.') }}</span>
 
@@ -34,7 +34,7 @@
     <button
         @click="filter = true; if (document.querySelector(`meta[name='should-ask-location']`).content == 'true') askLocation('{{ __('Geolocation access is denied or unavailable') }}')"
         type="button"
-        class="-m-2 ml-1 xs:ml-2 p-2 text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 sm:ml-4">
+        class="-m-2 ml-1 xs:ml-2 p-2 text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 sm:ml-4">
         <span class="sr-only">Filters</span>
         <svg class="h-5 w-5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"

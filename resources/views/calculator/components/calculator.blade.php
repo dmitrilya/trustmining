@@ -114,14 +114,14 @@
             class="mt-4 md:mt-0 md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-9 xl:pl-12 col-span-3">
             @if (in_array('currency', $blocks))
                 <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                    <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200">
+                    <h2 class="text-xs xs:text-sm text-slate-800 dark:text-slate-200">
                         {{ __('Profit calculation') }}</h2>
                     <div class="flex cursor-pointer mx-3">
                         <button
                             :class="{
                                 'bg-primary-gradient text-white': currency ==
                                     'RUB',
-                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-200': currency ==
                                     'USDT'
                             }"
                             class="p-1 xs:p-1.5 rounded-l-md border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
@@ -130,7 +130,7 @@
                             :class="{
                                 'bg-primary-gradient text-white': currency ==
                                     'USDT',
-                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-100': currency ==
+                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-200': currency ==
                                     'RUB'
                             }"
                             class="p-1 xs:p-1.5 rounded-r-md border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
@@ -145,13 +145,13 @@
                         <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
                             <button @click="view = 'day'"
                                 :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
+                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
                             <button @click="view = 'month'"
                                 :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
+                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
                             <button @click="view = 'year'"
                                 :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-700 dark:text-slate-300 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
+                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
                         </div>
 
                         <div
@@ -192,7 +192,7 @@
                         </div>
                         <div class="flex text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
                             <h3>{{ __('Payback period') }}</h3>:
-                            <span class="ml-1 text-slate-900 dark:text-slate-100 font-bold"
+                            <span class="ml-1 text-slate-800 dark:text-slate-200 font-bold"
                                 x-text="version.p ? dailyProfitUSDT > 0 ? Math.round(version.p / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
                         <div class="text-xxs text-slate-500 mt-2">
@@ -258,7 +258,7 @@
                     @endif
 
                     @if (in_array('coins', $blocks))
-                        <h2 class="text-xs xs:text-sm text-slate-700 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
+                        <h2 class="text-xs xs:text-sm text-slate-800 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
                             {{ __('How many coins does it mine per day') }}</h2>
 
                         <template x-for="(profit, i) in algorithms[version?.a].p" :key="'profit_' + i">

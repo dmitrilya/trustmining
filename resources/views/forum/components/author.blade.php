@@ -43,7 +43,7 @@
 
     <div>
         <h4 itemprop="name"
-            class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-700 dark:text-slate-300 font-bold">
+            class="{{ isset($sm) ? 'mb-0.5 sm:mb-1 lg:text-sm' : 'mb-1 sm:mb-1.5 sm:text-sm lg:text-base' }} text-xs text-slate-800 dark:text-slate-200 font-bold">
             {{ $name }}</h4>
         <div class="flex items-center{{ isset($sm) ? '' : ' xs:mb-0.5' }}" x-data="{ open: false }">
             <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-500" aria-hidden="true"
@@ -69,13 +69,13 @@
                 <div x-show="open" style="display: none"
                     class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-4 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl z-20">
                     <div class="flex justify-center items-center">
-                        <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-500"
+                        <svg class="{{ isset($sm) ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4 sm:w-5 sm:h-5' }} text-slate-800 dark:text-slate-200"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                                 d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
                         </svg>
-                        <div class="ml-2 sm:ml-3 text-xs xs:text-sm sm:text-base text-slate-700 dark:text-slate-300">
+                        <div class="ml-2 sm:ml-3 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200">
                             {{ __($rank) }} ({{ $forumScore }})
                         </div>
                     </div>
@@ -92,20 +92,20 @@
 
                     <div class="space-y-0.5 sm:space-y-1">
                         @foreach ($ranks as $rankScore => $rank)
-                            <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                            <p class="whitespace-nowrap text-xs xs:text-sm text-slate-600 dark:text-slate-400">
                                 {{ __($rank) }} <span class="text-slate-500">- {{ $rankScore }}
                                     {{ __('points') }}</span></p>
                         @endforeach
                     </div>
 
                     <div class="space-y-0.5 sm:space-y-1">
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Answer to the question') }} <span class="text-slate-500">- {{ $answerPoints }}
                                 {{ __('point') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Helpful answer') }} <span class="text-slate-500">- {{ $helpfulAnswerPoints }}
                                 {{ __('points') }}</span></p>
-                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-700 dark:text-slate-300">
+                        <p class="whitespace-nowrap text-xs xs:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('Best answer') }} <span class="text-slate-500">- {{ $bestAnswerPoints }}
                                 {{ __('points') }}</span></p>
                     </div>

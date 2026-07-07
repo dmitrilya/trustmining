@@ -29,9 +29,9 @@
                 {{ $gpu->gpuBrand->name . ' ' . $gpu->name }}
             </div>
 
-            <p class="mt-1 xs:mt-2 text-xxs sm:text-xs md:text-sm text-slate-500 dark:text-slate-400">
+            <p class="mt-1 xs:mt-2 text-xxs sm:text-xs md:text-sm text-slate-500">
                 {{ __('Power (kW/h)') . ': ' }}
-                <span class="text-slate-700 dark:text-slate-300">{{ __($gpu->max_power) }}</span>
+                <span class="text-slate-600 dark:text-slate-400">{{ __($gpu->max_power) }}</span>
             </p>
         </div>
 

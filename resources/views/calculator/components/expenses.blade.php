@@ -23,7 +23,7 @@
 
                     <div x-show="open" style="display: none"
                         class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
-                        <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                             {{ __('The commission is indicated when working on a mining pool') }} <a
                                 href="{{ config('partners.headframe.link') }}"
                                 class="inline font-bold text-indigo-500 hover:text-indigo-600 under" target="_blank">HeadFrame

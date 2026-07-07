@@ -3,7 +3,7 @@
 @if ($type === 'password')
     <div x-data="{ show: false }" class="relative mt-1">
         <input {{ $disabled ? 'disabled' : '' }} :type="show ? 'text' : 'password'"
-            {{ $attributes->merge(['class' => 'py-1.5 px-3 block w-full rounded-md shadow-sm shadow-logo-color text-slate-950 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset focus:ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-500']) }}>
+            {{ $attributes->merge(['class' => 'py-1.5 px-3 block w-full rounded-md shadow-sm shadow-logo-color text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset focus:ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-500']) }}>
         <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" @click="show = !show">
             <template x-if="!show">
                 <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -24,5 +24,5 @@
     </div>
 @else
     <input {{ $disabled ? 'disabled' : '' }} type="{{ $type }}"
-        {{ $attributes->merge(['class' => 'py-1.5 px-3 block mt-1 w-full rounded-md shadow-sm shadow-logo-color text-slate-950 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset focus:ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-500']) }}>
+        {{ $attributes->merge(['class' => 'py-1.5 px-3 block mt-1 w-full rounded-md shadow-sm shadow-logo-color text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset focus:ring-inset ring-slate-300 dark:ring-slate-700 focus:outline-none focus:ring-indigo-500 dark:focus:ring-indigo-500']) }}>
 @endif

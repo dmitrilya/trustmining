@@ -1,6 +1,6 @@
 <div x-data="{ open: false }">
     <button @click="open = ! open" aria-label="Options"
-        class="ml-2 sm:ml-3 inline-flex items-center p-2 sm:p-2.5 text-sm text-center text-slate-950 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-200 focus:ring-inset focus:ring-2 focus:outline-none dark:text-white focus:ring-slate-300 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
+        class="ml-2 sm:ml-3 inline-flex items-center p-2 sm:p-2.5 text-sm text-center text-slate-800 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-200 focus:ring-inset focus:ring-2 focus:outline-none dark:text-slate-200 focus:ring-slate-300 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
             <path
                 d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
@@ -9,14 +9,14 @@
 
     <div x-show="open" @mouseleave="open = false" @click.away="open = false" style="display: none"
         class="z-100 -right-0.5 bottom-[44px] absolute bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border-2 border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
-        <ul class="py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-100" aria-labelledby="ad-options-trigger">
+        <ul class="py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200" aria-labelledby="ad-options-trigger">
             @if ($owner)
                 <li>
                     <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"
-                        class="block px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">{{ __('Edit') }}</a>
+                        class="block px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200">{{ __('Edit') }}</a>
                 </li>
                 <li
-                    class="flex px-3 py-2 sm:px-4 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">
+                    class="flex px-3 py-2 sm:px-4 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200">
                     <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
                 </li>
             @else
@@ -37,7 +37,7 @@
                 @endphp
 
                 <li @click="{{ $trackClick }}"
-                    class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white">
+                    class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200">
                     <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
@@ -45,7 +45,7 @@
                     <span>{{ auth()->check() && auth()->user()->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('To track') }}</span>
                 </li>
                 <li>
-                    <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white"
+                    <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200"
                         target="_blank" href="{{ route('chat.start', ['user' => $ad->user_id, 'ad_id' => $ad->id]) }}">
                         <svg class="w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 @if ($ad->user_has_phone)
-                    <li class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-white"
+                    <li class="flex items-center cursor-pointer px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200"
                         x-data="{ number: '{{ __('View number') }}' }"
                         @click="if (/^\d+$/.test(number)) window.open('tel:+' + number);
                         else axios.get('{{ route('phone.show', ['user' => $ad->user_id, 'ad_id' => $ad->id]) }}')

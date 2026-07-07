@@ -76,7 +76,7 @@ window.sendMessage = function (chatId, form) {
                 </div>
 
                 <div>
-                    <div class="text-slate-950 dark:text-slate-100 font-semibold mb-1">${file.name}</div>
+                    <div class="text-slate-800 dark:text-slate-200 font-semibold mb-1">${file.name}</div>
 
                     <div class="flex h-4"></div>
                 </div>

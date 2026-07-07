@@ -1,7 +1,7 @@
 <section class="space-y-6">
     <header>
         <div class="flex justify-between items-center">
-            <h2 class="text-lg text-slate-800 dark:text-slate-200">
+            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
                 {{ __('Offices') }}
             </h2>
 
@@ -28,21 +28,21 @@
     @elseif ($user->offices->count())
         <div>
             <div class="flex justify-between">
-                <p class="text-sm text-slate-700 dark:text-slate-300">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Active') }}
                 </p>
 
-                <p class="text-base text-slate-700 dark:text-slate-300">
+                <p class="text-base text-slate-600 dark:text-slate-400">
                     {{ $user->offices->where('moderation', false)->count() }}
                 </p>
             </div>
 
             <div class="flex justify-between mt-2">
-                <p class="text-sm text-slate-700 dark:text-slate-300">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
                     {{ __('Is under moderation') }}
                 </p>
 
-                <p class="text-base text-slate-700 dark:text-slate-300">
+                <p class="text-base text-slate-600 dark:text-slate-400">
                     {{ $user->offices->where('moderation', true)->count() }}
                 </p>
             </div>

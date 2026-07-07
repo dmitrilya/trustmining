@@ -1,6 +1,6 @@
 <x-app-layout title="Блог: {{ $article->title }}" description="{{ $article->subtitle }}">
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ $article->title }}
         </h1>
     </x-slot>
@@ -12,7 +12,7 @@
                 data-date="{{ $article->created_at }}"></p>
             <img src="{{ Storage::url('public/articles/' . $article->id . '.webp') }}" alt=""
                 class="rounded-lg w-full">
-            <div class="text-xs sm:text-sm text-slate-900 dark:text-slate-100">
+            <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
                 {!! $article->article !!}
             </div>
         </div>

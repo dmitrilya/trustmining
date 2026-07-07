@@ -4,7 +4,7 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <x-slot name="header">
-        <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ $company->name }}
         </h1>
     </x-slot>
@@ -84,7 +84,7 @@
 
                 <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
                     <div id="editor"
-                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-100 focus:outline-0 p-4">
+                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-4">
                     </div>
 
                     <input type="hidden" class="hidden" name="description" :value="description" required>

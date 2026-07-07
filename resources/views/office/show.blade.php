@@ -3,7 +3,7 @@
         <div class="flex items-center">
             <x-back-link :href="route('company', ['user' => $office->user->slug])"></x-back-link>
 
-            <h1 class="font-bold text-xl text-slate-900 dark:text-slate-100 leading-tight ml-3">
+            <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight ml-3">
                 {{ __('Office of company') }} {{ $office->user->name }}
             </h1>
         </div>
@@ -28,7 +28,7 @@
                     <div
                         class="md:col-span-4 space-y-5">
                         <h3
-                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
+                            class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                             <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
@@ -76,7 +76,7 @@
                 <div
                     class="md:col-span-4 space-y-5">
                     <h3
-                        class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-950 dark:text-slate-100 xs:text-base sm:text-lg">
+                        class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
                         <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             viewBox="0 0 24 24">
