@@ -31,7 +31,7 @@ class PassportController extends Controller
             'images' => []
         ]);
 
-        $passport->images = $this->saveFiles($request->file('images'), 'passports', 'image', $passport->id, 'private/');
+        $passport->images = $this->saveFiles($request->file('images'), 'passports', 'image', $passport->id, null, null, null, 90, 'private');
         $passport->save();
 
         $passport->moderations()->create(['data' => $passport->attributesToArray()]);

@@ -65,7 +65,7 @@ class SendTGNotifications implements ShouldQueue
             case 'message':
                 $text = $this->n->user->name . "\n\n" . $this->n->message;
                 $keyboard = [[[
-                    'text' => __('Contact'),
+                    'text' => __('Reply'),
                     'url' => $this->n->user->role->name == 'support' ? route('support', ['chat' => true]) :
                         route('chat', ['chat' => $this->n->chat_id])
                 ]]];

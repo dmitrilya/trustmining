@@ -40,14 +40,14 @@ trait FileTrait
 
     public function saveContract(UploadedFile|File $file, string $folder, Hosting $hosting, string $disk = 'public')
     {
-        $path = $this->saveFile($file, $folder, 'contract', $hosting->id, time(), null, 70, $disk);
+        $path = $this->saveFile($file, $folder, 'contract', $hosting->id, time(), null, null, 70, $disk);
 
         $document = IOFactory::load(storage_path('app/' . $disk . '/' . $path));
         $text = '';
 
         foreach ($document->getSections() as $s) {
             foreach ($s->getElements() as $e) {
-                if (method_exists(get_class($e), 'getText')) $text .= ' ' . $e->getText();
+                if (method_exists($e, 'getText')) $text .= ' ' . $e->getText();
                 else $text .= "\n";
             }
         }
