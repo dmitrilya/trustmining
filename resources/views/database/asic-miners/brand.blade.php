@@ -12,7 +12,7 @@
                 class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">
                 @foreach ($algos as $algo)
                     <div @click="algo && algo == '{{ $algo->id }}' ? filter(null, search) : filter('{{ $algo->id }}', search)"
-                        class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group hover:bg-indigo-200 dark:hover:bg-indigo-600 border hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
+                        class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
                         :class="{
                             'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700': algo ==
                                 '{{ $algo->id }}',

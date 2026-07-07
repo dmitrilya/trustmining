@@ -10,7 +10,7 @@
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'account' => 'Account'] as $category => $category_header)
                 <div @click="category = '{{ $category }}'"
-                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 rounded-md"
+                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
                     :class="category ==
                         '{{ $category }}' ?
                         'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700' :
