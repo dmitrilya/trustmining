@@ -31,7 +31,7 @@
                     @endswitch
                 </div>
 
-                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
                     @switch($order->status)
                         @case('CONFIRMED')
                         @case('AUTHORIZED')
@@ -48,9 +48,9 @@
                 </p>
 
                 <x-characteristics.characteristics>
-                    <x-characteristics.characteristic name="Creation date" :value="$order->created_at" />
+                    <x-characteristics.characteristic name="Creation date" :value="$order->created_at->translatedFormat('j F Y')" />
                     @if ($order->updated_at > $order->created_at)
-                        <x-characteristics.characteristic name="Status update" :value="$order->updated_at" />
+                        <x-characteristics.characteristic name="Status update" :value="$order->updated_at->translatedFormat('j F Y')" />
                     @endif
                 </x-characteristics.characteristics>
             </div>
