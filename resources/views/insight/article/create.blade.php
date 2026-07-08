@@ -172,8 +172,8 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="article-title" :value="__('Title')" />
-                <x-inputs.length-input id="article-title" name="title" type="text" :value="old('title')" autocomplete="title"
-                    required max="40" />
+                <x-inputs.length-input id="article-title" name="title" type="text" :value="old('title')"
+                    autocomplete="title" required max="40" />
                 <template x-if="validation.title">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
                 </template>
@@ -190,8 +190,8 @@
 
             <div>
                 <x-inputs.input-label for="preview" :value="__('Preview')" />
-                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                    required label="max. 5MB, 4/3" />
+                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full"
+                    accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
@@ -204,7 +204,7 @@
             <div x-data="{ allTags: {{ $tags }}, tags: [], search: '' }">
                 <div>
                     <x-inputs.input-label for="search" :value="__('Hashtags')" />
-                    <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
+                    <div
                         class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                         <input type="text" id="search" x-model="search" placeholder="#"
                             class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-600 dark:text-slate-400 w-full" />
@@ -215,13 +215,15 @@
                     </div>
                 </div>
 
-                <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                    <template x-for="tag in tags" :key="tag">
-                        <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
-                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
-                        </div>
-                    </template>
-                </div>
+                <template x-if="tags.length">
+                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                        <template x-for="tag in tags" :key="tag">
+                            <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
+                                class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
+                            </div>
+                        </template>
+                    </div>
+                </template>
 
                 <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                     <template
@@ -284,7 +286,8 @@
                         <x-inputs.text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
                     </div>
 
-                    <x-buttons.primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto" type="button"
+                    <x-buttons.primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto"
+                        type="button"
                         @click="
                             show = false;
                             const input = $el.previousElementSibling.querySelector('input');

@@ -22,6 +22,11 @@ class Track extends Model
         'trackable_id',
     ];
 
+    public function trackable()
+    {
+        return $this->morphTo();
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class, 'user_id');

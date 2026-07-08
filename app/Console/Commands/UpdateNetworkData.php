@@ -10,7 +10,8 @@ use Exception;
 
 use App\Http\Traits\NotificationTrait;
 use App\Models\Database\Coin;
-use App\Models\Metrics\DifficultySubscription;
+use App\Models\User\NotificationType;
+use App\Models\User\User;
 
 class UpdateNetworkData extends Command
 {
@@ -81,18 +82,36 @@ class UpdateNetworkData extends Command
 
     private function sendNotifications(Collection $changed)
     {
-        $groupedSubscriptions = DifficultySubscription::with(['user', 'coin'])->get()->groupBy('coin_id');
+        if ($changed->isEmpty()) return;
+
+        $notificationTypeId = NotificationType::where('name', 'Difficulty changing')->value('id');
+        $changedCoinIds = $changed->pluck('id')->toArray();
+
+        $users = User::whereHas('settings', function ($query) use ($notificationTypeId, $changedCoinIds) {
+            $query->where(function ($q) use ($notificationTypeId, $changedCoinIds) {
+                foreach ($changedCoinIds as $coinId) {
+                    $q->orWhereJsonContains("notifications->{$notificationTypeId}->c", (int)$coinId);
+                }
+            });
+        })->with('settings')->select(['id', 'tg_id', 'email'])->get();
+
+        $coinsToUsersMap = [];
+
+        foreach ($users as $user) {
+            $userCoins = $user->settings->notifications[$notificationTypeId]['c'];
+            $subscribedChangedCoins = array_intersect($userCoins, $changedCoinIds);
+
+            foreach ($subscribedChangedCoins as $coinId) {
+                $coinsToUsersMap[$coinId][] = $user;
+            }
+        }
 
         foreach ($changed as $changedCoin) {
-            if (!$groupedSubscriptions->has($changedCoin->id)) continue;
+            if (!isset($coinsToUsersMap[$changedCoin->id])) continue;
 
-            $coinSubscriptions = $groupedSubscriptions->get($changedCoin->id);
+            $groupUsers = $coinsToUsersMap[$changedCoin->id];
 
-            $users = new Collection($coinSubscriptions->pluck('user')->filter()->unique('id'));
-
-            if ($users->isEmpty()) continue;
-
-            $this->notify('Difficulty changing', $users, 'coin', $changedCoin);
+            $this->notify('Difficulty changing', new Collection($groupUsers), 'coin', $changedCoin);
         }
     }
 }

@@ -6,10 +6,10 @@ class NewMessageFilter implements NotificationFilterInterface
 {
     public function check(array $settings, $message): bool
     {
-        switch ($settings['frequency']) {
-            case 'all':
+        switch ($settings['f']) {
+            case 'a':
                 return true;
-            case 'first':
+            case 'f':
                 $messageDate = $message->created_at;
 
                 return $message->chat->messages()

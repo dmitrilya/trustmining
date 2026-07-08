@@ -6,10 +6,10 @@ class ReviewEditedFilter implements NotificationFilterInterface
 {
     public function check(array $settings, $review): bool
     {
-        switch ($settings['condition']) {
-            case 'all':
+        switch ($settings['c']) {
+            case 'a':
                 return true;
-            case 'negative':
+            case 'n':
                 return $review->rating <= 3;
             default:
                 return true;

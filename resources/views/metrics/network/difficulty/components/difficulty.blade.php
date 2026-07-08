@@ -52,8 +52,7 @@
         diff1y = d365 ? calculateDiff(current, d365.value) : null;
     }
 })">
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-4 mb-2 lg:mb-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-4">
         <div
             class="bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between">
             <div>
@@ -181,9 +180,9 @@
 </div>
 
 @if (in_array('graph', $blocks))
-    <div class="overflow-hidden">
+    <div class="overflow-hidden mt-2 lg:mt-4">
         @if (in_array('period', $blocks))
-            <div class="flex items-center justify-between mb-4 lg:mb-6">
+            <div class="flex items-center justify-between">
                 <h2 class="text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                     {{ __('Online chart') }}
                 </h2>
@@ -239,6 +238,6 @@
             </div>
         @endif
 
-        <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
+        <div id="graph" class="h-[25rem] sm:h-[35rem] mt-4 lg:mt-6"></div>
     </div>
 @endif

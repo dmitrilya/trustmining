@@ -2,27 +2,27 @@
 
 return [
     'notifications' => [
-        'enabled' => 'Enabled',
+        'on' => 'Enabled',
         'directions' => [
-            'email' => 'Email',
-            'tg' => 'Telegram',
+            'e' => 'Email',
+            't' => 'Telegram',
         ],
         'settings' => [
-            'frequency' => [
+            'f' => [
                 'name' => 'Frequency',
-                'first' => 'Only the first one in a day',
-                'all' => 'All',
+                'f' => 'Only the first one in a day',
+                'a' => 'All',
                 '12h' => 'Every 12 hours',
                 'd' => 'Daily',
                 '3d' => 'Every 3 days',
-                'change' => 'On difficulty change',
+                'c' => 'On difficulty change',
             ],
-            'condition' => [
+            'c' => [
                 'name' => 'Condition',
-                'drop' => 'Decrease only',
-                'changing' => 'Any change',
-                'negative' => 'Only negative',
-                'all' => 'All',
+                'd' => 'Decrease only',
+                'c' => 'Any change',
+                'n' => 'Only negative',
+                'a' => 'All',
             ]
         ]
     ],

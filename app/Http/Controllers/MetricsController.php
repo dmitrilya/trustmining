@@ -12,7 +12,7 @@ use App\Http\Traits\AdTrait;
 
 use App\Models\Database\Coin;
 use App\Models\Morph\View;
-
+use App\Models\User\NotificationType;
 use Carbon\Carbon;
 
 class MetricsController extends Controller
@@ -108,9 +108,18 @@ class MetricsController extends Controller
 
     public function difficultySubscribe(Request $request, Coin $coin)
     {
-        $user = $request->user();
+        $notificationTypeId = NotificationType::where('name', 'Difficulty changing')->value('id');
+        $settings = $request->user()->settings;
+        $notifications = $settings->notifications;
+        $currentCoins = $notifications[$notificationTypeId]['c'];
 
-        $user->difficultySubscriptions()->firstOrCreate(['coin_id' => $coin->id]);
+        if (!in_array($coin->id, $currentCoins)) {
+            $currentCoins[] = (int) $coin->id;
+            $notifications[$notificationTypeId]['c'] = array_values($currentCoins);
+
+            $settings->notifications = $notifications;
+            $settings->save();
+        }
 
         return response()->json([
             'success' => true,
@@ -120,7 +129,19 @@ class MetricsController extends Controller
 
     public function difficultyUnsubscribe(Request $request, Coin $coin)
     {
-        $request->user()->difficultySubscriptions()->where('coin_id', $coin->id)->delete();
+        $notificationTypeId = NotificationType::where('name', 'Difficulty changing')->value('id');
+        $settings = $request->user()->settings;
+
+        $notifications = $settings->notifications;
+        $currentCoins = $notifications[$notificationTypeId]['c'];
+
+        if (($key = array_search($coin->id, $currentCoins)) !== false) {
+            unset($currentCoins[$key]);
+            $notifications[$notificationTypeId]['c'] = array_values($currentCoins);
+
+            $settings->notifications = $notifications;
+            $settings->save();
+        }
 
         return response()->json([
             'success' => true,

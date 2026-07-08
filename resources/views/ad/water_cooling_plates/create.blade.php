@@ -8,24 +8,26 @@
                 @input="search = $el.value" />
         </div>
 
-        <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-            <template x-for="model in models" :key="model">
-                <div>
-                    <div @click="
-                        models.splice(models.indexOf(model), 1);
-                        allModels.push(model);
-                        let props = JSON.parse($refs.props_water_cooling_plates.value);
-                        props['For which models'] = models;
-                        $refs.props_water_cooling_plates.value = JSON.stringify(props);
-                    "
-                        x-text="model"
-                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
+        <template x-if="models.length">
+            <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                <template x-for="model in models" :key="model">
+                    <div>
+                        <div @click="
+                            models.splice(models.indexOf(model), 1);
+                            allModels.push(model);
+                            let props = JSON.parse($refs.props_water_cooling_plates.value);
+                            props['For which models'] = models;
+                            $refs.props_water_cooling_plates.value = JSON.stringify(props);
+                        "
+                            x-text="model"
+                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
 
+                        </div>
+                        <input type="hidden" name="models[]" :value="model">
                     </div>
-                    <input type="hidden" name="models[]" :value="model">
-                </div>
-            </template>
-        </div>
+                </template>
+            </div>
+        </template>
 
         <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
             <template

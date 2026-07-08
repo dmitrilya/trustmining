@@ -178,7 +178,7 @@
 
             @auth
                 @if ($user->tariff && $user->tg_id === null)
-                    <x-modal name="tg-auth">
+                    <x-modal name="tg-auth" maxWidth="sm">
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-6">
                                 <h2 class="text-lg text-slate-800 dark:text-slate-200">

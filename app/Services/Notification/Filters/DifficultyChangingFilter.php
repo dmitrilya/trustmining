@@ -12,7 +12,7 @@ class DifficultyChangingFilter implements NotificationFilterInterface
         $pd = $difficulties[1]->difficulty;
         $cd = $difficulties[0]->difficulty;
 
-        if ($pd != $cd) return $settings['frequency'] == 'change';
+        if ($pd != $cd) return $settings['f'] == 'c';
 
         $now = now();
         $frequencies = ['12h'];
@@ -23,6 +23,6 @@ class DifficultyChangingFilter implements NotificationFilterInterface
             if ($now->diffInDays(Carbon::parse('2026-01-01')) % 3 === 0) $frequencies[] = '3d';
         }
 
-        return in_array($settings['frequency'], $frequencies);
+        return in_array($settings['f'], $frequencies);
     }
 }

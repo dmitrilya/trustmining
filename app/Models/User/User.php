@@ -57,13 +57,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
             $user->settings()->create([
                 'notifications' => [
-                    $notificationTypes->where('name', 'Moderation completed')->first()->id => ['email' => ['enabled' => true], 'tg' => ['enabled' => true]],
-                    $notificationTypes->where('name', 'Moderation failed')->first()->id => ['email' => ['enabled' => true], 'tg' => ['enabled' => true]],
-                    $notificationTypes->where('name', 'New message')->first()->id => ['email' => ['enabled' => true, 'frequency' => 'first'], 'tg' => ['enabled' => true, 'frequency' => 'all']],
-                    $notificationTypes->where('name', 'New review')->first()->id => ['email' => ['enabled' => true, 'condition' => 'negative'], 'tg' => ['enabled' => true, 'condition' => 'all']],
-                    $notificationTypes->where('name', 'Review edited')->first()->id => ['email' => ['enabled' => true, 'condition' => 'negative'], 'tg' => ['enabled' => true, 'condition' => 'all']],
-                    $notificationTypes->where('name', 'Price change')->first()->id => ['email' => ['enabled' => true, 'condition' => 'drop'], 'tg' => ['enabled' => true, 'condition' => 'changing']],
-                    $notificationTypes->where('name', 'Difficulty changing')->first()->id => ['email' => ['enabled' => true, 'frequency' => 'change'], 'tg' => ['enabled' => true, 'frequency' => 'change']],
+                    $notificationTypes->where('name', 'Moderation completed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true]],
+                    $notificationTypes->where('name', 'Moderation failed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true]],
+                    $notificationTypes->where('name', 'New message')->first()->id => ['e' => ['o' => true, 'f' => 'f'], 't' => ['o' => true, 'f' => 'a']],
+                    $notificationTypes->where('name', 'New review')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true, 'c' => 'a']],
+                    $notificationTypes->where('name', 'Review edited')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true, 'c' => 'a']],
+                    $notificationTypes->where('name', 'Price change')->first()->id => ['e' => ['o' => true, 'c' => 'd'], 't' => ['o' => true, 'c' => 'c']],
+                    $notificationTypes->where('name', 'Difficulty changing')->first()->id => ['c' => [], 'e' => ['o' => true, 'f' => 'c'], 't' => ['o' => true, 'f' => 'c']],
                 ]
             ]);
         });
@@ -221,11 +221,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function trackedAsicModels()
     {
         return $this->morphedByMany(\App\Models\Database\AsicModel::class, 'trackable', 'tracks', 'user_id', 'trackable_id');
-    }
-
-    public function difficultySubscriptions()
-    {
-        return $this->hasMany(\App\Models\Metrics\DifficultySubscription::class);
     }
 
     public function phones()

@@ -4,7 +4,7 @@
         $excludeTypes = ['Difficulty changing'];
     @endphp
 
-    <form x-data="{ settings: {{ $settings }} }"
+    <form
         @submit.prevent="axios.patch('{{ route('profile.settings.update', ['setting' => 'notifications']) }}', {settings: settings})
             .then(r => pushToastAlert(r.data.message, r.data.success ? 'success' : 'error'))">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -17,14 +17,14 @@
                     <div class="{{ count($notification->settings) ? 'space-y-4' : 'space-y-2' }}">
                         @foreach ($settings[$notification->id] as $directionName => $direction)
                             <div>
-                                <x-inputs.checkbox :name="$notification->id . '_' . $directionName . '_enabled'" :checked="$direction['enabled']" value="1"
-                                    :handleChange="'(checked => settings[\'' . $notification->id . '\'][\'' . $directionName . '\'][\'enabled\'] = checked)'">
+                                <x-inputs.checkbox :name="$notification->id . '_' . $directionName . '_on'" :checked="$direction['o']" value="1"
+                                    :handleChange="'(checked => settings[\'' . $notification->id . '\'][\'' . $directionName . '\'][\'o\'] = checked)'">
                                     {{ __('settings.notifications.directions.' . $directionName) }}
                                 </x-inputs.checkbox>
 
                                 @foreach ($notification->settings as $setting => $variants)
                                     <div class="mt-1 lg:mt-2">
-                                        <x-inputs.select ::disabled="!settings['{{ $notification->id }}']['{{ $directionName }}']['enabled']" :label="__('settings.notifications.settings.' . $setting . '.name')" :name="$notification->id . '_' . $directionName . '_' . $setting"
+                                        <x-inputs.select ::disabled="!settings['{{ $notification->id }}']['{{ $directionName }}']['o']" :label="__('settings.notifications.settings.' . $setting . '.name')" :name="$notification->id . '_' . $directionName . '_' . $setting"
                                             handleChange="(variant => settings['{{ $notification->id }}']['{{ $directionName }}']['{{ $setting }}'] = variant)"
                                             :key="$settings[$notification->id][$directionName][$setting]" :items="collect($variants)
                                                 ->map(

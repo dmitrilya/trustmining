@@ -156,8 +156,8 @@
 
         <div class="w-full">
             <x-inputs.input-label for="article-title" :value="__('Title')" />
-            <x-inputs.length-input id="article-title" name="title" type="text" :value="$article->title" autocomplete="title"
-                required max="40" />
+            <x-inputs.length-input id="article-title" name="title" type="text" :value="$article->title"
+                autocomplete="title" required max="40" />
             <template x-if="validation.title">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
             </template>
@@ -174,7 +174,8 @@
 
         <div>
             <x-inputs.input-label for="preview" :value="__('Preview')" />
-            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 4/3" />
+            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
+                label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>
@@ -198,13 +199,15 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                <template x-for="tag in tags" :key="tag">
-                    <div @click="tags.splice(tags.indexOf(tag), 1);allTags.unshift(tag)" x-text="tag"
-                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
-                    </div>
-                </template>
-            </div>
+            <template x-if="tags.length">
+                <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                    <template x-for="tag in tags" :key="tag">
+                        <div @click="tags.splice(tags.indexOf(tag), 1);allTags.unshift(tag)" x-text="tag"
+                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
+                        </div>
+                    </template>
+                </div>
+            </template>
 
             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                 <template

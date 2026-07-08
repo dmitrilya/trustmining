@@ -14,11 +14,11 @@ class PriceChangeFilter implements NotificationFilterInterface
 
         $currentPrice = $ad->price * $ad->coin->rate;
 
-        switch ($settings['condition'] ?? 'changing') {
-            case 'drop':
+        switch ($settings['c'] ?? 'c') {
+            case 'd':
                 return $currentPrice < $oldPrice;
 
-            case 'changing':
+            case 'c':
                 return true;
 
             default:
