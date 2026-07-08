@@ -1,24 +1,18 @@
-<section>
-    <header class="mb-2">
-        <div class="flex items-center justify-between">
-            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-                {{ __('Roulette results') }}
-            </h2>
+@php
+    $hasModeratedCompany = $user->company && !$user->company->moderation;
+@endphp
 
-            @if ($user->company && !$user->company->moderation)
-                <a
-                    href="{{ route('support', ['tab' => 'chat', 'message' => __('Hello! Our company is offering a roulette prize draw. We are giving away... conditions are...')]) }}">
-                    <x-buttons.secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('Start draw') }}</x-buttons.secondary-button>
-                </a>
-            @endif
-        </div>
-    </header>
-
-    @if (!$user->company || $user->company->moderation)
-        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">
-            {{ __('You can also launch a roulette draw. To do this, you need to add a company, verify it, and submit a request to our support team.') }}
-        </p>
+<x-profile.section h="Roulette results" :p="!$hasModeratedCompany
+    ? 'You can also launch a roulette draw. To do this, you need to add a company, verify it, and submit a request to our support team'
+    : null">
+    @if ($hasModeratedCompany)
+        <x-slot name="i">
+            <a
+                href="{{ route('support', ['tab' => 'chat', 'message' => __('Hello! Our company is offering a roulette prize draw. We are giving away... conditions are...')]) }}">
+                <x-buttons.secondary-button
+                    class="bg-secondary-gradient dark:text-slate-800">{{ __('Start draw') }}</x-buttons.secondary-button>
+            </a>
+        </x-slot>
     @endif
 
     <div class="space-y-2">
@@ -67,26 +61,24 @@
 
                 @if (!is_null($prize->activated_at))
                     <div class="text-xxs text-slate-500 mt-1">
-                        Период розыгрыша:
+                        {{ __('Draw period') }}:
                         {{ $startDate->format('d.m.Y H:i') }} —
-                        {{ $prize->deactivated_at ? $prize->deactivated_at->format('d.m.Y H:i') : 'настоящее время' }}
+                        {{ $prize->deactivated_at ? $prize->deactivated_at->format('d.m.Y H:i') : __('present time') }}
                     </div>
 
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                         <div
                             class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
-                            <span
-                                class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">1.
-                                Спинов в период</span>
+                            <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">1.
+                                {{ __('Spins in the period') }}</span>
                             <span
                                 class="text-lg font-black text-slate-600 dark:text-slate-400 font-mono">{{ $totalSiteSpinsInPeriod }}</span>
                         </div>
 
                         <div
                             class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
-                            <span
-                                class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">2.
-                                Выпадений приза</span>
+                            <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">2.
+                                {{ __('Prize drops') }}</span>
                             <span class="text-lg font-black text-indigo-600 dark:text-indigo-400 font-mono">
                                 {{ $allPrizeSpins->count() }}
                             </span>
@@ -94,9 +86,8 @@
 
                         <div
                             class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
-                            <span
-                                class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">3.
-                                Авторизовано</span>
+                            <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">3.
+                                {{ __('Authorized') }}</span>
                             <span class="text-lg font-black text-indigo-500 font-mono">
                                 {{ $authorizedSpins->count() }}
                             </span>
@@ -104,9 +95,8 @@
 
                         <div
                             class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
-                            <span
-                                class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">4.
-                                С привязкой TG</span>
+                            <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">4.
+                                {{ __('With TG binding') }}</span>
                             <span class="text-lg font-black text-emerald-500 font-mono">
                                 {{ $withTgIdSpins->count() }}
                             </span>
@@ -117,16 +107,16 @@
                         <button type="button"
                             data-url="{{ route('roulette.download-results', ['roulettePrize' => $prize->id]) }}"
                             class="download-tg-ids inline-flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm cursor-pointer">
-                            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor"
-                                stroke-width="2" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                             </svg>
-                            <span>Скачать TG ID ({{ $withTgIdSpins->pluck('user.tg_id')->unique()->count() }})</span>
+                            <span>{{ __('Download') }} TG ID ({{ $withTgIdSpins->pluck('user.tg_id')->unique()->count() }})</span>
                         </button>
                     </div>
                 @endif
             </div>
         @endforeach
     </div>
-</section>
+</x-profile.section>

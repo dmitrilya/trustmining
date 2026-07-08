@@ -31,12 +31,12 @@
                         <div class="mb-1.5 sm:mb-2 flex justify-between items-start">
                             @if ($question->moderation)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
                                     {{ __('Is under moderation') }}
                                 </div>
                             @elseif (!$question->published)
                                 <div
-                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
+                                    class="w-max cursor-default px-1 py-1 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color transition ease-in-out duration-100">
                                     {{ __('Check out similar questions') }}
                                 </div>
                             @else

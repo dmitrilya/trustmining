@@ -1,14 +1,4 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Notification settings') }}
-        </h2>
-
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __('Customize your notifications.') }}
-        </p>
-    </header>
-
+<x-profile.section h="Notification settings" p="Customize your notifications">
     @php
         $settings = collect($user->settings->notifications);
         $excludeTypes = ['Difficulty changing'];
@@ -62,4 +52,4 @@
             <x-buttons.primary-button class="block ml-auto mt-4">{{ __('Save') }}</x-buttons.primary-button>
         </template>
     </form>
-</section>
+</x-profile.section>

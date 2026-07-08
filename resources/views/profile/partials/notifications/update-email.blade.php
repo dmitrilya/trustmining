@@ -1,19 +1,9 @@
-<section>
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Email for notifications') }}
-        </h2>
-
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __("Update your email address.") }}
-        </p>
-    </header>
-
+<x-profile.section h="Email for notifications" p="Update your email address">
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="space-y-6">
         @csrf
         @method('patch')
 
@@ -52,4 +42,4 @@
             @endif
         </div>
     </form>
-</section>
+</x-profile.section>

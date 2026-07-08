@@ -1,14 +1,5 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
+<x-profile.section h="Delete Account"
+    p="Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain">
     <x-buttons.danger-button x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-buttons.danger-button>
 
@@ -45,4 +36,4 @@
             </div>
         </form>
     </x-modal>
-</section>
+</x-profile.section>

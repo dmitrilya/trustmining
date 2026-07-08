@@ -8,7 +8,7 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative" x-data="{ category: 'ads' }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'account' => 'Account'] as $category => $category_header)
+            @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'finance' => 'Finance', 'account' => 'Account'] as $category => $category_header)
                 <div @click="category = '{{ $category }}'"
                     class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
                     :class="category ==
@@ -27,26 +27,16 @@
 
         <x-profile.category x-show="category == 'ads'">
             <div class="xl:col-span-2 grid sm:grid-cols-2 gap-2">
-                <x-profile.partial
-                    class="sm:col-span-2">@include('profile.partials.ads.ads')</x-profile.partial>
-                <x-profile.partial>@include('profile.partials.ads.company')</x-profile.partial>
-                <x-profile.partial>@include('profile.partials.ads.hosting')</x-profile.partial>
-
-                <div class="sm:col-span-2 grid sm:grid-cols-2 gap-2">
-                    <x-profile.partial
-                        class="{{ !$user->passport ? 'sm:col-span-2 order-1' : 'order-2' }}">@include('profile.partials.ads.passport')</x-profile.partial>
-                    <x-profile.partial
-                        class="sm:col-span-2">@include('profile.partials.notifications.tg-auth')</x-profile.partial>
-                </div>
+                <x-profile.partial class="sm:col-span-2">@include('profile.partials.ads.ads')</x-profile.partial>
+                <x-profile.partial class="sm:col-span-2">@include('profile.partials.ads.passport')</x-profile.partial>
             </div>
 
             <div class="xl:col-span-3 grid sm:grid-cols-2 gap-2">
-                <x-profile.partial
-                    class="sm:col-span-2">@include('profile.partials.ads.tariff')</x-profile.partial>
+                <x-profile.partial>@include('profile.partials.ads.company')</x-profile.partial>
+                <x-profile.partial>@include('profile.partials.ads.hosting')</x-profile.partial>
                 <x-profile.partial>@include('profile.partials.ads.offices')</x-profile.partial>
                 <x-profile.partial>@include('profile.partials.ads.registry')</x-profile.partial>
-                <x-profile.partial
-                    class="sm:col-span-2">@include('profile.partials.ads.phones')</x-profile.partial>
+                <x-profile.partial class="sm:col-span-2">@include('profile.partials.ads.phones')</x-profile.partial>
             </div>
         </x-profile.category>
 
@@ -89,6 +79,16 @@
 
             <div class="xl:col-span-3 grid grid-cols-1 gap-2">
                 <x-profile.partial>@include('profile.partials.notifications.notifications')</x-profile.partial>
+            </div>
+        </x-profile.category>
+
+        <x-profile.category x-show="category == 'finance'">
+            <div class="xl:col-span-2 grid grid-cols-1 gap-2">
+                <x-profile.partial>@include('profile.partials.finance.history')</x-profile.partial>
+            </div>
+
+            <div class="xl:col-span-3 grid grid-cols-1 gap-2">
+                <x-profile.partial>@include('profile.partials.finance.tariff')</x-profile.partial>
             </div>
         </x-profile.category>
 

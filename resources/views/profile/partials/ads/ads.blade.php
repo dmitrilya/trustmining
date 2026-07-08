@@ -1,66 +1,34 @@
-<section class="space-y-6">
-    <header>
-        <div class="flex justify-between">
-            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-                {{ __('My advertisements') }}
-            </h2>
+@php
+    $adsCount = $user->ads->count();
+    $moreAdsAvailable = ($user->tariff && $adsCount < $user->tariff->max_ads) || (!$user->tariff && $adsCount < 2);
+    $hasVerification = $user->passport || ($user->company && !$user->company->moderation);
+    $officeExists = $user->offices->count() > 0;
+@endphp
 
-            @if (
-                (($user->tariff && $user->ads->count() < $user->tariff->max_ads) || (!$user->tariff && $user->ads->count() < 2)) &&
-                    ($user->passport || ($user->company && !$user->company->moderation)) &&
-                    $user->offices->count())
-                <a href="{{ route('ad.create') }}"
-                    class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
-            @endif
+<x-profile.section h="My advertisements" :p="!$hasVerification
+    ? 'Please verify your identity using your passport or register a company to access advertisements'
+    : (!$officeExists
+        ? 'When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale'
+        : null)">
+    @if ($moreAdsAvailable && $hasVerification && $officeExists)
+        <x-slot name="i">
+            <a href="{{ route('ad.create') }}"
+                class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
+        </x-slot>
+    @endif
+
+    @if ($hasVerification && $officeExists)
+        <div class="text-slate-500 text-sm">
+            <span class="text-slate-800 dark:text-slate-200 text-xl sm:text-2xl font-bold">{{ $adsCount }} /
+                {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
+            {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
         </div>
-    </header>
 
-    <div class="text-slate-500 text-sm">
-        <span class="text-slate-800 dark:text-slate-200 text-xl sm:text-2xl font-bold">{{ $user->ads->count() }} /
-            {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>
-        {{ __('according to the tariff') }} {{ $user->tariff ? $user->tariff->name : 'Base' }}
-    </div>
-
-    @if (!$user->passport && (!$user->company || $user->company->moderation))
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-            {{ __('Please verify your identity using your passport or register a company to access advertisements.') }}
-        </p>
-    @elseif (!$user->offices->count())
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-            {{ __('When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale.') }}
-        </p>
-    @else
-        <div>
-            <div class="flex justify-between">
-                <p class="text-sm text-slate-600 dark:text-slate-400">
-                    {{ __('Active') }}
-                </p>
-
-                <p class="text-base text-slate-600 dark:text-slate-400">
-                    {{ $user->ads->where('hidden', false)->where('moderation', false)->count() }}
-                </p>
-            </div>
-
-            <div class="flex justify-between mt-2">
-                <p class="text-sm text-slate-600 dark:text-slate-400">
-                    {{ __('Is under moderation') }}
-                </p>
-
-                <p class="text-base text-slate-600 dark:text-slate-400">
-                    {{ $user->ads->where('moderation', true)->count() }}
-                </p>
-            </div>
-
-            <div class="flex justify-between mt-2">
-                <p class="text-sm text-slate-600 dark:text-slate-400">
-                    {{ __('Hidden') }}
-                </p>
-
-                <p class="text-base text-slate-600 dark:text-slate-400">
-                    {{ $user->ads->where('hidden', true)->count() }}
-                </p>
-            </div>
-        </div>
+        <x-characteristics.characteristics>
+            <x-characteristics.characteristic name="Active" :value="$user->ads->where('hidden', false)->where('moderation', false)->count()" />
+            <x-characteristics.characteristic name="Is under moderation" :value="$user->ads->where('moderation', true)->count()" />
+            <x-characteristics.characteristic name="Hidden" :value="$user->ads->where('hidden', true)->count()" />
+        </x-characteristics.characteristics>
 
         @if ($user->ads->where('moderation', false)->count())
             <div class="flex justify-end mt-4">
@@ -76,4 +44,4 @@
             </div>
         @endif
     @endif
-</section>
+</x-profile.section>

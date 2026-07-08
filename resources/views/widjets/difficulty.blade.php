@@ -54,7 +54,7 @@
                         class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
                         :class="blocks.includes(key) ?
                             'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
-                            'bg-white border-slate-300 text-slate-500 opacity-60 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
+                            'bg-white border-slate-300 text-slate-500 opacity-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
 
                         <span x-text="item"></span>
 

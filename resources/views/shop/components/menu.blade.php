@@ -31,7 +31,7 @@
     @endphp
 
     <a href="{{ $hasCompany ? route('company.about', ['user' => $user->slug]) : '#' }}"
-        class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ $hasCompany ? '' : ' opacity-60' }}">
+        class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ $hasCompany ? '' : ' opacity-50' }}">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
             <svg class="h-5 sm:h-6 w-5 sm:w-6 {{ $hasCompany ? (request()->routeIs('company.about') ? 'text-indigo-500' : 'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600') : 'text-slate-600 dark:text-slate-400' }}"
@@ -51,7 +51,7 @@
         </div>
     </a>
     <a href="{{ $hasHosting ? route('company.hosting', ['user' => $user->slug]) : '#' }}"
-        class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ $hasHosting ? '' : ' opacity-60' }}">
+        class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ $hasHosting ? '' : ' opacity-50' }}">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
             <svg class="h-5 sm:h-6 w-5 sm:w-6 {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-indigo-500' : 'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600') : 'text-slate-600 dark:text-slate-400' }}"

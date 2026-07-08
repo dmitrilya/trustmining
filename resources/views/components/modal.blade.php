@@ -42,7 +42,7 @@
         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div class="absolute inset-0 bg-slate-500 dark:bg-slate-950 opacity-75"></div>
+        <div class="absolute inset-0 bg-slate-500 dark:bg-slate-950 opacity-80"></div>
     </div>
 
     <div x-show="show"

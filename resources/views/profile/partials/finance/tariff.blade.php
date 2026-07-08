@@ -1,24 +1,13 @@
-<section class="space-y-6">
-    <header>
-        <div class="flex justify-between items-center">
-            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-                {{ __('Finance') }}
-            </h2>
+<x-profile.section h="Balance and tariff plan"
+    p="You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base">
+    <x-slot name="i">
+        <a class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600"
+            href="{{ route('tariffs') }}">{{ __('Tariffs') }} ➚</a>
+    </x-slot>
 
-            <a class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600"
-                href="{{ route('tariffs') }}">{{ __('Tariffs') }} ➚</a>
-        </div>
-    </header>
-
-    <div class="flex justify-between items-center">
-        <p class="text-sm text-slate-600 dark:text-slate-400">
-            {{ __('Active tariff') }}
-        </p>
-
-        <p class="text-slate-500">
-            {{ $user->tariff ? $user->tariff->name : 'Base' }}
-        </p>
-    </div>
+    <x-characteristics.characteristics>
+        <x-characteristics.characteristic name="Active tariff" :value="$user->tariff ? $user->tariff->name : 'Base'" />
+    </x-characteristics.characteristics>
 
     <div class="flex items-center justify-between">
         <div class="flex items-center">
@@ -37,18 +26,14 @@
             </p>
 
             <a href="{{ route('order.create') }}"
-                class="ml-4 min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-70 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
+                class="ml-4 min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
         </div>
 
         @if ($user->tariff)
-            <div class="flex items-end text-slate-600 md:text-lg">
+            <div class="flex items-end text-slate-600 dark:text-slate-400">
                 <span
                     class="text-slate-800 dark:text-slate-200 font-bold text-xl">{{ round($user->tariff->price) }}</span>/{{ __('day') }}
             </div>
         @endif
     </div>
-
-    <p class="text-sm text-slate-600 dark:text-slate-400">
-        {{ __('You can top up your balance with any amount, but to activate the tariff, the amount must exceed your monthly expenses. If your balance is not enough for daily debits, the tariff will be reset to Base.') }}
-    </p>
-</section>
+</x-profile.section>

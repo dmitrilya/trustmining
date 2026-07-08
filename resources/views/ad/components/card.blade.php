@@ -32,18 +32,18 @@
         @if ($owner)
             <div class="mt-2 absolute z-10 left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->last_moderation_status == 1)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif ($ad->last_moderation_status == 3)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-60 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow-sm shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
                         {{ __('Rejected') }}
                     </div>
                 @endif

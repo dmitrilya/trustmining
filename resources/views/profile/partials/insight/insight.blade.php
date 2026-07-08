@@ -1,22 +1,16 @@
-<section class="space-y-6">
+<x-profile.section h="TM Insight channel">
     @php
         $channel = $user->channel;
     @endphp
 
-    <header>
-        <div class="flex justify-between mb-2">
-            <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-                {{ __('TM Insight channel') }}
-            </h2>
-
-            @if ($channel)
-                <a href="{{ route('insight.channel.show', ['channel' => $user->channel->slug]) }}">
-                    <x-buttons.secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My channel') }}</x-buttons.secondary-button>
-                </a>
-            @endif
-        </div>
-    </header>
+    @if ($channel)
+        <x-slot name="i">
+            <a href="{{ route('insight.channel.show', ['channel' => $user->channel->slug]) }}">
+                <x-buttons.secondary-button
+                    class="bg-secondary-gradient dark:text-slate-800">{{ __('My channel') }}</x-buttons.secondary-button>
+            </a>
+        </x-slot>
+    @endif
 
     @if ($channel)
         @include('insight.components.channel', [
@@ -53,8 +47,8 @@
         <div class="sm:flex sm:space-x-3 space-y-2 sm:space-y-0">
             <div class="w-full">
                 <x-inputs.input-label for="channel-name" :value="__('Channel name')" />
-                <x-inputs.length-input id="channel-name" name="name" type="text" :value="$channel->name ?? old('name')" autocomplete="name"
-                    required max="30" />
+                <x-inputs.length-input id="channel-name" name="name" type="text" :value="$channel->name ?? old('name')"
+                    autocomplete="name" required max="30" />
                 <template x-if="validation.name">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.name?.[0]"></p>
                 </template>
@@ -62,8 +56,8 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="channel-slug" :value="__('Channel address') . ' (a-z, 0-9, _)'" />
-                <x-inputs.length-input id="channel-slug" name="slug" type="text" :value="$channel->slug ?? old('slug')" autocomplete="slug"
-                    required max="20" regex="/[^a-z0-9_]/g" />
+                <x-inputs.length-input id="channel-slug" name="slug" type="text" :value="$channel->slug ?? old('slug')"
+                    autocomplete="slug" required max="20" regex="/[^a-z0-9_]/g" />
                 <template x-if="validation.slug">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.slug?.[0]"></p>
                 </template>
@@ -72,8 +66,8 @@
 
         <div>
             <x-inputs.input-label for="channel-brief_description" :value="__('Brief description')" />
-            <x-inputs.length-input id="channel-brief_description" name="brief_description" type="text" :value="$channel->brief_description ?? old('brief_description')"
-                autocomplete="brief_description" required max="100" />
+            <x-inputs.length-input id="channel-brief_description" name="brief_description" type="text"
+                :value="$channel->brief_description ?? old('brief_description')" autocomplete="brief_description" required max="100" />
             <template x-if="validation.brief_description">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.brief_description?.[0]"></p>
             </template>
@@ -90,8 +84,8 @@
 
         <div>
             <x-inputs.input-label for="channel-logo" :value="!$channel ? __('Logo') : __('Change logo')" />
-            <x-inputs.file-input id="channel-logo" name="logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                :required="!$channel" label="max. 2MB" />
+            <x-inputs.file-input id="channel-logo" name="logo" class="mt-1 block w-full"
+                accept=".png,.jpg,.jpeg,.webp" :required="!$channel" label="max. 2MB" />
             <template x-if="validation.logo">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.logo?.[0]"></p>
             </template>
@@ -99,7 +93,8 @@
 
         <div>
             <x-inputs.input-label for="channel-banner" :value="!$channel || !$channel->banner ? __('Banner') : __('Change banner')" />
-            <x-inputs.file-input id="channel-banner" name="banner" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 960x360 px" />
+            <x-inputs.file-input id="channel-banner" name="banner" class="mt-1 block w-full"
+                accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 960x360 px" />
             <template x-if="validation.banner">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.banner?.[0]"></p>
             </template>
@@ -108,4 +103,4 @@
         <x-buttons.primary-button class="block ml-auto mt-4" ::disabled="loading"
             ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
     </form>
-</section>
+</x-profile.section>

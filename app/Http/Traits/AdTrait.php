@@ -211,7 +211,7 @@ trait AdTrait
 
         $activeAdsCount = $user->activeAds()->count();
         if ($ad->hidden && ($user->tariff && $activeAdsCount >= $user->tariff->max_ads || !$user->tariff && $activeAdsCount >= config('settings.ads.max_count_without_tariff')))
-            return response()->json(['success' => false, 'message' => __('Not available with current plan.')]);
+            return response()->json(['success' => false, 'message' => __('Not available with current plan')]);
 
         $ad->hidden = !$ad->hidden;
         $ad->save();

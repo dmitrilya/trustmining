@@ -1,21 +1,12 @@
-<section>
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
+<x-profile.section h="Update Password" p="Ensure your account is using a long, random password to stay secure">
     <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('put')
 
         <div>
             <x-inputs.input-label for="current_password" :value="__('Current Password')" />
-            <x-inputs.text-input id="current_password" name="current_password" type="password" autocomplete="current-password" />
+            <x-inputs.text-input id="current_password" name="current_password" type="password"
+                autocomplete="current-password" />
             <x-inputs.input-error :messages="$errors->updatePassword->get('current_password')" />
         </div>
 
@@ -41,4 +32,4 @@
             @endif
         </div>
     </form>
-</section>
+</x-profile.section>

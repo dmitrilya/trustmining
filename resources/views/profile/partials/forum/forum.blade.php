@@ -1,9 +1,10 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200 mb-2">
-            {{ __('Forum profile') }}
-        </h2>
-    </header>
+<x-profile.section h="Forum profile" p="Update your email address">
+    <x-slot name="i">
+        <a href="{{ route('forum.question.mine') }}">
+            <x-buttons.secondary-button
+                class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
+        </a>
+    </x-slot>
 
     @php
         $ranks = config('forum.ranks');
@@ -11,11 +12,6 @@
         $helpfulAnswerPoints = config('forum.like');
         $bestAnswerPoints = config('forum.best');
     @endphp
-
-    <a href="{{ route('forum.question.mine') }}">
-        <x-buttons.secondary-button
-            class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
-    </a>
 
     @include('forum.components.author', [
         'id' => $user->id,
@@ -37,4 +33,4 @@
 
         <x-buttons.primary-button class="block ml-auto mt-4">{{ __('Save') }}</x-buttons.primary-button>
     </form>
-</section>
+</x-profile.section>

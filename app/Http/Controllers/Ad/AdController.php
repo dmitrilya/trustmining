@@ -93,7 +93,7 @@ class AdController extends Controller
         $user = Auth::user();
 
         if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
-            return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('ad.create', [
             'models' => AsicModel::select(['id', 'name', 'slug'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
@@ -116,7 +116,7 @@ class AdController extends Controller
         $activeAdsCount = $user->activeAds()->count();
         $maxAds = $user->tariff?->max_ads ?? config('settings.ads.max_count_without_tariff');
 
-        if ($activeAdsCount >= $maxAds) return back()->withErrors(['forbidden' => __('Not available with current plan.')]);
+        if ($activeAdsCount >= $maxAds) return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $this->service->store($request->validated(), $request->file('images'), $request->file('preview'), $user);
 

@@ -1,14 +1,4 @@
-<section>
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
+<x-profile.section h="Profile Information" p="Update your account's profile information and email address">
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
@@ -59,4 +49,4 @@
             @endif
         </div>
     </form>
-</section>
+</x-profile.section>

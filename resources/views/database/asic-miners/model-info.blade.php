@@ -99,7 +99,7 @@
                     </div>
 
                     <x-buttons.primary-button
-                        class="w-full h-full cursor-default opacity-60">{{ __('No ads') }}</x-buttons.primary-button>
+                        class="w-full h-full cursor-default opacity-50">{{ __('No ads') }}</x-buttons.primary-button>
                 @endif
 
                 <a href="{{ route('ads', ['adCategory' => 'miners']) }}">

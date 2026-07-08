@@ -1,21 +1,10 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Phone number') }}
-        </h2>
+@php
+    $canHavePhone = $user->tariff && $user->tariff->can_have_phone;
+    $phone = $user->phones->first();
+@endphp
 
-        @if (!($user->tariff && $user->tariff->can_have_phone))
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
-                {{ __('Not available with current plan.') }}
-            </p>
-        @endif
-    </header>
-
-    @if ($user->tariff && $user->tariff->can_have_phone)
-        @php
-            $phone = $user->phones->first();
-        @endphp
-
+<x-profile.section h="Phone number" :p="!$canHavePhone ? 'Not available with current plan' : null">
+    @if ($canHavePhone)
         <form class="flex items-center" method="POST"
             action="{{ !$phone ? route('phone.store') : route('phone.update', ['phone' => $phone->id]) }}">
             @csrf
@@ -36,4 +25,4 @@
             <x-buttons.primary-button class="mt-1">{{ __('Save') }}</x-buttons.primary-button>
         </form>
     @endif
-</section>
+</x-profile.section>
