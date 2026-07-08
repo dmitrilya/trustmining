@@ -12,9 +12,9 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="inn" :value="__('Company TIN')" />
-                    <x-text-input id="inn" name="inn" required autocomplete="inn" />
-                    <x-input-error :messages="$errors->get('inn')" />
+                    <x-inputs.input-label for="inn" :value="__('Company TIN')" />
+                    <x-inputs.text-input id="inn" name="inn" required autocomplete="inn" />
+                    <x-inputs.input-error :messages="$errors->get('inn')" />
                 </div>
 
                 <div class="grid gap-4 grid-cols-1 sm:grid-cols-2">
@@ -53,17 +53,17 @@
                 </div>
 
                 <div>
-                    <x-input-label for="documents" :value="__('Documents')" />
-                    <x-file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple max="4"
+                    <x-inputs.input-label for="documents" :value="__('Documents')" />
+                    <x-inputs.file-input id="documents" name="documents[]" class="mt-1 block w-full" multiple max="4"
                         accept=".doc,.docx" required label="DOC, max. 1MB, max. 4
                         items" />
-                    <x-input-error :messages="$errors->get('documents')" />
+                    <x-inputs.input-error :messages="$errors->get('documents')" />
                     @foreach ($errors->get('documents.*') as $error)
-                        <x-input-error :messages="$error" />
+                        <x-inputs.input-error :messages="$error" />
                     @endforeach
                 </div>
 
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

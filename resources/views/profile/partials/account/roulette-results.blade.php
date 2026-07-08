@@ -8,8 +8,8 @@
             @if ($user->company && !$user->company->moderation)
                 <a
                     href="{{ route('support', ['tab' => 'chat', 'message' => __('Hello! Our company is offering a roulette prize draw. We are giving away... conditions are...')]) }}">
-                    <x-secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('Start draw') }}</x-secondary-button>
+                    <x-buttons.secondary-button
+                        class="bg-secondary-gradient dark:text-slate-800">{{ __('Start draw') }}</x-buttons.secondary-button>
                 </a>
             @endif
         </div>

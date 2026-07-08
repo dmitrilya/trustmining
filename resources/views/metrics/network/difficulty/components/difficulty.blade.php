@@ -12,7 +12,7 @@
         </div>
 
         <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
-            <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkDifficulties')
+            <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkDifficulties')
                 ->get()
                 ->map(
                     fn($coin) => [

@@ -1,7 +1,7 @@
 <div x-data="{ allTags: {{ $tags->diff($selectedTags)->values() }}, tags: {{ collect($selectedTags) }}, search: '' }">
     <div>
-        <x-input-label for="search" :value="__('Hashtag')" />
-        <x-text-input id="search" type="text" ::value="search" placeholder="#" @input="search = $el.value" />
+        <x-inputs.input-label for="search" :value="__('Hashtag')" />
+        <x-inputs.text-input id="search" type="text" ::value="search" placeholder="#" @input="search = $el.value" />
     </div>
 
     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">

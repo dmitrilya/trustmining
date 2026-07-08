@@ -39,7 +39,7 @@
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false"
                     href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $gpu->slug]) }}">
-                    <x-primary-button class="w-full justify-center">{{ __('Buy') }}</x-primary-button>
+                    <x-buttons.primary-button class="w-full justify-center">{{ __('Buy') }}</x-buttons.primary-button>
                 </a>
             </div>
         </div>

@@ -1,9 +1,9 @@
 <x-app-layout title="Каталог ASIC майнеров"
     description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <x-breadcrumbs>
-            <x-breadcrumb position="1" :name="__('ASIC-miners')" />
-        </x-breadcrumbs>
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :name="__('ASIC-miners')" />
+        </x-breadcrumbs.breadcrumbs>
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '' }">

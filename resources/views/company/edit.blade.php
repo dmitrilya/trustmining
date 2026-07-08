@@ -53,33 +53,33 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="company" :value="__('Company TIN')" />
-                    <x-text-input id="company" readonly disabled autocomplete="company"
+                    <x-inputs.input-label for="company" :value="__('Company TIN')" />
+                    <x-inputs.text-input id="company" readonly disabled autocomplete="company"
                         value="{{ $company->card['inn'] }}" />
                 </div>
 
                 <div>
-                    <x-input-label for="images" :value="__('Photo')" />
-                    <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8"
+                    <x-inputs.input-label for="images" :value="__('Photo')" />
+                    <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8"
                         label='max. 2MB, 8 items' />
-                    <x-input-error :messages="$errors->get('images')" />
+                    <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
-                        <x-input-error :messages="$error" />
+                        <x-inputs.input-error :messages="$error" />
                     @endforeach
                 </div>
 
                 <div>
-                    <x-input-label for="logo" :value="__('Logo for avatar')" />
-                    <x-file-input id="logo" name="logo" class="mt-1 block w-full"
+                    <x-inputs.input-label for="logo" :value="__('Logo for avatar')" />
+                    <x-inputs.file-input id="logo" name="logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" label="max. 512KB, 1x1" />
-                    <x-input-error :messages="$errors->get('logo')" />
+                    <x-inputs.input-error :messages="$errors->get('logo')" />
                 </div>
 
                 <div>
-                    <x-input-label for="bg_logo" :value="__('Logo for the card')" />
-                    <x-file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
+                    <x-inputs.input-label for="bg_logo" :value="__('Logo for the card')" />
+                    <x-inputs.file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" label="max. 1024KB" />
-                    <x-input-error :messages="$errors->get('bg_logo')" />
+                    <x-inputs.input-error :messages="$errors->get('bg_logo')" />
                 </div>
 
                 <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
@@ -89,25 +89,25 @@
 
                     <input type="hidden" class="hidden" name="description" :value="description" required>
                 </div>
-                <x-input-error :messages="$errors->get('description')" />
+                <x-inputs.input-error :messages="$errors->get('description')" />
 
                 @if ($company->user->tariff && $company->user->tariff->can_site_link)
                     <div>
-                        <x-input-label for="site" :value="__('Link to site')" />
-                        <x-text-input id="site" name="site" type="text" :value="$company->site"
+                        <x-inputs.input-label for="site" :value="__('Link to site')" />
+                        <x-inputs.text-input id="site" name="site" type="text" :value="$company->site"
                             autocomplete="site" />
-                        <x-input-error :messages="$errors->get('site')" />
+                        <x-inputs.input-error :messages="$errors->get('site')" />
                     </div>
                 @endif
 
                 <div>
-                    <x-input-label for="video" :value="__('Link to video')" />
-                    <x-text-input id="video" name="video" type="text" :value="$company->video"
+                    <x-inputs.input-label for="video" :value="__('Link to video')" />
+                    <x-inputs.text-input id="video" name="video" type="text" :value="$company->video"
                         autocomplete="video" />
-                    <x-input-error :messages="$errors->get('video')" />
+                    <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
 
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

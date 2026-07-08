@@ -1,4 +1,4 @@
-<x-filter>@include('office.components.filter')</x-filter>
+<x-filters.filter>@include('office.components.filter')</x-filters.filter>
 
 @if (!$offices->count())
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">

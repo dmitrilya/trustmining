@@ -3,8 +3,8 @@
 
     <div x-data="{ allModels: {{ App\Models\Database\AsicModel::pluck('name') }}, models: [], search: '' }">
         <div>
-            <x-input-label for="search" :value="__('For which models')" />
-            <x-text-input id="search" type="text" ::value="search" placeholder="" autocomplete="off"
+            <x-inputs.input-label for="search" :value="__('For which models')" />
+            <x-inputs.text-input id="search" type="text" ::value="search" placeholder="" autocomplete="off"
                 @input="search = $el.value" />
         </div>
 

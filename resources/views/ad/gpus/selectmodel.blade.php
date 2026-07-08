@@ -57,5 +57,5 @@
         </div>
     </div>
 
-    <x-input-error :messages="$errors->get('model')" />
+    <x-inputs.input-error :messages="$errors->get('model')" />
 </div>

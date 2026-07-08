@@ -24,15 +24,15 @@
                     Whatsminer</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
+                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r"
+                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r"
                                 type="text" :placeholder="__('Warranty')" disabled readonly />
                         </div>
-                        <x-primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
+                        <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
                             @click="$el.classList.add('loading');$el.disabled = true;axios.get('https://www.whatsminer.com/renren-fast/app/RepairWorkOrder/warranty?str=' + sn + '&lang=en_US').then(r => {
                                     if (r.data.code == 1021) $refs.sn_wm_r.value = r.data.msg;
                                     else $refs.sn_wm_r.value = '{{ __('Warranty until') }} ' + new Date(r.data.dateList[1]).toLocaleDateString(window.locale, {
@@ -42,7 +42,7 @@
                                     $el.disabled = false;
                             })">
                             {{ __('Check') }}
-                        </x-primary-button>
+                        </x-buttons.primary-button>
                     </div>
                 </div>
                 <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline mt-2 sm:mt-3"
@@ -59,15 +59,15 @@
                     Bitmain</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
+                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
                             ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r"
+                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r"
                                 type="text" :placeholder="__('Warranty until')" disabled readonly />
                         </div>
-                        <x-primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
+                        <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
                             @click="$el.classList.add('loading');$el.disabled = true;axios.get('https://shop-repair.bitmain.com/api/warranty/getWarranty?serialNumber=' + sn).then(r => {
                                     if (r.data.warranty == 0) $refs.sn_bm_r.value = '{{ __('Warranty has expired or the number does not exist') }}';
                                     else $refs.sn_bm_r.value = '{{ __('Warranty until') }} ' + Date.now().setDate(Date.now().getDate() + r.data.warranty).toLocaleDateString(window.locale, {
@@ -77,7 +77,7 @@
                                     $el.disabled = false;
                             })">
                             {{ __('Check') }}
-                        </x-primary-button>
+                        </x-buttons.primary-button>
                     </div>
                 </div>
                 <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"

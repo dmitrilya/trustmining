@@ -40,7 +40,7 @@
                 $user = Auth::user();
             @endphp
 
-            <x-header-filters>
+            <x-filters.header-filters>
                 <x-slot name="sort">
                     <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->getName(),
@@ -62,7 +62,7 @@
                         {{ __('Price: High to Low') }}
                     </x-dropdown-link>
                 </x-slot>
-            </x-header-filters>
+            </x-filters.header-filters>
         </div>
     </x-slot>
 

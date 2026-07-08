@@ -1,13 +1,13 @@
 <div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
     <div class="w-full">
-        <x-input-label for="tariff" :value="__('Tariff')" />
-        <x-text-input ::value="tariff" id="tariff" type="text"
+        <x-inputs.input-label for="tariff" :value="__('Tariff')" />
+        <x-inputs.text-input ::value="tariff" id="tariff" type="text"
             @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
     </div>
 
     <div class="w-full">
         <div class="flex items-center">
-            <x-input-label for="fee" :value="__('Pool fee')" />
+            <x-inputs.input-label for="fee" :value="__('Pool fee')" />
 
             <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
                 <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false"
@@ -32,7 +32,7 @@
                 </div>
             </template>
         </div>
-        <x-text-input ::value="fee" id="fee" type="text"
+        <x-inputs.text-input ::value="fee" id="fee" type="text"
             @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
     </div>
 </div>
@@ -53,21 +53,21 @@
                     <div class="space-y-2 md:space-y-3">
                         <div class="flex space-x-2 sm:space-x-3">
                             <div class="w-full">
-                                <x-input-label for="count" :value="__('Count')" />
-                                <x-text-input ::value="count" id="count" type="text"
+                                <x-inputs.input-label for="count" :value="__('Count')" />
+                                <x-inputs.text-input ::value="count" id="count" type="text"
                                     @input="count = filterDouble($el, 1, 10000, 0);$el.value = count" />
                             </div>
 
                             <div class="w-full">
-                                <x-input-label for="uptime" :value="__('Uptime') . ' (%)'" />
-                                <x-text-input ::value="uptime" id="uptime" type="text"
+                                <x-inputs.input-label for="uptime" :value="__('Uptime') . ' (%)'" />
+                                <x-inputs.text-input ::value="uptime" id="uptime" type="text"
                                     @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
                             </div>
                         </div>
 
                         {{-- <div>
-                        <x-input-label for="difficulty-growth" :value="__('Annualized difficulty growth') . ' (%)'" />
-                        <x-text-input ::value="difficultyGrowth" id="difficulty-growth" type="text"
+                        <x-inputs.input-label for="difficulty-growth" :value="__('Annualized difficulty growth') . ' (%)'" />
+                        <x-inputs.text-input ::value="difficultyGrowth" id="difficulty-growth" type="text"
                             @input="difficultyGrowth = filterDouble($el, -20, 120, 2);$el.value = difficultyGrowth" />
                     </div> --}}
                     </div>

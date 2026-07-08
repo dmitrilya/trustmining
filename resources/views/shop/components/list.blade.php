@@ -1,4 +1,4 @@
-<x-filter>@include('shop.components.filter')</x-filter>
+<x-filters.filter>@include('shop.components.filter')</x-filters.filter>
 
 <fieldset aria-label="Choose a ad" class="w-full">
     <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">

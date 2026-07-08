@@ -12,7 +12,7 @@
             class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-slate-50 border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
             style="min-height: 48px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"></pre>
-        <x-input-error :messages="$errors->get('text')" />
+        <x-inputs.input-error :messages="$errors->get('text')" />
     </div>
 
     <div class="flex items-center justify-between px-3 py-1 border-t dark:border-slate-700" x-data="{ images: 0, files: 0 }">
@@ -77,12 +77,12 @@
                     </div>
 
                     <div class="mt-2 sm:mt-4 flex justify-end">
-                        <x-secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
+                        <x-buttons.secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
                             {{ __('Cancel') }}
-                        </x-secondary-button>
+                        </x-buttons.secondary-button>
 
-                        <x-primary-button type="button"
-                            @click="() => {insertLink(range, $refs.pre, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-primary-button>
+                        <x-buttons.primary-button type="button"
+                            @click="() => {insertLink(range, $refs.pre, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-buttons.primary-button>
                     </div>
                 </div>
             </x-modal>
@@ -123,7 +123,7 @@
     @if (count($errors->get('images.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('images.*') as $error)
-                <x-input-error :messages="$error" />
+                <x-inputs.input-error :messages="$error" />
             @endforeach
         </div>
     @endif
@@ -131,7 +131,7 @@
     @if (count($errors->get('files.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('files.*') as $error)
-                <x-input-error :messages="$error" />
+                <x-inputs.input-error :messages="$error" />
             @endforeach
         </div>
     @endif

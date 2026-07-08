@@ -35,13 +35,13 @@
                     alt="{{ $brand->name }} {{ $model->name }}">
             </div>
 
-            <x-characteristics>
-                <x-characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
-                <x-characteristic name="Algorithm" :value="$algorithms[$versions->first()['a']]['n']" itemprop="additionalProperty" />
-                <x-characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
-                <x-characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
+            <x-characteristics.characteristics>
+                <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
+                <x-characteristics.characteristic name="Algorithm" :value="$algorithms[$versions->first()['a']]['n']" itemprop="additionalProperty" />
+                <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
+                <x-characteristics.characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
                 <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
-            </x-characteristics>
+            </x-characteristics.characteristics>
 
             @include('database.asic-miners.rating')
 
@@ -71,14 +71,14 @@
                         : '$dispatch("open-modal", "login")';
                 @endphp
 
-                <x-secondary-button class="w-full justify-center" @click="{{ $trackClick }}">
+                <x-buttons.secondary-button class="w-full justify-center" @click="{{ $trackClick }}">
                     <svg class="min-w-4 h-4 mr-1 xs:mr-2" aria-hidden="true" width="24" height="24"
                         fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                     </svg>
                     <span>{{ auth()->user() && auth()->user()->trackedAsicModels->where('id', $model->id)->count() ? __('Untrack price') : __('Track price') }}</span>
-                </x-secondary-button>
+                </x-buttons.secondary-button>
 
                 @if ($versions->min('p'))
                     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
@@ -87,8 +87,8 @@
                         <link itemprop="url"
                             content="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
 
-                        <x-primary-button class="w-full h-full"
-                            @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-primary-button>
+                        <x-buttons.primary-button class="w-full h-full"
+                            @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-buttons.primary-button>
                     </div>
                 @else
                     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
@@ -98,12 +98,12 @@
                             href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
                     </div>
 
-                    <x-primary-button
-                        class="w-full h-full cursor-default opacity-60">{{ __('No ads') }}</x-primary-button>
+                    <x-buttons.primary-button
+                        class="w-full h-full cursor-default opacity-60">{{ __('No ads') }}</x-buttons.primary-button>
                 @endif
 
                 <a href="{{ route('ads', ['adCategory' => 'miners']) }}">
-                    <x-secondary-button class="w-full">{{ __('View all ads') }}</x-secondary-button>
+                    <x-buttons.secondary-button class="w-full">{{ __('View all ads') }}</x-buttons.secondary-button>
                 </a>
             </div>
         </div>

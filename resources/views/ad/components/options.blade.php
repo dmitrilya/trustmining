@@ -17,7 +17,7 @@
                 </li>
                 <li
                     class="flex px-3 py-2 sm:px-4 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200">
-                    <x-toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-toggler>
+                    <x-inputs.toggler ::checked="hidden" x-on:toggle-checked="toggle">{{ __('Toggle hidden') }}</x-inputs.toggler>
                 </li>
             @else
                 @php

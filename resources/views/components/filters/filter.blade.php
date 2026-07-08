@@ -32,11 +32,11 @@
 
             {{ $slot }}
 
-            <x-primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-primary-button>
+            <x-buttons.primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-buttons.primary-button>
 
             <a href="{{ route(request()->route()->getName(), request()->route()->originalParameters()) }}">
-                <x-secondary-button type="button"
-                    class="w-full justify-center mt-2">{{ __('Reset') }}</x-secondary-button>
+                <x-buttons.secondary-button type="button"
+                    class="w-full justify-center mt-2">{{ __('Reset') }}</x-buttons.secondary-button>
             </a>
         </form>
     </div>

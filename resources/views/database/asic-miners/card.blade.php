@@ -24,7 +24,7 @@
                 {{ $model->name }}
             </div>
 
-            <x-characteristics class="mt-1 xs:mt-2">
+            <x-characteristics.characteristics class="mt-1 xs:mt-2">
                 @foreach (array_merge($characteristics, [['name' => __('Algorithm'), 'value' => $model->algorithm->name]]) as $characteristic)
                     @php
                         $val =
@@ -32,15 +32,15 @@
                                 ? $characteristic['value']($model)
                                 : $characteristic['value'];
                     @endphp
-                    <x-characteristic :name="$characteristic['name']" :value="$val" />
+                    <x-characteristics.characteristic :name="$characteristic['name']" :value="$val" />
                 @endforeach
-            </x-characteristics>
+            </x-characteristics.characteristics>
         </div>
 
         <div class="mt-2 sm:mt-3">
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false" href="{{ $href }}">
-                    <x-primary-button class="w-full justify-center">{{ $buttonText }}</x-primary-button>
+                    <x-buttons.primary-button class="w-full justify-center">{{ $buttonText }}</x-buttons.primary-button>
                 </a>
             </div>
         </div>

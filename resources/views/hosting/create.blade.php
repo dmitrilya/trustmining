@@ -52,12 +52,12 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="hosting-images" :value="'* ' . __('Photo')" />
-                    <x-file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
+                    <x-inputs.input-label for="hosting-images" :value="'* ' . __('Photo')" />
+                    <x-inputs.file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple max="10" required label="max. 2MB, 10 items" />
-                    <x-input-error :messages="$errors->get('images')" />
+                    <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
-                        <x-input-error :messages="$error" />
+                        <x-inputs.input-error :messages="$error" />
                     @endforeach
                 </div>
 
@@ -71,7 +71,7 @@
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
-                        <x-input-error :messages="$errors->get('address')" />
+                        <x-inputs.input-error :messages="$errors->get('address')" />
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
@@ -80,20 +80,20 @@
                 </div>
 
                 <div>
-                    <x-input-label for="video" :value="__('Link to video')" />
-                    <x-text-input id="video" name="video" type="text" :value="old('video')" autocomplete="video" />
-                    <x-input-error :messages="$errors->get('video')" />
+                    <x-inputs.input-label for="video" :value="__('Link to video')" />
+                    <x-inputs.text-input id="video" name="video" type="text" :value="old('video')" autocomplete="video" />
+                    <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
 
                 <x-peculiarities model="hosting" :isForm="true"></x-peculiarities>
 
-                <x-editable-list name="conditions">
-                    <x-input-label :value="__('Conditions (from N units, from N th, etc.)')" />
-                </x-editable-list>
+                <x-inputs.editable-list name="conditions">
+                    <x-inputs.input-label :value="__('Conditions (from N units, from N th, etc.)')" />
+                </x-inputs.editable-list>
 
-                <x-editable-list name="expenses">
-                    <x-input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
-                </x-editable-list>
+                <x-inputs.editable-list name="expenses">
+                    <x-inputs.input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
+                </x-inputs.editable-list>
 
                 <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
                     <div id="editor"
@@ -102,37 +102,37 @@
 
                     <input type="hidden" class="hidden" name="description" :value="description" required>
                 </div>
-                <x-input-error :messages="$errors->get('description')" />
+                <x-inputs.input-error :messages="$errors->get('description')" />
 
                 <div>
-                    <x-input-label for="hosting-contract" :value="'* ' . __('Agreement for the provision of accommodation services')" />
-                    <x-file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
+                    <x-inputs.input-label for="hosting-contract" :value="'* ' . __('Agreement for the provision of accommodation services')" />
+                    <x-inputs.file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
                         accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
-                    <x-input-error :messages="$errors->get('contract')" />
+                    <x-inputs.input-error :messages="$errors->get('contract')" />
                 </div>
 
                 <div>
-                    <x-input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
-                    <x-file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
+                    <x-inputs.input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
+                    <x-inputs.file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
                         accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
-                    <x-input-error :messages="$errors->get('territory')" />
+                    <x-inputs.input-error :messages="$errors->get('territory')" />
                 </div>
 
                 <div>
-                    <x-input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
-                    <x-file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
+                    <x-inputs.input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
+                    <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
                         autocomplete="energy_supply" accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
-                    <x-input-error :messages="$errors->get('energy_supply')" />
+                    <x-inputs.input-error :messages="$errors->get('energy_supply')" />
                 </div>
 
                 <div>
-                    <x-input-label for="price" :value="'* ' . __('Tariff')" />
-                    <x-text-input id="price" name="price" required autocomplete="price" min="1"
+                    <x-inputs.input-label for="price" :value="'* ' . __('Tariff')" />
+                    <x-inputs.text-input id="price" name="price" required autocomplete="price" min="1"
                         max="10" type="number" step="0.01" :value="old('price')" />
-                    <x-input-error :messages="$errors->get('price')" />
+                    <x-inputs.input-error :messages="$errors->get('price')" />
                 </div>
 
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

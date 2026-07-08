@@ -31,20 +31,20 @@
             style="display: {{ $version['i'] == $selectedVersion['i'] ? 'block' : 'none' }}">
             <meta itemprop="name" content="{{ $model->name . ' ' . $version['h'] . $version['m'] }}" />
 
-            <x-characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
-                <x-characteristic name="Hashrate" :value="$version['h']" itemprop="hasMeasurement" :unit="[
+            <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
+                <x-characteristics.characteristic name="Hashrate" :value="$version['h']" itemprop="hasMeasurement" :unit="[
                     'prop' => 'unitText',
                     'content' => $version['m'] . '/s',
                 ]" />
-                <x-characteristic name="Efficiency" :value="$version['e']" itemprop="hasMeasurement" :unit="[
+                <x-characteristics.characteristic name="Efficiency" :value="$version['e']" itemprop="hasMeasurement" :unit="[
                     'prop' => 'unitText',
                     'content' => 'j/' . $version['m'],
                 ]" />
-                <x-characteristic name="Power" :value="$version['e'] * $version['h']" itemprop="hasMeasurement" :unit="['prop' => 'unitCode', 'content' => 'W']" />
+                <x-characteristics.characteristic name="Power" :value="$version['e'] * $version['h']" itemprop="hasMeasurement" :unit="['prop' => 'unitCode', 'content' => 'W']" />
                 @if ($version['p'])
-                    <x-characteristic name="The best price" :value="$version['p'] . ' USDT'" />
+                    <x-characteristics.characteristic name="The best price" :value="$version['p'] . ' USDT'" />
                 @endif
-            </x-characteristics>
+            </x-characteristics.characteristics>
 
             @if ($version['p'])
                 @if (count($algorithms[$version['a']]['p']))
@@ -73,8 +73,8 @@
                         <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
                             <a itemprop="urlTemplate" class="block w-full xs:w-fit"
                                 href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version['h']]) }}">
-                                <x-secondary-button
-                                    class="bg-secondary-gradient dark:text-slate-800 w-full justify-center">{{ __('Income calculator') }}</x-secondary-button>
+                                <x-buttons.secondary-button
+                                    class="bg-secondary-gradient dark:text-slate-800 w-full justify-center">{{ __('Income calculator') }}</x-buttons.secondary-button>
                             </a>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
                         <div itemprop="target" itemscope itemtype="https://schema.org/EntryPoint">
                             <a itemprop="urlTemplate" class="block w-fit"
                                 href="{{ route('calculator.modelver', ['asicModel' => $model->slug, 'asicVersion' => $version['h']]) }}">
-                                <x-secondary-button
-                                    class="bg-secondary-gradient dark:text-slate-800">{{ __('Income calculator') }}</x-secondary-button>
+                                <x-buttons.secondary-button
+                                    class="bg-secondary-gradient dark:text-slate-800">{{ __('Income calculator') }}</x-buttons.secondary-button>
                             </a>
                         </div>
                     </div>

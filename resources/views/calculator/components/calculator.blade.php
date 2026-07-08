@@ -76,17 +76,17 @@
                                 </div>
                             @endif
                             <div class="mt-5 space-y-2" style="min-height: 152px">
-                                <x-characteristics>
-                                    <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
-                                    <x-characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
-                                    <x-characteristic name="Power"
+                                <x-characteristics.characteristics>
+                                    <x-characteristics.characteristic name="Algorithm" x-value="algorithms[version.a].n" />
+                                    <x-characteristics.characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
+                                    <x-characteristics.characteristic name="Power"
                                         x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
                                     @if (!$widjet)
-                                        <x-characteristic name="The best price"
+                                        <x-characteristics.characteristic name="The best price"
                                             x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
                                     @endif
-                                    <x-characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
-                                </x-characteristics>
+                                    <x-characteristics.characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
+                                </x-characteristics.characteristics>
                                 @if (!$widjet)
                                     <a class="block mt-6 ml-auto w-fit text-sm text-indigo-500 hover:text-indigo-600"
                                         x-bind:href="version ?
@@ -99,8 +99,8 @@
                                 <template x-if="version.ac">
                                     <a class="mt-4 lg:mt-6 w-fit"
                                         x-bind:href="version ? '/ads/miners?model=' + version.ns : ' # '">
-                                        <x-primary-button
-                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                        <x-buttons.primary-button
+                                            class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-buttons.primary-button>
                                     </a>
                                 </template>
                             @endif
@@ -221,18 +221,18 @@
                                     @endif
                                     <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-1.5"
                                         style="min-height: 120px">
-                                        <x-characteristics>
-                                            <x-characteristic name="Algorithm" x-value="algorithms[version.a].n" />
-                                            <x-characteristic name="Efficiency"
+                                        <x-characteristics.characteristics>
+                                            <x-characteristics.characteristic name="Algorithm" x-value="algorithms[version.a].n" />
+                                            <x-characteristics.characteristic name="Efficiency"
                                                 x-value="version.e + ' j/' + version.m" />
-                                            <x-characteristic name="Power"
+                                            <x-characteristics.characteristic name="Power"
                                                 x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
                                             @if (!$widjet)
-                                                <x-characteristic name="The best price"
+                                                <x-characteristics.characteristic name="The best price"
                                                     x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
                                             @endif
-                                            <x-characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
-                                        </x-characteristics>
+                                            <x-characteristics.characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
+                                        </x-characteristics.characteristics>
                                         @if (!$widjet)
                                             <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
                                                 x-bind:href="version ?
@@ -247,8 +247,8 @@
                                         <template x-if="version.ac">
                                             <a class="mt-3 xs:mt-4 sm:mt-5 w-fit"
                                                 x-bind:href="version ? '/ads/miners?model=' + version.ns : ' # '">
-                                                <x-primary-button
-                                                    class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-primary-button>
+                                                <x-buttons.primary-button
+                                                    class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-buttons.primary-button>
                                             </a>
                                         </template>
                                     @endif
@@ -264,7 +264,7 @@
                         <template x-for="(profit, i) in algorithms[version?.a].p" :key="'profit_' + i">
                             <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
                                 @click="profitNumber = i, fee = profit.c[0].f;">
-                                <x-radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${profit.c[0].n}`" />
+                                <x-inputs.radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${profit.c[0].n}`" />
 
                                 <template x-for="coin in profit.c" :key="coin.a">
                                     <div>

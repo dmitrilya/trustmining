@@ -7,9 +7,9 @@
             </h1>
 
             <a class="block ml-auto w-fit" href="{{ route('forum.question.create') }}">
-                <x-primary-button class="w-full">
+                <x-buttons.primary-button class="w-full">
                     {{ __('New question') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </a>
         </div>
     </x-slot>

@@ -37,11 +37,11 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
     <input type="hidden" name="props" x-ref="props_legals" value="{{ json_encode($ad->props) }}" />
 
     <div>
-        <x-input-label for="area_of_activity" :value="__('Service')" />
-        <x-text-input id="area_of_activity" name="area_of_activity" type="text" autocomplete="area_of_activity"
+        <x-inputs.input-label for="area_of_activity" :value="__('Service')" />
+        <x-inputs.text-input id="area_of_activity" name="area_of_activity" type="text" autocomplete="area_of_activity"
             :value="$ad->props['Service']" required
             @change="let props = JSON.parse($refs.props_legals.value);props['Service'] = $el.value;$refs.props_legals.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('area_of_activity')" />
+        <x-inputs.input-error :messages="$errors->get('area_of_activity')" />
     </div>
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
@@ -51,5 +51,5 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
 
         <input type="hidden" class="hidden" name="description" :value="description" required>
     </div>
-    <x-input-error :messages="$errors->get('description')" />
+    <x-inputs.input-error :messages="$errors->get('description')" />
 </div>

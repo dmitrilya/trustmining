@@ -29,7 +29,7 @@
             </div>
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @if (!$notifications->count())
-                    <x-notification :type="__('No notifications yet')" :date="now()" :text="__('Notifications will be displayed here')"></x-notification>
+                    <x-notifications.notification :type="__('No notifications yet')" :date="now()" :text="__('Notifications will be displayed here')"></x-notifications.notification>
                 @else
                     @include('notification.components.foreach')
                 @endif

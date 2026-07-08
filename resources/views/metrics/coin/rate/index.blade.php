@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    <x-select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('coinRates')
+                    <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('coinRates')
                         ->has('algorithm')
                         ->get()
                         ->map(

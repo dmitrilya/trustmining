@@ -18,18 +18,18 @@
                     class="w-[40%] max-w-32" />
 
                 @if ($user->crmConnections()->where('crm_system_id', $crmSystem->id)->exists())
-                        <x-secondary-button>{{ __('Connected') }}</x-secondary-button>
+                        <x-buttons.secondary-button>{{ __('Connected') }}</x-buttons.secondary-button>
                 @else
                     @switch($crmSystem->name)
                         @case('AmoCRM')
                             <a href="https://www.amocrm.ru/oauth?client_id={{ config('services.amocrm.app.id') }}&state={{ csrf_token() }}&mode=popup">
-                                <x-primary-button>{{ __('Connect') }}</x-primary-button>
+                                <x-buttons.primary-button>{{ __('Connect') }}</x-buttons.primary-button>
                             </a>
                         @break
 
                         @case('Bitrix24')
                             <a href="">
-                                <x-primary-button>{{ __('Connect') }}</x-primary-button>
+                                <x-buttons.primary-button>{{ __('Connect') }}</x-buttons.primary-button>
                             </a>
                         @break
                     @endswitch

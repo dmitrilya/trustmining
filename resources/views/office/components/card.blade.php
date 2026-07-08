@@ -40,14 +40,14 @@
             <div class="flex flex-col sm:flex-row sm:ml-auto mt-3">
                 <a class="block w-full sm:w-auto"
                     href="{{ route('company.office', ['user' => $office->user->slug, 'office' => $office->id]) }}">
-                    <x-primary-button
-                        class="w-full justify-center">{{ __('Details') }}</x-primary-button>
+                    <x-buttons.primary-button
+                        class="w-full justify-center">{{ __('Details') }}</x-buttons.primary-button>
                 </a>
 
                 @if ($auth && $auth->id == $office->user->id)
                     <a class="block w-full sm:w-auto mt-1 sm:mt-0 sm:ml-2"
                         href="{{ route('office.edit', ['office' => $office->id]) }}">
-                        <x-primary-button class="w-full">{{ __('Edit') }}</x-primary-button>
+                        <x-buttons.primary-button class="w-full">{{ __('Edit') }}</x-buttons.primary-button>
                     </a>
                 @endif
             </div>

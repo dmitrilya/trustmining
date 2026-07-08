@@ -12,7 +12,7 @@
 
     <template x-if="props['Category'] == 'Cables, adapters and connectors'">
         <div class="space-y-6">
-            <x-select :label="__('Connector 1')" name="Connector 1" ::key="props['Connector 1']"
+            <x-inputs.select :label="__('Connector 1')" name="Connector 1" ::key="props['Connector 1']"
                 handleChange="(connector => props['Connector 1'] = connector)" :items="collect([
                     ['key' => 'C13', 'value' => 'C13'],
                     ['key' => '2C13', 'value' => '2C13'],
@@ -35,7 +35,7 @@
                     ['key' => 'LP-20-J04PE-01', 'value' => 'LP-20-J04PE-01'],
                 ])->keyBy('key')" />
 
-            <x-select :label="__('Connector 2')" name="Connector 2" ::key="props['Connector 2']"
+            <x-inputs.select :label="__('Connector 2')" name="Connector 2" ::key="props['Connector 2']"
                 handleChange="(connector => props['Connector 2'] = connector)" :items="collect([
                     ['key' => 'Without plug', 'value' => __('Without plug')],
                     ['key' => 'European plug (S22)', 'value' => __('European plug (S22)')],
@@ -61,10 +61,10 @@
                 ])->keyBy('key')" />
 
             <div>
-                <x-input-label for="length" :value="__('Length (m)')" />
-                <x-text-input id="length" name="length" type="number" autocomplete="length" ::value="props['Length (m)']"
+                <x-inputs.input-label for="length" :value="__('Length (m)')" />
+                <x-inputs.text-input id="length" name="length" type="number" autocomplete="length" ::value="props['Length (m)']"
                     @change="props['Length (m)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('length')" />
+                <x-inputs.input-error :messages="$errors->get('length')" />
             </div>
         </div>
     </template>
@@ -72,45 +72,45 @@
     <template x-if="props['Category'] == 'Coolers'">
         <div class="space-y-6">
             <div>
-                <x-input-label for="size" :value="__('Size (mm)')" />
-                <x-text-input id="size" name="size" type="number" autocomplete="size" ::value="props['Size (mm)']"
+                <x-inputs.input-label for="size" :value="__('Size (mm)')" />
+                <x-inputs.text-input id="size" name="size" type="number" autocomplete="size" ::value="props['Size (mm)']"
                     @change="props['Size (mm)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('size')" />
+                <x-inputs.input-error :messages="$errors->get('size')" />
             </div>
 
             <div>
-                <x-input-label for="thickness" :value="__('Thickness (mm)')" />
-                <x-text-input id="thickness" name="thickness" type="number" autocomplete="thickness" ::value="props['Thickness (mm)']"
+                <x-inputs.input-label for="thickness" :value="__('Thickness (mm)')" />
+                <x-inputs.text-input id="thickness" name="thickness" type="number" autocomplete="thickness" ::value="props['Thickness (mm)']"
                     @change="props['Thickness (mm)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('thickness')" />
+                <x-inputs.input-error :messages="$errors->get('thickness')" />
             </div>
 
             <div>
-                <x-input-label for="speed" :value="__('Speed (rpm)')" />
-                <x-text-input id="speed" name="speed" type="number" autocomplete="speed" ::value="props['Speed (rpm)']"
+                <x-inputs.input-label for="speed" :value="__('Speed (rpm)')" />
+                <x-inputs.text-input id="speed" name="speed" type="number" autocomplete="speed" ::value="props['Speed (rpm)']"
                     @change="props['Speed (rpm)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('speed')" />
+                <x-inputs.input-error :messages="$errors->get('speed')" />
             </div>
 
             <div>
-                <x-input-label for="amperage" :value="__('Amperage (A)')" />
-                <x-text-input id="amperage" name="amperage" type="number" step="0.01" autocomplete="amperage"
+                <x-inputs.input-label for="amperage" :value="__('Amperage (A)')" />
+                <x-inputs.text-input id="amperage" name="amperage" type="number" step="0.01" autocomplete="amperage"
                     ::value="props['Amperage (A)']" @change="props['Amperage (A)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('amperage')" />
+                <x-inputs.input-error :messages="$errors->get('amperage')" />
             </div>
 
             <div>
-                <x-input-label for="connector" :value="__('Connector (pin)')" />
-                <x-text-input id="connector" name="connector" type="number" autocomplete="connector" ::value="props['Connector (pin)']"
+                <x-inputs.input-label for="connector" :value="__('Connector (pin)')" />
+                <x-inputs.text-input id="connector" name="connector" type="number" autocomplete="connector" ::value="props['Connector (pin)']"
                     @change="props['Connector (pin)'] = $el.value;" />
-                <x-input-error :messages="$errors->get('connector')" />
+                <x-inputs.input-error :messages="$errors->get('connector')" />
             </div>
 
             <div>
-                <x-input-label for="model" :value="__('Model')" />
-                <x-text-input id="model" name="model" type="text" autocomplete="model"
+                <x-inputs.input-label for="model" :value="__('Model')" />
+                <x-inputs.text-input id="model" name="model" type="text" autocomplete="model"
                     ::value="props['Model']" @change="props['Model'] = $el.value;" />
-                <x-input-error :messages="$errors->get('model')" />
+                <x-inputs.input-error :messages="$errors->get('model')" />
             </div>
         </div>
     </template>

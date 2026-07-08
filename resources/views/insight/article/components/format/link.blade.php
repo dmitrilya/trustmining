@@ -32,12 +32,12 @@
         </div>
 
         <div class="mt-2 sm:mt-4 flex justify-end">
-            <x-secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
+            <x-buttons.secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
                 {{ __('Cancel') }}
-            </x-secondary-button>
+            </x-buttons.secondary-button>
 
-            <x-primary-button type="button"
-                @click="() => {insertLink(range, $refs.editor, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-primary-button>
+            <x-buttons.primary-button type="button"
+                @click="() => {insertLink(range, $refs.editor, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-buttons.primary-button>
         </div>
     </div>
 </x-modal>

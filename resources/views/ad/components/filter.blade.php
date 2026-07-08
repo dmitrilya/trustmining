@@ -1,10 +1,10 @@
-<x-filter>
+<x-filters.filter>
     @include('ad.' . $adCategory->name . '.filter')
 
-    <x-filter-filter type="checkbox" :name="__('VAT')" :items="collect([
+    <x-filters.filter-filter type="checkbox" :name="__('VAT')" :items="collect([
         ['name' => 'Price including VAT', 'slug' => 'with_vat'],
         ['name' => 'Price without VAT', 'slug' => 'without_vat'],
-    ])" field="vat"></x-filter-filter>
+    ])" field="vat"></x-filters.filter-filter>
 
     <div class="relative mt-4" x-data="{ open: false, sugs: false }" @click.away="open = false">
         <div class="relative z-0 w-full group" @click="open = true">
@@ -26,12 +26,12 @@
     @if (in_array(request()->route()->getName(), ['company']) &&
             ($user = Auth::user()) &&
             $user->id == request()->user->id)
-        <x-filter-filter type="radio" :name="__('Display')" :items="collect([
+        <x-filters.filter-filter type="radio" :name="__('Display')" :items="collect([
             ['name' => 'View all', 'slug' => ''],
             ['name' => 'Active', 'slug' => 'active'],
             ['name' => 'Is under moderation', 'slug' => 'moderation'],
             ['name' => 'Rejected', 'slug' => 'rejected'],
             ['name' => 'Hidden', 'slug' => 'hidden'],
-        ])" field="display"></x-filter-filter>
+        ])" field="display"></x-filters.filter-filter>
     @endif
-</x-filter>
+</x-filters.filter>

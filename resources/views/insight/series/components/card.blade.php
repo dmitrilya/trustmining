@@ -36,7 +36,7 @@
 
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"
             href="{{ route('insight.channel.series.show', ['channel' => $series->channel->slug, 'series' => $series->id . '-' . Str::slug($series->name)]) }}">
-            <x-secondary-button class="w-full justify-center">{{ __('Open') }}</x-secondary-button>
+            <x-buttons.secondary-button class="w-full justify-center">{{ __('Open') }}</x-buttons.secondary-button>
         </a>
     </div>
 </div>

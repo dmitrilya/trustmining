@@ -2,10 +2,10 @@
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 md:p-8" x-data="{ selectedPrize: null }">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
-            <x-primary-button class="block ml-auto mb-4"
+            <x-buttons.primary-button class="block ml-auto mb-4"
                 x-on:click.prevent="$dispatch('open-modal', 'roulette-prize-create')">
                 {{ __('Create') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-4">
                 @foreach ($prizes as $prize)
@@ -29,15 +29,15 @@
                         <div class="flex flex-wrap justify-end gap-2">
                             @if (!$prize->deactivated_at)
                                 @if ($prize->activated_at)
-                                    <x-danger-button
+                                    <x-buttons.danger-button
                                         x-on:click.prevent="selectedPrize = {{ $prize }};$dispatch('open-modal', 'roulette-prize-toggle-active')">
                                         {{ __('Deactivate') }}
-                                    </x-danger-button>
+                                    </x-buttons.danger-button>
                                 @else
-                                    <x-primary-button
+                                    <x-buttons.primary-button
                                         x-on:click.prevent="selectedPrize = {{ $prize }};$dispatch('open-modal', 'roulette-prize-toggle-active')">
                                         {{ __('Activate') }}
-                                    </x-primary-button>
+                                    </x-buttons.primary-button>
                                 @endif
                             @endif
 
@@ -54,10 +54,10 @@
                                 </button>
                             @endif
 
-                            <x-secondary-button
+                            <x-buttons.secondary-button
                                 x-on:click.prevent="selectedPrize = {{ $prize }};$dispatch('open-modal', 'roulette-prize-edit')">
                                 {{ __('Edit') }}
-                            </x-secondary-button>
+                            </x-buttons.secondary-button>
                         </div>
                     </div>
                 @endforeach

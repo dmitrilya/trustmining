@@ -7,22 +7,22 @@
         @csrf
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus
+            <x-inputs.input-label for="email" :value="__('Email')" />
+            <x-inputs.text-input id="email" type="email" name="email" :value="old('email')" required autofocus
                 autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" />
+            <x-inputs.input-error :messages="$errors->get('email')" />
         </div>
 
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" type="password" name="password" required autocomplete="current-password" />
-            <x-input-error :messages="$errors->get('password')" />
+            <x-inputs.input-label for="password" :value="__('Password')" />
+            <x-inputs.text-input id="password" type="password" name="password" required autocomplete="current-password" />
+            <x-inputs.input-error :messages="$errors->get('password')" />
         </div>
 
-        <x-checkbox class="block mt-4" textClasses="text-slate-600 dark:text-slate-400" name="remember"
+        <x-inputs.checkbox class="block mt-4" textClasses="text-slate-600 dark:text-slate-400" name="remember"
             value="with_vat">
             {{ __('Remember me') }}
-        </x-checkbox>
+        </x-inputs.checkbox>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('register'))
@@ -32,9 +32,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ml-3">
+            <x-buttons.primary-button class="ml-3">
                 {{ __('Login') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
 
         <a class="mt-3 underline text-sm text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-slate-900"

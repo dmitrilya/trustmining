@@ -28,9 +28,9 @@
             })">
             @csrf
 
-            <x-primary-button class="mt-4 block w-full">
+            <x-buttons.primary-button class="mt-4 block w-full">
                 {{ __('Subscribe') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </form>
     </div>
 </x-modal>

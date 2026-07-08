@@ -23,22 +23,22 @@
     'withAllVersions' => true,
 ])
 
-<x-filter-filter type="checkbox" :name="__('Algorithm')" :items="$algorithms" field="algorithms"></x-filter-filter>
+<x-filters.filter-filter type="checkbox" :name="__('Algorithm')" :items="$algorithms" field="algorithms"></x-filters.filter-filter>
 
-<x-filter-filter type="checkbox" :name="__('Manufacturer')" :items="$brands" field="brands"></x-filter-filter>
+<x-filters.filter-filter type="checkbox" :name="__('Manufacturer')" :items="$brands" field="brands"></x-filters.filter-filter>
 
-<x-filter-filter type="checkbox" :name="__('Condition')" :items="collect([['name' => 'New', 'slug' => 'New'], ['name' => 'Used', 'slug' => 'Used']])" field="Condition"></x-filter-filter>
+<x-filters.filter-filter type="checkbox" :name="__('Condition')" :items="collect([['name' => 'New', 'slug' => 'New'], ['name' => 'Used', 'slug' => 'Used']])" field="Condition"></x-filters.filter-filter>
 
-<x-filter-filter type="checkbox" :name="__('Availability')" :items="collect([['name' => 'In stock', 'slug' => 'In stock'], ['name' => 'Preorder', 'slug' => 'Preorder']])" field="Availability"></x-filter-filter>
+<x-filters.filter-filter type="checkbox" :name="__('Availability')" :items="collect([['name' => 'In stock', 'slug' => 'In stock'], ['name' => 'Preorder', 'slug' => 'Preorder']])" field="Availability"></x-filters.filter-filter>
 
 @if (in_array(request()->route()->getName(), ['company']) &&
         ($user = Auth::user()) &&
         $user->id == request()->user->id)
-    <x-filter-filter type="radio" :name="__('Display')" :items="collect([
+    <x-filters.filter-filter type="radio" :name="__('Display')" :items="collect([
         ['name' => 'View all', 'slug' => ''],
         ['name' => 'Active', 'slug' => 'active'],
         ['name' => 'Is under moderation', 'slug' => 'moderation'],
         ['name' => 'Rejected', 'slug' => 'rejected'],
         ['name' => 'Hidden', 'slug' => 'hidden'],
-    ])" field="display"></x-filter-filter>
+    ])" field="display"></x-filters.filter-filter>
 @endif

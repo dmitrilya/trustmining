@@ -23,7 +23,7 @@
     </x-slot>
 
     <div class="max-w-8xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6 items-start">
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-2 sm:gap-4 items-start">
             <div class="xl:col-span-3">
                 <div itemscope itemtype="https://schema.org/ViewAction"
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 pt-3 sm:p-4">
@@ -51,7 +51,7 @@
                 </section>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-2 sm:gap-4">
                 @include('calculator.components.liked')
                 @include('calculator.components.difficulty')
 

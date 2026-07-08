@@ -15,6 +15,6 @@
     </ul>
 </div>
 
-<x-checkbox name="is_company" value="true" textClasses="text-slate-600 py-3" :checked="request()->get('is_company')">
+<x-inputs.checkbox name="is_company" value="true" textClasses="text-slate-600 py-3" :checked="request()->get('is_company')">
     {{ __('Only IE and LLCs') }}
-</x-checkbox>
+</x-inputs.checkbox>

@@ -34,7 +34,7 @@
                 @include('components.about-seller')
 
                 <a href="{{ route('company', ['user' => $user->slug]) }}" class="block w-fit ml-auto mt-2 sm:mt-4">
-                    <x-primary-button>{{ __('Visit the store') }}</x-primary-button>
+                    <x-buttons.primary-button>{{ __('Visit the store') }}</x-buttons.primary-button>
                 </a>
             </div>
         @endforeach

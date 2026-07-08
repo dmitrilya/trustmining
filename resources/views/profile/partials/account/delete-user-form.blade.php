@@ -9,8 +9,8 @@
         </p>
     </header>
 
-    <x-danger-button x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
+    <x-buttons.danger-button x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-buttons.danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
@@ -26,22 +26,22 @@
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password-deletion" value="{{ __('Password') }}" class="sr-only" />
+                <x-inputs.input-label for="password-deletion" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-text-input id="password-deletion" name="password" type="password" class="w-3/4"
+                <x-inputs.text-input id="password-deletion" name="password" type="password" class="w-3/4"
                     placeholder="{{ __('Password') }}" />
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" />
+                <x-inputs.input-error :messages="$errors->userDeletion->get('password')" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-buttons.secondary-button x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-buttons.secondary-button>
 
-                <x-danger-button class="ml-3">
+                <x-buttons.danger-button class="ml-3">
                     {{ __('Delete Account') }}
-                </x-danger-button>
+                </x-buttons.danger-button>
             </div>
         </form>
     </x-modal>

@@ -1,13 +1,13 @@
 @if (!$user)
-    <x-primary-button @click="$dispatch('open-modal', 'login')">
+    <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">
         {{ __('Subscribe') }}
-    </x-primary-button>
+    </x-buttons.primary-button>
 @elseif ($user->id != $channel->user_id)
     <div itemprop="potentialAction" itemscope itemtype="https://schema.org/FollowAction">
-        <x-primary-button itemprop="target"
+        <x-buttons.primary-button itemprop="target"
             @click="channelToggleSubscription($el, '{{ route('insight.channel.subscription', ['channel' => $channel->slug]) }}')">
             {{ $channel->activeSubscribers()->wherePivot('user_id', $user->id)->exists() ? __('Unsubscribe') : __('Subscribe') }}
-        </x-primary-button>
+        </x-buttons.primary-button>
     </div>
 @else
     <div class="flex items-center">

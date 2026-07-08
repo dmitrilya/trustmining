@@ -148,8 +148,8 @@
 
             <div class="relative flex mt-1 sm:mt-2 items-center">
                 <a class="block w-full" draggable="false" href="{{ $href }}">
-                    <x-primary-button
-                        class="w-full justify-center">{{ __('Buy') }}</x-primary-button>
+                    <x-buttons.primary-button
+                        class="w-full justify-center">{{ __('Buy') }}</x-buttons.primary-button>
                 </a>
 
                 @include('ad.components.options')

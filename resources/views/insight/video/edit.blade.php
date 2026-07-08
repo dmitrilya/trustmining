@@ -20,8 +20,8 @@
         @method('PUT')
 
         <div class="w-full">
-            <x-input-label for="video-title" :value="__('Title')" />
-            <x-length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title" required
+            <x-inputs.input-label for="video-title" :value="__('Title')" />
+            <x-inputs.length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title" required
                 max="100" />
             <template x-if="validation.title">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
@@ -29,18 +29,18 @@
         </div>
 
         <div>
-            <x-input-label for="preview" :value="__('Preview')" />
-            <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
+            <x-inputs.input-label for="preview" :value="__('Preview')" />
+            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                 label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>
         </div>
 
-        <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
+        <x-inputs.select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
             ->keyBy('key')" :key="$video->series->first()?->id" />
 
-        <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+        <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
     </form>
 </div>

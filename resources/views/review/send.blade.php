@@ -88,6 +88,6 @@
         <p class="text-slate-500 text-sm mb-4">
             {{ __('You must be logged in to leave a review.') }}</p>
 
-        <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+        <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
     </div>
 @endauth

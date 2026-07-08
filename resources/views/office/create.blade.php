@@ -20,7 +20,7 @@
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address') }}
                         </label>
-                        <x-input-error :messages="$errors->get('address')" />
+                        <x-inputs.input-error :messages="$errors->get('address')" />
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"
@@ -29,24 +29,24 @@
                 </div>
 
                 <div>
-                    <x-input-label for="office-images" :value="__('Photo')" />
-                    <x-file-input id="office-images" name="images[]" class="mt-1 block w-full"
+                    <x-inputs.input-label for="office-images" :value="__('Photo')" />
+                    <x-inputs.file-input id="office-images" name="images[]" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" multiple max="5" required label="max. 2MB, 5 items" />
-                    <x-input-error :messages="$errors->get('images')" />
+                    <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
-                        <x-input-error :messages="$error" />
+                        <x-inputs.input-error :messages="$error" />
                     @endforeach
                 </div>
 
                 <x-peculiarities :isForm="true" model="office"></x-peculiarities>
 
                 <div>
-                    <x-input-label for="video" :value="__('Link to video')" />
-                    <x-text-input id="video" name="video" type="text" :value="old('video')" autocomplete="video" />
-                    <x-input-error :messages="$errors->get('video')" />
+                    <x-inputs.input-label for="video" :value="__('Link to video')" />
+                    <x-inputs.text-input id="video" name="video" type="text" :value="old('video')" autocomplete="video" />
+                    <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
 
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

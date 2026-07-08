@@ -3,8 +3,8 @@
 
     <div x-data="{ allModels: {{ App\Models\Database\AsicModel::pluck('name') }}, models: {{ $ad->props['For which models'] }}, search: '' }">
         <div>
-            <x-input-label for="search" :value="__('For which models')" />
-            <x-text-input id="search" type="text" ::value="search" placeholder="" @input="search = $el.value" />
+            <x-inputs.input-label for="search" :value="__('For which models')" />
+            <x-inputs.text-input id="search" type="text" ::value="search" placeholder="" @input="search = $el.value" />
         </div>
 
         <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">

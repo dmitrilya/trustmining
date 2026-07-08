@@ -133,7 +133,7 @@
             <form method="post" action="{{ route('order.store') }}" class="space-y-4 sm:space-y-6">
                 @csrf
 
-                <x-text-input name="amount" type="hidden" min="100" :value="$tariff->price * 30" autocomplete="off"
+                <x-inputs.text-input name="amount" type="hidden" min="100" :value="$tariff->price * 30" autocomplete="off"
                     required />
 
                 <div class="grid grid-cols-3 gap-1 xs:gap-2 sm:gap-4 md:gap-6">
@@ -289,8 +289,8 @@
                     </div>
                 </div>
 
-                <x-primary-button
-                    class="block w-full sm:w-max ml-auto md:!mt-10">{{ __('Pay') }}</x-primary-button>
+                <x-buttons.primary-button
+                    class="block w-full sm:w-max ml-auto md:!mt-10">{{ __('Pay') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

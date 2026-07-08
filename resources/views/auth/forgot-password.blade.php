@@ -13,15 +13,15 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" />
+            <x-inputs.input-label for="email" :value="__('Email')" />
+            <x-inputs.text-input id="email" type="email" name="email" :value="old('email')" required autofocus />
+            <x-inputs.input-error :messages="$errors->get('email')" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+            <x-buttons.primary-button>
                 {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
     </form>
 </x-guest-layout>

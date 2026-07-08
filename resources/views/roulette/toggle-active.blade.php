@@ -8,13 +8,13 @@
         </h2>
 
         <div class="mt-6 flex justify-end">
-            <x-secondary-button x-on:click="$dispatch('close')">
+            <x-buttons.secondary-button x-on:click="$dispatch('close')">
                 {{ __('Cancel') }}
-            </x-secondary-button>
+            </x-buttons.secondary-button>
 
-            <x-primary-button class="ml-3"
+            <x-buttons.primary-button class="ml-3"
                 x-text="selectedPrize?.activated_at ? '{{ __('Deactivate') }}' : '{{ __('Activate') }}'">
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
     </form>
 </x-modal>

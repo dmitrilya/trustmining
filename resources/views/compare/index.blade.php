@@ -19,10 +19,10 @@
                     'name' => 'model_b',
                     'selectedModel' => $modelB,
                 ])
-                <x-primary-button
+                <x-buttons.primary-button
                     @click="model_a && model_b ? window.location.href=`/asic-miners/compare/${model_a}-vs-${model_b}` : pushToastAlert('{{ __('Select models to compare') }}', 'error')">
                     {{ __('Compare') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
         </div>
 

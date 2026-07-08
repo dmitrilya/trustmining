@@ -21,7 +21,7 @@
                                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Name') . ' или ' . __('Company name') }}
                                 </label>
-                                <x-input-error :messages="$errors->get('name')" />
+                                <x-inputs.input-error :messages="$errors->get('name')" />
                             </div>
 
                             <div class="relative z-0 w-full mb-5 group">
@@ -32,7 +32,7 @@
                                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Email') }}
                                 </label>
-                                <x-input-error :messages="$errors->get('email')" />
+                                <x-inputs.input-error :messages="$errors->get('email')" />
                             </div>
 
                             <div class="relative z-0 w-full mb-5 group">
@@ -43,7 +43,7 @@
                                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Password') }}
                                 </label>
-                                <x-input-error :messages="$errors->get('password')" />
+                                <x-inputs.input-error :messages="$errors->get('password')" />
                             </div>
 
                             <div class="relative z-0 w-full group">
@@ -54,7 +54,7 @@
                                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                     {{ __('Confirm Password') }}
                                 </label>
-                                <x-input-error :messages="$errors->get('password_confirmation')" />
+                                <x-inputs.input-error :messages="$errors->get('password_confirmation')" />
                             </div>
 
                             <div class="flex items-center justify-end mt-6 lg:mt-8">
@@ -63,9 +63,9 @@
                                     {{ __('Login') }}
                                 </a>
 
-                                <x-primary-button class="ml-4">
+                                <x-buttons.primary-button class="ml-4">
                                     {{ __('Register') }}
-                                </x-primary-button>
+                                </x-buttons.primary-button>
                             </div>
                         </form>
                     </div>

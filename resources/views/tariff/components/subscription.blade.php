@@ -3,7 +3,7 @@
     <div class="h-9 flex items-end text-white md:text-lg"><span
             class="font-bold text-2xl sm:text-3xl lg:text-4xl">{{ ($tariff = App\Models\User\Tariff::where('name', 'Subscription')->first())->price * 30 }}</span> ₽/{{ __('month') }}</div>
     <a
-        href="{{ route('tariff', ['tariff' => $tariff->id]) }}"><x-primary-button>{{ __('Buy plan') }}</x-primary-button></a>
+        href="{{ route('tariff', ['tariff' => $tariff->id]) }}"><x-buttons.primary-button>{{ __('Buy plan') }}</x-buttons.primary-button></a>
     <div class="space-y-2 sm:space-y-4">
         <div class="flex items-center">
             <svg class="mr-4 flex-shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"

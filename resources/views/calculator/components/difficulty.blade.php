@@ -15,7 +15,7 @@
     </a>
 
     <a href="{{ route('metrics.network.difficulty', ['coin' => $difficultyData['coin']]) }}" target="_blank">
-        <x-primary-button class="flex items-center mt-2 sm:mt-3">
+        <x-buttons.primary-button class="flex items-center mt-2 sm:mt-3">
             <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -23,6 +23,6 @@
             </svg>
 
             {{ __('Get forecast') }}
-        </x-primary-button>
+        </x-buttons.primary-button>
     </a>
 </div>

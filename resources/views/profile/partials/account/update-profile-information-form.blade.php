@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="font-extrabold text-lg text-slate-800 dark:text-slate-200">
-            {{ __('Email for notifications') }}
+            {{ __('Profile Information') }}
         </h2>
 
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-            {{ __("Update your email address.") }}
+            {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
 
@@ -18,10 +18,17 @@
         @method('patch')
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" :value="old('email', $user->email)" required
+            <x-inputs.input-label for="name" :value="__('Name')" />
+            <x-inputs.text-input id="name" name="name" type="text" :value="old('name', $user->name)" required
+                autocomplete="name" />
+            <x-inputs.input-error :messages="$errors->get('name')" />
+        </div>
+
+        <div>
+            <x-inputs.input-label for="email" :value="__('Email')" />
+            <x-inputs.text-input id="email" name="email" type="email" :value="old('email', $user->email)" required
                 autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" />
+            <x-inputs.input-error :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
@@ -44,7 +51,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-buttons.primary-button>{{ __('Save') }}</x-buttons.primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

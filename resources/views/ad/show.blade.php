@@ -92,11 +92,11 @@
                         @endphp
 
                         <div class="md:col-span-2 md:col-start-1">
-                            <x-characteristics class="my-5 sm:my-6 lg:my-7">
+                            <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                                 @foreach ($ad->props as $prop => $value)
-                                    <x-characteristic :name="$prop" :value="$value" />
+                                    <x-characteristics.characteristic :name="$prop" :value="$value" />
                                 @endforeach
-                            </x-characteristics>
+                            </x-characteristics.characteristics>
 
                             <div>
                                 @include('ad.components.about-seller', [
@@ -331,11 +331,11 @@
                             {{ $ad->office->address }}
                         </a>
 
-                        <x-characteristics class="my-5 sm:my-6 lg:my-7">
+                        <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                             @foreach ($ad->props as $prop => $value)
-                                <x-characteristic :name="$prop" :value="$value" />
+                                <x-characteristics.characteristic :name="$prop" :value="$value" />
                             @endforeach
-                        </x-characteristics>
+                        </x-characteristics.characteristics>
 
                         <div>
                             @include('ad.components.about-seller', [

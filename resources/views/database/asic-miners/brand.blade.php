@@ -1,10 +1,10 @@
 <x-app-layout :title="'ASIC майнеры от производителя ' . $brand->name"
     description="ASIC майнеры от производителя {{ $brand->name }}. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <x-breadcrumbs>
-            <x-breadcrumb position="1" :href="route('database.asic-miners')" :name="__('ASIC-miners')" />
-            <x-breadcrumb position="2" :name="$brand->name" />
-        </x-breadcrumbs>
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :href="route('database.asic-miners')" :name="__('ASIC-miners')" />
+            <x-breadcrumbs.breadcrumb position="2" :name="$brand->name" />
+        </x-breadcrumbs.breadcrumbs>
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="modelsData" x-init="axios.post('/view/store', { viewable_type: 'asic-brand', viewable_id: {{ $brand->id }} })">

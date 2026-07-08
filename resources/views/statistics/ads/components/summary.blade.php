@@ -3,7 +3,7 @@
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 mb-6 sm:mb-8 lg:mb-10">
         <label class="flex cursor-pointer" for="metric_views" @click="changeMetric('views')">
-            <x-radio ::checked="metric == 'views'" />
+            <x-inputs.radio ::checked="metric == 'views'" />
             
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
@@ -24,7 +24,7 @@
         </label>
 
         <label class="flex cursor-pointer" for="metric_visits" @click="changeMetric('visits')">
-            <x-radio ::checked="metric == 'visits'" />
+            <x-inputs.radio ::checked="metric == 'visits'" />
             
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
@@ -45,7 +45,7 @@
         </label>
 
         <label class="flex cursor-pointer" for="metric_phone_views" @click="changeMetric('phone_views')">
-            <x-radio ::checked="metric == 'phone_views'" />
+            <x-inputs.radio ::checked="metric == 'phone_views'" />
 
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
@@ -66,7 +66,7 @@
         </label>
 
         <label class="flex cursor-pointer" for="metric_tracks" @click="changeMetric('tracks')">
-            <x-radio ::checked="metric == 'tracks'" />
+            <x-inputs.radio ::checked="metric == 'tracks'" />
             
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
@@ -87,7 +87,7 @@
         </label>
 
         <label class="flex cursor-pointer" for="metric_chats" @click="changeMetric('chats')">
-            <x-radio ::checked="metric == 'chats'" />
+            <x-inputs.radio ::checked="metric == 'chats'" />
             
             <div>
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">

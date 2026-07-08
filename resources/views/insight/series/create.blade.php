@@ -38,8 +38,8 @@
             @csrf
 
             <div class="w-full">
-                <x-input-label for="series-name" :value="__('Series name')" />
-                <x-length-input id="series-name" name="name" type="text" autocomplete="series-name" required
+                <x-inputs.input-label for="series-name" :value="__('Series name')" />
+                <x-inputs.length-input id="series-name" name="name" type="text" autocomplete="series-name" required
                     max="30" />
                 <template x-if="validation.name">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.name?.[0]"></p>
@@ -47,16 +47,16 @@
             </div>
 
             <div>
-                <x-input-label for="series-description" :value="__('Series description')" />
-                <x-length-textarea id="series-description" rows="4" name="description" required max="300"
+                <x-inputs.input-label for="series-description" :value="__('Series description')" />
+                <x-inputs.length-textarea id="series-description" rows="4" name="description" required max="300"
                     :value="old('description')" />
                 <template x-if="validation.description">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.description?.[0]"></p>
                 </template>
             </div>
 
-            <x-primary-button class="block ml-auto mt-6" ::disabled="loading"
-                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Create') }}</x-primary-button>
+            <x-buttons.primary-button class="block ml-auto mt-6" ::disabled="loading"
+                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Create') }}</x-buttons.primary-button>
         </form>
     </div>
 </x-modal>

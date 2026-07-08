@@ -10,7 +10,7 @@
                 $sort = request()->sort;
             @endphp
 
-            <x-header-filters>
+            <x-filters.header-filters>
                 <x-slot name="sort">
                     @if (($user = Auth::user()) && $user->tariff)
                         <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
@@ -41,14 +41,14 @@
                         </div>
                     @endif
                 </x-slot>
-            </x-header-filters>
+            </x-filters.header-filters>
         </div>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         @include('hosting.components.blurb')
 
-        <x-filter>@include('hosting.components.filter')</x-filter>
+        <x-filters.filter>@include('hosting.components.filter')</x-filters.filter>
 
         <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             @php

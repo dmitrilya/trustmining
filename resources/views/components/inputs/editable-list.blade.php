@@ -6,7 +6,7 @@
     <div class="space-y-1">
         @foreach ($items as $item)
             <div class="flex">
-                <x-text-input :id="$name" :name="$forName" type="text" :value="$item" class="py-1 px-2 mt-0" />
+                <x-inputs.text-input :id="$name" :name="$forName" type="text" :value="$item" class="py-1 px-2 mt-0" />
 
                 <button type="button" class="text-sm text-indigo-500 hover:text-indigo-600" @click="$el.parentElement.remove()">
                     <svg class="h-5 w-5 ml-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -19,7 +19,7 @@
     </div>
 
     <button type="button" class="flex text-sm text-indigo-500 hover:text-indigo-600" @click='$el.previousElementSibling.insertAdjacentHTML("beforeEnd", `<div class="flex">
-        <x-text-input :id="$name" :name="$forName" type="text" class="py-1 px-2 mt-0" />
+        <x-inputs.text-input :id="$name" :name="$forName" type="text" class="py-1 px-2 mt-0" />
 
         <button type="button" class="text-sm text-indigo-500 hover:text-indigo-600" @click="$el.parentElement.remove()">
             <svg class="h-5 w-5 ml-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

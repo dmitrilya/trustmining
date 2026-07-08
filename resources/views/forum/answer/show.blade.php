@@ -118,7 +118,7 @@
                     @if (!Auth::user())
                         <div class="flex items-center justify-center w-full h-full">
                             <a
-                                href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+                                href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
                         </div>
                     @else
                         @include('forum.comment.create')

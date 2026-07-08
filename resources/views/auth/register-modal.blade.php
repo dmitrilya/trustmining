@@ -28,7 +28,7 @@
                     {{ __('Name') . ' или ' . __('Company name') }}
                 </label>
                 @if (isset($errors))
-                    <x-input-error :messages="$errors->get('name')" />
+                    <x-inputs.input-error :messages="$errors->get('name')" />
                 @endif
             </div>
 
@@ -41,7 +41,7 @@
                     {{ __('Email') }}
                 </label>
                 @if (isset($errors))
-                    <x-input-error :messages="$errors->get('email')" />
+                    <x-inputs.input-error :messages="$errors->get('email')" />
                 @endif
             </div>
 
@@ -71,7 +71,7 @@
                     </template>
                 </button>
                 @if (isset($errors))
-                    <x-input-error :messages="$errors->get('password')" />
+                    <x-inputs.input-error :messages="$errors->get('password')" />
                 @endif
             </div>
 
@@ -101,7 +101,7 @@
                     </template>
                 </button>
                 @if (isset($errors))
-                    <x-input-error :messages="$errors->get('password_confirmation')" />
+                    <x-inputs.input-error :messages="$errors->get('password_confirmation')" />
                 @endif
             </div>
 
@@ -111,9 +111,9 @@
                     {{ __('Login') }}
                 </button>
 
-                <x-primary-button class="ml-4">
+                <x-buttons.primary-button class="ml-4">
                     {{ __('Register') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
         </form>
 

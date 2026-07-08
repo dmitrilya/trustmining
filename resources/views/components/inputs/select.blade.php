@@ -17,7 +17,7 @@
         isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }}
     }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }}">
         @if (isset($label))
-            <x-input-label :value="$label" />
+            <x-inputs.input-label :value="$label" />
         @endif
 
         <input type="hidden" name="{{ $name }}" :value="itemKey">

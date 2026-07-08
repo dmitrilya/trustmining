@@ -1,8 +1,8 @@
 @props(['withUniqueCheck' => false])
 
 <div class="flex justify-center items-center gap-4 mb-6">
-    <x-secondary-button x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'accept-moderation')">{{ __('Accept') }}</x-secondary-button>
+    <x-buttons.secondary-button x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'accept-moderation')">{{ __('Accept') }}</x-buttons.secondary-button>
 
     <x-modal name="accept-moderation" focusable>
         <form method="post" action="{{ route('moderation.accept', ['moderation' => $moderation->id]) }}" class="p-6">
@@ -15,26 +15,26 @@
 
             @if ($withUniqueCheck)
                 <div class="my-4">
-                    <x-checkbox name="unique_content" value="unique_content" textClasses="text-slate-600 py-5">
+                    <x-inputs.checkbox name="unique_content" value="unique_content" textClasses="text-slate-600 py-5">
                         {{ __('Unique content is used') }}
-                    </x-checkbox>
+                    </x-inputs.checkbox>
                 </div>
             @endif
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-buttons.secondary-button x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-buttons.secondary-button>
 
-                <x-primary-button class="ml-3">
+                <x-buttons.primary-button class="ml-3">
                     {{ __('Confirm') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
         </form>
     </x-modal>
 
-    <x-primary-button x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'decline-moderation')">{{ __('Decline') }}</x-primary-button>
+    <x-buttons.primary-button x-data=""
+        x-on:click.prevent="$dispatch('open-modal', 'decline-moderation')">{{ __('Decline') }}</x-buttons.primary-button>
 
     <x-modal name="decline-moderation" focusable>
         <form method="post" action="{{ route('moderation.decline', ['moderation' => $moderation->id]) }}"
@@ -51,19 +51,19 @@
             </p>
 
             <div class="mt-6">
-                <x-input-label for="comment" value="{{ __('Comment') }}" class="sr-only" />
-                <x-text-input id="comment" name="comment" class="w-3/4" placeholder="{{ __('Comment') }}" />
-                <x-input-error :messages="$errors->userDeletion->get('comment')" />
+                <x-inputs.input-label for="comment" value="{{ __('Comment') }}" class="sr-only" />
+                <x-inputs.text-input id="comment" name="comment" class="w-3/4" placeholder="{{ __('Comment') }}" />
+                <x-inputs.input-error :messages="$errors->userDeletion->get('comment')" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-buttons.secondary-button x-on:click="$dispatch('close')">
                     {{ __('Cancel') }}
-                </x-secondary-button>
+                </x-buttons.secondary-button>
 
-                <x-danger-button class="ml-3">
+                <x-buttons.danger-button class="ml-3">
                     {{ __('Decline') }}
-                </x-danger-button>
+                </x-buttons.danger-button>
             </div>
         </form>
     </x-modal>

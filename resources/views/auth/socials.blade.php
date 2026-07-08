@@ -5,7 +5,7 @@
 </div>
 
 <a href="https://oauth.yandex.ru/authorize?response_type=code&client_id={{ config('services.yandex_auth.id') }}">
-    <x-secondary-button class="w-full">
+    <x-buttons.secondary-button class="w-full">
         <div class="rounded-full overflow-hidden mr-3 sm:mr-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 44 44" fill="none">
                 <rect width="44" height="44" fill="#FC3F1D" />
@@ -16,5 +16,5 @@
         </div>
 
         {{ __('Login via Yandex ID') }}
-    </x-secondary-button>
+    </x-buttons.secondary-button>
 </a>

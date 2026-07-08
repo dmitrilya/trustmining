@@ -10,4 +10,4 @@
     ];
 @endphp
 
-<x-filter-filter type="checkbox" :name="__('Notification type')" :items="$types" field="notificationable_types"></x-filter-filter>
+<x-filters.filter-filter type="checkbox" :name="__('Notification type')" :items="$types" field="notificationable_types"></x-filters.filter-filter>

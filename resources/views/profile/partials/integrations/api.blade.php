@@ -34,5 +34,5 @@
         {{ __('Generate') }}
     </button>
 
-    <x-text-input class="hidden mt-4    "></x-text-input>
+    <x-inputs.text-input class="hidden mt-4    "></x-inputs.text-input>
 </section>

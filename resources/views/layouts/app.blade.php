@@ -203,14 +203,14 @@
                             <x-tg-auth />
 
                             <div class="flex items-center justify-between mt-6">
-                                <x-checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
+                                <x-inputs.checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
                                     {{ __("Don't ask again") }}
-                                </x-checkbox>
+                                </x-inputs.checkbox>
 
-                                <x-danger-button class="ml-3 text-xxs"
+                                <x-buttons.danger-button class="ml-3 text-xxs"
                                     @click="if($el.previousElementSibling.getElementsByTagName('input')[0].checked) {axios.patch('/tg/dont-ask');window.tgDontAsk = true}show = false">
                                     {{ __('Not interested') }}
-                                </x-danger-button>
+                                </x-buttons.danger-button>
                             </div>
                         </div>
                     </x-modal>

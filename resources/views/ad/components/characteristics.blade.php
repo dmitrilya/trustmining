@@ -1,22 +1,22 @@
 <div class="mt-4">
-    <x-characteristics>
+    <x-characteristics.characteristics>
         @if ($ad->adcategory->name == 'miners')
-            <x-characteristic name="Manufacturer" :value="$ad->asicVersion->asicModel->asicBrand->name" />
-            <x-characteristic name="Algorithm" :value="$ad->asicVersion->asicModel->algorithm->name" />
-            <x-characteristic name="Efficiency" :value="$ad->asicVersion->efficiency . 'j/' . $ad->asicVersion->measurement" />
-            <x-characteristic name="Power" :value="$ad->asicVersion->efficiency * $ad->asicVersion->hashrate . __('kW/h')" />
-            <x-characteristic name="Release date" :value="$ad->asicVersion->asicModel->release->translatedFormat('j M Y')" />
+            <x-characteristics.characteristic name="Manufacturer" :value="$ad->asicVersion->asicModel->asicBrand->name" />
+            <x-characteristics.characteristic name="Algorithm" :value="$ad->asicVersion->asicModel->algorithm->name" />
+            <x-characteristics.characteristic name="Efficiency" :value="$ad->asicVersion->efficiency . 'j/' . $ad->asicVersion->measurement" />
+            <x-characteristics.characteristic name="Power" :value="$ad->asicVersion->efficiency * $ad->asicVersion->hashrate . __('kW/h')" />
+            <x-characteristics.characteristic name="Release date" :value="$ad->asicVersion->asicModel->release->translatedFormat('j M Y')" />
         @elseif ($ad->adcategory->name == 'gpus')
-            <x-characteristic name="Power" :value="$ad->gpuModel->max_power" itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'kW/h']" />
-            <x-characteristic name="Engine manufacturer" :value="$ad->gpuModel->gpuEngineModel->gpuEngineBrand->name .
+            <x-characteristics.characteristic name="Power" :value="$ad->gpuModel->max_power" itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'kW/h']" />
+            <x-characteristics.characteristic name="Engine manufacturer" :value="$ad->gpuModel->gpuEngineModel->gpuEngineBrand->name .
                 ' (' .
                 __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) .
                 ')'" />
-            <x-characteristic name="Engine model" :value="$ad->gpuModel->gpuEngineModel->name" />
-            <x-characteristic name="Fuel consumption (m³/h)" :value="$ad->gpuModel->fuel_consumption" />
-            <x-characteristic name="Country" :value="__($ad->gpuModel->gpuBrand->country)" />
+            <x-characteristics.characteristic name="Engine model" :value="$ad->gpuModel->gpuEngineModel->name" />
+            <x-characteristics.characteristic name="Fuel consumption (m³/h)" :value="$ad->gpuModel->fuel_consumption" />
+            <x-characteristics.characteristic name="Country" :value="__($ad->gpuModel->gpuBrand->country)" />
         @endif
-    </x-characteristics>
+    </x-characteristics.characteristics>
 
     @if ($ad->adCategory->name == 'miners' || $ad->adCategory->name == 'gpus')
         <a class="block mt-4 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"

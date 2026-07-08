@@ -20,11 +20,11 @@
     </label>
 
     <div x-show="!inStock" class="mt-4">
-        <x-input-label for="waiting" :value="__('Waiting (days)')" />
-        <x-text-input id="waiting" name="waiting" type="number" min="1" max="120" autocomplete="waiting"
+        <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
+        <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="120" autocomplete="waiting"
             :value="isset($ad->props['Waiting (days)']) ? $ad->props['Waiting (days)'] : null"
             @change="let props = JSON.parse($refs.props_gpus.value);props['Waiting (days)'] = $el.value;$refs.props_gpus.value = JSON.stringify(props);" />
-        <x-input-error :messages="$errors->get('waiting')" />
+        <x-inputs.input-error :messages="$errors->get('waiting')" />
     </div>
 </div>
 
@@ -40,20 +40,20 @@
 
     <div x-show="!anew">
         <div class="mt-4">
-            <x-input-label for="warranty" :value="__('Warranty (months)')" />
-            <x-text-input id="warranty" name="warranty" type="number" min="0" max="12"
+            <x-inputs.input-label for="warranty" :value="__('Warranty (months)')" />
+            <x-inputs.text-input id="warranty" name="warranty" type="number" min="0" max="12"
                 autocomplete="warranty" :value="isset($ad->props['Warranty (months)']) ? $ad->props['Warranty (months)'] : null"
                 @change="let props = JSON.parse($refs.props_gpus.value);props['Warranty (months)'] = $el.value;$refs.props_gpus.value = JSON.stringify(props);" />
-            <x-input-error :messages="$errors->get('warranty')" />
+            <x-inputs.input-error :messages="$errors->get('warranty')" />
         </div>
 
         <div class="mt-6">
-            <x-input-label for="images" :value="__('Change photo')" />
-            <x-file-input id="images" name="images[]" class="mt-1 block w-full" multiple
+            <x-inputs.input-label for="images" :value="__('Change photo')" />
+            <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple
                 accept=".png,.jpg,.jpeg,.webp" max="3" label="max. 2MB, 3 items" />
-            <x-input-error :messages="$errors->get('images')" />
+            <x-inputs.input-error :messages="$errors->get('images')" />
             @foreach ($errors->get('images.*') as $error)
-                <x-input-error :messages="$error" />
+                <x-inputs.input-error :messages="$error" />
             @endforeach
         </div>
     </div>

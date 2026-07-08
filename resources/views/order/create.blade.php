@@ -11,10 +11,10 @@
                 @csrf
 
                 <div>
-                    <x-input-label for="amount" :value="__('Amount')" />
-                    <x-text-input id="amount" name="amount" type="number" min="100" :value="$user->tariff ? $user->tariff->price * 30 : 100" autocomplete="off"
+                    <x-inputs.input-label for="amount" :value="__('Amount')" />
+                    <x-inputs.text-input id="amount" name="amount" type="number" min="100" :value="$user->tariff ? $user->tariff->price * 30 : 100" autocomplete="off"
                         required />
-                    <x-input-error :messages="$errors->get('amount')" />
+                    <x-inputs.input-error :messages="$errors->get('amount')" />
                 </div>
 
                 <div class="grid grid-cols-3 gap-1 xs:gap-2 sm:gap-4 md:gap-6">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
 
-                <x-primary-button class="block w-full sm:w-max ml-auto md:!mt-10">{{ __('Top up') }}</x-primary-button>
+                <x-buttons.primary-button class="block w-full sm:w-max ml-auto md:!mt-10">{{ __('Top up') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

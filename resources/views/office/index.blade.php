@@ -37,7 +37,7 @@
                     @endif
                 </h1>
 
-                <x-header-filters withoutSort="true" />
+                <x-filters.header-filters withoutSort="true" />
             </div>
         </x-slot>
     @endif

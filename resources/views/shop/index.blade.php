@@ -9,7 +9,7 @@
                 $sort = request()->sort;
             @endphp
 
-            <x-header-filters>
+            <x-filters.header-filters>
                 <x-slot name="sort">
                     <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'tf_high_to_low' ? 'true' : 'false' }} }" :href="route(
                         request()->route()->getName(),
@@ -31,7 +31,7 @@
                         {{ __('TF: Low to High') }}
                     </x-dropdown-link>
                 </x-slot>
-            </x-header-filters>
+            </x-filters.header-filters>
         </div>
     </x-slot>
 

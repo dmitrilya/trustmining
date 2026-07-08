@@ -119,5 +119,5 @@
         </div>
     </template>
 
-    <x-input-error :messages="$errors->get('asic_version_id')" />
+    <x-inputs.input-error :messages="$errors->get('asic_version_id')" />
 </div>

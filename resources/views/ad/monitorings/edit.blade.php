@@ -43,5 +43,5 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
 
         <input type="hidden" class="hidden" name="description" :value="description" required>
     </div>
-    <x-input-error :messages="$errors->get('description')" />
+    <x-inputs.input-error :messages="$errors->get('description')" />
 </div>

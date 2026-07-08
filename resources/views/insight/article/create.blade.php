@@ -171,8 +171,8 @@
             @csrf
 
             <div class="w-full">
-                <x-input-label for="article-title" :value="__('Title')" />
-                <x-length-input id="article-title" name="title" type="text" :value="old('title')" autocomplete="title"
+                <x-inputs.input-label for="article-title" :value="__('Title')" />
+                <x-inputs.length-input id="article-title" name="title" type="text" :value="old('title')" autocomplete="title"
                     required max="40" />
                 <template x-if="validation.title">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
@@ -180,8 +180,8 @@
             </div>
 
             <div class="w-full">
-                <x-input-label for="article-subtitle" :value="__('Brief description')" />
-                <x-length-input id="article-subtitle" name="subtitle" type="text" :value="old('subtitle')"
+                <x-inputs.input-label for="article-subtitle" :value="__('Brief description')" />
+                <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" :value="old('subtitle')"
                     autocomplete="subtitle" required max="70" />
                 <template x-if="validation.subtitle">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
@@ -189,21 +189,21 @@
             </div>
 
             <div>
-                <x-input-label for="preview" :value="__('Preview')" />
-                <x-file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
+                <x-inputs.input-label for="preview" :value="__('Preview')" />
+                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                     required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
             </div>
 
-            <x-select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
+            <x-inputs.select :label="__('Series')" name="series_id" :items="collect([['key' => 0, 'value' => __('Without series')]])
                 ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                 ->keyBy('key')" />
 
             <div x-data="{ allTags: {{ $tags }}, tags: [], search: '' }">
                 <div>
-                    <x-input-label for="search" :value="__('Hashtags')" />
+                    <x-inputs.input-label for="search" :value="__('Hashtags')" />
                     <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
                         class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                         <input type="text" id="search" x-model="search" placeholder="#"
@@ -258,8 +258,8 @@
                 <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>
 
-            <x-primary-button class="block ml-auto" ::disabled="loading"
-                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-primary-button>
+            <x-buttons.primary-button class="block ml-auto" ::disabled="loading"
+                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
 
             <x-modal name="attach-img_modal" maxWidth="md">
                 <div class="p-6">
@@ -280,11 +280,11 @@
                     </div>
 
                     <div>
-                        <x-input-label for="attach-img_url" :value="__('Link to the image')" />
-                        <x-text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
+                        <x-inputs.input-label for="attach-img_url" :value="__('Link to the image')" />
+                        <x-inputs.text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
                     </div>
 
-                    <x-primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto" type="button"
+                    <x-buttons.primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto" type="button"
                         @click="
                             show = false;
                             const input = $el.previousElementSibling.querySelector('input');
@@ -293,7 +293,7 @@
                             attachCallback = null;
                         ">
                         {{ __('Attach') }}
-                    </x-primary-button>
+                    </x-buttons.primary-button>
                 </div>
             </x-modal>
 
@@ -316,11 +316,11 @@
                     </div>
 
                     <div>
-                        <x-input-label for="attach-video_url" :value="__('Link to the video') . ' (vkvideo, youtube, rutube)'" />
-                        <x-text-input id="attach-video_url" type="text" autocomplete="attach-video_url" />
+                        <x-inputs.input-label for="attach-video_url" :value="__('Link to the video') . ' (vkvideo, youtube, rutube)'" />
+                        <x-inputs.text-input id="attach-video_url" type="text" autocomplete="attach-video_url" />
                     </div>
 
-                    <x-primary-button class="mt-2 sm:mt-4 block ml-auto" type="button"
+                    <x-buttons.primary-button class="mt-2 sm:mt-4 block ml-auto" type="button"
                         @click="
                             show = false;
                             const input = $el.previousElementSibling.querySelector('input');
@@ -329,7 +329,7 @@
                             attachCallback = null;
                         ">
                         {{ __('Attach') }}
-                    </x-primary-button>
+                    </x-buttons.primary-button>
                 </div>
             </x-modal>
         </form>

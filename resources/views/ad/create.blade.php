@@ -14,20 +14,20 @@
             <form method="post" action="{{ route('ad.store') }}" class="space-y-6" enctype=multipart/form-data>
                 @csrf
 
-                <x-select :label="__('Ad type')" name="ad_category_id"
+                <x-inputs.select :label="__('Ad type')" name="ad_category_id"
                     handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
                         ->map(fn($adCategory) => ['key' => $adCategory->id, 'value' => __($adCategory->header)])
                         ->keyBy('key')" />
 
-                <x-select :label="__('Office')" name="office_id" :items="$offices
+                <x-inputs.select :label="__('Office')" name="office_id" :items="$offices
                     ->map(fn($office) => ['key' => $office->id, 'value' => $office->address])
                     ->keyBy('key')" />
 
                 <div>
-                    <x-input-label for="preview" :value="__('Preview')" />
-                    <x-file-input id="preview" name="preview" class="mt-1 block w-full" required
+                    <x-inputs.input-label for="preview" :value="__('Preview')" />
+                    <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" required
                         accept=".png,.jpg,.jpeg,.webp" label="max. 2MB, 4/3" />
-                    <x-input-error :messages="$errors->get('preview')" />
+                    <x-inputs.input-error :messages="$errors->get('preview')" />
                 </div>
 
                 <template x-if="ad_category_id == 1">
@@ -73,12 +73,12 @@
                 <div>
                     <div class="flex items-center">
                         <div class="mr-2 xs:mr-3 w-full">
-                            <x-input-label for="price" :value="__('Price')" />
-                            <x-text-input id="price" name="price" type="number" required autocomplete="price" />
-                            <x-input-error :messages="$errors->get('price')" />
+                            <x-inputs.input-label for="price" :value="__('Price')" />
+                            <x-inputs.text-input id="price" name="price" type="number" required autocomplete="price" />
+                            <x-inputs.input-error :messages="$errors->get('price')" />
                         </div>
 
-                        <x-select :label="__('Currency')" name="coin_id" key="2" :items="$coins
+                        <x-inputs.select :label="__('Currency')" name="coin_id" key="2" :items="$coins
                             ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
                             ->keyBy('key')"
                             :icon="['type' => 'value', 'path' => '/storage/coins/']" />
@@ -89,11 +89,11 @@
                     </div>
                 </div>
 
-                <x-checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
+                <x-inputs.checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
                     {{ __('Price including VAT') }}
-                </x-checkbox>
+                </x-inputs.checkbox>
 
-                <x-primary-button class="block ml-auto">{{ __('Save') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

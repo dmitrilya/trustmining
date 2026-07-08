@@ -37,14 +37,14 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
     <input type="hidden" name="props" x-ref="props_noiseboxes" value="{{ json_encode($ad->props) }}" />
 
     <div>
-        <x-input-label for="capacity" :value="__('Capacity')" />
-        <x-text-input id="capacity" name="capacity" type="number" min="1" max="10" autocomplete="capacity"
+        <x-inputs.input-label for="capacity" :value="__('Capacity')" />
+        <x-inputs.text-input id="capacity" name="capacity" type="number" min="1" max="10" autocomplete="capacity"
             :value="$ad->props['Capacity']"
             @change="let props = JSON.parse($refs.props_noiseboxes.value);props['Capacity'] = $el.value;$refs.props_noiseboxes.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('capacity')" />
+        <x-inputs.input-error :messages="$errors->get('capacity')" />
     </div>
 
-    <x-select :label="__('Material')" name="Material" :key="$ad->props['Material']"
+    <x-inputs.select :label="__('Material')" name="Material" :key="$ad->props['Material']"
         handleChange="(material => {
             let props = JSON.parse($refs.props_noiseboxes.value);
             props['Material'] = material;
@@ -58,24 +58,24 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
         ])->keyBy('key')" />
 
     <div>
-        <x-input-label for="length" :value="__('Length (cm)')" />
-        <x-text-input id="length" name="length" type="number" autocomplete="length" :value="$ad->props['Length (cm)']"
+        <x-inputs.input-label for="length" :value="__('Length (cm)')" />
+        <x-inputs.text-input id="length" name="length" type="number" autocomplete="length" :value="$ad->props['Length (cm)']"
             @change="let props = JSON.parse($refs.props_noiseboxes.value);props['Length (cm)'] = $el.value;$refs.props_noiseboxes.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('length')" />
+        <x-inputs.input-error :messages="$errors->get('length')" />
     </div>
 
     <div>
-        <x-input-label for="width" :value="__('Width (cm)')" />
-        <x-text-input id="width" name="width" type="number" autocomplete="width" :value="$ad->props['Width (cm)']"
+        <x-inputs.input-label for="width" :value="__('Width (cm)')" />
+        <x-inputs.text-input id="width" name="width" type="number" autocomplete="width" :value="$ad->props['Width (cm)']"
             @change="let props = JSON.parse($refs.props_noiseboxes.value);props['Width (cm)'] = $el.value;$refs.props_noiseboxes.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('width')" />
+        <x-inputs.input-error :messages="$errors->get('width')" />
     </div>
 
     <div>
-        <x-input-label for="height" :value="__('Height (cm)')" />
-        <x-text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
+        <x-inputs.input-label for="height" :value="__('Height (cm)')" />
+        <x-inputs.text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
             @change="let props = JSON.parse($refs.props_noiseboxes.value);props['Height (cm)'] = $el.value;$refs.props_noiseboxes.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('height')" />
+        <x-inputs.input-error :messages="$errors->get('height')" />
     </div>
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
@@ -85,5 +85,5 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
 
         <input type="hidden" class="hidden" name="description" :value="description" required>
     </div>
-    <x-input-error :messages="$errors->get('description')" />
+    <x-inputs.input-error :messages="$errors->get('description')" />
 </div>

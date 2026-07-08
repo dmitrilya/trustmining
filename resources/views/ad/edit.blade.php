@@ -15,15 +15,15 @@
                 @csrf
                 @method('PUT')
 
-                <x-select :label="__('Office')" name="office_id" :key="$ad->office_id" :items="$offices
+                <x-inputs.select :label="__('Office')" name="office_id" :key="$ad->office_id" :items="$offices
                     ->map(fn($office) => ['key' => $office->id, 'value' => $office->address])
                     ->keyBy('key')" />
 
                 <div>
-                    <x-input-label for="preview" :value="__('Change preview')" />
-                    <x-file-input id="preview" name="preview" class="mt-1 block w-full"
+                    <x-inputs.input-label for="preview" :value="__('Change preview')" />
+                    <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full"
                         accept=".png,.jpg,.jpeg,.webp" label="max. 2MB" />
-                    <x-input-error :messages="$errors->get('preview')" />
+                    <x-inputs.input-error :messages="$errors->get('preview')" />
                 </div>
 
                 @include('ad.' . $ad->adCategory->name . '.edit')
@@ -31,13 +31,13 @@
                 <div>
                     <div class="flex items-center">
                         <div class="mr-2 xs:mr-3 w-full">
-                            <x-input-label for="price" :value="__('Price')" />
-                            <x-text-input id="price" name="price" type="number" required autocomplete="price"
+                            <x-inputs.input-label for="price" :value="__('Price')" />
+                            <x-inputs.text-input id="price" name="price" type="number" required autocomplete="price"
                                 :value="$ad->price" />
-                            <x-input-error :messages="$errors->get('price')" />
+                            <x-inputs.input-error :messages="$errors->get('price')" />
                         </div>
 
-                        <x-select :label="__('Currency')" name="coin_id" :key="$ad->coin_id" :items="$coins
+                        <x-inputs.select :label="__('Currency')" name="coin_id" :key="$ad->coin_id" :items="$coins
                             ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
                             ->keyBy('key')"
                             :icon="['type' => 'value', 'path' => '/storage/coins/']" />
@@ -48,15 +48,15 @@
                     </div>
                 </div>
 
-                <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat">
+                <x-inputs.checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat">
                     {{ __('Price including VAT') }}
-                </x-checkbox>
+                </x-inputs.checkbox>
 
                 <div class="flex justify-end">
-                    <x-danger-button x-data="" type="button"
-                        @click.prevent="$dispatch('open-modal', 'confirm-ad-deletion')">{{ __('Delete an advertisement') }}</x-danger-button>
+                    <x-buttons.danger-button x-data="" type="button"
+                        @click.prevent="$dispatch('open-modal', 'confirm-ad-deletion')">{{ __('Delete an advertisement') }}</x-buttons.danger-button>
 
-                    <x-primary-button class="ml-3">{{ __('Save') }}</x-primary-button>
+                    <x-buttons.primary-button class="ml-3">{{ __('Save') }}</x-buttons.primary-button>
                 </div>
             </form>
 
@@ -70,13 +70,13 @@
                     </h2>
 
                     <div class="mt-8 flex justify-center">
-                        <x-secondary-button x-on:click="$dispatch('close')">
+                        <x-buttons.secondary-button x-on:click="$dispatch('close')">
                             {{ __('Cancel') }}
-                        </x-secondary-button>
+                        </x-buttons.secondary-button>
 
-                        <x-danger-button class="ml-3">
+                        <x-buttons.danger-button class="ml-3">
                             {{ __('Confirm') }}
-                        </x-danger-button>
+                        </x-buttons.danger-button>
                     </div>
                 </form>
             </x-modal>

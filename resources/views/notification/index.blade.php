@@ -5,7 +5,7 @@
                 {{ __('Notifications') }}
             </h1>
 
-            <x-header-filters :withoutSort="true"></x-header-filters>
+            <x-filters.header-filters :withoutSort="true"></x-filters.header-filters>
         </div>
     </x-slot>
 

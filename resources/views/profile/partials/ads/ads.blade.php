@@ -65,13 +65,13 @@
         @if ($user->ads->where('moderation', false)->count())
             <div class="flex justify-end mt-4">
                 <a href="{{ route('ad.statistics') }}">
-                    <x-secondary-button class="bg-secondary-gradient dark:text-slate-800 mr-2 sm:mr-3">
+                    <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800 mr-2 sm:mr-3">
                         {{ __('Statistics') }}
-                    </x-secondary-button>
+                    </x-buttons.secondary-button>
                 </a>
 
                 <a href="{{ route('ad.edit.mass') }}">
-                    <x-primary-button>{{ __('Update prices') }}</x-primary-button>
+                    <x-buttons.primary-button>{{ __('Update prices') }}</x-buttons.primary-button>
                 </a>
             </div>
         @endif

@@ -23,16 +23,16 @@
     @endphp
 
     <h2 class="text-sm xs:text-base sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-extrabold">{{ $model->data->name }}</h2>
-    <x-characteristics>
-        <x-characteristic name="Brand" :value="$model->data->asicBrand->name" />
-        <x-characteristic name="Hashrate" :value="$model->data->asicVersions->count() > 1
+    <x-characteristics.characteristics>
+        <x-characteristics.characteristic name="Brand" :value="$model->data->asicBrand->name" />
+        <x-characteristics.characteristic name="Hashrate" :value="$model->data->asicVersions->count() > 1
             ? $model->data->asicVersions->last()->hashrate . '-' . $version->hashrate . ' ' . $version->measurement
             : $version->hashrate . $version->measurement" />
-        <x-characteristic name="Algorithm" :value="$model->data->algorithm->name" />
-        <x-characteristic name="Efficiency" :value="$version->efficiency . ' j/' . $version->measurement" />
-        <x-characteristic name="Release date" :value="$model->data->release->locale(app()->getLocale())->translatedFormat('F Y')" />
-        <x-characteristic name="Cooling" :value="$model->characteristics['Cooling']" />
-    </x-characteristics>
+        <x-characteristics.characteristic name="Algorithm" :value="$model->data->algorithm->name" />
+        <x-characteristics.characteristic name="Efficiency" :value="$version->efficiency . ' j/' . $version->measurement" />
+        <x-characteristics.characteristic name="Release date" :value="$model->data->release->locale(app()->getLocale())->translatedFormat('F Y')" />
+        <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" />
+    </x-characteristics.characteristics>
 
     @if ($versionWithAds && count($versionWithAds->profits))
         <div>
@@ -48,13 +48,13 @@
             ])
         </div>
 
-        <x-characteristics>
-            <x-characteristic name="Power" :value="$versionWithAds->efficiency * $versionWithAds->hashrate . ' W'" />
-            <x-characteristic name="Ads count" :value="$modelAds->count()" />
+        <x-characteristics.characteristics>
+            <x-characteristics.characteristic name="Power" :value="$versionWithAds->efficiency * $versionWithAds->hashrate . ' W'" />
+            <x-characteristics.characteristic name="Ads count" :value="$modelAds->count()" />
             @if ($minPrice)
-                <x-characteristic name="The best price" :value="$minPrice->price . ' ' . $minPrice->coin" />
+                <x-characteristics.characteristic name="The best price" :value="$minPrice->price . ' ' . $minPrice->coin" />
             @endif
-        </x-characteristics>
+        </x-characteristics.characteristics>
     @elseif (count($version->profits))
         <div>
             <p class="text-xxs xxs:text-xs text-slate-500 mb-2">{{ __('Calculation for') }}
@@ -69,8 +69,8 @@
             ])
         </div>
 
-        <x-characteristics>
-            <x-characteristic name="Power" :value="$version->efficiency * $version->hashrate . ' W'" />
-        </x-characteristics>
+        <x-characteristics.characteristics>
+            <x-characteristics.characteristic name="Power" :value="$version->efficiency * $version->hashrate . ' W'" />
+        </x-characteristics.characteristics>
     @endif
 </div>

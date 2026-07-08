@@ -11,7 +11,7 @@
             style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"
             x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
-        <x-input-error :messages="$errors->get('text')" />
+        <x-inputs.input-error :messages="$errors->get('text')" />
     </div>
 
     <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ images: {{ count($answer->images) }}, files: {{ count($answer->files) }} }">
@@ -76,12 +76,12 @@
                     </div>
 
                     <div class="mt-2 sm:mt-4 flex justify-end">
-                        <x-secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
+                        <x-buttons.secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
                             {{ __('Cancel') }}
-                        </x-secondary-button>
+                        </x-buttons.secondary-button>
 
-                        <x-primary-button type="button"
-                            @click="() => {insertLink(range, $refs.answer, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-primary-button>
+                        <x-buttons.primary-button type="button"
+                            @click="() => {insertLink(range, $refs.answer, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-buttons.primary-button>
                     </div>
                 </div>
             </x-modal>
@@ -122,7 +122,7 @@
     @if (count($errors->get('images.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('images.*') as $error)
-                <x-input-error :messages="$error" />
+                <x-inputs.input-error :messages="$error" />
             @endforeach
         </div>
     @endif
@@ -130,7 +130,7 @@
     @if (count($errors->get('files.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('files.*') as $error)
-                <x-input-error :messages="$error" />
+                <x-inputs.input-error :messages="$error" />
             @endforeach
         </div>
     @endif

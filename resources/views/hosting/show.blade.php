@@ -206,12 +206,12 @@
                     <div>
                         @if ($auth && $hosting->user->id == $auth->id)
                             <a class="block mt-6" href="{{ route('hosting.edit', ['hosting' => $hosting->id]) }}">
-                                <x-primary-button>{{ __('Edit') }}</x-primary-button>
+                                <x-buttons.primary-button>{{ __('Edit') }}</x-buttons.primary-button>
                             </a>
                         @else
                             <a class="block mt-6" target="_blank"
                                 href="{{ route('chat.start', ['user' => $hosting->user->id]) }}">
-                                <x-primary-button>{{ __('Contact') }}</x-primary-button>
+                                <x-buttons.primary-button>{{ __('Contact') }}</x-buttons.primary-button>
                             </a>
                         @endif
                     </div>
@@ -235,7 +235,7 @@
 
                 @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
                     <div x-data="{ deficiencies: [], done: false }">
-                        <x-secondary-button
+                        <x-buttons.secondary-button
                             class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
                             @click="if (!status) {
                                     if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
@@ -256,7 +256,7 @@
                             </svg>
 
                             <span>{{ __('Defects of the contract') }}</span>
-                        </x-secondary-button>
+                        </x-buttons.secondary-button>
 
                         <template x-if="done">
                             <div>

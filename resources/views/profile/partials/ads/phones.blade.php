@@ -26,14 +26,14 @@
             <div class="w-full mr-3">
                 <div class="relative">
                     <span class="absolute left-2.5 top-1 text-lg">+</span>
-                    <x-text-input type="tel" class="pl-6" name="number" :value="!$phone ? old('number') : $phone->number" required
+                    <x-inputs.text-input type="tel" class="pl-6" name="number" :value="!$phone ? old('number') : $phone->number" required
                         x-mask:dynamic="$input.startsWith('7') ? '9 (999) 999-99-99' : '999999999999999'"
                         placeholder="7 (9##) ###-##-##" />
                 </div>
-                <x-input-error :messages="$errors->get('number')" />
+                <x-inputs.input-error :messages="$errors->get('number')" />
             </div>
 
-            <x-primary-button class="mt-1">{{ __('Save') }}</x-primary-button>
+            <x-buttons.primary-button class="mt-1">{{ __('Save') }}</x-buttons.primary-button>
         </form>
     @endif
 </section>

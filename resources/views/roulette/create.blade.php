@@ -19,41 +19,41 @@
         <form method="POST" action="{{ route('roulette.prize.store') }}" class="space-y-4">
             @csrf
 
-            <x-select :label="__('Company')" name="user_id" :items="collect($users)" />
+            <x-inputs.select :label="__('Company')" name="user_id" :items="collect($users)" />
 
             <div>
-                <x-input-label for="roulette-prize-create_name" :value="__('Title')" />
-                <x-text-input id="roulette-prize-create_name" type="text" name="name" required />
-                <x-input-error :messages="$errors->get('name')" />
+                <x-inputs.input-label for="roulette-prize-create_name" :value="__('Title')" />
+                <x-inputs.text-input id="roulette-prize-create_name" type="text" name="name" required />
+                <x-inputs.input-error :messages="$errors->get('name')" />
             </div>
 
             <div>
-                <x-input-label for="roulette-prize-create_caption" :value="__('Caption')" />
-                <x-text-input id="roulette-prize-create_caption" type="text" name="caption" required />
-                <x-input-error :messages="$errors->get('caption')" />
+                <x-inputs.input-label for="roulette-prize-create_caption" :value="__('Caption')" />
+                <x-inputs.text-input id="roulette-prize-create_caption" type="text" name="caption" required />
+                <x-inputs.input-error :messages="$errors->get('caption')" />
             </div>
 
             <div>
-                <x-input-label for="roulette-prize-create_partner_link" :value="__('Partner link')" />
-                <x-text-input id="roulette-prize-create_partner_link" type="text" name="partner_link" required />
-                <x-input-error :messages="$errors->get('partner_link')" />
+                <x-inputs.input-label for="roulette-prize-create_partner_link" :value="__('Partner link')" />
+                <x-inputs.text-input id="roulette-prize-create_partner_link" type="text" name="partner_link" required />
+                <x-inputs.input-error :messages="$errors->get('partner_link')" />
             </div>
 
             <div>
-                <x-input-label for="roulette-prize-create_href" :value="__('Take the prize')" />
-                <x-text-input id="roulette-prize-create_href" type="text" name="href" required />
-                <x-input-error :messages="$errors->get('href')" />
+                <x-inputs.input-label for="roulette-prize-create_href" :value="__('Take the prize')" />
+                <x-inputs.text-input id="roulette-prize-create_href" type="text" name="href" required />
+                <x-inputs.input-error :messages="$errors->get('href')" />
             </div>
 
             <div>
-                <x-input-label for="roulette-prize-create_chance" :value="__('Chance')" />
-                <x-text-input id="roulette-prize-create_chance" type="text" name="chance" required />
-                <x-input-error :messages="$errors->get('chance')" />
+                <x-inputs.input-label for="roulette-prize-create_chance" :value="__('Chance')" />
+                <x-inputs.text-input id="roulette-prize-create_chance" type="text" name="chance" required />
+                <x-inputs.input-error :messages="$errors->get('chance')" />
             </div>
 
-            <x-primary-button class="block ml-auto">
+            <x-buttons.primary-button class="block ml-auto">
                 {{ __('Create') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </form>
     </div>
 </x-modal>

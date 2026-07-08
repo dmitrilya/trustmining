@@ -27,12 +27,12 @@
             @csrf
 
             <div>
-                <x-input-label for="inn" :value="__('Company TIN')" />
-                <x-text-input id="inn" name="inn" required autocomplete="inn" />
-                <x-input-error :messages="$errors->get('inn')" />
+                <x-inputs.input-label for="inn" :value="__('Company TIN')" />
+                <x-inputs.text-input id="inn" name="inn" required autocomplete="inn" />
+                <x-inputs.input-error :messages="$errors->get('inn')" />
             </div>
 
-            <x-primary-button class="block ml-auto">{{ __('Confirm') }}</x-primary-button>
+            <x-buttons.primary-button class="block ml-auto">{{ __('Confirm') }}</x-buttons.primary-button>
         </form>
     @elseif ($user->company->moderation)
         <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
@@ -41,7 +41,7 @@
 
         @if ($order = $user->orders()->where('amount', 10)->where('status', 'init')->latest()->first('invoice_url'))
             <a href="{{ $order->invoice_url }}" target="_blank">
-                <x-primary-button class="block ml-auto">{{ __('Pay') }}</x-primary-button>
+                <x-buttons.primary-button class="block ml-auto">{{ __('Pay') }}</x-buttons.primary-button>
             </a>
         @endif
     @else

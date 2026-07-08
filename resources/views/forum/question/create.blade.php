@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         @if (!Auth::user())
             <div class="flex items-center justify-center w-full h-full">
-                <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+                <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
             </div>
         @else
             <div
@@ -21,10 +21,10 @@
                     @csrf
 
                     <div>
-                        <x-text-input class="!mt-0 !ring-0 px-4 py-4 rounded-t-2xl dark:placeholder-slate-400" required
+                        <x-inputs.text-input class="!mt-0 !ring-0 px-4 py-4 rounded-t-2xl dark:placeholder-slate-400" required
                             id="theme" name="theme" type="text" autocomplete="off" @change="theme = $el.value"
                             placeholder="{{ __('Theme') }}" ::value="theme" aria-label="{{ __('Theme') }}" />
-                        <x-input-error :messages="$errors->get('theme')" />
+                        <x-inputs.input-error :messages="$errors->get('theme')" />
                     </div>
 
                     <div class="px-4 py-2 mt-6 bg-white dark:bg-slate-950 rounded-t-lg">
@@ -33,7 +33,7 @@
                             class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-white border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
                             style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
                             @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"></pre>
-                        <x-input-error :messages="$errors->get('text')" />
+                        <x-inputs.input-error :messages="$errors->get('text')" />
                     </div>
 
                     <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700"
@@ -101,12 +101,12 @@
                                     </div>
 
                                     <div class="mt-2 sm:mt-4 flex justify-end">
-                                        <x-secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
+                                        <x-buttons.secondary-button @click="$dispatch('close')" class="mr-2 sm:mr-3">
                                             {{ __('Cancel') }}
-                                        </x-secondary-button>
+                                        </x-buttons.secondary-button>
 
-                                        <x-primary-button type="button"
-                                            @click="() => {insertLink(range, $refs.question, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-primary-button>
+                                        <x-buttons.primary-button type="button"
+                                            @click="() => {insertLink(range, $refs.question, link_text, link_url);$dispatch('close')}">{{ __('Save') }}</x-buttons.primary-button>
                                     </div>
                                 </div>
                             </x-modal>
@@ -151,7 +151,7 @@
                     @if (count($errors->get('images.*')))
                         <div class="px-3 py-2">
                             @foreach ($errors->get('images.*') as $error)
-                                <x-input-error :messages="$error" />
+                                <x-inputs.input-error :messages="$error" />
                             @endforeach
                         </div>
                     @endif
@@ -159,7 +159,7 @@
                     @if (count($errors->get('files.*')))
                         <div class="px-3 py-2">
                             @foreach ($errors->get('files.*') as $error)
-                                <x-input-error :messages="$error" />
+                                <x-inputs.input-error :messages="$error" />
                             @endforeach
                         </div>
                     @endif

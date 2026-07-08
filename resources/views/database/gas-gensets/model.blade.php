@@ -2,11 +2,11 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <x-breadcrumbs>
-            <x-breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas generators')" />
-            <x-breadcrumb position="2" :href="route('database.gas-gensets.brand', ['gpuBrand' => $brand->slug])" :name="$brand->name" />
-            <x-breadcrumb position="3" :name="$model->name" />
-        </x-breadcrumbs>
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas generators')" />
+            <x-breadcrumbs.breadcrumb position="2" :href="route('database.gas-gensets.brand', ['gpuBrand' => $brand->slug])" :name="$brand->name" />
+            <x-breadcrumbs.breadcrumb position="3" :name="$model->name" />
+        </x-breadcrumbs.breadcrumbs>
 
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
@@ -29,16 +29,16 @@
                         $reviewsCount = $model->moderatedReviews->count();
                     @endphp
 
-                    <x-characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
-                        <x-characteristic name="Manufacturer" :value="$brand->name" />
-                        <x-characteristic name="Country" :value="$brand->country" />
-                        <x-characteristic name="Power" :value="$model->max_power" itemprop="additionalProperty"
+                    <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
+                        <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" />
+                        <x-characteristics.characteristic name="Country" :value="$brand->country" />
+                        <x-characteristics.characteristic name="Power" :value="$model->max_power" itemprop="additionalProperty"
                             :unit="['prop' => 'unitText', 'content' => 'kW/h']" />
-                        <x-characteristic name="Phases" :value="$model->phases" itemprop="additionalProperty" />
-                        <x-characteristic name="Gas type" :value="__('Natural')" itemprop="additionalProperty" />
-                        <x-characteristic name="Gas consumption" :value="$model->fuel_consumption" itemprop="additionalProperty"
+                        <x-characteristics.characteristic name="Phases" :value="$model->phases" itemprop="additionalProperty" />
+                        <x-characteristics.characteristic name="Gas type" :value="__('Natural')" itemprop="additionalProperty" />
+                        <x-characteristics.characteristic name="Gas consumption" :value="$model->fuel_consumption" itemprop="additionalProperty"
                             :unit="['prop' => 'unitText', 'content' => 'm³/h']" />
-                    </x-characteristics>
+                    </x-characteristics.characteristics>
 
                     <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
                         <meta itemprop="name" content="{{ $brand->name }}" />
@@ -60,16 +60,16 @@
                             {{ __('Engine') }}
                         </h3>
 
-                        <x-characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
-                            <x-characteristic name="Model" :value="$model->gpuEngineModel->name" />
-                            <x-characteristic name="Manufacturer" :value="$model->gpuEngineModel->gpuEngineBrand->name" />
-                            <x-characteristic name="Country" :value="$model->gpuEngineModel->gpuEngineBrand->country" />
-                            <x-characteristic name="Volume" :value="$model->gpuEngineModel->volume" itemprop="additionalProperty"
+                        <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
+                            <x-characteristics.characteristic name="Model" :value="$model->gpuEngineModel->name" />
+                            <x-characteristics.characteristic name="Manufacturer" :value="$model->gpuEngineModel->gpuEngineBrand->name" />
+                            <x-characteristics.characteristic name="Country" :value="$model->gpuEngineModel->gpuEngineBrand->country" />
+                            <x-characteristics.characteristic name="Volume" :value="$model->gpuEngineModel->volume" itemprop="additionalProperty"
                                 :unit="['prop' => 'unitCode', 'content' => 'LTR']" />
-                            <x-characteristic name="Cylinders" :value="$model->gpuEngineModel->cylinders" itemprop="additionalProperty" />
-                            <x-characteristic name="RPM" :value="$model->gpuEngineModel->rpm" itemprop="additionalProperty" />
-                            <x-characteristic name="Cooling type" :value="__('Liquid')" itemprop="additionalProperty" />
-                        </x-characteristics>
+                            <x-characteristics.characteristic name="Cylinders" :value="$model->gpuEngineModel->cylinders" itemprop="additionalProperty" />
+                            <x-characteristics.characteristic name="RPM" :value="$model->gpuEngineModel->rpm" itemprop="additionalProperty" />
+                            <x-characteristics.characteristic name="Cooling type" :value="__('Liquid')" itemprop="additionalProperty" />
+                        </x-characteristics.characteristics>
 
                         <meta itemprop="model" content="{{ $model->gpuEngineModel->name }}" />
                         <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
@@ -86,33 +86,33 @@
                             {{ __('Dimensions') }}
                         </h3>
 
-                        <x-characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
-                            <x-characteristic name="Length" :value="$model->length" itemprop="additionalProperty"
+                        <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
+                            <x-characteristics.characteristic name="Length" :value="$model->length" itemprop="additionalProperty"
                                 :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristic name="Width" :value="$model->width" itemprop="additionalProperty"
+                            <x-characteristics.characteristic name="Width" :value="$model->width" itemprop="additionalProperty"
                                 :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristic name="Height" :value="$model->height" itemprop="additionalProperty"
+                            <x-characteristics.characteristic name="Height" :value="$model->height" itemprop="additionalProperty"
                                 :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristic name="Weight" :value="$model->weight" itemprop="additionalProperty"
+                            <x-characteristics.characteristic name="Weight" :value="$model->weight" itemprop="additionalProperty"
                                 :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                        </x-characteristics>
+                        </x-characteristics.characteristics>
                     </div>
                 </div>
 
                 <div class="mt-4 md:mt-0">
                     <h2 class="sr-only">Информация</h2>
 
-                    <x-characteristics class="mb-4 md:mb-6">
+                    <x-characteristics.characteristics class="mb-4 md:mb-6">
                         @if ($ads->where('price', '!=', 0)->count())
                             @php
                                 $minPrice = $ads->where('price', '!=', 0)->sortBy('price')->first();
                             @endphp
 
-                            <x-characteristic name="The best price" :value="$minPrice->price . ' ' . $minPrice->coin" />
+                            <x-characteristics.characteristic name="The best price" :value="$minPrice->price . ' ' . $minPrice->coin" />
                         @endif
 
-                        <x-characteristic name="Offers count" :value="$ads->count()" />
-                    </x-characteristics>
+                        <x-characteristics.characteristic name="Offers count" :value="$ads->count()" />
+                    </x-characteristics.characteristics>
 
                     @if ($reviewsCount)
                         <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
@@ -160,8 +160,8 @@
                                 <link itemprop="url"
                                     content="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $model->slug]) }}" />
 
-                                <x-primary-button class="w-full h-full"
-                                    @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-primary-button>
+                                <x-buttons.primary-button class="w-full h-full"
+                                    @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-buttons.primary-button>
                             </div>
                         @else
                             <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
@@ -171,13 +171,13 @@
                                     href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $model->slug]) }}" />
                             </div>
 
-                            <x-primary-button
-                                class="w-full h-full cursor-default opacity-60">{{ __('No ads') }}</x-primary-button>
+                            <x-buttons.primary-button
+                                class="w-full h-full cursor-default opacity-60">{{ __('No ads') }}</x-buttons.primary-button>
                         @endif
 
                         <a href="{{ route('ads', ['adCategory' => 'gpus']) }}">
-                            <x-secondary-button
-                                class="w-full text-center">{{ __('View all ads') }}</x-secondary-button>
+                            <x-buttons.secondary-button
+                                class="w-full text-center">{{ __('View all ads') }}</x-buttons.secondary-button>
                         </a>
                     </div>
                 </div>

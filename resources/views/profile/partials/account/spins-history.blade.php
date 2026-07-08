@@ -50,7 +50,7 @@
 
                 @if ($spin->roulettePrize->name != $EXTRA_SPIN_NAME)
                     <a href="{{ $spin->roulettePrize->href }}">
-                        <x-primary-button>{{ __('Take') }}</x-primary-button>
+                        <x-buttons.primary-button>{{ __('Take') }}</x-buttons.primary-button>
                     </a>
                 @endif
             </div>

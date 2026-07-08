@@ -23,13 +23,13 @@
                     </label>
                 </div>
 
-                <x-primary-button
+                <x-buttons.primary-button
                     @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => {
                         if (r.data.success) changings = [];
                         pushToastAlert(r.data.message, r.data.success ? 'success' : 'error');
                     })">
                     {{ __('Save') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
 
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-span-2">
                             <div class="flex items-center">
-                                <x-text-input autocomplete="price"
+                                <x-inputs.text-input autocomplete="price"
                                     class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-md !px-2"
                                     id="price" name="price" type="number" required value="{{ $ad->price }}"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
@@ -80,7 +80,7 @@
                                         else ad.price = $el.value;
                                     }" />
 
-                                <x-checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat" sm="true"
+                                <x-inputs.checkbox name="with_vat" :checked="$ad->with_vat" value="with_vat" sm="true"
                                     handleChange="(checked => {
                                         let id = $el.closest('.ad').getAttribute('data-id');
                                         let index = changings.findIndex(el => el.id == id);
@@ -95,11 +95,11 @@
                                         }
                                     })">
                                     {{ __('VAT') }}
-                                </x-checkbox>
+                                </x-inputs.checkbox>
                             </div>
                         </div>
                         <div>
-                            <x-select name="coin_id" size="sm" :key="$ad->coin_id"
+                            <x-inputs.select name="coin_id" size="sm" :key="$ad->coin_id"
                                 handleChange="(coinId => {
                                     let id = $el.closest('.ad').getAttribute('data-id');
                                     let index = changings.findIndex(el => el.id == id);
@@ -120,13 +120,13 @@
                     </div>
                 @endforeach
             </div>
-            <x-primary-button class="block ml-auto mt-6"
+            <x-buttons.primary-button class="block ml-auto mt-6"
                 @click="axios.post('{{ route('ad.update.mass') }}', {changings: changings}).then(r => {
                     if (r.data.success) changings = [];
                     pushToastAlert(r.data.message, r.data.success ? 'success' : 'error');
                 })">
                 {{ __('Save') }}
-            </x-primary-button>
+            </x-buttons.primary-button>
         </div>
     </div>
 </x-app-layout>

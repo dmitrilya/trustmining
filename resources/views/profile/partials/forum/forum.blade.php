@@ -13,8 +13,8 @@
     @endphp
 
     <a href="{{ route('forum.question.mine') }}">
-        <x-secondary-button
-            class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
+        <x-buttons.secondary-button
+            class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
     </a>
 
     @include('forum.components.author', [
@@ -29,12 +29,12 @@
         @method('PUT')
 
         <div>
-            <x-input-label for="avatar" :value="__('Avatar')" />
-            <x-file-input id="avatar" name="avatar" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
+            <x-inputs.input-label for="avatar" :value="__('Avatar')" />
+            <x-inputs.file-input id="avatar" name="avatar" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
                 required label="max. 1MB" />
-            <x-input-error :messages="$errors->get('avatar')" />
+            <x-inputs.input-error :messages="$errors->get('avatar')" />
         </div>
 
-        <x-primary-button class="block ml-auto mt-4">{{ __('Save') }}</x-primary-button>
+        <x-buttons.primary-button class="block ml-auto mt-4">{{ __('Save') }}</x-buttons.primary-button>
     </form>
 </section>

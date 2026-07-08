@@ -47,12 +47,12 @@
                             ->count();
                     @endphp
 
-                    <div class="mr-3 xs:mr-4"><x-notifications :notifications="$auth
+                    <div class="mr-3 xs:mr-4"><x-notifications.notifications :notifications="$auth
                         ->notifications()
                         ->with(['notificationType', 'notificationable'])
                         ->latest()
                         ->take(5)
-                        ->get()"></x-notifications></div>
+                        ->get()"></x-notifications.notifications></div>
 
                     <div class="mr-3 xs:mr-4 sm:mr-5 w-5 h-5">
                         <a aria-label="{{ __('Chats') }}" href="{{ route('chats') }}"
@@ -173,7 +173,7 @@
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center lg:hidden">
                     <button @click="open = ! open" aria-label="{{ __('Menu') }}"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

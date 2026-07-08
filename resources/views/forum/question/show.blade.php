@@ -47,13 +47,13 @@
 
             <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
                 <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
-                    <x-secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
+                    <x-buttons.secondary-button
+                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
                 </a>
                 <a class="" href="{{ route('forum.question.create') }}">
-                    <x-primary-button>
+                    <x-buttons.primary-button>
                         {{ __('New question') }}
-                    </x-primary-button>
+                    </x-buttons.primary-button>
                 </a>
             </div>
         </div>
@@ -165,7 +165,7 @@
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">
                             {{ __('Please log in to leave a reply') }}</p>
-                        <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+                        <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
                     </div>
                 @else
                     @include('forum.answer.create')
@@ -186,13 +186,13 @@
                     </h2>
 
                     <div class="mt-6 flex justify-end">
-                        <x-secondary-button x-on:click="$dispatch('close')">
+                        <x-buttons.secondary-button x-on:click="$dispatch('close')">
                             {{ __('Cancel') }}
-                        </x-secondary-button>
+                        </x-buttons.secondary-button>
 
-                        <x-danger-button class="ml-3">
+                        <x-buttons.danger-button class="ml-3">
                             {{ __('Delete') }}
-                        </x-danger-button>
+                        </x-buttons.danger-button>
                     </div>
                 </form>
             </x-modal>

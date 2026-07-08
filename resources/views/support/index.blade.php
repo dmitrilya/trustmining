@@ -35,7 +35,7 @@
                     role="tabpanel" aria-labelledby="question-tab">
                     @if (!$auth)
                         <div class="flex items-center justify-center w-full h-full">
-                            <a href="{{ route('login') }}"><x-primary-button>{{ __('Sign in') }}</x-primary-button></a>
+                            <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
                         </div>
                     @else
                         <div class="bg-slate-100 dark:bg-slate-950 p-1 rounded-t-md h-full overflow-hidden">

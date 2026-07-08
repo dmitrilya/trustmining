@@ -8,7 +8,7 @@
     description="Главная база знаний о криптовалютах и майнинге{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}. Информационные статьи, пошаговые инструкции, прогнозы экспертов и обзоры рынка в одном месте | TM Insight"
     header="{{ __('Articles') }}{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}" itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')" :noindex="$tagsCount > 1 ? 'true' : null">
     <x-slot name="sort">
-        <x-header-filters>
+        <x-filters.header-filters>
             <x-slot name="sort">
                 <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'newest' ? 'true' : 'false' }} }" :href="route(
                     request()->route()->getName(),
@@ -70,10 +70,10 @@
                     {{ __('Less views') }}
                 </x-dropdown-link>
             </x-slot>
-        </x-header-filters>
+        </x-filters.header-filters>
     </x-slot>
 
-    <x-filter>@include('insight.article.components.filter')</x-filter>
+    <x-filters.filter>@include('insight.article.components.filter')</x-filters.filter>
 
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList" id="infinite-loader"
         class="grid gap-1 xs:gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xxxl:grid-cols-4"

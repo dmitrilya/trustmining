@@ -29,7 +29,7 @@
             </div>
         </div>
         <a class="block ml-auto sm:w-full mt-1 sm:mt-4" href="{{ route('blog.article', ['article' => $article->id . '-' . Str::slug($article->title)]) }}">
-            <x-secondary-button class="w-full justify-center">{{ __('Details') }}</x-secondary-button>
+            <x-buttons.secondary-button class="w-full justify-center">{{ __('Details') }}</x-buttons.secondary-button>
         </a>
     </div>
 </div>

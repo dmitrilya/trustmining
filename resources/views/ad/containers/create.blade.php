@@ -36,38 +36,38 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
         value='{"Capacity": 60, "Power (kW)": "200", "Length (cm)": 0, "Width (cm)": 0, "Height (cm)": 0}'>
 
     <div>
-        <x-input-label for="capacity" :value="__('Capacity')" />
-        <x-text-input id="capacity" name="capacity" type="number" min="30" autocomplete="capacity" value="60"
+        <x-inputs.input-label for="capacity" :value="__('Capacity')" />
+        <x-inputs.text-input id="capacity" name="capacity" type="number" min="30" autocomplete="capacity" value="60"
             @change="let props = JSON.parse($refs.props_containers.value);props['Capacity'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('capacity')" />
+        <x-inputs.input-error :messages="$errors->get('capacity')" />
     </div>
 
     <div>
-        <x-input-label for="power" :value="__('Power (kW)')" />
-        <x-text-input id="power" name="power" type="number" min="90" autocomplete="power" value="200"
+        <x-inputs.input-label for="power" :value="__('Power (kW)')" />
+        <x-inputs.text-input id="power" name="power" type="number" min="90" autocomplete="power" value="200"
             @change="let props = JSON.parse($refs.props_containers.value);props['Power (kW)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('power')" />
+        <x-inputs.input-error :messages="$errors->get('power')" />
     </div>
 
     <div>
-        <x-input-label for="length" :value="__('Length (cm)')" />
-        <x-text-input id="length" name="length" type="number" autocomplete="length" value="0"
+        <x-inputs.input-label for="length" :value="__('Length (cm)')" />
+        <x-inputs.text-input id="length" name="length" type="number" autocomplete="length" value="0"
             @change="let props = JSON.parse($refs.props_containers.value);props['Length (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('length')" />
+        <x-inputs.input-error :messages="$errors->get('length')" />
     </div>
 
     <div>
-        <x-input-label for="width" :value="__('Width (cm)')" />
-        <x-text-input id="width" name="width" type="number" autocomplete="width" value="0"
+        <x-inputs.input-label for="width" :value="__('Width (cm)')" />
+        <x-inputs.text-input id="width" name="width" type="number" autocomplete="width" value="0"
             @change="let props = JSON.parse($refs.props_containers.value);props['Width (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('width')" />
+        <x-inputs.input-error :messages="$errors->get('width')" />
     </div>
 
     <div>
-        <x-input-label for="height" :value="__('Height (cm)')" />
-        <x-text-input id="height" name="height" type="number" autocomplete="height" value="0"
+        <x-inputs.input-label for="height" :value="__('Height (cm)')" />
+        <x-inputs.text-input id="height" name="height" type="number" autocomplete="height" value="0"
             @change="let props = JSON.parse($refs.props_containers.value);props['Height (cm)'] = $el.value;$refs.props_containers.value = JSON.stringify(props)" />
-        <x-input-error :messages="$errors->get('height')" />
+        <x-inputs.input-error :messages="$errors->get('height')" />
     </div>
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
@@ -77,5 +77,5 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
 
         <input type="hidden" class="hidden" name="description" :value="description" required>
     </div>
-    <x-input-error :messages="$errors->get('description')" />
+    <x-inputs.input-error :messages="$errors->get('description')" />
 </div>

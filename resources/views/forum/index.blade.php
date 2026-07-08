@@ -19,13 +19,13 @@
 
             <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
                 <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
-                    <x-secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-secondary-button>
+                    <x-buttons.secondary-button
+                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
                 </a>
                 <a class="" href="{{ route('forum.question.create') }}">
-                    <x-primary-button>
+                    <x-buttons.primary-button>
                         {{ __('New question') }}
-                    </x-primary-button>
+                    </x-buttons.primary-button>
                 </a>
             </div>
         </div>

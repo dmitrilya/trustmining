@@ -8,9 +8,9 @@
 
             <a class="block ml-auto w-fit"
                 href="{{ route('forum.question.create') }}">
-                <x-primary-button class="w-full">
+                <x-buttons.primary-button class="w-full">
                     {{ __('New question') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </a>
         </div>
     </x-slot>
@@ -120,9 +120,9 @@
 
                                                 <a class="block ml-auto w-full sm:w-fit mt-3 xs:mt-4 sm:mt-5 lg:mt-0"
                                                     href="{{ route('forum.question.publish', ['forumQuestion' => $question->id]) }}">
-                                                    <x-primary-button class="w-full">
+                                                    <x-buttons.primary-button class="w-full">
                                                         {{ __('There is no answer to my question') }}
-                                                    </x-primary-button>
+                                                    </x-buttons.primary-button>
                                                 </a>
                                             </div>
                                         </div>

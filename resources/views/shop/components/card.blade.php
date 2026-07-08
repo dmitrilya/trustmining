@@ -51,6 +51,6 @@
     </div>
 
     <a class="block w-full mt-3 sm:mt-4 lg:mt-6" href="{{ route('company', ['user' => $shop->slug]) }}">
-        <x-primary-button class="w-full justify-center">{{ __('Details') }}</x-primary-button>
+        <x-buttons.primary-button class="w-full justify-center">{{ __('Details') }}</x-buttons.primary-button>
     </a>
 </div>

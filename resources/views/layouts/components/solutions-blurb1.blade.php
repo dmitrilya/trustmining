@@ -57,7 +57,7 @@
             </div>
 
             <a class="block w-fit ml-auto mt-5" href="{{ config('partners.headframe.link') }}" target="_blank">
-                <x-primary-button>{{ __('Details') }}</x-primary-button>
+                <x-buttons.primary-button>{{ __('Details') }}</x-buttons.primary-button>
             </a>
         </div>
     </div>

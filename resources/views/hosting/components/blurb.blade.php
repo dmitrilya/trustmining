@@ -22,7 +22,7 @@
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
                 href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
-                <x-secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('Contact') }}</x-secondary-button>
+                <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('Contact') }}</x-buttons.secondary-button>
             </a>
         </div>
     </div>
@@ -50,7 +50,7 @@
             </div>
             <a class="block w-fit ml-auto mt-3 xs:mt-4 sm:mt-5"
                 href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I would like to discuss the Enterprise tariff plan')]) }}">
-                <x-secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('Contact') }}</x-secondary-button>
+                <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('Contact') }}</x-buttons.secondary-button>
             </a>
         </div>
     </div>
