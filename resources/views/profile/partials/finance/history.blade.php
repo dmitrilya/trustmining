@@ -48,9 +48,9 @@
                 </p>
 
                 <x-characteristics.characteristics>
-                    <x-characteristics.characteristic name="Creation date" :value="$order->created_at->translatedFormat('j F Y')" />
+                    <x-characteristics.characteristic name="Creation date" :value="$order->created_at->addHours(3)->translatedFormat('j F Y, H:i')" />
                     @if ($order->updated_at > $order->created_at)
-                        <x-characteristics.characteristic name="Status update" :value="$order->updated_at->translatedFormat('j F Y')" />
+                        <x-characteristics.characteristic name="Status update" :value="$order->updated_at->addHours(3)->translatedFormat('j F Y, H:i')" />
                     @endif
                 </x-characteristics.characteristics>
             </div>
