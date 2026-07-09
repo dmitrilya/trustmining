@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 use App\Events\Notification as NotificationEvent;
 use App\Jobs\SendTGNotifications;
-
+use App\Jobs\SendWebNotifications;
 use App\Models\User\NotificationType;
 use App\Models\User\Notification;
 
@@ -32,7 +32,7 @@ trait NotificationTrait
                     'notificationable_id' => $notifId,
                 ];
 
-                //TODO event(new NotificationEvent($user, $type, $notificationable)); для пушера
+                // TODO event(new NotificationEvent($user, $type, $notificationable)); для пушера (Channels)
             }
 
             Notification::upsert($notifications, ['id']);
@@ -60,9 +60,19 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['t'], $notificationable) : true;
         })->pluck('tg_id')->unique();
 
-        if ($tgIds->isNotEmpty()) {
-            SendTGNotifications::dispatch($tgIds, $type, $notificationableType, $notificationable);
-        }
+        if ($tgIds->isNotEmpty()) SendTGNotifications::dispatch($tgIds, $type, $notificationableType, $notificationable);
+
+        $webUserIds = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
+            $isEnabled = data_get($user->settings->notifications, "{$typeId}.w.on");
+            $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;
+
+            if (!$allowedByConfig) return false;
+
+            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['w'], $notificationable) : true;
+        })->pluck('id')->unique();
+
+        if ($webUserIds->isNotEmpty()) 
+            SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable);
 
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->email) return false;
@@ -73,7 +83,7 @@ trait NotificationTrait
             if (!$allowedByConfig) return false;
 
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['e'], $notificationable) : true;
-        });
+        })->pluck('tg_id');
 
         if ($emailUsers->isNotEmpty()) {
             // SendEmailNotifications::dispatch($emailUsers, ...);

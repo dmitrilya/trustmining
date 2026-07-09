@@ -1,6 +1,7 @@
 window.listenBroadcast = async function (userId) {
     const { default: Echo } = await import('laravel-echo');
     const { default: Pusher } = await import('pusher-js');
+    const PusherPushNotifications = await import('@pusher/push-notifications-web');
 
     window.Pusher = Pusher;
 
@@ -20,6 +21,19 @@ window.listenBroadcast = async function (userId) {
     });
 
     window.Echo.private(`messages.${userId}`).listen(".new-message", messagesChannelEvent);
+
+    if ('serviceWorker' in navigator && 'Notification' in window) {
+        const beamsClient = new PusherPushNotifications.Client({
+            instanceId: import.meta.env.VITE_PUSHER_BEAMS_INSTANCE_ID,
+        });
+
+        const tokenProvider = new PusherPushNotifications.TokenProvider({ url: '/beams/auth' });
+
+        beamsClient.start()
+            .then(() => beamsClient.setUserId(String(userId), tokenProvider))
+            .then(() => console.log('Successfully registered and subscribed!'))
+            .catch(console.error);
+    }
 }
 
 window.messagesChannelEvent = function (e) {

@@ -38,6 +38,7 @@ use App\Http\Controllers\Roulette\RouletteSpinController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Pusher\PushNotifications\PushNotifications;
 
 /*
 |--------------------------------------------------------------------------
@@ -351,6 +352,22 @@ Route::middleware('auth')->group(function () {
                 Route::put('/toggle-active', [RoulettePrizeController::class, 'toggleActive'])->name('roulette.prize.toggle-active');
             });
         });
+    });
+
+    Route::get('/beams/auth', function (Request $request) {
+        $user = $request->user();
+        $beamsUserId = $request->input('user_id');
+
+        if (!$user || (string)$user->id !== (string)$beamsUserId) {
+            return response()->json(['error' => 'Insecure userId'], 403);
+        }
+
+        $beamsClient = new PushNotifications([
+            'instanceId' => config('broadcasting.connections.pusher_beams.instance_id'),
+            'secretKey' => config('broadcasting.connections.pusher_beams.secret_key'),
+        ]);
+
+        return response()->json($beamsClient->generateToken((string)$user->id));
     });
 });
 

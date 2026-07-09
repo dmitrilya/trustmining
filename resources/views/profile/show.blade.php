@@ -70,7 +70,7 @@
             </div>
         </x-profile.category>
 
-        <x-profile.category x-show="category == 'notifications'" x-data="{ settings: {{ collect($user->settings->notifications) }} }">
+        <x-profile.category x-show="category == 'notifications'" x-data="{ settings: {{ collect($user->settings->notifications) }}, webEnabled: 'Notification' in window && Notification.permission === 'granted' }">
             <div class="xl:col-span-2 grid grid-cols-1 gap-2">
                 <x-profile.partial>@include('profile.partials.notifications.tg-auth')</x-profile.partial>
                 <x-profile.partial>@include('profile.partials.notifications.tracks')</x-profile.partial>

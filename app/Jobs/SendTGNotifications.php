@@ -65,7 +65,7 @@ class SendTGNotifications implements ShouldQueue
             case 'message':
                 $text = $this->n->user->name . "\n\n" . $this->n->message;
                 $keyboard = [[[
-                    'text' => __('Reply'),
+                    'text' => __('Contact'),
                     'url' => $this->n->user->role->name == 'support' ? route('support', ['chat' => true]) :
                         route('chat', ['chat' => $this->n->chat_id])
                 ]]];
@@ -109,14 +109,14 @@ class SendTGNotifications implements ShouldQueue
                         $cd = $difficulties[0]->difficulty;
 
                         if ($pd != $cd) {
-                            $text = "{$this->n->name} Difficulty changing\n\n";
+                            $text = "{$this->n->name} __('Difficulty changing')\n\n";
                             $text .= __('Previous difficulty') . ': ' . number_format($pd) . "\n";
                             $text .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
                             $text .= ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
                         } else {
                             $difficultyData = $this->difficultyData($this->n);
 
-                            $text = "{$this->n->name} Difficulty changing\n\n";
+                            $text = "{$this->n->name} __('Difficulty changing')\n\n";
                             $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
                             $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
                             $text .= __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
@@ -173,6 +173,24 @@ class SendTGNotifications implements ShouldQueue
                             'forumQuestion' => $this->n->forumAnswer->forumQuestion->id . '-' . Str::slug($this->n->forumAnswer->forumQuestion->theme),
                             'answer' => $this->n->forum_answer_id
                         ])]]];
+                        break;
+                    case 'New publication':
+                        $text = $this->n->channel->name . "\n\n";
+
+                        switch ($this->nt) {
+                            case 'article':
+                                $text .= $this->n->title;
+                                $keyboard = [[['text' => __('Read'), 'url' => route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
+                            case 'post':
+                                $text .= $this->n->content;
+                                $keyboard = [[['text' => __('Read'), 'url' => route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id])]]];
+                            case 'video':
+                                $text .= $this->n->title;
+                                $keyboard = [[['text' => __('Watch'), 'url' => route('insight.video.show', ['channel' => $this->n->channel->slug, 'video' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
+                            default:
+                                $text = __('New notification');
+                                $keyboard = null;
+                        }
                         break;
                     default:
                         $text = __('New notification');

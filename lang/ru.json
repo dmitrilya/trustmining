@@ -297,6 +297,7 @@
     "View all": "Смотреть все",
     "No notifications yet": "Пока нет оповещений",
     "Notifications will be displayed here": "Тут будут отображаться оповещения",
+    "Enable notifications in the site settings (lock icon near the address bar)": "Разрешите уведомления в настройках сайта (иконка замочка у адресной строки)",
     "Profile": "Профиль",
     "Login": "Войти",
     "or": "или",
@@ -1010,6 +1011,7 @@
     "Price increase": "Цена выросла",
     "New forum answer": "Новый ответ на форуме",
     "New forum comment": "Новый комментарий на форуме",
+    "New publication": "Новая публикация",
 
     "Creating and setting up an account": "Создание и настройка аккаунта",
     "Registration": "Регистрация",

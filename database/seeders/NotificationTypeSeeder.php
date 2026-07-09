@@ -89,7 +89,11 @@ class NotificationTypeSeeder extends Seeder
             [
                 'name' => 'Difficulty changing',
                 'settings' => ["f" => ["12h", "d", "3d", "c"]]
-            ]
+            ],
+            [
+                'name' => 'New publication',
+                'settings' => []
+            ],
         ]);
     }
 }

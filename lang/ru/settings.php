@@ -6,6 +6,7 @@ return [
         'directions' => [
             'e' => 'Email',
             't' => 'Телеграм',
+            'w' => 'Браузер'
         ],
         'settings' => [
             'f' => [

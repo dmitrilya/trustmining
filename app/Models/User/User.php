@@ -57,13 +57,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
             $user->settings()->create([
                 'notifications' => [
-                    $notificationTypes->where('name', 'Moderation completed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true]],
-                    $notificationTypes->where('name', 'Moderation failed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true]],
-                    $notificationTypes->where('name', 'New message')->first()->id => ['e' => ['o' => true, 'f' => 'f'], 't' => ['o' => true, 'f' => 'a']],
-                    $notificationTypes->where('name', 'New review')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true, 'c' => 'a']],
-                    $notificationTypes->where('name', 'Review edited')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true, 'c' => 'a']],
-                    $notificationTypes->where('name', 'Price change')->first()->id => ['e' => ['o' => true, 'c' => 'd'], 't' => ['o' => true, 'c' => 'c']],
-                    $notificationTypes->where('name', 'Difficulty changing')->first()->id => ['c' => [], 'e' => ['o' => true, 'f' => 'c'], 't' => ['o' => true, 'f' => 'c']],
+                    $notificationTypes->where('name', 'Moderation completed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true !== 0], 'w' => ['o' => true]],
+                    $notificationTypes->where('name', 'Moderation failed')->first()->id => ['e' => ['o' => true], 't' => ['o' => true !== 0], 'w' => ['o' => true]],
+                    $notificationTypes->where('name', 'New message')->first()->id => ['e' => ['o' => true, 'f' => 'f'], 't' => ['o' => true !== 0, 'f' => 'a'], 'w' => ['o' => true, 'f' => 'a']],
+                    $notificationTypes->where('name', 'New review')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true !== 0, 'c' => 'a'], 'w' => ['o' => true, 'c' => 'a']],
+                    $notificationTypes->where('name', 'Review edited')->first()->id => ['e' => ['o' => true, 'c' => 'n'], 't' => ['o' => true !== 0, 'c' => 'a'], 'w' => ['o' => true, 'c' => 'a']],
+                    $notificationTypes->where('name', 'Price change')->first()->id => ['e' => ['o' => true, 'c' => 'd'], 't' => ['o' => true !== 0, 'c' => 'c'], 'w' => ['o' => true, 'c' => 'c']],
+                    $notificationTypes->where('name', 'Difficulty changing')->first()->id => ['c' => [], 'e' => ['o' => true, 'f' => 'c'], 't' => ['o' => true !== 0, 'f' => 'c'], 'w' => ['o' => true, 'f' => 'c']],
+                    $notificationTypes->where('name', 'New publication')->first()->id => ['e' => ['o' => true], 't' => ['o' => true !== 0], 'w' => ['o' => true]],
                 ]
             ]);
         });
