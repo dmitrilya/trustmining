@@ -52,12 +52,12 @@ trait NotificationTrait
         $tgIds = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->tg_id || $user->tg_id == 0) return false;
 
-            $isEnabled = data_get($user->settings->notifications, "{$typeId}.tg.enabled");
+            $isEnabled = data_get($user->settings->notifications, "{$typeId}.t.on");
             $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;
 
             if (!$allowedByConfig) return false;
 
-            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['tg'], $notificationable) : true;
+            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['t'], $notificationable) : true;
         })->pluck('tg_id')->unique();
 
         if ($tgIds->isNotEmpty()) {
@@ -67,12 +67,12 @@ trait NotificationTrait
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->email) return false;
 
-            $isEnabled = data_get($user->settings->notifications, "{$typeId}.email.enabled");
+            $isEnabled = data_get($user->settings->notifications, "{$typeId}.e.on");
             $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;
 
             if (!$allowedByConfig) return false;
 
-            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['email'], $notificationable) : true;
+            return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['e'], $notificationable) : true;
         });
 
         if ($emailUsers->isNotEmpty()) {
