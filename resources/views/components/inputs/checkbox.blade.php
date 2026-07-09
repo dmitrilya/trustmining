@@ -24,7 +24,7 @@
             </svg>
         </div>
 
-        <p class="{{ $sm ? 'text-xxs' : 'text-xs' }} sm:text-sm {{ $textClasses }} select-none peer-disabled:opacity-50">
+        <p class="{{ $sm ? 'text-xxs' : 'text-xs' }} xs:text-sm {{ $textClasses }} select-none peer-disabled:opacity-50">
             {{ $slot }}
         </p>
     </label>

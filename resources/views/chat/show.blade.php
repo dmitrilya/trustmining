@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="lg:hidden px-3 py-2 sm:px-7">
-                        <p class="text-base font-semibold leading-6 text-slate-800">
+                        <p class="text-base font-semibold leading-6 text-slate-800 dark:text-slate-200">
                             {{ $user->name }}</p>
                     </div>
                 </div>
