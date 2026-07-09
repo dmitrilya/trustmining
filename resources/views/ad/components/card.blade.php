@@ -117,7 +117,7 @@
                             <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                 @foreach ($value as $item)
                                     <div
-                                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
+                                        class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
                                         {{ $item }}
                                     </div>
                                 @endforeach

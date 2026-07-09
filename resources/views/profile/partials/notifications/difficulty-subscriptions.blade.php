@@ -26,7 +26,7 @@
                     <template x-for="coin in coins" :key="coin.id">
                         <div @click="coins.splice(coins.indexOf(coin), 1);allCoins.push(coin)"
                             x-text="coin.abbreviation"
-                            class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs sm:text-xs">
+                            class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
                         </div>
                     </template>
                 </div>
@@ -36,7 +36,7 @@
                 <template x-for="coin in filteredCoins.slice(0, 5)" :key="coin.id">
                     <div @click="coins.push(coin);allCoins.splice(allCoins.indexOf(coin), 1);search = ''"
                         x-text="coin.abbreviation"
-                        class="cursor-pointer px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
+                        class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
                     </div>
                 </template>
                 <div x-show="filteredCoins.length > 5"
