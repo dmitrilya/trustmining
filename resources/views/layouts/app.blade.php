@@ -116,7 +116,7 @@
                     event: entries[0].name,
                     url: entries[0].target.baseURI,
                     target: entries[0].target.outerHTML,
-                    weakDevice:  localStorage.getItem('weakDevice')
+                    weakDevice: localStorage.getItem('weakDevice')
                 });
             }
         });
@@ -204,7 +204,8 @@
                             <x-tg-auth />
 
                             <div class="flex items-center justify-between mt-6">
-                                <x-inputs.checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
+                                <x-inputs.checkbox name="dont_ask" value="true"
+                                    textClasses="text-slate-500 text-xxs py-3">
                                     {{ __("Don't ask again") }}
                                 </x-inputs.checkbox>
 
@@ -234,6 +235,11 @@
         @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
         @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
+
+    <script src="https://aikodex-widget.s3.twcstorage.ru/widget.js" data-api-base="https://app.aikodex.ru/api/widget"
+        data-widget-key="wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj" data-accent="#40ff9f"
+        data-greeting="Задайте любой юридический вопрос и получите бесплатную консультацию за 1 минуту"
+        data-auto-open="scroll" data-auto-open-value="20" async></script>
 </body>
 
 </html>
