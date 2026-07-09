@@ -61,7 +61,7 @@ class SendWebNotifications implements ShouldQueue
                 $link = $this->n->user->role->name == 'support'
                     ? route('support', ['chat' => true])
                     : route('chat', ['chat' => $this->n->chat_id]);
-                if ($this->n->user->role->name != 'support' && $this->n->user->company?->logo) $icon = Storage::url($this->n->user->company->logo);
+                if ($this->n->user->role->name != 'support' && $this->n->user->company?->logo) $icon = url(Storage::url($this->n->user->company->logo));
                 break;
 
             case 'review':
@@ -88,7 +88,7 @@ class SendWebNotifications implements ShouldQueue
                         $title = $this->n->asicVersion->asicModel->name;
                         $body = $lastModeration->data['price'] . (isset($lastModeration->data['coin_id']) ? Coin::find($lastModeration->data['coin_id'])->abbreviation : $this->n->coin->abbreviation) . " => " . $price . $this->n->coin->abbreviation;
                         $link = route('ads.show', ['adCategory' => $this->n->adCategory->name, 'ad' => $this->n->id]);
-                        $icon = Storage::url($previewxs);
+                        $icon = url(Storage::url($previewxs));
                         break;
                     default:
                         $title = __('New notification');
@@ -167,7 +167,7 @@ class SendWebNotifications implements ShouldQueue
                         break;
                     case 'New publication':
                         $title = $this->n->channel->name;
-                        $icon = Storage::url($this->n->channel->logo);
+                        $icon = url(Storage::url($this->n->channel->logo));
 
                         switch ($this->nt) {
                             case 'article':
