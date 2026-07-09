@@ -18,7 +18,8 @@
         "mews/purifier": "*",
         "movemoveapp/laravel-dadata": "^1.0",
         "phpoffice/phpword": "^1.4",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^7.2",
+        "pusher/pusher-push-notifications": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
