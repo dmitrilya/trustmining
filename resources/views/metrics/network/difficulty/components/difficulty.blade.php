@@ -121,7 +121,7 @@
     </div>
 
     @if (in_array('dynamics', $blocks))
-        <div>
+        <div class="mt-2 lg:mt-4">
             <h2 class="sr-only">
                 {{ __('Relative change in network difficulty') }}
             </h2>
