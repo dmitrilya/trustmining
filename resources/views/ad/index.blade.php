@@ -1,10 +1,13 @@
 @php
-    $seoParams = request()->only(['model', 'gpu_model', 'page', 'Category']);
+    $seoParams = request()->only(['model', 'gpu_model', 'page', 'Category', 'For_which_models']);
     if (isset($seoParams['page']) && $seoParams['page'] == 1) {
         unset($seoParams['page']);
     }
     if (isset($seoParams['Category']) && count($seoParams['Category']) > 1) {
         unset($seoParams['Category']);
+    }
+    if (isset($seoParams['For_which_models']) && count($seoParams['For_which_models']) !== 1) {
+        unset($seoParams['For_which_models']);
     }
 
     $model = isset($seoParams['model'])
@@ -14,14 +17,23 @@
             : null);
 
     $addParams = [];
+    $header = __($adCategory->header);
     if ($model) {
         array_push($addParams, $model->name);
+        $header .= ' ' . $model->name;
     }
     if (isset($seoParams['Category'])) {
-        array_push($addParams, __(str_replace('_', ' ', $seoParams['Category'][0])));
+        $category = __(str_replace('_', ' ', $seoParams['Category'][0]));
+        array_push($addParams, $category);
+        $header .= ' - ' . $category;
+    }
+    if (isset($seoParams['For_which_models'])) {
+        $forModel = __('for') . ' ' . $seoParams['For_which_models'][0];
+        array_push($addParams, $forModel);
+        $header .= ' ' . $forModel;
     }
     if (isset($seoParams['page'])) {
-        array_push($addParams, "ст {$seoParams['page']}");
+        array_push($addParams, "__('p') {$seoParams['page']}");
     }
 
     $addParams = count($addParams) ? ': ' . implode(', ', $addParams) : '';
@@ -32,7 +44,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-                {{ __($adCategory->header) }}
+                {{ $header }}
             </h1>
 
             @php
