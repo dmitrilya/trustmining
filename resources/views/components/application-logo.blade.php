@@ -1,4 +1,4 @@
-@props(['type' => 'row', 'lang' => 'ru'])
+@props(['type' => 'row', 'lang' => app()->getLocale()])
 
 @if ($type == 'short')
     <p {{ $attributes->merge(['class' => 'color-logo-gradient font-extrabold w-fit']) }}>{{ $lang == 'ru' ? 'ТМ' : 'TM' }}</p>

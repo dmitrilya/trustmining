@@ -102,6 +102,10 @@
         @include('insight.components.comments.comments', ['modelType' => 'article', 'model' => $article])
     @endif
 
+    <x-slot name="leftSidebar">
+        <x-ai-kodex targetWidth="0" />
+    </x-slot>
+
     <x-modal name="delete-modal" focusable>
         <form method="post" class="p-6"
             action="{{ route('insight.article.destroy', ['channel' => $article->channel->slug, 'article' => $article->id]) }}">

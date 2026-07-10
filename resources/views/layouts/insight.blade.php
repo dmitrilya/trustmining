@@ -73,11 +73,11 @@
             <div class="hidden lg:flex flex-col h-full lg:col-span-3 gap-4">
                 @include('insight.components.top-channels')
 
-                <div id="toc-lg-container"></div>
-
                 @if (isset($rightSidebar))
                     {{ $rightSidebar }}
                 @endif
+
+                <div id="toc-lg-container"></div>
             </div>
         </div>
     </div>

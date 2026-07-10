@@ -61,6 +61,10 @@
         @include('insight.components.comments.comments', ['modelType' => 'video', 'model' => $video])
     @endif
 
+    <x-slot name="rightSidebar">
+        <x-ai-kodex targetWidth="0" />
+    </x-slot>
+
     <x-modal name="delete-modal" focusable>
         <form method="post" class="p-6"
             action="{{ route('insight.video.destroy', ['channel' => $video->channel->slug, 'video' => $video->id]) }}">

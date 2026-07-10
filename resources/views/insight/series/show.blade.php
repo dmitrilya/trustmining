@@ -94,4 +94,8 @@
             'routeData' => ['channel' => $channel->slug, 'series' => $series->id],
         ])
     @endif
+
+    <x-slot name="rightSidebar">
+        <x-ai-kodex targetWidth="0" />
+    </x-slot>
 </x-insight-layout>

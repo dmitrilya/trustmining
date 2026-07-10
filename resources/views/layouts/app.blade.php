@@ -238,7 +238,7 @@
 
     <script src="https://aikodex-widget.s3.twcstorage.ru/widget.js" data-api-base="https://app.aikodex.ru/api/widget"
         data-widget-key="wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj" data-accent="#40ff9f"
-        data-greeting="Задайте любой юридический вопрос и получите бесплатную консультацию за 1 минуту"
+        data-greeting="{{ __('Ask any legal question and get a free consultation in 1 minute') }}"
         data-auto-open="scroll" data-auto-open-value="20" async></script>
 </body>
 

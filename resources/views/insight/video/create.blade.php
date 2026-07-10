@@ -56,4 +56,8 @@
             <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
         </form>
     </div>
+
+    <x-slot name="rightSidebar">
+        <x-ai-kodex targetWidth="0" />
+    </x-slot>
 </x-insight-layout>

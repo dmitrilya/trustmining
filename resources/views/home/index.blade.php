@@ -95,7 +95,7 @@
 
             <div class="hidden lg:flex flex-col lg:col-span-3 gap-4">
                 @include('home.components.asic-models')
-                <div data-aikodex-inline></div>
+                <x-ai-kodex targetWidth="1024" />
                 @include('home.components.asic-brands')
                 @include('home.components.last-forum-questions')
 

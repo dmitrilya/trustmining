@@ -85,4 +85,8 @@
                 ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
         </form>
     </div>
+
+    <x-slot name="rightSidebar">
+        <x-ai-kodex targetWidth="0" />
+    </x-slot>
 </x-insight-layout>
