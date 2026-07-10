@@ -98,7 +98,7 @@ window.toc = (article, name) => {
 
         const btn = document.createElement('button');
         btn.textContent = 'Развернуть';
-        btn.classList.add('text-sm', 'mt-2', 'text-slate-600', 'dark:text-slate-400', 'hover:text-slate-800', 'dark:hover:text-slate-200');
+        btn.classList.add('text-sm', 'mt-2', 'text-indigo-500', 'hover:text-indigo-600');
 
         let isCollapsed = true;
 
