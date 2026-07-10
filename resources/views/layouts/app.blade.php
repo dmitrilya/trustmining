@@ -239,7 +239,7 @@
     <script src="https://aikodex-widget.s3.twcstorage.ru/widget.js" data-api-base="https://app.aikodex.ru/api/widget"
         data-widget-key="wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj" data-accent="#40ff9f"
         data-greeting="AI Kodex. {{ __('I specialize in legal matters, but I can help with both choosing equipment and writing an article on the topic of mining') }}"
-        data-auto-open="scroll" data-auto-open-value="20" data-theme="{{ $theme }}" async></script>
+        data-auto-open="scroll" data-auto-open-value="20" async></script>
 </body>
 
 </html>
