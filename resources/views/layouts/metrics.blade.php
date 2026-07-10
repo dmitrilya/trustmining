@@ -7,7 +7,7 @@
 
     <div class="max-w-9xl mx-auto p-2 sm:p-6 lg:p-8" x-data="{ show: false }">
         <div class="lg:grid grid-cols-9 gap-4 items-start relative">
-            <grid class="grid-cols-1 gap-4">
+            <grid class="lg:col-span-3 xl:col-span-2 grid grid-cols-1 gap-4">
                 @include('layouts.components.metrics-menu')
                 <x-ai-kodex targetWidth="1024" />
             </grid>

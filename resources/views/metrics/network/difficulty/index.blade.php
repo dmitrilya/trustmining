@@ -25,7 +25,7 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 sm:mt-6 p-2 sm:p-4 lg:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 lg:p-6">
             <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                 {{ __('History of changes') }}
             </h2>

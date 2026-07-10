@@ -93,7 +93,7 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 sm:mt-6 p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
