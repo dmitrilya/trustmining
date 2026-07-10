@@ -94,7 +94,7 @@ window.toc = (article, name) => {
 
     if (headings.length > 3) {
         tocListMobile.classList.add('overflow-hidden', 'transition-all')
-        tocListMobile.style.height = '60px';
+        tocListMobile.style.height = '62px';
 
         const btn = document.createElement('button');
         btn.textContent = 'Развернуть';
@@ -108,7 +108,7 @@ window.toc = (article, name) => {
                 btn.textContent = 'Свернуть';
                 isCollapsed = false;
             } else {
-                tocListMobile.style.height = '60px';
+                tocListMobile.style.height = '62px';
                 btn.textContent = 'Развернуть';
                 isCollapsed = true;
             }
