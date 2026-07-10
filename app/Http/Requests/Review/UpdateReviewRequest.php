@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Validation\Rule;
-
-class StoreReviewRequest extends FormRequest
+class UpdateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +24,6 @@ class StoreReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'reviewable_type' => ['required', Rule::in(['user', 'asic-model', 'gpu-model'])],
-            'reviewable_id' => [
-                'required',
-                'exists:' . str_replace('-', '_', $this->reviewable_type) . 's,id',
-                Rule::notIn([$this->user()->id]),
-                Rule::unique('reviews')->where(
-                    fn($query) => $query->where('reviewable_type', $this->reviewable_type)
-                        ->where('user_id', $this->user()->id)
-                )
-            ],
             'review' => 'required|string|max:500',
             'rating' => 'required|numeric|min:1|max:5',
             'image' => 'file|mimes:jpg,png,jpeg,webp|max:1024',

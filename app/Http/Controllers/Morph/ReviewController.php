@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Http\Requests\StoreReviewRequest;
+use App\Http\Requests\Review\StoreReviewRequest;
+use App\Http\Requests\Review\UpdateReviewRequest;
 
 use App\Jobs\CheckReview;
 
@@ -21,7 +22,7 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreReviewRequest  $request
+     * @param  \App\Http\Requests\Review\StoreReviewRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreReviewRequest $request)
@@ -42,9 +43,34 @@ class ReviewController extends Controller
 
         $review->moderations()->create(['data' => $review->attributesToArray()]);
 
-        CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
+        //CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
 
         return response()->json(['success' => true], 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Review\UpdateReviewRequest  $request
+     * @param  \App\Models\Morph\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateReviewRequest $request, Review $review)
+    {
+        $changings = [];
+
+        if ($request->review != $review->review) $changings['review'] = $request->review;
+        if ($request->rating != $review->rating) $changings['rating'] = $request->rating;
+
+        $time = time();
+        if ($request->file('image')) $changings['image'] = $this->saveFile($request->file('image'), 'reviews', 'image', $review->id, $time, null, null, 70, 'private');
+        if ($request->file('document')) $changings['document'] = $this->saveFile($request->file('document'), 'reviews', 'doc', $review->id, $time, null, null, 70, 'private');
+
+        if (!empty($changings)) $review->moderations()->create(['data' => $changings]);
+
+        //CheckReview::dispatch($review)->delay(now()->addMinutes(rand(90, 150)));
+
+        return response()->json(['success' => true, 'message' => __('A new review has been sent for moderation')], 200);
     }
 
     /**

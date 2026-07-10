@@ -258,6 +258,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'reviews'], function () {
         Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
         Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
+        Route::patch('/{review}/update', [ReviewController::class, 'update'])->middleware('owner')->name('review.update');
         Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->middleware('owner')->name('review.destroy');
     });
 

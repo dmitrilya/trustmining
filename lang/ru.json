@@ -204,6 +204,7 @@
     "The price must be in numerical format": "Цена должна быть в числовом формате",
     "Currency is required.": "Необходимо указать валюту",
     "Review is required": "Необходимо ввести текст отзыва",
+    "A new review has been sent for moderation": "Новый отзыв отправлен на модерацию",
     "More details about miner": "Подробнее о данном оборудовании",
     "More details about gpu": "Подробнее о данной ГПУ",
     "Comparing": "Сравнение",
