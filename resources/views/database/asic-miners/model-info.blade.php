@@ -80,24 +80,17 @@
                     <span>{{ auth()->user() && auth()->user()->trackedAsicModels->where('id', $model->id)->count() ? __('Untrack price') : __('Track price') }}</span>
                 </x-buttons.secondary-button>
 
+                <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
+                    <meta itemprop="lowPrice" content="{{ $versions->min('p') ?? 0 }}" />
+                    <meta itemprop="priceCurrency" content="{{ $versions->min('p') ? 'USD' : 'RUB' }}" />
+                    <link itemprop="url"
+                        href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
+                </div>
+
                 @if ($versions->min('p'))
-                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                        <meta itemprop="lowPrice" content="{{ $versions->min('p') }}" />
-                        <meta itemprop="priceCurrency" content="USD" />
-                        <link itemprop="url"
-                            content="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
-
-                        <x-buttons.primary-button class="w-full h-full"
-                            @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-buttons.primary-button>
-                    </div>
+                    <x-buttons.primary-button class="w-full h-full"
+                        @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-buttons.primary-button>
                 @else
-                    <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                        <meta itemprop="lowPrice" content="0" />
-                        <meta itemprop="priceCurrency" content="RUB" />
-                        <link itemprop="url"
-                            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $model->slug]) }}" />
-                    </div>
-
                     <x-buttons.primary-button
                         class="w-full h-full cursor-default opacity-50">{{ __('No ads') }}</x-buttons.primary-button>
                 @endif
