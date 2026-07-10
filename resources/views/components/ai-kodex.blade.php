@@ -29,7 +29,7 @@
             newScript.setAttribute('data-widget-key', 'wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj');
             newScript.setAttribute('data-accent', '#40ff9f');
             newScript.setAttribute('data-greeting',
-                '{{ __('Ask any legal question and get a free consultation in 1 minute') }}');
+                'AI Kodex. {{ __('I specialize in legal matters, but I can help with both choosing equipment and writing an article on the topic of mining') }}');
             newScript.setAttribute('data-auto-open', 'scroll');
             newScript.setAttribute('data-auto-open-value', '20');
 
