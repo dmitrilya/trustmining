@@ -27,7 +27,7 @@
                     <li>{{ __('Personal income tax rate') }}: <strong class="text-slate-800 dark:text-slate-200">13%–22%</strong>
                         ({{ __('progressive scale') }})</li>
                     <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Important') }}:</strong>
-                        {{ __('Power consumption limit') }} - <span class="underline">6000 {{ __('W') }}</span></li>
+                        {{ __('Power consumption limit') }} - <span class="underline">6 {{ __('kW/h') }}</span></li>
                 </ul>
             </div>
 
