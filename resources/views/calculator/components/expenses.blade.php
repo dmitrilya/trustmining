@@ -1,8 +1,7 @@
 <div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
     <div class="w-full">
         <x-inputs.input-label for="tariff" :value="__('Tariff')" />
-        <x-inputs.text-input ::value="tariff" id="tariff" type="text"
-            @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
+        <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
     </div>
 
     <div class="w-full">
@@ -10,30 +9,29 @@
             <x-inputs.input-label for="fee" :value="__('Pool fee')" />
 
             <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
-                <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false"
-                    @click="open = !open" @click.away="open = false">
-                    <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="1.5"
+                <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open"
+                    @click.away="open = false">
+                    <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition-colors duration-150">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                     </div>
 
-                    <div x-show="open" style="display: none"
-                        class="absolute w-40 top-5 right-0 px-2 py-3 sm:px-4 sm:py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95"
+                        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" style="display: none"
+                        class="absolute w-40 top-6 right-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                            {{ __('The commission is indicated when working on a mining pool') }} <a
-                                href="{{ config('partners.headframe.link') }}"
+                            {{ __('The commission is indicated when working on a mining pool') }} <a href="{{ config('partners.headframe.link') }}"
                                 class="inline font-bold text-indigo-500 hover:text-indigo-600 under" target="_blank">HeadFrame
                                 (0.9%)</a></p>
                     </div>
                 </div>
             </template>
         </div>
-        <x-inputs.text-input ::value="fee" id="fee" type="text"
-            @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
+        <x-inputs.text-input ::value="fee" id="fee" type="text" @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
     </div>
 </div>
 
@@ -44,8 +42,7 @@
                 class="flex items-center justify-between w-full px-0.5 py-2 sm:py-3 text-left text-slate-800 dark:text-slate-200 text-xs sm:text-sm">
                 <span>{{ __('Additional settings') }}</span>
                 <svg class="w-2 h-2 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 5 5 1 1 5" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
                 </svg>
             </button>
             <div x-show="show" style="display: none">
@@ -63,6 +60,14 @@
                                 <x-inputs.text-input ::value="uptime" id="uptime" type="text"
                                     @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
                             </div>
+                        </div>
+
+                        <div class="w-full">
+                            <div class="flex items-center">
+                                @include('calculator.components.tax-help')
+                            </div>
+                            <x-inputs.text-input ::value="tax" id="tax" type="text" placeholder="{{ __('Tax') }} (%)"
+                                @input="tax = filterDouble($el, 0, 100, 2);$el.value = tax" />
                         </div>
 
                         {{-- <div>

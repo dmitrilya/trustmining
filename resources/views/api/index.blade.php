@@ -66,7 +66,7 @@
                         <p class="mt-1 text-slate-600 dark:text-slate-400 text-[11px]">Максимум <strong>60 запросов в
                                 минуту</strong> на один
                             аккаунт. При превышении возвращается код <code
-                                class="text-rose-500 font-bold">429 Too Many
+                                class="text-rose-600 dark:text-rose-400 font-bold">429 Too Many
                                 Requests</code>.</p>
                     </div>
                 </div>
@@ -243,9 +243,9 @@
                     <div class="flex">
                         <div class="flex-shrink-0">🚫</div>
                         <div class="ml-3">
-                            <p class="text-sm text-rose-800 dark:text-rose-200 font-bold">Ограничение на редактирование
+                            <p class="text-sm text-rose-600 dark:text-rose-400 font-bold">Ограничение на редактирование
                             </p>
-                            <p class="text-xs text-rose-500 mt-1">
+                            <p class="text-xs text-rose-600 dark:text-rose-400 mt-1">
                                 Поля <code
                                     class="bg-rose-500/10 px-1 py-0.5 rounded-md font-bold">name</code>,
                                 <code

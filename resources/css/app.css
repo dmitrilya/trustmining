@@ -193,7 +193,8 @@ pre[contenteditable]:empty::before {
     will-change: transform;
 }
 
-.overflow-y-auto {
+.overflow-y-auto,
+.overflow-x-auto {
     &::-webkit-scrollbar-track {
         border-radius: 6px;
         background-color: #f3f4f6;
@@ -201,6 +202,7 @@ pre[contenteditable]:empty::before {
 
     &::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
         background-color: #f3f4f6;
     }
 
@@ -210,7 +212,8 @@ pre[contenteditable]:empty::before {
     }
 }
 
-.dark .overflow-y-auto {
+.dark .overflow-y-auto,
+.dark .overflow-x-auto {
     &::-webkit-scrollbar-track {
         background-color: oklch(14.1% 0.005 285.823);
     }
