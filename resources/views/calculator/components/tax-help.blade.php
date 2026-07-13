@@ -18,67 +18,73 @@
             {{ __('Mining taxation guide') }}
         </h3>
         <div class="space-y-2">
+            <!-- Физические лица -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-950/40 py-1 rounded-md">
                     <span class="mr-1.5">👤</span> {{ __('Individuals (excluding IE)') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
-                    <li>{{ __('Personal income tax rate') }}: <strong class="text-slate-800 dark:text-slate-200">13%</strong> ({{ __('up to') }} 2.4
-                        {{ __('million') }} {{ __('per year') }}) {{ __('or') }} <strong class="text-slate-800 dark:text-slate-200">15%</strong></li>
+                    <li>{{ __('Personal income tax rate') }}: <strong class="text-slate-800 dark:text-slate-200">13%–22%</strong>
+                        ({{ __('progressive scale') }})</li>
                     <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Important') }}:</strong>
-                        {{ __('Power consumption limit') }} - <span class="underline">{{ __('up to') }} 6000 {{ __('W') }}</span></li>
+                        {{ __('Power consumption limit') }} - <span class="underline">6000 {{ __('kWh/month') }}</span></li>
                 </ul>
             </div>
 
+            <!-- ИП на ОСНО -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 py-1 rounded-md">
                     <span class="mr-1.5">💼</span>
                     {{ __('IE (OSNO)') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
-                    <li>{{ __('Personal income tax rate') }}: <strong class="text-slate-800 dark:text-slate-200">13%</strong> ({{ __('up ut') }} 2.4
-                        {{ __('million') }} {{ __('per year') }}) {{ __('or') }} <strong class="text-slate-800 dark:text-slate-200">15%</strong></li>
+                    <li>{{ __('Personal income tax rate') }}: <strong class="text-slate-800 dark:text-slate-200">13%–22%</strong>
+                        ({{ __('progressive scale') }})</li>
                     <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Expenses') }}:</strong>
-                        {{ __('It is possible to reduce the tax on expenses') }}</li>
+                        {{ __('Professional tax deduction allowed') }} ({{ __('st. 221 NK RF') }})</li>
                 </ul>
             </div>
 
+            <!-- Запрет спецрежимов (Вместо старого ИП на УСН) -->
             <div class="space-y-1">
-                <div class="flex items-center text-xs font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/40 py-1 rounded-md">
-                    <span class="mr-1.5">⚡</span> {{ __('IE (STS)') }}
+                <div class="flex items-center text-xs font-bold text-rose-500 bg-rose-50 dark:bg-rose-950/40 py-1 rounded-md">
+                    <span class="mr-1.5">⛔</span> {{ __('Special tax regimes') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
-                    <li><strong class="text-slate-800 dark:text-slate-200">«{{ __('Incoming') }}»: 6%</strong> {{ __('from all proceeds') }}</li>
-                    <li><strong class="text-slate-800 dark:text-slate-200">«{{ __('Incoming') }} - {{ __('Expenses') }}»: 15%</strong>
-                        {{ __('from net profit') }}</li>
+                    <li><strong class="text-rose-600 font-semibold">{{ __('STS / Patent / Self-employment') }}:</strong> <span
+                            class="text-rose-600 font-bold">{{ __('PROHIBITED') }}</span></li>
+                    <li>{{ __('All business miners are required to use OSNO') }}</li>
                 </ul>
             </div>
 
+            <!-- Юрлица на ОСНО -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-950/40 py-1 rounded-md">
                     <span class="mr-1.5">🏢</span>
                     {{ __('Legal entities (OSNO)') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
-                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Income tax') }}: 20%</strong> ({{ __('may be reduced by regions to') }}
-                        13.5%)</li>
-                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Property tax') }}: {{ __('up to') }} 2.2%</strong>,
-                        {{ __('if the farms are listed on the balance sheet as fixed assets') }}</li>
+                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Income tax') }}: 25%</strong> ({{ __('8% federal, 17% regional') }})</li>
+                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('VAT') }}: 0%</strong>
+                        ({{ __('exempt under st. 146 NK RF, no deductions') }})</li>
                 </ul>
             </div>
 
+            <!-- Учет оборудования (Вместо старого Юрлица на УСН) -->
             <div class="space-y-1">
-                <div class="flex items-center text-xs font-bold text-purple-500 bg-purple-50 dark:bg-purple-950/40 py-1 rounded-md">
-                    <span class="mr-1.5">📊</span>
-                    {{ __('Legal entities (STS)') }}
+                <div class="flex items-center text-xs font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/40 py-1 rounded-md">
+                    <span class="mr-1.5">⚙️</span>
+                    {{ __('Asset & Equipment Accounting') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
-                    <li><strong class="text-slate-800 dark:text-slate-200">«{{ __('Incoming') }}»: 6%</strong> {{ __('from all proceeds') }}</li>
-                    <li><strong class="text-slate-800 dark:text-slate-200">«{{ __('Incoming') }} - {{ __('Expenses') }}»: 15%</strong>
-                        {{ __('from net profit') }}</li>
+                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Depreciation') }}:</strong> {{ __('3rd group, useful life 3–5 years') }}
+                    </li>
+                    <li><strong class="text-slate-800 dark:text-slate-200">{{ __('Property tax') }}: {{ __('up to') }} 2.2%</strong>
+                        ({{ __('depends on region') }})</li>
                 </ul>
             </div>
 
+            <!-- Кнопка перехода -->
             <div class="pt-2 mt-2 text-center border-t border-slate-300 dark:border-slate-700">
                 <a href="{{ route('tax') }}"
                     class="inline-flex items-center text-xs font-semibold text-indigo-500 hover:text-indigo-600 group transition-colors duration-150">
