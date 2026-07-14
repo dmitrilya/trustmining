@@ -30,7 +30,7 @@
                 return this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
             },
             get dailyIncome() {
-                return (this.profit * (100 - this.fee) * this.uptime / 1000000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
+                return (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
             },
             get dailyConsumption() {
                 return this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
@@ -39,7 +39,7 @@
                 return (this.dailyIncome - this.dailyConsumption) * (100 - (this.tax ?? 0)) / 100;
             },
             get dailyProfitUSDT() {
-                return ((this.profit * (100 - this.fee) * this.uptime * this.count / 1000000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count) * (100 - (this.tax ?? 0)) / 100;
+                return ((this.profit * (100 - this.fee) * this.uptime * this.count / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count) * (100 - (this.tax ?? 0)) / 100;
             },
             get total() { return this.dailyIncome + this.dailyConsumption },
             get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
