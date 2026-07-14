@@ -108,6 +108,7 @@ class AuthenticatedSessionController extends Controller
                     'slug' => Str::slug($name),
                     'email' => $email,
                     'password' => Hash::make(Str::random(24)),
+                    'email_verified_at' => now()
                 ]);
 
                 event(new Registered($user));
