@@ -1,11 +1,6 @@
-<x-app-layout title="Налоги на майнинг криптовалюты в России в 2026 году - полное руководство | TrustMining"
+<x-app-layout title="Налоги на майнинг и оборот криптовалюты в России | TRUSTMINING"
     description="Подробное руководство по налогообложению майнинга в России. Физические лица, ИП, ООО, расчет налогов, списание оборудования, декларации, документы, сроки и практические примеры.">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <x-breadcrumbs.breadcrumbs>
-            <x-breadcrumbs.breadcrumb position="1" name="Юридическая поддержка" />
-            <x-breadcrumbs.breadcrumb position="2" name="Налоги на майнинг" />
-        </x-breadcrumbs.breadcrumbs>
-
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-12 text-sm">
             <section id="block-1">
@@ -600,10 +595,10 @@
                             </div>
 
                             <div class="p-2 sm:p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-xl text-xs">
-                                <strong class="text-amber-800 dark:text-amber-400">🚨 Важное ограничение пункта <a target="_blank"
-                                        class="inline text-indigo-500 hover:text-indigo-600 underline"
-                                        href="https://www.consultant.ru/document/cons_doc_LAW_28165/9b06776ae7a39546ad4e3ba04bebef14baabf8d2/">2.3 статьи
-                                        210 НК РФ</a>:</strong> Налоговый кодекс РФ выделяет операции с цифровой валютой в <span
+                                <strong class="text-amber-800 dark:text-amber-400">🚨 Важное ограничение <a target="_blank"
+                                        href="https://www.consultant.ru/document/cons_doc_LAW_28165/9b06776ae7a39546ad4e3ba04bebef14baabf8d2/"
+                                        class="inline text-indigo-500 hover:text-indigo-600 underline">пункта 2.3 статьи 210 НК РФ</a>:</strong> Налоговый
+                                кодекс РФ выделяет операции с цифровой валютой в <span
                                     class="underline font-semibold text-slate-800 dark:text-slate-200">отдельную, изолированную налоговую базу</span>. Убыток
                                 от падения курса криптовалюты на Этапе 2 фиксируется, но его <span
                                     class="underline font-semibold text-slate-800 dark:text-slate-200">категорически запрещено вычитать</span> из вашей
@@ -865,10 +860,14 @@
                         <p class="mb-2 text-slate-600 dark:text-slate-400">
                             Вычислительная техника высокой мощности (промышленные ASIC-майнеры, GPU-фермы, специализированные серверные стойки и блоки
                             питания) стоимостью свыше 100 000 рублей не может быть списана в расходы единовременно в момент покупки. Такое имущество
-                            признается амортизируемым (основными средствами) на основании статьи 256 НК РФ.
+                            признается амортизируемым (основными средствами) на основании <a
+                                target="_blank"href="https://www.consultant.ru/document/cons_doc_LAW_28165/df53ee1751d3e93dbf8c0d34076675da18a2fd06/"
+                                class="inline text-indigo-500 hover:text-indigo-600 underline">статьи 256 НК РФ</a>.
                         </p>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
-                            В соответствии со статьей 258 НК РФ и Общероссийским классификатором основных средств, майнинговое оборудование включено в
+                            В соответствии со <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/92b60a20c6a0b9a44d8dcc235f3a47d5e2442526/"
+                                target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline">статьей 258 НК РФ</a> и Общероссийским
+                            классификатором основных средств, майнинговое оборудование включено в
                             <strong class="text-slate-800 dark:text-slate-200 font-bold">3-ю амортизационную группу</strong>:
                         </p>
 
@@ -886,10 +885,12 @@
                             <li class="flex items-start gap-2">
                                 <span class="text-indigo-500 font-bold mt-0.5">✔</span>
                                 <div>
-                                    <strong class="text-slate-800 dark:text-slate-200">Линейный метод начисления (ст. 259.1 НК РФ):</strong>
-                                    Амортизация рассчитывается отдельно по каждому объекту. Начисление производится ежемесячно равными долями, начиная с
-                                    1-го числа месяца, следующего за месяцем ввода устройства в эксплуатацию (приказ по форме ОС-1). Ежемесячная норма
-                                    амортизации вычисляется по формуле: <code
+                                    <strong class="text-slate-800 dark:text-slate-200">Линейный метод начисления (<a target="_blank"
+                                            href="https://www.consultant.ru/document/cons_doc_LAW_28165/da6bcc2d785c7ebb675408e09b58fef2c5306e27/"
+                                            class="inline text-indigo-500 hover:text-indigo-600 underline">ст. 259.1 НК РФ</a>):</strong> Амортизация
+                                    рассчитывается отдельно по каждому объекту. Начисление производится ежемесячно равными долями, начиная с 1-го числа месяца,
+                                    следующего за месяцем ввода устройства в эксплуатацию (приказ по форме ОС-1). Ежемесячная норма амортизации вычисляется по
+                                    формуле: <code
                                         class="bg-slate-100 dark:bg-slate-950 px-1.5 py-0.5 rounded-lg font-mono font-bold text-slate-800 dark:text-slate-200">K
                                         = (1 / СПИ в месяцах) × 100%</code>.
                                 </div>
@@ -907,8 +908,9 @@
                             превышают доход, зафиксированный в рамках Этапа №1. В этом случае у компании формируется чистый налоговый убыток.
                         </p>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
-                            Перенос и списание таких убытков регулируются положениями <strong class="text-slate-800 dark:text-slate-200 font-bold">статьи 283
-                                НК РФ</strong> на базе двух императивных условий:
+                            Перенос и списание таких убытков регулируются положениями <a class="inline text-indigo-500 hover:text-indigo-600 underline"
+                                target="_blank" href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">статьи
+                                283 НК РФ</a> на базе двух императивных условий:
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 text-slate-600 dark:text-slate-400">
@@ -997,8 +999,9 @@
                         </h3>
                         <p class="mb-2 text-slate-600 dark:text-slate-400">
                             В процессе эксплуатации майнингового оборудования на ОСНО его балансовая цена непрерывно уменьшается за счет ежемесячного начисления
-                            амортизации. Когда возникает необходимость продать б/у АСИКи или видеокарты, налогообложение операции регулируется <strong
-                                class="text-slate-800 dark:text-slate-200">статьей 268 НК РФ</strong>.
+                            амортизации. Когда возникает необходимость продать б/у АСИКи или видеокарты, налогообложение операции регулируется <a
+                                target="_blank" href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/"
+                                class="inline text-indigo-500 hover:text-indigo-600 underline">статьей 268 НК РФ</a>.
                         </p>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                             Ключевым экономическим показателем при расчете налога является <strong class="text-slate-800 dark:text-slate-200">остаточная
@@ -1116,9 +1119,9 @@
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                             Для подтверждения права на уменьшение налоговой базы (как по НДФЛ для физлиц и ИП, так и по налогу на прибыль для юрлиц) майнеры
                             обязаны обеспечивать полную сохранность данных бухгалтерского и налогового учета, а также любых документов, подтверждающих доходы и
-                            расходы. Согласно актуальной редакции <strong class="text-slate-800 dark:text-slate-200 font-bold">подпункта 8 пункта 1 статьи 23
-                                НК
-                                РФ</strong>, минимальный срок хранения первичной документации составляет <strong class="text-rose-500 font-bold">5
+                            расходы. Согласно актуальной редакции <a class="inline text-indigo-500 hover:text-indigo-600 underline" target="_blank"
+                                href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">подпункта 8 пункта 1
+                                статьи 23 НК РФ</a>, минимальный срок хранения первичной документации составляет <strong class="text-rose-500 font-bold">5
                                 лет</strong>.
                         </p>
 
@@ -1128,7 +1131,9 @@
                             </span>
                             <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                 Если организация или ИП на ОСНО зафиксировали убыток по результатам года и начали переносить его на будущие периоды на основании
-                                статьи 283 НК РФ, стандартный 5-летний лимит аннулируется. Налогоплательщик <strong
+                                <a class="inline text-indigo-500 hover:text-indigo-600 underline" target="_blank"
+                                    href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">статьи 283 НК
+                                    РФ</a>, стандартный 5-летний лимит аннулируется. Налогоплательщик <strong
                                     class="underline font-semibold text-slate-800 dark:text-slate-200">обязан хранить все первичные документы</strong>,
                                 подтверждающие сумму полученного убытка, в течение <strong class="text-slate-800 dark:text-slate-200 font-bold">всего
                                     срока</strong>, пока он уменьшает текущую налоговую базу. Если убыток списывается частями на протяжении 7 или 10 лет - все
@@ -1159,25 +1164,31 @@
                                             <span class="text-indigo-500 font-bold mt-0.5">•</span>
                                             <div>
                                                 <strong class="text-slate-800 dark:text-slate-200">Грузовая таможенная декларация (ГТД):</strong>
-                                                Номера ГТД должны быть официально указаны в договорах поставки и универсальных передаточных документах (УПД).
-                                                Покупка вычислительной техники на "сером" рынке у фирм-однодневок без ГТД влечет за собой гарантированное снятие
-                                                расходов со стороны ФНС.
+                                                Номера ГТД (декларации на товары) должны быть официально указаны в договорах поставки и универсальных
+                                                передаточных документах (УПД). Покупка вычислительной техники на "сером" рынке у фирм-однодневок без ГТД влечет
+                                                за собой гарантированное аннулирование расходов со стороны ФНС при проверке цепочки поставок.
                                             </div>
                                         </li>
                                         <li class="flex items-start gap-2">
                                             <span class="text-indigo-500 font-bold mt-0.5">•</span>
                                             <div>
-                                                <strong class="text-slate-800 dark:text-slate-200">Приказ о вводе в эксплуатацию (Форма ОС-1):</strong>
-                                                Первичный документ, фиксирующий точную дату начала работы оборудования, его первоначальную стоимость на балансе
-                                                организации и установленный срок полезного использования (СПИ).
+                                                <strong class="text-slate-800 dark:text-slate-200">Акт о приеме-передаче основных средств (<a target="_blank"
+                                                        href="https://www.consultant.ru/document/cons_doc_LAW_32449/e0929c6570687775afb5f4745bb09b4f18dcc3ad/"
+                                                        class="inline text-indigo-500 hover:text-indigo-600 underline">Форма № ОС-1</a>):</strong>
+                                                Первичный документ (оформляемый на основании внутреннего Приказа о вводе в эксплуатацию), который фиксирует
+                                                точную дату начала работы оборудования, его первоначальную стоимость на балансе организации и установленный срок
+                                                полезного использования (СПИ).
                                             </div>
                                         </li>
                                         <li class="flex items-start gap-2">
                                             <span class="text-indigo-500 font-bold mt-0.5">•</span>
                                             <div>
-                                                <strong class="text-slate-800 dark:text-slate-200">Инвентарная карточка учета ОС (Форма ОС-6):</strong>
-                                                Внутренний регистр налогового учета, в котором ежемесячно отражаются начисленная амортизация и изменение
-                                                остаточной стоимости каждого вычислительного устройства.
+                                                <strong class="text-slate-800 dark:text-slate-200">Инвентарная карточка учета ОС (<a target="_blank"
+                                                        href="https://www.consultant.ru/document/cons_doc_LAW_32449/ba9ec1601a9b1329bb0c7cf2ae933fc35c39cabf/"
+                                                        class="inline text-indigo-500 hover:text-indigo-600 underline">Форма № ОС-6</a>):</strong>
+                                                Регистр учетных данных Госкомстата, на основе которого формируются регистры налогового учета. В ней ежемесячно
+                                                отражаются начисленная амортизация и изменение остаточной стоимости каждого вычислительного устройства (АСИКа
+                                                или фермы).
                                             </div>
                                         </li>
                                     </ul>
@@ -1229,8 +1240,15 @@
                         </h3>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                             Соблюдение сроков подачи налоговых деклараций и перечисления авансовых платежей является базовым условием сохранения статуса
-                            легального майнера. Просрочка сдачи отчетности влечет за собой штрафы по статье 119 НК РФ, а несвоевременная уплата - начисление
-                            пеней (ст. 75 НК РФ) и блокировку расчетных счетов.
+                            легального майнера. Просрочка сдачи отчетности влечет за собой жесткие финансовые санкции по
+                            <a href="https://www.consultant.ru/document/cons_doc_LAW_19671/d9beb5691273fac122dfc8c6257fedd2b31116ca/" target="_blank"
+                                class="inline text-indigo-500 hover:text-indigo-600 underline">статье 119 НК РФ</a>,
+                            а несвоевременное перечисление средств в бюджет - автоматическое начисление пеней по
+                            <a href="https://www.consultant.ru/document/cons_doc_LAW_19671/10fdf2faa7c30851b7673ac4ca893589c88f24f7/" target="_blank"
+                                class="inline text-indigo-500 hover:text-indigo-600 underline">статье 75 НК РФ</a>
+                            и принудительную приостановку операций по расчетным счетам в банках на основании
+                            <a href="https://www.consultant.ru/document/cons_doc_LAW_19671/b34620a176b02a652a43343fb33498958a11a2dd/" target="_blank"
+                                class="inline text-indigo-500 hover:text-indigo-600 underline">статьи 76 НК РФ</a>.
                         </p>
 
                         <div
@@ -1271,26 +1289,31 @@
 
                     <div>
                         <h3 class="text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
-                            <span class="inline mr-1 sm:mr-2">🔒</span>Ежемесячный операционный контроль: Обязанность до 20-го числа (ФЗ-259)
+                            <span class="inline mr-1 sm:mr-2">🔒</span>Ежемесячный операционный контроль: Обязанность до 20-го числа (ст. 14.1 ФЗ № 259-ФЗ)
                         </h3>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
-                            Помимо стандартных налоговых деклараций, Федеральный закон № 259-ФЗ накладывает на профессиональных участников рынка
-                            (индивидуальных предпринимателей и юридических лиц, включенных в Реестр майнеров ФНС) обязанность по осуществлению <strong
-                                class="text-slate-800 dark:text-slate-200">непрерывного ежемесячного операционного контроля</strong>.
+                            Помимо стандартных налоговых деклараций, <a class="inline text-indigo-500 hover:text-indigo-600" target="_blank"
+                                href="https://www.consultant.ru/document/cons_doc_LAW_358753/d5af576a8a54d9fe32146b31334f4df92c0046a0/">статья 14.1
+                                Федерального закона № 259-ФЗ</a> накладывает на майнеров обязанность по
+                            осуществлению <strong class="text-slate-800 dark:text-slate-200">непрерывного ежемесячного операционного контроля</strong>.
+                            <span class="text-rose-600 dark:text-rose-400 font-semibold">Внимание:</span> Данное требование распространяется на
+                            class="underline">всех без исключения участников рынка - как на Юрлиц и ИП из Реестра, так и на обычных физических
+                            лиц, майнящих в пределах лимита 6 000 кВт·ч.
                         </p>
 
                         <div
                             class="bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 space-y-2 text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                            <p><strong class="text-slate-800 dark:text-slate-200">• Императивный срок:</strong> Строго <strong
-                                    class="text-rose-500 font-bold">до 20-го числа месяца</strong>, следующего за месяцем добычи
-                                (например, подробный отчет за май обязан быть отправлен в ведомство до 20 июня).</p>
-                            <p><strong class="text-slate-800 dark:text-slate-200">• Технический канал:</strong> Информация направляется исключительно в
-                                электронном виде через специализированный защищенный личный кабинет налогоплательщика на портале ФНС с обязательным
-                                заверением КЭП (квалифицированной электронной подписью) руководителя.</p>
-                            <p><strong class="text-slate-800 dark:text-slate-200">• Объем раскрываемых сведений:</strong> Майнер обязан предоставить точные
-                                данные о суммарном объеме намайненной цифровой валюты за прошедшие 30 дней, цифровые логи и идентификаторы пулов, а также
-                                полный перечень <strong class="underline font-medium text-slate-800 dark:text-slate-200">всех адресов криптокошельков (Public
-                                    Keys)</strong>, на которые пулом производились зачисления.</p>
+                            <p><strong class="text-slate-800 dark:text-slate-200">• Предельный срок:</strong> Строго <strong
+                                    class="text-rose-600 dark:text-rose-400 font-bold">до 20-го числа месяца</strong>, следующего за месяцем добычи (например,
+                                подробный отчет за май обязаны отправить до 20 июня).</p>
+                            <p><strong class="text-slate-800 dark:text-slate-200">• Канал связи с ФНС:</strong> Информация направляется в электронном виде
+                                через
+                                личные кабинеты налогоплательщиков (для физлиц, ИП или юрлиц). Бизнес-аккаунты обязаны заверять форму КЭП (квалифицированной
+                                электронной подписью) руководителя.</p>
+                            <p><strong class="text-slate-800 dark:text-slate-200">• Объем раскрываемых данных:</strong> Точный объем добытой за 30 дней
+                                цифровой
+                                валюты, идентификаторы пулов и полный перечень <strong class="underline font-medium text-slate-800 dark:text-slate-200">всех
+                                    адресов криптокошельков (Public Keys)</strong>, куда зачислялись монеты.</p>
                         </div>
 
                         <p class="text-xs text-rose-500 font-medium mt-3">
