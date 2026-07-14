@@ -59,7 +59,7 @@
 
             <!-- Кнопка перехода -->
             <div class="pt-2 mt-2 text-center border-t border-slate-300 dark:border-slate-700">
-                <a href="{{ route('tax') }}"
+                <a href="{{ route('taxes') }}"
                     class="inline-flex items-center text-xs font-semibold text-indigo-500 hover:text-indigo-600 group transition-colors duration-150">
                     <span>{{ __('More details with calculation examples') }}</span>
                     <svg class="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-0.5 transition-transform duration-150" fill="none" viewBox="0 0 24 24"

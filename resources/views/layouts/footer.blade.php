@@ -165,7 +165,7 @@
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('forum') }}">{{ __('Forum') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
-                    href="{{ route('tax') }}">{{ __('About Russian taxes') }}</a>
+                    href="{{ route('taxes') }}">{{ __('About Russian taxes') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('about') }}">{{ __('About project') }}</a>
                 {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"

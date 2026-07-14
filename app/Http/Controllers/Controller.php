@@ -86,9 +86,9 @@ class Controller extends BaseController
         return view('legal.index');
     }
 
-    public function tax(): View
+    public function taxes(): View
     {
-        return view('tax.index');
+        return view('taxes.index');
     }
 
     public function widjets(): View
