@@ -36,10 +36,10 @@
                 return this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
             },
             get dailyProfit() {
-                return (this.dailyIncome - this.dailyConsumption) * (100 - (this.tax ?? 0));
+                return (this.dailyIncome - this.dailyConsumption) * (100 - (this.tax ?? 0)) / 100;
             },
             get dailyProfitUSDT() {
-                return ((this.profit * (100 - this.fee) * this.uptime * this.count / 1000000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count) * (100 - (this.tax ?? 0));
+                return ((this.profit * (100 - this.fee) * this.uptime * this.count / 1000000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count) * (100 - (this.tax ?? 0)) / 100;
             },
             get total() { return this.dailyIncome + this.dailyConsumption },
             get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
