@@ -54,6 +54,7 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('cryptoexchangers');
         $out .= $this->addUrl('companies');
         $out .= $this->addUrl('warranty-check');
+        $out .= $this->addUrl('taxes');
 
         foreach (AdCategory::select('name')->get() as $adCategory) {
             $out .= $this->addUrl('ads/' . $adCategory->name);
