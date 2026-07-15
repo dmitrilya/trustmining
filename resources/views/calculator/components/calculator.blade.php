@@ -114,9 +114,9 @@
                     this.expPercent = this.taxEnabled ? 33.33 : 50;
                     this.taxPercent = this.taxEnabled ? 33.33 : 0;
                 }
-                    console.log(dailyProfitUSDT);
-                    console.log(dailyTaxUSDT);
-                    console.log(Math.round(version.p / (dailyProfitUSDT - dailyTaxUSDT)));
+                    console.log(this.dailyProfitUSDT);
+                    console.log(this.dailyTaxUSDT);
+                    console.log(Math.round(this.version.p / (this.dailyProfitUSDT - this.dailyTaxUSDT)));
             }
         }">
         <div class="col-span-2">
