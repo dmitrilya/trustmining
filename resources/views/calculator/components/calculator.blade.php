@@ -39,7 +39,7 @@
                 return (this.dailyIncome - this.dailyConsumption) * (100 - (this.tax ?? 0)) / 100;
             },
             get dailyProfitUSDT() {
-                return ((this.profit * (100 - this.fee) * this.uptime * this.count / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000) * this.count) * (100 - (this.tax ?? 0)) / 100;
+                return ((this.profit * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000)) * (100 - (this.tax ?? 0)) / 100;
             },
             get total() { return this.dailyIncome + this.dailyConsumption },
             get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
@@ -182,9 +182,11 @@
                             <span class="ml-1 text-slate-800 dark:text-slate-200 font-bold"
                                 x-text="version.p ? dailyProfitUSDT > 0 ? Math.round(version.p / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
-                        <div class="text-xxs text-slate-500 mt-2">
-                            *{{ __('The best offer at the moment is used for payback calculation') }}
-                        </div>
+                        <template x-if="version.p">
+                            <div class="text-xxs text-slate-500 mt-2">
+                                *{{ __('The best offer is used for payback calculation') }} (<span class="text-slate-800 dark:text-slate-200" x-text="Math.round(version.p / (currency == 'RUB' ? {{ $rub }} : 1)) + (currency == 'RUB' ? ' ₽' : ' USDT')"></span>)
+                            </div>
+                        </template>
                     @endif
 
                     @if (in_array('characteristics', $blocks))
