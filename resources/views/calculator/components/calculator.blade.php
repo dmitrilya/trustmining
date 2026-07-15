@@ -7,6 +7,7 @@
 
     <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12"
         x-data="{
+            coef: { day: 1, month: 30, year: 365 },
             currency: 'RUB',
             view: 'month',
             tariff: 5,
@@ -30,12 +31,16 @@
         
             profit: 0,
             dailyIncome: 0,
+            resultDailyIncome: 0,
             dailyConsumption: 0,
+            resultDailyConsumption: 0,
             dailyProfit: 0,
             dailyProfitUSDT: 0,
             minPrice: null,
             dailyTax: 0,
+            resultDailyTax: 0,
             dailyTaxUSDT: 0,
+            taxHelp: null,
             total: 0,
             incPercent: 33.33,
             expPercent: 33.33,
@@ -59,7 +64,9 @@
             recalculateAll() {
                 this.profit = this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
                 this.dailyIncome = (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
+                this.resultDailyIncome = Math.round(calculateProfitCAGR(this.dailyIncome, this.coef[this.view], this.difficultyGrowth) * 100) / 100;
                 this.dailyConsumption = this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
+                this.resultDailyConsumption = Math.round(this.dailyConsumption * this.coef[this.view] * 100) / 100;
         
                 this.dailyProfit = this.dailyIncome - this.dailyConsumption;
                 this.dailyProfitUSDT = this.profit * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000;
@@ -72,13 +79,22 @@
                 } else {
                     let cryptoTaxProfit = this.dailyProfitUSDT * this.count / {{ $rub }};
         
-                    if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) cryptoTaxProfit -= this.version.p * this.count / 1095 / {{ $rub }};
+                    this.taxHelp = Math.round(calculateProfitCAGR(this.dailyIncome, 1, this.difficultyGrowth) * 100) / 100 + ' - ' + Math.round(this.dailyConsumption * 100) / 100;
+        
+                    if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) {
+                        cryptoTaxProfit -= this.version.p * this.count / 1095 / {{ $rub }};
+                        this.taxHelp += ' - ' + Math.round(this.version.p * this.count / 1095 / (this.currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100 + ' ({{ __('amortization') }})';
+                    }
+        
+                    this.taxHelp += ' = ' + Math.round(cryptoTaxProfit * 100) / 100;
         
                     let calculatedTax = 0;
         
                     if (cryptoTaxProfit < 0) {
                         calculatedTax = 0;
                     } else {
+                        this.taxHelp += '<br>';
+        
                         if (this.taxType == 'person' || this.taxType == 'ip') {
                             const yearProfit = cryptoTaxProfit * 365;
                             const brackets = [
@@ -96,10 +112,21 @@
         
                             const annualTax = fixed + (yearProfit - limitValue) * rate;
                             calculatedTax = annualTax / 365;
-                        } else calculatedTax = cryptoTaxProfit * 0.25;
+        
+                            if (limitValue == 0) this.taxHelp += Math.round(cryptoTaxProfit * 100) / 100 + ' * ' + rate + ' = ' + Math.round(calculatedTax * 100) / 100;
+                            else {
+                                this.taxHelp += Math.round(cryptoTaxProfit * 100) / 100 + ' * 365 = ' + Math.round(yearProfit * 100) / 100 + ' ({{ __('per year') }})<br>';
+                                this.taxHelp += '(' + Math.round(yearProfit * 100) / 100 + ' - ' + limitValue + ') * ' + rate + ' + ' + fixed + ' = ' + Math.round(annualTax * 100) / 100 + '<br>';
+                                this.taxHelp += Math.round(annualTax * 100) / 100 + ' / 365 = ' + Math.round(calculatedTax * 100) / 100;
+                            }
+                        } else {
+                            calculatedTax = cryptoTaxProfit * 0.25;
+                            this.taxHelp += Math.round(cryptoTaxProfit * 100) / 100 + ' * 0.25 = ' + Math.round(calculatedTax * 100) / 100;
+                        }
                     }
         
                     this.dailyTax = calculatedTax * (this.currency == 'USDT' ? {{ $rub }} : 1);
+                    this.resultDailyTax = Math.round(this.dailyTax * this.coef[this.view] * 100) / 100;
                     this.dailyTaxUSDT = this.dailyTax / this.count * (this.currency == 'RUB' ? {{ $rub }} : 1);
                 }
         
@@ -114,9 +141,6 @@
                     this.expPercent = this.taxEnabled ? 33.33 : 50;
                     this.taxPercent = this.taxEnabled ? 33.33 : 0;
                 }
-                    console.log(this.dailyProfitUSDT);
-                    console.log(this.dailyTaxUSDT);
-                    console.log(Math.round(this.version.p / (this.dailyProfitUSDT - this.dailyTaxUSDT)));
             }
         }">
         <div class="col-span-2">
@@ -221,7 +245,7 @@
                             <div class="text-center mb-6">
                                 <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
                                 <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
-                                    x-text="view === 'day' ? Math.round((dailyProfit - dailyTax) * 100) / 100 : (view === 'month' ? Math.round((dailyProfit - dailyTax) * 30 * 100) / 100 : Math.round((dailyProfit - dailyTax) * 365 * 100) / 100)">
+                                    x-text="Math.round((dailyProfit - dailyTax) * coef[view] * 100) / 100">
                                 </div>
                             </div>
 
@@ -241,16 +265,21 @@
                                     </template>
                                 </div>
                                 <div class="mt-3 flex justify-between text-sm sm:text-base lg:text-lg font-black text-slate-800 dark:text-slate-200">
-                                    <span
-                                        x-text="view === 'day' ? Math.round(calculateProfitCAGR(dailyIncome, 1, difficultyGrowth)*100)/100 : (view === 'month' ? Math.round(calculateProfitCAGR(dailyIncome, 30, difficultyGrowth)*100)/100 : Math.round(calculateProfitCAGR(dailyIncome, 365, difficultyGrowth)*100)/100)"></span>
-                                    <span
-                                        x-text="view === 'day' ? Math.round(dailyConsumption * 100) / 100 : (view === 'month' ? Math.round(dailyConsumption * 30 * 100) / 100 : Math.round(dailyConsumption * 365 * 100) / 100)"></span>
+                                    <span x-text="resultDailyIncome"></span>
+                                    <span x-text="resultDailyConsumption"></span>
                                     <template x-if="taxEnabled">
-                                        <span
-                                            x-text="view === 'day' ? Math.round(dailyTax * 100) / 100 : (view === 'month' ? Math.round(dailyTax * 30 * 100) / 100 : Math.round(dailyTax * 365 * 100) / 100)"></span>
+                                        <span x-text="resultDailyTax"></span>
                                     </template>
                                 </div>
                             </div>
+
+                            <template x-if="taxEnabled">
+                                <div
+                                    class="mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color text-center">
+                                    <div class="text-slate-500 text-sm tracking-wide mb-2">{{ __('Tax calculation') }} {{ __('per day') }}</div>
+                                    <p class="font-mono text-slate-800 dark:text-slate-200 text-xs xs:text-sm tracking-tight" x-html="taxHelp"></p>
+                                </div>
+                            </template>
                         </div>
                     </div>
 
