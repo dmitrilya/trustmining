@@ -13,7 +13,7 @@
     <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95"
         x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95" style="display: none"
-        class="absolute w-64 sm:w-96 top-6 left-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
+        class="absolute w-64 sm:w-96 bottom-5 left-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
         <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 border-b border-slate-300 dark:border-slate-700 pb-2 mb-3">
             {{ __('Mining taxation guide') }}
         </h3>
