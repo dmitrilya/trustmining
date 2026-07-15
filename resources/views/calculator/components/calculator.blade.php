@@ -82,6 +82,7 @@
                     this.taxHelp = Math.round(calculateProfitCAGR(this.dailyIncome, 1, this.difficultyGrowth) * 100) / 100 + ' - ' + Math.round(this.dailyConsumption * 100) / 100;
         
                     if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) {
+                    consoole.log(this.version.p);
                         cryptoTaxProfit -= this.version.p * this.count / 1095 / {{ $rub }};
                         this.taxHelp += ' - ' + Math.round(this.version.p * this.count / 1095 / (this.currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100 + ' ({{ __('amortization') }})';
                     }
