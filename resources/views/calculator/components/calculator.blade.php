@@ -56,7 +56,6 @@
                 @endif
             },
         
-            // Единый сквозной метод бизнес-логики калькулятора
             recalculateAll() {
                 this.profit = this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
                 this.dailyIncome = (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
@@ -101,7 +100,7 @@
                     }
         
                     this.dailyTax = calculatedTax * (this.currency == 'USDT' ? {{ $rub }} : 1);
-                    this.dailyTaxUSDT = this.dailyTax * (this.currency == 'RUB' ? {{ $rub }} : 1);
+                    this.dailyTaxUSDT = this.dailyTax / this.count * (this.currency == 'RUB' ? {{ $rub }} : 1);
                 }
         
                 this.total = this.dailyIncome + this.dailyConsumption + this.dailyTax;
