@@ -72,7 +72,7 @@
                 } else {
                     let cryptoTaxProfit = this.dailyProfitUSDT * this.count / {{ $rub }};
         
-                    if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) cryptoTaxProfit -= this.version.p / 1095 / {{ $rub }};
+                    if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) cryptoTaxProfit -= this.version.p * this.count / 1095 / {{ $rub }};
         
                     let calculatedTax = 0;
         
