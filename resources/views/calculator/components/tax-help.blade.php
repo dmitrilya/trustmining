@@ -1,6 +1,6 @@
 <div class="relative inline-block" x-data="{ open: false }" @mouseover="open = true" @mouseleave="open = false" @click="open = !open" @click.away="open = false">
     <div
-        class="ml-1 sm:ml-2 flex items-center text-xs sm:text-sm text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition-colors duration-150">
+        class="flex items-center text-xs sm:text-sm text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition-colors duration-150">
         <svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -18,7 +18,6 @@
             {{ __('Mining taxation guide') }}
         </h3>
         <div class="space-y-2">
-            <!-- Физические лица -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-950/40 py-1 rounded-md">
                     <span class="mr-1.5">👤</span> {{ __('Individuals (excluding IE)') }}
@@ -31,7 +30,6 @@
                 </ul>
             </div>
 
-            <!-- ИП на ОСНО -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 py-1 rounded-md">
                     <span class="mr-1.5">💼</span>
@@ -45,7 +43,6 @@
                 </ul>
             </div>
 
-            <!-- Юрлица на ОСНО -->
             <div class="space-y-1">
                 <div class="flex items-center text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-950/40 py-1 rounded-md">
                     <span class="mr-1.5">🏢</span>
@@ -57,7 +54,6 @@
                 </ul>
             </div>
 
-            <!-- Кнопка перехода -->
             <div class="pt-2 mt-2 text-center border-t border-slate-300 dark:border-slate-700">
                 <a href="{{ route('taxes') }}"
                     class="inline-flex items-center text-xs font-semibold text-indigo-500 hover:text-indigo-600 group transition-colors duration-150">

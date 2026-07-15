@@ -24,30 +24,99 @@
             fee: {{ $fee }},
             count: 1,
             uptime: 99.7,
-            tax: null,
+            taxEnabled: true,
+            taxType: 'ip', // person / ip / legal
             difficultyGrowth: 0,
-            get profit() {
-                return this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
+        
+            profit: 0,
+            dailyIncome: 0,
+            dailyConsumption: 0,
+            dailyProfit: 0,
+            dailyProfitUSDT: 0,
+            minPrice: null,
+            dailyTax: 0,
+            dailyTaxUSDT: 0,
+            total: 0,
+            incPercent: 33.33,
+            expPercent: 33.33,
+            taxPercent: 33.33,
+            momentRating: null,
+        
+            init() {
+                this.momentRating = this.version.ra;
+        
+                this.recalculateAll();
+        
+                this.$watch('currency, view, tariff, taxEnabled, taxType, count, uptime, profitNumber', () => {
+                    this.recalculateAll();
+                });
+        
+                @if($rModel)
+                axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $selModel['i'] }} });
+                @endif
             },
-            get dailyIncome() {
-                return (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
-            },
-            get dailyConsumption() {
-                return this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
-            },
-            get dailyProfit() {
-                return (this.dailyIncome - this.dailyConsumption) * (100 - (this.tax ?? 0)) / 100;
-            },
-            get dailyProfitUSDT() {
-                return ((this.profit * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000)) * (100 - (this.tax ?? 0)) / 100;
-            },
-            get total() { return this.dailyIncome + this.dailyConsumption },
-            get incPercent() { return this.total > 0 ? (this.dailyIncome / this.total) * 100 : 50 },
-            get expPercent() { return this.total > 0 ? (this.dailyConsumption / this.total) * 100 : 50 },
-            get momentRating() { return this.version.ra }
-        }" @if ($rModel)
-        x-init="axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $selModel['i'] }} })"
-        @endif>
+        
+            // Единый сквозной метод бизнес-логики калькулятора
+            recalculateAll() {
+                this.profit = this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
+                this.dailyIncome = (this.profit * (100 - this.fee) * this.uptime / 10000) * this.count / (this.currency == 'RUB' ? {{ $rub }} : 1);
+                this.dailyConsumption = this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100 * this.count * (this.currency == 'USDT' ? {{ $rub }} : 1);
+        
+                this.dailyProfit = this.dailyIncome - this.dailyConsumption;
+                this.dailyProfitUSDT = this.profit * (100 - this.fee) * this.uptime / 10000 - this.version.e * this.version.h * this.tariff * {{ $rub }} * 24 * this.uptime / 100000;
+        
+                this.minPrice = this.version.p ? this.version.p / (this.currency == 'RUB' ? {{ $rub }} : 1) : null;
+        
+                if (!this.taxEnabled) {
+                    this.dailyTax = 0;
+                    this.dailyTaxUSDT = 0;
+                } else {
+                    let cryptoTaxProfit = this.dailyProfitUSDT * this.count / {{ $rub }};
+        
+                    if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) cryptoTaxProfit -= this.version.p / 1095 / {{ $rub }};
+        
+                    let calculatedTax = 0;
+        
+                    if (cryptoTaxProfit < 0) {
+                        calculatedTax = 0;
+                    } else {
+                        if (this.taxType == 'person' || this.taxType == 'ip') {
+                            const yearProfit = cryptoTaxProfit * 365;
+                            const brackets = [
+                                [50000000, 0.22, 9402000],
+                                [20000000, 0.20, 3402000],
+                                [5000000, 0.18, 702000],
+                                [2400000, 0.15, 312000],
+                                [0, 0.13, 0]
+                            ];
+        
+                            const matchedBracket = brackets.find(([limit]) => yearProfit > limit);
+                            const rate = matchedBracket[1];
+                            const fixed = matchedBracket[2];
+                            const limitValue = matchedBracket[0];
+        
+                            const annualTax = fixed + (yearProfit - limitValue) * rate;
+                            calculatedTax = annualTax / 365;
+                        } else calculatedTax = cryptoTaxProfit * 0.25;
+                    }
+        
+                    this.dailyTax = calculatedTax * (this.currency == 'USDT' ? {{ $rub }} : 1);
+                    this.dailyTaxUSDT = this.dailyTax * (this.currency == 'RUB' ? {{ $rub }} : 1);
+                }
+        
+                this.total = this.dailyIncome + this.dailyConsumption + this.dailyTax;
+        
+                if (this.total > 0) {
+                    this.incPercent = (this.dailyIncome / this.total) * 100;
+                    this.expPercent = (this.dailyConsumption / this.total) * 100;
+                    this.taxPercent = (this.dailyTax / this.total) * 100;
+                } else {
+                    this.incPercent = this.taxEnabled ? 33.33 : 50;
+                    this.expPercent = this.taxEnabled ? 33.33 : 50;
+                    this.taxPercent = this.taxEnabled ? 33.33 : 0;
+                }
+            }
+        }">
         <div class="col-span-2">
             @include('calculator.components.schema')
 
@@ -150,7 +219,7 @@
                             <div class="text-center mb-6">
                                 <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
                                 <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
-                                    x-text="view === 'day' ? Math.round(dailyProfit * 100)/100 : (view === 'month' ? Math.round(dailyProfit*30*100)/100 : Math.round(dailyProfit*365*100)/100)">
+                                    x-text="view === 'day' ? Math.round((dailyProfit - dailyTax) * 100) / 100 : (view === 'month' ? Math.round((dailyProfit - dailyTax) * 30 * 100) / 100 : Math.round((dailyProfit - dailyTax) * 365 * 100) / 100)">
                                 </div>
                             </div>
 
@@ -158,16 +227,26 @@
                                 <div class="flex justify-between text-xs font-extrabold uppercase">
                                     <span class="text-emerald-500">{{ __('Income') }}</span>
                                     <span class="text-red-700 dark:text-red-500">{{ __('Expense') }}</span>
+                                    <template x-if="taxEnabled">
+                                        <span class="text-rose-600 dark:text-rose-400">{{ __('Tax') }}</span>
+                                    </template>
                                 </div>
                                 <div class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
                                     <div class="h-full bg-emerald-500 transition-all duration-500" :style="`width: ${incPercent}%`"></div>
                                     <div class="h-full bg-red-600 transition-all duration-500" :style="`width: ${expPercent}%`"></div>
+                                    <template x-if="taxEnabled">
+                                        <div class="h-full bg-rose-500 transition-all duration-500" :style="`width: ${taxPercent}%`"></div>
+                                    </template>
                                 </div>
                                 <div class="mt-3 flex justify-between text-sm sm:text-base lg:text-lg font-black text-slate-800 dark:text-slate-200">
                                     <span
                                         x-text="view === 'day' ? Math.round(calculateProfitCAGR(dailyIncome, 1, difficultyGrowth)*100)/100 : (view === 'month' ? Math.round(calculateProfitCAGR(dailyIncome, 30, difficultyGrowth)*100)/100 : Math.round(calculateProfitCAGR(dailyIncome, 365, difficultyGrowth)*100)/100)"></span>
                                     <span
-                                        x-text="view === 'day' ? Math.round(dailyConsumption*100)/100 : (view === 'month' ? Math.round(dailyConsumption*30*100)/100 : Math.round(dailyConsumption*365*100)/100)"></span>
+                                        x-text="view === 'day' ? Math.round(dailyConsumption * 100) / 100 : (view === 'month' ? Math.round(dailyConsumption * 30 * 100) / 100 : Math.round(dailyConsumption * 365 * 100) / 100)"></span>
+                                    <template x-if="taxEnabled">
+                                        <span
+                                            x-text="view === 'day' ? Math.round(dailyTax * 100) / 100 : (view === 'month' ? Math.round(dailyTax * 30 * 100) / 100 : Math.round(dailyTax * 365 * 100) / 100)"></span>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -180,11 +259,12 @@
                         <div class="flex text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
                             <h3>{{ __('Payback period') }}</h3>:
                             <span class="ml-1 text-slate-800 dark:text-slate-200 font-bold"
-                                x-text="version.p ? dailyProfitUSDT > 0 ? Math.round(version.p / dailyProfitUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
+                                x-text="version.p ? dailyProfitUSDT > 0 ? Math.round(version.p / (dailyProfitUSDT - dailyTaxUSDT)) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'"></span>
                         </div>
                         <template x-if="version.p">
                             <div class="text-xxs text-slate-500 mt-2">
-                                *{{ __('The best offer is used for payback calculation') }} (<span class="text-slate-800 dark:text-slate-200" x-text="Math.round(version.p / (currency == 'RUB' ? {{ $rub }} : 1)) + (currency == 'RUB' ? ' ₽' : ' USDT')"></span>)
+                                *{{ __('The best offer is used for payback calculation') }} (<span class="text-slate-800 dark:text-slate-200"
+                                    x-text="Math.round(minPrice) + (currency == 'RUB' ? ' ₽' : ' USDT')"></span>)
                             </div>
                         </template>
                     @endif

@@ -100,7 +100,8 @@ class AuthenticatedSessionController extends Controller
 
             if (!$user) {
                 $firstUser = User::orderByDesc('ordering_id')->first();
-                $name = $yandexUser['real_name'] ?? $yandexUser['display_name'] ?? 'Yandex User';
+                $name = $yandexUser['real_name'] ?? $yandexUser['display_name'];
+                if (!$name || $name == '') $name = 'User-' . Str::random(10);
                 $user = User::create([
                     'ordering_id' => $firstUser ? $firstUser->ordering_id + 1 : 1,
                     'phone' => $cleanedPhone,

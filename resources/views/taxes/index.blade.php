@@ -418,14 +418,14 @@
 
                     <div>
                         <h3 class="text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
-                            <span class="inline mr-1 sm:mr-2">🛡️</span> Имущественные и профессиональные вычеты (<a target="_blank"
+                            <span class="inline mr-1 sm:mr-2">🛡️</span> Профессиональные налоговые вычеты для граждан (<a target="_blank"
                                 class="inline text-indigo-500 hover:text-indigo-600 underline"
                                 href="https://www.consultant.ru/document/cons_doc_LAW_28165/43b2a4727390504760e272227648fa7e6355969d/">ст. 221 НК РФ</a>)
                         </h3>
                         <p class="text-slate-600 dark:text-slate-400 mb-2">
                             Физлицо не обязано платить налог со всей стоимости намайненной криптовалюты. Согласно статье 221 НК РФ, граждане имеют право
                             применить <strong class="text-slate-800 dark:text-slate-200">профессиональный налоговый вычет</strong> при подаче декларации
-                            3-НДФЛ.
+                            по форме 3-НДФЛ.
                         </p>
                         <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                             Вычет позволяет уменьшить сумму полученного от майнинга дохода на величину <strong

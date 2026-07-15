@@ -63,11 +63,17 @@
                         </div>
 
                         <div class="w-full">
-                            <div class="flex items-center">
+                            <x-inputs.checkbox class="mb-2" value="1" name="tax_enable" ::checked="taxEnabled" handleChange="(checked => taxEnabled = checked)">
+                                {{ __('Consider tax') }}
+                            </x-inputs.checkbox>
+                            <x-inputs.select :label="__('Legal status')" name="tax_type" handleChange="(selectedType => taxType = selectedType)" :items="collect([
+                                ['key' => 'person', 'value' => __('Person')],
+                                ['key' => 'ip', 'value' => __('INDIVIDUAL')],
+                                ['key' => 'legal', 'value' => __('LEGAL')],
+                            ])->keyBy('key')" key="ip" disabled="disabled" ::disabled="!taxEnabled" />
+                            <div class="flex items-center mt-3">
                                 @include('calculator.components.tax-help')
                             </div>
-                            <x-inputs.text-input ::value="tax" id="tax" type="text" placeholder="{{ __('Tax') }} (%)"
-                                @input="tax = filterDouble($el, 0, 100, 2);$el.value = tax" />
                         </div>
 
                         {{-- <div>
