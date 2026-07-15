@@ -8,6 +8,8 @@
     <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-9 xl:gap-12 md:p-6 lg:p-9 xl:p-12"
         x-data="{
             coef: { day: 1, month: 30, year: 365 },
+            algorithms: {{ $algorithms }},
+
             currency: 'RUB',
             view: 'month',
             tariff: 5,
@@ -21,7 +23,6 @@
                 ra: @json($selModel['ra'])
             },
             profitNumber: 0,
-            algorithms: {{ $algorithms }},
             fee: {{ $fee }},
             count: 1,
             uptime: 99.7,
@@ -52,7 +53,7 @@
         
                 this.recalculateAll();
         
-                this.$watch('currency, view, tariff, taxEnabled, taxType, count, uptime, profitNumber', () => {
+                this.$watch('currency, view, tariff, taxEnabled, taxType, count, uptime, profitNumber, version', () => {
                     this.recalculateAll();
                 });
         
@@ -82,7 +83,6 @@
                     this.taxHelp = Math.round(calculateProfitCAGR(this.dailyIncome, 1, this.difficultyGrowth) * 100) / 100 + ' - ' + Math.round(this.dailyConsumption * 100) / 100;
         
                     if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) {
-                    console.log(this.version.p);
                         cryptoTaxProfit -= this.version.p * this.count / 1095 / {{ $rub }};
                         this.taxHelp += ' - ' + Math.round(this.version.p * this.count / 1095 / (this.currency == 'RUB' ? {{ $rub }} : 1) * 100) / 100 + ' ({{ __('amortization') }})';
                     }
