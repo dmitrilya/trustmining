@@ -1,4 +1,4 @@
-<div x-data="{ show: false }" class="mt-6 md:mt-0 md:p-6 md:pt-0 lg:p-9 lg:pt-0 xl:p-12 xl:pt-0">
+<div x-data="{ show: false }" class="mt-6 md:mt-0 md:p-2 md:pt-0 lg:p-4 lg:pt-0">
     <h2 class="mb-2 sm:mb-3 font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
         {{ __('Profitability analysis overview') }}</h2>
 
