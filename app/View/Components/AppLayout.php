@@ -19,7 +19,8 @@ class AppLayout extends Component
     {
         view()->share('popularArticle', (new ArticleService())->getPopular('article', 1, '1 week')->first());
         view()->share('roulettePrizes', RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')
-            ->select(['id', 'user_id', 'name', 'caption', 'partner_link', 'chance'])->with(['user:id', 'user.company:user_id,logo'])->inRandomOrder()->get());
+            ->select(['id', 'user_id', 'name', 'caption', 'partner_link', 'chance'])->with(['user:id,name', 'user.company:user_id,logo'])
+            ->inRandomOrder()->get());
         view()->share('timeToSpin', (new RouletteSpinService)->timeToSpin());
 
         return view('layouts.app');

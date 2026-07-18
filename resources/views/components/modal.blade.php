@@ -11,7 +11,7 @@
     ][$maxWidth];
 @endphp
 
-<div x-data="{
+<div name="{{ $name }}-modal" x-data="{
     show: @js($show),
     focusables() {
         // All focusable element types...
