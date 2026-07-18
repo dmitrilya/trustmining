@@ -46,7 +46,7 @@
             @endif
         </div>
         @if ($price != 0)
-            <div class="mt-1 sm:mt-1.5 w-fit px-2 py-0.5 rounded text-xxs font-bold uppercase tracking-tighter"
+            <div class="mt-1 sm:mt-1.5 w-fit px-2 py-0.5 rounded text-xxs xxs:text-xs font-bold uppercase tracking-tighter"
                 :class="{
                     'bg-rose-500/10 text-rose-500': payback > 1460 || payback == '∞',
                     'bg-amber-500/10 text-amber-500': payback > 730 && payback <= 1460,
