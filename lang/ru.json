@@ -138,6 +138,7 @@
     "rub./kW": "руб./кВт",
     "kW/h": "кВт/ч",
     "VAT": "НДС",
+    "With VAT": "с НДС",
     "Price including VAT": "Цена с НДС",
     "Price without VAT": "Цена без НДС",
     "The price includes VAT": "Цена указана с НДС",

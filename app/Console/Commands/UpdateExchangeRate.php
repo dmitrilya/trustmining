@@ -97,7 +97,7 @@ class UpdateExchangeRate extends Command
             'algorithm:id,name,slug,measurement',
             'asicBrand:id,name,slug',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
-            'asicVersions.ads:asic_version_id,price,coin_id,props,user_id',
+            'asicVersions.ads:asic_version_id,price,coin_id,props,with_vat,user_id',
             'asicVersions.ads.coin:id,abbreviation',
             'asicVersions.ads.user:id,name',
             'moderatedReviews:reviewable_id,reviewable_type,rating'
@@ -108,7 +108,7 @@ class UpdateExchangeRate extends Command
 
             $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model) {
                 $ads = $version->ads->where('price', '!=', 0)->map(function ($ad) {
-                    $ad->usdt_price = round($ad->price * $ad->coin->rate, 2);
+                    $ad->usdt_price = round($ad->price * $ad->coin->rate * ($ad->with_vat ? 1 : 1.2), 2);
                     return $ad;
                 });
                 $minPrice = $ads->sortBy('usdt_price')->first();
@@ -148,6 +148,7 @@ class UpdateExchangeRate extends Command
                 $version->original_hashrate = $version->hashrate * pow(1000, $vm);
                 $version->original_efficiency = $version->efficiency * pow(1000, $am - $vm);
                 $version->price = $minPrice ? $minPrice->usdt_price : null;
+                $version->with_vat = $minPrice ? $minPrice->with_vat : null;
                 $version->seller = $minPrice ? $minPrice->user->name : null;
                 $version->algorithm_id = $model->algorithm->id;
                 $version->algorithm = $model->algorithm->name;
@@ -181,6 +182,7 @@ class UpdateExchangeRate extends Command
                 'm' => $v->measurement,
                 'c' => $v->coef,
                 'p' => $v->price,
+                'v' => $v->with_vat,
                 's' => $v->seller,
                 'a' => $v->algorithm_id,
                 'ac' => count($v->ads),

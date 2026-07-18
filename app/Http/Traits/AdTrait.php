@@ -182,7 +182,7 @@ trait AdTrait
             }
 
             if ($request->sort) {
-                $convertedPrice = 'ads.price * coin_rates.rate';
+                $convertedPrice = "(CASE WHEN ads.with_vat = 0 THEN ads.price * 1.20 ELSE ads.price END) * coin_rates.rate";
 
                 switch ($request->sort) {
                     case 'price_low_to_high':
