@@ -51,8 +51,7 @@
         @endif
 
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
-            <a class="block w-full h-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }"
-                x-intersect.once.margin.300px="shown = true"
+            <a class="block w-full h-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true"
                 aria-label="{{ $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement }} offer">
                 <template x-if="shown">
                     <picture class="w-full">
@@ -83,8 +82,7 @@
                 @endif
 
                 <div class="bg-slate-100 rounded-full ml-3 p-1.5 tracking{{ $ad->is_tracked ? '' : ' hidden' }}">
-                    <svg class="w-4 h-4 text-indigo-500" aria-hidden="true" width="24" height="24" fill="none"
-                        viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-indigo-500" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                     </svg>
@@ -101,36 +99,41 @@
                 <p class="text-xxs sm:text-xs md:text-sm text-slate-500">Trust Factor</p>
             </div>
 
-            @if ($ad->ad_category_name == 'gpus')
-                <p class="text-xxs sm:text-xs md:text-sm text-slate-500">
-                    {{ __('Power (kW/h)') . ': ' }}
-                    <span class="text-slate-600 dark:text-slate-400">{{ __($ad->gpu_model_max_power) }}</span>
-                </p>
-            @endif
+            <x-characteristics.characteristics>
+                @if ($ad->ad_category_name == 'gpus')
+                    <x-characteristics.characteristic name="Power (kW/h)" :value="$ad->gpu_model_max_power" />
+                @endif
 
-            @if (!isset($sm))
-                @foreach ($props as $prop => $value)
-                    <p class="text-xxs sm:text-xs md:text-sm text-slate-500">
-                        {{ __($prop) . ': ' }}@if (!is_array($value))
-                            <span class="text-slate-600 dark:text-slate-400">{{ __($value) }}</span>
+                @if (!isset($sm))
+                    @foreach ($props as $prop => $value)
+                        @if (!is_array($value) && $prop != 'Service')
+                            <x-characteristics.characteristic :name="$prop" :value="$value" />
                         @else
-                            <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                                @foreach ($value as $item)
-                                    <div
-                                        class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
-                                        {{ $item }}
+                            <div class="text-xxs sm:text-xs md:text-sm text-slate-500">
+                                <span>{{ __($prop) . ': ' }}</span>
+                                @if ($prop == 'Service')
+                                    <span class="text-slate-600 dark:text-slate-400">{{ __($value) }}</span>
+                                @else
+                                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
+                                        @foreach ($value as $item)
+                                            <div
+                                                class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
+                                                {{ $item }}
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+                                @endif
                             </div>
                         @endif
-                    </p>
-                @endforeach
-            @endif
+                    @endforeach
+                @endif
+            </x-characteristics.characteristics>
         </div>
 
         <div class="mt-2 sm:mt-3">
             @if ($ad->price != 0 && $ad->with_vat)
-                <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs">{{ __('The price includes VAT') }}
+                <div class="bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
+                    {{ __('The price includes VAT') }}
                 </div>
             @endif
 
@@ -142,14 +145,12 @@
                 @endif
             </div>
 
-            <a href="{{ route('company.office', ['user' => $ad->user_slug, 'office' => $ad->office_id]) }}"
-                target="_blank" draggable="false"
+            <a href="{{ route('company.office', ['user' => $ad->user_slug, 'office' => $ad->office_id]) }}" target="_blank" draggable="false"
                 class="block hover:underline text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 mt-1 sm:mt-2">{{ $ad->city }}</a>
 
             <div class="relative flex mt-1 sm:mt-2 items-center">
                 <a class="block w-full" draggable="false" href="{{ $href }}">
-                    <x-buttons.primary-button
-                        class="w-full justify-center">{{ __('Buy') }}</x-buttons.primary-button>
+                    <x-buttons.primary-button class="w-full justify-center">{{ __('Buy') }}</x-buttons.primary-button>
                 </a>
 
                 @include('ad.components.options')

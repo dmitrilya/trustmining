@@ -1,6 +1,6 @@
 <div x-data="{ open: false }">
     <button @click="open = ! open" aria-label="Options"
-        class="ml-2 sm:ml-3 inline-flex items-center p-2 sm:p-2.5 text-sm text-center text-slate-800 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-200 focus:ring-inset focus:ring-2 focus:outline-none dark:text-slate-200 focus:ring-slate-300 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
+        class="ml-2 sm:ml-3 w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 inline-flex justify-center items-center text-sm text-slate-800 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-200 focus:ring-inset focus:ring-2 focus:outline-none dark:text-slate-200 focus:ring-slate-300 dark:hover:bg-slate-800 dark:focus:ring-slate-700">
         <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
             <path
                 d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
@@ -8,8 +8,8 @@
     </button>
 
     <div x-show="open" @mouseleave="open = false" @click.away="open = false" style="display: none"
-        class="z-100 -right-0.5 bottom-[44px] absolute bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border-2 border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
-        <ul class="py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200" aria-labelledby="ad-options-trigger">
+        class="z-100 -right-0.5 bottom-[44px] absolute overflow-hidden bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
+        <ul class="text-xs sm:text-sm text-slate-800 dark:text-slate-200" aria-labelledby="ad-options-trigger">
             @if ($owner)
                 <li>
                     <a href="{{ route('ad.edit', ['ad' => $ad->id]) }}"

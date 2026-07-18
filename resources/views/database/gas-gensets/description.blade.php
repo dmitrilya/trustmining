@@ -4,7 +4,7 @@
 
     <div itemprop="description" style="overflow-y: hidden; max-height: 5rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '5rem' }"
-        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400 transition-all ease-in-out">
+        class="ql-editor mt-5 text-xxs xxs:text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition-all ease-in-out">
             <p>Газопоршневая электростанция (ГПЭС) <b>{{ $model->name }}</b> от ведущего мирового бренда
                 <b>{{ $brand->name }}</b> (страна производства — <b>{{ __($brand->country) }}</b>) представляет собой
                 высокотехнологичное решение для создания систем автономного и резервного энергоснабжения. Данная
