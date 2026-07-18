@@ -3,7 +3,7 @@
 
     <div itemprop="description" style="overflow-y: hidden; max-height: 5rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '5rem' }"
-        class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400 transition-all ease-in-out">
+        class="ql-editor mt-5 text-xxs xxs:text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition-all ease-in-out">
         <p>Модель <b>{{ $model->name }}</b> от ведущего мирового производителя
             <b>{{ $brand->name }}</b> представляет собой высокопроизводительное решение,
             разработанное для профессионального майнинга. Данное устройство сочетает в себе

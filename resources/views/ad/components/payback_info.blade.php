@@ -6,7 +6,7 @@
         tariff: {{ $tariff }}
     }">
     <div
-        class="px-3 py-2 xs:px-4 xs:py-3 sm:p-4 lg:p-5 rounded-2xl relative bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
+        class="px-3 py-2 xs:px-4 xs:py-3 sm:p-4 lg:p-5 rounded-2xl relative z-0 bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
         <div class="relative z-10">
             <span
                 class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>

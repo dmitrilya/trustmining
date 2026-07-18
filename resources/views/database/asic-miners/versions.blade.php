@@ -1,5 +1,5 @@
 <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8" x-data="{ selectedTab: {{ array_search($selectedVersion['i'], $versions->pluck('i')->toArray()) }} }">
-    <div class="text-xs font-semibold text-center text-slate-600 dark:text-slate-400 border-b-2 border-slate-300 dark:border-slate-700">
+    <div class="text-xs xs:text-sm font-semibold text-center text-slate-600 dark:text-slate-400 border-b-2 border-slate-300 dark:border-slate-700">
         <div class="flex -mb-px overflow-x-auto no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
             @foreach ($versions as $i => $version)
                 <button class="mr-1 sm:mr-2 -mb-[1px] inline-block p-1 xs:p-2 border-b-2 rounded-t-lg" @click="selectedTab = {{ $i }}"
@@ -93,10 +93,10 @@
                         <div class="flex items-center">
                             <img alt="{{ $coin['n'] }}" class="w-5 xs:w-6 mr-1 xs:mr-2" src="{{ Storage::url('public/coins/' . $coin['a'] . '.webp') }}" />
                             <div>
-                                <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400">
+                                <div class="text-xs xxs:text-sm text-slate-600 dark:text-slate-400">
                                     {{ $coin['a'] }}
                                 </div>
-                                <div class="text-xxs xs:text-xs text-slate-500">
+                                <div class="text-xxs xxs:text-xs text-slate-500">
                                     {{ $coin['n'] }}
                                 </div>
                             </div>
