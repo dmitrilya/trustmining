@@ -101,7 +101,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <script type="module">
+    {{-- <script type="module">
         import {
             onINP
         } from 'https://unpkg.com/web-vitals@5.2.0/dist/web-vitals.js?module';
@@ -120,7 +120,7 @@
                 });
             }
         });
-    </script>
+    </script> --}}
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }"
