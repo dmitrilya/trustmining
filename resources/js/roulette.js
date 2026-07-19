@@ -20,7 +20,7 @@ export var roulette = (prizes, timeToSpin) => ({
             let weightedPool = [];
             prizes.forEach(prize => {
                 const count = Math.round(prize.chance);
-                for (let i = 0; i < count; i++) {
+                for (let i = 0; i < count * 4; i++) {
                     weightedPool.push(prize);
                 }
 
@@ -34,11 +34,7 @@ export var roulette = (prizes, timeToSpin) => ({
                 [weightedPool[i], weightedPool[j]] = [weightedPool[j], weightedPool[i]];
             }
 
-            const fullPool = Array.from({ length: 4 }, () => weightedPool).flat();
-            this.leftOffsetCount = 40;
-
-            const leftBuffer = fullPool.slice(-this.leftOffsetCount);
-            this.extendedPrizes = [...leftBuffer, ...fullPool];
+            this.extendedPrizes = weightedPool;
 
             this.updateFormattedTime();
             this.startTimer();
@@ -58,7 +54,7 @@ export var roulette = (prizes, timeToSpin) => ({
 
         let wideCharsCount = 0;
         const wideChars = ['ш', 'ю', 'ж', 'м', 'ф', 'щ', 'ы', 'ъ', 'ц'];
-        
+
         for (let char of longestWord.toLowerCase()) {
             if (wideChars.includes(char)) wideCharsCount++;
         }
@@ -74,10 +70,8 @@ export var roulette = (prizes, timeToSpin) => ({
                 const modalElement = document.querySelector('[name="roulette-modal"]');
                 const isModalOpen = modalElement && modalElement.getBoundingClientRect().width > 0;
 
-                if (!isModalOpen && this.timeToSpin === 0) {
-                    this.resetTapeToCenter();
+                if (!isModalOpen && this.timeToSpin === 0)
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
-                }
             }, 15000);
         } else {
             this.timerInterval = setInterval(() => {
@@ -86,7 +80,6 @@ export var roulette = (prizes, timeToSpin) => ({
                     this.updateFormattedTime();
                 } else {
                     clearInterval(this.timerInterval);
-                    this.resetTapeToCenter();
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
                 }
             }, 1000);
@@ -147,26 +140,12 @@ export var roulette = (prizes, timeToSpin) => ({
         requestAnimationFrame(() => this.trackTicks());
     },
 
-    resetTapeToCenter() {
-        const container = document.getElementById('roulette-tape')?.parentElement;
-        if (!container) return;
-        const containerWidth = container.offsetWidth;
-        const initialTargetPosition = this.leftOffsetCount * (this.cardWidth + this.gap) * 2;
-        this.currentTranslateX = (containerWidth / 2) - initialTargetPosition - (this.cardWidth / 2);
-        this.lastPlayedCardIndex = this.leftOffsetCount;
-    },
-
     async spinTape() {
         if (this.isSpinning || this.timeToSpin > 0) return;
         this.isSpinning = true;
         localStorage.removeItem('roulette_hide_until');
 
         const tape = document.getElementById('roulette-tape');
-        if (tape) tape.style.transitionDuration = '0ms';
-        this.resetTapeToCenter();
-
-        await new Promise(resolve => setTimeout(resolve, 50));
-        if (tape) tape.style.transitionDuration = '8000ms';
 
         try {
             const response = await axios.get('/roulette/spin');
@@ -197,7 +176,7 @@ export var roulette = (prizes, timeToSpin) => ({
                     this.isSpinning = false;
                     this.startTimer();
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette_prize' }));
-                }, 8200);
+                }, 10200);
             } else {
                 this.isSpinning = false;
                 window.pushToastAlert(response.data.message || 'Ошибка запроса', 'error');

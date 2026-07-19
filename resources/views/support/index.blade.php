@@ -1,6 +1,6 @@
 <x-app-layout title="Поддержка, часто задаваемые вопросы" description="Центр поддержки пользователей: ответы на часто задаваемые вопросы по покупке, настройке и ремонту майнинг-оборудования. Инструкции по работе с личным кабинетом, оплате и доставке. Получите помощь экспертов и решите любой вопрос быстро">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" style="height: calc(100dvh - 104.4px)"
-        x-data="{ tab: '{{ request()->tab ? request()->tab : 'chat' }}' }">
+        x-data="{ tab: '{{ request()->tab ?? 'chat' }}' }">
         <div
             class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
             <ul class="flex text-sm text-center text-slate-600 dark:text-slate-200 rounded-t-2xl divide-x divide-slate-300 dark:divide-slate-700 border-b border-slate-300 dark:border-slate-700"

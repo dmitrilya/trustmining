@@ -6,7 +6,7 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative" x-data="{ category: 'ads' }">
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative" x-data="{ category: '{{ request()->tab ?? 'ads' }}' }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'finance' => 'Finance', 'account' => 'Account'] as $category => $category_header)
                 <div @click="category = '{{ $category }}'"
