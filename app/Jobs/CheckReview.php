@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 use App\Models\Morph\Review;
+use App\Models\User\User;
 
 class CheckReview implements ShouldQueue
 {
@@ -59,13 +60,13 @@ class CheckReview implements ShouldQueue
                     $this->review->fake = true;
                     $this->review->save();
 
-                    $this->acceptModeration(null, $lastModeration, 10000000);
+                    $this->acceptModeration(null, $lastModeration, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                     break;
                 case 'Настоящий':
-                    $this->acceptModeration(null, $lastModeration, 10000000);
+                    $this->acceptModeration(null, $lastModeration, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                     break;
                 case 'Оскорбительный':
-                    $this->declineModeration(__('Please try to express your emotions without directly insulting'), $lastModeration, 10000000);
+                    $this->declineModeration(__('Please try to express your emotions without directly insulting'), $lastModeration, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                     break;
             }
         } catch (Exception $e) {

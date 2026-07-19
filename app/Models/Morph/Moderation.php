@@ -3,11 +3,15 @@
 namespace App\Models\Morph;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Http\Traits\NotificationTrait;
+use App\Models\User\User;
 
 class Moderation extends Model
 {
-    use HasFactory;
+    use HasFactory, NotificationTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +34,13 @@ class Moderation extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    protected static function booted(): void
+    {
+        static::created(function (Moderation $moderation) {
+            $moderation->notify('New moderation', new Collection([User::whereHas('role', fn($q) => $q->where('name', 'moderator'))->first()]));
+        });
+    }
 
     public function moderationable()
     {

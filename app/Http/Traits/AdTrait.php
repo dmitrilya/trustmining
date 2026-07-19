@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use App\Models\Database\Coin;
 use App\Models\Ad\AdCategory;
 use App\Models\Ad\Ad;
 

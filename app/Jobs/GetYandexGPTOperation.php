@@ -12,8 +12,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
 use App\Http\Traits\ModerationTrait;
-
 use App\Services\YandexGPTService;
+
+use App\Models\User\User;
 
 class GetYandexGPTOperation implements ShouldQueue
 {
@@ -61,13 +62,13 @@ class GetYandexGPTOperation implements ShouldQueue
                     $this->model->moderation = false;
                     $this->model->save();
 
-                    $this->acceptModeration(true, $this->model->moderations()->latest()->first());
+                    $this->acceptModeration(true, $this->model->moderations()->latest()->first(), User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                     break;
                 }
 
                 $reasons = implode('\n', $res['reasons']);
                 Log::channel('moderation')->info("[Moderation failed] model={" . get_class($this->model) . "} model_id={$this->model->id} reasons:\n$reasons");
-                $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), 10000000);
+                $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                 break;
             case 'hostings':
                 if ($res->alternatives[0]->status != 'ALTERNATIVE_STATUS_FINAL') {
@@ -85,7 +86,7 @@ class GetYandexGPTOperation implements ShouldQueue
 
                 if (isset($res['risk'])) {
                     $reasons = implode('\n', $res['reasons']);
-                    $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), 10000000);
+                    $this->declineModeration($reasons, $this->model->moderations()->latest()->first(), User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                     Log::channel('forum-question')->info("[Question classification risk] question={$this->model->id} reasons:\n$reasons");
                     break;
                 }
@@ -98,7 +99,7 @@ class GetYandexGPTOperation implements ShouldQueue
                 $this->model->keywords = $res['keywords'];
                 $this->model->save;
 
-                $this->acceptModeration(true, $this->model->moderations()->latest()->first());
+                $this->acceptModeration(true, $this->model->moderations()->latest()->first(), User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
 
                 (new ForumQuestionService())->findSimilarQuestions($this->model);
 

@@ -6,6 +6,7 @@ use Mews\Purifier\Facades\Purifier;
 use Illuminate\Http\UploadedFile;
 
 use App\Http\Traits\FileTrait;
+use App\Http\Traits\ModerationTrait;
 use App\Http\Traits\NotificationTrait;
 
 use App\Models\Ad\Ad;
@@ -13,7 +14,7 @@ use App\Models\User\User;
 
 class AdService
 {
-    use FileTrait, NotificationTrait;
+    use FileTrait, NotificationTrait, ModerationTrait;
 
     public function store(array $data, ?array $images, ?UploadedFile $preview, User $user): void
     {
@@ -71,45 +72,31 @@ class AdService
             $moderation = $ad->moderations()->create(['data' => $changings]);
 
             if (!$preview && !$images && !isset($changings['description'])) {
-                $moderation->moderation_status_id = 2;
-                $moderation->user_id = 10000000;
-                $moderation->save();
-
-                if (isset($changings['price'])) $this->notify(
-                    'Price change',
-                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
-                    'ad',
-                    $ad
-                );
-
-                $ad->update($changings);
+                $moderation->moderation_status_id = 1;
+                $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
             }
         }
     }
 
-    public function updateMass(array $changings, User $user): void
+    public function updateMass(array $data, User $user): void
     {
-        $changings = collect($changings);
+        $data = collect($data);
 
-        $user->ads()->whereIn('id', $changings->pluck('id'))->get()
-            ->each(function ($ad) use ($changings) {
-                $change = $changings->where('id', $ad->id)->first();
+        $user->ads()->whereIn('id', $data->pluck('id'))->get()
+            ->each(function ($ad) use ($data) {
+                $change = $data->where('id', $ad->id)->first();
+                $changings = [];
 
                 if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $ad->moderations()->create([
-                        'data' => $change,
-                        'moderation_status_id' => 2,
-                        'user_id' => 10000000
-                    ]);
+                    $changings['price'] = $data['price'];
+                    $changings['coin_id'] = $data['coin_id'];
+                    $changings['with_vat'] = $data['with_vat'];
+                }
 
-                    $this->notify(
-                        'Price change',
-                        $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
-                        'ad',
-                        $ad
-                    );
-
-                    $ad->update($change);
+                if (!empty($changings)) {
+                    $moderation = $ad->moderations()->create(['data' => $changings]);
+                    $moderation->moderation_status_id = 1;
+                    $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
                 }
             });
     }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Collection;
 
 use App\Http\Traits\ModerationTrait;
-use App\Http\Traits\NotificationTrait;
 use App\Http\Traits\FileTrait;
 use App\Http\Traits\ViewTrait;
 
@@ -21,7 +20,7 @@ use App\Models\User\User;
 
 abstract class ContentService
 {
-    use ViewTrait, FileTrait, ModerationTrait, NotificationTrait;
+    use ViewTrait, FileTrait, ModerationTrait;
 
     /**
      * Store a newly created resource in storage.
@@ -131,8 +130,8 @@ abstract class ContentService
 
         if ($hasCompany || $hasRecentModeratedContent) {
             $moderation->moderation_status_id = 1;
-            $this->acceptModeration(true, $moderation);
-        } else $this->notify('New moderation', new Collection([User::find(10000000)]));
+            $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
+        }
 
         return $moderation;
     }

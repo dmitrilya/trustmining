@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\API\Ad;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
 use App\Http\Traits\AdTrait;
+use App\Http\Traits\ModerationTrait;
 
 use App\Models\Database\Coin;
 use App\Models\Ad\Ad;
 use App\Models\Ad\AdCategory;
+use App\Models\User\User;
 
 class AdController extends Controller
 {
-    use AdTrait;
+    use AdTrait, ModerationTrait;
 
     /**
      * Display a listing of the resource.
@@ -243,21 +244,12 @@ class AdController extends Controller
                 $changes['props'] = json_encode($props);
             }
 
-            $ad->moderations()->create([
-                'data' => $changes,
-                'moderation_status_id' => 2,
-                'user_id' => 10000000
-            ]);
+            $moderation = $ad->moderations()->create(['data' => $changes]);
 
-            $ad->update($changes->all());
-
-            if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat)
-                $this->notify(
-                    'Price change',
-                    $ad->trackingUsers()->select(['users.id', 'users.tg_id'])->get()->merge($ad->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.tg_id'])->get()),
-                    'ad',
-                    $ad
-                );
+            if (isset($changes['price']) && $changes['price'] != $ad->price || isset($changes['coin_id']) && $changes['coin_id'] != $ad->coin_id || isset($changes['with_vat']) && $changes['with_vat'] != $ad->with_vat) {
+                $moderation->moderation_status_id = 1;
+                $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
+            }
         }
 
         return response()->json([

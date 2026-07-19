@@ -88,11 +88,11 @@ class ModerationController extends Controller
 
     public function accept(Request $request, Moderation $moderation)
     {
-        return $this->acceptModeration($request->filled('unique_content'), $moderation);
+        return $this->acceptModeration($request->filled('unique_content'), $moderation, $request->user()->id);
     }
 
     public function decline(Request $request, Moderation $moderation)
     {
-        return $this->declineModeration($request->comment, $moderation);
+        return $this->declineModeration($request->comment, $moderation, $request->user()->id);
     }
 }

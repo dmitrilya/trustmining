@@ -37,8 +37,9 @@ class ForumAnswerService
 
         $moderation = $answer->moderations()->create(['data' => $answer->attributesToArray()]);
         $moderation->moderation_status_id = 1;
-        $this->acceptModeration(true, $moderation);
+        $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
 
+        //TODO
         //(new YandexGPTService())->moderateText($answer->text, $answer);
 
         return $answer;
@@ -62,8 +63,9 @@ class ForumAnswerService
 
         $moderation = $answer->moderations()->create(['data' => $data]);
         $moderation->moderation_status_id = 1;
-        $this->acceptModeration(true, $moderation);
+        $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
 
+        //TODO
         //(new YandexGPTService())->moderateText($answer->text, $answer);
 
         return $answer;

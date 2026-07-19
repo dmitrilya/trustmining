@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -43,10 +42,8 @@ trait ModerationTrait
         return $moderations;
     }
 
-    public function acceptModeration(?bool $isUniqueContent, Moderation $moderation, ?int $userId = null)
+    public function acceptModeration(?bool $isUniqueContent, Moderation $moderation, int $userId)
     {
-        $userId = $userId ? $userId : Auth::id();
-
         $m = $moderation->moderationable;
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user && !$m->channel)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
@@ -146,10 +143,8 @@ trait ModerationTrait
         return redirect()->route('moderations');
     }
 
-    public function declineModeration(string $comment, Moderation $moderation, ?int $userId = null)
+    public function declineModeration(string $comment, Moderation $moderation, int $userId)
     {
-        $userId = $userId ? $userId : Auth::id();
-
         $m = $moderation->moderationable;
 
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user && !$m->channel) return redirect()->route('moderations');
