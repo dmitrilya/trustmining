@@ -74,10 +74,14 @@
 
                 <div class="grid grid-cols-3 xs:grid-cols-4 md:grid-cols-6 justify-items-center gap-3 xs:gap-4">
                     <template x-for="prize in prizes.filter(p => p.id !== 3)" :key="prize.id">
-                        <a class="flex flex-col items-center group" :href="prize.partner_link" target="_blank" :aria-label="`${prize.name} partner link`">
+                        <a class="flex flex-col items-center relative group" :href="prize.partner_link" target="_blank" :aria-label="`${prize.name} partner link`">
                             <img class="w-12 h-12 xs:w-16 xs:h-16 rounded-full group-hover:ring ring-indigo-600 pointer-events-auto"
-                                :src="prize?.id != 3 ? `/storage/${prize.user.company.logo}` : '/img/hf_logo.webp'" :alt="`${prize.name} icon`">
+                                :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                             <div class="text-center mt-1 xs:mt-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200" x-text="prize.user.name"></div>
+                            <div
+                                class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-slate-950 text-white text-[9px] font-bold py-1 px-2 rounded shadow-md whitespace-nowrap z-50">
+                                <span x-text="prize.name"></span>
+                            </div>
                         </a>
                     </template>
                 </div>
