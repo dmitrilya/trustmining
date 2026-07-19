@@ -51,15 +51,14 @@
 
                                 <div class="absolute top-0 left-0 w-full h-1" :class="getPrizeRarityClasses(prize.chance).badge.split(' ')"></div>
 
-                                <span
-                                    class="font-extrabold uppercase tracking-tight select-none text-center max-w-full text-xxs xs:text-xs text-slate-800 dark:text-slate-200 leading-tight z-10"
+                                <span :class="prize.isLongTitle ? 'text-xxs' : 'text-xxs xs:text-xs'"
+                                    class="font-extrabold uppercase tracking-tight select-none text-center max-w-full text-slate-800 dark:text-slate-200 leading-tight z-10"
                                     x-text="prize.name">
                                 </span>
 
                                 <div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700 relative"
                                     :class="getPrizeRarityClasses(prize.chance).glow">
-                                    <img class="w-full h-full object-contain"
-                                        :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
+                                    <img class="w-full h-full object-contain" :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                                 </div>
                             </div>
                         </template>
@@ -74,7 +73,8 @@
 
                 <div class="grid grid-cols-3 xs:grid-cols-4 md:grid-cols-6 justify-items-center gap-3 xs:gap-4">
                     <template x-for="prize in prizes" :key="prize.id">
-                        <a class="flex flex-col items-center relative group" :href="prize.partner_link" target="_blank" :aria-label="`${prize.name} partner link`">
+                        <a class="flex flex-col items-center relative group" :href="prize.partner_link" target="_blank"
+                            :aria-label="`${prize.name} partner link`">
                             <img class="w-12 h-12 xs:w-16 xs:h-16 rounded-full group-hover:ring ring-indigo-600 pointer-events-auto"
                                 :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                             <div class="text-center mt-1 xs:mt-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200" x-text="prize.user.name"></div>
@@ -108,8 +108,7 @@
             </h3>
             <a class="w-20 h-20 rounded-full overflow-hidden hover:ring ring-indigo-600 mb-3" :href="wonPrize?.partner_link">
                 <template x-if="wonPrize">
-                    <img class="w-full" :src="`/storage/${wonPrize.user.company.logo}`"
-                        :alt="`${wonPrize.name} icon`">
+                    <img class="w-full" :src="`/storage/${wonPrize.user.company.logo}`" :alt="`${wonPrize.name} icon`">
                 </template>
             </a>
             <p class="text-indigo-500 mb-2 font-bold" x-text="wonPrize?.name">

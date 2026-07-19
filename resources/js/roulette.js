@@ -23,6 +23,8 @@ export var roulette = (prizes, timeToSpin) => ({
                 for (let i = 0; i < count; i++) {
                     weightedPool.push(prize);
                 }
+
+                prize.isLongTitle = this.checkIfNameTooWide(prize.name);
             });
 
             if (weightedPool.length === 0) weightedPool = prizes;
@@ -41,6 +43,27 @@ export var roulette = (prizes, timeToSpin) => ({
             this.updateFormattedTime();
             this.startTimer();
         }
+    },
+
+    checkIfNameTooWide(name) {
+        let longestWord = '';
+        let maxLength = 0;
+
+        name.split(' ').forEach(word => {
+            if (word.length > maxLength) {
+                maxLength = word.length;
+                longestWord = word;
+            }
+        });
+
+        let wideCharsCount = 0;
+        const wideChars = ['ш', 'ю', 'ж', 'м', 'ф', 'щ', 'ы', 'ъ', 'ц'];
+        
+        for (let char of longestWord.toLowerCase()) {
+            if (wideChars.includes(char)) wideCharsCount++;
+        }
+
+        return maxLength + (wideCharsCount * 0.25) > 11;
     },
 
     startTimer() {
