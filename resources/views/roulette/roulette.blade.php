@@ -43,7 +43,7 @@
                         :style="`transform: translateX(${currentTranslateX}px);`" id="roulette-tape">
 
                         <template x-for="(prize, index) in extendedPrizes" :key="index">
-                            <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between p-4 rounded-xl border relative transition-all duration-300 overflow-hidden"
+                            <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition-all duration-300 overflow-hidden"
                                 :class="getPrizeRarityClasses(prize.chance).card">
                                 <x-card-pattern ::style="`--pattern-color: ${getPrizeRarityClasses(prize.chance).patternColor}`" />
 
@@ -52,7 +52,7 @@
                                 <div class="absolute top-0 left-0 w-full h-[3px]" :class="getPrizeRarityClasses(prize.chance).badge.split(' ')"></div>
 
                                 <span
-                                    class="font-extrabold uppercase tracking-tight select-none text-center max-w-full text-xxs text-slate-800 dark:text-slate-200 line-clamp-2 h-7 leading-tight z-10"
+                                    class="font-extrabold uppercase tracking-tight select-none text-center max-w-full text-xxs xs:text-xs text-slate-800 dark:text-slate-200 leading-tight z-10"
                                     x-text="prize.name">
                                 </span>
 
