@@ -21,6 +21,7 @@ window.listenBroadcast = async function (userId) {
     });
 
     window.Echo.private(`messages.${userId}`).listen(".new-message", messagesChannelEvent);
+
     if ('serviceWorker' in navigator && 'Notification' in window) {
         const beamsClient = new Beams.Client({
             instanceId: import.meta.env.VITE_PUSHER_BEAMS_INSTANCE_ID,
@@ -29,10 +30,14 @@ window.listenBroadcast = async function (userId) {
         const tokenProvider = new Beams.TokenProvider({ url: '/beams/auth' });
 
         beamsClient.start()
-        .then(() => {
-            console.log(beamsClient.getUserId());
-        })
-            .then(() => beamsClient.setUserId(String(userId), tokenProvider))
+            .then(() => beamsClient.getUserId())
+            .then((currentUserId) => {
+                const targetUserId = String(userId);
+
+                if (!currentUserId) return beamsClient.setUserId(targetUserId, tokenProvider);
+
+                if (currentUserId !== targetUserId) return beamsClient.clearAllState().then(() => beamsClient.setUserId(targetUserId, tokenProvider));
+            })
             .then(() => console.log('Successfully registered and subscribed!'))
             .catch(console.error);
     }
