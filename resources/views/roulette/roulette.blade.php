@@ -79,7 +79,7 @@
                                 :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                             <div class="text-center mt-1 xs:mt-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200" x-text="prize.user.name"></div>
                             <div
-                                class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block bg-slate-950 text-white text-xxs font-bold py-1 px-2 rounded shadow-md whitespace-nowrap z-50">
+                                class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 text-xs font-bold py-1 px-2 xs:py-1.5 xs:px-3 rounded-md shadow-md whitespace-nowrap z-50">
                                 <span x-text="prize.name"></span>
                             </div>
                         </a>
