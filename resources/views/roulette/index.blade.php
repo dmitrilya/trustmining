@@ -14,13 +14,13 @@
                                 <img src="{{ Storage::url($prize->user->company->logo) }}" alt="">
                             </div>
 
-                            <div>
+                            <div class="w-full">
                                 <div class="flex justify-between items-center">
                                     <div class="text-slate-800 dark:text-slate-200 font-bold mb-1">
                                         {{ $prize->name }}
                                     </div>
 
-                                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-md text-amber-800 dark:text-amber-200 text-xs">{{ $prize->chance }}%</div>
+                                    <div class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-md text-amber-800 dark:text-amber-200 text-xs">{{ $prize->chance }}%</div>
                                 </div>
 
                                 <div class="text-sm text-slate-600 dark:text-slate-400">
