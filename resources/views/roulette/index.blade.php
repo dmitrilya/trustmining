@@ -2,9 +2,12 @@
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 md:p-8" x-data="{ selectedPrize: null }">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
-            <x-buttons.primary-button class="block ml-auto mb-4" x-on:click.prevent="$dispatch('open-modal', 'roulette-prize-create')">
-                {{ __('Create') }}
-            </x-buttons.primary-button>
+            <div class="flex justify-between mb-4">
+                <div class="text-xs text-slate-600 dark:text-slate-400">Пороги редкости (%) - 3, 8, 15</div>
+                <x-buttons.primary-button x-on:click.prevent="$dispatch('open-modal', 'roulette-prize-create')">
+                    {{ __('Create') }}
+                </x-buttons.primary-button>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-4">
                 @foreach ($prizes as $prize)
@@ -15,12 +18,13 @@
                             </div>
 
                             <div class="w-full">
-                                <div class="flex justify-between items-center">
-                                    <div class="text-slate-800 dark:text-slate-200 font-bold mb-1">
+                                <div class="flex justify-between items-center mb-1">
+                                    <div class="text-slate-800 dark:text-slate-200 font-bold">
                                         {{ $prize->name }}
                                     </div>
 
-                                    <div class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-md text-amber-800 dark:text-amber-200 text-xs">{{ $prize->chance }}%</div>
+                                    <div class="px-1.5 py-0.5 bg-amber-500/10 border border-amber-500/30 rounded-md text-amber-800 dark:text-amber-200 text-xs">
+                                        {{ $prize->chance }}%</div>
                                 </div>
 
                                 <div class="text-sm text-slate-600 dark:text-slate-400">
