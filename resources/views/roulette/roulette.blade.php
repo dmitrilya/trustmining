@@ -49,7 +49,7 @@
 
                                 <div class="absolute inset-0 bg-gradient-to-b from-white/10 dark:from-white/[0.02] to-transparent pointer-events-none"></div>
 
-                                <div class="absolute top-0 left-0 w-full h-[3px]" :class="getPrizeRarityClasses(prize.chance).badge.split(' ')"></div>
+                                <div class="absolute top-0 left-0 w-full h-1" :class="getPrizeRarityClasses(prize.chance).badge.split(' ')"></div>
 
                                 <span
                                     class="font-extrabold uppercase tracking-tight select-none text-center max-w-full text-xxs xs:text-xs text-slate-800 dark:text-slate-200 leading-tight z-10"
