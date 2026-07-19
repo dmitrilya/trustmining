@@ -20,7 +20,7 @@ export var roulette = (prizes, timeToSpin) => ({
             let weightedPool = [];
             prizes.forEach(prize => {
                 const count = Math.round(prize.chance);
-                for (let i = 0; i < count * 4; i++) {
+                for (let i = 0; i < count; i++) {
                     weightedPool.push(prize);
                 }
 
@@ -34,7 +34,7 @@ export var roulette = (prizes, timeToSpin) => ({
                 [weightedPool[i], weightedPool[j]] = [weightedPool[j], weightedPool[i]];
             }
 
-            this.extendedPrizes = weightedPool;
+            this.extendedPrizes = Array.from({ length: 4 }, () => weightedPool).flat();
 
             this.updateFormattedTime();
             this.startTimer();
