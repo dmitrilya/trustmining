@@ -38,7 +38,6 @@ window.listenBroadcast = async function (userId) {
 
                 if (currentUserId !== targetUserId) return beamsClient.clearAllState().then(() => beamsClient.setUserId(targetUserId, tokenProvider));
             })
-            .then(() => console.log('Successfully registered and subscribed!'))
             .catch(console.error);
     }
 }
