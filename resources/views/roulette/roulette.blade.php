@@ -19,7 +19,7 @@
                 {{ trans_choice('time.period_choice', config('settings.roulette.period'), ['count' => config('settings.roulette.period')]) }}
             </p>
 
-            <div class="relative w-full max-w-md mx-auto mb-8 select-none">
+            <div class="relative w-full mb-8 select-none">
                 <div
                     class="absolute -top-1 left-1/2 -translate-x-1/2 z-30 w-0 h-0  border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[14px] border-t-indigo-500 drop-shadow-[0_0_8px_rgba(99,102,241,0.9)]">
                 </div>

@@ -149,7 +149,7 @@ trait AdTrait
                         } elseif (str_starts_with($val, '<')) {
                             $q->{$method . 'Raw'}("CAST(ads.props->'$.\"$key\"' AS UNSIGNED) <= ?", [(int)substr($val, 1)]);
                         } else {
-                            $q->{$method . "JsonContains"}("props->{$key}", $val);
+                            $q->{$method . "JsonContains"}("props->{$key}", str_replace('_', ' ', $val));
                         }
                     }
                 });

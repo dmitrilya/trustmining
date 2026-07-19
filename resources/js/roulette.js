@@ -50,7 +50,7 @@ export var roulette = (prizes, timeToSpin) => ({
                 const modalElement = document.querySelector('[name="roulette-modal"]');
                 const isModalOpen = modalElement && modalElement.getBoundingClientRect().width > 0;
 
-                if (!isModalOpen) {
+                if (!isModalOpen && this.timeToSpin === 0) {
                     this.resetTapeToCenter();
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
                 }
@@ -127,7 +127,7 @@ export var roulette = (prizes, timeToSpin) => ({
         const container = document.getElementById('roulette-tape')?.parentElement;
         if (!container) return;
         const containerWidth = container.offsetWidth;
-        const initialTargetPosition = this.leftOffsetCount * (this.cardWidth + this.gap);
+        const initialTargetPosition = this.leftOffsetCount * (this.cardWidth + this.gap) * 2;
         this.currentTranslateX = (containerWidth / 2) - initialTargetPosition - (this.cardWidth / 2);
         this.lastPlayedCardIndex = this.leftOffsetCount;
     },

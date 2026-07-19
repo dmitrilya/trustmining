@@ -3,10 +3,10 @@
     if (isset($seoParams['page']) && $seoParams['page'] == 1) {
         unset($seoParams['page']);
     }
-    if (isset($seoParams['Category']) && count($seoParams['Category']) > 1) {
+    if (isset($seoParams['Category']) && (!is_array($seoParams['Category']) || count($seoParams['Category']) !== 1)) {
         unset($seoParams['Category']);
     }
-    if (isset($seoParams['For_which_models']) && count($seoParams['For_which_models']) !== 1) {
+    if (isset($seoParams['For_which_models']) && (!is_array($seoParams['For_which_models']) || count($seoParams['For_which_models']) !== 1)) {
         unset($seoParams['For_which_models']);
     }
 
