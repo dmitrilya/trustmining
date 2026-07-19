@@ -6,6 +6,7 @@ export var roulette = (prizes, timeToSpin) => ({
     wonPrize: null,
     timeToSpin: timeToSpin,
     formattedTime: '',
+    rarity: [3, 8, 15],
 
     cardWidth: 112,
     gap: 8,
@@ -291,21 +292,21 @@ export var roulette = (prizes, timeToSpin) => ({
         };
 
         // Настройка цветов и стилей редкости
-        if (pct <= 3) {
+        if (pct <= this.rarity[0]) {
             config = {
                 card: 'bg-gradient-to-b from-red-800/40 to-red-900/20 dark:to-slate-900 border-red-500/60 shadow-md',
                 badge: 'bg-red-500',
                 glow: 'shadow-[0_0_20px_rgba(239,68,68,0.25)]',
                 patternColor: '#ef4444'
             };
-        } else if (pct <= 8) {
+        } else if (pct <= this.rarity[1]) {
             config = {
                 card: 'bg-gradient-to-b from-amber-800/40 to-amber-900/10 dark:to-slate-900 border-amber-500/50 shadow-md',
                 badge: 'bg-amber-500',
                 glow: 'shadow-[0_0_15px_rgba(217,70,239,0.2)]',
                 patternColor: '#d946ef'
             };
-        } else if (pct <= 25) {
+        } else if (pct <= this.rarity[2]) {
             config = {
                 card: 'bg-gradient-to-b from-indigo-800/40 to-indigo-900/10 dark:to-slate-900 border-indigo-500/50 shadow-md',
                 badge: 'bg-indigo-500',
