@@ -234,7 +234,9 @@ class ChatController extends Controller
             $message->save();
         }
 
-        event(new NewMessage($chat->users()->where('id', '!=', $crmConnection->user_id)->first(), $message));
+        $addressee = $chat->users()->where('id', '!=', $crmConnection->user_id)->first();
+        $this->notify('New message', new Collection([$addressee]), 'message', $message);
+        event(new NewMessage($addressee, $message));
 
         return 'OK';
     }
