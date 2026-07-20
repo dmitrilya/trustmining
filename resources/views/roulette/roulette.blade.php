@@ -1,4 +1,4 @@
-<div x-data="roulette({{ $roulettePrizes }}, {{ $timeToSpin }})">
+<div x-data="roulette({{ $roulettePrizes }}, {{ $timeToSpin }})" class="relative z-10">
     <x-modal name="roulette" maxWidth="2xl" rounded="rounded-xl">
         <div class="p-2 xs:p-4 sm:p-6" x-init="$watch('isSpinning', value => { if (!value && wonPrize) $dispatch('close'); })">
             <div class="flex justify-between items-center mb-2">

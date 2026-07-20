@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" style="height: calc(100dvh - 64.4px)">
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
-                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 overflow-y-auto lg:shadow-sm shadow-logo-color border-r dark:border-slate-950 lg:border-0 lg:rounded-l-lg p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-100 lg:h-full absolute lg:static">
+                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 overflow-y-auto lg:shadow-sm shadow-logo-color lg:rounded-l-xl p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-100 lg:h-full absolute lg:static">
                 <ul role="list" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
