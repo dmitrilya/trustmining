@@ -36,13 +36,13 @@
                         $cd = $difficulties[0]->difficulty;
 
                         if ($pd != $cd) {
-                            $text .= __('Previous difficulty') . ': ' . number_format($pd) . "\n";
+                            $text = __('Previous difficulty') . ': ' . number_format($pd) . "\n";
                             $text .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
                             $text .= ($cd >= $pd ? '+' : '-') . round((abs($cd - $pd) / $pd) * 100, 2) . '%';
                         } else {
                             $difficultyData = $n->difficultyData();
 
-                            $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "</br>";
+                            $text = __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "</br>";
                             $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "</br>";
                             $text .=
                                 __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
