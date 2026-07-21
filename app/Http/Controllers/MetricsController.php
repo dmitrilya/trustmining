@@ -13,7 +13,6 @@ use App\Http\Traits\AdTrait;
 use App\Models\Database\Coin;
 use App\Models\Morph\View;
 use App\Models\User\NotificationType;
-use Carbon\Carbon;
 
 class MetricsController extends Controller
 {
@@ -68,7 +67,7 @@ class MetricsController extends Controller
 
     public function difficulty(Request $request, Coin $coin)
     {
-        $data = $this->difficultyData($coin);
+        $data = $coin->difficultyData();
 
         if (!$data) return back();
 
@@ -92,7 +91,7 @@ class MetricsController extends Controller
 
     public function difficultyWidjet(Request $request, Coin $coin)
     {
-        $data = $this->difficultyData($coin);
+        $data = $coin->difficultyData();
 
         if (!$data) return back();
 

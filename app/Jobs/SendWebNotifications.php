@@ -109,7 +109,7 @@ class SendWebNotifications implements ShouldQueue
                             $body .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
                             $body .= ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
                         } else {
-                            $difficultyData = $this->difficultyData($this->n);
+                            $difficultyData = $this->n->difficultyData();
 
                             $body = __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
                             $body .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";

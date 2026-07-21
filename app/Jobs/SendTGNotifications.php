@@ -109,14 +109,14 @@ class SendTGNotifications implements ShouldQueue
                         $cd = $difficulties[0]->difficulty;
 
                         if ($pd != $cd) {
-                            $text = "{$this->n->name} __('Difficulty changing')\n\n";
+                            $text = "{$this->n->name}\n\n";
                             $text .= __('Previous difficulty') . ': ' . number_format($pd) . "\n";
                             $text .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
                             $text .= ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
                         } else {
-                            $difficultyData = $this->difficultyData($this->n);
+                            $difficultyData = $this->n->difficultyData();
 
-                            $text = "{$this->n->name} __('Difficulty changing')\n\n";
+                            $text = "{$this->n->name}\n\n";
                             $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
                             $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
                             $text .= __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';

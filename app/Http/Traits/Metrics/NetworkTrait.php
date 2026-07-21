@@ -35,46 +35,6 @@ trait NetworkTrait
         return response()->json(['difficulties' => $difficulties], 200);
     }
 
-    public function difficultyData(Coin $coin): ?array
-    {
-        $difficulties = $coin->networkDifficulties()->where('created_at', '>', Carbon::now()->subDays(31))
-            ->latest()->select(['difficulty', 'need_blocks', 'created_at'])->get();
-
-        if (!$difficulties->count()) return null;
-
-        $lastDifficulty = $difficulties->first();
-        $prediction = null;
-        $needBlocksTime = null;
-
-        if ($coin->target) {
-            $recalculateDates = [];
-
-            foreach ($difficulties as $i => $difficulty) {
-                if (!isset($difficulties[$i + 1])) return null;
-
-                if ($difficulty->need_blocks > $difficulties[$i + 1]->need_blocks) {
-                    if (!$needBlocksTime) {
-                        if ($i == 0) $needBlocksTime = __('Time calculation');
-                        else {
-                            $blockTime = ($lastDifficulty->created_at - $difficulty->created_at) / ($difficulty->need_blocks - $lastDifficulty->need_blocks);
-                            $needBlocksTime = $this->needBlocksTime($lastDifficulty, $blockTime);
-                            $prediction = round((($coin->target / $blockTime) - 1) * 100, 2);
-                        }
-                    }
-
-                    array_push($recalculateDates, $difficulty->created_at);
-                    if (count($recalculateDates) == 2) break;
-                }
-            }
-        }
-
-        return [
-            'lastDifficulty' => $lastDifficulty,
-            'needBlocksTime' => $needBlocksTime,
-            'prediction' => $prediction
-        ];
-    }
-
     public function needBlocksTime(NetworkDifficulty $ld, float $blockTime): string
     {
         $time = $blockTime * $ld->need_blocks;

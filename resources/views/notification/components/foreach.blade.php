@@ -8,26 +8,50 @@
 
     @switch($notification->notificationable_type)
         @case('message')
-            <x-notifications.notification :href="$n->user->role->name == 'support' ? route('support', ['chat' => true]) :
-                        route('chat', ['chat' => $n->chat_id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name"
-                :text="$n->message"></x-notifications.notification>
+            <x-notifications.notification :href="$n->user->role->name == 'support' ? route('support', ['chat' => true]) : route('chat', ['chat' => $n->chat_id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name" :text="$n->message"></x-notifications.notification>
         @break
 
         @case('review')
-            <x-notifications.notification :href="route('company.reviews', ['user' => $n->reviewable->slug])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating"
-                :text="$n->review"></x-notifications.notification>
+            <x-notifications.notification :href="route('company.reviews', ['user' => $n->reviewable->slug])" :type="$ntName" :date="$notification->created_at" :pretext="$n->rating" :text="$n->review"></x-notifications.notification>
         @break
 
         @case('moderation')
-            <x-notifications.notification href="#" :type="$ntName" :date="$notification->created_at" :pretext="__('types.' . $n->moderationable_type)"
-                :text="$n->comment"></x-notifications.notification>
+            <x-notifications.notification href="#" :type="$ntName" :date="$notification->created_at" :pretext="__('types.' . $n->moderationable_type)" :text="$n->comment"></x-notifications.notification>
         @break
 
         @case('ad')
             @switch($ntName)
                 @case('Price change')
-                    <x-notifications.notification :href="route('ads.show', ['adCategory' => $n->adCategory->name, 'ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
-                        :text="$n->price != 0 ? $n->price . $n->coin->abbreviation : __('Price on request')"></x-notifications.notification>
+                    <x-notifications.notification :href="route('ads.show', ['adCategory' => $n->adCategory->name, 'ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name" :text="$n->price != 0 ? $n->price . ' ' . $n->coin->abbreviation : __('Price on request')"></x-notifications.notification>
+                @break
+            @endswitch
+        @break
+
+        @case('coin')
+            @switch($ntName)
+                @case('Difficulty changing')
+                    @php
+                        $difficulties = $n->networkDifficulties()->latest()->take(2)->get();
+                        $pd = $difficulties[1]->difficulty;
+                        $cd = $difficulties[0]->difficulty;
+
+                        if ($pd != $cd) {
+                            $text = "{$n->name}\n\n";
+                            $text .= __('Previous difficulty') . ': ' . number_format($pd) . "\n";
+                            $text .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
+                            $text .= ($cd >= $pd ? '+' : '-') . round((abs($cd - $pd) / $pd) * 100, 2) . '%';
+                        } else {
+                            $difficultyData = $n->difficultyData();
+
+                            $text = "{$n->name}\n\n";
+                            $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
+                            $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
+                            $text .=
+                                __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
+                        }
+                    @endphp
+
+                    <x-notifications.notification :href="route('metrics.network.difficulty', ['coin' => strtolower($n->name)])" :type="$ntName" :date="$notification->created_at" :pretext="$n->name" :text="$text"></x-notifications.notification>
                 @break
             @endswitch
         @break
@@ -35,28 +59,23 @@
         @default
             @switch($ntName)
                 @case('Subscription renewal failed')
-                    <x-notifications.notification href="#" :type="$ntName" :date="$notification->created_at" pretext=""
-                        :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notifications.notification>
+                    <x-notifications.notification href="#" :type="$ntName" :date="$notification->created_at" pretext="" :text="__('Tariff reset to Base. Reactivate on the tariffs page')"></x-notifications.notification>
                 @break
 
                 @case('Top up your balance (7 days)')
-                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
-                        :text="__('In 7 days there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
+                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext="" :text="__('In 7 days there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
                 @break
 
                 @case('Top up your balance (3 days)')
-                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
-                        :text="__('In 3 days there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
+                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext="" :text="__('In 3 days there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
                 @break
 
                 @case('Top up your balance (1 day)')
-                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext=""
-                        :text="__('Tomorrow there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
+                    <x-notifications.notification :href="route('order.create')" :type="$ntName" :date="$notification->created_at" pretext="" :text="__('Tomorrow there will not be enough funds on the balance to extend the tariff')"></x-notifications.notification>
                 @break
 
                 @case('Similar questions')
-                    <x-notifications.notification :href="route('forum.question.mine')" :type="$ntName" :date="$notification->created_at" pretext=""
-                        :text="__('Before publishing, please review questions similar to yours')"></x-notifications.notification>
+                    <x-notifications.notification :href="route('forum.question.mine')" :type="$ntName" :date="$notification->created_at" pretext="" :text="__('Before publishing, please review questions similar to yours')"></x-notifications.notification>
                 @break
 
                 @case('New moderation')
@@ -69,21 +88,16 @@
                         'forumSubcategory' => $n->forumQuestion->forumSubcategory->slug,
                         'forumQuestion' => $n->forumQuestion->id . '-' . Str::slug($n->forumQuestion->theme),
                         'answer' => $n->id,
-                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumQuestion->theme"
-                        :text="$n->text"></x-notifications.notification>
+                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumQuestion->theme" :text="$n->text"></x-notifications.notification>
                 @break
 
                 @case('New forum comment')
                     <x-notifications.notification :href="route('forum.question.show', [
                         'forumCategory' => $n->forumAnswer->forumQuestion->forumSubcategory->forumCategory->slug,
                         'forumSubcategory' => $n->forumAnswer->forumQuestion->forumSubcategory->slug,
-                        'forumQuestion' =>
-                            $n->forumAnswer->forumQuestion->id .
-                            '-' .
-                            Str::slug($n->forumAnswer->forumQuestion->theme),
+                        'forumQuestion' => $n->forumAnswer->forumQuestion->id . '-' . Str::slug($n->forumAnswer->forumQuestion->theme),
                         'answer' => $n->forum_answer_id,
-                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumAnswer->forumQuestion->theme"
-                        :text="$n->text"></x-notifications.notification>
+                    ])" :type="$ntName" :date="$notification->created_at" :pretext="$n->forumAnswer->forumQuestion->theme" :text="$n->text"></x-notifications.notification>
                 @break
             @endswitch
         @endswitch
