@@ -83,7 +83,7 @@ trait NotificationTrait
             if (!$allowedByConfig) return false;
 
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['e'], $notificationable) : true;
-        })->pluck('tg_id');
+        });
 
         if ($emailUsers->isNotEmpty()) SendEmailNotifications::dispatch($emailUsers, $type, $notificationableType, $notificationable);
 
