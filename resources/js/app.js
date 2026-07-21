@@ -143,14 +143,6 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
 }
 
-window.debounce = (func, timeout = 1000) => {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    };
-}
-
 window.pluralize = function (count, one, two, five) {
     let n = Math.abs(count) % 100;
     let n1 = n % 10;

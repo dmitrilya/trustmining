@@ -10,6 +10,18 @@ window.channelToggleSubscription = (el, route) => {
     })
 }
 
+const debounce = (func, timeout = 1000) => {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+window.saveDraft = debounce((type, draft) => {
+    localStorage.setItem('draft-' + type, JSON.stringify(draft));
+}, 1500);
+
 window.addComment = async (form, text, parentId) => {
     if (!text) return;
 

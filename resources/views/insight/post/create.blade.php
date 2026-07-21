@@ -1,12 +1,10 @@
-<x-insight-layout title="Написание поста | TM Insight"
-    description="Создайте свою статью и обзор на сайте TrustMining | TM Insight" :header="__('Creation post')">
+<x-insight-layout title="Написание поста | TM Insight" description="Создайте свою статью и обзор на сайте TrustMining | TM Insight" :header="__('Creation post')">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-    <div
-        class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-        <form action="{{ route('insight.post.store', ['channel' => $channel->slug]) }}" method="POST"
-            class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }" x-init="const Delta = Quill.import('delta');
+    <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+        <form action="{{ route('insight.post.store', ['channel' => $channel->slug]) }}" method="POST" class="flex flex-col gap-4" enctype=multipart/form-data
+            x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }" x-init="const Delta = Quill.import('delta');
             const Link = Quill.import('formats/link');
             class CustomLink extends Link {
                 static create(value) {
@@ -36,9 +34,17 @@
                 theme: 'snow'
             });
             
+            let draft = localStorage.getItem('draft-post');
+            if (draft) {
+                draft = JSON.parse(draft);
+                content = draft.content;
+                quill.root.innerHTML = draft.content;
+            }
+            
             quill.on('text-change', () => {
                 content = quill.root.innerHTML;
                 if (validation['content']) delete validation['content'];
+                saveDraft('post', { content });
             });"
             @submit.prevent="if (Object.keys(validation).length > 0) {
                     pushToastAlert(Object.values(validation)[0], 'error');
@@ -59,8 +65,7 @@
 
             <div>
                 <x-inputs.input-label for="preview" :value="__('Preview')" />
-                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                    required label="max. 5MB, 4/3" />
+                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
@@ -81,8 +86,7 @@
                 <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>
 
-            <x-buttons.primary-button class="block ml-auto" ::disabled="loading"
-                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+            <x-buttons.primary-button class="block ml-auto" ::disabled="loading" ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
         </form>
     </div>
 

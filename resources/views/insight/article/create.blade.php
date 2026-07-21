@@ -1,16 +1,16 @@
-<x-insight-layout title="Создание статьи | TM Insight"
-    description="Создайте свою статью и обзор на сайте TrustMining | TM Insight" :header="__('Creation article')">
+<x-insight-layout title="Создание статьи | TM Insight" description="Создайте свою статью и обзор на сайте TrustMining | TM Insight" :header="__('Creation article')">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-
-    <div
-        class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-        <form action="{{ route('insight.article.store', ['channel' => $channel->slug]) }}" method="POST"
-            class="flex flex-col gap-4" enctype=multipart/form-data x-data="{
+    <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+        <form action="{{ route('insight.article.store', ['channel' => $channel->slug]) }}" method="POST" class="flex flex-col gap-4" enctype=multipart/form-data
+            x-data="{
                 validation: [],
                 loading: false,
-                content: `{{ old('content') }}`,
+                title: null,
+                subtitle: null,
+                tags: [],
+                content: null,
                 attachCallback: null
             }" x-init="const Delta = Quill.import('delta');
             const Parchment = Quill.import('parchment');
@@ -140,16 +140,20 @@
                 return delta;
             });
             
-            if (localStorage.getItem('draft')) quill.root.innerHTML = localStorage.getItem('draft');
-            
-            const draft = debounce(() => {
-                localStorage.setItem('draft', content);
-            }, 1500);
+            let draft = localStorage.getItem('draft-article');
+            if (draft) {
+                draft = JSON.parse(draft);
+                title = draft.title;
+                subtitle = draft.subtitle;
+                tags = draft.tags;
+                content = draft.content;
+                quill.root.innerHTML = draft.content;
+            }
             
             quill.on('text-change', () => {
                 content = quill.root.innerHTML;
                 if (validation['content']) delete validation['content'];
-                draft();
+                saveDraft('article', { title, subtitle, tags, content });
             });"
             @submit.prevent="if (Object.keys(validation).length > 0) {
                     pushToastAlert(Object.values(validation)[0], 'error');
@@ -172,8 +176,8 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="article-title" :value="__('Title')" />
-                <x-inputs.length-input id="article-title" name="title" type="text" :value="old('title')"
-                    autocomplete="title" required max="40" />
+                <x-inputs.length-input id="article-title" name="title" type="text" x-model="title" autocomplete="title" required max="40"
+                    @change="saveDraft('article', {title, subtitle, tags, content})" />
                 <template x-if="validation.title">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
                 </template>
@@ -181,8 +185,8 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="article-subtitle" :value="__('Brief description')" />
-                <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" :value="old('subtitle')"
-                    autocomplete="subtitle" required max="70" />
+                <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" x-model="subtitle" autocomplete="subtitle" required max="70"
+                    @change="saveDraft('article', {title, subtitle, tags, content})" />
                 <template x-if="validation.subtitle">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
                 </template>
@@ -190,8 +194,7 @@
 
             <div>
                 <x-inputs.input-label for="preview" :value="__('Preview')" />
-                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full"
-                    accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
+                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
@@ -201,7 +204,7 @@
                 ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                 ->keyBy('key')" />
 
-            <div x-data="{ allTags: {{ $tags }}, tags: [], search: '' }">
+            <div x-data="{ allTags: {{ $tags }}.filter(tag => !new Set(tags).has(tag)), search: '' }">
                 <div>
                     <x-inputs.input-label for="search" :value="__('Hashtags')" />
                     <div
@@ -211,14 +214,15 @@
 
                         <button type="button"
                             class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-2 py-1 rounded-full"
-                            @click="if (!search.trim().length) return; tags.push(search); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
+                            @click="if (!search.trim().length) return; tags.push(search); saveDraft('article', {title, subtitle, tags, content}); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
                     </div>
                 </div>
 
                 <template x-if="tags.length">
                     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                         <template x-for="tag in tags" :key="tag">
-                            <div @click="tags.splice(tags.indexOf(tag), 1);allTags.push(tag)" x-text="tag"
+                            <div @click="tags.splice(tags.indexOf(tag), 1);saveDraft('article', {title, subtitle, tags, content});allTags.push(tag)"
+                                x-text="tag"
                                 class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
                             </div>
                         </template>
@@ -226,17 +230,16 @@
                 </template>
 
                 <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                    <template
-                        x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)"
+                    <template x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)"
                         :key="tag">
-                        <div @click="tags.push(tag);allTags.splice(allTags.indexOf(tag), 1);search = ''" x-text="tag"
+                        <div @click="tags.push(tag);saveDraft('article', {title, subtitle, tags, content});allTags.splice(allTags.indexOf(tag), 1);search = ''"
+                            x-text="tag"
                             class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
                         </div>
                     </template>
                     <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
                         class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
-                        <span
-                            x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
+                        <span x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
                         {{ __('tags more') }}
                     </div>
                 </div>
@@ -260,8 +263,7 @@
                 <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>
 
-            <x-buttons.primary-button class="block ml-auto" ::disabled="loading"
-                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+            <x-buttons.primary-button class="block ml-auto" ::disabled="loading" ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
 
             <x-modal name="attach-img_modal" maxWidth="md">
                 <div class="p-6">
@@ -271,11 +273,9 @@
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                            @click="show = false">
+                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500" @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -286,8 +286,7 @@
                         <x-inputs.text-input id="attach-img_url" type="text" autocomplete="attach-img_url" />
                     </div>
 
-                    <x-buttons.primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto"
-                        type="button"
+                    <x-buttons.primary-button id="attach-img_button" class="mt-2 sm:mt-4 block ml-auto" type="button"
                         @click="
                             show = false;
                             const input = $el.previousElementSibling.querySelector('input');
@@ -308,11 +307,9 @@
                         </h3>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                            @click="show = false">
+                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500" @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
