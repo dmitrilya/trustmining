@@ -54,29 +54,30 @@ class SendEmailNotifications implements ShouldQueue
         $originalLocale = App::getLocale();
         if (!empty($user->lang)) App::setLocale($user->lang);
 
-        $title = __($this->type) ?? __('Новое уведомление');
+        $title = __($this->type) ?? __('New notification');
         $body = '';
         $link = url('/');
+        $linkText = __('View on the website');
 
         switch ($this->nt) {
             case 'message':
-                $title = __('Новое сообщение от') . ' ' . $this->n->user->name;
+                if ($this->n->user->role->name != 'support') $title = __('New message from') . ' ' . $this->n->user->name;
                 $body = $this->n->message;
                 $link = $this->n->user->role->name == 'support'
                     ? route('support', ['chat' => true])
                     : route('chat', ['chat' => $this->n->chat_id]);
+                $linkText = __('Reply');
                 break;
 
             case 'review':
                 $rating = "";
                 for ($i = 0; $i < $this->n->rating; $i++) $rating .= "⭐";
-                $title = __('Новый отзыв') . ' ' . $rating;
+                $title = __($this->type) . ' ' . $rating;
                 $body = $this->n->review;
                 $link = route('company.reviews', ['user' => $this->n->reviewable->slug]);
                 break;
 
             case 'moderation':
-                $title = __('Результат модерации');
                 $body = __('types.' . $this->n->moderationable_type);
                 if ($this->n->comment) $body .= "\n\n" . $this->n->comment;
                 break;
@@ -84,13 +85,13 @@ class SendEmailNotifications implements ShouldQueue
             case 'ad':
                 if ($this->type === 'Price change') {
                     $lastModeration = $this->n->moderations()->whereNotNull('data->price')->latest()->limit(2)->get();
-                    $price = $this->n->price != 0 ? $this->n->price : __('Цена по запросу');
+                    $price = $this->n->price != 0 ? $this->n->price : __('Price on request');
 
                     $title = $this->n->asicVersion->asicModel->name;
                     $oldPrice = $lastModeration[1]->data['price'] ?? '0';
                     $coinAbbr = isset($lastModeration[1]->data['coin_id']) ? Coin::find($lastModeration[1]->data['coin_id'])->abbreviation : $this->n->coin->abbreviation;
 
-                    $body = __('Изменение цены') . ": " . $oldPrice . $coinAbbr . " => " . $price . $this->n->coin->abbreviation;
+                    $body =  $oldPrice . $coinAbbr . " => " . $price . $this->n->coin->abbreviation;
                     $link = route('ads.show', ['adCategory' => $this->n->adCategory->name, 'ad' => $this->n->id]);
                 }
                 break;
@@ -101,14 +102,18 @@ class SendEmailNotifications implements ShouldQueue
                     $pd = $difficulties[1]->difficulty ?? 0;
                     $cd = $difficulties[0]->difficulty ?? 0;
 
-                    $title = "{$this->n->name} — " . __('Изменение сложности');
+                    $title = "{$this->n->name} — " . __('Difficulty changing');
 
                     if ($pd != $cd) {
-                        $percent = ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
-                        $body = __('Текущая сложность') . ': ' . number_format($cd) . " ({$percent})";
+                        $body = __('Previous difficulty') . ': ' . number_format($pd) . "\n";
+                        $body .= __('Current difficulty') . ': ' . number_format($cd) . "\n";
+                        $body .= ($cd >= $pd ? '+' : '-') . round(abs($cd - $pd) / $pd * 100, 2) . '%';
                     } else {
                         $difficultyData = $this->n->difficultyData();
-                        $body = __('Прогноз следующей сложности') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
+
+                        $body = __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
+                        $body .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
+                        $body .= __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
                     }
                     $link = route('metrics.network.difficulty', ['coin' => strtolower($this->n->name)]);
                 }
@@ -117,20 +122,24 @@ class SendEmailNotifications implements ShouldQueue
             default:
                 switch ($this->type) {
                     case 'Subscription renewal failed':
-                        $body = __('Тариф сброшен до Базового. Реактивируйте его на странице тарифов.');
+                        $body = __('Tariff reset to Base. Reactivate on the tariffs page');
                         $link = route('tariffs');
+                        $linkText = __('Details');
                         break;
                     case 'Top up your balance (7 days)':
-                        $body = __('Через 7 дней на балансе будет недостаточно средств для продления тарифа.');
+                        $body = __('In 7 days there will not be enough funds on the balance to extend the tariff');
                         $link = route('order.create');
+                        $linkText = __('Top up your balance');
                         break;
                     case 'Top up your balance (3 days)':
-                        $body = __('Через 3 дня на балансе будет недостаточно средств для продления тарифа.');
+                        $body = __('In 3 days there will not be enough funds on the balance to extend the tariff');
                         $link = route('order.create');
+                        $linkText = __('Top up your balance');
                         break;
                     case 'Top up your balance (1 day)':
                         $body = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $link = route('order.create');
+                        $linkText = __('Top up your balance');
                         break;
                     case 'Similar questions':
                         $body = __('Before publishing, please review questions similar to yours');
@@ -198,7 +207,7 @@ class SendEmailNotifications implements ShouldQueue
         }
 
         try {
-            Mail::to($user->email)->send(new Notification($title, $body, $signedActionLink, $unsubscribeLink));
+            Mail::to($user->email)->send(new Notification($title, $body, $signedActionLink, $linkText, $unsubscribeLink));
         } catch (Exception $e) {
             info('Exception - Job->SendEmailNotifications: ' . $e->getMessage());
         }

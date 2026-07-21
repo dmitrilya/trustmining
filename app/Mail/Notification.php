@@ -13,16 +13,18 @@ class Notification extends Mailable
     public string $title;
     public string $body;
     public string $link;
+    public string $linkText;
     public string $unsubscribeLink;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(string $title, string $body, string $link, string $unsubscribeLink)
+    public function __construct(string $title, string $body, string $link, string $linkText, string $unsubscribeLink)
     {
         $this->title = $title;
         $this->body = $body;
         $this->link = $link;
+        $this->linkText = $linkText;
         $this->unsubscribeLink = $unsubscribeLink;
     }
 
