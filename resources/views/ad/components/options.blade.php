@@ -8,7 +8,7 @@
     </button>
 
     <div x-show="open" @mouseleave="open = false" @click.away="open = false" style="display: none"
-        class="z-100 -right-0.5 bottom-[44px] absolute overflow-hidden bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
+        class="z-50 -right-0.5 bottom-[44px] absolute overflow-hidden bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
         <ul class="text-xs sm:text-sm text-slate-800 dark:text-slate-200" aria-labelledby="ad-options-trigger">
             @if ($owner)
                 <li>
