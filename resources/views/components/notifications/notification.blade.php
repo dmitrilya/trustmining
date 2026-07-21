@@ -17,5 +17,5 @@
         @endif
     </div>
 
-    <div class="text-sm text-slate-600 max-h-10 overflow-hidden">{!! $text !!}</div>
+    <div class="text-sm text-slate-600 dark:text-slate-400 overflow-hidden">{!! $text !!}</div>
 </a>
