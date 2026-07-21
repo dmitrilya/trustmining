@@ -17,7 +17,7 @@ class DifficultyChangingFilter implements NotificationFilterInterface
         $now = now();
         $frequencies = ['12h'];
 
-        if ($now->hour === 10) {
+        if ($now->hour === 3) {
             $frequencies[] = 'd';
 
             if ($now->diffInDays(Carbon::parse('2026-01-01')) % 3 === 0) $frequencies[] = '3d';

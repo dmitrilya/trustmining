@@ -43,7 +43,7 @@
     border-color: rgb(203 213 225 / var(--tw-border-opacity));
     color: rgb(71 85 105 / var(--tw-text-opacity));
 
-    input[type=text] {
+    & input[type=text] {
         border-radius: 0.375rem;
         border: 1px solid rgb(203 213 225 / var(--tw-border-opacity)) !important;
         color: rgb(30 41 59 / var(--tw-text-opacity));
@@ -55,7 +55,7 @@
     border-color: rgb(51 65 85 / var(--tw-border-opacity));
     color: rgb(148 163 184 / var(--tw-text-opacity));
 
-    input[type=text] {
+    & input[type=text] {
         border: 1px solid rgb(51 65 85 / var(--tw-border-opacity)) !important;
         color: rgb(226 232 240 / var(--tw-text-opacity));
     }

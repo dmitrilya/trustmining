@@ -8,7 +8,8 @@
 
     @switch($notification->notificationable_type)
         @case('message')
-            <x-notifications.notification :href="route('support', ['chat' => true])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name"
+            <x-notifications.notification :href="$n->user->role->name == 'support' ? route('support', ['chat' => true]) :
+                        route('chat', ['chat' => $n->chat_id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->user->name"
                 :text="$n->message"></x-notifications.notification>
         @break
 
@@ -26,7 +27,7 @@
             @switch($ntName)
                 @case('Price change')
                     <x-notifications.notification :href="route('ads.show', ['adCategory' => $n->adCategory->name, 'ad' => $n->id])" :type="$ntName" :date="$notification->created_at" :pretext="$n->asicVersion->asicModel->name"
-                        :text="$n->price != 0 ? $n->price : __('Price on request')"></x-notifications.notification>
+                        :text="$n->price != 0 ? $n->price . $n->coin->abbreviation : __('Price on request')"></x-notifications.notification>
                 @break
             @endswitch
         @break
