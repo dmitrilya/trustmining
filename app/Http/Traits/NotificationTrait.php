@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 use App\Events\Notification as NotificationEvent;
+use App\Jobs\SendEmailNotifications;
 use App\Jobs\SendTGNotifications;
 use App\Jobs\SendWebNotifications;
 use App\Models\User\NotificationType;
@@ -71,8 +72,7 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['w'], $notificationable) : true;
         })->pluck('id')->unique();
 
-        if ($webUserIds->isNotEmpty()) 
-            SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable);
+        if ($webUserIds->isNotEmpty()) SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable);
 
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->email) return false;
@@ -85,9 +85,7 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['e'], $notificationable) : true;
         })->pluck('tg_id');
 
-        if ($emailUsers->isNotEmpty()) {
-            // SendEmailNotifications::dispatch($emailUsers, ...);
-        }
+        if ($emailUsers->isNotEmpty()) SendEmailNotifications::dispatch($emailUsers, $type, $notificationableType, $notificationable);
 
         return true;
     }

@@ -1,5 +1,12 @@
 <?php
 
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Pusher\PushNotifications\PushNotifications;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\DatabaseController;
@@ -35,10 +42,8 @@ use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Morph\ViewController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use Pusher\PushNotifications\PushNotifications;
+
+use App\Models\User\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +64,20 @@ Route::get('private/temp', function (Request $request) {
 
     return $disk->download($request->path);
 })->name('private.temp');
+
+Route::get('/mail-login/{user_id}', function (Request $request) {
+    if (!$request->hasValidSignature()) abort(401);
+
+    $userId = $request->route('user_id');
+    $targetUrl = $request->input('redirect_to', url('/'));
+
+    if (!Auth::check() || Auth::id() != $userId) {
+        $user = User::find($userId);
+        if ($user) Auth::login($user, true);
+    }
+
+    return redirect()->to($targetUrl);
+})->name('mail.redirect');
 
 Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');
 

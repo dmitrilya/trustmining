@@ -11,7 +11,6 @@ use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-use App\Http\Traits\Metrics\NetworkTrait;
 use \App\Http\Traits\Telegram;
 
 use \App\Models\Database\Coin;
@@ -20,7 +19,7 @@ use Exception;
 
 class SendTGNotifications implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, NetworkTrait, Telegram;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Telegram;
 
     private Collection $tgIds;
     private string $type;
