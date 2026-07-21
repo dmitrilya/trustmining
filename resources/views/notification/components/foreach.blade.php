@@ -43,9 +43,9 @@
                         } else {
                             $difficultyData = $n->difficultyData();
 
-                            $text = "{$n->name}\n\n";
-                            $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "\n";
-                            $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "\n";
+                            $text = "{$n->name}</br>";
+                            $text .= __('Current difficulty') . ': ' . number_format($difficultyData['lastDifficulty']['difficulty']) . "</br>";
+                            $text .= __('Blocks before recalculation') . ': ' . $difficultyData['needBlocksTime'] . "</br>";
                             $text .=
                                 __('Next difficulty prediction') . ': ' . ($difficultyData['prediction'] >= 0 ? '+' : '') . $difficultyData['prediction'] . '%';
                         }
