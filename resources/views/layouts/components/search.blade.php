@@ -6,7 +6,7 @@
     </div>
 
     <div role="listbox" style="display: none" x-show="open && sugs"
-        class="absolute z-10 mt-1 w-full overflow-auto rounded-b-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl text-base shadow-lg shadow-logo-color ring-1 ring-black/10 dark:ring-white/10 focus:outline-none sm:text-sm">
+        class="absolute z-10 mt-1 w-full overflow-auto rounded-b-xl bg-slate-100/95 dark:bg-slate-900/95 border border-slate-300 dark:border-slate-700 text-base shadow-lg shadow-logo-color ring-1 ring-black/10 dark:ring-white/10 focus:outline-none sm:text-sm">
         <div class="relative select-none hover:bg-slate-100 dark:hover:bg-slate-800 ring-1 ring-inset ring-indigo-500 dark:ring-indigo-600">
             <a href="#" class="flex items-center text-sm py-2 px-3">
                 <div class="w-full text-slate-500">{{ __('Blurb') }}</div>

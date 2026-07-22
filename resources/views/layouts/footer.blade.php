@@ -98,7 +98,7 @@
 
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
-                <div class="text-sm text-slate-500 font-semibold">{{ __('To the buyer') }}</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest">{{ __('To the buyer') }}</div>
                 {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('companies') }}">{{ __('Companies') }}</a> --}}
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
@@ -130,7 +130,7 @@
             </div>
 
             <div class="space-y-2">
-                <div class="text-sm text-slate-500 font-semibold">{{ __('To the seller') }}</div>
+                <div class="text-xs text-slate-500 uppercase tracking-widest">{{ __('To the seller') }}</div>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('support', ['tab' => 'chat']) }}">{{ __('Write to support') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
@@ -157,8 +157,8 @@
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
-                    href="{{ route('blog') }}">{{ __('Blog') }}</a>
+                {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                    href="{{ route('blog') }}">{{ __('Blog') }}</a> --}}
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('insight.index') }}">TM
                     Insight</a>

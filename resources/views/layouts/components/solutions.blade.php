@@ -16,13 +16,13 @@
         x-transition:enter-start="transform opacity-0 scale-50" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-100" x-transition:leave-start="transform opacity-100 scale-100"
         x-transition:leave-end="transform opacity-0 scale-50"
-        class="w-full absolute z-50 bg-white/40 dark:bg-slate-900/40 rounded-b-2xl shadow-lg shadow-logo-color backdrop-blur-xl border border-t-0 border-slate-300 dark:border-slate-700 origin-top left-0 top-0 mt-10 lg:mt-14"
+        class="w-full absolute z-50 bg-slate-100/95 dark:bg-slate-900/95 rounded-b-2xl shadow-lg shadow-logo-color origin-top left-0 top-0 mt-10 lg:mt-14"
         style="display: none" @click.away="open = false">
         <div
             class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 xl:p-14">
             <div class="sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full mb-6 sm:mb-0">
-                    <div class="text-sm text-slate-600 mb-6">{{ __('Project') }}</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mb-6">{{ __('Project') }}</div>
 
                     {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -58,7 +58,7 @@
                             href="{{ route('about') }}">{{ __('About project') }}</a>
                     </div>
 
-                    <div class="group flex items-center">
+                    {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
@@ -68,7 +68,7 @@
                         </svg>
                         <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
                             href="{{ route('blog') }}">{{ __('Blog') }}</a>
-                    </div>
+                    </div> --}}
 
                     <div class="group flex items-center">
                         <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true"
@@ -169,7 +169,7 @@
                     </div> --}}
                 </div>
                 <div class="space-y-4 w-full">
-                    <div class="text-sm text-slate-600 mb-6">{{ __('Knowledge Base') }}</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mb-6">{{ __('Knowledge Base') }}</div>
 
                     {{-- <div class="group flex items-center">
                         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

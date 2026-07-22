@@ -1,5 +1,4 @@
-<nav x-data="{ open: false }"
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
+<nav x-data="{ open: false }" class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800 sticky top-0 left-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
         <div class="flex justify-between h-10 lg:h-14">
             <div class="w-full flex">
@@ -29,7 +28,7 @@
                     </x-nav-link>
 
                     @include('layouts.components.search', [
-                        'border' => 'px-2.5 py-1.5 rounded-md border',
+                        'border' => 'px-2.5 py-1.5 rounded-lg border',
                         'searchBlock' => 'max-w-sm',
                     ])
                 </div>
@@ -38,10 +37,7 @@
                 @auth
                     @php
                         $auth = Auth::user();
-                        $uncheckedMessagesCount = App\Models\Chat\Message::whereIn(
-                            'chat_id',
-                            $auth->chats()->pluck('id'),
-                        )
+                        $uncheckedMessagesCount = App\Models\Chat\Message::whereIn('chat_id', $auth->chats()->pluck('id'))
                             ->where('user_id', '!=', $auth->id)
                             ->where('checked', false)
                             ->count();
@@ -76,15 +72,7 @@
 
                 @if ($roulettePrizes->count() > 1)
                     <div class="mr-3 xs:mr-4 sm:mr-5 w-5 h-5">
-                        <button aria-label="{{ __('TM Roulette') }}" @click="$dispatch('open-modal', 'roulette')"
-                            class="relative inline-flex items-center text-sm text-center text-slate-500 hover:text-slate-600 dark:hover:text-slate-400 focus:outline-none">
-                            <svg class="w-5 h-5 mr-2.5" aria-hidden="true" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M17 1L13 3.5L16.5 7L17 1Z" fill="currentColor" />
-                                <path
-                                    d="M10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2ZM10 4C10.55 4 11 4.45 11 5V6.18C12.46 6.54 13.46 7.54 13.82 9H15C15.55 9 16 9.45 16 10C16 10.55 15.55 11 15 11H13.82C13.46 12.46 12.46 13.46 11 13.82V15C11 15.55 10.55 16 10 16C9.45 16 9 15.55 9 15V13.82C7.54 13.46 6.54 12.46 6.18 11H5C4.45 11 4 10.55 4 10C4 9.45 4.45 9 5 9H6.18C6.54 7.54 7.54 6.54 9 6.18V5C9 4.45 9.45 4 10 4ZM10 8C8.9 8 8 8.9 8 10C8 11.1 8.9 12 10 12C11.1 12 12 11.1 12 10C12 8.9 11.1 8 10 8Z"
-                                    fill="currentColor" />
-                            </svg>
-                        </button>
+                        @include('roulette.roulette-icon')
                     </div>
                 @endif
 
@@ -101,7 +89,7 @@
 
                 <div class="hidden lg:flex items-center ml-3">
                     @auth
-                        <x-dropdown align="right" width="48">
+                        <x-dropdown align="right" width="48" contentClasses="bg-slate-100/95 dark:bg-slate-900/95 border border-slate-300 dark:border-slate-700">
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
@@ -175,12 +163,10 @@
                     <button @click="open = ! open" aria-label="{{ __('Menu') }}"
                         class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                            <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                            <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
+                            <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
@@ -198,7 +184,7 @@
             @include('layouts.components.ads', [
                 'relative' => true,
                 'classes' =>
-                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-400 dark:focus:border-slate-700 transition duration-100 ease-in-out',
+                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent hover:border-indigo-500 focus:border-indigo-500 text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 transition duration-100 ease-in-out',
             ])
 
             <x-responsive-nav-link :href="route('support')">
@@ -208,7 +194,7 @@
             @include('layouts.components.solutions', [
                 'relative' => true,
                 'classes' =>
-                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-400 dark:focus:border-slate-700 transition duration-100 ease-in-out',
+                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent hover:border-indigo-500 focus:border-indigo-500 text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 transition duration-100 ease-in-out',
             ])
         </div>
 

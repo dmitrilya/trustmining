@@ -1,4 +1,4 @@
-<div x-data="roulette({{ $roulettePrizes }}, {{ $timeToSpin }})" class="relative z-10">
+<div x-data="roulette({{ $roulettePrizes }}, {{ $timeToSpin }})" class="relative z-50">
     <x-modal name="roulette" maxWidth="2xl" rounded="rounded-xl">
         <div class="p-2 xs:p-4 sm:p-6" x-init="$watch('isSpinning', value => { if (!value && wonPrize) $dispatch('close'); })">
             <div class="flex justify-between items-center mb-2">
@@ -44,7 +44,7 @@
 
                         <template x-for="(prize, index) in extendedPrizes" :key="index">
                             <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition-all duration-300 overflow-hidden"
-                                :class="getPrizeRarityClasses(prize.chance).card">
+                                :class="getPrizeRarityClasses(prize.chance).card + ' ' + getPrizeRarityClasses(prize.chance).border">
                                 <x-card-pattern ::style="`--pattern-color: ${getPrizeRarityClasses(prize.chance).patternColor}`" />
 
                                 <div class="absolute inset-0 bg-gradient-to-b from-white/10 dark:from-white/[0.02] to-transparent pointer-events-none"></div>
@@ -56,8 +56,8 @@
                                     x-text="prize.name">
                                 </span>
 
-                                <div class="w-10 h-10 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700 relative"
-                                    :class="getPrizeRarityClasses(prize.chance).glow">
+                                <div class="w-10 h-10 rounded-full overflow-hidden border relative"
+                                    :class="getPrizeRarityClasses(prize.chance).glow + ' ' + getPrizeRarityClasses(prize.chance).border">
                                     <img class="w-full h-full object-contain" :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                                 </div>
                             </div>

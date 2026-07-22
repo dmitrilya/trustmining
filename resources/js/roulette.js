@@ -70,8 +70,7 @@ export var roulette = (prizes, timeToSpin) => ({
                 const modalElement = document.querySelector('[name="roulette-modal"]');
                 const isModalOpen = modalElement && modalElement.getBoundingClientRect().width > 0;
 
-                if (!isModalOpen && this.timeToSpin === 0)
-                    window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
+                //if (!isModalOpen && this.timeToSpin === 0) window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
             }, 15000);
         } else {
             this.timerInterval = setInterval(() => {
@@ -296,28 +295,32 @@ export var roulette = (prizes, timeToSpin) => ({
         // Настройка цветов и стилей редкости
         if (pct <= this.rarity[0]) {
             config = {
-                card: 'bg-gradient-to-b from-red-800/40 to-red-900/20 dark:to-slate-900 border-red-500/60 shadow-md',
+                card: 'bg-gradient-to-b from-red-800/40 to-red-900/20 dark:to-slate-900 shadow-md',
+                border: 'border-red-500/60',
                 badge: 'bg-red-500',
                 glow: 'shadow-[0_0_20px_rgba(239,68,68,0.25)]',
                 patternColor: '#ef4444'
             };
         } else if (pct <= this.rarity[1]) {
             config = {
-                card: 'bg-gradient-to-b from-amber-800/40 to-amber-900/10 dark:to-slate-900 border-amber-500/50 shadow-md',
+                card: 'bg-gradient-to-b from-amber-800/40 to-amber-900/10 dark:to-slate-900 shadow-md',
+                border: 'border-amber-500/50',
                 badge: 'bg-amber-500',
                 glow: 'shadow-[0_0_15px_rgba(217,70,239,0.2)]',
                 patternColor: '#d946ef'
             };
         } else if (pct <= this.rarity[2]) {
             config = {
-                card: 'bg-gradient-to-b from-indigo-800/40 to-indigo-900/10 dark:to-slate-900 border-indigo-500/50 shadow-md',
+                card: 'bg-gradient-to-b from-indigo-800/40 to-indigo-900/10 dark:to-slate-900 shadow-md',
+                border: 'border-indigo-500/50',
                 badge: 'bg-indigo-500',
                 glow: 'shadow-[0_0_12px_rgba(99,102,241,0.15)]',
                 patternColor: '#6366f1'
             };
         } else {
             config = {
-                card: 'bg-white shadow-md dark:bg-slate-900 border-slate-500 dark:border-slate-950',
+                card: 'bg-white shadow-md dark:bg-slate-900',
+                border: 'border-slate-500 dark:border-slate-950',
                 badge: 'bg-slate-500 dark:bg-slate-950',
                 glow: '',
                 patternColor: '#475569'

@@ -1,4 +1,4 @@
-@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'overflow-hidden bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700'])
+@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700'])
 
 @php
     switch ($align) {
@@ -38,7 +38,7 @@
         x-transition:leave-end="transform opacity-0 scale-95"
         class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg shadow-logo-color backdrop-blur-xl {{ $alignmentClasses }}"
         style="display: none;" @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 overflow-hidden {{ $contentClasses }}">
             {{ $content }}
         </div>
     </div>
