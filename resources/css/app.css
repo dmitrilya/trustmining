@@ -21,18 +21,6 @@
     }
 }
 
-@keyframes colorPulse {
-    0%,
-    100% {
-        filter: drop-shadow(0 0 0px transparent);
-    }
-    50% {
-        filter: drop-shadow(
-            0 0 6px rgba(16, 185, 129, 0.7)
-        );
-    }
-}
-
 html {
     font-weight: 600;
     cursor: default;
