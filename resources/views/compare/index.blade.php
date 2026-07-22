@@ -1,15 +1,13 @@
-<x-app-layout :noindex="$noindex"
-    title="Сравнение {{ $modelA->data->asicBrand->name }} {{ $modelA->data->name }} и {{ $modelB->data->asicBrand->name }} {{ $modelB->data->name }}: что лучше купить в {{ now()->year }}? Характеристики, окупаемость и цены | TRUSTMINING"
+<x-app-layout :noindex="$noindex" title="Сравнение {{ $modelA->data->name }} и {{ $modelB->data->name }}: чем отличаются"
     description="Подробное сравнение ASIC майнеров {{ $modelA->data->asicBrand->name }} {{ $modelA->data->name }} и {{ $modelB->data->asicBrand->name }} {{ $modelB->data->name }}. Сравните доходность, энергопотребление и срок окупаемости. Актуальные цены от проверенных поставщиков в нашем агрегаторе.">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Which is better?') }}
+            {{ __('Which model is best to buy in') }} {{ now()->year }}
         </h1>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 pt-3 sm:p-4 md:p-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6" x-data="{ model_a: '{{ $modelA->slug }}', model_b: '{{ $modelB->slug }}' }">
                 @include('compare.components.select-model', [
                     'name' => 'model_a',
