@@ -16,10 +16,15 @@ trait ViewTrait
         Log::channel('agents')->info("UserAgent={$agent} ip={$ip}");
 
         $auth = $request->user();
-        if ($auth && (
-            $model->user && $model->user->id == $auth->id ||
-            $auth->role->name != 'user'
-        )) return;
+        if ($auth) {
+            if ($auth->role->name != 'user') return;
+
+            $isOwner = ($model instanceof \App\Models\User\User)
+                ? $model->id === $auth->id
+                : ($model->user && $model->user->id === $auth->id);
+
+            if ($isOwner) return;
+        }
 
         $now = now()->format('Y-m-d');
         $data = ['viewer' => $ip, 'created_at' => $now];
