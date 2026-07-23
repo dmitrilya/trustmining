@@ -88,9 +88,9 @@ class AdService
                 $changings = [];
 
                 if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $changings['price'] = $data['price'];
-                    $changings['coin_id'] = $data['coin_id'];
-                    $changings['with_vat'] = $data['with_vat'];
+                    $changings['price'] = $change['price'];
+                    $changings['coin_id'] = $change['coin_id'];
+                    $changings['with_vat'] = $change['with_vat'];
                 }
 
                 if (!empty($changings)) {
