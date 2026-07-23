@@ -62,7 +62,7 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['t'], $notificationable) : true;
         })->pluck('tg_id')->unique();
 
-        if ($tgIds->isNotEmpty()) SendTGNotifications::dispatch($tgIds, $type, $notificationableType, $notificationable);
+        if ($tgIds->isNotEmpty()) SendTGNotifications::dispatch($tgIds, $type, $notificationableType, $notificationable)->delay(now()->addSeconds(3));
 
         $webUserIds = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             $isEnabled = data_get($user->settings->notifications, "{$typeId}.w.on");
@@ -73,7 +73,7 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['w'], $notificationable) : true;
         })->pluck('id')->unique();
 
-        if ($webUserIds->isNotEmpty()) SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable);
+        if ($webUserIds->isNotEmpty()) SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable)->delay(now()->addSeconds(3));
 
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
             if (!$user->email) return false;
@@ -86,7 +86,7 @@ trait NotificationTrait
             return $filterInstance ? $filterInstance->check($user->settings->notifications[$typeId]['e'], $notificationable) : true;
         });
 
-        if ($emailUsers->isNotEmpty()) SendEmailNotifications::dispatch($emailUsers, $type, $notificationableType, $notificationable);
+        if ($emailUsers->isNotEmpty()) SendEmailNotifications::dispatch($emailUsers, $type, $notificationableType, $notificationable)->delay(now()->addSeconds(3));
 
         return true;
     }
