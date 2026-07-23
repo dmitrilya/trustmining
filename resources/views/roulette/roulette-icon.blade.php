@@ -2,7 +2,7 @@
     showTooltip: false,
     initTooltip() {
         const tooltipHiddenUntil = localStorage.getItem('roulette_tooltip_shown_today');
-        const isShownToday = false; //tooltipHiddenUntil && Date.now() < parseInt(tooltipHiddenUntil, 10);
+        const isShownToday = tooltipHiddenUntil && Date.now() < parseInt(tooltipHiddenUntil, 10);
 
         if ({{ $timeToSpin }} === 0 && !isShownToday) {
             setTimeout(() => {
