@@ -164,7 +164,7 @@
                         headers: { 'Content-Type': 'multipart/form-data' }
                     }).then(r => {
                         if (r.data.success) {
-                            localStorage.removeItem('draft'); 
+                            localStorage.removeItem('draft-article'); 
                             window.location.href = r.data.redirect;
                         } else pushToastAlert(r.data.message, 'error');
                     }).catch(err => {
