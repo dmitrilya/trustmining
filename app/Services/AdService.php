@@ -88,12 +88,10 @@ class AdService
                 $changings = [];
 
                 if (isset($change['price']) && $change['price'] != $ad->price || isset($change['coin_id']) && $change['coin_id'] != $ad->coin_id || isset($change['with_vat']) && $change['with_vat'] != $ad->with_vat) {
-                    $changings['price'] = $change['price'];
-                    $changings['coin_id'] = $change['coin_id'];
-                    $changings['with_vat'] = $change['with_vat'];
-                }
+                    $changings['price'] = isset($change['price']) ? $change['price'] : $ad->price;
+                    $changings['coin_id'] = isset($change['coin_id']) ? $change['coin_id'] : $ad->coin_id;
+                    $changings['with_vat'] = isset($change['with_vat']) ? $change['with_vat'] : $ad->with_vat;
 
-                if (!empty($changings)) {
                     $moderation = $ad->moderations()->create(['data' => $changings]);
                     $moderation->moderation_status_id = 1;
                     $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
