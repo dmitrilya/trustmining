@@ -45,6 +45,7 @@ trait ModerationTrait
     public function acceptModeration(?bool $isUniqueContent, Moderation $moderation, int $userId)
     {
         $m = $moderation->moderationable;
+        $type = $moderation->moderationable_type;
         if ($moderation->moderation_status_id != 1 || !$m || !$m->user && !$m->channel)
             return redirect()->route('moderations')->withErrors(['forbidden' => __('Not available moderation')]);
 
@@ -52,7 +53,7 @@ trait ModerationTrait
             $files = [];
             $disk = 'public';
 
-            switch ($moderation->moderationable_type) {
+            switch ($type) {
                 case ('company'):
                     if (isset($moderation->data['logo']) && $m->logo) array_push($files, $m->logo);
                     if (isset($moderation->data['bg_logo']) && $m->bg_logo) {
@@ -113,7 +114,7 @@ trait ModerationTrait
 
         $data = $moderation->data;
         if ($m->moderation) $data['moderation'] = 0;
-        if ($moderation->moderationable_type == 'ad') {
+        if ($type == 'ad') {
             $m->unique_content = $isUniqueContent;
 
             if (isset($data['price'])) $this->notify(
@@ -131,15 +132,17 @@ trait ModerationTrait
         $moderation->user_id = $userId;
         $moderation->save();
 
-        if ($moderation->moderationable_type != 'ad')
+        if ($type != 'ad')
             $this->notify('Moderation completed', new Collection([$m->user]), 'moderation', $moderation);
 
-        if ($moderation->moderationable_type == 'review' && $m->reviewable_type == 'user')
+        if ($type == 'review' && $m->reviewable_type == 'user')
             $this->notify(isset($data['moderation']) ? 'New review' : 'Review edited', new Collection([$m->reviewable]), 'review', $m);
-        elseif ($moderation->moderationable_type == 'forum-answer' && isset($data['moderation']) /* Не сработает на редактирование */)
+        elseif ($type == 'forum-answer' && isset($data['moderation']) /* Не сработает на редактирование */)
             $this->notify('New forum answer', new Collection([$m->forumQuestion->user]), 'forum-answer', $m);
-        elseif ($moderation->moderationable_type == 'forum-comment' && isset($data['moderation']) /* Не сработает на редактирование */)
+        elseif ($type == 'forum-comment' && isset($data['moderation']) /* Не сработает на редактирование */)
             $this->notify('New forum comment', new Collection([$m->forumAnswer->user, $m->forumAnswer->forumQuestion->user]), 'forum-comment', $m);
+        elseif (in_array($type, ['article', 'post', 'video']) && isset($data['moderation']))
+            $this->notify('New publication', $m->channel->activeSubscribers, $type, $m);
 
         return redirect()->route('moderations');
     }

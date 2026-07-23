@@ -38,7 +38,7 @@ class Moderation extends Model
     protected static function booted(): void
     {
         static::created(function (Moderation $moderation) {
-            $moderation->notify('New moderation', new Collection([User::whereHas('role', fn($q) => $q->where('name', 'moderator'))->first()]));
+            $moderation->notify('New moderation', new Collection([User::whereHas('role', fn($q) => $q->where('name', 'moderator'))->first()]), 'moderation', $moderation);
         });
     }
 
