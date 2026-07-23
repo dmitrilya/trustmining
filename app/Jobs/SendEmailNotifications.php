@@ -141,6 +141,12 @@ class SendEmailNotifications implements ShouldQueue
                         $link = route('order.create');
                         $linkText = __('Top up your balance');
                         break;
+                    case 'New moderation':
+                        if ($this->n->moderation_status_id !== 1) return;
+
+                        $body = __('types.' . $this->n->moderationable_type);
+                        $link = route('moderations');
+                        break;
                     case 'Similar questions':
                         $body = __('Before publishing, please review questions similar to yours');
                         $link = route('forum.question.mine');
@@ -167,7 +173,6 @@ class SendEmailNotifications implements ShouldQueue
                         break;
                     case 'New publication':
                         $title = $this->n->channel->name;
-                        $icon = url(Storage::url($this->n->channel->logo));
 
                         switch ($this->nt) {
                             case 'article':

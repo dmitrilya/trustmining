@@ -17,6 +17,7 @@ trait NotificationTrait
 {
     public function notify(string $type, Collection $users, $notificationableType = null, $notificationable = null)
     {
+        $users = $users->where('is_anchor', false);
         $users->loadMissing('settings');
         $typeId = NotificationType::where('name', $type)->first('id')->id;
 

@@ -140,6 +140,12 @@ class SendWebNotifications implements ShouldQueue
                         $body = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $link = route('order.create');
                         break;
+                    case 'New moderation':
+                        if ($this->n->moderation_status_id !== 1) return;
+                        
+                        $body = __('types.' . $this->n->moderationable_type);
+                        $link = route('moderations');
+                        break;
                     case 'Similar questions':
                         $body = __('Before publishing, please review questions similar to yours');
                         $link = route('forum.question.mine');

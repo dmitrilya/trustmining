@@ -41,7 +41,7 @@ class SubscriptionPayment extends Command
 
         foreach (
             User::whereNotNull('tariff_id')->where('tariff_from', '<', Carbon::now()->yesterday())
-                ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance', 'tg_id'])->get() as $user
+                ->with(['ads:id,user_id,hidden', 'tariff:id,price'])->select(['id', 'tariff_id', 'balance', 'tg_id', 'is_anchor'])->get() as $user
         ) {
             if ($user->balance < $user->tariff->price) {
                 $this->notify('Subscription renewal failed', new Collection([$user]));

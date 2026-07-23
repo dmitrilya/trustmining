@@ -40,7 +40,7 @@ class SendDifficultyNotification extends Command
 
         $users = User::whereHas('settings', function ($query) use ($notificationTypeId) {
             $query->where("notifications->{$notificationTypeId}->c", '!=', '[]');
-        })->with('settings')->select(['id', 'tg_id', 'email'])->get();
+        })->with('settings')->select(['id', 'tg_id', 'email', 'is_anchor'])->get();
 
         foreach ($users as $user) {
             $coinIds = $user->settings->notifications[$notificationTypeId]['c'];
