@@ -59,6 +59,8 @@ class SendTGNotifications implements ShouldQueue
     public function handle()
     {
         $tgIds = $this->tgIds->splice(0, 30);
+        $text = __('New notification');
+        $keyboard = null;
 
         switch ($this->nt) {
             case 'message':
@@ -78,9 +80,22 @@ class SendTGNotifications implements ShouldQueue
                 break;
 
             case 'moderation':
-                $text = __('types.' . $this->n->moderationable_type);
-                if ($this->n->comment) $text .= "\n\n" . $this->n->comment;
-                $keyboard = null;
+                switch ($this->type) {
+                    case 'Moderation completed':
+                    case 'Moderation failed':
+                        $text = __('types.' . $this->n->moderationable_type);
+                        if ($this->n->comment) $text .= "\n\n" . $this->n->comment;
+                        $keyboard = null;
+                        break;
+
+                    case 'New moderation':
+                        $freshModeration = $this->n->fresh();
+                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
+
+                        $text = __('types.' . $this->n->moderationable_type);
+                        $keyboard = [[['text' => __('Details'), 'url' => route('moderations')]]];
+                        break;
+                }
                 break;
 
             case 'ad':
@@ -94,9 +109,6 @@ class SendTGNotifications implements ShouldQueue
                             ['text' => __('Details'), 'url' => route('ads.show', ['adCategory' => $this->n->adCategory->name, 'ad' => $this->n->id])],
                         ]];
                         break;
-                    default:
-                        $text = __('New notification');
-                        $keyboard = null;
                 }
                 break;
 
@@ -123,9 +135,6 @@ class SendTGNotifications implements ShouldQueue
 
                         $keyboard = [[['text' => __('View on the website'), 'url' => route('metrics.network.difficulty', ['coin' => strtolower($this->n->name)])]]];
                         break;
-                    default:
-                        $text = __('New notification');
-                        $keyboard = null;
                 }
                 break;
 
@@ -146,13 +155,6 @@ class SendTGNotifications implements ShouldQueue
                     case 'Top up your balance (1 day)':
                         $text = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
-                        break;
-                    case 'New moderation':
-                        $freshModeration = $this->n->fresh();
-                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
-
-                        $text = __('New moderation');
-                        $keyboard = [[['text' => __('Details'), 'url' => route('moderations')]]];
                         break;
                     case 'Similar questions':
                         $text = __('Before publishing, please review questions similar to yours');
@@ -189,14 +191,8 @@ class SendTGNotifications implements ShouldQueue
                             case 'video':
                                 $text .= $this->n->title;
                                 $keyboard = [[['text' => __('Watch'), 'url' => route('insight.video.show', ['channel' => $this->n->channel->slug, 'video' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
-                            default:
-                                $text = __('New notification');
-                                $keyboard = null;
                         }
                         break;
-                    default:
-                        $text = __('New notification');
-                        $keyboard = null;
                 }
                 break;
         }

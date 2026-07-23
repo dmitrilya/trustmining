@@ -72,8 +72,22 @@ class SendWebNotifications implements ShouldQueue
                 break;
 
             case 'moderation':
-                $body = __('types.' . $this->n->moderationable_type);
-                if ($this->n->comment) $body .= "\n\n" . $this->n->comment;
+                switch ($this->type) {
+                    case 'Moderation completed':
+                    case 'Moderation failed':
+                        $body = __('types.' . $this->n->moderationable_type);
+                        if ($this->n->comment) $body .= "\n\n" . $this->n->comment;
+
+                    case 'New moderation':
+                        $freshModeration = $this->n->fresh();
+                        info($this->n->moderation_status_id);
+                        info($freshModeration->moderation_status_id);
+                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
+
+                        $body = __('types.' . $this->n->moderationable_type);
+                        $link = route('moderations');
+                        break;
+                }
                 break;
 
             case 'ad':
@@ -139,15 +153,6 @@ class SendWebNotifications implements ShouldQueue
                     case 'Top up your balance (1 day)':
                         $body = __('Tomorrow there will not be enough funds on the balance to extend the tariff');
                         $link = route('order.create');
-                        break;
-                    case 'New moderation':
-                        $freshModeration = $this->n->fresh();
-                        info($this->n->moderation_status_id);
-                        info($freshModeration->moderation_status_id);
-                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
-
-                        $body = __('types.' . $this->n->moderationable_type);
-                        $link = route('moderations');
                         break;
                     case 'Similar questions':
                         $body = __('Before publishing, please review questions similar to yours');
