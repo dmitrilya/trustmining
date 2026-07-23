@@ -148,8 +148,9 @@ class SendTGNotifications implements ShouldQueue
                         $keyboard = [[['text' => __('Top up'), 'url' => route('order.create')]]];
                         break;
                     case 'New moderation':
-                        if ($this->n->moderation_status_id !== 1) return;
-                        
+                        $freshModeration = $this->n->fresh();
+                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
+
                         $text = __('New moderation');
                         $keyboard = [[['text' => __('Details'), 'url' => route('moderations')]]];
                         break;

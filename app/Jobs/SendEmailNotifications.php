@@ -142,7 +142,8 @@ class SendEmailNotifications implements ShouldQueue
                         $linkText = __('Top up your balance');
                         break;
                     case 'New moderation':
-                        if ($this->n->moderation_status_id !== 1) return;
+                        $freshModeration = $this->n->fresh();
+                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
 
                         $body = __('types.' . $this->n->moderationable_type);
                         $link = route('moderations');

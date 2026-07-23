@@ -141,8 +141,9 @@ class SendWebNotifications implements ShouldQueue
                         $link = route('order.create');
                         break;
                     case 'New moderation':
-                        if ($this->n->moderation_status_id !== 1) return;
-                        
+                        $freshModeration = $this->n->fresh();
+                        if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
+
                         $body = __('types.' . $this->n->moderationable_type);
                         $link = route('moderations');
                         break;
