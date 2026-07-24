@@ -80,8 +80,6 @@ class SendWebNotifications implements ShouldQueue
 
                     case 'New moderation':
                         $freshModeration = $this->n->fresh();
-                        info($this->n->moderation_status_id);
-                        info($freshModeration->moderation_status_id);
                         if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
 
                         $body = __('types.' . $this->n->moderationable_type);

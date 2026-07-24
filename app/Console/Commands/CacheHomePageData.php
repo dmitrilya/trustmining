@@ -41,17 +41,17 @@ class CacheHomePageData extends Command
     {
         $location = session('user_location');
         $miners = $this->getAds(null, AdCategory::where('name', 'miners')->first());
-        $twoMonthsAgo = now()->subMonths(2);
+        $monthAgo = now()->subMonth();
 
         if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
 
         Cache::put('home_page_data', [
-            'asicBrands' => AsicBrand::select(['id', 'name', 'slug'])->withCount(['views as views_count' => function ($query) use ($twoMonthsAgo) {
-                $query->where('created_at', '>=', $twoMonthsAgo);
+            'asicBrands' => AsicBrand::select(['id', 'name', 'slug'])->withCount(['views as views_count' => function ($query) use ($monthAgo) {
+                $query->where('created_at', '>=', $monthAgo);
             }])->orderByDesc('views_count')->get(),
             'asicModels' => AsicModel::select(['id', 'name', 'slug', 'asic_brand_id'])->with(['asicBrand:id,name,slug'])
-                ->withCount(['views as views_count' => function ($query) use ($twoMonthsAgo) {
-                    $query->where('created_at', '>=', $twoMonthsAgo);
+                ->withCount(['views as views_count' => function ($query) use ($monthAgo) {
+                    $query->where('created_at', '>=', $monthAgo);
                 }])->orderByDesc('views_count')->limit(10)->get(),
             'gpuModels' => GPUModel::select(['id', 'name', 'slug', 'images', 'max_power', 'gpu_brand_id'])->with(['gpuBrand:id,name,slug'])
                 ->withCount('ads')->orderByDesc('ads_count')->limit(9)->get(),

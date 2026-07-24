@@ -1,33 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Database;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
 use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicBrand;
 use App\Models\Database\AsicModel;
 use App\Models\Database\Coin;
-use App\Models\Database\GPUBrand;
-use App\Models\Database\GPUModel;
 use App\Models\Morph\View;
 
-class DatabaseController extends Controller
+class AsicModelController
 {
-    use ViewTrait, AdTrait;
+    use AdTrait;
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function asicMinersIndex()
+    public function index()
     {
         $brands = AsicBrand::whereHas('asicModels', fn($q) => $q->where('release', '>', '2010-03-01'))
             ->with('asicModels', fn($q) => $q->where('release', '>', '2010-03-01')
@@ -44,54 +41,16 @@ class DatabaseController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function gpusIndex()
-    {
-        $brands = GPUBrand::whereHas('gpuModels')->with('gpuModels', fn($q) => $q->select(['id', 'name', 'slug', 'gpu_brand_id', 'max_power', 'fuel_consumption']))
-            ->withCount('views')->orderByDesc('views_count')->get()->each(fn($gpuBrand) => $gpuBrand->gpuModels->map(function ($model) use ($gpuBrand) {
-                $model->brand_slug = $gpuBrand->slug;
-                $model->brand_name = $gpuBrand->name;
-                return $model;
-            }));
-
-        return view('database.gas-gensets.index', ['brands' => $brands]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
      * @param  \App\Models\Database\AsicBrand  $asicBrand
      * @return \Illuminate\Http\Response
      */
-    public function asicMinersBrand(AsicBrand $asicBrand)
+    public function brand(AsicBrand $asicBrand)
     {
         return view('database.asic-miners.brand', [
             'brand' => $asicBrand->load(['asicModels' => fn($q) => $q->where('release', '>', '2010-03-01')
                 ->select(['id', 'slug', 'asic_brand_id', 'algorithm_id'])
                 ->with(['algorithm', 'algorithm.coins'])]),
             'algos' => $asicBrand->asicModels->pluck('algorithm')->flatten()->unique('name')
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Database\GPUBrand  $gpuBrand
-     * @return \Illuminate\Http\Response
-     */
-    public function gpusBrand(GPUBrand $gpuBrand)
-    {
-        $gpuBrand->load(['gpuModels' => fn($q) => $q->select(['id', 'name', 'slug', 'gpu_brand_id', 'max_power', 'fuel_consumption'])]);
-
-        $gpuBrand->gpuModels->map(function ($model) use ($gpuBrand) {
-            $model->brand_slug = $gpuBrand->slug;
-            $model->brand_name = $gpuBrand->name;
-            return $model;
-        });
-
-        return view('database.gas-gensets.brand', [
-            'brand' => $gpuBrand
         ]);
     }
 
@@ -103,7 +62,7 @@ class DatabaseController extends Controller
      * @param  \App\Models\Database\AsicModel  $asicModel
      * @return \Illuminate\Http\Response
      */
-    public function asicMinersModel(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
+    public function model(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
     {
         $data = Cache::get('optimized_calculator_data');
         $modelData = $data['m']->where('i', $asicModel->id)->first();
@@ -161,26 +120,6 @@ class DatabaseController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Database\GPUBrand  $gpuBrand
-     * @param  \App\Models\Database\GPUModel  $gpuModel
-     * @return \Illuminate\Http\Response
-     */
-    public function gpusModel(Request $request, GPUBrand $gpuBrand, GPUModel $gpuModel)
-    {
-        $ads = $this->getAds()->where('ads.gpu_model_id', $gpuModel->id)->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
-
-        return view('database.gas-gensets.model', [
-            'brand' => $gpuBrand,
-            'model' => $gpuModel,
-            'ads' => $ads,
-            'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
-        ]);
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request;
@@ -188,30 +127,12 @@ class DatabaseController extends Controller
      * @param  \App\Models\Database\AsicModel  $asicModel
      * @return \Illuminate\Http\Response
      */
-    public function getAsicMinersModelAds(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
+    public function getModelAds(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
     {
         $ads = $this->getAds()->whereIn('ads.asic_version_id', $asicModel->asicVersions()->pluck('id'))->orderByDesc('ads.ordering_id')->paginate(15);
 
         return response()->json([
             'html' => view('ad.components.list', ['adCategory' => AdCategory::where('name', 'miners')->first(), 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
-            'hasMore' => $ads->hasMorePages()
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @param  \Illuminate\Http\Request  $request;
-     * @param  \App\Models\Database\GPUBrand  $gpuBrand
-     * @param  \App\Models\Database\GPUModel  $gpuModel
-     * @return \Illuminate\Http\Response
-     */
-    public function getGpusModelAds(Request $request, GPUBrand $gpuBrand, GPUModel $gpuModel)
-    {
-        $ads = $this->getAds()->where('ads.gpu_model_id', $gpuModel->id)->orderByDesc('ads.ordering_id')->paginate(15);
-
-        return response()->json([
-            'html' => view('ad.components.list', ['adCategory' => AdCategory::where('name', 'gpus')->first(), 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
             'hasMore' => $ads->hasMorePages()
         ]);
     }
@@ -225,7 +146,7 @@ class DatabaseController extends Controller
      * @param  string  $asicVersion (hashrate + measurement)
      * @return \Illuminate\Http\Response
      */
-    public function asicMinersVersion(Request $request, AsicBrand $asicBrand, AsicModel $asicModel, $asicVersion)
+    public function version(Request $request, AsicBrand $asicBrand, AsicModel $asicModel, $asicVersion)
     {
         $data = Cache::get('optimized_calculator_data');
         $modelData = $data['m']->where('i', $asicModel->id)->first();
@@ -295,7 +216,7 @@ class DatabaseController extends Controller
      * @param  string  $asicModel
      * @return \Illuminate\Http\Response
      */
-    public function getAsicMinersVersionAds(Request $request, AsicBrand $asicBrand, AsicModel $asicModel, string $asicVersion)
+    public function getVersionAds(Request $request, AsicBrand $asicBrand, AsicModel $asicModel, string $asicVersion)
     {
         preg_match('/(\d+)([a-zA-Z]+)/', $asicVersion, $matches);
         if (!isset($matches[1])) abort(404);
@@ -317,7 +238,7 @@ class DatabaseController extends Controller
      * @param  string  $compareRequest
      * @return \Illuminate\Http\Response
      */
-    public function compareAsics(Request $request, $compareRequest)
+    public function compare(Request $request, $compareRequest)
     {
         $noindex = null;
         $modelSlugs = explode('-vs-', $compareRequest);
@@ -357,7 +278,7 @@ class DatabaseController extends Controller
         ]);
     }
 
-    public function asicMinersReviews(AsicBrand $asicBrand, AsicModel $asicModel)
+    public function reviews(AsicBrand $asicBrand, AsicModel $asicModel)
     {
         return view('review.index', [
             'auth' => Auth::user(),
@@ -368,18 +289,7 @@ class DatabaseController extends Controller
         ]);
     }
 
-    public function gpusReviews(GPUBrand $gpuBrand, GPUModel $gpuModel)
-    {
-        return view('review.index', [
-            'auth' => Auth::user(),
-            'name' => $gpuModel->name,
-            'type' => 'gpu-model',
-            'id' => $gpuModel->id,
-            'reviews' => $gpuModel->reviews
-        ]);
-    }
-
-    public function getAsicMinersModels(Request $request)
+    public function getModels(Request $request)
     {
         $models = Cache::get('calculator_models');
 

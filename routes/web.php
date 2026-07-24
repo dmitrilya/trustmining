@@ -9,10 +9,11 @@ use Pusher\PushNotifications\PushNotifications;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AnalyticsController;
-use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\Database\GPUModelController;
+use App\Http\Controllers\Database\AsicModelController;
 use App\Http\Controllers\Ad\AdController;
 use App\Http\Controllers\Ad\HostingController;
 use App\Http\Controllers\User\ProfileController;
@@ -146,34 +147,34 @@ Route::group(['prefix' => 'blog'], function () {
 });
 
 Route::group(['prefix' => 'gas-gensets'], function () {
-    Route::get('/', [DatabaseController::class, 'gpusIndex'])->name('database.gas-gensets');
+    Route::get('/', [GPUModelController::class, 'index'])->name('database.gas-gensets');
 
     Route::group(['prefix' => '{gpuBrand:slug}'], function () {
-        Route::get('/', [DatabaseController::class, 'gpusBrand'])->name('database.gas-gensets.brand');
+        Route::get('/', [GPUModelController::class, 'brand'])->name('database.gas-gensets.brand');
 
         Route::group(['prefix' => '{gpuModel:slug}'], function () {
-            Route::get('/', [DatabaseController::class, 'gpusModel'])->scopeBindings()->name('database.gas-gensets.model');
-            Route::get('/get-ads', [DatabaseController::class, 'getGpusModelAds'])->scopeBindings()->name('database.gas-gensets.model.get-ads');
-            Route::get('/reviews', [DatabaseController::class, 'gpusReviews'])->scopeBindings()->name('database.gas-gensets.reviews');
+            Route::get('/', [GPUModelController::class, 'model'])->scopeBindings()->name('database.gas-gensets.model');
+            Route::get('/get-ads', [GPUModelController::class, 'getModelAds'])->scopeBindings()->name('database.gas-gensets.model.get-ads');
+            Route::get('/reviews', [GPUModelController::class, 'reviews'])->scopeBindings()->name('database.gas-gensets.reviews');
         });
     });
 });
 
 Route::group(['prefix' => 'asic-miners'], function () {
-    Route::get('/', [DatabaseController::class, 'asicMinersIndex'])->name('database.asic-miners');
-    Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
-    Route::get('/compare/{compareRequest}', [DatabaseController::class, 'compareAsics'])->name('database.asic-miners.compare');
+    Route::get('/', [AsicModelController::class, 'index'])->name('database.asic-miners');
+    Route::get('/get-models', [AsicModelController::class, 'getModels']);
+    Route::get('/compare/{compareRequest}', [AsicModelController::class, 'compare'])->name('database.asic-miners.compare');
 
     Route::group(['prefix' => '{asicBrand:slug}'], function () {
-        Route::get('/', [DatabaseController::class, 'asicMinersBrand'])->name('database.asic-miners.brand');
-        Route::get('/get-models', [DatabaseController::class, 'getAsicMinersModels']);
+        Route::get('/', [AsicModelController::class, 'brand'])->name('database.asic-miners.brand');
+        Route::get('/get-models', [AsicModelController::class, 'getModels']);
 
         Route::group(['prefix' => '{asicModel:slug}'], function () {
-            Route::get('/', [DatabaseController::class, 'asicMinersModel'])->scopeBindings()->name('database.asic-miners.model');
-            Route::get('/get-ads', [DatabaseController::class, 'getAsicMinersModelAds'])->scopeBindings()->name('database.asic-miners.model.get-ads');
-            Route::get('/reviews', [DatabaseController::class, 'asicMinersReviews'])->scopeBindings()->name('database.asic-miners.reviews');
-            Route::get('/{asicVersion}', [DatabaseController::class, 'asicMinersVersion'])->name('database.asic-miners.version');
-            Route::get('/{asicVersion}/get-ads', [DatabaseController::class, 'getasicMinersVersionAds'])->name('database.asic-miners.version.get-ads');
+            Route::get('/', [AsicModelController::class, 'model'])->scopeBindings()->name('database.asic-miners.model');
+            Route::get('/get-ads', [AsicModelController::class, 'getModelAds'])->scopeBindings()->name('database.asic-miners.model.get-ads');
+            Route::get('/reviews', [AsicModelController::class, 'reviews'])->scopeBindings()->name('database.asic-miners.reviews');
+            Route::get('/{asicVersion}', [AsicModelController::class, 'version'])->name('database.asic-miners.version');
+            Route::get('/{asicVersion}/get-ads', [AsicModelController::class, 'getVersionAds'])->name('database.asic-miners.version.get-ads');
         });
     });
 });

@@ -12,7 +12,7 @@
                 const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
                 localStorage.setItem('roulette_tooltip_shown_today', endOfDay.getTime().toString());
 
-                setTimeout(() => { this.showTooltip = false; }, 4000);
+                setTimeout(() => { this.showTooltip = false; }, 5000);
             }, 10000);
         }
     }

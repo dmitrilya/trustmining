@@ -34,7 +34,7 @@
             ])
             <meta itemprop="headline" content="{{ str($post->content)->stripTags()->limit(70) }}" />
             <div itemprop="articleBody"
-                class="mt-2 sm:mt-3 text-xs text-slate-600 dark:text-slate-400 h-16 overflow-hidden line-clamp-4">
+                class="mt-2 sm:mt-3 text-xs text-slate-600 dark:text-slate-400 h-16 overflow-hidden">
                 {!! $post->content !!}</div>
         </div>
         <div class="mt-1 xs:mt-2">
