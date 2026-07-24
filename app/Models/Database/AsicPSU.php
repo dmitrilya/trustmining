@@ -41,7 +41,7 @@ class AsicPSU extends Model
         'cooling_type' => CoolingType::class,
     ];
 
-    public function brand()
+    public function asicBrand()
     {
         return $this->belongsTo(\App\Models\Database\AsicBrand::class);
     }

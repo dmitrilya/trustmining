@@ -108,7 +108,7 @@ class UpdateExchangeRate extends Command
 
             $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model) {
                 $ads = $version->ads->where('price', '!=', 0)->map(function ($ad) {
-                    $ad->usdt_price = round($ad->price * $ad->coin->rate * ($ad->with_vat ? 1 : 1.2), 2);
+                    $ad->usdt_price = round($ad->price * $ad->coin->rate, 2);
                     return $ad;
                 });
                 $minPrice = $ads->sortBy('usdt_price')->first();
