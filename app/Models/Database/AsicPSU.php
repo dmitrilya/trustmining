@@ -29,10 +29,13 @@ class AsicPSU extends Model
         'input_voltage_max',
         'frequency_min',
         'frequency_max',
-        'output_voltage_min',
-        'output_voltage_max',
-        'output_rated_current',
-        'max_power',
+        'output1_voltage_min',
+        'output1_voltage_max',
+        'output1_rated_current',
+        'output2_voltage_min',
+        'output2_voltage_max',
+        'output2_rated_current',
+        'rated_power',
         'cooling_type',
         'notes'
     ];
