@@ -17,17 +17,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('asic_brand_id')->constrained()->cascadeOnUpdate();
             $table->string('name')->index();
-            $table->string('revision')->nullable();
-            $table->string('power_connector');
-            $table->unsignedSmallInteger('voltage_min')->nullable();
-            $table->unsignedSmallInteger('voltage_max')->nullable();
+            $table->string('ac_input_connector');
+            $table->string('dc_output_connector')->nullable();
+            $table->unsignedDecimal('input_voltage_min', 5, 2)->nullable();
+            $table->unsignedDecimal('input_voltage_max', 5, 2)->nullable();
             $table->unsignedTinyInteger('frequency_min')->nullable();
             $table->unsignedTinyInteger('frequency_max')->nullable();
-            $table->unsignedSmallInteger('output_power')->nullable();
-            $table->unsignedTinyInteger('efficiency')->nullable();
+            $table->unsignedDecimal('output_voltage_min', 5, 2)->nullable();
+            $table->unsignedDecimal('output_voltage_max', 5, 2)->nullable();
+            $table->unsignedDecimal('output_rated_current', 5, 2)->nullable();
+            $table->unsignedSmallInteger('max_power')->nullable();
             $table->unsignedTinyInteger('cooling_type');
-
-            $table->unique(['asic_brand_id', 'name', 'revision']);
+            $table->text('notes')->nullable();
         });
     }
 

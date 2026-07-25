@@ -11,6 +11,8 @@ class AsicPSU extends Model
 {
     use HasFactory;
 
+    protected $table = 'asic_psus';
+
     public $timestamps = false;
 
     /**
@@ -21,15 +23,18 @@ class AsicPSU extends Model
     protected $fillable = [
         'asic_brand_id',
         'name',
-        'revision',
-        'power_connector',
-        'voltage_min',
-        'voltage_max',
+        'ac_input_connector',
+        'dc_output_connector',
+        'input_voltage_min',
+        'input_voltage_max',
         'frequency_min',
         'frequency_max',
-        'output_power',
-        'efficiency',
+        'output_voltage_min',
+        'output_voltage_max',
+        'output_rated_current',
+        'max_power',
         'cooling_type',
+        'notes'
     ];
 
     /**
@@ -40,6 +45,13 @@ class AsicPSU extends Model
     protected $casts = [
         'cooling_type' => CoolingType::class,
     ];
+
+    public function getMaxPowerAttribute(): ?float
+{
+    if (!$this->output_voltage_max || !$this->output_current_max) return null;
+
+    return round($this->output_voltage_max * $this->output_current_max);
+}
 
     public function asicBrand()
     {
