@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('asic_model_asic_psus', function (Blueprint $table) {
             $table->foreignId('asic_model_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('asic_psu_id')->constrained()->cascadeOnUpdate();
+            $table->unsignedTinyInteger('compatibility_level');
         });
     }
 

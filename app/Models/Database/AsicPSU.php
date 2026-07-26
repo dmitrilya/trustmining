@@ -23,8 +23,7 @@ class AsicPSU extends Model
     protected $fillable = [
         'asic_brand_id',
         'name',
-        'ac_input_connector',
-        'dc_output_connector',
+        'connector',
         'input_voltage_min',
         'input_voltage_max',
         'frequency_min',

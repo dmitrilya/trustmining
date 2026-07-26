@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('asic_brand_id')->constrained()->cascadeOnUpdate();
             $table->string('name')->index();
-            $table->string('ac_input_connector');
-            $table->string('dc_output_connector')->nullable();
+            $table->string('connector');
             $table->unsignedDecimal('input_voltage_min', 5, 2)->nullable();
             $table->unsignedDecimal('input_voltage_max', 5, 2)->nullable();
             $table->unsignedTinyInteger('frequency_min')->nullable();
