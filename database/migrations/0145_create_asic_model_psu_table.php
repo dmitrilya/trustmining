@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('asic_model_psus', function (Blueprint $table) {
+        Schema::create('asic_model_psu', function (Blueprint $table) {
             $table->foreignId('asic_model_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('psu_id')->constrained()->cascadeOnUpdate();
             $table->unsignedTinyInteger('compatibility_level');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asic_model_psus');
+        Schema::dropIfExists('asic_model_psu');
     }
 };

@@ -56,7 +56,7 @@ class AsicModel extends Model
 
     public function PSUs()
     {
-        return $this->belongsToMany(\App\Models\Database\PSU::class);
+        return $this->belongsToMany(\App\Models\Database\PSU::class, 'asic_model_psu');
     }
 
     public function ads()
