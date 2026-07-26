@@ -11,7 +11,7 @@ class PSU extends Model
 {
     use HasFactory;
 
-    protected $table = 'asic_psus';
+    protected $table = 'psus';
 
     public $timestamps = false;
 
