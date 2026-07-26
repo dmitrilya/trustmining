@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Enums\CoolingType;
 
-class AsicPSU extends Model
+class PSU extends Model
 {
     use HasFactory;
 

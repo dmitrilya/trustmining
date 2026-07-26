@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('asic_psus', function (Blueprint $table) {
+        Schema::create('psus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asic_brand_id')->constrained()->cascadeOnUpdate();
             $table->string('name')->index();
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asic_psus');
+        Schema::dropIfExists('psus');
     }
 };
