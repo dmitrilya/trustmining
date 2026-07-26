@@ -54,6 +54,11 @@ class AsicModel extends Model
         return $this->belongsTo(\App\Models\Database\AsicBrand::class);
     }
 
+    public function asicPSUs()
+    {
+        return $this->belongsToMany(\App\Models\Database\AsicPSU::class);
+    }
+
     public function ads()
     {
         return $this->hasManyThrough(\App\Models\Ad\Ad::class, \App\Models\Database\AsicVersion::class);

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('asic_model_id')->constrained()->cascadeOnUpdate();
             $table->foreignId('asic_psu_id')->constrained()->cascadeOnUpdate();
             $table->unsignedTinyInteger('compatibility_level');
+            
+            $table->unique(['asic_model_id', 'asic_psu_id']);
         });
     }
 

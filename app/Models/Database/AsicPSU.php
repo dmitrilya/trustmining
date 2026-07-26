@@ -59,4 +59,9 @@ class AsicPSU extends Model
     {
         return $this->belongsTo(\App\Models\Database\AsicBrand::class);
     }
+
+    public function asicModels()
+    {
+        return $this->belongsToMany(\App\Models\Database\AsicModel::class);
+    }
 }
