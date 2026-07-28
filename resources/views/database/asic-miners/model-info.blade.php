@@ -33,13 +33,18 @@
                     alt="{{ $brand->name }} {{ $model->name }}">
             </div>
 
-            <x-characteristics.characteristics>
-                <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
-                <x-characteristics.characteristic name="Algorithm" :value="$algorithms[$versions->first()['a']]['n']" itemprop="additionalProperty" />
-                <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
-                <x-characteristics.characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
-                <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
-            </x-characteristics.characteristics>
+            <div class="hidden md:block">
+                <x-characteristics.characteristics>
+                    <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" itemprop="additionalProperty" />
+                    <x-characteristics.characteristic name="Algorithm" :value="$algorithms[$versions->first()['a']]['n']" itemprop="additionalProperty" />
+                    @if ($model->psus->count())
+                        <x-characteristics.characteristic name="Power connector" :value="$model->psus->first()->connector" itemprop="additionalProperty" />
+                    @endif
+                    <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
+                    <x-characteristics.characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
+                    <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
+                </x-characteristics.characteristics>
+            </div>
 
             @include('database.asic-miners.rating')
 

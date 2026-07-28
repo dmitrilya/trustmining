@@ -76,7 +76,7 @@ trait NotificationTrait
         if ($webUserIds->isNotEmpty()) SendWebNotifications::dispatch($webUserIds, $type, $notificationableType, $notificationable);
 
         $emailUsers = $users->filter(function ($user) use ($typeId, $filterInstance, $notificationable) {
-            if (!$user->email) return false;
+            if (!$user->email || !$user->hasVerifiedEmail()) return false;
 
             $isEnabled = data_get($user->settings->notifications, "{$typeId}.e.on");
             $allowedByConfig = is_null($isEnabled) ? true : (bool) $isEnabled;

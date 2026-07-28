@@ -5,13 +5,13 @@
             <x-characteristics.characteristic name="Algorithm" :value="$ad->asicVersion->asicModel->algorithm->name" />
             <x-characteristics.characteristic name="Efficiency" :value="$ad->asicVersion->efficiency . 'j/' . $ad->asicVersion->measurement" />
             <x-characteristics.characteristic name="Power" :value="$ad->asicVersion->efficiency * $ad->asicVersion->hashrate . __('kW/h')" />
+            @if ($ad->asicVersion->asicModel->psus->count())
+                <x-characteristics.characteristic name="Power connector" :value="$ad->asicVersion->asicModel->psus->first()->connector" />
+            @endif
             <x-characteristics.characteristic name="Release date" :value="$ad->asicVersion->asicModel->release->translatedFormat('j M Y')" />
         @elseif ($ad->adcategory->name == 'gpus')
             <x-characteristics.characteristic name="Power" :value="$ad->gpuModel->max_power" itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'kW/h']" />
-            <x-characteristics.characteristic name="Engine manufacturer" :value="$ad->gpuModel->gpuEngineModel->gpuEngineBrand->name .
-                ' (' .
-                __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) .
-                ')'" />
+            <x-characteristics.characteristic name="Engine manufacturer" :value="$ad->gpuModel->gpuEngineModel->gpuEngineBrand->name . ' (' . __($ad->gpuModel->gpuEngineModel->gpuEngineBrand->country) . ')'" />
             <x-characteristics.characteristic name="Engine model" :value="$ad->gpuModel->gpuEngineModel->name" />
             <x-characteristics.characteristic name="Fuel consumption (m³/h)" :value="$ad->gpuModel->fuel_consumption" />
             <x-characteristics.characteristic name="Country" :value="__($ad->gpuModel->gpuBrand->country)" />

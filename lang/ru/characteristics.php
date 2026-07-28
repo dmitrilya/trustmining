@@ -11,5 +11,5 @@ return [
     'p' => 'Output power (W)',
     'e' => 'Efficiency',
     'c' => 'Cooling',
-    
+
 ];
