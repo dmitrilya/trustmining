@@ -12,7 +12,7 @@
                 const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
                 localStorage.setItem('roulette_tooltip_shown_today', endOfDay.getTime().toString());
 
-                setTimeout(() => { this.showTooltip = false; }, 5000);
+                //setTimeout(() => { this.showTooltip = false; }, 5000);
             }, 10000);
         }
     }
@@ -44,16 +44,19 @@
     <div x-show="showTooltip" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2 scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-        class="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-48 p-4 bg-slate-100/95 dark:bg-slate-900/95 rounded-xl shadow-md shadow-logo-color pointer-events-none text-center"
+        class="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-48 p-4 bg-slate-100/95 dark:bg-slate-900/95 rounded-xl shadow-md shadow-logo-color text-center"
         style="display: none;">
-        <div
-            class="absolute bottom-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-slate-100/95 dark:border-b-slate-950/95">
-        </div>
-
-        <div class="text-xxs font-black uppercase tracking-widest text-emerald-500 mb-1 flex items-center justify-center gap-2">
+        <div class="relative text-xxs font-black uppercase tracking-widest text-emerald-500 mb-1 flex items-center justify-center gap-2">
             <span class="w-1.5 h-1.5 mb-1 rounded-full bg-emerald-500 animate-pulse"></span>
             {{ __('Spin available!') }}
+
+            <span @click="showTooltip = false"
+                class="absolute right-0 mb-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer text-sm leading-none"
+                aria-label="Close">
+                &times;
+            </span>
         </div>
+
         <p class="text-xxs text-slate-600 dark:text-slate-400">
             {{ __('Take part in the ASIC giveaway or get a discount on your purchase') }}
         </p>
