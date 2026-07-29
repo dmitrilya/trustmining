@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('trustfactors:update')->dailyAt('00:30');
         $schedule->command('forumscore:update')->dailyAt('01:30');
         $schedule->command('price:update')->days([Schedule::MONDAY, Schedule::THURSDAY])->at('10:12');
+        $schedule->command('companycard:update')->mondays()->at('15:00');
         $schedule->command('auth:clear-resets')->daily();
     }
 
