@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum CoolingType: int
 {
+    case Passive = 0;
     case Air = 1;
     case Hydro = 2;
     case Immersion = 3;
@@ -11,6 +12,7 @@ enum CoolingType: int
     public function name(): string
     {
         return match ($this) {
+            self::Passive => 'Passive',
             self::Air => 'Air',
             self::Hydro => 'Hydro',
             self::Immersion => 'Immersion',
@@ -20,6 +22,7 @@ enum CoolingType: int
     public function icon(): string
     {
         return match ($this) {
+            self::Passive => 'fan',
             self::Air => 'fan',
             self::Hydro => 'droplets',
             self::Immersion => 'waves',
