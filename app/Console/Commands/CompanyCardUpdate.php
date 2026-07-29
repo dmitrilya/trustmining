@@ -33,7 +33,7 @@ class CompanyCardUpdate extends Command
     public function handle()
     {
         foreach (Company::all() as $company) {
-            $card = $this->dadataCompanyByInn($company->card->inn);
+            $card = $this->dadataCompanyByInn($company->card['inn']);
 
             if (!$card) {
                 info('[COMPANY CARD UPDATING] card in dadata not exists {company_id=' . $company->id . '}');
