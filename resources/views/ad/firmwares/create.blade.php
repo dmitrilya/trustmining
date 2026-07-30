@@ -1,4 +1,4 @@
-<div class="space-y-6" x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+<div class="space-y-6" x-data="{ measurement: '', description: `{{ old('description', '') }}` }" x-init="const Delta = Quill.import('delta');
 const Link = Quill.import('formats/link');
 class CustomLink extends Link {
     static create(value) {
@@ -32,10 +32,10 @@ quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
 });
 
 quill.on('text-change', () => description = quill.root.innerHTML);">
-    <input type="hidden" name="props" x-ref="props_firmwares" value='{"For which models": []}'>
+    <input type="hidden" name="props" x-ref="props_firmwares" value='{"Modes": []}'>
 
-    <x-inputs.multiselect name="models" label="For which models" :all="App\Models\Database\AsicModel::pluck('name')"
-        handleChange="let props = JSON.parse($refs.props_firmwares.value); props['For which models'] = selected; $refs.props_firmwares.value = JSON.stringify(props);" />
+    @include('ad.miners.selectversion', ['required' => true])
+    @include('ad.firmwares.modes', ['modes' => collect()])
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
         <div id="editor"

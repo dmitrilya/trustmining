@@ -192,12 +192,12 @@ class AdService
                 $alt = "$name для $models";
                 break;
             case 'firmwares':
-                $models = implode(', ', $ad->props['For which models']);
+                $maxMode = collect($ad->props['Modes'])->sortBy('h')->last()['h'];
 
                 $name = "Прошивка $user";
-                $title = "Прошивка для асиков $models от $user";
-                $description = "Кастомная прошивка и удаленное управление $user. Подходит для $models. Помощь в настройке";
-                $alt = "Прошивка и удаленное управление $user для $models";
+                $title = "Прошивка/Разгон для {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate} {$ad->asicVersion->measurement} от $user";
+                $description = "Кастомная прошивка и удаленное управление $user. Разгон до $maxMode {$ad->asicVersion->measurement}/s. Подходит для {$ad->asicVersion->asicModel->name}. Помощь в настройке";
+                $alt = "Прошивка и удаленное управление $user для {$ad->asicVersion->asicModel->name}";
                 break;
             case 'monitorings':
                 $name = "Мониторинг асиков $user";

@@ -8,7 +8,7 @@
             <x-inputs.text-input id="search" type="text" x-model="search" :placeholder="__('Search')" autocomplete="off" />
         @else
             <div
-                class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
+                class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-lg shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                 <input type="text" id="search" x-model="search" placeholder="__('Search')"
                     class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-600 dark:text-slate-400 w-full" />
 

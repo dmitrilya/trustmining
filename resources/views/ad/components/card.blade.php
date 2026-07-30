@@ -102,17 +102,29 @@
             <x-characteristics.characteristics>
                 @if ($ad->ad_category_name == 'gpus')
                     <x-characteristics.characteristic name="Power (kW/h)" :value="$ad->gpu_model_max_power" />
+                @elseif ($ad->ad_category_name == 'firmwares')
+                    <x-characteristics.characteristic name="Model" :value="$ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement" />
                 @endif
 
                 @if (!isset($sm))
                     @foreach ($props as $prop => $value)
-                        @if (!is_array($value) && $prop != 'Service')
+                        @if ((!is_array($value) && $prop != 'Service') || $prop == 'Modes')
+                            @php
+                                if ($prop == 'Modes') {
+                                    $modes = collect($value)->sortBy('h');
+                                    $value = $modes->first()['h'] . $ad->asic_version_measurement;
+                                    if ($modes->count() > 1) {
+                                        $value .= '-' . $modes->last()['h'] . $ad->asic_version_measurement;
+                                    }
+                                }
+                            @endphp
+
                             <x-characteristics.characteristic :name="$prop" :value="$value" />
                         @else
-                            <div class="text-xxs sm:text-xs md:text-sm text-slate-500">
+                            <div class="text-xxs sm:text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                 <span>{{ __($prop) . ': ' }}</span>
                                 @if ($prop == 'Service')
-                                    <span class="text-slate-600 dark:text-slate-400">{{ __($value) }}</span>
+                                    <span class="text-slate-800 dark:text-slate-200">{{ __($value) }}</span>
                                 @else
                                     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
                                         @foreach ($value as $item)

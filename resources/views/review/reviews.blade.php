@@ -25,7 +25,8 @@
                         {{ $review->user->name }}
                     </div>
 
-                    <span class="date-transform text-xs text-slate-500" data-date="{{ $review->moderations()->count() > 1 ? $review->updated_at : $review->created_at }}"></span>
+                    <span class="date-transform text-xs text-slate-500"
+                        data-date="{{ $review->moderations()->count() > 1 ? $review->updated_at : $review->created_at }}"></span>
                 </div>
 
                 <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
@@ -56,8 +57,7 @@
                                 pushToastAlert(r.data.message, 'error');
                             }
                         }).catch(e => pushToastAlert(e.response?.data?.message || 'Error', 'error'))"
-                    class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-800"
-                    enctype="multipart/form-data">
+                    class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-800" enctype="multipart/form-data">
                     <div class="px-4 py-2 bg-white rounded-t-xl dark:bg-slate-950">
                         <label for="review-{{ $review->id }}" class="sr-only">Your review</label>
                         <textarea id="review-{{ $review->id }}" rows="4" name="review"
@@ -67,22 +67,20 @@
 
                     <div class="flex items-center justify-between p-2 border-t dark:border-slate-700">
                         <div class="flex ps-0 space-x-1 items-center">
-                            <label :for="'input-doc-' + {{ $review->id }}"
-                                :class="document ? 'text-indigo-500' : 'text-slate-500'"
+                            <label :for="'input-doc-' + {{ $review->id }}" :class="document ? 'text-indigo-500' : 'text-slate-500'"
                                 class="inline-flex justify-center items-center p-1 xs:p-2 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
-                                <input :id="'input-doc-' + {{ $review->id }}" name="document" class="hidden"
-                                    type="file" accept=".pdf,.doc,.docx" @change="document = true">
+                                <input :id="'input-doc-' + {{ $review->id }}" name="document" class="hidden" type="file" accept=".pdf,.doc,.docx"
+                                    @change="document = true">
                                 <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
                                     <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                         d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
                                 </svg>
                             </label>
 
-                            <label :for="'input-img-' + {{ $review->id }}"
-                                :class="image ? 'text-indigo-500' : 'text-slate-500'"
+                            <label :for="'input-img-' + {{ $review->id }}" :class="image ? 'text-indigo-500' : 'text-slate-500'"
                                 class="inline-flex justify-center items-center p-1 xs:p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
-                                <input :id="'input-img-' + {{ $review->id }}" name="image" class="hidden"
-                                    type="file" accept=".png,.jpg,.jpeg,.webp" @change="image = true">
+                                <input :id="'input-img-' + {{ $review->id }}" name="image" class="hidden" type="file" accept=".png,.jpg,.jpeg,.webp"
+                                    @change="image = true">
                                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                                     <path
                                         d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
@@ -108,8 +106,7 @@
                                 class="xs:px-3 py-1 text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">
                                 <span class="hidden xs:block">{{ __('Cancel') }}</span>
                                 <span class="xs:hidden">
-                                    <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="w-5 h-5">
+                                    <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                     </svg>
                                 </span>
@@ -119,9 +116,8 @@
                                 class="inline-flex items-center p-1.5 xs:py-2.5 xs:px-4 text-xs text-center text-white bg-indigo-600 rounded-full xs:rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-700 hover:bg-indigo-700">
                                 <span class="hidden xs:block">{{ __('Save') }}</span>
                                 <span class="xs:hidden">
-                                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="18" height="18"
-                                        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                                        stroke-linejoin="round">
+                                    <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <line x1="12" y1="19" x2="12" y2="5"></line>
                                         <polyline points="5 12 12 5 19 12"></polyline>
                                     </svg>
@@ -133,37 +129,39 @@
             @endif
 
             @if ($auth && (($review->reviewable_type == 'user' && $auth->id == $review->reviewable->id) || $isOwnReview))
-                <template x-if="!isEditing">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button type="button"
-                                class="ml-2 sm:ml-3 inline-flex self-center items-center p-2 text-sm text-center rounded-xl text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-950 focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700 focus:outline-none">
-                                <svg class="w-4 h-4 text-slate-600 dark:text-slate-400" aria-hidden="true"
-                                    fill="currentColor" viewBox="0 0 4 15">
-                                    <path
-                                        d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                </svg>
-                            </button>
-                        </x-slot>
+                @if ($isOwnReview)
+                    <template x-if="!isEditing">
+                @endif
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button type="button"
+                            class="ml-2 sm:ml-3 inline-flex self-center items-center p-2 text-sm text-center rounded-xl text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-950 focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-700 focus:outline-none">
+                            <svg class="w-4 h-4 text-slate-600 dark:text-slate-400" aria-hidden="true" fill="currentColor" viewBox="0 0 4 15">
+                                <path
+                                    d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                            </svg>
+                        </button>
+                    </x-slot>
 
-                        <x-slot name="content">
-                            @if ($review->reviewable_type == 'user' && $auth->id == $review->reviewable->id)
-                                <x-dropdown-link
-                                    href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I am writing to appeal review number') . ' ' . $review->id]) }}">{{ __('Complain') }}</x-dropdown-link>
-                            @else
-                                <x-dropdown-link href="#" x-show="!isUnderModeration && !isEditing"
-                                    @click.prevent="isEditing = true; image = false; document = false;">
-                                    {{ __('Edit') }}
-                                </x-dropdown-link>
+                    <x-slot name="content">
+                        @if ($review->reviewable_type == 'user' && $auth->id == $review->reviewable->id)
+                            <x-dropdown-link
+                                href="{{ route('support', ['tab' => 'chat', 'message' => __('Good day! I am writing to appeal review number') . ' ' . $review->id]) }}">{{ __('Complain') }}</x-dropdown-link>
+                        @else
+                            <x-dropdown-link href="#" x-show="!isUnderModeration && !isEditing"
+                                @click.prevent="isEditing = true; image = false; document = false;">
+                                {{ __('Edit') }}
+                            </x-dropdown-link>
 
-                                <x-dropdown-link href="#"
-                                    @click.prevent="$dispatch('open-modal', 'confirm-review-deletion-{{ $review->id }}')">
-                                    {{ __('Delete') }}
-                                </x-dropdown-link>
-                            @endif
-                        </x-slot>
-                    </x-dropdown>
-                </template>
+                            <x-dropdown-link href="#" @click.prevent="$dispatch('open-modal', 'confirm-review-deletion-{{ $review->id }}')">
+                                {{ __('Delete') }}
+                            </x-dropdown-link>
+                        @endif
+                    </x-slot>
+                </x-dropdown>
+                @if ($isOwnReview)
+                    </template>
+                @endif
             @endif
         </div>
 

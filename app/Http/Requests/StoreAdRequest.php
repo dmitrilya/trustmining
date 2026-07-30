@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\OfficeBelongsToUser;
 use App\Rules\PaymentableCoin;
 
+use App\Models\Ad\AdCategory;
+
 class StoreAdRequest extends FormRequest
 {
     /**
@@ -34,8 +36,14 @@ class StoreAdRequest extends FormRequest
             'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048',
             'images' => 'nullable|array|max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
-            'props' => 'nullable',
-            'description' => 'sometimes|string',
+            'props' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if (AdCategory::find($this->ad_category_id)->value('name') == 'firmwares' && (!is_array($value) || !isset($value['modes']) || !is_array($value['modes']) || empty($value['modes'])))
+                        $fail('For a firmware category, you must specify a list of operating modes.');
+                },
+            ],
+            'description' => 'sometimes|nullable|string',
             'price' => 'required|numeric',
             'coin_id' => ['required', new PaymentableCoin],
             'with_vat' => 'sometimes',

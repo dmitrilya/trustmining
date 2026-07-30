@@ -16,16 +16,16 @@
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif aria-label="{{ __('Version') }}">
 
-    <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
+    <div class="relative z-50 mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
             <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                 <input type="text" autocomplete="off" :value="search" id="search_model"
-                    @input="search = $el.value;selectedModel = null;selectedVersion = null"
-                    class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 group-focus:outline-none focus:ring-0 peer" />
+                    @input="search = $el.value;selectedModel = null;selectedVersion = null; if (typeof measurement != 'undefined') measurement = '';"
+                    class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 focus:outline-none focus:ring-0 peer" />
 
                 <button type="button" aria-label="Clear"
                     class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
-                    @click="search = '';selectedModel = null;selectedVersion = null;$el.previousElementSibling.focus()">
+                    @click="search = '';selectedModel = null;selectedVersion = null;if (typeof measurement != 'undefined') measurement = '';$el.previousElementSibling.focus()">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -85,7 +85,7 @@
                     x-show="show">
 
                     @if (isset($withAllVersions))
-                        <li @click="selectedVersion = null; show = false;" role="option"
+                        <li @click="selectedVersion = null; if (typeof measurement != 'undefined') measurement = ''; show = false;" role="option"
                             class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
                             <span class="block truncate">{{ __('All') }}</span>
 
@@ -101,7 +101,7 @@
                     @endif
 
                     <template x-for="asicVersion in selectedModel.asic_versions" :key="asicVersion.id">
-                        <li @click="selectedVersion = asicVersion.id; show = false;"
+                        <li @click="selectedVersion = asicVersion.id; if (typeof measurement != 'undefined') measurement = asicVersion.measurement; show = false;"
                             class="cursor-default relative select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
                             <span class="block truncate" x-text="asicVersion.hashrate"></span>
 

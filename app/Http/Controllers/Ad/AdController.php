@@ -96,7 +96,7 @@ class AdController extends Controller
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('ad.create', [
-            'models' => AsicModel::select(['id', 'name', 'slug'])->with('asicVersions:id,asic_model_id,hashrate')->get(),
+            'models' => AsicModel::select(['id', 'name', 'slug'])->with('asicVersions:id,asic_model_id,hashrate,measurement')->get(),
             'gpuModels' => GPUModel::select(['id', 'name', 'slug', 'max_power', 'gpu_brand_id', 'gpu_engine_model_id'])
                 ->with(['gpuBrand:id,name', 'gpuEngineModel:id,name,gpu_engine_brand_id', 'gpuEngineModel.gpuEngineBrand:id,name'])->get(),
             'offices' => $user->offices()->select(['id', 'address'])->get(),

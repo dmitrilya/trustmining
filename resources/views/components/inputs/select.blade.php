@@ -1,6 +1,6 @@
 @props([
     'label' => null,
-    'name',
+    'name' => null,
     'size' => 'base',
     'items',
     'key' => null,
@@ -20,12 +20,14 @@
             <x-inputs.input-label :value="$label" />
         @endif
 
-        <input type="hidden" name="{{ $name }}" :value="itemKey">
+        @if ($name)
+            <input type="hidden" name="{{ $name }}" :value="itemKey">
+        @endif
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
             <button type="button" @click="if (!isDisabled) open = ! open"
                 :class="{ 'opacity-50': isDisabled }"
-                class="relative w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:py-1.5 sm:pl-3 sm:pr-10' : 'pr-10' }} rounded-md text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                class="relative w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:pr-10' : 'pr-10' }} rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
                 <span class="flex items-center">
                     @if ($icon)
                         @switch($icon['type'])
@@ -43,7 +45,7 @@
                         @endswitch
                     @endif
 
-                    <span class="block truncate {{ $size == 'sm' ? 'text-xxs' : 'text-xs' }} sm:text-sm"
+                    <span class="block truncate {{ $size == 'sm' ? 'text-xxs sm:text-sm' : ($size == 'lg' ? '' : 'text-xs sm:text-sm') }}"
                         x-text="items[itemKey].value"></span>
                 </span>
                 <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
