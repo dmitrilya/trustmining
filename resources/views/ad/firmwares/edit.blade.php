@@ -36,55 +36,8 @@ quill.root.innerHTML = `{{ $ad->description }}`;
 quill.on('text-change', () => description = quill.root.innerHTML);">
     <input type="hidden" name="props" x-ref="props_firmwares" value="{{ json_encode($ad->props) }}">
 
-    <div x-data="{ allModels: {{ App\Models\Database\AsicModel::pluck('name') }}, models: {{ collect($ad->props['For which models']) }}, search: '' }">
-        <div>
-            <x-inputs.input-label for="search" :value="__('For which models')" />
-            <x-inputs.text-input id="search" type="text" ::value="search" placeholder=""
-                @input="search = $el.value" />
-        </div>
-
-        <template x-if="models.length">
-            <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                <template x-for="model in models" :key="model">
-                    <div>
-                        <div @click="
-                        models.splice(models.indexOf(model), 1);
-                        allModels.push(model);
-                        let props = JSON.parse($refs.props_firmwares.value);
-                        props['For which models'] = models;
-                        $refs.props_firmwares.value = JSON.stringify(props);
-                    "
-                            x-text="model"
-                            class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
-                        </div>
-                        <input type="hidden" name="models[]" :value="model">
-                    </div>
-                </template>
-            </div>
-        </template>
-
-        <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-            <template
-                x-for="model in allModels.filter(allModel => `${allModel.toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).slice(0, 20)"
-                :key="model">
-                <div @click="
-                        models.push(model);
-                        allModels.splice(allModels.indexOf(model), 1);
-                        let props = JSON.parse($refs.props_firmwares.value);
-                        props['For which models'] = models;
-                        $refs.props_firmwares.value = JSON.stringify(props);
-                    "
-                    x-text="model"
-                    class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
-                </div>
-            </template>
-            <div x-show="allModels.filter(allModel => `${allModel.toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).length > 20"
-                class="px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
-                <span x-text="allModels.filter(allModel => `${allModel}`.indexOf(search) !== -1).length - 20"></span>
-                {{ __('models more') }}
-            </div>
-        </div>
-    </div>
+    <x-inputs.multiselect name="models" label="For which models" :all="App\Models\Database\AsicModel::pluck('name')->diff($ad->props['For which models'])->values()" :selected="collect($ad->props['For which models'])"
+        handleChange="let props = JSON.parse($refs.props_firmwares.value); props['For which models'] = selected; $refs.props_firmwares.value = JSON.stringify(props);" />
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
         <div id="editor"

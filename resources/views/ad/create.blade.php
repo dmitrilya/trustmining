@@ -9,91 +9,67 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl"
-            x-data="{ ad_category_id: 1 }">
-            <form method="post" action="{{ route('ad.store') }}" class="space-y-6" enctype=multipart/form-data>
+        <div class="p-2 xs:p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl"
+            x-data="{ ad_category_id: 7 }">
+            <form method="post" action="{{ route('ad.store') }}" enctype=multipart/form-data>
                 @csrf
 
-                <x-inputs.select :label="__('Ad type')" name="ad_category_id"
-                    handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
+                <div class="space-y-6">
+                    <x-inputs.select :label="__('Ad type')" name="ad_category_id" handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
                         ->map(fn($adCategory) => ['key' => $adCategory->id, 'value' => __($adCategory->header)])
                         ->keyBy('key')" />
 
-                <x-inputs.select :label="__('Office')" name="office_id" :items="$offices
-                    ->map(fn($office) => ['key' => $office->id, 'value' => $office->address])
-                    ->keyBy('key')" />
+                    <x-inputs.select :label="__('Office')" name="office_id" :items="$offices->map(fn($office) => ['key' => $office->id, 'value' => $office->address])->keyBy('key')" />
 
-                <div>
-                    <x-inputs.input-label for="preview" :value="__('Preview')" />
-                    <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" required
-                        accept=".png,.jpg,.jpeg,.webp" label="max. 2MB, 4/3" />
-                    <x-inputs.input-error :messages="$errors->get('preview')" />
-                </div>
+                    <div>
+                        <x-inputs.input-label for="preview" :value="__('Preview')" />
+                        <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" required accept=".png,.jpg,.jpeg,.webp"
+                            label="max. 2MB, 4/3" />
+                        <x-inputs.input-error :messages="$errors->get('preview')" />
+                    </div>
 
-                <template x-if="ad_category_id == 1">
-                    @include('ad.miners.create')
-                </template>
+                    <template x-if="ad_category_id == 1">@include('ad.miners.create')</template>
 
-                <template x-if="ad_category_id == 2">
-                    @include('ad.legals.create')
-                </template>
+                    <template x-if="ad_category_id == 2">@include('ad.legals.create')</template>
 
-                <template x-if="ad_category_id == 3">
-                    @include('ad.containers.create')
-                </template>
+                    <template x-if="ad_category_id == 3">@include('ad.containers.create')</template>
 
-                <template x-if="ad_category_id == 4">
-                    @include('ad.noiseboxes.create')
-                </template>
+                    <template x-if="ad_category_id == 4">@include('ad.noiseboxes.create')</template>
 
-                <template x-if="ad_category_id == 5">
-                    @include('ad.cryptoboilers.create')
-                </template>
+                    <template x-if="ad_category_id == 5">@include('ad.cryptoboilers.create')</template>
 
-                <template x-if="ad_category_id == 6">
-                    @include('ad.water_cooling_plates.create')
-                </template>
+                    <template x-if="ad_category_id == 6">@include('ad.water_cooling_plates.create')</template>
 
-                <template x-if="ad_category_id == 7">
-                    @include('ad.firmwares.create')
-                </template>
+                    <template x-if="ad_category_id == 7">@include('ad.firmwares.create')</template>
 
-                <template x-if="ad_category_id == 8">
-                    @include('ad.monitorings.create')
-                </template>
+                    <template x-if="ad_category_id == 8">@include('ad.monitorings.create')</template>
 
-                <template x-if="ad_category_id == 9">
-                    @include('ad.accessories.create')
-                </template>
+                    <template x-if="ad_category_id == 9">@include('ad.accessories.create')</template>
 
-                <template x-if="ad_category_id == 10">
-                    @include('ad.gpus.create')
-                </template>
+                    <template x-if="ad_category_id == 10">@include('ad.gpus.create')</template>
 
-                <div>
-                    <div class="flex items-center">
-                        <div class="mr-2 xs:mr-3 w-full">
-                            <x-inputs.input-label for="price" :value="__('Price')" />
-                            <x-inputs.text-input id="price" name="price" type="number" required autocomplete="price" />
-                            <x-inputs.input-error :messages="$errors->get('price')" />
+                    <div>
+                        <div class="flex items-center">
+                            <div class="mr-2 xs:mr-3 w-full">
+                                <x-inputs.input-label for="price" :value="__('Price')" />
+                                <x-inputs.text-input id="price" name="price" type="number" required autocomplete="price" />
+                                <x-inputs.input-error :messages="$errors->get('price')" />
+                            </div>
+
+                            <x-inputs.select :label="__('Currency')" name="coin_id" key="2" :items="$coins->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                         </div>
 
-                        <x-inputs.select :label="__('Currency')" name="coin_id" key="2" :items="$coins
-                            ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
-                            ->keyBy('key')"
-                            :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                        <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-slate-500">
+                            {{ __('Enter 0 to display "Price on request"') }}
+                        </div>
                     </div>
 
-                    <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-slate-500">
-                        {{ __('Enter 0 to display "Price on request"') }}
-                    </div>
+                    <x-inputs.checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
+                        {{ __('Price including VAT') }}
+                    </x-inputs.checkbox>
+
+                    <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
                 </div>
-
-                <x-inputs.checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
-                    {{ __('Price including VAT') }}
-                </x-inputs.checkbox>
-
-                <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

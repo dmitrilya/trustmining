@@ -9,7 +9,6 @@
                 loading: false,
                 title: null,
                 subtitle: null,
-                tags: [],
                 content: null,
                 attachCallback: null
             }" x-init="const Delta = Quill.import('delta');
@@ -145,7 +144,6 @@
                 draft = JSON.parse(draft);
                 title = draft.title;
                 subtitle = draft.subtitle;
-                tags = draft.tags;
                 content = draft.content;
                 quill.root.innerHTML = draft.content;
             }
@@ -153,7 +151,7 @@
             quill.on('text-change', () => {
                 content = quill.root.innerHTML;
                 if (validation['content']) delete validation['content'];
-                saveDraft('article', { title, subtitle, tags, content });
+                saveDraft('article', { title, subtitle, content });
             });"
             @submit.prevent="if (Object.keys(validation).length > 0) {
                     pushToastAlert(Object.values(validation)[0], 'error');
@@ -177,7 +175,7 @@
             <div class="w-full">
                 <x-inputs.input-label for="article-title" :value="__('Title')" />
                 <x-inputs.length-input id="article-title" name="title" type="text" x-model="title" autocomplete="title" required max="40"
-                    @change="saveDraft('article', {title, subtitle, tags, content})" />
+                    @change="saveDraft('article', {title, subtitle, content})" />
                 <template x-if="validation.title">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
                 </template>
@@ -186,7 +184,7 @@
             <div class="w-full">
                 <x-inputs.input-label for="article-subtitle" :value="__('Brief description')" />
                 <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" x-model="subtitle" autocomplete="subtitle" required max="70"
-                    @change="saveDraft('article', {title, subtitle, tags, content})" />
+                    @change="saveDraft('article', {title, subtitle, content})" />
                 <template x-if="validation.subtitle">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
                 </template>
@@ -204,50 +202,8 @@
                 ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                 ->keyBy('key')" />
 
-            <div x-data="{ allTags: {{ $tags }}.filter(tag => !new Set(tags).has(tag)), search: '' }">
-                <div>
-                    <x-inputs.input-label for="search" :value="__('Hashtags')" />
-                    <div
-                        class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
-                        <input type="text" id="search" x-model="search" placeholder="#"
-                            class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-600 dark:text-slate-400 w-full" />
+            <x-inputs.multiselect name="tags" label="Hashtags" :all="$tags" withAdding="true" />
 
-                        <button type="button"
-                            class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-2 py-1 rounded-full"
-                            @click="if (!search.trim().length) return; tags.push(search); saveDraft('article', {title, subtitle, tags, content}); if (allTags.indexOf(search) != -1) allTags.splice(allTags.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
-                    </div>
-                </div>
-
-                <template x-if="tags.length">
-                    <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                        <template x-for="tag in tags" :key="tag">
-                            <div @click="tags.splice(tags.indexOf(tag), 1);saveDraft('article', {title, subtitle, tags, content});allTags.push(tag)"
-                                x-text="tag"
-                                class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-indigo-600 hover:bg-indigo-500 dark:hover:bg-slate-800 text-white text-xxs xs:text-xs">
-                            </div>
-                        </template>
-                    </div>
-                </template>
-
-                <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-                    <template x-for="tag in allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).slice(0, 15)"
-                        :key="tag">
-                        <div @click="tags.push(tag);saveDraft('article', {title, subtitle, tags, content});allTags.splice(allTags.indexOf(tag), 1);search = ''"
-                            x-text="tag"
-                            class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
-                        </div>
-                    </template>
-                    <div x-show="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length > 15"
-                        class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
-                        <span x-text="allTags.filter(allTag => `${allTag}`.toLowerCase().indexOf(search.toLowerCase()) !== -1).length - 15"></span>
-                        {{ __('tags more') }}
-                    </div>
-                </div>
-
-                <template x-for="tag in tags" :key="tag">
-                    <input type="hidden" name="tags[]" :value="tag">
-                </template>
-            </div>
             <template x-if="validation.tags">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.tags?.[0]"></p>
             </template>
