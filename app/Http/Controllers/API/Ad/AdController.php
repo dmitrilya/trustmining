@@ -226,12 +226,12 @@ class AdController extends Controller
                         continue;
                     }
 
-                    if (!is_int($adChanges['props']['waiting']) || $adChanges['props']['waiting'] < 1 || $adChanges['props']['waiting'] > 120) {
+                    if (!is_int($adChanges['props']['waiting']) || $adChanges['props']['waiting'] < 1 || $adChanges['props']['waiting'] > 180) {
                         array_push($errors, [
                             'id' => $adChanges['id'],
                             'error' => [
                                 'field' => 'props.waiting',
-                                'message' => 'Valid type of field "waiting" is int. Min is 1, max is 120.'
+                                'message' => 'Valid type of field "waiting" is int. Min is 1, max is 180.'
                             ]
                         ]);
 

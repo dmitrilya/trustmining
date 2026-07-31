@@ -28,7 +28,7 @@
 
         <div :class="{ 'block': !inStock, 'hidden': inStock }" class="mt-4">
             <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
-            <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="120"
+            <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180"
                 autocomplete="waiting" x-ref="waiting"
                 @change="let props = JSON.parse($refs.props_gpus.value);props['Waiting (days)'] = $el.value;$refs.props_gpus.value = JSON.stringify(props);" />
             <x-inputs.input-error :messages="$errors->get('waiting')" />

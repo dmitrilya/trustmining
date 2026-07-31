@@ -26,7 +26,7 @@
 
     <div x-show="!inStock" class="mt-4">
         <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
-        <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="120" autocomplete="waiting"
+        <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180" autocomplete="waiting"
             :value="isset($ad->props['Waiting (days)']) ? $ad->props['Waiting (days)'] : null"
             @change="let props = JSON.parse($refs.props_miners.value);props['Waiting (days)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
         <x-inputs.input-error :messages="$errors->get('waiting')" />
