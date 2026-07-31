@@ -45,12 +45,12 @@ window.addComment = async (form, text, parentId) => {
     });
 }
 
-window.toc = (article, name) => {
+window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
     const headings = article.querySelectorAll('h2, h3');
     if (headings.length === 0) return;
 
     const tocList = document.createElement('ul');
-    tocList.classList.add('space-y-2');
+    tocList.classList.add(space);
 
     headings.forEach((heading, index) => {
         const id = `toc-anchor-${index}`;
@@ -63,7 +63,7 @@ window.toc = (article, name) => {
         link.href = `#${id}`;
 
         if (heading.tagName.toLowerCase() === 'h3') {
-            listItem.classList.add('ml-2', 'list-none', 'text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-800', 'dark:group-hover:text-slate-200', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
+            listItem.classList.add('ml-2', 'list-none', 'text-slate-600', 'dark:text-slate-400', 'group-hover:text-slate-800', 'dark:group-hover:text-slate-200', 'marker:text-[1px]', 'text-xs', 'group', 'cursor-pointer', 'relative', 'pl-1.5', 'sm:pl-2', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full');
         } else {
             listItem.classList.add('list-none', 'text-xs', 'group', 'cursor-pointer');
         }
@@ -82,7 +82,7 @@ window.toc = (article, name) => {
 
     const tocLgContainer = document.getElementById('toc-lg-container');
     const tocContainer = document.getElementById('toc-container');
-    tocLgContainer.classList.add('sticky', 'top-4', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.classList.add('sticky', 'top-16', 'lg:top-20', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
     tocContainer.classList.add('min-h-[129px]');
 
     const blockName = document.createElement('p');
@@ -104,7 +104,7 @@ window.toc = (article, name) => {
         });
     });
 
-    if (headings.length > 3) {
+    if (headings.length > 3 && needExpand) {
         tocListMobile.classList.add('overflow-hidden', 'transition-all')
         tocListMobile.style.height = '62px';
 

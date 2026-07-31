@@ -9,7 +9,7 @@ module.exports = {
     ],
 
     safelist: [
-        'min-h-[129px]', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full',
+        'top-16', 'lg:top-20', 'min-h-[129px]', 'before:content-[""]', 'before:absolute', 'before:left-0', 'before:top-2', 'before:h-0.5', 'before:w-0.5', 'before:bg-current', 'before:rounded-full',
         'bg-green-100', 'dark:bg-green-800', 'dark:text-green-200',
         'from-red-800/40', 'to-red-900/20', 'dark:to-slate-900', 'border-red-500/60', 'shadow-[inset_0_0_12px_rgba(239,68,68,0.15)]', 'bg-red-500', 'shadow-[0_0_20px_rgba(239,68,68,0.25)]', 'from-amber-800/40', 'to-amber-900/10', 'border-amber-500/50', 'shadow-[inset_0_0_12px_rgba(217,70,239,0.15)]', 'bg-amber-500', 'shadow-[0_0_15px_rgba(217,70,239,0.2)]', 'from-indigo-800/40', 'to-indigo-900/10', 'border-indigo-500/50', 'shadow-[inset_0_0_12px_rgba(99,102,241,0.1)]', 'shadow-[0_0_10px_rgba(99,102,241,0.15)]'
     ],

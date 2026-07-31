@@ -92,8 +92,7 @@
             });
         </script>
         <noscript>
-            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;"
-                    alt="" />
+            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;" alt="" />
             </div>
         </noscript>
     @endif
@@ -140,17 +139,18 @@
         <meta itemprop="name" content="{{ $attributes->get('itemname') }}" />
     @endif
 
-    <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}"
-        x-data="{ filter: false }">
+    <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}" x-data="{ filter: false }">
+        <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl sticky top-0 left-0 z-50">
         @include('layouts.navigation')
 
         @if (isset($header))
-            <header class="bg-white/40 dark:bg-slate-900/40 shadow shadow-logo-color">
+            <header class="w-full shadow shadow-logo-color">
                 <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
         @endif
+        </div>
 
         <main>
             {{ $slot }}
@@ -163,11 +163,9 @@
                         </h2>
 
                         <button type="button" aria-label="{{ __('Close') }}"
-                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                            @click="show = false">
+                            class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500" @click="show = false">
                             <span class="sr-only">Close</span>
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
@@ -190,8 +188,7 @@
                                     class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
                                     @click="show = false">
                                     <span class="sr-only">Close</span>
-                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" aria-hidden="true">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
@@ -204,8 +201,7 @@
                             <x-tg-auth />
 
                             <div class="flex items-center justify-between mt-6">
-                                <x-inputs.checkbox name="dont_ask" value="true"
-                                    textClasses="text-slate-500 text-xxs py-3">
+                                <x-inputs.checkbox name="dont_ask" value="true" textClasses="text-slate-500 text-xxs py-3">
                                     {{ __("Don't ask again") }}
                                 </x-inputs.checkbox>
 
