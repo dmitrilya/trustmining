@@ -1,4 +1,4 @@
-<div class="space-y-6" x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+<div class="space-y-6" x-data="{ measurement: '{{ $ad->asicVersion->measurement }}', description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
 const Link = Quill.import('formats/link');
 class CustomLink extends Link {
     static create(value) {
