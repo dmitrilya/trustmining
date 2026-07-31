@@ -33,7 +33,7 @@
         </a>
     @endif
 
-    @if ($ad->adCategory->name == 'firmwares')
+    @if ($ad->adCategory->name == 'firmwares' && array_key_exists('Modes', $ad->props))
         <div class="overflow-hidden border border-slate-300 dark:border-slate-700 rounded-xl">
             <table class="min-w-full divide-y divide-slate-300 dark:divide-slate-700 text-left text-xs xs:text-sm text-slate-800 dark:text-slate-200">
                 <thead class="bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400">
