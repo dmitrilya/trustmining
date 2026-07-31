@@ -119,7 +119,7 @@
                         <div class="md:col-span-2 md:col-start-1">
                             <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                                 @if ($ad->adCategory->name == 'firmwares')
-                                    <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . $ad->asicVersion->measurement . '/s'" />
+                                    <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . ' ' . $ad->asicVersion->measurement . '/s'" />
                                 @endif
 
                                 @foreach ($ad->props as $prop => $value)
@@ -342,7 +342,7 @@
 
                         <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                             @if ($ad->adCategory->name == 'firmwares')
-                                <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . $ad->asicVersion->measurement . '/s'" />
+                                <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . ' ' . $ad->asicVersion->measurement . '/s'" />
                             @endif
 
                             @foreach ($ad->props as $prop => $value)
