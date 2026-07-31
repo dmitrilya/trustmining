@@ -38,10 +38,10 @@
             <table class="min-w-full divide-y divide-slate-300 dark:divide-slate-700 text-left text-xs xs:text-sm text-slate-800 dark:text-slate-200">
                 <thead class="bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400">
                     <tr>
-                        <th class="px-2 xs:px-4 py-2">{{ $ad->asicVersion->measurement }}/s</th>
-                        <th class="px-2 xs:px-4 py-2">{{ __('W') }}/{{ $ad->asicVersion->measurement }}</th>
-                        <th class="px-2 xs:px-4 py-2">{{ __('W') }}</th>
-                        <th class="px-2 xs:px-4 py-2">{{ __('Strain') }}</th>
+                        <th class="px-2 lg:px-4 py-2">{{ $ad->asicVersion->measurement }}/s</th>
+                        <th class="px-2 lg:px-4 py-2">{{ __('W') }}/{{ $ad->asicVersion->measurement }}</th>
+                        <th class="px-2 lg:px-4 py-2">{{ __('W') }}</th>
+                        <th class="px-2 lg:px-4 py-2">{{ __('Strain') }}</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
@@ -51,10 +51,10 @@
                         @endphp
 
                         <tr class="{{ $strain->bg() }} {{ $strain->text() }}">
-                            <td class="px-2 xs:px-4 py-2">{{ $mode['h'] }}</td>
-                            <td class="px-2 xs:px-4 py-2">{{ $mode['e'] }}</td>
-                            <td class="px-2 xs:px-4 py-2">~{{ round($mode['h'] * $mode['e'] / 10) * 10 }}</td>
-                            <td class="px-2 xs:px-4 py-2">{{ __('characteristics.strain_level.' . $strain->name()) }}</td>
+                            <td class="px-2 lg:px-4 py-2">{{ $mode['h'] }}</td>
+                            <td class="px-2 lg:px-4 py-2">{{ $mode['e'] }}</td>
+                            <td class="px-2 lg:px-4 py-2">~{{ round($mode['h'] * $mode['e'] / 10) * 10 }}</td>
+                            <td class="px-2 lg:px-4 py-2">{{ __('characteristics.strain_level.' . $strain->name()) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

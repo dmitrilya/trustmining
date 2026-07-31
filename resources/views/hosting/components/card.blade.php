@@ -30,12 +30,7 @@
             <a href="{{ route('company', ['user' => $hosting->user->slug]) }}" draggable="false"
                 class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">{{ $hosting->user->name }}</a>
 
-            <div class="flex items-center my-1 md:my-2">
-                <div
-                    class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $hosting->user->tf > config('trustfactor.yellow') ? ($hosting->user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
-                </div>
-                <p class="text-xxs sm:text-xs md:text-sm text-slate-500">{{ __('Trust Factor') }}</p>
-            </div>
+            <x-tf :tf="$hosting->user->tf" class="my-1 md:my-2" />
 
             <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
         </div>

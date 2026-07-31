@@ -76,12 +76,7 @@
             </div>
         </div>
 
-        <div class="flex items-center mt-2 sm:mt-3">
-            <div
-                class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
-            </div>
-            <p class="text-xs sm:text-sm text-slate-500">{{ __('Trust Factor') }}</p>
-        </div>
+        <x-tf :tf="$user->tf" class="mt-2 sm:mt-3" />
 
         <div itemprop="description"
             class="ql-editor mt-3 sm:mt-4 lg:mt-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">

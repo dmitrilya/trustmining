@@ -4,13 +4,9 @@
     @if (
         $user->company &&
             ($user->company->logo ||
-                (isset($moderation) &&
-                    isset($auth) &&
-                    in_array($auth->role->name, ['admin', 'moderator']) &&
-                    isset($moderation->data['logo']))))
+                (isset($moderation) && isset($auth) && in_array($auth->role->name, ['admin', 'moderator']) && isset($moderation->data['logo']))))
         <img class="rounded-full mr-2 {{ isset($bg) ? 'w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16' : 'w-12 h-12' }}"
-            src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}"
-            alt="">
+            src="{{ Storage::url(isset($moderation->data['logo']) ? $moderation->data['logo'] : $user->company->logo) }}" alt="">
     @endif
 
     <div>
@@ -18,8 +14,7 @@
             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
         </div>
 
-        <a href="{{ route('company', ['user' => $user->slug]) }}"
-            class="hover:underline text-sm text-indigo-500 hover:text-indigo-600">{{ $user->name }}</a>
+        <a href="{{ route('company', ['user' => $user->slug]) }}" class="hover:underline text-sm text-indigo-500 hover:text-indigo-600">{{ $user->name }}</a>
     </div>
 </div>
 
@@ -36,9 +31,4 @@
     </div>
 </div>
 
-<div class="flex items-center mt-2 sm:mt-3">
-    <div
-        class="trust mr-1 sm:mr-2 w-3 h-3 md:w-4 md:h-4 rounded-full border border-slate-300 dark:border-slate-700 {{ $user->tf > config('trustfactor.yellow') ? ($user->tf > config('trustfactor.green') ? 'bg-green-500' : 'bg-yellow-300') : 'bg-red-600' }}">
-    </div>
-    <p class="text-xs sm:text-sm text-slate-500">{{ __('Trust Factor') }}</p>
-</div>
+<x-tf :tf="$user->tf" class="mt-2 sm:mt-3" />
