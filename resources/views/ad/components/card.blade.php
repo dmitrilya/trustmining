@@ -103,7 +103,7 @@
                 @if ($ad->ad_category_name == 'gpus')
                     <x-characteristics.characteristic name="Power (kW/h)" :value="$ad->gpu_model_max_power" />
                 @elseif ($ad->ad_category_name == 'firmwares')
-                    <x-characteristics.characteristic name="Model" :value="$ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement" />
+                    <x-characteristics.characteristic name="Model" :value="$ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement . '/s'" />
                 @endif
 
                 @if (!isset($sm))
