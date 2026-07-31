@@ -28,6 +28,8 @@ class UpdateAdRequest extends FormRequest
      */
     public function rules()
     {
+        $ad = $this->route('ad');
+
         return [
             'office_id' => ['required', new OfficeBelongsToUser],
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
@@ -35,8 +37,8 @@ class UpdateAdRequest extends FormRequest
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',
             'props' => [
                 'nullable',
-                function ($attribute, $value, $fail) {
-                    if (AdCategory::find($this->ad_category_id)->value('name') == 'firmwares' && (!is_array($value) || !isset($value['modes']) || !is_array($value['modes']) || empty($value['modes'])))
+                function ($attribute, $value, $fail) use ($ad) {
+                    if ($ad->adCategory->name == 'firmwares' && (!is_array($value) || !isset($value['modes']) || !is_array($value['modes']) || empty($value['modes'])))
                         $fail('For a firmware category, you must specify a list of operating modes.');
                 },
             ],
