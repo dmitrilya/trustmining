@@ -71,11 +71,12 @@ class TrustFactorService
         }
 
         // возраст компании
-        $years = Carbon::now()->diffInYears(Carbon::createFromTimestampMs($card['state']['registration_date']));
+        $years = Carbon::now()->diffInMonths(Carbon::createFromTimestampMs($card['state']['registration_date']));
 
-        if ($years > 4)      $score += 5;
-        elseif ($years > 2)  $score += 2;
-        elseif ($years < 1)  $score -= 3;
+        if ($years > 36)      $score += 10;
+        elseif ($years > 24)  $score += 6;
+        elseif ($years > 18)  $score += 3;
+        elseif ($years < 8)  $score -= 3;
 
         // статус
         if ($card['state']['status'] != 'ACTIVE') {
