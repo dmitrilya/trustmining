@@ -1,7 +1,7 @@
 <x-app-layout title="Налоги на майнинг и оборот криптовалюты в России | TRUSTMINING"
     description="Подробное руководство по налогообложению майнинга в России. Физические лица, ИП, ООО, расчет налогов, списание оборудования, декларации, документы, сроки и практические примеры.">
     <x-slot name="header">
-        <div class="flex items-center justify-between gap-4">
+        <div class="flex items-end justify-between gap-4">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight transition-opacity duration-150 ease-in-out">
                 {{ __('Taxes on cryptocurrency mining and circulation in Russia') }}
             </h1>
@@ -15,8 +15,7 @@
         </div>
 
         <div id="header-toc-dropdown" class="lg:hidden max-h-0 overflow-y-auto transition-all duration-300 ease-in-out">
-            <div id="toc-container" class="pt-2 mt-2 border-t border-slate-300 dark:border-slate-700">
-            </div>
+            <div id="toc-container" class="pt-2 mt-2 border-t border-slate-300 dark:border-slate-700"></div>
         </div>
     </x-slot>
 
@@ -32,7 +31,7 @@
                 if (dropdown.style.maxHeight) {
                     dropdown.style.maxHeight = null;
                 } else {
-                    dropdown.style.maxHeight = "400px";
+                    dropdown.style.maxHeight = "398px";
                 }
             });
 
