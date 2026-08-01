@@ -33,7 +33,7 @@
                     ])
                 </div>
             </div>
-            <div class="flex items-center ml-4 xl:ml-6">
+            <div class="flex items-center ml-2 xl:ml-6">
                 @auth
                     @php
                         $auth = Auth::user();
