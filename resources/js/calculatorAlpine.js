@@ -72,7 +72,7 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
         if (rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
-    sortFirmwares() {
+    sortFirmwares(dailyProfit) {
         let availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
 
         if (this.availableFirmwares.length && this.firmware == null) availableFirmwares.map(f => {
@@ -125,7 +125,6 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
     },
 
     recalculateAll() {
-        this.sortFirmwares();
         this.hashrate = this.firmware != null ? this.firmware.h : this.version.h;
         this.efficiency = this.firmware != null ? this.firmware.e : this.version.e;
         const isRub = this.currency == 'RUB';
@@ -216,6 +215,8 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
         dailyProfit -= dailyTaxCurrency;
         dailyProfitOneUSDT -= dailyTaxOneUSDT;
         this.dailyProfit = round2(dailyProfit * COEF[this.view]);
+
+        this.sortFirmwares(dailyProfit);
 
         this.paybackPeriod = vp ? dailyProfitOneUSDT > 0 ? Math.round(vp / dailyProfitOneUSDT) + ' ' + window.pluralize(Math.round(vp / dailyProfitOneUSDT), l['Days']) : '∞' : l['No data']
         const total = dailyIncomeCurrency + dailyConsumptionCurrency + dailyTaxCurrency;
