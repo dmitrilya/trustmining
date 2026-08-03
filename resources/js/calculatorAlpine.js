@@ -72,45 +72,52 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
         if (rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
-    sortFirmwares(algoProfit, isRub, isCompany, vp, minPriceRubRounded, dailyProfit) {
+    firmwareCalc(h, e, algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
+        const fwProfit = algoProfit * h * this.version.c;
+        const fwDailyIncomeOne = (fwProfit * (100 - this.fee) * this.uptime / 10000);
+        const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
+
+        const fwDailyConsumptionOne = e * h / 1000 * this.tariff * 24 * this.uptime / 100;
+        const fwDailyConsumptionCurrency = (fwDailyConsumptionOne * this.count) * (!isRub ? rub : 1);
+
+        let fwDailyProfit = fwDailyIncomeCurrency - fwDailyConsumptionCurrency;
+
+        if (this.taxEnabled) {
+            let fwCryptoTaxProfit = (fwDailyIncomeOne - fwDailyConsumptionOne * rub) * this.count / rub;
+            if (isCompany && vp) {
+                const fwAmortization = round2(minPriceRubRounded * this.count / 1095);
+                fwCryptoTaxProfit -= (fwAmortization / this.count);
+            }
+
+            let fwDailyTax = 0;
+            if (fwCryptoTaxProfit > 0) {
+                if (this.taxType == 'person' || this.taxType == 'ip') {
+                    const fwYearProfit = fwCryptoTaxProfit * 365;
+                    const matchedBracket = BRACKETS.find(([limit]) => fwYearProfit > limit);
+                    fwDailyTax = ((fwYearProfit - matchedBracket[0]) * matchedBracket[1] + matchedBracket[2]) / 365;
+                } else {
+                    fwDailyTax = fwCryptoTaxProfit * 0.25;
+                }
+            }
+
+            const fwDailyTaxCurrency = fwDailyTax * (!isRub ? rub : 1);
+            fwDailyProfit -= fwDailyTaxCurrency;
+        }
+
+        return fwDailyProfit;
+    },
+
+    sortFirmwares(algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
         let availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
+        let baseDailyProfit = this.firmwareCalc(this.version.h, this.version.e, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
 
         if (availableFirmwares.length) availableFirmwares = availableFirmwares.map(f => {
             let up = 0;
-            const fwProfit = algoProfit * f.h * this.version.c;
-            const fwDailyIncomeOne = (fwProfit * (100 - this.fee) * this.uptime / 10000);
-            const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
+            let dailyProfit = this.firmwareCalc(f.h, f.e, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
 
-            const fwDailyConsumptionOne = f.e * f.h / 1000 * this.tariff * 24 * this.uptime / 100;
-            const fwDailyConsumptionCurrency = (fwDailyConsumptionOne * this.count) * (!isRub ? rub : 1);
-
-            let fwDailyProfit = fwDailyIncomeCurrency - fwDailyConsumptionCurrency;
-
-            if (this.taxEnabled) {
-                let fwCryptoTaxProfit = (fwDailyIncomeOne - fwDailyConsumptionOne * rub) * this.count / rub;
-                if (isCompany && vp) {
-                    const fwAmortization = round2(minPriceRubRounded * this.count / 1095);
-                    fwCryptoTaxProfit -= (fwAmortization / this.count);
-                }
-
-                let fwDailyTax = 0;
-                if (fwCryptoTaxProfit > 0) {
-                    if (this.taxType == 'person' || this.taxType == 'ip') {
-                        const fwYearProfit = fwCryptoTaxProfit * 365;
-                        const matchedBracket = BRACKETS.find(([limit]) => fwYearProfit > limit);
-                        fwDailyTax = ((fwYearProfit - matchedBracket[0]) * matchedBracket[1] + matchedBracket[2]) / 365;
-                    } else {
-                        fwDailyTax = fwCryptoTaxProfit * 0.25;
-                    }
-                }
-
-                const fwDailyTaxCurrency = fwDailyTax * (!isRub ? rub : 1);
-                fwDailyProfit -= fwDailyTaxCurrency;
-            }
-
-            if (dailyProfit > 0 && fwDailyProfit > dailyProfit) {
-                up = Math.round(((fwDailyProfit - dailyProfit) / dailyProfit) * 100);
-            } else if (dailyProfit <= 0 && fwDailyProfit > 0) {
+            if (baseDailyProfit > 0 && dailyProfit > baseDailyProfit) {
+                up = Math.round(((dailyProfit - baseDailyProfit) / baseDailyProfit) * 100);
+            } else if (baseDailyProfit <= 0 && dailyProfit > 0) {
                 up = 100;
             }
 
