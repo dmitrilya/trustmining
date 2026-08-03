@@ -102,7 +102,7 @@
     </script>
 
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="grid grid-cols-1 xl:grid-cols-7 gap-4 items-start relative">
+        <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
             <div x-init="toc($el, '{{ __('TOC') }}', false, 'space-y-1')"
                 class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-12 text-sm xl:col-span-5">
                 <section id="block-1">
@@ -1515,7 +1515,7 @@
                 </section>
             </div>
 
-            <div class="hidden xl:block xl:col-span-2 sticky top-[140px]">
+            <div class="hidden xl:block xl:col-span-2">
                 <div class="max-h-[80vh] overflow-y-auto" id="toc-lg-container"></div>
             </div>
         </div>

@@ -1,10 +1,10 @@
-<div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope
-    itemtype="https://schema.org/Answer" x-data="{ open: false }" id="answer-{{ $answer->id }}"
+<div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope itemtype="https://schema.org/Answer" x-data="{ open: false }"
+    id="answer-{{ $answer->id }}"
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
-            <svg class="flex-shrink-0 w-5 h-5 sm:w-7 sm:h-7 text-yellow-300" aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="flex-shrink-0 w-5 h-5 sm:w-7 sm:h-7 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
                     d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z"
                     clip-rule="evenodd" />
@@ -13,8 +13,7 @@
 
         <div class="ml-auto flex items-end">
             @if ($authId && $authId == $answer->user_id)
-                <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
-                    @click="forumEdit($refs.content)">
+                <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center" @click="forumEdit($refs.content)">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                         aria-hidden="true" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -25,10 +24,8 @@
                 <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 flex items-center"
                     @click="deleteHref = '{{ route('forum.answer.destroy', ['forumAnswer' => $answer->id]) }}'; $dispatch('open-modal', 'delete-modal')">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
-                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" fill="none"
-                        viewBox="0 0 26 26">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" height="18.67px"
-                            stroke-width="1.5"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" fill="none" viewBox="0 0 26 26">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" height="18.67px" stroke-width="1.5"
                             d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                     </svg>
                 </div>
@@ -67,8 +64,7 @@
         @if (count($answer->images))
             <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                 @foreach ($answer->images as $image)
-                    <div
-                        class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
+                    <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                         <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
                             class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
                         </div>
@@ -96,8 +92,7 @@
     </div>
 
     <div class="ml-auto w-fit mb-2 sm:mb-3 lg:mb-4">
-        <div data-type="datetime" data-date="{{ $answer->created_at }}"
-            class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500"></div>
+        <div data-type="datetime" data-date="{{ $answer->created_at }}" class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500"></div>
         <meta itemprop="dateCreated" content="{{ $answer->created_at }}">
     </div>
 
@@ -108,8 +103,7 @@
                     class="flex items-center justify-between w-full py-5 text-left text-slate-800 dark:text-slate-200 text-xs sm:text-sm lg:text-base">
                     <span>{{ __('Comments') }} ({{ $answer->moderatedForumComments->count() }})</span>
                     <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5 5 1 1 5" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
                     </svg>
                 </button>
             </h3>
@@ -117,8 +111,7 @@
                 <div class="py-3">
                     @if (!Auth::user())
                         <div class="flex items-center justify-center w-full h-full">
-                            <a
-                                href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
+                            <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
                         </div>
                     @else
                         @include('forum.comment.create')
@@ -137,15 +130,12 @@
     <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
         class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
-        <div
-            class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
-            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
-                @click.away="open = false">
+        <div class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
+            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800" @click.away="open = false">
                 <button @click="open = false" type="button"
                     class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
                     <span class="sr-only">Close modal</span>
                 </button>

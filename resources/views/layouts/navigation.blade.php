@@ -154,7 +154,7 @@
                     @else
                         <button
                             class="inline-flex items-center border-b-2 border-transparent text-sm leading-5 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:border-slate-300 dark:focus:border-slate-600 transition duration-100 ease-in-out"
-                            @click="$dispatch('open-modal', 'login')"">{{ __('Login') }}</button>
+                            @click="$dispatch('open-modal', 'login')">{{ __('Login') }}</button>
                     @endauth
                 </div>
 
@@ -253,7 +253,7 @@
             @else
                 <button
                     class="block w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-300 dark:focus:border-slate-700 transition duration-100 ease-in-out"
-                    @click="$dispatch('open-modal', 'login')"">{{ __('Login') }}</button>
+                    @click="$dispatch('open-modal', 'login')">{{ __('Login') }}</button>
             @endauth
         </div>
     </div>

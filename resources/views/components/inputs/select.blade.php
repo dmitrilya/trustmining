@@ -11,7 +11,7 @@
 ])
 
 @php
-    $itemsData = $isJs ? $items : json_encode($items->values());
+    $itemsData = $isJs ? $items : $items->values();
 
     if ($key) {
         $defaultKey = "'$key'";

@@ -45,7 +45,7 @@
                 </ol>
             </nav>
 
-            <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
+            <div class="flex justify-end mt-2 xs:mt-4 lg:mt-0">
                 <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
                     <x-buttons.secondary-button
                         class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
@@ -165,7 +165,7 @@
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">
                             {{ __('Please log in to leave a reply') }}</p>
-                        <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
+                        <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
                     </div>
                 @else
                     @include('forum.answer.create')

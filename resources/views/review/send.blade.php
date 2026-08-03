@@ -88,6 +88,6 @@
         <p class="text-slate-500 text-sm mb-4">
             {{ __('You must be logged in to leave a review.') }}</p>
 
-        <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
+        <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
     </div>
 @endauth

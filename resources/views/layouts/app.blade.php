@@ -140,16 +140,16 @@
     @endif
 
     <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}" x-data="{ filter: false }">
-        <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl sticky top-0 left-0 z-50">
-        @include('layouts.navigation')
+        <div id="head" class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl sticky top-0 left-0 z-50">
+            @include('layouts.navigation')
 
-        @if (isset($header))
-            <header class="w-full shadow shadow-logo-color">
-                <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+            @if (isset($header))
+                <header class="w-full shadow shadow-logo-color">
+                    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
         </div>
 
         <main>

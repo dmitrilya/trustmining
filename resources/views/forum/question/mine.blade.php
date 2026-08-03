@@ -118,7 +118,7 @@
                                                     </a>
                                                 @endforeach
 
-                                                <a class="block ml-auto w-full sm:w-fit mt-3 xs:mt-4 sm:mt-5 lg:mt-0"
+                                                <a class="block ml-auto w-full sm:w-fit mt-2 xs:mt-4 lg:mt-0"
                                                     href="{{ route('forum.question.publish', ['forumQuestion' => $question->id]) }}">
                                                     <x-buttons.primary-button class="w-full">
                                                         {{ __('There is no answer to my question') }}

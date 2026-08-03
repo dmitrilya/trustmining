@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         @if (!Auth::user())
             <div class="flex items-center justify-center w-full h-full">
-                <a href="{{ route('login') }}"><x-buttons.primary-button>{{ __('Sign in') }}</x-buttons.primary-button></a>
+                <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
             </div>
         @else
             <div

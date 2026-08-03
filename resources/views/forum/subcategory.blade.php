@@ -45,7 +45,7 @@
                 </ol>
             </nav>
 
-            <div class="flex justify-end mt-3 xs:mt-4 sm:mt-5 lg:mt-0">
+            <div class="flex justify-end mt-2 xs:mt-4 lg:mt-0">
                 <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
                     <x-buttons.secondary-button
                         class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>

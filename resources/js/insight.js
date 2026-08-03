@@ -82,7 +82,8 @@ window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
 
     const tocLgContainer = document.getElementById('toc-lg-container');
     const tocContainer = document.getElementById('toc-container');
-    tocLgContainer.classList.add('sticky', 'top-16', 'lg:top-20', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.classList.add('sticky', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.style.top = document.getElementById('head')?.offsetHeight + 16 + 'px';
     tocContainer.classList.add('min-h-[129px]');
 
     const blockName = document.createElement('p');
