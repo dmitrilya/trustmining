@@ -40,7 +40,7 @@ class AdController extends Controller
      */
     public function index(Request $request, AdCategory $adCategory)
     {
-        $ads = $this->getAds($adCategory->id, $request)->orderByDesc('ads.ordering_id')->withQueryString()->paginate(15);
+        $ads = $this->getAds($adCategory->id, $request)->orderByDesc('ads.ordering_id')->paginate(15)->withQueryString();
 
         if ($request->ajax()) return response()->json([
             'html' => view('ad.components.list', ['adCategory' => $adCategory, 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
