@@ -82,7 +82,7 @@
                             <div class="w-full">
                                 <x-inputs.select :label="__('Firmware')" name="firmware" :isJs="true"
                                     handleChange="(selectedFirmware => firmware = selectedFirmware !== -1 ? availableFirmwares[selectedFirmware] : null)"
-                                    items="[{ key: -1, value: '{{ __('Without firmware') }}' }, ...availableFirmwares.map((f, i) => ({ key: i, value: `${f.h}${f.m}/s - ${f.c} (${f.e}j/${f.m})`, style: f.s }))]" />
+                                    items="[{ key: -1, value: '{{ __('Without firmware') }}' }, ...availableFirmwares.map((f, i) => ({ key: i, value: `${f.h}${f.m}/s - ${f.c} (${f.e}j/${f.m}) (+${f.up}%)`, style: f.s }))]" />
                             </div>
                         </template>
 

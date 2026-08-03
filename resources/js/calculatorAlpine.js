@@ -120,7 +120,6 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
             };
         }).sort((a, b) => b.up - a.up);
 
-
         this.availableFirmwares = availableFirmwares;
     },
 
@@ -157,7 +156,7 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
             if (isCompany && vp) {
                 amortization = round2(minPriceRubRounded * this.count / 1095);
                 cryptoTaxProfit -= amortization;
-                taxHelp.push(`<p class='font-sans text-slate-500 mb-1'>l['Equipment amortization']</p>`);
+                taxHelp.push(`<p class='font-sans text-slate-500 mb-1'>${l['Equipment amortization']}</p>`);
                 taxHelp.push(`<span>${l['Price']} ${this.version.n} ${this.version.h}${this.version.m} - <span class='text-indigo-500'>${minPriceRubRounded}</span> ₽ (${l['With VAT']})</span><br>`);
                 if (this.count > 1) taxHelp.push(`<span><span class='text-indigo-500'>${minPriceRubRounded}</span> * ${this.count} = <span class='indigo-500'>${minPriceRubRounded * this.count}</span></span><br>`);
                 taxHelp.push(`<span><span class='text-indigo-500'>${minPriceRubRounded * this.count}</span> / 1095 (3 ${l['y']}) = <span class='text-blue-700 dark:text-blue-300'>${amortization}</span></span><br>`);
@@ -203,7 +202,7 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
                 } else {
                     dailyTax = cryptoTaxProfit * 0.25;
                     taxHelp.push(`<p class='font-sans text-slate-500 mt-1.5 mb-1'>${l['Tax rate']} 25%</p>`);
-                    taxHelp.push(`<span class='text-yellow-300'>${cryptoTaxProfitRounded}</span> * 0.25 = <span class='text-rose-600 dark:text-rose-400'>${dailyTaxRounded}</span>`);
+                    taxHelp.push(`<span class='text-yellow-300'>${cryptoTaxProfitRounded}</span> * 0.25 = <span class='text-rose-600 dark:text-rose-400'>${round2(dailyTax)}</span>`);
                 }
             }
 

@@ -11,21 +11,39 @@
 ])
 
 @php
-    $itemsData = $isJs ? $items : json_encode($items);
+    $itemsData = $isJs ? $items : json_encode($items->values());
 
     if ($key) {
         $defaultKey = "'$key'";
     } else {
-        $defaultKey = $isJs ? "{$items}[0].key" : "'" . collect($items)->first()['key'] . "'";
+        $defaultKey = $isJs ? "({$itemsData}[0]?.key ?? 0)" : "'" . collect($itemsData)->first()['key'] . "'";
     }
 @endphp
 
 @if ($isJs || count($items))
     <div x-data="{
         open: false,
-        items: {{ $itemsData }},
         itemKey: {{ $defaultKey }},
-        isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }}
+        isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }},
+        
+        get currentItems() {
+            return {{ $isJs ? 'true' : 'false' }} ? ({{ $itemsData }} || []) : {{ $itemsData }};
+        },
+        
+        get selectedItem() {
+            return this.currentItems.find(i => i.key == this.itemKey);
+        },
+        
+        init() {
+            if ({{ $isJs ? 'true' : 'false' }}) {
+                this.$watch('() => this.currentItems', (newItems) => {
+                    if (newItems.length && !newItems.some(i => i.key == this.itemKey)) {
+                        this.itemKey = newItems[0]?.key ?? -1;
+                        @if($handleChange) {{ $handleChange }}(this.itemKey); @endif
+                    }
+                }, { deep: true });
+            }
+        }
     }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }};">
 
         @if (isset($label))
@@ -45,20 +63,17 @@
                         @switch($icon['type'])
                             @case('value')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="'{{ $icon['path'] }}' + Object.values(items).find(item => item.key == itemKey)?.value + '.webp'"
-                                    :alt="Object.values(items).find(item => item.key == itemKey)?.value">
+                                    :src="'{{ $icon['path'] }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value">
                             @break
 
                             @case('path')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="Object.values(items).find(item => item.key == itemKey)?.icon ?? '{{ $icon['path'] ?? '' }}' + Object.values(items).find(
-                                        item => item.key == itemKey)?.value + '.webp'"
-                                    :alt="Object.values(items).find(item => item.key == itemKey)?.value">
+                                    :src="selectedItem?.icon ?? '{{ $icon['path'] ?? '' }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value">
                             @break
                         @endswitch
                     @endif
                     <span class="block truncate {{ $size == 'sm' ? 'text-xxs sm:text-sm' : ($size == 'lg' ? '' : 'text-xs sm:text-sm') }}"
-                        x-text="Object.values(items).find(item => item.key == itemKey)?.value"></span>
+                        x-text="selectedItem?.value"></span>
                 </span>
 
                 <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -74,17 +89,17 @@
                 class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
 
                 @if ($isJs)
-                    <template x-for="item in items" :key="item.key">
-                        <li @click="
-                            if (item.href) { window.location.href = item.href; }
-                            else {
+                    <template x-for="item in currentItems" :key="item.key">
+                        <li @click="if (item.href) { 
+                                window.location.href = item.href; 
+                            } else {
                                 @if ($handleChange) {{ $handleChange }}(item.key); @endif
                                 itemKey = item.key;
                                 open = false;
-                            }
-                        "
-                            class="flex items-center justify-between cursor-pointer select-none py-2 px-3 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-slate-200 dark:hover:text-slate-200"
-                            :class="item.style ? item.style : 'text-slate-800 dark:text-slate-200'"}>
+                            }"
+                            :class="['flex items-center justify-between cursor-pointer select-none py-2 px-3 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-slate-200 dark:hover:text-slate-200',
+                                item.style || 'text-slate-800 dark:text-slate-200'
+                            ]">
                             <div class="flex items-center w-full">
                                 @if ($icon)
                                     @switch($icon['type'])
