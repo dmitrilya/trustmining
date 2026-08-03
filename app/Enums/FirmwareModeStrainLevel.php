@@ -20,8 +20,8 @@ enum FirmwareModeStrainLevel: int
     public function text(): string
     {
         return match ($this) {
-            self::Safe => 'text-blue-700 dark:text-blue-300',
-            self::Optimal => 'text-amber-800 dark:text-amber-200',
+            self::Safe => 'text-emerald-600 dark:text-emerald-400',
+            self::Optimal => 'text-amber-600 dark:text-amber-400',
             self::Extreme => 'text-rose-600 dark:text-rose-400',
         };
     }
@@ -29,7 +29,7 @@ enum FirmwareModeStrainLevel: int
     public function bg(): string
     {
         return match ($this) {
-            self::Safe => 'bg-blue-50 dark:bg-blue-950/20',
+            self::Safe => 'bg-emerald-500/10',
             self::Optimal => 'bg-amber-500/10',
             self::Extreme => 'bg-rose-500/10',
         };
