@@ -47,7 +47,6 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
     dailyIncome: 0,
     dailyConsumption: 0,
     dailyProfit: 0,
-    firmwareUp: 0,
     minPriceUSDT: null,
     dailyTax: 0,
     taxHelp: '',
@@ -59,11 +58,9 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
 
     init() {
         this.momentRating = this.version.ra;
-        this.availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
         this.recalculateAll();
 
         this.$watch('version', () => {
-            this.availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
             if (this.firmware) this.firmware = null;
             else this.recalculateAll();
         });
@@ -75,7 +72,60 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
         if (rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
+    sortFirmwares() {
+        let availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
+
+        if (this.availableFirmwares.length && this.firmware == null) availableFirmwares.map(f => {
+            let up = 0;
+            const fwProfit = algoProfit * f.h * this.version.c;
+            const fwDailyIncomeOne = (fwProfit * (100 - this.fee) * this.uptime / 10000);
+            const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
+
+            const fwDailyConsumptionOne = f.e * f.h / 1000 * this.tariff * 24 * this.uptime / 100;
+            const fwDailyConsumptionCurrency = (fwDailyConsumptionOne * this.count) * (!isRub ? rub : 1);
+
+            let fwDailyProfit = fwDailyIncomeCurrency - fwDailyConsumptionCurrency;
+
+            if (this.taxEnabled) {
+                let fwCryptoTaxProfit = (fwDailyIncomeOne - fwDailyConsumptionOne * rub) * this.count / rub;
+                if (isCompany && vp) {
+                    const fwAmortization = round2(minPriceRubRounded * this.count / 1095);
+                    fwCryptoTaxProfit -= (fwAmortization / this.count);
+                }
+
+                let fwDailyTax = 0;
+                if (fwCryptoTaxProfit > 0) {
+                    if (this.taxType == 'person' || this.taxType == 'ip') {
+                        const fwYearProfit = fwCryptoTaxProfit * 365;
+                        const matchedBracket = BRACKETS.find(([limit]) => fwYearProfit > limit);
+                        fwDailyTax = ((fwYearProfit - matchedBracket[0]) * matchedBracket[1] + matchedBracket[2]) / 365;
+                    } else {
+                        fwDailyTax = fwCryptoTaxProfit * 0.25;
+                    }
+                }
+
+                const fwDailyTaxCurrency = fwDailyTax * (!isRub ? rub : 1);
+                fwDailyProfit -= fwDailyTaxCurrency;
+            }
+
+            if (dailyProfit > 0 && fwDailyProfit > dailyProfit) {
+                up = Math.round(((fwDailyProfit - dailyProfit) / dailyProfit) * 100);
+            } else if (dailyProfit <= 0 && fwDailyProfit > 0) {
+                up = 100;
+            }
+
+            return {
+                ...f,
+                up: up
+            };
+        }).sort((a, b) => b.up - a.up);
+
+
+        this.availableFirmwares = availableFirmwares;
+    },
+
     recalculateAll() {
+        this.sortFirmwares();
         this.hashrate = this.firmware != null ? this.firmware.h : this.version.h;
         this.efficiency = this.firmware != null ? this.firmware.e : this.version.e;
         const isRub = this.currency == 'RUB';
@@ -166,49 +216,6 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
         dailyProfit -= dailyTaxCurrency;
         dailyProfitOneUSDT -= dailyTaxOneUSDT;
         this.dailyProfit = round2(dailyProfit * COEF[this.view]);
-
-        this.firmwareUp = 0;
-
-        if (this.availableFirmwares.length && this.firmware == null) {
-            const maxFirmware = this.availableFirmwares[0];
-
-            const fwProfit = algoProfit * maxFirmware.h * this.version.c;
-            const fwDailyIncomeOne = (fwProfit * (100 - this.fee) * this.uptime / 10000);
-            const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
-
-            const fwDailyConsumptionOne = maxFirmware.e * maxFirmware.h / 1000 * this.tariff * 24 * this.uptime / 100;
-            const fwDailyConsumptionCurrency = (fwDailyConsumptionOne * this.count) * (!isRub ? rub : 1);
-
-            let fwDailyProfit = fwDailyIncomeCurrency - fwDailyConsumptionCurrency;
-
-            if (this.taxEnabled) {
-                let fwCryptoTaxProfit = (fwDailyIncomeOne - fwDailyConsumptionOne * rub) * this.count / rub;
-                if (isCompany && vp) {
-                    const fwAmortization = round2(minPriceRubRounded * this.count / 1095);
-                    fwCryptoTaxProfit -= (fwAmortization / this.count);
-                }
-
-                let fwDailyTax = 0;
-                if (fwCryptoTaxProfit > 0) {
-                    if (this.taxType == 'person' || this.taxType == 'ip') {
-                        const fwYearProfit = fwCryptoTaxProfit * 365;
-                        const matchedBracket = BRACKETS.find(([limit]) => fwYearProfit > limit);
-                        fwDailyTax = ((fwYearProfit - matchedBracket[0]) * matchedBracket[1] + matchedBracket[2]) / 365;
-                    } else {
-                        fwDailyTax = fwCryptoTaxProfit * 0.25;
-                    }
-                }
-
-                const fwDailyTaxCurrency = fwDailyTax * (!isRub ? rub : 1);
-                fwDailyProfit -= fwDailyTaxCurrency;
-            }
-
-            if (dailyProfit > 0 && fwDailyProfit > dailyProfit) {
-                this.firmwareUp = Math.round(((fwDailyProfit - dailyProfit) / dailyProfit) * 100);
-            } else if (dailyProfit <= 0 && fwDailyProfit > 0) {
-                this.firmwareUp = 100;
-            }
-        }
 
         this.paybackPeriod = vp ? dailyProfitOneUSDT > 0 ? Math.round(vp / dailyProfitOneUSDT) + ' ' + window.pluralize(Math.round(vp / dailyProfitOneUSDT), l['Days']) : '∞' : l['No data']
         const total = dailyIncomeCurrency + dailyConsumptionCurrency + dailyTaxCurrency;

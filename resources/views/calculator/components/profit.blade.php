@@ -17,10 +17,10 @@
         </div>
 
         @if ($firmwares->count())
-            <template x-if="firmwares.filter(firmware => firmware.v == version.i).length && (firmware != null || firmwareUp > 0)">
+            <template x-if="availableFirmwares.length && (firmware != null || availableFirmwares[0].up > 0)">
                 <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-indigo-500/10 text-indigo-500 border-indigo-500 text-xs">
                     <span
-                        x-text="firmware == null ? `+${firmwareUp}% {{ __('with firmware (enable in advanced settings)') }}` : '{{ __('The :hashrate firmware from :company was selected') }}'.replace(':hashrate', firmware.h + firmware.m + '/s').replace(':company', firmware.c)"></span>
+                        x-text="firmware == null ? `+${availableFirmwares[0].up}% {{ __('with firmware (enable in advanced settings)') }}` : '{{ __('The :hashrate firmware from :company was selected') }}'.replace(':hashrate', firmware.h + firmware.m + '/s').replace(':company', firmware.c)"></span>
                 </div>
             </template>
         @endif

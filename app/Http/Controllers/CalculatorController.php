@@ -59,7 +59,7 @@ class CalculatorController extends Controller
             'algorithm' => $data['a'][$selVersion['a']]['n'],
             'coins' => collect($data['a'][$selVersion['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', '),
             'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
-            'firmwares' => $firmwares->sortByDesc('h'),
+            'firmwares' => $firmwares,
             'ads' => $ads,
             'difficultyData' => Cache::get('calculator_difficulty_data')
         ]);
@@ -100,7 +100,7 @@ class CalculatorController extends Controller
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
             'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
-            'firmwares' => $firmwares->sortByDesc('h'),
+            'firmwares' => $firmwares,
         ]);
     }
 
@@ -152,7 +152,7 @@ class CalculatorController extends Controller
             'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
             'algorithm' => $data['a'][$selVersion['a']]['n'],
             'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
-            'firmwares' => $firmwares->sortByDesc('h'),
+            'firmwares' => $firmwares,
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
         ]);
