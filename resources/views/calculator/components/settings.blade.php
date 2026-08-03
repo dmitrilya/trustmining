@@ -63,18 +63,28 @@
                         </div>
 
                         <div class="w-full">
-                            <x-inputs.checkbox class="mb-2" value="1" name="tax_enable" ::checked="taxEnabled" handleChange="(checked => taxEnabled = checked)">
+                            <x-inputs.checkbox class="mb-2" value="1" name="tax_enable" ::checked="taxEnabled"
+                                handleChange="(checked => taxEnabled = checked)">
                                 {{ __('Consider tax') }}
                             </x-inputs.checkbox>
                             <x-inputs.select :label="__('Legal status')" name="tax_type" handleChange="(selectedType => taxType = selectedType)" :items="collect([
                                 ['key' => 'person', 'value' => __('Person')],
                                 ['key' => 'ip', 'value' => __('INDIVIDUAL')],
                                 ['key' => 'legal', 'value' => __('LEGAL')],
-                            ])->keyBy('key')" key="ip" disabled="disabled" ::disabled="!taxEnabled" />
+                            ])->keyBy('key')"
+                                key="ip" disabled="disabled" ::disabled="!taxEnabled" />
                             <div class="flex items-center mt-3">
                                 @include('calculator.components.tax-help')
                             </div>
                         </div>
+
+                        <template x-if="availableFirmwares.length">
+                            <div class="w-full">
+                                <x-inputs.select :label="__('Firmware')" name="firmware" :isJs="true"
+                                    handleChange="(selectedFirmware => firmware = selectedFirmware !== -1 ? availableFirmwares[selectedFirmware] : null)"
+                                    items="[{ key: -1, value: '{{ __('Without firmware') }}' }, ...availableFirmwares.map((f, i) => ({ key: i, value: `${f.h}${f.m}/s - ${f.c} (${f.e}j/${f.m})`, style: f.s }))]" />
+                            </div>
+                        </template>
 
                         {{-- <div>
                         <x-inputs.input-label for="difficulty-growth" :value="__('Annualized difficulty growth') . ' (%)'" />

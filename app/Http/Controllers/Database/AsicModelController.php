@@ -70,7 +70,7 @@ class AsicModelController
         $versions = collect($modelData['v']);
         $selectedVersion = $versions->first();
 
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         $asicModel->reviews_count = $modelData['r'];
         $asicModel->reviews_avg = $modelData['ra'];
@@ -129,7 +129,7 @@ class AsicModelController
      */
     public function getModelAds(Request $request, AsicBrand $asicBrand, AsicModel $asicModel)
     {
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $asicModel->asicVersions()->pluck('id'))->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('ads.asic_version_id', $asicModel->asicVersions()->pluck('id'))->orderByDesc('ads.ordering_id')->paginate(15);
 
         return response()->json([
             'html' => view('ad.components.list', ['adCategory' => AdCategory::where('name', 'miners')->first(), 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
@@ -158,7 +158,7 @@ class AsicModelController
         $selectedVersion = $versions->where('h', $matches[1])->first();
         if (!$selectedVersion) abort(404);
 
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         $asicModel->reviews_count = $modelData['r'];
         $asicModel->reviews_avg = $modelData['ra'];
@@ -223,7 +223,7 @@ class AsicModelController
         $version = $asicModel->asicVersions()->where('hashrate', $matches[1])->first();
         if (!$version) abort(404);
 
-        $ads = $this->getAds()->where('ads.asic_version_id', $version->id)->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->where('ads.asic_version_id', $version->id)->orderByDesc('ads.ordering_id')->paginate(15);
 
         return response()->json([
             'html' => view('ad.components.list', ['adCategory' => AdCategory::where('name', 'miners')->first(), 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
@@ -261,7 +261,7 @@ class AsicModelController
         $modelA->data = $calculatorModels->where('id', $modelA->id)->first();
         $modelB->data = $calculatorModels->where('id', $modelB->id)->first();
 
-        $ads = $this->getAds()->whereIn('asic_models.id', [$modelA->id, $modelB->id])->orderByDesc('ads.ordering_id')->get();
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', [$modelA->id, $modelB->id])->orderByDesc('ads.ordering_id')->get();
 
         return view('compare.index', [
             'modelA' => $modelA,

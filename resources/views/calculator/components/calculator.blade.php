@@ -5,303 +5,29 @@
     <meta itemprop="description"
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }} {{ __('in a convenient mining calculator') }}" />
 
-    <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-8 md:p-2 lg:p-4" x-data="{
-        algorithms: {{ $algorithms }},
-    
-        currency: 'RUB',
-        view: 'month',
-        tariff: 5,
-        version: {
-            ...{{ collect($selVersion) }},
-            n: '{{ $selModel['n'] }}',
-            ns: '{{ $selModel['s'] }}',
-            b: '{{ $selModel['b'] }}',
-            bs: '{{ $selModel['bs'] }}',
-            r: {{ $selModel['r'] }},
-            ra: @json($selModel['ra'])
-        },
-        profitNumber: 0,
-        fee: {{ $fee }},
-        count: 1,
-        uptime: 99.7,
-        taxEnabled: {{ !$widjet ? 'true' : 'false' }},
-        taxType: 'ip', // person / ip / legal
-        difficultyGrowth: 0,
-    
-        profit: 0,
-        dailyIncome: 0,
-        dailyConsumption: 0,
-        dailyProfit: 0,
-        minPriceUSDT: null,
-        dailyTax: 0,
-        taxHelp: '',
-        incPercent: 33.33,
-        expPercent: 33.33,
-        taxPercent: 33.33,
-        paybackPeriod: null,
-        momentRating: null,
-    
-        init() {
-            console.log(this.version);
-            this.momentRating = this.version.ra;
-    
-            this.recalculateAll();
-    
-            this.$watch('currency, view, tariff, taxEnabled, taxType, count, uptime, profitNumber, version', () => {
-                this.recalculateAll();
-            });
-    
-            @if($rModel)
-            axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $selModel['i'] }} });
-            @endif
-        },
-    
-        recalculateAll() {
-            const coef = { day: 1, month: 30, year: 365 };
-            const profit = this.algorithms[this.version.a].p[this.profitNumber].p * this.version.h * this.version.c;
-            const dailyIncomeOne = (profit * (100 - this.fee) * this.uptime / 10000);
-            const dailyIncome = dailyIncomeOne * this.count;
-            const dailyIncomeCurrency = dailyIncome / (this.currency == 'RUB' ? {{ $rub }} : 1);
-            this.dailyIncome = Math.round(dailyIncomeCurrency * coef[this.view] * 100) / 100;
-            const dailyConsumptionOne = this.version.e * this.version.h / 1000 * this.tariff * 24 * this.uptime / 100;
-            const dailyConsumption = dailyConsumptionOne * this.count;
-            const dailyConsumptionCurrency = dailyConsumption * (this.currency == 'USDT' ? {{ $rub }} : 1);
-            this.dailyConsumption = Math.round(dailyConsumptionCurrency * coef[this.view] * 100) / 100;
-            let dailyProfit = dailyIncomeCurrency - dailyConsumptionCurrency;
-            let dailyProfitOneUSDT = dailyIncomeOne - dailyConsumptionOne * {{ $rub }};
-    
-            this.minPriceUSDT = this.version.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null
-            const minPriceRubRounded = Math.round(this.minPriceUSDT / {{ $rub }});
-            let dailyTax = 0;
-            this.taxHelp = '';
-    
-            if (this.taxEnabled) {
-                let cryptoTaxProfit = dailyProfitOneUSDT * this.count / {{ $rub }};
-                let amortization = 0;
-    
-                if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) {
-                    amortization = Math.round(minPriceRubRounded * this.count / 1095 * 100) / 100;
-                    cryptoTaxProfit -= amortization;
-                    this.taxHelp += `<p class='font-sans text-slate-500 mb-1'>{{ __('Equipment amortization') }}</p>`;
-                    this.taxHelp += `<span>{{ __('Price') }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }} - <span class='text-indigo-500'>` + minPriceRubRounded + '</span> ₽' + ' ({{ __('With VAT') }})</span><br>';
-                    if (this.count > 1) this.taxHelp += `<span><span class='text-indigo-500'>` + minPriceRubRounded + '</span> * ' + this.count + ` = <span class='indigo-500'>` + minPriceRubRounded * this.count + '</span></span><br>';
-                    this.taxHelp += `<span><span class='text-indigo-500'>` + minPriceRubRounded * this.count + '</span> / 1095 (3 {{ __('y') }}) = ' + `<span class='text-blue-700 dark:text-blue-300'>` + amortization + '</span></span><br>';
-                }
-    
-                this.taxHelp += `<p class='font-sans text-slate-500 mt-1.5 mb-1'>{{ __('Tax base') }}</p>`;
-                this.taxHelp += `<span class='text-emerald-500'>` + Math.round(dailyIncome / {{ $rub }} * 100) / 100 + `</span> - <span class='text-red-700 dark:text-red-500'>` + Math.round(dailyConsumption * 100) / 100 + '</span>';
-                if ((this.taxType == 'ip' || this.taxType == 'legal') && this.version.p) this.taxHelp += ` - <span class='text-blue-700 dark:text-blue-300'>` + amortization + '</span>'
-    
-                const cryptoTaxProfitRounded = Math.round(cryptoTaxProfit * 100) / 100;
-                this.taxHelp += ` = <span class='text-yellow-300'>` + cryptoTaxProfitRounded + '</span>';
-    
-                if (cryptoTaxProfit <= 0) this.taxHelp += `<p class='font-sans text-slate-500 mt-1.5'>` + (this.taxType == 'ip' || this.taxType == 'legal' ? '{{ __('You will be able to carry forward losses to the next period of up to 10 years') }}' : '{{ __('Your losses are lost. You cannot carry them over to the next period') }}') + '</p>';
-                else {
-                    this.taxHelp += '<br>';
-    
-                    if (this.taxType == 'person' || this.taxType == 'ip') {
-                        const yearProfit = cryptoTaxProfit * 365;
-                        const yearProfitRounded = Math.round(yearProfit * 100) / 100;
-                        const brackets = [
-                            [50000000, 0.22, 9402000],
-                            [20000000, 0.20, 3402000],
-                            [5000000, 0.18, 702000],
-                            [2400000, 0.15, 312000],
-                            [0, 0.13, 0]
-                        ];
-    
-                        const matchedBracket = brackets.find(([limit]) => yearProfit > limit);
-                        const rate = matchedBracket[1];
-                        const fixed = matchedBracket[2];
-                        const limitValue = matchedBracket[0];
-    
-                        const annualTax = (yearProfit - limitValue) * rate;
-                        const annualTaxRounded = Math.round(annualTax * 100) / 100;
-                        const annualTaxFixed = fixed + annualTax;
-                        const annualTaxFixedRounded = Math.round(annualTaxFixed * 100) / 100;
-                        dailyTax = annualTax / 365;
-                        dailyTaxRounded = Math.round(dailyTax * 100) / 100;
-    
-                        if (limitValue == 0) {
-                            this.taxHelp += `<p class='font-sans text-slate-500 mt-1.5 mb-1'>{{ __('Tax rate') }} 13%</p>`;
-                            this.taxHelp += `<span class='text-yellow-300'>` + cryptoTaxProfitRounded + `</span> * 0.13 = <span class='text-rose-600 dark:text-rose-400'>` + dailyTaxRounded + '</span><br>';
-                        } else {
-                            this.taxHelp += `<p class='font-sans text-slate-500 mt-1.5 mb-1'>{{ __('Progressive scale') }}</p>`;
-                            this.taxHelp += `<span class='text-yellow-300'>` + cryptoTaxProfitRounded + `</span> * 365 = <span class='text-purple-600 dark:text-purple-400'>` + yearProfitRounded + '</span> ({{ __('per year') }})<br>';
-                            this.taxHelp += `(<span class='text-purple-600 dark:text-purple-400'>` + yearProfitRounded + '</span> - ' + limitValue + ') * ' + rate + ` = <span class='text-amber-800 dark:text-amber-200'>` + annualTaxRounded + '</span><br>';
-                            this.taxHelp += fixed + ` + <span class='text-amber-800 dark:text-amber-200'>` + annualTaxRounded + `</span> = <span class='text-green-500'>` + annualTaxFixedRounded + '</span><br>';
-                            this.taxHelp += `<span class='text-green-500'>` + annualTaxFixedRounded + `</span> / 365 = <span class='text-rose-600 dark:text-rose-400'>` + dailyTaxRounded + '</span>';
-                        }
-                    } else {
-                        dailyTax = cryptoTaxProfit * 0.25;
-                        this.taxHelp += `<p class='font-sans text-slate-500 mt-1.5 mb-1'>{{ __('Tax rate') }} 25%</p>`;
-                        this.taxHelp += `<span class='text-yellow-300'>` + cryptoTaxProfitRounded + `</span> * 0.25 = <span class='text-rose-600 dark:text-rose-400'>` + dailyTaxRounded + '</span>';
-                    }
-                }
-            }
-    
-            const dailyTaxCurrency = dailyTax * (this.currency == 'USDT' ? {{ $rub }} : 1);
-            const dailyTaxOneUSDT = dailyTax / this.count * {{ $rub }};
-            this.dailyTax = Math.round(dailyTaxCurrency * coef[this.view] * 100) / 100;
-            dailyProfit -= dailyTaxCurrency;
-            dailyProfitOneUSDT -= dailyTaxOneUSDT;
-    
-            this.dailyProfit = Math.round(dailyProfit * coef[this.view] * 100) / 100;
-            this.paybackPeriod = this.version.p ? dailyProfitOneUSDT > 0 ? Math.round(this.version.p / dailyProfitOneUSDT) + ' {{ __('Days') }}' : '∞' : '{{ __('No data') }}'
-            const total = dailyIncomeCurrency + dailyConsumptionCurrency + dailyTaxCurrency;
-    
-            if (total > 0) {
-                this.incPercent = (dailyIncomeCurrency / total) * 100;
-                this.expPercent = (dailyConsumptionCurrency / total) * 100;
-                this.taxPercent = (dailyTaxCurrency / total) * 100;
-            } else {
-                this.incPercent = this.taxEnabled ? 33.33 : 50;
-                this.expPercent = this.taxEnabled ? 33.33 : 50;
-                this.taxPercent = this.taxEnabled ? 33.33 : 0;
-            }
-        }
-    }">
+    <div itemprop="object" itemscope itemtype="https://schema.org/Product" class="md:grid grid-cols-5 gap-6 lg:gap-8 md:p-2 lg:p-4" x-data="calculator({{ $algorithms }}, {{ $firmwares }}, {{ collect($selVersion) }}, {{ collect($selModel) }}, {{ $fee }}, {{ !$widjet ? 'true' : 'false' }}, {{ !$rModel ? 'true' : 'false' }}, {{ $rub }}, { 'With VAT': '{{ __('With VAT') }}', 'Equipment amortization': '{{ __('Equipment amortization') }}', 'Price': '{{ __('Price') }}', 'y': '{{ __('y') }}', 'Tax base': '{{ __('Tax base') }}', 'You will be able to carry forward losses to the next period of up to 10 years': '{{ __('You will be able to carry forward losses to the next period of up to 10 years') }}', 'Your losses are lost. You cannot carry them over to the next period': '{{ __('Your losses are lost. You cannot carry them over to the next period') }}', 'Tax rate': '{{ __('Tax rate') }}', 'Progressive scale': '{{ __('Progressive scale') }}', 'per year': '{{ __('per year') }}', 'Days': ['{{ trans_choice('time.days', 1) }}', '{{ trans_choice('time.days', 2) }}', '{{ trans_choice('time.days', 5) }}'], 'No data': '{{ __('No data') }}' })">
         <div class="col-span-2">
             @include('calculator.components.schema')
 
             @include('calculator.components.selectversion')
 
-            @include('calculator.components.expenses')
+            @include('calculator.components.settings')
 
             @if (in_array('characteristics', $blocks))
                 <div class="hidden md:block">
-                    <template x-if="version !== null">
-                        <div class="mt-8 lg:mt-10">
-                            @if (!$widjet)
-                                <div class="mt-6">
-                                    <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                    <div class="flex items-center">
-                                        <x-rating></x-rating>
-
-                                        <a :href="'/asic-miners/' + version.bs + '/' + version.ns + '/reviews'"
-                                            class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
-                                            <span x-text="version.r"></span>
-                                            <span
-                                                x-text="window.pluralize(version.r, '{{ trans_choice('navigation.reviews', 1) }}', '{{ trans_choice('navigation.reviews', 2) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="mt-5 space-y-2" style="min-height: 152px">
-                                <x-characteristics.characteristics>
-                                    <x-characteristics.characteristic name="Algorithm" x-value="algorithms[version.a].n" />
-                                    <x-characteristics.characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
-                                    <x-characteristics.characteristic name="Power" x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
-                                    @if (!$widjet)
-                                        <x-characteristics.characteristic name="The best price"
-                                            x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
-                                    @endif
-                                    <x-characteristics.characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
-                                </x-characteristics.characteristics>
-                                @if (!$widjet)
-                                    <a class="block mt-6 ml-auto w-fit text-sm text-indigo-500 hover:text-indigo-600"
-                                        x-bind:href="version ?
-                                            `/asic-miners/${version.bs}/${version.ns}/${version.h}${version.m}` : '#'">
-                                        {{ __('All characteristics') }}
-                                    </a>
-                                @endif
-                            </div>
-                            @if (!$widjet)
-                                <template x-if="version.ac">
-                                    <a class="mt-4 lg:mt-6 w-fit" x-bind:href="version ? '/ads/miners?model=' + version.ns : ' # '">
-                                        <x-buttons.primary-button class="text-xxs sm:text-xs">{{ __('Find ads') }}</x-buttons.primary-button>
-                                    </a>
-                                </template>
-                            @endif
-                        </div>
-                    </template>
+                    @include('calculator.components.characteristics')
                 </div>
             @endif
         </div>
 
         <div class="mt-4 md:mt-0 md:border-l border-slate-300 dark:border-slate-700 md:pl-6 lg:pl-8 col-span-3">
             @if (in_array('currency', $blocks))
-                <div class="flex items-center justify-between mb-6 sm:mb-7 lg:mb-8">
-                    <h2 class="text-xs xs:text-sm text-slate-800 dark:text-slate-200">
-                        {{ __('Profit calculation') }}</h2>
-                    <div class="flex cursor-pointer mx-3">
-                        <button
-                            :class="{
-                                'bg-primary-gradient text-white': currency ==
-                                    'RUB',
-                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-200': currency ==
-                                    'USDT'
-                            }"
-                            class="p-1 xs:p-1.5 rounded-l-md border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-                            @click="currency = 'RUB'">RUB</button>
-                        <button
-                            :class="{
-                                'bg-primary-gradient text-white': currency ==
-                                    'USDT',
-                                'bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 dark:text-slate-200': currency ==
-                                    'RUB'
-                            }"
-                            class="p-1 xs:p-1.5 rounded-r-md border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-                            @click="currency = 'USDT'">USDT</button>
-                    </div>
-                </div>
+                @include('calculator.components.currency')
             @endif
 
             <template x-if="version !== null">
                 <div>
-                    <div style="min-height: 228px" class="space-y-2 sm:space-y-4">
-                        <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
-                            <button @click="view = 'day'" :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
-                            <button @click="view = 'month'" :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
-                            <button @click="view = 'year'" :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-                                class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
-                        </div>
-
-                        <div class="bg-slate-50 dark:bg-slate-900/50 p-4 sm:p-6 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700">
-                            <div class="text-center mb-6">
-                                <span class="text-slate-500 text-sm tracking-wide">{{ __('Net Profit') }}</span>
-                                <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 dark:text-slate-200 mt-1"
-                                    x-text="dailyProfit + (currency == 'RUB' ? ' ₽' : ' USDT')">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-xs font-extrabold uppercase">
-                                    <span class="text-emerald-500">{{ __('Income') }}</span>
-                                    <span class="text-red-700 dark:text-red-500">{{ __('Expense') }}</span>
-                                    <template x-if="taxEnabled">
-                                        <span class="text-rose-600 dark:text-rose-400">{{ __('Tax') }}</span>
-                                    </template>
-                                </div>
-                                <div class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
-                                    <div class="h-full bg-emerald-500 transition-all duration-500" :style="`width: ${incPercent}%`"></div>
-                                    <div class="h-full bg-red-600 transition-all duration-500" :style="`width: ${expPercent}%`"></div>
-                                    <template x-if="taxEnabled">
-                                        <div class="h-full bg-rose-500 transition-all duration-500" :style="`width: ${taxPercent}%`"></div>
-                                    </template>
-                                </div>
-                                <div class="mt-3 flex justify-between text-sm sm:text-base lg:text-lg font-black text-slate-800 dark:text-slate-200">
-                                    <span x-text="dailyIncome"></span>
-                                    <span x-text="dailyConsumption"></span>
-                                    <template x-if="taxEnabled">
-                                        <span x-text="dailyTax"></span>
-                                    </template>
-                                </div>
-                            </div>
-
-                            <template x-if="taxEnabled">
-                                <div
-                                    class="mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
-                                    <div class="text-slate-500 text-sm tracking-wide mb-2 text-center">{{ __('Tax calculation') }} {{ __('per day') }}</div>
-                                    <div class="font-mono text-slate-800 dark:text-slate-200 text-xxs xxs:text-xs sm:text-sm tracking-tight" x-html="taxHelp">
-                                    </div>
-                                    <div class="mt-2 text-xxs text-slate-500">*{{ __('Tax calculation can be disabled in additional settings') }}</div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
+                    @include('calculator.components.profit')
 
                     @if (!$widjet)
                         <div class="text-xxs text-slate-500 mt-3">
@@ -319,87 +45,14 @@
                         </template>
                     @endif
 
-                    @if (in_array('characteristics', $blocks))
-                        <div class="md:hidden">
-                            <template x-if="version !== null">
-                                <div class="mt-6 sm:mt-8">
-                                    @if (!$widjet)
-                                        <div class="mt-6">
-                                            <h2 class="sr-only">{{ __('Reviews') }}</h2>
-                                            <div class="flex items-center">
-                                                <x-rating></x-rating>
-
-                                                <a :href="`/asic-miners/${version.bs}/${version.ns}/reviews`"
-                                                    class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
-                                                    <span x-text="version.r"></span>
-                                                    <span
-                                                        x-text="window.pluralize(version.r, '{{ trans_choice('navigation.reviews', 1) }}', '{{ trans_choice('navigation.reviews', 2) }}', '{{ trans_choice('navigation.reviews', 5) }}')"></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="mt-3 xs:mt-4 sm:mt-5 space-y-1 sm:space-y-1.5" style="min-height: 120px">
-                                        <x-characteristics.characteristics>
-                                            <x-characteristics.characteristic name="Algorithm" x-value="algorithms[version.a].n" />
-                                            <x-characteristics.characteristic name="Efficiency" x-value="version.e + ' j/' + version.m" />
-                                            <x-characteristics.characteristic name="Power"
-                                                x-value="Math.round(version.e * version.h) + ' {{ __('W') }}'" />
-                                            @if (!$widjet)
-                                                <x-characteristics.characteristic name="The best price"
-                                                    x-value="version.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
-                                            @endif
-                                            <x-characteristics.characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
-                                        </x-characteristics.characteristics>
-                                        @if (!$widjet)
-                                            <a class="block mt-6 ml-auto w-fit text-xs xs:text-sm text-indigo-500 hover:text-indigo-600"
-                                                x-bind:href="version ?
-                                                    `/asic-miners/${version.bs}/${version.ns}/${version.h}${version.m}` :
-                                                    '#'">
-                                                {{ __('All characteristics') }}
-                                            </a>
-                                        @endif
-                                    </div>
-
-                                    @if (!$widjet)
-                                        <template x-if="version.ac">
-                                            <a class="mt-3 xs:mt-4 sm:mt-5 w-fit" x-bind:href="version ? '/ads/miners?model=' + version.ns : ' # '">
-                                                <x-buttons.primary-button class="text-xxs xs:text-xs">{{ __('Find ads') }}</x-buttons.primary-button>
-                                            </a>
-                                        </template>
-                                    @endif
-                                </div>
-                            </template>
-                        </div>
+                    @if (in_array('coins', $blocks))
+                        @include('calculator.components.coins')
                     @endif
 
-                    @if (in_array('coins', $blocks))
-                        <h2 class="text-xs xs:text-sm text-slate-800 dark:text-slate-200 mt-6 sm:mt-7 lg:mt-8">
-                            {{ __('How many coins does it mine per day') }}</h2>
-
-                        <template x-for="(profit, i) in algorithms[version?.a].p" :key="'profit_' + i">
-                            <div class="flex flex-wrap gap-y-2 items-center space-x-2 mt-3 sm:mt-5 cursor-pointer"
-                                @click="profitNumber = i, fee = profit.c[0].f;">
-                                <x-inputs.radio name="profitNumber" ::value="i" ::checked="profitNumber == i" ::aria-label="`{{ __('Change calculation to') }} ${profit.c[0].n}`" />
-
-                                <template x-for="coin in profit.c" :key="coin.a">
-                                    <div>
-                                        <div class="flex items-center">
-                                            <img :src="`/storage/coins/${coin.a}.webp`" :alt="'{{ __('Calculator') }} ' + coin.n"
-                                                class="w-5 xs:w-6 mr-1 xs:mr-2">
-                                            <div>
-                                                <div class="text-xs xs:text-sm text-slate-600 dark:text-slate-400" x-text="coin.a">
-                                                </div>
-                                                <div class="text-xxs xs:text-xs text-slate-500" x-text="coin.n">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1"
-                                            x-text="version ? Math.round(version.h * coin.p * version.c * 100000000) / 100000000 : 0">
-                                        </div>
-                                    </div>
-                                </template>
-                            </div>
-                        </template>
+                    @if (in_array('characteristics', $blocks))
+                        <div class="md:hidden">
+                            @include('calculator.components.characteristics')
+                        </div>
                     @endif
                 </div>
             </template>

@@ -15,7 +15,7 @@ use Illuminate\View\View;
 use App\Http\Traits\AdTrait;
 use App\Http\Traits\DaData;
 use App\Http\Traits\SearchTrait;
-
+use App\Models\Ad\AdCategory;
 use App\Models\Database\Coin;
 use App\Models\Morph\Like;
 use App\Models\User\Role;
@@ -119,7 +119,7 @@ class Controller extends BaseController
         $models = Cache::get('calculator_models')->filter(fn($model) => count($model->asicVersions->first()->profits))
             ->sortByDesc(fn($model) => $model->asicVersions->first()->profits->first()['profit'])->take(50);
 
-        $ads = $this->getAds()->whereIn('asic_models.id', $models->pluck('id'))->orderByDesc('ads.ordering_id')->get();
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', $models->pluck('id'))->orderByDesc('ads.ordering_id')->get();
 
         $models = $models->map(function ($model) use ($ads) {
             $version = $model->asicVersions->first();

@@ -10,7 +10,7 @@ use App\Models\Ad\Ad;
 
 trait AdTrait
 {
-    public function getAds(?Request $request = null, ?AdCategory $adCategory = null)
+    public function getAds(?int $adCategoryId = null, ?Request $request = null)
     {
         $authId = auth()->id() ?? 0;
         $adClass = addslashes(Ad::class);
@@ -76,7 +76,7 @@ trait AdTrait
                 DB::raw("EXISTS (SELECT 1 FROM tracks t WHERE t.trackable_type = 'ad' AND t.trackable_id = ads.id AND t.user_id = {$authId}) as is_tracked"),
             ]);
 
-        if ($adCategory) $ads->where('ads.ad_category_id', $adCategory->id);
+        if ($adCategoryId) $ads->where('ads.ad_category_id', $adCategoryId);
 
         if ($request) {
             if ($request->model) {

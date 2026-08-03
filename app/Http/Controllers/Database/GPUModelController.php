@@ -64,7 +64,7 @@ class GPUModelController
      */
     public function model(Request $request, GPUBrand $gpuBrand, GPUModel $gpuModel)
     {
-        $ads = $this->getAds()->where('ads.gpu_model_id', $gpuModel->id)->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'gpus')->value('id'))->where('ads.gpu_model_id', $gpuModel->id)->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
 
         return view('database.gas-gensets.model', [
             'brand' => $gpuBrand,
@@ -84,7 +84,7 @@ class GPUModelController
      */
     public function getModelAds(Request $request, GPUBrand $gpuBrand, GPUModel $gpuModel)
     {
-        $ads = $this->getAds()->where('ads.gpu_model_id', $gpuModel->id)->orderByDesc('ads.ordering_id')->paginate(15);
+        $ads = $this->getAds(AdCategory::where('name', 'gpus')->value('id'))->where('ads.gpu_model_id', $gpuModel->id)->orderByDesc('ads.ordering_id')->paginate(15);
 
         return response()->json([
             'html' => view('ad.components.list', ['adCategory' => AdCategory::where('name', 'gpus')->first(), 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),

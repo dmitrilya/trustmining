@@ -57,7 +57,7 @@
                 <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                     <input type="text" autocomplete="off" :value="search" id="search_model"
                         @input.debounce.1000ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
-                        class="block py-2.5 px-0 w-full text-sm xs:text-base text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 group-focus:outline-none focus:ring-0 peer" />
+                        class="block py-2.5 px-0 w-full text-sm xs:text-base text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 focus:outline-none focus:ring-0 peer" />
 
                     <button type="button" aria-label="Clear"
                         class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"

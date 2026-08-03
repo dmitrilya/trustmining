@@ -1,3 +1,4 @@
+import { calculatorAlpine } from './calculatorAlpine';
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 
@@ -28,6 +29,10 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
 
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
 }
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('calculator', calculatorAlpine);
+});
 
 document.addEventListener('alpine:initialized', () => {
     const sendHeight = () => {

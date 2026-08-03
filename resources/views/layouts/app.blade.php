@@ -145,7 +145,7 @@
 
         @if (isset($header))
             <header class="w-full shadow shadow-logo-color">
-                <div class="max-w-7xl mx-auto p-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>

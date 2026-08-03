@@ -10,6 +10,7 @@ use App\Http\Traits\Metrics\NetworkTrait;
 use App\Http\Traits\Metrics\CoinTrait;
 use App\Http\Traits\AdTrait;
 
+use App\Models\Ad\AdCategory;
 use App\Models\Database\Coin;
 use App\Models\Morph\View;
 use App\Models\User\NotificationType;
@@ -32,7 +33,7 @@ class MetricsController extends Controller
         $ads = Cache::remember(
             'algorithm_ads_' . $coin->algorithm->slug,
             now()->endOfDay(),
-            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
                 ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
                 ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
                 ->orderByDesc('ads.ordering_id')->limit(14)->get()
@@ -52,7 +53,7 @@ class MetricsController extends Controller
         $ads = Cache::remember(
             'algorithm_ads_' . $coin->algorithm->slug,
             now()->endOfDay(),
-            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
                 ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
                 ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
                 ->orderByDesc('ads.ordering_id')->limit(14)->get()
@@ -74,7 +75,7 @@ class MetricsController extends Controller
         $ads = Cache::remember(
             'algorithm_ads_' . $coin->algorithm->slug,
             now()->endOfDay(),
-            fn() => $this->getAds()->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
                 ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
                 ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
                 ->orderByDesc('ads.ordering_id')->limit(14)->get()

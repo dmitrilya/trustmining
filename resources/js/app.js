@@ -2,6 +2,7 @@ import './bootstrap';
 import './date';
 import './toast';
 import './chat';
+import { calculatorAlpine } from './calculatorAlpine';
 import { adsStatistics } from './statistics';
 import { roulette } from './roulette';
 import { tgAuth } from './tgAuth';
@@ -128,6 +129,8 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 
+    Alpine.data('calculator', calculatorAlpine);
+
     Alpine.data('roulette', roulette);
 
     Alpine.data('tgAuth', tgAuth);
@@ -143,13 +146,13 @@ window.calculateProfitCAGR = (dailyProfit, days, percent) => {
     return dailyProfit * (1 - Math.pow(coef, days)) / (1 - coef);
 }
 
-window.pluralize = function (count, one, two, five) {
+window.pluralize = function (count, trans) {
     let n = Math.abs(count) % 100;
     let n1 = n % 10;
-    if (n > 10 && n < 20) return five;
-    if (n1 > 1 && n1 < 5) return two;
-    if (n1 === 1) return one;
-    return five;
+    if (n > 10 && n < 20) return trans[2];
+    if (n1 > 1 && n1 < 5) return trans[1];
+    if (n1 === 1) return trans[0];
+    return trans[2];
 }
 
 Alpine.start();

@@ -7,15 +7,27 @@
     'icon' => null,
     'handleChange' => null,
     'disabled' => false,
+    'isJs' => false,
 ])
 
-@if (count($items))
+@php
+    $itemsData = $isJs ? $items : json_encode($items);
+
+    if ($key) {
+        $defaultKey = "'$key'";
+    } else {
+        $defaultKey = $isJs ? "{$items}[0].key" : "'" . collect($items)->first()['key'] . "'";
+    }
+@endphp
+
+@if ($isJs || count($items))
     <div x-data="{
         open: false,
-        items: {{ $items }},
-        itemKey: '{{ $key ? $key : $items->first()['key'] }}',
+        items: {{ $itemsData }},
+        itemKey: {{ $defaultKey }},
         isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }}
-    }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }}">
+    }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }};">
+
         @if (isset($label))
             <x-inputs.input-label :value="$label" />
         @endif
@@ -25,32 +37,33 @@
         @endif
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
-            <button type="button" @click="if (!isDisabled) open = ! open"
-                :class="{ 'opacity-50': isDisabled }"
+            <button type="button" @click="if (!isDisabled) open = ! open" :class="{ 'opacity-50': isDisabled }"
                 class="relative w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:pr-10' : 'pr-10' }} rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+
                 <span class="flex items-center">
                     @if ($icon)
                         @switch($icon['type'])
                             @case('value')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="'{{ $icon['path'] }}' + items[itemKey].value +
-                                        '.webp'"
-                                    :alt="items[itemKey].value">
+                                    :src="'{{ $icon['path'] }}' + Object.values(items).find(item => item.key == itemKey)?.value + '.webp'"
+                                    :alt="Object.values(items).find(item => item.key == itemKey)?.value">
                             @break
 
                             @case('path')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="items[itemKey].icon" :alt="items[itemKey].value">
+                                    :src="Object.values(items).find(item => item.key == itemKey)?.icon ?? '{{ $icon['path'] ?? '' }}' + Object.values(items).find(
+                                        item => item.key == itemKey)?.value + '.webp'"
+                                    :alt="Object.values(items).find(item => item.key == itemKey)?.value">
                             @break
                         @endswitch
                     @endif
-
                     <span class="block truncate {{ $size == 'sm' ? 'text-xxs sm:text-sm' : ($size == 'lg' ? '' : 'text-xs sm:text-sm') }}"
-                        x-text="items[itemKey].value"></span>
+                        x-text="Object.values(items).find(item => item.key == itemKey)?.value"></span>
                 </span>
+
                 <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                    <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5' : 'h-4 w-4' }} sm:h-5 sm:w-5 text-slate-500"
-                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5' : 'h-4 w-4' }} sm:h-5 sm:w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" />
                     </svg>
@@ -58,41 +71,76 @@
             </button>
 
             <ul x-show="open" @click.away="open = false" style="display: none"
-                class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
-                @foreach ($items as $item)
-                    <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'"
-                    @elseif ($handleChange) @click="{{ $handleChange }}('{{ $item['key'] }}');itemKey = '{{ $item['key'] }}';open = false"
-                    @else @click="itemKey = '{{ $item['key'] }}';open = false" @endif
-                        class="flex items-center justify-between cursor-pointer select-none py-2 px-3 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
-                        <div class="flex items-center w-full">
-                            @if ($icon)
-                                @switch($icon['type'])
-                                    @case('value')
-                                        <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                            src="{{ $icon['path'] . $item['value'] . '.webp' }}" alt="{{ $item['value'] }}">
-                                    @break
+                class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
 
-                                    @case('path')
-                                        <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                            src="{{ $item->icon }}" alt="{{ $item['value'] }}">
-                                    @break
-                                @endswitch
-                            @endif
+                @if ($isJs)
+                    <template x-for="item in items" :key="item.key">
+                        <li @click="
+                            if (item.href) { window.location.href = item.href; }
+                            else {
+                                @if ($handleChange) {{ $handleChange }}(item.key); @endif
+                                itemKey = item.key;
+                                open = false;
+                            }
+                        "
+                            class="flex items-center justify-between cursor-pointer select-none py-2 px-3 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-slate-200 dark:hover:text-slate-200"
+                            :class="item.style ? item.style : 'text-slate-800 dark:text-slate-200'"}>
+                            <div class="flex items-center w-full">
+                                @if ($icon)
+                                    @switch($icon['type'])
+                                        @case('value')
+                                            <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
+                                                :src="'{{ $icon['path'] }}' + item.value + '.webp'" :alt="item.value">
+                                        @break
 
-                            <span
-                                class="block truncate {{ $size == 'sm' ? 'text-xxs' : 'text-xs' }} sm:text-sm">{{ $item['value'] }}</span>
-                        </div>
+                                        @case('path')
+                                            <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
+                                                :src="item.icon" :alt="item.value">
+                                        @break
+                                    @endswitch
+                                @endif
+                                <span class="block truncate {{ $size == 'sm' ? 'text-xxs' : 'text-xs' }} sm:text-sm" x-text="item.value"></span>
+                            </div>
 
-                        <span x-show="'{{ $item['key'] }}' == itemKey" class="flex items-center">
-                            <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5 min-w-2.5 sm:h-4 sm:w-4 sm:min-w-4 ml-1 xs:ml-2 sm:ml-3' : 'h-4 w-4 min-w-4 ml-2 xs:ml-3' }}"
-                                viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white"
-                                aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
-                            </svg>
-                        </span>
-                    </li>
-                @endforeach
+                            <span x-show="item.key == itemKey" class="flex items-center">
+                                <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5 min-w-2.5 sm:h-4 sm:w-4 sm:min-w-4 ml-1 xs:ml-2 sm:ml-3' : 'h-4 w-4 min-w-4 ml-2 xs:ml-3' }}"
+                                    viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
+                                </svg>
+                            </span>
+                        </li>
+                    </template>
+                @else
+                    @foreach ($items as $item)
+                        <li @if (isset($item['href'])) @click="window.location.href = '{{ $item['href'] }}'" @elseif ($handleChange) @click="{{ $handleChange }}('{{ $item['key'] }}');itemKey = '{{ $item['key'] }}';open = false" @else @click="itemKey = '{{ $item['key'] }}';open = false" @endif
+                            class="flex items-center justify-between cursor-pointer select-none py-2 px-3 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
+                            <div class="flex items-center w-full">
+                                @if ($icon)
+                                    @switch($icon['type'])
+                                        @case('value')
+                                            <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
+                                                src="{{ $icon['path'] . $item['value'] . '.webp' }}" alt="{{ $item['value'] }}">
+                                        @break
+
+                                        @case('path')
+                                            <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
+                                                src="{{ $item['icon'] ?? ($item->icon ?? '') }}" alt="{{ $item['value'] }}">
+                                        @break
+                                    @endswitch
+                                @endif
+                                <span class="block truncate {{ $size == 'sm' ? 'text-xxs' : 'text-xs' }} sm:text-sm">{{ $item['value'] }}</span>
+                            </div>
+                            <span x-show="'{{ $item['key'] }}' == itemKey" class="flex items-center">
+                                <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5 min-w-2.5 sm:h-4 sm:w-4 sm:min-w-4 ml-1 xs:ml-2 sm:ml-3' : 'h-4 w-4 min-w-4 ml-2 xs:ml-3' }}"
+                                    viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
+                                </svg>
+                            </span>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>

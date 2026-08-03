@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="border-b border-slate-300 dark:border-slate-700 w-full">
-    <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
-        <div class="flex justify-between h-10 lg:h-14">
+    <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-12 lg:h-14">
             <div class="w-full flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">

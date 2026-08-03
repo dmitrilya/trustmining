@@ -29,12 +29,7 @@ class AdController extends Controller
 {
     use ViewTrait, AdTrait;
 
-    protected $service;
-
-    public function __construct(AdService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected AdService $service) {}
 
     /**
      * Display a listing of the resource.
@@ -45,7 +40,7 @@ class AdController extends Controller
      */
     public function index(Request $request, AdCategory $adCategory)
     {
-        $ads = $this->getAds($request, $adCategory)->orderByDesc('ads.ordering_id')->paginate(15)->withQueryString();
+        $ads = $this->getAds($adCategory->id, $request)->orderByDesc('ads.ordering_id')->withQueryString()->paginate(15);
 
         if ($request->ajax()) return response()->json([
             'html' => view('ad.components.list', ['adCategory' => $adCategory, 'ads' => $ads, 'user' => $request->user(), 'owner' => false])->render(),
@@ -67,7 +62,7 @@ class AdController extends Controller
      */
     public function getAdsCarousel(Request $request, AdCategory $adCategory)
     {
-        $ads = $this->getAds($request, $adCategory)->orderByDesc('ads.ordering_id')->paginate(4);
+        $ads = $this->getAds($adCategory->id, $request)->orderByDesc('ads.ordering_id')->paginate(4);
 
         if ($request->ajax()) return response()->json([
             'html' => view('home.components.carousel-list', [
@@ -147,7 +142,7 @@ class AdController extends Controller
 
         if ($adCategory->name == 'miners') {
             $ad->version_data = Cache::get('calculator_models')->where('id', $ad->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $ad->asic_version_id)->first();
-            $ads = $this->getAds()->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
+            $ads = $this->getAds($adCategory->id)->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
                 ->limit(9)->get();
         }
 
@@ -180,7 +175,7 @@ class AdController extends Controller
         $this->addView(request(), $ad);
 
         $ad->version_data = Cache::get('calculator_models')->where('id', $ad->asicVersion->asicModel->id)->first()?->asicVersions->where('id', $ad->asic_version_id)->first();
-        $ads = $this->getAds()->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
+        $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('ads.asic_version_id', $ad->asicVersion->asicModel->asicVersions()->pluck('id'))
             ->limit(9)->get();
 
         return view('ad.show', [

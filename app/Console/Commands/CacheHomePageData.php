@@ -40,7 +40,7 @@ class CacheHomePageData extends Command
     public function handle()
     {
         $location = session('user_location');
-        $miners = $this->getAds(null, AdCategory::where('name', 'miners')->first());
+        $miners = $this->getAds(AdCategory::where('name', 'miners')->value('id'));
         $monthAgo = now()->subMonth();
 
         if ($location && $location['source'] == 'geo') $miners->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$location['city']]);
