@@ -58,7 +58,6 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
     momentRating: null,
 
     init() {
-        console.log(this.firmwares);
         this.momentRating = this.version.ra;
         this.availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
         this.recalculateAll();
