@@ -28,7 +28,7 @@
         <div class="mt-6">
             <div class="flex justify-between text-xs font-extrabold uppercase">
                 <span class="text-emerald-500">{{ __('Income') }}</span>
-                <span class="text-red-700 dark:text-red-500">{{ __('Expense') }}</span>
+                <span class="text-red-700 dark:text-red-500">{{ __('Expense') }} (<span x-text="Math.round(hashrate * efficiency)"></span> {{ __('W') }})</span>
                 <template x-if="taxEnabled">
                     <span class="text-rose-600 dark:text-rose-400">{{ __('Tax') }}</span>
                 </template>
