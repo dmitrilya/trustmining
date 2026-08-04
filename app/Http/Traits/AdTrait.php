@@ -26,12 +26,10 @@ trait AdTrait
             ->leftJoin('gpu_models', 'gpu_models.id', '=', 'ads.gpu_model_id')
             ->leftJoin('gpu_brands', 'gpu_brands.id', '=', 'gpu_models.gpu_brand_id')
             ->leftJoin('coins', 'coins.id', '=', 'ads.coin_id')
-            ->leftJoin(
-                'coin_rates',
-                fn($join) =>
+            ->leftJoin('coin_rates', function ($join) {
                 $join->on('coin_rates.coin_id', '=', 'ads.coin_id')
-                    ->whereRaw('coin_rates.id = (SELECT MAX(id) FROM coin_rates WHERE coin_id = ads.coin_id)')
-            )
+                    ->whereRaw('coin_rates.created_at = (SELECT MAX(inner_cr.created_at) FROM coin_rates inner_cr WHERE inner_cr.coin_id = ads.coin_id)');
+            })
 
             ->select([
                 'ads.id',
