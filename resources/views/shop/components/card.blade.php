@@ -37,7 +37,7 @@
             </p>
         </div>
 
-        <x-tf :tf="$user->tf" class="mt-4 sm:mt-5" />
+        <x-tf :tf="$shop->tf" class="mt-4 sm:mt-5" />
 
         <p class="mt-1 sm:mt-2 text-xxs sm:text-sm text-slate-500">
             {{ __('Number of offices') }}: <span
