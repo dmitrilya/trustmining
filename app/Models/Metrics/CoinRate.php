@@ -11,6 +11,10 @@ class CoinRate extends Model
 
     const UPDATED_AT = null;
 
+    public $incrementing = false;
+
+    protected $primaryKey = ['coin_id', 'created_at'];
+
     /**
      * The attributes that are mass assignable.
      *

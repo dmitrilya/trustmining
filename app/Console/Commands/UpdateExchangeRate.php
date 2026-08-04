@@ -11,6 +11,7 @@ use Exception;
 use App\Models\Database\AsicModel;
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
+use App\Models\Metrics\CoinRate;
 use App\Models\Morph\View;
 
 class UpdateExchangeRate extends Command
@@ -37,12 +38,14 @@ class UpdateExchangeRate extends Command
     public function handle()
     {
         $key = config('services.coinmarketcap.key');
-        $coins = Coin::where('paymentable', false)->pluck('abbreviation');
+        $coins = Coin::where('paymentable', false)->get(['id', 'abbreviation']);
+        $coinSymbols = $coins->pluck('abbreviation');
+
         try {
             $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
-            $data->each(function ($coinData) {
-                $coin = Coin::where('abbreviation', $coinData->symbol)->first();
-                if (!$coin || !$coinData->quote->USD->price) return;
+            $data->each(function ($coinData) use ($coins) {
+                $coin = $coins->firstWhere('abbreviation', $coinData->symbol);
+                if (!$coin || empty($coinData->quote->USD->price)) return;
 
                 $coin->coinRates()->create(['rate' => $coinData->quote->USD->price]);
             });
@@ -66,12 +69,21 @@ class UpdateExchangeRate extends Command
         else {
             $rates = json_decode($out)->rates;
 
-            $btcRate = Coin::where('abbreviation', 'BTC')->first('id')->rate;
-            Coin::where('abbreviation', 'RUB')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
-            Coin::where('abbreviation', 'CNY')->first('id')->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
+            $btcCoin = Coin::where('abbreviation', 'BTC')->first();
+            if ($btcCoin && isset($rates->rub->value) && isset($rates->cny->value)) {
+                $btcRate = $btcCoin->rate;
+
+                $rubCoin = Coin::where('abbreviation', 'RUB')->first();
+                if ($rubCoin) $rubCoin->coinRates()->create(['rate' => $btcRate / $rates->rub->value]);
+
+                $cnyCoin = Coin::where('abbreviation', 'CNY')->first();
+                if ($cnyCoin) $cnyCoin->coinRates()->create(['rate' => $btcRate / $rates->cny->value]);
+            }
         }
 
         $this->updateProfit();
+
+        if (now()->hour === 0 && now()->minute < 5) $this->compressYesterdayRates();
 
         return Command::SUCCESS;
     }
@@ -211,5 +223,31 @@ class UpdateExchangeRate extends Command
             'a' => $algorithms,
             'r' => Coin::where('abbreviation', 'RUB')->first('id')->rate
         ]);
+    }
+
+    protected function compressYesterdayRates(): void
+    {
+        $startOfYesterday = now()->subDay()->startOfDay();
+        $endOfYesterday = $startOfYesterday->copy()->endOfDay();
+
+        $coinIds = Coin::pluck('id');
+
+        foreach ($coinIds as $coinId) {
+            $ratesQuery = DB::table('coin_rates')->where('coin_id', $coinId)->whereBetween('created_at', [$startOfYesterday, $endOfYesterday]);
+
+            $averageRate = $ratesQuery->avg('rate');
+
+            if ($averageRate !== null) {
+                DB::transaction(function () use ($ratesQuery, $coinId, $averageRate, $startOfYesterday) {
+                    $ratesQuery->delete();
+
+                    DB::table('coin_rates')->insert([
+                        'coin_id'    => $coinId,
+                        'rate'       => $averageRate,
+                        'created_at' => $startOfYesterday,
+                    ]);
+                });
+            }
+        }
     }
 }
