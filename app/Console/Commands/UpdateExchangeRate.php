@@ -39,7 +39,6 @@ class UpdateExchangeRate extends Command
     {
         $key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->get(['id', 'abbreviation']);
-        $coinSymbols = $coins->pluck('abbreviation');
 
         try {
             $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
@@ -109,7 +108,10 @@ class UpdateExchangeRate extends Command
             'algorithm:id,name,slug,measurement',
             'asicBrand:id,name,slug',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
-            'asicVersions.ads:asic_version_id,price,coin_id,props,with_vat,user_id',
+            'asicVersions.ads' => function ($q) {
+                $q->select(['id', 'asic_version_id', 'price', 'coin_id', 'props', 'with_vat', 'user_id', 'moderation', 'hidden'])
+                    ->where('moderation', false)->where('hidden', false);
+            },
             'asicVersions.ads.coin:id,abbreviation',
             'asicVersions.ads.user:id,name',
             'moderatedReviews:reviewable_id,reviewable_type,rating'
