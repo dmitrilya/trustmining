@@ -26,7 +26,7 @@ class CalculatorController extends Controller
         $ads = Cache::remember(
             'asic_model_ads_' . $selModel['i'],
             now()->endOfDay(),
-            fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->where('ads.hidden', false)->where('ads.moderation', false)
+            fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->where('ads.moderation', false)->where('ads.hidden', false)
                 ->where('asic_models.id', $selModel['i'])->orderByRaw('ads.price = 0')->orderByRaw("ads.price * coin_rates.rate")->limit(9)->get()
         );
 

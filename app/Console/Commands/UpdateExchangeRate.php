@@ -39,9 +39,10 @@ class UpdateExchangeRate extends Command
     {
         $key = config('services.coinmarketcap.key');
         $coins = Coin::where('paymentable', false)->get(['id', 'abbreviation']);
+        $coinSymbols = $coins->pluck('abbreviation');
 
         try {
-            $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coins->implode(',')))->data);
+            $data = collect(json_decode(file_get_contents('https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?CMC_PRO_API_KEY=' . $key . '&symbol=' . $coinSymbols->implode(',')))->data);
             $data->each(function ($coinData) use ($coins) {
                 $coin = $coins->firstWhere('abbreviation', $coinData->symbol);
                 if (!$coin || empty($coinData->quote->USD->price)) return;
