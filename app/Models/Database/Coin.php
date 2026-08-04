@@ -46,7 +46,7 @@ class Coin extends Model
 
     public function latestRate()
     {
-        return $this->hasOne(\App\Models\Metrics\CoinRate::class)->latestOfMany();
+        return $this->hasOne(\App\Models\Metrics\CoinRate::class)->latest('created_at');
     }
 
     public function networkHashrates()
