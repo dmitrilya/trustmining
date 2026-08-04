@@ -11,7 +11,7 @@
     .ql-toolbar {
         border: none;
         position: sticky;
-        top: 0;
+        top: var(--header-height, 0px) !important;
         z-index: 40;
         background: inherit;
         border-top-left-radius: 0.5rem;

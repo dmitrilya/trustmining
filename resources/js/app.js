@@ -242,6 +242,9 @@ window.checkNotifications = function () {
 }
 
 window.onload = function () {
+    document.documentElement.style.setProperty('--header-height', `${document.getElementById('head')?.offsetHeight || 0}px`);
+    window.addEventListener('resize', () => document.documentElement.style.setProperty('--header-height', `${document.getElementById('head')?.offsetHeight || 0}px`));
+
     let userId = document.querySelector("meta[name='user-id']");
 
     if (userId) window.listenBroadcast(userId.content);
