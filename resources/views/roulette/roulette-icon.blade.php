@@ -1,5 +1,5 @@
 <button x-data="{
-    showTooltip: true,
+    showTooltip: false,
     timeToSpin: null,
     initTooltip() {
         if (this.timeToSpin !== 0) return;
