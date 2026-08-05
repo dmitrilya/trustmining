@@ -8,16 +8,11 @@ use Illuminate\Support\Str;
 
 use App\Http\Controllers\Controller;
 use App\Models\Roulette\RouletteSpin;
-use App\Services\RouletteSpinService;
+use App\Services\RouletteService;
 
 class RouletteSpinController extends Controller
 {
-    protected $service;
-
-    public function __construct(RouletteSpinService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected RouletteService $service) {}
 
     /**
      * Spin the roulette.

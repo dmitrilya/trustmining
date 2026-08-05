@@ -33,12 +33,12 @@
     </template>
 
     <div class="flex flex-wrap gap-0.5 sm:gap-1 mt-2">
-        <template x-for="item in all.filter(item => `${item.toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).slice(0, 20)" :key="item">
+        <template x-for="item in all.filter(item => `${String(item).toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).slice(0, 20)" :key="item">
             <div @click="selected.push(item); all.splice(all.indexOf(item), 1); search = ''; {{ $handleChange }}" x-text="item"
                 class="cursor-pointer px-1 py-0.5 xs:px-2 xs:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs xs:text-xs">
             </div>
         </template>
-        <div x-show="all.filter(item => `${item.toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).length > 20"
+        <div x-show="all.filter(item => `${String(item).toLowerCase()}`.indexOf(search.toLowerCase()) !== -1).length > 20"
             class="px-1 py-0.5 sm:px-2 sm:py-1 rounded-md bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 text-xxs sm:text-xs">
             {{ __('another') }} <span x-text="all.filter(item => `${item}`.indexOf(search) !== -1).length - 20"></span>
         </div>

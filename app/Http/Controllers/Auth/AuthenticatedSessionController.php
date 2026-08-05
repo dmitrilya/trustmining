@@ -15,7 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-use App\Services\RouletteSpinService;
+use App\Services\RouletteService;
 use App\Models\User\User;
 
 class AuthenticatedSessionController extends Controller
@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        (new RouletteSpinService)->compareSpinsAfterLogin(auth()->id());
+        (new RouletteService)->compareSpinsAfterLogin(auth()->id());
 
         return $request->redirect ? redirect($request->redirect) : redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -123,7 +123,7 @@ class AuthenticatedSessionController extends Controller
 
             Auth::login($user, true);
 
-            (new RouletteSpinService)->compareSpinsAfterLogin(auth()->id());
+            (new RouletteService)->compareSpinsAfterLogin(auth()->id());
 
             return $request->redirect ? redirect($request->redirect) : redirect()->intended(RouteServiceProvider::HOME);
         } catch (\Exception $e) {

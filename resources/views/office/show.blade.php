@@ -1,7 +1,7 @@
 <x-app-layout title="Офис компании {{ $office->user->name }}, точка продаж ASIC майнеров в городе {{ $office->city }}" description="Посетите официальный офис компании {{ $office->user->name }} в городе {{ $office->city }}. В продаже ASIC-майнеры в наличии и под заказ, проверка оборудования на месте, гарантийное обслуживание и консультации экспертов. Узнайте адрес и режим работы прямо сейчас">
     <x-slot name="header">
         <div class="flex items-center">
-            <x-back-link :href="route('company', ['user' => $office->user->slug])"></x-back-link>
+            <x-buttons.back-link :href="route('company', ['user' => $office->user->slug])"></x-buttons.back-link>
 
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight ml-3">
                 {{ __('Office of company') }} {{ $office->user->name }}

@@ -70,7 +70,7 @@
                     </div>
                 @endauth
 
-                @if ($roulettePrizes->count() > 1)
+                @if ($roulettePrizes['prizes']->count() > 1)
                     <div class="mr-3 xs:mr-4 sm:mr-5 w-5 h-5">
                         @include('roulette.roulette-icon')
                     </div>

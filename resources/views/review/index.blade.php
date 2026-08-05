@@ -49,7 +49,7 @@
 <x-app-layout title="Отзывы о {{ $title }}" description="{{ $description }} на платформе TrustMining">
     <x-slot name="header">
         <div class="flex items-center">
-            <x-back-link :href="$href"></x-back-link>
+            <x-buttons.back-link :href="$href"></x-buttons.back-link>
 
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight ml-3">
                 {{ __('Reviews') }} {{ $name }}
