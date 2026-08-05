@@ -42,14 +42,28 @@
                     <div class="flex items-center gap-2 -ml-4 transition-transform ease-out will-change-transform h-full"
                         :style="`transform: translateX(${currentTranslateX}px); transition-duration: ${isSpinning ? '10000ms' : '0ms'};`" id="roulette-tape">
 
+                        <svg class="hidden">
+                            <defs>
+                                @php
+                                    $randomSeeds = collect(range(1, 200))->random(16)->values()->all();
+                                @endphp
+
+                                @foreach ($randomSeeds as $index => $seed)
+                                    <g id="circuit-pattern-{{ $index }}" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                                        {!! \App\Services\RouletteService::generate($seed) !!}
+                                    </g>
+                                @endforeach
+                            </defs>
+                        </svg>
+
                         <template x-for="(prize, i) in extendedPrizes" :key="i">
                             <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition-all duration-300 overflow-hidden"
                                 :class="prize.style.card + ' ' + prize.style.border">
 
-                                <div class="absolute inset-0 opacity-65 dark:opacity-60 pointer-events-none z-0 select-none"
+                                <div class="absolute inset-0 opacity-80 pointer-events-none z-0 select-none"
                                     :style="`--pattern-color: ${prize.style.patternColor}`">
                                     <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                        <g x-html="prize.svg_pattern"></g>
+                                        <use :href="`#circuit-pattern-${prize.pattern_id}`" />
                                     </svg>
                                 </div>
 

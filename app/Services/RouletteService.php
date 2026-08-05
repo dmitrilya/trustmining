@@ -69,7 +69,7 @@ class RouletteService
 
         $extendedPrizes = $extendedPrizes->map(function ($p, $i) {
             $p['is_long_title'] = $this->checkIfNameTooWide($p['name']);
-            $p['svg_pattern'] = $this->generate($i);
+            $p['pattern_id'] = $i % 16; 
             $p['style'] = $this->getPrizeRarityClasses($p['chance']);
 
             return $p;
@@ -232,7 +232,7 @@ class RouletteService
         ];
     }
 
-    protected static function generate(int $cardIndex): string
+    public static function generate(int $cardIndex): string
     {
         return Cache::rememberForever("card_pattern_{$cardIndex}_v1", function () use ($cardIndex) {
             $currentSeed = $cardIndex + 55443;
