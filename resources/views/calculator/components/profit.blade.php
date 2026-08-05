@@ -1,11 +1,11 @@
 <div style="min-height: 228px" class="space-y-2 sm:space-y-4">
     <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full max-w-xs mx-auto">
         <button @click="view = 'day'" :class="view === 'day' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-            class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
+            class="flex-1 py-1.5 text-xs text-slate-800 dark:text-slate-200 font-bold rounded-lg transition-all">{{ __('Day') }}</button>
         <button @click="view = 'month'" :class="view === 'month' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-            class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
+            class="flex-1 py-1.5 text-xs text-slate-800 dark:text-slate-200 font-bold rounded-lg transition-all">{{ __('Month') }}</button>
         <button @click="view = 'year'" :class="view === 'year' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-80'"
-            class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
+            class="flex-1 py-1.5 text-xs text-slate-800 dark:text-slate-200 font-bold rounded-lg transition-all">{{ __('Year') }}</button>
     </div>
 
     <div>

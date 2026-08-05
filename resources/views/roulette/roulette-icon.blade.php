@@ -51,7 +51,7 @@
         style="display: none;">
         <div class="absolute bottom-full left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-slate-100/95 dark:bg-slate-900/95 -mb-[6px] -z-10"></div>
         
-        <div class="relative text-xxs font-black uppercase tracking-widest text-emerald-500 mb-1 flex items-center justify-center gap-2">
+        <div class="relative text-xxs font-black uppercase tracking-widest text-emerald-500 mb-2 flex items-center justify-center gap-2">
             <span class="w-1.5 h-1.5 mb-1 rounded-full bg-emerald-500 animate-pulse"></span>
             {{ __('Spin available!') }}
 
