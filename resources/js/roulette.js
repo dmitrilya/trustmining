@@ -191,106 +191,106 @@ export var roulette = (prizes, timeToSpin) => ({
         let config = {};
 
         // Детерминированный рандом на основе index
-        const createRandom = (seed) => {
-            let currentSeed = seed + 55443;
-            return () => {
-                currentSeed = (currentSeed * 1664525 + 1013904223) % 4294967296;
-                return currentSeed / 4294967296;
-            };
-        };
+        // const createRandom = (seed) => {
+        //     let currentSeed = seed + 55443;
+        //     return () => {
+        //         currentSeed = (currentSeed * 1664525 + 1013904223) % 4294967296;
+        //         return currentSeed / 4294967296;
+        //     };
+        // };
 
         // Генерация топологии платы с равномерным распределением по высоте
-        const generateCircuitSvg = (cardIndex) => {
-            const rand = createRandom(cardIndex);
-            let html = '';
+        // const generateCircuitSvg = (cardIndex) => {
+        //     const rand = createRandom(cardIndex);
+        //     let html = '';
 
-            const trackCount = 20;      // 14 горизонтальных уровней (треков)
-            const trackSpacing = 6.5;   // Идеальный отступ между линиями
-            const startYOffset = 6;
+        //     const trackCount = 20;      // 14 горизонтальных уровней (треков)
+        //     const trackSpacing = 6.5;   // Идеальный отступ между линиями
+        //     const startYOffset = 6;
 
-            // Карта занятости пространства по оси X для каждого трека
-            const occupied = Array.from({ length: trackCount }, () => []);
+        //     // Карта занятости пространства по оси X для каждого трека
+        //     const occupied = Array.from({ length: trackCount }, () => []);
 
-            // Функция для проверки, свободен ли отрезок на конкретном треке
-            const isSpaceFree = (track, xStart, xEnd) => {
-                if (track < 0 || track >= trackCount) return false;
-                return !occupied[track].some(range =>
-                    (xStart - 4 < range.end && xEnd + 4 > range.start)
-                );
-            };
+        //     // Функция для проверки, свободен ли отрезок на конкретном треке
+        //     const isSpaceFree = (track, xStart, xEnd) => {
+        //         if (track < 0 || track >= trackCount) return false;
+        //         return !occupied[track].some(range =>
+        //             (xStart - 4 < range.end && xEnd + 4 > range.start)
+        //         );
+        //     };
 
-            // Создаем массив индексов всех треков [0, 1, 2, ..., 13]
-            const tracksOrder = Array.from({ length: trackCount }, (_, i) => i);
+        //     // Создаем массив индексов всех треков [0, 1, 2, ..., 13]
+        //     const tracksOrder = Array.from({ length: trackCount }, (_, i) => i);
 
-            // Перемешиваем массив треков (Fisher-Yates shuffle на основе нашего рандома),
-            // чтобы гарантированно пройтись по каждому уровню высоты без случайных куч
-            for (let i = tracksOrder.length - 1; i > 0; i--) {
-                const j = Math.floor(rand() * (i + 1));
-                [tracksOrder[i], tracksOrder[j]] = [tracksOrder[j], tracksOrder[i]];
-            }
+        //     // Перемешиваем массив треков (Fisher-Yates shuffle на основе нашего рандома),
+        //     // чтобы гарантированно пройтись по каждому уровню высоты без случайных куч
+        //     for (let i = tracksOrder.length - 1; i > 0; i--) {
+        //         const j = Math.floor(rand() * (i + 1));
+        //         [tracksOrder[i], tracksOrder[j]] = [tracksOrder[j], tracksOrder[i]];
+        //     }
 
-            // Делаем 42 попытки (проходим по перемешанному массиву треков по кругу)
-            for (let i = 0; i < 62; i++) {
-                const startTrack = tracksOrder[i % trackCount]; // Выбираем трек из сбалансированного списка
-                const startX = Math.floor(rand() * 55);
+        //     // Делаем 42 попытки (проходим по перемешанному массиву треков по кругу)
+        //     for (let i = 0; i < 62; i++) {
+        //         const startTrack = tracksOrder[i % trackCount]; // Выбираем трек из сбалансированного списка
+        //         const startX = Math.floor(rand() * 55);
 
-                // Длина первого горизонтального участка
-                const segment1 = rand() > 0.4 ? (Math.floor(rand() * 12) + 4) : (Math.floor(rand() * 25) + 12);
-                const breakX1 = startX + segment1;
+        //         // Длина первого горизонтального участка
+        //         const segment1 = rand() > 0.4 ? (Math.floor(rand() * 12) + 4) : (Math.floor(rand() * 25) + 12);
+        //         const breakX1 = startX + segment1;
 
-                if (breakX1 > 90 || !isSpaceFree(startTrack, startX, breakX1)) continue;
+        //         if (breakX1 > 90 || !isSpaceFree(startTrack, startX, breakX1)) continue;
 
-                // Определяем излом: прыгаем на 1 или 2 трека вверх/вниз
-                const trackDelta = rand() > 0.5 ? 1 : 2;
-                const dir = rand() > 0.5 ? 1 : -1;
-                const endTrack = startTrack + (dir * trackDelta);
+        //         // Определяем излом: прыгаем на 1 или 2 трека вверх/вниз
+        //         const trackDelta = rand() > 0.5 ? 1 : 2;
+        //         const dir = rand() > 0.5 ? 1 : -1;
+        //         const endTrack = startTrack + (dir * trackDelta);
 
-                // Строгая длина диагонали под 45 градусов
-                const diagWidth = trackDelta * trackSpacing;
-                const breakX2 = breakX1 + diagWidth;
+        //         // Строгая длина диагонали под 45 градусов
+        //         const diagWidth = trackDelta * trackSpacing;
+        //         const breakX2 = breakX1 + diagWidth;
 
-                if (breakX2 > 95 || endTrack < 0 || endTrack >= trackCount) continue;
+        //         if (breakX2 > 95 || endTrack < 0 || endTrack >= trackCount) continue;
 
-                // Длина финального участка с высоким контрастом
-                const lengthRoll = rand();
-                let segment2 = 0;
-                if (lengthRoll > 0.7) {
-                    segment2 = Math.floor(rand() * 8) + 3; // Очень короткий хвост
-                } else if (lengthRoll > 0.3) {
-                    segment2 = Math.floor(rand() * 20) + 15; // Средний хвост
-                } else {
-                    segment2 = Math.floor(rand() * 40) + 35; // Длинный сквозной хвост
-                }
+        //         // Длина финального участка с высоким контрастом
+        //         const lengthRoll = rand();
+        //         let segment2 = 0;
+        //         if (lengthRoll > 0.7) {
+        //             segment2 = Math.floor(rand() * 8) + 3; // Очень короткий хвост
+        //         } else if (lengthRoll > 0.3) {
+        //             segment2 = Math.floor(rand() * 20) + 15; // Средний хвост
+        //         } else {
+        //             segment2 = Math.floor(rand() * 40) + 35; // Длинный сквозной хвост
+        //         }
 
-                const endX = Math.min(100, breakX2 + segment2);
+        //         const endX = Math.min(100, breakX2 + segment2);
 
-                // Проверяем доступность пути для конечного трека
-                if (isSpaceFree(endTrack, breakX1, endX)) {
+        //         // Проверяем доступность пути для конечного трека
+        //         if (isSpaceFree(endTrack, breakX1, endX)) {
 
-                    // Фиксируем занятое пространство
-                    occupied[startTrack].push({ start: startX, end: breakX1 });
-                    occupied[endTrack].push({ start: breakX1, end: endX });
+        //             // Фиксируем занятое пространство
+        //             occupied[startTrack].push({ start: startX, end: breakX1 });
+        //             occupied[endTrack].push({ start: breakX1, end: endX });
 
-                    const y1 = startYOffset + (startTrack * trackSpacing);
-                    const y2 = startYOffset + (endTrack * trackSpacing);
+        //             const y1 = startYOffset + (startTrack * trackSpacing);
+        //             const y2 = startYOffset + (endTrack * trackSpacing);
 
-                    // Отрисовываем ломаную линию
-                    const path = `M ${startX} ${y1} L ${breakX1} ${y1} L ${breakX2} ${y2} L ${endX} ${y2}`;
-                    const op = (rand() * 0.2 + 0.35).toFixed(2);
+        //             // Отрисовываем ломаную линию
+        //             const path = `M ${startX} ${y1} L ${breakX1} ${y1} L ${breakX2} ${y2} L ${endX} ${y2}`;
+        //             const op = (rand() * 0.2 + 0.35).toFixed(2);
 
-                    html += `<path d="${path}" fill="none" stroke="var(--pattern-color)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="${op}" />`;
+        //             html += `<path d="${path}" fill="none" stroke="var(--pattern-color)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="${op}" />`;
 
-                    // Ставим кружки-контакты
-                    if (segment2 < 12 || rand() > 0.3) {
-                        html += `<circle cx="${endX}" cy="${y2}" r="1.3" fill="#0b0f19" stroke="var(--pattern-color)" stroke-width="0.8" opacity="0.8" />`;
-                    }
-                    if (startX > 5 && rand() > 0.4) {
-                        html += `<circle cx="${startX}" cy="${y1}" r="1.2" fill="var(--pattern-color)" opacity="0.75" />`;
-                    }
-                }
-            }
-            return html;
-        };
+        //             // Ставим кружки-контакты
+        //             if (segment2 < 12 || rand() > 0.3) {
+        //                 html += `<circle cx="${endX}" cy="${y2}" r="1.3" fill="#0b0f19" stroke="var(--pattern-color)" stroke-width="0.8" opacity="0.8" />`;
+        //             }
+        //             if (startX > 5 && rand() > 0.4) {
+        //                 html += `<circle cx="${startX}" cy="${y1}" r="1.2" fill="var(--pattern-color)" opacity="0.75" />`;
+        //             }
+        //         }
+        //     }
+        //     return html;
+        // };
 
         // Настройка цветов и стилей редкости
         if (pct <= this.rarity[0]) {
@@ -327,7 +327,7 @@ export var roulette = (prizes, timeToSpin) => ({
             };
         }
 
-        config.circuitHtml = generateCircuitSvg(index);
+        //config.circuitHtml = generateCircuitSvg(index);
         return config;
     },
 
