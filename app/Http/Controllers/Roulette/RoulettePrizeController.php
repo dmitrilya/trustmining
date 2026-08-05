@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Roulette\RoulettePrize;
 use App\Models\User\User;
+use App\Services\RouletteService;
 
 class RoulettePrizeController extends Controller
 {
@@ -27,6 +28,15 @@ class RoulettePrizeController extends Controller
             'prizes' => $prizes,
             'users' => $users
         ]);
+    }
+
+    public function getPrizes()
+    {
+        $service = new RouletteService();
+        $data = $service->getPrizes();
+        $data['time_to_spin'] = $service->timeToSpin();
+
+        return response()->json($data, 200);
     }
 
     /**

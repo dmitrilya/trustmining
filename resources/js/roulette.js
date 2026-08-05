@@ -1,11 +1,12 @@
-export var roulette = (prizes, timeToSpin) => ({
-    prizes: prizes.prizes,
-    extendedPrizes: prizes.extendedPrizes,
+export var roulette = () => ({
+    prizes: [],
+    extendedPrizes: [],
     isSpinning: false,
     currentTranslateX: 0,
     wonPrize: null,
-    timeToSpin: timeToSpin,
+    timeToSpin: null,
     formattedTime: '',
+    isLoading: true,
 
     cardWidth: 112,
     gap: 8,
@@ -15,12 +16,27 @@ export var roulette = (prizes, timeToSpin) => ({
     timerInterval: null,
 
     init() {
-        if (prizes.length > 1) {
-            this.updateFormattedTime();
-            this.startTimer();
-        }
+        axios.get('/roulette/prizes/get')
+            .then(response => {
+                const data = response.data;
 
-        console.log(prizes);
+                this.prizes = data.prizes;
+                this.extendedPrizes = data.extended_prizes;
+                this.timeToSpin = data.time_to_spin;
+                this.isLoading = false;
+
+                window.dispatchEvent(new CustomEvent('roulette-loaded', {
+                    detail: { timeToSpin: data.time_to_spin }
+                }));
+
+                if (this.extendedPrizes.length > 1) {
+                    this.updateFormattedTime();
+                    this.startTimer();
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки данных рулетки:', error);
+            });
     },
 
     startTimer() {

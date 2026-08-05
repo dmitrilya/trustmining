@@ -104,6 +104,7 @@ Route::get('/legal', [Controller::class, 'legal'])->name('legal');
 Route::get('/taxes', [Controller::class, 'taxes'])->name('taxes');
 
 Route::group(['prefix' => 'roulette'], function () {
+    Route::get('/prizes/get', [RoulettePrizeController::class, 'getPrizes']);
     Route::get('/spin', [RouletteSpinController::class, 'spin'])->name('roulette.spin');
 });
 

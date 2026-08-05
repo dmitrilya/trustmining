@@ -1,7 +1,9 @@
 <x-profile.section h="Spins history" p="To activate your prizes, you need to log in through your Telegram account">
-    <x-slot name="i">
-        @include('roulette.roulette-icon')
-    </x-slot>
+    @if ($roulettePrizesExist)
+        <x-slot name="i">
+            @include('roulette.roulette-icon')
+        </x-slot>
+    @endif
 
     @php
         $EXTRA_SPIN_NAME = config('settings.roulette.extra_spin_name');

@@ -8,8 +8,6 @@ use Illuminate\View\View;
 use App\Services\Insight\Content\ArticleService;
 use App\Services\RouletteService;
 
-use App\Models\Roulette\RoulettePrize;
-
 class AppLayout extends Component
 {
     /**
@@ -18,8 +16,7 @@ class AppLayout extends Component
     public function render(): View
     {
         view()->share('popularArticle', (new ArticleService())->getPopular('article', 1, '1 week')->first());
-        view()->share('roulettePrizes', (new RouletteService)->getPrizes());
-        view()->share('timeToSpin', (new RouletteService)->timeToSpin());
+        view()->share('roulettePrizesExist', (new RouletteService)->prizesExist());
 
         return view('layouts.app');
     }

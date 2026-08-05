@@ -31,6 +31,11 @@ class RouletteService
         return $prizes->last();
     }
 
+    public function prizesExist()
+    {
+        return RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')->exists();
+    }
+
     public function getPrizes()
     {
         $prizes = RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')
@@ -70,7 +75,7 @@ class RouletteService
             return $p;
         });
 
-        return collect(['prizes' => $prizes, 'extendedPrizes' => $extendedPrizes]);
+        return ['prizes' => $prizes, 'extended_prizes' => $extendedPrizes];
     }
 
     /**

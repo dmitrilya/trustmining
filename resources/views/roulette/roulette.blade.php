@@ -1,4 +1,4 @@
-<div x-data="roulette({{ $roulettePrizes }}, {{ $timeToSpin }})" class="relative z-50">
+<div x-data="roulette()" class="relative z-50">
     <x-modal name="roulette" maxWidth="2xl" rounded="rounded-xl">
         <div class="p-2 xs:p-4 sm:p-6" x-init="$watch('isSpinning', value => { if (!value && wonPrize) $dispatch('close'); })">
             <div class="flex justify-between items-center mb-2">
@@ -53,7 +53,8 @@
                                     </svg>
                                 </div>
 
-                                <div class="absolute inset-0 bg-gradient-to-b from-white/10 dark:from-white/[0.02] to-transparent pointer-events-none"></div>
+                                <div class="absolute inset-0 bg-gradient-to-b from-white/10 dark:from-white/[0.02] to-transparent pointer-events-none">
+                                </div>
 
                                 <div class="absolute top-0 left-0 w-full h-1" :class="prize.style.badge"></div>
 

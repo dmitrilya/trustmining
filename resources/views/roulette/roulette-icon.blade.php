@@ -1,10 +1,13 @@
 <button x-data="{
-    showTooltip: false,
+    showTooltip: true,
+    timeToSpin: null,
     initTooltip() {
+        if (this.timeToSpin !== 0) return;
+
         const tooltipHiddenUntil = localStorage.getItem('roulette_tooltip_shown_today');
         const isShownToday = tooltipHiddenUntil && Date.now() < parseInt(tooltipHiddenUntil, 10);
 
-        if ({{ $timeToSpin }} === 0 && !isShownToday) {
+        if (!isShownToday) {
             setTimeout(() => {
                 this.showTooltip = true;
 
@@ -16,15 +19,15 @@
             }, 10000);
         }
     }
-}" x-init="initTooltip()" aria-label="{{ __('TM Roulette') }}" @click="$dispatch('open-modal', 'roulette')"
-    class="relative inline-flex items-center text-sm text-center focus:outline-none">
+}" @roulette-loaded.window="timeToSpin = $event.detail.timeToSpin; initTooltip();" aria-label="{{ __('TM Roulette') }}"
+    @click="$dispatch('open-modal', 'roulette')" class="relative inline-flex items-center text-sm text-center focus:outline-none">
     <div class="relative">
-        <div x-show="{{ $timeToSpin }} === 0" class="absolute inset-[-6px] rounded-full pointer-events-none animate-pulse z-0"
+        <div x-show="timeToSpin === 0" class="absolute inset-[-6px] rounded-full pointer-events-none animate-pulse z-0"
             style="background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, rgba(16, 185, 129, 0.15) 25%, rgba(16, 185, 129, 0) 70%);">
         </div>
 
         <svg class="w-5 h-5 opacity-80 hover:opacity-100" aria-hidden="true" viewBox="0 0 20 20"
-            :class="{{ $timeToSpin }} === 0 ? '[animation:spin_10s_linear_infinite] hover:[animation-play-state:paused]' : ''">
+            :class="timeToSpin === 0 ? '[animation:spin_10s_linear_infinite] hover:[animation-play-state:paused]' : ''">
             <defs>
                 <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#40ff9f" />
@@ -46,12 +49,14 @@
         x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-2 scale-95"
         class="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-48 p-4 bg-slate-100/95 dark:bg-slate-900/95 rounded-xl shadow-md shadow-logo-color text-center"
         style="display: none;">
+        <div class="absolute bottom-full left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-slate-100/95 dark:bg-slate-900/95 -mb-[6px] -z-10"></div>
+        
         <div class="relative text-xxs font-black uppercase tracking-widest text-emerald-500 mb-1 flex items-center justify-center gap-2">
             <span class="w-1.5 h-1.5 mb-1 rounded-full bg-emerald-500 animate-pulse"></span>
             {{ __('Spin available!') }}
 
-            <span @click="showTooltip = false"
-                class="absolute right-0 mb-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer text-sm leading-none"
+            <span @click.stop.prevent="showTooltip = false"
+                class="absolute right-0 mb-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer text-sm leading-none"
                 aria-label="Close">
                 &times;
             </span>
