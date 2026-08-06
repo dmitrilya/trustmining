@@ -24,7 +24,6 @@ class AdService
         $data['ordering_id'] = $firstAd ? $firstAd->ordering_id + 1 : 1;
         if (array_key_exists('description', $data))
             $data['description'] = $data['description'] ? Purifier::clean(htmlspecialchars_decode($data['description']), 'description') : '';
-        $data['props'] = json_decode($data['props']);
         $data['images'] = [];
 
         $ad = $user->ads()->create($data);
@@ -46,7 +45,7 @@ class AdService
 
         if ($data['office_id'] != $ad->office_id) $changings['office_id'] = $data['office_id'];
 
-        $props = collect(json_decode($data['props'], true));
+        $props = collect($data['props']);
         $propDiffs = $props->reject(fn($value, $key) => $value === ($ad->props[$key] ?? null))->toArray();
         if (count($propDiffs)) $data['props'] = $props;
 
