@@ -47,7 +47,7 @@ class UpdateAdRequest extends FormRequest
             'props' => [
                 'nullable',
                 function ($attribute, $value, $fail) use ($ad) {
-                    if ($ad->adCategory->name == 'firmwares' && (!is_array($value) || !isset($value['modes']) || !is_array($value['modes']) || empty($value['modes'])))
+                    if ($ad->adCategory->name == 'firmwares' && (!is_array($value) || !isset($value['Modes']) || !is_array($value['Modes']) || empty($value['Modes'])))
                         $fail('For a firmware category, you must specify a list of operating modes.');
                 },
             ],

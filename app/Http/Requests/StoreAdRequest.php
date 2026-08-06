@@ -48,7 +48,7 @@ class StoreAdRequest extends FormRequest
             'props' => [
                 'nullable',
                 function ($attribute, $value, $fail) {
-                    if (AdCategory::find($this->ad_category_id)->value('name') == 'firmwares' && (!is_array($value) || !isset($value['modes']) || !is_array($value['modes']) || empty($value['modes'])))
+                    if (AdCategory::find($this->ad_category_id)->value('name') == 'firmwares' && (!is_array($value) || !isset($value['Modes']) || !is_array($value['Modes']) || empty($value['Modes'])))
                         $fail('For a firmware category, you must specify a list of operating modes.');
                 },
             ],
