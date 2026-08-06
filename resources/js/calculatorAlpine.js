@@ -116,7 +116,7 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
             let dailyProfit = this.firmwareCalc(f.h, f.e, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
 
             if (baseDailyProfit > 0 && dailyProfit > baseDailyProfit) {
-                up = Math.round(((dailyProfit - baseDailyProfit) / baseDailyProfit) * 100);
+                up = Math.round(((dailyProfit - baseDailyProfit) / baseDailyProfit) * 10000) / 100;
             } else if (baseDailyProfit <= 0 && dailyProfit > 0) {
                 up = 100;
             }
