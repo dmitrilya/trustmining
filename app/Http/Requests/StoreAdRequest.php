@@ -21,6 +21,15 @@ class StoreAdRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if (is_string($this->props)) {
+            $this->merge([
+                'props' => json_decode($this->props, true),
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
