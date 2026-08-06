@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Console\Command;
 use Exception;
 
+use App\Models\Ad\AdCategory;
 use App\Models\Database\AsicModel;
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
-use App\Models\Metrics\CoinRate;
 use App\Models\Morph\View;
 
 class UpdateExchangeRate extends Command
@@ -111,7 +111,7 @@ class UpdateExchangeRate extends Command
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
             'asicVersions.ads' => function ($q) {
                 $q->select(['id', 'asic_version_id', 'price', 'coin_id', 'props', 'with_vat', 'user_id', 'moderation', 'hidden'])
-                    ->where('moderation', false)->where('hidden', false);
+                    ->where('moderation', false)->where('hidden', false)->where('ad_category_id', AdCategory::where('name', 'miners')->value('id'));
             },
             'asicVersions.ads.coin:id,abbreviation',
             'asicVersions.ads.user:id,name',
