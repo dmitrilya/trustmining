@@ -3,8 +3,9 @@
 
     const theme = me.getAttribute('data-theme') || 'light';
     const blocks = me.getAttribute('data-blocks') || 'period,graph,prediction,history';
+    const parentUrl = window.location.href;
 
-    const widgetUrl = `https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${encodeURIComponent(blocks)}&theme=${theme}`;
+    const widgetUrl = `https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${encodeURIComponent(blocks)}&theme=${theme}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
     iframe.src = widgetUrl;

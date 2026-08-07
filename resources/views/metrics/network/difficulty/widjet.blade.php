@@ -37,6 +37,11 @@
                 ecommerce: "dataLayer",
                 accurateTrackBounce: true,
                 trackLinks: true
+                params: {
+                    widget_hosts: {
+                        site_url: "{{ $parentUrl }}"
+                    }
+                }
             });
         </script>
         <noscript>

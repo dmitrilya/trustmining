@@ -155,6 +155,7 @@ class CalculatorController extends Controller
             'firmwares' => $firmwares,
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
+            'parentUrl' => $request->parent_url
         ]);
     }
 

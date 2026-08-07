@@ -36,12 +36,16 @@
                 clickmap: true,
                 ecommerce: "dataLayer",
                 accurateTrackBounce: true,
-                trackLinks: true
+                trackLinks: true,
+                params: {
+                    widget_hosts: {
+                        site_url: "{{ $parentUrl }}"
+                    }
+                }
             });
         </script>
         <noscript>
-            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;"
-                    alt="" />
+            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;" alt="" />
             </div>
         </noscript>
     @endif
@@ -71,7 +75,6 @@
 </body>
 
 </html>
-
 
 {{-- 
 <script 

@@ -103,6 +103,7 @@ class MetricsController extends Controller
             'prediction' => $data['prediction'],
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,
+            'parentUrl' => $request->parent_url
         ]);
     }
 
