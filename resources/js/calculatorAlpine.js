@@ -14,7 +14,7 @@ const BRACKETS = Object.freeze([
 
 const round2 = value => Math.round(value * 100) / 100;
 
-export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee, taxEnabled, rModel, rub, l) => ({
+export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selModel, fee, taxEnabled, rModel, rub, l) => ({
     algorithms: algorithms,
     firmwares: firmwares,
 
@@ -69,7 +69,7 @@ export var calculatorAlpine = (algorithms, firmwares, selVersion, selModel, fee,
             this.recalculateAll();
         });
 
-        if (rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
+        if (!isWidjet && rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
     firmwareCalc(h, e, algoProfit, isRub, isCompany, vp, minPriceRubRounded) {

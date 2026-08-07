@@ -38,9 +38,7 @@
                 accurateTrackBounce: true,
                 trackLinks: true,
                 params: {
-                    widget_hosts: {
-                        site_url: "{{ $parentUrl }}"
-                    }
+                    widget_host: "{{ $parentUrl }}"
                 }
             });
         </script>
