@@ -65,7 +65,7 @@
         document.body.classList.remove('dark');
     }" @endif>
     <main>
-        <div class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4" x-data="{ period: '1y', items: [] }" x-init="fetch('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}')
+        <div x-data="{ period: '1y', items: [] }" x-init="fetch('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}')
             .then(r => r.json())
             .then(data => {
                 @if(in_array('graph', $blocks))
