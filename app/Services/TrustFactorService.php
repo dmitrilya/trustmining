@@ -190,7 +190,7 @@ class TrustFactorService
                         )
                     ) : 0,
                 'capital' => $card['capital'] ?? 0,
-                'income' => $card['finance']['income'] ?? 0,
+                'income' => $card['finance']['income'] ? $card['finance']['income'] / 100 : 0,
                 'employees' => $card['employee_count'] ?? 0,
                 'site' => (bool) ($company?->site),
                 'video' => (bool) ($company?->video),

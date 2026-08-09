@@ -83,7 +83,7 @@
                                                     background-position: -{{ $i * 100 }}% 0;
                                                 ">
                                                 @if ($isActive)
-                                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-xxs font-mono text-slate-600 dark:text-slate-400">
+                                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-mono text-slate-600 dark:text-slate-400">
                                                         {{ $factor['value'] }}
                                                     </div>
                                                 @endif
