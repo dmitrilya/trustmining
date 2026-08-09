@@ -182,7 +182,7 @@ class TrustFactorService
                 'legal_entity' => ($card['type'] ?? null) === 'LEGAL',
                 'status_active' => ($card['state']['status'] ?? null) === 'ACTIVE',
                 'branches' => $card['branch_count'] ?? 0,
-                'invalid' => isset($card['invalid']) && $card['invalid'] != null,
+                'invalid' => isset($card['invalid']) && $card['invalid'] != 'null',
                 'registration_age' =>  isset($card['state']['registration_date'])
                     ? Carbon::now()->diffInMonths(
                         Carbon::createFromTimestampMs(
@@ -214,7 +214,7 @@ class TrustFactorService
             'response_time' => $user->art,
 
             'registry' => [
-                'exists' => (bool) $user->registry,
+                'exists' => (bool) $company->registry,
             ],
 
             'hosting' => [
