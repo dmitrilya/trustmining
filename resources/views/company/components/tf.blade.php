@@ -49,8 +49,8 @@
 
                     <div>
                         @if ($factor['type'] === 'threshold')
-                            <div class="space-y-1.5">
-                                <div class="relative w-full h-2 rounded-full overflow-hidden">
+                            <div class="space-y-1.5 mt-2">
+                                <div class="relative w-full h-2">
                                     @php
                                         $sortedThresholds = $factor['thresholds'];
                                         asort($sortedThresholds);
@@ -72,7 +72,7 @@
                                                 $isActive = $i === $matchedIndex;
                                             @endphp
 
-                                            <div class="h-full {{ $loop->first ? 'border-r' : ($loop->last ? 'border-l' : 'border-x') }} border-slate-300 transition-opacity duration-300 {{ !$isActive ? 'opacity-20 select-none pointer-events-none' : 'opacity-100 z-10' }}"
+                                            <div class="relative h-full {{ $loop->first ? 'rounded-l-full border-r' : ($loop->last ? 'rounded-r-full border-l' : 'border-x') }} border-slate-300 transition-opacity duration-300 {{ !$isActive ? 'opacity-20 select-none pointer-events-none' : 'opacity-100 z-10' }}"
                                                 style="
                                                     width: {{ $segmentWidth }}%; 
                                                     background: linear-gradient(to right, var(--tw-gradient-stops));
@@ -82,6 +82,11 @@
                                                     background-size: {{ $count * 100 }}% 100%;
                                                     background-position: -{{ $i * 100 }}% 0;
                                                 ">
+                                                @if ($isActive)
+                                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-xxs font-mono text-slate-600 dark:text-slate-400">
+                                                        {{ $factor['value'] }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         @endforeach
                                     </div>
@@ -89,7 +94,6 @@
 
                                 <div class="flex justify-between text-xxs font-mono text-slate-500 px-0.5">
                                     <span>{{ $thresholdKeys[0] }}</span>
-                                    <span class="text-slate-600 dark:text-slate-400">{{ $factor['value'] }}</span>
                                     <span>{{ end($thresholdKeys) }}</span>
                                 </div>
                             </div>
