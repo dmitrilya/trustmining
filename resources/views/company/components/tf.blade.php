@@ -17,7 +17,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
             @foreach ($tfData['factors'] as $factor)
-                <div class="p-2 sm:p-4 rounded-xl bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 flex flex-col justify-between">
+                <div class="p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 flex flex-col justify-between">
                     <div class="flex justify-between items-start gap-4 mb-4">
                         <div>
                             <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm tracking-wide">
@@ -96,19 +96,19 @@
                         @else
                             <div class="flex items-center gap-2">
                                 <div
-                                    class="{{ $factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs bg-rose-500/10 text-rose-600 dark:text-rose-400 px-2.5 py-1 rounded-lg border border-rose-500/30 w-full justify-center">
+                                    class="{{ $factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border {{ $factor['penalty'] ? 'border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
                                     @if ($factor['penalty'])
                                         <span class="font-mono">{{ $factor['penalty'] }}</span>
                                     @else
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                         </svg>
-                                        <span></span>
+                                        <span>{{ __('Not passed') }}</span>
                                     @endif
                                 </div>
 
                                 <div
-                                    class="{{ !$factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 rounded-lg border border-emerald-500/30 w-full justify-center">
+                                    class="{{ !$factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border {{ $factor['bonus'] ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
 
                                     @if ($factor['bonus'])
                                         <span class="font-mono">+{{ $factor['bonus'] }}</span>
@@ -116,7 +116,7 @@
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
-                                        <span>Пройдено</span>
+                                        <span>{{ __('Passed') }}</span>
                                     @endif
                                 </div>
                             </div>
