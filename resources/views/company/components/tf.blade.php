@@ -18,7 +18,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
             @foreach ($tfData['factors'] as $factor)
                 <div class="p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 flex flex-col justify-between">
-                    <div class="flex justify-between items-start gap-4 mb-4">
+                    <div class="flex justify-between items-start gap-4 {{ $factor['type'] === 'threshold' ? 'mb-4' : 'mb-2' }}">
                         <div>
                             <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm tracking-wide">
                                 {{ __('trustfactor.factors.' . $factor['name'] . '.title') }}
@@ -49,7 +49,7 @@
 
                     <div>
                         @if ($factor['type'] === 'threshold')
-                            <div class="space-y-1.5 mt-2">
+                            <div class="space-y-1.5">
                                 <div class="relative w-full h-2">
                                     @php
                                         $sortedThresholds = $factor['thresholds'];
@@ -83,7 +83,7 @@
                                                     background-position: -{{ $i * 100 }}% 0;
                                                 ">
                                                 @if ($isActive)
-                                                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-xs font-mono text-slate-600 dark:text-slate-400">
+                                                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-mono text-slate-600 dark:text-slate-400">
                                                         {{ $factor['value'] }}
                                                     </div>
                                                 @endif
@@ -100,7 +100,7 @@
                         @else
                             <div class="flex items-center gap-2">
                                 <div
-                                    class="{{ $factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border {{ $factor['penalty'] ? 'border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
+                                    class="{{ $factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['penalty'] ? 'border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
                                     @if ($factor['penalty'])
                                         <span class="font-mono">{{ $factor['penalty'] }}</span>
                                     @else
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <div
-                                    class="{{ !$factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border {{ $factor['bonus'] ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
+                                    class="{{ !$factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['bonus'] ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
 
                                     @if ($factor['bonus'])
                                         <span class="font-mono">+{{ $factor['bonus'] }}</span>
