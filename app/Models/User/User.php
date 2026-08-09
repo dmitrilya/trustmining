@@ -115,9 +115,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->ads()->where('moderation', 0);
     }
 
-    public function activeAds()
+    public function notHiddenAds()
     {
         return $this->ads()->where('hidden', 0);
+    }
+
+    public function activeAds()
+    {
+        return $this->ads()->where('hidden', 0)->where('moderation', 0);
     }
 
     public function channel()

@@ -2,228 +2,289 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use App\Models\User\User;
 
 class TrustFactorService
 {
     protected array $config;
+    protected array $data = [];
 
     public function __construct()
     {
         $this->config = config('trustfactor');
     }
 
-    public function calculate($user)
+    /**
+     * Обычный расчет Trust Factor.
+     * Возвращает только итоговый TF.
+     */
+    public function calculate(User $user): int|float
     {
         $oldTF = $user->tf ?? null;
-        $tf = $this->config['base'];
 
-        // --- 1. Компания ---
-        $tf += $this->scoreCompanyData($user);
+        $result = $this->calculateDetailed($user);
 
-        // --- 2. Отзывы ---
-        $tf += $this->scoreReviews($user);
-
-        // --- 3. Офисы ---
-        $tf += $this->scoreOffices($user);
-
-        // --- 4. Уникальность контента ---
-        $tf += $this->scoreUniqueContent($user);
-
-        // --- 5. Average Response Time ---
-        $tf += $this->scoreResponseTime($user);
-
-        // --- 6. Хостинг ---
-        $tf += $this->scoreHosting($user);
-
-        // --- 7. Хостинг ---
-        $tf += $this->scoreRegistry($user);
-
-        // --- 8. Обрезаем по границам ---
-        //$tf = max($this->config['min'], min($this->config['max'], $tf));
-
-        $user->tf = $tf;
+        $user->tf = $result['tf'];
         $user->save();
 
-        $this->logIfAnomaly($user, $oldTF, $tf);
+        $this->logIfAnomaly($user, $oldTF, $result['tf']);
 
-        return $tf;
+        return $result['tf'];
     }
 
     /**
-     * COMPANY
+     * Подробный расчет Trust Factor.
      */
-    private function scoreCompanyData($user)
+    public function calculateDetailed(User $user): array
     {
-        if (!$user->company) {
-            return -20;
+        $this->prepareData($user);
+
+        $direction = $this->detectDirection($user);
+
+        $tf = $this->config['base'];
+        $max = $this->config['base'];
+
+        $factors = [];
+
+        foreach ($this->config['factors']['active'] as $name) {
+            $factor = $this->config['factors']['directions'][$direction][$name]
+                ?? $this->config['factors']['default'][$name]
+                ?? null;
+
+            if (!$factor || !$this->checkCondition($factor['condition'] ?? null)) continue;
+
+            $result = $this->calculateFactor($name, $factor);
+
+            $tf += $result['score'];
+            $max += $result['max'];
+
+            $factors[] = $result;
         }
 
-        $score = 0;
-        $card = $user->company->card;
+        $tf = round($tf / $max * 100);
 
-        if ($card['type'] === 'LEGAL') {
-            $score += 3;
-
-            if ($card['capital'] > 10000) $score += 2;
-            if ($card['branch_count'] > 0) $score += 3;
-        }
-
-        // возраст компании
-        $years = Carbon::now()->diffInMonths(Carbon::createFromTimestampMs($card['state']['registration_date']));
-
-        if ($years > 36)      $score += 10;
-        elseif ($years > 24)  $score += 6;
-        elseif ($years > 18)  $score += 3;
-        elseif ($years < 8)  $score -= 3;
-
-        // статус
-        if ($card['state']['status'] != 'ACTIVE') {
-            $score -= 35;
-        }
-
-        // финансы
-        if (!empty($card['finance'])) {
-            $income = $card['finance']['income'];
-
-            if ($income > 10000000000) $score += 7;
-            elseif ($income > 5000000000) $score += 5;
-            elseif ($income > 2000000000) $score += 3;
-            elseif ($income < 100000000)   $score -= 6;
-            elseif ($income < 1000000000) $score -= 3;
-        }
-
-        // сотрудники
-        $emp = $card['employee_count'] ?? 0;
-
-        if ($emp > 10)      $score += 4;
-        elseif ($emp > 4)   $score += 2;
-        elseif ($emp > 1)   $score += 1;
-        else                $score -= 5;
-
-        if (isset($card['invalid'])) {
-            $score -= 15;
-        }
-
-        // сайт
-        if ($user->company->site) $score += 3;
-
-        // видео
-        if ($user->company->video) $score += 3;
-
-        // количество фото
-        if (count($user->company->images) > 5) $score += 2;
-
-        return $score;
+        return [
+            'direction' => $direction,
+            'tf' => $tf,
+            'factors' => $factors,
+        ];
     }
 
     /**
-     * REVIEWS
+     * Расчет одной проверки.
      */
-    private function scoreReviews($user)
+    private function calculateFactor(string $name, array $factor): array
     {
+        $value = $this->getData($factor['source']);
+
+        if (isset($factor['thresholds'])) {
+            $thresholdResult = $this->calculateThreshold($value, $factor['thresholds']);
+
+            return [
+                'name' => $name,
+                'type' => 'threshold',
+                'value' => $value,
+                'score' => $thresholdResult['score'],
+                'max' => max($factor['thresholds']),
+                'thresholds' => $factor['thresholds'],
+                'matched_threshold' => $thresholdResult['threshold'],
+            ];
+        }
+
+        $passed = (bool) $value;
+
+        $score = $passed ? ($factor['bonus'] ?? 0) : ($factor['penalty'] ?? 0);
+
+        return [
+            'name' => $name,
+            'type' => 'boolean',
+            'value' => $value,
+            'score' => $score,
+            'max' => $factor['bonus'] ?? 0,
+            'bonus' => $factor['bonus'] ?? 0,
+            'penalty' => $factor['penalty'] ?? 0,
+        ];
+    }
+
+    /**
+     * Определяет сработавший порог.
+     */
+    private function calculateThreshold(int|float|null $value, array $thresholds): array
+    {
+        foreach ($thresholds as $threshold => $score) {
+            if ($value >= $threshold) {
+                return [
+                    'threshold' => $threshold,
+                    'score' => $score,
+                ];
+            }
+        }
+
+        return [
+            'threshold' => null,
+            'score' => 0,
+        ];
+    }
+
+    /**
+     * Проверка условия выполнения фактора.
+     */
+    private function checkCondition(?array $condition): bool
+    {
+        if (!$condition) return true;
+
+        $actual = $this->getData($condition['source']);
+        $expected = $condition['value'];
+
+        return match ($condition['operator']) {
+            '==' => $actual == $expected,
+            '!=' => $actual != $expected,
+            '>'  => $actual > $expected,
+            '>=' => $actual >= $expected,
+            '<'  => $actual < $expected,
+            '<=' => $actual <= $expected,
+            default => false,
+        };
+    }
+
+    /**
+     * Получение подготовленного значения.
+     */
+    private function getData(string $source): mixed
+    {
+        return data_get($this->data, $source);
+    }
+
+    /**
+     * Подготовка всех данных, которые используются проверками.
+     */
+    private function prepareData(User $user): void
+    {
+        $company = $user->company;
+        $card = $company?->card ?? [];
+
         $reviews = $user->moderatedReviews;
 
-        if (!$reviews || $reviews->where('fake', false)->count() <= 2) {
-            return 0;
+        $realReviews = $reviews->where('fake', false);
+        $fakeReviews = $reviews->where('fake', true);
+
+        $activeAdsCount = $user->activeAds->count();
+
+        $uniqueAdsCount = $user->activeAds
+            ->where('unique_content', true)
+            ->count();
+
+        $this->data = [
+            'company' => [
+                'exists' => (bool) $company,
+                'legal_entity' => ($card['type'] ?? null) === 'LEGAL',
+                'status_active' => ($card['state']['status'] ?? null) === 'ACTIVE',
+                'branches' => $card['branch_count'] ?? 0,
+                'invalid' => isset($card['invalid']),
+                'registration_age' =>  isset($card['state']['registration_date'])
+                    ? Carbon::now()->diffInMonths(
+                        Carbon::createFromTimestampMs(
+                            $card['state']['registration_date']
+                        )
+                    ) : 0,
+                'capital' => $card['capital'] ?? 0,
+                'income' => $card['finance']['income'] ?? 0,
+                'employees' => $card['employee_count'] ?? 0,
+                'site' => (bool) ($company?->site),
+                'video' => (bool) ($company?->video),
+                'images' => count($company?->images) ?? 0,
+            ],
+
+            'reviews' => [
+                'count' => $realReviews->count(),
+                'average' => $realReviews->avg('rating') ?? 0,
+                'fake_count' => $fakeReviews->count(),
+            ],
+
+            'offices' => [
+                'count' => $user->moderatedOffices->count(),
+            ],
+
+            'ads' => [
+                'count' => $activeAdsCount,
+                'unique_ratio' => $activeAdsCount ? $uniqueAdsCount / $activeAdsCount * 100 : 0,
+            ],
+            'response_time' => $user->art,
+
+            'registry' => [
+                'exists' => (bool) $user->registry,
+            ],
+
+            'hosting' => [
+                'exists' => (bool) ( $user->hosting && !$user->hosting->moderation),
+                'visiting_territory' => (bool) ( $user->hosting && !$user->hosting->moderation && in_array(
+                        'Possibility of visiting the territory',
+                        $user->hosting->peculiarities ?? []
+                    )
+                ),
+            ],
+        ];
+    }
+
+    /**
+     * Определение основного направления компании.
+     */
+    private function detectDirection(User $user): string
+    {
+        $directionsConfig = $this->config['directions'];
+
+        $map = $directionsConfig['map'];
+        $weights = $directionsConfig['weights'];
+
+        $ads = $user->activeAds;
+
+        $scores = [
+            'miners'        => 0,
+            'legals'        => 0,
+            'containers'    => 0,
+            'noiseboxes'    => 0,
+            'cryptoboilers' => 0,
+            'firmwares'     => 0,
+            'gpus'          => 0,
+            'hosting'       => 0,
+            'service'       => 0,
+            'exchanger'     => 0,
+        ];
+
+        $hasMinersAds = $ads->contains(
+            fn($ad) => $ad->adCategory->name === 'miners'
+        );
+
+        foreach ($ads as $ad) {
+            $category = $ad->adCategory->name;
+
+            if ($category === 'noiseboxes') $direction = $hasMinersAds ? 'miners' : 'noiseboxes';
+            else $direction = $map[$category] ?? null;
+
+            if ($direction) $scores[$direction] += $weights[$category] ?? 0;
         }
 
-        $fakeCount = $reviews->where('fake', true)->count();
-        $real = $reviews->where('fake', false);
-        $avg = $real->avg('rating');
-
-        $score = 0;
-
-        if ($avg >= 4.85) $score += 7;
-        elseif ($avg >= 4.7) $score += 4;
-        elseif ($avg >= 4.4) $score += 1;
-        elseif ($avg >= 4.1) $score -= 3;
-        elseif ($avg >= 3.9) $score -= 6;
-        elseif ($avg >= 3.65) $score -= 10;
-        else $score -= 15;
-
-        if ($fakeCount > 0) {
-            $score -= 3;
+        if ($user->hosting && !$user->hosting->moderation) {
+            $scores['hosting'] += $weights['hosting'] ?? 0;
         }
 
-        return $score;
-    }
+        foreach ($user->moderatedOffices as $office) {
+            if (in_array('Repair service', $office->peculiarities ?? [])) $scores['service'] += $weights['service'] ?? 0;
 
-    /**
-     * OFFICES
-     */
-    private function scoreOffices($user)
-    {
-        $cfg = $this->config['office_bonus'];
-        $count = min(count($cfg) - 1, $user->moderatedOffices->count());
-
-        return $cfg[$count];
-    }
-
-    /**
-     * UNIQUE CONTENT
-     */
-    private function scoreUniqueContent($user)
-    {
-        $adsCount = $user->ads->count();
-
-        if ($adsCount == 0) {
-            return 0;
+            if (in_array('Cryptoexchanger', $office->peculiarities ?? [])) $scores['exchanger'] += $weights['exchanger'] ?? 0;
         }
 
-        $uniqueCount = $user->ads->where('unique_content')->count();
-        $ratio = $uniqueCount / $adsCount;
+        arsort($scores);
 
-        if ($ratio >= 0.9)     return 5;
-        elseif ($ratio >= 0.75) return 2;
-        elseif ($ratio < 0.15)  return -5;
-        elseif ($ratio < 0.5)   return -2;
-
-        return 0;
+        return array_key_first($scores);
     }
 
     /**
-     * AVERAGE RESPONSE TIME
+     * Логирование резкого изменения TF.
      */
-    private function scoreResponseTime($user)
-    {
-        $minutes = $user->art;
-
-        if ($minutes < 5)        return 4;
-        elseif ($minutes < 10)   return 2;
-        elseif ($minutes > 40)   return -4;
-        elseif ($minutes > 20)   return -2;
-
-        return 0;
-    }
-
-    /**
-     * HOSTING
-     */
-    private function scoreHosting($user)
-    {
-        if (!$user->hosting || $user->hosting->moderation) return 0;
-
-        if (!in_array('Possibility of visiting the territory', $user->hosting->peculiarities)) {
-            return -5;
-        }
-
-        return 0;
-    }
-
-    /**
-     * REGISTRY
-     */
-    private function scoreRegistry($user)
-    {
-        return $user->registry ? 15 : 0;
-    }
-
-    /**
-     * LOGGING
-     */
-    private function logIfAnomaly($user, $old, $new)
+    private function logIfAnomaly(User $user, int|float|null $old, int|float $new): void
     {
         if ($old === null) {
             Log::channel('trustfactor')->info("[TF INIT] user={$user->id} tf=$new");
@@ -231,10 +292,9 @@ class TrustFactorService
         }
 
         $diff = abs($old - $new);
+
         $threshold = $this->config['log_diff_threshold'];
 
-        if ($diff >= $threshold) {
-            Log::channel('trustfactor')->warning("[TF ANOMALY] user={$user->id} old=$old new=$new diff=$diff");
-        }
+        if ($diff >= $threshold) Log::channel('trustfactor')->warning("[TF ANOMALY] user={$user->id} old=$old new=$new diff=$diff");
     }
 }

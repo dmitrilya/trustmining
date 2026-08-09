@@ -67,7 +67,7 @@ class AdController extends Controller
         ], 200);
 
         $user = $request->user()->load(['role:id,name', 'tariff:id,max_ads']);
-        $activeAdsCount = $user->activeAds()->count();
+        $notHiddenAdsCount = $user->notHiddenAds()->count();
         $maxAds = $user->tariff?->max_ads ?? config('settings.ads.max_count_without_tariff');
 
         $coins = array_change_key_case(Coin::whereIn('abbreviation', ['usdt', 'rub', 'cny'])->pluck('id', 'abbreviation')->all(), CASE_LOWER);
@@ -165,7 +165,7 @@ class AdController extends Controller
             if (array_key_exists('hidden', $adChanges)) {
                 if (!$adChanges['hidden']) {
                     if ($ad->hidden) {
-                        if ($activeAdsCount >= $maxAds) {
+                        if ($notHiddenAdsCount >= $maxAds) {
                             array_push($errors, [
                                 'id' => $adChanges['id'],
                                 'error' => [
@@ -177,9 +177,9 @@ class AdController extends Controller
                             continue;
                         }
 
-                        $activeAdsCount++;
+                        $notHiddenAdsCount++;
                     }
-                } else $activeAdsCount--;
+                } else $notHiddenAdsCount--;
             }
 
             if (array_key_exists('props', $adChanges)) {

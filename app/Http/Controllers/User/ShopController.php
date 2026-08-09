@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\ShopTrait;
 use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
+use App\Services\TrustFactorService;
 
 use App\Models\User\User;
 use App\Models\User\Office;
@@ -49,7 +50,7 @@ class ShopController extends Controller
         if (!$user->company || $user->company->moderation && !(auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
-        return view('company.show', ['user' => $user, 'company' => $user->company]);
+        return view('company.show', ['user' => $user, 'company' => $user->company, 'tfData' => (new TrustFactorService)->calculateDetailed($user)]);
     }
 
     /**

@@ -17,25 +17,21 @@
                     @if ((isset($moderation->data['images']) && count($moderation->data['images'])) || count($company->images))
                         <div
                             class="md:col-span-3 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
-                            <x-carousel :images="isset($moderation->data['images'])
-                                ? $moderation->data['images']
-                                : $company->images" min="128" max="128"></x-carousel>
+                            <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $company->images" min="128" max="128"></x-carousel>
                         </div>
                     @endif
 
                     <div class="md:col-span-4 space-y-5">
                         @if (isset($moderation->data['bg_logo']))
                             <div class="border border-indigo-500">
-                                <img class="h-40" src="{{ Storage::url($moderation->data['bg_logo']) }}"
-                                    alt="">
+                                <img class="h-40" src="{{ Storage::url($moderation->data['bg_logo']) }}" alt="">
                             </div>
                         @endif
 
                         @if ($company->card['type'] == 'LEGAL')
-                            <h3
-                                class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
-                                <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24"
-                                    height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <h3 class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
+                                <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
                                         d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                         clip-rule="evenodd" />
@@ -45,10 +41,8 @@
                         @endif
 
                         @if ($company->site && $company->user->tariff && $company->user->tariff->can_site_link)
-                            <a href="{{ $company->site }}" target="_blank"
-                                class="text-indigo-500 hover:text-indigo-600 flex items-center">
-                                <svg class="w-5 h-5" aria-hidden="true" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
+                            <a href="{{ $company->site }}" target="_blank" class="text-indigo-500 hover:text-indigo-600 flex items-center">
+                                <svg class="w-5 h-5" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                                         d="M4.37 7.657c2.063.528 2.396 2.806 3.202 3.87 1.07 1.413 2.075 1.228 3.192 2.644 1.805 2.289 1.312 5.705 1.312 6.705M20 15h-1a4 4 0 0 0-4 4v1M8.587 3.992c0 .822.112 1.886 1.515 2.58 1.402.693 2.918.351 2.918 2.334 0 .276 0 2.008 1.972 2.008 2.026.031 2.026-1.678 2.026-2.008 0-.65.527-.9 1.177-.9H20M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
@@ -64,8 +58,7 @@
                                         'LIQUIDATING' => 'Ликвидируется',
                                         'LIQUIDATED' => 'Ликвидирована',
                                         'BANKRUPT' => 'Банкротство',
-                                        'REORGANIZING' =>
-                                            'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
+                                        'REORGANIZING' => 'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
                                     ];
                                 @endphp
 
@@ -84,8 +77,7 @@
                                     </li>
                                 @endif
                                 <li class="text-slate-500">
-                                    {{ __('Registration date') . ': ' }}<span
-                                        class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
+                                    {{ __('Registration date') . ': ' }}<span class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
                                         data-date="{{ $company->card['state']['registration_date'] }}"></span>
                                 </li>
                                 <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
@@ -94,13 +86,11 @@
 
                                 @if ($company->card['type'] == 'LEGAL')
                                     <li class="text-slate-500">
-                                        {{ __('Authorized capital') . ': ' }}<span
-                                            class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
+                                        {{ __('Authorized capital') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
                                             ₽</span>
                                     </li>
 
-                                    <div
-                                        class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
+                                    <div class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Founders') }}</div>
 
                                     @foreach ($company->card['founders'] as $founder)
@@ -111,16 +101,14 @@
                                                 </span>
                                             </li>
                                             <li class="text-slate-500 mt-1">
-                                                {{ __('TIN') . ': ' }}<span
-                                                    class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
+                                                {{ __('TIN') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
                                 @endif
 
                                 @if (array_key_exists('managers', $company->card))
-                                    <div
-                                        class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
+                                    <div class="text-sm md:text-lg text-slate-800 dark:text-slate-200 font-semibold mt-3">
                                         {{ __('Managers') }}
                                     </div>
 
@@ -130,8 +118,7 @@
                                                     class="text-slate-800 dark:text-slate-200">{{ $manager['name'] }}</span>
                                             </li>
                                             <li class="text-slate-500 mt-1">
-                                                {{ __('TIN') . ': ' }}<span
-                                                    class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
+                                                {{ __('TIN') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                             </li>
                                         </div>
                                     @endforeach
@@ -150,9 +137,7 @@
 
                     @php
                         $v = isset($moderation->data['video']) ? $moderation->data['video'] : $company->video;
-                        $d = isset($moderation->data['description'])
-                            ? $moderation->data['description']
-                            : $company->description;
+                        $d = isset($moderation->data['description']) ? $moderation->data['description'] : $company->description;
                     @endphp
 
                     @if ($v)
@@ -179,6 +164,8 @@
             </div>
         @endif
 
+        @include('company.components.tf')
+
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-3 sm:gap-6">
@@ -190,10 +177,8 @@
 
                 <div class="md:col-span-4 space-y-5">
                     @if ($company->card['type'] == 'LEGAL')
-                        <h3
-                            class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
-                            <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24"
-                                fill="currentColor" viewBox="0 0 24 24">
+                        <h3 class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
+                            <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd"
                                     d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                     clip-rule="evenodd" />
@@ -210,8 +195,7 @@
                                     'LIQUIDATING' => 'Ликвидируется',
                                     'LIQUIDATED' => 'Ликвидирована',
                                     'BANKRUPT' => 'Банкротство',
-                                    'REORGANIZING' =>
-                                        'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
+                                    'REORGANIZING' => 'В процессе присоединения к другому юрлицу, с последующей ликвидацией',
                                 ];
                             @endphp
 
@@ -229,9 +213,8 @@
                                         class="text-slate-800 dark:text-slate-200">{{ $company->card['kpp'] }}</span>
                                 </li>
                             @endif
-                            <li class="text-slate-500">{{ __('Registration date') . ': ' }}<span
-                                    class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
-                                    data-date="{{ $company->card['state']['registration_date'] }}"></span>
+                            <li class="text-slate-500">{{ __('Registration date') . ': ' }}<span class="date-transform text-slate-800 dark:text-slate-200"
+                                    data-type="date" data-date="{{ $company->card['state']['registration_date'] }}"></span>
                             </li>
                             <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
                                     class="text-slate-800 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
@@ -239,8 +222,7 @@
 
                             @if ($company->card['type'] == 'LEGAL')
                                 <li class="text-slate-500">
-                                    {{ __('Authorized capital') . ': ' }}<span
-                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
+                                    {{ __('Authorized capital') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $company->card['capital'] }}
                                         ₽</span>
                                 </li>
 
@@ -256,8 +238,7 @@
                                             </span>
                                         </li>
                                         <li class="text-slate-500 mt-1">
-                                            {{ __('TIN') . ': ' }}<span
-                                                class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
+                                            {{ __('TIN') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $founder['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach
@@ -274,8 +255,7 @@
                                                 class="text-slate-800 dark:text-slate-200">{{ $manager['name'] }}</span>
                                         </li>
                                         <li class="text-slate-500 mt-1">
-                                            {{ __('TIN') . ': ' }}<span
-                                                class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
+                                            {{ __('TIN') . ': ' }}<span class="text-slate-800 dark:text-slate-200">{{ $manager['inn'] }}</span>
                                         </li>
                                     </div>
                                 @endforeach
@@ -289,8 +269,7 @@
                                 <x-buttons.primary-button>{{ __('Edit') }}</x-buttons.primary-button>
                             </a>
                         @else
-                            <a class="block mt-6" target="_blank"
-                                href="{{ route('chat.start', ['user' => $company->user->id]) }}">
+                            <a class="block mt-6" target="_blank" href="{{ route('chat.start', ['user' => $company->user->id]) }}">
                                 <x-buttons.primary-button>{{ __('Contact') }}</x-buttons.primary-button>
                             </a>
                         @endif

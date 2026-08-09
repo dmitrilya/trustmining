@@ -32,12 +32,16 @@ class UpdateTrustFactors extends Command
      */
     public function handle()
     {
-        $users = User::whereHas('ads', function (Builder $q) {
-            $q->where('moderation', 'false')->where('hidden', 'false');
-        })->orWhereHas('hosting', function (Builder $q) {
-            $q->where('moderation', 'false');
-        })->select(['id', 'tf', 'art'])
-            ->with(['moderatedOffices', 'company', 'tariff:id,name', 'moderatedReviews:user_id,rating', 'ads:user_id,unique_content'])
+        $users = User::whereHas('activeAds')->orWhereHas('hosting', fn($q) => $q->where('moderation', 'false'))
+            ->orWhereHas('moderatedOffices', fn($q) => $q->where(fn($q1) => $q1->whereJsonContains('peculiarities', 'Repair service')->orWhereJsonContains('peculiarities', 'Cryptoexchanger')))
+            ->select(['id', 'tf', 'art'])->with([
+                'moderatedOffices:user_id,peculiarities',
+                'company',
+                'tariff:id,name',
+                'moderatedReviews:user_id,rating',
+                'activeAds:user_id,ad_category_id,unique_content',
+                'activeAds.adCategory:id,name'
+            ])
             ->get();
 
         $service = app(TrustFactorService::class);
