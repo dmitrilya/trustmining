@@ -57,6 +57,8 @@ class TrustFactorService
 
             $result = $this->calculateFactor($name, $factor);
 
+            if (!$result) continue;
+
             $tf += $result['score'];
             $max += $result['max'];
 
@@ -190,7 +192,7 @@ class TrustFactorService
                         )
                     ) : 0,
                 'capital' => $card['capital'] ?? 0,
-                'income' => $card['finance']['income'] ? $card['finance']['income'] / 100 : 0,
+                'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] / 100 : 0,
                 'employees' => $card['employee_count'] ?? 0,
                 'site' => (bool) ($company?->site),
                 'video' => (bool) ($company?->video),
@@ -211,6 +213,7 @@ class TrustFactorService
                 'count' => $activeAdsCount,
                 'unique_ratio' => $activeAdsCount ? $uniqueAdsCount / $activeAdsCount * 100 : 0,
             ],
+
             'response_time' => $user->art,
 
             'registry' => [

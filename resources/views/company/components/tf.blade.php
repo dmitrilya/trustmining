@@ -1,24 +1,23 @@
 <div
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10">
     <div class="space-y-6">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-300 dark:border-slate-700">
-            <div>
+        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6">
+            <div class="max-w-lg">
                 <h2 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200">{{ __('Company reliability analysis') }}</h2>
-                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                    {{ __('Main direction') }}: <span class="text-indigo-500 uppercase">{{ __('trustfactor.directions.' . $tfData['direction']) }}</span>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    {{ __('The criteria and their strictness depend on the main activity of the company and the presence of certain announcements') }}
                 </p>
             </div>
-            {{-- <div
-                class="flex items-center gap-3 px-4 py-2 rounded-xl border {{ $tfData['tf'] > config('trustfactor.yellow') ? ($tfData['tf'] > config('trustfactor.green') ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400') : 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400' }}">
-                <span class="text-sm">{{ __('Final trust factor') }} (TF):</span>
-                <span class="text-2xl font-black">{{ $tfData['tf'] }}%</span>
-            </div> --}}
+            <div class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl border bg-indigo-50 dark:bg-indigo-950/40 border-indigo-600 text-emerald-600 dark:text-emerald-400">
+                <div class="whitespace-nowrap text-slate-600 dark:text-slate-400 mb-1">{{ __('Main direction') }}</div>
+                <div class="whitespace-nowrap text-indigo-500 uppercase">{{ __('trustfactor.directions.' . $tfData['direction']) }}</div>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
             @foreach ($tfData['factors'] as $factor)
                 <div class="p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 flex flex-col justify-between">
-                    <div class="flex justify-between items-start gap-4 {{ $factor['type'] === 'threshold' ? 'mb-4' : 'mb-2' }}">
+                    <div class="flex justify-between items-start gap-4 {{ $factor['type'] === 'threshold' ? 'mb-6' : 'mb-4' }}">
                         <div>
                             <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm tracking-wide">
                                 {{ __('trustfactor.factors.' . $factor['name'] . '.title') }}
