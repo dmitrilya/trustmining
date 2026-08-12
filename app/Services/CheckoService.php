@@ -253,10 +253,10 @@ class CheckoService
             "registration_date" => Carbon::create($companyInfo['ДатаРег'])->timestamp,
             "state" => $companyInfo['Статус']['Наим'],
             "okveds" => array_merge([$companyInfo['ОКВЭД']], $companyInfo['ОКВЭДДоп']),
-            "phones" => $companyInfo['Контакты']['Тел'] ?? [],
-            "emails" => $companyInfo['Контакты']['Емэйл'] ?? [],
+            "phones" => (array) ($companyInfo['Контакты']['Тел'] ?? []),
+            "emails" => (array) ($companyInfo['Контакты']['Емэйл'] ?? []),
             "website" => $companyInfo['Контакты']['ВебСайт'] ?? null,
-            "address" => $companyInfo['ЮрАдрес']['АдресРФ'],
+            "address" => $companyInfo['type'] == 'LEGAL' ? $companyInfo['ЮрАдрес']['АдресРФ'] : $companyInfo['Регион']['Наим'] . ', ' . $companyInfo['ОКТМО']['Наим'],
             "finance" => [
                 "income" => $finance['2110'] ?? null,
                 "profit" => $finance['2400'] ?? null
