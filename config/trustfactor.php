@@ -45,7 +45,6 @@ return [
             'legal_entity',
             'company_status',
             'branches',
-            'invalid_registry_data',
             'registration_age',
             'website',
             'video',
@@ -81,11 +80,6 @@ return [
             'branches' => [
                 'source' => 'company.branches',
                 'bonus' => 3,
-            ],
-
-            'invalid_registry_data' => [
-                'source' => 'company.invalid',
-                'penalty' => -15,
             ],
 
             'registration_age' => [

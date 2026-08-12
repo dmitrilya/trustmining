@@ -239,13 +239,12 @@ class TrustFactorService
             'company' => [
                 'exists' => (bool) $company,
                 'legal_entity' => ($card['type'] ?? null) === 'LEGAL',
-                'status_active' => ($card['state']['status'] ?? null) === 'ACTIVE',
+                'status_active' => ($card['status'] ?? null) === 'Действует',
                 'branches' => $card['branch_count'] ?? 0,
-                'invalid' => !isset($card['invalid']) || $card['invalid'] != null,
-                'registration_age' =>  isset($card['state']['registration_date'])
+                'registration_age' =>  isset($card['registration_date'])
                     ? Carbon::now()->diffInMonths(
-                        Carbon::createFromTimestampMs(
-                            $card['state']['registration_date']
+                        Carbon::createFromTimestamp(
+                            $card['registration_date']
                         )
                     ) : 0,
                 'capital' => $card['capital'] ?? 0,

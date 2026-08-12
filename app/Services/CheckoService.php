@@ -251,7 +251,7 @@ class CheckoService
             "okpo" => $companyInfo['ОКПО'],
             "type" => $companyInfo['type'],
             "registration_date" => Carbon::create($companyInfo['ДатаРег'])->timestamp,
-            "state" => $companyInfo['Статус']['Наим'],
+            "status" => $companyInfo['Статус']['Наим'],
             "okveds" => array_merge([$companyInfo['ОКВЭД']], $companyInfo['ОКВЭДДоп']),
             "phones" => (array) ($companyInfo['Контакты']['Тел'] ?? []),
             "emails" => (array) ($companyInfo['Контакты']['Емэйл'] ?? []),
