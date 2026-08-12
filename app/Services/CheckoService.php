@@ -275,7 +275,7 @@ class CheckoService
                 array_push($founders, [
                     "inn" => $founder['ИНН'],
                     "name" => $founder['ФИО'],
-                    "share" => $founder['Доля']['Процент'],
+                    "share" => $founder['Доля']['Процент'] ?? null,
                 ]);
             }
             $card['founders'] = $founders;
