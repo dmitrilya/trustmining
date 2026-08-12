@@ -292,7 +292,10 @@ class CheckoService
             $card['managers'] = $managers;
         }
 
-        return $card;
+        return [
+            'name' => $companyInfo['type'] == 'LEGAL' ? $companyInfo['НаимСокр'] : $companyInfo['ТипСокр'] . ' ' . $companyInfo['ФИО'],
+            'card' => $card
+        ];
     }
 
     private function request(string $method, array $params)

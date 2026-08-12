@@ -16,6 +16,7 @@ use App\Http\Traits\Tinkoff;
 use App\Jobs\CheckInvoice;
 use App\Models\User\Company;
 use App\Models\User\Order;
+use App\Services\CheckoService;
 
 class CompanyController extends Controller
 {
@@ -57,14 +58,14 @@ class CompanyController extends Controller
 
         if (Company::whereJsonContains('card->inn', $request->inn)->exists()) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 
-        $card = $this->dadataCompanyByInn($request->inn);
+        $data = (new CheckoService)->checkoCompanyByInn($request->inn);
 
-        if (!$card) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
+        if (!$data) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 
         $company = Company::create([
             'user_id' => $user->id,
-            'name' => $card['value'],
-            'card' => $card['data'],
+            'name' => $data['name'],
+            'card' => $data['card'],
             'documents' => [],
             'images' => [],
         ]);
