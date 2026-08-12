@@ -256,7 +256,7 @@ class CheckoService
             "phones" => (array) ($companyInfo['Контакты']['Тел'] ?? []),
             "emails" => (array) ($companyInfo['Контакты']['Емэйл'] ?? []),
             "website" => $companyInfo['Контакты']['ВебСайт'] ?? null,
-            "address" => $companyInfo['type'] == 'LEGAL' ? $companyInfo['ЮрАдрес']['АдресРФ'] : $companyInfo['Регион']['Наим'] . ', ' . $companyInfo['ОКТМО']['Наим'],
+            "address" => $companyInfo['type'] == 'LEGAL' ? $companyInfo['ЮрАдрес']['АдресРФ'] : $companyInfo['Регион']['Наим'] . (isset($companyInfo['ОКТМО']['Наим']) ? ', ' . $companyInfo['ОКТМО']['Наим'] : ''),
             "finance" => [
                 "income" => $finance['2110'] ?? null,
                 "profit" => $finance['2400'] ?? null
