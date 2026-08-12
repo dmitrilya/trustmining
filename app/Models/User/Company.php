@@ -11,8 +11,6 @@ class Company extends Model
 {
     use HasFactory, Searchable;
 
-    const UPDATED_AT = null;
-
     /**
      * The attributes that are mass assignable.
      *

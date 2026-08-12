@@ -151,6 +151,11 @@ return [
                         'source' => 'company.exists',
                         'operator' => '==',
                         'value' => true,
+                    ], 
+                    [
+                        'source' => 'company.capital',
+                        'operator' => '!=',
+                        'value' => null,
                     ]
                 ],
                 'thresholds' => [

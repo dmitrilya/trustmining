@@ -268,7 +268,7 @@ class CheckoService
 
         if ($companyInfo['type'] == 'LEGAL') {
             $card['kpp'] = $companyInfo['КПП'];
-            $card['capital'] = $companyInfo['УстКап']['Сумма'];
+            $card['capital'] = $companyInfo['УстКап']['Сумма'] ?? null;
 
             $founders = [];
             foreach (($companyInfo['Учред']['ФЛ'] ?? []) as $founder) {
