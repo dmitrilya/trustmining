@@ -232,8 +232,19 @@ class CheckoService
     "СанкцУчр" => false
   ] */
 
-    private function processData(array $companyInfo, array $finance): array
+    private function processData(array $companyInfo, ?array $finance): array
     {
+        $risks = array_filter([
+            "ЕФРСБ" => count($companyInfo["ЕФРСБ"]),
+            "НедобПост" => $companyInfo["НедобПост"],
+            "ДисквЛица" => $companyInfo["ДисквЛица"],
+            "МассРуковод" => $companyInfo["МассРуковод"],
+            "МассУчред" => $companyInfo["МассУчред"],
+            "НелегалФин" => $companyInfo["НелегалФин"],
+            "Санкции" => $companyInfo["Санкции"],
+            "СанкцУчр" => $companyInfo["СанкцУчр"],
+        ], fn($v) =>  $v === true || (is_array($v) && !empty($v)));
+
         $card = [
             "inn" => $companyInfo['ИНН'],
             "kpp" => $companyInfo['КПП'],
@@ -248,19 +259,10 @@ class CheckoService
             "website" => $companyInfo['Контакты']['ВебСайт'] ?? null,
             "address" => $companyInfo['ЮрАдрес']['АдресРФ'],
             "finance" => [
-                "income" => $finance['2110'],
-                "profit" => $finance['2400']
+                "income" => $finance['2110'] ?? null,
+                "profit" => $finance['2400'] ?? null
             ],
-            "risks" => [
-                "ЕФРСБ" => count($companyInfo["ЕФРСБ"]),
-                "НедобПост" => $companyInfo["НедобПост"],
-                "ДисквЛица" => $companyInfo["ДисквЛица"],
-                "МассРуковод" => $companyInfo["МассРуковод"],
-                "МассУчред" => $companyInfo["МассУчред"],
-                "НелегалФин" => $companyInfo["НелегалФин"],
-                "Санкции" => $companyInfo["Санкции"],
-                "СанкцУчр" => $companyInfo["СанкцУчр"],
-            ],
+            "risks" => $risks,
             "branch_count" => count($companyInfo['Подразд']['Филиал'] ?? []),
             "employee_count" => $companyInfo['СЧР'],
         ];
