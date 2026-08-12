@@ -26,7 +26,7 @@ class TrustFactorService
 
         $result = $this->calculateDetailed($user);
 
-        $user->tf = $result['tf'];
+        $user->tf = $result['tf'] / $result['max'];
         $user->save();
 
         $this->logIfAnomaly($user, $oldTF, $result['tf']);
@@ -70,6 +70,7 @@ class TrustFactorService
         return [
             'direction' => $direction,
             'tf' => $tf,
+            'max' => $max,
             'factors' => $factors,
         ];
     }

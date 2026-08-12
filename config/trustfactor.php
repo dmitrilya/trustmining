@@ -51,6 +51,7 @@ return [
             'images',
             'capital',
             'income',
+            'profit',
             'employees',
             'reviews',
             'fake_reviews',
