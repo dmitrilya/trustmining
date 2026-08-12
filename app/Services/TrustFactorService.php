@@ -295,7 +295,7 @@ class TrustFactorService
         ];
     }
 
-    private function checkWebsite(string $url): array
+    private function checkWebsite(?string $url): array
     {
         if (!$url) return [
             'exists' => false,
