@@ -247,7 +247,7 @@ class CheckoService
 
         $card = [
             "inn" => $companyInfo['ИНН'],
-            "ogrn" => $companyInfo['ОГРН'],
+            "ogrn" => $companyInfo['ОГРН'] ?? $companyInfo['ОГРНИП'],
             "okpo" => $companyInfo['ОКПО'],
             "type" => $companyInfo['type'],
             "registration_date" => Carbon::create($companyInfo['ДатаРег'])->timestamp,
