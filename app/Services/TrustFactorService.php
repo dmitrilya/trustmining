@@ -26,7 +26,7 @@ class TrustFactorService
 
         $result = $this->calculateDetailed($user);
 
-        $user->tf = $result['tf'] / $result['max'] * 100;
+        $user->tf = $result['tf'];
         $user->save();
 
         $this->logIfAnomaly($user, $oldTF, $result['tf']);
