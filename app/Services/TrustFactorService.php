@@ -53,7 +53,7 @@ class TrustFactorService
                 ?? $this->config['factors']['default'][$name]
                 ?? null;
 
-            if (!$factor || !$this->checkCondition($factor['condition'] ?? null)) continue;
+            if (!$factor || !$this->checkConditions($factor['conditions'] ?? null)) continue;
 
             $result = $this->calculateFactor($name, $factor);
 
@@ -102,7 +102,7 @@ class TrustFactorService
             $components = [];
 
             foreach ($factor['components'] ?? [] as $componentName => $component) {
-                if (!$this->checkCondition($component['condition'] ?? null)) continue;
+                if (!$this->checkConditions($component['conditions'] ?? null)) continue;
 
                 $result = $this->calculateFactor($componentName, $component);
 
@@ -172,6 +172,17 @@ class TrustFactorService
             'threshold' => null,
             'score' => 0,
         ];
+    }
+
+    private function checkConditions(array $conditions): bool
+    {
+        foreach ($conditions as $condition) {
+            if (!$this->checkCondition($condition)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

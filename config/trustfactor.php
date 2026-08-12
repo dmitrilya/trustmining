@@ -152,10 +152,12 @@ return [
 
             'capital' => [
                 'source' => 'company.capital',
-                'condition' => [
-                    'source' => 'company.exists',
-                    'operator' => '==',
-                    'value' => true,
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
                 ],
                 'thresholds' => [
                     20000 => 2,
@@ -165,10 +167,12 @@ return [
 
             'income' => [
                 'source' => 'company.income',
-                'condition' => [
-                    'source' => 'company.registration_age',
-                    'operator' => '>',
-                    'value' => 12,
+                'conditions' => [
+                    [
+                        'source' => 'company.registration_age',
+                        'operator' => '>',
+                        'value' => 12,
+                    ]
                 ],
                 'thresholds' => [
                     1000000 => 3,
@@ -179,10 +183,12 @@ return [
 
             'profit' => [
                 'source' => 'company.profit',
-                'condition' => [
-                    'source' => 'company.registration_age',
-                    'operator' => '>',
-                    'value' => 12,
+                'conditions' => [
+                    [
+                        'source' => 'company.registration_age',
+                        'operator' => '>',
+                        'value' => 12,
+                    ]
                 ],
                 'thresholds' => [
                     0       => 0,
@@ -193,10 +199,17 @@ return [
 
             'employees' => [
                 'source' => 'company.employees',
-                'condition' => [
-                    'source' => 'company.exists',
-                    'operator' => '==',
-                    'value' => true,
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
+                        'source' => 'company.legal_entity',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
                 ],
                 'thresholds' => [
                     11 => 5,
@@ -208,10 +221,12 @@ return [
 
             'reviews' => [
                 'source' => 'reviews.average',
-                'condition' => [
-                    'source' => 'reviews.count',
-                    'operator' => '>',
-                    'value' => 2,
+                'conditions' => [
+                    [
+                        'source' => 'reviews.count',
+                        'operator' => '>',
+                        'value' => 2,
+                    ]
                 ],
                 'thresholds' => [
                     4.85 => 7,
@@ -226,10 +241,12 @@ return [
 
             'fake_reviews' => [
                 'source' => 'reviews.fake_count',
-                'condition' => [
-                    'source' => 'reviews.count',
-                    'operator' => '>',
-                    'value' => 0,
+                'conditions' => [
+                    [
+                        'source' => 'reviews.count',
+                        'operator' => '>',
+                        'value' => 0,
+                    ]
                 ],
                 'thresholds' => [
                     5 => -7,
@@ -255,10 +272,12 @@ return [
 
             'unique_content' => [
                 'source' => 'ads.unique_ratio',
-                'condition' => [
-                    'source' => 'ads.count',
-                    'operator' => '>',
-                    'value' => 0,
+                'conditions' => [
+                    [
+                        'source' => 'ads.count',
+                        'operator' => '>',
+                        'value' => 0,
+                    ]
                 ],
                 'thresholds' => [
                     90 => 2,
@@ -281,10 +300,12 @@ return [
 
             'registry' => [
                 'source' => 'registry.exists',
-                'condition' => [
-                    'source' => 'hosting.exists',
-                    'operator' => '==',
-                    'value' => true,
+                'conditions' => [
+                    [
+                        'source' => 'hosting.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
                 ],
                 'penalty' => -5,
                 'bonus' => 15,
@@ -292,10 +313,12 @@ return [
 
             'visiting_territory' => [
                 'source' => 'hosting.visiting_territory',
-                'condition' => [
-                    'source' => 'hosting.exists',
-                    'operator' => '==',
-                    'value' => true,
+                'conditions' => [
+                    [
+                        'source' => 'hosting.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
                 ],
                 'penalty' => -5,
             ],
@@ -305,10 +328,12 @@ return [
             'miners' => [
                 'capital' => [
                     'source' => 'company.capital',
-                    'condition' => [
-                        'source' => 'company.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'thresholds' => [
                         5000000 => 6,
@@ -321,10 +346,12 @@ return [
 
                 'income' => [
                     'source' => 'company.income',
-                    'condition' => [
-                        'source' => 'company.registration_age',
-                        'operator' => '>',
-                        'value' => 12,
+                    'conditions' => [
+                        [
+                            'source' => 'company.registration_age',
+                            'operator' => '>',
+                            'value' => 12,
+                        ]
                     ],
                     'thresholds' => [
                         100000000 => 7,
@@ -338,10 +365,12 @@ return [
 
                 'employees' => [
                     'source' => 'company.employees',
-                    'condition' => [
-                        'source' => 'company.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'thresholds' => [
                         50 => 7,
@@ -356,10 +385,12 @@ return [
             'hosting' => [
                 'capital' => [
                     'source' => 'company.capital',
-                    'condition' => [
-                        'source' => 'company.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'thresholds' => [
                         10000000 => 5,
@@ -372,10 +403,12 @@ return [
 
                 'income' => [
                     'source' => 'company.income',
-                    'condition' => [
-                        'source' => 'company.registration_age',
-                        'operator' => '>',
-                        'value' => 12,
+                    'conditions' => [
+                        [
+                            'source' => 'company.registration_age',
+                            'operator' => '>',
+                            'value' => 12,
+                        ]
                     ],
                     'thresholds' => [
                         50000000 => 8,
@@ -388,10 +421,12 @@ return [
 
                 'employees' => [
                     'source' => 'company.employees',
-                    'condition' => [
-                        'source' => 'company.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'thresholds' => [
                         50 => 6,
@@ -404,10 +439,12 @@ return [
 
                 'registry' => [
                     'source' => 'registry.exists',
-                    'condition' => [
-                        'source' => 'hosting.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'hosting.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'penalty' => -20,
                     'bonus' => 10,
@@ -415,10 +452,12 @@ return [
 
                 'visiting_territory' => [
                     'source' => 'hosting.visiting_territory',
-                    'condition' => [
-                        'source' => 'hosting.exists',
-                        'operator' => '==',
-                        'value' => true,
+                    'conditions' => [
+                        [
+                            'source' => 'hosting.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
                     ],
                     'penalty' => -10,
                 ],

@@ -263,7 +263,7 @@ class CheckoService
             ],
             "risks" => $risks,
             "branch_count" => count($companyInfo['Подразд']['Филиал'] ?? []),
-            "employee_count" => $companyInfo['СЧР'],
+            "employee_count" => $companyInfo['СЧР'] ?? null,
         ];
 
         if ($companyInfo['type'] == 'LEGAL') {
