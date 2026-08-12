@@ -14,7 +14,7 @@
             <br>
             @if ($ad->user->company)
                 @php
-                    $registration = Carbon\Carbon::createFromTimestampMs(
+                    $registration = Carbon\Carbon::createFromTimestamp(
                         $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
@@ -57,7 +57,7 @@
                 <p>{{ __('descriptions.can_trust.company.person') }}</p>
             @else
                 @php
-                    $registration = Carbon\Carbon::createFromTimestampMs(
+                    $registration = Carbon\Carbon::createFromTimestamp(
                         $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
@@ -108,7 +108,7 @@
                 <p>{{ __('descriptions.can_trust.company.person') }}</p>
             @else
                 @php
-                    $registration = Carbon\Carbon::createFromTimestampMs(
+                    $registration = Carbon\Carbon::createFromTimestamp(
                         $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
