@@ -79,6 +79,50 @@ class TrustFactorService
      */
     private function calculateFactor(string $name, array $factor): array
     {
+        if (($factor['type'] ?? null) === 'group') {
+            $exists = (bool) $this->getData($factor['source']);
+
+            if (!$exists) {
+                $score = $factor['penalty'] ?? 0;
+
+                return [
+                    'name' => $name,
+                    'type' => 'boolean',
+                    'value' => $exists,
+                    'score' => $score,
+                    'max' => $factor['bonus'] ?? 0,
+                    'bonus' => $factor['bonus'] ?? 0,
+                    'penalty' => $factor['penalty'] ?? 0,
+                    'components' => [],
+                ];
+            }
+
+            $score = 0;
+            $max = 0;
+            $components = [];
+
+            foreach ($factor['components'] ?? [] as $componentName => $component) {
+                if (!$this->checkCondition($component['condition'] ?? null)) continue;
+
+                $result = $this->calculateFactor($componentName, $component);
+
+                $score += $result['score'];
+                $max += $result['max'];
+                $components[] = $result;
+            }
+
+            return [
+                'name' => $name,
+                'type' => 'group',
+                'value' => $exists,
+                'score' => $score,
+                'max' => $max,
+                'bonus' => $factor['bonus'] ?? 0,
+                'penalty' => $factor['penalty'] ?? 0,
+                'components' => $components,
+            ];
+        }
+
         $value = $this->getData($factor['source']);
 
         if (isset($factor['thresholds'])) {
@@ -178,6 +222,8 @@ class TrustFactorService
             ->where('unique_content', true)
             ->count();
 
+        $phone = $user->phones->first();
+
         $this->data = [
             'company' => [
                 'exists' => (bool) $company,
@@ -193,10 +239,18 @@ class TrustFactorService
                     ) : 0,
                 'capital' => $card['capital'] ?? 0,
                 'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] / 100 : 0,
+                'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] / 100 : 0,
                 'employees' => $card['employee_count'] ?? 0,
-                'site' => (bool) ($company?->site),
                 'video' => (bool) ($company?->video),
                 'images' => count($company?->images) ?? 0,
+            ],
+
+            'website' => $this->checkWebsite($company?->site),
+
+            'phone' => [
+                'exists' => (bool) $phone,
+                'actual' => (bool) $phone->actual,
+                'toll_free' => (bool) mb_substr($phone->number, 0, 4) == 7800
             ],
 
             'reviews' => [
@@ -221,13 +275,87 @@ class TrustFactorService
             ],
 
             'hosting' => [
-                'exists' => (bool) ( $user->hosting && !$user->hosting->moderation),
-                'visiting_territory' => (bool) ( $user->hosting && !$user->hosting->moderation && in_array(
-                        'Possibility of visiting the territory',
-                        $user->hosting->peculiarities ?? []
-                    )
-                ),
+                'exists' => (bool) ($user->hosting && !$user->hosting->moderation),
+                'visiting_territory' => (bool) ($user->hosting && !$user->hosting->moderation && in_array(
+                    'Possibility of visiting the territory',
+                    $user->hosting->peculiarities ?? []
+                )),
             ],
+        ];
+    }
+
+    private function checkWebsite(string $url): array
+    {
+        if (!$url) return [
+            'exists' => false,
+            'https' => false,
+            'reachable' => false,
+        ];
+
+        $url = trim($url);
+        if (!preg_match('#^https?://#i', $url)) $url = 'https://' . $url;
+        $parts = parse_url($url);
+        $host = $parts['host'] ?? null;
+
+        if (!$host) return [
+            'exists' => false,
+            'https' => false,
+            'reachable' => false,
+        ];
+
+        $https = false;
+        $reachable = false;
+
+        try {
+            $context = stream_context_create([
+                'ssl' => [
+                    'verify_peer' => true,
+                    'verify_peer_name' => true,
+                    'allow_self_signed' => false,
+                    'SNI_enabled' => true,
+                    'peer_name' => $host,
+                ],
+            ]);
+
+            $socket = @stream_socket_client("ssl://{$host}:443", $errno, $errstr, 5, STREAM_CLIENT_CONNECT, $context);
+
+            if ($socket) {
+                $https = true;
+                fclose($socket);
+            }
+        } catch (\Throwable $e) {
+            $https = false;
+        }
+
+        try {
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'HEAD',
+                    'timeout' => 5,
+                    'ignore_errors' => true,
+                    'follow_location' => true,
+                    'max_redirects' => 5,
+                ],
+            ]);
+
+            $headers = @get_headers($url, true, $context);
+
+            if ($headers !== false) {
+                $statusLine = $headers[0] ?? '';
+
+                preg_match('#HTTP/\S+\s+(\d{3})#', $statusLine, $matches);
+
+                $status = isset($matches[1]) ? (int) $matches[1] : null;
+                $reachable = $status !== null && $status >= 200 && $status < 400;
+            }
+        } catch (\Throwable $e) {
+            $reachable = false;
+        }
+
+        return [
+            'exists' => true,
+            'https' => $https,
+            'reachable' => $reachable,
         ];
     }
 

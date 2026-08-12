@@ -8,7 +8,8 @@
                     {{ __('The criteria and their strictness depend on the main activity of the company and the presence of certain announcements') }}
                 </p>
             </div>
-            <div class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl border bg-indigo-50 dark:bg-indigo-950/40 border-indigo-600 text-emerald-600 dark:text-emerald-400">
+            <div
+                class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl border bg-indigo-50 dark:bg-indigo-950/40 border-indigo-600 text-emerald-600 dark:text-emerald-400">
                 <div class="whitespace-nowrap text-slate-600 dark:text-slate-400 mb-1">{{ __('Main direction') }}</div>
                 <div class="whitespace-nowrap text-indigo-500 uppercase">{{ __('trustfactor.directions.' . $tfData['direction']) }}</div>
             </div>
@@ -28,7 +29,7 @@
                         </div>
 
                         <div class="flex flex-col items-end">
-                            @if ($factor['type'] === 'threshold')
+                            @if ($factor['type'] === 'threshold' || $factor['type'] === 'group')
                                 <span
                                     class="whitespace-nowrap text-xs px-2 py-0.5 rounded-full font-mono
                                 {{ $factor['score'] > 0 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : ($factor['score'] < 0 ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400') }}">
@@ -95,6 +96,81 @@
                                     <span>{{ $thresholdKeys[0] }}</span>
                                     <span>{{ end($thresholdKeys) }}</span>
                                 </div>
+                            </div>
+                        @elseif ($factor['type'] === 'group')
+                            <div class="space-y-2">
+                                <div class="relative h-2 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-800">
+                                    @php
+                                        $max = max(abs($factor['max'] ?? 0), abs($factor['penalty'] ?? 0), 1);
+                                        $score = $factor['score'] ?? 0;
+
+                                        $minScore = $factor['penalty'] ?? 0;
+                                        $maxScore = $factor['max'] ?? 0;
+
+                                        $range = $maxScore - $minScore;
+
+                                        $position = $range > 0 ? (($score - $minScore) / $range) * 100 : 0;
+
+                                        $position = max(0, min(100, $position));
+                                    @endphp
+
+                                    <div class="absolute inset-0" style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);"></div>
+
+                                    <div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-slate-200 border-2 border-slate-700 dark:border-slate-300 shadow"
+                                        style="left: calc({{ $position }}% - 6px);"></div>
+                                </div>
+
+                                @if (!empty($factor['components']))
+                                    <details class="group/details">
+                                        <summary
+                                            class="cursor-pointer select-none text-xs text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition">
+                                            <span class="group-open/details:hidden">
+                                                {{ __('Details') }}
+                                            </span>
+
+                                            <span class="hidden group-open/details:inline">
+                                                {{ __('Скрыть подробности') }}
+                                            </span>
+                                        </summary>
+
+                                        <div class="mt-2 pl-3 border-l border-slate-200 dark:border-slate-700 space-y-2">
+                                            @foreach ($factor['components'] as $component)
+                                                <div class="flex items-center justify-between gap-3">
+
+                                                    <div class="min-w-0">
+                                                        <div class="text-xs text-slate-700 dark:text-slate-300">
+                                                            {{ __('trustfactor.factors.' . $factor['name'] . '.components.' . $component['name'] . '.title') }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="shrink-0">
+                                                        @if ($component['type'] === 'threshold')
+                                                            <span
+                                                                class="text-xxs font-mono px-1.5 py-0.5 rounded
+                                                                {{ $component['score'] > 0
+                                                                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                                                    : ($component['score'] < 0
+                                                                        ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                                                                        : 'bg-slate-500/10 text-slate-500 dark:text-slate-400') }}">
+                                                                {{ $component['score'] > 0 ? '+' : '' }}{{ $component['score'] }}
+                                                            </span>
+                                                        @else
+                                                            <span
+                                                                class="text-xxs font-mono px-1.5 py-0.5 rounded
+                                                                {{ $component['score'] > 0
+                                                                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                                                                    : ($component['score'] < 0
+                                                                        ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
+                                                                        : 'bg-slate-500/10 text-slate-500 dark:text-slate-400') }}">
+                                                                {{ $component['score'] > 0 ? '+' : '' }}{{ $component['score'] }}
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </details>
+                                @endif
                             </div>
                         @else
                             <div class="flex items-center gap-2">

@@ -100,8 +100,40 @@ return [
             ],
 
             'website' => [
-                'source' => 'company.site',
-                'bonus' => 1,
+                'type' => 'group',
+                'source' => 'website.exists',
+                'penalty' => -4,
+
+                'components' => [
+                    'https' => [
+                        'source' => 'website.https',
+                        'bonus' => 1,
+                        'penalty' => -4,
+                    ],
+
+                    'reachable' => [
+                        'source' => 'website.reachable',
+                        'bonus' => 1,
+                        'penalty' => -3,
+                    ],
+                ],
+            ],
+
+            'phone' => [
+                'type' => 'group',
+                'source' => 'phone.exists',
+
+                'components' => [
+                    'actual' => [
+                        'source' => 'phone.actual',
+                        'penalty' => -2,
+                    ],
+
+                    'toll_free' => [
+                        'source' => 'phone.toll_free',
+                        'bonus' => 2,
+                    ]
+                ]
             ],
 
             'video' => [
@@ -127,7 +159,7 @@ return [
                 ],
                 'thresholds' => [
                     20000 => 2,
-                    0 => 0,
+                    0     => 0,
                 ],
             ],
 
@@ -141,7 +173,21 @@ return [
                 'thresholds' => [
                     1000000 => 3,
                     100000  => 0,
-                    0         => -1,
+                    0       => -1,
+                ],
+            ],
+
+            'profit' => [
+                'source' => 'company.profit',
+                'condition' => [
+                    'source' => 'company.registration_age',
+                    'operator' => '>',
+                    'value' => 12,
+                ],
+                'thresholds' => [
+                    0       => 0,
+                    -50000  => 0,
+                    -500000 => -1,
                 ],
             ],
 
@@ -233,7 +279,6 @@ return [
                 ],
             ],
 
-            // Реестр майнеров
             'registry' => [
                 'source' => 'registry.exists',
                 'condition' => [
@@ -245,7 +290,6 @@ return [
                 'bonus' => 15,
             ],
 
-            // Возможность посещения территории хостинга
             'visiting_territory' => [
                 'source' => 'hosting.visiting_territory',
                 'condition' => [

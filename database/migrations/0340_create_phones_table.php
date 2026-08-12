@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->string('number');
+            $table->boolean('actual')->default(1);
             $table->boolean('destroyed')->default(0);
             $table->timestamps();
         });

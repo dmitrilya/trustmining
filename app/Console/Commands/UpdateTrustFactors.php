@@ -38,6 +38,7 @@ class UpdateTrustFactors extends Command
                 'moderatedOffices:user_id,peculiarities',
                 'company',
                 'tariff:id,name',
+                'phones:user_id,number,actual',
                 'moderatedReviews:user_id,rating',
                 'activeAds:user_id,ad_category_id,unique_content',
                 'activeAds.adCategory:id,name'

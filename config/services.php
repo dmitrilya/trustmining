@@ -61,6 +61,10 @@ return [
         'key' => env('COINGECKO_APP_KEY')
     ],
 
+    'checko' => [
+        'key' => env('CHECKO_API_KEY')
+    ],
+
     'tinkoff' => [
         'account_number' => env('TINKOFF_ACCOUNT_NUMBER'),
         'terminal' => [
