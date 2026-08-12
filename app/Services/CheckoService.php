@@ -236,13 +236,13 @@ class CheckoService
     {
         $risks = array_filter([
             "ЕФРСБ" => count($companyInfo["ЕФРСБ"]),
-            "НедобПост" => $companyInfo["НедобПост"],
-            "ДисквЛица" => $companyInfo["ДисквЛица"],
-            "МассРуковод" => $companyInfo["МассРуковод"],
-            "МассУчред" => $companyInfo["МассУчред"],
-            "НелегалФин" => $companyInfo["НелегалФин"],
-            "Санкции" => $companyInfo["Санкции"],
-            "СанкцУчр" => $companyInfo["СанкцУчр"],
+            "НедобПост" => $companyInfo["НедобПост"] ?? false,
+            "ДисквЛица" => $companyInfo["ДисквЛица"] ?? false,
+            "МассРуковод" => $companyInfo["МассРуковод"] ?? false,
+            "МассУчред" => $companyInfo["МассУчред"] ?? false,
+            "НелегалФин" => $companyInfo["НелегалФин"] ?? false,
+            "Санкции" => $companyInfo["Санкции"] ?? false,
+            "СанкцУчр" => $companyInfo["СанкцУчр"] ?? false,
         ], fn($v) =>  $v === true || (is_array($v) && !empty($v)));
 
         $card = [
