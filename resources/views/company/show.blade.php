@@ -53,7 +53,7 @@
                         <div class="my-5">
                             <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                 <li class="text-slate-500">{{ __('Status') . ': ' }}<span
-                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['status']] }}</span>
+                                        class="text-slate-800 dark:text-slate-200">{{ $company->card['status'] }}</span>
                                 </li>
                                 <li class="text-slate-500">{{ __('TIN') . ': ' }}<span
                                         class="text-slate-800 dark:text-slate-200">{{ $company->card['inn'] }}</span>
