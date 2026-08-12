@@ -174,7 +174,7 @@ class TrustFactorService
         ];
     }
 
-    private function checkConditions(array $conditions): bool
+    private function checkConditions(?array $conditions = []): bool
     {
         foreach ($conditions as $condition) {
             if (!$this->checkCondition($condition)) {
