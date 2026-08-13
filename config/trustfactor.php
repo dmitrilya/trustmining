@@ -44,7 +44,7 @@ return [
             'company_exists',
             'legal_entity',
             'company_status',
-            'branches',
+            //'branches',
             'registration_age',
             'website',
             'video',
@@ -86,8 +86,9 @@ return [
             'registration_age' => [
                 'source' => 'company.registration_age',
                 'thresholds' => [
-                    36 => 10,
-                    24 => 6,
+                    48 => 16,
+                    36 => 12,
+                    24 => 7,
                     18 => 3,
                     8  => 0,
                     0  => -3,
@@ -97,7 +98,7 @@ return [
             'website' => [
                 'type' => 'group',
                 'source' => 'website.exists',
-                'penalty' => -4,
+                'penalty' => -3,
 
                 'components' => [
                     'https' => [
@@ -191,7 +192,6 @@ return [
                     ]
                 ],
                 'thresholds' => [
-                    1       => 0,
                     -50000  => 0,
                     -500000 => -1,
                 ],
@@ -336,8 +336,8 @@ return [
                         ]
                     ],
                     'thresholds' => [
-                        5000000 => 6,
-                        1000000 => 3,
+                        2000000 => 4,
+                        500000 => 2,
                         100000  => 1,
                         20000   => 0,
                         0       => -2,
@@ -354,11 +354,11 @@ return [
                         ]
                     ],
                     'thresholds' => [
-                        100000000 => 7,
-                        50000000  => 5,
-                        20000000  => 3,
+                        1000000000 => 7,
+                        150000000  => 5,
+                        30000000  => 3,
                         10000000  => 0,
-                        1000000   => -3,
+                        2000000   => -3,
                         0           => -6,
                     ],
                 ],
