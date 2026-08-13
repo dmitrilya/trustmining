@@ -58,7 +58,7 @@ class CompanyController extends Controller
 
         if (Company::whereJsonContains('card->inn', $request->inn)->exists()) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 
-        $data = (new CheckoService)->checkoCompanyByInn($request->inn);
+        $data = (new CheckoService)->companyByInn($request->inn);
 
         if (!$data) return back()->withErrors(['forbidden' => __('Check the entered TIN')]);
 

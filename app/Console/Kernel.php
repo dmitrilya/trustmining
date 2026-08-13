@@ -24,10 +24,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('art:update')->twiceDaily(0, 12);
         $schedule->command('sitemap:generate')->twiceDaily(1, 13);
         $schedule->command('difficulty-notification:send')->twiceDaily(3, 15);
-        $schedule->command('trustfactors:update')->dailyAt('00:30');
+        $schedule->command('trustfactors:update')->dailyAt('15:10');
         $schedule->command('forumscore:update')->dailyAt('01:30');
         $schedule->command('price:update')->days([Schedule::MONDAY, Schedule::THURSDAY])->at('10:12');
-        //$schedule->command('companycard:update')->mondays()->at('15:00');
+        $schedule->command('companycards:update')->dailyAt('15:00');
         $schedule->command('auth:clear-resets')->daily();
     }
 

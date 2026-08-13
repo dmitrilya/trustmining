@@ -13,11 +13,11 @@ class CheckoService
         $this->apiKey = config('services.checko.key');
     }
 
-    public function checkoCompanyByInn(string|int $inn): ?array
+    public function companyByInn(string|int $inn, ?string $type = null): ?array
     {
         $inn = (string) $inn;
 
-        $info = $this->getCompanyInfo($inn);
+        $info = $this->getCompanyInfo($inn, $type);
 
         if ($info === null) return null;
 
@@ -26,7 +26,7 @@ class CheckoService
         return $this->processData($info, $finance);
     }
 
-    public function getCompanyInfo(string $inn, ?string $type = null): ?array
+    public function getCompanyInfo(string $inn, ?string $type): ?array
     {
         if ($type) {
             $response = $this->request(($type == 'LEGAL' ? 'company' : 'entrepreneur'), ['inn' => $inn]);
