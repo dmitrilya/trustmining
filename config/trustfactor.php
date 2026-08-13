@@ -86,8 +86,8 @@ return [
             'registration_age' => [
                 'source' => 'company.registration_age',
                 'thresholds' => [
-                    48 => 16,
-                    36 => 12,
+                    48 => 14,
+                    36 => 11,
                     24 => 7,
                     18 => 3,
                     8  => 0,

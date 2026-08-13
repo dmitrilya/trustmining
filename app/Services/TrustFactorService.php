@@ -260,8 +260,8 @@ class TrustFactorService
 
             'phone' => [
                 'exists' => (bool) $phone,
-                'actual' => (bool) $phone->actual,
-                'toll_free' => (bool) mb_substr($phone->number, 0, 4) == 7800
+                'actual' => (bool) $phone?->actual,
+                'toll_free' => ($phone?->number !== null) && (mb_substr($phone->number, 0, 4) === '7800')
             ],
 
             'reviews' => [
