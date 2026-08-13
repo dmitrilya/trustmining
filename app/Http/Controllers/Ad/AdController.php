@@ -16,6 +16,7 @@ use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
 
 use App\Services\AdService;
+use App\Services\TrustFactorService;
 
 use App\Models\Ad\Ad;
 use App\Models\Ad\AdCategory;
@@ -149,6 +150,7 @@ class AdController extends Controller
             'ad' => $ad,
             'ads' => $ads,
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
+            'tfData' => (new TrustFactorService)->calculateDetailed($ad->user)
         ]);
     }
 
@@ -181,6 +183,7 @@ class AdController extends Controller
             'ad' => $ad,
             'ads' => $ads,
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
+            'tfData' => (new TrustFactorService)->calculateDetailed($ad->user)
         ]);
     }
 
@@ -208,6 +211,7 @@ class AdController extends Controller
             'ad' => $ad,
             'ads' => [],
             'rub' => Coin::where('abbreviation', 'RUB')->first('id')->rate,
+            'tfData' => (new TrustFactorService)->calculateDetailed($ad->user)
         ]);
     }
 

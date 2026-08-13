@@ -119,7 +119,12 @@
                         <div class="md:col-span-2 md:col-start-1">
                             <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                                 @if ($ad->adCategory->name == 'firmwares')
-                                    <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . ' ' . $ad->asicVersion->measurement . '/s'" />
+                                    <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name .
+                                        ' ' .
+                                        (float) $ad->asicVersion->hashrate .
+                                        ' ' .
+                                        $ad->asicVersion->measurement .
+                                        '/s'" />
                                 @endif
 
                                 @foreach ($ad->props as $prop => $value)
@@ -342,7 +347,12 @@
 
                         <x-characteristics.characteristics class="my-5 sm:my-6 lg:my-7">
                             @if ($ad->adCategory->name == 'firmwares')
-                                <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name . ' ' . (float) $ad->asicVersion->hashrate . ' ' . $ad->asicVersion->measurement . '/s'" />
+                                <x-characteristics.characteristic name="Model" :value="$ad->asicVersion->asicModel->name .
+                                    ' ' .
+                                    (float) $ad->asicVersion->hashrate .
+                                    ' ' .
+                                    $ad->asicVersion->measurement .
+                                    '/s'" />
                             @endif
 
                             @foreach ($ad->props as $prop => $value)
@@ -458,6 +468,11 @@
                     @include('ad.components.location')
                 </div>
             </div>
+        </div>
+
+        <div
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14 mt-2 sm:mt-4">
+            @include('company.components.tf')
         </div>
 
         @if ($ad->adCategory->name == 'miners')
