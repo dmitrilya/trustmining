@@ -30,7 +30,7 @@ return [
             'containers'  => 8,
             'noiseboxes' => 2,
             'cryptoboilers' => 4,
-            'firmwares' => 4,
+            'firmwares' => 12,
             'monitorings' => 4,
             'gpus' => 9,
             'hosting' => 35,
@@ -153,7 +153,7 @@ return [
                         'source' => 'company.exists',
                         'operator' => '==',
                         'value' => true,
-                    ], 
+                    ],
                     [
                         'source' => 'company.capital',
                         'operator' => '!=',
@@ -213,8 +213,8 @@ return [
                     ]
                 ],
                 'thresholds' => [
-                    11 => 5,
-                    6  => 3,
+                    10 => 5,
+                    5  => 3,
                     2  => 2,
                     0  => 0,
                 ],
@@ -261,11 +261,7 @@ return [
             'offices' => [
                 'source' => 'offices.count',
                 'thresholds' => [
-                    7 => 10,
-                    6 => 9,
-                    5 => 7,
-                    4 => 5,
-                    3 => 3,
+                    3 => 4,
                     2 => 2,
                     0 => 0,
                 ],
@@ -381,6 +377,19 @@ return [
                         0  => -4,
                     ],
                 ],
+
+                'offices' => [
+                    'source' => 'offices.count',
+                    'thresholds' => [
+                        7 => 10,
+                        6 => 9,
+                        5 => 7,
+                        4 => 5,
+                        3 => 3,
+                        2 => 2,
+                        0 => 0,
+                    ],
+                ],
             ],
 
             'hosting' => [
@@ -468,10 +477,34 @@ return [
             'containers' => [],
             'noiseboxes' => [],
             'cryptoboilers' => [],
-            'firmwares' => [],
+            'firmwares' => [
+                'offices' => [
+                    'source' => 'offices.count',
+                    'thresholds' => [
+                        2 => 2,
+                        0 => 0,
+                    ],
+                ],
+            ],
             'gpus' => [],
-            'service' => [],
-            'exchanger' => [],
+            'service' => [
+                'offices' => [
+                    'source' => 'offices.count',
+                    'thresholds' => [
+                        2 => 2,
+                        0 => 0,
+                    ],
+                ],
+            ],
+            'exchanger' => [
+                'offices' => [
+                    'source' => 'offices.count',
+                    'thresholds' => [
+                        2 => 2,
+                        0 => 0,
+                    ],
+                ],
+            ],
         ],
     ],
 ];
