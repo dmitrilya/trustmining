@@ -249,8 +249,8 @@ class TrustFactorService
                         )
                     ) : 0,
                 'capital' => $card['capital'] ?? 0,
-                'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] / 100 : 0,
-                'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] / 100 : 0,
+                'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] : 0,
+                'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] : 0,
                 'employees' => $card['employee_count'] ?? 0,
                 'video' => (bool) ($company?->video),
                 'images' => count($company?->images) ?? 0,
