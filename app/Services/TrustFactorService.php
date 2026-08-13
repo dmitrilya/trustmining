@@ -276,7 +276,7 @@ class TrustFactorService
 
             'ads' => [
                 'count' => $activeAdsCount,
-                'unique_ratio' => $activeAdsCount ? $uniqueAdsCount / $activeAdsCount * 100 : 0,
+                'unique_ratio' => $activeAdsCount ? round($uniqueAdsCount / $activeAdsCount * 100) : 0,
             ],
 
             'response_time' => $user->art,

@@ -68,7 +68,7 @@
                                 @endif
                                 <li class="text-slate-500">
                                     {{ __('Registration date') . ': ' }}<span class="date-transform text-slate-800 dark:text-slate-200" data-type="date"
-                                        data-date="{{ $company->card['registration_date'] }}"></span>
+                                        data-date="{{ $company->card['registration_date'] * 1000 }}"></span>
                                 </li>
                                 <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
                                         class="text-slate-800 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
@@ -194,7 +194,7 @@
                                 </li>
                             @endif
                             <li class="text-slate-500">{{ __('Registration date') . ': ' }}<span class="date-transform text-slate-800 dark:text-slate-200"
-                                    data-type="date" data-date="{{ $company->card['registration_date'] }}"></span>
+                                    data-type="date" data-date="{{ $company->card['registration_date'] * 1000 }}"></span>
                             </li>
                             <li class="text-slate-500">{{ __('Employee count') . ': ' }}<span
                                     class="text-slate-800 dark:text-slate-200">{{ $company->card['employee_count'] ? $company->card['employee_count'] : 0 }}</span>
