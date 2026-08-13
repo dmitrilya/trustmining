@@ -75,69 +75,21 @@ class TrustFactorService
         ];
     }
 
-    /**
-     * Расчет одной проверки.
-     */
     private function calculateFactor(string $name, array $factor): array
     {
-        if (($factor['type'] ?? null) === 'group') {
-            $exists = (bool) $this->getData($factor['source']);
+        $type = $factor['type'] ?? null;
+        if ($type === 'group') {
+            return $this->calculateGroup($name, $factor);
+        }
 
-            if (!$exists) {
-                $score = $factor['penalty'] ?? 0;
-
-                return [
-                    'name' => $name,
-                    'type' => 'boolean',
-                    'value' => $exists,
-                    'score' => $score,
-                    'max' => $factor['bonus'] ?? 0,
-                    'bonus' => $factor['bonus'] ?? 0,
-                    'penalty' => $factor['penalty'] ?? 0,
-                    'components' => [],
-                ];
-            }
-
-            $score = 0;
-            $max = 0;
-            $components = [];
-
-            foreach ($factor['components'] ?? [] as $componentName => $component) {
-                if (!$this->checkConditions($component['conditions'] ?? [])) continue;
-
-                $result = $this->calculateFactor($componentName, $component);
-
-                $score += $result['score'];
-                $max += $result['max'];
-                $components[] = $result;
-            }
-
-            return [
-                'name' => $name,
-                'type' => 'group',
-                'value' => $exists,
-                'score' => $score,
-                'max' => $max,
-                'bonus' => $factor['bonus'] ?? 0,
-                'penalty' => $factor['penalty'] ?? 0,
-                'components' => $components,
-            ];
+        if ($type === 'list') {
+            return $this->calculateList($name, $factor);
         }
 
         $value = $this->getData($factor['source']);
 
         if (isset($factor['thresholds'])) {
-            $thresholdResult = $this->calculateThreshold($value, $factor['thresholds']);
-
-            return [
-                'name' => $name,
-                'type' => 'threshold',
-                'value' => $value,
-                'score' => $thresholdResult['score'],
-                'max' => max($factor['thresholds']),
-                'thresholds' => $factor['thresholds'],
-                'matched_threshold' => $thresholdResult['threshold'],
-            ];
+            return $this->calculateThreshold($name, $value, $factor['thresholds']);
         }
 
         $passed = (bool) $value;
@@ -155,23 +107,110 @@ class TrustFactorService
         ];
     }
 
-    /**
-     * Определяет сработавший порог.
-     */
-    private function calculateThreshold(int|float|null $value, array $thresholds): array
+    private function calculateThreshold(string $name, int|float|null $value, array $thresholds): array
     {
         foreach ($thresholds as $threshold => $score) {
             if ($value >= $threshold) {
                 return [
-                    'threshold' => $threshold,
+                    'name' => $name,
+                    'type' => 'threshold',
+                    'value' => $value,
                     'score' => $score,
+                    'max' => max($thresholds),
+                    'thresholds' => $thresholds,
+                    'matched_threshold' => $threshold,
                 ];
             }
         }
 
         return [
-            'threshold' => null,
+            'name' => $name,
+            'type' => 'threshold',
+            'value' => $value,
             'score' => 0,
+            'max' => max($thresholds),
+            'thresholds' => $thresholds,
+            'matched_threshold' => null,
+        ];
+    }
+
+    private function calculateGroup(string $name, array $factor): array
+    {
+        $exists = (bool) $this->getData($factor['source']);
+
+        if (!$exists) {
+            $score = $factor['penalty'] ?? 0;
+
+            return [
+                'name' => $name,
+                'type' => 'boolean',
+                'value' => $exists,
+                'score' => $score,
+                'max' => $factor['bonus'] ?? 0,
+                'bonus' => $factor['bonus'] ?? 0,
+                'penalty' => $factor['penalty'] ?? 0,
+                'components' => [],
+            ];
+        }
+
+        $score = 0;
+        $max = 0;
+        $components = [];
+
+        foreach ($factor['components'] ?? [] as $componentName => $component) {
+            if (!$this->checkConditions($component['conditions'] ?? [])) continue;
+
+            $result = $this->calculateFactor($componentName, $component);
+
+            $score += $result['score'];
+            $max += $result['max'];
+            $components[] = $result;
+        }
+
+        return [
+            'name' => $name,
+            'type' => 'group',
+            'value' => $exists,
+            'score' => $score,
+            'max' => $max,
+            'bonus' => $factor['bonus'] ?? 0,
+            'penalty' => $factor['penalty'] ?? 0,
+            'components' => $components,
+        ];
+    }
+
+    private function calculateList(string $name, array $factor): array
+    {
+        $items = array_keys($this->getData($factor['source'])) ?? [];
+
+        $score = 0;
+        $max = 0;
+        $components = [];
+
+        foreach ($factor['components'] ?? [] as $componentName => $component) {
+            $exists = in_array($componentName, $items);
+            $componentScore = $component['score'] ?? 0;
+            $componentMax = $componentScore > 0 ? $componentScore : 0;
+
+            if ($exists) $score += $componentScore;
+            $max += $componentMax;
+
+            $components[] = [
+                'name' => $componentName,
+                'type' => 'boolean',
+                'value' => $exists,
+                'score' => $exists ? $componentScore : 0,
+                'max' => $componentMax,
+            ];
+        }
+
+        return [
+            'name' => $name,
+            'type' => 'list',
+            'value' => (bool) count($items),
+            'score' => $score,
+            'max' => $max,
+            'components' => $components,
         ];
     }
 
@@ -254,6 +293,7 @@ class TrustFactorService
                 'employees' => $card['employee_count'] ?? 0,
                 'video' => (bool) ($company?->video),
                 'images' => count($company?->images) ?? 0,
+                'risks' => $card['risks'] ?? []
             ],
 
             'website' => $this->checkWebsite($company?->site),
@@ -341,23 +381,31 @@ class TrustFactorService
         try {
             $context = stream_context_create([
                 'http' => [
-                    'method' => 'HEAD',
+                    'method' => 'GET',
                     'timeout' => 5,
                     'ignore_errors' => true,
                     'follow_location' => true,
                     'max_redirects' => 5,
+                    'user_agent' => 'TrustMining/1.0',
                 ],
             ]);
 
             $headers = @get_headers($url, true, $context);
 
             if ($headers !== false) {
-                $statusLine = $headers[0] ?? '';
+                $statusLine = is_array($headers[0] ?? null)
+                    ? end($headers[0])
+                    : ($headers[0] ?? '');
 
                 preg_match('#HTTP/\S+\s+(\d{3})#', $statusLine, $matches);
 
-                $status = isset($matches[1]) ? (int) $matches[1] : null;
-                $reachable = $status !== null && $status >= 200 && $status < 400;
+                $status = isset($matches[1])
+                    ? (int) $matches[1]
+                    : null;
+
+                $reachable = $status !== null
+                    && $status >= 200
+                    && $status < 400;
             }
         } catch (\Throwable $e) {
             $reachable = false;

@@ -46,6 +46,7 @@ return [
             'company_status',
             //'branches',
             'registration_age',
+            'risk_factors',
             'website',
             'video',
             'images',
@@ -93,6 +94,38 @@ return [
                     8  => 0,
                     0  => -3,
                 ],
+            ],
+
+            'risk_factors' => [
+                'type' => 'list',
+                'source' => 'company.risks',
+
+                'components' => [
+                    'ЕФРСБ' => [
+                        'score' => -30
+                    ],
+                    'НедобПост' => [
+                        'score' => -6
+                    ],
+                    'ДисквЛица' => [
+                        'score' => -8
+                    ],
+                    'МассРуковод' => [
+                        'score' => -2
+                    ],
+                    'МассУчред' => [
+                        'score' => -1
+                    ],
+                    'НелегалФин' => [
+                        'score' => -6
+                    ],
+                    'Санкции' => [
+                        'score' => -2
+                    ],
+                    'СанкцУчр' => [
+                        'score' => -2
+                    ],
+                ]
             ],
 
             'website' => [

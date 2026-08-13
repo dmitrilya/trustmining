@@ -235,13 +235,13 @@ class CheckoService
     private function processData(array $companyInfo, ?array $finance): array
     {
         $risks = array_filter([
-            "ЕФРСБ" => count($companyInfo["ЕФРСБ"]),
+            "ЕФРСБ" => !empty($companyInfo["ЕФРСБ"]),
             "НедобПост" => $companyInfo["НедобПост"] ?? false,
             "ДисквЛица" => $companyInfo["ДисквЛица"] ?? false,
             "МассРуковод" => $companyInfo["МассРуковод"] ?? false,
             "МассУчред" => $companyInfo["МассУчред"] ?? false,
-            "НелегалФин" => $companyInfo["НелегалФин"] ?? false,
-            "Санкции" => $companyInfo["Санкции"] ?? false,
+            "НелегалФин" => $companyInfo["НелегалФинСтатус"] ?? null,
+            "Санкции" => $companyInfo['СанкцииСтраны'] ?? [],
             "СанкцУчр" => $companyInfo["СанкцУчр"] ?? false,
         ], fn($v) =>  $v === true || (is_array($v) && !empty($v)));
 
