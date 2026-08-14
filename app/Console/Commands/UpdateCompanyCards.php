@@ -55,7 +55,7 @@ class UpdateCompanyCards extends Command
                 continue;
             }
 
-            $company->card = $card['data'];
+            $company->card = $card['card'];
             $company->save();
         }
 
