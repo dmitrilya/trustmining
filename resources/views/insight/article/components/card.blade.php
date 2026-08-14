@@ -32,7 +32,7 @@
                 'subscribers' => $article->channel->active_subscribers_count,
             ])
             <h3 itemprop="headline"
-                class="mt-1.5 mb-2 sm:mt-2 sm:mb-3 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 h-8 sm:h-10 line-clamp-2">
+                class="mt-1.5 mb-2 sm:mt-2 sm:mb-3 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 h-8 sm:h-10">
                 {{ $article->title }}</h3>
             <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 h-12">
                 {{ $article->subtitle }}</p>
@@ -58,9 +58,10 @@
                         </svg>
 
                         <meta itemprop="interactionType" content="https://schema.org/LikeAction" />
-                        <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
+                        <meta itemprop="userInteractionCount" content="{{ $article->likes_count }}" />
+                        {{-- <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
                             {{ $article->likes_count }}
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
@@ -73,8 +74,9 @@
                         </svg>
 
                         <meta itemprop="interactionType" content="https://schema.org/ViewAction" />
-                        <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
-                            {{ $article->views_count }}</p>
+                        <meta itemprop="userInteractionCount" content="{{ $article->views_count }}">
+                        {{-- <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
+                            {{ $article->views_count }}</p> --}}
                     </div>
                 </div>
             </div>

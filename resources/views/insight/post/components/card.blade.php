@@ -58,9 +58,10 @@
                         </svg>
 
                         <meta itemprop="interactionType" content="https://schema.org/LikeAction" />
-                        <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
+                        <meta itemprop="userInteractionCount" content="{{ $post->likes_count }}" />
+                        {{-- <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
                             {{ $post->likes_count }}
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"
@@ -73,8 +74,9 @@
                         </svg>
 
                         <meta itemprop="interactionType" content="https://schema.org/ViewAction" />
-                        <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
-                            {{ $post->views_count }}</p>
+                        <meta itemprop="userInteractionCount" content="{{ $post->views_count }}" />
+                        {{-- <p itemprop="userInteractionCount" class="text-xxs sm:text-xs text-slate-500 ml-1 xs:ml-2">
+                            {{ $post->views_count }}</p> --}}
                     </div>
                 </div>
             </div>
