@@ -213,7 +213,7 @@
                     @else
                         <div class="flex items-center gap-2">
                             <div
-                                class="{{ $factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['penalty'] ? 'border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
+                                class="{{ $factor['value'] ? 'opacity-50 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['penalty'] ? 'border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-800 dark:text-slate-200' }} w-full justify-center">
                                 @if ($factor['penalty'])
                                     <span class="font-mono">{{ $factor['penalty'] }}</span>
                                 @else
@@ -225,7 +225,7 @@
                             </div>
 
                             <div
-                                class="{{ !$factor['value'] ? 'opacity-20 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['bonus'] ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400' }} w-full justify-center">
+                                class="{{ !$factor['value'] ? 'opacity-50 ' : '' }}flex items-center gap-1.5 text-xs px-2 py-1 sm:py-1.5 rounded-lg border {{ $factor['bonus'] ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : 'border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 text-slate-800 dark:text-slate-200' }} w-full justify-center">
 
                                 @if ($factor['bonus'])
                                     <span class="font-mono">+{{ $factor['bonus'] }}</span>
