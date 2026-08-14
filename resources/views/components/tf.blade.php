@@ -5,5 +5,5 @@
     <svg class="trust mr-1 sm:mr-2 w-2 h-2 xs:w-3 xs:h-3" width="100" height="100" viewBox="0 0 100 100" xmlns="http://w3.org">
         <circle cx="50" cy="50" r="40" fill="currentColor" />
     </svg>
-    <p class="text-xxs sm:text-xs uppercase">{{ __('Trust Factor') }}</p>
+    <p class="text-xxs sm:text-xs sm:mt-0.5 uppercase">{{ __('Trust Factor') }}</p>
 </div>
