@@ -183,7 +183,7 @@
                                         <div class="flex items-center justify-between gap-3">
                                             <div class="min-w-0">
                                                 <div class="text-xs text-slate-700 dark:text-slate-300">
-                                                    {{ $component['name'] }}
+                                                    {{ __('trustfactor.factors.' . $factor['name'] . '.components.' . $component['name'] . '.title') }}
                                                 </div>
                                             </div>
 
