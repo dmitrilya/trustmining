@@ -59,8 +59,8 @@ trait FileTrait
 
     public function saveFile(UploadedFile|File $file, string $folder, string $type, int|string $id, ?int $time, int|array|null $resize = null, ?string $watermark = null, int $quality = 70, string $disk = 'public')
     {
-        $filename = $type . '_' . $id;
-        if ($time) $filename .= '_' . $time;
+        if (!$time) $time = time();
+        $filename = $type . '_' . $id . '_' . $time;
         if ($resize) $filename .= '_' . (is_array($resize) ? ($resize[0] ?? $resize[1]) : $resize);
         $ext = ($file instanceof UploadedFile) ? $file->getClientOriginalExtension() : $file->extension();
         if (!($ext == 'doc' || $ext == 'docx' || $ext == 'pdf' || $ext == 'txt')) $ext = $this->compress($file, $disk, $folder, $filename, $resize, $quality, $watermark);
