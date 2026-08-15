@@ -4,7 +4,7 @@
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-slate-950">
             <label for="message" class="sr-only">{{ __('Your message...') }}</label>
             <textarea id="message" rows="4" name="message" placeholder="{{ __('Your message...') }}" :value="text"
-                class="resize-none w-full px-0 text-sm text-slate-800 bg-white border-0 dark:bg-slate-950 focus:ring-0 dark:text-slate-200 dark:placeholder-slate-400"
+                class="resize-none w-full px-0 text-sm text-slate-800 bg-white border-0 dark:bg-slate-950 focus:ring-0 focus:outline-none dark:text-slate-200 dark:placeholder-slate-400"
                 @change="text = $el.value"></textarea>
         </div>
         <div class="flex items-center justify-between p-2 border-t dark:border-slate-700" x-data="{ files: 0, photos: 0 }">
