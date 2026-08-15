@@ -105,10 +105,10 @@
             </x-dropdown>
 
             <div class="flex flex-col justify-center ml-2">
-                <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="files > 0">
+                <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="files > 0">
                     {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400" x-text="files"></span>
                 </div>
-                <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="images > 0">
+                <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="images > 0">
                     {{ __('Image') }}: <span class="text-slate-600 dark:text-slate-400" x-text="images"></span>
                 </div>
             </div>

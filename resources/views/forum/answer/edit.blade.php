@@ -8,9 +8,8 @@
         <input type="hidden" name="text" :value="text">
         <pre required id="text" aria-placeholder="{{ __('Your answer...') }}" x-ref="answer" contenteditable="true"
             class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-white border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
-            style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()"
-            @mouseup="range = saveRange()" @touchend="range = saveRange()" @paste="e => formatPaste($el, e)"
-            x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
+            style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()" @mouseup="range = saveRange()"
+            @touchend="range = saveRange()" @paste="e => formatPaste($el, e)" x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
         <x-inputs.input-error :messages="$errors->get('text')" />
     </div>
 
@@ -18,20 +17,17 @@
         <div class="flex ps-0 space-x-1">
             <label for="edit-input-file-answer_{{ $answer->id }}"
                 class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
-                <input id="edit-input-file-answer_{{ $answer->id }}" name="files[]" class="hidden" type="file"
-                    accept=".pdf,.doc,.docx,.txt" multiple
+                <input id="edit-input-file-answer_{{ $answer->id }}" name="files[]" class="hidden" type="file" accept=".pdf,.doc,.docx,.txt" multiple
                     @change="if ($el.files.length > 3) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 3]) }}', 'error')};files = $el.files.length">
                 <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 12 20">
-                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                        d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
+                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
                 </svg>
                 <span class="sr-only">Attach file</span>
             </label>
 
             <label for="edit-input-image-answer_{{ $answer->id }}"
                 class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
-                <input id="edit-input-image-answer_{{ $answer->id }}" name="images[]" class="hidden" type="file"
-                    accept=".png,.jpg,.jpeg,.webp" multiple
+                <input id="edit-input-image-answer_{{ $answer->id }}" name="images[]" class="hidden" type="file" accept=".png,.jpg,.jpeg,.webp" multiple
                     @change="if ($el.files.length > 5) {$el.value=null;return pushToastAlert('{{ __('validation.max.array', ['max' => 5]) }}', 'error')};images = $el.files.length">
                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 18">
                     <path
@@ -56,8 +52,7 @@
                     </h3>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="text" id="hyper-answer_{{ $answer->id }}" placeholder=" "
-                            :value="link_text" @change="link_text = $el.value"
+                        <input type="text" id="hyper-answer_{{ $answer->id }}" placeholder=" " :value="link_text" @change="link_text = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="hyper-answer_{{ $answer->id }}"
                             class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -66,8 +61,7 @@
                     </div>
 
                     <div class="relative z-0 w-full mb-5 group">
-                        <input type="url" id="url-answer_{{ $answer->id }}" placeholder=" "
-                            :value="link_url" @change="link_url = $el.value"
+                        <input type="url" id="url-answer_{{ $answer->id }}" placeholder=" " :value="link_url" @change="link_url = $el.value"
                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                         <label for="url-answer_{{ $answer->id }}"
                             class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -104,10 +98,10 @@
             </x-dropdown>
 
             <div class="flex flex-col justify-center ml-2">
-                <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="files > 0">
+                <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="files > 0">
                     {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400" x-text="files"></span>
                 </div>
-                <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="images > 0">
+                <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="images > 0">
                     {{ __('Image') }}: <span class="text-slate-600 dark:text-slate-400" x-text="images"></span>
                 </div>
             </div>

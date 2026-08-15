@@ -189,6 +189,10 @@ pre[contenteditable]:empty::before {
     cursor: text;
 }
 
+pre {
+    font-family: unset;
+}
+
 .relative > button {
     will-change: transform;
 }

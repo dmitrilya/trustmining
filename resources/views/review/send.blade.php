@@ -54,10 +54,10 @@
                         <x-rating :clickable="true"></x-rating>
 
                         <div class="flex flex-col justify-center ml-2">
-                            <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="document">
+                            <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="document">
                                 {{ __('File') }}: <span class="text-slate-600 dark:text-slate-400">1</span>
                             </div>
-                            <div class="text-xxs sm:text-xs text-slate-500" style="display: hidden" x-show="image">
+                            <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="image">
                                 {{ __('Photo') }}: <span class="text-slate-600 dark:text-slate-400">1</span>
                             </div>
                         </div>

@@ -91,7 +91,8 @@ window.sendMessage = function (chatId, form) {
 
             container.scrollTo(0, container.scrollHeight);
 
-            form.querySelector('#message').value = null;
+            const component = Alpine.$data(form);
+            component.text = '';
             const file = form.querySelector('#input-file-chat');
             file.value = null;
             file.dispatchEvent(new Event('change'));
