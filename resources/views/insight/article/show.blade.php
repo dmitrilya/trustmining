@@ -1,7 +1,9 @@
-<x-insight-layout :title="$article->subtitle" :description="$article->title  . ' | ' . $channel->name . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
+<x-insight-layout :title="$article->subtitle" :description="$article->title . ' | ' . $channel->name . ' | TM Insight'" header="" itemtype="https://schema.org/WebPage">
     @php
         $user = Auth::user();
-        if (isset($moderation)) $channel = $article->channel;
+        if (isset($moderation)) {
+            $channel = $article->channel;
+        }
     @endphp
 
     <x-slot name="og">
@@ -47,9 +49,7 @@
         <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
             @php
                 $preview =
-                    isset($moderation) && isset($moderation->data['preview'])
-                        ? explode('.', $moderation->data['preview'])
-                        : explode('.', $article->preview);
+                    isset($moderation) && isset($moderation->data['preview']) ? explode('.', $moderation->data['preview']) : explode('.', $article->preview);
                 $baseName = preg_replace('/_[0-9]+$/', '', $preview[0]);
 
                 $previewlg = Storage::url($baseName . '_928.' . $preview[1]);
@@ -59,8 +59,7 @@
             <picture class="w-full">
                 <source media="(min-width: 430px)" srcset="{{ $previewlg }}">
 
-                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}"
-                    alt="{{ $article->title }}" />
+                <img itemprop="image" fetchpriority="high" class="w-full" src="{{ $previewxs }}" alt="{{ $article->title }}" />
             </picture>
         </div>
 
@@ -107,8 +106,7 @@
     </x-slot>
 
     <x-modal name="delete-modal" focusable>
-        <form method="post" class="p-6"
-            action="{{ route('insight.article.destroy', ['channel' => $article->channel->slug, 'article' => $article->id]) }}">
+        <form method="post" class="p-6" action="{{ route('insight.article.destroy', ['channel' => $article->channel->slug, 'article' => $article->id]) }}">
             @csrf
             @method('delete')
 

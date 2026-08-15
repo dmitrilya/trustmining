@@ -19,6 +19,12 @@
     }
 }
 
+.ql-snow .ql-editor .ql-code-block-container {
+    border-radius: 0.5rem !important;
+    background-color: oklch(12.9% 0.042 264.695) !important;
+    color: oklch(92.9% 0.013 255.508) !important;
+}
+
 .ql-snow .ql-tooltip {
     --tw-backdrop-blur: blur(24px);
     -webkit-backdrop-filter: var(--tw-backdrop-blur)

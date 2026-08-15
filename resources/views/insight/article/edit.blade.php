@@ -119,7 +119,7 @@
             theme: "snow"
         });
         
-        quill.root.innerHTML = `{{ $article->content }}`;
+        quill.clipboard.dangerouslyPasteHTML(0, document.getElementById("content").innerHTML);
         
         quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
             delta.ops.forEach(op => {
@@ -133,6 +133,7 @@
         });
         
         quill.on("text-change", () => {
+        console.log(quill.root.innerHTML);
             content = quill.root.innerHTML;
             if (validation["content"]) delete validation["content"];
         });'
@@ -197,6 +198,7 @@
                     class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-2 sm:p-4">
                 </div>
 
+                <template id="content">{!! $article->content !!}</template>
                 <input type="hidden" class="hidden" name="content" :value="content" required>
             </div>
             <template x-if="validation.content">

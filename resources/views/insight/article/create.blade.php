@@ -145,7 +145,7 @@
                 title = draft.title;
                 subtitle = draft.subtitle;
                 content = draft.content;
-                quill.root.innerHTML = draft.content;
+                quill.clipboard.dangerouslyPasteHTML(0, draft.content);
             }
             
             quill.on('text-change', () => {

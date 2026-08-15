@@ -22,7 +22,7 @@ return [
             'AutoFormat.RemoveEmpty' => true,
         ],
         'insight_article' => [
-            'HTML.Allowed' => 'div,b,strong,i,em,u,a[href|title|class|target],ul,ol,li[data-list],p[class],br,span[contenteditable|class],img[width|height|alt|src|class],blockquote,pre,h2,h3,iframe[src|class|frameborder],table,thead,tbody,tr,th,td',
+            'HTML.Allowed' => 'div[class],b,strong,i,em,u,a[href|title|class|target],ul,ol,li[data-list],p[class],br,span[contenteditable|class],img[width|height|alt|src|class],blockquote,pre,h2,h3,iframe[src|class|frameborder],table,thead,tbody,tr,th,td',
             'URI.AllowedSchemes' => ['http' => true, 'https' => true, 'mailto' => true],
             'HTML.SafeIframe' => true,
             'URI.SafeIframeRegexp' => '%^(https?:)?//(www\.youtube\.com/embed/|www\.youtube-nocookie\.com/embed/|rutube\.ru/play/embed/|vkvideo\.ru/video_ext\.php)%',
