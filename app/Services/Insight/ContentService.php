@@ -122,11 +122,8 @@ abstract class ContentService
 
         $hasCompany = $channel->user->company && !$channel->user->company->moderation;
 
-        $hasRecentModeratedContent = $model->newQuery()
-            ->where('channel_id', $channel->id)
-            ->where('moderation', false)
-            ->where('created_at', '>=', now()->subMonths(3))
-            ->exists();
+        $hasRecentModeratedContent = $model->newQuery()->where('channel_id', $channel->id)
+            ->where('moderation', false)->where('created_at', '>=', now()->subMonths(3))->count() > 3;
 
         if ($hasCompany || $hasRecentModeratedContent) {
             $moderation->moderation_status_id = 1;
