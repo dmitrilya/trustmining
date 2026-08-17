@@ -476,10 +476,15 @@ return [
                 ],
 
                 'employees' => [
-                    'source' => 'company.employees',
+                    'source' => 'company.employees.count',
                     'conditions' => [
                         [
                             'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.employees.exists',
                             'operator' => '==',
                             'value' => true,
                         ]

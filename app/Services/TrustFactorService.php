@@ -285,7 +285,10 @@ class TrustFactorService
                 'capital' => $card['capital'] ?? 0,
                 'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] : 0,
                 'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] : 0,
-                'employees' => $card['employee_count'] ?? 0,
+                'employees' => [
+                    'exists' => $card['employee_count'] !== null,
+                    'count' => $card['employee_count'] ?? 0,
+                ],
                 'video' => (bool) ($company?->video),
                 'images' => count($company?->images) ?? 0,
                 'risks' => $card['risks'] ?? []
