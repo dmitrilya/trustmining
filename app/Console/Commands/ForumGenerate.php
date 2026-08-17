@@ -10,6 +10,7 @@ use App\Models\Forum\ForumAnswer;
 use App\Models\Forum\ForumComment;
 use App\Models\Forum\ForumQuestion;
 use App\Models\Forum\ForumSubcategory;
+use App\Models\Morph\View;
 
 class ForumGenerate extends Command
 {
@@ -317,6 +318,15 @@ class ForumGenerate extends Command
         if (!isset($answerData['user_id'])) Log::channel('forum-generate')->warning("Answer #{$answerIndex} has no user_id.");
         if (!isset($answerData['text'])) Log::channel('forum-generate')->warning("Answer #{$answerIndex} has no text.");
 
+        for ($i = 0; $i < rand(2, 3); $i++) {
+            View::create([
+                'viewable_type' => 'forum-question',
+                'viewable_id' => $questionData['id'],
+                'count' => 1,
+                'viewer' => '000.000.000.000'
+            ]);
+        }
+
         $answer = ForumAnswer::create([
             'forum_question_id' => $questionData['id'],
             'user_id' => $answerData['user_id'],
@@ -362,6 +372,15 @@ class ForumGenerate extends Command
         if (!isset($commentData['user_id'])) Log::channel('forum-generate')->warning("Comment #{$commentIndex} has no user_id.");
         if (!isset($commentData['text'])) Log::channel('forum-generate')->warning("Comment #{$commentIndex} has no text.");
 
+        for ($i = 0; $i < rand(2, 3); $i++) {
+            View::create([
+                'viewable_type' => 'forum-question',
+                'viewable_id' => $questionData['id'],
+                'count' => 1,
+                'viewer' => '000.000.000.000'
+            ]);
+        }
+
         $comment = ForumComment::create([
             'forum_answer_id' => $answerData['id'],
             'user_id' => $commentData['user_id'],
@@ -397,7 +416,7 @@ class ForumGenerate extends Command
             $json = json_encode($forum, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
         } catch (Throwable $e) {
             Log::channel('forum-generate')->warning('Unable to encode forum.json: ' . $e->getMessage());
-            
+
             return;
         }
 
