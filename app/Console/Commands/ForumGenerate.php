@@ -254,6 +254,8 @@ class ForumGenerate extends Command
         }
 
         Log::channel('forum-generate')->warning('Unable to select weighted random item.');
+
+        return self::FAILURE;
     }
 
     /**
@@ -384,6 +386,8 @@ class ForumGenerate extends Command
             $json = json_encode($forum, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
         } catch (Throwable $e) {
             Log::channel('forum-generate')->warning('Unable to encode forum.json: ' . $e->getMessage());
+            
+            return;
         }
 
         $temporaryPath =  $path . '.tmp';

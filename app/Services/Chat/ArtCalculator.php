@@ -4,6 +4,9 @@ namespace App\Services\Chat;
 
 use Illuminate\Support\Facades\Log;
 
+use App\Models\User\User;
+use App\Models\Chat\Chat;
+
 class ArtCalculator
 {
     const WORK_DAY_START = 11; // 11:00
@@ -12,7 +15,7 @@ class ArtCalculator
     /**
      * Рассчитать ART по списку чатов пользователя
      */
-    public function calculateForUser($user): int
+    public function calculateForUser(User $user): int
     {
         $responseCount = 0;
         $responseTime = 0;
@@ -30,7 +33,7 @@ class ArtCalculator
     /**
      * ART по одному чату
      */
-    private function calculateForChat($chat, int $sellerId): array
+    private function calculateForChat(Chat $chat, int $sellerId): array
     {
         $responseCount = 0;
         $responseTime = 0;
