@@ -46,12 +46,16 @@
                 </div>
 
                 <div>
-                    @if ($factor['type'] === 'threshold')
+                    @if ($factor['type'] === 'threshold' || $factor['type'] === 'threshold_reverse')
                         <div class="space-y-1.5">
                             <div class="relative w-full h-2">
                                 @php
                                     $sortedThresholds = $factor['thresholds'];
-                                    asort($sortedThresholds);
+                                    if ($factor['type'] === 'threshold_reverse') {
+                                        arsort($sortedThresholds);
+                                    } else {
+                                        asort($sortedThresholds);
+                                    }
 
                                     $thresholdKeys = array_keys($sortedThresholds);
 

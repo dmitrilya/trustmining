@@ -78,19 +78,13 @@ class TrustFactorService
     private function calculateFactor(string $name, array $factor): array
     {
         $type = $factor['type'] ?? null;
-        if ($type === 'group') {
-            return $this->calculateGroup($name, $factor);
-        }
+        if ($type === 'group') return $this->calculateGroup($name, $factor);
 
-        if ($type === 'list') {
-            return $this->calculateList($name, $factor);
-        }
+        if ($type === 'list') return $this->calculateList($name, $factor);
 
         $value = $this->getData($factor['source']);
 
-        if (isset($factor['thresholds'])) {
-            return $this->calculateThreshold($name, $value, $factor['thresholds']);
-        }
+        if (isset($factor['thresholds'])) return $this->calculateThreshold($name, $value, $factor['thresholds'], $factor['type'] ?? 'threshold');
 
         $passed = (bool) $value;
 
@@ -107,14 +101,14 @@ class TrustFactorService
         ];
     }
 
-    private function calculateThreshold(string $name, int|float|null $value, array $thresholds): array
+    private function calculateThreshold(string $name, int|float|null $value, array $thresholds, string $type): array
     {
         foreach ($thresholds as $threshold => $score) {
             if ($value >= $threshold) {
                 return [
                     'name' => $name,
-                    'type' => 'threshold',
-                    'value' => $value,
+                    'type' => $type,
+                    'value' => round($value, 1),
                     'score' => $score,
                     'max' => max($thresholds),
                     'thresholds' => $thresholds,
@@ -125,7 +119,7 @@ class TrustFactorService
 
         return [
             'name' => $name,
-            'type' => 'threshold',
+            'type' => $type,
             'value' => $value,
             'score' => 0,
             'max' => max($thresholds),
@@ -262,11 +256,11 @@ class TrustFactorService
         $company = $user->company;
         $card = $company?->card ?? [];
         $age = isset($card['registration_date'])
-                    ? Carbon::now()->diffInMonths(
-                        Carbon::createFromTimestamp(
-                            $card['registration_date']
-                        )
-                    ) : 0;
+            ? Carbon::now()->diffInMonths(
+                Carbon::createFromTimestamp(
+                    $card['registration_date']
+                )
+            ) : 0;
 
         $reviews = $user->moderatedReviews;
 

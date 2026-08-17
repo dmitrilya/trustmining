@@ -130,6 +130,7 @@ return [
             ],
 
             'legal_cases' => [
+                'type' => 'thresholds_reverse',
                 'source' => 'legal_cases.ratio',
                 'thresholds' => [
                     2.5  => -7,
