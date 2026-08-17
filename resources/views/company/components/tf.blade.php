@@ -56,6 +56,7 @@
                                     } else {
                                         asort($sortedThresholds);
                                     }
+                                    $gradients = $factor['type'] === 'threshold_reverse' ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#f43f5e', '#f59e0b', '#10b981'];
 
                                     $thresholdKeys = array_keys($sortedThresholds);
 
@@ -78,9 +79,9 @@
                                             style="
                                                     width: {{ $segmentWidth }}%; 
                                                     background: linear-gradient(to right, var(--tw-gradient-stops));
-                                                    --tw-gradient-from: #f43f5e var(--tw-gradient-from-position, 0%);
-                                                    --tw-gradient-to: #10b981 var(--tw-gradient-to-position, 100%);
-                                                    --tw-gradient-stops: var(--tw-gradient-from), #f59e0b {{ 50 }}%, var(--tw-gradient-to);
+                                                    --tw-gradient-from: {{ $gradients[0] }} var(--tw-gradient-from-position, 0%);
+                                                    --tw-gradient-to: {{ $gradients[2] }} var(--tw-gradient-to-position, 100%);
+                                                    --tw-gradient-stops: var(--tw-gradient-from), {{ $gradients[1] }} {{ 50 }}%, var(--tw-gradient-to);
                                                     background-size: {{ $count * 100 }}% 100%;
                                                     background-position: -{{ $i * 100 }}% 0;
                                                 ">
