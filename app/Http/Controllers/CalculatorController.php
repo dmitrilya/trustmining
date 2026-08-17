@@ -32,13 +32,14 @@ class CalculatorController extends Controller
 
         $firmwares = collect();
         $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
-            ->select(['user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
+            ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {
             foreach ($firmware->props['Modes'] as $mode) {
                 $firmwareModeStrainLevel = FirmwareModeStrainLevel::from($mode['s']);
 
                 $firmwares->push([
+                    'i' => $firmware->id,
                     'c' => $firmware->user->name,
                     'h' => (float) $mode['h'],
                     'e' => (float) $mode['e'],
@@ -74,13 +75,14 @@ class CalculatorController extends Controller
 
         $firmwares = collect();
         $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
-            ->select(['user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
+            ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {
             foreach ($firmware->props['Modes'] as $mode) {
                 $firmwareModeStrainLevel = FirmwareModeStrainLevel::from($mode['s']);
 
                 $firmwares->push([
+                    'i' => $firmware->id,
                     'c' => $firmware->user->name,
                     'h' => (float) $mode['h'],
                     'e' => (float) $mode['e'],
@@ -126,13 +128,14 @@ class CalculatorController extends Controller
 
         $firmwares = collect();
         $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
-            ->select(['user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
+            ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {
             foreach ($firmware->props['Modes'] as $mode) {
                 $firmwareModeStrainLevel = FirmwareModeStrainLevel::from($mode['s']);
 
                 $firmwares->push([
+                    'i' => $firmware->id,
                     'c' => $firmware->user->name,
                     'h' => (float) $mode['h'],
                     'e' => (float) $mode['e'],
