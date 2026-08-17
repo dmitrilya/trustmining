@@ -47,6 +47,7 @@ return [
             //'branches',
             'registration_age',
             'risk_factors',
+            'legal_cases',
             'website',
             'video',
             'images',
@@ -126,6 +127,17 @@ return [
                         'score' => -2
                     ],
                 ]
+            ],
+
+            'legal_cases' => [
+                'source' => 'legal_cases.ratio',
+                'thresholds' => [
+                    2.5  => -7,
+                    1.8  => -5,
+                    1    => -2,
+                    0.25 => 0,
+                    0    => 1,
+                ],
             ],
 
             'website' => [

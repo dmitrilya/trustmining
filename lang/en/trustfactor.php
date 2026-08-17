@@ -71,6 +71,10 @@ return [
                 ],
             ],
         ],
+        'legal_cases' => [
+            'title' => 'Arbitration cases',
+            'description' => 'The criterion depends on the company\'s operating time'
+        ],
         'registry' => [
             'title' => 'Federal Tax Service mining registry',
             'description' => 'The company is listed in the mining operators registry',

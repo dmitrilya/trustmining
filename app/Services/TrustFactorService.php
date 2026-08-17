@@ -261,6 +261,12 @@ class TrustFactorService
     {
         $company = $user->company;
         $card = $company?->card ?? [];
+        $age = isset($card['registration_date'])
+                    ? Carbon::now()->diffInMonths(
+                        Carbon::createFromTimestamp(
+                            $card['registration_date']
+                        )
+                    ) : 0;
 
         $reviews = $user->moderatedReviews;
 
@@ -281,12 +287,7 @@ class TrustFactorService
                 'legal_entity' => ($card['type'] ?? null) === 'LEGAL',
                 'status_active' => ($card['status'] ?? null) === 'Действует',
                 'branches' => $card['branch_count'] ?? 0,
-                'registration_age' =>  isset($card['registration_date'])
-                    ? Carbon::now()->diffInMonths(
-                        Carbon::createFromTimestamp(
-                            $card['registration_date']
-                        )
-                    ) : 0,
+                'registration_age' =>  $age,
                 'capital' => $card['capital'] ?? 0,
                 'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] : 0,
                 'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] : 0,
@@ -294,6 +295,10 @@ class TrustFactorService
                 'video' => (bool) ($company?->video),
                 'images' => count($company?->images) ?? 0,
                 'risks' => $card['risks'] ?? []
+            ],
+
+            'legal_cases' => [
+                'ratio' => $age < 8 ? $card['legal_cases']['count'] * 1.5 : $card['legal_cases']['count'] / max(1, $age / 12 * 0.8)
             ],
 
             'website' => $this->checkWebsite($company?->site),
