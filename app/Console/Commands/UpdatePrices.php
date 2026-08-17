@@ -95,14 +95,12 @@ class UpdatePrices extends Command
         $rateRegex = '/\b(\d+(?:[,.]\d+)?)(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|(?:[tkmg](?![a-z0-9+])))\b/u';
     
         if ($withRate && preg_match($rateRegex, $lower, $matches)) {
-            $rateValue = str_replace(',', '.', $matches);
+            $rateValue = str_replace(',', '.', $matches[1]);
             $rate = is_numeric($rateValue) ? (float)$rateValue : null;
-    
-            if ($rate !== null && $rate == (int)$rate) $rate = (int)$rate;
         }
     
         $cleanRegex = '/\b\d+(?:[,.]\d+)?(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
-        $cleaned = preg_replace($cleanRegex, '', $lower);
+        $cleaned = preg_replace($cleanRegex, ' ', $lower);
     
         $words = array_values(array_filter(explode(' ', $cleaned)));
     
