@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="flex flex-col items-end">
-                        @if ($factor['type'] === 'threshold' || $factor['type'] === 'group' || $factor['type'] === 'list')
+                        @if ($factor['type'] === 'threshold' || $factor['type'] === 'threshold_reverse' || $factor['type'] === 'group' || $factor['type'] === 'list')
                             <span
                                 class="whitespace-nowrap text-xs px-2 py-0.5 rounded-full font-mono
                                 {{ $factor['score'] > 0 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' : ($factor['score'] < 0 ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' : 'bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400') }}">
