@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('homepage:cache')->hourlyAt(7);
         $schedule->command('ordering:update')->hourlyAt(15);
         $schedule->command('subscription:check')->daily();
-        $schedule->command('coinprofit:update')->cron('3 2,10,18 * * *');;
+        $schedule->command('coinprofit:update')->cron('3 2,10,18 * * *');
         $schedule->command('exchangerates:update')->everyFiveMinutes();
         $schedule->command('network_data:update')->everyThirtyMinutes();
         $schedule->command('art:update')->twiceDaily(0, 12);
@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('price:update')->days([Schedule::MONDAY, Schedule::THURSDAY])->at('10:12');
         $schedule->command('companycards:update')->dailyAt('15:00');
         $schedule->command('auth:clear-resets')->daily();
+        $schedule->command('forum:generate')->everyMinute();
     }
 
     /**
