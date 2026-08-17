@@ -21,13 +21,13 @@
         this.efficiency = '';
         this.strain = '';
         let props = JSON.parse($refs.props_firmwares.value);
-        props['modes'] = this.modes;
+        props['Modes'] = this.modes;
         $refs.props_firmwares.value = JSON.stringify(props);
     },
     removeMode(index) {
         this.modes.splice(index, 1);
         let props = JSON.parse($refs.props_firmwares.value);
-        props['modes'] = this.modes;
+        props['Modes'] = this.modes;
         $refs.props_firmwares.value = JSON.stringify(props);
     }
 }" class="space-y-4">

@@ -10,14 +10,14 @@
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="p-2 xs:p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl"
-            x-data="{ ad_category_id: 1 }">
+            x-data="{ ad_category_id: {{ old('ad_category_id') ?? 1 }} }">
             <form method="post" action="{{ route('ad.store') }}" enctype=multipart/form-data>
                 @csrf
 
                 <div class="space-y-6">
                     <x-inputs.select :label="__('Ad type')" name="ad_category_id" handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
                         ->map(fn($adCategory) => ['key' => $adCategory->id, 'value' => __($adCategory->header)])
-                        ->keyBy('key')" />
+                        ->keyBy('key')" :key="old('ad_category_id') ?? 1" />
 
                     <x-inputs.select :label="__('Office')" name="office_id" :items="$offices->map(fn($office) => ['key' => $office->id, 'value' => $office->address])->keyBy('key')" />
 

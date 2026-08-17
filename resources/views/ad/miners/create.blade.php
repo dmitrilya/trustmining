@@ -1,5 +1,10 @@
 <div class="space-y-6">
-    @include('ad.miners.selectversion', ['required' => true])
+    @php
+        $selectedModel = old('model') ? App\Models\Database\AsicModel::where('slug', old('model'))->first() : null;
+        $selectedVersion = $selectedModel && old('asic_version_id') ? App\Models\Database\AsicVersion::find(old('asic_version_id')) : null;
+    @endphp
+
+    @include('ad.miners.selectversion', ['required' => true, 'selectedModel' => $selectedModel, 'selectedVersion' => $selectedVersion])
 
     <input type="hidden" name="props" x-ref="props_miners" value='{"Condition": "New", "Availability": "In stock"}'>
 
@@ -15,8 +20,7 @@
 
         <div :class="{ 'block': !inStock, 'hidden': inStock }" class="mt-4">
             <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
-            <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180"
-                autocomplete="waiting" x-ref="waiting"
+            <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180" autocomplete="waiting" x-ref="waiting"
                 @change="let props = JSON.parse($refs.props_miners.value);props['Waiting (days)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
             <x-inputs.input-error :messages="$errors->get('waiting')" />
         </div>
@@ -35,16 +39,15 @@
         <div :class="{ 'block': !anew, 'hidden': anew }">
             <div class="mt-4">
                 <x-inputs.input-label for="warranty" :value="__('Warranty (months)')" />
-                <x-inputs.text-input id="warranty" name="warranty" type="number" min="0" max="12"
-                    autocomplete="warranty" x-ref="warranty"
+                <x-inputs.text-input id="warranty" name="warranty" type="number" min="0" max="12" autocomplete="warranty" x-ref="warranty"
                     @change="let props = JSON.parse($refs.props_miners.value);props['Warranty (months)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
                 <x-inputs.input-error :messages="$errors->get('warranty')" />
             </div>
 
             <div class="mt-6">
                 <x-inputs.input-label for="images" :value="__('Photo')" />
-                <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple
-                    accept=".png,.jpg,.jpeg,.webp" max="3" label="max. 1MB, 3 items" />
+                <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple accept=".png,.jpg,.jpeg,.webp" max="3"
+                    label="max. 1MB, 3 items" />
                 <x-inputs.input-error :messages="$errors->get('images')" />
                 @foreach ($errors->get('images.*') as $error)
                     <x-inputs.input-error :messages="$error" />

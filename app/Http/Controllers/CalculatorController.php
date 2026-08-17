@@ -45,7 +45,8 @@ class CalculatorController extends Controller
                     'e' => (float) $mode['e'],
                     'v' => $firmware->asicVersion->id,
                     'm' => $firmware->asicVersion->measurement,
-                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text()
+                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text(),
+                    'f' => $firmware->props['Fee (%)'] ?? 0
                 ]);
             }
         }
@@ -88,7 +89,8 @@ class CalculatorController extends Controller
                     'e' => (float) $mode['e'],
                     'v' => $firmware->asicVersion->id,
                     'm' => $firmware->asicVersion->measurement,
-                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text()
+                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text(),
+                    'f' => $firmware->props['Fee (%)'] ?? 0
                 ]);
             }
         }
@@ -141,7 +143,8 @@ class CalculatorController extends Controller
                     'e' => (float) $mode['e'],
                     'v' => $firmware->asicVersion->id,
                     'm' => $firmware->asicVersion->measurement,
-                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text()
+                    's' => $firmwareModeStrainLevel->bg() . ' ' . $firmwareModeStrainLevel->text(),
+                    'f' => $firmware->props['Fee (%)'] ?? 0
                 ]);
             }
         }

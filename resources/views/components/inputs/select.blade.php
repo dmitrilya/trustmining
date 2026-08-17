@@ -56,7 +56,7 @@
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
             <button type="button" @click="if (!isDisabled) open = ! open" :class="{ 'opacity-50': isDisabled }"
-                class="relative w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 pl-3 {{ $size == 'sm' ? 'pr-5 sm:pr-10' : 'pr-10' }} rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+                class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-2 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
 
                 <span class="flex items-center">
                     @if ($icon)
@@ -76,7 +76,7 @@
                         x-text="selectedItem?.value"></span>
                 </span>
 
-                <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                <span class="pointer-events-none inline inset-y-0 right-0 ml-1 xxs:ml-3 flex items-center">
                     <svg class="{{ $size == 'sm' ? 'h-2.5 w-2.5' : 'h-4 w-4' }} sm:h-5 sm:w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor"
                         aria-hidden="true">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -97,7 +97,7 @@
                                 itemKey = item.key;
                                 open = false;
                             }"
-                            :class="['flex items-center justify-between cursor-pointer select-none py-2 px-3 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-slate-200 dark:hover:text-slate-200',
+                            :class="['flex items-center justify-between cursor-pointer select-none py-2 px-2 xs:px-3 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-slate-200 dark:hover:text-slate-200',
                                 item.style || 'text-slate-800 dark:text-slate-200'
                             ]">
                             <div class="flex items-center w-full">

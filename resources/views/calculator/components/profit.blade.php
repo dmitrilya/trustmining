@@ -32,7 +32,12 @@
 
         <div class="mt-6">
             <div class="flex justify-between text-xs font-extrabold uppercase">
-                <span class="text-emerald-500">{{ __('Income') }}</span>
+                <span class="text-emerald-500">
+                    {{ __('Income') }}
+                    <template x-if="firmware && firmware.f > 0">
+                        <span class="text-red-700 dark:text-red-500" x-text="'(-' + firmware.f + '%)'"></span>
+                    </template>
+                </span>
                 <span class="text-red-700 dark:text-red-500">{{ __('Expense') }} (<span x-text="Math.round(hashrate * efficiency)"></span>
                     {{ __('W') }})</span>
                 <template x-if="taxEnabled">

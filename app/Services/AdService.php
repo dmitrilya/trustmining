@@ -47,7 +47,7 @@ class AdService
 
         $props = collect($data['props']);
         $propDiffs = $props->reject(fn($value, $key) => $value === ($ad->props[$key] ?? null))->toArray();
-        if (count($propDiffs)) $data['props'] = $props;
+        if (count($propDiffs)) $changings['props'] = $props;
 
         if (array_key_exists('description', $data) && $data['description'] != $ad->description)
             $changings['description'] = Purifier::clean(htmlspecialchars_decode($data['description']), 'description');

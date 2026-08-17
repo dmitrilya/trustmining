@@ -82,9 +82,24 @@
                             <div class="w-full">
                                 <x-inputs.select :label="__('Firmware')" name="firmware" :isJs="true"
                                     handleChange="(selectedFirmware => firmware = selectedFirmware !== -1 ? availableFirmwares[selectedFirmware] : null)"
-                                    items="[{ key: -1, value: '{{ __('Without firmware') }}' }, ...availableFirmwares.map((f, i) => ({ key: i, value: `${f.h}${f.m}/s - ${f.c} (${f.e}j/${f.m}) (+${f.up}%)`, style: f.s }))]" />
+                                    items="[{ key: -1, value: '{{ __('Without firmware') }}' }, ...availableFirmwares.map((f, i) => ({ key: i, value: `${f.h}${f.m}/s - ${f.c} (${f.e}j/${f.m}) +${f.up}%`, style: f.s }))]" />
                             </div>
                         </template>
+
+                        <div class="flex items-center">
+                            <div class="mr-2 xs:mr-3 w-full">
+                                <x-inputs.input-label for="price" :value="__('ASIC price')" />
+                                <x-inputs.text-input ::value="price" id="price" type="text" :placeholder="__('Your price')"
+                                    @input="price = filterDouble($el, 0, null, 0);$el.value = price" />
+                            </div>
+
+                            <x-inputs.select :label="__('Currency')" name="coin_id" key="USDT" :items="App\Models\Database\Coin::whereIn('abbreviation', ['USDT', 'RUB'])
+                                ->select(['abbreviation'])
+                                ->get()
+                                ->map(fn($coin) => ['key' => $coin->abbreviation, 'value' => $coin->abbreviation])
+                                ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']"
+                                handleChange="(selectedCurrency => priceCurrency = selectedCurrency)" />
+                        </div>
 
                         {{-- <div>
                         <x-inputs.input-label for="difficulty-growth" :value="__('Annualized difficulty growth') . ' (%)'" />

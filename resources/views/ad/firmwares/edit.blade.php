@@ -50,7 +50,14 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
         <x-inputs.text-input id="asic_version" disabled :value="$ad->asicVersion->hashrate" />
     </div>
 
-    @include('ad.firmwares.modes', ['modes' => collect($ad->props['Modes'])])
+    @include('ad.firmwares.modes', ['modes' => collect($ad->props['Modes'] ?? [])])
+
+    <div class="w-full">
+        <x-inputs.input-label for="fee" :value="__('Fee (%)')" />
+        <x-inputs.text-input id="fee" :value="$ad->props['Fee (%)'] ?? 0" type="text"
+            @input="count = filterDouble($el, 1, 100, 2);$el.value = count"
+            @change="let props = JSON.parse($refs.props_firmwares.value);props['Fee (%)'] = $el.value;$refs.props_firmwares.value = JSON.stringify(props);" />
+    </div>
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
         <div id="editor"

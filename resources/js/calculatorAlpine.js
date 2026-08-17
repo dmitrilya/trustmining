@@ -34,6 +34,8 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     firmware: null,
     profitNumber: 0,
     fee: fee,
+    price: '',
+    priceCurrency: 'USDT',
     count: 1,
     uptime: 99.7,
     taxEnabled: taxEnabled,
@@ -47,7 +49,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     dailyIncome: 0,
     dailyConsumption: 0,
     dailyProfit: 0,
-    minPriceUSDT: null,
+    minPriceUSDT: selVersion.p ? (!taxEnabled || selVersion.v ? selVersion.p : selVersion.p * 1.2) : null,
     dailyTax: 0,
     taxHelp: '',
     incPercent: 33.33,
@@ -65,16 +67,22 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
             else this.recalculateAll();
         });
 
-        this.$watch('currency, view, tariff, taxEnabled, taxType, count, uptime, profitNumber, firmware', () => {
+        this.$watch('price, priceCurrency, taxEnabled', () => {
+            console.log(this.price);
+            this.minPriceUSDT = this.price === '' ? (this.version.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
+            this.recalculateAll();
+        });
+
+        this.$watch('currency, view, tariff, taxType, count, uptime, profitNumber, firmware', () => {
             this.recalculateAll();
         });
 
         if (!isWidjet && rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
-    firmwareCalc(h, e, algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
+    firmwareCalc(h, e, f, algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
         const fwProfit = algoProfit * h * this.version.c;
-        const fwDailyIncomeOne = (fwProfit * (100 - this.fee) * this.uptime / 10000);
+        const fwDailyIncomeOne = fwProfit * (100 - f) * (100 - this.fee) * this.uptime / 1000000;
         const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
 
         const fwDailyConsumptionOne = e * h / 1000 * this.tariff * 24 * this.uptime / 100;
@@ -109,11 +117,11 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
 
     sortFirmwares(algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
         let availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
-        let baseDailyProfit = this.firmwareCalc(this.version.h, this.version.e, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
+        let baseDailyProfit = this.firmwareCalc(this.version.h, this.version.e, 0, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
 
         if (availableFirmwares.length) availableFirmwares = availableFirmwares.map(f => {
             let up = 0;
-            let dailyProfit = this.firmwareCalc(f.h, f.e, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
+            let dailyProfit = this.firmwareCalc(f.h, f.e, f.f, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
 
             if (baseDailyProfit > 0 && dailyProfit > baseDailyProfit) {
                 up = Math.round(((dailyProfit - baseDailyProfit) / baseDailyProfit) * 10000) / 100;
@@ -131,15 +139,15 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     },
 
     recalculateAll() {
-        this.hashrate = this.firmware != null ? this.firmware.h : this.version.h;
-        this.efficiency = this.firmware != null ? this.firmware.e : this.version.e;
+        this.hashrate = this.firmware?.h ?? this.version.h;
+        this.efficiency = this.firmware?.e ?? this.version.e;
         const isRub = this.currency == 'RUB';
         const isCompany = this.taxType == 'ip' || this.taxType == 'legal';
         const algoProfit = this.algorithms[this.version.a].p[this.profitNumber].p;
-        const vp = this.version.p;
+        const vp = this.price || this.version.p;
 
         const profit = algoProfit * this.hashrate * this.version.c;
-        const dailyIncomeOne = (profit * (100 - this.fee) * this.uptime / 10000);
+        const dailyIncomeOne = profit * (100 - (this.firmware?.f ?? 0)) * (100 - this.fee) * this.uptime / 1000000;
         const dailyIncome = dailyIncomeOne * this.count;
         const dailyIncomeCurrency = dailyIncome / (isRub ? rub : 1);
         this.dailyIncome = round2(dailyIncomeCurrency * COEF[this.view]);
@@ -150,7 +158,6 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         let dailyProfit = dailyIncomeCurrency - dailyConsumptionCurrency;
         let dailyProfitOneUSDT = dailyIncomeOne - dailyConsumptionOne * rub;
 
-        this.minPriceUSDT = vp ? (!this.taxEnabled || this.version.v ? vp : vp * 1.2) : null
         const minPriceRubRounded = Math.round(this.minPriceUSDT / rub);
         let dailyTax = 0;
         this.taxHelp = '';

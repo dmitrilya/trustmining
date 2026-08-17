@@ -23,7 +23,7 @@ class ForumQuestion extends Model
         'files',
         'keywords',
         'similar_questions',
-        'forum_question_category_id',
+        'forum_subcategory_id',
         'user_id',
         'moderation',
         'published'

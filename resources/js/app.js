@@ -211,8 +211,8 @@ window.filterDouble = function (el, min, max, precision) {
 
     if (v !== '' && !v.endsWith('.')) {
         let num = parseFloat(v);
-        if (num > max) v = max;
-        if (num < min) v = min;
+        if (max && num > max) v = max;
+        if (min && num < min) v = min;
     }
 
     return v.toString();
