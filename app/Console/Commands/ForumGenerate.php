@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use Throwable;
+
 use App\Models\Forum\ForumAnswer;
 use App\Models\Forum\ForumComment;
 use App\Models\Forum\ForumQuestion;
 use App\Models\Forum\ForumSubcategory;
-use Illuminate\Console\Command;
-use RuntimeException;
-use Throwable;
 
 class ForumGenerate extends Command
 {
@@ -47,7 +48,7 @@ class ForumGenerate extends Command
         $path = base_path('forum.json');
 
         if (!file_exists($path)) {
-            $this->error("File not found: {$path}");
+            Log::channel('forum-generate')->warning('File forum.json not found');
 
             return self::FAILURE;
         }
@@ -55,7 +56,7 @@ class ForumGenerate extends Command
         $json = file_get_contents($path);
 
         if ($json === false) {
-            $this->error('Unable to read forum.json.');
+            Log::channel('forum-generate')->warning('Unable to read forum.json');
 
             return self::FAILURE;
         }
@@ -63,13 +64,13 @@ class ForumGenerate extends Command
         try {
             $forum = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
         } catch (Throwable $e) {
-            $this->error('forum.json contains invalid JSON: ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('forum.json contains invalid JSON: ' . $e->getMessage());
 
             return self::FAILURE;
         }
 
         if (!is_array($forum)) {
-            $this->error('forum.json root must be an array.');
+            Log::channel('forum-generate')->warning('forum.json root must be an array');
 
             return self::FAILURE;
         }
@@ -77,7 +78,7 @@ class ForumGenerate extends Command
         try {
             $this->validatePublishedEntities($forum);
         } catch (Throwable $e) {
-            $this->error('Validation error: ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Validation error: ' . $e->getMessage());
 
             return self::FAILURE;
         }
@@ -91,22 +92,14 @@ class ForumGenerate extends Command
         $totalAvailable = $questionsCount * self::QUESTION_ACTIVITY_WEIGHT + $answersCount * self::ANSWER_ACTIVITY_WEIGHT + $commentsCount * self::COMMENT_ACTIVITY_WEIGHT;
 
         if ($totalAvailable === 0) {
-            $this->info('Nothing available for publication.');
+            Log::channel('forum-generate')->warning('Nothing available for publication');
 
             return self::SUCCESS;
         }
 
         $probability = $this->calculateProbability($totalAvailable);
 
-        $this->line(sprintf('Available: questions=%d, answers=%d, comments=%d, total=%d', $questionsCount, $answersCount, $commentsCount, $totalAvailable));
-
-        $this->line(sprintf('Publication probability: %.4f%%', $probability * 100));
-
-        if (!$this->shouldPublish($probability)) {
-            $this->info('Result: SKIP');
-
-            return self::SUCCESS;
-        }
+        if (!$this->shouldPublish($probability)) return self::SUCCESS;
 
         $type = $this->chooseMessageType($questionsCount, $answersCount, $commentsCount);
 
@@ -115,17 +108,13 @@ class ForumGenerate extends Command
                 'question' => $this->publishQuestion($forum, $available['questions'], $path),
                 'answer' => $this->publishAnswer($forum, $available['answers'], $path),
                 'comment' => $this->publishComment($forum, $available['comments'], $path),
-                default => throw new RuntimeException("Unknown message type: {$type}"),
+                default => Log::channel('forum-generate')->warning("Unknown message type: {$type}"),
             };
         } catch (Throwable $e) {
-            $this->error('Publication failed: ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Publication failed: ' . $e->getMessage());
 
             return self::FAILURE;
         }
-
-        $this->info('Result: CREATE');
-        $this->info("Type: {$type}");
-        $this->info("Database ID: {$published->id}");
 
         return self::SUCCESS;
     }
@@ -139,7 +128,7 @@ class ForumGenerate extends Command
             if (isset($question['id'])) {
                 $exists = ForumQuestion::query()->whereKey($question['id'])->exists();
 
-                if (!$exists) throw new RuntimeException("Question ID {$question['id']} from " . "forum.json does not exist in database.");
+                if (!$exists) Log::channel('forum-generate')->warning("Question ID {$question['id']} from " . "forum.json does not exist in database.");
             }
 
             if (!isset($question['id'])) continue;
@@ -150,9 +139,7 @@ class ForumGenerate extends Command
                 if (isset($answer['id'])) {
                     $exists = ForumAnswer::query()->whereKey($answer['id'])->where('forum_question_id', $question['id'])->exists();
 
-                    if (!$exists) throw new RuntimeException(
-                        "Answer ID {$answer['id']} from " . "forum.json does not exist in database " . "or belongs to another question."
-                    );
+                    if (!$exists) Log::channel('forum-generate')->warning("Answer ID {$answer['id']} from " . "forum.json does not exist in database " . "or belongs to another question.");
                 }
 
                 if (!isset($answer['id'])) continue;
@@ -163,9 +150,7 @@ class ForumGenerate extends Command
                     if (isset($comment['id'])) {
                         $exists = ForumComment::query()->whereKey($comment['id'])->where('forum_answer_id', $answer['id'])->exists();
 
-                        if (!$exists) throw new RuntimeException(
-                            "Comment ID {$comment['id']} from " . "forum.json does not exist in database " . "or belongs to another answer."
-                        );
+                        if (!$exists) Log::channel('forum-generate')->warning("Comment ID {$comment['id']} from " . "forum.json does not exist in database " . "or belongs to another answer.");
                     }
                 }
             }
@@ -258,7 +243,7 @@ class ForumGenerate extends Command
     {
         $total = array_sum($weights);
 
-        if ($total <= 0) throw new RuntimeException('Weighted random has no available options.');
+        if ($total <= 0) Log::channel('forum-generate')->warning('Weighted random has no available options.');
 
         $random = random_int(1, $total);
 
@@ -268,7 +253,7 @@ class ForumGenerate extends Command
             if ($random <= 0) return $key;
         }
 
-        throw new RuntimeException('Unable to select weighted random item.');
+        Log::channel('forum-generate')->warning('Unable to select weighted random item.');
     }
 
     /**
@@ -280,9 +265,9 @@ class ForumGenerate extends Command
         $questionIndex = $selected['question_index'];
         $questionData = &$forum[$questionIndex];
 
-        if (isset($questionData['id'])) throw new RuntimeException('Selected question has already been published.');
-        if (!isset($questionData['user_id'])) throw new RuntimeException("Question #{$questionIndex} has no user_id.");
-        if (!isset($questionData['text'])) throw new RuntimeException("Question #{$questionIndex} has no text.");
+        if (isset($questionData['id'])) Log::channel('forum-generate')->warning('Selected question has already been published.');
+        if (!isset($questionData['user_id'])) Log::channel('forum-generate')->warning("Question #{$questionIndex} has no user_id.");
+        if (!isset($questionData['text'])) Log::channel('forum-generate')->warning("Question #{$questionIndex} has no text.");
 
         $question = ForumQuestion::create([
             'user_id' => $questionData['user_id'],
@@ -300,12 +285,10 @@ class ForumGenerate extends Command
             try {
                 $question->delete();
             } catch (Throwable $deleteException) {
-                throw new RuntimeException(
-                    'Unable to save forum.json AND unable ' . 'to rollback created question ID ' . $question->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage()
-                );
+                Log::channel('forum-generate')->warning('Unable to save forum.json AND unable ' . 'to rollback created question ID ' . $question->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage());
             }
 
-            throw new RuntimeException('Unable to save forum.json. ' . 'Created question was rolled back. ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Unable to save forum.json. ' . 'Created question was rolled back. ' . $e->getMessage());
         }
 
         return $question;
@@ -322,10 +305,10 @@ class ForumGenerate extends Command
         $questionData = &$forum[$questionIndex];
         $answerData = &$questionData['answers'][$answerIndex];
 
-        if (!isset($questionData['id'])) throw new RuntimeException('Selected answer belongs to unpublished question.');
-        if (isset($answerData['id'])) throw new RuntimeException('Selected answer has already been published.');
-        if (!isset($answerData['user_id'])) throw new RuntimeException("Answer #{$answerIndex} has no user_id.");
-        if (!isset($answerData['text'])) throw new RuntimeException("Answer #{$answerIndex} has no text.");
+        if (!isset($questionData['id'])) Log::channel('forum-generate')->warning('Selected answer belongs to unpublished question.');
+        if (isset($answerData['id'])) Log::channel('forum-generate')->warning('Selected answer has already been published.');
+        if (!isset($answerData['user_id'])) Log::channel('forum-generate')->warning("Answer #{$answerIndex} has no user_id.");
+        if (!isset($answerData['text'])) Log::channel('forum-generate')->warning("Answer #{$answerIndex} has no text.");
 
         $answer = ForumAnswer::create([
             'forum_question_id' => $questionData['id'],
@@ -341,12 +324,10 @@ class ForumGenerate extends Command
             try {
                 $answer->delete();
             } catch (Throwable $deleteException) {
-                throw new RuntimeException(
-                    'Unable to save forum.json AND unable ' . 'to rollback created answer ID ' . $answer->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage()
-                );
+                Log::channel('forum-generate')->warning('Unable to save forum.json AND unable ' . 'to rollback created answer ID ' . $answer->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage());
             }
 
-            throw new RuntimeException('Unable to save forum.json. ' . 'Created answer was rolled back. ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Unable to save forum.json. ' . 'Created answer was rolled back. ' . $e->getMessage());
         }
 
         return $answer;
@@ -365,11 +346,11 @@ class ForumGenerate extends Command
         $answerData = &$questionData['answers'][$answerIndex];
         $commentData = &$answerData['comments'][$commentIndex];
 
-        if (!isset($questionData['id'])) throw new RuntimeException('Selected comment belongs to unpublished question.');
-        if (!isset($answerData['id'])) throw new RuntimeException('Selected comment belongs to unpublished answer.');
-        if (isset($commentData['id'])) throw new RuntimeException('Selected comment has already been published.');
-        if (!isset($commentData['user_id'])) throw new RuntimeException("Comment #{$commentIndex} has no user_id.");
-        if (!isset($commentData['text'])) throw new RuntimeException("Comment #{$commentIndex} has no text.");
+        if (!isset($questionData['id'])) Log::channel('forum-generate')->warning('Selected comment belongs to unpublished question.');
+        if (!isset($answerData['id'])) Log::channel('forum-generate')->warning('Selected comment belongs to unpublished answer.');
+        if (isset($commentData['id'])) Log::channel('forum-generate')->warning('Selected comment has already been published.');
+        if (!isset($commentData['user_id'])) Log::channel('forum-generate')->warning("Comment #{$commentIndex} has no user_id.");
+        if (!isset($commentData['text'])) Log::channel('forum-generate')->warning("Comment #{$commentIndex} has no text.");
 
         $comment = ForumComment::create([
             'forum_answer_id' => $answerData['id'],
@@ -385,12 +366,10 @@ class ForumGenerate extends Command
             try {
                 $comment->delete();
             } catch (Throwable $deleteException) {
-                throw new RuntimeException(
-                    'Unable to save forum.json AND unable ' . 'to rollback created comment ID ' . $comment->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage()
-                );
+                Log::channel('forum-generate')->warning('Unable to save forum.json AND unable ' . 'to rollback created comment ID ' . $comment->id . '. Original error: ' . $e->getMessage() . '. Delete error: ' . $deleteException->getMessage());
             }
 
-            throw new RuntimeException('Unable to save forum.json. ' . 'Created comment was rolled back. ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Unable to save forum.json. ' . 'Created comment was rolled back. ' . $e->getMessage());
         }
 
         return $comment;
@@ -404,19 +383,19 @@ class ForumGenerate extends Command
         try {
             $json = json_encode($forum, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
         } catch (Throwable $e) {
-            throw new RuntimeException('Unable to encode forum.json: ' . $e->getMessage());
+            Log::channel('forum-generate')->warning('Unable to encode forum.json: ' . $e->getMessage());
         }
 
         $temporaryPath =  $path . '.tmp';
 
         $result = file_put_contents($temporaryPath, $json . PHP_EOL, LOCK_EX);
 
-        if ($result === false) throw new RuntimeException('Unable to write temporary forum.json file.');
+        if ($result === false) Log::channel('forum-generate')->warning('Unable to write temporary forum.json file');
 
         if (!rename($temporaryPath, $path)) {
             @unlink($temporaryPath);
 
-            throw new RuntimeException('Unable to replace forum.json.');
+            Log::channel('forum-generate')->warning('Unable to replace forum.json');
         }
     }
 }

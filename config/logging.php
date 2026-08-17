@@ -63,6 +63,12 @@ return [
             'level' => 'info',
         ],
 
+        'forum-generate' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/forum_generate.log'),
+            'level' => 'info',
+        ],
+
         'analytics' => [
             'driver' => 'single',
             'path' => storage_path('logs/analytics.log'),
