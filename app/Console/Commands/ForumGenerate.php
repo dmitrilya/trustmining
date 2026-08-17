@@ -276,7 +276,12 @@ class ForumGenerate extends Command
             'theme' => $questionData['theme'] ?? null,
             'text' => $questionData['text'],
             'keywords' => $questionData['keywords'] ?? [],
+            'images' => [],
+            'files' => [],
+            'similar_questions' => [],
             'subcategory_id' => ForumSubcategory::where('name', $questionData['subcategory'])->value('id') ?? null,
+            'moderation' => 0,
+            'published' => 1
         ]);
 
         $questionData['id'] = $question->id;
@@ -316,6 +321,8 @@ class ForumGenerate extends Command
             'forum_question_id' => $questionData['id'],
             'user_id' => $answerData['user_id'],
             'text' => $answerData['text'],
+            'images' => [],
+            'files' => [],
         ]);
 
         $answerData['id'] = $answer->id;
@@ -358,6 +365,8 @@ class ForumGenerate extends Command
             'forum_answer_id' => $answerData['id'],
             'user_id' => $commentData['user_id'],
             'text' => $commentData['text'],
+            'images' => [],
+            'files' => [],
         ]);
 
         $commentData['id'] = $comment->id;
