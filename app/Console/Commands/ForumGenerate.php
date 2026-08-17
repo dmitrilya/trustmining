@@ -323,6 +323,7 @@ class ForumGenerate extends Command
             'text' => $answerData['text'],
             'images' => [],
             'files' => [],
+            'moderation' => 0
         ]);
 
         $answerData['id'] = $answer->id;
@@ -367,6 +368,7 @@ class ForumGenerate extends Command
             'text' => $commentData['text'],
             'images' => [],
             'files' => [],
+            'moderation' => 0
         ]);
 
         $commentData['id'] = $comment->id;

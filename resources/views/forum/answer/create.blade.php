@@ -5,7 +5,7 @@
 
     <input type="hidden" name="forum_question_id" value="{{ $question->id }}">
 
-    <div class="px-4 py-2 bg-white dark:bg-slate-950 rounded-t-lg">
+    <div class="px-4 py-2 bg-white dark:bg-slate-950">
         <input type="hidden" name="text" :value="text">
         <pre required id="text" aria-placeholder="{{ __('Your answer...') }}" x-ref="answer" contenteditable="true"
             class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-white border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
@@ -14,7 +14,7 @@
         <x-inputs.input-error :messages="$errors->get('text')" />
     </div>
 
-    <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ images: 0, files: 0 }">
+    <div class="flex items-center justify-between px-3 py-2 border-t border-slate-300 dark:border-slate-700" x-data="{ images: 0, files: 0 }">
         <div class="flex ps-0 space-x-1">
             <label for="input-file-answer"
                 class="inline-flex justify-center items-center p-2 text-slate-600 rounded-md cursor-pointer hover:text-slate-800 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-700">
