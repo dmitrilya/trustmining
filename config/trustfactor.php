@@ -245,7 +245,7 @@ return [
             ],
 
             'employees' => [
-                'source' => 'company.employees',
+                'source' => 'company.employees.count',
                 'conditions' => [
                     [
                         'source' => 'company.exists',
@@ -254,6 +254,11 @@ return [
                     ],
                     [
                         'source' => 'company.legal_entity',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
+                        'source' => 'company.employees.exists',
                         'operator' => '==',
                         'value' => true,
                     ]
@@ -407,10 +412,20 @@ return [
                 ],
 
                 'employees' => [
-                    'source' => 'company.employees',
+                    'source' => 'company.employees.count',
                     'conditions' => [
                         [
                             'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.employees.exists',
                             'operator' => '==',
                             'value' => true,
                         ]
@@ -480,6 +495,11 @@ return [
                     'conditions' => [
                         [
                             'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
                             'operator' => '==',
                             'value' => true,
                         ],
