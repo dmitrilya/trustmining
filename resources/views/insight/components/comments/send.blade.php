@@ -3,7 +3,7 @@
     @csrf
 
     <div @if (!auth()->check()) @click="$dispatch('open-modal', 'login')" @endif
-        class="p-2 sm:px-4 flex items-end overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus-within:ring-1 focus-within:ring-indigo-500">
+        class="p-2 sm:px-4 flex items-end overflow-hidden rounded-xl border border-slate-300 dark:border-slate-700 focus-within:ring-1 focus-within:ring-indigo-500">
         <textarea name="text" x-model="text" rows="1" placeholder="{{ __('Your comment...') }}" x-data="{
             resize() {
                 $el.style.height = '0px';
@@ -11,7 +11,7 @@
             }
         }"
             x-init="resize()" @input="resize()" @readonly(!auth()->check())
-            class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 text-slate-600 dark:text-slate-400 overflow-hidden w-full"></textarea>
+            class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 focus:outline-none text-slate-600 dark:text-slate-400 overflow-hidden w-full"></textarea>
 
         <button
             class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-full">{{ __('Send') }}</button>
