@@ -124,7 +124,7 @@ class ForumGenerate extends Command
                 $exists = ForumQuestion::query()->whereKey($question['id'])->exists();
 
                 if (!$exists) {
-                    Log::channel('forum-generate')->warning("Question ID {$question['id']} from " . "forum.json does not exist in database.");
+                    Log::channel('forum-generate')->warning("Question ID {$question['id']} from forum.json does not exist in database.");
                     throw new RuntimeException();
                 }
             }
@@ -138,7 +138,7 @@ class ForumGenerate extends Command
                     $exists = ForumAnswer::query()->whereKey($answer['id'])->where('forum_question_id', $question['id'])->exists();
 
                     if (!$exists) {
-                        Log::channel('forum-generate')->warning("Answer ID {$answer['id']} from " . "forum.json does not exist in database " . "or belongs to another question.");
+                        Log::channel('forum-generate')->warning("Answer ID {$answer['id']} from forum.json does not exist in database or belongs to another question.");
                         throw new RuntimeException();
                     }
                 }
@@ -152,7 +152,7 @@ class ForumGenerate extends Command
                         $exists = ForumComment::query()->whereKey($comment['id'])->where('forum_answer_id', $answer['id'])->exists();
 
                         if (!$exists) {
-                            Log::channel('forum-generate')->warning("Comment ID {$comment['id']} from " . "forum.json does not exist in database " . "or belongs to another answer.");
+                            Log::channel('forum-generate')->warning("Comment ID {$comment['id']} from forum.json does not exist in database or belongs to another answer.");
                             throw new RuntimeException();
                         }
                     }

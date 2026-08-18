@@ -41,7 +41,7 @@
 
         <div class="xs:flex items-end">
             <div class="w-full">
-                <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="$video->published_at" :disabled="$post->published_at->isPast() && $post->created_at->diffInHours(now()) >= 1" />
+                <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="$video->published_at" :disabled="$video->published_at->isPast() && $video->created_at->diffInHours(now()) >= 1" />
                 <template x-if="validation.published_at">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
                 </template>
