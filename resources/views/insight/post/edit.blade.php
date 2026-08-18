@@ -1,6 +1,6 @@
 <div x-show="edit">
     <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}" method="POST" class="flex flex-col gap-4"
-        enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }"
+        enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ $post->content }}` }"
         x-init='const Delta = Quill.import("delta");    
         const Link = Quill.import("formats/link");
         class CustomLink extends Link {
