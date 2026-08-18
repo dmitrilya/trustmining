@@ -100,7 +100,7 @@ class ArticleController extends Controller
         $user = Auth::user();
 
         if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($article->moderation || $article->published_at > now()))
-            return redirect()->route('insight.article.index')->withErrors(['forbidden' => __('Unavailable article')]);
+            return abort('404')->withErrors(['forbidden' => __('Unavailable article')]);
 
         $this->addView(request(), $article);
 
