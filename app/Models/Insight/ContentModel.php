@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use ReflectionClass;
 
 abstract class ContentModel extends Model
 {
@@ -51,6 +54,40 @@ abstract class ContentModel extends Model
         }
 
         return $query;
+    }
+
+    /**
+     * Автоматически находит все классы контента в папке App\Models\Insight\Content
+     *
+     * @return array
+     */
+    public static function getInheritors(): array
+    {
+        $inheritors = [];
+
+        $directoryPath = app_path('Models/Insight/Content');
+
+        if (File::isDirectory($directoryPath)) {
+            $files = File::files($directoryPath);
+
+            foreach ($files as $file) {
+                $className = $file->getFilenameWithoutExtension();
+
+                $fullClassName = "App\\Models\\Insight\\Content\\\\" . $className;
+
+                if (class_exists($fullClassName)) {
+                    $reflection = new ReflectionClass($fullClassName);
+
+                    if ($reflection->isSubclassOf(self::class) && !$reflection->isAbstract()) {
+                        $type = Str::lower($className);
+
+                        $inheritors[$type] = $fullClassName;
+                    }
+                }
+            }
+        }
+
+        return $inheritors;
     }
 
     public function scopePublished(Builder $query, $now = null): void

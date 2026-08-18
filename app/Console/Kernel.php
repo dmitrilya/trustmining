@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('companycards:update')->dailyAt('15:00');
         $schedule->command('auth:clear-resets')->daily();
         $schedule->command('forum:generate')->everyMinute();
+        $schedule->command('publications:notify')->everyMinute();
     }
 
     /**

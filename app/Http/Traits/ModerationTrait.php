@@ -142,7 +142,7 @@ trait ModerationTrait
             $this->notify('New forum answer', new Collection([$m->forumQuestion->user]), 'forum-answer', $m);
         elseif ($type == 'forum-comment' && isset($data['moderation']) /* Не сработает на редактирование */)
             $this->notify('New forum comment', new Collection([$m->forumAnswer->user, $m->forumAnswer->forumQuestion->user]), 'forum-comment', $m);
-        elseif (in_array($type, ['article', 'post', 'video']) && isset($data['moderation']))
+        elseif (in_array($type, ['article', 'post', 'video']) && isset($data['moderation']) && $m->published_at->isPast())
             $this->notify('New publication', $m->channel->activeSubscribers, $type, $m);
 
         return redirect()->route('moderations');
