@@ -186,7 +186,7 @@ class SendEmailNotifications implements ShouldQueue
                                 $link = route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)]);
                                 break;
                             case 'post':
-                                $body = $this->n->content;
+                                $body = trim(strip_tags(str_replace(['</p>', '</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", "\n", " "], Str::limit($this->n->content, 220))));
                                 $link = route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id]);
                                 break;
                             case 'video':
@@ -221,7 +221,7 @@ class SendEmailNotifications implements ShouldQueue
         }
 
         try {
-            Mail::to($user->email)->send(new Notification($title, Str::limit(trim($body), 200), $signedActionLink, $linkText, $unsubscribeLink));
+            Mail::to($user->email)->send(new Notification($title, $body, $signedActionLink, $linkText, $unsubscribeLink));
         } catch (Exception $e) {
             info('Exception - Job->SendEmailNotifications: ' . $e->getMessage());
         }

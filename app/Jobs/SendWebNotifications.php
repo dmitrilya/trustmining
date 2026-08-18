@@ -186,7 +186,7 @@ class SendWebNotifications implements ShouldQueue
                                 $link = route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)]);
                                 break;
                             case 'post':
-                                $body = $this->n->content;
+                                $body = trim(strip_tags(str_replace(['</p>', '</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", "\n", " "], Str::limit($this->n->content, 150))));
                                 $link = route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id]);
                                 break;
                             case 'video':

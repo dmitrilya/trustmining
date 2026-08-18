@@ -187,7 +187,7 @@ class SendTGNotifications implements ShouldQueue
                                 $keyboard = [[['text' => __('Read'), 'url' => route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
                                 break;
                             case 'post':
-                                $text .= $this->n->content;
+                                $text .= trim(strip_tags(str_replace(['</p>', '</div>', '<br>', '<br/>', '&nbsp;'], ["\n", "\n", "\n", "\n", " "], Str::limit($this->n->content, 220))));
                                 $keyboard = [[['text' => __('Read'), 'url' => route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id])]]];
                                 break;
                             case 'video':
@@ -203,7 +203,7 @@ class SendTGNotifications implements ShouldQueue
         try {
             $this->tgSendNotifications(
                 $tgIds,
-                "<b>" . __('New notification') . "</b>\n\n<pre><code class='language-" . __($this->type) . "'>" . Str::limit(trim($text), 200) . "</code></pre>",
+                "<b>" . __('New notification') . "</b>\n\n<pre><code class='language-" . __($this->type) . "'>" . $text . "</code></pre>",
                 $keyboard
             );
         } catch (Exception $e) {
