@@ -82,9 +82,7 @@
             </div>
         @endif
 
-        <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400">
-            {!! $answer->text !!}
-        </div>
+        <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $answer->text !!}</div>
     </div>
 
     <div class="hidden">
