@@ -203,7 +203,7 @@ class SendTGNotifications implements ShouldQueue
         try {
             $this->tgSendNotifications(
                 $tgIds,
-                "<b>" . __('New notification') . "</b>\n\n<pre><code class='language-" . __($this->type) . "'>" . $text . "</code></pre>",
+                "<b>" . __('New notification') . "</b>\n\n<pre><code class='language-" . __($this->type) . "'>" . Str::limit(trim($text), 200) . "</code></pre>",
                 $keyboard
             );
         } catch (Exception $e) {

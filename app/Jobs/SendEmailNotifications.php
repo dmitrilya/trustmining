@@ -221,7 +221,7 @@ class SendEmailNotifications implements ShouldQueue
         }
 
         try {
-            Mail::to($user->email)->send(new Notification($title, $body, $signedActionLink, $linkText, $unsubscribeLink));
+            Mail::to($user->email)->send(new Notification($title, Str::limit(trim($body), 200), $signedActionLink, $linkText, $unsubscribeLink));
         } catch (Exception $e) {
             info('Exception - Job->SendEmailNotifications: ' . $e->getMessage());
         }

@@ -201,8 +201,6 @@ class SendWebNotifications implements ShouldQueue
                 break;
         }
 
-        $body = Str::limit(trim($body), 150);
-
         try {
             $beamsClient = new PushNotifications([
                 'instanceId' => config('broadcasting.connections.pusher_beams.instance_id'),
@@ -215,7 +213,7 @@ class SendWebNotifications implements ShouldQueue
                     "web" => [
                         "notification" => [
                             "title" => $title,
-                            "body" => $body,
+                            "body" => Str::limit(trim($body), 150),
                             "deep_link" => $link,
                             "icon" => $icon
                         ]
