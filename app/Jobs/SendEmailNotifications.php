@@ -83,7 +83,7 @@ class SendEmailNotifications implements ShouldQueue
                     case 'Moderation failed':
                         $body = __('types.' . $this->n->moderationable_type);
                         if ($this->n->comment) $body .= "\n\n" . $this->n->comment;
-
+                        break;
                     case 'New moderation':
                         $freshModeration = $this->n->fresh();
                         if (!$freshModeration || $freshModeration->moderation_status_id !== 1) return;
@@ -184,12 +184,15 @@ class SendEmailNotifications implements ShouldQueue
                             case 'article':
                                 $body = $this->n->title;
                                 $link = route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)]);
+                                break;
                             case 'post':
                                 $body = $this->n->content;
                                 $link = route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id]);
+                                break;
                             case 'video':
                                 $body = $this->n->title;
                                 $link = route('insight.video.show', ['channel' => $this->n->channel->slug, 'video' => $this->n->id . '-' . Str::slug($this->n->title)]);
+                                break;
                         }
                         break;
                 }

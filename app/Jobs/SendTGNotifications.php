@@ -185,12 +185,15 @@ class SendTGNotifications implements ShouldQueue
                             case 'article':
                                 $text .= $this->n->title;
                                 $keyboard = [[['text' => __('Read'), 'url' => route('insight.article.show', ['channel' => $this->n->channel->slug, 'article' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
+                                break;
                             case 'post':
                                 $text .= $this->n->content;
                                 $keyboard = [[['text' => __('Read'), 'url' => route('insight.post.show', ['channel' => $this->n->channel->slug, 'post' => $this->n->id])]]];
+                                break;
                             case 'video':
                                 $text .= $this->n->title;
                                 $keyboard = [[['text' => __('Watch'), 'url' => route('insight.video.show', ['channel' => $this->n->channel->slug, 'video' => $this->n->id . '-' . Str::slug($this->n->title)])]]];
+                                break;
                         }
                         break;
                 }
