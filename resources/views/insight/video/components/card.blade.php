@@ -41,9 +41,9 @@
         <div class="mt-1 xs:mt-2">
             <div class="flex items-center justify-between">
                 <p class="text-xxs sm:text-xs text-slate-500">
-                    {{ $video->created_at->gt(now()->subWeek()) ? $video->created_at->diffForHumans() : $video->created_at->translatedFormat('j M') }}
+                    {{ $video->published_at->gt(now()->subWeek()) ? $video->published_at->diffForHumans() : $video->published_at->translatedFormat('j M') }}
                 </p>
-                <meta itemprop="uploadDate" content="{{ $video->created_at->toIso8601String() }}" />
+                <meta itemprop="uploadDate" content="{{ $video->published_at->toIso8601String() }}" />
 
                 <div class="flex items-center gap-2 xs:gap-3 sm:gap-4">
                     <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter"

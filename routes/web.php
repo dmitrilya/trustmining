@@ -227,7 +227,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');
         Route::post('/comment/{comment}/reaction/{type}', [CommentController::class, 'reaction'])->name('insight.comment.reaction');
         Route::middleware('owner')->group(function () {
-            Route::get('/channel/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
+            Route::get('/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
+            Route::get('/{channel}/delayed', [ChannelController::class, 'delayed'])->name('insight.channel.delayed');
             Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('insight.channel.edit');
             Route::put('/channel/{channel}/update', [ChannelController::class, 'update'])->name('insight.channel.update');
             Route::delete('/channel/{channel}/destroy', [ChannelController::class, 'destroy'])->name('insight.channel.destroy');

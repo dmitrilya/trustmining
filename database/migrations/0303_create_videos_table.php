@@ -18,9 +18,14 @@ return new class extends Migration
             $table->string('title');
             $table->string('preview');
             $table->string('url');
+            $table->timestamp('published_at');
             $table->boolean('moderation')->default(1);
             $table->foreignId('channel_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
+
+            $table->index(['moderation', 'published_at'], 'videos_published_index');
+            $table->index(['channel_id', 'moderation', 'published_at'], 'videos_channel_published_index');
+            $table->index(['moderation', 'published_at', 'channel_id'], 'videos_published_channels_index');
         });
     }
 

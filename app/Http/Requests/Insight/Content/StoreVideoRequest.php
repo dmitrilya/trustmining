@@ -32,6 +32,7 @@ class StoreVideoRequest extends FormRequest
                 'regex:/^https:\/\/(?:[a-z0-9-]+\.)*(?:vkvideo\.ru|vk\.com|youtube\.com|rutube\.ru|youtu\.be)/i'
             ],
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
+            'published_at' => 'nullable|date|after:now',
         ];
     }
 

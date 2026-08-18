@@ -6,6 +6,7 @@ use Laravel\Scout\Searchable;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 abstract class ContentModel extends Model
@@ -50,6 +51,21 @@ abstract class ContentModel extends Model
         }
 
         return $query;
+    }
+
+    public function scopePublished(Builder $query, $now = null): void
+    {
+        $query->where('moderation', false)->where('published_at', '<=', $now ?? now());
+    }
+
+    public function scopeChannelPublished(Builder $query, int $channelId, $now = null): void
+    {
+        $query->published($now)->where('channel_id', $channelId);
+    }
+
+    public function scopePublishedInChannels(Builder $query, array $channelIds, $now = null): void
+    {
+        $query->published($now)->whereIn('channel_id', $channelIds);
     }
 
     public function channel()

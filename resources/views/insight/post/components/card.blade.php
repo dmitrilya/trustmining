@@ -40,9 +40,9 @@
         <div class="mt-1 xs:mt-2">
             <div class="flex items-center justify-between">
                 <p class="text-xxs sm:text-xs text-slate-500">
-                    {{ $post->created_at->gt(now()->subWeek()) ? $post->created_at->diffForHumans() : $post->created_at->translatedFormat('j M') }}
+                    {{ $post->published_at->gt(now()->subWeek()) ? $post->published_at->diffForHumans() : $post->published_at->translatedFormat('j M') }}
                 </p>
-                <meta itemprop="datePublished" content="{{ $post->created_at->toIso8601String() }}" />
+                <meta itemprop="datePublished" content="{{ $post->published_at->toIso8601String() }}" />
                 @if ($post->updated_at)
                     <meta itemprop="dateModified" content="{{ $post->updated_at->toIso8601String() }}" />
                 @endif

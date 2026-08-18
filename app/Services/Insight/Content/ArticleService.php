@@ -31,6 +31,7 @@ class ArticleService extends ContentService
             'preview' => '',
             'content' => $content,
             'tags' => $data['tags'],
+            'published_at' => $data['published_at'],
         ]);
 
         $time = time();
@@ -79,6 +80,9 @@ class ArticleService extends ContentService
 
         if ($data['series_id']) $article->series()->sync([$data['series_id']]);
 
+        if ($data['published_at'] !== $article->published_at->format('Y-m-d H:i:s') && ($article->published_at->isFuture() || $article->created_at->diffInHours(now()) < 1))
+            $changings['published_at'] = $data['published_at'];
+
         if (!empty($changings)) $this->moderate($channel, $article, $changings);
 
         return $article;
@@ -86,8 +90,9 @@ class ArticleService extends ContentService
 
     public function filter($request = null)
     {
-        $articles = Article::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
-            ->select(['id', 'title', 'subtitle', 'preview', 'channel_id', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
+        $articles = Article::published()
+            ->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
+            ->select(['id', 'title', 'subtitle', 'preview', 'channel_id', 'published_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
             if ($request->tags && count($request->tags)) $articles = $articles->where(function ($q) use ($request) {
@@ -101,10 +106,10 @@ class ArticleService extends ContentService
             if ($request->sort) {
                 switch ($request->sort) {
                     case 'newest':
-                        $articles = $articles->orderBy('created_at', 'desc');
+                        $articles = $articles->orderBy('published_at', 'desc');
                         break;
                     case 'oldest':
-                        $articles = $articles->orderBy('created_at');
+                        $articles = $articles->orderBy('published_at');
                         break;
                     case 'more_likes':
                         $articles = $articles->orderBy('likes_count', 'desc');
@@ -119,8 +124,8 @@ class ArticleService extends ContentService
                         $articles = $articles->orderBy('views_count');
                         break;
                 }
-            } else $articles = $articles->orderBy('created_at', 'desc');
-        } else $articles = $articles->orderBy('created_at', 'desc');
+            } else $articles = $articles->orderBy('published_at', 'desc');
+        } else $articles = $articles->orderBy('published_at', 'desc');
 
         return $articles;
     }

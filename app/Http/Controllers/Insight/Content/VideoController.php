@@ -24,12 +24,7 @@ class VideoController extends Controller
 {
     use ViewTrait;
 
-    protected $service;
-
-    public function __construct(VideoService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected VideoService $service) {}
 
     /**
      * Display a listing of the resource.
@@ -53,7 +48,7 @@ class VideoController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function create(Channel $channel)
@@ -64,8 +59,8 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\StoreVideoRequest  $request
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Http\Requests\Insight\Content\StoreVideoRequest  $request
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function store(StoreVideoRequest $request, Channel $channel)
@@ -74,7 +69,8 @@ class VideoController extends Controller
             'preview' => $request->preview,
             'title' => $request->title,
             'url' => $request->url,
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')
@@ -98,7 +94,7 @@ class VideoController extends Controller
     {
         $user = Auth::user();
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && $video->moderation)
+        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($video->moderation || $video->published_at > now()))
             return back()->withErrors(['forbidden' => __('Unavailable video')]);
 
         $this->addView(request(), $video);
@@ -123,7 +119,7 @@ class VideoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\UpdateVideoRequest  $request
+     * @param  \App\Http\Requests\Insight\Content\UpdateVideoRequest  $request
      * @param  \App\Models\Insight\Channel  $channel
      * @param  \App\Models\Insight\Content\Video  $video
      * @return \Illuminate\Http\Response
@@ -138,7 +134,8 @@ class VideoController extends Controller
         $this->service->update($channel, $video, [
             'preview' => $request->preview,
             'title' => $request->title,
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')

@@ -1,6 +1,6 @@
 <div x-show="edit">
-    <form action="{{ route('insight.video.update', ['channel' => $video->channel->slug, 'video' => $video->id]) }}"
-        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ validation: [], loading: false }"
+    <form action="{{ route('insight.video.update', ['channel' => $video->channel->slug, 'video' => $video->id]) }}" method="POST" class="space-y-6"
+        enctype=multipart/form-data x-data="{ validation: [], loading: false }"
         @submit.prevent="if (Object.keys(validation).length > 0) {
                 pushToastAlert(Object.values(validation)[0], 'error');
                 $el.querySelector(`[name='${Object.keys(validation)[0]}']`).focus();
@@ -21,8 +21,7 @@
 
         <div class="w-full">
             <x-inputs.input-label for="video-title" :value="__('Title')" />
-            <x-inputs.length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title" required
-                max="100" />
+            <x-inputs.length-input id="video-title" name="title" type="text" :value="$video->title" autocomplete="title" required max="100" />
             <template x-if="validation.title">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
             </template>
@@ -30,8 +29,7 @@
 
         <div>
             <x-inputs.input-label for="preview" :value="__('Preview')" />
-            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                label="max. 5MB, 4/3" />
+            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>
@@ -41,6 +39,16 @@
             ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
             ->keyBy('key')" :key="$video->series->first()?->id" />
 
-        <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
+        <div class="xs:flex items-end">
+            <div class="w-full">
+                <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="$video->published_at" :disabled="$post->published_at->isPast() && $post->created_at->diffInHours(now()) >= 1" />
+                <template x-if="validation.published_at">
+                    <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                </template>
+            </div>
+
+            <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
+                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+        </div>
     </form>
 </div>

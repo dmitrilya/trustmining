@@ -29,9 +29,9 @@
     <div class="p-2 md:p-3 mt-1 xs:mt-2">
         <div class="flex items-center justify-between">
             <p class="text-xxs sm:text-xs text-slate-500">
-                {{ $series->contents->first()->created_at->gt(now()->subWeek()) ? $series->contents->first()->created_at->diffForHumans() : $series->contents->first()->created_at->translatedFormat('j M') }}
+                {{ $series->contents->first()->published_at->gt(now()->subWeek()) ? $series->contents->first()->published_at->diffForHumans() : $series->contents->first()->published_at->translatedFormat('j M') }}
             </p>
-            <meta itemprop="dateModified" content="{{ $series->contents->first()->created_at->toIso8601String() }}" />
+            <meta itemprop="dateModified" content="{{ $series->contents->first()->published_at->toIso8601String() }}" />
         </div>
 
         <a itemprop="url" class="block ml-auto sm:w-full mt-2"

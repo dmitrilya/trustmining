@@ -125,7 +125,7 @@ abstract class ContentService
         $hasRecentModeratedContent = $model->newQuery()->where('channel_id', $channel->id)
             ->where('moderation', false)->where('created_at', '>=', now()->subMonths(3))->count() > 3;
 
-        if ($hasCompany || $hasRecentModeratedContent) {
+        if ($hasCompany || $hasRecentModeratedContent || count($data) === 1 && isset($data['published_at'])) {
             $moderation->moderation_status_id = 1;
             $this->acceptModeration(true, $moderation, User::whereHas('role', fn($q) => $q->where('name', 'admin'))->value('id'));
         }

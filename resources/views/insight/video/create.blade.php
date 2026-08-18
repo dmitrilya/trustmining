@@ -1,10 +1,8 @@
-<x-insight-layout title="Добавление видео | TM Insight" description="Добавьте видео на сайте TrustMining | TM Insight"
-    :header="__('Creation video')">
+<x-insight-layout title="Добавление видео | TM Insight" description="Добавьте видео на сайте TrustMining | TM Insight" :header="__('Creation video')">
 
-    <div
-        class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-        <form action="{{ route('insight.video.store', ['channel' => $channel->slug]) }}" method="POST"
-            class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ validation: [], loading: false }"
+    <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+        <form action="{{ route('insight.video.store', ['channel' => $channel->slug]) }}" method="POST" class="flex flex-col gap-4" enctype=multipart/form-data
+            x-data="{ validation: [], loading: false }"
             @submit.prevent="if (Object.keys(validation).length > 0) {
                     pushToastAlert(Object.values(validation)[0], 'error');
                     $el.querySelector(`[name='${Object.keys(validation)[0]}']`).focus();
@@ -24,8 +22,7 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="video-title" :value="__('Title')" />
-                <x-inputs.length-input id="video-title" name="title" type="text" :value="old('title')" autocomplete="title"
-                    required max="100" />
+                <x-inputs.length-input id="video-title" name="title" type="text" :value="old('title')" autocomplete="title" required max="100" />
                 <template x-if="validation.title">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
                 </template>
@@ -33,8 +30,7 @@
 
             <div>
                 <x-inputs.input-label for="preview" :value="__('Preview')" />
-                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                    required label="max. 5MB, 4/3" />
+                <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
@@ -42,8 +38,7 @@
 
             <div class="w-full">
                 <x-inputs.input-label for="video-url" :value="__('Url')" />
-                <x-inputs.text-input id="video-url" name="url" type="text" :value="old('url')" autocomplete="url"
-                    required />
+                <x-inputs.text-input id="video-url" name="url" type="text" :value="old('url')" autocomplete="url" required />
                 <template x-if="validation.preview">
                     <p class="text-red-500 text-xs mt-1" x-text="validation.url?.[0]"></p>
                 </template>
@@ -53,7 +48,17 @@
                 ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                 ->keyBy('key')" />
 
-            <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>
+            <div class="xs:flex items-end">
+                <div class="w-full">
+                    <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="old('published_at')" />
+                    <template x-if="validation.published_at">
+                        <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                    </template>
+                </div>
+
+                <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
+                    ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+            </div>
         </form>
     </div>
 

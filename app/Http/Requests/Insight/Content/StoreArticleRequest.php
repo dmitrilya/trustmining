@@ -29,6 +29,7 @@ class StoreArticleRequest extends FormRequest
             'preview' => 'required|file|mimes:jpg,png,jpeg,webp|max:5120',
             'content' => 'required',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
+            'published_at' => 'nullable|date|after:now',
         ];
     }
 

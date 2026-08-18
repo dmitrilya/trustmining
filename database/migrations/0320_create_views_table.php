@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedInteger('count')->default(0);
             $table->ipAddress('viewer');
             $table->timestamps();
+
+            $table->index(['viewable_type', 'viewable_id'], 'views_morph_index');
         });
     }
 

@@ -23,12 +23,7 @@ class PostController extends Controller
 {
     use ViewTrait;
 
-    protected $service;
-
-    public function __construct(PostService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected PostService $service) {}
 
     /**
      * Display a listing of the resource.
@@ -52,7 +47,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function create(Channel $channel)
@@ -63,8 +58,8 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\StorePostRequest  $request
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Http\Requests\Insight\Content\StorePostRequest  $request
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function store(StorePostRequest $request, Channel $channel)
@@ -72,7 +67,8 @@ class PostController extends Controller
         $post = $this->service->store($channel, [
             'preview' => $request->preview,
             'content' => $request->content,
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')
@@ -96,7 +92,7 @@ class PostController extends Controller
     {
         $user = Auth::user();
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && $post->moderation)
+        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($post->moderation || $post->published_at > now()))
             return back()->withErrors(['forbidden' => __('Unavailable post')]);
 
         $this->addView(request(), $post);
@@ -121,7 +117,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\UpdatePostRequest  $request
+     * @param  \App\Http\Requests\Insight\Content\UpdatePostRequest  $request
      * @param  \App\Models\Insight\Channel  $channel
      * @param  \App\Models\Insight\Content\Post  $post
      * @return \Illuminate\Http\Response
@@ -136,7 +132,8 @@ class PostController extends Controller
         $this->service->update($channel, $post, [
             'preview' => $request->preview,
             'content' => $request->content,
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')

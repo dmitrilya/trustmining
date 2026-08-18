@@ -25,6 +25,7 @@ class VideoService extends ContentService
             'preview' => '',
             'title' => $data['title'],
             'url' => processVideoLink($data['url']),
+            'published_at' => $data['published_at'],
         ]);
 
         $time = time();
@@ -61,6 +62,9 @@ class VideoService extends ContentService
 
         if ($data['series_id']) $video->series()->sync([$data['series_id']]);
 
+        if ($data['published_at'] !== $video->published_at->format('Y-m-d H:i:s') && ($video->published_at->isFuture() || $video->created_at->diffInHours(now()) < 1))
+            $changings['published_at'] = $data['published_at'];
+
         if (!empty($changings)) $this->moderate($channel, $video, $changings);
 
         return $video;
@@ -68,13 +72,14 @@ class VideoService extends ContentService
 
     public function filter($request = null)
     {
-        $videos = Video::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
-            ->select(['id', 'title', 'preview', 'channel_id', 'url', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
+        $videos = Video::published()
+            ->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
+            ->select(['id', 'title', 'preview', 'channel_id', 'url', 'published_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
-            if ($request->sort) {}
-            else $videos = $videos->orderBy('created_at', 'desc');
-        } else $videos = $videos->orderBy('created_at', 'desc');
+            if ($request->sort) {
+            } else $videos = $videos->orderBy('published_at', 'desc');
+        } else $videos = $videos->orderBy('published_at', 'desc');
 
         return $videos;
     }

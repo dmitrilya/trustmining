@@ -28,6 +28,7 @@ class PostService extends ContentService
         $post = $channel->posts()->create([
             'preview' => '',
             'content' => $content,
+            'published_at' => $data['published_at'],
         ]);
 
         $time = time();
@@ -73,6 +74,9 @@ class PostService extends ContentService
 
         if ($data['series_id']) $post->series()->sync([$data['series_id']]);
 
+        if ($data['published_at'] !== $post->published_at->format('Y-m-d H:i:s') && ($post->published_at->isFuture() || $post->created_at->diffInHours(now()) < 1))
+            $changings['published_at'] = $data['published_at'];
+
         if (!empty($changings)) $this->moderate($channel, $post, $changings);
 
         return $post;
@@ -80,13 +84,14 @@ class PostService extends ContentService
 
     public function filter($request = null)
     {
-        $posts = Post::where('moderation', false)->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
-            ->select(['id', 'preview', 'channel_id', 'content', 'created_at', 'updated_at'])->withCount(['likes', 'views']);
+        $posts = Post::published()
+            ->with(['channel' => fn($q) => $q->select(['id', 'name', 'slug', 'logo'])->withCount('activeSubscribers'), 'series:id,name'])
+            ->select(['id', 'preview', 'channel_id', 'content', 'published_at', 'updated_at'])->withCount(['likes', 'views']);
 
         if (isset($request)) {
-            if ($request->sort) {}
-            else $posts = $posts->orderBy('created_at', 'desc');
-        } else $posts = $posts->orderBy('created_at', 'desc');
+            if ($request->sort) {
+            } else $posts = $posts->orderBy('published_at', 'desc');
+        } else $posts = $posts->orderBy('published_at', 'desc');
 
         return $posts;
     }

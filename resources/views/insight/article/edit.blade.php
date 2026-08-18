@@ -1,7 +1,6 @@
 <div x-show="edit">
-    <form
-        action="{{ route('insight.article.update', ['channel' => $article->channel->slug, 'article' => $article->id]) }}"
-        method="POST" class="space-y-6" enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}`, attachCallback: null }"
+    <form action="{{ route('insight.article.update', ['channel' => $article->channel->slug, 'article' => $article->id]) }}" method="POST" class="space-y-6"
+        enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}`, attachCallback: null }"
         x-init='const Delta = Quill.import("delta");
         const Parchment = Quill.import("parchment");
     
@@ -157,8 +156,7 @@
 
         <div class="w-full">
             <x-inputs.input-label for="article-title" :value="__('Title')" />
-            <x-inputs.length-input id="article-title" name="title" type="text" :value="$article->title"
-                autocomplete="title" required max="40" />
+            <x-inputs.length-input id="article-title" name="title" type="text" :value="$article->title" autocomplete="title" required max="40" />
             <template x-if="validation.title">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
             </template>
@@ -166,8 +164,7 @@
 
         <div class="w-full">
             <x-inputs.input-label for="article-subtitle" :value="__('Brief description')" />
-            <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" :value="$article->subtitle"
-                autocomplete="subtitle" required max="70" />
+            <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" :value="$article->subtitle" autocomplete="subtitle" required max="70" />
             <template x-if="validation.subtitle">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
             </template>
@@ -175,8 +172,7 @@
 
         <div>
             <x-inputs.input-label for="preview" :value="__('Preview')" />
-            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                label="max. 5MB, 4/3" />
+            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>
@@ -206,8 +202,17 @@
             </template>
         </div>
 
-        <x-buttons.primary-button class="block ml-auto" ::disabled="loading"
-            ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+        <div class="xs:flex items-end">
+            <div class="w-full">
+                <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="$article->published_at" :disabled="$post->published_at->isPast() && $post->created_at->diffInHours(now()) >= 1" />
+                <template x-if="validation.published_at">
+                    <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                </template>
+            </div>
+
+            <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
+                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+        </div>
 
         <x-modal name="attach-img_modal" maxWidth="md">
             <div class="p-6">
@@ -217,11 +222,9 @@
                     </h3>
 
                     <button type="button" aria-label="{{ __('Close') }}"
-                        class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                        @click="show = false">
+                        class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500" @click="show = false">
                         <span class="sr-only">Close</span>
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            aria-hidden="true">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -253,11 +256,9 @@
                     </h3>
 
                     <button type="button" aria-label="{{ __('Close') }}"
-                        class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500"
-                        @click="show = false">
+                        class="ml-4 flex w-6 h-6 items-center justify-center rounded-md bg-white dark:bg-slate-950 text-slate-500" @click="show = false">
                         <span class="sr-only">Close</span>
-                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" aria-hidden="true">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>

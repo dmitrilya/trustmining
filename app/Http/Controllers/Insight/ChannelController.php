@@ -82,16 +82,34 @@ class ChannelController extends Controller
         return view('insight.channel.show', [
             'channel' => $channel,
             'series' => $channel->series->map(function ($series) {
-                $series->contents = $series->getContent();
+                $series->contents = $series->getPublishedContent();
                 $series->contents_count = $series->contents->count();
                 return $series;
             }),
-            'newArticles' => $channel->moderatedArticles()->orderByDesc('created_at')->paginate(4),
-            'popularArticles' => $channel->moderatedArticles()->orderByDesc('views_count')->paginate(4),
-            'newPosts' => $channel->moderatedPosts()->orderByDesc('created_at')->paginate(4),
-            'popularPosts' => $channel->moderatedPosts()->orderByDesc('views_count')->paginate(4),
-            'newVideos' => $channel->moderatedVideos()->orderByDesc('created_at')->paginate(4),
-            'popularVideos' => $channel->moderatedVideos()->orderByDesc('views_count')->paginate(4)
+            'newArticles' => $channel->publishedArticles()->orderByDesc('published_at')->paginate(4),
+            'popularArticles' => $channel->publishedArticles()->orderByDesc('views_count')->paginate(4),
+            'newPosts' => $channel->publishedPosts()->orderByDesc('published_at')->paginate(4),
+            'popularPosts' => $channel->publishedPosts()->orderByDesc('views_count')->paginate(4),
+            'newVideos' => $channel->publishedVideos()->orderByDesc('published_at')->paginate(4),
+            'popularVideos' => $channel->publishedVideos()->orderByDesc('views_count')->paginate(4)
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \App\Models\Insight\Channel  $channel
+     * @return \Illuminate\View\View
+     */
+    public function delayed(Channel $channel): View
+    {
+        $now = now();
+
+        return view('insight.channel.delayed', [
+            'channel' => $channel,
+            'articles' => $channel->moderatedArticles()->where('published_at', '>', $now)->orderBy('published_at')->get(),
+            'posts' => $channel->moderatedPosts()->where('published_at', '>', $now)->orderBy('published_at')->get(),
+            'videos' => $channel->moderatedVideos()->where('published_at', '>', $now)->orderBy('published_at')->get(),
         ]);
     }
 
@@ -173,8 +191,7 @@ class ChannelController extends Controller
 
         if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
 
-        $content = $modelClass::where('moderation', false)->where('channel_id', $channel->id)
-            ->orderByDesc($order == 'new' ? 'created_at' : 'views_count')->paginate(4);
+        $content = $modelClass::channelPublished($channel->id)->orderByDesc($order == 'new' ? 'published_at' : 'views_count')->paginate(4);
 
         return response()->json([
             'html' => view('insight.components.carousel-list', [

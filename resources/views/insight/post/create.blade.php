@@ -88,7 +88,17 @@
                 <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>
 
-            <x-buttons.primary-button class="block ml-auto" ::disabled="loading" ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+            <div class="xs:flex items-end">
+                <div class="w-full">
+                    <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="old('published_at')" />
+                    <template x-if="validation.published_at">
+                        <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                    </template>
+                </div>
+
+                <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
+                    ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+            </div>
         </form>
     </div>
 

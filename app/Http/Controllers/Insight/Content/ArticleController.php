@@ -23,12 +23,7 @@ class ArticleController extends Controller
 {
     use ViewTrait;
 
-    protected $service;
-
-    public function __construct(ArticleService $service)
-    {
-        $this->service = $service;
-    }
+    public function __construct(protected ArticleService $service) {}
 
     /**
      * Display a listing of the resource.
@@ -53,7 +48,7 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function create(Channel $channel)
@@ -67,8 +62,8 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\StoreArticleRequest  $request
-     * @param  \App\Models\Insight\Channel
+     * @param  \App\Http\Requests\Insight\Content\StoreArticleRequest  $request
+     * @param  \App\Models\Insight\Channel  $channel
      * @return \Illuminate\Http\Response
      */
     public function store(StoreArticleRequest $request, Channel $channel)
@@ -79,7 +74,8 @@ class ArticleController extends Controller
             'preview' => $request->preview,
             'content' => $request->content,
             'tags' => $request->tags ?? [],
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')
@@ -103,7 +99,7 @@ class ArticleController extends Controller
     {
         $user = Auth::user();
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && $article->moderation)
+        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($article->moderation || $article->published_at > now()))
             return back()->withErrors(['forbidden' => __('Unavailable article')]);
 
         $this->addView(request(), $article);
@@ -129,7 +125,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Insight\UpdateArticleRequest  $request
+     * @param  \App\Http\Requests\Insight\Content\UpdateArticleRequest  $request
      * @param  \App\Models\Insight\Channel  $channel
      * @param  \App\Models\Insight\Content\Article  $article
      * @return \Illuminate\Http\Response
@@ -147,7 +143,8 @@ class ArticleController extends Controller
             'preview' => $request->preview,
             'content' => $request->content,
             'tags' => $request->tags ?? [],
-            'series_id' => $request->series_id
+            'series_id' => $request->series_id,
+            'published_at' => $request->published_at ?? now()
         ]);
 
         Redirect::to('/')

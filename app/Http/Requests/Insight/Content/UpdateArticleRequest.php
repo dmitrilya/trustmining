@@ -23,12 +23,17 @@ class UpdateArticleRequest extends FormRequest
      */
     public function rules()
     {
+        $publishedAtRules = ['nullable', 'date'];
+        $publishedAt = $this->input('published_at') ? date('Y-m-d H:i', strtotime($this->input('published_at'))) : null;
+        if ($publishedAt !== $this->route('article')->published_at->format('Y-m-d H:i')) $publishedAtRules[] = 'after:now';
+
         return [
             'title' => 'required|max:40',
             'subtitle' => 'required|max:70',
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:5120',
             'content' => 'required',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
+            'published_at' => $publishedAtRules,
         ];
     }
 

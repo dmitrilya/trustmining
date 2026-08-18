@@ -1,6 +1,6 @@
 <div x-show="edit">
-    <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}"
-        method="POST" class="flex flex-col gap-4" enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }"
+    <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}" method="POST" class="flex flex-col gap-4"
+        enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ old('content') }}` }"
         x-init='const Delta = Quill.import("delta");    
         const Link = Quill.import("formats/link");
         class CustomLink extends Link {
@@ -57,8 +57,7 @@
 
         <div>
             <x-inputs.input-label for="preview" :value="__('Preview')" />
-            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp"
-                label="max. 5MB, 4/3" />
+            <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 4/3" />
             <template x-if="validation.preview">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
             </template>
@@ -79,7 +78,16 @@
             <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
         </template>
 
-        <x-buttons.primary-button class="block ml-auto" ::disabled="loading"
-            ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+        <div class="xs:flex items-end">
+            <div class="w-full">
+                <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="$post->published_at" :disabled="$post->published_at->isPast() && $post->created_at->diffInHours(now()) >= 1" />
+                <template x-if="validation.published_at">
+                    <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                </template>
+            </div>
+
+            <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
+                ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
+        </div>
     </form>
 </div>

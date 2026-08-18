@@ -81,7 +81,7 @@ class ChannelService
         }
         elseif ($channel->banner && $channel->slug != $slug) $channel->banner = str_replace($channel->slug, $slug, $channel->banner);
         if ($channel->slug != $slug) {
-            foreach ($channel->getContent() as $content) {
+            foreach ($channel->getAllContent() as $content) {
                 $content->preview = str_replace($channel->slug, $slug, $content->preview);
                 $content->save();
             }
@@ -131,7 +131,6 @@ class ChannelService
      * @param User  $user
      * @param Channel  $channel
      * @param string  $backUrl
-     * @return Response
      */
     public function toggleSubscriptionGet(User $user, Channel $channel, string $backUrl)
     {
@@ -152,7 +151,6 @@ class ChannelService
      * 
      * @param User  $user
      * @param Channel  $channel
-     * @return Response
      */
     public function toggleSubscription(User $user, Channel $channel)
     {

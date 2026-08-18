@@ -57,12 +57,12 @@ class SeriesController extends Controller
         return view('insight.series.show', [
             'channel' => $channel,
             'series' => $series,
-            'newArticles' => $series->moderatedArticles()->orderByDesc('created_at')->paginate(4),
-            'popularArticles' => $series->moderatedArticles()->orderByDesc('views_count')->paginate(4),
-            'newPosts' => $series->moderatedPosts()->orderByDesc('created_at')->paginate(4),
-            'popularPosts' => $series->moderatedPosts()->orderByDesc('views_count')->paginate(4),
-            'newVideos' => $series->moderatedVideos()->orderByDesc('created_at')->paginate(4),
-            'popularVideos' => $series->moderatedVideos()->orderByDesc('views_count')->paginate(4)
+            'newArticles' => $series->publishedArticles()->orderByDesc('published_at')->paginate(4),
+            'popularArticles' => $series->publishedArticles()->orderByDesc('views_count')->paginate(4),
+            'newPosts' => $series->publishedPosts()->orderByDesc('published_at')->paginate(4),
+            'popularPosts' => $series->publishedPosts()->orderByDesc('views_count')->paginate(4),
+            'newVideos' => $series->publishedVideos()->orderByDesc('published_at')->paginate(4),
+            'popularVideos' => $series->publishedVideos()->orderByDesc('views_count')->paginate(4)
         ]);
     }
 
@@ -116,8 +116,8 @@ class SeriesController extends Controller
 
         if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
 
-        $content = $modelClass::where('moderation', false)->whereHas('series', fn($q) => $q->where('series.id', $series->id))
-            ->orderByDesc($order == 'new' ? 'created_at' : 'views_count')->paginate(4);
+        $content = $modelClass::where('moderation', false)->where('published_at', '<=', now())->whereHas('series', fn($q) => $q->where('series.id', $series->id))
+            ->orderByDesc($order == 'new' ? 'published_at' : 'views_count')->paginate(4);
 
         return response()->json([
             'html' => view('insight.components.carousel-list', [

@@ -2,8 +2,9 @@
 
 namespace App\Models\Insight\Content;
 
-use App\Models\Insight\ContentModel;
 use Laravel\Scout\Searchable;
+
+use App\Models\Insight\ContentModel;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,8 +23,9 @@ class Article extends ContentModel
         'preview',
         'content',
         'tags',
-        'channel_id',
+        'published_at',
         'moderation',
+        'channel_id',
     ];
 
     /**
@@ -33,6 +35,7 @@ class Article extends ContentModel
      */
     protected $casts = [
         'tags' => 'array',
+        'published_at' => 'datetime'
     ];
 
     /**

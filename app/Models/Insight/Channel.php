@@ -67,6 +67,11 @@ class Channel extends Model
         return $this->articles()->where('moderation', false);
     }
 
+    public function publishedArticles()
+    {
+        return $this->moderatedArticles()->where('published_at', '<=', now());
+    }
+
     public function posts()
     {
         return $this->hasMany(\App\Models\Insight\Content\Post::class);
@@ -75,6 +80,11 @@ class Channel extends Model
     public function moderatedPosts()
     {
         return $this->posts()->where('moderation', false);
+    }
+
+    public function publishedPosts()
+    {
+        return $this->moderatedPosts()->where('published_at', '<=', now());
     }
 
     public function videos()
@@ -87,8 +97,18 @@ class Channel extends Model
         return $this->videos()->where('moderation', false);
     }
 
-    public function getContent()
+    public function publishedVideos()
+    {
+        return $this->moderatedVideos()->where('published_at', '<=', now());
+    }
+
+    public function getAllContent()
     {
         return $this->articles->concat($this->posts)->concat($this->videos);
+    }
+
+    public function getPublishedContent()
+    {
+        return $this->publishedArticles->concat($this->publishedPosts)->concat($this->publishedVideos)->sortByDesc('published_at')->values();
     }
 }

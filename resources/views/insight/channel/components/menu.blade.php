@@ -1,9 +1,9 @@
-<div class="flex flex-wrap lg:hidden gap-2 sm:gap-3 mb-4">
+<div class="flex lg:hidden gap-2 sm:gap-3 pt-1 pb-2 mb-2 overflow-x-auto">
     @php
         $strokeWidth = 1.5;
     @endphp
 
-    <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block">
+    <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block min-w-max">
         <div @click="open = !open"
             class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
             <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5"
@@ -33,7 +33,30 @@
         </div>
     </div>
 
-    <div class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2"
+    <a href="{{ !request()->routeIs('insight.channel.delayed') ? route('insight.channel.delayed', ['channel' => $channel->slug]) : route('insight.channel.show', ['channel' => $channel->slug]) }}"
+        class="min-w-max flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
+        @if (request()->routeIs('insight.channel.delayed'))
+            @include('insight.svg.delayed-active', [
+                'svgClass' =>
+                    'text-slate-800 dark:text-slate-200 stroke-slate-800 dark:stroke-slate-200 w-4 h-4 sm:w-5 sm:h-5',
+            ])
+
+            <div class="ml-1 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
+                {{ __('My channel') }}
+            </div>
+        @else
+            @include('insight.svg.delayed', [
+                'svgClass' =>
+                    'text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5',
+            ])
+
+            <div class="ml-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                {{ __('Delayed') }}
+            </div>
+        @endif
+    </a>
+
+    <div class="min-w-max flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2"
         @click="$dispatch('open-modal', 'series-creation')">
         <svg class="text-slate-600 dark:text-slate-400 stroke-slate-400 dark:stroke-slate-600 w-4 h-4 sm:w-5 sm:h-5"
             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -49,8 +72,8 @@
         </div>
     </div>
 
-    <a href="{{ route('insight.channel.statistics', ['channel' => $channel->slug]) }}"
-        class="flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
+    <a href="{{ !request()->routeIs('insight.channel.statistics') ? route('insight.channel.statistics', ['channel' => $channel->slug]) : route('insight.channel.show', ['channel' => $channel->slug]) }}"
+        class="min-w-max flex items-center cursor-pointer rounded-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color px-3 py-1.5 sm:px-4 sm:py-2">
         @if (request()->routeIs('insight.channel.statistics'))
             @include('insight.svg.statistics-active', [
                 'svgClass' =>
@@ -58,7 +81,7 @@
             ])
 
             <div class="ml-1 text-xs sm:text-sm text-slate-800 dark:text-slate-200">
-                {{ __('Statistics') }}
+                {{ __('My channel') }}
             </div>
         @else
             @include('insight.svg.statistics', [

@@ -31,7 +31,7 @@ class Controller extends BaseController
     public function home(): View
     {
         $data = Cache::get('home_page_data');
-        $data['articles'] = Article::where('moderation', false)->orderByDesc('created_at')->limit(9)->get();
+        $data['articles'] = Article::published()->orderByDesc('published_at')->limit(9)->get();
 
         return view('home.index', $data);
     }

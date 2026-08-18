@@ -23,10 +23,15 @@ class UpdateVideoRequest extends FormRequest
      */
     public function rules()
     {
+        $publishedAtRules = ['nullable', 'date'];
+        $publishedAt = $this->input('published_at') ? date('Y-m-d H:i', strtotime($this->input('published_at'))) : null;
+        if ($publishedAt !== $this->route('video')->published_at->format('Y-m-d H:i')) $publishedAtRules[] = 'after:now';
+
         return [
             'title' => 'required|max:100',
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:5120',
             'series_id' => 'exclude_if:series_id,0|exists:series,id',
+            'published_at' => $publishedAtRules,
         ];
     }
 

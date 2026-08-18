@@ -18,6 +18,8 @@ return new class extends Migration
             $table->morphs('likeable');
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
+
+            $table->index(['likeable_type', 'likeable_id'], 'likes_morph_index');
         });
     }
 

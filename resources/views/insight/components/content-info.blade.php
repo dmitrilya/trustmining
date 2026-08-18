@@ -1,9 +1,9 @@
 <div class="flex items-center justify-between">
     <p class="text-xxs sm:text-xs text-slate-500">
-        {{ $content->created_at->gt(now()->subWeek()) ? $content->created_at->diffForHumans() : $content->created_at->translatedFormat('j M') }}
+        {{ $content->published_at->gt(now()->subWeek()) ? $content->published_at->diffForHumans() : $content->published_at->translatedFormat('j M') }}
     </p>
     <meta itemprop="{{ $type == 'video' ? 'uploadDate' : 'datePublished' }}"
-        content="{{ $content->created_at->toIso8601String() }}" />
+        content="{{ $content->published_at->toIso8601String() }}" />
     @if ($content->updated_at)
         <meta itemprop="dateModified" content="{{ $content->updated_at->toIso8601String() }}" />
     @endif
@@ -62,7 +62,7 @@
 
     @if ($content->series->first())
         @php
-            $seriesContent = $content->series->first()->getContent();
+            $seriesContent = $content->series->first()->getPublishedContent();
             $contentIndex = $seriesContent->search(
                 fn($item) => $item->id === $content->id && $item->getMorphClass() === $content->getMorphClass(),
             );

@@ -32,6 +32,7 @@ trait ModerationTrait
 
                         \App\Models\Insight\Content\Article::class => ['channel:id,user_id,name,logo', 'channel.user:id,tariff_id'],
                         \App\Models\Insight\Content\Post::class => ['channel:id,user_id,name,logo', 'channel.user:id,tariff_id'],
+                        \App\Models\Insight\Content\Video::class => ['channel:id,user_id,name,logo', 'channel.user:id,tariff_id'],
                     ]);
                 }
             ]);

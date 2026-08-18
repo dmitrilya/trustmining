@@ -21,19 +21,22 @@ class InsightController extends Controller
      */
     public function index(): View
     {
+        $now = now();
+        $threeMonthsAgo = now()->subMonths(3);
+
         return view('insight.index', [
             'topChannels' => Channel::orderByDesc('active_subscribers_count')->limit(10)->get(),
-            'newArticles' => Article::where('moderation', false)->orderByDesc('created_at')->paginate(4),
-            'popularArticles' => Article::where('moderation', false)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newArticles' => Article::published($now)->orderByDesc('published_at')->paginate(4),
+            'popularArticles' => Article::published($now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4),
-            'newPosts' => Post::where('moderation', false)->orderByDesc('created_at')->paginate(4),
-            'popularPosts' => Post::where('moderation', false)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newPosts' => Post::published($now)->orderByDesc('published_at')->paginate(4),
+            'popularPosts' => Post::published($now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4),
-            'newVideos' => Video::where('moderation', false)->orderByDesc('created_at')->paginate(4),
-            'popularVideos' => Video::where('moderation', false)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newVideos' => Video::published($now)->orderByDesc('published_at')->paginate(4),
+            'popularVideos' => Video::published($now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4)
         ]);
     }
@@ -49,19 +52,22 @@ class InsightController extends Controller
         $user = auth()->user();
         $channelIds = $user->activeSubscriptions()->pluck('id');
 
+        $now = now();
+        $threeMonthsAgo = now()->subMonths(3);
+
         return view('insight.index', [
             'topChannels' => Channel::orderByDesc('active_subscribers_count')->limit(10)->get(),
-            'newArticles' => Article::where('moderation', false)->whereIn('channel_id', $channelIds)->orderByDesc('created_at')->paginate(4),
-            'popularArticles' => Article::where('moderation', false)->whereIn('channel_id', $channelIds)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newArticles' => Article::publishedInChannels($channelIds, $now)->orderByDesc('published_at')->paginate(4),
+            'popularArticles' => Article::publishedInChannels($channelIds, $now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4),
-            'newPosts' => Post::where('moderation', false)->whereIn('channel_id', $channelIds)->orderByDesc('created_at')->paginate(4),
-            'popularPosts' => Post::where('moderation', false)->whereIn('channel_id', $channelIds)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newPosts' => Post::publishedInChannels($channelIds, $now)->orderByDesc('published_at')->paginate(4),
+            'popularPosts' => Post::publishedInChannels($channelIds, $now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4),
-            'newVideos' => Video::where('moderation', false)->whereIn('channel_id', $channelIds)->orderByDesc('created_at')->paginate(4),
-            'popularVideos' => Video::where('moderation', false)->whereIn('channel_id', $channelIds)
-                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
+            'newVideos' => Video::publishedInChannels($channelIds, $now)->orderByDesc('published_at')->paginate(4),
+            'popularVideos' => Video::publishedInChannels($channelIds, $now)
+                ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
                 ->orderByDesc('recent_views_count')->paginate(4)
         ]);
     }
@@ -79,9 +85,9 @@ class InsightController extends Controller
 
         if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
 
-        $content = $modelClass::where('moderation', false);
+        $content = $modelClass::published();
 
-        if ($order == 'new') $content = $content->orderByDesc('created_at');
+        if ($order == 'new') $content = $content->orderByDesc('published_at');
         else $content = $content->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
             ->orderByDesc('recent_views_count');
 
@@ -109,14 +115,14 @@ class InsightController extends Controller
         /** @var \App\Models\User\User $user */
         $user = auth()->user();
         $channelIds = $user->activeSubscriptions()->pluck('id');
-        
+
         $modelClass = Relation::getMorphedModel($type);
 
         if (!$modelClass) abort(404, "Morph type [{$type}] not found.");
 
-        $content = $modelClass::where('moderation', false)->whereIn('channel_id', $channelIds);
+        $content = $modelClass::publishedInChannels($channelIds);
 
-        if ($order == 'new') $content = $content->orderByDesc('created_at');
+        if ($order == 'new') $content = $content->orderByDesc('published_at');
         else $content = $content->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', now()->subMonths(3))])
             ->orderByDesc('recent_views_count');
 

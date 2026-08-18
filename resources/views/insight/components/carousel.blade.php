@@ -3,7 +3,7 @@
 
     <div x-ref="container"
         class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing"
-        @if ($model != 'series') x-init="new InfiniteLoader({ container: $el, endpoint: '{{ $endpoint }}', page: 1, lastPage: {{ $items->lastPage() }} });" @endif>
+        @if ($model != 'series' && isset($endpoint)) x-init="new InfiniteLoader({ container: $el, endpoint: '{{ $endpoint }}', page: 1, lastPage: {{ $items->lastPage() }} });" @endif>
 
         @include('insight.components.carousel-list')
     </div>
