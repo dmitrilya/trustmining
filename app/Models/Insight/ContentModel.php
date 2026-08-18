@@ -73,7 +73,7 @@ abstract class ContentModel extends Model
             foreach ($files as $file) {
                 $className = $file->getFilenameWithoutExtension();
 
-                $fullClassName = "App\\Models\\Insight\\Content\\\\" . $className;
+                $fullClassName = "App\\Models\\Insight\\Content\\" . $className;
 
                 if (class_exists($fullClassName)) {
                     $reflection = new ReflectionClass($fullClassName);
