@@ -43,7 +43,7 @@ trait NetworkTrait
         $hours = intdiv($time, 60 * 60);
         $time %= (60 * 60);
         $minutes = intdiv($time, 60);
-        $needBlocksTime = '~';
+        $needBlocksTime = '';
         if ($days > 0) $needBlocksTime .= $days . ' ' . trans_choice('time.days', $days) . ' ';
         if ($hours > 0) $needBlocksTime .= $hours . ' ' . trans_choice('time.hours', $hours) . ' ';
         if ($minutes > 0) $needBlocksTime .= $minutes . ' ' . trans_choice('time.minutes', $minutes);

@@ -96,7 +96,7 @@
                         </div>
                         <div class="mt-0.5">
                             <h3 class="sr-only">{{ __('Time left until the calculation') }}</h3>
-                            <span class="text-xxs xs:text-sm text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
+                            <span class="text-xxs xxs:text-sm text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
                         </div>
                     </div>
                 </div>
