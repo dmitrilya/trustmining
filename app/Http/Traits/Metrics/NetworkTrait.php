@@ -19,7 +19,11 @@ trait NetworkTrait
 
     public function getDifficulty(Request $request, Coin $coin)
     {
-        $groupedDifficulties = $coin->networkDifficulties()->select(['difficulty', DB::raw('Date(created_at) as date')])
+        $period = $request->period ?? 372;
+        $networkDifficulties = $coin->networkDifficulties();
+        if ($period != 'all') $networkDifficulties->where('created_at', '>', now()->subDays($period));
+        
+        $groupedDifficulties = $networkDifficulties->select(['difficulty', DB::raw('Date(created_at) as date')])
             ->get()->groupBy('date');
         $difficulties = [];
         $prevAvg = $groupedDifficulties->first()->avg('difficulty');

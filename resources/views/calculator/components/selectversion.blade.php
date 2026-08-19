@@ -102,7 +102,7 @@
 
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
-                        class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+                        class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
                         <span class="block truncate" x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
