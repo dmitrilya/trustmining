@@ -37,11 +37,14 @@
 
         this.isLoading = true;
 
-        axios.get('{{ route('calculator.get-data') }}')
-            .then(r => {
-                this.models = Object.freeze(Object.values(r.data.m));
-                this.popular_models = Object.freeze(r.data.p.map(id => r.data.m[id]).filter(Boolean));
-                algorithms = Object.freeze(r.data.a);
+        fetch('{{ route('calculator.get-data') }}')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                this.models = Object.freeze(Object.values(data.m));
+                this.popular_models = Object.freeze(data.p.map(id => data.m[id]).filter(Boolean));
+                algorithms = Object.freeze(data.a);
             })
             .catch(error => {
                 console.error('Ошибка загрузки моделей:', error);
@@ -59,11 +62,9 @@
                         @input.debounce.1000ms="search = $el.value;selectedModel = null;selectedVersion = null;version = null"
                         class="block py-2.5 px-0 w-full text-sm xs:text-base text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 focus:outline-none focus:ring-0 peer" />
 
-                    <button type="button" aria-label="Clear"
-                        class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
+                    <button type="button" aria-label="Clear" class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
                         @click.debounce.10ms="search = '';selectedModel = null;selectedVersion = null;version = null;$el.previousElementSibling.focus()">
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            aria-hidden="true">
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -84,10 +85,8 @@
                             <span class="ml-3 block truncate" x-text="asicModel.n"></span>
                         </div>
 
-                        <span x-show="selectedModel && selectedModel.i == asicModel.i"
-                            class="absolute inset-y-0 right-0 flex items-center pr-4">
-                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                                class="text-indigo-500 hover:text-white" aria-hidden="true">
+                        <span x-show="selectedModel && selectedModel.i == asicModel.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                             </svg>
@@ -104,12 +103,10 @@
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
                         class="h-9 w-full cursor-pointer rounded-md text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 py-1.5 pl-3 pr-10 text-left shadow-sm ring-1 ring-slate-300 dark:ring-slate-700">
-                        <span class="block truncate"
-                            x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
+                        <span class="block truncate" x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
-                            <svg class="h-5 w-5 text-slate-500" viewBox="0 0 20 20"
-                                fill="currentColor">
+                            <svg class="h-5 w-5 text-slate-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" />
                             </svg>
@@ -123,8 +120,7 @@
                                 class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
                                 <span class="block truncate" x-text="asicVersion.h"></span>
 
-                                <span x-show="selectedVersion?.i == asicVersion.i"
-                                    class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                <span x-show="selectedVersion?.i == asicVersion.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
                                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                             d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
