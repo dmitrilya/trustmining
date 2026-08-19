@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        @if ($prediction && in_array('prediction', $blocks))
+        @if ($prediction !== null && in_array('prediction', $blocks))
             <div
                 class="md:col-span-3 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-2 sm:gap-4">
                 <div class="flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2">
