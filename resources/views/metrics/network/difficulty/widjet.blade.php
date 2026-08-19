@@ -64,15 +64,15 @@
         document.body.classList.remove('dark');
     }" @endif>
     <main>
-        <div x-data="{ period: '1y', items: [] }" x-init="fetch('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}')
-            .then(r => r.json())
-            .then(data => {
-                @if(in_array('graph', $blocks))
-                window.buildGraph(data.difficulties, period, 'graph', 'value');
-                @endif
-                difficulties = data.difficulties.reverse().slice(0, 76);
-                items = difficulties.slice(0, 75).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
-            })">
+        <div x-data="{ period: '1y', items: [] }"
+            @if (in_array('graph', $blocks) || in_array('history', $blocks)) x-init="fetch('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name), 'period' => in_array('graph', $blocks) ? 372 : 76]) }}')
+                .then(r => r.json())
+                .then(data => {
+                    @if (in_array('graph', $blocks)) window.buildGraph(data.difficulties, period, 'graph', 'value'); @endif
+            difficulties=data.difficulties.reverse().slice(0, 76); items=difficulties.slice(0, 75).filter((difficulty, i)=> difficulty.value != difficulties[i +
+            1].value);
+            })"
+            @endif>
             <a href="{{ route('home') }}" target="_blank" class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-800 dark:text-slate-200">
