@@ -1,6 +1,6 @@
 @props(['blocks' => ['additional-params', 'coins', 'characteristics', 'currency'], 'widjet' => false])
 
-<div class="min-h-[990px] md:min-h-[660px]">
+<div class="{{ !$widjet ? 'min-h-[990px] md:min-h-[660px]' : '' }}">
     <meta itemprop="name" content="{{ __('Income calculator') }} {{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }}" />
     <meta itemprop="description"
         content="{{ __('Calculate revenue, expenses, profit, and ROI for an ASIC miner') }} {{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }}{{ $selVersion['m'] }} {{ __('in a convenient mining calculator') }}" />
