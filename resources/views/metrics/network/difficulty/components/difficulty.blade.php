@@ -58,7 +58,7 @@
                     {{ number_format($difficulty->difficulty) }}
                 </span>
             </div>
-            <div class="mt-4 flex items-center text-xxs lg:text-xs text-slate-500">
+            <div class="mt-2 flex items-center text-xxs lg:text-xs text-slate-500">
                 <span class="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mr-1.5 animate-pulse"></span>
                 {{ __('Current value for today') }}
             </div>
