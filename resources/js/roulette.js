@@ -16,27 +16,54 @@ export var roulette = () => ({
     timerInterval: null,
 
     init() {
-        axios.get('/roulette/prizes/get')
-            .then(response => {
-                const data = response.data;
+        axios.get('/roulette/prizes/get').then(response => {
+            const data = response.data;
 
-                this.prizes = data.prizes;
-                this.extendedPrizes = data.extended_prizes;
-                this.timeToSpin = data.time_to_spin;
-                this.isLoading = false;
+            this.prizes = data.prizes;
+            this.timeToSpin = data.time_to_spin;
 
-                window.dispatchEvent(new CustomEvent('roulette-loaded', {
-                    detail: { timeToSpin: data.time_to_spin }
-                }));
-
-                if (this.extendedPrizes.length > 1) {
-                    this.updateFormattedTime();
-                    this.startTimer();
+            let weightedPool = [];
+            this.prizes.forEach(prize => {
+                const count = Math.round(Number(prize.chance)) || 1;
+                for (let i = 0; i < count; i++) {
+                    weightedPool.push({ ...prize });
                 }
-            })
-            .catch(error => {
-                console.error('Ошибка загрузки данных рулетки:', error);
             });
+
+            if (weightedPool.length === 0) {
+                weightedPool = this.prizes.map(prize => ({ ...prize }));
+            }
+
+            for (let i = weightedPool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [weightedPool[i], weightedPool[j]] = [weightedPool[j], weightedPool[i]];
+            }
+
+            let extended = [];
+            for (let meta = 0; meta < 4; meta++) {
+                weightedPool.forEach(prize => {
+                    extended.push({ ...prize });
+                });
+            }
+
+            this.extendedPrizes = Object.freeze(extended.map((prize, i) => {
+                prize.pattern_id = i % 16;
+                return prize;
+            }));
+
+            this.isLoading = false;
+
+            window.dispatchEvent(new CustomEvent('roulette-loaded', {
+                detail: { timeToSpin: this.timeToSpin }
+            }));
+
+            if (this.extendedPrizes.length > 1) {
+                this.updateFormattedTime();
+                this.startTimer();
+            }
+        }).catch(error => {
+            console.error('Ошибка загрузки данных рулетки:', error);
+        });
     },
 
     startTimer() {

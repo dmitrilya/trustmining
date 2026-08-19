@@ -41,41 +41,48 @@ class RouletteService
         $prizes = RoulettePrize::whereNotNull('activated_at')->whereNull('deactivated_at')
             ->select(['id', 'user_id', 'name', 'caption', 'partner_link', 'chance'])->with(['user:id,name', 'user.company:user_id,logo'])
             ->inRandomOrder()->get();
-        $weightedPool = [];
+        // $weightedPool = [];
 
-        foreach ($prizes as $prize) {
-            $count = (int) round($prize->chance);
-            for ($i = 0; $i < $count; $i++) {
-                $weightedPool[] = $prize->toArray();
-            }
-        }
+        // foreach ($prizes as $prize) {
+        //     $count = (int) round($prize->chance);
+        //     for ($i = 0; $i < $count; $i++) {
+        //         $weightedPool[] = $prize->toArray();
+        //     }
+        // }
 
-        if (empty($weightedPool)) $weightedPool = $prizes->toArray();
+        // if (empty($weightedPool)) $weightedPool = $prizes->toArray();
 
-        $countPool = count($weightedPool);
-        for ($i = $countPool - 1; $i > 0; $i--) {
-            $j = random_int(0, $i);
-            $temp = $weightedPool[$i];
-            $weightedPool[$i] = $weightedPool[$j];
-            $weightedPool[$j] = $temp;
-        }
+        // $countPool = count($weightedPool);
+        // for ($i = $countPool - 1; $i > 0; $i--) {
+        //     $j = random_int(0, $i);
+        //     $temp = $weightedPool[$i];
+        //     $weightedPool[$i] = $weightedPool[$j];
+        //     $weightedPool[$j] = $temp;
+        // }
 
-        $extendedPrizes = collect();
-        for ($meta = 0; $meta < 4; $meta++) {
-            foreach ($weightedPool as $prize) {
-                $extendedPrizes->push($prize);
-            }
-        }
+        // $extendedPrizes = collect();
+        // for ($meta = 0; $meta < 4; $meta++) {
+        //     foreach ($weightedPool as $prize) {
+        //         $extendedPrizes->push($prize);
+        //     }
+        // }
 
-        $extendedPrizes = $extendedPrizes->map(function ($p, $i) {
+        // $extendedPrizes = $extendedPrizes->map(function ($p, $i) {
+        //     $p['is_long_title'] = $this->checkIfNameTooWide($p['name']);
+        //     $p['pattern_id'] = $i % 16; 
+        //     $p['style'] = $this->getPrizeRarityClasses($p['chance']);
+
+        //     return $p;
+        // });
+
+        $prizes = $prizes->map(function ($p, $i) {
             $p['is_long_title'] = $this->checkIfNameTooWide($p['name']);
-            $p['pattern_id'] = $i % 16; 
             $p['style'] = $this->getPrizeRarityClasses($p['chance']);
 
             return $p;
         });
 
-        return ['prizes' => $prizes, 'extended_prizes' => $extendedPrizes];
+        return ['prizes' => $prizes, 'time_to_spin' => $this->timeToSpin()];
     }
 
     /**
