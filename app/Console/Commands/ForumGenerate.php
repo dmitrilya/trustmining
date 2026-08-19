@@ -301,7 +301,7 @@ class ForumGenerate extends Command
             'images' => [],
             'files' => [],
             'similar_questions' => [],
-            'subcategory_id' => ForumSubcategory::where('name', $questionData['subcategory'])->value('id') ?? null,
+            'forum_subcategory_id' => ForumSubcategory::where('name', $questionData['subcategory'])->value('id') ?? null,
             'moderation' => 0,
             'published' => 1
         ]);
