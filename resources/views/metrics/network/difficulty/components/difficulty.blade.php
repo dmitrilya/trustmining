@@ -2,7 +2,8 @@
 
 @if (!$widjet)
     <div class="flex justify-between items-center">
-        <div class="text-xxs xxs:text-xs px-2 xs:px-4 py-1.5 xs:py-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-600 text-slate-600 dark:text-slate-400 uppercase tracking-widest">
+        <div
+            class="text-xxs xxs:text-xs px-2 xs:px-4 py-1.5 xs:py-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-600 text-slate-600 dark:text-slate-400 uppercase tracking-widest">
             {{ __('Updated') }}: <span class="text-indigo-500">{{ Carbon\Carbon::createFromTimestamp($difficulty->created_at)->diffForHumans() }}</span>
         </div>
 
@@ -67,14 +68,15 @@
             <div
                 class="md:col-span-3 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-2 sm:gap-4">
                 <div class="flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2">
-                    <div style="max-width: 60%">
-                        <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
-                            {{ __('Next difficulty prediction') }}
-                        </h2>
-                        <span
-                            class="text-xl xs:text-2xl sm:text-3xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
-                            {{ $prediction > 0 ? '+' : '' }}{{ $prediction }}%
-                        </span>
+                    <div style="max-width: 60%" class="flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
+                                {{ __('Next difficulty prediction') }}
+                            </h2>
+                            <span class="text-xl xs:text-3xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
+                                {{ $prediction > 0 ? '+' : '' }}{{ $prediction }}%
+                            </span>
+                        </div>
                         <span class="block text-xxs sm:text-xs text-slate-500 mt-0.5 leading-tight">
                             {{ __('Expected trend when recalculated') }}
                         </span>
@@ -82,19 +84,19 @@
 
                     <div class="text-right flex-1 flex flex-col justify-between">
                         <div>
-                        <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
-                            {{ __('Blocks before recalculation') }}
-                        </h2>
-                        <div class="flex items-baseline justify-end gap-1">
-                            <span class="xs:text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-200">
-                                {{ $difficulty->need_blocks }}
-                            </span>
-                            <span class="text-xs text-slate-500">/ 2016</span>
-                        </div>
+                            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
+                                {{ __('Blocks before recalculation') }}
+                            </h2>
+                            <div class="flex items-baseline justify-end gap-1">
+                                <span class="xs:text-lg sm:text-xl font-bold text-slate-800 dark:text-slate-200">
+                                    {{ $difficulty->need_blocks }}
+                                </span>
+                                <span class="text-xs text-slate-500">/ 2016</span>
+                            </div>
                         </div>
                         <div class="mt-0.5">
                             <h3 class="sr-only">{{ __('Time left until the calculation') }}</h3>
-                            <span class="text-xxs xs:text-xs text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
+                            <span class="text-xxs xs:text-sm text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
                         </div>
                     </div>
                 </div>

@@ -103,7 +103,7 @@
                                 <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
                                     x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
 
-                                    <td class="py-1.5 lg:py-2 pr-4 text-xxs xs:text-xs sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
+                                    <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
                                         x-text="new Date(item.date).toLocaleString(window.locale, {
                                             year: 'numeric',
                                             month: 'short',
@@ -111,11 +111,11 @@
                                         })">
                                     </td>
 
-                                    <td class="py-1.5 lg:py-2 pr-4 text-xxs xs:text-xs sm:text-base text-slate-800 dark:text-slate-200"
+                                    <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200"
                                         x-text="item.value">
                                     </td>
 
-                                    <td class="py-1.5 lg:py-2 text-xxs xs:text-xs sm:text-base text-right whitespace-nowrap"
+                                    <td class="py-1.5 lg:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
                                         :class="{
                                             'text-green-500': item.value > items[i + 1]?.value,
                                             'text-red-500': item.value < items[i + 1]?.value,
