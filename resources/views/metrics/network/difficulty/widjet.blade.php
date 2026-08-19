@@ -85,7 +85,7 @@
                 <div x-data="{ show: false }" class="w-full">
                     <table class="w-full border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-300 dark:border-slate-700">
+                            <tr class="border-b border-indigo-600">
                                 <th class="py-1.5 md:py-4 pr-4 text-left font-bold text-xs sm:text-sm text-slate-500">
                                     {{ __('Date') }}
                                 </th>
@@ -98,11 +98,10 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
                             <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
                                 <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                                    class="border-b border-slate-100 dark:border-slate-800/50 last:border-0">
+                                    x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
 
                                     <td class="py-1.5 lg:py-2 pr-4 text-xxs xs:text-xs sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
                                         x-text="new Date(item.date).toLocaleString(window.locale, {

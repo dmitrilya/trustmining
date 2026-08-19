@@ -25,7 +25,7 @@
             </h2>
             <div x-data="{ show: false }" class="w-full">
                 <table class="w-full border-collapse">
-                    <thead class="mb-2">
+                    <thead>
                         <tr class="border-b border-indigo-600">
                             <th class="py-1.5 md:py-4 pr-4 text-left font-bold text-xs sm:text-sm text-slate-500">
                                 {{ __('Date') }}
