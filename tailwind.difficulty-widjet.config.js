@@ -15,7 +15,7 @@ export default {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             screens: {
-                'xxs': '360px',
+                'xxs': '358px',
                 'xs': '380px',
             },
         },
