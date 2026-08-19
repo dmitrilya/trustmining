@@ -52,7 +52,7 @@
                 </section>
             </div>
 
-            <div class="hidden xl:flex flex-col gap-4 max-w-xs">
+            <div class="hidden xl:flex flex-col gap-4 max-w-sm">
                 <div
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
                     <script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="dark" data-blocks="prediction,history"></script>
