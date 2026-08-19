@@ -95,7 +95,10 @@ class VideoController extends Controller
         $user = Auth::user();
 
         if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($video->moderation || $video->published_at > now()))
-            return abort('404')->withErrors(['forbidden' => __('Unavailable video')]);
+            return response()->view('errors.insight', [
+                'code' => 404,
+                'published_at' => $video->published_at
+            ], 404);
 
         $this->addView(request(), $video);
 

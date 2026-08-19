@@ -27,7 +27,7 @@ class ForumQuestionController extends ForumController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function myQuestions(Request $request): View
     {
@@ -42,9 +42,9 @@ class ForumQuestionController extends ForumController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(): View
     {
         return view('forum.question.create');
     }
@@ -55,9 +55,9 @@ class ForumQuestionController extends ForumController
      * @param  \App\Models\Forum\ForumCategory  $forumCategory
      * @param  \App\Models\Forum\ForumSubcategory  $forumSubcategory
      * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory, ForumQuestion $forumQuestion)
+    public function show(ForumCategory $forumCategory, ForumSubcategory $forumSubcategory, ForumQuestion $forumQuestion): View
     {
         $this->addView(request(), $forumQuestion);
 
@@ -103,7 +103,7 @@ class ForumQuestionController extends ForumController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateForumQuestionRequest  $request
+     * @param  \App\Http\Requests\Forum\UpdateForumQuestionRequest  $request
      * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
      * @return \Illuminate\Http\Response
      */
@@ -133,7 +133,7 @@ class ForumQuestionController extends ForumController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Forum\StoreForumQuestionRequest  $request
+     * @param  \App\Models\Forum\ForumQuestion  $forumQuestion
      * @return \Illuminate\Http\Response
      */
     public function publish(ForumQuestion $forumQuestion)

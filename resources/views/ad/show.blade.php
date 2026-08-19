@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <div class="hidden md:block">
+                            <div class="hidden md:block mt-4">
                                 @include('ad.components.characteristics')
                             </div>
                         </div>

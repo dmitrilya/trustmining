@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -45,6 +46,17 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (HttpExceptionInterface $e, $request) {
+            if ($request->is('insight') || $request->is('insight/*')) $blade = 'insight';
+            elseif ($request->is('forum') || $request->is('forum/*')) $blade = 'forum';
+
+            $code = $e->getStatusCode();
+
+            return response()->view('errors.' . ($blade ?? 'default'), [
+                'code' => $code,
+            ], $code);
         });
     }
 }

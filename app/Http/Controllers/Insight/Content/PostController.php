@@ -93,7 +93,10 @@ class PostController extends Controller
         $user = Auth::user();
 
         if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($post->moderation || $post->published_at > now()))
-            return abort('404')->withErrors(['forbidden' => __('Unavailable post')]);
+            return response()->view('errors.insight', [
+                'code' => 404,
+                'published_at' => $post->published_at
+            ], 404);
 
         $this->addView(request(), $post);
 

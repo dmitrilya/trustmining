@@ -60,8 +60,8 @@
         $notificationAnswerId = request()->answer;
     @endphp
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-3 sm:gap-5 xl:gap-7 items-start">
-        <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-4 sm:space-y-6" x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-2 sm:gap-4 items-start">
+        <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-2 sm:space-y-4" x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {
             let answer = document.querySelector('#answer-{{ $notificationAnswerId }}');
             answer.scrollIntoView({ behavior: 'smooth' });
             answer.classList.add('animate-scrolling-highlight')
