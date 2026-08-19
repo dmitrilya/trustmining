@@ -8,7 +8,7 @@
     <div itemprop="subjectOf" itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-2 sm:space-y-4"
         x-data="{ active: null }">
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 1 ? active = 1 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">Как осуществляется доставка {{ $ad->asicVersion->asicModel->name }}
@@ -37,7 +37,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 2 ? active = 2 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">Какая гарантия на {{ $ad->asicVersion->asicModel->asicBrand->name }}
@@ -61,7 +61,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 3 ? active = 3 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">Как рассчитать окупаемость {{ $ad->asicVersion->asicModel->name }} на
@@ -90,7 +90,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 4 ? active = 4 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">Можно ли доверять компании {{ $ad->user->name }}?</span>
@@ -122,7 +122,7 @@
 
         @if ($ad->user->hosting && $ad->user->tariff && $ad->user->tariff->can_have_hosting && !$ad->user->hosting->moderation)
             <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-                class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+                class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
                 <button @click="active !== 5 ? active = 5 : active = null"
                     class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
                     <span itemprop="name">Могу ли я разместить приобретенное оборудование в майнинг-хостинге компании

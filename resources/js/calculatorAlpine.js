@@ -63,13 +63,14 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         this.recalculateAll();
 
         this.$watch('version', () => {
+            this.minPriceUSDT = this.price === '' ? (this.version?.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
+
             if (this.firmware) this.firmware = null;
             else this.recalculateAll();
         });
 
         this.$watch('price, priceCurrency, taxEnabled', () => {
-            console.log(this.price);
-            this.minPriceUSDT = this.price === '' ? (this.version.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
+            this.minPriceUSDT = this.price === '' ? (this.version?.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
             this.recalculateAll();
         });
 
@@ -80,7 +81,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         if (!isWidjet && rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
     },
 
-    firmwareCalc(h, e, f, algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
+    firmwareCalc(h, e, f, algoProfit, isRub, isCompany, minPriceRubRounded) {
         const fwProfit = algoProfit * h * this.version.c;
         const fwDailyIncomeOne = fwProfit * (100 - f) * (100 - this.fee) * this.uptime / 1000000;
         const fwDailyIncomeCurrency = fwDailyIncomeOne * this.count / (isRub ? rub : 1);
@@ -92,7 +93,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
 
         if (this.taxEnabled) {
             let fwCryptoTaxProfit = (fwDailyIncomeOne - fwDailyConsumptionOne * rub) * this.count / rub;
-            if (isCompany && vp) {
+            if (isCompany && minPriceRubRounded) {
                 const fwAmortization = round2(minPriceRubRounded * this.count / 1095);
                 fwCryptoTaxProfit -= (fwAmortization / this.count);
             }
@@ -115,13 +116,13 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         return fwDailyProfit;
     },
 
-    sortFirmwares(algoProfit, isRub, isCompany, vp, minPriceRubRounded) {
+    sortFirmwares(algoProfit, isRub, isCompany, minPriceRubRounded) {
         let availableFirmwares = this.firmwares.filter(f => f.v == this.version.i);
-        let baseDailyProfit = this.firmwareCalc(this.version.h, this.version.e, 0, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
+        let baseDailyProfit = this.firmwareCalc(this.version.h, this.version.e, 0, algoProfit, isRub, isCompany, minPriceRubRounded);
 
         if (availableFirmwares.length) availableFirmwares = availableFirmwares.map(f => {
             let up = 0;
-            let dailyProfit = this.firmwareCalc(f.h, f.e, f.f, algoProfit, isRub, isCompany, vp, minPriceRubRounded);
+            let dailyProfit = this.firmwareCalc(f.h, f.e, f.f, algoProfit, isRub, isCompany, minPriceRubRounded);
 
             if (baseDailyProfit > 0 && dailyProfit > baseDailyProfit) {
                 up = Math.round(((dailyProfit - baseDailyProfit) / baseDailyProfit) * 10000) / 100;
@@ -139,12 +140,13 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     },
 
     recalculateAll() {
+        if (!this.version) return;
+
         this.hashrate = this.firmware?.h ?? this.version.h;
         this.efficiency = this.firmware?.e ?? this.version.e;
         const isRub = this.currency == 'RUB';
         const isCompany = this.taxType == 'ip' || this.taxType == 'legal';
         const algoProfit = this.algorithms[this.version.a].p[this.profitNumber].p;
-        const vp = this.price || this.version.p;
 
         const profit = algoProfit * this.hashrate * this.version.c;
         const dailyIncomeOne = profit * (100 - (this.firmware?.f ?? 0)) * (100 - this.fee) * this.uptime / 1000000;
@@ -167,7 +169,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
             let cryptoTaxProfit = dailyProfitOneUSDT * this.count / rub;
             let amortization = 0;
 
-            if (isCompany && vp) {
+            if (isCompany && this.minPriceUSDT) {
                 amortization = round2(minPriceRubRounded * this.count / 1095);
                 cryptoTaxProfit -= amortization;
                 taxHelp.push(`<p class='font-sans text-slate-500 mb-1'>${l['Equipment amortization']}</p>`);
@@ -178,7 +180,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
 
             taxHelp.push(`<p class='font-sans text-slate-500 mt-1.5 mb-1'>${l['Tax base']}</p>`);
             taxHelp.push(`<span class='text-emerald-500'>${round2(dailyIncome / rub)}</span> - <span class='text-red-700 dark:text-red-500'>${round2(dailyConsumption)}</span>`);
-            if (isCompany && vp) taxHelp.push(` - <span class='text-blue-700 dark:text-blue-300'>${amortization}</span>`);
+            if (isCompany && this.minPriceUSDT) taxHelp.push(` - <span class='text-blue-700 dark:text-blue-300'>${amortization}</span>`);
 
             const cryptoTaxProfitRounded = round2(cryptoTaxProfit);
             taxHelp.push(` = <span class='text-yellow-300'>${cryptoTaxProfitRounded}</span>`);
@@ -229,9 +231,9 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         dailyProfitOneUSDT -= dailyTaxOneUSDT;
         this.dailyProfit = round2(dailyProfit * COEF[this.view]);
 
-        this.sortFirmwares(algoProfit, isRub, isCompany, vp, minPriceRubRounded, dailyProfit);
+        this.sortFirmwares(algoProfit, isRub, isCompany, minPriceRubRounded);
 
-        this.paybackPeriod = vp ? dailyProfitOneUSDT > 0 ? Math.round(vp / dailyProfitOneUSDT) + ' ' + window.pluralize(Math.round(vp / dailyProfitOneUSDT), l['Days']) : '∞' : l['No data']
+        this.paybackPeriod = this.minPriceUSDT ? dailyProfitOneUSDT > 0 ? Math.round(this.minPriceUSDT / dailyProfitOneUSDT) + ' ' + window.pluralize(Math.round(this.minPriceUSDT / dailyProfitOneUSDT), l['Days']) : '∞' : l['No data']
         const total = dailyIncomeCurrency + dailyConsumptionCurrency + dailyTaxCurrency;
 
         if (total > 0) {

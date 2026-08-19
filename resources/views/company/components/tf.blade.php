@@ -135,7 +135,7 @@
                                         </span>
                                     </summary>
 
-                                    <div class="mt-2 pl-3 border-l border-slate-200 dark:border-slate-700 space-y-2">
+                                    <div class="mt-2 pl-3 border-l border-slate-300 dark:border-slate-700 space-y-2">
                                         @foreach ($factor['components'] as $component)
                                             <div class="flex items-center justify-between gap-3">
 
@@ -183,7 +183,7 @@
                                     <span class="hidden group-open/details:inline">{{ __('Скрыть подробности') }}</span>
                                 </summary>
 
-                                <div class="mt-2 pl-3 border-l border-slate-200 dark:border-slate-700 space-y-2">
+                                <div class="mt-2 pl-3 border-l border-slate-300 dark:border-slate-700 space-y-2">
                                     @foreach ($factor['components'] as $component)
                                         <div class="flex items-center justify-between gap-3">
                                             <div class="min-w-0">

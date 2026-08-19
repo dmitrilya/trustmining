@@ -12,7 +12,7 @@
         <tr>
             <td align="center">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%"
-                    style="max-width: 600px; background-color: #ffffff; border: 1px border-slate-200; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                    style="max-width: 600px; background-color: #ffffff; border: 1px border-slate-300; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
                     <tr>
                         <td align="center" style="padding: 25px 0;">
                             <img src="{{ url('/img/logo-full.png') }}" alt="Logo" style="display: block; height: 40px; border: 0;">

@@ -7,7 +7,7 @@
 
     <div itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-4" x-data="{ active: null }">
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 1 ? active = 1 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">
@@ -28,7 +28,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 2 ? active = 2 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">
@@ -49,7 +49,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 3 ? active = 3 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">
@@ -70,7 +70,7 @@
         </div>
 
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+            class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 4 ? active = 4 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-slate-800 dark:text-slate-200 transition-all">
                 <span itemprop="name">

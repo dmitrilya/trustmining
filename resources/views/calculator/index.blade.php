@@ -1,13 +1,10 @@
-<x-app-layout :title="'Калькулятор майнинга ' . ($rModel
-        ? ($rVersion
-            ? $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m']
-            : $selModel['n'])
-        : 'онлайн') . ': доходность и окупаемость'" :description="($rModel
+<x-app-layout :title="'Калькулятор майнинга ' .
+    ($rModel ? ($rVersion ? $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] : $selModel['n']) : 'онлайн') .
+    ': доходность и окупаемость'" :description="($rModel
     ? ($rVersion
         ? 'Узнайте, сколько приносит ' . $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] . ' сегодня. '
         : 'Узнайте, сколько приносит ' . $selModel['n'] . ' сегодня. ')
-    : '') .
-    'Рассчитайте доход, расход, прибыль и срок окупаемости асиков в онлайн калькуляторе доходности майнинга'"
+    : '') . 'Рассчитайте доход, расход, прибыль и срок окупаемости асиков в онлайн калькуляторе доходности майнинга'"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
             'asicModel' => $selModel['s'],
@@ -22,14 +19,18 @@
         </h1>
     </x-slot>
 
-    <div class="max-w-8xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="grid grid-cols-1 xl:grid-cols-4 gap-2 sm:gap-4 items-start">
-            <div class="xl:col-span-3">
+    <div class="max-w-8xl mx-auto px-2 py-4 sm:p-4 lg:p-6">
+        <div class="xl:flex items-start gap-4">
+            <div class="flex-1 min-w-0">
                 <div itemscope itemtype="https://schema.org/ViewAction"
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 pt-3 sm:p-4">
                     @include('calculator.components.calculator')
 
                     @include('calculator.components.description')
+
+                    <div class="mt-4 sm:mt-6 md:px-2 lg:px-4 md:pb-2 lg:pb-4">
+                        @include('calculator.components.liked')
+                    </div>
                 </div>
 
                 <section class="mt-4 sm:mt-6 lg:mt-8">
@@ -51,20 +52,17 @@
                 </section>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-1 gap-2 sm:gap-4">
-                @include('calculator.components.liked')
-                <x-ai-kodex targetWidth="1280" />
-                @include('calculator.components.difficulty')
-
-                <div class="hidden xl:block">
-                    @include('layouts.components.solutions-blurb1')
+            <div class="hidden xl:flex flex-col gap-4 max-w-xs">
+                <div
+                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
+                    <script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="dark" data-blocks="prediction,history"></script>
                 </div>
 
-                @php
-                    $article = App\Models\Insight\Content\Article::find(10000004);
-                @endphp
+                <x-ai-kodex targetWidth="1280" />
 
-                @if ($article)
+                @include('layouts.components.solutions-blurb1')
+
+                @if ($article = App\Models\Insight\Content\Article::find(10000004))
                     @include('insight.article.components.card', [
                         'channel' => $article->channel->slug,
                         'article' => $article,

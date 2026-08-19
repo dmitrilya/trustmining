@@ -1,4 +1,4 @@
-<div class="w-full h-full flex flex-col justify-between p-2 sm:p-4 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl"
+<div class="w-full h-full flex flex-col justify-between p-2 sm:p-3 bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl"
     style="background-image: url('/img/headframe.webp');background-size: auto 100%">
     <div class="h-full flex flex-col justify-between">
         <div class="mb-16">

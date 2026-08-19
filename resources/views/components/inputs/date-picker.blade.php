@@ -81,7 +81,7 @@
                 <button type="button" @click="isDisabled(date) ? null : selectDay(date)" :disabled="isDisabled(date)" class="p-1 rounded-lg transition"
                     :class="{
                         'text-slate-200 bg-indigo-600 hover:bg-indigo-700': isSelected(date),
-                        'text-indigo-500 font-bold border border-indigo-600 hover:bg-slate-100 dark:hover:bg-slate-800': isToday(date) && !isSelected(date) && !
+                        'text-indigo-500 font-bold border border-indigo-600 hover:bg-slate-200 dark:hover:bg-slate-800': isToday(date) && !isSelected(date) && !
                             isDisabled(date),
                         'text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer':
                             !isToday(date) && !isSelected(date) && !isDisabled(date),

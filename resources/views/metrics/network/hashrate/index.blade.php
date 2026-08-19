@@ -1,5 +1,5 @@
-<x-metrics-layout title="Хэшрейт сети {{ __($coin->name) }} ({{ $coin->abbreviation }}): история и график | TRUSTMINING" :header="__('Network hashrate') . ' ' . $coin->name" active="network_hashrate"
-    description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+<x-metrics-layout title="Хэшрейт сети {{ __($coin->name) }} ({{ $coin->abbreviation }}): история и график | TRUSTMINING" :header="__('Network hashrate') . ' ' . $coin->name"
+    active="network_hashrate" description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
     <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_hashrate', ['coin' => strtolower($coin->name)]) }}').then(r => {
@@ -8,82 +8,69 @@
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
-            <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
-                    @click="show = !show">
-                    <svg class="w-4 h-4 text-slate-800 dark:text-slate-200" aria-hidden="true" width="24"
-                        height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
-                    </svg>
-                </div>
-
-                <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">
-                    <div
-                        class="flex bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
-                        <div @click="period = '3m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3m'], groupData: false});"
-                            :class="{
-                                'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
-                                    '3m',
-                                ' text-slate-800 dark:text-slate-200': period != '3m'
-                            }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
-                            {{ '3' . __('m') }}
-                        </div>
-                        <div @click="period = '6m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['6m'], groupData: false});"
-                            :class="{
-                                'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
-                                    '6m',
-                                ' text-slate-800 dark:text-slate-200': period != '6m'
-                            }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
-                            {{ '6' . __('m') }}
-                        </div>
-                        <div @click="period = '1y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['1y'], groupData: false});"
-                            :class="{
-                                'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
-                                    '1y',
-                                ' text-slate-800 dark:text-slate-200': period != '1y'
-                            }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
-                            {{ '1' . __('y') }}
-                        </div>
-                        <div @click="period = '3y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3y'], groupData: true});"
-                            :class="{
-                                'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
-                                    '3y',
-                                ' text-slate-800 dark:text-slate-200': period != '3y'
-                            }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
-                            {{ '3' . __('y') }}
-                        </div>
-                        <div @click="period = 'all';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['all'], groupData: true});"
-                            :class="{
-                                'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
-                                    'all',
-                                ' text-slate-800 dark:text-slate-200': period != 'all'
-                            }"
-                            class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
-                            {{ __('All') }}
-                        </div>
+            <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
+                <div class="flex bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
+                    <div @click="period = '3m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3m'], groupData: false});"
+                        :class="{
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
+                                '3m',
+                            ' text-slate-800 dark:text-slate-200': period != '3m'
+                        }"
+                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
+                        {{ '3' . __('m') }}
                     </div>
-
-                    <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkHashrates')
-                        ->get()
-                        ->map(
-                            fn($coin) => [
-                                'key' => $coin->id,
-                                'value' => $coin->abbreviation,
-                                'href' => route('metrics.network.hashrate', ['coin' => strtolower($coin->name)]),
-                            ],
-                        )
-                        ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                    <div @click="period = '6m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['6m'], groupData: false});"
+                        :class="{
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
+                                '6m',
+                            ' text-slate-800 dark:text-slate-200': period != '6m'
+                        }"
+                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
+                        {{ '6' . __('m') }}
+                    </div>
+                    <div @click="period = '1y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['1y'], groupData: false});"
+                        :class="{
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
+                                '1y',
+                            ' text-slate-800 dark:text-slate-200': period != '1y'
+                        }"
+                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
+                        {{ '1' . __('y') }}
+                    </div>
+                    <div @click="period = '3y';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3y'], groupData: true});"
+                        :class="{
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
+                                '3y',
+                            ' text-slate-800 dark:text-slate-200': period != '3y'
+                        }"
+                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
+                        {{ '3' . __('y') }}
+                    </div>
+                    <div @click="period = 'all';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['all'], groupData: true});"
+                        :class="{
+                            'text-slate-800 dark:text-slate-200 bg-slate-200 dark:bg-slate-800': period ==
+                                'all',
+                            ' text-slate-800 dark:text-slate-200': period != 'all'
+                        }"
+                        class="p-2 xs:px-2.5 sm:px-3 text-xxs sm:text-xs cursor-pointer hover:bg-slate-300 dark:hover:bg-slate-700">
+                        {{ __('All') }}
+                    </div>
                 </div>
+
+                <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkHashrates')
+                    ->get()
+                    ->map(
+                        fn($coin) => [
+                            'key' => $coin->id,
+                            'value' => $coin->abbreviation,
+                            'href' => route('metrics.network.hashrate', ['coin' => strtolower($coin->name)]),
+                        ],
+                    )
+                    ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
             </div>
 
             <div class="text-center my-4 xs:my-5 sm::my-6 md:my-7 lg:my-9">
-                <h3
-                    class="text-lg sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-bold mb-2 sm:mb-3 lg:mb-4">
+                <h3 class="text-lg sm:text-xl lg:text-2xl text-slate-800 dark:text-slate-200 font-bold mb-2 sm:mb-3 lg:mb-4">
                     {{ __('Current hashrate') }}</h3>
                 <div class="text-xs sm:text-sm lg:text-lg text-slate-600 dark:text-slate-400 mb-3 sm:mb-4 lg:mb-6">
                     {{ number_format($hashrate) }}</div>
@@ -104,10 +91,8 @@
             </div>
             <div x-data="{ show: false }">
                 <template x-for="(item, i) in items.slice(0, 90)" :key="item.date">
-                    <div x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
+                    <div x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0" class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
                         <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
                             x-text="new Date(item.date).toLocaleString(window.locale, {
                                 year: 'numeric',
@@ -131,8 +116,7 @@
                 </template>
 
                 <template x-if="items.length > 5">
-                    <button @click="show = !show"
-                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+                    <button @click="show = !show" class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
                         <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                     </button>
                 </template>

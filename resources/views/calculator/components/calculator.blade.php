@@ -25,26 +25,26 @@
                 @include('calculator.components.currency')
             @endif
 
+            @include('calculator.components.profit')
+
+            @if (!$widjet)
+                <div class="text-xxs text-slate-500 mt-3">
+                    *{{ __('The data is current at the time of calculation. The cryptocurrency market is volatile, and figures are subject to change') }}
+                </div>
+                <div class="flex text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
+                    <h3>{{ __('Payback period') }}</h3>:
+                    <span class="ml-1 text-slate-800 dark:text-slate-200 font-bold" x-text="paybackPeriod"></span>
+                </div>
+                <template x-if="minPriceUSDT">
+                    <div class="text-xxs text-slate-500 mt-2">
+                        *{{ __('The best offer is used for payback and taxes calculation') }} (<span class="text-slate-800 dark:text-slate-200"
+                            x-text="Math.round(minPriceUSDT / (currency == 'RUB' ? {{ $rub }} : 1)) + (currency == 'RUB' ? ' ₽' : ' USDT')"></span>)
+                    </div>
+                </template>
+            @endif
+
             <template x-if="version !== null">
                 <div>
-                    @include('calculator.components.profit')
-
-                    @if (!$widjet)
-                        <div class="text-xxs text-slate-500 mt-3">
-                            *{{ __('The data is current at the time of calculation. The cryptocurrency market is volatile, and figures are subject to change') }}
-                        </div>
-                        <div class="flex text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-6 sm:mt-7 lg:mt-8">
-                            <h3>{{ __('Payback period') }}</h3>:
-                            <span class="ml-1 text-slate-800 dark:text-slate-200 font-bold" x-text="paybackPeriod"></span>
-                        </div>
-                        <template x-if="version.p">
-                            <div class="text-xxs text-slate-500 mt-2">
-                                *{{ __('The best offer is used for payback and taxes calculation') }} (<span class="text-slate-800 dark:text-slate-200"
-                                    x-text="Math.round(minPriceUSDT / (currency == 'RUB' ? {{ $rub }} : 1)) + (currency == 'RUB' ? ' ₽' : ' USDT')"></span>)
-                            </div>
-                        </template>
-                    @endif
-
                     @if (in_array('coins', $blocks))
                         @include('calculator.components.coins')
                     @endif

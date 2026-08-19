@@ -22,4 +22,10 @@
         'name' => $coin->name,
         'short' => $coin->abbreviation,
     ])" />
+    <x-faqs.faq i="5" :question="__('faq.metrics.network.difficulty.question_5', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_5', ['short' => $coin->abbreviation])" />
+    <x-faqs.faq i="6" :question="__('faq.metrics.network.difficulty.question_6', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_6')" />
+    <x-faqs.faq i="7" :question="__('faq.metrics.network.difficulty.question_7', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_7')" />
+    <x-faqs.faq i="8" :question="__('faq.metrics.network.difficulty.question_8', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_8', ['short' => $coin->abbreviation])" />
+    <x-faqs.faq i="9" :question="__('faq.metrics.network.difficulty.question_9', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_9')" />
+    <x-faqs.faq i="10" :question="__('faq.metrics.network.difficulty.question_10', ['short' => $coin->abbreviation])" :answer="__('faq.metrics.network.difficulty.answer_10', ['name' => $coin->name])" />
 </x-faqs.faqs>

@@ -3,15 +3,27 @@
 return [
     'metrics' => [
         'network' => [
-            "difficulty" => [
-                "question_1" => "What is the network difficulty of :name (:short)?",
-                "answer_1" => " =>name difficulty is a parameter that determines how hard it is to perform mathematical calculations to find a new block in the :short blockchain. It is automatically adjusted to maintain stable block generation time when the total network hashrate changes. You can also find more detailed information in our article.",
-                "question_2" => "How often is the :short difficulty recalculated?",
-                "answer_2" => " =>name algorithm regularly updates the difficulty level. The recalculation period depends on the specific coin protocol and aims to prevent miners from mining blocks either too fast or too slow.",
-                "question_3" => "What impact does the increase in :name difficulty have?",
-                "answer_3" => "An increase in :short difficulty means that more computational power is required to mine the same amount of coins. This usually reduces mining profitability for older equipment but makes the network more secure against attacks.",
-                "question_4" => "Where can I see the current difficulty forecast for :short?",
-                "answer_4" => "The current chart and difficulty forecast for :name are available on this page. The data is updated in real-time based on the current block generation speed in the :short network."
+            'difficulty' => [
+                'question_1' => 'What is network difficulty for :name (:short)?',
+                'answer_1' => 'The :name difficulty is a parameter that determines how difficult it is to find a new block in the :short blockchain. It is automatically adjusted according to the protocol rules to maintain the target block generation rate. You can also learn more about this topic in our article',
+                'question_2' => 'How often is :short difficulty adjusted?',
+                'answer_2' => 'The difficulty adjustment period depends on the protocol of each cryptocurrency. For example, the Bitcoin network adjusts its difficulty every 2016 blocks to keep the average block generation time close to its target value.',
+                'question_3' => 'How does an increase in :name difficulty affect mining?',
+                'answer_3' => 'An increase in :short difficulty means that more computational work is required to find a new block. With the network hashrate and other conditions unchanged, this generally reduces the mining profitability of individual mining hardware.',
+                'question_4' => 'Where can I see the current :short difficulty forecast?',
+                'answer_4' => 'The current difficulty and its projected change for :name are available on this page. The forecast is calculated using the current block generation rate and other network data for :short.',
+                'question_5' => 'How is :short network difficulty calculated?',
+                'answer_5' => 'The difficulty calculation algorithm is defined by the rules of each cryptocurrency protocol. In the :short network, the difficulty is adjusted based on the actual block generation time during the previous adjustment period to keep block production close to the target rate.',
+                'question_6' => 'What is the relationship between :short difficulty and hashrate?',
+                'answer_6' => 'Hashrate represents the total computational power of miners on the network, while difficulty determines how difficult it is to find a new block. When hashrate increases, blocks may be found faster than the target rate, so the protocol will typically increase difficulty at the next adjustment.',
+                'question_7' => 'How does difficulty affect :short mining profitability?',
+                'answer_7' => 'All other conditions being equal, an increase in difficulty reduces expected mining profitability because each miner accounts for a smaller share of the network\'s total computational work. A decrease in difficulty generally has the opposite effect.',
+                'question_8' => 'When is the next :short difficulty adjustment?',
+                'answer_8' => 'The timing of the next difficulty adjustment depends on the number of remaining blocks and the current block generation rate. This page shows the number of blocks remaining until the adjustment and the estimated time until :short difficulty changes.',
+                'question_9' => 'Why does :short network difficulty increase or decrease?',
+                'answer_9' => 'The main reason for a difficulty change is a difference between the actual block generation rate and the protocol\'s target rate. If blocks are found faster than the target time, difficulty usually increases. If they are found more slowly, difficulty decreases.',
+                'question_10' => 'Where can I see the history of :short difficulty changes?',
+                'answer_10' => 'The history of :name difficulty changes is available on this page in the table and chart. It allows you to compare the current difficulty with previous values and see how the network difficulty has changed over time.',
             ],
             "hashrate" => [
                 "question_1" => "What does the current :name hashrate indicate?",

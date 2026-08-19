@@ -1,7 +1,6 @@
-<x-metrics-layout
-    title="Сложность сети {{ $coin->name }} ({{ $coin->abbreviation }}): онлайн график и прогноз | TRUSTMINING"
-    :header="__('Network difficulty') . ' ' . $coin->name" active="network_difficulty"
-    description="История изменений, текущий показатель и прогноз следующей сложности криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+<x-metrics-layout title="Сложность сети {{ $coin->name }}({{ $coin->abbreviation }}) сегодня: прогноз, онлайн график" :header="__('Network difficulty') . ' ' . __($coin->name)"
+    active="network_difficulty"
+    description="Актуальная сложность сети {{ $coin->name }}, онлайн-график, история изменений и прогноз следующего пересчёта. Данные обновляются в реальном времени">
     @vite(['resources/js/graph.js'])
 
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}').then(r => {
@@ -16,11 +15,6 @@
     })">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
-            <div class="text-right mb-3 sm:mb-4 cursor-pointer text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline"
-                @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">
-                {{ __('Would you like to receive notifications about network difficulty changes?') }}
-            </div>
-
             @include('metrics.network.difficulty.components.difficulty')
         </div>
 
@@ -29,50 +23,64 @@
             <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                 {{ __('History of changes') }}
             </h2>
-            <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
-                <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
-                    {{ __('Date') }}</div>
-                <div class="col-span-3 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
-                    {{ __('Network difficulty') }}</div>
-                <div class="col-span-1 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
-                    {{ __('Change') }}</div>
-            </div>
-            <div x-data="{ show: false }">
-                <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
-                    <div x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        class="grid grid-cols-6 gap-1 sm:gap-3 mb-1 sm:mb-2">
-                        <div class="col-span-2 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                            x-text="new Date(item.date).toLocaleString(window.locale, {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric',
-                            })">
-                        </div>
+            <div x-data="{ show: false }" class="w-full">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-300 dark:border-slate-700">
+                            <th class="py-1.5 md:py-4 pr-4 text-left font-bold text-xs sm:text-sm text-slate-500">
+                                {{ __('Date') }}
+                            </th>
+                            <th class="py-1.5 md:py-4 pr-4 text-left font-bold text-xs sm:text-sm text-slate-500">
+                                {{ __('Network difficulty') }}
+                            </th>
+                            <th class="py-1.5 md:py-4 font-bold text-xs sm:text-sm text-right text-slate-500">
+                                {{ __('Change') }}
+                            </th>
+                        </tr>
+                    </thead>
 
-                        <div class="col-span-3 text-xxs xs:text-xs sm:text-base lg:text-lg text-slate-800 dark:text-slate-200"
-                            x-text="item.value"></div>
+                    <tbody>
+                        <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
+                            <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0" class="border-b border-slate-100 dark:border-slate-800/50 last:border-0">
 
-                        <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
-                            :class="{
-                                'text-green-500': item.value > items[i + 1]?.value,
-                                'text-red-500': item.value < items[i + 1]?.value,
-                                'text-slate-800 dark:text-slate-200': item.value == items[i + 1]?.value
-                            }"
-                            x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
-                        </div>
-                    </div>
-                </template>
+                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xs:text-xs sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
+                                    x-text="new Date(item.date).toLocaleString(window.locale, {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: 'numeric',
+                                    })">
+                                </td>
+
+                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xs:text-xs sm:text-base text-slate-800 dark:text-slate-200" x-text="item.value">
+                                </td>
+
+                                <td class="py-1.5 lg:py-2 text-xxs xs:text-xs sm:text-base text-right whitespace-nowrap"
+                                    :class="{
+                                        'text-green-500': item.value > items[i + 1]?.value,
+                                        'text-red-500': item.value < items[i + 1]?.value,
+                                        'text-slate-800 dark:text-slate-200': item.value == items[i + 1]?.value
+                                    }"
+                                    x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
 
                 <template x-if="items.length > 5">
                     <button @click="show = !show"
-                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors duration-300">
+                        class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors duration-300">
                         <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                     </button>
                 </template>
             </div>
         </div>
+
+        {{-- <div class="text-right mb-3 sm:mb-4 cursor-pointer text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline"
+            @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">
+            {{ __('Would you like to receive notifications about network difficulty changes?') }}
+        </div> --}}
     </div>
 
     <section class="mt-4 sm:mt-6 lg:mt-8">

@@ -1,7 +1,8 @@
 @props(['i', 'question', 'answer'])
 
 <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-    class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-500 dark:border-l-indigo-500">
+    class="border rounded-xl overflow-hidden shadow-sm bg-white/40 dark:bg-slate-900/40 border-l-4 border-l-indigo-600 dark:border-l-indigo-600"
+    :class="active == {{ $i }} ? 'border-indigo-600' : 'border-slate-300 dark:border-slate-700'">
     <button @click="active !== {{ $i }} ? active = {{ $i }} : active = null"
         class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition-all">
         <span itemprop="name">{!! $question !!}</span>

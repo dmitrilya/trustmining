@@ -56,7 +56,7 @@
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
             <button type="button" @click="if (!isDisabled) open = ! open" :class="{ 'opacity-50': isDisabled }"
-                class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-2 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+                class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 xs:py-2 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
 
                 <span class="flex items-center">
                     @if ($icon)
