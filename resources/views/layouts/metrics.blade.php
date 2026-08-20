@@ -26,7 +26,7 @@
                 {{ $slot }}
             </div>
 
-            <div class="hidden xl:flex flex-col gap-4 max-w-xs">
+            <div class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
                 <div
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
                     <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="antminer-s21+" data-version="235">
