@@ -49,7 +49,7 @@
             <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1280px)').matches)" class="hidden xl:flex flex-col gap-4 max-w-sm">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
-                        <div
+                        <div style="min-height: 435px"
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
                             <script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="dark" data-blocks="prediction,history"></script>
                         </div>
