@@ -68,18 +68,13 @@
             <div
                 class="md:col-span-3 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 shadow-sm flex flex-col justify-between gap-2 sm:gap-4">
                 <div class="flex justify-between gap-2 border-b border-slate-300 dark:border-slate-700 pb-2">
-                    <div style="max-width: 60%" class="flex flex-col justify-between">
-                        <div>
+                    <div style="max-width: 60%">
                             <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
                                 {{ __('Difficulty prediction') }}
                             </h2>
-                            <span class="text-xl xs:text-3xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
+                            <span class="text-2xl xs:text-4xl lg:text-5xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
                                 {{ $prediction > 0 ? '+' : '' }}{{ $prediction }}%
                             </span>
-                        </div>
-                        <span class="block text-xxs sm:text-xs text-slate-500 mt-0.5 leading-tight">
-                            {{ __('Expected trend when recalculated') }}
-                        </span>
                     </div>
 
                     <div class="text-right flex-1 flex flex-col justify-between">
@@ -94,7 +89,7 @@
                                 <span class="text-xs text-slate-500">/ 2016</span>
                             </div>
                         </div>
-                        <div class="mt-0.5">
+                        <div>
                             <h3 class="sr-only">{{ __('Time left until the calculation') }}</h3>
                             <span class="text-xxs xxs:text-sm text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
                         </div>
