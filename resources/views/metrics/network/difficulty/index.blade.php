@@ -52,7 +52,8 @@
                                     })">
                                 </td>
 
-                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200" x-text="item.value">
+                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200"
+                                    x-text="item.value">
                                 </td>
 
                                 <td class="py-1.5 lg:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
@@ -91,12 +92,7 @@
         </div>
 
         <div>
-            @include('home.components.carousel', [
-                'items' => $ads,
-                'blade' => 'ad.components.card',
-                'model' => 'ad',
-                'bigWrapper' => true,
-            ])
+            <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" />
         </div>
     </section>
 

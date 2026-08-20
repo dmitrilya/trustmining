@@ -28,8 +28,7 @@
         }
     }">
         <div class="flex justify-center">
-            <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-full p-0.5 space-x-2 flex">
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-full p-0.5 space-x-2 flex">
                 <div class="relative z-0 group">
                     <input id="tariff" type="text" :value="tariff" aria-label="{{ __('Tariff') }}"
                         class="py-1 px-3 block w-28 rounded-full text-sm text-slate-800 bg-slate-50 dark:bg-slate-950 dark:text-slate-200 border ring-0 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
@@ -85,8 +84,7 @@
                         class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
                             class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
-                            <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')"
-                                alt="medal">
+                            <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')" alt="medal">
                         </div>
 
                         <span x-text="`${model.name} ${model.hashrate}${model.measurement}/s`"></span>
@@ -114,8 +112,7 @@
                     </div>
                     <div class="hidden lg:block pl-1.5 sm:pl-2">
                         <template x-for="coin in model.coins">
-                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
-                                :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline" :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
                         </template>
                     </div>
                 </a>
@@ -130,12 +127,7 @@
             </div>
 
             <div>
-                @include('home.components.carousel', [
-                    'items' => $ads,
-                    'blade' => 'ad.components.card',
-                    'model' => 'ad',
-                    'bigWrapper' => true,
-                ])
+                <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" />
             </div>
         </section>
 

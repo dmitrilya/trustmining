@@ -76,24 +76,26 @@
                 </div>
             </div>
 
-            <ul role="listbox" x-show="openModel"
-                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
-                <template x-for="asicModel in filteredModels" :key="asicModel.i">
-                    <li @click.debounce.10ms="selectModel(asicModel)" role="option"
-                        class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
-                        <div class="flex items-center">
-                            <span class="ml-3 block truncate" x-text="asicModel.n"></span>
-                        </div>
+            <template x-if="openModel">
+                <ul role="listbox"
+                    class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                    <template x-for="asicModel in filteredModels" :key="asicModel.i">
+                        <li @click.debounce.10ms="selectModel(asicModel)" role="option"
+                            class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
+                            <div class="flex items-center">
+                                <span class="ml-3 block truncate" x-text="asicModel.n"></span>
+                            </div>
 
-                        <span x-show="selectedModel && selectedModel.i == asicModel.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
-                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
-                            </svg>
-                        </span>
-                    </li>
-                </template>
-            </ul>
+                            <span x-show="selectedModel && selectedModel.i == asicModel.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
+                                </svg>
+                            </span>
+                        </li>
+                    </template>
+                </ul>
+            </template>
         </div>
 
         <template x-if="selectedModel">
@@ -113,22 +115,24 @@
                         </span>
                     </button>
 
-                    <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg"
-                        x-show="openVersion">
-                        <template x-for="asicVersion in selectedModel.v" :key="asicVersion.i">
-                            <li @click.debounce.10ms="selectVersion(asicVersion)"
-                                class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
-                                <span class="block truncate" x-text="asicVersion.h"></span>
+                    <template x-if="openVersion">
+                        <ul
+                            class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg">
+                            <template x-for="asicVersion in selectedModel.v" :key="asicVersion.i">
+                                <li @click.debounce.10ms="selectVersion(asicVersion)"
+                                    class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
+                                    <span class="block truncate" x-text="asicVersion.h"></span>
 
-                                <span x-show="selectedVersion?.i == asicVersion.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
-                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
-                                    </svg>
-                                </span>
-                            </li>
-                        </template>
-                    </ul>
+                                    <span x-show="selectedVersion?.i == asicVersion.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
+                                        </svg>
+                                    </span>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
                 </div>
             </div>
         </template>

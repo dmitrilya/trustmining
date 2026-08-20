@@ -89,7 +89,8 @@
 
                 <div class="hidden lg:flex items-center ml-3">
                     @auth
-                        <x-dropdown align="right" width="48" contentClasses="bg-slate-100/95 dark:bg-slate-900/95 border border-slate-300 dark:border-slate-700">
+                        <x-dropdown align="right" width="48"
+                            contentClasses="bg-slate-100/95 dark:bg-slate-900/95 border border-slate-300 dark:border-slate-700">
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
@@ -143,9 +144,7 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                    <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                         {{ __('Logout') }}
                                     </x-dropdown-link>
                                 </form>
@@ -243,9 +242,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                             {{ __('Logout') }}
                         </x-responsive-nav-link>
                     </form>

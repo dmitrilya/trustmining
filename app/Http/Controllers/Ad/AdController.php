@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Blade;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdRequest;
@@ -66,14 +67,14 @@ class AdController extends Controller
         $ads = $this->getAds($adCategory->id, $request)->orderByDesc('ads.ordering_id')->paginate(4);
 
         if ($request->ajax()) return response()->json([
-            'html' => view('home.components.carousel-list', [
-                'adCategory' => $adCategory,
-                'items' => $ads,
-                'blade' => 'ad.components.card',
-                'model' => 'ad',
-                'user' => $request->user(),
-                'owner' => false
-            ])->render(),
+            'html' => Blade::render(
+                '<x-carousel.list :adCategory="$adCategory" :items="$items" blade="ad.components.card" model="ad" :user="$user" />',
+                [
+                    'adCategory' => $adCategory,
+                    'items' => $ads,
+                    'user' => $request->user(),
+                ]
+            ),
             'hasMore' => $ads->hasMorePages()
         ]);
     }

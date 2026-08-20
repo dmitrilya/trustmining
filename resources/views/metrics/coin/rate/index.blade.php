@@ -151,12 +151,7 @@
         </div>
 
         <div>
-            @include('home.components.carousel', [
-                'items' => $ads,
-                'blade' => 'ad.components.card',
-                'model' => 'ad',
-                'bigWrapper' => true,
-            ])
+            <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" />
         </div>
     </section>
 

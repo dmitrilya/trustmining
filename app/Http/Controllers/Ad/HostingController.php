@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Blade;
 use Mews\Purifier\Facades\Purifier;
 
 use App\Http\Requests\StoreHostingRequest;
@@ -48,12 +49,12 @@ class HostingController extends Controller
         $hostings = $this->getHostings($request)->orderByDesc('ordering_id')->paginate(4);
 
         if ($request->ajax()) return response()->json([
-            'html' => view('home.components.carousel-list', [
-                'items' => $hostings,
-                'blade' => 'hosting.components.card',
-                'model' => 'hosting',
-                'auth' => $request->user()
-            ])->render(),
+            'html' => Blade::render(
+                '<x-carousel.list :items="$hostings" blade="hosting.components.card" model="hosting" />',
+                [
+                    'items' => $hostings,
+                ]
+            ),
             'hasMore' => $hostings->hasMorePages()
         ]);
     }

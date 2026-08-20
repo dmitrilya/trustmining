@@ -41,33 +41,31 @@
                     </div>
 
                     <div>
-                        @include('home.components.carousel', [
-                            'items' => $ads,
-                            'blade' => 'ad.components.card',
-                            'model' => 'ad',
-                            'bigWrapper' => true,
-                            'lazy' => true,
-                        ])
+                        <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" :lazy="true" />
                     </div>
                 </section>
             </div>
 
-            <div class="hidden xl:flex flex-col gap-4 max-w-sm">
-                <div
-                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
-                    <script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="dark" data-blocks="prediction,history"></script>
-                </div>
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1280px)').matches)" class="hidden xl:flex flex-col gap-4 max-w-sm">
+                <template x-if="isXL">
+                    <div class="flex flex-col gap-4 w-full">
+                        <div
+                            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
+                            <script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="dark" data-blocks="prediction,history"></script>
+                        </div>
 
-                <x-ai-kodex targetWidth="1280" />
+                        <x-ai-kodex targetWidth="1280" />
 
-                @include('layouts.components.solutions-blurb1')
+                        @include('layouts.components.solutions-blurb1')
 
-                @if ($article = App\Models\Insight\Content\Article::find(10000004))
-                    @include('insight.article.components.card', [
-                        'channel' => $article->channel->slug,
-                        'article' => $article,
-                    ])
-                @endif
+                        @if ($article = App\Models\Insight\Content\Article::find(10000004))
+                            @include('insight.article.components.card', [
+                                'channel' => $article->channel->slug,
+                                'article' => $article,
+                            ])
+                        @endif
+                    </div>
+                </template>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-@props(['ad', 'auth', 'hidden'])
+@props(['ad', 'hidden'])
 
 <div
     class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">

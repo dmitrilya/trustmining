@@ -27,12 +27,7 @@
                     </div>
 
                     <div>
-                        @include('home.components.carousel', [
-                            'items' => $miners,
-                            'blade' => 'ad.components.card',
-                            'model' => 'ad',
-                            'sm' => true,
-                        ])
+                        <x-carousel.carousel :items="$miners" blade="ad.components.card" model="ad" :sm="true" />
                     </div>
                 </section>
 
@@ -48,11 +43,7 @@
                     </div>
 
                     <div>
-                        @include('home.components.carousel', [
-                            'items' => $hostings,
-                            'blade' => 'hosting.components.card',
-                            'model' => 'hosting',
-                        ])
+                        <x-carousel.carousel :items="$hostings" blade="hosting.components.card" model="hosting" />
                     </div>
                 </section>
 
@@ -68,11 +59,7 @@
                     </div>
 
                     <div>
-                        @include('home.components.carousel', [
-                            'items' => $gpuModels,
-                            'blade' => 'database.components.gpu-card',
-                            'model' => 'gpu',
-                        ])
+                        <x-carousel.carousel :items="$gpuModels" blade="database.components.gpu-card" model="gpu" />
                     </div>
                 </section>
 
@@ -84,11 +71,7 @@
                     </div>
 
                     <div>
-                        @include('home.components.carousel', [
-                            'items' => $articles,
-                            'blade' => 'insight.article.components.card',
-                            'model' => 'article',
-                        ])
+                        <x-carousel.carousel :items="$articles" blade="insight.article.components.card" model="article" />
                     </div>
                 </section>
             </div>

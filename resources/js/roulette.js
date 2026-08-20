@@ -1,4 +1,7 @@
 export var roulette = () => ({
+    opened: false,
+    renderContent: false,
+    isReady: false,
     prizes: [],
     extendedPrizes: [],
     isSpinning: false,
@@ -215,8 +218,6 @@ export var roulette = () => ({
         const hideUntil = localStorage.getItem('roulette_hide_until');
         if (!hideUntil) return false;
         return Date.now() < parseInt(hideUntil, 10);
-        console.log(Date.now());
-        console.log(parseInt(hideUntil, 10));
     }
 });
 
