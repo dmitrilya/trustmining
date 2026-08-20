@@ -71,7 +71,7 @@
                     <div style="max-width: 60%" class="flex flex-col justify-between">
                         <div>
                             <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
-                                {{ __('Next difficulty prediction') }}
+                                {{ __('Difficulty prediction') }}
                             </h2>
                             <span class="text-xl xs:text-3xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-400' }}">
                                 {{ $prediction > 0 ? '+' : '' }}{{ $prediction }}%
