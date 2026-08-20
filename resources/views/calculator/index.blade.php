@@ -21,7 +21,7 @@
 
     <div class="max-w-8xl mx-auto px-2 py-4 sm:p-4 lg:p-6">
         <div class="xl:flex items-start gap-4">
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 xl:max-w-[calc(100%-400px)]">
                 <div itemscope itemtype="https://schema.org/ViewAction"
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 pt-3 sm:p-4">
                     @include('calculator.components.calculator')

@@ -22,7 +22,7 @@
         </div>
 
         <div class="xl:flex items-start gap-4">
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 xl:max-w-[calc(100%-336px)]">
                 {{ $slot }}
             </div>
 
