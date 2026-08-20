@@ -46,7 +46,7 @@
                 </section>
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1280px)').matches)" class="hidden xl:flex flex-col gap-4 max-w-sm">
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1280px)').matches)" class="hidden xl:flex flex-col gap-4 w-sm max-w-sm">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div style="min-height: 435px"
