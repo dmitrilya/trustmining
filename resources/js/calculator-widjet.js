@@ -19,7 +19,7 @@
     const version = me.getAttribute('data-version') || '17';
     const parentUrl = window.location.href;
 
-    const widgetUrl = `https://trustmining.ru{encodeURIComponent(blocks)}&theme=${theme}&model=${model}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
+    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&model=${model}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
     iframe.src = widgetUrl;
@@ -40,7 +40,6 @@
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         if (iframe.contentWindow) iframe.contentWindow.postMessage({ type: 'THEME_CHANGE', theme: getParentTheme() }, '*');
     });
-    // --------------------------------------------------
 
     window.addEventListener('message', function (event) {
         if (event.data && event.data.type === 'resize-calculator') iframe.style.height = event.data.height + 'px';
