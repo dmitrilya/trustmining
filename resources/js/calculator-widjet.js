@@ -2,8 +2,8 @@
     const me = document.currentScript;
 
     function getParentTheme() {
-        const isDarkClass = document.documentElement.classList.contains('dark') || document.body.classList.contains('dark');
-        if (isDarkClass) return 'dark';
+        if (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) return 'dark';
+        else if (document.documentElement.classList.contains('light') || document.body.classList.contains('light')) return 'light';
 
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
 
