@@ -20,6 +20,7 @@
     const widgetUrl = `https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${encodeURIComponent(blocks)}&theme=${theme}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
+    iframe.title = 'Trust Mining Difficulty';
     iframe.src = widgetUrl;
     iframe.style.width = '100%';
     iframe.style.border = 'none';

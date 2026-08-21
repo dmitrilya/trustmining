@@ -22,6 +22,7 @@
     const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&model=${model}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
+    iframe.title = 'Trust Mining Calculator';
     iframe.src = widgetUrl;
     iframe.style.width = '100%';
     iframe.style.border = 'none';
