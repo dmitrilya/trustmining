@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '', changings: [] }">
             <div class="flex justify-between items-center my-6">
                 <div class="relative z-0">

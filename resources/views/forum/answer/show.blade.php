@@ -1,6 +1,6 @@
 <div itemprop="{{ $i == 0 && $answer->likes_count ? 'acceptedAnswer' : 'suggestedAnswer' }}" itemscope itemtype="https://schema.org/Answer" x-data="{ open: false }"
     id="answer-{{ $answer->id }}"
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4">
     <div class="mb-2 sm:mb-4 lg:mb-6 flex justify-between">
         @if ($i == 0 && $answer->likes_count)
             <svg class="flex-shrink-0 w-5 h-5 sm:w-7 sm:h-7 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -66,7 +66,7 @@
                 @foreach ($answer->images as $image)
                     <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                         <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                            class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                            class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
                         </div>
                         <img src="{{ Storage::url($image) }}" />
                     </div>

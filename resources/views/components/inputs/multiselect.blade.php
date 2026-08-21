@@ -8,12 +8,12 @@
             <x-inputs.text-input id="search" type="text" x-model="search" :placeholder="__('Search')" autocomplete="off" />
         @else
             <div
-                class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-lg shadow-sm shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
+                class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-lg shadow shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                 <input type="text" id="search" x-model="search" placeholder="{{ __('Search') }}"
                     class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-slate-600 dark:text-slate-400 w-full" />
 
                 <button type="button"
-                    class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-2 py-1 rounded-full"
+                    class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow text-slate-600 dark:text-slate-400 px-2 py-1 rounded-full"
                     @click="if (!search.trim().length) return; selected.push(search); if (all.indexOf(search) != -1) all.splice(all.indexOf(search), 1); search = ''">{{ __('Add') }}</button>
             </div>
         @endif

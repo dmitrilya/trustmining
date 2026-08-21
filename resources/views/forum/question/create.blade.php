@@ -12,7 +12,7 @@
             </div>
         @else
             <div
-                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-2xl shadow-lg shadow-logo-color">
+                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-xl shadow-lg shadow-logo-color">
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
                     @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters') }}', 'error');
                         if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"

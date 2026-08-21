@@ -25,7 +25,7 @@
             @include('moderation.components.buttons', ['withUniqueCheck' => true])
 
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 lg:p-14">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 lg:p-14">
                 <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8">
                     <div class="md:col-span-5">
                         <div class="h-full flex flex-col justify-between">
@@ -175,7 +175,7 @@
         @endif
 
         <div itemscope itemtype="https://schema.org/Product"
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
             <meta itemprop="sku" content="{{ $ad->id }}">
             <link itemprop="url" href="{{ url()->current() }}">
             <meta itemprop="description" content="{{ $description }}">
@@ -472,7 +472,7 @@
 
         @if (!isset($moderation))
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14 mt-2 sm:mt-4">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14 mt-2 sm:mt-4">
                 @include('company.components.tf')
             </div>
         @endif

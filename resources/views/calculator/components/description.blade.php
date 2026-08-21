@@ -3,7 +3,7 @@
         {{ __('Profitability analysis overview') }}</h2>
 
     <div itemprop="description"
-        class="ql-editor text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400 transition-all ease-in-out"
+        class="ql-editor text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400 transition ease-in-out"
         style="overflow-y: hidden; max-height: 3.75rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php

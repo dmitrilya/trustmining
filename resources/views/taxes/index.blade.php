@@ -2,19 +2,19 @@
     description="Подробное руководство по налогообложению майнинга в России. Физические лица, ИП, ООО, расчет налогов, списание оборудования, декларации, документы, сроки и практические примеры.">
     <x-slot name="header">
         <div class="flex items-end justify-between gap-4">
-            <h1 class="font-bold text-lg sm:text-xl text-slate-800 dark:text-slate-200 leading-tight transition-opacity duration-150 ease-in-out">
+            <h1 class="font-bold text-lg sm:text-xl text-slate-800 dark:text-slate-200 leading-tight transition duration-100 ease-in-out">
                 {{ __('Taxes on cryptocurrency mining and circulation in Russia') }}
             </h1>
 
             <button id="header-toc-toggle"
-                class="xl:hidden flex items-center p-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                class="xl:hidden flex items-center p-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
         </div>
 
-        <div id="header-toc-dropdown" class="xl:hidden max-h-0 overflow-y-auto transition-all duration-300 ease-in-out">
+        <div id="header-toc-dropdown" class="xl:hidden max-h-0 overflow-y-auto transition duration-300 ease-in-out">
             <div id="toc-container" class="pt-2 mt-2 border-t border-slate-300 dark:border-slate-700"></div>
         </div>
     </x-slot>
@@ -104,7 +104,7 @@
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="grid grid-cols-1 xl:grid-cols-7 gap-4">
             <div x-init="toc($el, '{{ __('TOC') }}', false, 'space-y-1')"
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-12 text-sm xl:col-span-5">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-12 text-sm xl:col-span-5">
                 <section id="block-1">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
@@ -250,7 +250,7 @@
                                         Если деятельность по майнингу осуществлялась без включения в реестр ФНС и принесла государству или гражданам <strong
                                             class="text-slate-800 dark:text-slate-200">крупный ущерб / доход (от 3 500 000 рублей)</strong>, наступает уголовная
                                         ответственность. Санкция статьи предусматривает штрафы до 300 000 рублей, обязательные работы, либо <strong
-                                            class="text-red-600 dark:text-red-400">лишение свободы на срок до 5 лет</strong> в случае совершения преступления
+                                            class="text-red-700 dark:text-red-500">лишение свободы на срок до 5 лет</strong> в случае совершения преступления
                                         организованной группой или в особо крупном размере.
                                     </p>
                                 </div>
@@ -288,7 +288,7 @@
                                 компаний) и <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/9b06776ae7a39546ad4e3ba04bebef14baabf8d2/"
                                     target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline">статье 210 НК РФ</a> (для граждан), вы не
                                 можете заявить
-                                налоговому органу: <em class="not-italic font-medium text-slate-950 dark:text-white">«Я еще не продал биткоин, я просто храню
+                                налоговому органу: <em class="not-italic font-medium text-slate-800 dark:text-slate-200">«Я еще не продал биткоин, я просто храню
                                     его
                                     на
                                     холодном кошельке, поэтому дохода нет»</em>. Закон фиксирует получение экономической выгоды непосредственно в момент
@@ -453,7 +453,7 @@
                                         запрет
                                     </h4>
                                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                                        Майнинг <strong class="text-red-600 dark:text-red-400">полностью запрещен</strong> (даже до 1 кВт·ч) в следующих
+                                        Майнинг <strong class="text-red-700 dark:text-red-500">полностью запрещен</strong> (даже до 1 кВт·ч) в следующих
                                         регионах:
                                         юг Иркутской области (включая города Иркутск, Ангарск, Шелехов), отдельные районы Бурятии и Забайкальского края,
                                         республики
@@ -521,13 +521,13 @@
                                             <td class="p-2 sm:p-3 font-medium">2<span class="hidden md:inline"> ступень</span></td>
                                             <td class="p-2 sm:p-3">От 2 400 000 ₽ до 5 000 000 ₽</td>
                                             <td class="p-2 sm:p-3 font-mono">312 000 ₽ + 15% с суммы превышения 2,4 млн ₽</td>
-                                            <td class="p-2 sm:p-3 text-right font-bold text-blue-600 text-blue-300">15%</td>
+                                            <td class="p-2 sm:p-3 text-right font-bold text-blue-600">15%</td>
                                         </tr>
                                         <tr>
                                             <td class="p-2 sm:p-3 font-medium">3<span class="hidden md:inline"> ступень</span></td>
                                             <td class="p-2 sm:p-3">От 5 000 000 ₽ до 20 000 000 ₽</td>
                                             <td class="p-2 sm:p-3 font-mono">702 000 ₽ + 18% с суммы превышения 5 млн ₽</td>
-                                            <td class="p-2 sm:p-3 text-right font-bold text-indigo-600 dark:text-indigo-400">18%</td>
+                                            <td class="p-2 sm:p-3 text-right font-bold text-indigo-500">18%</td>
                                         </tr>
                                         <tr>
                                             <td class="p-2 sm:p-3 font-medium">4<span class="hidden md:inline"> ступень</span></td>

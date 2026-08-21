@@ -32,7 +32,7 @@
             </div>
 
             <ul role="listbox" style="display: none" x-show="open"
-                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
 
                 <template x-for="gpuModel in models" :key="gpuModel.id">
                     <li @click="selectedModel = gpuModel; open = false; search = gpuModel.name" role="option"

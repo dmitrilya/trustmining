@@ -33,7 +33,7 @@
 
                 @if ($isOwnReview)
                     <template x-if="isUnderModeration">
-                        <p class="text-sm text-red-600 font-semibold mt-2">{{ __('Is under moderation') }}</p>
+                        <p class="text-sm text-red-700 font-semibold mt-2">{{ __('Is under moderation') }}</p>
                     </template>
                 @endif
 

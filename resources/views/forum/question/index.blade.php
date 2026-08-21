@@ -16,7 +16,7 @@
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     <a

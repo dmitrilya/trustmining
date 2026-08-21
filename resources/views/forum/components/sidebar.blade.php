@@ -1,7 +1,7 @@
 <div class="w-full mt-4 sm:mt-6 lg:mt-0 space-y-4 sm:space-y-6 col-span-1">
     @if (isset($similarQuestions) && !empty($similarQuestions))
         <div
-            class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
+            class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <h2
                 class="mb-1 sm:mb-3 p-2 xs:p-3 md:p-4 xs:text-lg sm:text-xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
                 {{ __('Similar posts') }}
@@ -34,7 +34,7 @@
 
     @if (isset($newQuestions) && !empty($newQuestions))
         <div
-            class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
+            class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <h2
                 class="mb-1 sm:mb-3 p-2 xs:p-3 md:p-4 xs:text-lg sm:text-xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
                 {{ __('New posts') }}

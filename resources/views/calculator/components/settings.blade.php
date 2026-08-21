@@ -11,7 +11,7 @@
             <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
                 <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open"
                     @click.away="open = false">
-                    <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition-colors duration-150">
+                    <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
@@ -19,8 +19,8 @@
                         </svg>
                     </div>
 
-                    <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95"
-                        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+                    <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
+                        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100"
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" style="display: none"
                         class="absolute w-40 top-6 right-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">

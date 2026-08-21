@@ -14,12 +14,12 @@
         items = difficulties.slice(0, difficulties.length - 1).filter((difficulty, i) => difficulty.value != difficulties[i + 1].value);
     })">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
             @include('metrics.network.difficulty.components.difficulty')
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 lg:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 lg:p-6">
             <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                 {{ __('History of changes') }}
             </h2>
@@ -71,7 +71,7 @@
 
                 <template x-if="items.length > 5">
                     <button @click="show = !show"
-                        class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors duration-300">
+                        class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition duration-300">
                         <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                     </button>
                 </template>

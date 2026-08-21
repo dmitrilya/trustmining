@@ -31,29 +31,29 @@
             <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                 <button @click="screen = 430"
                     :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Mobile') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Mobile') }}</button>
                 <button @click="screen = 768"
                     :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Tablet') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Tablet') }}</button>
                 <button @click="screen = 1280"
                     :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Desktop') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Desktop') }}</button>
             </div>
             <div class="mt-2 flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                 <button @click="theme = 'light'"
                     :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Light') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Light') }}</button>
                 <button @click="theme = 'dark'"
                     :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
-                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition-all">{{ __('Dark') }}</button>
+                    class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Dark') }}</button>
             </div>
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                 <template
                     x-for="(item, key) in {'additional-params': '{{ __('Add. settings') }}', 'currency': '{{ __('Currency') }}', 'coins': '{{ __('Coins') }}', 'characteristics': '{{ __('Characteristics') }}'}">
                     <button @click="toggleBlock(key)"
-                        class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition-all duration-300"
+                        class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition duration-300"
                         :class="blocks.includes(key) ?
-                            'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-300' :
+                            'text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/50 border-indigo-200 dark:border-indigo-800' :
                             'bg-white border-slate-300 text-slate-500 opacity-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
 
                         <span x-text="item"></span>

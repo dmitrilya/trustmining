@@ -30,7 +30,7 @@
         </div>
 
         <ul role="listbox" x-show="open" x-cloak
-            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
 
             <template :key="asicModel.id"
                 x-for="asicModel in models.filter(m => m.slug !== {{ $name === 'model_a' ? 'model_b' : 'model_a' }})">

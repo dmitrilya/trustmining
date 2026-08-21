@@ -42,7 +42,7 @@
                 @foreach ($comment->images as $image)
                     <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                         <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                            class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                            class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
                         </div>
                         <img src="{{ Storage::url($image) }}" />
                     </div>

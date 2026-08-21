@@ -82,7 +82,7 @@ window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
 
     const tocLgContainer = document.getElementById('toc-lg-container');
     const tocContainer = document.getElementById('toc-container');
-    tocLgContainer.classList.add('sticky', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow-sm', 'shadow-logo-color', 'rounded-xl');
+    tocLgContainer.classList.add('sticky', 'p-4', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'shadow', 'shadow-logo-color', 'rounded-xl');
     tocLgContainer.style.top = document.getElementById('head')?.offsetHeight + 16 + 'px';
     tocContainer.classList.add('min-h-[129px]');
 
@@ -106,7 +106,7 @@ window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
     });
 
     if (headings.length > 3 && needExpand) {
-        tocListMobile.classList.add('overflow-hidden', 'transition-all')
+        tocListMobile.classList.add('overflow-hidden', 'transition')
         tocListMobile.style.height = '62px';
 
         const btn = document.createElement('button');

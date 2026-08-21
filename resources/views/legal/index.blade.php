@@ -6,7 +6,7 @@
         </x-breadcrumbs.breadcrumbs>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-4 md:p-6 space-y-16">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-4 md:p-6 space-y-16">
             <div class="max-w-3xl space-y-6 sm:space-y-8 lg:space-y-10">
                 <span
                     class="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-500/10 border border-indigo-500/30 rounded-full text-xs text-indigo-400 font-bold uppercase tracking-wider">
@@ -23,7 +23,7 @@
                 </p>
                 <div class="pt-4 flex flex-wrap gap-4">
                     <a href="#consultation"
-                        class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-indigo-600/20 active:scale-95">
+                        class="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition shadow-lg shadow-indigo-600/20 active:scale-95">
                         Получить консультацию
                     </a>
                     <div class="flex items-center gap-2 text-xs text-slate-400">
@@ -44,13 +44,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-indigo-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-indigo-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 📋</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition">
                                 Регистрация и лицензирование</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Помощь в регистрации и лицензировании деятельности, связанной с ЦФА и криптовалютой.
@@ -61,13 +61,13 @@
                     </div>
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-emerald-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-emerald-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 💸</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition">
                                 Возврат от криптомошенников</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Поиск и возврат денежных средств, утерянных в результате действий мошеннических
@@ -78,13 +78,13 @@
                     </div>
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-indigo-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-indigo-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 ⚡</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition">
                                 Энергоснабжение для майнинга</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Юридическая поддержка в сфере энергоснабжения. Заключение прямых договоров со сбытовыми
@@ -95,13 +95,13 @@
                     </div>
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-emerald-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-emerald-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 📦</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-400 transition">
                                 Сопровождение поставок оборудования</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Сопровождение сделок по приобретению и поставке оборудования для майнинга (ASIC-майнеры,
@@ -112,13 +112,13 @@
                     </div>
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-indigo-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-indigo-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-indigo-500/10 border border-indigo-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 🏗️</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition">
                                 Юридическое сопровождение майнинга</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Абонентское обслуживание майнинг-отелей и дата-центров. Разработка договоров размещения
@@ -128,13 +128,13 @@
                     </div>
 
                     <div
-                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-2xl flex flex-col justify-between hover:border-rose-500/50 transition-all group">
+                        class="bg-slate-50 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 p-5 rounded-xl flex flex-col justify-between hover:border-rose-500/50 transition group">
                         <div class="space-y-3">
                             <div
-                                class="w-10 h-10 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center justify-center text-xl shadow-sm">
+                                class="w-10 h-10 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center justify-center text-xl shadow">
                                 🚨</div>
                             <h3
-                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-rose-400 transition-colors">
+                                class="text-base font-bold text-slate-800 dark:text-slate-200 group-hover:text-rose-400 transition">
                                 Споры по 115-ФЗ и 161-ФЗ</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 Защита прав при блокировке банковских счетов, карт и P2P-сделок. Подготовка пакета
@@ -177,7 +177,7 @@
                 </div>
 
                 <div
-                    class="lg:col-span-2 bg-slate-50 dark:bg-slate-800/30 border border-slate-300 dark:border-slate-700 p-4 md:p-6 rounded-2xl">
+                    class="lg:col-span-2 bg-slate-50 dark:bg-slate-800/30 border border-slate-300 dark:border-slate-700 p-4 md:p-6 rounded-xl">
                     <form method="POST" action="" x-data="{ name: '', contact: '', message: '', isSending: false }"
                         @submit.prevent="isSending = true; axios.post(\$el.action, { name, contact, message }).then(r => {
                               isSending = false;
@@ -216,7 +216,7 @@
 
                         <div class="flex justify-end">
                             <button type="submit" :disabled="isSending"
-                                class="w-full sm:w-auto px-6 py-3 bg-primary-gradient rounded-xl font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 transition-all disabled:opacity-50">
+                                class="w-full sm:w-auto px-6 py-3 bg-primary-gradient rounded-xl font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 transition disabled:opacity-50">
                                 <span x-show="!isSending">Отправить запрос</span>
                                 <span x-show="isSending" class="animate-pulse">Обработка...</span>
                             </button>

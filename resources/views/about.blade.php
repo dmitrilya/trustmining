@@ -22,19 +22,19 @@
 
         <div class="grid gap-4 sm:gap-6 lg:gap-10 xl:gap-14 grid-cols-1 md:grid-cols-3">
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">{{ __('Hosting') }}</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
                     {{ __('Fake hostings that lure customers with favorable conditions') }}</p>
             </div>
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">{{ __('Miners') }}</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
                     {{ __('Counterfeit equipment that does not meet specifications or breaks down quickly') }}</p>
             </div>
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">{{ __('Seller') }}</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
                     {{ __('Disappearance of sellers after online payment for equipment') }}</p>
@@ -54,14 +54,14 @@
 
         <div class="grid gap-4 sm:gap-6 lg:gap-10 xl:gap-14 grid-cols-1 md:grid-cols-3">
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">{{ __('Verification') }}</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
                     {{ __('Each seller must pass passport verification and confirm the presence of at least one point of sale') }}
                 </p>
             </div>
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">
                     {{ __('Availability of information') }}</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
@@ -69,7 +69,7 @@
                 </p>
             </div>
             <div
-                class="p-6 md:p-7 rounded-xl hover:-translate-y-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-[0_0_30px_rgba(64,64,153,0.15)] dark:shadow-[0_0_40px_rgba(64,255,159,0.12)] hover:shadow-[0_0_30px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_40px_rgba(64,255,159,0.35)]">
+                class="p-6 md:p-7 rounded-xl hover:-translate-y-0.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color">
                 <p class="text-sm sm:text-lg text-slate-800 dark:text-slate-200 font-bold">Trust Factor</p>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 md:mt-3">
                     {{ __('A unique metric of trust in a company') }}</p>

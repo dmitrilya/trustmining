@@ -17,7 +17,7 @@
             x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-50"
             class="w-full absolute z-50 bg-slate-100/95 dark:bg-slate-900/95 rounded-b-2xl shadow-lg shadow-logo-color origin-top left-0 top-0 mt-10 lg:mt-14"
             @click.away="open = false">
-            <div class="ring-b-1 ring-black ring-opacity-5 p-4 lg:p-10 xl:p-14">
+            <div class="ring-b-1 ring-slate-300 dark:ring-slate-700 p-4 lg:p-10 xl:p-14">
                 <div class="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-3 sm:gap-4">
                     @include('layouts.components.ad-categories')
                 </div>

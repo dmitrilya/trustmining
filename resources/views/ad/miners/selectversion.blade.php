@@ -40,7 +40,7 @@
         </div>
 
         <ul role="listbox" x-show="open"
-            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-900 ring-opacity-5 focus:outline-none sm:text-sm">
+            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
 
             <template x-for="asicModel in models" :key="asicModel.id">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name"
@@ -70,7 +70,7 @@
 
             <div class="relative mt-1" x-data="{ show: false }" @click.away="show = false">
                 <button type="button" @click="show = !show"
-                    class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+                    class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
                     <span class="block truncate" x-text="currentVersion?.hashrate ?? '{{ isset($withAllVersions) ? __('All') : '' }}'"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">

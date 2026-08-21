@@ -5,7 +5,7 @@
             <x-breadcrumbs.breadcrumb position="1" :name="__('Gas generators')" />
         </x-breadcrumbs.breadcrumbs>
 
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '' }">
             <div class="relative z-0 sm:max-w-xs group mb-6 ml-auto">
                 <input type="text" id="gpu-brand_input" placeholder=" " @input="search = $el.value" autocomplete="off"
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="mt-4 sm:mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
+        <div class="mt-4 sm:mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{
                 models: {{ $brands->pluck('gpuModels')->flatten() }},
                 search: null,

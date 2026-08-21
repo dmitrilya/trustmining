@@ -1,5 +1,5 @@
 <div itemscope itemtype="https://schema.org/Product"
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14"
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14"
     x-data={} x-init="axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: {{ $model->id }} })">
     {{-- <div class="mb-6 md:mb-12">
                 @include('database.components.model-images')

@@ -45,7 +45,7 @@
     </div>
 
     <div x-show="showTooltip" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-        x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-2 scale-95"
         class="absolute top-full left-1/2 -translate-x-1/2 mt-3 z-50 w-48 p-4 bg-slate-100/95 dark:bg-slate-900/95 rounded-xl shadow-md shadow-logo-color text-center"
         style="display: none;">
@@ -56,7 +56,7 @@
             {{ __('Spin available!') }}
 
             <span @click.stop.prevent="showTooltip = false"
-                class="absolute right-0 mb-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer text-sm leading-none"
+                class="absolute right-0 mb-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition cursor-pointer text-sm leading-none"
                 aria-label="Close">
                 &times;
             </span>

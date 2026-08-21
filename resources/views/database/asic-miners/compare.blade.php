@@ -7,16 +7,16 @@
         <div class="flex text-xs s m:text-sm">
             <button @click="tab = 'simmilar'"
                 :class="tab === 'simmilar' ?
-                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400' :
+                    'bg-slate-100 dark:bg-slate-800 shadow text-slate-600 dark:text-slate-400' :
                     'text-slate-500'"
-                class="px-3 py-1 rounded-full transition-all">
+                class="px-3 py-1 rounded-full transition">
                 {{ __('Similar') }}
             </button>
             <button @click="tab = 'popular'"
                 :class="tab === 'popular' ?
-                    'bg-slate-100 dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-400' :
+                    'bg-slate-100 dark:bg-slate-800 shadow text-slate-600 dark:text-slate-400' :
                     'text-slate-500'"
-                class="px-3 py-1 rounded-full transition-all">
+                class="px-3 py-1 rounded-full transition">
                 {{ __('Popular') }}
             </button>
         </div>

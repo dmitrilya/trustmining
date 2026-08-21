@@ -27,7 +27,7 @@
 
     <div class="relative w-full">
         <input type="text" id="{{ $name }}_display" {{ $disabled ? 'disabled' : '' }} readonly :value="getDisplayValue()" @click="open = !open"
-            class="py-1.5 px-10 block w-full rounded-lg shadow-sm shadow-logo-color bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none disabled:opacity-25">
+            class="py-1.5 px-10 block w-full rounded-lg shadow shadow-logo-color bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none disabled:opacity-25">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-600 dark:text-slate-400">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,7 +48,7 @@
     </div>
 
     @error($name)
-        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
     @enderror
 
     <div x-show="open" x-transition x-on:click.outside="open = false"
@@ -85,7 +85,7 @@
                             isDisabled(date),
                         'text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer':
                             !isToday(date) && !isSelected(date) && !isDisabled(date),
-                        'text-slate-800 dark:text-slate-200 cursor-not-allowed opacity-20': isDisabled(date)
+                        'text-slate-800 dark:text-slate-200 cursor-not-allowed opacity-25': isDisabled(date)
                     }"
                     x-text="date"></button>
             </template>
@@ -101,7 +101,7 @@
                         class="w-12 text-center text-sm bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg p-1 focus:outline-none focus:ring-1 ring-inset focus:ring-indigo-500">
                 </div>
                 <button type="button" @click="open = false"
-                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-600 px-2.5 py-1.5 rounded-lg">ОК</button>
+                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 px-2.5 py-1.5 rounded-lg">ОК</button>
             </div>
         </template>
     </div>

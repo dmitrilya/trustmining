@@ -16,7 +16,7 @@
                 {{ __('Hashrate') }}
             </a>
             <a href="{{ route('metrics.coin.rate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
-                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md {{ request()->routeIs('metrics.network.rate') ? 'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200' : 'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200' }}">
+                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md {{ request()->routeIs('metrics.coin.rate') ? 'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200' : 'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200' }}">
                 {{ __('Rate') }}
             </a>
         </div>
@@ -28,7 +28,7 @@
 
             <div class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
                 <div
-                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-3">
+                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
                     <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="antminer-s21+" data-version="235">
                     </script>
                 </div>

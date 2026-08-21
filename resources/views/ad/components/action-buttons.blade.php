@@ -1,7 +1,7 @@
 @if ($user && $ad->user->id == $user->id)
     @if (($lastM = $ad->moderations->reverse()->first()) && $lastM->moderation_status_id == 3)
         <div class="flex items-center mt-6">
-            <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 text-red-700 mr-2" fill="currentColor" aria-hidden="true" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
             </svg>

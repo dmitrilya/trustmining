@@ -1,4 +1,4 @@
-{{-- <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8">
+{{-- <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8">
     <h2 class="mb-3 sm:mb-5 xs:text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-bold">
         {{ __('Liked the calculator?') }}
     </h2> --}}

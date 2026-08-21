@@ -9,9 +9,9 @@
         items = r.data.rates.reverse().splice(0, 91);
     })">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
             <div class="flex justify-between lg:justify-end items-start mb-3 xs:mb-4 lg:mb-6">
-                <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow-sm shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
+                <div class="bg-slate-100 dark:bg-slate-900 w-7 h-7 sm:w-8 sm:h-8 rounded-md shadow shadow-logo-color cursor-pointer border dark:border-slate-700 flex justify-center items-center lg:hidden"
                     @click="show = !show">
                     <svg class="w-4 h-4 text-slate-800 dark:text-slate-200" aria-hidden="true" width="24"
                         height="24" fill="none" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
@@ -135,7 +135,7 @@
 
                 <template x-if="items.length > 5">
                     <button @click="show = !show"
-                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+                        class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition">
                         <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                     </button>
                 </template>

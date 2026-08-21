@@ -14,6 +14,6 @@
             class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 focus:outline-none text-slate-600 dark:text-slate-400 overflow-hidden w-full"></textarea>
 
         <button
-            class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-sm text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-full">{{ __('Send') }}</button>
+            class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow text-slate-600 dark:text-slate-400 px-3 py-1.5 rounded-full">{{ __('Send') }}</button>
     </div>
 </form>

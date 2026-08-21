@@ -16,7 +16,7 @@
 
             <div x-show="tgWidgetLoaded" x-transition style="display: none">
                 <button type="button"
-                    class="flex items-center justify-center px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-100"
+                    class="flex items-center justify-center px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow hover:shadow-md shadow-logo-color hover:shadow-logo-color hover:-translate-y-0.5 focus:outline-none disabled:opacity-25 transition ease-in-out duration-100"
                     @click="auth()">
                     <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24">
                         <path

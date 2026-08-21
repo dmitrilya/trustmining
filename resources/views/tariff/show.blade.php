@@ -27,7 +27,7 @@
     <div class="bg-slate-100 relative pb-16 z-20">
         <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-8 pb-16 relative">
             <div
-                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-slate-900 border-2 border-indigo-500' : 'bg-white border border-slate-300' }} rounded-2xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
+                class="-mt-72 mx-auto w-full max-w-md shadow-lg {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'bg-slate-900 border-2 border-indigo-500' : 'bg-white border border-slate-300' }} rounded-xl px-8 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-18 space-y-4 sm:space-y-8">
                 <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-slate-200' : 'text-slate-800' }} font-semibold text-lg md:text-2xl">{{ $tariff->name }}</div>
                 <div class="{{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-slate-400' : 'text-slate-600' }} text-sm md:text-base">{{ __($tariff->description) }}</div>
                 <div class="h-9 flex items-end {{ $tariff->name == 'Subscription' || $tariff->name == 'Enterprise' ? 'text-slate-400' : 'text-slate-600' }} md:text-lg"><span
@@ -126,7 +126,7 @@
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto bg-white overflow-hidden shadow-sm rounded-2xl p-4 sm:p-8 md:p-12 mt-8">
+        <div class="max-w-4xl mx-auto bg-white overflow-hidden shadow rounded-xl p-4 sm:p-8 md:p-12 mt-8">
             <div class="text-center text-slate-800 font-semibold text-lg md:text-xl lg:text-2xl mb-6 lg:mb-10">
                 {{ __('Pay the tariff') }}</div>
 
@@ -142,7 +142,7 @@
                             checked>
 
                         <label for="qr"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow-sm hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
                             <svg class="h-4 xs:h-6 sm:h-8" viewBox="0 0 178 86" fill="none">
                                 <g clip-path="url(#clip0_3_497)">
                                     <path
@@ -255,7 +255,7 @@
                             required>
 
                         <label for="card"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow-sm hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -274,7 +274,7 @@
                             required>
 
                         <label for="invoice"
-                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow-sm hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
+                            class="w-full cursor-pointer px-2 py-3 sm:px-4 sm:py-6 md:py-8 rounded-lg border border-slate-300 text-slate-600 hover:text-slate-800 shadow hover:shadow-lg peer peer-checked:shadow-lg peer-checked:text-slate-800 bg-white flex items-center justify-center">
                             <svg class="w-4 h-4 xs:w-6 xs:h-6 sm:w-8 sm:h-8" aria-hidden="true" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

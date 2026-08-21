@@ -66,7 +66,7 @@
             answer.scrollIntoView({ behavior: 'smooth' });
             answer.classList.add('animate-scrolling-highlight')
         }">
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4"
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4"
                 x-data="{ open: false }">
                 <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
@@ -86,7 +86,7 @@
                         @foreach ($question->images as $image)
                             <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
                                 <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                                    class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                                    class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
                                 </div>
                                 <img src="{{ Storage::url($image) }}" />
                             </div>
@@ -140,7 +140,7 @@
                 </div>
             </div>
 
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl overflow-hidden">
+            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl overflow-hidden">
                 @if (!Auth::user())
                     <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
                         <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">

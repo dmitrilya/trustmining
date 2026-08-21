@@ -130,7 +130,7 @@
 
                     <template x-if="items.length > 5">
                         <button @click="show = !show"
-                            class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors duration-300">
+                            class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition duration-300">
                             <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                         </button>
                     </template>

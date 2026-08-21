@@ -56,7 +56,7 @@
 
         <div class="relative flex min-w-max{{ isset($label) ? ' mt-1' : '' }}">
             <button type="button" @click="if (!isDisabled) open = ! open" :class="{ 'opacity-50': isDisabled }"
-                class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 xs:py-2 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color">
+                class="flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 xs:py-2 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
 
                 <span class="flex items-center">
                     @if ($icon)
@@ -86,7 +86,7 @@
             </button>
 
             <ul x-show="open" @click.away="open = false" style="display: none"
-                class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-y-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl text-base shadow-lg shadow-logo-color ring-1 ring-black dark:ring-slate-700 ring-opacity-5 focus:outline-none sm:text-sm">
+                class="absolute top-full z-50 mt-1 max-h-56 w-full overflow-y-auto rounded-md bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 backdrop-blur-xl text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
 
                 @if ($isJs)
                     <template x-for="item in currentItems" :key="item.key">

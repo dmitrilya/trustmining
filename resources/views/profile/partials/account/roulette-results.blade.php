@@ -79,7 +79,7 @@
                             class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
                             <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">2.
                                 {{ __('Prize drops') }}</span>
-                            <span class="text-lg font-black text-indigo-600 dark:text-indigo-400 font-mono">
+                            <span class="text-lg font-black text-indigo-500 font-mono">
                                 {{ $allPrizeSpins->count() }}
                             </span>
                         </div>
@@ -106,7 +106,7 @@
                     <div class="flex justify-end mt-2">
                         <button type="button"
                             data-url="{{ route('roulette.download-results', ['roulettePrize' => $prize->id]) }}"
-                            class="download-tg-ids inline-flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-sm cursor-pointer">
+                            class="download-tg-ids inline-flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 font-bold text-xs uppercase tracking-wider rounded-lg transition shadow cursor-pointer">
                             <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"

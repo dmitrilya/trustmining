@@ -18,7 +18,7 @@
 
     <template x-if="opened">
         <div x-show="open" @click.away="open = false"
-            class="absolute z-50 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden border border-slate-300 dark:border-slate-700 rounded-2xl shadow-lg shadow-logo-color"
+            class="absolute z-50 mt-5 flex max-w-sm md:max-w-md lg:max-w-lg right-2 sm:right-6 lg:right-8 overflow-hidden border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color"
             style="width: calc(100vw - 1rem);" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2"
             x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100"
             x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-2">

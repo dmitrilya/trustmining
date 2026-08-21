@@ -51,14 +51,22 @@
     @vite(['resources/css/calculator.css', 'resources/js/calculator.js'])
 </head>
 
-<body class="font-sans antialiased overflow-hidden {{ $theme ?? 'light' }}"
-    @if (!$theme) x-init="if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-        document.body.classList.remove('light');
+<body class="font-sans antialiased overflow-hidden {{ $theme ?? 'light' }}" x-data="{ currentTheme: '{{ $theme ?? 'light' }}' }" x-init="@if (!$theme) if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        currentTheme = 'dark';
+    } @endif
+
+$watch('currentTheme', value => {
+    if (value === 'dark') {
+        $el.classList.add('dark');
+        $el.classList.remove('light');
     } else {
-        document.body.classList.add('light');
-        document.body.classList.remove('dark');
-    }" @endif>
+        $el.classList.add('light');
+        $el.classList.remove('dark');
+    }
+});"
+    x-on:message.window="if ($event.data && $event.data.type === 'THEME_CHANGE') {
+            currentTheme = $event.data.theme;
+        }">
     <main>
         <div itemscope itemtype="https://schema.org/ViewAction">
             <a href="{{ route('home') }}" target="_blank" class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">

@@ -71,21 +71,21 @@
     }
 }" @clear-files.window="handleClearFiles($event)">
     <label
-        class="flex flex-col items-center justify-center w-full h-28 sm:h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors group"
+        class="flex flex-col items-center justify-center w-full h-28 sm:h-32 border-2 border-dashed rounded-xl cursor-pointer transition group"
         :class="isDragOver ? 'border-indigo-500' :
             'border-slate-500 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-500'"
         @dragover.prevent="isDragOver = true" @dragleave.prevent="isDragOver = false"
         @drop.prevent="isDragOver = false; updateFiles($event)">
 
         <div class="flex flex-col items-center justify-center pt-5 pb-6 px-4 text-center pointer-events-none w-full">
-            <svg class="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 transition-colors"
+            <svg class="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 transition"
                 :class="isDragOver ? 'text-indigo-500' : 'text-slate-400 group-hover:text-indigo-600'" aria-hidden="true"
                 xmlns="http://w3.org" fill="none" viewBox="0 0 20 16">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5.016 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
             </svg>
 
-            <p class="text-xxs xs:text-xs sm:text-sm transition-colors truncate max-w-full px-2"
+            <p class="text-xxs xs:text-xs sm:text-sm transition truncate max-w-full px-2"
                 :class="isDragOver ? 'text-indigo-500' : 'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600'"
                 x-text="getLabelText()"></p>
             <p class="text-xs text-slate-500 mt-2" x-show="filesCount === 0">{{ $label }}</p>

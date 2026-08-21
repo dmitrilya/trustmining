@@ -34,7 +34,7 @@
 }" class="w-full">
     <div class="relative h-2 mt-8">
         <div class="absolute inset-0 bg-logo-gradient rounded-full"></div>
-        <div class="absolute inset-0 bg-logo-gradient rounded-full opacity-20">
+        <div class="absolute inset-0 bg-logo-gradient rounded-full opacity-25">
         </div>
 
         <div class="absolute bottom-0 text-slate-400" :style="`left: ${getPercent(avg)}%; transform: translateX(-50%);`">

@@ -37,18 +37,18 @@
                     </div>
 
                     <div
-                        class="w-full h-40 ring ring-inset ring-indigo-500 relative overflow-hidden rounded-2xl shadow-[inset_0_4px_20px_rgba(0,0,0,0.2)] flex items-center">
+                        class="w-full h-40 ring-2 ring-inset ring-indigo-500 relative overflow-hidden rounded-xl flex items-center">
                         <div class="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-slate-200 dark:from-slate-950 to-transparent z-20">
                         </div>
                         <div class="absolute top-0 right-0 w-12 h-full bg-gradient-to-l from-slate-200 dark:from-slate-950 to-transparent z-20">
                         </div>
 
                         <div
-                            class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-full bg-indigo-500 z-20 pointer-events-none shadow-[0_0_6px_rgba(99,102,241,0.4)]">
+                            class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-full bg-indigo-500 z-20 pointer-events-none drop-shadow-[0_0_8px_rgba(99,102,241,0.9)]">
                         </div>
 
                         <template x-if="renderContent">
-                            <div class="flex items-center gap-2 -ml-4 transition-transform ease-out will-change-transform h-full"
+                            <div class="flex items-center gap-2 -ml-4 transition ease-out will-change-transform h-full"
                                 :style="`transform: translateX(${currentTranslateX}px); transition-duration: ${isSpinning ? '10000ms' : '0ms'};`"
                                 id="roulette-tape">
 
@@ -67,7 +67,7 @@
                                 </svg>
 
                                 <template x-for="(prize, i) in extendedPrizes" :key="i">
-                                    <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition-all duration-300 overflow-hidden"
+                                    <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition duration-300 overflow-hidden"
                                         :class="prize.style.card + ' ' + prize.style.border">
 
                                         <div class="absolute inset-0 opacity-80 pointer-events-none z-0 select-none"
@@ -88,7 +88,7 @@
                                         </span>
 
                                         <div class="w-10 h-10 rounded-full overflow-hidden border relative"
-                                            :class="prize.style.glow + ' ' + prize.style.border">
+                                            :class="prize.style.border">
                                             <img class="w-full h-full object-contain" :src="`/storage/${prize.user.company.logo}`" :alt="`${prize.name} icon`">
                                         </div>
                                     </div>
@@ -120,13 +120,13 @@
                 </div>
 
                 <button
-                    class="w-full items-center px-4 py-2.5 bg-primary-gradient rounded-lg font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 focus:outline-none focus:opacity-90 transition-all disabled:cursor-not-allowed shadow-lg"
+                    class="w-full items-center px-4 py-2.5 bg-primary-gradient rounded-lg font-bold text-xs text-white uppercase tracking-widest hover:opacity-90 focus:outline-none focus:opacity-90 transition disabled:cursor-not-allowed shadow-lg"
                     @click="spinTape" :disabled="isSpinning || timeToSpin > 0 || !isReady">
 
                     <span x-show="!isReady" class="inline-flex items-center gap-2">
                         <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor"
+                            <path class="opacity-80" fill="currentColor"
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         {{ __('Loading') }}...
@@ -164,7 +164,7 @@
                 @auth
                     <template x-if="wonPrize?.name != '{{ config('settings.roulette.extra_spin_name') }}'">
                         <a target="_blank" :href="wonPrize?.href"
-                            class="mt-8 w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-100">
+                            class="mt-8 w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow hover:shadow-md shadow-logo-color hover:shadow-logo-color hover:-translate-y-0.5 focus:outline-none disabled:opacity-25 transition ease-in-out duration-100">
                             {{ __('Take the prize') }}
                         </a>
                     </template>
@@ -173,7 +173,7 @@
                         {{ __('Login to claim your prize') }}
                     </p>
                     <button
-                        class="w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-200 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow-[0_0_8px_rgba(64,64,153,0.15)] dark:shadow-[0_0_12px_rgba(64,255,159,0.12)] hover:shadow-[0_0_10px_rgba(64,64,153,0.4)] dark:hover:shadow-[0_0_15px_rgba(64,255,159,0.35)] focus:outline-none disabled:opacity-25 transition ease-in-out duration-100"
+                        class="w-full px-4 py-2.5 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 rounded-lg font-bold text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow hover:shadow-md shadow-logo-color hover:shadow-logo-color hover:-translate-y-0.5 focus:outline-none disabled:opacity-25 transition ease-in-out duration-100"
                         @click="$dispatch('close');$dispatch('open-login-modal', { redirect: '{{ route('profile', ['tab' => 'account']) }}' })">
                         {{ __('Login') }}
                     </button>

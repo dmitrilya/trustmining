@@ -6,13 +6,13 @@
         tariff: {{ $tariff }}
     }">
     <div
-        class="p-2 sm:p-4 lg:p-6 rounded-2xl relative z-0 bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
+        class="p-2 sm:p-4 lg:p-6 rounded-xl relative z-0 bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
         <div class="relative z-10">
             <span
                 class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
                 <span class="text-xl sm:text-3xl font-black"
-                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-400'">
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500'">
                     {{ number_format($profit, 2, '.', ' ') }}
                 </span>
                 <span class="font-bold"
@@ -20,7 +20,7 @@
             </div>
             <p class="text-slate-400 text-xs mt-1 sm:mt-2">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-16 opacity-20">
+        <div class="absolute bottom-0 left-0 right-0 h-16 opacity-25">
             <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path d="M0 100 C 20 80, 40 90, 50 60 C 60 30, 80 40, 100 0 V 100 H 0 Z"
                     fill="url(#grad_{{ $expense }})" />
@@ -36,7 +36,7 @@
     </div>
 
     <div
-        class="p-2 sm:p-4 lg:p-6 rounded-2xl bg-white dark:bg-slate-300 border border-slate-300 dark:border-slate-700 shadow-sm overflow-hidden">
+        class="p-2 sm:p-4 lg:p-6 rounded-xl bg-white dark:bg-slate-300 border border-slate-300 dark:border-slate-700 shadow overflow-hidden">
         <span class="text-slate-500 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Payback') }}</span>
         <div class="mt-2">
             <span class="text-xl sm:text-3xl font-black text-slate-800"

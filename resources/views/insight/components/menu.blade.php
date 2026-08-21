@@ -1,5 +1,5 @@
 <div
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl py-1 sm:px-1 sm:py-2 md:px-3 md:py-4">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl py-1 sm:px-1 sm:py-2 md:px-3 md:py-4">
     @php
         $strokeWidth = '2';
     @endphp

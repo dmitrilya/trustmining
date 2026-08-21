@@ -1,6 +1,6 @@
 <x-insight-layout noindex="true" :title='__("errors.insight.$code.title")'>
     <div
-        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
+        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6 space-y-4 sm:space-y-6 lg:space-y-8">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <div class="min-w-6 w-6 h-6 sm:min-w-8 sm:w-8 sm:h-8 mr-2 sm:mr-3 rounded-full border border-indigo-500 p-[0.07rem]">

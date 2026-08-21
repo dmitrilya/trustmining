@@ -6,7 +6,7 @@
         </x-breadcrumbs.breadcrumbs>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 text-slate-800 dark:text-slate-200 space-y-12">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 text-slate-800 dark:text-slate-200 space-y-12">
             <div class="border-b border-slate-300 dark:border-slate-700 pb-6">
                 <h1 class="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-200">Trustmining API v1
                 </h1>

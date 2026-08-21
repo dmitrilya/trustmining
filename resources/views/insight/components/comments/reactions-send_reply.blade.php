@@ -40,7 +40,7 @@
 }" class="text-xs text-slate-500">
     <div class="flex items-center gap-3 h-5 mt-2">
         @if (!isset($withoutReply))
-            <button @click="showReply = !showReply" class="hover:text-indigo-600 transition-colors"
+            <button @click="showReply = !showReply" class="hover:text-indigo-600 transition"
                 :class="showReply ? 'text-indigo-500' : ''">
                 {{ __('Reply') }}
             </button>
@@ -51,9 +51,9 @@
                 <button @click="toggleReaction(type)" {{-- Расчет сдвига: индекс * (ширина кнопки + gap) --}}
                     :style="'transform: translateX(' + (getIndex(type) * 44) + 'px)'"
                     :class="userReaction === type ?
-                        'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 ring-1 ring-indigo-500/40' :
+                        'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-500 ring-1 ring-indigo-500/40' :
                         'bg-slate-200 dark:bg-slate-800 text-slate-500 hover:bg-slate-100'"
-                    class="absolute left-0 flex items-center justify-center gap-0.5 px-1 py-0.5 rounded-full transition-all duration-500 ease-in-out select-none">
+                    class="absolute left-0 flex items-center justify-center gap-0.5 px-1 py-0.5 rounded-full transition duration-500 ease-in-out select-none">
                     <span x-text="reactions[type].symbol"></span>
                     <span x-text="reactions[type].count" class="min-w-[10px]"></span>
                 </button>

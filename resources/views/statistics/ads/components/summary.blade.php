@@ -1,5 +1,5 @@
 <div
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden">
+    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6 overflow-hidden">
     <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 xs:gap-4 sm:gap-5 mb-6 sm:mb-8 lg:mb-10">
         <label class="flex cursor-pointer" for="metric_views" @click="changeMetric('views')">

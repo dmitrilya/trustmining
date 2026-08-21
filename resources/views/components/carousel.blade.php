@@ -1,7 +1,7 @@
 @props(['images', 'max' => '96', 'min' => '56', 'model'])
 
 <div id="ad-images" class="relative max-w-full rounded-lg overflow-hidden" x-data="{ slide: 1, slides: '{{ count($images) }}', width: 0 }" x-init="width = $el.clientWidth">
-    <div class="max-h-[360px] duration-700 ease-in-out flex items-center relative h-full"
+    <div class="max-h-[360px] duration-500 ease-in-out flex items-center relative h-full"
         :style="{ left: -1 * (slide - 1) * width + 'px' }">
         @foreach ($images as $image)
             <div class="rounded-lg overflow-hidden bg-white" x-init="$el.style.minWidth = width + 'px'">
@@ -45,7 +45,7 @@
         <button type="button" @click="if (slide > 1) slide--; else slide = {{ count($images) }}"
             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
             <span
-                class="inline-flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-800 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 group-focus:ring-2 group-focus:ring-slate-50 dark:group-focus:ring-slate-600 group-focus:outline-none">
+                class="inline-flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-800 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 group-focus:ring-2 group-focus:ring-slate-300 dark:group-focus:ring-slate-700 group-focus:outline-none">
                 <svg class="w-2 h-2 sm:w-4 sm:h-4 text-slate-500" aria-hidden="true" fill="none"
                     viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -57,7 +57,7 @@
         <button type="button" @click="if (slide < slides) slide++; else slide = 1"
             class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-2 sm:px-4 cursor-pointer group focus:outline-none">
             <span
-                class="inline-flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-800 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 group-focus:ring-2 group-focus:ring-slate-50 dark:group-focus:ring-slate-600 group-focus:outline-none">
+                class="inline-flex items-center justify-center w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-800 group-hover:bg-slate-200 dark:group-hover:bg-slate-700 group-focus:ring-2 group-focus:ring-slate-300 dark:group-focus:ring-slate-700 group-focus:outline-none">
                 <svg class="w-2 h-2 sm:w-4 sm:h-4 text-slate-500" aria-hidden="true" fill="none"
                     viewBox="0 0 6 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

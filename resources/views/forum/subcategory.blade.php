@@ -61,7 +61,7 @@
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <h1
                 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
                 {{ __($subcategory->name) }}

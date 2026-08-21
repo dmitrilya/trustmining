@@ -7,7 +7,7 @@
         items = r.data.hashrates.reverse().splice(0, 91);
     })">
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
             <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4 mb-3 xs:mb-4 lg:mb-6">
                 <div class="flex bg-slate-100 dark:bg-slate-900 rounded-lg overflow-hidden border dark:border-slate-700 h-7 sm:h-8">
                     <div @click="period = '3m';window.graph_chart.xAxes.values[0].setAll({min: window.dateDiffs['3m'], groupData: false});"
@@ -80,7 +80,7 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow-sm shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 md:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 md:p-6">
             <div class="grid grid-cols-6 gap-1 sm:gap-3 mb-2 sm:mb-3">
                 <div class="col-span-2 font-bold text-xs sm:text-sm lg:text-base text-slate-500">
                     {{ __('Date') }}</div>
@@ -116,7 +116,7 @@
                 </template>
 
                 <template x-if="items.length > 5">
-                    <button @click="show = !show" class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition-colors">
+                    <button @click="show = !show" class="mt-2 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition">
                         <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
                     </button>
                 </template>

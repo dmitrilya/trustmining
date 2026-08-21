@@ -1,4 +1,4 @@
-<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-sm shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
+<div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-4 md:p-6 mt-4 sm:mt-6">
     <div class="sticky top-16 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700">
         <div class="py-4 grid grid-cols-7 md:grid-cols-8 lg:grid-cols-9 xl:grid-cols-10 gap-1 xs:gap-2">
             <div class="flex items-center cursor-pointer text-slate-600 text-xxs sm:text-xs sm:text-sm hover:text-slate-800 col-start-2"
