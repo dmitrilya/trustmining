@@ -7,9 +7,9 @@
         style="overflow-y: hidden; max-height: 3.75rem"
         :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
         @php
-            $haveProfits = count($algorithms[$selVersion['a']]['p']);
+            $haveProfits = count($algorithms[$selModel['a']]['p']);
             $income = $haveProfits
-                ? ($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] * (100 - $fee) * 99.7) /
+                ? ($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] * (100 - $fee) * 99.7) /
                     10000
                 : 0;
             $expense = ((($selVersion['e'] * $selVersion['h']) / 1000) * 5 * 24 * 99.7) / 100;

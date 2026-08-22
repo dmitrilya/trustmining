@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\FirmwareModeStrainLevel;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\View\View as ViewBlade;
 
 use App\Http\Traits\ViewTrait;
+use App\Models\Morph\View;
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
 use App\Models\Ad\Ad;
@@ -57,13 +59,14 @@ class CalculatorController extends Controller
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
-            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
-            'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'coins' => collect($data['a'][$selVersion['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', '),
-            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
+            'algorithms' => collect([$data['a'][$selModel['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selModel['a']]['n'],
+            'coins' => collect($data['a'][$selModel['a']]['p'])->pluck('c')->flatten(1)->pluck('n')->implode(', '),
+            'fee' => count($data['a'][$selModel['a']]['p']) ? $data['a'][$selModel['a']]['p'][0]['c'][0]['f'] : 0,
             'firmwares' => $firmwares,
             'ads' => $ads,
-            'difficultyData' => Cache::get('calculator_difficulty_data')
+            'difficultyData' => Cache::get('calculator_difficulty_data'),
+            
         ]);
     }
 
@@ -101,9 +104,9 @@ class CalculatorController extends Controller
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
-            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
-            'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
+            'algorithms' => collect([$data['a'][$selModel['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selModel['a']]['n'],
+            'fee' => count($data['a'][$selModel['a']]['p']) ? $data['a'][$selModel['a']]['p'][0]['c'][0]['f'] : 0,
             'firmwares' => $firmwares,
         ]);
     }
@@ -155,9 +158,9 @@ class CalculatorController extends Controller
             'rVersion' => $asicVersion,
             'selModel' => $selModel,
             'selVersion' => $selVersion,
-            'algorithms' => collect([$data['a'][$selVersion['a']]])->keyBy('i'),
-            'algorithm' => $data['a'][$selVersion['a']]['n'],
-            'fee' => count($data['a'][$selVersion['a']]['p']) ? $data['a'][$selVersion['a']]['p'][0]['c'][0]['f'] : 0,
+            'algorithms' => collect([$data['a'][$selModel['a']]])->keyBy('i'),
+            'algorithm' => $data['a'][$selModel['a']]['n'],
+            'fee' => count($data['a'][$selModel['a']]['p']) ? $data['a'][$selModel['a']]['p'][0]['c'][0]['f'] : 0,
             'firmwares' => $firmwares,
             'blocks' => explode(',', $request->blocks),
             'theme' => $request->theme,

@@ -23,6 +23,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     tariff: 5,
     version: {
         ...selVersion,
+        a: selModel.a,
         n: selModel.n,
         ns: selModel.s,
         b: selModel.b,

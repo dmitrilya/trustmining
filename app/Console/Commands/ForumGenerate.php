@@ -212,7 +212,7 @@ class ForumGenerate extends Command
      */
     private function calculateProbability(int $availableCount): float
     {
-        $probability = self::BASE_PROBABILITY + ($availableCount / 200) * (self::MAX_PROBABILITY - self::BASE_PROBABILITY);
+        $probability = self::BASE_PROBABILITY + ($availableCount / 300) * (self::MAX_PROBABILITY - self::BASE_PROBABILITY);
 
         return min($probability, self::MAX_PROBABILITY);
     }

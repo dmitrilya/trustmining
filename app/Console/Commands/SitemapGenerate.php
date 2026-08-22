@@ -200,7 +200,7 @@ class SitemapGenerate extends Command
         return Command::SUCCESS;
     }
 
-    private function addUrl($url, $updatedAt = null)
+    private function addUrl(string $url, $updatedAt = null)
     {
         $url = '
     <url>

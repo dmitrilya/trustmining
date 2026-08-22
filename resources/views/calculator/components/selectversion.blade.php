@@ -23,6 +23,7 @@
         this.selectedVersion = v;
         version = {
             ...v,
+            a: this.selectedModel.a,
             n: this.selectedModel.n,
             ns: this.selectedModel.s,
             b: this.selectedModel.b,

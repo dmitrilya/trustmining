@@ -81,12 +81,38 @@ class MetricsController extends Controller
                 ->orderByDesc('ads.ordering_id')->limit(14)->get()
         );
 
+        $prediction = $data['prediction'];
+
+        $modelsData = Cache::get('optimized_calculator_data');
+        $algo = collect($modelsData['a'])->first(fn($algo) => strtolower($algo['n']) === 'sha-256');
+        $profit = $algo['p'][0]['p'];
+        $rub = $modelsData['r'];
+
+        $models = collect($modelsData['m'])->whereIn('i', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
+            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(10)->pluck('viewable_id'))
+            ->where('a', $algo['i'])->map(function ($model) use ($profit, $prediction, $rub) {
+            $v = $model['v'][0];
+            $c = $v['e']* $v['h']/ 1000 * 120 * $rub;
+            $p = round($profit * $v['h'] * $v['c'] - $c, 2);
+            $pp = round($profit / ((100 + $prediction) / 100) * $v['h'] * $v['c'] - $c, 2);
+
+            return [
+                'n' => $model['n'] . ' ' . $v['h'] . ' ' . $v['m'] . '/s',
+                's' => $model['s'],
+                'bs' => $model['bs'],
+                'p' => $p . ' USDT',
+                'pp' => $pp . ' USDT',
+                'c' => ($p ? round(($pp - $p) / abs($p) * 100, 2) : 0) . '%',
+            ];
+        })->values();
+
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,
             'difficulty' => $data['lastDifficulty'],
             'needBlocksTime' => $data['needBlocksTime'],
-            'prediction' => $data['prediction'],
-            'ads' => $ads
+            'prediction' => $prediction,
+            'ads' => $ads,
+            'topModels' => $models
         ]);
     }
 

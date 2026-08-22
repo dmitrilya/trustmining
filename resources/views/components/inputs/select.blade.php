@@ -63,12 +63,12 @@
                         @switch($icon['type'])
                             @case('value')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="'{{ $icon['path'] }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value">
+                                    :src="'{{ $icon['path'] }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value + ' icon'">
                             @break
 
                             @case('path')
                                 <img class="{{ $size == 'sm' ? 'hidden sm:block ' : '' }}mr-2 xs:mr-3 w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5"
-                                    :src="selectedItem?.icon ?? '{{ $icon['path'] ?? '' }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value">
+                                    :src="selectedItem?.icon ?? '{{ $icon['path'] ?? '' }}' + selectedItem?.value + '.webp'" :alt="selectedItem?.value + ' icon'">
                             @break
                         @endswitch
                     @endif

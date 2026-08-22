@@ -19,7 +19,7 @@
         </div>
 
         <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-4 p-2 sm:p-4 lg:p-6">
+            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-2 sm:mt-4 p-2 sm:p-4 lg:p-6">
             <h2 class="mb-4 lg:mb-6 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
                 {{ __('History of changes') }}
             </h2>
@@ -43,7 +43,6 @@
                         <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
                             <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
                                 x-transition:enter-end="opacity-100 translate-y-0">
-
                                 <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
                                     x-text="new Date(item.date).toLocaleString(window.locale, {
                                         year: 'numeric',
@@ -77,11 +76,80 @@
                 </template>
             </div>
         </div>
+    </div>
 
-        {{-- <div class="text-right mb-3 sm:mb-4 cursor-pointer text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline"
-            @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">
-            {{ __('Would you like to receive notifications about network difficulty changes?') }}
-        </div> --}}
+    <div
+        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-2 sm:mt-4 p-2 sm:p-4 lg:p-6">
+        <h2 class="mb-2 lg:mb-4 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
+            {{ __('Free alerts') }}
+        </h2>
+
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+            {{ __('Subscribe to notifications about current network difficulty and a forecast of the next change via Telegram, email, or browser. You can choose how often you want to receive notifications.') }}
+        </p>
+
+        <x-buttons.secondary-button class="block ml-auto mt-4"
+            @click="$dispatch('open-modal', '{{ auth()->check() ? 'difficulty-subscription' : 'login' }}')">{{ __('Subscribe') }}</x-secondary-button>
+    </div>
+
+    <div
+        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-2 sm:mt-4 p-2 sm:p-4 lg:p-6">
+        <h2 class="mb-2 lg:mb-4 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
+            {{ __('The impact of complexity on profit') }}
+        </h2>
+
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 sm:mb-4">
+            {{ __('Find out how the profit of popular ASIC miners will change after recalculating the difficulty at a rate of 5 rubles/kW.') }}
+        </p>
+
+        <table class="w-full border-collapse">
+            <thead>
+                <tr class="border-b border-indigo-600">
+                    <th class="py-1.5 md:py-4 text-left font-bold text-xs sm:text-sm text-slate-500">
+                        {{ __('Model') }}
+                    </th>
+                    <th class="py-1.5 md:py-4 pl-4 text-left font-bold text-xs sm:text-sm text-slate-500">
+                        {{ __('Current income') }}
+                    </th>
+                    <th class="py-1.5 md:py-4 pl-4 text-right xs:text-left font-bold text-xs sm:text-sm text-slate-500">
+                        {{ __('Income after recalculation') }}
+                    </th>
+                    <th class="py-1.5 md:py-4 pl-4 text-right font-bold text-xs sm:text-sm text-slate-500 hidden xs:block">
+                        {{ __('Percentage change') }}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
+                @foreach ($topModels as $model)
+                    <tr>
+                        <td class="py-1.5 lg:py-2 text-xxs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
+                            >{{ $model['n'] }}
+                        </td>
+
+                        <td class="py-1.5 lg:py-2 pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
+                            {{ $model['p'] }}
+                        </td>
+
+                        <td class="py-1.5 lg:py-2 pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right xs:text-left whitespace-nowrap"
+                            :class="{
+                                'text-green-500': {{ $prediction }} < 0,
+                                'text-red-500': {{ $prediction }} >= 0
+                            }"
+                            >{{ $model['pp'] }}
+                        </td>
+
+                        <td class="py-1.5 lg:py-2 pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:block"
+                            :class="{
+                                'text-green-500': {{ $prediction }} < 0,
+                                'text-red-500': {{ $prediction }} >= 0
+                            }"
+                            >{{ $model['c'] }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <section class="mt-4 sm:mt-6 lg:mt-8">

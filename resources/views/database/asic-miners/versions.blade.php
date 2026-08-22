@@ -44,9 +44,9 @@
                 @endif
             </x-characteristics.characteristics>
 
-            @if (count($algorithms[$version['a']]['p']))
+            @if (count($algorithms[$model['a']]['p']))
                 @include('ad.components.payback_info', [
-                    'profit' => $algorithms[$version['a']]['p'][0]['p'] * $version['h'] * $version['c'],
+                    'profit' => $algorithms[$model['a']]['p'][0]['p'] * $version['h'] * $version['c'],
                     'expense' => (($version['h'] * $version['e'] * 24) / 1000) * $rub,
                     'tariff' => 5,
                     'price' => $version['p'] ?? 0,
@@ -90,7 +90,7 @@
             </h2>
 
             <div class="grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                @foreach (collect($algorithms[$version['a']]['p'])->pluck('c')->flatten(1)->where('p', '>', 0) as $coin)
+                @foreach (collect($algorithms[$model['a']]['p'])->pluck('c')->flatten(1)->where('p', '>', 0) as $coin)
                     <div>
                         <div class="flex items-center">
                             <img alt="{{ $coin['n'] }}" class="w-5 xs:w-6 mr-1 xs:mr-2" src="{{ Storage::url('public/coins/' . $coin['a'] . '.webp') }}" />

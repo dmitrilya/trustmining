@@ -186,6 +186,7 @@ class UpdateExchangeRate extends Command
             'i' => $model->id,
             'n' => $model->name,
             's' => $model->slug,
+            'a' => $model->algorithm->id,
             'b' => $model->asicBrand->name,
             'bs' => $model->asicBrand->slug,
             'r' => $model->moderatedReviews->count(),
@@ -199,7 +200,6 @@ class UpdateExchangeRate extends Command
                 'p' => $v->price,
                 'v' => $v->with_vat,
                 's' => $v->seller,
-                'a' => $v->algorithm_id,
                 'ac' => count($v->ads),
             ])->toArray()
         ])->keyBy('i');

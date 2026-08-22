@@ -220,6 +220,6 @@
             </div>
         @endif
 
-        <div id="graph" class="h-[20rem] sm:h-[30rem] mt-4 lg:mt-6"></div>
+        <div id="graph" class="h-60 sm:h-[25rem] mt-4 lg:mt-6"></div>
     </div>
 @endif

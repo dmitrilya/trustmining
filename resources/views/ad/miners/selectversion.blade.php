@@ -16,7 +16,7 @@
     <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
         @if (isset($required)) required @endif aria-label="{{ __('Version') }}">
 
-    <div class="relative z-50 mt-1" x-data="{ open: false }" @click.away="open = false">
+    <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
             <div class="flex items-center justify-between group border-b-2 border-slate-300 dark:border-slate-700">
                 <input type="text" autocomplete="off" :value="search" id="search_model"

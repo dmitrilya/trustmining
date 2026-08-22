@@ -33,28 +33,28 @@
     <meta itemprop="name" content="{{ __('Average price') }}">
     <meta itemprop="value" content="{{ $selVersion['p'] ? $selVersion['p'] : __('No data') }}">
 </div>
-@if (count($algorithms[$selVersion['a']]['p']))
+@if (count($algorithms[$selModel['a']]['p']))
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub, 2) }}" />
+        <meta itemprop="value" content="{{ round($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub, 2) }}" />
     </div>
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round(($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub) * 30, 2) }}" />
+        <meta itemprop="value" content="{{ round(($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub) * 30, 2) }}" />
     </div>
     @if ($selVersion['p'])
         <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
             <meta itemprop="valueReference" content="{{ __('Payback') }}" />
             <meta itemprop="unitCode" content="DAY" />
             <meta itemprop="value"
-                content="{{ $algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
+                content="{{ $algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
                     ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000 >
                 0
                     ? round(
                         $selVersion['p'] /
-                            ($algorithms[$selVersion['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
+                            ($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
                                 ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000),
                     )
                     : 0 }}" />
