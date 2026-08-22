@@ -127,7 +127,7 @@
                             >{{ $model['n'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
+                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap">
                             {{ $model['p'] }}
                         </td>
 
