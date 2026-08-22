@@ -108,10 +108,10 @@
                     <th class="py-1.5 md:py-4 text-left font-bold text-xs sm:text-sm text-slate-500">
                         {{ __('Model') }}
                     </th>
-                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-left font-bold text-xs sm:text-sm text-slate-500">
+                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500">
                         {{ __('Current income') }}
                     </th>
-                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right xs:text-left font-bold text-xs sm:text-sm text-slate-500">
+                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500">
                         {{ __('Income after recalculation') }}
                     </th>
                     <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500 hidden xs:block">
@@ -127,11 +127,11 @@
                             >{{ $model['n'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap">
+                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right text-slate-800 dark:text-slate-200 whitespace-nowrap">
                             {{ $model['p'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right xs:text-left whitespace-nowrap"
+                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap"
                             :class="{
                                 'text-green-500': {{ $prediction }} < 0,
                                 'text-red-500': {{ $prediction }} >= 0
