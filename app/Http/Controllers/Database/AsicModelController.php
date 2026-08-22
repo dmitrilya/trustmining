@@ -67,7 +67,10 @@ class AsicModelController
         $data = Cache::get('optimized_calculator_data');
         $modelData = $data['m']->where('i', $asicModel->id)->first();
 
-        $versions = collect($modelData['v']);
+        $versions = collect($modelData['v'])->map(function ($v) use ($modelData) {
+            $v['a'] = $modelData['a'];
+            return $v;
+        });
         $selectedVersion = $versions->first();
 
         $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('ads.asic_version_id', $versions->pluck('i'))->where('ads.moderation', false)->orderByDesc('ads.ordering_id')->paginate(15);
@@ -83,7 +86,7 @@ class AsicModelController
                 $models = AsicModel::select(['id', 'name', 'slug', 'asic_brand_id', 'algorithm_id', 'release', 'images'])->whereHas('asicVersions.ads')
                     ->with(['asicVersions:asic_model_id,hashrate', 'asicBrand:id,slug', 'algorithm:id,name,measurement'])->withCount('views')->get();
                 $maxViews = log($models->max('views_count') + 1);
-                
+
                 if ($maxViews == 0) $maxViews = 1;
 
                 return [
@@ -154,7 +157,10 @@ class AsicModelController
         preg_match('/(\d+(?:\.\d+)?)([a-zA-Z]+)/', $asicVersion, $matches);
         if (!isset($matches[1])) abort(404);
 
-        $versions = collect($modelData['v']);
+        $versions = collect($modelData['v'])->map(function ($v) use ($modelData) {
+            $v['a'] = $modelData['a'];
+            return $v;
+        });
         $selectedVersion = $versions->where('h', $matches[1])->first();
         if (!$selectedVersion) abort(404);
 

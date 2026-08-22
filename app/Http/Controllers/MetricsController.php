@@ -88,23 +88,26 @@ class MetricsController extends Controller
         $profit = $algo['p'][0]['p'];
         $rub = $modelsData['r'];
 
-        $models = collect($modelsData['m'])->whereIn('i', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
-            ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(10)->pluck('viewable_id'))
-            ->where('a', $algo['i'])->map(function ($model) use ($profit, $prediction, $rub) {
-                $v = $model['v'][0];
-                $c = $v['e'] * $v['h'] / 1000 * 120 * $rub;
-                $p = round($profit * $v['h'] * $v['c'] - $c, 2);
-                $pp = round($profit / ((100 + $prediction) / 100) * $v['h'] * $v['c'] - $c, 2);
+        $modelIdsForAlgo = collect($modelsData['m'])->where('a', $algo['i'])->pluck('i');
 
-                return [
-                    'n' => $model['n'] . ' ' . $v['h'] . ' ' . $v['m'] . '/s',
-                    's' => $model['s'],
-                    'bs' => $model['bs'],
-                    'p' => $p . ' USDT',
-                    'pp' => $pp . ' USDT',
-                    'c' => ($p ? ($pp > $p ? '+' : '') . round(($pp - $p) / abs($p) * 100, 2) : 0) . '%',
-                ];
-            })->values();
+        $popularIds = View::where('viewable_type', 'asic-model')->whereIn('viewable_id', $modelIdsForAlgo)
+            ->select('viewable_id', DB::raw('count(*) as views_count'))->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(10)->pluck('viewable_id');
+
+        $models = collect($modelsData['m'])->whereIn('i', $popularIds)->map(function ($model) use ($profit, $prediction, $rub) {
+            $v = $model['v'][0];
+            $c = $v['e'] * $v['h'] / 1000 * 120 * $rub;
+            $p = round($profit * $v['h'] * $v['c'] - $c, 2);
+            $pp = round($profit / ((100 + $prediction) / 100) * $v['h'] * $v['c'] - $c, 2);
+
+            return [
+                'n' => $model['n'] . ' ' . $v['h'] . ' ' . $v['m'] . '/s',
+                's' => $model['s'],
+                'bs' => $model['bs'],
+                'p' => $p . ' USDT',
+                'pp' => $pp . ' USDT',
+                'c' => ($p ? ($pp > $p ? '+' : '') . round(($pp - $p) / abs($p) * 100, 2) : 0) . '%',
+            ];
+        })->values();
 
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,
