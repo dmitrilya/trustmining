@@ -107,7 +107,7 @@ class MetricsController extends Controller
                 'pp' => $pp . ' USDT',
                 'c' => ($p ? ($pp > $p ? '+' : '') . round(($pp - $p) / abs($p) * 100, 2) : 0) . '%',
             ];
-        })->values();
+        })->sortByDesc('p')->values();
 
         return view('metrics.network.difficulty.index', [
             'coin' => $coin,
