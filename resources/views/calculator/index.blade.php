@@ -41,7 +41,7 @@
                     </div>
 
                     <div>
-                        <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" :lazy="true" />
+                        <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" />
                     </div>
                 </section>
             </div>

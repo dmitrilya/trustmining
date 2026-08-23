@@ -47,7 +47,6 @@ window.carousel = () => {
             const dx = pageX - this.startX;
             const dy = pageY - (this.startY || pageY);
 
-            // если направление ещё не определено
             if (!this.isDraggingX) {
                 if (Math.abs(dx) > 5) {
                     this.isDraggingX = Math.abs(dx) > Math.abs(dy);
@@ -55,7 +54,7 @@ window.carousel = () => {
                 if (!this.isDraggingX) return;
             }
 
-            e.preventDefault(); // блокируем ТОЛЬКО если горизонтальный свайп
+            e.preventDefault();
 
             this.deltaX = dx;
 
@@ -89,11 +88,9 @@ window.carousel = () => {
 
             const progress = (currentScroll % cardWidth) / cardWidth;
 
-            // Быстрый свайп — всегда перелистываем
             if (Math.abs(this.velocity) > velocityLimit) {
                 index += this.velocity < 0 ? 1 : -1;
             } else {
-                // Медленный свайп — проверяем порог
                 if (this.deltaX < 0 && progress > threshold) {
                     index += 1;
                 }

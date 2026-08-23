@@ -90,7 +90,7 @@ $watch('currentTheme', value => {
             @include('metrics.network.difficulty.components.difficulty', ['widjet' => true])
 
             @if (in_array('history', $blocks))
-                <div x-data="{ show: false }" class="w-full">
+                <div class="w-full">
                     <table class="w-full border-collapse">
                         <thead>
                             <tr class="border-b border-indigo-600">
@@ -108,9 +108,7 @@ $watch('currentTheme', value => {
 
                         <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
                             <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
-                                <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300"
-                                    x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-
+                                <tr>
                                     <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
                                         x-text="new Date(item.date).toLocaleString(window.locale, {
                                             year: 'numeric',
@@ -135,13 +133,6 @@ $watch('currentTheme', value => {
                             </template>
                         </tbody>
                     </table>
-
-                    <template x-if="items.length > 5">
-                        <button @click="show = !show"
-                            class="mt-3 block w-fit ml-auto text-xs xs:text-sm text-indigo-500 hover:text-indigo-600 transition duration-300">
-                            <span x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></span>
-                        </button>
-                    </template>
                 </div>
             @endif
         </div>
