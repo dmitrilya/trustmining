@@ -114,7 +114,7 @@
                     <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500">
                         {{ __('Income after recalculation') }}
                     </th>
-                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500 hidden xs:block">
+                    <th class="py-1.5 md:py-4 pl-2 sm:pl-4 text-right font-bold text-xs sm:text-sm text-slate-500 hidden xs:table-cell items-end">
                         {{ __('Percentage change') }}
                     </th>
                 </tr>
@@ -123,11 +123,13 @@
             <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($topModels as $model)
                     <tr>
-                        <td class="py-1.5 lg:py-2 text-xxs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
-                            >{{ $model['n'] }}
+                        <td class="py-1.5 lg:py-2 text-xxs sm:text-sm lg:text-base whitespace-nowrap">
+                            <a href="{{ route('database.asic-miners.version', ['asicBrand' => $model['bs'], 'asicModel' => $model['s'], 'asicVersion' => $model['v']]) }}"
+                                class="text-indigo-500 hover:text-indigo-600 underline">{{ $model['n'] }}</a>
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right text-slate-800 dark:text-slate-200 whitespace-nowrap">
+                        <td
+                            class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right text-slate-800 dark:text-slate-200 whitespace-nowrap">
                             {{ $model['p'] }}
                         </td>
 
@@ -135,16 +137,22 @@
                             :class="{
                                 'text-green-500': {{ $prediction }} < 0,
                                 'text-red-500': {{ $prediction }} >= 0
-                            }"
-                            >{{ $model['pp'] }}
+                            }">
+                            {{ $model['pp'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:block"
+                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:table-cell items-end"
                             :class="{
                                 'text-green-500': {{ $prediction }} < 0,
                                 'text-red-500': {{ $prediction }} >= 0
-                            }"
-                            >{{ $model['c'] }}
+                            }">
+                            {{ $model['c'] }}
+                        </td>
+
+                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 hidden lg:table-cell justify-items-end">
+                            <a href="{{ route('calculator.modelver', ['asicModel' => $model['s'], 'asicVersion' => $model['v']]) }}">
+                                <x-buttons.primary-button>{{ __('Calculator') }}</x-buttons.primary-button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

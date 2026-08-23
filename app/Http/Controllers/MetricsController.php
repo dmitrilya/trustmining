@@ -103,6 +103,7 @@ class MetricsController extends Controller
                 'n' => $model['n'] . ' ' . $v['h'] . ' ' . $v['m'] . '/s',
                 's' => $model['s'],
                 'bs' => $model['bs'],
+                'v' => $v['h'],
                 'p' => $p . ' USDT',
                 'pp' => $pp . ' USDT',
                 'c' => ($p ? ($pp > $p ? '+' : '') . round(($pp - $p) / abs($p) * 100, 2) : 0) . '%',
