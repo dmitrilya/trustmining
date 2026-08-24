@@ -118,13 +118,13 @@ trait ModerationTrait
         if ($type == 'ad') {
             $m->unique_content = $isUniqueContent;
 
-            if (isset($data['price'])) $this->notify(
-                'Price change',
-                $m->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get()
-                    ->merge($m->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get()),
-                'ad',
-                $m
-            );
+            if (isset($data['price'])) {
+                $users = $m->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get();
+
+                if ($m->asicVersion) $users = $users->merge($m->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get());
+
+                $this->notify('Price change', $users, 'ad', $m);
+            }
         }
 
         $m->update($data);
