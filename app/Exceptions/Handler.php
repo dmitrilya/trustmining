@@ -51,10 +51,11 @@ class Handler extends ExceptionHandler
         $this->renderable(function (HttpExceptionInterface $e, $request) {
             if ($request->is('insight') || $request->is('insight/*')) $blade = 'insight';
             elseif ($request->is('forum') || $request->is('forum/*')) $blade = 'forum';
+            else $blade = 'default';
 
             $code = $e->getStatusCode();
 
-            return response()->view('errors.' . ($blade ?? 'default'), [
+            return response()->view('errors.' . $blade, [
                 'code' => $code,
             ], $code);
         });
