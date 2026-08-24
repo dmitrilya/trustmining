@@ -48,15 +48,16 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(function (HttpExceptionInterface $e, $request) {
+        $this->renderable(function (Throwable $e, $request) {
             if ($request->is('insight') || $request->is('insight/*')) $blade = 'insight';
             elseif ($request->is('forum') || $request->is('forum/*')) $blade = 'forum';
             else $blade = 'default';
 
-            $code = $e->getStatusCode();
+            $code = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
 
             return response()->view('errors.' . $blade, [
                 'code' => $code,
+                'exception' => $e
             ], $code);
         });
     }
