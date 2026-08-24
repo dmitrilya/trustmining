@@ -11,6 +11,16 @@ return [
             ],
         ],
 
+        '405' => [
+            'title' => 'Access denied',
+            'headline' => 'The server knows what you want. But it’s not going to do it',
+            'paragraphs' => [
+                'You sent a request to the server, the server received it, looked it over carefully, and apparently decided that today is not the day for that. Error 405 means that this particular way of accessing the page or resource isn’t allowed here. The resource itself might exist and work perfectly fine — it’s just that the server doesn’t want to accept this specific method.',
+                'You can try going back, refreshing the page, or accessing it in a different way. Or you can pretend that this wasn’t an error, but rather a diplomatic refusal by the server to continue cooperating.',
+            ],
+        ],
+
+
         '419' => [
             'title' => 'Session Expired',
             'headline' => 'You spent too long reading one article',
@@ -35,45 +45,72 @@ return [
             'question' => [
                 'title' => 'Where did the page go? I’m getting an error when trying to open the forum',
                 'text' => "Hi everyone. I’m trying to open a specific forum page, but instead I’m getting an error. At first, I thought it was a problem on my end, but after several refreshes, the situation hasn’t changed.\n\nHas anyone else run into this? Is the server temporarily down, or was the page actually removed? I’d just like to understand if there’s anything I can do from my side, or if I just have to wait.",
-                'author' => 'HashWalker',
+                'author' => 'Victim',
             ],
 
             'answer_1' => [
                 'text' => "Most likely, the issue is on the server side. If other pages open fine but this specific one keeps throwing an error, it’s unlikely to be related to your browser or internet connection.\n\nI’d wait a bit and try again. If the error persists, then you can contact the administration.",
-                'author' => 'HashHunter',
+                'author' => 'Advisor 1',
             ],
 
             'answer_2' => [
                 'text' => "I’m also having trouble opening some pages right now. Looks like the server decided to take a moment to contemplate the meaning of life.\n\nTry opening the page again in a few minutes. Sometimes these errors disappear faster than you can figure out what went wrong.",
-                'author' => 'ByteNomad',
+                'author' => 'Advisor 2',
             ],
 
             'comment' => [
                 'text' => "Just hope the server doesn’t start mining instead of serving the forum.",
-                'author' => '0xMiner',
+                'author' => 'Just a commenter',
             ],
         ],
+
+        '405' => [
+            'question' => [
+                'title' => 'The page opens, but I can’t perform the action',
+                'text' => 'Hi everyone. I’ve run into a strange situation on the forum. The page loads fine, but when I try to perform a certain action, nothing happens and an error message appears.
+
+At first, I thought it was a temporary glitch or a browser issue. I tried refreshing the page, logging in again, and repeating the action, but the result is the same. Has anyone experienced something similar? Could this be a limitation of the site itself, or is the problem really on my end?',
+                'author' => 'Victim',
+            ],
+            'answer_1' => [
+                'text' => 'If the page itself loads fine but the error appears specifically when you try to perform an action, the issue is likely not with your connection. It’s possible that the specific action isn’t available right now, or the site isn’t accepting that kind of request.
+
+I’d suggest trying it again from a different device or browser first. If you get the same result, it’s probably an issue on the site’s side.',
+                'author' => 'Advisor 1',
+            ],
+            'answer_2' => [
+                'text' => 'I had something similar recently. The page loaded without any problems, but one button just absolutely refused to work.
+
+In the end, everything started working on its own after a while. Seems like sometimes the site just decides that certain actions aren’t meant to be performed today.',
+                'author' => 'Advisor 2',
+            ],
+            'comment' => [
+                'text' => 'Looks like the button decided to take a day off too. The important thing is that the rest of the forum’s features keep working.',
+                'author' => 'Just a commenter',
+            ],
+        ],
+
 
         '419' => [
             'question' => [
                 'title' => 'The forum logged me out after a long idle period',
                 'text' => "I left the forum open while I took care of some other things, and when I came back to continue, I got an error. The page was working fine before that.\n\nIs it normal for the forum to ‘forget’ a user so quickly? Or is there something wrong with my browser? I don’t really want to have to log in again every time I get distracted for a couple of minutes.",
-                'author' => 'RigWalker',
+                'author' => 'Victim',
             ],
 
             'answer_1' => [
                 'text' => "Most likely, your session simply expired. If you don’t do anything for a long time, the server may assume you’ve left.\n\nRefresh the page or log in again — this usually gets everything working normally. There’s nothing critical going on here.",
-                'author' => 'BlockPilot',
+                'author' => 'Advisor 1',
             ],
 
             'answer_2' => [
                 'text' => "This happens to me too, especially if I leave the tab open for a few hours.\n\nI wouldn’t worry. The forum hasn’t blocked you; it just figured you’d been away too long and it was time to get reacquainted.",
-                'author' => 'MiningBear',
+                'author' => 'Advisor 2',
             ],
 
             'comment' => [
                 'text' => "So even the forum needs confirmation that you’re still there. Soon we’ll probably have to click an ‘I’m still mining’ button every hour.",
-                'author' => 'NonceMan',
+                'author' => 'Just a commenter',
             ],
         ],
 
@@ -81,22 +118,22 @@ return [
             'question' => [
                 'title' => 'Is the site crashing periodically for everyone?',
                 'text' => "Lately, I’ve been getting server errors when opening some forum pages. I refresh the page, and sometimes it works, but other times I get the error again.\n\nIs anyone else experiencing this right now? I can’t tell if it’s just my connection acting up or if the server is actually crashing periodically.",
-                'author' => 'AsicFox',
+                'author' => 'Victim',
             ],
 
             'answer_1' => [
                 'text' => "Yeah, I got this error once too. After refreshing the page, everything worked fine.\n\nLooks like a temporary glitch. If it keeps happening regularly, it’s better to notify the administration so they can check the server logs.",
-                'author' => 'BitMechanic',
+                'author' => 'Advisor 1',
             ],
 
             'answer_2' => [
                 'text' => "Confirmed — I just got the same error. A minute later, the page opened normally.\n\nMaybe the server just got overwhelmed with too much work at once. Let’s see if it happens again.",
-                'author' => 'CoreMiner',
+                'author' => 'Advisor 2',
             ],
 
             'comment' => [
                 'text' => "Let’s just hope it’s a simple server glitch and not the moment when the admin decided to test the ‘restart server’ button.",
-                'author' => 'VoltMiner',
+                'author' => 'Just a commenter',
             ],
         ],
     ],
@@ -139,6 +176,58 @@ return [
             'characteristic_8' => [
                 'name' => 'Recommendation',
                 'value' => 'Go Back',
+            ],
+        ],
+
+        '405' => [
+            'title' => 'Listing for a Temporarily Unavailable Action',
+
+            'name' => 'Action Unavailable',
+
+            'paragraphs' => [
+                'A practically fully functional website page for sale. It opens without any problems, looks perfectly fine, but categorically refuses to perform certain actions. Every attempt to interact with it is met with a refusal and a clear suggestion not to insist.',
+
+                'The reason for this behavior has not yet been determined. Perhaps the page simply did not like the way it was approached. It is recommended to try again a little later or use a different method. The server continues to operate and pretends that everything is completely under control.',
+            ],
+
+            'characteristic_1' => [
+                'name' => 'Condition',
+                'value' => 'Works with limitations',
+            ],
+
+            'characteristic_2' => [
+                'name' => 'Availability',
+                'value' => 'Available',
+            ],
+
+            'characteristic_3' => [
+                'name' => 'Action Execution',
+                'value' => 'Limited',
+            ],
+
+            'characteristic_4' => [
+                'name' => 'Reason for Refusal',
+                'value' => 'Unknown',
+            ],
+
+            'characteristic_5' => [
+                'name' => 'Personality',
+                'value' => 'Principled',
+            ],
+
+            'characteristic_6' => [
+                'name' => 'Compatibility',
+                'value' => 'Not compatible with all requests',
+            ],
+
+            'characteristic_7' => [
+                'name' => 'Repair Required',
+                'value' => 'Cannot be ruled out',
+            ],
+
+            'characteristic_8' => [
+                'name' => 'Recommendation',
+                'value' => 'Try again',
             ],
         ],
 
