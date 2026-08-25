@@ -224,7 +224,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
                         taxHelp.push(`<p class='font-sans text-slate-500 mt-1.5 mb-1'>${l['Progressive scale']}</p>`);
                         taxHelp.push(`<span class='text-yellow-300'>${cryptoTaxProfitRounded}</span> * 365 = <span class='text-purple-600 dark:text-purple-400'>${yearProfitRounded}</span> (${l['per year']})<br>`);
                         taxHelp.push(`(<span class='text-purple-600 dark:text-purple-400'>${yearProfitRounded}</span> - ${limitValue}) * ${rate} = <span class='text-amber-800 dark:text-amber-200'>${annualTaxRounded}</span><br>`);
-                        taxHelp.push(`${fixed} <span class='text-amber-800 dark:text-amber-200'>${annualTaxRounded}</span> = <span class='text-green-500'>${annualTaxFixedRounded}</span><br>`);
+                        taxHelp.push(`${fixed} + <span class='text-amber-800 dark:text-amber-200'>${annualTaxRounded}</span> = <span class='text-green-500'>${annualTaxFixedRounded}</span><br>`);
                         taxHelp.push(`<span class='text-green-500'>${annualTaxFixedRounded}</span> / 365 = <span class='text-rose-600 dark:text-rose-400'>${dailyTaxRounded}</span>`);
                     }
                 } else {
