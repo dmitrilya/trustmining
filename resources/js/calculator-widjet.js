@@ -20,7 +20,7 @@
     const version = me.getAttribute('data-version') || '17';
     const parentUrl = window.location.href;
 
-    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&tariffs=${tariffs}&model=${model}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
+    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&tariffs=${tariffs}&model=${encodeURIComponent(model)}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
     iframe.title = 'Trust Mining Calculator';

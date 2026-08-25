@@ -81,7 +81,7 @@ $watch('currentTheme', value => {
             1].value);
             })"
             @endif>
-            <a href="{{ route('home') }}" target="_blank" class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">
+            <a href="{{ route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]) }}" target="_blank" class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-800 dark:text-slate-200">
                     DIFFICULTY

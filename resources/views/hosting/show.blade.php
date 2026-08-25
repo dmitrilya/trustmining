@@ -12,16 +12,20 @@
         @endif
 
         <div class="lg:flex items-start gap-4">
-            <div class="flex-1 min-w-0 xl:max-w-[calc(100%-336px)]">
+            <div class="flex-1 min-w-0 lg:max-w-[calc(100%-336px)]">
                 @if (isset($moderation))
                     @include('moderation.components.buttons')
 
                     <div
                         class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
                             <div
                                 class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                                 <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
+
+                                <div class="hidden md:block mt-4">
+                                    <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
+                                </div>
                             </div>
 
                             <div class="lg:col-span-3 space-y-5">
@@ -52,8 +56,10 @@
                                     @endforeach
                                 </div>
 
-                                <x-peculiarities class="{{ isset($moderation->data['peculiarities']) ? ' border border-indigo-500' : '' }}" :ps="isset($moderation->data['peculiarities']) ? $moderation->data['peculiarities'] : $hosting->peculiarities"
-                                    model="hosting"></x-peculiarities>
+                                <div class="md:hidden">
+                                    <x-peculiarities class="{{ isset($moderation->data['peculiarities']) ? ' border border-indigo-500' : '' }}"
+                                        :ps="isset($moderation->data['peculiarities']) ? $moderation->data['peculiarities'] : $hosting->peculiarities" model="hosting"></x-peculiarities>
+                                </div>
 
                                 <div>
                                     <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
@@ -137,12 +143,9 @@
                             @endif
 
                             <div>
-                                <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
-                                    {{ __('Description') }}</h2>
-
                                 <div itemprop="description"
                                     class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {!! isset($moderation->data['description']) ? $moderation->data['description'] : $hosting->description !!}
+                                    {!! $moderation->data['description'] ?? $hosting->description !!}
                                 </div>
                             </div>
                         </div>
@@ -151,10 +154,14 @@
 
                 <div
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
                         <div
                             class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                             <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
+
+                            <div class="hidden md:block mt-4">
+                                <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
+                            </div>
                         </div>
 
                         <div class="lg:col-span-3 space-y-5">
@@ -179,7 +186,9 @@
                                 @endforeach
                             </div>
 
-                            <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
+                            <div class="md:hidden">
+                                <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
+                            </div>
 
                             <div>
                                 <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
@@ -307,33 +316,90 @@
                                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                         @endif
+                    </div>
 
-                        <div>
-                            <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200 mt-8">
+                    <div class="mt-8" x-data="{ selectedTab: 'description' }">
+                        <div
+                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-400 dark:border-slate-800">
+                            <ul class="flex flex-wrap -mb-px">
+                                <li class="mr-0.5 sm:mr-2">
+                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'description'"
+                                        :class="{
+                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'description' !=
+                                                selectedTab,
+                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'description' ==
+                                                selectedTab
+                                        }">
+                                        {{ __('Description') }}
+                                    </button>
+                                </li>
+                                <li class="mr-0.5 sm:mr-2">
+                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'reviews'"
+                                        :class="{
+                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'reviews' !=
+                                                selectedTab,
+                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'reviews' ==
+                                                selectedTab
+                                        }">
+                                        {{ __('Reviews') }}
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'location'"
+                                        :class="{
+                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'location' !=
+                                                selectedTab,
+                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'location' ==
+                                                selectedTab
+                                        }">
+                                        {{ __('Location') }}
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div x-show="selectedTab == 'description'">
+                            <x-can-trust :user="$hosting->user" :id="$hosting->id" />
+
+                            <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
                                 {{ __('Description') }}</h2>
 
-                            <div itemprop="description" class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            <div itemprop="description" class="ql-editor mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">
                                 {!! $hosting->description !!}
                             </div>
                         </div>
+
+                        <div class="space-y-6" x-show="selectedTab == 'reviews'" style="display: none">
+                            @include('review.reviews', ['auth' => $auth, 'reviews' => $hosting->user->reviews])
+                            @include('review.send', [
+                                'auth' => $auth,
+                                'reviews' => $hosting->user->reviews,
+                                'type' => 'user',
+                                'id' => $hosting->user->id,
+                            ])
+                        </div>
+
+                        <div x-show="selectedTab == 'location'" style="display: none">
+                            @include('ad.components.location', ['location' => $hosting->address])
+                        </div>
                     </div>
                 </div>
-
-                @if (!isset($moderation))
-                    <div
-                        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mt-4">
-                        @include('company.components.tf')
-                    </div>
-                @endif
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1024px)').matches)" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) {
+                window.addEventListener('resize', () => {
+                    if (window.matchMedia('(min-width: 1024px)').matches) {
+                        isXL = true;
+                        window.removeEventListener('resize', checkScreen);
+                    }
+                });
+            }" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
-                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-tariffs="{{ json_encode($hosting->tariffs) }}" data-blocks="currency" data-model="antminer-l9" data-version="17">
-                            </script>
+                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-tariffs="{{ json_encode($hosting->tariffs) }}"
+                                data-blocks="currency" data-model="antminer-l9" data-version="17"></script>
                         </div>
 
                         <x-ai-kodex targetWidth="1024" />
@@ -341,5 +407,12 @@
                 </template>
             </div>
         </div>
+
+        @if (!isset($moderation))
+            <div
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mt-4">
+                @include('company.components.tf')
+            </div>
+        @endif
     </div>
 </x-app-layout>

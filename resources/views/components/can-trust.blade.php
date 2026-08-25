@@ -1,31 +1,33 @@
+@props(['user', 'id'])
+
 <div class="mb-8">
     <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
-        {{ __('Can you trust') }} {{ $ad->user->name }}?</h2>
+        {{ __('Can you trust') }} {{ $user->name }}?</h2>
 
     <div itemprop="description"
         class="mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">
         {{-- GREEN --}}
         @php
-            $offices = $ad->user->offices;
+            $offices = $user->offices;
         @endphp
 
-        @if ($ad->user->tf > config('trustfactor.green'))
-            <p>{{ __('descriptions.can_trust.trust.green', ['seller' => $ad->user->name]) }}</p>
+        @if ($user->tf > config('trustfactor.green'))
+            <p>{{ __('descriptions.can_trust.trust.green', ['seller' => $user->name]) }}</p>
             <br>
-            @if ($ad->user->company)
+            @if ($user->company)
                 @php
                     $registration = Carbon\Carbon::createFromTimestamp(
-                        $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
+                        $user->company->card['state']['registration_date'] ?? $user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
-                    $employers = $ad->user->company->card['employee_count'] ?? 0;
+                    $employers = $user->company->card['employee_count'] ?? 0;
                 @endphp
 
-                @if ($ad->user->company->card['type'] == 'LEGAL')
-                    <p>{{ __('descriptions.can_trust.company.llc', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                @if ($user->company->card['type'] == 'LEGAL')
+                    <p>{{ __('descriptions.can_trust.company.llc', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                     </p>
                 @else
-                    <p>{{ __('descriptions.can_trust.company.ip', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                    <p>{{ __('descriptions.can_trust.company.ip', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                     </p>
                 @endif
 
@@ -36,7 +38,7 @@
                 @endif
 
                 @if ($employers > 4)
-                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $ad->user->name, 'count' => $employers]) }}
+                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $user->name, 'count' => $employers]) }}
                     </p>
                     @if ($employers > 10)
                         <p>{{ __('descriptions.can_trust.company.employers.>10') }}</p>
@@ -50,25 +52,25 @@
                 <p>{{ __('descriptions.can_trust.offices.many', ['count' => $offices->count()]) }}</p>
             @endif
             {{-- YELLOW --}}
-        @elseif ($ad->user->tf > config('trustfactor.yellow'))
-            <p>{{ __('descriptions.can_trust.trust.yellow', ['seller' => $ad->user->name]) }}</p>
+        @elseif ($user->tf > config('trustfactor.yellow'))
+            <p>{{ __('descriptions.can_trust.trust.yellow', ['seller' => $user->name]) }}</p>
             <br>
-            @if (!$ad->user->company)
+            @if (!$user->company)
                 <p>{{ __('descriptions.can_trust.company.person') }}</p>
             @else
                 @php
                     $registration = Carbon\Carbon::createFromTimestamp(
-                        $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
+                        $user->company->card['state']['registration_date'] ?? $user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
-                    $employers = $ad->user->company->card['employee_count'] ?? 0;
+                    $employers = $user->company->card['employee_count'] ?? 0;
                 @endphp
 
-                @if ($ad->user->company->card['type'] == 'LEGAL')
-                    <p>{{ __('descriptions.can_trust.company.llc', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                @if ($user->company->card['type'] == 'LEGAL')
+                    <p>{{ __('descriptions.can_trust.company.llc', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                     </p>
                 @else
-                    <p>{{ __('descriptions.can_trust.company.ip', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                    <p>{{ __('descriptions.can_trust.company.ip', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                     </p>
                 @endif
 
@@ -79,12 +81,12 @@
                 @endif
 
                 @if (!$employers)
-                    <p>{{ __('descriptions.can_trust.company.employers.not', ['seller' => $ad->user->name]) }}</p>
+                    <p>{{ __('descriptions.can_trust.company.employers.not', ['seller' => $user->name]) }}</p>
                     @if ($years < 2)
                         <p>{{ __('descriptions.can_trust.company.employers.registration') }}</p>
                     @endif
                 @elseif ($employers <= 10)
-                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $ad->user->name, 'count' => $employers]) }}
+                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $user->name, 'count' => $employers]) }}
                     </p>
                     @if ($employers > 4)
                         <p>{{ __('descriptions.can_trust.company.employers.4-10') }}</p>
@@ -102,37 +104,37 @@
             @endif
             {{-- RED --}}
         @else
-            <p>{{ __('descriptions.can_trust.trust.red', ['seller' => $ad->user->name]) }}</p>
+            <p>{{ __('descriptions.can_trust.trust.red', ['seller' => $user->name]) }}</p>
             <br>
-            @if (!$ad->user->company)
+            @if (!$user->company)
                 <p>{{ __('descriptions.can_trust.company.person') }}</p>
             @else
                 @php
                     $registration = Carbon\Carbon::createFromTimestamp(
-                        $ad->user->company->card['state']['registration_date'] ?? $ad->user->company->card['registration_date'],
+                        $user->company->card['state']['registration_date'] ?? $user->company->card['registration_date'],
                     );
                     $years = Carbon\Carbon::now()->diffInYears($registration);
-                    $employers = $ad->user->company->card['employee_count'] ?? 0;
+                    $employers = $user->company->card['employee_count'] ?? 0;
                 @endphp
 
                 @if ($years < 1)
-                    @if ($ad->user->company->card['type'] == 'LEGAL')
-                        <p>{{ __('descriptions.can_trust.company.llc', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                    @if ($user->company->card['type'] == 'LEGAL')
+                        <p>{{ __('descriptions.can_trust.company.llc', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                         </p>
                     @else
-                        <p>{{ __('descriptions.can_trust.company.ip', ['name' => $ad->user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
+                        <p>{{ __('descriptions.can_trust.company.ip', ['name' => $user->company->name, 'registration' => $registration->translatedFormat('d F Y')]) }}
                         </p>
                     @endif
                     <p>{{ __('descriptions.can_trust.company.registration.<1') }}</p>
                 @endif
 
                 @if (!$employers)
-                    <p>{{ __('descriptions.can_trust.company.employers.not', ['seller' => $ad->user->name]) }}</p>
+                    <p>{{ __('descriptions.can_trust.company.employers.not', ['seller' => $user->name]) }}</p>
                     @if ($years < 2)
                         <p>{{ __('descriptions.can_trust.company.employers.registration') }}</p>
                     @endif
                 @elseif ($employers <= 4)
-                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $ad->user->name, 'count' => $employers]) }}
+                    <p>{{ trans_choice('descriptions.can_trust.company.employers.have', $employers, ['seller' => $user->name, 'count' => $employers]) }}
                     </p>
                     <p>{{ __('descriptions.can_trust.company.employers.1-4') }}</p>
                     @if ($years < 2)
@@ -146,6 +148,6 @@
             @endif
         @endif
         <br>
-        <p>{{ __('descriptions.can_trust.conclusion')[$ad->id % 4] }}</p>
+        <p>{{ __('descriptions.can_trust.conclusion')[$id % 4] }}</p>
     </div>
 </div>

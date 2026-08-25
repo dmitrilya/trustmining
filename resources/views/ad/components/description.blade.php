@@ -16,6 +16,7 @@
             }
         }
     @endphp
+    
     <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
         {{ __('Ad description') }}</h2>
 

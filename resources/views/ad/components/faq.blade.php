@@ -5,8 +5,7 @@
         </h2>
     </div>
 
-    <div itemprop="subjectOf" itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-2 sm:space-y-4"
-        x-data="{ active: null }">
+    <div itemprop="subjectOf" itemscope itemtype="https://schema.org/FAQPage" class="max-w-3xl mx-auto space-y-2 sm:space-y-4" x-data="{ active: null }">
         <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
             class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow bg-slate-100 dark:bg-slate-900 border-l-4 border-l-indigo-600 dark:border-l-indigo-600">
             <button @click="active !== 1 ? active = 1 : active = null"
@@ -14,15 +13,13 @@
                 <span itemprop="name">Как осуществляется доставка {{ $ad->asicVersion->asicModel->name }}
                     {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }} от компании
                     {{ $ad->user->name }}?</span>
-                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300"
-                    :class="active === 1 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300" :class="active === 1 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 1"
-                x-collapse x-cloak>
-                <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
+            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 1" x-collapse x-cloak>
+                <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     @if ($ad->props['Availability'] == 'In stock')
                         <p class="mb-2">Оборудование находится в г. <b>{{ $ad->office->city }}</b>, отгрузка со склада
                             <b>{{ $ad->user->name }}</b> в течение 1-2 дней партнерской транспортной компанией.
@@ -42,17 +39,15 @@
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition">
                 <span itemprop="name">Какая гарантия на {{ $ad->asicVersion->asicModel->asicBrand->name }}
                     {{ $ad->asicVersion->asicModel->name }}?</span>
-                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300"
-                    :class="active === 2 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300" :class="active === 2 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 2"
-                x-collapse x-cloak>
-                <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
-                    На новое оборудование действует официальная гарантия производителя. Вы можете <a target="_blank"
-                        href="{{ route('warranty') }}" class="inline text-indigo-500 hover:text-indigo-600">проверить
+            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 2" x-collapse x-cloak>
+                <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
+                    На новое оборудование действует официальная гарантия производителя. Вы можете <a target="_blank" href="{{ route('warranty') }}"
+                        class="inline text-indigo-500 hover:text-indigo-600">проверить
                         остаток
                         гарантии по S/N</a>. Уточните у <b>{{ $ad->user->name }}</b> возможность оформления расширенной
                     гарантии от их сервиса.
@@ -66,15 +61,13 @@
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition">
                 <span itemprop="name">Как рассчитать окупаемость {{ $ad->asicVersion->asicModel->name }} на
                     {{ $ad->asicVersion->hashrate }}{{ $ad->asicVersion->measurement }}?</span>
-                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300"
-                    :class="active === 3 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300" :class="active === 3 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 3"
-                x-collapse x-cloak>
-                <div itemprop="text"
-                    class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
+            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 3" x-collapse x-cloak>
+                <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                     Доход зависит от хешрейта, курса
                     {{ $ad->asicVersion->asicModel->algorithm->coins()->first('name')->name }} и сложности сети.
                     @if ($ad->version_data && count($ad->version_data->profits))
@@ -94,26 +87,35 @@
             <button @click="active !== 4 ? active = 4 : active = null"
                 class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition">
                 <span itemprop="name">Можно ли доверять компании {{ $ad->user->name }}?</span>
-                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300"
-                    :class="active === 4 ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300" :class="active === 4 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
-            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 4"
-                x-collapse x-cloak>
+            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 4" x-collapse x-cloak>
                 <div itemprop="text"
                     class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800 space-y-2">
                     <p>Для безопасности пользователей в нашем сервисе внедрена уникальная метрика Trust Factor.
                         Перейдите в карточку компании или посмотрите на значок в объявлении</p>
-                    <div class="flex items-center gap-2"><span
-                            class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-green-500"></span>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-3 h-3 md:w-4 md:h-4 text-emerald-600 dark:text-emerald-400" width="100" height="100" viewBox="0 0 100 100"
+                            xmlns="http://w3.org">
+                            <circle cx="50" cy="50" r="40" fill="currentColor" />
+                        </svg>
                         <span>— Надежный партнер.</span>
                     </div>
-                    <div class="flex items-center gap-2"><span
-                            class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-300"></span>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-3 h-3 md:w-4 md:h-4 text-amber-600 dark:text-amber-400" width="100" height="100" viewBox="0 0 100 100"
+                            xmlns="http://w3.org">
+                            <circle cx="50" cy="50" r="40" fill="currentColor" />
+                        </svg>
                         <span>— Есть замечания или мало опыта.</span>
                     </div>
-                    <div class="flex items-center gap-2"><span class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-600"></span>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-3 h-3 md:w-4 md:h-4 text-rose-600 dark:text-rose-400" width="100" height="100" viewBox="0 0 100 100"
+                            xmlns="http://w3.org">
+                            <circle cx="50" cy="50" r="40" fill="currentColor" />
+                        </svg>
                         <span>— Мало информации / Риски.</span>
                     </div>
                 </div>
@@ -127,22 +129,19 @@
                     class="flex justify-between items-center w-full p-4 text-left font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 transition">
                     <span itemprop="name">Могу ли я разместить приобретенное оборудование в майнинг-хостинге компании
                         {{ $ad->user->name }}?</span>
-                    <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300"
-                        :class="active === 5 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                    <svg class="ml-2 sm:ml-3 w-5 h-5 transition duration-300" :class="active === 5 ? 'rotate-180' : ''" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                         </path>
                     </svg>
                 </button>
-                <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 5"
-                    x-collapse x-cloak>
-                    <div itemprop="text"
-                        class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
+                <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" x-show="active === 5" x-collapse x-cloak>
+                    <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                         Да, вы можете разместить <b>{{ $ad->asicVersion->asicModel->name }}</b> в дата-центре в
                         {{ $ad->user->hosting->address }}. Тарифы начинаются от
                         <br><b>{{ collect($ad->user->hosting->tariffs)->min('t') }}р за кВт/ч</b>. Ознакомьтесь с <a
-                            href="{{ route('company.hosting', ['user' => $ad->user->slug]) }}"
-                            class="inline text-indigo-500 hover:text-indigo-600" target="_blank">информацией о хостинге
+                            href="{{ route('company.hosting', ['user' => $ad->user->slug]) }}" class="inline text-indigo-500 hover:text-indigo-600"
+                            target="_blank">информацией о хостинге
                             компании
                             {{ $ad->user->name }}</a>
                     </div>

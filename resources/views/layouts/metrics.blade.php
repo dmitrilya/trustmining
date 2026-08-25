@@ -22,11 +22,18 @@
         </div>
 
         <div class="lg:flex items-start gap-4">
-            <div class="flex-1 min-w-0 xl:max-w-[calc(100%-336px)]">
+            <div class="flex-1 min-w-0 lg:max-w-[calc(100%-336px)]">
                 {{ $slot }}
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="window.addEventListener('resize', () => isXL = window.matchMedia('(min-width: 1024px)').matches)" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) {
+                window.addEventListener('resize', () => {
+                    if (window.matchMedia('(min-width: 1024px)').matches) {
+                        isXL = true;
+                        window.removeEventListener('resize', checkScreen);
+                    }
+                });
+            }" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div
@@ -34,7 +41,7 @@
                             <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="antminer-s21+" data-version="235">
                             </script>
                         </div>
-                        
+
                         <x-ai-kodex targetWidth="1024" />
                     </div>
                 </template>

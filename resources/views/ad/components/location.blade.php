@@ -97,7 +97,7 @@
         map.addChild(new YMapDefaultFeaturesLayer());
 
         const results = await ymaps3.search({
-            text: '{{ $ad->user->name }}, {{ $ad->office->address }}',
+            text: '{{ $location }}',
             bounds: map.bounds
         });
 
