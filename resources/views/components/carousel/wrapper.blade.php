@@ -1,7 +1,7 @@
-<x-carousel.list :adCategory="$adCategory ?? null" :items="$items" :blade="$blade" :model="$model" :big="$big" />
+<x-carousel.list :adCategory="$adCategory ?? null" :items="$items" :blade="$blade" :model="$model" :big="$big" :sm="$sm" />
 
 <div draggable="false"
-    class="shrink-0 snap-start mr-2 sm:mr-4 w-[calc(100%-1.4rem)] xs:w-[calc(50%-1rem)] sm:w-[calc(50%-1.6rem)] md:w-[calc(33.333%-1.5rem)] {{ !isset($big) ? 'lg:w-[calc(50%-1.7rem)] xl:w-[calc(33.333%-1.5rem)]' : 'xl:w-[calc(25%-1.5rem)]' }}">
+    class="shrink-0 snap-start mr-2 sm:mr-4 w-[calc(100%-1.4rem)] xs:w-[calc(50%-1rem)] sm:w-[calc(50%-1.6rem)] md:w-[calc(33.333%-1.5rem)] {{ !$big ? 'lg:w-[calc(50%-1.7rem)] xl:w-[calc(33.333%-1.5rem)]' : 'xl:w-[calc(25%-1.5rem)]' }}">
     <div
         class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col offer-card">
         @switch($model)
