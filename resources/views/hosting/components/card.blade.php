@@ -36,7 +36,7 @@
         </div>
 
         <div class="mt-2 sm:mt-3">
-            <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-lg font-bold">{{ $hosting->price }} ₽</div>
+            <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-lg font-bold">{{ collect($hosting->tariffs)->min('t') }} ₽</div>
 
             <div class="relative flex mt-2 items-center">
                 <a class="block w-full" draggable="false"

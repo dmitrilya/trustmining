@@ -163,6 +163,7 @@ class CalculatorController extends Controller
             'fee' => count($data['a'][$selModel['a']]['p']) ? $data['a'][$selModel['a']]['p'][0]['c'][0]['f'] : 0,
             'firmwares' => $firmwares,
             'blocks' => explode(',', $request->blocks),
+            'tariffs' => json_decode($request->tariffs),
             'theme' => $request->theme,
             'parentUrl' => $request->parent_url
         ]);

@@ -140,7 +140,7 @@
                         class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
                         Да, вы можете разместить <b>{{ $ad->asicVersion->asicModel->name }}</b> в дата-центре в
                         {{ $ad->user->hosting->address }}. Тарифы начинаются от
-                        <br><b>{{ $ad->user->hosting->price }}р за кВт/ч</b>. Ознакомьтесь с <a
+                        <br><b>{{ collect($ad->user->hosting->tariffs)->min('t') }}р за кВт/ч</b>. Ознакомьтесь с <a
                             href="{{ route('company.hosting', ['user' => $ad->user->slug]) }}"
                             class="inline text-indigo-500 hover:text-indigo-600" target="_blank">информацией о хостинге
                             компании

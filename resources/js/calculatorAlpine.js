@@ -12,15 +12,19 @@ const BRACKETS = Object.freeze([
     [0, 0.13, 0]
 ]);
 
+const BASE_TARIFF = 5;
+const BASE_UPTIME = 99.7;
+
 const round2 = value => Math.round(value * 100) / 100;
 
-export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selModel, fee, taxEnabled, rModel, rub, l) => ({
+export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVersion, selModel, fee, taxEnabled, rModel, rub, l) => ({
     algorithms: algorithms,
     firmwares: firmwares,
+    tariffs: [...tariffs, { t: BASE_TARIFF, u: BASE_UPTIME }],
 
     currency: 'RUB',
     view: 'month',
-    tariff: 5,
+    tariff: tariffs.length ? tariffs[0].t : BASE_TARIFF,
     version: {
         ...selVersion,
         a: selModel.a,
@@ -31,6 +35,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         r: selModel.r,
         ra: selModel.ra
     },
+    selectedTariff: 0,
     availableFirmwares: [],
     firmware: null,
     profitNumber: 0,
@@ -38,7 +43,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
     price: '',
     priceCurrency: 'USDT',
     count: 1,
-    uptime: 99.7,
+    uptime: tariffs.length ? tariffs[0].u : BASE_UPTIME,
     taxEnabled: taxEnabled,
     taxType: 'ip', // person / ip / legal
     difficultyGrowth: 0,
@@ -80,6 +85,12 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, selVersion, selM
         });
 
         if (!isWidjet && rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
+    },
+
+    selectTariff(tariff) {
+        this.selectedTariff = tariff;
+        this.tariff = this.tariffs[tariff].t;
+        this.uptime = this.tariffs[tariff].u;
     },
 
     firmwareCalc(h, e, f, algoProfit, isRub, isCompany, minPriceRubRounded) {

@@ -98,12 +98,12 @@ class HostingController extends Controller
             'description' => Purifier::clean(htmlspecialchars_decode($request->description), 'description'),
             'address' => $request->address ? $request->address : 'Not specified',
             'video' => $request->video,
-            'price' => $request->price,
             'images' => [],
             'contract_deficiencies' => [],
-            'peculiarities' => $request->peculiarities ? $request->peculiarities : [],
-            'conditions' => $request->conditions ? $request->conditions : [],
-            'expenses' => $request->expenses ? $request->expenses : [],
+            'tariffs' => $request->tariffs ?? [],
+            'peculiarities' => $request->peculiarities ?? [],
+            'conditions' => $request->conditions ?? [],
+            'expenses' => $request->expenses ?? [],
         ]);
 
         $time = time();
@@ -158,14 +158,15 @@ class HostingController extends Controller
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         $data = [];
-        $p = $request->peculiarities ? $request->peculiarities : [];
-        $c = $request->conditions ? $request->conditions : [];
-        $e = $request->expenses ? $request->expenses : [];
+        $t = $request->tariffs ?? [];
+        $p = $request->peculiarities ?? [];
+        $c = $request->conditions ?? [];
+        $e = $request->expenses ?? [];
 
         if ($request->description != $hosting->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
         if ($request->address != $hosting->address) $data['address'] = $request->address ? $request->address : 'Not specified';
         if ($request->video != $hosting->video) $data['video'] = $request->video;
-        if ($request->price != $hosting->price) $data['price'] = $request->price;
+        if (count(array_diff($hosting->tariffs, $t)) || count(array_diff($t, $hosting->tariffs))) $data['tariffs'] = $t;
         if (count(array_diff($hosting->peculiarities, $p)) || count(array_diff($p, $hosting->peculiarities))) $data['peculiarities'] = $p;
         if (count(array_diff($hosting->conditions, $c)) || count(array_diff($c, $hosting->conditions))) $data['conditions'] = $c;
         if (count(array_diff($hosting->expenses, $e)) || count(array_diff($e, $hosting->expenses))) $data['expenses'] = $e;
@@ -182,8 +183,7 @@ class HostingController extends Controller
         if ($request->territory) $data['territory'] = $this->saveFile($request->file('territory'), 'hostings', 'territory', $hosting->id, $time);
         if ($request->energy_supply) $data['energy_supply'] = $this->saveFile($request->file('energy_supply'), 'hostings', 'energy_supply', $hosting->id, $time);
 
-        if (!empty($data))
-            $hosting->moderations()->create(['data' => $data]);
+        if (!empty($data)) $hosting->moderations()->create(['data' => $data]);
 
         return redirect()->route('company.hosting', ['user' => $user->slug]);
     }

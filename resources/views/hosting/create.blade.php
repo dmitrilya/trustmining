@@ -85,6 +85,8 @@
                     <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
 
+                @include('hosting.components.tariffs', ['tariffs' => old('tariffs', [])])
+
                 <x-peculiarities model="hosting" :isForm="true"></x-peculiarities>
 
                 <x-inputs.editable-list name="conditions">
@@ -123,13 +125,6 @@
                     <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
                         autocomplete="energy_supply" accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('energy_supply')" />
-                </div>
-
-                <div>
-                    <x-inputs.input-label for="price" :value="'* ' . __('Tariff')" />
-                    <x-inputs.text-input id="price" name="price" required autocomplete="price" min="1"
-                        max="10" type="number" step="0.01" :value="old('price')" />
-                    <x-inputs.input-error :messages="$errors->get('price')" />
                 </div>
 
                 <x-buttons.primary-button class="block ml-auto">{{ __('Save') }}</x-buttons.primary-button>

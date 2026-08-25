@@ -1,37 +1,20 @@
+<template x-if="tariffs.length > 1">
+    <div class="w-full mt-3 xs:mt-4">
+        <x-inputs.select :label="__('Choose a tariff')" name="tariff" :isJs="true" handleChange="(tariff => selectTariff(tariff))"
+            items="tariffs.map((t, i) => ({ key: i, value: i == tariffs.length - 1 ? '{{ __('Individual conditions') }}' : `${t.t} ₽/{{ __('kW') }} - {{ __('Uptime') }} ${t.u}%` }))" />
+    </div>
+</template>
+
 <div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
     <div class="w-full">
-        <x-inputs.input-label for="tariff" :value="__('Tariff')" />
-        <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
+        <x-inputs.input-label for="tariff" :value="__('Tariff') . ' ₽/' . __('kW')" />
+        <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
     </div>
 
     <div class="w-full">
-        <div class="flex items-center">
-            <x-inputs.input-label for="fee" :value="__('Pool fee')" />
-
-            <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
-                <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open"
-                    @click.away="open = false">
-                    <div class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </div>
-
-                    <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95"
-                        x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" style="display: none"
-                        class="absolute w-40 top-6 right-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                            {{ __('The commission is indicated when working on a mining pool') }} <a href="{{ config('partners.headframe.link') }}"
-                                class="inline font-bold text-indigo-500 hover:text-indigo-600 under" target="_blank">HeadFrame
-                                (0.9%)</a></p>
-                    </div>
-                </div>
-            </template>
-        </div>
-        <x-inputs.text-input ::value="fee" id="fee" type="text" @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
+        <x-inputs.input-label for="uptime" :value="__('Uptime') . ' (%)'" />
+        <x-inputs.text-input ::value="uptime" id="uptime" type="text" @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime"
+            ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
     </div>
 </div>
 
@@ -56,9 +39,39 @@
                             </div>
 
                             <div class="w-full">
-                                <x-inputs.input-label for="uptime" :value="__('Uptime') . ' (%)'" />
-                                <x-inputs.text-input ::value="uptime" id="uptime" type="text"
-                                    @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
+                                <div class="flex items-center">
+                                    <x-inputs.input-label for="fee" :value="__('Pool fee')" />
+
+                                    @if (!$widjet)
+                                        <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
+                                            <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false"
+                                                @click="open = !open" @click.away="open = false">
+                                                <div
+                                                    class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
+                                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                            d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                    </svg>
+                                                </div>
+
+                                                <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                                                    x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100"
+                                                    x-transition:leave-end="opacity-0 scale-95" style="display: none"
+                                                    class="absolute w-40 top-6 right-0 p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl z-20">
+                                                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                                                        {{ __('The commission is indicated when working on a mining pool') }} <a
+                                                            href="{{ config('partners.headframe.link') }}"
+                                                            class="inline font-bold text-indigo-500 hover:text-indigo-600 under" target="_blank">HeadFrame
+                                                            (0.9%)</a></p>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    @endif
+                                </div>
+                                <x-inputs.text-input ::value="fee" id="fee" type="text"
+                                    @input="fee = filterDouble($el, 0, 100, 2);$el.value = fee" />
                             </div>
                         </div>
 

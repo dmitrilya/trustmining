@@ -31,7 +31,9 @@ class UpdateHostingRequest extends FormRequest
             'contract' => 'file|mimes:doc,docx,pdf|max:1024',
             'territory' => 'file|mimes:doc,docx,pdf|max:1024',
             'energy_supply' => 'file|mimes:doc,docx,pdf|max:1024',
-            'price' => 'required|min:0',
+            'tariffs' => 'required|array|min:1',
+            'tariffs.*.t' => 'required|numeric|between:0,10',
+            'tariffs.*.u' => 'required|numeric|between:0,100',
         ];
     }
 
@@ -54,8 +56,8 @@ class UpdateHostingRequest extends FormRequest
             'territory.max' => __('The maximum file size should not exceed 1 MB'),
             'energy_supply.mimes' => __('Valid types are doc (word) or pdf'),
             'energy_supply.max' => __('The maximum file size should not exceed 1 MB'),
-            'price.required' => __('Price is required'),
-            'price.min' => __('Price is required'),
+            'tariffs.required' => __('Price is required'),
+            'tariffs.min' => __('Price is required'),
         ];
     }
 }

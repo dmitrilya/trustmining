@@ -25,7 +25,7 @@ return new class extends Migration
             $table->json('contract_deficiencies');
             $table->string('territory')->nullable();
             $table->string('energy_supply')->nullable();
-            $table->float('price', 5, 2);
+            $table->json('tariffs');
             $table->json('peculiarities');
             $table->json('expenses');
             $table->json('conditions');

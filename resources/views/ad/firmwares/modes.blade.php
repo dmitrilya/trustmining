@@ -67,7 +67,7 @@
                             <td class="px-2 xs:px-4 py-2" x-text="strainLevels[mode.s].value"></td>
                             <td class="px-2 xs:px-4 py-2 text-right">
                                 <button type="button" @click="removeMode(index)"
-                                    class="text-red-700 hover:text-red-500 text-xs px-2 py-1 rounded hover:bg-red-50 dark:hover:bg-red-950/30 transition">
+                                    class="text-red-700 hover:text-red-500 text-xs transition">
                                     {{ __('Delete') }}
                                 </button>
                             </td>

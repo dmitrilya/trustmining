@@ -1,5 +1,4 @@
-<x-app-layout title="Майнинг отель: редактировать объявление о хостинге"
-    description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
+<x-app-layout title="Майнинг отель: редактировать объявление о хостинге" description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
@@ -10,10 +9,9 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}"
-                class="mt-6 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+            <form method="post" action="{{ route('hosting.update', ['hosting' => $hosting->id]) }}" class="mt-6 space-y-6" enctype=multipart/form-data
+                x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
                 const Link = Quill.import('formats/link');
                 class CustomLink extends Link {
                     static create(value) {
@@ -54,8 +52,8 @@
 
                 <div>
                     <x-inputs.input-label for="hosting-images" :value="__('Photo')" />
-                    <x-inputs.file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" multiple max="10" :label="__('When you upload new files, all old ones are deleted')" />
+                    <x-inputs.file-input id="hosting-images" name="images[]" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" multiple max="10"
+                        :label="__('When you upload new files, all old ones are deleted')" />
                     <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-inputs.input-error :messages="$error" />
@@ -64,10 +62,8 @@
 
                 <div class="relative mt-1" x-data="{ open: false, sugs: false }" @click.away="open = false">
                     <div class="relative z-0 w-full group" @click="open = true">
-                        <input type="text" id="address" name="address" x-ref="search" placeholder=" "
-                            value="{{ __($hosting->address) }}"
-                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
-                            autocomplete="off"
+                        <input type="text" id="address" name="address" x-ref="search" placeholder=" " value="{{ __($hosting->address) }}"
+                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')" autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -86,6 +82,8 @@
                     <x-inputs.text-input id="video" name="video" type="text" :value="$hosting->video" autocomplete="video" />
                     <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
+
+                @include('hosting.components.tariffs', ['tariffs' => collect($hosting->tariffs)])
 
                 <x-peculiarities :ps="$hosting->peculiarities" model="hosting" :isForm="true"></x-peculiarities>
 
@@ -114,23 +112,15 @@
 
                 <div>
                     <x-inputs.input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
-                    <x-inputs.file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
-                        accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
+                    <x-inputs.file-input id="hosting-territory" name="territory" class="mt-1 block w-full" accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('territory')" />
                 </div>
 
                 <div>
                     <x-inputs.input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
-                    <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
-                        autocomplete="energy_supply" accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
+                    <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full" autocomplete="energy_supply"
+                        accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('energy_supply')" />
-                </div>
-
-                <div>
-                    <x-inputs.input-label for="price" :value="__('Tariff')" />
-                    <x-inputs.text-input id="price" name="price" required autocomplete="price" min="1"
-                        max="10" type="number" step="0.01" :value="$hosting->price" />
-                    <x-inputs.input-error :messages="$errors->get('price')" />
                 </div>
 
                 <div class="mt-6 flex justify-end">
@@ -142,8 +132,7 @@
             </form>
 
             <x-modal name="confirm-hosting-deletion">
-                <form method="post" action="{{ route('hosting.destroy', ['hosting' => $hosting->id]) }}"
-                    class="p-6">
+                <form method="post" action="{{ route('hosting.destroy', ['hosting' => $hosting->id]) }}" class="p-6">
                     @csrf
                     @method('delete')
 

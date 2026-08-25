@@ -50,7 +50,11 @@ class ShopController extends Controller
         if (!$user->company || $user->company->moderation && !(auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
-        return view('company.show', ['user' => $user, 'company' => $user->company, 'tfData' => (new TrustFactorService)->calculateDetailed($user)]);
+        return view('company.show', [
+            'user' => $user,
+            'company' => $user->company,
+            'tfData' => (new TrustFactorService)->calculateDetailed($user)
+        ]);
     }
 
     /**
@@ -70,7 +74,11 @@ class ShopController extends Controller
 
         $this->addView(request(), $user->hosting);
 
-        return view('hosting.show', ['user' => $user, 'hosting' => $user->hosting]);
+        return view('hosting.show', [
+            'user' => $user,
+            'hosting' => $user->hosting,
+            'tfData' => (new TrustFactorService)->calculateDetailed($user)
+        ]);
     }
 
     public function reviews(Request $request, User $user)
