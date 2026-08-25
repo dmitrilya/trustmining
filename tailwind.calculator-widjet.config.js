@@ -17,6 +17,7 @@ export default {
         './resources/views/components/inputs/checkbox.blade.php',
         './resources/views/components/inputs/select.blade.php',
         './resources/views/components/inputs/radio.blade.php',
+        './resources/views/components/inputs/text-input.blade.php',
     ],
 
     safelist: [
