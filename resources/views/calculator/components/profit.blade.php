@@ -63,7 +63,7 @@
         <template x-if="taxEnabled">
             <div class="mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
                 <div class="text-slate-500 text-sm tracking-wide mb-2 text-center">{{ __('Tax calculation') }} {{ __('per day') }}</div>
-                <div class="font-mono text-slate-800 dark:text-slate-200 text-xxs xxs:text-xs sm:text-sm tracking-tight" x-html="taxHelp">
+                <div class="font-mono text-slate-800 dark:text-slate-200 text-xs sm:text-sm tracking-tight" x-html="taxHelp">
                 </div>
                 <div class="mt-2 text-xxs text-slate-500">*{{ __('Tax calculation can be disabled in additional settings') }}</div>
             </div>
