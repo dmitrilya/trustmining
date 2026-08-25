@@ -332,7 +332,7 @@
                     <div class="flex flex-col gap-4 w-full">
                         <div
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
-                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" tariffs="{{ json_encode($hosting->tariffs) }}" data-blocks="currency" data-model="antminer-l9" data-version="17">
+                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-tariffs="{{ json_encode($hosting->tariffs) }}" data-blocks="currency" data-model="antminer-l9" data-version="17">
                             </script>
                         </div>
 
