@@ -5,7 +5,7 @@
             class="block w-full placeholder:text-xs sm:placeholder:text-sm placeholder:text-slate-500 text-slate-800 bg-transparent border-slate-300 appearance-none dark:text-slate-200 {{ isset($border) ? $border : 'px-0 py-2.5 border-0 border-b-2' }} dark:border-slate-700 dark:focus:border-slate-600 focus:outline-none focus:ring-0 focus:border-slate-800 peer" />
     </div>
 
-    <template x-if="sugs">
+    <template x-if="open">
         <div role="listbox" style="display: none" x-show="open && sugs"
             class="absolute z-10 mt-1 w-full overflow-auto rounded-b-xl bg-slate-100/95 dark:bg-slate-900/95 border border-slate-300 dark:border-slate-700 text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
             <div class="relative select-none hover:bg-slate-100 dark:hover:bg-slate-800 ring-1 ring-inset ring-indigo-500 dark:ring-indigo-600">
