@@ -21,7 +21,7 @@ export default {
     ],
 
     safelist: [
-        'mt-1.5', 'mb-1', 'xxs:text-xs', 'font-mono', 'tracking-tight', 'text-blue-700', 'dark:text-blue-300', 'text-yellow-300', 'bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'bg-amber-500/10', 'text-amber-600', 'dark:text-amber-400', 'text-amber-800', 'dark:text-amber-200', 'bg-rose-500/10', 'text-rose-600', 'dark:text-rose-400', 'text-purple-600', 'dark:text-purple-400'
+        'mt-1.5', 'mb-1', 'xxs:text-xs', 'font-mono', 'tracking-tight', 'text-blue-700', 'dark:text-blue-300', 'text-yellow-300', 'bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'bg-amber-500/10', 'text-amber-600', 'dark:text-amber-400', 'text-amber-800', 'dark:text-amber-200', 'bg-rose-500/10', 'text-rose-600', 'dark:text-rose-400', 'text-purple-600', 'dark:text-purple-400', 'text-green-500'
     ],
 
     theme: {
