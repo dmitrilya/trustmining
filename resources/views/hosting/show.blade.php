@@ -11,8 +11,8 @@
             @include('shop.components.about')
         @endif
 
-        <div class="lg:flex items-start gap-4">
-            <div class="flex-1 min-w-0 lg:max-w-[calc(100%-336px)]">
+        <div class="xl:flex items-start gap-4">
+            <div class="flex-1 min-w-0 xl:max-w-[calc(100%-336px)]">
                 @if (isset($moderation))
                     @include('moderation.components.buttons')
 
@@ -23,7 +23,7 @@
                                 class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                                 <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
 
-                                <div class="hidden md:block mt-4">
+                                <div class="hidden md:block mt-6">
                                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                             class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
                             <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
 
-                            <div class="hidden md:block mt-4">
+                            <div class="hidden md:block mt-6">
                                 <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
                             </div>
                         </div>
@@ -386,14 +386,14 @@
                 </div>
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) {
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) {
                 window.addEventListener('resize', () => {
-                    if (window.matchMedia('(min-width: 1024px)').matches) {
+                    if (window.matchMedia('(min-width: 1280px)').matches) {
                         isXL = true;
                         window.removeEventListener('resize', checkScreen);
                     }
                 });
-            }" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
+            }" class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div
@@ -402,7 +402,7 @@
                                 data-blocks="currency" data-model="antminer-l9" data-version="17"></script>
                         </div>
 
-                        <x-ai-kodex targetWidth="1024" />
+                        <x-ai-kodex targetWidth="1280" />
                     </div>
                 </template>
             </div>
