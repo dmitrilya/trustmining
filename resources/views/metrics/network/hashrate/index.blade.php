@@ -1,5 +1,6 @@
 <x-metrics-layout title="Хэшрейт сети {{ __($coin->name) }} ({{ $coin->abbreviation }}): история и график | TRUSTMINING" :header="__('Network hashrate') . ' ' . $coin->name"
-    active="network_hashrate" description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
+    active="network_hashrate" :coin="$coin"
+    description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
     <x-breadcrumbs.breadcrumbs>

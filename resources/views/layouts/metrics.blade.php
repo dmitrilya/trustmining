@@ -14,10 +14,22 @@
             <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1024px')" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
+                        @php
+                            $coin = $attributes->get('coin');
+                            $model = \App\Models\Database\AsicModel::where('algorithm_id', $coin->algorithm_id)
+                                ->withCount([
+                                    'views' => function ($q) {
+                                        $q->where('created_at', '>=', Carbon\Carbon::now()->subMonths(3));
+                                    },
+                                ])
+                                ->orderByDesc('views_count')
+                                ->first();
+                        @endphp
+
                         <div
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
-                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="antminer-s21+" data-version="235">
-                            </script>
+                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="{{ $model->slug }}"
+                                data-version="{{ $model->asicVersions()->value('hashrate') }}"></script>
                         </div>
 
                         <x-ai-kodex targetWidth="1024" />

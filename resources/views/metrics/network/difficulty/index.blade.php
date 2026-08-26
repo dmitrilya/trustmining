@@ -1,5 +1,5 @@
 <x-metrics-layout title="Сложность сети {{ $coin->name }}({{ $coin->abbreviation }}) сегодня: прогноз, онлайн график" :header="__('Network difficulty') . ' ' . __($coin->name)"
-    active="network_difficulty"
+    active="network_difficulty" :coin="$coin"
     description="Актуальная сложность сети {{ $coin->name }}, онлайн-график, история изменений и прогноз следующего пересчёта. Данные обновляются в реальном времени">
     @vite(['resources/js/graph.js'])
 
