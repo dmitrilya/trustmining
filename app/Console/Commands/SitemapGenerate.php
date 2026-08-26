@@ -61,12 +61,18 @@ class SitemapGenerate extends Command
         }
 
         $out .= $this->addUrl('metrics');
+        $out .= $this->addUrl('metrics/network');
+        $out .= $this->addUrl('metrics/coin');
         foreach (Coin::whereHas('networkHashrates')->select('name')->get() as $coin) {
             $out .= $this->addUrl('metrics/network/' . strtolower($coin->name) . '/hashrate');
         }
 
         foreach (Coin::whereHas('networkDifficulties')->select('name')->get() as $coin) {
             $out .= $this->addUrl('metrics/network/' . strtolower($coin->name) . '/difficulty');
+        }
+
+        foreach (Coin::whereHas('coinRates')->select('name')->get() as $coin) {
+            $out .= $this->addUrl('metrics/coin/' . strtolower($coin->name) . '/rate');
         }
 
         $users = User::whereHas('offices', fn($q) => $q->where('moderation', 'false'))->with([

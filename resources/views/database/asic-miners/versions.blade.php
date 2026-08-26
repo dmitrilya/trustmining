@@ -93,7 +93,7 @@
                 @foreach (collect($algorithms[$version['a']]['p'])->pluck('c')->flatten(1)->where('p', '>', 0) as $coin)
                     <div>
                         <div class="flex items-center">
-                            <img alt="{{ $coin['n'] }}" class="w-5 xs:w-6 mr-1 xs:mr-2" src="{{ Storage::url('public/coins/' . $coin['a'] . '.webp') }}" />
+                            <img alt="{{ $coin['n'] }} icon" class="w-5 xs:w-6 mr-1 xs:mr-2" src="{{ Storage::url('public/coins/' . $coin['a'] . '.webp') }}" />
                             <div>
                                 <div class="text-xs xxs:text-sm text-slate-600 dark:text-slate-400">
                                     {{ $coin['a'] }}

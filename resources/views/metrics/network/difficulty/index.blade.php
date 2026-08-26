@@ -3,6 +3,31 @@
     description="Актуальная сложность сети {{ $coin->name }}, онлайн-график, история изменений и прогноз следующего пересчёта. Данные обновляются в реальном времени">
     @vite(['resources/js/graph.js'])
 
+    <x-breadcrumbs.breadcrumbs>
+        <x-breadcrumbs.breadcrumb position="1" :href="route('metrics')" :name="__('Metrics')" />
+        <x-breadcrumbs.breadcrumb position="2" :href="route('metrics.network')" :name="__('Cryptonetwork')" />
+        <x-breadcrumbs.breadcrumb position="3" :name="__('Network difficulty') . ' ' . $coin->abbreviation" />
+    </x-breadcrumbs.breadcrumbs>
+
+    <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+        <a href="#"
+            class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200">
+            {{ __('Difficulty') }}
+        </a>
+        @if ($coin->networkHashrates()->exists())
+            <a href="{{ route('metrics.network.hashrate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
+                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200">
+                {{ __('Hashrate') }}
+            </a>
+        @endif
+        @if ($coin->coinRates()->exists())
+            <a href="{{ route('metrics.coin.rate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
+                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200">
+                {{ __('Rate') }}
+            </a>
+        @endif
+    </div>
+
     <div x-data="{ period: '1y', items: [] }" x-init="axios.get('{{ route('metrics.network.get_difficulty', ['coin' => strtolower($coin->name)]) }}').then(r => {
         window.buildGraph(r.data.difficulties, period, 'graph', 'value');
         difficulties = [];
@@ -95,7 +120,7 @@
     <div
         class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-2 sm:mt-4 p-2 sm:p-4 lg:p-6">
         <h2 class="mb-2 lg:mb-4 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
-            {{ __('The impact of complexity on profit') }}
+            {{ __('Mining difficulty') }}
         </h2>
 
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 sm:mb-4">
@@ -135,16 +160,18 @@
 
                         <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap"
                             :class="{
-                                'text-green-500': {{ $prediction }} < 0,
-                                'text-red-500': {{ $prediction }} >= 0
+                                'text-green-500': {{ $prediction ?? 0 }} < 0,
+                                'text-red-500': {{ $prediction ?? 0 }} > 0,
+                                'text-slate-800 dark:text-slate-200': {{ $prediction ?? 0 }} == 0
                             }">
                             {{ $model['pp'] }}
                         </td>
 
                         <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:table-cell items-end"
                             :class="{
-                                'text-green-500': {{ $prediction }} < 0,
-                                'text-red-500': {{ $prediction }} >= 0
+                                'text-green-500': {{ $prediction ?? 0 }} < 0,
+                                'text-red-500': {{ $prediction ?? 0 }} > 0,
+                                'text-slate-800 dark:text-slate-200': {{ $prediction ?? 0 }} == 0
                             }">
                             {{ $model['c'] }}
                         </td>

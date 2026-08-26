@@ -2,6 +2,31 @@
     active="network_hashrate" description="История изменений и текущий показатель хэшрейта криптосети {{ $coin->name }} ({{ $coin->abbreviation }})">
     @vite(['resources/js/graph.js'])
 
+    <x-breadcrumbs.breadcrumbs>
+        <x-breadcrumbs.breadcrumb position="1" :href="route('metrics')" :name="__('Metrics')" />
+        <x-breadcrumbs.breadcrumb position="2" :href="route('metrics.network')" :name="__('Cryptonetwork')" />
+        <x-breadcrumbs.breadcrumb position="3" :name="__('Network hashrate') . ' ' . $coin->abbreviation" />
+    </x-breadcrumbs.breadcrumbs>
+
+    <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+        @if ($coin->networkDifficulties()->exists())
+            <a href="{{ route('metrics.network.difficulty', ['coin' => strtolower(request()->route()->coin->name)]) }}"
+                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200">
+                {{ __('Difficulty') }}
+            </a>
+        @endif
+        <a href="#"
+            class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200">
+            {{ __('Hashrate') }}
+        </a>
+        @if ($coin->coinRates()->exists())
+            <a href="{{ route('metrics.coin.rate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
+                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200">
+                {{ __('Rate') }}
+            </a>
+        @endif
+    </div>
+
     <div x-data="{ period: '3m', items: [] }" x-init="axios.get('{{ route('metrics.network.get_hashrate', ['coin' => strtolower($coin->name)]) }}').then(r => {
         window.buildGraph(r.data.hashrates, period, 'graph', 'value');
         items = r.data.hashrates.reverse().splice(0, 91);

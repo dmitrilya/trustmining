@@ -19,9 +19,19 @@ class MetricsController extends Controller
 {
     use NetworkTrait, CoinTrait, AdTrait;
 
-    public function index(Request $request)
+    public function index()
     {
-        return redirect()->route('metrics.coin.rate', ['coin' => 'bitcoin']);
+        return view('metrics.index', Cache::get('home_page_data'));
+    }
+
+    public function network()
+    {
+        return view('metrics.network.index', Cache::get('home_page_data'));
+    }
+
+    public function coin()
+    {
+        return view('metrics.coin.index', Cache::get('home_page_data'));
     }
 
     public function hashrate(Request $request, Coin $coin)

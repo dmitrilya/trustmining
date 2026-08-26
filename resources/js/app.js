@@ -155,6 +155,18 @@ window.pluralize = function (count, trans) {
     return trans[2];
 }
 
+window.initLazyComponent = function (componentContext, breakpoint = '1024px') {
+    const checkScreen = () => {
+        if (window.matchMedia(`(min-width: ${breakpoint})`).matches) {
+            componentContext.isXL = true;
+
+            window.removeEventListener('resize', checkScreen);
+        }
+    };
+
+    window.addEventListener('resize', checkScreen);
+};
+
 Alpine.start();
 
 window.askLocation = (errorMessage) => {

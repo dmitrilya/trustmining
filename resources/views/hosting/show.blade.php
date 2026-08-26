@@ -386,14 +386,7 @@
                 </div>
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) {
-                window.addEventListener('resize', () => {
-                    if (window.matchMedia('(min-width: 1280px)').matches) {
-                        isXL = true;
-                        window.removeEventListener('resize', checkScreen);
-                    }
-                });
-            }" class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1280px')" class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div

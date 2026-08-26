@@ -6,34 +6,12 @@
     </x-slot>
 
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-4 lg:p-6">
-        <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <a href="{{ route('metrics.network.difficulty', ['coin' => strtolower(request()->route()->coin->name)]) }}"
-                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md {{ request()->routeIs('metrics.network.difficulty') ? 'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200' : 'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200' }}">
-                {{ __('Difficulty') }}
-            </a>
-            <a href="{{ route('metrics.network.hashrate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
-                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md {{ request()->routeIs('metrics.network.hashrate') ? 'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200' : 'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200' }}">
-                {{ __('Hashrate') }}
-            </a>
-            <a href="{{ route('metrics.coin.rate', ['coin' => strtolower(request()->route()->coin->name)]) }}"
-                class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 font-semibold text-xs lg:text-sm border rounded-md {{ request()->routeIs('metrics.coin.rate') ? 'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700 text-indigo-500 dark:text-slate-200' : 'border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-700 text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-slate-200' }}">
-                {{ __('Rate') }}
-            </a>
-        </div>
-
         <div class="lg:flex items-start gap-4">
             <div class="flex-1 min-w-0 lg:max-w-[calc(100%-336px)]">
                 {{ $slot }}
             </div>
 
-            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) {
-                window.addEventListener('resize', () => {
-                    if (window.matchMedia('(min-width: 1024px)').matches) {
-                        isXL = true;
-                        window.removeEventListener('resize', checkScreen);
-                    }
-                });
-            }" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
+            <div x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1024px')" class="hidden lg:flex flex-col gap-4 w-xs max-w-xs">
                 <template x-if="isXL">
                     <div class="flex flex-col gap-4 w-full">
                         <div
