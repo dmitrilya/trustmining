@@ -1,5 +1,16 @@
-<x-app-layout title="Майнинг отель: разместить оборудование у компании {{ $hosting->user->name }}"
-    description="Майнинг отель {{ $hosting->user->name }}. Описание, фото, цена и условия">
+<x-app-layout title="Майнинг отель {{ $hosting->user->name }} - хостинг для майнинга"
+    description="Разместите оборудование у компании {{ $hosting->user->name }} по тарифу {{ collect($hosting->tariffs)->min('t') }} ₽/кВт. Описание, фото, цена и условия на сайте Trust Mining">
+    <x-slot name="og">
+        <meta property="og:title" content="{{ __('Mining hotel') }} {{ $hosting->user->name }} - {{ __('hosting for mining') }}">
+        <meta property="og:description"
+            content="{{ __('Place the equipment at the company') }} {{ $hosting->user->name }} {{ __('according to the tariff') }} {{ collect($hosting->tariffs)->min('t') }} ₽/{{ __('kW') }}">
+        <meta property="og:image"
+            content="{{ $hosting->user->company->logo ? Storage::disk('public')->url($hosting->user->company->logo) : request()->getSchemeAndHttpHost() . '/img/icon.png' }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="product">
+    </x-slot>
+
+    <script src="https://api-maps.yandex.ru/v3/?apikey=edbdf37c-6677-43bf-8434-455e393b7362&lang=ru_RU"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     @php
@@ -29,6 +40,10 @@
                             </div>
 
                             <div class="lg:col-span-3 space-y-5">
+                                <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl">
+                                    {{ __('Hosting ASICs for mining') }}
+                                </h1>
+
                                 <h3
                                     class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -165,6 +180,10 @@
                         </div>
 
                         <div class="lg:col-span-3 space-y-5">
+                            <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl">
+                                {{ __('Hosting ASICs for mining') }}
+                            </h1>
+
                             <h3 class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                     height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -362,7 +381,8 @@
                             <x-can-trust :user="$hosting->user" :id="$hosting->id" />
 
                             <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
-                                {{ __('Description') }}</h2>
+                                {{ __('Description of the data center for mining') }}
+                            </h2>
 
                             <div itemprop="description" class="ql-editor mt-5 text-xs sm:text-sm sm:text-base text-slate-600 dark:text-slate-400">
                                 {!! $hosting->description !!}

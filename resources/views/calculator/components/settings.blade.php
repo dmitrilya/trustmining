@@ -5,10 +5,11 @@
     </div>
 </template>
 
-<div class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
+<div x-show="!tariffs.length || selectedTariff == tariffs.length - 1" class="flex space-x-2 sm:space-x-3 mt-3 xs:mt-4 mb-4">
     <div class="w-full">
         <x-inputs.input-label for="tariff" :value="__('Tariff') . ' ₽/' . __('kW')" />
-        <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
+        <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff"
+            ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
     </div>
 
     <div class="w-full">

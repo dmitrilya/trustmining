@@ -6,26 +6,26 @@
             class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
     @endif
 
-    <div
-        class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
+    <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
         <div class="flex justify-between items-start mb-1 sm:mb-2">
-            <div class="flex items-center">
-                @if ($user->company->logo)
-                    <img itemprop="logo" class="rounded-full mr-2 sm:mr-3 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
-                        src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }} logo">
-                @endif
+            <div>
+                <div class="flex items-center">
+                    @if ($user->company->logo)
+                        <img itemprop="logo" class="rounded-full mr-2 sm:mr-3 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
+                            src="{{ Storage::url($user->company->logo) }}" alt="{{ $user->name }} logo">
+                    @endif
 
-                <div>
-                    <div class="text-xs text-slate-500">
-                        {{ __($user->company->card['type']) }}
+                    <div>
+                        <div class="text-xs text-slate-500">
+                            {{ __($user->company->card['type']) }}
+                        </div>
+
+                        <h2 itemprop="name" class="mb-1 sm:mb-1.5 text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 font-bold">
+                            {{ $user->name }}</h2>
                     </div>
-
-                    <h1 itemprop="name"
-                        class="mb-1 sm:mb-1.5 text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200 font-bold">
-                        {{ $user->name }}</h1>
-
-                    @include('components.about-seller_tables')
                 </div>
+
+                @include('components.about-seller_tables')
             </div>
 
             <div class="flex items-center ml-4">
@@ -37,27 +37,25 @@
                     </svg>
                 </a>
 
-                {{-- @if ($user->company->site)
-                    <a href="{{ $user->company->site }}" aria-label="Site link" class="ml-2 sm:ml-3">
+                @if ($user->company->site)
+                    <a href="{{ $user->company->site }}?utm_source=trustmining" target="_blank" aria-label="Site link" class="ml-2 sm:ml-3">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
                                 d="M4.37 7.657c2.063.528 2.396 2.806 3.202 3.87 1.07 1.413 2.075 1.228 3.192 2.644 1.805 2.289 1.312 5.705 1.312 6.705M20 15h-1a4 4 0 0 0-4 4v1M8.587 3.992c0 .822.112 1.886 1.515 2.58 1.402.693 2.918.351 2.918 2.334 0 .276 0 2.008 1.972 2.008 2.026.031 2.026-1.678 2.026-2.008 0-.65.527-.9 1.177-.9H20M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                     </a>
-                @endif --}}
+                @endif
 
-                <button aria-label="Share"
-                    class="ml-2 sm:ml-3 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                <button aria-label="Share" class="ml-2 sm:ml-3 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                     @click="navigator.share({
                             title: '{{ __('Company') . ' ' . $user->name }}',
                             description: 'Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING',
                             image: '{{ Storage::disk('public')->url($user->company->logo) }}',
                             url: '{{ url()->current() }}' + '?utm_source=share_button&utm_campaign=content_propagation&utm_medium=company&utm_content={{ $user->company->id }}'
                         });">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="m15.141 6 5.518 4.95a1.05 1.05 0 0 1 0 1.549l-5.612 5.088m-6.154-3.214v1.615a.95.95 0 0 0 1.525.845l5.108-4.251a1.1 1.1 0 0 0 0-1.646l-5.108-4.251a.95.95 0 0 0-1.525.846v1.7c-3.312 0-6 2.979-6 6.654v1.329a.7.7 0 0 0 1.344.353 5.174 5.174 0 0 1 4.652-3.191l.004-.003Z" />
                     </svg>
