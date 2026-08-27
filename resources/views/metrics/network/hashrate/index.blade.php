@@ -84,6 +84,7 @@
                 </div>
 
                 <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('networkHashrates')
+                    ->select(['id', 'abbreviation', 'name'])
                     ->get()
                     ->map(
                         fn($coin) => [

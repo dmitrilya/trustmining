@@ -59,13 +59,14 @@ class MetricsController extends Controller
     public function coinRate(Request $request, Coin $coin)
     {
         $latestRate = $coin->rate;
+        $algo = $coin->algorithm->slug ?? 'sha-256';
 
         $ads = Cache::remember(
-            'algorithm_ads_' . $coin->algorithm->slug,
+            'algorithm_ads_' . $algo,
             now()->endOfDay(),
             fn() => $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', View::where('viewable_type', 'asic-model')->select('viewable_id', DB::raw('count(*) as views_count'))
                 ->groupBy('viewable_id')->orderBy('views_count', 'desc')->limit(30)->pluck('viewable_id'))
-                ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $coin->algorithm->slug)
+                ->join('algorithms', 'algorithms.id', '=', 'asic_models.algorithm_id')->where('algorithms.slug', $algo)
                 ->orderByDesc('ads.ordering_id')->limit(14)->get()
         );
 

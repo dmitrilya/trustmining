@@ -1,5 +1,6 @@
 <x-metrics-layout title="Курс {{ __($coin->name) }} ({{ $coin->abbreviation }}) к USDT: онлайн график и история за все время" :header="__('Coin rate') . ' ' . $coin->name" active="coin_rate"
-    :coin="$coin" description="Актуальный курс :coin="$coin" {{ $coin->name }} на сегодня. Интерактивный график {{ $coin->abbreviation }}/USDT, история
+    :coin="$coin"
+    description="Актуальный курс {{ $coin->name }} на сегодня. Интерактивный график {{ $coin->abbreviation }}/USDT, история
     изменений цены по дням и годам, динамика курса в реальном времени.">
     @vite(['resources/js/graph.js'])
 
@@ -93,7 +94,7 @@
                     </div>
 
                     <x-inputs.select name="coin_id" :key="$coin->id" :items="\App\Models\Database\Coin::has('coinRates')
-                        ->has('algorithm')
+                        ->select(['id', 'abbreviation', 'name'])
                         ->get()
                         ->map(
                             fn($coin) => [

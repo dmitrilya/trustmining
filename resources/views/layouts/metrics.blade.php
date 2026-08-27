@@ -16,7 +16,8 @@
                     <div class="flex flex-col gap-4 w-full">
                         @php
                             $coin = $attributes->get('coin');
-                            $model = \App\Models\Database\AsicModel::where('algorithm_id', $coin->algorithm_id)
+                            $algoId = $coin->algorithm_id ?? \App\Models\Database\Algorithm::where('name', 'SHA-256')->value('id');
+                            $model = \App\Models\Database\AsicModel::where('algorithm_id', $algoId)
                                 ->withCount([
                                     'views' => function ($q) {
                                         $q->where('created_at', '>=', Carbon\Carbon::now()->subMonths(3));
