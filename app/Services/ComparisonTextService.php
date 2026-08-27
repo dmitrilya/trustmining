@@ -101,12 +101,12 @@ class ComparisonTextService
         $sections[] = "\n\n";
 
         // Охлаждение
-        $coolingKey = ($m1->characteristics['Cooling'] === $m2->characteristics['Cooling']) ? 'same_' . $m1->characteristics['Cooling'] : 'diff';
+        $coolingKey = ($m1->cooling_type->name === $m2->cooling_type->name) ? 'same_' . $m1->cooling_type->name : 'diff';
         $sections[] = $this->getTrans("descriptions.compare.cooling.{$coolingKey}", $hash, [
             'm1' => $m1->name,
             'm2' => $m2->name,
-            'c1' => $m1->characteristics['Cooling'],
-            'c2' => $m2->characteristics['Cooling']
+            'c1' => $m1->cooling_type->name,
+            'c2' => $m2->cooling_type->name
         ]);
 
         $sections[] = "\n\n";

@@ -7,6 +7,8 @@ use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Enums\CoolingType;
+
 class AsicModel extends Model
 {
     use HasFactory, Searchable;
@@ -37,6 +39,7 @@ class AsicModel extends Model
         'characteristics' => 'array',
         'images' => 'array',
         'release' => 'date',
+        'cooling_type' => CoolingType::class,
     ];
 
     public function algorithm()

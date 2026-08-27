@@ -31,7 +31,7 @@
         <x-characteristics.characteristic name="Algorithm" :value="$model->data->algorithm->name" />
         <x-characteristics.characteristic name="Efficiency" :value="$version->efficiency . ' j/' . $version->measurement" />
         <x-characteristics.characteristic name="Release date" :value="$model->data->release->locale(app()->getLocale())->translatedFormat('F Y')" />
-        <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" />
+        <x-characteristics.characteristic name="Cooling" :value="$model->cooling_type->name" />
     </x-characteristics.characteristics>
 
     @if ($versionWithAds && count($versionWithAds->profits))

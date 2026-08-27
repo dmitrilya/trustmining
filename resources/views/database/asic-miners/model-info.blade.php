@@ -40,7 +40,7 @@
                     @if ($model->psus->count())
                         <x-characteristics.characteristic name="Power connector" :value="$model->psus->first()->connector" itemprop="additionalProperty" />
                     @endif
-                    <x-characteristics.characteristic name="Cooling" :value="$model->characteristics['Cooling']" itemprop="additionalProperty" />
+                    <x-characteristics.characteristic name="Cooling" :value="$model->cooling_type->name" itemprop="additionalProperty" />
                     <x-characteristics.characteristic name="Release date" :value="$model->release->locale(app()->getLocale())->translatedFormat('F Y')" />
                     <meta itemprop="releaseDate" content="{{ $model->release->toIso8601String() }}">
                 </x-characteristics.characteristics>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->json('characteristics');
             $table->json('images');
             $table->date('release');
+            $table->unsignedTinyInteger('cooling_type');
         });
     }
 
