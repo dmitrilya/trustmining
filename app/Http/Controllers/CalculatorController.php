@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\FirmwareModeStrainLevel;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\View\View as ViewBlade;
 
 use App\Http\Traits\ViewTrait;
-use App\Models\Morph\View;
+use App\Http\Traits\AdTrait;
+
 use App\Models\Database\AsicModel;
 use App\Models\Database\AsicVersion;
 use App\Models\Ad\Ad;
@@ -17,7 +17,7 @@ use App\Models\Ad\AdCategory;
 
 class CalculatorController extends Controller
 {
-    use ViewTrait;
+    use ViewTrait, AdTrait;
 
     public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
     {
