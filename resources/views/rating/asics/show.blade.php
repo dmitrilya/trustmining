@@ -55,7 +55,7 @@
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
             <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
-                {{ $filterType ? __("meta.rating.asics.filters.$filterType.best", ['prefix' => __("meta.rating.asics.types.$type.best_prefix")]) : __("meta.rating.asics.types.$type.best") }}
+                {{ $filterType ? __("meta.rating.asics.filters.best", ['prefix' => __("meta.rating.asics.types.$type.best_prefix")]) : __("meta.rating.asics.types.$type.best") }}
             </h2>
 
             <div class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8">
