@@ -103,10 +103,14 @@ class AsicRatingController extends Controller
             return true;
         });
 
-        if ($type == 'payback') $models = $models->map(function ($model) use ($algos, $rub) {
+        if ($type == 'payback') $models = $models->map(function ($model) use ($filterType, $filterValue, $algos, $rub) {
             $algoProfit = $algos->get($model['a'])['p'][0]['p'];
 
-            $version = collect($model['v'])->filter(fn($v) => isset($v['p']) && $v['p'] > 0)->map(function ($v) use ($algoProfit, $rub) {
+            $version = collect($model['v'])->filter(function ($v) use ($filterType, $filterValue, $rub) {
+                $hasPrice = isset($v['p']) && $v['p'] > 0;
+
+                return $filterType != 'price' ? $hasPrice : $hasPrice && $v['p'] <= $filterValue * $rub;
+            })->map(function ($v) use ($algoProfit, $rub) {
                 $income = $v['h'] * $v['c'] * $algoProfit;
                 $consumption = $v['e'] * $v['h'] / 1000 * 3.5 * 24 * $rub;
                 $profit = $income - $consumption;
