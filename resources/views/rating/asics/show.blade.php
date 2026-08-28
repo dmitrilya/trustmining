@@ -73,27 +73,25 @@
                                 </template>
                             </x-characteristics.characteristics>
 
-                            <div class="mt-2 sm:mt-3 grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-4" x-data="{
-                                payback: sortedModels[0].payback != 99999 ? sortedModels[0].payback : '∞',
-                                profit: sortedModels[0].netProfit,
-                                expense: (sortedModels[0].v.h * sortedModels[0].v.e * tariff * rub * 24) / 1000,
-                            }">
+                            <div class="mt-2 sm:mt-3 grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-4">
                                 <div class="p-2 sm:p-4 lg:p-6 rounded-xl relative z-0 bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
                                     <div class="relative z-10">
                                         <span class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
                                         <div class="mt-2 flex items-baseline gap-2">
                                             <span class="text-xl sm:text-3xl font-black"
-                                                :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500'" x-text="profit"></span>
-                                            <span class="font-bold" :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500/50'">USDT</span>
+                                                :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-500'"
+                                                x-text="sortedModels[0].netProfit"></span>
+                                            <span class="font-bold" :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-500/50'">USDT</span>
                                         </div>
-                                        <p class="text-slate-400 text-xs mt-1 sm:mt-2" x-text="'≈' + Math.round(profit / rub * 100) / 100 + '₽'"></p>
+                                        <p class="text-slate-400 text-xs mt-1 sm:mt-2"
+                                            x-text="'≈' + Math.round(sortedModels[0].netProfit / rub * 100) / 100 + '₽'"></p>
                                     </div>
                                     <div class="absolute bottom-0 left-0 right-0 h-16 opacity-25">
                                         <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                                             <path d="M0 100 C 20 80, 40 90, 50 60 C 60 30, 80 40, 100 0 V 100 H 0 Z" fill="url(#grad)" />
                                             <defs>
                                                 <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                    <stop offset="0%" style="stop-color:rgb(16, 185, 129);stop-opacity:1" />
+                                                    <stop offset="0%" style="stop-color:rgb(16, 185, 129);stop-opacity:1" />ы
                                                     <stop offset="100%" style="stop-color:rgb(16, 185, 129);stop-opacity:0" />
                                                 </linearGradient>
                                             </defs>
@@ -106,20 +104,20 @@
                                     <span class="text-slate-500 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Payback') }}</span>
                                     <div class="mt-2">
                                         <span class="text-xl sm:text-3xl font-black text-slate-800"
-                                            x-text="payback != '∞' ? payback != 99999 ? Math.round(payback) : '{{ __('No data') }}' : '∞'"></span>
-                                        <template x-if="payback != '∞' && payback != 99999">
+                                            x-text="sortedModels[0].payback != 99999 ? sortedModels[0].v.p ? Math.round(sortedModels[0].payback) : '{{ __('No data') }}' : '∞'"></span>
+                                        <template x-if="sortedModels[0].payback != 99999">
                                             <span class="text-slate-500 font-bold text-lg">{{ __('d') }}.</span>
                                         </template>
                                     </div>
                                     <template x-if="sortedModels[0].v.p">
                                         <div class="mt-1 sm:mt-1.5 w-fit px-1 xs:px-2 py-0.5 rounded text-xxs xxs:text-xs font-bold uppercase tracking-tighter"
                                             :class="{
-                                                'bg-rose-500/10 text-rose-500': payback > 1460 || payback == '∞',
-                                                'bg-amber-500/10 text-amber-500': payback > 730 && payback <= 1460,
-                                                'bg-emerald-500/10 text-emerald-500': payback <= 730,
+                                                'bg-rose-500/10 text-rose-500': sortedModels[0].payback > 1460 || sortedModels[0].payback == 99999,
+                                                'bg-amber-500/10 text-amber-500': sortedModels[0].payback > 730 && sortedModels[0].payback <= 1460,
+                                                'bg-emerald-500/10 text-emerald-500': sortedModels[0].payback <= 730,
                                             }">
                                             <span
-                                                x-text="payback != '∞' ? payback <= 730 ? '{{ __('Top payback') }}' : (payback <= 1460 ? '{{ __('Normal') }}' : '{{ __('Long payback period') }}') : '{{ __('WOW') }}'"></span>
+                                                x-text="sortedModels[0].payback != 99999 ? sortedModels[0].payback <= 730 ? '{{ __('Top payback') }}' : (sortedModels[0].payback <= 1460 ? '{{ __('Normal') }}' : '{{ __('Long payback period') }}') : '{{ __('WOW') }}'"></span>
                                         </div>
                                     </template>
                                 </div>
