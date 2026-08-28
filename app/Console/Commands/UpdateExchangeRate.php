@@ -105,7 +105,7 @@ class UpdateExchangeRate extends Command
             return $algorithm;
         });
 
-        $models = AsicModel::select(['id', 'name', 'slug', 'algorithm_id', 'asic_brand_id', 'release'])->with([
+        $models = AsicModel::select(['id', 'name', 'slug', 'algorithm_id', 'asic_brand_id', 'cooling_type', 'release'])->with([
             'algorithm:id,name,slug,measurement',
             'asicBrand:id,name,slug',
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
@@ -189,6 +189,8 @@ class UpdateExchangeRate extends Command
             'a' => $model->algorithm->id,
             'b' => $model->asicBrand->name,
             'bs' => $model->asicBrand->slug,
+            'c' => (int) $model->cooling_type->value,
+            'm' => (int) ($model->release > now()->subMonths(18)),
             'r' => $model->moderatedReviews->count(),
             'ra' => $model->moderatedReviews->avg('rating'),
             'v' => $model->asicVersions->map(fn($v) => [

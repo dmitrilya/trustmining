@@ -80,7 +80,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
             this.recalculateAll();
         });
 
-        this.$watch('currency, view, tariff, taxType, count, uptime, profitNumber, firmware', () => {
+        this.$watch('currency, view, tariff, fee, taxType, count, uptime, profitNumber, firmware', () => {
             this.recalculateAll();
         });
 

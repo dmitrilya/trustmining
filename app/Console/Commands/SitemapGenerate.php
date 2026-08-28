@@ -60,6 +60,31 @@ class SitemapGenerate extends Command
             $out .= $this->addUrl('ads/' . $adCategory->name);
         }
 
+        $coins = [['n' => 'Bitcoin', 'a' => 'BTC'], ['n' => 'Litecoin', 'a' => 'LTC'], ['n' => 'Kaspa', 'a' => 'KAS'], ['n' => 'Zcash', 'a' => 'ZEC']];
+        $algos = ['SHA-256', 'Scrypt', 'kHeavyHash', 'Equihash', 'Etchash'];
+        $coolings = [['slug' => 'air', 'n' => __('Air')], ['slug' => 'hydro', 'n' => __('Hydro')], ['slug' => 'immersion', 'n' => __('Immersion')]];
+        $prices = [['slug' => '50000', 'n' => __('Up to') . ' 50 000 ₽'], ['slug' => '100000', 'n' => __('Up to') . ' 100 000 ₽'], ['slug' => '200000', 'n' => __('Up to') . ' 200 000 ₽']];
+
+        $out .= $this->addUrl('rating/asic-miners');
+        $out .= $this->addUrl('rating/asic-miners/profit');
+        $out .= $this->addUrl('rating/asic-miners/payback');
+        foreach ($coins as $coin) {
+            $out .= $this->addUrl('rating/asic-miners/profit/coin-' . strtolower($coin['n']));
+            $out .= $this->addUrl('rating/asic-miners/payback/coin-' . strtolower($coin['n']));
+        }
+        foreach ($algos as $algo) {
+            $out .= $this->addUrl('rating/asic-miners/profit/algorithm-' . strtolower($algo));
+            $out .= $this->addUrl('rating/asic-miners/payback/algorithm-' . strtolower($algo));
+        }
+        foreach ($coolings as $cooling) {
+            $out .= $this->addUrl('rating/asic-miners/profit/cooling-' . $cooling['slug']);
+            $out .= $this->addUrl('rating/asic-miners/payback/cooling-' . $cooling['slug']);
+        }
+        foreach ($prices as $price) {
+            $out .= $this->addUrl('rating/asic-miners/profit/price-' . $price['slug']);
+            $out .= $this->addUrl('rating/asic-miners/payback/price-' . $price['slug']);
+        }
+
         $out .= $this->addUrl('metrics');
         $out .= $this->addUrl('metrics/network');
         $out .= $this->addUrl('metrics/coin');

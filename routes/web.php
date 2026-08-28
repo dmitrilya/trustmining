@@ -41,9 +41,12 @@ use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Morph\ViewController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\Rating\AsicRatingController;
+use App\Http\Controllers\Rating\CompanyRatingController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
-
+use App\Http\Controllers\SearchController;
 use App\Models\User\User;
 
 /*
@@ -86,22 +89,32 @@ Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
 Route::post('/location', [ProfileController::class, 'location'])->name('location');
 Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
-Route::get('/', [Controller::class, 'home'])->name('home');
-Route::get('/about', [Controller::class, 'about'])->name('about');
-Route::get('/search', [Controller::class, 'search'])->name('search');
-Route::get('/document', [Controller::class, 'document'])->name('document');
-Route::get('/privacy', [Controller::class, 'privacy'])->name('privacy');
-Route::get('/terms', [Controller::class, 'terms'])->name('terms');
-//Route::get('/roadmap', [Controller::class, 'roadmap'])->name('roadmap');
-Route::get('/career', [Controller::class, 'career'])->name('career');
-Route::get('/events', [Controller::class, 'events'])->name('events');
-Route::get('/warranty-check', [Controller::class, 'warranty'])->name('warranty');
-Route::get('/top', [Controller::class, 'top'])->name('top');
-Route::get('/rating-asic-miners', [Controller::class, 'asicRating'])->name('asic-rating');
-Route::get('/widjets', [Controller::class, 'widjets'])->name('widjets');
-Route::get('/api/doc', [Controller::class, 'api'])->name('api.doc');
-Route::get('/legal', [Controller::class, 'legal'])->name('legal');
-Route::get('/taxes', [Controller::class, 'taxes'])->name('taxes');
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/widjets', [PageController::class, 'widjets'])->name('widjets');
+Route::get('/support', [PageController::class, 'support'])->name('support');
+
+Route::view('/about', 'about')->name('about');
+//Route::view('/roadmap', 'roadmap')->name('roadmap');
+Route::view('/career', 'career')->name('career');
+Route::view('/events', 'events')->name('events');
+Route::view('/document', 'document')->name('document');
+Route::view('/privacy', 'document')->name('privacy');
+Route::view('/terms', 'document')->name('terms');
+Route::view('/warranty', 'warranty.index')->name('warranty');
+Route::view('/api', 'api.index')->name('api.doc');
+Route::view('/legal', 'legal.index')->name('legal');
+Route::view('/taxes', 'taxes.index')->name('taxes');
+
+Route::get('/search', SearchController::class)->name('search');
+
+Route::group(['prefix' => 'rating'], function () {
+    Route::group(['prefix' => 'asic-miners'], function () {
+        Route::get('/', [AsicRatingController::class, 'index'])->name('rating.asics');
+        Route::get('/{type}/{filter?}', [AsicRatingController::class, 'show'])->name('rating.asics.show');
+    })->where('type', 'profit|payback');
+
+    Route::get('/companies', [CompanyRatingController::class, 'top'])->name('top');
+});
 
 Route::group(['prefix' => 'roulette'], function () {
     Route::get('/prizes/get', [RoulettePrizeController::class, 'getPrizes']);
@@ -184,11 +197,6 @@ Route::group(['prefix' => 'asic-miners'], function () {
             Route::get('/{asicVersion}/get-ads', [AsicModelController::class, 'getVersionAds'])->name('database.asic-miners.version.get-ads');
         });
     });
-});
-
-Route::group(['prefix' => 'support'], function () {
-    Route::get('/', [Controller::class, 'support'])->name('support');
-    Route::get('/question', [Controller::class, 'supportQuestion'])->name('support.question');
 });
 
 Route::group(['prefix' => 'company/{user}'], function () {
@@ -466,6 +474,6 @@ Route::group(['prefix' => 'insight'], function () {
             Route::get('/{type}/get/{order}', [SeriesController::class, 'getContent'])->name('insight.channel.series.content.get');
         });
     });
-})->where('type', 'new|popular');;
+})->where('type', 'new|popular');
 
 require __DIR__ . '/auth.php';

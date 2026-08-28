@@ -152,7 +152,7 @@
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('top') }}">{{ __('Top reliable companies') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
-                    href="{{ route('asic-rating') }}">{{ __('The most profitable ASICs') }}</a>
+                    href="{{ route('rating.asics') }}">{{ __('The most profitable ASICs') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
