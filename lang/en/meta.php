@@ -15,7 +15,9 @@ return [
                     'header' => 'Best mining equipment by profit',
                     'title_prefix' => 'profitable',
                     'header_prefix' => 'by profit',
+                    'best_prefix' => 'profitable',
                     'breadcrumb' => 'Profit',
+                    'best' => 'The most profitable ASIC at the moment'
                 ],
                 'payback' => [
                     'title' => 'Top most cost-effective ASICs for today',
@@ -23,11 +25,15 @@ return [
                     'header' => 'Best mining equipment by payback speed',
                     'title_prefix' => 'cost-effective',
                     'header_prefix' => 'by payback speed',
+                    'best_prefix' => 'fastest-payback',
                     'breadcrumb' => 'Payback',
+                    'best' => 'The fastest-payback ASIC at the moment'
                 ]
             ],
 
             'filters' => [
+                'best' => 'The :prefix ASIC at the moment',
+
                 'algorithm' => [
                     'title' => 'The most :prefix ASICs on :filter_value for today',
                     'description' => 'Fresh rating of ASIC miners on the :filter_value algorithm :prefix. Comparison of model profitability, technical parameters, energy efficiency, and equipment prices.',

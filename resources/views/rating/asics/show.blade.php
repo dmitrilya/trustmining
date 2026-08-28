@@ -9,6 +9,13 @@
         rub: {{ $rub }},
         models: {{ $models }},
         algos: {{ $algorithms }},
+        coolingTypes: {{ collect(array_column(\App\Enums\CoolingType::cases(), 'name')) }},
+        sortedModels: [],
+        init() {
+            this.$watch('tariff, currency', () => this.updateModels());
+    
+            this.updateModels();
+        },
         getNetProfit(model) {
             let cost = (model.v.h * model.v.e * this.tariff * this.rub * 24) / 1000;
             return Math.round((this.algos[model.a].p[0].p * model.v.h * model.v.c - cost) * 100) / 100;
@@ -22,9 +29,14 @@
             const netProfit = this.getNetProfit(model);
             return model.v.p && netProfit > 0 ? Math.round(model.v.p / netProfit) : 99999;
         },
-        get sortedModels() {
-            return this.models
-                .map(m => ({ ...m, netProfit: this.getNetProfit(m), netProfitCurrency: this.getNetProfitCurrency(m), payback: this.getPayback(m) }))
+        updateModels() {
+            this.sortedModels = this.models
+                .map(m => ({
+                    ...m,
+                    netProfit: this.getNetProfit(m),
+                    netProfitCurrency: this.getNetProfitCurrency(m),
+                    payback: this.getPayback(m)
+                }))
                 .sort((a, b) => '{{ $type }}' == 'profit' ? b.netProfit - a.netProfit : a.payback - b.payback)
                 .slice(0, 15);
         }
@@ -40,6 +52,135 @@
                     : __('meta.rating.asics.filters.' . $filterType . '.breadcrumb', ['filter_value' => $filterValue])" />
             @endif
         </x-breadcrumbs.breadcrumbs>
+
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
+            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
+                {{ $filterType ? __("meta.rating.asics.filters.$filterType.best", ['prefix' => __("meta.rating.asics.types.$type.best_prefix")]) : __("meta.rating.asics.types.$type.best") }}
+            </h2>
+
+            <div class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8">
+                <div class="md:col-span-2 md:border-r border-slate-300 dark:border-slate-700 md:pr-8">
+                    <h3 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl" x-text="sortedModels[0].n"></h3>
+
+                    <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8">
+                        <div>
+                            <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
+                                <x-characteristics.characteristic name="Hashrate" xValue="sortedModels[0].v.h" />
+                                <x-characteristics.characteristic name="Efficiency" xValue="sortedModels[0].v.e" />
+                                <x-characteristics.characteristic name="Power" xValue="Math.round(sortedModels[0].v.e * sortedModels[0].v.h)" />
+                                <template x-if="sortedModels[0].v.p">
+                                    <x-characteristics.characteristic name="The best price" xValue="sortedModels[0].v.p + ' USDT'" />
+                                </template>
+                            </x-characteristics.characteristics>
+
+                            <div class="mt-2 sm:mt-3 grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-4" x-data="{
+                                payback: sortedModels[0].payback != 99999 ? sortedModels[0].payback : '∞',
+                                profit: sortedModels[0].netProfit,
+                                expense: (sortedModels[0].v.h * sortedModels[0].v.e * tariff * rub * 24) / 1000,
+                            }">
+                                <div class="p-2 sm:p-4 lg:p-6 rounded-xl relative z-0 bg-slate-900 dark:bg-slate-800 shadow-lg overflow-hidden">
+                                    <div class="relative z-10">
+                                        <span class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
+                                        <div class="mt-2 flex items-baseline gap-2">
+                                            <span class="text-xl sm:text-3xl font-black"
+                                                :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500'" x-text="profit"></span>
+                                            <span class="font-bold" :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500/50'">USDT</span>
+                                        </div>
+                                        <p class="text-slate-400 text-xs mt-1 sm:mt-2" x-text="'≈' + Math.round(profit / rub * 100) / 100 + '₽'"></p>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 right-0 h-16 opacity-25">
+                                        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                            <path d="M0 100 C 20 80, 40 90, 50 60 C 60 30, 80 40, 100 0 V 100 H 0 Z" fill="url(#grad)" />
+                                            <defs>
+                                                <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:rgb(16, 185, 129);stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:rgb(16, 185, 129);stop-opacity:0" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="p-2 sm:p-4 lg:p-6 rounded-xl bg-white dark:bg-slate-300 border border-slate-300 dark:border-slate-700 shadow overflow-hidden">
+                                    <span class="text-slate-500 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Payback') }}</span>
+                                    <div class="mt-2">
+                                        <span class="text-xl sm:text-3xl font-black text-slate-800"
+                                            x-text="payback != '∞' ? payback != 99999 ? Math.round(payback) : '{{ __('No data') }}' : '∞'"></span>
+                                        <template x-if="payback != '∞' && payback != 99999">
+                                            <span class="text-slate-500 font-bold text-lg">{{ __('d') }}.</span>
+                                        </template>
+                                    </div>
+                                    <template x-if="sortedModels[0].v.p">
+                                        <div class="mt-1 sm:mt-1.5 w-fit px-1 xs:px-2 py-0.5 rounded text-xxs xxs:text-xs font-bold uppercase tracking-tighter"
+                                            :class="{
+                                                'bg-rose-500/10 text-rose-500': payback > 1460 || payback == '∞',
+                                                'bg-amber-500/10 text-amber-500': payback > 730 && payback <= 1460,
+                                                'bg-emerald-500/10 text-emerald-500': payback <= 730,
+                                            }">
+                                            <span
+                                                x-text="payback != '∞' ? payback <= 730 ? '{{ __('Top payback') }}' : (payback <= 1460 ? '{{ __('Normal') }}' : '{{ __('Long payback period') }}') : '{{ __('WOW') }}'"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div class="sm:flex flex-row-reverse mt-6 md:mt-8">
+                                <div class="w-full sm:w-fit mt-2 sm:mt-0">
+                                    <a class="block w-full" :href="'/calculator/' + sortedModels[0].s + '/' + sortedModels[0].v.h">
+                                        <x-buttons.secondary-button
+                                            class="bg-secondary-gradient dark:text-slate-800 w-full">{{ __('Income calculator') }}</x-buttons.secondary-button>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h2 class="text-sm text-slate-800 dark:text-slate-200 mt-8 mb-3">
+                                {{ __('How many coins does it mine per day') }}
+                            </h2>
+
+                            <div class="grid gap-2 grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                                <template x-for="coin in algos[sortedModels[0].a].p.flatMap(p => p.c).filter(c => c.p > 0)" :key="coin.a">
+                                    <div>
+                                        <div class="flex items-center">
+                                            <img :alt="coin.n + ' icon'" class="w-5 xs:w-6 mr-1 xs:mr-2" :src="'/storage/coins/' + coin.a + '.webp'" />
+                                            <div>
+                                                <div class="text-xs xxs:text-sm text-slate-600 dark:text-slate-400" x-text="coin.a"></div>
+                                                <div class="text-xxs xxs:text-xs text-slate-500" x-text="coin.n"></div>
+                                            </div>
+                                        </div>
+                                        <div class="text-xxs xxs:text-xs text-slate-800 dark:text-slate-200 font-bold mt-0.5 xs:mt-1"
+                                            x-text="Math.round(sortedModels[0].v.h * coin.p * 100000000) / 100000000"></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 md:mt-0">
+                    <h4 class="sr-only">Информация</h4>
+
+                    <div class="w-full rounded-lg overflow-hidden mb-4 sm:mb-6">
+                        <img itemprop="image" class="w-full object-cover" :src="'/storage/asic-miners/' + sortedModels[0].s + '_380.webp'"
+                            :alt="sortedModels[0].b + ' ' + sortedModels[0].n">
+                    </div>
+
+                    <div class="hidden md:block">
+                        <x-characteristics.characteristics>
+                            <x-characteristics.characteristic name="Manufacturer" xValue="sortedModels[0].b" />
+                            <x-characteristics.characteristic name="Algorithm" xValue="algos[sortedModels[0].a].n" />
+                            <x-characteristics.characteristic name="Cooling" xValue="coolingTypes[sortedModels[0].c]" />
+                        </x-characteristics.characteristics>
+                    </div>
+
+                    <div class="flex flex-col mt-4 sm:mt-6 lg:mt-8">
+                        <a :href="'/ads/miners?model=' + sortedModels[0].s + '&asic_version_id' + sortedModels[0].v.i">
+                            <x-buttons.primary-button class="w-full mt-2">{{ __('Buy') }}</x-buttons.primary-button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="flex justify-center">
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-full p-0.5 space-x-2 flex">
