@@ -123,8 +123,8 @@ class AsicRatingController extends Controller
 
             return $model;
         })->sortBy('v.pb');
-        elseif ($type == 'profit') $models = $models->map(function ($model) use ($algos) {
-            $model['v'] = $model['v'][0];
+        elseif ($type == 'profit') $models = $models->map(function ($model) use ($filterType, $filterValue, $algos, $rub) {
+            $model['v'] = $filterType != 'price' ? $model['v'][0] : collect($model['v'])->filter(fn($v) => isset($v['p']) && $v['p'] > 0 && $v['p'] <= $filterValue * $rub)->first();
 
             return $model;
         })->sortByDesc(fn($m) => $algos->get($m['a'])['p'][0]['p'] * $m['v']['h'] * $m['v']['c']);
