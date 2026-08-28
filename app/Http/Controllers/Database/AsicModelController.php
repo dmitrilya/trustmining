@@ -250,8 +250,8 @@ class AsicModelController
         $modelSlugs = explode('-vs-', $compareRequest);
         if (count($modelSlugs) != 2) abort(404);
 
-        $modelA = AsicModel::where('slug', $modelSlugs[0])->select(['id', 'name', 'slug', 'characteristics'])->first();
-        $modelB = AsicModel::where('slug', $modelSlugs[1])->select(['id', 'name', 'slug', 'characteristics'])->first();
+        $modelA = AsicModel::where('slug', $modelSlugs[0])->select(['id', 'name', 'slug', 'characteristics', 'cooling_type'])->first();
+        $modelB = AsicModel::where('slug', $modelSlugs[1])->select(['id', 'name', 'slug', 'characteristics', 'cooling_type'])->first();
 
         if (!$modelA || !$modelB) abort(404);
 
