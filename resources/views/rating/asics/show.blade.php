@@ -65,9 +65,9 @@
                     <div class="md:col-span-2 md:col-start-1 mt-4 md:mt-8">
                         <div>
                             <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
-                                <x-characteristics.characteristic name="Hashrate" xValue="sortedModels[0].v.h" />
-                                <x-characteristics.characteristic name="Efficiency" xValue="sortedModels[0].v.e" />
-                                <x-characteristics.characteristic name="Power" xValue="Math.round(sortedModels[0].v.e * sortedModels[0].v.h)" />
+                                <x-characteristics.characteristic name="Hashrate" xValue="sortedModels[0].v.h + ' ' + sortedModels[0].v.m + '/s'" />
+                                <x-characteristics.characteristic name="Efficiency" xValue="sortedModels[0].v.e + ' j/' + sortedModels[0].v.m" />
+                                <x-characteristics.characteristic name="Power" xValue="Math.round(sortedModels[0].v.e * sortedModels[0].v.h) + ' {{ __('W') }}'" />
                                 <template x-if="sortedModels[0].v.p">
                                     <x-characteristics.characteristic name="The best price" xValue="sortedModels[0].v.p + ' USDT'" />
                                 </template>
