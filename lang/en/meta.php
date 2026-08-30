@@ -2,6 +2,11 @@
 
 return [
     'rating' => [
+        'title' => 'Mining ratings :year: hostings, ASICs, and companies',
+        'description' => 'Independent ratings for the mining industry. Find the best hardware suppliers, hosting hotels, and profitable ASIC miners on Trust Mining',
+        'header' => 'Mining industry ratings',
+        'breadcrumb' => 'Ratings',
+
         'asics' => [
             'title' => 'Top ASICs: the best miners in :year',
             'description' => 'Current ASIC ratings. Compare equipment by daily profitability or return on investment speed on the Trust Mining website',
@@ -88,6 +93,34 @@ return [
                     'breadcrumb' => 'New ASICs',
                 ]
             ]
-        ]
+        ],
+
+        'hosting' => [
+            'best' => [
+                'title' => 'Best Mining Hotels: Data Center Rating',
+                'description' => 'Up-to-date top of mining hosts by price-to-quality ratio. Compare data centers by electricity rates, security, and placement conditions on Trust Mining.',
+                'header' => 'Top Best Hostings for Crypto Mining',
+                'breadcrumb' => 'Hostings',
+            ],
+            'reliable' => [
+                'title' => 'Reliable Mining Hotels: Safe Data Center Rating',
+                'description' => 'Top of the most reliable hotels for mining with uptime guarantee and a high level of security. Compare equipment placement conditions on Trust Mining.',
+                'header' => 'Top Reliable Hostings for Crypto Mining',
+                'breadcrumb' => 'Hostings',
+            ],
+            'cheapest' => [
+                'title' => 'Cheapest Mining Hotels: Low-Tariff Data Centers',
+                'description' => 'The most inexpensive mining hosts and budget data centers. Compare electricity rates, placement costs and choose the best value on Trust Mining.',
+                'header' => 'Top Cheap Hostings for Crypto Mining',
+                'breadcrumb' => 'Hostings',
+            ],
+        ],
+
+        'companies' => [
+            'title' => 'Reliable Mining Companies: Vendor & Service Rating',
+            'description' => 'Top of the most reliable companies in the mining and cryptocurrency industry. Compare hardware suppliers, mining services and choose trusted partners on Trust Mining.',
+            'header' => 'Top Reliable Mining & Crypto Companies',
+            'breadcrumb' => 'Companies',
+        ],
     ]
 ];

@@ -1,4 +1,4 @@
-<div class="relative inline-block" x-data="{ open: false }" @mouseover="open = true" @mouseleave="open = false" @click="open = !open" @click.away="open = false">
+<div class="relative inline-block" x-data="{ open: false }" @click="open = !open" @click.away="open = false">
     <div
         class="flex items-center text-xs sm:text-sm text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
         <svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@
             </div>
 
             <div class="pt-2 mt-2 text-center border-t border-slate-300 dark:border-slate-700">
-                <a href="{{ route('taxes') }}"
+                <a href="{{ route('taxes') }}" target="_blank"
                     class="inline-flex items-center text-xs font-semibold text-indigo-500 hover:text-indigo-600 group transition duration-100">
                     <span>{{ __('More details with calculation examples') }}</span>
                     <svg class="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-0.5 transition duration-100" fill="none" viewBox="0 0 24 24"

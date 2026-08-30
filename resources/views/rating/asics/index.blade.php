@@ -1,6 +1,7 @@
 <x-home-layout :data="$data" :title="__('meta.rating.asics.title', ['year' => now()->year])" :description="__('meta.rating.asics.description')">
     <x-breadcrumbs.breadcrumbs>
-        <x-breadcrumbs.breadcrumb position="1" :name="__('meta.rating.asics.breadcrumb')" />
+        <x-breadcrumbs.breadcrumb position="1" :href="route('ratings')" :name="__('meta.rating.breadcrumb')" />
+        <x-breadcrumbs.breadcrumb position="2" :name="__('meta.rating.asics.breadcrumb')" />
     </x-breadcrumbs.breadcrumbs>
 
     <section class="mb-6 sm:mb-8 lg:mb-10">

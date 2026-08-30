@@ -42,8 +42,10 @@ use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Morph\ViewController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Rating\RatingController;
 use App\Http\Controllers\Rating\AsicRatingController;
 use App\Http\Controllers\Rating\CompanyRatingController;
+use App\Http\Controllers\Rating\HostingRatingController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use App\Http\Controllers\SearchController;
@@ -107,13 +109,16 @@ Route::view('/taxes', 'taxes.index')->name('taxes');
 
 Route::get('/search', SearchController::class)->name('search');
 
-Route::group(['prefix' => 'rating'], function () {
+Route::group(['prefix' => 'ratings'], function () {
+    Route::get('/', [RatingController::class, 'index'])->name('ratings');
+
     Route::group(['prefix' => 'asic-miners'], function () {
         Route::get('/', [AsicRatingController::class, 'index'])->name('rating.asics');
         Route::get('/{type}/{filter?}', [AsicRatingController::class, 'show'])->name('rating.asics.show');
     })->where('type', 'profit|payback');
 
-    Route::get('/companies', [CompanyRatingController::class, 'top'])->name('top');
+    Route::get('/companies', [CompanyRatingController::class, 'show'])->name('rating.companies.show');
+    Route::get('/hostings/{type}', [HostingRatingController::class, 'show'])->where('type', 'best|reliable|cheapest')->name('rating.hostings.show');
 });
 
 Route::group(['prefix' => 'roulette'], function () {

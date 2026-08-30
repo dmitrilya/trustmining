@@ -42,12 +42,13 @@
         }
     }">
         <x-breadcrumbs.breadcrumbs>
-            <x-breadcrumbs.breadcrumb position="1" :href="route('rating.asics')" :name="__('meta.rating.asics.breadcrumb')" />
+            <x-breadcrumbs.breadcrumb position="1" :href="route('ratings')" :name="__('meta.rating.breadcrumb')" />
+            <x-breadcrumbs.breadcrumb position="2" :href="route('rating.asics')" :name="__('meta.rating.asics.breadcrumb')" />
             @if (!$filterType)
-                <x-breadcrumbs.breadcrumb position="2" :name="__('meta.rating.asics.types.' . $type . '.breadcrumb')" />
+                <x-breadcrumbs.breadcrumb position="3" :name="__('meta.rating.asics.types.' . $type . '.breadcrumb')" />
             @else
-                <x-breadcrumbs.breadcrumb position="2" :href="route('rating.asics.show', ['type' => $type])" :name="__('meta.rating.asics.types.' . $type . '.breadcrumb')" />
-                <x-breadcrumbs.breadcrumb position="3" :name="$filterType == 'cooling'
+                <x-breadcrumbs.breadcrumb position="3" :href="route('rating.asics.show', ['type' => $type])" :name="__('meta.rating.asics.types.' . $type . '.breadcrumb')" />
+                <x-breadcrumbs.breadcrumb position="4" :name="$filterType == 'cooling'
                     ? __('meta.rating.asics.filters.cooling.' . $filterValue . '.breadcrumb')
                     : __('meta.rating.asics.filters.' . $filterType . '.breadcrumb', ['filter_value' => $filterValue])" />
             @endif

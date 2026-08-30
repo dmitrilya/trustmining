@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Database\Algorithm;
 use App\Models\Database\Coin;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class UpdateCoinProfit extends Command
 {
@@ -44,31 +45,37 @@ class UpdateCoinProfit extends Command
         $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
         $algos = Algorithm::all();
 
-        collect(json_decode(file_get_contents('https://www.antpool.com/auth/v3/index/poolcoins'))->data->items)->whereNotIn('coinType', ['FB'])
-            ->each(function ($coin) use ($measurements, $algos) {
-                if ($coin->algorithm == 'SHA256d') $coin->algorithm = 'SHA-256';
-                elseif ($coin->algorithm == 'Blake2B+SHA3') $coin->algorithm = 'Handshake';
-                elseif ($coin->algorithm == 'Blake2S') $coin->algorithm = 'Blake (2s-Kadena)';
-                elseif ($coin->algorithm == 'SCRYPT') $coin->algorithm = 'Scrypt';
+        $response = Http::withHeaders([
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        ])->get('https://www.antpool.com/auth/v3/index/poolcoins');
 
-                $algorithm = $algos->where('name', $coin->algorithm)->first();
-                if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
+        if ($response->successful()) {
+            collect($response->json()->data->items)->whereNotIn('coinType', ['FB'])
+                ->each(function ($coin) use ($measurements, $algos) {
+                    if ($coin->algorithm == 'SHA256d') $coin->algorithm = 'SHA-256';
+                    elseif ($coin->algorithm == 'Blake2B+SHA3') $coin->algorithm = 'Handshake';
+                    elseif ($coin->algorithm == 'Blake2S') $coin->algorithm = 'Blake (2s-Kadena)';
+                    elseif ($coin->algorithm == 'SCRYPT') $coin->algorithm = 'Scrypt';
 
-                $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
-                    array_search(substr($algorithm->measurement, 0, 1), $measurements);
-                $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, $coef);
-                $fee = $coin->coinType == 'BTC' ? 0.9 : (1 - collect($coin->miningType)->min('percent')) * 100;
-                Coin::where('abbreviation', $coin->coinType)->update([
-                    'profit' => $profit,
-                    'difficulty' => $coin->networkDiff,
-                    'fee' => $fee,
-                    'reward_block' => $coin->blockIncentive
-                ]);
+                    $algorithm = $algos->where('name', $coin->algorithm)->first();
+                    if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
 
-                if (!$coin->mergeMiningInfos) return;
-                foreach ($coin->mergeMiningInfos as $mergeCoin)
-                    Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate, 'fee' => $fee]);
-            });
+                    $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
+                        array_search(substr($algorithm->measurement, 0, 1), $measurements);
+                    $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, $coef);
+                    $fee = $coin->coinType == 'BTC' ? 0.9 : (1 - collect($coin->miningType)->min('percent')) * 100;
+                    Coin::where('abbreviation', $coin->coinType)->update([
+                        'profit' => $profit,
+                        'difficulty' => $coin->networkDiff,
+                        'fee' => $fee,
+                        'reward_block' => $coin->blockIncentive
+                    ]);
+
+                    if (!$coin->mergeMiningInfos) return;
+                    foreach ($coin->mergeMiningInfos as $mergeCoin)
+                        Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate, 'fee' => $fee]);
+                });
+        } else Log::channel('integration-errors')->info("[AntPool] {$response->status()}");
 
         $i = 1;
         foreach (
@@ -89,7 +96,7 @@ class UpdateCoinProfit extends Command
                     if (!$algorithm) return;
 
                     $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
-                    array_search(substr($algorithm->measurement, 0, 1), $measurements);
+                        array_search(substr($algorithm->measurement, 0, 1), $measurements);
                     if ($coin->reward !== -1) $coinData['profit'] = $coin->reward * 24 * pow(1000, $coef);
                     if ($coin->reward_block !== -1) $coinData['reward_block'] = $coin->reward_block;
 

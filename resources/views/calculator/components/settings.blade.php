@@ -45,7 +45,7 @@
 
                                     @if (!$widjet)
                                         <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
-                                            <div class="relative" x-data="{ open: false }" @mouseover="open = true" @mouseover.away = "open = false"
+                                            <div class="relative" x-data="{ open: false }"
                                                 @click="open = !open" @click.away="open = false">
                                                 <div
                                                     class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
