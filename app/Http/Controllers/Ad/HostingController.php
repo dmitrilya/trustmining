@@ -166,7 +166,12 @@ class HostingController extends Controller
         if ($request->description != $hosting->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
         if ($request->address != $hosting->address) $data['address'] = $request->address ? $request->address : 'Not specified';
         if ($request->video != $hosting->video) $data['video'] = $request->video;
-        if (count(array_diff($hosting->tariffs, $t)) || count(array_diff($t, $hosting->tariffs))) $data['tariffs'] = $t;
+
+        $currentTariffs = collect($hosting->tariffs);
+        $newTariffs = collect($t);
+
+        if ($currentTariffs->count() !== $newTariffs->count() || $newTariffs->diff($currentTariffs)->isNotEmpty()) $data['tariffs'] = $t;
+
         if (count(array_diff($hosting->peculiarities, $p)) || count(array_diff($p, $hosting->peculiarities))) $data['peculiarities'] = $p;
         if (count(array_diff($hosting->conditions, $c)) || count(array_diff($c, $hosting->conditions))) $data['conditions'] = $c;
         if (count(array_diff($hosting->expenses, $e)) || count(array_diff($e, $hosting->expenses))) $data['expenses'] = $e;
