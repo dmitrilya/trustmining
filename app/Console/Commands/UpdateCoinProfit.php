@@ -50,7 +50,7 @@ class UpdateCoinProfit extends Command
         ])->get('https://www.antpool.com/auth/v3/index/poolcoins');
 
         if ($response->successful()) {
-            collect($response->json()->data->items)->whereNotIn('coinType', ['FB'])
+            collect($response->json()['data']['items'])->whereNotIn('coinType', ['FB'])
                 ->each(function ($coin) use ($measurements, $algos) {
                     if ($coin['algorithm'] == 'SHA256d') $coin['algorithm'] = 'SHA-256';
                     elseif ($coin['algorithm'] == 'Blake2B+SHA3') $coin['algorithm'] = 'Handshake';
