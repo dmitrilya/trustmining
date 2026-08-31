@@ -1,5 +1,5 @@
 <div x-data="{
-    tariffs: {{ $tariffs }},
+    tariffs: {{ collect($tariffs) }},
     tariff: '',
     uptime: '',
     addTariff() {
