@@ -52,28 +52,28 @@ class UpdateCoinProfit extends Command
         if ($response->successful()) {
             collect($response->json()->data->items)->whereNotIn('coinType', ['FB'])
                 ->each(function ($coin) use ($measurements, $algos) {
-                    if ($coin->algorithm == 'SHA256d') $coin->algorithm = 'SHA-256';
-                    elseif ($coin->algorithm == 'Blake2B+SHA3') $coin->algorithm = 'Handshake';
-                    elseif ($coin->algorithm == 'Blake2S') $coin->algorithm = 'Blake (2s-Kadena)';
-                    elseif ($coin->algorithm == 'SCRYPT') $coin->algorithm = 'Scrypt';
+                    if ($coin['algorithm'] == 'SHA256d') $coin['algorithm'] = 'SHA-256';
+                    elseif ($coin['algorithm'] == 'Blake2B+SHA3') $coin['algorithm'] = 'Handshake';
+                    elseif ($coin['algorithm'] == 'Blake2S') $coin['algorithm'] = 'Blake (2s-Kadena)';
+                    elseif ($coin['algorithm'] == 'SCRYPT') $coin['algorithm'] = 'Scrypt';
 
-                    $algorithm = $algos->where('name', $coin->algorithm)->first();
-                    if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin->coinType} algorithm={$coin->algorithm}");
+                    $algorithm = $algos->where('name', $coin['algorithm'])->first();
+                    if (!$algorithm) return Log::channel('unknownalgo')->info("coin={$coin['coinType']} algorithm={$coin['algorithm']}");
 
                     $coef = in_array(strtolower($algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                         array_search(substr($algorithm->measurement, 0, 1), $measurements);
-                    $profit = $coin->blockReward * 86400 / $coin->coinCoefficient / $coin->networkDiff * pow(1000, $coef);
-                    $fee = $coin->coinType == 'BTC' ? 0.9 : (1 - collect($coin->miningType)->min('percent')) * 100;
-                    Coin::where('abbreviation', $coin->coinType)->update([
+                    $profit = $coin['blockReward'] * 86400 / $coin['coinCoefficient'] / $coin['networkDiff'] * pow(1000, $coef);
+                    $fee = $coin['coinType'] == 'BTC' ? 0.9 : (1 - collect($coin['miningType'])->min('percent')) * 100;
+                    Coin::where('abbreviation', $coin['coinType'])->update([
                         'profit' => $profit,
-                        'difficulty' => $coin->networkDiff,
+                        'difficulty' => $coin['networkDiff'],
                         'fee' => $fee,
-                        'reward_block' => $coin->blockIncentive
+                        'reward_block' => $coin['blockIncentive']
                     ]);
 
-                    if (!$coin->mergeMiningInfos) return;
-                    foreach ($coin->mergeMiningInfos as $mergeCoin)
-                        Coin::where('abbreviation', $mergeCoin->coinType)->update(['profit' => $profit * $mergeCoin->mergeRate, 'fee' => $fee]);
+                    if (!$coin['mergeMiningInfos']) return;
+                    foreach ($coin['mergeMiningInfos'] as $mergeCoin)
+                        Coin::where('abbreviation', $mergeCoin['coinType'])->update(['profit' => $profit * $mergeCoin['mergeRate'], 'fee' => $fee]);
                 });
         } else Log::channel('integration-errors')->info("[AntPool] {$response->status()}");
 
