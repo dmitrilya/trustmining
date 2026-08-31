@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Throwable;
@@ -49,7 +51,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e, $request) {
-            if (config('app.debug')) return null;
+            if (config('app.debug') || $e instanceof AuthenticationException || $e instanceof AuthorizationException) return null;
             
             if ($request->is('insight') || $request->is('insight/*')) $blade = 'insight';
             elseif ($request->is('forum') || $request->is('forum/*')) $blade = 'forum';
