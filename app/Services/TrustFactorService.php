@@ -254,6 +254,7 @@ class TrustFactorService
     private function prepareData(User $user): void
     {
         $company = $user->company;
+        $hosting = $user->hosting;
         $card = $company?->card ?? [];
         $age = isset($card['registration_date'])
             ? Carbon::now()->diffInMonths(
@@ -289,7 +290,7 @@ class TrustFactorService
                     'exists' => $card['employee_count'] !== null,
                     'count' => $card['employee_count'] ?? 0,
                 ],
-                'video' => (bool) ($company?->video),
+                'video' => (bool) ($company?->video || $hosting?->video),
                 'images' => count($company?->images) ?? 0,
                 'risks' => $card['risks'] ?? []
             ],
@@ -328,10 +329,10 @@ class TrustFactorService
             ],
 
             'hosting' => [
-                'exists' => (bool) ($user->hosting && !$user->hosting->moderation),
-                'visiting_territory' => (bool) ($user->hosting && !$user->hosting->moderation && in_array(
+                'exists' => (bool) ($hosting && !$hosting->moderation),
+                'visiting_territory' => (bool) ($hosting && !$hosting->moderation && in_array(
                     'Possibility of visiting the territory',
-                    $user->hosting->peculiarities ?? []
+                    $hosting->peculiarities ?? []
                 )),
             ],
         ];
@@ -395,19 +396,13 @@ class TrustFactorService
             $headers = @get_headers($url, true, $context);
 
             if ($headers !== false) {
-                $statusLine = is_array($headers[0] ?? null)
-                    ? end($headers[0])
-                    : ($headers[0] ?? '');
+                $statusLine = is_array($headers[0] ?? null) ? end($headers[0]) : ($headers[0] ?? '');
 
                 preg_match('#HTTP/\S+\s+(\d{3})#', $statusLine, $matches);
 
-                $status = isset($matches[1])
-                    ? (int) $matches[1]
-                    : null;
+                $status = isset($matches[1]) ? (int) $matches[1] : null;
 
-                $reachable = $status !== null
-                    && $status >= 200
-                    && $status < 400;
+                $reachable = $status !== null && $status >= 200 && $status < 400;
             }
         } catch (\Throwable $e) {
             $reachable = false;
@@ -445,9 +440,7 @@ class TrustFactorService
             'exchanger'     => 0,
         ];
 
-        $hasMinersAds = $ads->contains(
-            fn($ad) => $ad->adCategory->name === 'miners'
-        );
+        $hasMinersAds = $ads->contains(fn($ad) => $ad->adCategory->name === 'miners');
 
         foreach ($ads as $ad) {
             $category = $ad->adCategory->name;
@@ -458,9 +451,7 @@ class TrustFactorService
             if ($direction) $scores[$direction] += $weights[$category] ?? 0;
         }
 
-        if ($user->hosting && !$user->hosting->moderation) {
-            $scores['hosting'] += $weights['hosting'] ?? 0;
-        }
+        if ($user->hosting && !$user->hosting->moderation) $scores['hosting'] += $weights['hosting'] ?? 0;
 
         foreach ($user->moderatedOffices as $office) {
             if (in_array('Repair service', $office->peculiarities ?? [])) $scores['service'] += $weights['service'] ?? 0;
