@@ -63,7 +63,7 @@ class UpdatePrices extends Command
      */
     public function handle()
     {
-        $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems', 'Global Mining', 'MinerGroup'])
+        $users = User::whereIn('name', ['PushMiner', 'GIS mining', 'IBMM Technology', 'Mining Depot', 'Intelion Data Systems', 'Global Mining', 'MinerGroup', 'LeoMining'])
             ->with(['moderatedAds' => fn($q) => $q->where('ad_category_id', 1)])->get();
         $changings = [];
 
@@ -74,6 +74,7 @@ class UpdatePrices extends Command
         $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
         $changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
         $changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
+        $changings = array_merge($changings, $this->leoMining($users->where('name', 'LeoMining')->first()));
 
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
@@ -85,7 +86,9 @@ class UpdatePrices extends Command
 
     private function parseModelName(string $name, bool $withRate = false): array
     {
-        $normalized = mb_strtolower(str_replace("\xc2\xa0", ' ', $name), 'UTF-8');
+        $cleanedBrackets = preg_replace('/\s*\([^)]*\)/u', '', $name);
+
+        $normalized = mb_strtolower(str_replace("\xc2\xa0", ' ', $cleanedBrackets), 'UTF-8');
         $normalized = preg_replace('/[а-яё]+/ui', '', $normalized);
         $normalized = preg_replace('/\b-?mix\b/u', '', $normalized);
     
@@ -821,6 +824,94 @@ class UpdatePrices extends Command
             Log::channel('price-updating-check')->info("[Miner Group]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
         } catch (Exception $e) {
             Log::channel('price-updating-errors')->info("[Miner Group] {$e->getMessage()}");
+        }
+
+        return $changings->toArray();
+    }
+    
+    private function leoMining(?User $user): array
+    {
+        $changings = collect();
+
+        try {
+            $html = file_get_contents('https://price.leomining.ru/');
+            $ads = $user->moderatedAds;
+
+            $check = collect();
+
+            $dom = new DOMDocument();
+            @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+            $xpath = new DOMXPath($dom);
+            
+            $data = $xpath->query('//div[contains(@class, "t431__data-part2")]')->item(0)->textContent;
+            $paragraphs = preg_split('/\R+/', trim($data));
+
+            $data = array_values(array_map(function($paragraph) {
+                return array_filter(array_map('trim', explode(';', $paragraph)));
+            }, $paragraphs));
+            
+            foreach ($data as $i => $row) {
+                $fullName = $row[0];
+                $name = $this->parseModelName($fullName);
+                if ($name[0] == 'yuchai') continue;
+                if ($name[1] == 's21++') $name[1] = 's21+';
+                elseif ($name[1] == 's21pro+') $name[1] = 's21pro';
+                $nameWithBrand = $name[0] . $name[1];
+                $variants = [
+                    $name[1],
+                    $nameWithBrand,
+                    str_replace('hydro', 'hyd', $nameWithBrand),
+                    str_replace('hydro', 'hyd', $name[1]),
+                ];
+                $rate = (float) explode(' ', $row[2])[0];
+                $price = (float) str_replace(' ', '', str_replace('₽', '', $row[4]));
+
+                $corrs = $this->models->whereIn('name', $variants);
+                if ($corrs->count() != 1) {
+                    $check->push('[Нет модели] ' . $fullName . ' ' . $rate . ' ' . $price);
+                    continue;
+                }
+
+                $model = $corrs->first();
+                $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
+                if (!$version) {
+                    $check->push('[Нет версии] ' . $fullName . ' ' . $rate . ' ' . $price);
+                        continue;
+                }
+
+                $ad = null;
+                $ads->each(function ($item, $key) use (&$ad, $ads, $version) {
+                    if (
+                        $item->asic_version_id == $version->id && 'New' == $item->props['Condition']
+                        && 'Preorder' == $item->props['Availability']
+                    ) {
+                        $ad = $ads->pull($key);
+                        return false;
+                    }
+                });
+
+                if (!$ad) {
+                    $check->push('[Нет объявления] ' . $fullName . ' ' . $rate . ' ' . $price);
+                    continue;
+                }
+
+                if ($ad->price != $price) $changings->push([
+                    'id' => $ad->id,
+                    'price' => $price,
+                    'coin_id' => 1
+                ]);
+            }
+
+            foreach ($ads->where('price', '!=', 0) as $ad) {
+                $changings->push([
+                    'id' => $ad->id,
+                    'price' => 0,
+                ]);
+            }
+
+            Log::channel('price-updating-check')->info("[LeoMining]\nОбновлено: {$changings->count()}\n" . implode("\n", $check->toArray()));
+        } catch (Exception $e) {
+            Log::channel('price-updating-errors')->info("[LeoMining] {$e->getMessage()}");
         }
 
         return $changings->toArray();
