@@ -89,6 +89,8 @@ class AdController extends Controller
         /** @var \App\Models\User\User $user */
         $user = Auth::user();
 
+        if (!$user->offices()->where('moderation', false)->exists()) return back();
+
         if ($user->tariff && $user->ads()->count() >= $user->tariff->max_ads || !$user->tariff && $user->ads()->count() >= 2)
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 

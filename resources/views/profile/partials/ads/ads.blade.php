@@ -2,7 +2,7 @@
     $adsCount = $user->ads->count();
     $moreAdsAvailable = ($user->tariff && $adsCount < $user->tariff->max_ads) || (!$user->tariff && $adsCount < 2);
     $hasVerification = $user->passport || ($user->company && !$user->company->moderation);
-    $officeExists = $user->offices->count() > 0;
+    $officeExists = $user->offices->where('moderation', false)->count() > 0;
 @endphp
 
 <x-profile.section h="My advertisements" :p="!$hasVerification
