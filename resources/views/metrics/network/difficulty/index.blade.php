@@ -120,7 +120,7 @@
     <div
         class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl mt-2 sm:mt-4 p-2 sm:p-4 lg:p-6">
         <h2 class="mb-2 lg:mb-4 text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-extrabold">
-            {{ __('Mining difficulty') }}
+            {{ __('Mining difficulty') }} {{ $coin->abbreviation }}
         </h2>
 
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 sm:mb-4">
