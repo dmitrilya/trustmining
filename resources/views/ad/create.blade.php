@@ -17,9 +17,12 @@
                 <div class="space-y-6">
                     <x-inputs.select :label="__('Ad type')" name="ad_category_id" handleChange="(adCategoryId => ad_category_id = adCategoryId)" :items="App\Models\Ad\AdCategory::all()
                         ->map(fn($adCategory) => ['key' => $adCategory->id, 'value' => __($adCategory->header)])
-                        ->keyBy('key')" :key="old('ad_category_id') ?? 1" />
+                        ->keyBy('key')"
+                        :key="old('ad_category_id') ?? 1" />
+                    <x-inputs.input-error :messages="$errors->get('ad_category_id')" />
 
                     <x-inputs.select :label="__('Office')" name="office_id" :items="$offices->map(fn($office) => ['key' => $office->id, 'value' => $office->address])->keyBy('key')" />
+                    <x-inputs.input-error :messages="$errors->get('office_id')" />
 
                     <div>
                         <x-inputs.input-label for="preview" :value="__('Preview')" />
