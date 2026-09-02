@@ -171,6 +171,8 @@
                 @endif
 
                 <div class="md:col-span-4 space-y-5">
+                    <h1 class="text-xl sm:text-2xl text-slate-800 dark:text-slate-200">{{ $company->name }}</h1>
+
                     @if ($company->card['type'] == 'LEGAL')
                         <h3 class="flex items-center text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
                             <svg class="w-5 h-5 text-slate-600 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -262,23 +264,21 @@
                 </div>
             </div>
 
-            <div class="mt-8">
-                @if (count($company->documents))
-                    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                        @foreach ($company->documents as $document)
-                            <x-document :path="Storage::url($document['path'])" :name="$document['name']"></x-document>
-                        @endforeach
-                    </div>
-                @endif
+            @if (count($company->documents))
+                <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+                    @foreach ($company->documents as $document)
+                        <x-document :path="Storage::url($document['path'])" :name="$document['name']"></x-document>
+                    @endforeach
+                </div>
+            @endif
 
-                @if ($company->video)
-                    <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
-                        <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                @endif
-            </div>
+            @if ($company->video)
+                <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
+                    <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
