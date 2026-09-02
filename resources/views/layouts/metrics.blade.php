@@ -27,11 +27,13 @@
                                 ->first();
                         @endphp
 
-                        <div
-                            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
-                            <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="{{ $model->slug }}"
-                                data-version="{{ $model->asicVersions()->value('hashrate') }}"></script>
-                        </div>
+                        @if ($model)
+                            <div
+                                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-3">
+                                <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="currency" data-model="{{ $model->slug }}"
+                                    data-version="{{ $model->asicVersions()->value('hashrate') }}"></script>
+                            </div>
+                        @endif
 
                         <x-ai-kodex targetWidth="1024" />
                     </div>
