@@ -17,7 +17,10 @@ class HostingRatingController extends Controller
         if ($type == 'reliable') $hostings = $hostings->sortByDesc(fn($h) => $h->user->tf);
         else {
             $hostings = $hostings->map(function ($hosting) {
-                $hosting->price = collect($hosting->tariffs)->sortByDesc('u')->first()['t'];
+                $tariffs = collect($hosting->tariffs);
+                $u97 = $tariffs->where('u', '>=', 97);
+                $minTariff = $u97->count() ? $u97->sortBy('t')->first() : $tariffs->sortByDesc('u')->first();
+                $hosting->price = $minTariff['t'] / $minTariff['u'];
                 return $hosting;
             });
 
