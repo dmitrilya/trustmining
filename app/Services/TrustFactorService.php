@@ -322,7 +322,12 @@ class TrustFactorService
                 'unique_ratio' => $activeAdsCount ? round($uniqueAdsCount / $activeAdsCount * 100) : 0,
             ],
 
-            'response_time' => $user->art,
+            'messages' => [
+                'exists' => (bool) $user->chats()->exists(),
+                'response_time' => $user->art,
+            ],
+
+            'ignore' => $user->ignore,
 
             'registry' => [
                 'exists' => (bool) $company->registry,

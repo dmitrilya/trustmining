@@ -60,6 +60,7 @@ return [
             'offices',
             'unique_content',
             'response_time',
+            'ignore',
             'registry',
             'visiting_territory',
         ],
@@ -337,13 +338,25 @@ return [
             ],
 
             'response_time' => [
-                'source' => 'response_time',
+                'source' => 'messages.response_time',
+                'conditions' => [
+                    [
+                        'source' => 'messages.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'thresholds' => [
                     40 => -2,
                     20 => 0,
                     5  => 1,
                     0  => 3,
                 ],
+            ],
+
+            'ignore' => [
+                'source' => 'ignore',
+                'penalty' => -8,
             ],
 
             'registry' => [
