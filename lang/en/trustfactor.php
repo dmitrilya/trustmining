@@ -157,7 +157,7 @@ return [
             'title' => 'Average response time',
             'description' => 'How quickly the seller responds to messages',
         ],
-        'ignore' => [
+        'ignores' => [
             'title' => 'Avoids verification',
             'description' => 'The company ignores representatives of the Trust Mining service'
         ],

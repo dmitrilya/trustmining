@@ -60,7 +60,7 @@ return [
             'offices',
             'unique_content',
             'response_time',
-            'ignore',
+            'ignores',
             'registry',
             'visiting_territory',
         ],
@@ -354,7 +354,7 @@ return [
                 ],
             ],
 
-            'ignore' => [
+            'ignores' => [
                 'source' => 'ignore',
                 'penalty' => -8,
             ],
