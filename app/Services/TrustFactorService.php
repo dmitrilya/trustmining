@@ -327,7 +327,7 @@ class TrustFactorService
                 'response_time' => $user->art,
             ],
 
-            'ignores' => $user->ignores,
+            'ignores' => (bool) !$user->ignores,
 
             'registry' => [
                 'exists' => (bool) $company->registry,
