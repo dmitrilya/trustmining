@@ -355,7 +355,7 @@ return [
             ],
 
             'ignores' => [
-                'source' => 'ignore',
+                'source' => 'ignores',
                 'penalty' => -8,
             ],
 
