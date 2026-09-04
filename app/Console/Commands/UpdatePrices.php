@@ -91,29 +91,29 @@ class UpdatePrices extends Command
         $normalized = mb_strtolower(str_replace("\xc2\xa0", ' ', $cleanedBrackets), 'UTF-8');
         $normalized = preg_replace('/[а-яё]+/ui', '', $normalized);
         $normalized = preg_replace('/\b-?mix\b/u', '', $normalized);
-    
+
         $lower = trim($normalized);
         $rate = null;
-    
+
         $rateRegex = '/\b(\d+(?:[,.]\d+)?)(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|(?:[tkmg](?![a-z0-9+])))\b/u';
-    
+
         if ($withRate && preg_match($rateRegex, $lower, $matches)) {
             $rateValue = str_replace(',', '.', $matches[1]);
             $rate = is_numeric($rateValue) ? (float)$rateValue : null;
         }
-    
+
         $cleanRegex = '/\b\d+(?:[,.]\d+)?(?:-\d+(?:[,.]\d+)?)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|kh|ksol\/s|ksol|w|(?:[tkmg](?![a-z0-9+])))\b/u';
         $cleaned = preg_replace($cleanRegex, ' ', $lower);
-    
+
         $words = array_values(array_filter(explode(' ', $cleaned)));
-    
+
         if (empty($words)) return $withRate ? ['', '', null] : ['', ''];
-    
+
         $brand = $words[0];
         $model = implode('', array_slice($words, 1));
-    
+
         if ($withRate) return [$brand, $model, $rate];
-    
+
         return [$brand, $model];
     }
 
@@ -340,7 +340,8 @@ class UpdatePrices extends Command
                 $rate = (float) explode(' ', trim($tds->item(2)->textContent))[0];
                 $price = (float) str_replace(' ', '', str_replace('$', '', trim($tds->item(4)->textContent)));
 
-                $corrs = $this->models->where('name', $name);
+                $variants = [$name, str_replace('hydro', 'hyd', $name)];
+                $corrs = $this->models->whereIn('name', $variants);
                 if ($corrs->count() != 1) {
                     $corrs = $this->models->where('name', $name . 'hyd');
 
@@ -624,7 +625,7 @@ class UpdatePrices extends Command
                     $fullName = trim($xpath->query('.//div[contains(@class, "productCard__title")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
                     $rate = strpos($name[2], '-') !== false ? (float) explode('-', $name[2])[0] : (float) $name[2];
-                    
+
                     $name[1] = str_replace('м', 'm', $name[1]);
                     if ($name[1] == 'l11' && $rate == 21) $name[1] = 'l11pro';
                     elseif ($name[1] == 's21+hydro' && $rate == 335) $name[1] = 's21hyd';
@@ -632,9 +633,9 @@ class UpdatePrices extends Command
                     elseif ($name[1] == 'dghome') $name[1] = 'dghome1';
                     elseif ($name[1] == 's21hydroxp') $name[1] = 's21xphyd';
                     elseif ($name[1] == 's19еxphydro') $name[1] = 's19exphyd';
-                    
+
                     $nameWithBrand = $name[0] . $name[1];
-                    
+
                     if ($nameWithBrand == 'bitcoinminers19jxp') $nameWithBrand = 'antminers19jxp';
 
                     $variants = [
@@ -657,7 +658,7 @@ class UpdatePrices extends Command
                     if (!$version) {
                         $model = $this->models->where('name', str_replace('+', '', $nameWithBrand))->first();
                         if ($model) $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
-    
+
                         if (!$version) {
                             $check->push('[Нет версии] ' . $fullName);
                             continue;
@@ -704,7 +705,7 @@ class UpdatePrices extends Command
 
         return $changings->toArray();
     }
-    
+
     private function minerGroup(?User $user): array
     {
         $changings = collect();
@@ -712,10 +713,10 @@ class UpdatePrices extends Command
         try {
             $ads = $user->moderatedAds;
             $check = collect();
-            
+
             $url = 'https://docs.google.com/spreadsheets/d/1LkIZpmWM9-48o8fu9b8V04D7gDdAaLSLkdj_yLxkzwM/gviz/tq?gid=0&range=A3%3AO&headers=1&_=' . time() * 1000;
             $raw_data = file_get_contents($url);
-    
+
             if (preg_match('/google\.visualization\.Query\.setResponse\((.*)\);/s', $raw_data, $matches)) $data = json_decode($matches[1], true);
             else Log::channel('price-updating-errors')->info("[Miner Group] {не получилось распарсить response}");
 
@@ -724,42 +725,39 @@ class UpdatePrices extends Command
 
             foreach ($data['table']['rows'] as $row) {
                 $row = $row['c'];
-                
+
                 if (!$row[1]) {
                     $text = $row[0]['v'];
                     if ($text == 'Наличие в Иркутске') {
                         $city = 'Иркутск';
                         $waiting = 0;
-                    }
-                    elseif ($text == 'Наличие Москва') {
+                    } elseif ($text == 'Наличие Москва') {
                         $city = 'Москва';
                         $waiting = 8;
-                    }
-                    elseif ($text == 'Наличие Китай') {
+                    } elseif ($text == 'Наличие Китай') {
                         $city = 'Китай';
                         $waiting = 25;
                     }
-                    
+
                     continue;
                 }
-                
+
                 if (!$row[3]) continue;
 
                 $fullName = $row[0]['v'];
                 $name = $this->parseModelName($fullName);
                 $name[1] = preg_replace('/\(\d+(?:[.,\/]\d+)*\)/u', '', $name[1]);
                 $name[1] = str_replace('()', '', $name[1]);
-                
+
                 if ($name[0] == 'whatsminer') {
                     $name[1] = str_replace('hydro', '', $name[1]);
                     $name[1] = preg_replace('/\d+(?:[,.]\d+)?\s*(?:th\/s|th|mh\/s|mh|gh\/s|gh|kh\/s|ksol\/s|ksol|[tkmg])\b/ui', '', $name[1]);
-                }
-                elseif ($name[1] == 'q90') $name[1] = 'q';
+                } elseif ($name[1] == 'q90') $name[1] = 'q';
                 elseif ($name[1] == 's21pro+') $name[1] = 's21pro';
                 elseif ($name[1] == 's21++') $name[1] = 's21+';
                 elseif ($name[1] == 'dg1hydro') $name[1] = 'dghydro1';
                 elseif ($name[1] == 'dg1home1') $name[1] = 'dghome1';
-                
+
                 $nameWithBrand = $name[0] . $name[1];
                 $variants = [
                     $name[1],
@@ -767,9 +765,9 @@ class UpdatePrices extends Command
                     str_replace('hydro', 'hyd', $nameWithBrand),
                     str_replace('hydro', 'hyd', $name[1]),
                 ];
-                
+
                 if ($name[0] == 'avalon') array_push($variants, $name[0] . 'a' . $name[1]);
-                
+
                 $rate = (float) $row[7]['v'];
                 $price = (float) $row[1]['v'];
 
@@ -783,17 +781,17 @@ class UpdatePrices extends Command
                 $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                 if (!$version) {
                     $check->push('[Нет версии] ' . $fullName . ' ' . $row[4]['v'] . ' ' . $city . ' ' . $price);
-                        continue;
+                    continue;
                 }
-                
+
                 $condition = $row[4]['v'] == 'Б/у' ? 'Used' : 'New';
                 $availability = $waiting == 0 ? 'In stock' : 'Preorder';
 
                 $ad = null;
                 $ads->each(function ($item, $key) use (&$ad, $ads, $version, $condition, $availability, $waiting) {
                     if (
-                        $item->asic_version_id == $version->id && 
-                        $condition == $item->props['Condition'] && 
+                        $item->asic_version_id == $version->id &&
+                        $condition == $item->props['Condition'] &&
                         $availability == $item->props['Availability'] &&
                         ($availability !== 'Preorder' || $waiting == $item->props['Waiting (days)'])
                     ) {
@@ -828,7 +826,7 @@ class UpdatePrices extends Command
 
         return $changings->toArray();
     }
-    
+
     private function leoMining(?User $user): array
     {
         $changings = collect();
@@ -842,14 +840,14 @@ class UpdatePrices extends Command
             $dom = new DOMDocument();
             @$dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
             $xpath = new DOMXPath($dom);
-            
+
             $data = $xpath->query('//div[contains(@class, "t431__data-part2")]')->item(0)->textContent;
             $paragraphs = preg_split('/\R+/', trim($data));
 
-            $data = array_values(array_map(function($paragraph) {
+            $data = array_values(array_map(function ($paragraph) {
                 return array_filter(array_map('trim', explode(';', $paragraph)));
             }, $paragraphs));
-            
+
             foreach ($data as $i => $row) {
                 $fullName = $row[0];
                 $name = $this->parseModelName($fullName);
@@ -876,7 +874,7 @@ class UpdatePrices extends Command
                 $version = $model->asicVersions->whereIn('hashrate', [$rate, $rate / 1000, $rate * 1000])->first();
                 if (!$version) {
                     $check->push('[Нет версии] ' . $fullName . ' ' . $rate . ' ' . $price);
-                        continue;
+                    continue;
                 }
 
                 $ad = null;
