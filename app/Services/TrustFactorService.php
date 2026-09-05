@@ -284,8 +284,8 @@ class TrustFactorService
                 'branches' => $card['branch_count'] ?? 0,
                 'registration_age' =>  $age,
                 'capital' => $card['capital'] ?? 0,
-                'income' => $card['finance'] && $card['finance']['income'] ? $card['finance']['income'] : 0,
-                'profit' => $card['finance'] && $card['finance']['profit'] ? $card['finance']['profit'] : 0,
+                'income' => $card['finance']['income'] ?? 0,
+                'profit' => $card['finance']['profit'] ?? 0,
                 'employees' => [
                     'exists' => $card['employee_count'] !== null,
                     'count' => $card['employee_count'] ?? 0,
