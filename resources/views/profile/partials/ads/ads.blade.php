@@ -1,23 +1,20 @@
 @php
     $adsCount = $user->ads->count();
     $moreAdsAvailable = ($user->tariff && $adsCount < $user->tariff->max_ads) || (!$user->tariff && $adsCount < 2);
-    $hasVerification = $user->passport || ($user->company && !$user->company->moderation);
     $officeExists = $user->offices->where('moderation', false)->count() > 0;
 @endphp
 
-<x-profile.section h="My advertisements" :p="!$hasVerification
-    ? 'Please verify your identity using your passport or register a company to access advertisements'
-    : (!$officeExists
+<x-profile.section h="My advertisements" :p="!$officeExists
         ? 'When creating a sales ad, you will need to indicate where to pick up the equipment. So first add information about your office or point of sale'
-        : null)">
-    @if ($moreAdsAvailable && $hasVerification && $officeExists)
+        : null">
+    @if ($moreAdsAvailable && $officeExists)
         <x-slot name="i">
             <a href="{{ route('ad.create') }}"
                 class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
         </x-slot>
     @endif
 
-    @if ($hasVerification && $officeExists)
+    @if ($officeExists)
         <div class="text-slate-500 text-sm">
             <span class="text-slate-800 dark:text-slate-200 text-xl sm:text-2xl font-bold">{{ $adsCount }} /
                 {{ $user->tariff ? $user->tariff->max_ads : 2 }}</span>

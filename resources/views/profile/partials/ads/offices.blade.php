@@ -2,15 +2,12 @@
     $officesCount = $user->offices->count();
     $moreOfficesAvailable =
         ($user->tariff && $officesCount < $user->tariff->max_offices) || (!$user->tariff && $officesCount < 1);
-    $hasVerification = $user->passport || ($user->company && !$user->company->moderation);
 @endphp
 
-<x-profile.section h="Offices" :p="!$hasVerification
-    ? 'Please verify your identity using your passport or register a company to add offices'
-    : (!$officesCount
+<x-profile.section h="Offices" :p="!$officesCount
         ? 'Add information about open offices and points of sale'
-        : null)">
-    @if ($moreOfficesAvailable && $hasVerification)
+        : null">
+    @if ($moreOfficesAvailable)
         <x-slot name="i">
             <a href="{{ route('office.create') }}"
                 class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>

@@ -337,7 +337,7 @@ Route::middleware('auth')->group(function () {
         });
     })->middleware('verified');
 
-    Route::middleware(['identified', 'verified'])->group(function () {
+    Route::middleware(['verified'])->group(function () {
         Route::group(['prefix' => 'offices'], function () {
             Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
             Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
