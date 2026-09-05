@@ -287,16 +287,16 @@ class TrustFactorService
                 'income' => $card['finance']['income'] ?? 0,
                 'profit' => $card['finance']['profit'] ?? 0,
                 'employees' => [
-                    'exists' => $card['employee_count'] !== null,
+                    'exists' => (bool) isset($card['employee_count']) && $card['employee_count'] !== null,
                     'count' => $card['employee_count'] ?? 0,
                 ],
                 'video' => (bool) ($company?->video || $hosting?->video),
-                'images' => count($company?->images) ?? 0,
+                'images' => count($company->images ?? []),
                 'risks' => $card['risks'] ?? []
             ],
 
             'legal_cases' => [
-                'ratio' => $age < 8 ? $card['legal_cases']['count'] * 1.5 : $card['legal_cases']['count'] / max(1, $age / 12 * 0.8)
+                'ratio' => isset($card['legal_cases']['count']) ? ($age < 8 ? $card['legal_cases']['count'] * 1.5 : $card['legal_cases']['count'] / max(1, $age / 12 * 0.8)) : 0
             ],
 
             'website' => $this->checkWebsite($company?->site),
@@ -330,7 +330,7 @@ class TrustFactorService
             'ignores' => !(bool) $user->ignores,
 
             'registry' => [
-                'exists' => (bool) $company->registry,
+                'exists' => (bool) ($company->registry ?? false),
             ],
 
             'hosting' => [
