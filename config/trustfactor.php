@@ -73,21 +73,49 @@ return [
 
             'legal_entity' => [
                 'source' => 'company.legal_entity',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'bonus' => 3,
             ],
 
             'company_status' => [
                 'source' => 'company.status_active',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'penalty' => -35,
             ],
 
             'branches' => [
                 'source' => 'company.branches',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'bonus' => 3,
             ],
 
             'registration_age' => [
                 'source' => 'company.registration_age',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'thresholds' => [
                     48 => 14,
                     36 => 11,
@@ -100,6 +128,13 @@ return [
 
             'risk_factors' => [
                 'type' => 'list',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'source' => 'company.risks',
 
                 'components' => [
@@ -181,11 +216,25 @@ return [
 
             'video' => [
                 'source' => 'company.video',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'bonus' => 2,
             ],
 
             'images' => [
                 'source' => 'company.images',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'thresholds' => [
                     5 => 2,
                     1 => 0,
@@ -217,6 +266,11 @@ return [
                 'source' => 'company.income',
                 'conditions' => [
                     [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
                         'source' => 'company.registration_age',
                         'operator' => '>',
                         'value' => 12,
@@ -232,6 +286,11 @@ return [
             'profit' => [
                 'source' => 'company.profit',
                 'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
                     [
                         'source' => 'company.registration_age',
                         'operator' => '>',
