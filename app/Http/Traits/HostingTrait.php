@@ -12,8 +12,6 @@ trait HostingTrait
         $hostings = Hosting::with(['user:id,name,slug,tf', 'user.phones:id,user_id'])->whereHas('user', function ($query) {
             $query->whereHas('tariff', function ($q) {
                 $q->where('can_have_hosting', true);
-            })->whereHas('company', function ($q) {
-                $q->where('moderation', false);
             });
         });
 
