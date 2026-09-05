@@ -365,15 +365,13 @@ Route::middleware('auth')->group(function () {
             });
         });
 
-        Route::middleware('has-company')->group(function () {
-            Route::group(['prefix' => 'hostings'], function () {
-                Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
-                Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
-                Route::middleware('owner')->group(function () {
-                    Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
-                    Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
-                    Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
-                });
+        Route::group(['prefix' => 'hostings'], function () {
+            Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
+            Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
+            Route::middleware('owner')->group(function () {
+                Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
+                Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
+                Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
             });
         });
     });
