@@ -67,8 +67,7 @@ class ShopController extends Controller
 
         if (
             !$user->tariff || !$user->tariff->can_have_hosting ||
-            !$user->hosting || $user->hosting->moderation && !$canSee ||
-            !$user->company || $user->company->moderation && !$canSee
+            !$user->hosting || $user->hosting->moderation && !$canSee
         )
             return redirect()->route('company', ['user' => $user->slug]);
 
