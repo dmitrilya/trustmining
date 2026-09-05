@@ -10,7 +10,7 @@
             class="cursor-text whitespace-normal resize-none w-full px-0 text-slate-800 dark:text-slate-200 bg-white border-0 dark:bg-slate-950 focus:ring-0 focus-visible:ring-0 focus-visible:outline-none dark:placeholder-slate-400"
             style="min-height: 96px" @input="text = $el.innerHTML; range = saveRange()" @keyup="range = saveRange()" @mouseup="range = saveRange()"
             @touchend="range = saveRange()" @paste="e => formatPaste($el, e)" x-init="$el.innerHTML = `{{ $answer->text }}`"></pre>
-        <x-inputs.input-error :messages="$errors?->get('text')" />
+        <x-inputs.input-error :messages="$errors->get('text')" />
     </div>
 
     <div class="flex items-center justify-between px-3 py-2 border-t dark:border-slate-700" x-data="{ images: {{ count($answer->images) }}, files: {{ count($answer->files) }} }">
@@ -113,7 +113,7 @@
         </button>
     </div>
 
-    @if (count($errors?->get('images.*') ?? []))
+    @if (count($errors->get('images.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('images.*') as $error)
                 <x-inputs.input-error :messages="$error" />
@@ -121,7 +121,7 @@
         </div>
     @endif
 
-    @if (count($errors?->get('files.*') ?? []))
+    @if (count($errors->get('files.*')))
         <div class="px-3 py-2">
             @foreach ($errors->get('files.*') as $error)
                 <x-inputs.input-error :messages="$error" />

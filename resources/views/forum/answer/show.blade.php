@@ -85,9 +85,11 @@
         <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $answer->text !!}</div>
     </div>
 
-    <div class="hidden">
-        @include('forum.answer.edit')
-    </div>
+    @if ($authId && $authId == $answer->user_id)
+        <div class="hidden">
+            @include('forum.answer.edit')
+        </div>
+    @endif
 
     <div class="ml-auto w-fit mb-2 sm:mb-3 lg:mb-4">
         <div data-type="datetime" data-date="{{ $answer->created_at }}" class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500"></div>
