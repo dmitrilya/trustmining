@@ -5,7 +5,7 @@
         <meta property="og:description"
             content="{{ __('Place the equipment at the company') }} {{ $hosting->user->name }} {{ __('according to the tariff') }} {{ collect($hosting->tariffs)->min('t') }} ₽/{{ __('kW') }}">
         <meta property="og:image"
-            content="{{ $hosting->user->company->logo ? Storage::disk('public')->url($hosting->user->company->logo) : request()->getSchemeAndHttpHost() . '/img/icon.png' }}">
+            content="{{ $hosting->user->company?->logo ? Storage::disk('public')->url($hosting->user->company->logo) : request()->getSchemeAndHttpHost() . '/img/icon.png' }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="product">
     </x-slot>
