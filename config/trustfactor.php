@@ -168,6 +168,13 @@ return [
             'legal_cases' => [
                 'type' => 'threshold_reverse',
                 'source' => 'legal_cases.ratio',
+                'conditions' => [
+                    [
+                        'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
                 'thresholds' => [
                     '2.5'  => -7,
                     '1.8'  => -5,
