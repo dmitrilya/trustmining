@@ -1,5 +1,5 @@
 <x-app-layout :title="'Калькулятор майнинга ' .
-    ($rModel ? ($rVersion ? $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] : $selModel['n']) : 'онлайн') .
+    ($rModel ? ($rVersion ? $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] : $selModel['n']) : 'асиков') .
     ': доходность и окупаемость'" :description="($rModel
     ? ($rVersion
         ? 'Узнайте, сколько приносит ' . $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] . ' сегодня. '
@@ -44,6 +44,8 @@
                         <x-carousel.carousel :items="$ads" blade="ad.components.card" model="ad" :big="true" />
                     </div>
                 </section>
+
+                @include('calculator.components.why-tm')
             </div>
 
             <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1280px')" class="hidden xl:flex flex-col gap-4 w-sm max-w-sm">
