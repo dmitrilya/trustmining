@@ -61,9 +61,11 @@
         <div itemprop="text" class="text-xs lg:text-sm text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $comment->text !!}</div>
     </div>
 
-    <div class="hidden">
-        @include('forum.comment.edit')
-    </div>
+    @if ($authId && $authId == $comment->user_id)
+        <div class="hidden">
+            @include('forum.comment.edit')
+        </div>
+    @endif
 
     <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
         class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
