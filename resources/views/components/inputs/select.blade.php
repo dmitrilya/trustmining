@@ -4,6 +4,7 @@
     'size' => 'base',
     'items',
     'key' => null,
+    'initKey' => null,
     'icon' => null,
     'handleChange' => null,
     'disabled' => false,
@@ -25,24 +26,26 @@
         open: false,
         itemKey: {{ $defaultKey }},
         isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }},
-        
+    
         get currentItems() {
             return {{ $isJs ? 'true' : 'false' }} ? ({{ $itemsData }} || []) : {{ $itemsData }};
         },
-        
+    
         get selectedItem() {
             return this.currentItems.find(i => i.key == this.itemKey);
         },
-        
+    
         init() {
-            if ({{ $isJs ? 'true' : 'false' }}) {
-                this.$watch('() => this.currentItems', (newItems) => {
-                    if (newItems.length && !newItems.some(i => i.key == this.itemKey)) {
-                        this.itemKey = newItems[0]?.key ?? -1;
-                        @if($handleChange) {{ $handleChange }}(this.itemKey); @endif
-                    }
-                }, { deep: true });
-            }
+            if ({{ $isJs ? 'true' : 'false' }}) this.$watch('() => this.currentItems', (newItems) => {
+                if (newItems.length && !newItems.some(i => i.key == this.itemKey)) {
+                    this.itemKey = newItems[0]?.key ?? -1;
+                    @if($handleChange)
+                    {{ $handleChange }}(this.itemKey);
+                    @endif
+                }
+            }, { deep: true });
+    
+            if ({{ $initKey ? 'true' : 'false' }} && {{ $initKey ?? 'false' }}) this.itemKey = {{ $initKey ?? 'null' }};
         }
     }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }};">
 

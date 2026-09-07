@@ -59,7 +59,8 @@
                                 <x-inputs.input-error :messages="$errors->get('price')" />
                             </div>
 
-                            <x-inputs.select :label="__('Currency')" name="coin_id" key="2" :items="$coins->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                            <x-inputs.select :label="__('Currency')" name="coin_id" key="2" initKey="localStorage.getItem('ad_creating_currency')"
+                                handleChange="(currency => localStorage.setItem('ad_creating_currency', currency))" :items="$coins->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                         </div>
 
                         <div class="mt-0.5 xs:mt-1 text-xxs xs:text-xs text-slate-500">
@@ -67,7 +68,9 @@
                         </div>
                     </div>
 
-                    <x-inputs.checkbox name="with_vat" :checked="old('with_vat')" value="with_vat">
+                    <x-inputs.checkbox name="with_vat" :checked="old('with_vat')" value="with_vat"
+                        dataInit="$el.checked = localStorage.getItem('ad_creating_with_vat') === 'true'"
+                        @change="localStorage.setItem('ad_creating_with_vat', $event.target.checked)">
                         {{ __('Price including VAT') }}
                     </x-inputs.checkbox>
 
