@@ -21,6 +21,7 @@
                 @if (!$widjet)
                     <x-characteristics.characteristic name="The best price" x-value="version?.p ? version.p + ' USDT' : '{{ __('No data') }}'" />
                 @endif
+                <x-characteristics.characteristic x-name="algorithms[version.a].p[profitNumber].c[0].a + 'USDT'" x-value="algorithms[version.a].p[profitNumber].c[0].r" />
                 <x-characteristics.characteristic name="USDTRUB" :value="round(1 / $rub, 2)" />
             </x-characteristics.characteristics>
             @if (!$widjet)

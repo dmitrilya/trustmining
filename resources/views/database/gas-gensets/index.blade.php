@@ -115,7 +115,7 @@
                         x-text="model.name">
                     </h5>
                     <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
-                        x-text="Math.round(model.max_power) + ' {{ __('kW/h') }}'"></div>
+                        x-text="Math.round(model.max_power) + ' {{ __('kW·h') }}'"></div>
                     <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.fuel_consumption) + ' {{ __('m³/h') }}'"></div>
                 </a>

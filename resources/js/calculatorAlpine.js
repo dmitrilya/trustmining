@@ -58,6 +58,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
     minPriceUSDT: selVersion.p ? (!taxEnabled || selVersion.v ? selVersion.p : selVersion.p * 1.2) : null,
     dailyTax: 0,
     taxHelp: '',
+    maxProfitableTariff: null,
     incPercent: 33.33,
     expPercent: 33.33,
     taxPercent: 33.33,
@@ -171,6 +172,8 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
         this.dailyConsumption = round2(dailyConsumptionCurrency * COEF[this.view]);
         let dailyProfit = dailyIncomeCurrency - dailyConsumptionCurrency;
         let dailyProfitOneUSDT = dailyIncomeOne - dailyConsumptionOne * rub;
+
+        this.maxProfitableTariff = dailyIncomeOne / (this.efficiency * this.hashrate / 1000 * 24 * this.uptime / 100);
 
         const minPriceRubRounded = Math.round(this.minPriceUSDT / rub);
         let dailyTax = 0;

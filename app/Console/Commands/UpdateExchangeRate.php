@@ -216,7 +216,8 @@ class UpdateExchangeRate extends Command
                     'n' => $c->name,
                     'a' => $c->abbreviation,
                     'p' => $c->profit,
-                    'f' => $c->fee
+                    'f' => $c->fee,
+                    'r' => $c->rate,
                 ])
             ])
         ])->keyBy('i');

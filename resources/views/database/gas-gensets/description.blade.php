@@ -18,7 +18,7 @@
             <ol>
                 <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                         class="ql-color-secondary-text-color"><b>Максимальная мощность:</b></span> Станция способна
-                    выдавать до <b>{{ $model->max_power }} {{ __('kW/h') }}</b>, что позволяет запитывать энергоемкое
+                    выдавать до <b>{{ $model->max_power }} {{ __('kW·h') }}</b>, что позволяет запитывать энергоемкое
                     оборудование без просадок напряжения.</li>
                 <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                         class="ql-color-secondary-text-color"><b>Электрические параметры:</b></span> Установка
@@ -27,7 +27,7 @@
                 <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                         class="ql-color-secondary-text-color"><b>Экономичность:</b></span> Продуманная система
                     смесеобразования позволяет достичь оптимизированного расхода топлива. Расход газа составляет
-                    <b>{{ $model->fuel_consumption }}</b>, что делает стоимость одного кВт*ч значительно ниже, чем при
+                    <b>{{ $model->fuel_consumption }}</b>, что делает стоимость одного кВт·ч значительно ниже, чем при
                     использовании магистральных сетей или дизельных аналогов.</li>
             </ol>
             <p><br></p>
@@ -81,7 +81,7 @@
                 оборудования из строя.</p>
             <p><br></p>
             <h2>Сферы применения</h2>
-            <p>Благодаря сочетанию высокой мощности {{ $model->max_power }} {{ __('kW/h') }} и надежного двигателя {{ $model->gpuEngineModel->name }},
+            <p>Благодаря сочетанию высокой мощности {{ $model->max_power }} {{ __('kW·h') }} и надежного двигателя {{ $model->gpuEngineModel->name }},
                 данная ГПУ является идеальным выбором для:</p>
             <ol>
                 <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>Производственных цехов и

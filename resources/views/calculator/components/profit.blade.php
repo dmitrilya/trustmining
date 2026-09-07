@@ -16,19 +16,27 @@
             </div>
         </div>
 
-        @if ($firmwares->count() && in_array('additional-params', $blocks))
-            <template x-if="availableFirmwares.length && (firmware != null || availableFirmwares[0].up > 0)">
-                <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-indigo-500/10 text-indigo-500 border-indigo-500 text-xs text-center">
-                    <span
-                        x-text="firmware == null ? `+${availableFirmwares[0]?.up}% {{ __('with firmware (enable in advanced settings)') }}` : '{{ __('The :hashrate firmware from :company was selected') }}'.replace(':hashrate', firmware.h + firmware.m + '/s').replace(':company', firmware.c)"></span>
-                    <template x-if="firmware != null">
-                        <a :href="'https://trustmining.ru/ads/firmwares/' + firmware.i" target="_blank" class="inline underline hover:text-indigo-600"
-                            x-text="'({{ __('Details') }})'">
-                        </a>
-                    </template>
+        <div class="space-y-2">
+            @if ($firmwares->count() && in_array('additional-params', $blocks))
+                <template x-if="availableFirmwares.length && (firmware != null || availableFirmwares[0].up > 0)">
+                    <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-indigo-500/10 text-indigo-500 border border-indigo-500/30 text-xs text-center">
+                        <span
+                            x-text="firmware == null ? `+${availableFirmwares[0]?.up}% {{ __('with firmware (enable in advanced settings)') }}` : '{{ __('The :hashrate firmware from :company was selected') }}'.replace(':hashrate', firmware.h + firmware.m + '/s').replace(':company', firmware.c)"></span>
+                        <template x-if="firmware != null">
+                            <a :href="'https://trustmining.ru/ads/firmwares/' + firmware.i" target="_blank" class="inline underline hover:text-indigo-600"
+                                x-text="'({{ __('Details') }})'">
+                            </a>
+                        </template>
+                    </div>
+                </template>
+            @endif
+
+            <template x-if="dailyProfit < 0">
+                <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/30 text-xs text-center">
+                    <span x-text="'{{ __('It will work in plus with the tariff') }} ' + maxProfitableTariff + ' ₽/{{ __('kW·h') }}'"></span>
                 </div>
             </template>
-        @endif
+        </div>
 
         <div class="mt-6">
             <div class="flex justify-between text-xs font-extrabold uppercase">

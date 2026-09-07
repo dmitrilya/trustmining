@@ -34,7 +34,7 @@
                         <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" />
                         <x-characteristics.characteristic name="Country" :value="$brand->country" />
                         <x-characteristics.characteristic name="Power" :value="$model->max_power" itemprop="additionalProperty"
-                            :unit="['prop' => 'unitText', 'content' => 'kW/h']" />
+                            :unit="['prop' => 'unitText', 'content' => 'kW·h']" />
                         <x-characteristics.characteristic name="Phases" :value="$model->phases"
                             itemprop="additionalProperty" />
                         <x-characteristics.characteristic name="Gas type" :value="__('Natural')"

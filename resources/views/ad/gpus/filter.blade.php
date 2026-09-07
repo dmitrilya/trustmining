@@ -16,11 +16,11 @@
     'selectedModel' => $selModel,
 ])
 
-<x-filters.filter-filter type="checkbox" :name="__('Power (kW/h)')" :items="[
-    ['slug' => '><200-300', 'name' => '300' . __('kW/h')],
-    ['slug' => '><300-500', 'name' => '500' . __('kW/h')],
-    ['slug' => '><500-1000', 'name' => '1000' . __('kW/h')],
-    ['slug' => '>1000', 'name' => __('more') . ' 1000' . __('kW/h')],
+<x-filters.filter-filter type="checkbox" :name="__('Power (kW·h)')" :items="[
+    ['slug' => '><200-300', 'name' => '300' . __('kW·h')],
+    ['slug' => '><300-500', 'name' => '500' . __('kW·h')],
+    ['slug' => '><500-1000', 'name' => '1000' . __('kW·h')],
+    ['slug' => '>1000', 'name' => __('more') . ' 1000' . __('kW·h')],
 ]" field="max_power"></x-filters.filter-filter>
 
 <x-filters.filter-filter type="checkbox" :name="__('Manufacturer')" :items="$brands" field="manufacturers"></x-filters.filter-filter>
