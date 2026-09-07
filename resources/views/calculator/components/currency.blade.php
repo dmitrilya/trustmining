@@ -10,7 +10,7 @@
                     'USDT'
             }"
             class="p-1 xs:p-1.5 rounded-l-md border border-r-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-            @click="currency = 'RUB'">RUB</button>
+            @click="currency = 'RUB';localStorage.setItem('calc_currency', 'RUB')">RUB</button>
         <button
             :class="{
                 'bg-primary-gradient text-white': currency ==
@@ -19,6 +19,6 @@
                     'RUB'
             }"
             class="p-1 xs:p-1.5 rounded-r-md border border-l-0 border-slate-300 dark:border-slate-700 text-xxs font-semibold"
-            @click="currency = 'USDT'">USDT</button>
+            @click="currency = 'USDT';localStorage.setItem('calc_currency', 'USDT')">USDT</button>
     </div>
 </div>

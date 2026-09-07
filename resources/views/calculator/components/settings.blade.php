@@ -9,7 +9,7 @@
     <div class="w-full">
         <x-inputs.input-label for="tariff" :value="__('Tariff') . ' ₽/' . __('kW')" />
         <x-inputs.text-input ::value="tariff" id="tariff" type="text" @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff"
-            ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
+            @change="localStorage.setItem('calc_tariff', $el.value)" ::disabled="tariffs.length > 1 && selectedTariff != tariffs.length - 1" />
     </div>
 
     <div class="w-full">
@@ -45,8 +45,7 @@
 
                                     @if (!$widjet)
                                         <template x-if="version && algorithms[version.a].p[profitNumber].c[0].a == 'BTC'">
-                                            <div class="relative" x-data="{ open: false }"
-                                                @click="open = !open" @click.away="open = false">
+                                            <div class="relative" x-data="{ open: false }" @click="open = !open" @click.away="open = false">
                                                 <div
                                                     class="ml-1 sm:ml-2 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer transition duration-100">
                                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

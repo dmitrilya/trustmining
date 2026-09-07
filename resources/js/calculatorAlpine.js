@@ -14,6 +14,7 @@ const BRACKETS = Object.freeze([
 
 const BASE_TARIFF = 5;
 const BASE_UPTIME = 99.7;
+const BASE_CURRENCY = 'RUB';
 
 const round2 = value => Math.round(value * 100) / 100;
 
@@ -22,9 +23,9 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
     firmwares: firmwares,
     tariffs: [...tariffs, { t: BASE_TARIFF, u: BASE_UPTIME }],
 
-    currency: 'RUB',
+    currency: localStorage.getItem('calc_currency') || BASE_CURRENCY,
     view: 'month',
-    tariff: tariffs.length ? tariffs[0].t : BASE_TARIFF,
+    tariff: tariffs.length ? tariffs[0].t : (localStorage.getItem('calc_tariff') ? parseFloat(localStorage.getItem('calc_tariff')) : BASE_TARIFF),
     version: {
         ...selVersion,
         a: selModel.a,
