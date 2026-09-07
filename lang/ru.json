@@ -465,6 +465,7 @@
     "Firmware": "Прошивка",
     "Without firmware": "Без прошивки",
     "with firmware (enable in advanced settings)": "с прошивкой (включите в доп. настройках)",
+    "It will work in plus with the tariff": "Будет работать в плюс при тарифе",
     "The :hashrate firmware from :company was selected": "Выбрана прошивка на :hashrate от :company",
     "Modes": "Режимы",
     "Mode": "Режим",
