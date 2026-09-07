@@ -173,7 +173,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
         let dailyProfit = dailyIncomeCurrency - dailyConsumptionCurrency;
         let dailyProfitOneUSDT = dailyIncomeOne - dailyConsumptionOne * rub;
 
-        this.maxProfitableTariff = dailyIncomeOne / (this.efficiency * this.hashrate / 1000 * 24 * this.uptime / 100);
+        this.maxProfitableTariff = round2(dailyIncomeOne / rub / (this.efficiency * this.hashrate / 1000 * 24 * this.uptime / 100));
 
         const minPriceRubRounded = Math.round(this.minPriceUSDT / rub);
         let dailyTax = 0;
