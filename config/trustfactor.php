@@ -258,6 +258,11 @@ return [
                         'value' => true,
                     ],
                     [
+                        'source' => 'company.legal_entity',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
                         'source' => 'company.capital',
                         'operator' => '!=',
                         'value' => null,
@@ -274,6 +279,11 @@ return [
                 'conditions' => [
                     [
                         'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
+                        'source' => 'company.legal_entity',
                         'operator' => '==',
                         'value' => true,
                     ],
@@ -295,6 +305,11 @@ return [
                 'conditions' => [
                     [
                         'source' => 'company.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ],
+                    [
+                        'source' => 'company.legal_entity',
                         'operator' => '==',
                         'value' => true,
                     ],
@@ -460,6 +475,16 @@ return [
                             'source' => 'company.exists',
                             'operator' => '==',
                             'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.capital',
+                            'operator' => '!=',
+                            'value' => null,
                         ]
                     ],
                     'thresholds' => [
@@ -474,6 +499,16 @@ return [
                 'income' => [
                     'source' => 'company.income',
                     'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
                         [
                             'source' => 'company.registration_age',
                             'operator' => '>',
@@ -540,6 +575,16 @@ return [
                             'source' => 'company.exists',
                             'operator' => '==',
                             'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.capital',
+                            'operator' => '!=',
+                            'value' => null,
                         ]
                     ],
                     'thresholds' => [
@@ -554,6 +599,16 @@ return [
                 'income' => [
                     'source' => 'company.income',
                     'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
+                        [
+                            'source' => 'company.legal_entity',
+                            'operator' => '==',
+                            'value' => true,
+                        ],
                         [
                             'source' => 'company.registration_age',
                             'operator' => '>',
