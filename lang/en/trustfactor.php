@@ -77,7 +77,7 @@ return [
         ],
         'registry' => [
             'title' => 'Federal Tax Service mining registry',
-            'description' => 'The company is listed in the mining operators registry',
+            'description' => 'The company is an operator of mining infrastructure',
         ],
         'visiting_territory' => [
             'title' => 'Hosting site access',
