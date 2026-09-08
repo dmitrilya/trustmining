@@ -3,8 +3,11 @@
     $serviceFilter = request()->peculiarities && in_array('Repair service', request()->peculiarities);
     $cryptoexchangerFilter = request()->peculiarities && in_array('Cryptoexchanger', request()->peculiarities);
 
-    if ($serviceFilter) {
-        $title = 'Сервисные центры по ремонту майнингового оборудования, точки продаж ASIC майнеров';
+    if (isset($user) && $user->company) {
+        $title .= 'Официальные офисы компании ' . $user->name;
+        $description .= ' - ' . $user->name;
+    } elseif ($serviceFilter) {
+        $title = 'Сервисные центры по ремонту майнингового оборудования';
         $description =
             'Каталог сервисных центров по ремонту ASIC и видеокарт, а также проверенные точки продаж майнингового оборудования. Сравните цены, найдите ближайший сервис и купите оборудование для майнинга с гарантией в вашем городе';
     } elseif ($cryptoexchangerFilter) {
@@ -15,11 +18,6 @@
         $title = 'Офисы майнинговых компаний, точки продаж ASIC майнеров';
         $description =
             'Сравните предложения от ведущих поставщиков оборудования для майнинга. Адреса офисов, актуальное наличие ASIC-майнеров и цены в точках продаж. Покупайте оборудование для добычи криптовалют у официальных дилеров с сервисным обслуживанием';
-    }
-
-    if (isset($user) && $user->company) {
-        $title .= ' - ' . $user->name;
-        $description .= ' - ' . $user->name;
     }
 @endphp
 
