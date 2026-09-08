@@ -6,8 +6,7 @@
                 {{ __('The criteria and their strictness depend on the main activity of the company and the presence of certain announcements') }}
             </p>
         </div>
-        <div
-            class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600">
+        <div class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600">
             <div class="whitespace-nowrap text-slate-600 dark:text-slate-400 mb-1">{{ __('Main direction') }}</div>
             <div class="whitespace-nowrap text-indigo-500 uppercase">{{ __('trustfactor.directions.' . $tfData['direction']) }}</div>
         </div>
@@ -56,7 +55,8 @@
                                     } else {
                                         asort($sortedThresholds);
                                     }
-                                    $gradients = $factor['type'] === 'threshold_reverse' ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#f43f5e', '#f59e0b', '#10b981'];
+                                    $gradients =
+                                        $factor['type'] === 'threshold_reverse' ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#f43f5e', '#f59e0b', '#10b981'];
 
                                     $thresholdKeys = array_keys($sortedThresholds);
 
@@ -102,24 +102,26 @@
                         </div>
                     @elseif ($factor['type'] === 'group')
                         <div class="space-y-2">
-                            <div class="relative h-2 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-800">
+                            <div class="relative h-2 bg-slate-200 dark:bg-slate-800 rounded-full">
                                 @php
-                                    $max = max(abs($factor['max'] ?? 0), abs($factor['penalty'] ?? 0), 1);
-                                    $score = $factor['score'] ?? 0;
-
-                                    $minScore = $factor['penalty'] ?? 0;
+                                    $minScore = $factor['min'] ?? ($factor['penalty'] ?? 0);
                                     $maxScore = $factor['max'] ?? 0;
+                                    $score = $factor['score'] ?? 0;
 
                                     $range = $maxScore - $minScore;
 
                                     $position = $range > 0 ? (($score - $minScore) / $range) * 100 : 0;
-
                                     $position = max(0, min(100, $position));
                                 @endphp
 
-                                <div class="absolute inset-0" style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);"></div>
+                                <div class="absolute inset-0 opacity-25 rounded-full"
+                                    style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);"></div>
 
-                                <div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-slate-200 border-2 border-slate-700 dark:border-slate-300 shadow"
+                                <div class="absolute inset-0 rounded-full"
+                                    style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);background-size: {{ $position }}% 100%;background-repeat: no-repeat;">
+                                </div>
+
+                                <div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-slate-200 border-2 border-slate-700 dark:border-slate-300 shadow-sm z-10"
                                     style="left: calc({{ $position }}% - 6px);"></div>
                             </div>
 
@@ -147,25 +149,25 @@
 
                                                 <div class="shrink-0">
                                                     @if ($component['type'] === 'threshold')
-                                                        <span
-                                                            class="text-xxs font-mono px-1.5 py-0.5 rounded
+                                                        <div
+                                                            class="text-xxs font-mono w-6 flex justify-center py-0.5 rounded
                                                                 {{ $component['score'] > 0
                                                                     ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                                                                     : ($component['score'] < 0
                                                                         ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
                                                                         : 'bg-slate-500/10 text-slate-500') }}">
                                                             {{ $component['score'] > 0 ? '+' : '' }}{{ $component['score'] }}
-                                                        </span>
+                                                        </div>
                                                     @else
-                                                        <span
-                                                            class="text-xxs font-mono px-1.5 py-0.5 rounded
+                                                        <div
+                                                            class="text-xxs font-mono w-6 flex justify-center py-0.5 rounded
                                                                 {{ $component['score'] > 0
                                                                     ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                                                                     : ($component['score'] < 0
                                                                         ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400'
                                                                         : 'bg-slate-500/10 text-slate-500') }}">
                                                             {{ $component['score'] > 0 ? '+' : '' }}{{ $component['score'] }}
-                                                        </span>
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>
@@ -192,8 +194,8 @@
                                                 </div>
                                             </div>
 
-                                            <span
-                                                class="shrink-0 text-xxs font-mono px-1.5 py-0.5 rounded
+                                            <div
+                                                class="shrink-0 text-xxs font-mono w-6 flex justify-center py-0.5 rounded
                                                     {{ ($component['value'] && $component['max'] > 0) || (!$component['value'] && $component['max'] == 0)
                                                         ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                                                         : 'bg-rose-500/10 text-rose-600 dark:text-rose-400' }}">
@@ -209,7 +211,7 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                                     </svg>
                                                 @endif
-                                            </span>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>

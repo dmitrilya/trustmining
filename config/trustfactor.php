@@ -49,6 +49,7 @@ return [
             'risk_factors',
             'legal_cases',
             'website',
+            'phone',
             'video',
             'images',
             'capital',
@@ -63,6 +64,7 @@ return [
             'ignores',
             'registry',
             'visiting_territory',
+            'hosting_documents',
         ],
 
         'default' => [
@@ -464,6 +466,38 @@ return [
                 ],
                 'penalty' => -5,
             ],
+
+            'hosting_documents' => [
+                'type' => 'group',
+                'source' => 'hosting.exists',
+                'conditions' => [
+                    [
+                        'source' => 'hosting.exists',
+                        'operator' => '==',
+                        'value' => true,
+                    ]
+                ],
+
+                'components' => [
+                    'contract' => [
+                        'source' => 'hosting.documents.contract',
+                        'bonus' => 1,
+                        'penalty' => -2,
+                    ],
+
+                    'territory' => [
+                        'source' => 'hosting.documents.territory',
+                        'bonus' => 3,
+                        'penalty' => -1,
+                    ],
+
+                    'energy' => [
+                        'source' => 'hosting.documents.energy',
+                        'bonus' => 3,
+                        'penalty' => -1,
+                    ],
+                ],
+            ],
         ],
 
         'directions' => [
@@ -675,6 +709,38 @@ return [
                         ]
                     ],
                     'penalty' => -10,
+                ],
+
+                'hosting_documents' => [
+                    'type' => 'group',
+                    'source' => 'hosting.exists',
+                    'conditions' => [
+                        [
+                            'source' => 'hosting.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
+                    ],
+
+                    'components' => [
+                        'contract' => [
+                            'source' => 'hosting.documents.contract',
+                            'bonus' => 0,
+                            'penalty' => -3,
+                        ],
+
+                        'territory' => [
+                            'source' => 'hosting.documents.territory',
+                            'bonus' => 2,
+                            'penalty' => -2,
+                        ],
+
+                        'energy' => [
+                            'source' => 'hosting.documents.energy',
+                            'bonus' => 2,
+                            'penalty' => -2,
+                        ],
+                    ],
                 ],
             ],
 

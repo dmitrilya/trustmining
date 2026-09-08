@@ -96,6 +96,7 @@ class TrustFactorService
             'value' => $value,
             'score' => $score,
             'max' => $factor['bonus'] ?? 0,
+            'min' => $factor['penalty'] ?? 0,
             'bonus' => $factor['bonus'] ?? 0,
             'penalty' => $factor['penalty'] ?? 0,
         ];
@@ -141,6 +142,7 @@ class TrustFactorService
                 'value' => $exists,
                 'score' => $score,
                 'max' => $factor['bonus'] ?? 0,
+                'min' => $factor['penalty'] ?? 0,
                 'bonus' => $factor['bonus'] ?? 0,
                 'penalty' => $factor['penalty'] ?? 0,
                 'components' => [],
@@ -149,6 +151,7 @@ class TrustFactorService
 
         $score = 0;
         $max = 0;
+        $min = 0;
         $components = [];
 
         foreach ($factor['components'] ?? [] as $componentName => $component) {
@@ -158,6 +161,7 @@ class TrustFactorService
 
             $score += $result['score'];
             $max += $result['max'];
+            $min += $result['min'];
             $components[] = $result;
         }
 
@@ -167,6 +171,7 @@ class TrustFactorService
             'value' => $exists,
             'score' => $score,
             'max' => $max,
+            'min' => $min,
             'bonus' => $factor['bonus'] ?? 0,
             'penalty' => $factor['penalty'] ?? 0,
             'components' => $components,
@@ -339,6 +344,11 @@ class TrustFactorService
                     'Possibility of visiting the territory',
                     $hosting->peculiarities ?? []
                 )),
+                'documents' => [
+                    'contract' => (bool) ($hosting && $hosting->contract),
+                    'territory' => (bool) ($hosting && $hosting->territory),
+                    'energy' => (bool) ($hosting && $hosting->energy_supply),
+                ]
             ],
         ];
     }

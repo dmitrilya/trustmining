@@ -83,6 +83,25 @@ return [
             'title' => 'Hosting site access',
             'description' => 'The company allows visits to the hosting facility',
         ],
+        'hosting_documents' => [
+            'title' => 'Hosting Documents',
+            'description' => 'Documents uploaded and verified',
+
+            'components' => [
+                'contract' => [
+                    'title' => 'Contract Template',
+                    'description' => 'Standard agreement uploaded and verified',
+                ],
+                'territory' => [
+                    'title' => 'Facility Documents',
+                    'description' => 'Ownership or lease documents verified',
+                ],
+                'energy' => [
+                    'title' => 'Power Supply Agreement',
+                    'description' => 'Power supply agreement uploaded and verified',
+                ],
+            ],
+        ],
         'registration_age' => [
             'title' => 'Company age',
             'description' => 'Time elapsed since the company’s registration',
