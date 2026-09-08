@@ -60,10 +60,10 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
     </div>
 
     <div>
-        <x-inputs.input-label for="length" :value="__('Length (cm)')" />
-        <x-inputs.text-input id="length" name="length" type="number" autocomplete="length" :value="$ad->props['Length (cm)']"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Length (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
-        <x-inputs.input-error :messages="$errors->get('length')" />
+        <x-inputs.input-label for="height" :value="__('Height (cm)')" />
+        <x-inputs.text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Height (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-inputs.input-error :messages="$errors->get('height')" />
     </div>
 
     <div>
@@ -74,10 +74,10 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
     </div>
 
     <div>
-        <x-inputs.input-label for="height" :value="__('Height (cm)')" />
-        <x-inputs.text-input id="height" name="height" type="number" autocomplete="height" :value="$ad->props['Height (cm)']"
-            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Height (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
-        <x-inputs.input-error :messages="$errors->get('height')" />
+        <x-inputs.input-label for="depth" :value="__('Depth (cm)')" />
+        <x-inputs.text-input id="depth" name="depth" type="number" autocomplete="depth" :value="$ad->props['Depth (cm)']"
+            @change="let props = JSON.parse($refs.props_cryptoboilers.value);props['Depth (cm)'] = $el.value;$refs.props_cryptoboilers.value = JSON.stringify(props)" />
+        <x-inputs.input-error :messages="$errors->get('depth')" />
     </div>
 
     <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">

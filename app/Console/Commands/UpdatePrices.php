@@ -525,6 +525,8 @@ class UpdatePrices extends Command
                     $fullName = trim($xpath->query('.//span[contains(@class, "i-catalog-item__name")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
                     $nameWithBrand = $name[0] . $name[1];
+                    if ($nameWithBrand == 'antminers21pro+') $nameWithBrand = 'antminers21pro';
+                    elseif ($nameWithBrand == 'antminers21++') $nameWithBrand = 'antminers21+';
 
                     $variants = [
                         $name[1],
