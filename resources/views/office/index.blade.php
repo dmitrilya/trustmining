@@ -4,8 +4,8 @@
     $cryptoexchangerFilter = request()->peculiarities && in_array('Cryptoexchanger', request()->peculiarities);
 
     if (isset($user) && $user->company) {
-        $title .= 'Официальные офисы компании ' . $user->name;
-        $description .= ' - ' . $user->name;
+        $title = 'Официальные офисы компании ' . $user->name;
+        $description = ' - ' . $user->name;
     } elseif ($serviceFilter) {
         $title = 'Сервисные центры по ремонту майнингового оборудования';
         $description =
