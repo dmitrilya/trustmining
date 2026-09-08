@@ -502,6 +502,19 @@ return [
 
         'directions' => [
             'miners' => [
+                'legal_entity' => [
+                    'source' => 'company.legal_entity',
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
+                    ],
+                    'bonus' => 2,
+                    'penalty' => -4,
+                ],
+
                 'capital' => [
                     'source' => 'company.capital',
                     'conditions' => [
@@ -602,6 +615,19 @@ return [
             ],
 
             'hosting' => [
+                'legal_entity' => [
+                    'source' => 'company.legal_entity',
+                    'conditions' => [
+                        [
+                            'source' => 'company.exists',
+                            'operator' => '==',
+                            'value' => true,
+                        ]
+                    ],
+                    'bonus' => 0,
+                    'penalty' => -8,
+                ],
+
                 'capital' => [
                     'source' => 'company.capital',
                     'conditions' => [
