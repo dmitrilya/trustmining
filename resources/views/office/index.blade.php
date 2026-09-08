@@ -5,7 +5,7 @@
 
     if (isset($user) && $user->company) {
         $title = 'Официальные офисы компании ' . $user->name;
-        $description = ' - ' . $user->name;
+        $description = 'Адреса офисов, актуальное наличие ASIC-майнеров и цены в точках продаж компании ' . $user->name;
     } elseif ($serviceFilter) {
         $title = 'Сервисные центры по ремонту майнингового оборудования';
         $description =
