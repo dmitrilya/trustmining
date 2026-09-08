@@ -112,13 +112,15 @@
 
                                     $position = $range > 0 ? (($score - $minScore) / $range) * 100 : 0;
                                     $position = max(0, min(100, $position));
+
+                                    $clipRight = 100 - $position;
                                 @endphp
 
                                 <div class="absolute inset-0 opacity-25 rounded-full"
                                     style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);"></div>
 
                                 <div class="absolute inset-0 rounded-full"
-                                    style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);background-size: {{ $position }}% 100%;background-repeat: no-repeat;">
+                                    style="background: linear-gradient(to right, #f43f5e, #f59e0b 50%, #10b981);clip-path: inset(0 {{ $clipRight }}% 0 0);">
                                 </div>
 
                                 <div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white dark:bg-slate-200 border-2 border-slate-700 dark:border-slate-300 shadow-sm z-10"
