@@ -55,7 +55,7 @@
         </x-breadcrumbs.breadcrumbs>
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
-            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
+            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5 sm:mb-3 lg:mb-4">
                 {{ $filterType ? __('meta.rating.asics.filters.best', ['prefix' => __("meta.rating.asics.types.$type.best_prefix")]) : __("meta.rating.asics.types.$type.best") }}
             </h2>
 
