@@ -185,7 +185,7 @@
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-full p-0.5 space-x-2 flex">
                 <div class="relative z-0 group">
                     <input id="tariff" type="text" :value="tariff" aria-label="{{ __('Tariff') }}"
-                        class="py-1 px-3 block w-28 rounded-full text-sm text-slate-800 bg-slate-50 dark:bg-slate-950 dark:text-slate-200 border ring-0 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
+                        class="py-1 px-3 block w-28 rounded-full text-sm xs:text-base text-slate-800 bg-slate-50 dark:bg-slate-950 dark:text-slate-200 border ring-0 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
                         @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
                     <label for="tariff"
                         class="z-10 flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 right-0 top-1/2 -translate-y-1/2 scale-75 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
