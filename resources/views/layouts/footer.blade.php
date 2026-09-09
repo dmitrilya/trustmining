@@ -179,7 +179,7 @@
 
         <div>
             <div class="text-sm text-slate-500">ИП Дмитриева Елизавета Николаевна</div>
-            <div class="text-sm text-slate-500">ОГРНИП: 325385000082654</div>
+            <div class="text-sm text-slate-500 whitespace-nowrap">ОГРНИП: 325385000082654</div>
         </div>
         <div class="text-xs text-slate-500" style ="max-width: 1312px;">© 2025 - {{ Carbon\Carbon::now()->year }}.
             {{ __('This is not a public offer.') }}</div>
