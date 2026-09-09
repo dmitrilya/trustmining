@@ -65,7 +65,7 @@ class TrustFactorService
             $factors[] = $result;
         }
 
-        $tf = round($tf / $max * 100);
+        $tf = round(max($tf, 0) / $max * 100);
 
         return [
             'direction' => $direction,
