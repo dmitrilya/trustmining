@@ -68,7 +68,7 @@
                         <template x-for="(item, i) in items.slice(0, items.length - 1)" :key="item.date">
                             <tr x-show="i < 5 || show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2"
                                 x-transition:enter-end="opacity-100 translate-y-0">
-                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
+                                <td class="py-1.5 xs:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 whitespace-nowrap"
                                     x-text="new Date(item.date).toLocaleString(window.locale, {
                                         year: 'numeric',
                                         month: 'short',
@@ -76,11 +76,11 @@
                                     })">
                                 </td>
 
-                                <td class="py-1.5 lg:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200"
+                                <td class="py-1.5 xs:py-2 pr-4 text-xxs xxs:text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200"
                                     x-text="item.value">
                                 </td>
 
-                                <td class="py-1.5 lg:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
+                                <td class="py-1.5 xs:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
                                     :class="{
                                         'text-green-500': item.value > items[i + 1]?.value,
                                         'text-red-500': item.value < items[i + 1]?.value,
@@ -123,7 +123,7 @@
             {{ __('Mining difficulty') }} {{ $coin->abbreviation }}
         </h2>
 
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 sm:mb-4">
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-2 xs:mb-4">
             {{ __('Find out how the profit of popular ASIC miners will change after recalculating the difficulty at a rate of 5 rubles/kW.') }}
         </p>
 
@@ -148,17 +148,17 @@
             <tbody class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($topModels as $model)
                     <tr>
-                        <td class="py-1.5 lg:py-2 text-xxs sm:text-sm lg:text-base whitespace-nowrap">
+                        <td class="py-1.5 xs:py-2 text-xxs sm:text-sm lg:text-base whitespace-nowrap">
                             <a href="{{ route('database.asic-miners.version', ['asicBrand' => $model['bs'], 'asicModel' => $model['s'], 'asicVersion' => $model['v']]) }}"
                                 class="text-indigo-500 hover:text-indigo-600 underline">{{ $model['n'] }}</a>
                         </td>
 
                         <td
-                            class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right text-slate-800 dark:text-slate-200 whitespace-nowrap">
+                            class="py-1.5 xs:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right text-slate-800 dark:text-slate-200 whitespace-nowrap">
                             {{ $model['p'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap"
+                        <td class="py-1.5 xs:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap"
                             :class="{
                                 'text-green-500': {{ $prediction ?? 0 }} < 0,
                                 'text-red-500': {{ $prediction ?? 0 }} > 0,
@@ -167,7 +167,7 @@
                             {{ $model['pp'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:table-cell items-end"
+                        <td class="py-1.5 xs:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:table-cell items-end"
                             :class="{
                                 'text-green-500': {{ $prediction ?? 0 }} < 0,
                                 'text-red-500': {{ $prediction ?? 0 }} > 0,
@@ -176,7 +176,7 @@
                             {{ $model['c'] }}
                         </td>
 
-                        <td class="py-1.5 lg:py-2 pl-2 sm:pl-4 hidden lg:table-cell justify-items-end">
+                        <td class="py-1.5 xs:py-2 pl-2 sm:pl-4 hidden lg:table-cell justify-items-end">
                             <a href="{{ route('calculator.modelver', ['asicModel' => $model['s'], 'asicVersion' => $model['v']]) }}">
                                 <x-buttons.primary-button>{{ __('Calculator') }}</x-buttons.primary-button>
                             </a>

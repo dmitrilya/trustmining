@@ -1,6 +1,6 @@
 <div class="{{ $relative ?? false ? 'relative ' : '' }}flex items-center h-full focus:outline-none transition duration-100 ease-in-out" x-data="{ open: false, opened: false }"
     @if (!isset($relative) || !$relative) @mouseover="opened = true; open = true" @mouseleave="open = false" @endif>
-    <button class="{{ $classes }}" @click="open = ! open">
+    <button class="{{ $classes }}" @click.stop="opened = true; open = ! open">
         <div>{{ __('Menu') }}</div>
 
         <div class="ml-1">
@@ -235,7 +235,7 @@
                         </div>
 
                         <div class="group flex items-center">
-                            <svg class="ww-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="M10.7367 14.5876c.895.2365 2.8528.754 3.1643-.4966.3179-1.2781-1.5795-1.7039-2.5053-1.9117-.1034-.0232-.1947-.0437-.2694-.0623l-.6025 2.4153c.0611.0152.1328.0341.2129.0553Zm.8452-3.5291c.7468.1993 2.3746.6335 2.6581-.5025.2899-1.16213-1.2929-1.5124-2.066-1.68348-.0869-.01923-.1635-.03619-.2262-.0518l-.5462 2.19058c.0517.0129.1123.0291.1803.0472Z" />

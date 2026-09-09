@@ -2,9 +2,14 @@
 
 @if (!$widjet)
     <div class="flex justify-between items-center">
+        @php
+            $actualDate = Carbon\Carbon::createFromTimestamp($difficulty->created_at);
+        @endphp
+
+        <span class="sr-only">{{ __('The data is current at the time') }} {{ $actualDate->toIso8601String() }}</span>
         <div
             class="text-xxs xxs:text-xs px-2 xs:px-4 py-1.5 xs:py-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 text-slate-600 dark:text-slate-400 uppercase tracking-widest">
-            {{ __('Updated') }}: <span class="text-indigo-500">{{ Carbon\Carbon::createFromTimestamp($difficulty->created_at)->diffForHumans() }}</span>
+            {{ __('Updated') }}: <span class="text-indigo-500">{{ $actualDate->diffForHumans() }}</span>
         </div>
 
         <div class="flex justify-end space-x-2 xs:space-x-3 sm:space-x-4">

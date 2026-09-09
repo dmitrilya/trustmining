@@ -160,7 +160,7 @@
                     <h4 class="sr-only">Информация</h4>
 
                     <div class="w-full rounded-lg overflow-hidden mb-4 sm:mb-6">
-                        <img itemprop="image" class="w-full object-cover" :src="'/storage/asic-miners/' + sortedModels[0].s + '_380.webp'"
+                        <img itemprop="image" class="w-full object-cover" :src="'/storage/asic-miners/' + sortedModels[0].s + '_480.webp'"
                             :alt="sortedModels[0].b + ' ' + sortedModels[0].n">
                     </div>
 
