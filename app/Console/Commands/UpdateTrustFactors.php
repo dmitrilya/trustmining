@@ -34,7 +34,7 @@ class UpdateTrustFactors extends Command
     {
         $users = User::whereHas('activeAds')->orWhereHas('hosting', fn($q) => $q->where('moderation', 'false'))
             ->orWhereHas('moderatedOffices', fn($q) => $q->where(fn($q1) => $q1->whereJsonContains('peculiarities', 'Repair service')->orWhereJsonContains('peculiarities', 'Cryptoexchanger')))
-            ->select(['id', 'tf', 'art'])->with([
+            ->select(['id', 'tf', 'art', 'ignores', 'is_anchor'])->with([
                 'moderatedOffices:user_id,peculiarities',
                 'company',
                 'tariff:id,name',
