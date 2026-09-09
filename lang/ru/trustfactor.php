@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'tf' => [
+        'result' => 'Компания :company имеет :level уровень доверия',
+        'level' => '[0,' . config('trustfactor.yellow') . '] низкий|[' . config('trustfactor.yellow') . ',' . config('trustfactor.green') . '] средний|[' . config('trustfactor.green') . ',100] высокий'
+    ],
+
     'directions' => [
         'miners' => 'Продажа оборудования',
         'legals' => 'Юридические услуги',

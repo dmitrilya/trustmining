@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'tf' => [
+        'result' => ':company company has a :level trust level',
+        'level' => '[0,' . config('trustfactor.yellow') . '] low|[' . config('trustfactor.yellow') . ',' . config('trustfactor.green') . '] medium|[' . config('trustfactor.green') . ',100] high'
+    ],
+
     'directions' => [
         'miners' => 'Sale of mining equipment',
         'legals' => 'Legal services',

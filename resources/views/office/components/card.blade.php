@@ -27,7 +27,7 @@
                 <a href="{{ route('company', ['user' => $office->user->slug]) }}"
                     class="block hover:underline text-xs md:text-sm text-indigo-500 hover:text-indigo-600">{{ $office->user->name }}</a>
 
-                <x-tf :tf="$office->user->tf" class="mt-1 md:mt-2 mb-3 sm:mb-4" />
+                <x-tf :tf="$office->user->tf" :company="$office->user->name" class="mt-1 md:mt-2 mb-3 sm:mb-4" />
 
                 <x-peculiarities :ps="$office->peculiarities" model="office"></x-peculiarities>
             </div>

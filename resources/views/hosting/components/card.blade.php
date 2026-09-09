@@ -30,7 +30,7 @@
             <a href="{{ route('company', ['user' => $hosting->user->slug]) }}" draggable="false"
                 class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">{{ $hosting->user->name }}</a>
 
-            <x-tf :tf="$hosting->user->tf" class="my-1 md:my-2" />
+            <x-tf :tf="$hosting->user->tf" :company="$hosting->user->name" class="my-1 md:my-2" />
 
             <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
         </div>

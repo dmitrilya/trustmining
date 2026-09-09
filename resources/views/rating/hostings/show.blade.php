@@ -35,7 +35,7 @@
                             {{ $hosting->user->name }}
                         </h1>
 
-                        <x-tf :tf="$hosting->user->tf" />
+                        <x-tf :tf="$hosting->user->tf" :company="$hosting->user->name" />
 
                         <h3 class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

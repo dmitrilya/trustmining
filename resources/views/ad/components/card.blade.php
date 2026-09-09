@@ -92,7 +92,7 @@
             <a href="{{ route('company', ['user' => $ad->user_slug]) }}" draggable="false"
                 class="block hover:underline text-xs md:text-sm text-indigo-500 hover:text-indigo-600 mt-1">{{ $ad->user_name }}</a>
 
-            <x-tf :tf="$ad->user_tf" class="my-1 md:my-2" />
+            <x-tf :tf="$ad->user_tf" :company="$ad->user_name" class="my-1 md:my-2" />
 
             <x-characteristics.characteristics>
                 @if ($ad->ad_category_name == 'gpus')

@@ -49,5 +49,5 @@
         </div>
     </div>
 
-    <x-tf :tf="$user->tf" class="mt-2 sm:mt-3" />
+    <x-tf :tf="$user->tf" :company="$user->name" class="mt-2 sm:mt-3" />
 </div>

@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <x-tf :tf="$user->tf" class="mt-2 sm:mt-3" />
+        <x-tf :tf="$user->tf" :company="$user->name" class="mt-2 sm:mt-3" />
 
         <div itemprop="description"
             class="ql-editor mt-3 sm:mt-4 lg:mt-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">
