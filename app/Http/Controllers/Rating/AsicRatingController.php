@@ -131,7 +131,7 @@ class AsicRatingController extends Controller
             })->sortByDesc(fn($m) => $algos->get($m['a'])['p'][0]['p'] * $m['v']['h'] * $m['v']['c']);
 
             $models = $models->take(40)->values();
-            $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', $models->take(5)->pluck('id'))->orderByDesc('ads.ordering_id')->limit(14)->get();
+            $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', $models->take(3)->pluck('i'))->orderByDesc('ads.ordering_id')->limit(14)->get();
 
             if ($filter) {
                 $value = $filterValue;
