@@ -438,7 +438,7 @@ return [
             ],
 
             'ignores' => [
-                'source' => 'ignores',
+                'source' => 'user.ignores',
                 'penalty' => -8,
             ],
 
@@ -475,6 +475,11 @@ return [
                         'source' => 'hosting.exists',
                         'operator' => '==',
                         'value' => true,
+                    ],
+                    [
+                        'source' => 'user.is_anchor',
+                        'operator' => '==',
+                        'value' => false,
                     ]
                 ],
 
@@ -745,6 +750,11 @@ return [
                             'source' => 'hosting.exists',
                             'operator' => '==',
                             'value' => true,
+                        ],
+                        [
+                            'source' => 'user.is_anchor',
+                            'operator' => '==',
+                            'value' => false,
                         ]
                     ],
 
