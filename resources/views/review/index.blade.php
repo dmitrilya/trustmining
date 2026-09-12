@@ -17,7 +17,7 @@
     }
 @endphp
 
-<x-app-layout :title="{{ $title }}" :description="{{ $description }}">
+<x-app-layout :title="$title" :description="$description">
     <x-slot name="header">
         <div class="flex items-center">
             <x-buttons.back-link :href="$href"></x-buttons.back-link>
