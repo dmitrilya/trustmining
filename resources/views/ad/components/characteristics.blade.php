@@ -54,7 +54,7 @@
                             <td class="px-2 lg:px-4 py-2">{{ $mode['h'] }}</td>
                             <td class="px-2 lg:px-4 py-2">{{ $mode['e'] }}</td>
                             <td class="px-2 lg:px-4 py-2">~{{ round($mode['h'] * $mode['e'] / 10) * 10 }}</td>
-                            <td class="px-2 lg:px-4 py-2">{{ __('characteristics.strain_level.' . $strain->name()) }}</td>
+                            <td class="px-2 lg:px-4 py-2">{{ __('characteristics_loc.strain_level.' . $strain->name()) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -244,7 +244,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
-                                href="{{ route('metrics.network.difficulty', 'bitcoin') }}">{{ __('Network difficulty') }} Bitcoin</a>
+                                href="{{ route('metrics.network.difficulty', ['coin' => 'bitcoin']) }}">{{ __('Network difficulty') }} Bitcoin</a>
                         </div>
                     </div>
 

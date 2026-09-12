@@ -1,5 +1,4 @@
-<x-home-layout :data="$__data" title="Метрики и показатели криптовалют - TRUSTMINING"
-    description="Аналитика и статистика криптовалют. Показатели сложности сетей, хэшрейт популярных монет и актуальные курсы криптовалют в реальном времени">
+<x-home-layout :data="$__data" :title="__('meta.metrics.title')" :description="__('meta.metrics.description')" :header="__('Metrics')">
     <x-breadcrumbs.breadcrumbs>
         <x-breadcrumbs.breadcrumb position="1" :name="__('Metrics')" />
     </x-breadcrumbs.breadcrumbs>

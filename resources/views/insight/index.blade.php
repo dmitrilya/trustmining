@@ -1,6 +1,4 @@
-<x-insight-layout title="TM Insight - экспертное медиа о крипте, майнинге и оборудовании"
-    description="TM Insight - ведущая медиа-платформа о криптовалютах и майнинге. Экспертные статьи, рыночная аналитика, трейдинг, оборудование и корпоративные каналы"
-    header="TM Insight" itemtype="https://schema.org/WebPage" :itemname="'TM Insight ' . __('Home')">
+<x-insight-layout :title="__('meta.insight.title')" :description="__('meta.insight.description')" header="TM Insight" itemtype="https://schema.org/WebPage" :itemname="'TM Insight ' . __('Home')">
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList">
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 

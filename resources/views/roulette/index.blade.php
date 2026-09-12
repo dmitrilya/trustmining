@@ -1,9 +1,9 @@
-<x-app-layout title="Список всех розыгрышей" noindex="true">
+<x-app-layout :title="__('meta.roulette.prizes.title')" noindex="true">
     <div class="max-w-9xl mx-auto px-2 py-4 sm:p-6 md:p-8" x-data="{ selectedPrize: null }">
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
             <div class="flex justify-between mb-4">
-                <div class="text-xs text-slate-600 dark:text-slate-400">Пороги редкости (%) - 3, 8, 15</div>
+                <div class="text-xs text-slate-600 dark:text-slate-400">{{ __('Thresholds of rarity') }} (%) - 3, 8, 15</div>
                 <x-buttons.primary-button x-on:click.prevent="$dispatch('open-modal', 'roulette-prize-create')">
                     {{ __('Create') }}
                 </x-buttons.primary-button>

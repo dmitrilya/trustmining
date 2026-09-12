@@ -27,7 +27,12 @@ class OfficeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
+        return view('office.index', [
+            'offices' => $this->getOffices($request)->paginate(50),
+            'title' => __('meta.office.index.title'),
+            'description' => __('meta.office.index.description'),
+            'header' => __('Offices'),
+        ]);
     }
 
     /**
@@ -41,7 +46,12 @@ class OfficeController extends Controller
         array_push($ps, 'Repair service');
         $request->merge(['peculiarities' => $ps]);
 
-        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
+        return view('office.index', [
+            'offices' => $this->getOffices($request)->paginate(50),
+            'title' => __('meta.office.services.title'),
+            'description' => __('meta.office.services.description'),
+            'header' => __('Repair services'),
+        ]);
     }
 
     /**
@@ -55,7 +65,12 @@ class OfficeController extends Controller
         array_push($ps, 'Cryptoexchanger');
         $request->merge(['peculiarities' => $ps]);
 
-        return view('office.index', ['offices' => $this->getOffices($request)->paginate(50)]);
+        return view('office.index', [
+            'offices' => $this->getOffices($request)->paginate(50),
+            'title' => __('meta.office.exchangers.title'),
+            'description' => __('meta.office.exchangers.description'),
+            'header' => __('Cryptoexchangers'),
+        ]);
     }
 
     /**

@@ -1,7 +1,4 @@
-<x-metrics-layout title="Курс {{ __($coin->name) }} ({{ $coin->abbreviation }}) к USDT: онлайн график и история за все время" :header="__('Coin rate') . ' ' . $coin->name" active="coin_rate"
-    :coin="$coin"
-    description="Актуальный курс {{ $coin->name }} на сегодня. Интерактивный график {{ $coin->abbreviation }}/USDT, история
-    изменений цены по дням и годам, динамика курса в реальном времени.">
+<x-metrics-layout :title="__('meta.metrics.coin.rate.title', ['name' => $coin->name])" :description="__('meta.metrics.coin.rate.description', ['pair' => $coin->abbreviation . 'USDT'])" :header="__('Coin rate') . ' ' . $coin->name" active="coin_rate" :coin="$coin">
     @vite(['resources/js/graph.js'])
 
     <x-breadcrumbs.breadcrumbs>

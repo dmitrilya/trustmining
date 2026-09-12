@@ -1,5 +1,4 @@
-<x-app-layout title="Газовые генераторы от производителя  {{ $brand->name }}"
-    description="Газопоршневые электростанции от производителя {{ $brand->name }}. Цены, характеристики, реальные отзывы, фото. Каталог гпу.">
+<x-app-layout :title="__('meta.database.genset.brand.title', ['brand' => $brand->name])" :description="__('meta.database.genset.brand.description', ['brand' => $brand->name])">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs.breadcrumbs>
             <x-breadcrumbs.breadcrumb position="1" :href="route('database.gas-gensets')" :name="__('Gas generators')" />
@@ -29,8 +28,7 @@
                 <label for="gpu-model_input"
                     class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                     {{ __('Model') }}
                 </label>
@@ -92,8 +90,7 @@
         </div>
 
         @foreach ($brand->gpuModels as $gpuModel)
-            <a
-                href="{{ route('database.gas-gensets.model', ['gpuBrand' => $brand->slug, 'gpuModel' => $gpuModel->slug]) }}"></a>
+            <a href="{{ route('database.gas-gensets.model', ['gpuBrand' => $brand->slug, 'gpuModel' => $gpuModel->slug]) }}"></a>
         @endforeach
     </div>
 </x-app-layout>

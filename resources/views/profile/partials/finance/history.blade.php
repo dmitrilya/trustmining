@@ -1,7 +1,7 @@
 <x-profile.section h="Order history">
     <div class="space-y-2">
         @foreach ($user->orders as $order)
-            <div class="pt-2 border-t border-slate-300 dark:border-slate-800">
+            <div class="pt-2 border-t border-slate-300 dark:border-slate-700">
                 <div class="flex justify-between items-center mb-2">
                     <div class="text-slate-800 dark:text-slate-200 font-extrabold text-base tracking-tight">
                         {{ $order->amount }} ₽

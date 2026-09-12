@@ -1,8 +1,7 @@
-<x-app-layout title="Проверить гарантию ASIC майнера: остаток гарантийного обслуживания"
-    description="Узнать остаток гарантии асика Whatsminer, Bitmain, Canaan, Iceriver, Jasminer">
+<x-app-layout :title="__('meta.warranty.title')" :description="__('meta.warranty.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Check warranty by serial number') }}
+            {{ __('meta.warranty.header') }}
         </h1>
     </x-slot>
 
@@ -19,18 +18,17 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-4 sm:mb-6"
                 x-data="{ sn: null }">
-                <h2
-                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                <h2 class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Whatsminer</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text"
-                            ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
+                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text" ::value="sn" @input="sn = $el.value"
+                            :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r"
-                                type="text" :placeholder="__('Warranty')" disabled readonly />
+                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r" type="text" :placeholder="__('Warranty')"
+                                disabled readonly />
                         </div>
                         <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
                             @click="$el.classList.add('loading');$el.disabled = true;axios.get('https://www.whatsminer.com/renren-fast/app/RepairWorkOrder/warranty?str=' + sn + '&lang=en_US').then(r => {
@@ -45,8 +43,7 @@
                         </x-buttons.primary-button>
                     </div>
                 </div>
-                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline mt-2 sm:mt-3"
-                    target="_blank"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline mt-2 sm:mt-3" target="_blank"
                     href="https://www.whatsminer.com/src/views/support.html">{{ __('Check on the official website') }}</a>
             </div>
         </section>
@@ -54,18 +51,17 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h2
-                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                <h2 class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Bitmain</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text"
-                            ::value="sn" @input="sn = $el.value" :placeholder="__('Serial number')" />
+                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text" ::value="sn" @input="sn = $el.value"
+                            :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r"
-                                type="text" :placeholder="__('Warranty until')" disabled readonly />
+                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r" type="text" :placeholder="__('Warranty until')"
+                                disabled readonly />
                         </div>
                         <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
                             @click="$el.classList.add('loading');$el.disabled = true;axios.get('https://shop-repair.bitmain.com/api/warranty/getWarranty?serialNumber=' + sn).then(r => {
@@ -80,8 +76,7 @@
                         </x-buttons.primary-button>
                     </div>
                 </div>
-                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
-                    target="_blank"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3" target="_blank"
                     href="https://m.bitmain.com/support/warranty">{{ __('Check on the official website') }}</a>
             </div>
         </section>
@@ -89,11 +84,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h2
-                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                <h2 class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Canaan</h2>
-                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
-                    target="_blank"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3" target="_blank"
                     href="https://www.canaan.io/support/warranty_check">{{ __('Check on the official website') }}</a>
             </div>
         </section>
@@ -101,11 +94,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h2
-                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                <h2 class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Iceriver</h2>
-                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
-                    target="_blank"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3" target="_blank"
                     href="https://www.iceriver.io/warranty-inquiry">{{ __('Check on the official website') }}</a>
             </div>
         </section>
@@ -113,11 +104,9 @@
         <section>
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6"
                 x-data="{ sn: null }">
-                <h2
-                    class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
+                <h2 class="text-sm xs:text-base sm:text-lg text-slate-800 dark:text-slate-200 font-bold mb-3 xs:mb-4 sm:mb-5">
                     Jasminer</h2>
-                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3"
-                    target="_blank"
+                <a class="text-xxs sm:text-xs text-indigo-500 hover:text-indigo-600 underline    mt-2 sm:mt-3" target="_blank"
                     href="https://www.jasminer.com/#/support/searchsn">{{ __('Check on the official website') }}</a>
             </div>
         </section>

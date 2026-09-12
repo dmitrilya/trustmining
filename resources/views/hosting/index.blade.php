@@ -1,9 +1,8 @@
-<x-app-layout title="Майнинг отель: разместить оборудование, проверенные хостинги"
-    description="Найти объявления о майнинг фермах на сайте TrustMining">
+<x-app-layout :title="__('meta.hosting.index.title')" :description="__('meta.hosting.index.description')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-                {{ __('Hostings') }}
+                {{ __('meta.hosting.index.header') }}
             </h1>
 
             @php
@@ -13,25 +12,25 @@
             <x-filters.header-filters>
                 <x-slot name="sort">
                     {{-- @if (($user = Auth::user()) && $user->tariff) --}}
-                        <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
-                            request()->route()->getName(),
-                            array_merge(request()->route()->originalParameters(), [
-                                'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
-                                http_build_query(request()->except('sort')),
-                            ]),
-                        )">
-                            {{ __('Price: Low to High') }}
-                        </x-dropdown-link>
+                    <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_low_to_high' ? 'true' : 'false' }} }" :href="route(
+                        request()->route()->getName(),
+                        array_merge(request()->route()->originalParameters(), [
+                            'sort' => $sort && $sort == 'price_low_to_high' ? null : 'price_low_to_high',
+                            http_build_query(request()->except('sort')),
+                        ]),
+                    )">
+                        {{ __('Price: Low to High') }}
+                    </x-dropdown-link>
 
-                        <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
-                            request()->route()->getName(),
-                            array_merge(request()->route()->originalParameters(), [
-                                'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
-                                http_build_query(request()->except('sort')),
-                            ]),
-                        )">
-                            {{ __('Price: High to Low') }}
-                        </x-dropdown-link>
+                    <x-dropdown-link ::class="{ 'bg-slate-200 dark:bg-slate-700': {{ $sort && $sort == 'price_high_to_low' ? 'true' : 'false' }} }" :href="route(
+                        request()->route()->getName(),
+                        array_merge(request()->route()->originalParameters(), [
+                            'sort' => $sort && $sort == 'price_high_to_low' ? null : 'price_high_to_low',
+                            http_build_query(request()->except('sort')),
+                        ]),
+                    )">
+                        {{ __('Price: High to Low') }}
+                    </x-dropdown-link>
                     {{-- @else
                         <div class="px-4 py-2 text-left text-sm leading-5 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition duration-100 ease-in-out"
                             @click.prevent="$dispatch('open-modal', 'need-subscription')">{{ __('Price: Low to High') }}

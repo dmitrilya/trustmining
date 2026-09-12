@@ -28,7 +28,7 @@
                         class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-800 dark:text-slate-200 border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                     <label for="register-name"
                         class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                        {{ __('Name') . ' или ' . __('Company name') }}
+                        {{ __('Name') . ' ' . __('or') . ' ' . __('Company name') }}
                     </label>
                     @if (isset($errors))
                         <x-inputs.input-error :messages="$errors->get('name')" />

@@ -1,5 +1,5 @@
-<x-app-layout title="Форум по майнингу и криптовалюте TrustMining: список ваших вопросов"
-    description="Посмотрите историю ваших вопросов, узнайте о процессе модерации и ознакомьтесь с похожими вопросами">
+<x-app-layout :title="__('meta.forum.question.my.title')"
+    :description="__('meta.forum.question.my.description')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">

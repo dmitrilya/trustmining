@@ -1,4 +1,4 @@
-<x-insight-layout title="Написание поста | TM Insight" description="Создайте свою статью и обзор на сайте TrustMining | TM Insight" :header="__('Creation post')">
+<x-insight-layout :title="__('meta.insight.content.post.create.title')" :description="__('meta.insight.content.post.create.description')" :header="__('meta.insight.content.post.create.header')">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 

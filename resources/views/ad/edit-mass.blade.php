@@ -1,7 +1,7 @@
-<x-app-layout title="Обновление цен" noindex="true">
+<x-app-layout :title="__('meta.ad.edit_mass.title')" :description="__('meta.ad.edit_mass.description')" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Price update') }}
+            {{ __('meta.ad.edit_mass.header') }}
         </h1>
     </x-slot>
 
@@ -10,14 +10,12 @@
             x-data="{ search: '', changings: [] }">
             <div class="flex justify-between items-center my-6">
                 <div class="relative z-0">
-                    <input type="text" id="asic-model_search-name" placeholder=" " @input="search = $el.value"
-                        autocomplete="off" :value="search"
+                    <input type="text" id="asic-model_search-name" placeholder=" " @input="search = $el.value" autocomplete="off" :value="search"
                         class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-600 peer" />
                     <label for="asic-model_search-name"
                         class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                         </svg>
                         {{ __('Model') }}
                     </label>
@@ -65,9 +63,8 @@
                         </div>
                         <div class="col-span-2">
                             <div class="flex items-center">
-                                <x-inputs.text-input autocomplete="price"
-                                    class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-md !px-2"
-                                    id="price" name="price" type="number" required value="{{ $ad->price }}"
+                                <x-inputs.text-input autocomplete="price" class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-md !px-2" id="price"
+                                    name="price" type="number" required value="{{ $ad->price }}"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
                                     let index = changings.findIndex(el => el.id == id);
                                     if (index === -1) changings.push({ id: id, price: $el.value });
@@ -113,9 +110,7 @@
                                         else ad.coin_id = coinId;
                                     }
                                 })"
-                                :items="$coins
-                                    ->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])
-                                    ->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+                                :items="$coins->map(fn($coin) => ['key' => $coin->id, 'value' => $coin->abbreviation])->keyBy('key')" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
                         </div>
                     </div>
                 @endforeach

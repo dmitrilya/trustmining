@@ -1,5 +1,5 @@
-<x-app-layout title="{{ __($category->name) }} - {{ __($subcategory->name) }} | TRUSTMINING Форум"
-    description="Найдите ответ на вопрос среди постов из раздела {{ __($category->name) }} категории {{ __($subcategory->name) }} или задайте свой">
+<x-app-layout title="{{ __($category->name) }} - {{ __($subcategory->name) }}"
+    :description="__('meta.forum.subcategory.description', ['category' => $category->name, 'subcategory' => $subcategory->name])">
     <x-slot name="header">
         <div class="lg:flex items-center justify-between">
             <nav aria-label="Breadcrumb">

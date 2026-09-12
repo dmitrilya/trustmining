@@ -1,4 +1,4 @@
-<x-app-layout title="Онлайн чат: сообщения, диалоги" description="Диалог с пользователем на сайте TrustMining" noindex="true">
+<x-app-layout :title="__('meta.chat.title')" :description="__('meta.chat.description')" noindex="true">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" style="height: calc(100dvh - 64.4px)">
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
@@ -12,10 +12,7 @@
                                 $lastMessage = $chat->messages->reverse()->first();
                                 $lastMessageContent = $lastMessage->message ? $lastMessage->message : __('Files');
                             }
-                            $isUnchecked = $chat->messages
-                                ->where('checked', false)
-                                ->where('user_id', $user->id)
-                                ->count();
+                            $isUnchecked = $chat->messages->where('checked', false)->where('user_id', $user->id)->count();
                         @endphp
 
                         <a href="{{ route('chat', ['chat' => $chat->id]) }}" id="chat-{{ $chat->id }}"
@@ -38,8 +35,7 @@
                                             {{ $user->company && !$user->company->moderation ? __($user->company->card['type']) : __('Person') }}
                                         </p>
                                         @if ($lastMessage)
-                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-500"
-                                                data-date="{{ $lastMessage->created_at }}"></p>
+                                            <p class="date-transform mt-0.5 xs:mt-1 text-xxs text-slate-500" data-date="{{ $lastMessage->created_at }}"></p>
                                         @endif
                                     </div>
                                 </div>
@@ -53,7 +49,8 @@
                 </ul>
             </div>
 
-            <div class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl lg:rounded-l-none flex flex-col p-1 sm:p-4 h-full">
+            <div
+                class="w-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl lg:rounded-l-none flex flex-col p-1 sm:p-4 h-full">
                 @php
                     $user = $activeChat->users()->where('id', '!=', $auth->id)->first();
                 @endphp
@@ -63,12 +60,10 @@
                         <button @click="open = ! open"
                             class="inline-flex items-center justify-center p-1 rounded-md text-slate-500 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-950 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-950 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
                             <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-                                <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
+                                <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
@@ -80,9 +75,8 @@
                 </div>
 
                 <div class="bg-slate-100 dark:bg-slate-950 p-1 rounded-t-md h-full overflow-hidden">
-                    <div class="bg-slate-100 dark:bg-slate-950 p-1 sm:p-5 h-full space-y-1 overflow-x-hidden overflow-y-auto duration-100"
-                        id="chat-messages" data-chat_id="{{ $activeChat->id }}" style="opacity: 0"
-                        x-init="setTimeout(() => {
+                    <div class="bg-slate-100 dark:bg-slate-950 p-1 sm:p-5 h-full space-y-1 overflow-x-hidden overflow-y-auto duration-100" id="chat-messages"
+                        data-chat_id="{{ $activeChat->id }}" style="opacity: 0" x-init="setTimeout(() => {
                             scrollBottom($el);
                             $el.style.opacity = 1;
                         }, 100)">

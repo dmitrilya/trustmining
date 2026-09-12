@@ -47,7 +47,6 @@
         <meta name="robots" content="noindex, nofollow">
     @endif
 
-    <!-- Yandex.Metrika counter -->
     @if (!is_bot_request())
         <script type="text/javascript">
             function isWeakDevice() {
@@ -96,7 +95,6 @@
             </div>
         </noscript>
     @endif
-    <!-- /Yandex.Metrika counter -->
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -120,6 +118,23 @@
             }
         });
     </script> --}}
+
+    <script>
+        window.Translations = {
+            "min": __('min'),
+            "h": __('h'),
+            "d": __('d'),
+            "Expand": __('Expand'),
+            "Collapse": __('Collapse'),
+            "Rating required": __('Rating required'),
+            "Enter a message or attach files": __('Enter a message or attach files'),
+            "Network error. Please try again.": __('Network error. Please try again.'),
+            "Request error": __('Request error'),
+            "Failed to download file.": __('Failed to download file.'),
+            "Failed to start roulette": __('Failed to start roulette'),
+            "just now": __('just now'),
+        };
+    </script>
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden {{ $theme ?? 'light' }}" x-data="{ theme: '{{ $theme ?? 'light' }}' }"

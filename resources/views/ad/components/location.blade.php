@@ -1,16 +1,10 @@
 <script>
     window.initMap = async function(theme) {
-        if (typeof ymaps3 === 'undefined') {
-            console.error('ymaps3 не загружен');
-            return;
-        }
+        if (typeof ymaps3 === 'undefined') return;
 
         try {
             await ymaps3.ready;
-        } catch (error) {
-            console.error('Ошибка загрузки ymaps3:', error);
-            return;
-        }
+        } catch (error) {}
 
         const {
             YMap,
@@ -121,8 +115,6 @@
             }, markerElement);
 
             map.addChild(marker);
-        } else {
-            console.log('Организация не найдена');
         }
     }
 </script>

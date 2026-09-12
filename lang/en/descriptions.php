@@ -86,6 +86,7 @@ return [
             ]
         ]
     ],
+
     'calculator' => [
         'main' => 'Currently, the :brand :model :version generates around :incomeU USDT (:incomeR RUB) in revenue per day. With an electricity tariff of :tariff ₽/kWh, daily power costs amount to :expenseU USDT (:expenseR RUB). After accounting for electricity costs and pool fees, the estimated net mining profit is :profitU USDT (:profitR RUB) per day.',
         'tax' => 'Based on the selected tax settings, the estimated mining tax for the :brand :model :version is :taxU USDT (:taxR RUB) per day, :taxMonthU USDT (:taxMonthR RUB) per month, and :taxYearU USDT (:taxYearR RUB) per year. After taxes, the estimated net profit is :profitAfterTaxU USDT (:profitAfterTaxR RUB) per day, or :profitAfterTaxMonthU USDT (:profitAfterTaxMonthR RUB) per month. Tax calculations depend on the selected tax system and configured parameters.',
@@ -97,6 +98,7 @@ return [
         'params' => 'To calculate mining profitability, the TrustMining calculator uses live crypto network data and hardware specifications. The calculation includes the electricity tariff (:tariff ₽/kWh), ASIC energy efficiency (:efficiency), consumption of the :model model version :version (:power W), current revenue of all available coins for the :algorithm algorithm (:coins), mining pool commission (:comission%), and equipment uptime (:uptime%). The calculation can also account for the ASIC price, tax parameters, and the impact of available firmware options on hashrate, power consumption, and final mining profitability.',
         'summary' => 'In summary, the TrustMining calculator evaluates not only cryptocurrency mining revenue but also the key expenses and factors affecting ASIC profitability. The calculation factors in live network data, hardware specifications, power costs, pool fees, taxes, ASIC prices, and firmware configurations to provide a comprehensive view of mining economics.',
     ],
+
     'can_trust' => [
         'trust' => [
             'green' => 'The Trust system has determined that the seller :seller can be fully trusted, based on the positive factors listed below.',
@@ -135,5 +137,121 @@ return [
             'The Trust Factor is calculated automatically using 40 criteria, ranging from review analysis to company revenue data. The full list of parameters is not disclosed to protect the system from artificial inflation and to provide users with reliable information on seller credibility.',
             'We evaluate seller reliability based on more than 40 parameters—everything from their reputation and reviews to official financial transparency. To make sure no one can "hack" the system or artificially boost their Trust Factor, we do not go public with the full list of criteria. This keeps your shopping experience safe and honest.'
         ]
+    ],
+
+    'ad' => [
+        'conditions' => [
+            'new_miner' => 'new',
+            'used_miner' => 'used',
+            'new_gpu' => 'new',
+            'used_gpu' => 'used',
+        ],
+        'availability' => [
+            'preorder' => 'on pre-order with a waiting time up to :days days',
+            'stock' => 'from stock',
+        ],
+
+        'miner_desc' => "<p>:user offers a <b>:condition</b> ASIC miner <b>:brand :model</b> with a hashrate of <b>:hashrate :measurement</b> in <b>:city</b>.</p><p>Equipment is available <b>:availability</b>.</p><p><br /></p>Check availability and delivery terms with the seller by contacting them in our online chat or by phone.",
+        'gpu_desc' => "<p>:user offers a <b>:condition</b> gas generator set <b>:brand :model</b> with a maximum power of <b>:power kWh</b> in <b>:city</b>.</p><p>GPU is available <b>:availability</b>.</p><p><br /></p>Check availability and delivery terms with the seller by contacting them in our online chat or by phone.",
+    ],
+
+    'asic' => [
+        'text_p1' => 'The <b>:model</b> model from the world\'s leading manufacturer <b>:brand</b> is a high-performance solution designed for professional mining. This device combines advanced chip architecture, exceptional reliability, and optimized power consumption, making it one of the most sought-after tools in the digital asset mining industry. The model was released in :release.',
+
+        'h2_specs' => 'Technical Specifications and Performance',
+        'text_specs_p1' => 'The <b>:model</b> is powered by innovative components that ensure stable operation even under peak loads.',
+        'text_specs_p2' => 'Key metrics of the device:',
+
+        'labels' => [
+            'algorithm' => 'Algorithm:',
+            'hashrate' => 'Hashrate:',
+            'power' => 'Power Consumption:',
+            'efficiency' => 'Energy Efficiency:',
+        ],
+
+        'specs' => [
+            'algorithm' => 'Operates on the <b>:algorithm</b> algorithm, which has proven to be one of the most secure and profitable in the network.',
+            'hashrate' => 'The nominal computing power is <b>:hashrate</b>, allowing it to compete effectively in today\'s network complexity conditions.',
+            'power' => 'The device power consumption is locked at <b>:power W</b>, providing a perfect balance between performance and electricity costs.',
+            'efficiency' => 'The efficiency metric stands at <b>:efficiency J/TH</b>, which is a key factor for a fast return on investment.',
+        ],
+
+        'h2_assets' => 'Supported Assets',
+        'text_assets' => 'Due to the <b>:algorithm</b> algorithm, this miner allows you to mine a wide range of cryptocurrencies. The list of the most relevant coins includes: <b>:coins</b>. This gives the owner flexibility in choosing a mining strategy and the ability to switch between assets depending on the current market situation.',
+
+        'h2_cooling' => 'Cooling System and Operating Conditions',
+        'text_cooling' => 'The operational stability of an ASIC miner directly depends on the quality of heat dissipation. This model features an advanced cooling system.',
+
+        'cooling_types' => [
+            'Air' => 'The <b>air cooling</b> system is equipped with high-RPM fans that create a powerful directed airflow through the chip heatsinks. This is a classic and most reliable solution that does not require complex maintenance. It is ideal for deployment in specially equipped containers or data centers with high-quality supply and exhaust ventilation. The chassis is designed to minimize hot air stagnation zones, extending the lifespan of the components.',
+            'Hydro' => 'The <b>hydro cooling</b> system utilizes special water blocks for direct heat dissipation from the hashboards. This allows completely eliminating noisy fans, making the device operation virtually silent. Hydro systems handle overheating significantly better, allowing the miner to be operated in regions with hot climates or allowing waste heat to be used for space heating. This type of cooling requires connection to an external water loop or cooling tower.',
+            'Immersion' => 'The device is prepared for submersion into a specialized dielectric liquid. <b>Immersion cooling</b> is the pinnacle of engineering thought in mining. The liquid envelops all components, ensuring uniform heat dissipation and protecting the hashboards from dust, moisture, and static electricity. This eliminates the risk of local overheating ("hot spots") and allows for safe overclocking, increasing the hashrate above factory settings while maintaining a stable temperature.',
+        ],
+
+        'h2_advantages' => 'Advantages of the :model model',
+        'advantages' => [
+            'durability' => '<b>Durability:</b> The use of high-quality chassis materials and wear-resistant components guarantees a long equipment lifecycle.',
+            'management' => '<b>Intelligent Management:</b> The built-in software allows tracking chip status, fan rotation speed (if applicable), and current revenue in real-time.',
+            'setup' => '<b>Fast Configuration:</b> An intuitive web interface allows launching the mining process just a few minutes after the first power-up.',
+        ],
+
+        'h2_summary' => 'Summary',
+        'text_summary' => '<b>:brand :model</b> is the benchmark of quality in the mining world. The device is perfectly suited both for scaling existing farms and for those looking for the most effective solution to start. A high hashrate combined with clever power consumption makes this model a strategically advantageous acquisition for the long-term perspective.',
+    ],
+
+    'genset' => [
+        'text_p1' => 'The <b>:model</b> gas piston power plant (GPES) from the world\'s leading brand <b>:brand</b> (country of manufacture — <b>:country</b>) is a highly technological solution for creating autonomous and backup power supply systems. This installation is designed to provide maximum energy independence for industrial enterprises, commercial facilities, and large mining hotels.',
+
+        'h2_specs' => 'Technical Specifications and Power',
+        'text_specs_p1' => 'The :model model features high performance and adaptability to challenging operational conditions.',
+
+        'labels' => [
+            'max_power' => 'Maximum Power:',
+            'phases' => 'Electrical Parameters:',
+            'economy' => 'Efficiency:',
+            'volume' => 'Displacement:',
+            'configuration' => 'Configuration:',
+            'rpm' => 'Operating Speed:',
+        ],
+
+        'specs' => [
+            'max_power' => 'The plant is capable of delivering up to <b>:power :unit</b>, which allows powering heavy equipment without voltage drops.',
+            'phases' => 'The system generates electricity in a :phases-phase mode, ensuring a stable sine wave and frequency required for sensitive electronics.',
+            'economy' => 'An advanced air-fuel mixing system ensures optimized fuel consumption. Gas consumption is <b>:consumption</b>, making the cost per kWh significantly lower than using main power grids or diesel alternatives.',
+        ],
+
+        'h2_engine' => 'Power Unit: The Heart of the System',
+        'text_engine_p1' => 'The reliability of the power plant directly depends on the engine specifications. This model utilizes an industrial <b>:model</b> gas piston engine from the legendary manufacturer <b>:brand</b> (<b>:country</b>).',
+        'h3_engine_title' => 'The engine possesses the following design features:',
+
+        'engine_specs' => [
+            'volume' => '<b>:volume</b>, which guarantees high torque and stability under load.',
+            'cylinders' => 'The engine features <b>:cylinders</b> cylinders arranged to minimize vibration and mechanical wear.',
+            'rpm' => 'The rotation speed is <b>:rpm</b> rpm. This is the optimal mode for extended continuous operation (24/7), ensuring an increased overhaul interval (operational lifespan).',
+        ],
+
+        'h2_advantages' => 'Advantages of <b>:brand</b> Gas Piston Technology',
+        'advantages' => [
+            'cost' => '<b>Low Energy Cost:</b> Utilizing natural gas (or associated petroleum gas) reduces electricity expenses by 2-3 times compared to grid utility tariffs.',
+            'ecology' => '<b>Eco-Friendliness:</b> <b>:brand</b> gas piston engines comply with strict international environmental standards for NOx and CO emissions.',
+            'cogen' => '<b>Cogeneration Capability:</b> The <b>:model</b> plant can be retrofitted with a heat recovery system, allowing free thermal energy generation for space heating or industrial processes.',
+            'durability' => '<b>Durability:</b> Industrial components and precision assembly in <b>:country</b> ensure an equipment lifespan of tens of thousands of operating hours before a major overhaul.',
+        ],
+
+        'h2_safety' => 'Safety and Control',
+        'text_safety' => 'The plant is equipped with a modern microprocessor control panel that automatically monitors all critical parameters: gas pressure, coolant temperature, oil level, and output power quality. The protection system reacts instantly to any anomalies, preventing equipment damage.',
+
+        'h2_usage' => 'Applications',
+        'text_usage' => 'Combining a high power of :power :unit and a reliable :engine_model engine, this GPU is an ideal choice for:',
+
+        'usage_list' => [
+            'f1' => 'Manufacturing workshops and plants;',
+            'f2' => 'Large data centers (DCs);',
+            'f3' => 'Oil and gas sector facilities;',
+            'f4' => 'Mining farms requiring stable and cheap electricity.',
+        ],
+
+        'h2_summary' => 'Summary',
+        'text_summary' => 'By choosing the <b>:brand :model</b> gas piston power plant, you are investing in a reliable asset that will power your enterprise for many years to come. This is a time-tested solution combining a solid engineering background with modern energy-efficiency technologies.',
     ]
 ];

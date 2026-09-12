@@ -31,7 +31,7 @@
                 $withTgIdSpins = $authorizedSpins->filter(fn($spin) => $spin->user && !empty($spin->user->tg_id));
             @endphp
 
-            <div class="pt-2 border-t border-slate-300 dark:border-slate-800">
+            <div class="pt-2 border-t border-slate-300 dark:border-slate-700">
                 <div class="flex justify-between items-center mb-2">
                     <div class="text-slate-800 dark:text-slate-200 font-extrabold text-base tracking-tight">
                         {{ $prize->name }}
@@ -68,7 +68,7 @@
 
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                         <div
-                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
+                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700/80 p-3 rounded-xl text-center">
                             <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">1.
                                 {{ __('Spins in the period') }}</span>
                             <span
@@ -76,7 +76,7 @@
                         </div>
 
                         <div
-                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
+                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700/80 p-3 rounded-xl text-center">
                             <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">2.
                                 {{ __('Prize drops') }}</span>
                             <span class="text-lg font-black text-indigo-500 font-mono">
@@ -85,7 +85,7 @@
                         </div>
 
                         <div
-                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
+                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700/80 p-3 rounded-xl text-center">
                             <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">3.
                                 {{ __('Authorized') }}</span>
                             <span class="text-lg font-black text-indigo-500 font-mono">
@@ -94,7 +94,7 @@
                         </div>
 
                         <div
-                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-800/80 p-3 rounded-xl text-center">
+                            class="flex flex-col justify-between bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700/80 p-3 rounded-xl text-center">
                             <span class="block text-xxs font-bold text-slate-500 uppercase tracking-wider mb-1">4.
                                 {{ __('With TG binding') }}</span>
                             <span class="text-lg font-black text-emerald-500 font-mono">

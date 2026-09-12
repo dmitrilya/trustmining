@@ -63,13 +63,13 @@
         </div>
 
         <div class="grid grid-cols-7 gap-1 text-center text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">
-            <div>Пн</div>
-            <div>Вт</div>
-            <div>Ср</div>
-            <div>Чт</div>
-            <div>Пт</div>
-            <div>Сб</div>
-            <div>Вс</div>
+            <div>{{ __('time.weekday_names.mon') }}</div>
+            <div>{{ __('time.weekday_names.tue') }}</div>
+            <div>{{ __('time.weekday_names.wed') }}</div>
+            <div>{{ __('time.weekday_names.thu') }}</div>
+            <div>{{ __('time.weekday_names.fri') }}</div>
+            <div>{{ __('time.weekday_names.sat') }}</div>
+            <div>{{ __('time.weekday_names.sun') }}</div>
         </div>
 
         <div class="grid grid-cols-7 gap-1 text-center text-sm" style="min-height: 192px">
@@ -101,7 +101,7 @@
                         class="w-12 text-center text-sm bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg p-1 focus:outline-none focus:ring-1 ring-inset focus:ring-indigo-500">
                 </div>
                 <button type="button" @click="open = false"
-                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 px-2.5 py-1.5 rounded-lg">ОК</button>
+                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 px-2.5 py-1.5 rounded-lg">OK</button>
             </div>
         </template>
     </div>
@@ -113,7 +113,11 @@
             return {
                 open: false,
                 config: config,
-                monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                monthNames: ['{{ __('time.month_names.january') }}', '{{ __('time.month_names.february') }}', '{{ __('time.month_names.march') }}',
+                    '{{ __('time.month_names.april') }}', '{{ __('time.month_names.may') }}', '{{ __('time.month_names.june') }}',
+                    '{{ __('time.month_names.july') }}', '{{ __('time.month_names.august') }}', '{{ __('time.month_names.september') }}',
+                    '{{ __('time.month_names.october') }}', '{{ __('time.month_names.november') }}', '{{ __('time.month_names.december') }}'
+                ],
                 viewDate: new Date(),
                 selectedDate: null,
                 month: 0,

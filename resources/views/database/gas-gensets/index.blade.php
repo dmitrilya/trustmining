@@ -1,5 +1,4 @@
-<x-app-layout title="Каталог газовых генераторов"
-    description="Газопоршневые электростанции. Цены, характеристики, реальные отзывы, фото. Каталог ГПУ.">
+<x-app-layout :title="__('meta.database.genset.title')" :description="__('meta.database.genset.description')">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs.breadcrumbs>
             <x-breadcrumbs.breadcrumb position="1" :name="__('Gas generators')" />
@@ -8,14 +7,12 @@
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '' }">
             <div class="relative z-0 sm:max-w-xs group mb-6 ml-auto">
-                <input type="text" id="gpu-brand_input" placeholder=" " @input="search = $el.value" autocomplete="off"
-                    :value="search"
+                <input type="text" id="gpu-brand_input" placeholder=" " @input="search = $el.value" autocomplete="off" :value="search"
                     class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="gpu-brand_input"
                     class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                     {{ __('Brand') }}
                 </label>
@@ -60,8 +57,7 @@
                 <label for="gpu-model_input"
                     class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                     {{ __('Model') }}
                 </label>
@@ -123,8 +119,7 @@
         </div>
 
         @foreach ($brand->gpuModels as $gpuModel)
-            <a
-                href="{{ route('database.gas-gensets.model', ['gpuBrand' => $brand->slug, 'gpuModel' => $gpuModel->slug]) }}"></a>
+            <a href="{{ route('database.gas-gensets.model', ['gpuBrand' => $brand->slug, 'gpuModel' => $gpuModel->slug]) }}"></a>
         @endforeach
     </div>
 </x-app-layout>

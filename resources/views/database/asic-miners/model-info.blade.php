@@ -26,7 +26,7 @@
         </div>
 
         <div class="mt-6 md:mt-0">
-            <h2 class="sr-only">Информация</h2>
+            <h2 class="sr-only">{{ __('Information') }}</h2>
 
             <div class="w-full rounded-lg overflow-hidden mb-4 sm:mb-6">
                 <img itemprop="image" class="w-full object-cover" src="{{ Storage::url('asic-miners/' . $model->slug . '_380.webp') }}"

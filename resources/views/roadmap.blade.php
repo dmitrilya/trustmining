@@ -1,4 +1,4 @@
-<x-app-layout title="Дорожная карта Trustmining — Планы развития и обновления проекта" description="Ознакомьтесь с официальной дорожной картой проекта Trustmining. Узнайте о планах развития платформы, запуске новых инструментов для майнинга, графике обновлений и стратегических целях нашей команды">
+<x-app-layout :title="__('meta.roadmap.title')" :description="__('meta.roadmap.description')">
     <div class="lg:grid lg:grid-cols-5" style="height: calc(100vh - 64.4px)">
         @guest
             <div class="col-span-2 bg-slate-900 hidden lg:flex flex-col h-full w-full relative z-10 overflow-hidden">
@@ -19,7 +19,7 @@
                                     class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                 <label for="name"
                                     class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                    {{ __('Name') . ' или ' . __('Company name') }}
+                                    {{ __('Name') . ' ' . __('or') . ' ' . __('Company name') }}
                                 </label>
                                 <x-inputs.input-error :messages="$errors->get('name')" />
                             </div>

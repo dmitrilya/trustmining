@@ -17,7 +17,7 @@
         :class="active === {{ $i }} ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
 
         <div class="min-h-0">
-            <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-800">
+            <div itemprop="text" class="p-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400 border-t border-slate-300 dark:border-slate-700">
                 {!! $answer !!}
             </div>
         </div>

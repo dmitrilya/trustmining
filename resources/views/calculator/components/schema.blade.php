@@ -1,6 +1,5 @@
 <meta itemprop="name" content="{{ $selModel['b'] . ' ' . $selModel['n'] }}" />
-<meta itemprop="description"
-    content="ASIC майнер от производителя {{ $selModel['b'] }} модели {{ $selModel['n'] }} на {{ $selVersion['h'] }} {{ $selVersion['m'] }}" />
+<meta itemprop="description" content="{{ $selModel['b'] }} {{ $selModel['n'] }} {{ $selVersion['h'] }} {{ $selVersion['m'] }}/s" />
 <div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
     <meta itemprop="name" content="{{ $selModel['b'] }}" />
 </div>
@@ -37,25 +36,22 @@
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('day') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub, 2) }}" />
+        <meta itemprop="value" content="{{ round(($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c']) / $rub, 2) }}" />
     </div>
     <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
         <meta itemprop="valueReference" content="{{ __('Income per') }} {{ __('month') }}" />
         <meta itemprop="unitCode" content="RUB" />
-        <meta itemprop="value" content="{{ round(($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] / $rub) * 30, 2) }}" />
+        <meta itemprop="value" content="{{ round((($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c']) / $rub) * 30, 2) }}" />
     </div>
     @if ($selVersion['p'])
         <div itemprop="hasMeasurement" itemscope itemtype="http://schema.org/QuantitativeValue">
             <meta itemprop="valueReference" content="{{ __('Payback') }}" />
             <meta itemprop="unitCode" content="DAY" />
             <meta itemprop="value"
-                content="{{ $algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
-                    ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000 >
-                0
+                content="{{ $algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] - ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000 > 0
                     ? round(
                         $selVersion['p'] /
-                            ($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] -
-                                ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000),
+                            ($algorithms[$selModel['a']]['p'][0]['p'] * $selVersion['h'] * $selVersion['c'] - ($selVersion['e'] * $selVersion['h'] * 5 * $rub * 24) / 1000),
                     )
                     : 0 }}" />
         </div>
@@ -66,17 +62,14 @@
     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
         <meta itemprop="offerCount" content="{{ $selVersion['ac'] }}" />
         <meta itemprop="lowPrice" content="{{ $selVersion['p'] }}" />
-        <meta itemprop="priceCurrency"
-            content="USD" />
-        <link itemprop="url"
-            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['m']]) }}" />
+        <meta itemprop="priceCurrency" content="USD" />
+        <link itemprop="url" href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['m']]) }}" />
     </div>
 @else
     <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
         <meta itemprop="offerCount" content="0" />
         <meta itemprop="lowPrice" content="0" />
         <meta itemprop="priceCurrency" content="RUB" />
-        <link itemprop="url"
-            href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['m']]) }}" />
+        <link itemprop="url" href="{{ route('ads', ['adCategory' => 'miners', 'model' => $selVersion['m']]) }}" />
     </div>
 @endif

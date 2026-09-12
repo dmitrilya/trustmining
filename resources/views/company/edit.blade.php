@@ -1,5 +1,4 @@
-<x-app-layout title="Редактировать информацию о компании"
-    description="Добавьте описание, фото и логотип к своей компании на сайте TrustMining" noindex="true">
+<x-app-layout :title="__('meta.company.edit.title')" :description="__('meta.company.edit.description')" noindex="true">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
@@ -10,10 +9,9 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-            <form method="post" action="{{ route('company.update', ['company' => $company->id]) }}"
-                class="mt-6 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+            <form method="post" action="{{ route('company.update', ['company' => $company->id]) }}" class="mt-6 space-y-6" enctype=multipart/form-data
+                x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
                 const Link = Quill.import('formats/link');
                 class CustomLink extends Link {
                     static create(value) {
@@ -54,14 +52,12 @@
 
                 <div>
                     <x-inputs.input-label for="company" :value="__('Company TIN')" />
-                    <x-inputs.text-input id="company" readonly disabled autocomplete="company"
-                        value="{{ $company->card['inn'] }}" />
+                    <x-inputs.text-input id="company" readonly disabled autocomplete="company" value="{{ $company->card['inn'] }}" />
                 </div>
 
                 <div>
                     <x-inputs.input-label for="images" :value="__('Photo')" />
-                    <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8"
-                        label='max. 2MB, 8 items' />
+                    <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple max="8" label='max. 2MB, 8 items' />
                     <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-inputs.input-error :messages="$error" />
@@ -70,15 +66,13 @@
 
                 <div>
                     <x-inputs.input-label for="logo" :value="__('Logo for avatar')" />
-                    <x-inputs.file-input id="logo" name="logo" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" label="max. 512KB, 1x1" />
+                    <x-inputs.file-input id="logo" name="logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 512KB, 1x1" />
                     <x-inputs.input-error :messages="$errors->get('logo')" />
                 </div>
 
                 <div>
                     <x-inputs.input-label for="bg_logo" :value="__('Logo for the card')" />
-                    <x-inputs.file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" label="max. 1024KB" />
+                    <x-inputs.file-input id="bg_logo" name="bg_logo" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" label="max. 1024KB" />
                     <x-inputs.input-error :messages="$errors->get('bg_logo')" />
                 </div>
 
@@ -94,16 +88,14 @@
                 @if ($company->user->tariff && $company->user->tariff->can_site_link)
                     <div>
                         <x-inputs.input-label for="site" :value="__('Link to site')" />
-                        <x-inputs.text-input id="site" name="site" type="text" :value="$company->site"
-                            autocomplete="site" />
+                        <x-inputs.text-input id="site" name="site" type="text" :value="$company->site" autocomplete="site" />
                         <x-inputs.input-error :messages="$errors->get('site')" />
                     </div>
                 @endif
 
                 <div>
                     <x-inputs.input-label for="video" :value="__('Link to video')" />
-                    <x-inputs.text-input id="video" name="video" type="text" :value="$company->video"
-                        autocomplete="video" />
+                    <x-inputs.text-input id="video" name="video" type="text" :value="$company->video" autocomplete="video" />
                     <x-inputs.input-error :messages="$errors->get('video')" />
                 </div>
 

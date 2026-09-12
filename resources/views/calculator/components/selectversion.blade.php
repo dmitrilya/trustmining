@@ -47,9 +47,6 @@
                 this.popular_models = Object.freeze(data.p.map(id => data.m[id]).filter(Boolean));
                 algorithms = Object.freeze(data.a);
             })
-            .catch(error => {
-                console.error('Ошибка загрузки моделей:', error);
-            })
             .finally(() => {
                 this.isLoading = false;
             });

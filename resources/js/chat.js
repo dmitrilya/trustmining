@@ -3,7 +3,7 @@ window.sendMessage = function (chatId, form) {
     let button = document.getElementById('send_button');
 
     if (!data.get('message') && !data.get('files[]').size && !data.get('images[]').size)
-        return window.pushToastAlert('Введите сообщение или прикрепите файлы', 'error');
+        return window.pushToastAlert(__('Enter a message or attach files'), 'error');
 
     button.classList.add('loading');
     button.disabled = true;
@@ -15,7 +15,7 @@ window.sendMessage = function (chatId, form) {
     }).catch(e => {
         if (e.response.status === 419) {
             pushToastAlert('Your session has expired. Please refresh the page.', "error")
-        } else window.pushToastAlert('Ошибка сети. Попробуйте снова', 'error');
+        } else window.pushToastAlert(__('Network error. Please try again.'), 'error');
 
         button.classList.remove('loading');
         button.disabled = false;

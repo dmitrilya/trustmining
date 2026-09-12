@@ -9,9 +9,8 @@
 
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Сложность сети {{ $coin->name }}({{ $coin->abbreviation }}) сегодня: прогноз, онлайн график</title>
-    <meta name="description"
-        content="Актуальная сложность сети {{ $coin->name }}, онлайн-график, история изменений и прогноз следующего пересчёта. Данные обновляются в реальном времени">
+    <title>{{ __('meta.metrics.network.difficulty.title', ['name' => $coin->name]) }}</title>
+    <meta name="description" content="{{ __('meta.metrics.network.difficulty.description', ['name' => $coin->name, 'abbreviation' => $coin->abbreviation]) }}">
 
     @if (!is_bot_request())
         <script type="text/javascript">
@@ -81,7 +80,8 @@ $watch('currentTheme', value => {
             1].value);
             })"
             @endif>
-            <a href="{{ route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]) }}" target="_blank" class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">
+            <a href="{{ route('metrics.network.difficulty', ['coin' => strtolower($coin->name)]) }}" target="_blank"
+                class="flex items-center mb-4 md:px-6 lg:px-9 xl:px-12">
                 <x-application-logo lang="en" />
                 <h1 class="ml-1.5 text-[0.9rem] font-bold text-slate-800 dark:text-slate-200">
                     DIFFICULTY

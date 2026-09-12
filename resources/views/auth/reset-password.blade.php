@@ -1,4 +1,4 @@
-<x-guest-layout title="TrustMining Сбросить пароль" description="Сбросить пароль на сайте TrustMining" noindex="true">
+<x-guest-layout :title="__('meta.auth.reset_password.title')" :description="__('meta.auth.reset_password.description')" noindex="true">
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 

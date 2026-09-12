@@ -1,5 +1,4 @@
-<x-home-layout :data="$__data" title="Курсы и метрики криптомонет - TRUSTMINING" :header="__('Coin metrics')"
-    description="Следите за стоимостью криптовалют онлайн. Актуальные курсы монет, графики изменений цен и рыночная аналитика в реальном времени">
+<x-home-layout :data="$__data" :title="__('meta.metrics.coin.title')" :description="__('meta.metrics.coin.description')" :header="__('meta.metrics.coin.header')">
     <x-breadcrumbs.breadcrumbs>
         <x-breadcrumbs.breadcrumb position="1" :href="route('metrics')" :name="__('Metrics')" />
         <x-breadcrumbs.breadcrumb position="2" :name="__('Coin')" />

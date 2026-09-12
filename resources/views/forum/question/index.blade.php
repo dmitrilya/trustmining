@@ -1,9 +1,8 @@
-<x-app-layout title="Список вопросов | TRUSTMINING Форум"
-    description="Список всех вопросов на форуме TrustMining">
+<x-app-layout :title="__('meta.forum.question.index.title')" :description="__('meta.forum.question.index.description')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-                {{ __('All forum questions') }}
+                {{ __('meta.forum.question.index.header') }}
             </h1>
 
             <a class="block ml-auto w-fit" href="{{ route('forum.question.create') }}">
@@ -15,8 +14,7 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
-        <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
                     <a

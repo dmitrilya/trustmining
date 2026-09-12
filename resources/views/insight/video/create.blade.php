@@ -1,5 +1,4 @@
-<x-insight-layout title="Добавление видео | TM Insight" description="Добавьте видео на сайте TrustMining | TM Insight" :header="__('Creation video')">
-
+<x-insight-layout :title="__('meta.insight.content.video.create.title')" :description="__('meta.insight.content.video.create.description')" :header="__('meta.insight.content.video.create.header')">
     <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
         <form action="{{ route('insight.video.store', ['channel' => $channel->slug]) }}" method="POST" class="flex flex-col gap-4" enctype=multipart/form-data
             x-data="{ validation: [], loading: false }"

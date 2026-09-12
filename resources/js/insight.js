@@ -110,7 +110,7 @@ window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
         tocListMobile.style.height = '62px';
 
         const btn = document.createElement('button');
-        btn.textContent = 'Развернуть';
+        btn.textContent = __('Expand');
         btn.classList.add('text-sm', 'mt-2', 'text-indigo-500', 'hover:text-indigo-600');
 
         let isCollapsed = true;
@@ -118,11 +118,11 @@ window.toc = (article, name, needExpand = true, space = 'space-y-2') => {
         btn.onclick = () => {
             if (isCollapsed) {
                 tocListMobile.style.height = tocListMobile.scrollHeight + 'px';
-                btn.textContent = 'Свернуть';
+                btn.textContent = __('Collapse');
                 isCollapsed = false;
             } else {
                 tocListMobile.style.height = '62px';
-                btn.textContent = 'Развернуть';
+                btn.textContent = __('Expand');
                 isCollapsed = true;
             }
         };

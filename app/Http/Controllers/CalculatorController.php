@@ -53,6 +53,23 @@ class CalculatorController extends Controller
             }
         }
 
+        $params = [
+            'model'    => $asicModel ? $selModel['n'] : '',
+            'hashrate' => $asicVersion ? $selVersion['h'] : '',
+            'unit'     => $asicVersion ? $selVersion['m'] : '',
+        ];
+
+        if ($asicModel && $asicVersion) {
+            $title = __('calc.title.version', $params);
+            $description = __('calc.description.version', $params);
+        } elseif ($asicModel) {
+            $title = __('calc.title.model', $params);
+            $description = __('calc.description.model', $params);
+        } else {
+            $title = __('calc.title.default');
+            $description = __('calc.description.default');
+        }
+
         return view('calculator.index', [
             'rub' => $data['r'],
             'rModel' => $asicModel,
@@ -66,7 +83,8 @@ class CalculatorController extends Controller
             'firmwares' => $firmwares,
             'ads' => $ads,
             'difficultyData' => Cache::get('calculator_difficulty_data'),
-            
+            'title' => $title,
+            'description' => $description
         ]);
     }
 

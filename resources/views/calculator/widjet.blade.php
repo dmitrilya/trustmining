@@ -9,9 +9,8 @@
 
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Калькулятор доходности майнинга — расчет прибыли и окупаемости TrustMining</title>
-    <meta name="description"
-        content="Онлайн-калькулятор доходности оборудования TrustMining: узнайте ежедневную прибыль, сроки окупаемости и чистый доход с учетом затрат на электроэнергию и актуального курса">
+    <title>{{ __('meta.calculator.app.title') }}</title>
+    <meta name="description" content="{{ __('meta.calculator.app.description') }}">
 
     @if (!is_bot_request())
         <script type="text/javascript">

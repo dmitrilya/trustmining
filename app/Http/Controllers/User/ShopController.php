@@ -100,7 +100,10 @@ class ShopController extends Controller
 
         return view('office.index', [
             'user' => $user,
-            'offices' => $user->offices()->where('moderation', false)->limit($limit)->get()
+            'offices' => $user->offices()->where('moderation', false)->limit($limit)->get(),
+            'title' => __('meta.office.shop.title', ['name' => $user->name]),
+            'description' => __('meta.office.shop.description', ['name' => $user->name]),
+            'header' => __('Offices') . ' ' . $user->name,
         ]);
     }
 

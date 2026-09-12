@@ -50,7 +50,7 @@
                 <button aria-label="Share" class="ml-2 sm:ml-3 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
                     @click="navigator.share({
                             title: '{{ __('Company') . ' ' . $user->name }}',
-                            description: 'Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING',
+                            description: '{{ __('meta.company.shop.description', ['name' => $user->name]) }}',
                             image: '{{ Storage::disk('public')->url($user->company->logo) }}',
                             url: '{{ url()->current() }}' + '?utm_source=share_button&utm_campaign=content_propagation&utm_medium=company&utm_content={{ $user->company->id }}'
                         });">

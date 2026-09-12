@@ -83,8 +83,8 @@ window.carousel = () => {
             const currentScroll = container.scrollLeft;
             let index = Math.round(currentScroll / cardWidth);
 
-            const threshold = 0.25;     // меньше чем 1/3
-            const velocityLimit = 0.5;  // скорость для "быстрого свайпа"
+            const threshold = 0.25;
+            const velocityLimit = 0.5;
 
             const progress = (currentScroll % cardWidth) / cardWidth;
 

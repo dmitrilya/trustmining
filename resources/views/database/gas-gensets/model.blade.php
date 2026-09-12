@@ -1,4 +1,4 @@
-<x-app-layout :title='"Газовый генератор {$brand->name} {$model->name} {$model->max_power} кВт/ч купить"' :description='"Газопоршневая установка {$brand->name} {$model->name} {$model->max_power} кВт/ч. Характеристики, отзывы, актуальные предложения продавцов и цены. Купить {$model->name} с доставкой по РФ на TRUSTMINING"'>
+<x-app-layout :title="__('meta.database.genset.model.title', ['brand' => $brand->name, 'name' => $model->name, 'power' => $model->max_power])" :description="__('meta.database.genset.model.description', ['brand' => $brand->name, 'name' => $model->name, 'power' => $model->max_power])">
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
@@ -14,8 +14,7 @@
                 @include('database.components.gpu-model-images')
             </div>
 
-            <div itemscope itemtype="https://schema.org/Product"
-                class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8" x-data={}
+            <div itemscope itemtype="https://schema.org/Product" class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8" x-data={}
                 x-init="axios.post('/view/store', { viewable_type: 'gpu-model', viewable_id: {{ $model->id }} })">
                 <div class="md:col-span-2 md:border-r border-slate-300 dark:border-slate-700 md:pr-8">
                     <h1 itemprop="name"
@@ -33,14 +32,10 @@
                     <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
                         <x-characteristics.characteristic name="Manufacturer" :value="$brand->name" />
                         <x-characteristics.characteristic name="Country" :value="$brand->country" />
-                        <x-characteristics.characteristic name="Power" :value="$model->max_power" itemprop="additionalProperty"
-                            :unit="['prop' => 'unitText', 'content' => 'kW·h']" />
-                        <x-characteristics.characteristic name="Phases" :value="$model->phases"
-                            itemprop="additionalProperty" />
-                        <x-characteristics.characteristic name="Gas type" :value="__('Natural')"
-                            itemprop="additionalProperty" />
-                        <x-characteristics.characteristic name="Gas consumption" :value="$model->fuel_consumption"
-                            itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'm³/h']" />
+                        <x-characteristics.characteristic name="Power" :value="$model->max_power" itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'kW·h']" />
+                        <x-characteristics.characteristic name="Phases" :value="$model->phases" itemprop="additionalProperty" />
+                        <x-characteristics.characteristic name="Gas type" :value="__('Natural')" itemprop="additionalProperty" />
+                        <x-characteristics.characteristic name="Gas consumption" :value="$model->fuel_consumption" itemprop="additionalProperty" :unit="['prop' => 'unitText', 'content' => 'm³/h']" />
                     </x-characteristics.characteristics>
 
                     <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
@@ -50,8 +45,7 @@
                         </div>
                     </div>
 
-                    <meta itemprop="description"
-                        content="ГПУ от производителя {{ $brand->name }} модели {{ $model->name }}" />
+                    <meta itemprop="description" content="{{ __('meta.database.genset.model.title', ['brand' => $brand->name, 'name' => $model->name, 'power' => $model->max_power]) }}" />
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 
@@ -67,22 +61,17 @@
                             <x-characteristics.characteristic name="Model" :value="$model->gpuEngineModel->name" />
                             <x-characteristics.characteristic name="Manufacturer" :value="$model->gpuEngineModel->gpuEngineBrand->name" />
                             <x-characteristics.characteristic name="Country" :value="$model->gpuEngineModel->gpuEngineBrand->country" />
-                            <x-characteristics.characteristic name="Volume" :value="$model->gpuEngineModel->volume"
-                                itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'LTR']" />
-                            <x-characteristics.characteristic name="Cylinders" :value="$model->gpuEngineModel->cylinders"
-                                itemprop="additionalProperty" />
-                            <x-characteristics.characteristic name="RPM" :value="$model->gpuEngineModel->rpm"
-                                itemprop="additionalProperty" />
-                            <x-characteristics.characteristic name="Cooling type" :value="__('Liquid')"
-                                itemprop="additionalProperty" />
+                            <x-characteristics.characteristic name="Volume" :value="$model->gpuEngineModel->volume" itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'LTR']" />
+                            <x-characteristics.characteristic name="Cylinders" :value="$model->gpuEngineModel->cylinders" itemprop="additionalProperty" />
+                            <x-characteristics.characteristic name="RPM" :value="$model->gpuEngineModel->rpm" itemprop="additionalProperty" />
+                            <x-characteristics.characteristic name="Cooling type" :value="__('Liquid')" itemprop="additionalProperty" />
                         </x-characteristics.characteristics>
 
                         <meta itemprop="model" content="{{ $model->gpuEngineModel->name }}" />
                         <div itemprop="manufacturer" itemscope itemtype="http://schema.org/Organization">
                             <meta itemprop="name" content="{{ $model->gpuEngineModel->gpuEngineBrand->name }}" />
                             <div itemprop="location" itemscope itemtype="http://schema.org/Country">
-                                <meta itemprop="name"
-                                    content="{{ $model->gpuEngineModel->gpuEngineBrand->ncountrye }}" />
+                                <meta itemprop="name" content="{{ $model->gpuEngineModel->gpuEngineBrand->ncountrye }}" />
                             </div>
                         </div>
                     </div>
@@ -93,20 +82,16 @@
                         </h3>
 
                         <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-2">
-                            <x-characteristics.characteristic name="Length" :value="$model->length"
-                                itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristics.characteristic name="Width" :value="$model->width"
-                                itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristics.characteristic name="Height" :value="$model->height"
-                                itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
-                            <x-characteristics.characteristic name="Weight" :value="$model->weight"
-                                itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
+                            <x-characteristics.characteristic name="Length" :value="$model->length" itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
+                            <x-characteristics.characteristic name="Width" :value="$model->width" itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
+                            <x-characteristics.characteristic name="Height" :value="$model->height" itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
+                            <x-characteristics.characteristic name="Weight" :value="$model->weight" itemprop="additionalProperty" :unit="['prop' => 'unitCode', 'content' => 'mm']" />
                         </x-characteristics.characteristics>
                     </div>
                 </div>
 
                 <div class="mt-4 md:mt-0">
-                    <h2 class="sr-only">Информация</h2>
+                    <h2 class="sr-only">{{ __('Information') }}</h2>
 
                     <x-characteristics.characteristics class="mb-4 md:mb-6">
                         @if ($ads->where('price', '!=', 0)->count())
@@ -159,25 +144,21 @@
 
                     <div class="flex flex-col gap-2 sm:gap-3 mt-4 sm:mt-6 lg:mt-8">
                         <div itemprop="offers" itemscope itemtype="https://schema.org/AggregateOffer">
-                            <meta itemprop="lowPrice"
-                                content="{{ $modelAdWithMinPrice ? $modelAdWithMinPrice->price : 0 }}" />
+                            <meta itemprop="lowPrice" content="{{ $modelAdWithMinPrice ? $modelAdWithMinPrice->price : 0 }}" />
                             <meta itemprop="priceCurrency"
                                 content="{{ $modelAdWithMinPrice ? ($modelAdWithMinPrice->coin->abbreviation == 'USDT' ? 'USD' : $modelAdWithMinPrice->coin->abbreviation) : 'RUB' }}" />
-                            <link itemprop="url"
-                                href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $model->slug]) }}" />
+                            <link itemprop="url" href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $model->slug]) }}" />
                         </div>
 
                         @if ($modelAds->count())
                             <x-buttons.primary-button class="w-full h-full"
                                 @click="document.querySelector('#infinite-loader').previousElementSibling.scrollIntoView({behavior: 'smooth'})">{{ __('Buy') }}</x-buttons.primary-button>
                         @else
-                            <x-buttons.primary-button
-                                class="w-full h-full cursor-default opacity-50">{{ __('No ads') }}</x-buttons.primary-button>
+                            <x-buttons.primary-button class="w-full h-full cursor-default opacity-50">{{ __('No ads') }}</x-buttons.primary-button>
                         @endif
 
                         <a href="{{ route('ads', ['adCategory' => 'gpus']) }}">
-                            <x-buttons.secondary-button
-                                class="w-full text-center">{{ __('View all ads') }}</x-buttons.secondary-button>
+                            <x-buttons.secondary-button class="w-full text-center">{{ __('View all ads') }}</x-buttons.secondary-button>
                         </a>
                     </div>
                 </div>
@@ -195,8 +176,8 @@
                 </h2>
             </div>
 
-            <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader"
-                x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route('database.gas-gensets.model.get-ads', ['gpuBrand' => $brand->slug, 'gpuModel' => $model->slug]) }}', page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }} });">
+            <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader" x-data="{}"
+                x-init="new InfiniteLoader({ endpoint: '{{ route('database.gas-gensets.model.get-ads', ['gpuBrand' => $brand->slug, 'gpuModel' => $model->slug]) }}', page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }} });">
                 @include('ad.components.list', ['owner' => false])
             </div>
         </section>

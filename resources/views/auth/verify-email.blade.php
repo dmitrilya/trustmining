@@ -1,6 +1,4 @@
-<x-guest-layout title="Подтверждение email - завершение регистрации в TrustMining"
-    description="Подтвердите адрес электронной почты, чтобы завершить регистрацию в TrustMining и получить полный доступ к платформе для майнеров, продавцов, экспертов и сервисных компаний"
-    noindex="true">
+<x-guest-layout :title="__('meta.auth.verify_email.title')" :description="__('meta.auth.verify_email.title')" noindex="true">
     <div class="mb-4 text-sm text-slate-600 dark:text-slate-400">
         {{ __("Before continuing, you'll need to confirm your email address by clicking the link we just sent you. If you haven't received the email, we'll be happy to send you another one.") }}
     </div>

@@ -1,5 +1,4 @@
-<x-app-layout title="Майнинг отель: создать объявление о хостинге"
-    description="Создание объявления о хостинге на сайте TrustMining">
+<x-app-layout :title="__('meta.hosting.create.title')" :description="__('meta.hosting.create.description')">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
@@ -10,12 +9,11 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
             <p class="text-xxs sm:text-xs text-slate-600 mt-6">* - {{ __('required fields') }}</p>
 
-            <form method="post" action="{{ route('hosting.store') }}" class="mt-2 space-y-6" enctype=multipart/form-data
-                x-data="{ description: `{{ old('description') }}` }" x-init="const Delta = Quill.import('delta');
+            <form method="post" action="{{ route('hosting.store') }}" class="mt-2 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }"
+                x-init="const Delta = Quill.import('delta');
                 const Link = Quill.import('formats/link');
                 class CustomLink extends Link {
                     static create(value) {
@@ -53,8 +51,8 @@
 
                 <div>
                     <x-inputs.input-label for="hosting-images" :value="'* ' . __('Photo')" />
-                    <x-inputs.file-input id="hosting-images" name="images[]" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" multiple max="10" required label="max. 2MB, 10 items" />
+                    <x-inputs.file-input id="hosting-images" name="images[]" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" multiple max="10"
+                        required label="max. 2MB, 10 items" />
                     <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-inputs.input-error :messages="$error" />
@@ -64,8 +62,7 @@
                 <div class="relative mt-1" x-data="{ open: false, sugs: false }" @click.away="open = false">
                     <div class="relative z-0 w-full group" @click="open = true">
                         <input type="text" id="address" name="address" x-ref="search" placeholder=" "
-                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
-                            autocomplete="off"
+                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')" autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -108,22 +105,20 @@
 
                 <div>
                     <x-inputs.input-label for="hosting-contract" :value="'* ' . __('Agreement for the provision of accommodation services')" />
-                    <x-inputs.file-input id="hosting-contract" name="contract" class="mt-1 block w-full"
-                        accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
+                    <x-inputs.file-input id="hosting-contract" name="contract" class="mt-1 block w-full" accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('contract')" />
                 </div>
 
                 <div>
                     <x-inputs.input-label for="hosting-territory" :value="__('Rights to the territory (rent, ownership)')" />
-                    <x-inputs.file-input id="hosting-territory" name="territory" class="mt-1 block w-full"
-                        accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
+                    <x-inputs.file-input id="hosting-territory" name="territory" class="mt-1 block w-full" accept=".doc,.docx,.pdf" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('territory')" />
                 </div>
 
                 <div>
                     <x-inputs.input-label for="hosting-energy_supply" :value="__('Energy supply agreement')" />
-                    <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full"
-                        autocomplete="energy_supply" accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
+                    <x-inputs.file-input id="hosting-energy_supply" name="energy_supply" class="mt-1 block w-full" autocomplete="energy_supply"
+                        accept=".doc,.docx,.pdf" :value="old('energy_supply')" label="DOC|PDF, max. 1MB" />
                     <x-inputs.input-error :messages="$errors->get('energy_supply')" />
                 </div>
 

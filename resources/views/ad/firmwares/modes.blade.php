@@ -1,6 +1,6 @@
 @php
     $strainLevels = collect(App\Enums\FirmwareModeStrainLevel::cases())
-        ->map(fn($mode) => ['key' => $mode->value, 'value' => __('characteristics.strain_level.' . $mode->name())])
+        ->map(fn($mode) => ['key' => $mode->value, 'value' => __('characteristics_loc.strain_level.' . $mode->name())])
         ->keyBy('key');
 @endphp
 

@@ -36,9 +36,9 @@
 
                         @if ($factor['type'] === 'boolean')
                             @if ($factor['value'] && $factor['bonus'] > 0)
-                                <span class="whitespace-nowrap text-xxs text-emerald-600 dark:text-emerald-400 mt-1">Бонус получен</span>
+                                <span class="whitespace-nowrap text-xxs text-emerald-600 dark:text-emerald-400 mt-1">{{ __('Bonus received') }}</span>
                             @elseif(!$factor['value'] && $factor['penalty'] < 0)
-                                <span class="whitespace-nowrap text-xxs text-rose-600 dark:text-rose-400 mt-1">Применен штраф</span>
+                                <span class="whitespace-nowrap text-xxs text-rose-600 dark:text-rose-400 mt-1">{{ __('Penalty applied') }}</span>
                             @endif
                         @endif
                     </div>
@@ -135,7 +135,7 @@
                                         </span>
 
                                         <span class="hidden group-open/details:inline">
-                                            {{ __('Скрыть подробности') }}
+                                            {{ __('Toggle hidden') }}
                                         </span>
                                     </summary>
 
@@ -184,7 +184,7 @@
                                 <summary class="cursor-pointer select-none text-xs text-indigo-500 hover:text-indigo-600 transition">
                                     <span class="group-open/details:hidden">{{ __('Details') }}</span>
 
-                                    <span class="hidden group-open/details:inline">{{ __('Скрыть подробности') }}</span>
+                                    <span class="hidden group-open/details:inline">{{ __('Toggle hidden') }}</span>
                                 </summary>
 
                                 <div class="mt-2 pl-3 border-l border-slate-300 dark:border-slate-700 space-y-2">

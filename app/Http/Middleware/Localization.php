@@ -4,8 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Session;
 
 class Localization
 {
@@ -18,8 +16,13 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::has('locale')) {
-            App::setLocale(Session::get('locale'));
+        $supportedLocales = ['en'];
+        $firstSegment = $request->segment(1);
+
+        if (in_array($firstSegment, $supportedLocales)) {
+            app()->setLocale($firstSegment);
+        } else {
+            app()->setLocale('ru');
         }
 
         return $next($request);

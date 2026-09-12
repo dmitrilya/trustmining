@@ -1,4 +1,4 @@
-<x-app-layout title="Блог: статьи, новости майнинга" description="Новостной блог от TrustMining. Только самые интересные и актуальные статьи">
+<x-app-layout :title="__('meta.blog.title')" :description="__('meta.blog.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Blog') }}

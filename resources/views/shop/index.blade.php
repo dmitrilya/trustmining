@@ -1,4 +1,4 @@
-<x-app-layout title="Майнинговые компании: рейтинг, отзывы" description="Рейтинг лучших майнинговых компаний России и мира. Актуальные отзывы реальных клиентов о надежности поставщиков оборудования, хостинге и обслуживании. Сравните компании по ценам, услугам и репутации, чтобы выбрать проверенного партнера">
+<x-app-layout :title="__('meta.company.index.title')" :description="__('meta.company.index.description')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">

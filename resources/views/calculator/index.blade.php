@@ -1,10 +1,4 @@
-<x-app-layout :title="'Калькулятор майнинга ' .
-    ($rModel ? ($rVersion ? $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] : $selModel['n']) : 'асиков') .
-    ': доходность и окупаемость'" :description="($rModel
-    ? ($rVersion
-        ? 'Узнайте, сколько приносит ' . $selModel['n'] . ' ' . $selVersion['h'] . $selVersion['m'] . ' сегодня. '
-        : 'Узнайте, сколько приносит ' . $selModel['n'] . ' сегодня. ')
-    : '') . 'Рассчитайте доход, расход, прибыль и срок окупаемости асиков в онлайн калькуляторе доходности майнинга'"
+<x-app-layout :title="$title" :description="$description"
     canonical="{{ $rModel && !$rVersion
         ? route('calculator.modelver', [
             'asicModel' => $selModel['s'],

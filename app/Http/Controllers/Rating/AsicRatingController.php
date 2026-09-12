@@ -133,20 +133,6 @@ class AsicRatingController extends Controller
             $models = $models->take(40)->values();
             $ads = $this->getAds(AdCategory::where('name', 'miners')->value('id'))->whereIn('asic_models.id', $models->take(3)->pluck('i'))->orderByDesc('ads.ordering_id')->limit(14)->get();
 
-            if ($filter) {
-                $value = $filterValue;
-                if ($filterType == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$filterValue}.title");
-                $title = __("meta.rating.asics.filters.{$filterType}.title", ['prefix' => __("meta.rating.asics.types.{$type}.title_prefix"), 'filter_value' => $value]);
-                if ($filterType == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$filterValue}.description");
-                $description = __("meta.rating.asics.filters.{$filterType}.description", ['prefix' => __("meta.rating.asics.types.{$type}.header_prefix"), 'filter_value' => $value]);
-                if ($filterType == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$filterValue}.header");
-                $header = __("meta.rating.asics.filters.{$filterType}.header", ['prefix' => __("meta.rating.asics.types.{$type}.header_prefix"), 'filter_value' => $value]);
-            } else {
-                $title = __("meta.rating.asics.types.{$type}.title", ['year' => now()->year]);
-                $description = __("meta.rating.asics.types.{$type}.description");
-                $header = __("meta.rating.asics.types.{$type}.header");
-            }
-
             return [
                 'filterType' => $filterType,
                 'filterValue' => $filterValue,
@@ -154,11 +140,22 @@ class AsicRatingController extends Controller
                 'ads' => $ads,
                 'algorithms' => $algos,
                 'rub' => $rub,
-                'title' => $title,
-                'description' => $description,
-                'header' => $header,
             ];
         });
+
+        if ($filter) {
+            $value = $result['filterValue'];
+            if ($result['filterType'] == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$result['filterValue']}.title");
+            $title = __("meta.rating.asics.filters.{$result['filterType']}.title", ['prefix' => __("meta.rating.asics.types.{$type}.title_prefix"), 'filter_value' => $value]);
+            if ($result['filterType'] == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$result['filterValue']}.description");
+            $description = __("meta.rating.asics.filters.{$result['filterType']}.description", ['prefix' => __("meta.rating.asics.types.{$type}.header_prefix"), 'filter_value' => $value]);
+            if ($result['filterType'] == 'cooling') $value = __("meta.rating.asics.filters.cooling.{$result['filterValue']}.header");
+            $header = __("meta.rating.asics.filters.{$result['filterType']}.header", ['prefix' => __("meta.rating.asics.types.{$type}.header_prefix"), 'filter_value' => $value]);
+        } else {
+            $title = __("meta.rating.asics.types.{$type}.title", ['year' => now()->year]);
+            $description = __("meta.rating.asics.types.{$type}.description");
+            $header = __("meta.rating.asics.types.{$type}.header");
+        }
 
         return view('rating.asics.show', [
             'type' => $type,
@@ -168,9 +165,9 @@ class AsicRatingController extends Controller
             'ads' => $result['ads'],
             'algorithms' => $result['algorithms'],
             'rub' => $result['rub'],
-            'title' => $result['title'],
-            'description' => $result['description'],
-            'header' => $result['header'],
+            'title' => $title,
+            'description' => $description,
+            'header' => $header,
             'coins' => $this->coins,
             'algos' => $this->algos,
             'coolings' => $this->coolings,

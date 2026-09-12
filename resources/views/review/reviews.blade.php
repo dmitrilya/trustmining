@@ -57,7 +57,7 @@
                                 pushToastAlert(r.data.message, 'error');
                             }
                         }).catch(e => pushToastAlert(e.response?.data?.message || 'Error', 'error'))"
-                    class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-800" enctype="multipart/form-data">
+                    class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-700" enctype="multipart/form-data">
                     <div class="px-4 py-2 bg-white rounded-t-xl dark:bg-slate-950">
                         <label for="review-{{ $review->id }}" class="sr-only">Your review</label>
                         <textarea id="review-{{ $review->id }}" rows="4" name="review"

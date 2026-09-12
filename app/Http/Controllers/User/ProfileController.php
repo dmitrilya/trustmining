@@ -50,14 +50,28 @@ class ProfileController extends Controller
 
     public function locale(Request $request)
     {
-        if (! in_array($request->locale, ['en', 'ru'])) {
-            abort(400);
-        }
+        $supportedLocales = ['en'];
+        $defaultLocale = 'ru';
 
-        app()->setLocale($request->locale);
-        session()->put('locale', $request->locale);
+        $targetLocale = $request->input('locale');
 
-        return back();
+        if (!in_array($targetLocale, array_merge($supportedLocales, [$defaultLocale]))) abort(400);
+
+        $previousUrl = url()->previous();
+        $refererPath = parse_url($previousUrl, PHP_URL_PATH) ?: '/';
+
+        $segments = explode('/', ltrim($refererPath, '/'));
+
+        if (isset($segments[0]) && in_array($segments[0], $supportedLocales)) array_shift($segments);
+
+        if ($targetLocale !== $defaultLocale) array_unshift($segments, $targetLocale);
+
+        $newPath = '/' . implode('/', $segments);
+
+        $queryString = parse_url($previousUrl, PHP_URL_QUERY);
+        if ($queryString) $newPath .= '?' . $queryString;
+
+        return redirect($newPath);
     }
 
     public function location(Request $request)
@@ -118,7 +132,7 @@ class ProfileController extends Controller
         $settings->{$setting} = $request->settings;
         $settings->save();
 
-        return response()->json(['success' => true, 'message' => __('Settings updated successfully')] , 200);
+        return response()->json(['success' => true, 'message' => __('Settings updated successfully')], 200);
     }
 
     public function generateToken(Request $request)

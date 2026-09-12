@@ -1,7 +1,7 @@
-<x-app-layout title="Задать вопрос на форуме TrustMining" description="Опишите свою проблему или начните обсуждение интересующей вас темы из криптосферы">
+<x-app-layout :title="__('meta.forum.question.create.title')" :description="__('meta.forum.question.create.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Question creating') }}
+            {{ __('meta.forum.question.create.header') }}
         </h1>
     </x-slot>
 
@@ -12,7 +12,7 @@
             </div>
         @else
             <div
-                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-800 rounded-xl shadow-lg shadow-logo-color">
+                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color">
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
                     @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters') }}', 'error');
                         if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"

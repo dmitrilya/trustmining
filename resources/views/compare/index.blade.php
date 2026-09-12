@@ -1,8 +1,8 @@
-<x-app-layout :noindex="$noindex" title="Сравнение {{ $modelA->data->name }} и {{ $modelB->data->name }}: чем отличаются"
-    description="Подробное сравнение ASIC майнеров {{ $modelA->data->asicBrand->name }} {{ $modelA->data->name }} и {{ $modelB->data->asicBrand->name }} {{ $modelB->data->name }}. Сравните доходность, энергопотребление и срок окупаемости. Актуальные цены от проверенных поставщиков в нашем агрегаторе.">
+<x-app-layout :noindex="$noindex" :title="__('meta.database.asic.compare.title', ['modelA' => $modelA->data->name, 'modelB' => $modelB->data->name])"
+    :description="__('meta.database.asic.compare.title', ['brandA' => $modelA->data->asicBrand->name, 'modelA' => $modelA->data->name, 'brandB' => $modelB->data->asicBrand->name, 'modelB' => $modelB->data->name])">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Which model is best to buy in') }} {{ now()->year }}
+            {{ $modelA->data->name }} vs {{ $modelB->data->name }}
         </h1>
     </x-slot>
 

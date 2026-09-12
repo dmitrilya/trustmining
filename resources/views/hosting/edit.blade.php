@@ -1,4 +1,4 @@
-<x-app-layout title="Майнинг отель: редактировать объявление о хостинге" description="Редактирование объявления о хостинге на сайте TrustMining" noindex="true">
+<x-app-layout :title="__('meta.hosting.edit.title')" :description="__('meta.hosting.edit.description')" noindex="true">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 

@@ -400,7 +400,7 @@
 
                     <div class="mt-8" x-data="{ selectedTab: 'description' }">
                         <div
-                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-400 dark:border-slate-800">
+                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 dark:text-slate-400 border-b border-slate-300 dark:border-slate-700">
                             <ul class="flex flex-wrap -mb-px">
                                 <li class="mr-0.5 sm:mr-2">
                                     <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'description'"

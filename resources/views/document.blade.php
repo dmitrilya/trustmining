@@ -1,6 +1,9 @@
-<x-app-layout
-    title="{{ request()->routeIs('terms') ? 'Пользовательское соглашение - условия использования TrustMining' : 'Политика конфиденциальности - условия обработки данных TrustMining' }}"
-    description="{{ request()->routeIs('terms') ? 'Пользовательское соглашение TrustMining: правила использования платформы, права и обязанности пользователей, ответственность сторон и условия работы с сервисами сайта' : 'Политика конфиденциальности TrustMining: правила сбора, хранения и защиты персональной информации пользователей, использование файлов cookie и гарантии безопасности данных' }}">
+<x-app-layout :title="request()->routeIs('terms') ? __('meta.terms.title') : __('meta.privacy.title')"
+    :description="request()->routeIs('terms') ? __('meta.terms.description') : __('meta.privacy.description')">
+    <x-slot name="header">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">{{ request()->routeIs('terms') ? __('meta.terms.header') : __('meta.privacy.header') }}</h1>
+    </x-slot>
+
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div id="doc-wrapper" class="mx-auto px-0 space-y-4" style="max-width:596px"></div>
 
@@ -20,7 +23,9 @@
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
 
-            var loadingTask = pdfjsLib.getDocument({ url: url });
+            var loadingTask = pdfjsLib.getDocument({
+                url: url
+            });
             loadingTask.promise.then(function(pdf) {
                 thePDF = pdf;
                 numPages = pdf.numPages;

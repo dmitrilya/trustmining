@@ -1,20 +1,3 @@
-{{-- <div class="relative" x-data="show: false">
-    <span @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open" @click.away="open = false"
-        class="flex items-center ml-3 text-xs font-semibold px-2 py-1 rounded-full {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
-        <span>{{ isset($priceData['upper_bound']) ? ($ad->price * $ad->coin->rate > $priceData['upper_bound'] ? 'Выше рынка' : ($ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'Подозрительно дешево' : 'В рынке')) : 'Мало данных' }}</span>
-        <svg class="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-        </svg>
-    </span>
-
-    <div x-show="open" style="display: none"
-        class="absolute top-7 left-1/2 -translate-x-1/2 px-2 py-3 sm:px-4 sm:py-5 space-y-3 sm:space-y-4 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg z-20">
-    
-    </div>
-</div> --}}
-
 <span @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open" @click.away="open = false"
     class="ml-3 text-center text-xs font-semibold px-2 py-1 rounded-full {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
     <span>{{ isset($priceData['upper_bound']) ? ($ad->price * $ad->coin->rate > $priceData['upper_bound'] ? __('Above market') : ($ad->price * $ad->coin->rate < $priceData['lower_bound'] ? __('Suspiciously cheap') : __('In the market'))) : __('Not enough data') }}</span>

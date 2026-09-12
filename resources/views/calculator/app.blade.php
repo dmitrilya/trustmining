@@ -12,9 +12,8 @@
         $theme = request()->cookie('app_theme');
     @endphp
 
-    <title>Калькулятор доходности майнинга — расчет прибыли и окупаемости TrustMining</title>
-    <meta name="description"
-        content="Онлайн-калькулятор доходности оборудования TrustMining: узнайте ежедневную прибыль, сроки окупаемости и чистый доход с учетом затрат на электроэнергию и актуального курса">
+    <title>{{ __('meta.calculator.app.title') }}</title>
+    <meta name="description" content="{{ __('meta.calculator.app.description') }}">
 
     @if (!is_bot_request())
         <script type="text/javascript">
@@ -43,8 +42,7 @@
             });
         </script>
         <noscript>
-            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;"
-                    alt="" />
+            <div><img src="https://mc.yandex.ru/watch/103577303" style="position:absolute; left:-9999px;" alt="" />
             </div>
         </noscript>
     @endif
@@ -63,8 +61,7 @@
                 theme = 'light';
             }" @endif>
     <div class="min-h-screen">
-        <nav
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-800">
+        <nav class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-700">
             <div class="max-w-7xl mx-auto px-2 xs:px-4 sm:px-6 lg:px-8 py-1">
                 <div class="flex justify-between h-10 lg:h-14">
                     <div class="w-full flex">

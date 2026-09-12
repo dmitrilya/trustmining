@@ -1,9 +1,9 @@
-<x-app-layout title="Майнинг отель {{ $hosting->user->name }} - хостинг для майнинга"
-    description="Разместите оборудование у компании {{ $hosting->user->name }} по тарифу {{ collect($hosting->tariffs)->min('t') }} ₽/кВт. Описание, фото, цена и условия на сайте Trust Mining">
+<x-app-layout :title="__('meta.hosting.show.title', ['name' => $hosting->user->name])"
+    :description="__('meta.hosting.show.description', ['name' => $hosting->user->name, 'tariff' => collect($hosting->tariffs)->min('t')])">
     <x-slot name="og">
-        <meta property="og:title" content="{{ __('Mining hotel') }} {{ $hosting->user->name }} - {{ __('hosting for mining') }}">
+        <meta property="og:title" content="{{ __('meta.hosting.show.title', ['name' => $hosting->user->name]) }}">
         <meta property="og:description"
-            content="{{ __('Place the equipment at the company') }} {{ $hosting->user->name }} {{ __('according to the tariff') }} {{ collect($hosting->tariffs)->min('t') }} ₽/{{ __('kW') }}">
+            content="{{ __('meta.hosting.show.description', ['name' => $hosting->user->name, 'tariff' => collect($hosting->tariffs)->min('t')]) }}">
         <meta property="og:image"
             content="{{ $hosting->user->company?->logo ? Storage::disk('public')->url($hosting->user->company->logo) : request()->getSchemeAndHttpHost() . '/img/icon.png' }}">
         <meta property="og:url" content="{{ url()->current() }}">
@@ -339,7 +339,7 @@
 
                     <div class="mt-8" x-data="{ selectedTab: 'description' }">
                         <div
-                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-400 dark:border-slate-800">
+                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-400 dark:border-slate-700">
                             <ul class="flex flex-wrap -mb-px">
                                 <li class="mr-0.5 sm:mr-2">
                                     <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'description'"

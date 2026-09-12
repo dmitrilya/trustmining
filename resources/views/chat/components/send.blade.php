@@ -1,6 +1,6 @@
 <form @submit.prevent="sendMessage({{ $chatId }}, $el)" x-data="{ text: '{{ isset($message) ? $message : '' }}', range: null }"
     @keypress="if ($event.ctrlKey && $event.code == 'Enter') sendMessage({{ $chatId }}, $el);">
-    <div class="w-full border border-slate-300 rounded-b-lg bg-slate-50 dark:bg-slate-900 dark:border-slate-800">
+    <div class="w-full border border-slate-300 rounded-b-lg bg-slate-50 dark:bg-slate-900 dark:border-slate-700">
         <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-slate-950">
             <input type="hidden" name="message" :value="text">
             <pre required id="text" aria-placeholder="{{ __('Your message...') }}" x-ref="message" contenteditable="true"

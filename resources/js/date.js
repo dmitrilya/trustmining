@@ -66,16 +66,15 @@ function getRelativeTime(date) {
     const diffInSeconds = Math.floor((now - date) / 1000);
     const diffInDays = Math.floor(diffInSeconds / 86400);
 
-    // Если прошло больше 7 дней, возвращаем null (чтобы вывести обычную дату)
     if (diffInDays > 7) return null;
 
-    if (diffInSeconds < 60) return window.locale == 'ru' ? "только что" : 'just now';
+    if (diffInSeconds < 60) return __('just now');
 
     const diffInMinutes = Math.floor(diffInSeconds / 60);
-    if (diffInMinutes < 60) return `${diffInMinutes} ${window.locale == 'ru' ? 'мин' : 'min'}`;
+    if (diffInMinutes < 60) return `${diffInMinutes} ${__('min')}`;
 
     const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `${diffInHours} ${window.locale == 'ru' ? 'ч' : 'h'}`;
+    if (diffInHours < 24) return `${diffInHours} ${__('h')}`;
 
-    return `${diffInDays} ${window.locale == 'ru' ? 'дн' : 'd'}`;
+    return `${diffInDays} ${__('d')}`;
 }

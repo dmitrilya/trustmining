@@ -169,6 +169,8 @@ window.initLazyComponent = function (componentContext, breakpoint = '1024px') {
 
 Alpine.start();
 
+window.__ = (key) => window.Translations[key] !== undefined ? window.Translations[key] : key;
+
 window.askLocation = (errorMessage) => {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -233,7 +235,7 @@ window.filterDouble = function (el, min, max, precision) {
 window.sendReview = function (form) {
     const data = new FormData(form);
 
-    if (!data.get('rating')) return window.pushToastAlert('Необходимо поставить оценку', 'error');
+    if (!data.get('rating')) return window.pushToastAlert(__('Rating required'), 'error');
 
     axios.post('/reviews/store', data, {
         headers: {

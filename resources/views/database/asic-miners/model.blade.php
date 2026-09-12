@@ -1,6 +1,4 @@
-<x-app-layout
-    title="{{ $brand->name }} {{ $model->name }} {{ $selectedVersion['h'] }}{{ $selectedVersion['m'] }}/s - доходность и объявления"
-    description="{{ $brand->name }} {{ $model->name }} {{ $selectedVersion['h'] }}{{ $selectedVersion['m'] }}/s. Характеристики, потребление, доходность и окупаемость. Актуальные предложения и цены. Купить {{ $model->name }} с доставкой по РФ на TRUSTMINING"
+<x-app-layout :title="__('meta.database.asic.model.title', ['b' => $brand->name, 'n' => $model->name, 'h' => $selectedVersion['h'], 'm' => $selectedVersion['m']])" :description="__('meta.database.asic.model.description', ['b' => $brand->name, 'n' => $model->name, 'h' => $selectedVersion['h'], 'm' => $selectedVersion['m']])"
     canonical="{{ route('database.asic-miners.version', [
         'asicBrand' => $brand->slug,
         'asicModel' => $model->slug,

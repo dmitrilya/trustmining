@@ -85,398 +85,409 @@ Route::get('/mail-login/{user_id}', function (Request $request) {
     return redirect()->to($targetUrl);
 })->name('mail.redirect');
 
-Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');
-
 Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
-Route::post('/location', [ProfileController::class, 'location'])->name('location');
-Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/widjets', [PageController::class, 'widjets'])->name('widjets');
-Route::get('/support', [PageController::class, 'support'])->name('support');
+$webRoutes = function () {
+    Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');
+    Route::post('/location', [ProfileController::class, 'location'])->name('location');
+    Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
 
-Route::view('/about', 'about')->name('about');
-//Route::view('/roadmap', 'roadmap')->name('roadmap');
-Route::view('/career', 'career')->name('career');
-Route::view('/events', 'events')->name('events');
-Route::view('/document', 'document')->name('document');
-Route::view('/privacy', 'document')->name('privacy');
-Route::view('/terms', 'document')->name('terms');
-Route::view('/warranty', 'warranty.index')->name('warranty');
-Route::view('/api', 'api.index')->name('api.doc');
-Route::view('/legal', 'legal.index')->name('legal');
-Route::view('/taxes', 'taxes.index')->name('taxes');
+    Route::get('/', [PageController::class, 'home'])->name('home');
+    Route::get('/widjets', [PageController::class, 'widjets'])->name('widjets');
+    Route::get('/support', [PageController::class, 'support'])->name('support');
 
-Route::get('/search', SearchController::class)->name('search');
+    Route::view('/about', 'about')->name('about');
+    //Route::view('/roadmap', 'roadmap')->name('roadmap');
+    Route::view('/career', 'career')->name('career');
+    Route::view('/events', 'events')->name('events');
+    Route::view('/document', 'document')->name('document');
+    Route::view('/privacy', 'document')->name('privacy');
+    Route::view('/terms', 'document')->name('terms');
+    Route::view('/warranty', 'warranty.index')->name('warranty');
+    Route::view('/api', 'api.index')->name('api.doc');
+    Route::view('/legal', 'legal.index')->name('legal');
+    Route::view('/taxes', 'taxes.' . app()->getLocale() . '.index')->name('taxes');
 
-Route::group(['prefix' => 'ratings'], function () {
-    Route::get('/', [RatingController::class, 'index'])->name('ratings');
+    Route::get('/search', SearchController::class)->name('search');
 
-    Route::group(['prefix' => 'asic-miners'], function () {
-        Route::get('/', [AsicRatingController::class, 'index'])->name('rating.asics');
-        Route::get('/{type}/{filter?}', [AsicRatingController::class, 'show'])->name('rating.asics.show');
-    })->where('type', 'profit|payback');
+    Route::group(['prefix' => 'ratings'], function () {
+        Route::get('/', [RatingController::class, 'index'])->name('ratings');
 
-    Route::get('/companies', [CompanyRatingController::class, 'show'])->name('rating.companies.show');
-    Route::get('/hostings/{type}', [HostingRatingController::class, 'show'])->where('type', 'best|reliable|cheapest')->name('rating.hostings.show');
-});
+        Route::group(['prefix' => 'asic-miners'], function () {
+            Route::get('/', [AsicRatingController::class, 'index'])->name('rating.asics');
+            Route::get('/{type}/{filter?}', [AsicRatingController::class, 'show'])->name('rating.asics.show');
+        })->where('type', 'profit|payback');
 
-Route::group(['prefix' => 'roulette'], function () {
-    Route::get('/prizes/get', [RoulettePrizeController::class, 'getPrizes']);
-    Route::get('/spin', [RouletteSpinController::class, 'spin'])->name('roulette.spin');
-});
-
-Route::group(['prefix' => 'calculator'], function () {
-    Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
-    Route::get('/app', [CalculatorController::class, 'calculatorApp'])->name('calculator.app');
-    Route::get('/get-data', [CalculatorController::class, 'calculatorData'])->name('calculator.get-data');
-    Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.model');
-    Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.modelver');
-});
-
-Route::group(['prefix' => 'metrics'], function () {
-    Route::get('/', [MetricsController::class, 'index'])->name('metrics');
-    Route::group(['prefix' => 'network'], function () {
-        Route::get('/', [MetricsController::class, 'network'])->name('metrics.network');
-        Route::group(['prefix' => '{coin:name}'], function () {
-            Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
-            Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
-            Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
-        });
-    });
-    Route::group(['prefix' => 'coin'], function () {
-        Route::get('/', [MetricsController::class, 'coin'])->name('metrics.coin');
-        Route::group(['prefix' => '{coin:name}'], function () {
-            Route::get('/rate', [MetricsController::class, 'coinRate'])->name('metrics.coin.rate');
-            Route::get('/get-rate', [MetricsController::class, 'getCoinRate'])->name('metrics.coin.get_rate');
-        });
-    });
-});
-
-Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
-Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
-Route::get('/services', [OfficeController::class, 'services'])->name('services');
-Route::get('/cryptoexchangers', [OfficeController::class, 'cryptoexchangers'])->name('cryptoexchangers');
-Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
-
-Route::group(['prefix' => 'dadata'], function () {
-    Route::group(['prefix' => 'suggestions'], function () {
-        Route::get('/address', [Controller::class, 'dadataSuggsAddress'])->name('dadata.suggs.address');
-        Route::get('/city', [Controller::class, 'dadataSuggsCity'])->name('adadata.suggs.city');
-    });
-});
-
-Route::group(['prefix' => 'blog'], function () {
-    Route::get('/', [BlogArticleController::class, 'index'])->name('blog');
-    Route::get('/article/{article}', [BlogArticleController::class, 'show'])->name('blog.article');
-});
-
-Route::group(['prefix' => 'gas-gensets'], function () {
-    Route::get('/', [GPUModelController::class, 'index'])->name('database.gas-gensets');
-
-    Route::group(['prefix' => '{gpuBrand:slug}'], function () {
-        Route::get('/', [GPUModelController::class, 'brand'])->name('database.gas-gensets.brand');
-
-        Route::group(['prefix' => '{gpuModel:slug}'], function () {
-            Route::get('/', [GPUModelController::class, 'model'])->scopeBindings()->name('database.gas-gensets.model');
-            Route::get('/get-ads', [GPUModelController::class, 'getModelAds'])->scopeBindings()->name('database.gas-gensets.model.get-ads');
-            Route::get('/reviews', [GPUModelController::class, 'reviews'])->scopeBindings()->name('database.gas-gensets.reviews');
-        });
-    });
-});
-
-Route::group(['prefix' => 'asic-miners'], function () {
-    Route::get('/', [AsicModelController::class, 'index'])->name('database.asic-miners');
-    Route::get('/get-models', [AsicModelController::class, 'getModels']);
-    Route::get('/compare/{compareRequest}', [AsicModelController::class, 'compare'])->name('database.asic-miners.compare');
-
-    Route::group(['prefix' => '{asicBrand:slug}'], function () {
-        Route::get('/', [AsicModelController::class, 'brand'])->name('database.asic-miners.brand');
-        Route::get('/get-models', [AsicModelController::class, 'getModels']);
-
-        Route::group(['prefix' => '{asicModel:slug}'], function () {
-            Route::get('/', [AsicModelController::class, 'model'])->scopeBindings()->name('database.asic-miners.model');
-            Route::get('/get-ads', [AsicModelController::class, 'getModelAds'])->scopeBindings()->name('database.asic-miners.model.get-ads');
-            Route::get('/reviews', [AsicModelController::class, 'reviews'])->scopeBindings()->name('database.asic-miners.reviews');
-            Route::get('/{asicVersion}', [AsicModelController::class, 'version'])->name('database.asic-miners.version');
-            Route::get('/{asicVersion}/get-ads', [AsicModelController::class, 'getVersionAds'])->name('database.asic-miners.version.get-ads');
-        });
-    });
-});
-
-Route::group(['prefix' => 'company/{user}'], function () {
-    Route::get('/shop', [ShopController::class, 'shop'])->name('company');
-    Route::get('/reviews', [ShopController::class, 'reviews'])->name('company.reviews');
-    Route::get('/about', [ShopController::class, 'aboutCompany'])->name('company.about');
-    Route::get('/hosting', [ShopController::class, 'hosting'])->name('company.hosting');
-    Route::get('/offices', [ShopController::class, 'offices'])->name('company.offices');
-    Route::get('/offices/{office}', [ShopController::class, 'office'])->name('company.office');
-});
-
-Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
-Route::get('/get-hostings', [HostingController::class, 'getHostingsCarousel'])->name('hostings.get');
-
-Route::post('/order/webhook', [OrderController::class, 'webhook']);
-Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
-Route::post('/amocrm/webhook/uninstall', [AmoCRMController::class, 'handleUninstallWebhook']);
-Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook']);
-
-Route::get('/phones/{user}/show', [PhoneController::class, 'show'])->name('phone.show');
-Route::post('/view/store', [ViewController::class, 'store'])->name('view.store');
-
-Route::middleware('auth')->group(function () {
-    Route::post('/like', [Controller::class, 'like'])->name('like');
-
-    Route::get('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
-    Route::get('/api/token/generate', [ProfileController::class, 'generateToken'])->name('api.token.generate');
-
-    Route::group(['prefix' => 'tg'], function () {
-        Route::get('/auth', [Controller::class, 'tgAuth']);
-        Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
-    });
-
-    Route::group(['prefix' => 'metrics/network/{coin:name}/difficulty'], function () {
-        Route::post('/subscribe', [MetricsController::class, 'difficultySubscribe'])->name('difficulty-subscribe');
-        Route::post('/unsubscribe', [MetricsController::class, 'difficultyUnsubscribe'])->name('difficulty-unsubscribe');
-    });
-
-    Route::group(['prefix' => 'insight'], function () {
-        Route::post('/channel/check-slug', [ChannelController::class, 'checkSlug'])->name('insight.channel.check-slug');
-        Route::get('/channel/create', [ChannelController::class, 'create'])->name('insight.channel.create');
-        Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');
-        Route::post('/comment/{comment}/reaction/{type}', [CommentController::class, 'reaction'])->name('insight.comment.reaction');
-        Route::middleware('owner')->group(function () {
-            Route::get('/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
-            Route::get('/{channel}/delayed', [ChannelController::class, 'delayed'])->name('insight.channel.delayed');
-            Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('insight.channel.edit');
-            Route::put('/channel/{channel}/update', [ChannelController::class, 'update'])->name('insight.channel.update');
-            Route::delete('/channel/{channel}/destroy', [ChannelController::class, 'destroy'])->name('insight.channel.destroy');
-        });
-
-        Route::group(['prefix' => '/{channel}'], function () {
-            Route::post('/toggle-subscription', [ChannelController::class, 'toggleSubscription'])->name('insight.channel.subscription');
-            Route::post('/series/store', [SeriesController::class, 'store'])->name('insight.series.store');
-            Route::put('/series/{series}/update', [SeriesController::class, 'update'])->scopeBindings()->name('insight.series.update');
-            Route::delete('/series/{series}/destroy', [SeriesController::class, 'destroy'])->scopeBindings()->name('insight.series.destroy');
-            Route::get('/article/create', [ArticleController::class, 'create'])->name('insight.article.create');
-            Route::post('/article/store', [ArticleController::class, 'store'])->name('insight.article.store');
-            Route::put('/article/{article}/update', [ArticleController::class, 'update'])->scopeBindings()->name('insight.article.update');
-            Route::delete('/article/{article}/destroy', [ArticleController::class, 'destroy'])->scopeBindings()->name('insight.article.destroy');
-            Route::post('/article/{article}/comment', [ArticleController::class, 'comment'])->scopeBindings()->name('insight.article.comment');
-            Route::get('/video/create', [VideoController::class, 'create'])->name('insight.video.create');
-            Route::post('/video/store', [VideoController::class, 'store'])->name('insight.video.store');
-            Route::put('/video/{video}/update', [VideoController::class, 'update'])->scopeBindings()->name('insight.video.update');
-            Route::delete('/video/{video}/destroy', [VideoController::class, 'destroy'])->scopeBindings()->name('insight.video.destroy');
-            Route::post('/video/{video}/comment', [VideoController::class, 'comment'])->scopeBindings()->name('insight.video.comment');
-            Route::get('/post/create', [PostController::class, 'create'])->name('insight.post.create');
-            Route::post('/post/store', [PostController::class, 'store'])->name('insight.post.store');
-            Route::put('/post/{post}/update', [PostController::class, 'update'])->scopeBindings()->name('insight.post.update');
-            Route::delete('/post/{post}/destroy', [PostController::class, 'destroy'])->scopeBindings()->name('insight.post.destroy');
-            Route::post('/post/{post}/comment', [PostController::class, 'comment'])->scopeBindings()->name('insight.post.comment');
-        });
-    });
-
-    Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
-
-    Route::group(['prefix' => 'order'], function () {
-        Route::get('/create', [OrderController::class, 'create'])->name('order.create');
-        Route::post('/store', [OrderController::class, 'store'])->name('order.store');
-    });
-
-    Route::group(['prefix' => 'profile'], function () {
-        Route::get('/', [ProfileController::class, 'show'])->name('profile');
-        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        Route::get('/notifications', [ProfileController::class, 'notifications'])->name('notifications');
-        Route::get('/notifications/check', [ProfileController::class, 'notificationsCheck'])->name('notifications.check');
-        Route::patch('/settings/{setting}/update', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
-    });
-
-    Route::group(['prefix' => 'forum/questions'], function () {
-        Route::get('/my-questions', [ForumQuestionController::class, 'myQuestions'])->name('forum.question.mine');
-        Route::get('/publish/{forumQuestion}', [ForumQuestionController::class, 'publish'])->middleware('owner')->name('forum.question.publish');
-    });
-
-    Route::group(['prefix' => 'reviews'], function () {
-        Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
-        Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
-        Route::patch('/{review}/update', [ReviewController::class, 'update'])->middleware('owner')->name('review.update');
-        Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->middleware('owner')->name('review.destroy');
-    });
-
-    Route::get('/chat/user/{user}', [ChatController::class, 'chat'])->name('chat.start');
-    Route::get('/chats', [ChatController::class, 'index'])->name('chats');
-
-    Route::middleware('in-chat')->group(function () {
-        Route::get('/chat/{chat}', [ChatController::class, 'show'])->name('chat');
-        Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
-    });
-
-    Route::group(['prefix' => 'phones'], function () {
-        Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
-        Route::middleware('owner')->group(function () {
-            Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
-            Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
-        });
+        Route::get('/companies', [CompanyRatingController::class, 'show'])->name('rating.companies.show');
+        Route::get('/hostings/{type}', [HostingRatingController::class, 'show'])->where('type', 'best|reliable|cheapest')->name('rating.hostings.show');
     });
 
     Route::group(['prefix' => 'roulette'], function () {
-        Route::group(['prefix' => 'prize'], function () {
-            Route::get('/{roulettePrize}', [RoulettePrizeController::class, 'downloadResults'])->name('roulette.download-results');
+        Route::get('/prizes/get', [RoulettePrizeController::class, 'getPrizes']);
+        Route::get('/spin', [RouletteSpinController::class, 'spin'])->name('roulette.spin');
+    });
+
+    Route::group(['prefix' => 'calculator'], function () {
+        Route::get('/', [CalculatorController::class, 'calculator'])->name('calculator');
+        Route::get('/app', [CalculatorController::class, 'calculatorApp'])->name('calculator.app');
+        Route::get('/get-data', [CalculatorController::class, 'calculatorData'])->name('calculator.get-data');
+        Route::get('/{asicModel:slug}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.model');
+        Route::get('/{asicModel:slug}/{asicVersion:hashrate}', [CalculatorController::class, 'calculator'])->middleware('old-slug')->scopeBindings()->name('calculator.modelver');
+    });
+
+    Route::group(['prefix' => 'metrics'], function () {
+        Route::get('/', [MetricsController::class, 'index'])->name('metrics');
+        Route::group(['prefix' => 'network'], function () {
+            Route::get('/', [MetricsController::class, 'network'])->name('metrics.network');
+            Route::group(['prefix' => '{coin:name}'], function () {
+                Route::get('/hashrate', [MetricsController::class, 'hashrate'])->name('metrics.network.hashrate');
+                Route::get('/get-hashrate', [MetricsController::class, 'getHashrate'])->name('metrics.network.get_hashrate');
+                Route::get('/difficulty', [MetricsController::class, 'difficulty'])->name('metrics.network.difficulty');
+            });
+        });
+        Route::group(['prefix' => 'coin'], function () {
+            Route::get('/', [MetricsController::class, 'coin'])->name('metrics.coin');
+            Route::group(['prefix' => '{coin:name}'], function () {
+                Route::get('/rate', [MetricsController::class, 'coinRate'])->name('metrics.coin.rate');
+                Route::get('/get-rate', [MetricsController::class, 'getCoinRate'])->name('metrics.coin.get_rate');
+            });
         });
     });
 
-    Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
+    Route::get('/tariffs', [TariffController::class, 'index'])->name('tariffs');
+    Route::get('/offices', [OfficeController::class, 'index'])->name('offices');
+    Route::get('/services', [OfficeController::class, 'services'])->name('services');
+    Route::get('/cryptoexchangers', [OfficeController::class, 'cryptoexchangers'])->name('cryptoexchangers');
+    Route::get('/companies', [ShopController::class, 'shops'])->name('companies');
 
-    Route::group(['prefix' => 'companies'], function () {
-        Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
-        Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
-        Route::middleware('owner')->group(function () {
-            Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
-            Route::put('/{company}/update', [CompanyController::class, 'update'])->name('company.update');
+    Route::group(['prefix' => 'dadata'], function () {
+        Route::group(['prefix' => 'suggestions'], function () {
+            Route::get('/address', [Controller::class, 'dadataSuggsAddress'])->name('dadata.suggs.address');
+            Route::get('/city', [Controller::class, 'dadataSuggsCity'])->name('adadata.suggs.city');
         });
-    })->middleware('verified');
+    });
 
-    Route::middleware(['verified'])->group(function () {
-        Route::group(['prefix' => 'offices'], function () {
-            Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
-            Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
+    Route::group(['prefix' => 'blog'], function () {
+        Route::get('/', [BlogArticleController::class, 'index'])->name('blog');
+        Route::get('/article/{article}', [BlogArticleController::class, 'show'])->name('blog.article');
+    });
+
+    Route::group(['prefix' => 'gas-gensets'], function () {
+        Route::get('/', [GPUModelController::class, 'index'])->name('database.gas-gensets');
+
+        Route::group(['prefix' => '{gpuBrand:slug}'], function () {
+            Route::get('/', [GPUModelController::class, 'brand'])->name('database.gas-gensets.brand');
+
+            Route::group(['prefix' => '{gpuModel:slug}'], function () {
+                Route::get('/', [GPUModelController::class, 'model'])->scopeBindings()->name('database.gas-gensets.model');
+                Route::get('/get-ads', [GPUModelController::class, 'getModelAds'])->scopeBindings()->name('database.gas-gensets.model.get-ads');
+                Route::get('/reviews', [GPUModelController::class, 'reviews'])->scopeBindings()->name('database.gas-gensets.reviews');
+            });
+        });
+    });
+
+    Route::group(['prefix' => 'asic-miners'], function () {
+        Route::get('/', [AsicModelController::class, 'index'])->name('database.asic-miners');
+        Route::get('/get-models', [AsicModelController::class, 'getModels']);
+        Route::get('/compare/{compareRequest}', [AsicModelController::class, 'compare'])->name('database.asic-miners.compare');
+
+        Route::group(['prefix' => '{asicBrand:slug}'], function () {
+            Route::get('/', [AsicModelController::class, 'brand'])->name('database.asic-miners.brand');
+            Route::get('/get-models', [AsicModelController::class, 'getModels']);
+
+            Route::group(['prefix' => '{asicModel:slug}'], function () {
+                Route::get('/', [AsicModelController::class, 'model'])->scopeBindings()->name('database.asic-miners.model');
+                Route::get('/get-ads', [AsicModelController::class, 'getModelAds'])->scopeBindings()->name('database.asic-miners.model.get-ads');
+                Route::get('/reviews', [AsicModelController::class, 'reviews'])->scopeBindings()->name('database.asic-miners.reviews');
+                Route::get('/{asicVersion}', [AsicModelController::class, 'version'])->name('database.asic-miners.version');
+                Route::get('/{asicVersion}/get-ads', [AsicModelController::class, 'getVersionAds'])->name('database.asic-miners.version.get-ads');
+            });
+        });
+    });
+
+    Route::group(['prefix' => 'company/{user}'], function () {
+        Route::get('/shop', [ShopController::class, 'shop'])->name('company');
+        Route::get('/reviews', [ShopController::class, 'reviews'])->name('company.reviews');
+        Route::get('/about', [ShopController::class, 'aboutCompany'])->name('company.about');
+        Route::get('/hosting', [ShopController::class, 'hosting'])->name('company.hosting');
+        Route::get('/offices', [ShopController::class, 'offices'])->name('company.offices');
+        Route::get('/offices/{office}', [ShopController::class, 'office'])->name('company.office');
+    });
+
+    Route::get('/hostings', [HostingController::class, 'index'])->name('hostings');
+    Route::get('/get-hostings', [HostingController::class, 'getHostingsCarousel'])->name('hostings.get');
+
+    Route::post('/order/webhook', [OrderController::class, 'webhook']);
+    Route::post('/order/invoice/webhook', [OrderController::class, 'invoiceWebhook']);
+    Route::post('/amocrm/webhook/uninstall', [AmoCRMController::class, 'handleUninstallWebhook']);
+    Route::post('/amocrm/webhook/{scope_id}', [ChatController::class, 'amocrmWebhook']);
+
+    Route::get('/phones/{user}/show', [PhoneController::class, 'show'])->name('phone.show');
+    Route::post('/view/store', [ViewController::class, 'store'])->name('view.store');
+
+    Route::middleware('auth')->group(function () {
+        Route::post('/like', [Controller::class, 'like'])->name('like');
+
+        Route::get('/amocrm/auth', [AmoCRMController::class, 'auth'])->name('amocrm.auth');
+        Route::get('/api/token/generate', [ProfileController::class, 'generateToken'])->name('api.token.generate');
+
+        Route::group(['prefix' => 'tg'], function () {
+            Route::get('/auth', [Controller::class, 'tgAuth']);
+            Route::patch('/dont-ask', [Controller::class, 'tgDontAsk']);
+        });
+
+        Route::group(['prefix' => 'metrics/network/{coin:name}/difficulty'], function () {
+            Route::post('/subscribe', [MetricsController::class, 'difficultySubscribe'])->name('difficulty-subscribe');
+            Route::post('/unsubscribe', [MetricsController::class, 'difficultyUnsubscribe'])->name('difficulty-unsubscribe');
+        });
+
+        Route::group(['prefix' => 'insight'], function () {
+            Route::post('/channel/check-slug', [ChannelController::class, 'checkSlug'])->name('insight.channel.check-slug');
+            Route::get('/channel/create', [ChannelController::class, 'create'])->name('insight.channel.create');
+            Route::post('/channel/store', [ChannelController::class, 'store'])->name('insight.channel.store');
+            Route::post('/comment/{comment}/reaction/{type}', [CommentController::class, 'reaction'])->name('insight.comment.reaction');
             Route::middleware('owner')->group(function () {
-                Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
-                Route::put('/{office}/update', [OfficeController::class, 'update'])->name('office.update');
-                Route::delete('/{office}/destroy', [OfficeController::class, 'destroy'])->name('office.destroy');
+                Route::get('/{channel}/statistics', [ChannelController::class, 'statistics'])->name('insight.channel.statistics');
+                Route::get('/{channel}/delayed', [ChannelController::class, 'delayed'])->name('insight.channel.delayed');
+                Route::get('/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('insight.channel.edit');
+                Route::put('/channel/{channel}/update', [ChannelController::class, 'update'])->name('insight.channel.update');
+                Route::delete('/channel/{channel}/destroy', [ChannelController::class, 'destroy'])->name('insight.channel.destroy');
+            });
+
+            Route::group(['prefix' => '/{channel}'], function () {
+                Route::post('/toggle-subscription', [ChannelController::class, 'toggleSubscription'])->name('insight.channel.subscription');
+                Route::post('/series/store', [SeriesController::class, 'store'])->name('insight.series.store');
+                Route::put('/series/{series}/update', [SeriesController::class, 'update'])->scopeBindings()->name('insight.series.update');
+                Route::delete('/series/{series}/destroy', [SeriesController::class, 'destroy'])->scopeBindings()->name('insight.series.destroy');
+                Route::get('/article/create', [ArticleController::class, 'create'])->name('insight.article.create');
+                Route::post('/article/store', [ArticleController::class, 'store'])->name('insight.article.store');
+                Route::put('/article/{article}/update', [ArticleController::class, 'update'])->scopeBindings()->name('insight.article.update');
+                Route::delete('/article/{article}/destroy', [ArticleController::class, 'destroy'])->scopeBindings()->name('insight.article.destroy');
+                Route::post('/article/{article}/comment', [ArticleController::class, 'comment'])->scopeBindings()->name('insight.article.comment');
+                Route::get('/video/create', [VideoController::class, 'create'])->name('insight.video.create');
+                Route::post('/video/store', [VideoController::class, 'store'])->name('insight.video.store');
+                Route::put('/video/{video}/update', [VideoController::class, 'update'])->scopeBindings()->name('insight.video.update');
+                Route::delete('/video/{video}/destroy', [VideoController::class, 'destroy'])->scopeBindings()->name('insight.video.destroy');
+                Route::post('/video/{video}/comment', [VideoController::class, 'comment'])->scopeBindings()->name('insight.video.comment');
+                Route::get('/post/create', [PostController::class, 'create'])->name('insight.post.create');
+                Route::post('/post/store', [PostController::class, 'store'])->name('insight.post.store');
+                Route::put('/post/{post}/update', [PostController::class, 'update'])->scopeBindings()->name('insight.post.update');
+                Route::delete('/post/{post}/destroy', [PostController::class, 'destroy'])->scopeBindings()->name('insight.post.destroy');
+                Route::post('/post/{post}/comment', [PostController::class, 'comment'])->scopeBindings()->name('insight.post.comment');
             });
         });
 
-        Route::middleware('has-office')->group(function () {
-            Route::group(['prefix' => 'ads'], function () {
-                Route::get('/create', [AdController::class, 'create'])->name('ad.create');
-                Route::post('/store', [AdController::class, 'store'])->name('ad.store');
-                Route::get('/edit-mass', [AdController::class, 'editMass'])->name('ad.edit.mass');
-                Route::post('/update-mass', [AdController::class, 'updateMass'])->name('ad.update.mass');
-                Route::get('/statistics', [StatisticsController::class, 'ads'])->name('ad.statistics');
-                Route::get('/statistics/get-ads-statistics', [StatisticsController::class, 'adsStatistics'])->name('ad.get-statistics');
+        Route::get('/tariff/{tariff}', [TariffController::class, 'show'])->name('tariff');
+
+        Route::group(['prefix' => 'order'], function () {
+            Route::get('/create', [OrderController::class, 'create'])->name('order.create');
+            Route::post('/store', [OrderController::class, 'store'])->name('order.store');
+        });
+
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('/', [ProfileController::class, 'show'])->name('profile');
+            Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
+            Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
+            Route::get('/notifications', [ProfileController::class, 'notifications'])->name('notifications');
+            Route::get('/notifications/check', [ProfileController::class, 'notificationsCheck'])->name('notifications.check');
+            Route::patch('/settings/{setting}/update', [ProfileController::class, 'updateSettings'])->name('profile.settings.update');
+        });
+
+        Route::group(['prefix' => 'forum/questions'], function () {
+            Route::get('/my-questions', [ForumQuestionController::class, 'myQuestions'])->name('forum.question.mine');
+            Route::get('/publish/{forumQuestion}', [ForumQuestionController::class, 'publish'])->middleware('owner')->name('forum.question.publish');
+        });
+
+        Route::group(['prefix' => 'reviews'], function () {
+            Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
+            Route::get('/{review}', [ReviewController::class, 'show'])->middleware('role:admin,moderator,support')->name('review.show');
+            Route::patch('/{review}/update', [ReviewController::class, 'update'])->middleware('owner')->name('review.update');
+            Route::delete('/{review}/destroy', [ReviewController::class, 'destroy'])->middleware('owner')->name('review.destroy');
+        });
+
+        Route::get('/chat/user/{user}', [ChatController::class, 'chat'])->name('chat.start');
+        Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+
+        Route::middleware('in-chat')->group(function () {
+            Route::get('/chat/{chat}', [ChatController::class, 'show'])->name('chat');
+            Route::post('/chat/{chat}/send', [ChatController::class, 'send'])->name('chat.send');
+        });
+
+        Route::group(['prefix' => 'phones'], function () {
+            Route::post('/store', [PhoneController::class, 'store'])->name('phone.store');
+            Route::middleware('owner')->group(function () {
+                Route::put('/{phone}/update', [PhoneController::class, 'update'])->name('phone.update');
+                Route::delete('/{phone}/destroy', [PhoneController::class, 'destroy'])->name('phone.destroy');
+            });
+        });
+
+        Route::group(['prefix' => 'roulette'], function () {
+            Route::group(['prefix' => 'prize'], function () {
+                Route::get('/{roulettePrize}', [RoulettePrizeController::class, 'downloadResults'])->name('roulette.download-results');
+            });
+        });
+
+        Route::post('/passport/store', [PassportController::class, 'store'])->name('passport.store');
+
+        Route::group(['prefix' => 'companies'], function () {
+            Route::get('/create', [CompanyController::class, 'create'])->name('company.create');
+            Route::post('/store', [CompanyController::class, 'store'])->name('company.store');
+            Route::middleware('owner')->group(function () {
+                Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('company.edit');
+                Route::put('/{company}/update', [CompanyController::class, 'update'])->name('company.update');
+            });
+        })->middleware('verified');
+
+        Route::middleware(['verified'])->group(function () {
+            Route::group(['prefix' => 'offices'], function () {
+                Route::get('/create', [OfficeController::class, 'create'])->name('office.create');
+                Route::post('/store', [OfficeController::class, 'store'])->name('office.store');
                 Route::middleware('owner')->group(function () {
-                    Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
-                    Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
-                    Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ad.toggle-hidden');
-                    Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ad.destroy');
+                    Route::get('/{office}/edit', [OfficeController::class, 'edit'])->name('office.edit');
+                    Route::put('/{office}/update', [OfficeController::class, 'update'])->name('office.update');
+                    Route::delete('/{office}/destroy', [OfficeController::class, 'destroy'])->name('office.destroy');
+                });
+            });
+
+            Route::middleware('has-office')->group(function () {
+                Route::group(['prefix' => 'ads'], function () {
+                    Route::get('/create', [AdController::class, 'create'])->name('ad.create');
+                    Route::post('/store', [AdController::class, 'store'])->name('ad.store');
+                    Route::get('/edit-mass', [AdController::class, 'editMass'])->name('ad.edit.mass');
+                    Route::post('/update-mass', [AdController::class, 'updateMass'])->name('ad.update.mass');
+                    Route::get('/statistics', [StatisticsController::class, 'ads'])->name('ad.statistics');
+                    Route::get('/statistics/get-ads-statistics', [StatisticsController::class, 'adsStatistics'])->name('ad.get-statistics');
+                    Route::middleware('owner')->group(function () {
+                        Route::get('/{ad}/edit', [AdController::class, 'edit'])->name('ad.edit');
+                        Route::put('/{ad}/update', [AdController::class, 'update'])->name('ad.update');
+                        Route::put('/{ad}/toggle-hidden', [AdController::class, 'toggleHidden'])->name('ad.toggle-hidden');
+                        Route::delete('/{ad}/destroy', [AdController::class, 'destroy'])->name('ad.destroy');
+                    });
+                });
+            });
+
+            Route::group(['prefix' => 'hostings'], function () {
+                Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
+                Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
+                Route::middleware('owner')->group(function () {
+                    Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
+                    Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
+                    Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
                 });
             });
         });
 
-        Route::group(['prefix' => 'hostings'], function () {
-            Route::get('/create', [HostingController::class, 'create'])->name('hosting.create');
-            Route::post('/store', [HostingController::class, 'store'])->name('hosting.store');
-            Route::middleware('owner')->group(function () {
-                Route::get('/{hosting}/edit', [HostingController::class, 'edit'])->name('hosting.edit');
-                Route::put('/{hosting}/update', [HostingController::class, 'update'])->name('hosting.update');
-                Route::delete('/{hosting}/destroy', [HostingController::class, 'destroy'])->name('hosting.destroy');
+        Route::middleware('role:admin,moderator,support')->group(function () {
+            Route::group(['prefix' => 'moderations'], function () {
+                Route::get('/', [ModerationController::class, 'index'])->name('moderations');
+                Route::get('/{moderation}', [ModerationController::class, 'show'])->name('moderation');
+                Route::put('/{moderation}/accept', [ModerationController::class, 'accept'])->name('moderation.accept');
+                Route::put('/{moderation}/decline', [ModerationController::class, 'decline'])->name('moderation.decline');
+            });
+
+            Route::group(['prefix' => 'roulette/prize'], function () {
+                Route::get('/', [RoulettePrizeController::class, 'index'])->name('roulette.prize.index');
+                Route::post('/store', [RoulettePrizeController::class, 'store'])->name('roulette.prize.store');
+
+                Route::group(['prefix' => '{roulettePrize}'], function () {
+                    Route::put('/update', [RoulettePrizeController::class, 'update'])->name('roulette.prize.update');
+                    Route::put('/toggle-active', [RoulettePrizeController::class, 'toggleActive'])->name('roulette.prize.toggle-active');
+                });
+            });
+        });
+
+        Route::get('/beams/auth', function (Request $request) {
+            $user = $request->user();
+            $beamsUserId = $request->input('user_id');
+
+            if (!$user || (string)$user->id !== (string)$beamsUserId) {
+                return response()->json(['error' => 'Insecure userId'], 403);
+            }
+
+            $beamsClient = new PushNotifications([
+                'instanceId' => config('broadcasting.connections.pusher_beams.instance_id'),
+                'secretKey' => config('broadcasting.connections.pusher_beams.secret_key'),
+            ]);
+
+            return response()->json($beamsClient->generateToken((string)$user->id));
+        });
+    });
+
+    Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
+        Route::get('/', [AdController::class, 'index'])->name('ads');
+        Route::get('/get-ads', [AdController::class, 'getAdsCarousel'])->name('ads.get');
+        Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
+    });
+
+    Route::get('asic-miners/{asicBrand:slug}/{asicModel:slug}/{asicVersion}/ads/{ad}', [AdController::class, 'asicMinerAd'])->name('ads.asic.show');
+    Route::get('gas-gensets/{gpuBrand:slug}/{gpuModel:slug}/ads/{ad}', [AdController::class, 'gpuAd'])->name('ads.gpu.show');
+
+    Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
+
+    Route::post('/track/handle', [Controller::class, 'track'])->name('track');
+
+    Route::group(['prefix' => 'forum'], function () {
+        Route::get('/', [ForumController::class, 'index'])->name('forum');
+        Route::get('/questions', [ForumQuestionController::class, 'index'])->name('forum.question.index');
+        Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
+        Route::middleware('auth')->group(function () {
+            Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');
+            Route::group(['prefix' => 'question'], function () {
+                Route::post('/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
+                Route::put('/{forumQuestion}/update', [ForumQuestionController::class, 'update'])->middleware('owner')->name('forum.question.update');
+                Route::delete('/{forumQuestion}/destroy', [ForumQuestionController::class, 'destroy'])->middleware('owner')->name('forum.question.destroy');
+            });
+            Route::group(['prefix' => 'answer'], function () {
+                Route::post('/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
+                Route::put('/{forumAnswer}/update', [ForumAnswerController::class, 'update'])->middleware('owner')->name('forum.answer.update');
+                Route::delete('/{forumAnswer}/destroy', [ForumAnswerController::class, 'destroy'])->middleware('owner')->name('forum.answer.destroy');
+            });
+            Route::group(['prefix' => 'comment'], function () {
+                Route::post('/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
+                Route::put('/{forumComment}/update', [ForumCommentController::class, 'update'])->middleware('owner')->name('forum.comment.update');
+                Route::delete('/{forumComment}/destroy', [ForumCommentController::class, 'destroy'])->middleware('owner')->name('forum.comment.destroy');
+            });
+        });
+        Route::group(['prefix' => '{forumCategory:slug}'], function () {
+            Route::get('/', [ForumController::class, 'category'])->name('forum.category');
+            Route::group(['prefix' => '{forumSubcategory:slug}'], function () {
+                Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
+                Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
             });
         });
     });
 
-    Route::middleware('role:admin,moderator,support')->group(function () {
-        Route::group(['prefix' => 'moderations'], function () {
-            Route::get('/', [ModerationController::class, 'index'])->name('moderations');
-            Route::get('/{moderation}', [ModerationController::class, 'show'])->name('moderation');
-            Route::put('/{moderation}/accept', [ModerationController::class, 'accept'])->name('moderation.accept');
-            Route::put('/{moderation}/decline', [ModerationController::class, 'decline'])->name('moderation.decline');
+    Route::group(['prefix' => 'insight'], function () {
+        Route::get('/', [InsightController::class, 'index'])->name('insight.index');
+        Route::get('/articles', [ArticleController::class, 'index'])->name('insight.article.index');
+        Route::get('/posts', [PostController::class, 'index'])->name('insight.post.index');
+        Route::get('/videos', [VideoController::class, 'index'])->name('insight.video.index');
+        Route::get('/{type}/get/{order}', [InsightController::class, 'getContent'])->name('insight.content.get');
+        Route::group(['prefix' => 'subscriptions', 'middleware' => 'auth'], function () {
+            Route::get('/', [InsightController::class, 'subscriptions'])->name('insight.subscriptions.index');
+            Route::get('/{type}/get/{order}', [InsightController::class, 'getSubscriptionsContent'])->name('insight.subscriptions.content.get');
         });
-
-        Route::group(['prefix' => 'roulette/prize'], function () {
-            Route::get('/', [RoulettePrizeController::class, 'index'])->name('roulette.prize.index');
-            Route::post('/store', [RoulettePrizeController::class, 'store'])->name('roulette.prize.store');
-
-            Route::group(['prefix' => '{roulettePrize}'], function () {
-                Route::put('/update', [RoulettePrizeController::class, 'update'])->name('roulette.prize.update');
-                Route::put('/toggle-active', [RoulettePrizeController::class, 'toggleActive'])->name('roulette.prize.toggle-active');
+        Route::group(['prefix' => '{channel}'], function () {
+            Route::get('/', [ChannelController::class, 'show'])->name('insight.channel.show');
+            Route::get('/{type}/get/{order}', [ChannelController::class, 'getContent'])->name('insight.channel.content.get');
+            Route::get('/article/{article}', [ArticleController::class, 'show'])->name('insight.article.show');
+            Route::get('/post/{post}', [PostController::class, 'show'])->name('insight.post.show');
+            Route::get('/video/{video}', [VideoController::class, 'show'])->name('insight.video.show');
+            Route::group(['prefix' => '/series/{series}'], function () {
+                Route::get('/', [SeriesController::class, 'show'])->name('insight.channel.series.show');
+                Route::get('/{type}/get/{order}', [SeriesController::class, 'getContent'])->name('insight.channel.series.content.get');
             });
         });
-    });
+    })->where('type', 'new|popular');
+};
 
-    Route::get('/beams/auth', function (Request $request) {
-        $user = $request->user();
-        $beamsUserId = $request->input('user_id');
+foreach (['en'] as $locale) {
+    Route::group([
+        'prefix' => $locale,
+        'as'     => $locale . '.',
+    ], $webRoutes);
+}
 
-        if (!$user || (string)$user->id !== (string)$beamsUserId) {
-            return response()->json(['error' => 'Insecure userId'], 403);
-        }
-
-        $beamsClient = new PushNotifications([
-            'instanceId' => config('broadcasting.connections.pusher_beams.instance_id'),
-            'secretKey' => config('broadcasting.connections.pusher_beams.secret_key'),
-        ]);
-
-        return response()->json($beamsClient->generateToken((string)$user->id));
-    });
-});
-
-Route::group(['prefix' => 'ads/{adCategory:name}'], function () {
-    Route::get('/', [AdController::class, 'index'])->name('ads');
-    Route::get('/get-ads', [AdController::class, 'getAdsCarousel'])->name('ads.get');
-    Route::get('/{ad}', [AdController::class, 'show'])->name('ads.show');
-});
-
-Route::get('asic-miners/{asicBrand:slug}/{asicModel:slug}/{asicVersion}/ads/{ad}', [AdController::class, 'asicMinerAd'])->name('ads.asic.show');
-Route::get('gas-gensets/{gpuBrand:slug}/{gpuModel:slug}/ads/{ad}', [AdController::class, 'gpuAd'])->name('ads.gpu.show');
-
-Route::get('/hostings/{hosting}/contract_deficiencies', [HostingController::class, 'getContractDeficiencies'])->name('hosting.contract_deficiencies');
-
-Route::post('/track/handle', [Controller::class, 'track'])->name('track');
-
-Route::group(['prefix' => 'forum'], function () {
-    Route::get('/', [ForumController::class, 'index'])->name('forum');
-    Route::get('/questions', [ForumQuestionController::class, 'index'])->name('forum.question.index');
-    Route::get('/question/create', [ForumQuestionController::class, 'create'])->name('forum.question.create');
-    Route::middleware('auth')->group(function () {
-        Route::put('/avatar/update', [ForumController::class, 'updateAvatar'])->name('forum.avatar.update');
-        Route::group(['prefix' => 'question'], function () {
-            Route::post('/store', [ForumQuestionController::class, 'store'])->name('forum.question.store');
-            Route::put('/{forumQuestion}/update', [ForumQuestionController::class, 'update'])->middleware('owner')->name('forum.question.update');
-            Route::delete('/{forumQuestion}/destroy', [ForumQuestionController::class, 'destroy'])->middleware('owner')->name('forum.question.destroy');
-        });
-        Route::group(['prefix' => 'answer'], function () {
-            Route::post('/store', [ForumAnswerController::class, 'store'])->name('forum.answer.store');
-            Route::put('/{forumAnswer}/update', [ForumAnswerController::class, 'update'])->middleware('owner')->name('forum.answer.update');
-            Route::delete('/{forumAnswer}/destroy', [ForumAnswerController::class, 'destroy'])->middleware('owner')->name('forum.answer.destroy');
-        });
-        Route::group(['prefix' => 'comment'], function () {
-            Route::post('/store', [ForumCommentController::class, 'store'])->name('forum.comment.store');
-            Route::put('/{forumComment}/update', [ForumCommentController::class, 'update'])->middleware('owner')->name('forum.comment.update');
-            Route::delete('/{forumComment}/destroy', [ForumCommentController::class, 'destroy'])->middleware('owner')->name('forum.comment.destroy');
-        });
-    });
-    Route::group(['prefix' => '{forumCategory:slug}'], function () {
-        Route::get('/', [ForumController::class, 'category'])->name('forum.category');
-        Route::group(['prefix' => '{forumSubcategory:slug}'], function () {
-            Route::get('/', [ForumController::class, 'subcategory'])->name('forum.subcategory');
-            Route::get('/{forumQuestion}', [ForumQuestionController::class, 'show'])->name('forum.question.show');
-        });
-    });
-});
-
-Route::group(['prefix' => 'insight'], function () {
-    Route::get('/', [InsightController::class, 'index'])->name('insight.index');
-    Route::get('/articles', [ArticleController::class, 'index'])->name('insight.article.index');
-    Route::get('/posts', [PostController::class, 'index'])->name('insight.post.index');
-    Route::get('/videos', [VideoController::class, 'index'])->name('insight.video.index');
-    Route::get('/{type}/get/{order}', [InsightController::class, 'getContent'])->name('insight.content.get');
-    Route::group(['prefix' => 'subscriptions', 'middleware' => 'auth'], function () {
-        Route::get('/', [InsightController::class, 'subscriptions'])->name('insight.subscriptions.index');
-        Route::get('/{type}/get/{order}', [InsightController::class, 'getSubscriptionsContent'])->name('insight.subscriptions.content.get');
-    });
-    Route::group(['prefix' => '{channel}'], function () {
-        Route::get('/', [ChannelController::class, 'show'])->name('insight.channel.show');
-        Route::get('/{type}/get/{order}', [ChannelController::class, 'getContent'])->name('insight.channel.content.get');
-        Route::get('/article/{article}', [ArticleController::class, 'show'])->name('insight.article.show');
-        Route::get('/post/{post}', [PostController::class, 'show'])->name('insight.post.show');
-        Route::get('/video/{video}', [VideoController::class, 'show'])->name('insight.video.show');
-        Route::group(['prefix' => '/series/{series}'], function () {
-            Route::get('/', [SeriesController::class, 'show'])->name('insight.channel.series.show');
-            Route::get('/{type}/get/{order}', [SeriesController::class, 'getContent'])->name('insight.channel.series.content.get');
-        });
-    });
-})->where('type', 'new|popular');
+Route::group([], $webRoutes);
 
 require __DIR__ . '/auth.php';

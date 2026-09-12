@@ -1,4 +1,4 @@
-<x-app-layout title="Онлайн чат: диалоги" description="Все диалоги с пользователями на сайте TrustMining">
+<x-app-layout :title="__('meta.chat.title')" :description="__('meta.chat.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Chats') }}

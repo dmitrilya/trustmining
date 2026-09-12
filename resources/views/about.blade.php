@@ -1,10 +1,7 @@
-<x-app-layout title="TrustMining: купить Asic майнер, майнинг хостинг"
-    description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
-    {{-- <x-slot name="header">
-        <div class="sm:mt-4 grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 gap-3 sm:gap-4">
-            @include('layouts.components.ad-categories')
-        </div>
-    </x-slot> --}}
+<x-app-layout :title="__('meta.about.title')" :description="__('meta.about.description')">
+    <x-slot name="header">
+        <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">{{ __('meta.about.header') }}</h1>
+    </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 space-y-8 lg:space-y-12">
         <div class="max-w-xs lg:max-w-xl mx-auto mt-4 md:mt-8">

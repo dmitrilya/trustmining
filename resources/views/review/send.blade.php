@@ -17,7 +17,7 @@
             <input type="hidden" name="reviewable_type" value="{{ $type }}">
             <input type="hidden" name="reviewable_id" value="{{ $id }}">
 
-            <div class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-800">
+            <div class="w-full border border-slate-300 rounded-xl bg-slate-50 dark:bg-slate-900 dark:border-slate-700">
                 <div class="px-4 py-2 bg-white rounded-t-xl dark:bg-slate-950">
                     <label for="review" class="sr-only">Your review</label>
                     <textarea id="review" rows="4" x-ref="review" name="review"

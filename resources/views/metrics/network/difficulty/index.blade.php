@@ -1,6 +1,4 @@
-<x-metrics-layout title="Сложность сети {{ $coin->name }}({{ $coin->abbreviation }}) сегодня: прогноз, онлайн график" :header="__('Network difficulty') . ' ' . __($coin->name)"
-    active="network_difficulty" :coin="$coin"
-    description="Актуальная сложность сети {{ $coin->name }}, онлайн-график, история изменений и прогноз следующего пересчёта. Данные обновляются в реальном времени">
+<x-metrics-layout :title="__('meta.metrics.network.difficulty.title', ['name' => $coin->name])" :description="__('meta.metrics.network.difficulty.description', ['name' => $coin->name, 'abbreviation' => $coin->abbreviation])" :header="__('Network difficulty') . ' ' . __($coin->abbreviation)" active="network_difficulty" :coin="$coin">
     @vite(['resources/js/graph.js'])
 
     <x-breadcrumbs.breadcrumbs>

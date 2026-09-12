@@ -44,11 +44,11 @@
                             <x-document :path="Storage::disk('private')->temporaryUrl(
                                 $moderation->data['document'],
                                 now()->addSeconds(60),
-                            )" name="Документ к отзыву" class="bg-white"></x-document>
+                            )" name="{{ __('Document for review') }}" class="bg-white"></x-document>
                         </div>
                     @elseif ($review->document)
                         <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            <x-document :path="Storage::disk('private')->temporaryUrl($review->document, now()->addSeconds(60))" name="Документ к отзыву" class="bg-white"></x-document>
+                            <x-document :path="Storage::disk('private')->temporaryUrl($review->document, now()->addSeconds(60))" name="{{ __('Document for review') }}" class="bg-white"></x-document>
                         </div>
                     @endif
                 </div>

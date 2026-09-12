@@ -1,4 +1,4 @@
-<h2 class="sr-only">Информация о продавце</h2>
+<h2 class="sr-only">{{ __('Seller information') }}</h2>
 
 <div class="flex items-center">
     @if (

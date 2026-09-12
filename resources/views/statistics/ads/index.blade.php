@@ -1,4 +1,4 @@
-<x-app-layout title="Статистика объявлений" description="Отчеты эффективности объявлений">
+<x-app-layout :title="__('meta.ad.statistics.title')" :description="__('meta.ad.statistics.description')">
     @vite(['resources/js/graph.js'])
 
     <x-slot name="header">

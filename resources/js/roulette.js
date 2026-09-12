@@ -64,8 +64,6 @@ export var roulette = () => ({
                 this.updateFormattedTime();
                 this.startTimer();
             }
-        }).catch(error => {
-            console.error('Ошибка загрузки данных рулетки:', error);
         });
     },
 
@@ -116,9 +114,7 @@ export var roulette = () => ({
 
             osc.start();
             osc.stop(this.audioCtx.currentTime + 0.04);
-        } catch (e) {
-            console.log('Audio Context не поддерживается или заблокирован');
-        }
+        } catch (e) { }
     },
 
     trackTicks() {
@@ -185,11 +181,11 @@ export var roulette = () => ({
                 }, 10200);
             } else {
                 this.isSpinning = false;
-                window.pushToastAlert(response.data.message || 'Ошибка запроса', 'error');
+                window.pushToastAlert(response.data.message || __('Request error'), 'error');
             }
         } catch (error) {
             this.isSpinning = false;
-            window.pushToastAlert?.('Не удалось запустить рулетку', 'error');
+            window.pushToastAlert(__('Failed to start roulette'), 'error');
         }
     },
 
@@ -203,7 +199,7 @@ export var roulette = () => ({
         const minutes = Math.floor((this.timeToSpin % 3600) / 60);
         const seconds = Math.floor(this.timeToSpin % 60);
         let result = '';
-        if (days > 0) result += `${days}д `;
+        if (days > 0) result += `${days}${__('d')} `;
         result += `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         this.formattedTime = result;
     },
@@ -253,7 +249,7 @@ document.querySelectorAll('.download-tg-ids').forEach(button => {
             window.URL.revokeObjectURL(downloadUrl);
 
         } catch (error) {
-            let errorMessage = 'Не удалось скачать файл.';
+            let errorMessage = __('Failed to download file.');
 
             if (error.response && error.response.data instanceof Blob) {
                 try {
@@ -261,9 +257,7 @@ document.querySelectorAll('.download-tg-ids').forEach(button => {
                     const jsonError = JSON.parse(textError);
 
                     if (jsonError.message) errorMessage = jsonError.message;
-                } catch (parseError) {
-                    console.error('Ошибка парсинга ответа сервера:', parseError);
-                }
+                } catch (parseError) { }
             }
 
             window.pushToastAlert(errorMessage, 'error');

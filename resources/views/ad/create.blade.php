@@ -1,10 +1,10 @@
-<x-app-layout title="Создать объявление о продаже оборудования для майнинга">
+<x-app-layout :title="__('meta.ad.create.title')" :description="__('meta.ad.create.description')">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Creating an advertisement') }}
+            {{ __('meta.ad.create.header') }}
         </h1>
     </x-slot>
 

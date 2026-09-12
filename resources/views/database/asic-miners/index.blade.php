@@ -1,5 +1,4 @@
-<x-app-layout title="Каталог ASIC майнеров"
-    description="ASIC майнеры. Цены, характеристики, расчет доходности, реальные отзывы, фото. Каталог моделей.">
+<x-app-layout :title="__('meta.database.asic.title')" :description="__('meta.database.asic.title')">
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <x-breadcrumbs.breadcrumbs>
             <x-breadcrumbs.breadcrumb position="1" :name="__('ASIC-miners')" />
@@ -8,14 +7,12 @@
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="{ search: '' }">
             <div class="relative z-0 sm:max-w-xs group mb-6 ml-auto">
-                <input type="text" id="asic-brand_input" placeholder=" " @input="search = $el.value" autocomplete="off"
-                    :value="search"
+                <input type="text" id="asic-brand_input" placeholder=" " @input="search = $el.value" autocomplete="off" :value="search"
                     class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-brand_input"
                     class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                     {{ __('Brand') }}
                 </label>
@@ -26,8 +23,7 @@
                     <a x-data="{ name: '{{ $brand->name }}'.toLowerCase() }" x-show="name.includes(search.toLowerCase())"
                         href="{{ route('database.asic-miners.brand', ['asicBrand' => $brand->slug]) }}"
                         class="flex items-center px-2 sm:px-3 py-1 sm:py-2 group hover:bg-slate-200 dark:hover:bg-slate-800 rounded-md">
-                        <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}"
-                            alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
+                        <img src="{{ Storage::url('public/brands/' . $brand->name . '.webp') }}" alt="{{ $brand->name }}" class="w-5 sm:w-7 mr-2">
                         <h3
                             class="font-semibold text-slate-600 dark:text-slate-400 text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200">
                             {{ $brand->name }}
@@ -39,8 +35,7 @@
 
         <div class="mt-4 sm:mt-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6"
             x-data="modelsData">
-            <div
-                class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">
+            <div class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 md:mr-8">
                 @foreach ($algos as $algo)
                     <div @click="algo && algo == '{{ $algo->id }}' ? filter(null, search) : filter('{{ $algo->id }}', search)"
                         class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
@@ -66,14 +61,12 @@
             </div>
 
             <div class="relative z-0 group ml-auto my-6">
-                <input type="text" id="asic-model_input" placeholder=" " @input="filter(algo, $el.value)"
-                    autocomplete="off" :value="search"
+                <input type="text" id="asic-model_input" placeholder=" " @input="filter(algo, $el.value)" autocomplete="off" :value="search"
                     class="py-2.5 px-0 w-full max-w-56 text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                 <label for="asic-model_input"
                     class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                     </svg>
                     {{ __('Model') }}
                 </label>
@@ -168,8 +161,8 @@
                     </div>
                     <div class="pl-1.5 sm:pl-2">
                         <template x-for="coin in algorithms[model.a].c" :key="model.n + coin">
-                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline"
-                                :src="'/storage/coins/' + coin + '.webp'" :alt="coin">
+                            <img class="min-w-3 h-3 sm:min-w-4 sm:h-4 -ml-1.5 sm:-ml-2 inline" :src="'/storage/coins/' + coin + '.webp'"
+                                :alt="coin">
                         </template>
                     </div>
                 </a>

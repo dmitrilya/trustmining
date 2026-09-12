@@ -1,5 +1,4 @@
-<x-app-layout title="Налоги на майнинг и оборот криптовалюты в России | TRUSTMINING"
-    description="Подробное руководство по налогообложению майнинга в России. Физические лица, ИП, ООО, расчет налогов, списание оборудования, декларации, документы, сроки и практические примеры.">
+<x-app-layout :title="__('meta.taxes.title')" :description="__('meta.taxes.description')">
     <x-slot name="header">
         <div class="flex items-end justify-between gap-4">
             <h1 class="font-bold text-lg sm:text-xl text-slate-800 dark:text-slate-200 leading-tight transition duration-100 ease-in-out">
@@ -107,7 +106,8 @@
                 class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6 space-y-12 text-sm xl:col-span-5">
                 <section id="block-1">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">01</span>
                             Правовой статус и легализация майнинга в РФ
@@ -142,12 +142,9 @@
                                                 class="inline text-indigo-500 hover:text-indigo-600 underline"
                                                 href="https://www.consultant.ru/document/cons_doc_LAW_491749/">№ 418-ФЗ от 29.11.2024</a> «О
                                             внесении изменений в части первую и вторую Налогового кодекса Российской Федерации и отдельные законодательные акты
-                                            Российской Федерации»:</strong>
-                                        Интегрирует майнинг в налоговое поле страны. Закон жестко разграничивает полномочия участников рынка, устанавливает
-                                        правила
-                                        ведения раздельного учета и вводит бескомпромиссный запрет на применение любых специальных налоговых режимов (таких как
-                                        УСН
-                                        или патент).
+                                            Российской Федерации»:</strong>Интегрирует майнинг в налоговое поле страны. Закон жестко разграничивает полномочия
+                                        участников рынка, устанавливает правила ведения раздельного учета и вводит бескомпромиссный запрет на применение любых
+                                        специальных налоговых режимов (таких как УСН или патент).
                                     </div>
                                 </li>
                             </ul>
@@ -176,8 +173,7 @@
                                         <li class="flex items-start gap-1.5">
                                             <span class="text-rose-500 font-bold">•</span>
                                             <span>Все <strong class="text-slate-800 dark:text-slate-200">индивидуальные предприниматели (ИП)</strong>,
-                                                независимо от
-                                                количества устройств.</span>
+                                                независимо от количества устройств.</span>
                                         </li>
                                         <li class="flex items-start gap-1.5">
                                             <span class="text-rose-500 font-bold">•</span>
@@ -218,8 +214,7 @@
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Осуществление майнинга лицами, обязанными зарегистрироваться в реестре, но уклоняющимися от этого, влечет за собой жесткие
-                                санкции -
-                                от конфискации активов до тюремного заключения.
+                                санкции - от конфискации активов до тюремного заключения.
                             </p>
 
                             <div class="space-y-2 sm:space-y-4">
@@ -231,11 +226,10 @@
                                     </h4>
                                     <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                         Осуществление предпринимательской деятельности без государственной регистрации или без специального разрешения
-                                        (включения в
-                                        реестр). Наказывается наложением административного штрафа <strong class="text-slate-800 dark:text-slate-200">до 1 000
-                                            000
-                                            рублей</strong> для юридических лиц с возможностью <strong class="text-rose-500">принудительной
-                                            конфискации</strong> всего вычислительного оборудования (АСИКов, ферм, блоков питания).
+                                        (включения в реестр). Наказывается наложением административного штрафа <strong
+                                            class="text-slate-800 dark:text-slate-200">до 1 000 000 рублей</strong> для юридических лиц с возможностью <strong
+                                            class="text-rose-500">принудительной конфискации</strong> всего вычислительного оборудования (АСИКов, ферм, блоков
+                                        питания).
                                     </p>
                                 </div>
 
@@ -243,8 +237,7 @@
                                     <h4 class="font-semibold text-red-700 dark:text-red-300 text-sm sm:text-base lg:text-lg mb-1">
                                         Уголовная ответственность (<a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                             href="https://www.consultant.ru/document/cons_doc_LAW_10699/cc12ef68af6f5296cb8a9dad10ca87865d02f12f/">ст. 171 УК
-                                            РФ</a>
-                                        «Незаконное предпринимательство»)
+                                            РФ</a> «Незаконное предпринимательство»)
                                     </h4>
                                     <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                         Если деятельность по майнингу осуществлялась без включения в реестр ФНС и принесла государству или гражданам <strong
@@ -261,7 +254,8 @@
 
                 <section id="block-2">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">02</span>
                             Двухэтапная концепция налогообложения
@@ -275,11 +269,9 @@
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
                                 Российское законодательство не рассматривает криптовалюту как классический товар, ценную бумагу или иностранную валюту. Для
-                                майнинга
-                                внедрен уникальный симбиоз правил налога на добычу и налога на перепродажу активов. Нормы Налогового кодекса РФ, введенные
-                                <a href="https://www.consultant.ru/document/cons_doc_LAW_491749/" target="_blank"
-                                    class="inline text-indigo-500 hover:text-indigo-600 underline">Федеральным законом
-                                    от 29.11.2024 № 418-ФЗ</a>,
+                                майнинга внедрен уникальный симбиоз правил налога на добычу и налога на перепродажу активов. Нормы Налогового кодекса РФ,
+                                введенные <a href="https://www.consultant.ru/document/cons_doc_LAW_491749/" target="_blank"
+                                    class="inline text-indigo-500 hover:text-indigo-600 underline">Федеральным законом от 29.11.2024 № 418-ФЗ</a>,
                                 жестко разделяют жизненный цикл добытой монеты на две изолированные точки контроля.
                             </p>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -287,13 +279,10 @@
                                     target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline">пункту 32 статьи 250 НК РФ</a> (для
                                 компаний) и <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/9b06776ae7a39546ad4e3ba04bebef14baabf8d2/"
                                     target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline">статье 210 НК РФ</a> (для граждан), вы не
-                                можете заявить
-                                налоговому органу: <em class="not-italic font-medium text-slate-800 dark:text-slate-200">«Я еще не продал биткоин, я просто храню
-                                    его
-                                    на
-                                    холодном кошельке, поэтому дохода нет»</em>. Закон фиксирует получение экономической выгоды непосредственно в момент
-                                генерации
-                                блока и возникновения права распоряжаться монетами (Этап 1), а затем контролирует изменение курсовой стоимости по правилам <a
+                                можете заявить налоговому органу: <em class="not-italic font-medium text-slate-800 dark:text-slate-200">«Я еще не продал
+                                    биткоин, я просто храню его на холодном кошельке, поэтому дохода нет»</em>. Закон фиксирует получение экономической выгоды
+                                непосредственно в момент генерации блока и возникновения права распоряжаться монетами (Этап 1), а затем контролирует изменение
+                                курсовой стоимости по правилам <a
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/14328e2432a07e109c576fb39961359cbfe9a26a/" target="_blank"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">статьи 282.3 НК РФ</a> при выводе активов в фиат (Этап 2).
                             </p>
@@ -314,16 +303,14 @@
                                     </h4>
                                     <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-4">
                                         Как только майнинг-пул распределил награду и транзакция зачисления криптовалюты получила подтверждение в блокчейне, у
-                                        вас
-                                        официально возникает доход. Оценка производится по рыночной стоимости (курсу) монеты на дату её получения.
+                                        вас официально возникает доход. Оценка производится по рыночной стоимости (курсу) монеты на дату её получения.
                                     </p>
                                 </div>
                                 <div
                                     class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-400 space-y-1">
                                     <p><strong class="text-slate-800 dark:text-slate-200">База:</strong> Рыночная стоимость полученного объема монет.</p>
                                     <p><strong class="text-slate-800 dark:text-slate-200">Оценка курса:</strong> На дату зачисления по срезу котировок на
-                                        крупнейших
-                                        верифицированных криптобиржах.</p>
+                                        крупнейших верифицированных криптобиржах.</p>
                                     <p><strong class="text-slate-800 dark:text-slate-200">Учет расходов:</strong> На этом этапе уменьшить доход на затраты
                                         (электричество/амортизацию) могут только ИП и юрлица на ОСНО, а также физлица при подаче 3-НДФЛ.</p>
                                 </div>
@@ -343,21 +330,17 @@
                                     </h4>
                                     <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-4">
                                         Вторая точка контроля наступает, когда вы выводите намайненную криптовалюту в рубли, иностранную валюту или обмениваете
-                                        её
-                                        на другие цифровые активы, товары или услуги. Обложению подлежит прирост стоимости монеты.
+                                        её на другие цифровые активы, товары или услуги. Обложению подлежит прирост стоимости монеты.
                                     </p>
                                 </div>
                                 <div
                                     class="bg-slate-100 dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-400 space-y-1">
                                     <p><strong class="text-slate-800 dark:text-slate-200">Если курс вырос:</strong> Разница между ценой продажи и ценой
-                                        фиксации на
-                                        Этапе 1 признается внереализационным доходом и облагается налогом.</p>
+                                        фиксации на Этапе 1 признается внереализационным доходом и облагается налогом.</p>
                                     <p><strong class="text-slate-800 dark:text-slate-200">Если курс упал:</strong> Образуется чистый убыток от реализации
-                                        цифровой
-                                        валюты. Налог на данном этапе равен нулю.</p>
+                                        цифровой валюты. Налог на данном этапе равен нулю.</p>
                                     <p><strong class="text-slate-800 dark:text-slate-200">Ограничение убытка:</strong> Убыток уменьшает только доходы от
-                                        операций с
-                                        криптой и не переносится на обычную деятельность.</p>
+                                        операций с криптой и не переносится на обычную деятельность.</p>
                                 </div>
                             </div>
                         </div>
@@ -381,8 +364,7 @@
                                 <div class="pt-4 border-t border-slate-300 dark:border-slate-700">
                                     <span class="text-emerald-600 dark:text-emerald-400 font-bold">ФОРМУЛА ЭТАПА 2 (Налог на реализацию):</span><br />
                                     <span class="text-slate-800 dark:text-slate-200">Налоговая База 2 = Фактическая выручка от продажи − (Объем Проданных Монет
-                                        ×
-                                        Курс фиксации на Этапе 1)</span>
+                                        × Курс фиксации на Этапе 1)</span>
                                 </div>
                             </div>
                             <p class="text-xs mt-4 text-rose-500">
@@ -395,7 +377,8 @@
 
                 <section id="block-3">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">03</span>
                             Майнинг для физических лиц (без статуса ИП)
@@ -411,10 +394,8 @@
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Обычные граждане имеют законное право заниматься майнингом без получения статуса ИП и без включения в реестр ФНС, но в строго
                                 очерченных рамках энергопотребления. Согласно <strong class="text-slate-800 dark:text-slate-200">Постановлению Правительства РФ
-                                    №
-                                    1469</strong>, верхний порог потребления электроэнергии для физлица составляет ровно <strong
-                                    class="text-rose-500 font-bold">6
-                                    000 кВт·ч в месяц</strong> на одного человека.
+                                    № 1469</strong>, верхний порог потребления электроэнергии для физлица составляет ровно <strong
+                                    class="text-rose-500 font-bold">6 000 кВт·ч в месяц</strong> на одного человека.
                             </p>
 
                             <div
@@ -423,16 +404,12 @@
                                     энергосбытовые компании ведут контроль:</h4>
                                 <ul class="list-disc list-inside space-y-1 pl-1 text-slate-600 dark:text-slate-400">
                                     <li><strong class="text-slate-800 dark:text-slate-200">Автоматический мониторинг:</strong> Данные снимаются через
-                                        интеллектуальные
-                                        системы учета электроэнергии (умные счетчики) в разрезе каждого лицевого счета.</li>
+                                        интеллектуальные системы учета электроэнергии (умные счетчики) в разрезе каждого лицевого счета.</li>
                                     <li><strong class="text-slate-800 dark:text-slate-200">Передача данных в ФНС и Минэнерго:</strong> При фиксации расхода
-                                        свыше 6
-                                        000
-                                        кВт·ч за расчетный месяц энергосбыт автоматически передает сведения в контролирующие органы.</li>
+                                        свыше 6 000 кВт·ч за расчетный месяц энергосбыт автоматически передает сведения в контролирующие органы.</li>
                                     <li><strong class="text-slate-800 dark:text-slate-200">Блокировка и тарифы:</strong> Превышение лимита без регистрации ИП
                                         расценивается как нецелевое использование сетей. Потребителю принудительно пересчитывают тариф со льготного (для
-                                        населения)
-                                        на коммерческий (промышленный) и инициируют процедуру отключения.</li>
+                                        населения) на коммерческий (промышленный) и инициируют процедуру отключения.</li>
                                 </ul>
                             </div>
                         </div>
@@ -443,33 +420,30 @@
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Наличие свободной розетки и соблюдение лимита в 6 000 кВт·ч не дают автоматического права на майнинг. Из-за дефицита
-                                энергомощностей
-                                Правительство РФ ввело тотальные ограничения в ряде субъектов:
+                                энергомощностей Правительство РФ ввело тотальные ограничения в ряде субъектов:
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
                                 <div class="border-l-4 border-red-600 bg-red-100 dark:bg-red-950/20 p-2 sm:p-4 rounded-r-lg">
-                                    <h4 class="font-semibold text-red-700 dark:text-red-300 text-sm sm:text-base lg:text-lg mb-1">Тотальный круглогодичный
-                                        запрет
+                                    <h4 class="font-semibold text-red-700 dark:text-red-300 text-sm sm:text-base lg:text-lg mb-1">
+                                        Тотальный круглогодичный запрет
                                     </h4>
                                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                                         Майнинг <strong class="text-red-700 dark:text-red-500">полностью запрещен</strong> (даже до 1 кВт·ч) в следующих
-                                        регионах:
-                                        юг Иркутской области (включая города Иркутск, Ангарск, Шелехов), отдельные районы Бурятии и Забайкальского края,
-                                        республики
-                                        Дагестан, Чечня, Ингушетия, Кабардино-Балкария, Карачаево-Черкесия, Северная Осетия, а также на территориях ДНР, ЛНР,
-                                        Запорожской и Херсонской областей.
+                                        регионах: юг Иркутской области (включая города Иркутск, Ангарск, Шелехов), отдельные районы Бурятии и Забайкальского
+                                        края, республики Дагестан, Чечня, Ингушетия, Кабардино-Балкария, Карачаево-Черкесия, Северная Осетия, а также на
+                                        территориях ДНР, ЛНР, Запорожской и Херсонской областей.
                                     </p>
                                 </div>
                                 <div class="border-l-4 border-amber-500 bg-amber-50/50 dark:bg-amber-950/20 p-2 sm:p-4 rounded-r-lg">
-                                    <h4 class="font-semibold text-amber-950 dark:text-amber-300 text-sm sm:text-base lg:text-lg mb-1">Сезонный запрет (Пиковые
-                                        нагрузки)</h4>
+                                    <h4 class="font-semibold text-amber-950 dark:text-amber-300 text-sm sm:text-base lg:text-lg mb-1">
+                                        Сезонный запрет (Пиковые нагрузки)
+                                    </h4>
                                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                                         На остальных незапрещенных территориях Иркутской области, Бурятии и Забайкальского края вводится <strong
                                             class="text-amber-600 dark:text-amber-400">ежегодный зимний запрет</strong> в период с <strong
                                             class="text-slate-800 dark:text-slate-200">15 ноября по 15 марта</strong>. В эти месяцы включать майнинговое
-                                        оборудование
-                                        физлицам запрещено.
+                                        оборудование физлицам запрещено.
                                     </p>
                                 </div>
                             </div>
@@ -570,13 +544,11 @@
                                 </h4>
                                 <ul class="space-y-1 list-none text-blue-900 text-blue-300">
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Расходы на оплату электроэнергии (по
-                                            квитанциям
-                                            и чекам Энергосбыта).</span></li>
+                                            квитанциям и чекам Энергосбыта).</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Стоимость приобретенного майнингового
                                             оборудования (АСИКи, видеокарты, блоки питания при наличии договоров, накладных и чеков).</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Оплата услуг связи и интернета, необходимых
-                                            для
-                                            удержания связи с пулом.</span></li>
+                                            для удержания связи с пулом.</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Комиссии майнинг-пулов, удержанные при
                                             распределении наград (должны подтверждаться цифровыми отчетами/выгрузками из личного кабинета пула).</span></li>
                                 </ul>
@@ -587,7 +559,8 @@
 
                 <section id="block-4">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">04</span>
                             Практические кейсы расчетов для физических лиц
@@ -609,15 +582,13 @@
                             <div class="text-slate-600 dark:text-slate-400">
                                 <p class="mb-2">
                                     <strong>Условия:</strong> Гражданин Петров проживает в Новосибирске. Энергопотребление его оборудования составляет 4 500
-                                    кВт·ч в
-                                    месяц (меньше лимита 6 000 кВт·ч, Реестр не нужен). За 2025 год на его кошелек поступила криптовалюта. Рыночная стоимость
-                                    монет
-                                    на даты зачисления в сумме составила <strong class="text-slate-800 dark:text-slate-200">6 000 000 ₽</strong>.
+                                    кВт·ч в месяц (меньше лимита 6 000 кВт·ч, Реестр не нужен). За 2025 год на его кошелек поступила криптовалюта. Рыночная
+                                    стоимость монет на даты зачисления в сумме составила <strong class="text-slate-800 dark:text-slate-200">6 000 000
+                                        ₽</strong>.
                                 </p>
                                 <p class="mb-4">
                                     Петров сохранил все документы и чеки на общую сумму расходов <strong class="text-slate-800 dark:text-slate-200">500 000
-                                        ₽</strong>
-                                    (300 000 ₽ за свет и 200 000 ₽ - покупка видеокарт).
+                                        ₽</strong> (300 000 ₽ за свет и 200 000 ₽ - покупка видеокарт).
                                 </p>
 
                                 <div
@@ -648,7 +619,8 @@
                                 <span
                                     class="px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold text-xs whitespace-nowrap">Кейс
                                     Б</span>
-                                <h3 class="scroll-mt-[540px] xl:scroll-mt-36 scroll-mt-[540px] xl:scroll-mt-36vinline text-base font-bold text-slate-800 dark:text-slate-200">
+                                <h3
+                                    class="scroll-mt-[540px] xl:scroll-mt-36 scroll-mt-[540px] xl:scroll-mt-36vinline text-base font-bold text-slate-800 dark:text-slate-200">
                                     Расходы на электроэнергию перекрывают доход (Убыточный майнинг)
                                 </h3>
                             </div>
@@ -656,8 +628,7 @@
                             <div class="text-slate-600 dark:text-slate-400">
                                 <p class="mb-4">
                                     <strong>Условия:</strong> Из-за падения курсов на рынке в течение нескольких месяцев майнер Соколов получил на кошелек
-                                    монеты,
-                                    суммарная стоимость которых на дату зачисления составила <strong class="text-slate-800 dark:text-slate-200">150 000
+                                    монеты, суммарная стоимость которых на дату зачисления составила <strong class="text-slate-800 dark:text-slate-200">150 000
                                         ₽</strong>.
                                     При этом затраты на электроэнергию по тарифам и чекам составили <strong class="text-slate-800 dark:text-slate-200">180 000
                                         ₽</strong>.
@@ -699,8 +670,7 @@
                             <div class="space-y-2 sm:space-y-4 text-slate-600 dark:text-slate-400">
                                 <p class="text-sm">
                                     Рассмотрим два противоположных сценария на втором этапе - при конвертации криптовалюты в рубли на бирже или через
-                                    P2P-платформу.
-                                    Исходная точка: майнер добыл 0.1 BTC, когда его рыночная стоимость составляла <strong
+                                    P2P-платформу. Исходная точка: майнер добыл 0.1 BTC, когда его рыночная стоимость составляла <strong
                                         class="text-slate-800 dark:text-slate-200">500 000 ₽</strong> (эта сумма уже занесена в доходы Этапа 1).
                                 </p>
 
@@ -738,8 +708,7 @@
                                             class="inline text-indigo-500 hover:text-indigo-600 underline">пункта 2.3 статьи 210 НК РФ</a>:</strong> Налоговый
                                     кодекс РФ выделяет операции с цифровой валютой в <span
                                         class="underline font-semibold text-slate-800 dark:text-slate-200">отдельную, изолированную налоговую базу</span>.
-                                    Убыток
-                                    от падения курса криптовалюты на Этапе 2 фиксируется, но его <span
+                                    Убыток от падения курса криптовалюты на Этапе 2 фиксируется, но его <span
                                         class="underline font-semibold text-slate-800 dark:text-slate-200">категорически запрещено вычитать</span> из вашей
                                     основной налоговой базы (куда входят заработная плата по основному месту работы или доходы от продажи личной собственности,
                                     например, автомобиля), чтобы снизить общий НДФЛ за год. Данный отрицательный результат может сальдироваться только в рамках
@@ -753,7 +722,8 @@
 
                 <section id="block-5">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">05</span>
                             Индивидуальные предприниматели (ИП) на ОСНО
@@ -768,18 +738,15 @@
                             <p class="text-slate-600 dark:text-slate-400 mb-2">
                                 Главная юридическая ловушка для начинающих предпринимателей - попытка зарегистрировать ИП и подать уведомление о переходе на УСН
                                 («Доходы» 6% или «Доходы минус расходы» 15%). Налоговый кодекс РФ содержит <strong
-                                    class="text-slate-800 dark:text-slate-200">прямой
-                                    императивный запрет</strong> на применение льготных систем для майнинга.
+                                    class="text-slate-800 dark:text-slate-200">прямой императивный запрет</strong> на применение льготных систем для майнинга.
                             </p>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Согласно изменениям, внесенным Федеральным законом № 418-ФЗ, <a target="_blank"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/a1d86f7078e645869b02fde85e8c972193557dee/">подпункт 23 пункта 3
                                     статьи 346.12 НК РФ</a> полностью лишает лиц, осуществляющих майнинг и последующую реализацию цифровой валюты, права
-                                применять
-                                УСН. Аналогичные блокирующие поправки внесены в главы НК РФ, регулирующие Автоматизированную УСН (АУСН), единый сельхозналог
-                                (ЕСХН),
-                                патентную систему (ПСН) и налог на профессиональный доход (НПД / самозанятость).
+                                применять УСН. Аналогичные блокирующие поправки внесены в главы НК РФ, регулирующие Автоматизированную УСН (АУСН), единый
+                                сельхозналог (ЕСХН), патентную систему (ПСН) и налог на профессиональный доход (НПД / самозанятость).
                             </p>
 
                             <div class="p-2 sm:p-4 border-l-4 border-rose-500/30 bg-rose-500/10 rounded-r-lg">
@@ -788,10 +755,8 @@
                                 </h4>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Если ИП вел майнинг на УСН, налоговая инспекция при проверке аннулирует право на спецрежим <strong
-                                        class="text-rose-500">задним
-                                        числом с начала квартала</strong>, в котором была совершена первая операция
-                                    по добыче. Предпринимателю принудительно начислят налоги по ОСНО, пени и штраф в размере 20% от неуплаченной суммы на
-                                    основании
+                                        class="text-rose-500">задним числом с начала квартала</strong>, в котором была совершена первая операция по добыче.
+                                    Предпринимателю принудительно начислят налоги по ОСНО, пени и штраф в размере 20% от неуплаченной суммы на основании
                                     <a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                         href="https://www.consultant.ru/document/cons_doc_LAW_19671/1bab8cfd8c4da82e8af44f7ebcbfa1716bac9586/">ст. 122 НК
                                         РФ</a>.
@@ -809,15 +774,13 @@
                                     class="text-slate-800 dark:text-slate-200">13% до
                                     22%</strong> (<a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/3e4bbd6dd9fb5dd4e9394f447653506e1d6fa3a9/">ст. 224 НК РФ</a>),
-                                но
-                                правила признания расходов здесь строго регламентированы.
+                                но правила признания расходов здесь строго регламентированы.
                             </p>
                             <p class="text-slate-600 dark:text-slate-400">
                                 Согласно <a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/43b2a4727390504760e272227648fa7e6355969d/">статье 221 НК
-                                    РФ</a>, ИП
-                                имеет право уменьшить доходы от майнинга на сумму <strong class="text-slate-800 dark:text-slate-200">профессиональных налоговых
-                                    вычетов</strong>. Состав этих вычетов определяется
+                                    РФ</a>, ИП имеет право уменьшить доходы от майнинга на сумму <strong
+                                    class="text-slate-800 dark:text-slate-200">профессиональных налоговых вычетов</strong>. Состав этих вычетов определяется
                                 предпринимателем самостоятельно в порядке, аналогичном определению расходов для налога на прибыль (<a target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/043b3ec883ce309e856dd0c833f5b8b817c276e9/"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">Глава 25 НК РФ</a>). Все расходы должны быть экономически
@@ -844,8 +807,7 @@
                                         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                             Принимаются к вычету только при наличии договора энергоснабжения, заключенного именно на ИП или коммерческий объект,
                                             ежемесячных актов приема-передачи электроэнергии и платежных поручений с расчетного счета ИП. Бытовые тарифы физлиц
-                                            для
-                                            уменьшения базы ИП использовать нельзя.
+                                            для уменьшения базы ИП использовать нельзя.
                                         </p>
                                     </div>
                                 </div>
@@ -873,10 +835,8 @@
                                         </h4>
                                         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                             Пул удерживает от 1% до 3% от добытых монет в качестве комиссии. Чтобы легально уменьшить доход на эту сумму, ИП
-                                            обязан
-                                            иметь сквозные цифровые выгрузки логов пула и привязку учетных записей (воркеров) к серийным номерам своих устройств
-                                            на
-                                            балансе.
+                                            обязан иметь сквозные цифровые выгрузки логов пула и привязку учетных записей (воркеров) к серийным номерам своих
+                                            устройств на балансе.
                                         </p>
                                     </div>
                                 </div>
@@ -889,9 +849,8 @@
                             </h4>
                             <p class="text-xs md:text-sm mb-4 text-blue-900 text-blue-300">
                                 ИП Сидоров за год добыл криптовалюты на общую сумму <strong class="underline">5 000 000 ₽</strong>. Его подтвержденные
-                                операционные
-                                расходы (электроэнергия по договору + хостинг ЦОД) составили <strong class="underline">2 000 000 ₽</strong>. Входящий НДС от
-                                энергетиков составил 400 000 ₽ (включен в общую стоимость затрат, так как вычет по НДС для майнеров запрещен).
+                                операционные расходы (электроэнергия по договору + хостинг ЦОД) составили <strong class="underline">2 000 000 ₽</strong>.
+                                Входящий НДС от энергетиков составил 400 000 ₽ (включен в общую стоимость затрат, так как вычет по НДС для майнеров запрещен).
                             </p>
                             <div
                                 class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 font-mono text-slate-800 dark:text-slate-200">
@@ -913,7 +872,8 @@
 
                 <section id="block-6">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">06</span>
                             Юридические лица (ОСНО) - Налог на прибыль и НДС
@@ -929,14 +889,13 @@
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
                                 Для всех юридических лиц (ООО, АО), осуществляющих деятельность по майнингу цифровых валют, основным прямым налогом является
-                                налог
-                                на прибыль организаций. В соответствии с актуальной редакцией статьи 284 Налогового кодекса РФ, базовая ставка налога составляет
+                                налог на прибыль организаций. В соответствии с актуальной редакцией статьи 284 Налогового кодекса РФ, базовая ставка налога
+                                составляет
                                 <strong class="text-slate-800 dark:text-slate-200 font-bold">25%</strong>.
                             </p>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Законодательство устанавливает строгое императивное распределение сумм начисленного налога по уровням бюджетной системы
-                                Российской
-                                Федерации:
+                                Российской Федерации:
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
@@ -959,9 +918,8 @@
                             </div>
                             <p class="mt-4 text-xs text-slate-500">
                                 *Примечание: Законодательные органы субъектов РФ имеют право снижать налоговую ставку в своей части (17%) для отдельных
-                                категорий
-                                налогоплательщиков (например, для резидентов особых экономических зон или территорий опережающего развития), но не ниже
-                                установленных федеральным законом лимитов.
+                                категорий налогоплательщиков (например, для резидентов особых экономических зон или территорий опережающего развития), но не
+                                ниже установленных федеральным законом лимитов.
                             </p>
                         </div>
 
@@ -975,8 +933,7 @@
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">подпунктов 27 и 28 пункта 2 статьи 146 НК РФ</a>,
                                 операции по осуществлению майнинга цифровой валюты и операции по её последующей реализации <strong
                                     class="text-green-600 dark:text-green-400 font-bold">не признаются объектом налогообложения НДС</strong>.
-                                Организация-майнер не
-                                начисляет НДС "сверху" при продаже крипты и не выставляет счета-фактуры покупателям.
+                                Организация-майнер не начисляет НДС "сверху" при продаже крипты и не выставляет счета-фактуры покупателям.
                             </p>
 
                             <div class="p-2 sm:p-4 border border-rose-500/30 bg-rose-500/10 rounded-xl mb-2 sm:mb-4">
@@ -984,32 +941,28 @@
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Поскольку конечная операция освобождена от НДС, организация <strong
                                         class="underline font-medium text-slate-800 dark:text-slate-200">теряет право на налоговый вычет</strong> по входящему
-                                    НДС.
-                                    Весь НДС, предъявленный вам энергосбытовыми компаниями за электричество, арендодателями или поставщиками оборудования при
-                                    покупке АСИКов, <strong class="text-rose-500 font-bold">нельзя вернуть из бюджета</strong>. Этот налог в полном объеме
+                                    НДС. Весь НДС, предъявленный вам энергосбытовыми компаниями за электричество, арендодателями или поставщиками оборудования
+                                    при покупке АСИКов, <strong class="text-rose-500 font-bold">нельзя вернуть из бюджета</strong>. Этот налог в полном объеме
                                     включается в стоимость приобретаемых товаров, работ и услуг (<a
                                         class="inline text-indigo-500 hover:text-indigo-600 underline"
                                         href="https://www.consultant.ru/document/cons_doc_LAW_28165/7e99d9a14446e1adf556f812066034a9091e0cc4/"
-                                        target="_blank">п.
-                                        2 ст. 170 НК РФ</a>) и списывается в общие расходы, уменьшающие налог на прибыль.
+                                        target="_blank">п. 2 ст. 170 НК РФ</a>) и списывается в общие расходы, уменьшающие налог на прибыль.
                                 </p>
                             </div>
 
                             <div
                                 class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
                                 <span class="font-bold text-slate-800 dark:text-slate-200 text-sm sm:text-base lg:text-lg block mb-1">📊 Обязанность ведения
-                                    раздельного учета (<a
-                                        href="https://www.consultant.ru/document/cons_doc_LAW_28165/c8ebcedc9ddce9d959d6c520c3b0d602f71e8e12/" target="_blank"
-                                        class="inline text-indigo-500 hover:text-indigo-600 underline">п. 4 ст. 149 НК РФ</a>)</span>
+                                    раздельного учета (<a class="inline text-indigo-500 hover:text-indigo-600 underline"
+                                        href="https://www.consultant.ru/document/cons_doc_LAW_28165/c8ebcedc9ddce9d959d6c520c3b0d602f71e8e12/"
+                                        target="_blank">п. 4 ст. 149 НК РФ</a>)</span>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Если компания осуществляет исключительно майнинг, весь входящий НДС просто уходит в расходы. Однако, если юрлицо ведет
-                                    смешанную
-                                    деятельность - например, майнит криптовалюту (операция без НДС) и параллельно сдает в аренду коммерческую недвижимость или
-                                    продает компьютерные комплектующие (операции с НДС 20%), она <strong
+                                    смешанную деятельность - например, майнит криптовалюту (операция без НДС) и параллельно сдает в аренду коммерческую
+                                    недвижимость или продает компьютерные комплектующие (операции с НДС 20%), она <strong
                                         class="text-slate-800 dark:text-slate-200 font-semibold">обязана вести жесткий раздельный учет</strong> сумм выручки,
                                     затрат и сумм входящего НДС. При отсутствии раздельного учета компания лишается права включать входящий НДС в расходы по
-                                    налогу
-                                    на прибыль.
+                                    налогу на прибыль.
                                 </p>
                             </div>
                         </div>
@@ -1050,10 +1003,8 @@
                                                 href="https://www.consultant.ru/document/cons_doc_LAW_28165/da6bcc2d785c7ebb675408e09b58fef2c5306e27/"
                                                 class="inline text-indigo-500 hover:text-indigo-600 underline">ст. 259.1 НК РФ</a>):</strong> Амортизация
                                         рассчитывается отдельно по каждому объекту. Начисление производится ежемесячно равными долями, начиная с 1-го числа
-                                        месяца,
-                                        следующего за месяцем ввода устройства в эксплуатацию (приказ по форме ОС-1). Ежемесячная норма амортизации вычисляется
-                                        по
-                                        формуле: <code
+                                        месяца, следующего за месяцем ввода устройства в эксплуатацию (приказ по форме ОС-1). Ежемесячная норма амортизации
+                                        вычисляется по формуле: <code
                                             class="bg-slate-100 dark:bg-slate-950 px-1.5 py-0.5 rounded-lg font-mono font-bold text-slate-800 dark:text-slate-200">K
                                             = (1 / СПИ в месяцах) × 100%</code>.
                                     </div>
@@ -1089,9 +1040,8 @@
                                     <strong class="text-slate-800 dark:text-slate-200 block mb-2">🛑 Ограничение базы в 50%</strong>
                                     <span>Налоговая база за текущий отчетный (налоговый) период <strong
                                             class="underline font-semibold text-slate-800 dark:text-slate-200">не может быть уменьшена более чем на
-                                            50%</strong> за
-                                        счет накопленных убытков прошлых лет. Организация в любом случае обязана рассчитать и уплатить налог на прибыль минимум
-                                        с половины фактически заработанного дохода за текущий год.</span>
+                                            50%</strong> за счет накопленных убытков прошлых лет. Организация в любом случае обязана рассчитать и уплатить налог
+                                        на прибыль минимум с половины фактически заработанного дохода за текущий год.</span>
                                 </div>
                             </div>
                         </div>
@@ -1105,8 +1055,7 @@
                                 <div class="p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-blue-100 dark:border-blue-900 rounded-xl shadow-md">
                                     <strong class="text-slate-800 dark:text-slate-200 block mb-2">📅 Год №1 (Капитальные затраты и фиксация убытка):</strong>
                                     Компанией приобретено и введено в эксплуатацию оборудование на сумму <strong class="text-slate-800 dark:text-slate-200">1
-                                        000
-                                        000 ₽</strong>. Выбран минимальный срок полезного использования - 36 месяцев.
+                                        000 000 ₽</strong>. Выбран минимальный срок полезного использования - 36 месяцев.
                                     <div class="mt-4 text-slate-600 dark:text-slate-400 space-y-1">
                                         <p>• Сумма ежемесячной амортизации: 1 000 000 ₽ ÷ 36 мес. = 27 777.78 ₽.</p>
                                         <p>• Сумма начисленной амортизации за первый полный год работы: 27 777.78 ₽ × 12 мес. = 333 333.36 ₽.</p>
@@ -1151,7 +1100,8 @@
 
                 <section id="block-7">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">07</span>
                             Продажа и списание оборудования
@@ -1165,8 +1115,7 @@
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
                                 В процессе эксплуатации майнингового оборудования на ОСНО его балансовая цена непрерывно уменьшается за счет ежемесячного
-                                начисления
-                                амортизации. Когда возникает необходимость продать б/у АСИКи или видеокарты, налогообложение операции регулируется <a
+                                начисления амортизации. Когда возникает необходимость продать б/у АСИКи или видеокарты, налогообложение операции регулируется <a
                                     target="_blank" href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">статьей 268 НК РФ</a>.
                             </p>
@@ -1181,8 +1130,7 @@
                             </div>
                             <p class="text-slate-600 dark:text-slate-400">
                                 Согласно подпункту 1 пункта 1 статьи 268 НК РФ, при продаже оборудования организация (или ИП на ОСНО) имеет полное законное
-                                право
-                                уменьшить полученный доход от реализации на величину этой остаточной стоимости.
+                                право уменьшить полученный доход от реализации на величину этой остаточной стоимости.
                             </p>
                         </div>
 
@@ -1215,9 +1163,8 @@
                             </div>
                             <p class="text-xs text-rose-500">
                                 *Внимание: Если оборудование продается после полного нормативного списания (через 3–5 лет), его остаточная стоимость равна 0 ₽.
-                                В
-                                этом случае вся сумма, полученная от продажи б/у техники, признается чистой прибылью и облагается налогом по стандартной ставке
-                                ОСНО. Утверждение, что списанная техника продается без налогов - грубейшая ошибка.
+                                В этом случае вся сумма, полученная от продажи б/у техники, признается чистой прибылью и облагается налогом по стандартной
+                                ставке ОСНО. Утверждение, что списанная техника продается без налогов - грубейшая ошибка.
                             </p>
                         </div>
 
@@ -1241,10 +1188,8 @@
                                 <p class="text-slate-600 dark:text-slate-400">
                                     Полученный убыток включается в состав прочих расходов налогоплательщика <strong
                                         class="text-slate-800 dark:text-slate-200 font-semibold">равными долями ежемесячно</strong> в течение срока,
-                                    определяемого
-                                    как
-                                    разница между установленным сроком полезного использования (СПИ) этого имущества и фактическим сроком его эксплуатации до
-                                    момента продажи.
+                                    определяемого как разница между установленным сроком полезного использования (СПИ) этого имущества и фактическим сроком его
+                                    эксплуатации до момента продажи.
                                 </p>
                             </div>
 
@@ -1255,8 +1200,7 @@
                                 <p class="mb-4 text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Организация купила АСИК с установленным СПИ 36 месяцев. Спустя 24 месяца эксплуатации (осталось 12 месяцев) его остаточная
                                     стоимость составляла <strong class="underline">60 000 ₽</strong>. Из-за падения энергоэффективности устройство было продано
-                                    за
-                                    <strong class="underline">36 000 ₽</strong>.
+                                    за <strong class="underline">36 000 ₽</strong>.
                                 </p>
                                 <div
                                     class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 font-mono text-slate-800 dark:text-slate-200">
@@ -1264,9 +1208,7 @@
                                     <p>2. Определение оставшегося срока амортизации: 36 мес. − 24 мес. = 12 месяцев</p>
                                     <p>3. Порядок списания убытка в КУДиР / Налоговый регистр:</p>
                                     <p class="my-2 sm:my-4 font-sans text-slate-600 dark:text-slate-400">Компания не может уменьшить базу текущего месяца на 24
-                                        000
-                                        ₽.
-                                        Вместо этого она обязана списывать данный убыток равными долями в течение следующих 12 месяцев.</p>
+                                        000 ₽. Вместо этого она обязана списывать данный убыток равными долями в течение следующих 12 месяцев.</p>
                                     <p>4. Сумма ежемесячного списания убытка: 24 000 ₽ ÷ 12 месяцев = <span class="text-sm font-bold text-green-500">2 000 ₽ в
                                             месяц</span></p>
                                 </div>
@@ -1277,7 +1219,8 @@
 
                 <section id="block-8">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
-                        <h2 class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                        <h2
+                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">08</span>
                             Первичные документы и чек-лист проверки ФНС
@@ -1292,8 +1235,8 @@
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Для подтверждения права на уменьшение налоговой базы (как по НДФЛ для физлиц и ИП, так и по налогу на прибыль для юрлиц) майнеры
                                 обязаны обеспечивать полную сохранность данных бухгалтерского и налогового учета, а также любых документов, подтверждающих
-                                доходы и
-                                расходы. Согласно актуальной редакции <a class="inline text-indigo-500 hover:text-indigo-600 underline" target="_blank"
+                                доходы и расходы. Согласно актуальной редакции <a class="inline text-indigo-500 hover:text-indigo-600 underline"
+                                    target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">подпункта 8 пункта 1
                                     статьи 23 НК РФ</a>, минимальный срок хранения первичной документации составляет <strong class="text-rose-500 font-bold">5
                                     лет</strong>.
@@ -1305,15 +1248,13 @@
                                 </span>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Если организация или ИП на ОСНО зафиксировали убыток по результатам года и начали переносить его на будущие периоды на
-                                    основании
-                                    <a class="inline text-indigo-500 hover:text-indigo-600 underline" target="_blank"
+                                    основании <a class="inline text-indigo-500 hover:text-indigo-600 underline" target="_blank"
                                         href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">статьи 283 НК
                                         РФ</a>, стандартный 5-летний лимит аннулируется. Налогоплательщик <strong
                                         class="underline font-semibold text-slate-800 dark:text-slate-200">обязан хранить все первичные документы</strong>,
                                     подтверждающие сумму полученного убытка, в течение <strong class="text-slate-800 dark:text-slate-200 font-bold">всего
                                         срока</strong>, пока он уменьшает текущую налоговую базу. Если убыток списывается частями на протяжении 7 или 10 лет -
-                                    все
-                                    документы по расходам за тот самый первый убыточный год обязаны храниться на балансе все 7 или 10 лет соответственно.
+                                    все документы по расходам за тот самый первый убыточный год обязаны храниться на балансе все 7 или 10 лет соответственно.
                                 </p>
                             </div>
                         </div>
@@ -1324,10 +1265,8 @@
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 При проверке майнера налоговый инспектор затребует непрерывную сквозную цепочку документов, доказывающую легальность
-                                происхождения
-                                оборудования, законность потребления энергии и реальность связи физических устройств с конкретным блокчейн-адресом. При
-                                отсутствии
-                                любого звена расходы будут аннулированы.
+                                происхождения оборудования, законность потребления энергии и реальность связи физических устройств с конкретным
+                                блокчейн-адресом. При отсутствии любого звена расходы будут аннулированы.
                             </p>
 
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
@@ -1344,8 +1283,7 @@
                                                     <strong class="text-slate-800 dark:text-slate-200">Грузовая таможенная декларация (ГТД):</strong>
                                                     Номера ГТД (декларации на товары) должны быть официально указаны в договорах поставки и универсальных
                                                     передаточных документах (УПД). Покупка вычислительной техники на "сером" рынке у фирм-однодневок без ГТД
-                                                    влечет
-                                                    за собой гарантированное аннулирование расходов со стороны ФНС при проверке цепочки поставок.
+                                                    влечет за собой гарантированное аннулирование расходов со стороны ФНС при проверке цепочки поставок.
                                                 </div>
                                             </li>
                                             <li class="flex items-start gap-2">
@@ -1357,8 +1295,7 @@
                                                             class="inline text-indigo-500 hover:text-indigo-600 underline">Форма № ОС-1</a>):</strong>
                                                     Первичный документ (оформляемый на основании внутреннего Приказа о вводе в эксплуатацию), который фиксирует
                                                     точную дату начала работы оборудования, его первоначальную стоимость на балансе организации и установленный
-                                                    срок
-                                                    полезного использования (СПИ).
+                                                    срок полезного использования (СПИ).
                                                 </div>
                                             </li>
                                             <li class="flex items-start gap-2">
@@ -1368,10 +1305,8 @@
                                                             href="https://www.consultant.ru/document/cons_doc_LAW_32449/ba9ec1601a9b1329bb0c7cf2ae933fc35c39cabf/"
                                                             class="inline text-indigo-500 hover:text-indigo-600 underline">Форма № ОС-6</a>):</strong>
                                                     Регистр учетных данных Госкомстата, на основе которого формируются регистры налогового учета. В ней
-                                                    ежемесячно
-                                                    отражаются начисленная амортизация и изменение остаточной стоимости каждого вычислительного устройства
-                                                    (АСИКа
-                                                    или фермы).
+                                                    ежемесячно отражаются начисленная амортизация и изменение остаточной стоимости каждого вычислительного
+                                                    устройства (АСИКа или фермы).
                                                 </div>
                                             </li>
                                         </ul>
@@ -1389,10 +1324,9 @@
                                                 <span class="text-indigo-500 font-bold mt-0.5">•</span>
                                                 <div>
                                                     <strong class="text-slate-800 dark:text-slate-200">Договор коммерческого хостинга / размещения в
-                                                        ЦОД:</strong>
-                                                    Необходим, если оборудование работает вне вашей личной площадки. Оператор дата-центра, выставивший акты
-                                                    комплексного обслуживания, в обязательном порядке должен состоять в Реестре операторов майнинговой
-                                                    инфраструктуры ФНС.
+                                                        ЦОД:</strong> Необходим, если оборудование работает вне вашей личной площадки. Оператор дата-центра,
+                                                    выставивший акты комплексного обслуживания, в обязательном порядке должен состоять в Реестре операторов
+                                                    майнинговой инфраструктуры ФНС.
                                                 </div>
                                             </li>
                                             <li class="flex items-start gap-2">
@@ -1400,8 +1334,7 @@
                                                 <div>
                                                     <strong class="text-slate-800 dark:text-slate-200">Договор энергоснабжения и счета от Энергосбыта:</strong>
                                                     Для юрлиц и ИП - строго по коммерческим тарифам с приложением ежемесячных ведомостей показаний приборов
-                                                    учета и
-                                                    платежных поручений с расчетного счета организации.
+                                                    учета и платежных поручений с расчетного счета организации.
                                                 </div>
                                             </li>
                                             <li class="flex items-start gap-2">
@@ -1479,29 +1412,24 @@
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Помимо стандартных налоговых деклараций, <a class="inline text-indigo-500 hover:text-indigo-600" target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_358753/d5af576a8a54d9fe32146b31334f4df92c0046a0/">статья 14.1
-                                    Федерального закона № 259-ФЗ</a> накладывает на майнеров обязанность по
-                                осуществлению <strong class="text-slate-800 dark:text-slate-200">непрерывного ежемесячного операционного контроля</strong>.
-                                Данное требование распространяется на <span class="underline">всех без исключения участников рынка</span> - как на Юрлиц и ИП
-                                из
-                                Реестра, так и на обычных физических
-                                лиц, майнящих в пределах лимита 6 000 кВт·ч.
+                                    Федерального закона № 259-ФЗ</a> накладывает на майнеров обязанность по осуществлению <strong
+                                    class="text-slate-800 dark:text-slate-200">непрерывного ежемесячного операционного контроля</strong>. Данное требование
+                                распространяется на <span class="underline">всех без исключения участников рынка</span> - как на Юрлиц и ИП из Реестра, так и
+                                на обычных физических лиц, майнящих в пределах лимита 6 000 кВт·ч.
                             </p>
 
                             <div
                                 class="bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 space-y-2 text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                 <p><strong class="text-slate-800 dark:text-slate-200">• Предельный срок:</strong> Строго <strong
                                         class="text-rose-600 dark:text-rose-400 font-bold">до 20-го числа месяца</strong>, следующего за месяцем добычи
-                                    (например,
-                                    подробный отчет за май обязаны отправить до 20 июня).</p>
+                                    (например, подробный отчет за май обязаны отправить до 20 июня).</p>
                                 <p><strong class="text-slate-800 dark:text-slate-200">• Канал связи с ФНС:</strong> Информация направляется в электронном виде
-                                    через
-                                    личные кабинеты налогоплательщиков (для физлиц, ИП или юрлиц). Бизнес-аккаунты обязаны заверять форму КЭП (квалифицированной
-                                    электронной подписью) руководителя.</p>
+                                    через личные кабинеты налогоплательщиков (для физлиц, ИП или юрлиц). Бизнес-аккаунты обязаны заверять форму КЭП
+                                    (квалифицированной электронной подписью) руководителя.</p>
                                 <p><strong class="text-slate-800 dark:text-slate-200">• Объем раскрываемых данных:</strong> Точный объем добытой за 30 дней
-                                    цифровой
-                                    валюты, идентификаторы пулов и полный перечень <strong
-                                        class="underline font-medium text-slate-800 dark:text-slate-200">всех
-                                        адресов криптокошельков (Public Keys)</strong>, куда зачислялись монеты.</p>
+                                    цифровой валюты, идентификаторы пулов и полный перечень <strong
+                                        class="underline font-medium text-slate-800 dark:text-slate-200">всех адресов криптокошельков (Public Keys)</strong>,
+                                    куда зачислялись монеты.</p>
                             </div>
 
                             <p class="text-xs text-rose-500 font-medium mt-3">

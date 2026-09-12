@@ -1,6 +1,4 @@
-<x-guest-layout title="Авторизация на TrustMining — вход для продавцов, покупателей и экспертов"
-    description="Авторизация на TrustMining — вход для майнеров и клиентов инфраструктурных компаний. Получите доступ к проверенным предложениям, экспертному сообществу, обзорам оборудования и профессиональной экосистеме майнинга">
-    <!-- Session Status -->
+<x-guest-layout :title="__('meta.auth.login.title')" :description="__('meta.auth.login.description')">
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -8,8 +6,7 @@
 
         <div>
             <x-inputs.input-label for="email" :value="__('Email')" />
-            <x-inputs.text-input id="email" type="email" name="email" :value="old('email')" required autofocus
-                autocomplete="username" />
+            <x-inputs.text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-inputs.input-error :messages="$errors->get('email')" />
         </div>
 
@@ -19,8 +16,7 @@
             <x-inputs.input-error :messages="$errors->get('password')" />
         </div>
 
-        <x-inputs.checkbox class="block mt-4" textClasses="text-slate-600 dark:text-slate-400" name="remember"
-            value="with_vat">
+        <x-inputs.checkbox class="block mt-4" textClasses="text-slate-600 dark:text-slate-400" name="remember" value="with_vat">
             {{ __('Remember me') }}
         </x-inputs.checkbox>
 

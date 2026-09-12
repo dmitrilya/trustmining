@@ -1,11 +1,7 @@
-<x-app-layout title="Майнинговая компания {{ $user->name }}: купить ASIC майнер"
-    description="Официальный представитель {{ $user->name }}: купите ASIC-майнеры Bitmain, Whatsminer и Canaan с гарантией от производителя. Большой выбор оборудования в наличии, низкие цены, быстрая доставка и профессиональная поддержка 24/7. Проверьте и заберите майнеры в наших офисах или закажите онлайн"
-    itemtype="https://schema.org/ProfilePage" :itemname="__('Company') . ' ' . $user->name">
+<x-app-layout :title="__('meta.company.shop.title', ['name' => $user->name])" :description="__('meta.company.shop.description', ['name' => $user->name])" itemtype="https://schema.org/ProfilePage" :itemname="__('Company') . ' ' . $user->name">
     <x-slot name="og">
-        <meta property="og:title"
-            content="{{ $user->company && !$user->company->moderation ? __('Company') : __('Seller') }} {{ $user->name }}">
-        <meta property="og:description"
-            content="Актуальный прайс-лист, информация о дата-центре и данные компании | TRUSTMINING">
+        <meta property="og:title" content="{{ $user->company && !$user->company->moderation ? __('Company') : __('Seller') }} {{ $user->name }}">
+        <meta property="og:description" content="{{ __('meta.company.shop.description', ['name' => $user->name]) }}">
         @if ($user->company && !$user->company->moderation)
             <meta property="og:image" content="{{ Storage::disk('public')->url($user->company->logo) }}">
         @endif
@@ -41,14 +37,13 @@
                 <a href="{{ route('ad.create') }}"
                     class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-lg shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
-                        <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-400" aria-hidden="true"
-                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-400" aria-hidden="true" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"
                                 d="M16.5 15v1.5m0 0V18m0-1.5H15m1.5 0H18M3 9V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3M3 9v6a1 1 0 0 0 1 1h5M3 9h16m0 0v1M6 12h3m12 4.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
                         </svg>
 
-                        <div
-                            class="font-semibold text-xl text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 mt-2">
+                        <div class="font-semibold text-xl text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 mt-2">
                             {{ __('Create') }}</div>
                     </div>
                 </a>

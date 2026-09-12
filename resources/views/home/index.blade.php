@@ -1,5 +1,4 @@
-<x-home-layout :data="$__data" title="TrustMining: купить Asic майнер, майнинг хостинг"
-    description="Сервис, объединивший в себе все сферы из мира майнинга. Информация по оборудованию для майнинга, новостной портал, блоггерское и экспертное сообщество, продавцы и специалисты">
+<x-home-layout :data="$__data" :title="__('meta.home.title')" :description="__('meta.home.description')">
     <div class="lg:hidden mb-4 sm:mb-6">
         @include('home.components.asic-brands')
     </div>
