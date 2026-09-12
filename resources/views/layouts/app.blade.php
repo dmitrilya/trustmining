@@ -121,18 +121,18 @@
 
     <script>
         window.Translations = {
-            "min": __('min'),
-            "h": __('h'),
-            "d": __('d'),
-            "Expand": __('Expand'),
-            "Collapse": __('Collapse'),
-            "Rating required": __('Rating required'),
-            "Enter a message or attach files": __('Enter a message or attach files'),
-            "Network error. Please try again.": __('Network error. Please try again.'),
-            "Request error": __('Request error'),
-            "Failed to download file.": __('Failed to download file.'),
-            "Failed to start roulette": __('Failed to start roulette'),
-            "just now": __('just now'),
+            "min": '{{ __('min') }}',
+            "h": '{{ __('h') }}',
+            "d": '{{ __('d') }}',
+            "Expand": '{{ __('Expand') }}',
+            "Collapse": '{{ __('Collapse') }}',
+            "Rating required": '{{ __('Rating required') }}',
+            "Enter a message or attach files": '{{ __('Enter a message or attach files') }}',
+            "Network error. Please try again.": '{{ __('Network error. Please try again.') }}',
+            "Request error": '{{ __('Request error') }}',
+            "Failed to download file.": '{{ __('Failed to download file.') }}',
+            "Failed to start roulette": '{{ __('Failed to start roulette') }}',
+            "just now": '{{ __('just now') }}',
         };
     </script>
 </head>

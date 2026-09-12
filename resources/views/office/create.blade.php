@@ -1,7 +1,7 @@
-<x-app-layout title="Добавить офис, точку продаж" description="Если у вас есть офис, точка продаж, производство или другое место, где вы можете встретиться с потенциальным клиентом, то добавьте его здесь">
+<x-app-layout :title="__('meta.office.create.title')" :description="__('meta.office.create.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Adding an office') }}
+            {{ __('meta.office.create.header') }}
         </h1>
     </x-slot>
 
@@ -13,8 +13,7 @@
                 <div class="relative mt-1" x-data="{ open: false, sugs: false }" @click.away="open = false">
                     <div class="relative z-0 w-full group" @click="open = true">
                         <input type="text" id="address" name="address" x-ref="search" placeholder=" "
-                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')"
-                            autocomplete="off"
+                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')" autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
@@ -30,8 +29,8 @@
 
                 <div>
                     <x-inputs.input-label for="office-images" :value="__('Photo')" />
-                    <x-inputs.file-input id="office-images" name="images[]" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" multiple max="5" required label="max. 2MB, 5 items" />
+                    <x-inputs.file-input id="office-images" name="images[]" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" multiple max="5"
+                        required label="max. 2MB, 5 items" />
                     <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-inputs.input-error :messages="$error" />

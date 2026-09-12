@@ -92,7 +92,7 @@
                                             <path d="M0 100 C 20 80, 40 90, 50 60 C 60 30, 80 40, 100 0 V 100 H 0 Z" fill="url(#grad)" />
                                             <defs>
                                                 <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                                    <stop offset="0%" style="stop-color:rgb(16, 185, 129);stop-opacity:1" />ы
+                                                    <stop offset="0%" style="stop-color:rgb(16, 185, 129);stop-opacity:1" />
                                                     <stop offset="100%" style="stop-color:rgb(16, 185, 129);stop-opacity:0" />
                                                 </linearGradient>
                                             </defs>
@@ -157,7 +157,7 @@
                 </div>
 
                 <div class="mt-6 md:mt-0">
-                    <h4 class="sr-only">Информация</h4>
+                    <h4 class="sr-only">{{ __('Information') }}</h4>
 
                     <div class="w-full rounded-lg overflow-hidden mb-4 sm:mb-6">
                         <img itemprop="image" class="w-full object-cover" :src="'/storage/asic-miners/' + sortedModels[0].s + '_480.webp'"

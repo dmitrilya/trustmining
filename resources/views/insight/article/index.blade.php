@@ -4,9 +4,14 @@
     $tagsCount = count($selectedTags);
 @endphp
 
-<x-insight-layout title="TM Insight{{ $tagsCount === 1 ?  ' | ' . $selectedTags[0] : '' }}: статьи, руководства для майнеров, отзывы и обзоры экспертов"
-    description="Главная база знаний о криптовалютах и майнинге{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}. Информационные статьи, пошаговые инструкции, прогнозы экспертов и обзоры рынка в одном месте | TM Insight"
-    header="{{ __('Articles') }}{{ $tagsCount === 1 ? ' на тему ' . $selectedTags[0] : '' }}" itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')" :noindex="$tagsCount > 1 ? 'true' : null">
+<x-insight-layout :title="__('meta.insight.content.article.index.title', ['tag' => $tagsCount === 1 ? $selectedTags[0] . ' -' : __('Read')])" :description="__('meta.insight.content.article.index.description', [
+    'tag' =>
+        $tagsCount === 1
+            ? __('meta.insight.content.article.index.description_tag') . ' ' . $selectedTags[0]
+            : __('meta.insight.content.article.index.description_part'),
+])"
+    header="{{ __('Articles') }}{{ $tagsCount === 1 ? ' ' . __('meta.insight.content.article.index.header_tag', ['tag' => $selectedTags[0]]) : '' }}"
+    itemtype="https://schema.org/CollectionPage" :itemname="__('Articles')" :noindex="$tagsCount > 1 ? 'true' : null">
     <x-slot name="sort">
         <x-filters.header-filters>
             <x-slot name="sort">
@@ -76,8 +81,7 @@
     <x-filters.filter>@include('insight.article.components.filter')</x-filters.filter>
 
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList" id="infinite-loader"
-        class="grid gap-1 xs:gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xxxl:grid-cols-4"
-        x-init="new InfiniteLoader({ endpoint: '{{ route('insight.article.index') }}', page: {{ $articles->currentPage() }}, lastPage: {{ $articles->lastPage() }} });">
+        class="grid gap-1 xs:gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 xxxl:grid-cols-4" x-init="new InfiniteLoader({ endpoint: '{{ route('insight.article.index') }}', page: {{ $articles->currentPage() }}, lastPage: {{ $articles->lastPage() }} });">
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 
         @include('insight.article.components.list')

@@ -22,7 +22,7 @@
 
         <div class="absolute bottom-0 text-slate-400" :style="`left: ${getPercent(avg)}%; transform: translateX(-50%);`">
             <div class="group relative flex flex-col items-center cursor-pointer">
-                <span class="text-[10px] mb-2 w-max font-bold text-slate-400 uppercase">{{ __('Average price') }}</span>
+                <span class="text-xxs mb-2 w-max font-bold text-slate-400 uppercase">{{ __('Average price') }}</span>
                 <div class="w-0.5 h-2 bg-slate-300"></div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded-md py-1 px-2 whitespace-nowrap">
@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-[11px] text-slate-400 uppercase">
+    <div class="flex justify-between mt-2 sm:mt-3 lg:mt-4 text-xs text-slate-400 uppercase">
         <span>{{ __('Min') }}: {{ number_format($priceData['min'], 0, '.', ' ') }}</span>
         <span>{{ __('Max') }}: {{ number_format($priceData['max'], 0, '.', ' ') }}</span>
     </div>

@@ -1,13 +1,13 @@
 <div class="max-w-xs lg:max-w-xl mx-auto mt-4 md:mt-8">
-    <h2 class="text-center text-2xl sm:text-3xl lg:text-5xl text-slate-800 dark:text-slate-200 font-extrabold">
-        {{ __('Network difficulty') }}
-    </h2>
+    <h1 class="text-center text-2xl sm:text-3xl lg:text-5xl text-slate-800 dark:text-slate-200 font-extrabold">
+        {{ __('Network difficulty') }} {{ __('widjet') }}
+    </h1>
 </div>
 
 <div class="max-w-sm md:max-w-2xl mx-auto">
-    <h3 class="text-center text-xs sm:text-lg lg:text-xl text-slate-500">
+    <h2 class="text-center text-xs sm:text-lg lg:text-xl text-slate-500">
         {{ __('Customize the network difficulty widget and embed it on your website in just one minute') }}
-    </h3>
+    </h2>
 </div>
 
 <div x-data="{
@@ -29,22 +29,17 @@
     <div class="grid grid-cols-1 md:grid-cols-2 justify-center gap-2 md:gap-4 max-w-4xl mx-auto">
         <div class="w-full md:w-md max-w-md mx-auto">
             <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
-                <button @click="screen = 430"
-                    :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
+                <button @click="screen = 430" :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Mobile') }}</button>
-                <button @click="screen = 768"
-                    :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
+                <button @click="screen = 768" :class="screen === 768 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Tablet') }}</button>
-                <button @click="screen = 1280"
-                    :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
+                <button @click="screen = 1280" :class="screen === 1280 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Desktop') }}</button>
             </div>
             <div class="mt-2 flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
-                <button @click="theme = 'light'"
-                    :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
+                <button @click="theme = 'light'" :class="theme === 'light' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Light') }}</button>
-                <button @click="theme = 'dark'"
-                    :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
+                <button @click="theme = 'dark'" :class="theme === 'dark' ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Dark') }}</button>
             </div>
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
@@ -68,18 +63,14 @@
             </div>
         </div>
         <div class="w-full md:w-md max-w-md mx-auto">
-            <div
-                class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
-                <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}"
-                    data-blocks="${blocks.join(",")}"></script>`'></div>
+            <div class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
+                <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}" data-blocks="${blocks.join(" ,")}"></script>`'></div>
 
                 <svg @click="navigator.clipboard.writeText($el.previousElementSibling.innerText)
                             .then(() => pushToastAlert('{{ __('Code successfully copied') }}', 'success'))"
-                    class="cursor-pointer min-w-5 w-5 h-5 ml-3 sm:ml-4" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                    viewBox="0 0 24 24">
-                    <path fill-rule="evenodd"
-                        d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z"
+                    class="cursor-pointer min-w-5 w-5 h-5 ml-3 sm:ml-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z"
                         clip-rule="evenodd" />
                     <path fill-rule="evenodd"
                         d="M8 7.054V11H4.2a2 2 0 0 1 .281-.432l2.46-2.87A2 2 0 0 1 8 7.054ZM10 7v4a2 2 0 0 1-2 2H4v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"
@@ -91,8 +82,7 @@
 
     <div itemscope itemtype="https://schema.org/ViewAction" class="mt-4 sm:mt-6 lg:mt-8 flex">
         <iframe id="diff-widjet_preview" class="mx-auto max-w-full rounded-xl overflow-hidden"
-            :src="`https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${blocks.join(',')}&theme=${theme}`"
-            frameborder="0"
+            :src="`https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${blocks.join(',')}&theme=${theme}`" frameborder="0"
             :style="`min-width: ${screen}px; width: ${screen}px; overflow: hidden; border: none; display: block; transform: scale(${scale});transform-origin: top left`"></iframe>
 
         <script>

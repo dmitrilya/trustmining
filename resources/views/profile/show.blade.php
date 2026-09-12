@@ -1,5 +1,4 @@
-<x-app-layout title="Личный кабинет, профиль компании"
-    description="Ваш личный кабинет: управление профилем компании и контроль баланса. Редактируйте данные и управляйте всеми услугами">
+<x-app-layout :title="__('meta.profile.title')" :description="__('meta.profile.description')">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
             {{ __('Profile') }}
@@ -9,8 +8,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative" x-data="{ category: '{{ request()->tab ?? 'ads' }}' }">
         <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
             @foreach (['ads' => 'Advertisements', 'insight' => 'TM Insight', 'forum' => 'Forum', 'integrations' => 'Integrations', 'notifications' => 'Notifications', 'finance' => 'Finance', 'account' => 'Account'] as $category => $category_header)
-                <div @click="category = '{{ $category }}'"
-                    class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
+                <div @click="category = '{{ $category }}'" class="flex items-center cursor-pointer px-2 py-1 xs:px-2 md:px-3 md:py-2 group border rounded-md"
                     :class="category ==
                         '{{ $category }}' ?
                         'bg-indigo-200 dark:bg-indigo-600 border-indigo-500 dark:border-indigo-700' :

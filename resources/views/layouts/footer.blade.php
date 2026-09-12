@@ -6,7 +6,7 @@
         </a>
 
         <div class="flex items-center gap-2 lg:gap-3">
-            <a href="https://t.me/trustmining_ru" target="_blank" aria-label="Связаться в телеграм">
+            <a href="https://t.me/trustmining_ru" target="_blank" aria-label="{{ __('Contact in telegram') }}">
                 <div
                     class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" width="20" height="20" viewBox="0 0 20 20"
@@ -17,7 +17,7 @@
                     </svg>
                 </div>
             </a>
-            <a href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
+            <a href="mailto:trustmining.ru@gmail.com" aria-label="{{ __('Write by email') }}">
                 <div
                     class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" aria-hidden="true"
@@ -27,7 +27,7 @@
                     </svg>
                 </div>
             </a>
-            <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="Канал Дзен">
+            <a href="https://dzen.ru/trustmining?share_to=link" target="_blank" aria-label="{{ __('Yandex Dzen Channel') }}">
                 <div
                     class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" width="20" height="20" viewBox="0 0 20 20"
@@ -51,7 +51,7 @@
         </div>
 
         <a class="w-max under text-sm lg:text-base text-slate-800 dark:text-slate-200"
-            href="mailto:trustmining.ru@gmail.com" aria-label="Написать на почту">
+            href="mailto:trustmining.ru@gmail.com" aria-label="{{ __('Write by email') }}">
             trustmining.ru@gmail.com
         </a>
 

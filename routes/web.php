@@ -95,6 +95,8 @@ $webRoutes = function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/widjets', [PageController::class, 'widjets'])->name('widjets');
     Route::get('/support', [PageController::class, 'support'])->name('support');
+    Route::get('/taxes', [PageController::class, 'taxes'])->name('taxes');
+    Route::get('/legal', [PageController::class, 'legal'])->name('legal');
 
     Route::view('/about', 'about')->name('about');
     //Route::view('/roadmap', 'roadmap')->name('roadmap');
@@ -105,8 +107,6 @@ $webRoutes = function () {
     Route::view('/terms', 'document')->name('terms');
     Route::view('/warranty', 'warranty.index')->name('warranty');
     Route::view('/api', 'api.index')->name('api.doc');
-    Route::view('/legal', 'legal.index')->name('legal');
-    Route::view('/taxes', 'taxes.' . app()->getLocale() . '.index')->name('taxes');
 
     Route::get('/search', SearchController::class)->name('search');
 

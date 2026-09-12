@@ -60,4 +60,14 @@ class PageController extends Controller
 
         return view('support.index', compact(['auth', 'chat']));
     }
+
+    public function taxes(): View
+    {
+        return view('taxes.' . app()->getLocale() . '.index');
+    }
+
+    public function legal(): View
+    {
+        return view('legal.' . app()->getLocale() . '.index');
+    }
 }

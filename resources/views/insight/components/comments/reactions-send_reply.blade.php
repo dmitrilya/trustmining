@@ -48,7 +48,7 @@
 
         <div class="relative flex items-center gap-1">
             <template x-for="(val, type) in reactions" :key="type">
-                <button @click="toggleReaction(type)" {{-- Расчет сдвига: индекс * (ширина кнопки + gap) --}}
+                <button @click="toggleReaction(type)"
                     :style="'transform: translateX(' + (getIndex(type) * 44) + 'px)'"
                     :class="userReaction === type ?
                         'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-500 ring-1 ring-indigo-500/40' :

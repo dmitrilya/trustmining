@@ -349,7 +349,7 @@
                             <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">💡</span> Математическая модель двухэтапного начисления
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
                                 Чтобы исключить риски штрафов и доначислений от ФНС, учет и расчет обязательств строятся строго по следующему математическому
                                 алгоритму:
                             </p>
@@ -357,7 +357,7 @@
                             <div
                                 class="space-y-4 font-mono text-xs bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 text-slate-800 dark:text-slate-200">
                                 <div>
-                                    <span class="text-blue-600 text-blue-300 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
+                                    <span class="text-blue-600 dark:text-blue-300 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
                                     <span class="text-slate-800 dark:text-slate-200">Налоговая База 1 = Объем Добытых Монет × Рыночный Курс Монеты (на дату
                                         зачисления на адрес)</span>
                                 </div>
@@ -451,11 +451,7 @@
                             <p class="text-xs text-slate-500 mt-4">
                                 *Юридическое обоснование ограничений: <a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_494125/f2f09aa5ea7dd770d1637880a3166fe348b44edf/">Постановление
-                                    Правительства РФ № 1869</a> (в ред. Постановления № 280), принятое на основании <a target="_blank"
-                                    href="https://www.consultant.ru/document/cons_doc_LAW_358753/176562423610280f8b2578ab3480887bf7707562/"
-                                    class="inline text-indigo-500 hover:text-indigo-600 underline">пункта 12 статьи 14</a> и <a target="_blank"
-                                    href="https://www.consultant.ru/document/cons_doc_LAW_358753/232bf15b31488f0a5099bcb7073d3d1270b2819e/"
-                                    class="inline text-indigo-500 hover:text-indigo-600 underline">статьи 14.2</a> Федерального закона № 259-ФЗ
+                                    Правительства РФ № 1869</a> (в ред. Постановления № 280)
                                 </a>
                             </p>
                         </div>
@@ -542,7 +538,7 @@
                                 <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-4">
                                     <span class="inline mr-1 sm:mr-2">📋</span> Какие расходы физлицо может официально вычесть из доходов
                                 </h4>
-                                <ul class="space-y-1 list-none text-blue-900 text-blue-300">
+                                <ul class="space-y-1 list-none text-blue-900 dark:text-blue-300">
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Расходы на оплату электроэнергии (по
                                             квитанциям и чекам Энергосбыта).</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Стоимость приобретенного майнингового
@@ -579,7 +575,7 @@
                                 </h3>
                             </div>
 
-                            <div class="text-slate-600 dark:text-slate-400">
+                            <div class="text-slate-600 dark:text-slate-400 text-sm">
                                 <p class="mb-2">
                                     <strong>Условия:</strong> Гражданин Петров проживает в Новосибирске. Энергопотребление его оборудования составляет 4 500
                                     кВт·ч в месяц (меньше лимита 6 000 кВт·ч, Реестр не нужен). За 2025 год на его кошелек поступила криптовалюта. Рыночная
@@ -625,7 +621,7 @@
                                 </h3>
                             </div>
 
-                            <div class="text-slate-600 dark:text-slate-400">
+                            <div class="text-slate-600 dark:text-slate-400 text-sm">
                                 <p class="mb-4">
                                     <strong>Условия:</strong> Из-за падения курсов на рынке в течение нескольких месяцев майнер Соколов получил на кошелек
                                     монеты, суммарная стоимость которых на дату зачисления составила <strong class="text-slate-800 dark:text-slate-200">150 000
@@ -642,7 +638,7 @@
                                     <p>3. Налоговая база = 150 000 ₽ − 180 000 ₽ = −30 000 ₽ (Отрицательное значение)</p>
                                     <div class="pt-2 sm:pt-4 border-t border-slate-300 dark:border-slate-700 font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Налоговая база признается равной:</span>
-                                        <span class="text-blue-600 text-blue-300">0 ₽</span>
+                                        <span class="text-blue-600 dark:text-blue-300">0 ₽</span>
                                     </div>
                                     <div class="font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Итоговый НДФЛ к уплате:</span>
@@ -697,7 +693,7 @@
                                         <div class="font-mono bg-white dark:bg-slate-950 p-2 rounded-lg border border-rose-500/30 space-y-1">
                                             <p>Доход Этапа 2 = 400 000 ₽ − 500 000 ₽</p>
                                             <p>База налога = −100 000 ₽ (Убыток)</p>
-                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 text-blue-300">0 ₽</strong></p>
+                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 dark:text-blue-300">0 ₽</strong></p>
                                         </div>
                                     </div>
                                 </div>
@@ -847,7 +843,7 @@
                             <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Практический пример расчета для ИП на ОСНО:
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
                                 ИП Сидоров за год добыл криптовалюты на общую сумму <strong class="underline">5 000 000 ₽</strong>. Его подтвержденные
                                 операционные расходы (электроэнергия по договору + хостинг ЦОД) составили <strong class="underline">2 000 000 ₽</strong>.
                                 Входящий НДС от энергетиков составил 400 000 ₽ (включен в общую стоимость затрат, так как вычет по НДС для майнеров запрещен).
@@ -1023,9 +1019,8 @@
                             </p>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
                                 Перенос и списание таких убытков регулируются положениями <a class="inline text-indigo-500 hover:text-indigo-600 underline"
-                                    target="_blank"
-                                    href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">статьи
-                                    283 НК РФ</a> на базе двух императивных условий:
+                                    href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/"
+                                    target="_blank">статьи 283 НК РФ</a> на базе двух императивных условий:
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 text-slate-600 dark:text-slate-400">
@@ -1116,7 +1111,7 @@
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
                                 В процессе эксплуатации майнингового оборудования на ОСНО его балансовая цена непрерывно уменьшается за счет ежемесячного
                                 начисления амортизации. Когда возникает необходимость продать б/у АСИКи или видеокарты, налогообложение операции регулируется <a
-                                    target="_blank" href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/"
+                                    target="_blank" href="https://www.consultant.ru/document/cons_doc_LAW_28165/7512c2fc6e5e83865428ba6f2ca315f09a9a6d6c/"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">статьей 268 НК РФ</a>.
                             </p>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1237,7 +1232,7 @@
                                 обязаны обеспечивать полную сохранность данных бухгалтерского и налогового учета, а также любых документов, подтверждающих
                                 доходы и расходы. Согласно актуальной редакции <a class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     target="_blank"
-                                    href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">подпункта 8 пункта 1
+                                    href="https://www.consultant.ru/document/cons_doc_LAW_19671/dfdebc3924e7af2bdd0afedcf17a119a7e191b07/">подпункта 8 пункта 1
                                     статьи 23 НК РФ</a>, минимальный срок хранения первичной документации составляет <strong class="text-rose-500 font-bold">5
                                     лет</strong>.
                             </p>
@@ -1447,4 +1442,5 @@
                 <div class="max-h-[80vh] overflow-y-auto" id="toc-lg-container"></div>
             </div>
         </div>
+    </div>
 </x-app-layout>

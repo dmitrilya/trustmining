@@ -1,21 +1,20 @@
-<x-app-layout title="Редактировать офис, точку продаж" description="Отредактируйте созданный офис или точку продаж" noindex="true">
+<x-app-layout :title="__('meta.office.edit.title')" :description="__('meta.office.edit.description')" noindex="true">
     <x-slot name="header">
         <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
-            {{ __('Editing an office') }}
+            {{ __('meta.office.edit.header') }}
         </h1>
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-            <form method="post" action="{{ route('office.update', ['office' => $office->id]) }}" class="mt-6 space-y-6"
-                enctype=multipart/form-data>
+            <form method="post" action="{{ route('office.update', ['office' => $office->id]) }}" class="mt-6 space-y-6" enctype=multipart/form-data>
                 @csrf
                 @method('PUT')
 
                 <div>
                     <x-inputs.input-label for="office-images" :value="__('Photo')" />
-                    <x-inputs.file-input id="office-images" name="images[]" class="mt-1 block w-full"
-                        accept=".png,.jpg,.jpeg,.webp" multiple max="5" label="max. 2MB, 5 items" />
+                    <x-inputs.file-input id="office-images" name="images[]" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" multiple max="5"
+                        label="max. 2MB, 5 items" />
                     <x-inputs.input-error :messages="$errors->get('images')" />
                     @foreach ($errors->get('images.*') as $error)
                         <x-inputs.input-error :messages="$error" />

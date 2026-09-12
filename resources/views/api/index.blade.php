@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-300 dark:border-slate-700 rounded-lg p-4 text-xs space-y-3">
-                    <div class="text-slate-500 font-semibold uppercase tracking-wider text-[10px]">{{ __('Required HTTP Headers') }}</div>
+                    <div class="text-slate-500 font-semibold uppercase tracking-wider text-xxs">{{ __('Required HTTP Headers') }}</div>
                     <div class="space-y-1">
                         <div class="text-emerald-500 font-bold">Authorization:</div>
                         <div class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 p-2 rounded-md text-slate-600 dark:text-slate-400">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="pt-2 border-t border-slate-300 dark:border-slate-700">
                         <span class="font-bold text-slate-800 dark:text-slate-200">{{ __('Rate Limit:') }}</span>
-                        <p class="mt-1 text-slate-600 dark:text-slate-400 text-[11px]">{{ __('Maximum') }} <strong>60 {{ __('requests per minute') }}</strong>
+                        <p class="mt-1 text-slate-600 dark:text-slate-400 text-xs">{{ __('Maximum') }} <strong>60 {{ __('requests per minute') }}</strong>
                             {{ __('per account. If the limit is exceeded, will be returned a code') }} <code
                                 class="text-rose-600 dark:text-rose-400 font-bold">429 Too Many Requests</code>.</p>
                     </div>

@@ -349,7 +349,7 @@
                             <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">💡</span> Математическая модель двухэтапного начисления
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
                                 Чтобы исключить риски штрафов и доначислений от ФНС, учет и расчет обязательств строятся строго по следующему математическому
                                 алгоритму:
                             </p>
@@ -357,7 +357,7 @@
                             <div
                                 class="space-y-4 font-mono text-xs bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 text-slate-800 dark:text-slate-200">
                                 <div>
-                                    <span class="text-blue-600 text-blue-300 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
+                                    <span class="text-blue-600 dark:text-blue-300 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
                                     <span class="text-slate-800 dark:text-slate-200">Налоговая База 1 = Объем Добытых Монет × Рыночный Курс Монеты (на дату
                                         зачисления на адрес)</span>
                                 </div>
@@ -542,7 +542,7 @@
                                 <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-4">
                                     <span class="inline mr-1 sm:mr-2">📋</span> Какие расходы физлицо может официально вычесть из доходов
                                 </h4>
-                                <ul class="space-y-1 list-none text-blue-900 text-blue-300">
+                                <ul class="space-y-1 list-none text-blue-900 dark:text-blue-300">
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Расходы на оплату электроэнергии (по
                                             квитанциям и чекам Энергосбыта).</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Стоимость приобретенного майнингового
@@ -642,7 +642,7 @@
                                     <p>3. Налоговая база = 150 000 ₽ − 180 000 ₽ = −30 000 ₽ (Отрицательное значение)</p>
                                     <div class="pt-2 sm:pt-4 border-t border-slate-300 dark:border-slate-700 font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Налоговая база признается равной:</span>
-                                        <span class="text-blue-600 text-blue-300">0 ₽</span>
+                                        <span class="text-blue-600 dark:text-blue-300">0 ₽</span>
                                     </div>
                                     <div class="font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Итоговый НДФЛ к уплате:</span>
@@ -697,7 +697,7 @@
                                         <div class="font-mono bg-white dark:bg-slate-950 p-2 rounded-lg border border-rose-500/30 space-y-1">
                                             <p>Доход Этапа 2 = 400 000 ₽ − 500 000 ₽</p>
                                             <p>База налога = −100 000 ₽ (Убыток)</p>
-                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 text-blue-300">0 ₽</strong></p>
+                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 dark:text-blue-300">0 ₽</strong></p>
                                         </div>
                                     </div>
                                 </div>
@@ -847,7 +847,7 @@
                             <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Практический пример расчета для ИП на ОСНО:
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
                                 ИП Сидоров за год добыл криптовалюты на общую сумму <strong class="underline">5 000 000 ₽</strong>. Его подтвержденные
                                 операционные расходы (электроэнергия по договору + хостинг ЦОД) составили <strong class="underline">2 000 000 ₽</strong>.
                                 Входящий НДС от энергетиков составил 400 000 ₽ (включен в общую стоимость затрат, так как вычет по НДС для майнеров запрещен).

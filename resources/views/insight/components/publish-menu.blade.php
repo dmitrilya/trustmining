@@ -4,7 +4,7 @@
         <span class="p-1 rounded-lg bg-indigo-500/10 text-indigo-500">📝</span>
         <div class="flex flex-col">
             <span>{{ __('Article') }}</span>
-            <span class="text-[10px] text-slate-500">{{ __('Long read content') }}</span>
+            <span class="text-xxs text-slate-500">{{ __('Long read content') }}</span>
         </div>
     </a>
 
@@ -13,7 +13,7 @@
         <span class="p-1 rounded-lg bg-emerald-500/10 text-emerald-500">💬</span>
         <div class="flex flex-col">
             <span>{{ __('Post') }}</span>
-            <span class="text-[10px] text-slate-500">{{ __('Short thoughts') }}</span>
+            <span class="text-xxs text-slate-500">{{ __('Short thoughts') }}</span>
         </div>
     </a>
 
@@ -22,7 +22,7 @@
         <span class="p-1 rounded-lg bg-amber-500/10 text-amber-500">🎥</span>
         <div class="flex flex-col">
             <span>{{ __('Video') }}</span>
-            <span class="text-[10px] text-slate-500">{{ __('Visual stories') }}</span>
+            <span class="text-xxs text-slate-500">{{ __('Visual stories') }}</span>
         </div>
     </a>
 </div>
