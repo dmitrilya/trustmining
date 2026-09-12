@@ -35,6 +35,13 @@ class SitemapGenerate extends Command
      */
     protected $description = 'Generate actual sitemap XML file';
 
+    protected $host = 'https://trustmining.ru/';
+
+    protected $languages = [
+        'ru' => '',
+        'en' => 'en/',
+    ];
+
     /**
      * Execute the console command.
      *
@@ -42,11 +49,8 @@ class SitemapGenerate extends Command
      */
     public function handle()
     {
-        $host = 'https://trustmining.ru/';
-
         $out = '<?xml version="1.0" encoding="UTF-8"?>';
-        $out .= '
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $out .= "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://w3.org">';
 
         $out .= $this->addUrl('');
         $out .= $this->addUrl('hostings');
@@ -140,10 +144,10 @@ class SitemapGenerate extends Command
             foreach ($asicBrand->asicModels as $asicModel) {
                 $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/reviews');
                 foreach ($asicModel->asicVersions as $asicVersion) {
-                    $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement);
+                    $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . strtolower($asicVersion->measurement));
                     $out .= $this->addUrl('calculator/' . $asicModel->slug . '/' . $asicVersion->hashrate);
                     foreach ($asicVersion->moderatedAds as $ad) {
-                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . $asicVersion->measurement . '/ads/' . $ad->user->slug . '-' . $ad->id, $ad->updated_at);
+                        $out .= $this->addUrl('asic-miners/' . $asicBrand->slug . '/' . $asicModel->slug . '/' . $asicVersion->hashrate . strtolower($asicVersion->measurement) . '/ads/' . $ad->user->slug . '-' . $ad->id, $ad->updated_at);
                     }
                 }
             }
@@ -231,18 +235,28 @@ class SitemapGenerate extends Command
         return Command::SUCCESS;
     }
 
-    private function addUrl(string $url, $updatedAt = null)
+    private function addUrl(string $path, $updatedAt = null)
     {
-        $url = '
-    <url>
-        <loc>https://trustmining.ru/' . $url . '</loc>';
+        $xml = '';
 
-        if ($updatedAt) $url .= '
-        <lastmod>' . $updatedAt->toIso8601String() . '</lastmod>';
+        foreach ($this->languages as $currentLang => $currentPrefix) {
+            $currentUrl = 'https://trustmining.ru/' . $currentPrefix . $path;
 
-        $url .= '
-    </url>';
+            $xml .= "\n    <url>";
+            $xml .= "\n        <loc>" . $currentUrl . "</loc>";
 
-        return $url;
+            if ($updatedAt) {
+                $xml .= "\n        <lastmod>" . $updatedAt->toIso8601String() . "</lastmod>";
+            }
+
+            foreach ($this->languages as $altLang => $altPrefix) {
+                $altUrl = 'https://trustmining.ru/' . $altPrefix . $path;
+                $xml .= "\n        <xhtml:link rel=\"alternate\" hreflang=\"" . $altLang . "\" href=\"" . $altUrl . "\" />";
+            }
+
+            $xml .= "\n    </url>";
+        }
+
+        return $xml;
     }
 }
