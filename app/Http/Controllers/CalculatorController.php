@@ -60,14 +60,14 @@ class CalculatorController extends Controller
         ];
 
         if ($asicModel && $asicVersion) {
-            $title = __('calc.title.version', $params);
-            $description = __('calc.description.version', $params);
+            $title = __('meta.calculator.show.title.version', $params);
+            $description = __('meta.calculator.show.description.version', $params);
         } elseif ($asicModel) {
-            $title = __('calc.title.model', $params);
-            $description = __('calc.description.model', $params);
+            $title = __('meta.calculator.show.title.model', $params);
+            $description = __('meta.calculator.show.description.model', $params);
         } else {
-            $title = __('calc.title.default');
-            $description = __('calc.description.default');
+            $title = __('meta.calculator.show.title.default');
+            $description = __('meta.calculator.show.description.default');
         }
 
         return view('calculator.index', [
