@@ -1,4 +1,4 @@
-<x-app-layout :title="__('meta.tariff.index')" :description="__('meta.tariff.description')">
+<x-app-layout :title="__('meta.tariff.index.title')" :description="__('meta.tariff.index.description')">
     <div class="bg-slate-900 h-128 lg:h-144 relative z-10 overflow-hidden">
         <div class="max-w-5xl mx-auto px-2 py-4 sm:p-6 lg:p-8 relative">
             <div class="mt-4 md:mt-6 lg:mt-8 py-4 sm:py-6 lg:py-8 mb-4 sm:mb-6 lg:mb-8 text-center">
