@@ -11,7 +11,7 @@
         'c' => $ad->asicVersion->asicModel->algorithm->coins()->first('name')->name,
         'p' =>
             $ad->version_data && count($ad->version_data->profits)
-                ? __('faq.ad.answer_3', [
+                ? __('faq.ad.answer_3_profit', [
                     'm' => $ad->asicVersion->asicModel->name,
                     'h' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
                     'p' => $ad->version_data->profits[0]['profit'],
