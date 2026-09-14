@@ -50,12 +50,12 @@ class ProfileController extends Controller
 
     public function locale(Request $request)
     {
-        $supportedLocales = ['en'];
-        $defaultLocale = 'ru';
+        $supportedLocales = array_keys(config('app.supported_locales'));
+        $defaultLocale = config('app.locale');
 
         $targetLocale = $request->input('locale');
 
-        if (!in_array($targetLocale, array_merge($supportedLocales, [$defaultLocale]))) abort(400);
+        if (!in_array($targetLocale, $supportedLocales)) abort(400);
 
         $previousUrl = url()->previous();
         $refererPath = parse_url($previousUrl, PHP_URL_PATH) ?: '/';
@@ -76,9 +76,11 @@ class ProfileController extends Controller
 
     public function location(Request $request)
     {
+        $defaultLocale = config('app.locale');
+
         if ($request->has('default')) {
             $city = config('app.default_city');
-            $locale = 'ru';
+            $locale = $defaultLocale;
 
             app()->setLocale($locale);
             session(['user_location' => [
@@ -97,7 +99,7 @@ class ProfileController extends Controller
             if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
                 $city = config('app.default_city');
                 $source = 'default';
-                $locale = 'ru';
+                $locale = $defaultLocale;
             } else {
                 $city = $result['suggestions'][0]['data']['city'];
                 $source = 'geo';
@@ -106,7 +108,7 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             $city = config('app.default_city');
             $source = 'default';
-            $locale = 'ru';
+            $locale = $defaultLocale;
         }
 
         app()->setLocale($locale);

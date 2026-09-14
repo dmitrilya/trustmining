@@ -19,6 +19,8 @@ class CityByIp
     public function handle(Request $request, Closure $next)
     {
         if (!session()->has('useruser_location_city')) {
+            $defaultLocale = config('app.locale');
+            
             try {
                 $result = DaDataAddress::iplocate($request->ip(), 1);
 
@@ -29,7 +31,7 @@ class CityByIp
                 } else {
                     $city = config('app.default_city');
                     $source = 'default';
-                    $locale = 'ru';
+                    $locale = $defaultLocale;
                 }
 
                 
@@ -45,7 +47,7 @@ class CityByIp
                     'city' => config('app.default_city'),
                     'source' => 'default',
                     'updated_at' => now()->timestamp,
-                ], 'locale' => 'ru']);
+                ], 'locale' => $defaultLocale]);
             }
         }
 

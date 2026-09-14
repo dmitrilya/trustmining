@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 {
                     $currentLocale = app()->getLocale();
 
-                    if ($currentLocale !== 'ru' && $name !== 'locale') {
+                    if ($currentLocale !== config('app.locale') && $name !== 'locale') {
                         $localizedName = $currentLocale . '.' . $name;
                         if ($this->routes->getByName($localizedName)) $name = $localizedName;
                     }

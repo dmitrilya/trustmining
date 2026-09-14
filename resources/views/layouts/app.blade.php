@@ -2,9 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @if ($attributes->get('canonical'))
-        <link rel="canonical" href="{{ $attributes->get('canonical') }}">
-    @endif
+    <link rel="canonical" href="{{ $attributes->get('canonical') ?? url()->current() }}">
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="{{ asset('img/apple-touch-icon.png') }}">
@@ -23,7 +21,17 @@
         } elseif ($location['source'] === 'default') {
             $shouldAskLocation = now()->timestamp - $location['updated_at'] > 86400;
         }
+
+        $baseUrl = request()->getSchemeAndHttpHost();
+        $prefixes = implode('|', array_map('preg_quote', array_filter(config('app.supported_locales'))));    
+        $currentPath = ltrim(preg_replace('#^(' . $prefixes . ')#', '', request()->path()), '/');
     @endphp
+
+    @foreach (config('app.supported_locales') as $lang => $prefix)
+        <link rel="alternate" hreflang="{{ $lang }}" href="{{ $baseUrl }}/{{ $prefix }}{{ $currentPath }}" />
+    @endforeach
+
+    <link rel="alternate" hreflang="x-default" href="{{ $baseUrl }}/{{ $currentPath }}" />
 
     @if (isset($og))
         {{ $og }}

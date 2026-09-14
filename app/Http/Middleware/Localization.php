@@ -16,13 +16,13 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        $supportedLocales = ['en'];
+        $supportedLocales = array_keys(config('app.supported_locales'));
         $firstSegment = $request->segment(1);
 
         if (in_array($firstSegment, $supportedLocales)) {
             app()->setLocale($firstSegment);
         } else {
-            app()->setLocale('ru');
+            app()->setLocale(config('app.locale'));
         }
 
         return $next($request);

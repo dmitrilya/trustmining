@@ -37,11 +37,6 @@ class SitemapGenerate extends Command
 
     protected $host = 'https://trustmining.ru/';
 
-    protected $languages = [
-        'ru' => '',
-        'en' => 'en/',
-    ];
-
     /**
      * Execute the console command.
      *
@@ -237,9 +232,10 @@ class SitemapGenerate extends Command
 
     private function addUrl(string $path, $updatedAt = null)
     {
+        $languages = config('app.supported_locales');
         $xml = '';
 
-        foreach ($this->languages as $currentLang => $currentPrefix) {
+        foreach ($languages as $currentLang => $currentPrefix) {
             $currentUrl = 'https://trustmining.ru/' . $currentPrefix . $path;
 
             $xml .= "\n    <url>";
@@ -249,7 +245,7 @@ class SitemapGenerate extends Command
                 $xml .= "\n        <lastmod>" . $updatedAt->toIso8601String() . "</lastmod>";
             }
 
-            foreach ($this->languages as $altLang => $altPrefix) {
+            foreach ($languages as $altLang => $altPrefix) {
                 $altUrl = 'https://trustmining.ru/' . $altPrefix . $path;
                 $xml .= "\n        <xhtml:link rel=\"alternate\" hreflang=\"" . $altLang . "\" href=\"" . $altUrl . "\" />";
             }
