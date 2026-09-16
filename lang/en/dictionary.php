@@ -3616,7 +3616,7 @@ return [
 
                 <h3>How tokens are created</h3>
 
-                <p>On programmable blockchains, a token is often implemented through a <span class="term" data-term="defi/smart-contract">smart contract</span>. The contract can maintain balances and ownership information and define transfer rules and other operations. The exact architecture depends on the blockchain and token standard.</p>
+                <p>On programmable blockchains, a token is often implemented through a <span class="term" data-term="blockchain/smart-contract">smart contract</span>. The contract can maintain balances and ownership information and define transfer rules and other operations. The exact architecture depends on the blockchain and token standard.</p>
 
                 <h3>Common token types</h3>
 
@@ -5194,7 +5194,7 @@ return [
         ],
     ],
 
-    'deFi' => [
+    'defi' => [
         'title' => 'DeFi and Decentralized Finance Terms',
         'description' => 'DeFi glossary covering DEX, AMM, liquidity pools, yield farming, TVL, impermanent loss and other terms.',
         'name' => 'DeFi',

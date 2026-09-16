@@ -3617,7 +3617,7 @@ return [
 
                 <h3>Как создается токен</h3>
 
-                <p>В программируемых блокчейнах токен часто реализуется через <span class="term" data-term="defi/smart-contract">смарт-контракт</span>. Контракт хранит сведения о владельцах и балансах, а также определяет правила перевода и другие операции. Конкретная архитектура зависит от блокчейна и стандарта токена.</p>
+                <p>В программируемых блокчейнах токен часто реализуется через <span class="term" data-term="blockchain/smart-contract">смарт-контракт</span>. Контракт хранит сведения о владельцах и балансах, а также определяет правила перевода и другие операции. Конкретная архитектура зависит от блокчейна и стандарта токена.</p>
 
                 <h3>Основные виды токенов</h3>
 
@@ -4658,7 +4658,7 @@ return [
                 'caption' => 'Платформа для торговли и обмена криптоактивами.',
                 'definition' => '<p><strong>Криптобиржа</strong> — это платформа, через которую пользователи могут покупать, продавать и обменивать <span class="term" data-term="cryptocurrency/crypto-asset">криптоактивы</span>. В зависимости от архитектуры биржа может быть централизованной или децентрализованной, а набор доступных операций может включать <span class="term" data-term="crypto-trading/spot-trading">спотовую торговлю</span>, <span class="term" data-term="crypto-trading/margin-trading">маржинальную торговлю</span>, <span class="term" data-term="crypto-trading/futures-trading">торговлю фьючерсами</span> и другими <span class="term" data-term="crypto-trading/derivatives">деривативами</span>.</p>
 
-                <p>Централизованная биржа обычно хранит средства пользователей на своих <span class="term" data-term="crypto-exchanges/exchange-wallet">биржевых кошельках</span> и ведёт внутренний учёт балансов. Торговые заявки обрабатываются через <span class="term" data-term="crypto-exchanges/order-matching">сопоставление ордеров</span>, а непосредственно процесс поиска встречных заявок выполняет <span class="term" data-term="crypto-exchanges/matching-engine">matching engine</span>. Децентрализованная биржа, напротив, использует <span class="term" data-term="deFi/smart-contract">смарт-контракты</span> и блокчейн для выполнения операций без традиционного централизованного хранения активов.</p>
+                <p>Централизованная биржа обычно хранит средства пользователей на своих <span class="term" data-term="crypto-exchanges/exchange-wallet">биржевых кошельках</span> и ведёт внутренний учёт балансов. Торговые заявки обрабатываются через <span class="term" data-term="crypto-exchanges/order-matching">сопоставление ордеров</span>, а непосредственно процесс поиска встречных заявок выполняет <span class="term" data-term="crypto-exchanges/matching-engine">matching engine</span>. Децентрализованная биржа, напротив, использует <span class="term" data-term="blockchain/smart-contract">смарт-контракты</span> и блокчейн для выполнения операций без традиционного централизованного хранения активов.</p>
 
                 <h3>Основные функции криптобиржи</h3>
                 <ul>
@@ -5195,7 +5195,7 @@ return [
         ],
     ],
 
-    'deFi' => [
+    'defi' => [
         'title' => 'Термины DeFi и децентрализации',
         'description' => 'Словарь терминов DeFi: DEX, AMM, liquidity pool, yield farming, TVL, impermanent loss и другие понятия.',
         'name' => 'DeFi',
