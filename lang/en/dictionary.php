@@ -6095,7 +6095,7 @@ return [
 
                 <p>The best-known scenario involves double-spending. An attacker makes a payment on one chain and then uses its controlled consensus resource to build an alternative history in which the payment does not exist. If the alternative chain becomes preferred under the protocol rules, the recipient may lose the basis for treating the original payment as final.</p>
 
-                <p>Protection depends on network architecture. In PoW, the distribution of <span class="term" data-term="mining/hashrate">hashrate</span> and the economic cost of obtaining significant computational power are important. In PoS, the economic cost of controlling stake, <span class="term" data-term="staking/slashing">slashing</span>, finality, and other protocol mechanisms play a major role.</p>
+                <p>Protection depends on network architecture. In PoW, the distribution of <span class="term" data-term="equipment-specifications/hashrate">hashrate</span> and the economic cost of obtaining significant computational power are important. In PoS, the economic cost of controlling stake, <span class="term" data-term="staking/slashing">slashing</span>, finality, and other protocol mechanisms play a major role.</p>
 
                 <p>The risk is particularly relevant to smaller networks where acquiring a large share of the consensus resource may be economically easier. Decentralization and broad resource distribution are therefore important elements of blockchain security.</p>'
             ],
@@ -6135,7 +6135,7 @@ return [
 
                 <p>A Sybil attack can be used to manipulate distributed systems, voting mechanisms, peer selection, or data propagation. In a blockchain, its impact depends on network architecture and on how the protocol determines the weight of participants.</p>
 
-                <p>A Sybil attack alone does not necessarily give an attacker control over a blockchain. If influence is determined by <span class="term" data-term="mining/hashrate">hashrate</span> or stake, thousands of identities without the corresponding resource may have little effect. Sybil attacks can nevertheless amplify other attack types, particularly network-level attacks.</p>
+                <p>A Sybil attack alone does not necessarily give an attacker control over a blockchain. If influence is determined by <span class="term" data-term="equipment-specifications/hashrate">hashrate</span> or stake, thousands of identities without the corresponding resource may have little effect. Sybil attacks can nevertheless amplify other attack types, particularly network-level attacks.</p>
 
                 <p>Resistance to Sybil attacks is therefore a fundamental consideration when designing a blockchain <span class="term" data-term="blockchain/consensus-mechanism">consensus mechanism</span> and network infrastructure.</p>'
             ],
