@@ -236,7 +236,7 @@ class SitemapGenerate extends Command
         $xml = '';
 
         foreach ($languages as $currentLang => $currentPrefix) {
-            $currentUrl = 'https://trustmining.ru/' . $currentPrefix . $path;
+            $currentUrl = $this->host . $currentPrefix . $path;
 
             $xml .= "\n    <url>";
             $xml .= "\n        <loc>" . $currentUrl . "</loc>";
@@ -246,7 +246,7 @@ class SitemapGenerate extends Command
             }
 
             foreach ($languages as $altLang => $altPrefix) {
-                $altUrl = 'https://trustmining.ru/' . $altPrefix . $path;
+                $altUrl = $this->host . $altPrefix . $path;
                 $xml .= "\n        <xhtml:link rel=\"alternate\" hreflang=\"" . $altLang . "\" href=\"" . $altUrl . "\" />";
             }
 

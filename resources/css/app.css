@@ -112,6 +112,15 @@ body {
     opacity: 0.3;
 }
 
+span.term {
+    color: rgb(99 102 241);
+    cursor: pointer;
+
+    &:hover {
+        color: rgb(79 70 229);
+    }
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

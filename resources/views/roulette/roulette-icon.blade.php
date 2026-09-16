@@ -16,7 +16,7 @@
                 localStorage.setItem('roulette_tooltip_shown_today', endOfDay.getTime().toString());
 
                 //setTimeout(() => { this.showTooltip = false; }, 5000);
-            }, 10000);
+            }, 5000);
         }
     }
 }" @roulette-loaded.window="timeToSpin = $event.detail.timeToSpin; initTooltip();" aria-label="{{ __('TM Roulette') }}"

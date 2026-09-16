@@ -461,6 +461,18 @@ return [
         ]
     ],
 
+    'wiki' => [
+        'title' => 'TM Wiki - Crypto Glossary and Knowledge Base',
+        'description' => 'At TM Wiki, we have gathered all the information you need to understand cryptocurrency and mining. Beginners can learn the fundamentals, while professionals can deepen their knowledge.',
+        'header' => 'TM Wiki',
+
+        'dictionary' => [
+            'title' => 'Crypto & Mining Terms and Definitions | TM Wiki',
+            'description' => 'Explore essential crypto slang and mining terminology in the specialized TM Wiki section on the TrustMining website.',
+            'header' => 'Crypto Dictionary',
+        ]
+    ],
+
     'order' => [
         'create' => [
             'title' => 'TrustMining Dashboard Balance Top-Up',

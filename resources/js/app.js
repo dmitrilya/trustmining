@@ -264,6 +264,8 @@ window.onload = function () {
     if (userId) window.listenBroadcast(userId.content);
 
     Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
+
+    prepareTerms();
 }
 
 window.saveRange = function () {
@@ -273,6 +275,182 @@ window.saveRange = function () {
     }
 
     return null;
+}
+
+function prepareTerms() {
+    const terms = window.terms || {};
+    console.log(terms);
+
+    let activeTerm = null;
+    let popup = null;
+
+    function createPopup() {
+        if (popup) {
+            return popup;
+        }
+
+        popup = document.createElement('div');
+
+        popup.className = [
+            'tm-wiki-popup',
+            'fixed',
+            'z-50',
+            'hidden',
+            'w-80',
+            'max-w-xs',
+            'rounded-xl',
+            'bg-white/40',
+            'dark:bg-slate-900/40',
+            'border',
+            'border-slate-300',
+            'dark:border-slate-700',
+            'backdrop-blur-xl',
+            'p-2',
+            'sm:p-3',
+            'shadow-xl'
+        ].join(' ');
+
+        popup.innerHTML = `
+            <div class="tm-wiki-popup-name font-semibold text-slate-800 dark:text-slate-200"></div>
+            <div class="tm-wiki-popup-caption mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400"></div>
+            <a
+                href="#" target="_blank"
+                class="tm-wiki-popup-link mt-3 inline-block text-sm font-medium text-indigo-500 hover:text-indigo-600"
+            >
+                ${__('Details')} →
+            </a>
+        `;
+
+        document.body.appendChild(popup);
+
+        popup.addEventListener('mouseenter', () => { cancelHidePopup(); });
+
+        popup.addEventListener('mouseleave', () => { scheduleHidePopup(); });
+
+        return popup;
+    }
+
+    function positionPopup(element) {
+        if (!popup) {
+            return;
+        }
+
+        const rect = element.getBoundingClientRect();
+
+        const popupWidth = popup.offsetWidth;
+        const popupHeight = popup.offsetHeight;
+
+        const gap = 8;
+        const viewportPadding = 12;
+
+        let left = rect.left + (rect.width / 2) - (popupWidth / 2);
+        let top = rect.bottom + gap;
+
+        if (left < viewportPadding) {
+            left = viewportPadding;
+        }
+
+        if (left + popupWidth > window.innerWidth - viewportPadding) {
+            left = window.innerWidth - popupWidth - viewportPadding;
+        }
+
+        if (top + popupHeight > window.innerHeight - viewportPadding) {
+            top = rect.top - popupHeight - gap;
+        }
+
+        if (top < viewportPadding) {
+            top = viewportPadding;
+        }
+
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+    }
+
+    function showPopup(element) {
+        const key = element.dataset.term;
+        const data = terms[key];
+        const keyParts = key.split('/');
+
+        if (!data) return;
+
+        const current = activeTerm === element;
+
+        activeTerm = element;
+
+        const popupElement = createPopup();
+
+        popupElement.querySelector('.tm-wiki-popup-name').textContent = data.name || '';
+
+        popupElement.querySelector('.tm-wiki-popup-caption').textContent = data.caption || '';
+
+        const link = popupElement.querySelector('.tm-wiki-popup-link');
+
+        link.href = `/wiki/dictionary/${keyParts[0]}/${keyParts[1]}`;
+
+        popupElement.classList.remove('hidden');
+
+        requestAnimationFrame(() => { positionPopup(element); });
+
+        return current;
+    }
+
+    function hidePopup() {
+        if (!popup) return;
+
+        popup.classList.add('hidden');
+        activeTerm = null;
+    }
+
+    let hideTimeout = null;
+
+    function scheduleHidePopup() {
+        clearTimeout(hideTimeout);
+
+        hideTimeout = setTimeout(() => { hidePopup(); }, 150);
+    }
+
+    function cancelHidePopup() {
+        clearTimeout(hideTimeout);
+    }
+
+    document.querySelectorAll('span.term[data-term]').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cancelHidePopup();
+            showPopup(element);
+        });
+
+        element.addEventListener('mouseleave', () => { scheduleHidePopup(); });
+
+        element.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            cancelHidePopup();
+
+            if (activeTerm === element && popup && !popup.classList.contains('hidden')) hidePopup();
+            else showPopup(element);
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!activeTerm) return;
+
+        if (event.target.closest('span.term[data-term]') || event.target.closest('.tm-wiki-popup')) return;
+
+        hidePopup();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') hidePopup();
+    });
+
+    window.addEventListener('resize', () => {
+        if (activeTerm && popup && !popup.classList.contains('hidden')) positionPopup(activeTerm);
+    });
+
+    window.addEventListener('scroll', () => {
+        if (activeTerm && popup && !popup.classList.contains('hidden')) positionPopup(activeTerm);
+    }, { passive: true });
 }
 
 function beforeRangeManipulation(range, pre) {

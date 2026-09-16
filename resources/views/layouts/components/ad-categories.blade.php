@@ -155,3 +155,15 @@
         class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
         {{ __('Accessories') }}</h4>
 </a>
+<a href="{{ route('ads', ['adCategory' => 'hydro_rack']) }}" class="flex flex-col items-center group">
+    <div
+        class="mb-3 sm:mb-4 xl:mb-5 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
+        @include('layouts.components.svg.hydro_rack', [
+            'class' => 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200',
+            'w' => '60%',
+        ])
+    </div>
+    <h4
+        class="text-xs xs:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
+        {{ __('Hydro racks') }}</h4>
+</a>

@@ -23,6 +23,11 @@
                             'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100',
                     ])
 
+                    @include('layouts.components.wiki', [
+                        'classes' =>
+                            'h-full inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100',
+                    ])
+
                     <x-nav-link :href="route('support')">
                         {{ __('Support') }}
                     </x-nav-link>
@@ -191,6 +196,12 @@
             </x-responsive-nav-link>
 
             @include('layouts.components.solutions', [
+                'relative' => true,
+                'classes' =>
+                    'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent hover:border-indigo-500 focus:border-indigo-500 text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 transition duration-100 ease-in-out',
+            ])
+
+            @include('layouts.components.wiki', [
                 'relative' => true,
                 'classes' =>
                     'flex items-center w-full pl-3 pr-4 py-2 border-l-4 border-transparent hover:border-indigo-500 focus:border-indigo-500 text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 transition duration-100 ease-in-out',

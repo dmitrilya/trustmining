@@ -1,6 +1,6 @@
 <div
-    class="px-1 sm:py-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl ">
-    <h2 class="pt-1 px-3 lg:mb-6 text-base text-slate-600 dark:text-slate-400 font-extrabold">
+    class="px-1 py-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl ">
+    <h2 class="pt-1 px-1 sm:px-2 text-xs text-slate-500 uppercase tracking-widest mb-4">
         {{ __('Popular models') }}
     </h2>
 

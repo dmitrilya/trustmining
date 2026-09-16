@@ -150,6 +150,8 @@
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('database.asic-miners') }}">{{ __('Catalog of models') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                    href="{{ route('dictionary') }}">{{ __('Crypto dictionary') }}</a>
+                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('rating.companies.show') }}">{{ __('Top reliable companies') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('rating.asics') }}">{{ __('The most profitable ASICs') }}</a>

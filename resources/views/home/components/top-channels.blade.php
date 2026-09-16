@@ -1,6 +1,6 @@
 <div
-    class="p-4 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
-    <h2 class="mb-4 lg:mb-6 text-base text-slate-600 dark:text-slate-400 font-extrabold">
+    class="p-2 sm:p-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
+    <h2 class="text-xs text-slate-500 uppercase tracking-widest mb-4 lg:mb-6">
         {{ __('Top channels') }}
     </h2>
 

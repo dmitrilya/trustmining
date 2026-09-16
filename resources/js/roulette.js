@@ -71,12 +71,25 @@ export var roulette = () => ({
         if (this.timerInterval) clearInterval(this.timerInterval);
 
         if (this.timeToSpin === 0) {
-            if (!this.isClosedForToday()) setTimeout(() => {
-                const modalElement = document.querySelector('[name="roulette-modal"]');
-                const isModalOpen = modalElement && modalElement.getBoundingClientRect().width > 0;
+            let exitIntentTriggered = false;
 
-                //if (!isModalOpen && this.timeToSpin === 0) window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
-            }, 15000);
+            if (!this.isClosedForToday()) {
+                const handleExitIntent = (event) => {
+                    if (event.clientY < 50 && !exitIntentTriggered) {
+                        const modalElement = document.querySelector('[name="roulette-modal"]');
+                        const isModalOpen = modalElement && modalElement.getBoundingClientRect().width > 0;
+
+                        if (!isModalOpen && this.timeToSpin === 0) {
+                            exitIntentTriggered = true;
+
+                            window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette' }));
+                            document.removeEventListener('mouseleave', handleExitIntent);
+                        }
+                    }
+                };
+
+                document.addEventListener('mouseleave', handleExitIntent);
+            }
         } else {
             this.timerInterval = setInterval(() => {
                 if (this.timeToSpin > 0) {

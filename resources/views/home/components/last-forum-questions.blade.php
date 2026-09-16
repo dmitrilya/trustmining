@@ -1,6 +1,6 @@
 <div
     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
-    <h2 class="p-4 lg:mb-2 text-base text-slate-600 dark:text-slate-400 font-extrabold">
+    <h2 class="p-2 sm:p-3 text-xs text-slate-500 uppercase tracking-widest lg:mb-2">
         {{ __('Latest forum questions') }}
     </h2>
 
@@ -13,7 +13,7 @@
                     'forumQuestion' => $forumQuestion->id . '-' . Str::slug($forumQuestion->theme),
                 ]) }}">
                 <div
-                    class="px-4 py-2 xs:py-3 sm:px-4 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">
+                    class="px-2 sm:px-3 py-2 xs:py-3 group bg-slate-100 dark:bg-slate-950 hover:bg-slate-200 dark:hover:bg-slate-800">
                     <div class="mb-1.5 sm:mb-2 flex justify-between">
                         <div class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
                             {{ __($forumQuestion->forumSubcategory->forumCategory->name) }}.

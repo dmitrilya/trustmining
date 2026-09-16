@@ -3,7 +3,7 @@
         @csrf
 
         <div>
-            <x-inputs.input-label for="name" :value="__('Name') . ' ' . {{ __('or') }} . ' ' . __('Company name')" />
+            <x-inputs.input-label for="name" :value="__('Name') . ' ' . __('or') . ' ' . __('Company name')" />
             <x-inputs.text-input id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-inputs.input-error :messages="$errors->get('name')" />
         </div>

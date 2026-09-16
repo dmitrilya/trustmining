@@ -141,6 +141,7 @@
             "Failed to download file.": '{{ __('Failed to download file.') }}',
             "Failed to start roulette": '{{ __('Failed to start roulette') }}',
             "just now": '{{ __('just now') }}',
+            "Details": '{{ __('Details') }}'
         };
     </script>
 </head>

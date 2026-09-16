@@ -40,6 +40,7 @@ use App\Http\Controllers\Forum\ForumAnswerController;
 use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\Morph\ViewController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Rating\RatingController;
@@ -50,6 +51,7 @@ use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use App\Http\Controllers\SearchController;
 use App\Models\User\User;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +111,15 @@ $webRoutes = function () {
     Route::view('/api', 'api.index')->name('api.doc');
 
     Route::get('/search', SearchController::class)->name('search');
+
+    Route::group(['prefix' => 'wiki'], function () {
+        Route::get('/', fn() => view('wiki.index', Cache::get('home_page_data')))->name('wiki');
+        Route::group(['prefix' => 'dictionary'], function () {
+            Route::get('/', [DictionaryController::class, 'index'])->name('dictionary');
+            Route::get('/{dictionaryCategory:name}', [DictionaryController::class, 'category'])->name('dictionary.category');
+            Route::get('/{dictionaryCategory:name}/{dictionaryTerm:name}', [DictionaryController::class, 'term'])->name('dictionary.term');
+        });
+    });
 
     Route::group(['prefix' => 'ratings'], function () {
         Route::get('/', [RatingController::class, 'index'])->name('ratings');

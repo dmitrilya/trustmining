@@ -101,6 +101,8 @@ class AppServiceProvider extends ServiceProvider
             'forum-question' => \App\Models\Forum\ForumQuestion::class,
             'forum-answer' => \App\Models\Forum\ForumAnswer::class,
             'forum-comment' => \App\Models\Forum\ForumComment::class,
+
+            'term' => \App\Models\Dictionary\DictionaryTerm::class,
         ]);
     }
 }
