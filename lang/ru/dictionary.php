@@ -4812,7 +4812,7 @@ return [
 
                 <p>Рыночные ордера обычно исполняются как taker. Лимитная заявка также может получить статус taker, если она сразу пересекает текущий <span class="term" data-term="crypto-trading/bid">bid</span> или <span class="term" data-term="crypto-trading/ask">ask</span>.</p>
 
-                <p>За taker-исполнение биржа обычно взимает <span class="term" data-term="crypto-exchanges/taker-fee">taker fee</span>. Фактические расходы дополнительно зависят от размера сделки, глубины рынка и <span class="term" data-term="crypto-trading/slippage">проскальзывания</span>.</p>'
+                <p>За taker-исполнение биржа обычно взимает <span class="term" data-term="crypto-exchanges/taker">taker</span> fee. Фактические расходы дополнительно зависят от размера сделки, глубины рынка и <span class="term" data-term="crypto-trading/slippage">проскальзывания</span>.</p>'
             ],
 
             'order-matching' => [

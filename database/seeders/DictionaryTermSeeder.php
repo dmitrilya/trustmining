@@ -200,7 +200,6 @@ class DictionaryTermSeeder extends Seeder
             ['name' => 'deposit', 'dictionary_category_id' => 11],
             ['name' => 'deposit-address', 'dictionary_category_id' => 11],
             ['name' => 'trading-fee', 'dictionary_category_id' => 11],
-            ['name' => 'taker-fee', 'dictionary_category_id' => 11],
             ['name' => 'maker', 'dictionary_category_id' => 11],
             ['name' => 'taker', 'dictionary_category_id' => 11],
             ['name' => 'order-matching', 'dictionary_category_id' => 11],

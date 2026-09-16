@@ -4811,7 +4811,7 @@ return [
 
                 <p>Market orders are normally executed as taker orders. A limit order can also receive taker classification if it immediately crosses the current <span class="term" data-term="crypto-trading/bid">bid</span> or <span class="term" data-term="crypto-trading/ask">ask</span>.</p>
 
-                <p>A taker is normally charged a <span class="term" data-term="crypto-exchanges/taker-fee">taker fee</span>. The effective trading cost can also depend on order size, market depth, and <span class="term" data-term="crypto-trading/slippage">slippage</span>.</p>'
+                <p>A taker is normally charged a <span class="term" data-term="crypto-exchanges/taker">taker</span> fee. The effective trading cost can also depend on order size, market depth, and <span class="term" data-term="crypto-trading/slippage">slippage</span>.</p>'
             ],
 
             'order-matching' => [
