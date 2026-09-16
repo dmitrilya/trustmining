@@ -4701,10 +4701,10 @@ return [
                 'caption' => 'A blockchain-based exchange using smart contracts.',
                 'definition' => '<p>A <strong>decentralized exchange</strong> (DEX) is a protocol or application for exchanging <span class="term" data-term="cryptocurrency/crypto-asset">crypto assets</span> where key operations are executed on a <span class="term" data-term="blockchain/blockchain">blockchain</span> through <span class="term" data-term="blockchain/smart-contract">smart contracts</span>.</p>
 
-                <p>Unlike a centralized exchange, a DEX generally does not require users to deposit assets with a traditional exchange operator for ordinary swaps. Users connect a <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallet</span>, authorize the transaction, and interact directly with the protocol. Trading may rely on an <span class="term" data-term="deFi/automated-market-maker">automated market maker</span> and <span class="term" data-term="deFi/liquidity-pool">liquidity pool</span>.</p>
+                <p>Unlike a centralized exchange, a DEX generally does not require users to deposit assets with a traditional exchange operator for ordinary swaps. Users connect a <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallet</span>, authorize the transaction, and interact directly with the protocol. Trading may rely on an <span class="term" data-term="defi/automated-market-maker">automated market maker</span> and <span class="term" data-term="defi/liquidity-pool">liquidity pool</span>.</p>
 
                 <h3>How a DEX works</h3>
-                <p>The user selects an asset to sell and an asset to receive. The protocol calculates the <span class="term" data-term="deFi/swap">swap</span> according to available liquidity and the rules of its smart contracts. The final result may be affected by <span class="term" data-term="crypto-trading/slippage">slippage</span>, protocol fees, and the <span class="term" data-term="blockchain/transaction-fee">blockchain transaction fee</span>.</p>
+                <p>The user selects an asset to sell and an asset to receive. The protocol calculates the <span class="term" data-term="defi/swap">swap</span> according to available liquidity and the rules of its smart contracts. The final result may be affected by <span class="term" data-term="crypto-trading/slippage">slippage</span>, protocol fees, and the <span class="term" data-term="blockchain/transaction-fee">blockchain transaction fee</span>.</p>
 
                 <p>A DEX reduces the need to trust a centralized operator, but introduces or shifts risks toward smart contracts, oracles, liquidity, and blockchain infrastructure. Users therefore also need to consider smart-contract risks and the quality of available <span class="term" data-term="security/smart-contract-audit">smart-contract audits</span>.</p>'
             ],
@@ -4916,7 +4916,7 @@ return [
                     <li><span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallets</span> — the user controls the keys.</li>
                 </ul>
 
-                <p>A wallet may support one or multiple blockchains and different types of assets, including <span class="term" data-term="cryptocurrency/coin">coins</span> and <span class="term" data-term="cryptocurrency/token">tokens</span>. Depending on its architecture, it may also interact with <span class="term" data-term="deFi/dapp">dApps</span>, smart contracts, <span class="term" data-term="deFi/defi">DeFi</span> protocols, and <span class="term" data-term="staking/staking">staking</span> systems.</p>
+                <p>A wallet may support one or multiple blockchains and different types of assets, including <span class="term" data-term="cryptocurrency/coin">coins</span> and <span class="term" data-term="cryptocurrency/token">tokens</span>. Depending on its architecture, it may also interact with <span class="term" data-term="defi/dapp">dApps</span>, smart contracts, <span class="term" data-term="defi/defi">DeFi</span> protocols, and <span class="term" data-term="staking/staking">staking</span> systems.</p>
 
                 <h3>What a wallet actually stores</h3>
                 <p>Crypto assets are not physically stored in a wallet file or device. The blockchain contains the relevant state, while the wallet stores or accesses the secret information required to control those assets. Losing the key material can therefore result in loss of access even though the assets themselves remain recorded on the blockchain.</p>
@@ -4931,7 +4931,7 @@ return [
                 'caption' => 'A wallet connected to an online environment.',
                 'definition' => '<p>A <strong>hot wallet</strong> is a crypto wallet that operates in an environment with internet access, allowing users to quickly receive, send, and sign operations involving crypto assets. Many mobile, desktop, and browser wallets are hot wallets.</p>
 
-                <p>The main advantage of a hot wallet is convenience. Users can quickly generate a <span class="term" data-term="crypto-wallets/wallet-address">wallet address</span>, receive assets, sign a <span class="term" data-term="blockchain/transaction">transaction</span>, or connect to a <span class="term" data-term="deFi/dapp">dApp</span>. This makes hot wallets useful for regular transactions, trading, <span class="term" data-term="deFi/defi">DeFi</span>, and other activities that require frequent blockchain interaction.</p>
+                <p>The main advantage of a hot wallet is convenience. Users can quickly generate a <span class="term" data-term="crypto-wallets/wallet-address">wallet address</span>, receive assets, sign a <span class="term" data-term="blockchain/transaction">transaction</span>, or connect to a <span class="term" data-term="defi/dapp">dApp</span>. This makes hot wallets useful for regular transactions, trading, <span class="term" data-term="defi/defi">DeFi</span>, and other activities that require frequent blockchain interaction.</p>
 
                 <h3>Hot wallet risks</h3>
                 <p>Continuous internet connectivity increases the attack surface. Malware, phishing websites, malicious browser extensions, fake applications, and other threats can target the device or wallet environment. If an attacker obtains key material or tricks the user into approving a malicious operation, assets can be lost.</p>
@@ -4984,7 +4984,7 @@ return [
 
                 <p>A software wallet may run on a desktop computer, smartphone, or browser. It may be <span class="term" data-term="crypto-wallets/hot-wallet">hot</span> when its keys are used in an internet-connected environment, and it may be <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial</span> when the user controls the key material directly.</p>
 
-                <p>Depending on its implementation, a software wallet may support multiple networks, tokens, <span class="term" data-term="deFi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. Some wallets also provide built-in asset swaps, <span class="term" data-term="staking/staking">staking</span>, and other functions.</p>
+                <p>Depending on its implementation, a software wallet may support multiple networks, tokens, <span class="term" data-term="defi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. Some wallets also provide built-in asset swaps, <span class="term" data-term="staking/staking">staking</span>, and other functions.</p>
 
                 <p>The main security risks of software wallets are connected with the security of the device and application environment. Malware, phishing, malicious extensions, and exposure of the <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> can compromise assets. Wallet security therefore depends not only on the application itself but also on the entire environment in which it operates.</p>'
             ],
@@ -5013,7 +5013,7 @@ return [
 
                 <p>When a wallet is created, it may generate a <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> from which keys and <span class="term" data-term="crypto-wallets/wallet-address">addresses</span> can later be derived. The user is responsible for protecting this key material. If the key is lost and no backup exists, there may be no centralized recovery service.</p>
 
-                <p>Non-custodial wallets can interact directly with <span class="term" data-term="deFi/defi">DeFi</span>, <span class="term" data-term="deFi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. At the same time, they place greater responsibility on the user because compromised keys or malicious signatures can directly affect the assets.</p>'
+                <p>Non-custodial wallets can interact directly with <span class="term" data-term="defi/defi">DeFi</span>, <span class="term" data-term="defi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. At the same time, they place greater responsibility on the user because compromised keys or malicious signatures can directly affect the assets.</p>'
             ],
 
             'self-custody' => [
@@ -5189,7 +5189,7 @@ return [
                 <h3>What a transaction signature proves</h3>
                 <p>A digital signature allows the network to verify that the operation was authorized by the holder of the corresponding key and that the signed data has not been altered after signing. A signature does not, however, guarantee that a transaction will be included in the blockchain: it must still satisfy the network rules and may remain pending or be rejected.</p>
 
-                <p>It is also important to distinguish cryptographic signing from simply clicking a confirmation button in a wallet interface. Signing authorizes a specific operation, so the user should verify the recipient, amount, fee, and other parameters before approval. This is especially important when interacting with <span class="term" data-term="deFi/dapp">dApps</span> and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>, where the signed action may be more complex than a simple transfer.</p>'
+                <p>It is also important to distinguish cryptographic signing from simply clicking a confirmation button in a wallet interface. Signing authorizes a specific operation, so the user should verify the recipient, amount, fee, and other parameters before approval. This is especially important when interacting with <span class="term" data-term="defi/dapp">dApps</span> and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>, where the signed action may be more complex than a simple transfer.</p>'
             ],
         ],
     ],
