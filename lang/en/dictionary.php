@@ -883,7 +883,7 @@ return [
 
                 <p>Chip temperature is monitored using equipment sensors and miner management software. When specified thresholds are exceeded, the system may automatically adjust frequencies, fan speeds, or other parameters.</p>
 
-                <p>Various <span class="term" data-term="cooling/cooling">cooling</span> technologies are used to maintain chip temperature, including air, liquid, and immersion cooling. Their effectiveness also depends on <span class="term" data-term="cooling/heat-dissipation">heat dissipation</span> and <span class="term" data-term="cooling/thermal-load">thermal load</span>.</p>'
+                <p>Various cooling technologies are used to maintain chip temperature, including air, liquid, and immersion cooling. Their effectiveness also depends on <span class="term" data-term="cooling/heat-dissipation">heat dissipation</span> and <span class="term" data-term="cooling/thermal-load">thermal load</span>.</p>'
             ],
 
             'chip-count' => [
@@ -2410,7 +2410,7 @@ return [
 
                 <h3>Why Heat Dissipation Matters</h3>
 
-                <p>Insufficient heat dissipation causes component temperatures to rise. This can contribute to unstable operation, hardware errors, and <span class="term" data-term="performance/thermal-throttling">thermal throttling</span>. Effective heat dissipation is therefore an important part of mining infrastructure reliability.</p>'
+                <p>Insufficient heat dissipation causes component temperatures to rise. This can contribute to unstable operation, hardware errors, and <span class="term" data-term="equipment-specifications/thermal-throttling">thermal throttling</span>. Effective heat dissipation is therefore an important part of mining infrastructure reliability.</p>'
             ],
 
             'thermal-load' => [
@@ -2556,7 +2556,7 @@ return [
                     <li>networking equipment and internet connectivity;</li>
                     <li>monitoring and <span class="term" data-term="mining-infrastructure/remote-management">remote management</span> systems;</li>
                     <li>structures for mounting and organizing equipment;</li>
-                    <li>backup infrastructure supporting high <span class="term" data-term="mining-performance/uptime">uptime</span>.</li>
+                    <li>backup infrastructure supporting high <span class="term" data-term="equipment-specifications/uptime">uptime</span>.</li>
                 </ul>
 
                 <h3>How a Mining Farm Operates</h3>
@@ -2762,7 +2762,7 @@ return [
                 <h3>What Can Be Monitored</h3>
 
                 <ul>
-                    <li>current <span class="term" data-term="mining-performance/hashrate">hashrate</span>;</li>
+                    <li>current <span class="term" data-term="equipment-specifications/hashrate">hashrate</span>;</li>
                     <li>temperature and device status;</li>
                     <li>power consumption when supported by the monitoring system;</li>
                     <li>network connection status;</li>
@@ -3006,7 +3006,7 @@ return [
 
                 <p>Cost per hash is particularly useful when compared with revenue per hash. If normalized revenue exceeds the attributable cost under the same assumptions, the operation produces a positive difference for that model.</p>
 
-                <p>Electricity price, <span class="term" data-term="mining-performance/power-consumption">power consumption</span>, power efficiency, and equipment utilization are major inputs into the calculation.</p>'
+                <p>Electricity price, <span class="term" data-term="equipment-specifications/power-consumption">power consumption</span>, power efficiency, and equipment utilization are major inputs into the calculation.</p>'
             ],
 
             'mining-tax' => [
