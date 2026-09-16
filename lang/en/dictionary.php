@@ -4701,7 +4701,7 @@ return [
                 'caption' => 'A blockchain-based exchange using smart contracts.',
                 'definition' => '<p>A <strong>decentralized exchange</strong> (DEX) is a protocol or application for exchanging <span class="term" data-term="cryptocurrency/crypto-asset">crypto assets</span> where key operations are executed on a <span class="term" data-term="blockchain/blockchain">blockchain</span> through <span class="term" data-term="blockchain/smart-contract">smart contracts</span>.</p>
 
-                <p>Unlike a centralized exchange, a DEX generally does not require users to deposit assets with a traditional exchange operator for ordinary swaps. Users connect a <span class="term" data-term="crypto-wallet/non-custodial-wallet">non-custodial wallet</span>, authorize the transaction, and interact directly with the protocol. Trading may rely on an <span class="term" data-term="deFi/automated-market-maker">automated market maker</span> and <span class="term" data-term="deFi/liquidity-pool">liquidity pool</span>.</p>
+                <p>Unlike a centralized exchange, a DEX generally does not require users to deposit assets with a traditional exchange operator for ordinary swaps. Users connect a <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallet</span>, authorize the transaction, and interact directly with the protocol. Trading may rely on an <span class="term" data-term="deFi/automated-market-maker">automated market maker</span> and <span class="term" data-term="deFi/liquidity-pool">liquidity pool</span>.</p>
 
                 <h3>How a DEX works</h3>
                 <p>The user selects an asset to sell and an asset to receive. The protocol calculates the <span class="term" data-term="deFi/swap">swap</span> according to available liquidity and the rules of its smart contracts. The final result may be affected by <span class="term" data-term="crypto-trading/slippage">slippage</span>, protocol fees, and the <span class="term" data-term="blockchain/transaction-fee">blockchain transaction fee</span>.</p>
@@ -4728,7 +4728,7 @@ return [
                     <li>access to spot and other trading products.</li>
                 </ul>
 
-                <p>An exchange account should be distinguished from a <span class="term" data-term="crypto-wallet/crypto-wallet">crypto wallet</span>. On a centralized exchange, a user balance is often an internal ledger entry, while a non-custodial wallet gives the user direct control over the corresponding <span class="term" data-term="crypto-wallet/private-key">private key</span>.</p>'
+                <p>An exchange account should be distinguished from a <span class="term" data-term="crypto-wallets/crypto-wallet">crypto wallet</span>. On a centralized exchange, a user balance is often an internal ledger entry, while a non-custodial wallet gives the user direct control over the corresponding <span class="term" data-term="crypto-wallets/private-key">private key</span>.</p>'
             ],
 
             'exchange-wallet' => [
@@ -4740,7 +4740,7 @@ return [
 
                 <p>A user may receive a dedicated <span class="term" data-term="crypto-exchanges/deposit-address">deposit address</span>, while the exchange may technically manage the assets through a larger address system or pooled wallet architecture. Once a <span class="term" data-term="blockchain/transaction">transaction</span> receives the required confirmations, the exchange can credit the corresponding internal balance.</p>
 
-                <p>Exchanges may use hot and cold storage systems. Key management is a critical part of custody security because compromise of wallet infrastructure can result in asset loss. This also illustrates the distinction between custodial exchange storage and <span class="term" data-term="crypto-wallet/self-custody">self-custody</span>.</p>'
+                <p>Exchanges may use hot and cold storage systems. Key management is a critical part of custody security because compromise of wallet infrastructure can result in asset loss. This also illustrates the distinction between custodial exchange storage and <span class="term" data-term="crypto-wallets/self-custody">self-custody</span>.</p>'
             ],
 
             'deposit' => [
@@ -4769,7 +4769,7 @@ return [
                 'description' => 'A deposit address is a blockchain address provided by an exchange for depositing a specific crypto asset.',
                 'name' => 'Deposit Address',
                 'caption' => 'An address used to send cryptocurrency to an exchange.',
-                'definition' => '<p>A <strong>deposit address</strong> is a <span class="term" data-term="crypto-wallet/wallet-address">wallet address</span> provided by a crypto exchange for receiving a particular <span class="term" data-term="cryptocurrency/crypto-asset">crypto asset</span>.</p>
+                'definition' => '<p>A <strong>deposit address</strong> is a <span class="term" data-term="crypto-wallets/wallet-address">wallet address</span> provided by a crypto exchange for receiving a particular <span class="term" data-term="cryptocurrency/crypto-asset">crypto asset</span>.</p>
 
                 <p>The address is associated with a blockchain network or token standard. An address format alone does not guarantee that every asset can safely be sent through every network. Token deposits may require selecting the correct supported network, and some assets also require a memo or tag.</p>
 
@@ -4902,18 +4902,18 @@ return [
                 'description' => 'A crypto wallet is a tool for managing crypto assets, keys, and addresses used to receive and send funds.',
                 'name' => 'Crypto Wallet',
                 'caption' => 'A tool for managing crypto assets and keys.',
-                'definition' => '<p>A <strong>crypto wallet</strong> is a software, hardware, or other tool that allows a user to manage crypto assets through the corresponding <span class="term" data-term="crypto-wallet/private-key">private keys</span> and create operations on a <span class="term" data-term="blockchain/blockchain">blockchain</span>. Unlike a traditional bank account, a wallet does not literally store coins or tokens inside the device. The assets remain recorded on the relevant blockchain, while the wallet provides the means to control them.</p>
+                'definition' => '<p>A <strong>crypto wallet</strong> is a software, hardware, or other tool that allows a user to manage crypto assets through the corresponding <span class="term" data-term="crypto-wallets/private-key">private keys</span> and create operations on a <span class="term" data-term="blockchain/blockchain">blockchain</span>. Unlike a traditional bank account, a wallet does not literally store coins or tokens inside the device. The assets remain recorded on the relevant blockchain, while the wallet provides the means to control them.</p>
 
-                <p>Key wallet components include key material, <span class="term" data-term="crypto-wallet/wallet-address">addresses</span>, and software or hardware used to create and sign <span class="term" data-term="blockchain/transaction">transactions</span>. To send funds, the wallet constructs a transaction and uses <span class="term" data-term="crypto-wallet/transaction-signing">transaction signing</span> to prove control of the relevant key.</p>
+                <p>Key wallet components include key material, <span class="term" data-term="crypto-wallets/wallet-address">addresses</span>, and software or hardware used to create and sign <span class="term" data-term="blockchain/transaction">transactions</span>. To send funds, the wallet constructs a transaction and uses <span class="term" data-term="crypto-wallets/transaction-signing">transaction signing</span> to prove control of the relevant key.</p>
 
                 <h3>Main types of crypto wallets</h3>
                 <ul>
-                    <li><span class="term" data-term="crypto-wallet/hot-wallet">hot wallets</span> — connected to the network continuously or regularly;</li>
-                    <li><span class="term" data-term="crypto-wallet/cold-wallet">cold wallets</span> — designed to keep key material away from continuously connected environments;</li>
-                    <li><span class="term" data-term="crypto-wallet/hardware-wallet">hardware wallets</span> — use a dedicated physical device;</li>
-                    <li><span class="term" data-term="crypto-wallet/software-wallet">software wallets</span> — operate through applications, browsers, or operating systems;</li>
-                    <li><span class="term" data-term="crypto-wallet/custodial-wallet">custodial wallets</span> — keys are controlled by a third party;</li>
-                    <li><span class="term" data-term="crypto-wallet/non-custodial-wallet">non-custodial wallets</span> — the user controls the keys.</li>
+                    <li><span class="term" data-term="crypto-wallets/hot-wallet">hot wallets</span> — connected to the network continuously or regularly;</li>
+                    <li><span class="term" data-term="crypto-wallets/cold-wallet">cold wallets</span> — designed to keep key material away from continuously connected environments;</li>
+                    <li><span class="term" data-term="crypto-wallets/hardware-wallet">hardware wallets</span> — use a dedicated physical device;</li>
+                    <li><span class="term" data-term="crypto-wallets/software-wallet">software wallets</span> — operate through applications, browsers, or operating systems;</li>
+                    <li><span class="term" data-term="crypto-wallets/custodial-wallet">custodial wallets</span> — keys are controlled by a third party;</li>
+                    <li><span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallets</span> — the user controls the keys.</li>
                 </ul>
 
                 <p>A wallet may support one or multiple blockchains and different types of assets, including <span class="term" data-term="cryptocurrency/coin">coins</span> and <span class="term" data-term="cryptocurrency/token">tokens</span>. Depending on its architecture, it may also interact with <span class="term" data-term="deFi/dapp">dApps</span>, smart contracts, <span class="term" data-term="deFi/defi">DeFi</span> protocols, and <span class="term" data-term="staking/staking">staking</span> systems.</p>
@@ -4921,7 +4921,7 @@ return [
                 <h3>What a wallet actually stores</h3>
                 <p>Crypto assets are not physically stored in a wallet file or device. The blockchain contains the relevant state, while the wallet stores or accesses the secret information required to control those assets. Losing the key material can therefore result in loss of access even though the assets themselves remain recorded on the blockchain.</p>
 
-                <p>Wallet security depends heavily on protecting the <span class="term" data-term="crypto-wallet/private-key">private key</span> or <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span>. If the key material is compromised, an attacker may be able to authorize transactions. Wallet security is therefore closely connected with <span class="term" data-term="security/private-key-security">private-key security</span>, backup, and recovery procedures.</p>'
+                <p>Wallet security depends heavily on protecting the <span class="term" data-term="crypto-wallets/private-key">private key</span> or <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span>. If the key material is compromised, an attacker may be able to authorize transactions. Wallet security is therefore closely connected with <span class="term" data-term="security/private-key-security">private-key security</span>, backup, and recovery procedures.</p>'
             ],
 
             'hot-wallet' => [
@@ -4931,12 +4931,12 @@ return [
                 'caption' => 'A wallet connected to an online environment.',
                 'definition' => '<p>A <strong>hot wallet</strong> is a crypto wallet that operates in an environment with internet access, allowing users to quickly receive, send, and sign operations involving crypto assets. Many mobile, desktop, and browser wallets are hot wallets.</p>
 
-                <p>The main advantage of a hot wallet is convenience. Users can quickly generate a <span class="term" data-term="crypto-wallet/wallet-address">wallet address</span>, receive assets, sign a <span class="term" data-term="blockchain/transaction">transaction</span>, or connect to a <span class="term" data-term="deFi/dapp">dApp</span>. This makes hot wallets useful for regular transactions, trading, <span class="term" data-term="deFi/defi">DeFi</span>, and other activities that require frequent blockchain interaction.</p>
+                <p>The main advantage of a hot wallet is convenience. Users can quickly generate a <span class="term" data-term="crypto-wallets/wallet-address">wallet address</span>, receive assets, sign a <span class="term" data-term="blockchain/transaction">transaction</span>, or connect to a <span class="term" data-term="deFi/dapp">dApp</span>. This makes hot wallets useful for regular transactions, trading, <span class="term" data-term="deFi/defi">DeFi</span>, and other activities that require frequent blockchain interaction.</p>
 
                 <h3>Hot wallet risks</h3>
                 <p>Continuous internet connectivity increases the attack surface. Malware, phishing websites, malicious browser extensions, fake applications, and other threats can target the device or wallet environment. If an attacker obtains key material or tricks the user into approving a malicious operation, assets can be lost.</p>
 
-                <p>For this reason, hot wallets are often used for funds intended for active operations, while larger long-term holdings may be kept in a <span class="term" data-term="crypto-wallet/cold-wallet">cold wallet</span>. This separation does not eliminate risk, but it can reduce the amount of capital directly exposed to a continuously connected environment.</p>'
+                <p>For this reason, hot wallets are often used for funds intended for active operations, while larger long-term holdings may be kept in a <span class="term" data-term="crypto-wallets/cold-wallet">cold wallet</span>. This separation does not eliminate risk, but it can reduce the amount of capital directly exposed to a continuously connected environment.</p>'
             ],
 
             'cold-wallet' => [
@@ -4944,14 +4944,14 @@ return [
                 'description' => 'A cold wallet keeps key material largely offline to reduce the risk of remote compromise.',
                 'name' => 'Cold Wallet',
                 'caption' => 'A wallet designed to keep keys away from online environments.',
-                'definition' => '<p>A <strong>cold wallet</strong> is a method of storing cryptographic keys in which the key material is generally kept outside a continuously internet-connected environment. The main purpose of cold storage is to reduce the likelihood of remote access to <span class="term" data-term="crypto-wallet/private-key">private keys</span>.</p>
+                'definition' => '<p>A <strong>cold wallet</strong> is a method of storing cryptographic keys in which the key material is generally kept outside a continuously internet-connected environment. The main purpose of cold storage is to reduce the likelihood of remote access to <span class="term" data-term="crypto-wallets/private-key">private keys</span>.</p>
 
-                <p>Cold storage can be implemented through a <span class="term" data-term="crypto-wallet/hardware-wallet">hardware wallet</span>, an isolated computer, an offline device, or other procedures designed to separate keys from ordinary online environments. A cold wallet therefore describes a storage and access model rather than one specific device type.</p>
+                <p>Cold storage can be implemented through a <span class="term" data-term="crypto-wallets/hardware-wallet">hardware wallet</span>, an isolated computer, an offline device, or other procedures designed to separate keys from ordinary online environments. A cold wallet therefore describes a storage and access model rather than one specific device type.</p>
 
                 <h3>Cold versus hot storage</h3>
-                <p>A <span class="term" data-term="crypto-wallet/hot-wallet">hot wallet</span> emphasizes convenience and frequent network interaction, while cold storage emphasizes isolation of key material. Cold storage generally requires additional steps when signing transactions and is therefore less convenient for frequent activity.</p>
+                <p>A <span class="term" data-term="crypto-wallets/hot-wallet">hot wallet</span> emphasizes convenience and frequent network interaction, while cold storage emphasizes isolation of key material. Cold storage generally requires additional steps when signing transactions and is therefore less convenient for frequent activity.</p>
 
-                <p>Cold storage does not automatically protect against every threat. Users must still protect their <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span>, backups, and devices. They must also verify transaction details before <span class="term" data-term="crypto-wallet/transaction-signing">signing</span>, because physical key isolation does not prevent social engineering or accidental approval of malicious operations.</p>'
+                <p>Cold storage does not automatically protect against every threat. Users must still protect their <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span>, backups, and devices. They must also verify transaction details before <span class="term" data-term="crypto-wallets/transaction-signing">signing</span>, because physical key isolation does not prevent social engineering or accidental approval of malicious operations.</p>'
             ],
 
             'hardware-wallet' => [
@@ -4959,7 +4959,7 @@ return [
                 'description' => 'A hardware wallet is a physical device designed to protect private keys and sign cryptocurrency transactions.',
                 'name' => 'Hardware Wallet',
                 'caption' => 'A physical device for protecting cryptographic keys.',
-                'definition' => '<p>A <strong>hardware wallet</strong> is a specialized physical device designed to store or use <span class="term" data-term="crypto-wallet/private-key">private keys</span> and perform <span class="term" data-term="crypto-wallet/transaction-signing">transaction signing</span>. Its purpose is to separate sensitive key material from the normal operating environment of a computer or smartphone.</p>
+                'definition' => '<p>A <strong>hardware wallet</strong> is a specialized physical device designed to store or use <span class="term" data-term="crypto-wallets/private-key">private keys</span> and perform <span class="term" data-term="crypto-wallets/transaction-signing">transaction signing</span>. Its purpose is to separate sensitive key material from the normal operating environment of a computer or smartphone.</p>
 
                 <p>When a transaction is initiated, the companion application sends the required transaction data to the device. The hardware wallet uses the protected key to generate a digital signature and returns the signed transaction to the application, which can then broadcast it to the <span class="term" data-term="blockchain/blockchain">blockchain</span>. In a properly designed architecture, the private key does not leave the device.</p>
 
@@ -4972,7 +4972,7 @@ return [
                     <li>to manage multiple blockchains and assets.</li>
                 </ul>
 
-                <p>A hardware wallet does not eliminate the need to protect the <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span>. If the recovery phrase is exposed, device security may no longer protect the associated assets. Users should also verify addresses and transaction details on the device before approving a signature.</p>'
+                <p>A hardware wallet does not eliminate the need to protect the <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span>. If the recovery phrase is exposed, device security may no longer protect the associated assets. Users should also verify addresses and transaction details on the device before approving a signature.</p>'
             ],
 
             'software-wallet' => [
@@ -4980,13 +4980,13 @@ return [
                 'description' => 'A software wallet is an application used to manage keys, addresses, and transactions involving crypto assets.',
                 'name' => 'Software Wallet',
                 'caption' => 'An application for managing crypto assets and keys.',
-                'definition' => '<p>A <strong>software wallet</strong> is an application, browser extension, or other software program used to manage <span class="term" data-term="crypto-wallet/private-key">private keys</span>, create <span class="term" data-term="crypto-wallet/wallet-address">addresses</span>, and sign <span class="term" data-term="blockchain/transaction">transactions</span>.</p>
+                'definition' => '<p>A <strong>software wallet</strong> is an application, browser extension, or other software program used to manage <span class="term" data-term="crypto-wallets/private-key">private keys</span>, create <span class="term" data-term="crypto-wallets/wallet-address">addresses</span>, and sign <span class="term" data-term="blockchain/transaction">transactions</span>.</p>
 
-                <p>A software wallet may run on a desktop computer, smartphone, or browser. It may be <span class="term" data-term="crypto-wallet/hot-wallet">hot</span> when its keys are used in an internet-connected environment, and it may be <span class="term" data-term="crypto-wallet/non-custodial-wallet">non-custodial</span> when the user controls the key material directly.</p>
+                <p>A software wallet may run on a desktop computer, smartphone, or browser. It may be <span class="term" data-term="crypto-wallets/hot-wallet">hot</span> when its keys are used in an internet-connected environment, and it may be <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial</span> when the user controls the key material directly.</p>
 
                 <p>Depending on its implementation, a software wallet may support multiple networks, tokens, <span class="term" data-term="deFi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. Some wallets also provide built-in asset swaps, <span class="term" data-term="staking/staking">staking</span>, and other functions.</p>
 
-                <p>The main security risks of software wallets are connected with the security of the device and application environment. Malware, phishing, malicious extensions, and exposure of the <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span> can compromise assets. Wallet security therefore depends not only on the application itself but also on the entire environment in which it operates.</p>'
+                <p>The main security risks of software wallets are connected with the security of the device and application environment. Malware, phishing, malicious extensions, and exposure of the <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> can compromise assets. Wallet security therefore depends not only on the application itself but also on the entire environment in which it operates.</p>'
             ],
 
             'custodial-wallet' => [
@@ -4994,14 +4994,14 @@ return [
                 'description' => 'A custodial wallet is a wallet where private keys are controlled by a third party such as a crypto exchange.',
                 'name' => 'Custodial Wallet',
                 'caption' => 'A wallet where a third party controls the keys.',
-                'definition' => '<p>A <strong>custodial wallet</strong> is a storage model in which <span class="term" data-term="crypto-wallet/private-key">private keys</span> are controlled by a third party, such as a crypto exchange, payment service, or other custodian.</p>
+                'definition' => '<p>A <strong>custodial wallet</strong> is a storage model in which <span class="term" data-term="crypto-wallets/private-key">private keys</span> are controlled by a third party, such as a crypto exchange, payment service, or other custodian.</p>
 
                 <p>The user normally receives an account and sees a balance but does not necessarily receive direct access to the keys used to sign blockchain transactions. As a result, an internal transfer between users of the same platform may be only an internal ledger operation, while an actual <span class="term" data-term="blockchain/transaction">blockchain transaction</span> occurs when assets are deposited, withdrawn, or otherwise moved on-chain.</p>
 
                 <h3>Characteristics of custodial storage</h3>
                 <p>Custodial systems can simplify account recovery, account management, and access to exchange services. However, the user depends on the security, infrastructure, and policies of the custodian. Withdrawals may be restricted or delayed, and access can be affected by account controls or platform policies.</p>
 
-                <p>The alternative model is a <span class="term" data-term="crypto-wallet/non-custodial-wallet">non-custodial wallet</span>, where the user controls the keys. The key distinction between the two models is therefore who controls the cryptographic keys rather than the appearance of the wallet application.</p>'
+                <p>The alternative model is a <span class="term" data-term="crypto-wallets/non-custodial-wallet">non-custodial wallet</span>, where the user controls the keys. The key distinction between the two models is therefore who controls the cryptographic keys rather than the appearance of the wallet application.</p>'
             ],
 
             'non-custodial-wallet' => [
@@ -5009,9 +5009,9 @@ return [
                 'description' => 'A non-custodial wallet lets users control their private keys and authorize blockchain transactions themselves.',
                 'name' => 'Non-Custodial Wallet',
                 'caption' => 'A wallet where the user controls the keys.',
-                'definition' => '<p>A <strong>non-custodial wallet</strong> is a wallet in which the user directly controls the <span class="term" data-term="crypto-wallet/private-key">private keys</span> required to manage assets. A third party should not have unilateral authority to sign transactions on the user’s behalf.</p>
+                'definition' => '<p>A <strong>non-custodial wallet</strong> is a wallet in which the user directly controls the <span class="term" data-term="crypto-wallets/private-key">private keys</span> required to manage assets. A third party should not have unilateral authority to sign transactions on the user’s behalf.</p>
 
-                <p>When a wallet is created, it may generate a <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span> from which keys and <span class="term" data-term="crypto-wallet/wallet-address">addresses</span> can later be derived. The user is responsible for protecting this key material. If the key is lost and no backup exists, there may be no centralized recovery service.</p>
+                <p>When a wallet is created, it may generate a <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> from which keys and <span class="term" data-term="crypto-wallets/wallet-address">addresses</span> can later be derived. The user is responsible for protecting this key material. If the key is lost and no backup exists, there may be no centralized recovery service.</p>
 
                 <p>Non-custodial wallets can interact directly with <span class="term" data-term="deFi/defi">DeFi</span>, <span class="term" data-term="deFi/dapp">dApps</span>, and <span class="term" data-term="blockchain/smart-contract">smart contracts</span>. At the same time, they place greater responsibility on the user because compromised keys or malicious signatures can directly affect the assets.</p>'
             ],
@@ -5021,12 +5021,12 @@ return [
                 'description' => 'Self-custody means personally controlling and protecting the private keys associated with crypto assets.',
                 'name' => 'Self-Custody',
                 'caption' => 'Direct personal control over cryptocurrency keys.',
-                'definition' => '<p><strong>Self-custody</strong> is a model of crypto asset ownership in which the user directly controls the <span class="term" data-term="crypto-wallet/private-key">private keys</span> required to manage the assets. The keys are not entrusted to a crypto exchange, custodian, or other intermediary.</p>
+                'definition' => '<p><strong>Self-custody</strong> is a model of crypto asset ownership in which the user directly controls the <span class="term" data-term="crypto-wallets/private-key">private keys</span> required to manage the assets. The keys are not entrusted to a crypto exchange, custodian, or other intermediary.</p>
 
-                <p>Self-custody can be implemented through a <span class="term" data-term="crypto-wallet/software-wallet">software wallet</span> or <span class="term" data-term="crypto-wallet/hardware-wallet">hardware wallet</span>. In both cases, the key material remains under the user’s control and transactions are authorized through <span class="term" data-term="crypto-wallet/transaction-signing">cryptographic signatures</span>.</p>
+                <p>Self-custody can be implemented through a <span class="term" data-term="crypto-wallets/software-wallet">software wallet</span> or <span class="term" data-term="crypto-wallets/hardware-wallet">hardware wallet</span>. In both cases, the key material remains under the user’s control and transactions are authorized through <span class="term" data-term="crypto-wallets/transaction-signing">cryptographic signatures</span>.</p>
 
                 <h3>User responsibility in self-custody</h3>
-                <p>The user is responsible for backup procedures, <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span> security, device security, and transaction verification. Loss of a key, exposure of the recovery phrase, or approval of a malicious transaction can result in irreversible loss of assets.</p>
+                <p>The user is responsible for backup procedures, <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> security, device security, and transaction verification. Loss of a key, exposure of the recovery phrase, or approval of a malicious transaction can result in irreversible loss of assets.</p>
 
                 <p>Self-custody therefore changes the trust model: the user relies less on a custodian but assumes more technical and operational responsibility for asset security and recovery.</p>'
             ],
@@ -5038,12 +5038,12 @@ return [
                 'caption' => 'A secret key used to control crypto assets.',
                 'definition' => '<p>A <strong>private key</strong> is a secret cryptographic value used to create <span class="term" data-term="security/digital-signature">digital signatures</span> and authorize specific operations. In cryptocurrency systems, control over the corresponding private key generally means control over assets that can be spent or moved from associated addresses.</p>
 
-                <p>A private key is mathematically related to a <span class="term" data-term="crypto-wallet/public-key">public key</span>. The public key can be used to verify signatures, while the private key must remain secret. Users should never disclose private keys or enter them into untrusted websites or applications.</p>
+                <p>A private key is mathematically related to a <span class="term" data-term="crypto-wallets/public-key">public key</span>. The public key can be used to verify signatures, while the private key must remain secret. Users should never disclose private keys or enter them into untrusted websites or applications.</p>
 
                 <h3>Private keys and blockchains</h3>
                 <p>The private key itself is normally not stored on the <span class="term" data-term="blockchain/blockchain">blockchain</span>. Instead, the blockchain contains information that allows the network to verify signatures or determine the state associated with an address. When funds are sent, the wallet uses the private key to create a signature that the network verifies.</p>
 
-                <p>Modern wallets often do not require users to manage a separate private key for every address. In <span class="term" data-term="crypto-wallet/hd-wallet">HD wallets</span>, many keys can be derived from common root key material such as a seed phrase.</p>
+                <p>Modern wallets often do not require users to manage a separate private key for every address. In <span class="term" data-term="crypto-wallets/hd-wallet">HD wallets</span>, many keys can be derived from common root key material such as a seed phrase.</p>
 
                 <p>Private-key security is critical. Disclosure can allow another person to authorize valid transactions, while loss of the key without a usable backup can make the associated assets inaccessible.</p>'
             ],
@@ -5053,9 +5053,9 @@ return [
                 'description' => 'A public key is the public part of a cryptographic key pair used to verify digital signatures.',
                 'name' => 'Public Key',
                 'caption' => 'An open cryptographic key used to verify signatures.',
-                'definition' => '<p>A <strong>public key</strong> is the public part of a cryptographic key pair and is mathematically related to the corresponding <span class="term" data-term="crypto-wallet/private-key">private key</span>. In digital-signature systems, the public key is used to verify that a signature was produced by the corresponding private key.</p>
+                'definition' => '<p>A <strong>public key</strong> is the public part of a cryptographic key pair and is mathematically related to the corresponding <span class="term" data-term="crypto-wallets/private-key">private key</span>. In digital-signature systems, the public key is used to verify that a signature was produced by the corresponding private key.</p>
 
-                <p>In some blockchain systems, a <span class="term" data-term="crypto-wallet/wallet-address">wallet address</span> is derived directly or indirectly from a public key. However, a public key and an address are not universally interchangeable concepts: the exact address construction depends on the blockchain protocol and address standard.</p>
+                <p>In some blockchain systems, a <span class="term" data-term="crypto-wallets/wallet-address">wallet address</span> is derived directly or indirectly from a public key. However, a public key and an address are not universally interchangeable concepts: the exact address construction depends on the blockchain protocol and address standard.</p>
 
                 <p>Unlike a private key, a public key is not intended to remain secret. Revealing it does not by itself allow someone to sign transactions. The security model relies on the computational difficulty of deriving the private key from the public key.</p>'
             ],
@@ -5065,7 +5065,7 @@ return [
                 'description' => 'A seed phrase is a sequence of words used to restore a crypto wallet and its associated cryptographic keys.',
                 'name' => 'Seed Phrase',
                 'caption' => 'A recovery phrase used to restore a crypto wallet.',
-                'definition' => '<p>A <strong>seed phrase</strong> is a sequence of words from which a compatible crypto wallet can restore its root key material and derived addresses. It provides a human-readable representation of secret information used by many <span class="term" data-term="crypto-wallet/hd-wallet">HD wallets</span>.</p>
+                'definition' => '<p>A <strong>seed phrase</strong> is a sequence of words from which a compatible crypto wallet can restore its root key material and derived addresses. It provides a human-readable representation of secret information used by many <span class="term" data-term="crypto-wallets/hd-wallet">HD wallets</span>.</p>
 
                 <p>One of the best-known standards for generating such phrases is BIP-39, although exact formats and recovery mechanisms depend on the wallet implementation. A seed phrase is not simply an application password: when supported by the relevant wallet standard, it can contain enough information to recreate the wallet’s key hierarchy.</p>
 
@@ -5082,10 +5082,10 @@ return [
                 'caption' => 'A human-readable representation of wallet key material.',
                 'definition' => '<p>A <strong>mnemonic phrase</strong> is a sequence of words used to represent cryptographic entropy in a human-readable form. In compatible wallet systems, the phrase can be converted into the initial key material from which wallet keys and addresses are derived.</p>
 
-                <p>In everyday usage, the terms <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span> and mnemonic phrase are often treated as synonyms, although technical terminology can vary by standard. For example, BIP-39 defines a mnemonic sentence that encodes entropy and a checksum and can then be converted into a seed.</p>
+                <p>In everyday usage, the terms <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> and mnemonic phrase are often treated as synonyms, although technical terminology can vary by standard. For example, BIP-39 defines a mnemonic sentence that encodes entropy and a checksum and can then be converted into a seed.</p>
 
                 <h3>Relationship to HD wallets</h3>
-                <p>After recovering the root seed, the wallet can use a <span class="term" data-term="crypto-wallet/derivation-path">derivation path</span> to generate different branches of keys and addresses. As a result, one mnemonic phrase can correspond to many addresses and accounts.</p>
+                <p>After recovering the root seed, the wallet can use a <span class="term" data-term="crypto-wallets/derivation-path">derivation path</span> to generate different branches of keys and addresses. As a result, one mnemonic phrase can correspond to many addresses and accounts.</p>
 
                 <p>A mnemonic phrase must be treated as secret key material. Exposure can allow recovery of the corresponding keys, while loss without another backup can result in permanent loss of access to assets.</p>'
             ],
@@ -5099,7 +5099,7 @@ return [
 
                 <p>Address formats depend on the specific <span class="term" data-term="blockchain/blockchain">blockchain</span> and address standard. Some networks support multiple address formats for different use cases, while tokens may exist on several networks and use different contract addresses and interaction standards.</p>
 
-                <p>An address can normally be shared publicly for receiving funds. It should not be confused with a <span class="term" data-term="crypto-wallet/private-key">private key</span>: the address identifies a destination, while the private key is used to authorize spending or other operations.</p>
+                <p>An address can normally be shared publicly for receiving funds. It should not be confused with a <span class="term" data-term="crypto-wallets/private-key">private key</span>: the address identifies a destination, while the private key is used to authorize spending or other operations.</p>
 
                 <h3>Address verification</h3>
                 <p>Before sending funds, the complete destination address and network should be verified. Malware can replace copied addresses in a clipboard, so checking only the first and last characters is not sufficient protection.</p>'
@@ -5117,7 +5117,7 @@ return [
                 <h3>Why separate change addresses are used</h3>
                 <p>Using new addresses allows wallets to manage multiple UTXOs and can improve privacy because not all transactions have to be associated with a single repeatedly used address.</p>
 
-                <p>In <span class="term" data-term="crypto-wallet/hd-wallet">HD wallets</span>, change addresses are normally generated deterministically from common key material. When the wallet is restored using the correct <span class="term" data-term="crypto-wallet/derivation-path">derivation path</span>, it can therefore regenerate the relevant addresses.</p>'
+                <p>In <span class="term" data-term="crypto-wallets/hd-wallet">HD wallets</span>, change addresses are normally generated deterministically from common key material. When the wallet is restored using the correct <span class="term" data-term="crypto-wallets/derivation-path">derivation path</span>, it can therefore regenerate the relevant addresses.</p>'
             ],
 
             'hd-wallet' => [
@@ -5127,7 +5127,7 @@ return [
                 'caption' => 'A hierarchical deterministic cryptocurrency wallet.',
                 'definition' => '<p>An <strong>HD wallet</strong> (Hierarchical Deterministic Wallet) is a wallet capable of deterministically generating many cryptographic keys and addresses from a single root secret. This architecture allows users to manage large numbers of addresses without separately backing up every individual key.</p>
 
-                <p>The root material may be represented by a <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span>. The wallet derives a root key and then creates a hierarchy of child keys. The exact hierarchy is determined by the standards and <span class="term" data-term="crypto-wallet/derivation-path">derivation path</span> used by the wallet.</p>
+                <p>The root material may be represented by a <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span>. The wallet derives a root key and then creates a hierarchy of child keys. The exact hierarchy is determined by the standards and <span class="term" data-term="crypto-wallets/derivation-path">derivation path</span> used by the wallet.</p>
 
                 <h3>Advantages of HD wallets</h3>
                 <ul>
@@ -5146,12 +5146,12 @@ return [
                 'description' => 'A derivation path determines which keys and addresses an HD wallet derives from its root seed.',
                 'name' => 'Derivation Path',
                 'caption' => 'The path used to derive keys and addresses in an HD wallet.',
-                'definition' => '<p>A <strong>derivation path</strong> is a structure that determines which child keys an <span class="term" data-term="crypto-wallet/hd-wallet">HD wallet</span> derives from its root key material. A single seed can generate many different keys, and the derivation path selects a specific branch of that hierarchy.</p>
+                'definition' => '<p>A <strong>derivation path</strong> is a structure that determines which child keys an <span class="term" data-term="crypto-wallets/hd-wallet">HD wallet</span> derives from its root key material. A single seed can generate many different keys, and the derivation path selects a specific branch of that hierarchy.</p>
 
                 <p>BIP-32 provides a widely used framework for hierarchical deterministic derivation, while account and address schemes may use additional standards such as BIP-44. A path can contain levels corresponding to purpose, coin type, account, chain, and address index.</p>
 
                 <h3>Why the path matters during recovery</h3>
-                <p>If a user restores a wallet from a <span class="term" data-term="crypto-wallet/seed-phrase">seed phrase</span> but selects a different derivation path, the application may display an empty balance even though the original assets remain on the blockchain. The issue may therefore be the derivation branch rather than the seed itself.</p>
+                <p>If a user restores a wallet from a <span class="term" data-term="crypto-wallets/seed-phrase">seed phrase</span> but selects a different derivation path, the application may display an empty balance even though the original assets remain on the blockchain. The issue may therefore be the derivation branch rather than the seed itself.</p>
 
                 <p>Wallet migration should account for the standard, account type, and derivation path used by the original wallet. Seed compatibility alone does not guarantee that every previously used address will be discovered automatically.</p>'
             ],
@@ -5182,7 +5182,7 @@ return [
                 'description' => 'Transaction signing is the cryptographic authorization of a blockchain operation using a private key.',
                 'name' => 'Transaction Signing',
                 'caption' => 'Cryptographic authorization of a blockchain transaction.',
-                'definition' => '<p><strong>Transaction signing</strong> is a cryptographic operation in which the holder of a corresponding <span class="term" data-term="crypto-wallet/private-key">private key</span> authorizes a specific operation. The network uses the relevant <span class="term" data-term="crypto-wallet/public-key">public key</span> or related cryptographic data to verify the signature.</p>
+                'definition' => '<p><strong>Transaction signing</strong> is a cryptographic operation in which the holder of a corresponding <span class="term" data-term="crypto-wallets/private-key">private key</span> authorizes a specific operation. The network uses the relevant <span class="term" data-term="crypto-wallets/public-key">public key</span> or related cryptographic data to verify the signature.</p>
 
                 <p>When sending funds, the wallet constructs a <span class="term" data-term="blockchain/transaction">transaction</span> containing the recipient, amount, fees, and other parameters required by the blockchain. The wallet then signs the transaction with the private key. The signed transaction can be broadcast to the network and may enter the <span class="term" data-term="blockchain/mempool">mempool</span> before being included in a <span class="term" data-term="blockchain/block">block</span>.</p>
 
@@ -5207,7 +5207,7 @@ return [
                 'caption' => 'Decentralized finance on blockchain',
                 'definition' => '<p><strong>DeFi (Decentralized Finance)</strong> is a broad ecosystem of financial applications, protocols, and services built on <span class="term" data-term="blockchain/blockchain">blockchains</span> that allow users to perform financial operations without relying on a traditional centralized intermediary. Instead of a bank, broker, or financial company controlling the operation, part of the financial logic is implemented through <span class="term" data-term="blockchain/smart-contract">smart contracts</span>, blockchain consensus, and cryptographic authorization.</p>
 
-                <p>Users normally interact with a DeFi protocol through a <span class="term" data-term="defi/dapp">dApp</span> and a <span class="term" data-term="crypto-wallet/crypto-wallet">crypto wallet</span>. The wallet allows the user to control assets and authorize operations by signing blockchain transactions. Depending on the protocol, users can exchange assets, lend them, borrow against collateral, provide liquidity, or participate in governance.</p>
+                <p>Users normally interact with a DeFi protocol through a <span class="term" data-term="defi/dapp">dApp</span> and a <span class="term" data-term="crypto-wallets/crypto-wallet">crypto wallet</span>. The wallet allows the user to control assets and authorize operations by signing blockchain transactions. Depending on the protocol, users can exchange assets, lend them, borrow against collateral, provide liquidity, or participate in governance.</p>
 
                 <p>Major DeFi components include <span class="term" data-term="defi/liquidity-pool">liquidity pools</span>, <span class="term" data-term="defi/automated-market-maker">automated market makers</span>, lending protocols, yield strategies, and <span class="term" data-term="defi/oracle">oracles</span>. Protocol governance may be organized through a <span class="term" data-term="defi/dao">DAO</span>.</p>
 
@@ -5243,9 +5243,9 @@ return [
                 'caption' => 'Decentralized blockchain application',
                 'definition' => '<p>A <strong>dApp</strong>, or decentralized application, is an application that uses a <span class="term" data-term="blockchain/blockchain">blockchain</span> and one or more <span class="term" data-term="blockchain/smart-contract">smart contracts</span> to implement part of its functionality. In DeFi, a dApp commonly provides the user interface through which users interact with a financial protocol.</p>
 
-                <p>A typical dApp consists of a frontend interface and blockchain-connected logic. The frontend can be a conventional web application displaying balances, prices, liquidity, and transaction parameters. When the user performs an action, the application constructs a blockchain transaction that is then authorized through a <span class="term" data-term="crypto-wallet/crypto-wallet">crypto wallet</span>.</p>
+                <p>A typical dApp consists of a frontend interface and blockchain-connected logic. The frontend can be a conventional web application displaying balances, prices, liquidity, and transaction parameters. When the user performs an action, the application constructs a blockchain transaction that is then authorized through a <span class="term" data-term="crypto-wallets/crypto-wallet">crypto wallet</span>.</p>
 
-                <p>After <span class="term" data-term="crypto-wallet/transaction-signing">transaction signing</span>, the transaction can be broadcast to the network. <span class="term" data-term="blockchain/blockchain-node">Blockchain nodes</span> process it and the relevant smart contract executes the programmed logic.</p>
+                <p>After <span class="term" data-term="crypto-wallets/transaction-signing">transaction signing</span>, the transaction can be broadcast to the network. <span class="term" data-term="blockchain/blockchain-node">Blockchain nodes</span> process it and the relevant smart contract executes the programmed logic.</p>
 
                 <p>A dApp can interact with several contracts in one operation. For example, a decentralized exchange interface can interact with routing contracts, liquidity pools, token contracts, and other components. One user action can therefore result in multiple contract calls within a single blockchain transaction.</p>
 
