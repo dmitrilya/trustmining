@@ -16,6 +16,7 @@ use App\Models\Database\GPUBrand;
 use App\Models\Blog\BlogArticle;
 use App\Models\Insight\Channel;
 use App\Models\Database\Coin;
+use App\Models\Dictionary\DictionaryCategory;
 use App\Models\Forum\ForumCategory;
 use App\Models\Morph\View;
 
@@ -209,6 +210,16 @@ class SitemapGenerate extends Command
                 $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName);
                 foreach ($forumSubcategory->forumQuestions as $forumQuestion)
                     $out .= $this->addUrl('forum/' . $forumCategoryName . '/' . $forumSubcategoryName . '/' . $forumQuestion->id . '-' . Str::slug($forumQuestion->theme));
+            }
+        }
+
+        $out .= $this->addUrl('wiki');
+        $out .= $this->addUrl('wiki/dictionary');
+
+        foreach (DictionaryCategory::with(['dictionaryTerms'])->get() as $category) {
+            $out .= $this->addUrl('wiki/dictionary/' . $category->name);
+            foreach ($category->dictionaryTerms as $term) {
+                $out .= $this->addUrl('wiki/dictionary/' . $category->name . '/' . $term->name);
             }
         }
 
