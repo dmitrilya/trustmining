@@ -48,6 +48,8 @@ class DictionaryController extends Controller
 
             $data = __("dictionary.$category.terms.$term");
 
+            if (!$data) continue;
+
             $terms[$key] = [
                 'name' => $data['name'],
                 'caption' => $data['caption'],
