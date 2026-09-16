@@ -2569,7 +2569,7 @@ return [
 
                 <p>Adding miners increases more than the total hashrate. It also increases electrical and thermal loads. If the electrical or cooling infrastructure is not designed for the additional load, the farm may be unable to operate all installed devices continuously.</p>
 
-                <p>Large facilities therefore plan electrical capacity, cooling capability, network infrastructure, and infrastructure reserves before expanding the number of miners.</p>
+                <p>Large facilities therefore plan electrical capacity, <span class="term" data-term="cooling/cooling-capacity">cooling capability</span>, network infrastructure, and infrastructure reserves before expanding the number of miners.</p>
 
                 <h3>Key Infrastructure Factors</h3>
 
