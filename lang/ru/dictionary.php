@@ -2557,7 +2557,7 @@ return [
                     <li>сетевое оборудование и подключение к интернету;</li>
                     <li>система мониторинга и <span class="term" data-term="mining-infrastructure/remote-management">удалённого управления</span>;</li>
                     <li>конструкции для размещения оборудования;</li>
-                    <li>резервные элементы инфраструктуры, необходимые для поддержания <span class="term" data-term="mining-equipment/uptime">uptime</span>.</li>
+                    <li>резервные элементы инфраструктуры, необходимые для поддержания <span class="term" data-term="equipment-specifications/uptime">uptime</span>.</li>
                 </ul>
 
                 <h3>Как работает майнинг-ферма</h3>
