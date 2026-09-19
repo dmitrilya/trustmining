@@ -99,6 +99,7 @@ $webRoutes = function () {
     Route::get('/support', [PageController::class, 'support'])->name('support');
     Route::get('/taxes', [PageController::class, 'taxes'])->name('taxes');
     Route::get('/legal', [PageController::class, 'legal'])->name('legal');
+    Route::get('/hashrate-converter', [PageController::class, 'hashrateConverter'])->name('hashrate-converter');
 
     Route::view('/about', 'about')->name('about');
     //Route::view('/roadmap', 'roadmap')->name('roadmap');

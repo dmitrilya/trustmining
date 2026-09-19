@@ -89,4 +89,60 @@ return [
         'question_4' => 'Is the warranty voided by overclocking the miner or using custom firmware?',
         'answer_4' => 'Yes, most manufacturers (Bitmain, MicroBT) will void the warranty if they detect the use of third-party software, signs of overheating due to overclocking, or operation in improper conditions (high humidity, dust). The warranty is also voided if the factory seals are damaged.',
     ],
+    'asic' => [
+        'question_1' => 'How do I properly connect the :b :m and start mining?',
+        'answer_1_cooling' => [
+            'Passive' => 'a passive heatsink. Models with <b>passive cooling</b> do not require any fans or pumps; heat dissipation relies entirely on a heavy-duty heatsink and natural convection. These devices are ideal for residential use due to zero noise output, and they typically run on a standard compact PSU or a Type-C cable.',
+            'Air' => 'fans and airflow. <b>Air cooling</b> setups require high-volume ventilation and heavy-duty power cables rated at least 2.5 mm².',
+            'Hydro' => 'a water system. <b>Hydro models</b> demand an external water-loop distribution block or a dry cooling tower.',
+            'Immersion' => 'immersion fluid. <b>Immersion models</b> can only be operated inside a specialized dielectric fluid tank (bath).',
+        ],
+        'answer_1' => 'The :b :m features cooling based on :cooling. To initiate mining, plug in the LAN cable, scan your local network for the miner\'s IP using an ASIC Tool, open the web dashboard, and enter your target pool stratum addresses.',
+
+        'question_2' => 'How much does the :coin :b :m miner cost and where to buy it?',
+        'answer_2' => 'Currently, the best available price for the :b :m :h ASIC miner on our platform is <b>:price rubles</b>. This listing is provided by <b>:company</b>. You can review all current listings, evaluate supplier credibility using our Trust Factor badge, and proceed with a secure deal inside our catalog.',
+
+        'question_3' => ':h :mes — how much is it in other metrics and how to convert :b :m hashrate?',
+        'units' => [
+            'names' => [
+                'h'   => 'hash/s',
+                'sol' => 'sol/s',
+                'g'   => 'graph/s',
+                'c'   => 'cuckoo/s',
+                'k'   => 'key/s',
+            ],
+            'prefixes' => [
+                ''  => '',
+                'k' => 'kilo',
+                'M' => 'Mega',
+                'G' => 'Giga',
+                'T' => 'Tera',
+                'P' => 'Peta',
+                'E' => 'Exa',
+            ]
+        ],
+        'answer_3' => 'Upon conversion, the computing power of :h is equivalent to :converted_text. Depending on the coin algorithm, the baseline operational output denomination might be displayed in different network standards. To quickly convert any hashrate, solution, or graph volumes without manual calculations, use our dedicated <a target="_blank" href="' . route('hashrate-converter') . '" class="inline text-indigo-500 hover:text-indigo-600">hashrate converter tool on the TrustMining website</a>.',
+
+        'question_4' => 'How long does it take for the :b :m :h to mine 1 Bitcoin?',
+        'answer_4' => 'Given the current network difficulty of <b>:d</b> and a block reward of <b>:r</b> BTC, a single :b :m :h will take approximately <b>:btc_time</b> to successfully secure 1 full Bitcoin. The device yields roughly <b>:p BTC</b> or <b>:ps satoshi</b> per day on average.',
+
+        'question_5' => 'How much bandwidth data does the :b :m consume and what network cable/router is required for ASICs?',
+        'answer_5' => 'The :m rig is exceptionally data-efficient, utilizing only about <b>50 to 150 MB of network data per month</b> per machine, as it only sends small textual cryptographic shares (work updates) to the pool server. The core requirement is connection stability and minimal network latency rather than raw speed (Ping to the pool under 50-80 ms). ASICs must be connected exclusively via a **wired LAN cable** (Ethernet).',
+
+        'question_6' => 'What is the average operational lifespan of the :b :m miner?',
+        'answer_6' => 'If adequate cooling is maintained (ASIC chips under 75-80°C), dust is cleared regularly (every 6 months), and grid voltage stays stable, the :m can operate reliably for **3 to 5 years**. The most common components requiring eventual routine replacement are cooling fans.',
+    ],
+    'converter' => [
+        'question_1' => 'How do I convert hashrate from TH/s to GH/s or MH/s?',
+        'answer_1' => 'Computing power conversion in crypto mining follows the standard metric system, where each prefix tier multiplies or divides the base value by 1000. For instance, <b>1 TH/s (Terahash)</b> equals 1,000 GH/s (Gigahashes), 1,000,000 MH/s (Megahashes), or 1,000,000,000,000 H/s (raw hashes). Our online converter calculates these shifts automatically.',
+
+        'question_2' => 'What is the difference between H/s, Sol/s, and Graphs/s?',
+        'answer_2' => 'These are fundamentally distinct computing performance units linked to specific cryptographic setups: <br>• <b>H/s (Hashes/s)</b> is utilized in classic PoW mining grids (Bitcoin, Litecoin).<br>• <b>Sol/s (Solutions/s)</b> measures operational solutions found per second on Equihash engines (Zcash).<br>• <b>Graphs/s (or G/s)</b> calculates graph generation velocity on Cuckoo Cycle frameworks (Grin coin).<br>They cannot be directly compared or added up, as they execute completely different math workloads.',
+
+        'question_3' => 'What do the C/s (Cuckoos) and K/s (Keys) units represent?',
+        'answer_3' => 'These metrics are applied to niche or hardware-specific consensus protocols. <b>K/s (Keys per second)</b> tracks structural encryption key evaluation speeds (e.g., CryptoNight derivatives). <b>C/s (Cuckoos or Chirps)</b> captures computing cycle runtimes for target Cuckoo architectures. Use our main calculator dropdown to easily denominate these configurations.',
+
+        'question_4' => 'How does hashrate affect mining profitability and coin generation speed?',
+        'answer_4' => 'Hashrate is the raw velocity at which your mining hardware computes cryptographic puzzles. The higher this metric, the more valid shares your machine transmits to the pool per second, securing you a larger slice of the network block reward. If the network difficulty spikes, the amount of coins mined at the exact same hashrate will drop, which is why tracking active hardware performance is vital.',
+    ]
 ];

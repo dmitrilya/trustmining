@@ -486,6 +486,11 @@ return [
         ]
     ],
 
+    'hashrate-converter' => [
+        'title' => 'Hashrate Converter | Convert hash, Mh, Gh, Th, Sol',
+        'description' => 'A universal online calculator for converting miner computing power. Easily convert hashes (H/s), solutions (Sol/s), and Graphs/s on TrustMining.',
+    ],
+
     'tariff' => [
         'index' => [
             'title' => 'TrustMining Service Rates and Pricing',

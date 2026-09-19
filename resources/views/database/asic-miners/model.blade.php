@@ -24,5 +24,6 @@
         @include('database.asic-miners.model-info')
         @include('database.asic-miners.compare')
         @include('database.asic-miners.ads')
+        @include('database.asic-miners.faq')
     </div>
 </x-app-layout>

@@ -21,6 +21,11 @@ class PageController extends Controller
         return view('home.index', $data);
     }
 
+    public function hashrateConverter(): View
+    {
+        return view('instruments.hashrate-converter', ['data' => Cache::get('home_page_data')]);
+    }
+
     public function widjets(): View
     {
         $models = Cache::get('calculator_models');

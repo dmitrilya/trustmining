@@ -54,6 +54,7 @@ class SitemapGenerate extends Command
         $out .= $this->addUrl('cryptoexchangers');
         $out .= $this->addUrl('companies');
         $out .= $this->addUrl('warranty-check');
+        $out .= $this->addUrl('hashrate-converter');
         $out .= $this->addUrl('taxes');
 
         foreach (AdCategory::select('name')->get() as $adCategory) {
@@ -224,14 +225,12 @@ class SitemapGenerate extends Command
         }
 
         $out .= $this->addUrl('support');
-        $out .= $this->addUrl('support?chat=1');
         $out .= $this->addUrl('privacy');
         $out .= $this->addUrl('agreement');
         $out .= $this->addUrl('tariffs');
-        $out .= $this->addUrl('roadmap');
+        //$out .= $this->addUrl('roadmap');
         $out .= $this->addUrl('login');
         $out .= $this->addUrl('register');
-        $out .= $this->addUrl('forgot-password');
 
         $out .= '
 </urlset>';

@@ -486,6 +486,11 @@ return [
         ]
     ],
 
+    'hashrate-converter' => [
+        'title' => 'Конвертер хэшрейта | Перевод hash, Mh, Gh, Th, Sol',
+        'description' => 'Универсальный онлайн-калькулятор для конвертации вычислительной мощности майнеров. Удобный перевод хешей (H/s), солов (Sol/s) и Graphs/s на TrustMining',
+    ],
+
     'tariff' => [
         'index' => [
             'title' => 'Тарифы на использование сервиса TrustMining',

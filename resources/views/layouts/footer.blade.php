@@ -159,6 +159,8 @@
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
+                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                    href="{{ route('hashrate-converter') }}">{{ __('Hashrate converter') }}</a>
                 {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('blog') }}">{{ __('Blog') }}</a> --}}
                 <a class="w-max under text-sm text-slate-800 dark:text-slate-200"

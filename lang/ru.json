@@ -937,6 +937,9 @@
     "Penalty applied": "Применен штраф",
     "Your browser does not support embedded videos.": "Ваш браузер не поддерживает встроенные видео.",
     "Crypto dictionary": "Словарь криптана",
+    "Hashrate converter": "Конвертер хэшрейта",
+    "Select the type of computing power:": "Выберите тип вычислительной мощности:",
+    "Enter a value in any field for instant recalculation:": "Введите значение в любое поле для мгновенного пересчета:",
 
     "Welcome to the TrustMining integration guide. Our API allows you to automate ad management in the mining hardware (ASIC miners) category.": "Добро пожаловать в руководство по интеграции с платформой TrustMining. Наше API позволяет автоматизировать управление объявлениями в категории майнинг-оборудования (ASIC-майнеры).",
     "Authorization and Restrictions": "Авторизация и Ограничения",

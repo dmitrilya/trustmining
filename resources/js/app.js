@@ -5,6 +5,7 @@ import './chat';
 import { calculatorAlpine } from './calculatorAlpine';
 import { adsStatistics } from './statistics';
 import { roulette } from './roulette';
+import { hashrateConverter } from './hashrate-converter';
 import { tgAuth } from './tgAuth';
 import './suggestions';
 import './broadcast';
@@ -132,6 +133,8 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('calculator', calculatorAlpine);
 
     Alpine.data('roulette', roulette);
+
+    Alpine.data('hashrateConverter', hashrateConverter);
 
     Alpine.data('tgAuth', tgAuth);
 

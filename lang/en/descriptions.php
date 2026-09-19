@@ -173,7 +173,7 @@ return [
             'algorithm' => 'Operates on the <b>:algorithm</b> algorithm, which has proven to be one of the most secure and profitable in the network.',
             'hashrate' => 'The nominal computing power is <b>:hashrate</b>, allowing it to compete effectively in today\'s network complexity conditions.',
             'power' => 'The device power consumption is locked at <b>:power W</b>, providing a perfect balance between performance and electricity costs.',
-            'efficiency' => 'The efficiency metric stands at <b>:efficiency J/TH</b>, which is a key factor for a fast return on investment.',
+            'efficiency' => 'The efficiency metric stands at <b>:efficiency j/:measurement</b>, which is a key factor for a fast return on investment.',
         ],
 
         'h2_assets' => 'Supported Assets',

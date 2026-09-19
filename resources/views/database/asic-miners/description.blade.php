@@ -30,7 +30,7 @@
             </li>
             <li data-list="bullet"><span class="ql-ui" contenteditable="false"></span><span
                     class="ql-color-secondary-text-color"><b>{{ __('descriptions.asic.labels.efficiency') }}</b></span>
-                {!! __('descriptions.asic.specs.efficiency', ['efficiency' => $selectedVersion['e']]) !!}
+                {!! __('descriptions.asic.specs.efficiency', ['efficiency' => $selectedVersion['e'], 'measurement' => $selectedVersion['m']]) !!}
             </li>
         </ol>
         <p></br></p>
