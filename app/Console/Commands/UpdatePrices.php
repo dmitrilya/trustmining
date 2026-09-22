@@ -67,15 +67,15 @@ class UpdatePrices extends Command
             ->with(['moderatedAds' => fn($q) => $q->where('ad_category_id', 1)])->get();
         $changings = [];
 
-        //$changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
-        //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
-        //$changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
-        //$changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
-        //$changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
+        $changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
+        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
+        $changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
+        $changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
         $changings = array_merge($changings, $this->leoMining($users->where('name', 'LeoMining')->first()));
-dd($changings);
+        
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
             'Accept'        => 'application/json',
