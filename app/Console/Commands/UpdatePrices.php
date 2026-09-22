@@ -67,15 +67,15 @@ class UpdatePrices extends Command
             ->with(['moderatedAds' => fn($q) => $q->where('ad_category_id', 1)])->get();
         $changings = [];
 
-        $changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
-        $changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
-        $changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
-        $changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
-        $changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
-        $changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
-        $changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
+        //$changings = array_merge($changings, $this->pushminer($users->where('name', 'PushMiner')->first()));
+        //$changings = array_merge($changings, $this->gismining($users->where('name', 'GIS mining')->first()));
+        //$changings = array_merge($changings, $this->ibmm($users->where('name', 'IBMM Technology')->first()));
+        //$changings = array_merge($changings, $this->miningdepot($users->where('name', 'Mining Depot')->first()));
+        //$changings = array_merge($changings, $this->intelion($users->where('name', 'Intelion Data Systems')->first()));
+        //$changings = array_merge($changings, $this->globalMining($users->where('name', 'Global Mining')->first()));
+        //$changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
         $changings = array_merge($changings, $this->leoMining($users->where('name', 'LeoMining')->first()));
-
+dd($changings);
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
             'Accept'        => 'application/json',
@@ -856,6 +856,9 @@ class UpdatePrices extends Command
                 if ($name[0] == 'yuchai') continue;
                 if ($name[1] == 's21++') $name[1] = 's21+';
                 elseif ($name[1] == 's21pro+') $name[1] = 's21pro';
+                elseif ($name[1] == 's21exphu3') $name[1] = 's21exphyd3u';
+                elseif ($name[1] == 's19xp+') $name[1] = 's19xp+hyd';
+                elseif ($name[1] == 's23xphyd') $name[1] = 's19xp+hyd';
                 $nameWithBrand = $name[0] . $name[1];
                 $variants = [
                     $name[1],
@@ -864,7 +867,7 @@ class UpdatePrices extends Command
                     str_replace('hydro', 'hyd', $name[1]),
                 ];
                 $rate = (float) explode(' ', $row[2])[0];
-                $price = (float) str_replace(' ', '', str_replace('₽', '', $row[4]));
+                $price = (float) preg_replace('/\s+/u', '', str_replace('₽', '', $row[4]));
 
                 $corrs = $this->models->whereIn('name', $variants);
                 if ($corrs->count() != 1) {
