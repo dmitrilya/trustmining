@@ -204,7 +204,7 @@ class SendEmailNotifications implements ShouldQueue
             now()->addDays(30),
             [
                 'user_id' => $user->id,
-                'redirect_to' => route('profile', ['tab' => 'notifications'])
+                'redirect_to' => base64_encode(route('profile', ['tab' => 'notifications']))
             ]
         );
 

@@ -294,24 +294,7 @@ function prepareTerms() {
 
         popup = document.createElement('div');
 
-        popup.className = [
-            'tm-wiki-popup',
-            'fixed',
-            'z-50',
-            'hidden',
-            'w-80',
-            'max-w-xs',
-            'rounded-xl',
-            'bg-white/40',
-            'dark:bg-slate-900/40',
-            'border',
-            'border-slate-300',
-            'dark:border-slate-700',
-            'backdrop-blur-xl',
-            'p-2',
-            'sm:p-3',
-            'shadow-xl'
-        ].join(' ');
+        popup.className = ['tm-wiki-popup', 'fixed', 'z-50', 'hidden', 'w-80', 'max-w-xs', 'rounded-xl', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'backdrop-blur-xl', 'p-2', 'sm:p-3', 'shadow-xl'].join(' ');
 
         popup.innerHTML = `
             <div class="tm-wiki-popup-name font-semibold text-slate-800 dark:text-slate-200"></div>
