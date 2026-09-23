@@ -64,32 +64,32 @@ use Illuminate\Support\Facades\Cache;
 |
 */
 
-Route::get('private/temp', function (Request $request) {
-    if (!$request->hasValidSignature()) abort(401);
-
-    /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-    $disk = Storage::disk('private');
-
-    return $disk->download($request->path);
-})->name('private.temp');
-
-Route::get('/mail-login/{user_id}', function (Request $request) {
-    if (!$request->hasValidSignature()) abort(401);
-
-    $userId = $request->route('user_id');
-    $targetUrl = $request->input('redirect_to', url('/'));
-
-    if (!Auth::check() || Auth::id() != $userId) {
-        $user = User::find($userId);
-        if ($user) Auth::login($user, true);
-    }
-
-    return redirect()->to($targetUrl);
-})->name('mail.redirect');
-
 Route::get('/locale', [ProfileController::class, 'locale'])->name('locale');
 
 $webRoutes = function () {
+    Route::get('private/temp', function (Request $request) {
+        if (!$request->hasValidSignature()) abort(401);
+
+        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+        $disk = Storage::disk('private');
+
+        return $disk->download($request->path);
+    })->name('private.temp');
+
+    Route::get('/mail-login/{user_id}', function (Request $request) {
+        if (!$request->hasValidSignature()) abort(401);
+
+        $userId = $request->route('user_id');
+        $targetUrl = $request->input('redirect_to', url('/'));
+
+        if (!Auth::check() || Auth::id() != $userId) {
+            $user = User::find($userId);
+            if ($user) Auth::login($user, true);
+        }
+
+        return redirect()->to($targetUrl);
+    })->name('mail.redirect');
+
     Route::post('/inp', [AnalyticsController::class, 'inp'])->name('inp');
     Route::post('/location', [ProfileController::class, 'location'])->name('location');
     Route::get('/change-theme', [ProfileController::class, 'changeTheme'])->name('change-theme');
