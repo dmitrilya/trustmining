@@ -73,11 +73,11 @@ Route::get('private/temp', function (Request $request) {
     return $disk->download($request->path);
 })->name('private.temp');
 
-Route::get('/mail-login/{user_id}/{redirect_to?}', function (Request $request) {
+Route::get('/mail-login/{user_id}', function (Request $request) {
     if (!$request->hasValidSignature()) abort(401);
 
     $userId = $request->route('user_id');
-    $targetUrl = $request->route('redirect_to') ? base64_decode($request->route('redirect_to')) : url('/');
+    $targetUrl = $request->input('redirect_to', url('/'));
 
     if (!Auth::check() || Auth::id() != $userId) {
         $user = User::find($userId);

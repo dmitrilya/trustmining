@@ -49,15 +49,17 @@ class AppServiceProvider extends ServiceProvider
 
         \Carbon\Carbon::setLocale(app()->getLocale());
 
-        /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
-        $disk = Storage::disk('private');
+        Storage::resolved(function () {
+            /** @var \Illuminate\Filesystem\FilesystemAdapter $disk */
+            $disk = Storage::disk('private');
 
-        $disk->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
-            return URL::temporarySignedRoute(
-                'private.temp',
-                $expiration,
-                array_merge($options, ['path' => $path])
-            );
+            $disk->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
+                return URL::temporarySignedRoute(
+                    'private.temp',
+                    $expiration,
+                    array_merge($options, ['path' => $path])
+                );
+            });
         });
 
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
