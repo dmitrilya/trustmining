@@ -93,7 +93,7 @@ class UpdateNetworkData extends Command
                     $q->orWhereJsonContains("notifications->{$notificationTypeId}->c", (int)$coinId);
                 }
             });
-        })->with('settings')->select(['id', 'tg_id', 'email', 'is_anchor'])->get();
+        })->with('settings')->select(['id', 'tg_id', 'email', 'email_verified_at', 'is_anchor'])->get();
 
         $coinsToUsersMap = [];
 

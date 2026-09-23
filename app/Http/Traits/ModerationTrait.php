@@ -119,7 +119,7 @@ trait ModerationTrait
             $m->unique_content = $isUniqueContent;
 
             if (isset($data['price'])) {
-                $users = $m->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get();
+                $users = $m->trackingUsers()->select(['users.id', 'users.email', 'users.email_verified_at', 'users.tg_id', 'users.is_anchor'])->get();
 
                 if ($m->asicVersion) $users = $users->merge($m->asicVersion->asicModel->trackingUsers()->select(['users.id', 'users.email', 'users.tg_id', 'users.is_anchor'])->get());
 

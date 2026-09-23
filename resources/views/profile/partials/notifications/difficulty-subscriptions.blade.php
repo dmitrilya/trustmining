@@ -17,7 +17,7 @@
                 <div
                     class="mt-1 flex items-center overflow-hidden bg-white dark:bg-slate-950 rounded-md shadow shadow-logo-color ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus-within:ring-indigo-500 dark:focus-within:ring-indigo-500 pr-2">
                     <input type="text" id="search" x-model="search" placeholder="Bitcoin"
-                        class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 text-slate-600 dark:text-slate-400 w-full" />
+                        class="py-1.5 px-3 bg-transparent border-0 focus:ring-0 focus:outline-none text-slate-600 dark:text-slate-400 w-full" />
                 </div>
             </div>
 
