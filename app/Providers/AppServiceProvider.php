@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             };
 
-            $generator->setKeyResolver($url->getKeyResolver());
+            $generator->setKeyResolver(fn() => $app['config']->get('app.key'));
 
             return $generator;
         });
