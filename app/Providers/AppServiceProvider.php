@@ -32,12 +32,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->extend('url', function (UrlGenerator $url, $app) {
-            return new class($app['router']->getRoutes(), $app['request'], $app->config->get('app.asset_url')) extends UrlGenerator {
+            $generator = new class($app['router']->getRoutes(), $app['request'], $app->config->get('app.asset_url')) extends UrlGenerator {
                 public function route($name, $parameters = [], $absolute = true)
                 {
                     $currentLocale = app()->getLocale();
 
-                    if ($currentLocale !== config('app.locale') && $name !== 'locale') {
+                    if ($currentLocale !== 'ru' && $name !== 'locale') {
                         $localizedName = $currentLocale . '.' . $name;
                         if ($this->routes->getByName($localizedName)) $name = $localizedName;
                     }
@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
                     return parent::route($name, $parameters, $absolute);
                 }
             };
+
+            $generator->setKeyResolver(fn() => $app['config']->get('app.key'));
+
+            return $generator;
         });
 
         \Carbon\Carbon::setLocale(app()->getLocale());
