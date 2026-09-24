@@ -125,11 +125,19 @@ class AdController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Ad\AdCategory  $adCategory
-     * @param  \App\Models\Ad\Ad  $ad
+     * @param  int  $adId
      * @return \Illuminate\Http\Response
      */
-    public function show(AdCategory $adCategory, Ad $ad)
+    public function show(AdCategory $adCategory, int $adId)
     {
+        $ad = Ad::find($adId);
+
+        if (!$ad) {
+            if ($adId < Ad::max('id') ?? 0) return redirect()->to(route('ads', ['adCategory' => $adCategory->name]), 301)->with('from_deleted_ad', true);
+
+            abort(404);
+        }
+
         $user = Auth::user();
 
         if ((!$user || $user->role->name == 'user' && $user->id != $ad->user_id) && ($ad->moderation || $ad->hidden))
@@ -168,8 +176,18 @@ class AdController extends Controller
      */
     public function asicMinerAd(AsicBrand $asicBrand, AsicModel $asicModel, string $asicVersion, $ad)
     {
-        $ad = Ad::find(array_reverse(explode('-', $ad))[0]);
-        if (!$ad) abort(404);
+        $adId = array_reverse(explode('-', $ad))[0];
+
+        $ad = Ad::find($adId);
+
+        if (!$ad) {
+            if ($adId < Ad::max('id') ?? 0) return redirect()->to(route('database.asic-miners.model', [
+                'asicBrand' => $asicBrand->slug,
+                'asicModel' => $asicModel->slug
+            ]), 301)->with('from_deleted_ad', true);
+
+            abort(404);
+        }
 
         $user = Auth::user();
 
@@ -200,8 +218,18 @@ class AdController extends Controller
      */
     public function gpuAd(GPUBrand $gpuBrand, GPUModel $gpuModel, $ad)
     {
-        $ad = Ad::find(array_reverse(explode('-', $ad))[0]);
-        if (!$ad) abort(404);
+        $adId = array_reverse(explode('-', $ad))[0];
+
+        $ad = Ad::find($adId);
+
+        if (!$ad) {
+            if ($adId < Ad::max('id') ?? 0) return redirect()->to(route('database.gas-gensets.model', [
+                'gpuBrand' => $gpuBrand->slug,
+                'gpuModel' => $gpuModel->slug
+            ]), 301)->with('from_deleted_ad', true);
+
+            abort(404);
+        }
 
         $user = Auth::user();
 

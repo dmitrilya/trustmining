@@ -27,7 +27,7 @@
         $isPureType = in_array(strtolower($unitString), $availableTypes);
 
         $currentPrefix = $isPureType ? '' : substr($unitString, 0, 1);
-        $type = $isPureType ? $unitString : substr($unitString, 1);
+        $type = $isPureType ? strtolower($unitString) : strtolower(substr($unitString, 1));
 
         $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
 

@@ -82,8 +82,21 @@
         @include('ad.components.blurb')
         @include('ad.components.filter')
 
-        <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader"
-            x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route('ads', request()->route()->originalParameters()) }}', data: {{ request()->collect() }}, page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }}, count: 15 });">
+        @if (session('from_deleted_ad'))
+            <div class="bg-amber-500/10 border-l-4 border-amber-500/30 p-4 rounded-r-md mb-2 sm:mb-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">⚠️</div>
+                    <div class="ml-3">
+                        <p class="text-sm sm:text-base text-amber-800 dark:text-amber-200 font-bold">{{ __('The ad has been removed') }}</p>
+                        <p class="text-xs sm:text-sm text-amber-500 mt-1">
+                            {{ __('We invite you to view similar ads') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" id="infinite-loader" x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route('ads', request()->route()->originalParameters()) }}', data: {{ request()->collect() }}, page: {{ $ads->currentPage() }}, lastPage: {{ $ads->lastPage() }}, count: 15 });">
             @include('ad.components.list', ['owner' => false])
         </div>
     </div>

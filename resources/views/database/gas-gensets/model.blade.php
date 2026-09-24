@@ -8,6 +8,20 @@
             <x-breadcrumbs.breadcrumb position="3" :name="$model->name" />
         </x-breadcrumbs.breadcrumbs>
 
+        @if (session('from_deleted_ad'))
+            <div class="bg-amber-500/10 border-l-4 border-amber-500/30 p-4 rounded-r-md mb-2 sm:mb-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">⚠️</div>
+                    <div class="ml-3">
+                        <p class="text-sm sm:text-base text-amber-800 dark:text-amber-200 font-bold">{{ __('The ad has been removed') }}</p>
+                        <p class="text-xs sm:text-sm text-amber-500 mt-1">
+                            {{ __('We invite you to check out other offers for sale of') }} {{ $brand->name }} {{ $model->name }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14">
             <div class="mb-6 md:mb-12">
@@ -45,7 +59,8 @@
                         </div>
                     </div>
 
-                    <meta itemprop="description" content="{{ __('meta.database.genset.model.title', ['brand' => $brand->name, 'name' => $model->name, 'power' => $model->max_power]) }}" />
+                    <meta itemprop="description"
+                        content="{{ __('meta.database.genset.model.title', ['brand' => $brand->name, 'name' => $model->name, 'power' => $model->max_power]) }}" />
                     {{-- <div>
                         <h3 class="sr-only">{{ __('Description') }}</h3>
 

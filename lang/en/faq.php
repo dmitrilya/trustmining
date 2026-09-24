@@ -100,7 +100,7 @@ return [
         'answer_1' => 'The :b :m features cooling based on :cooling. To initiate mining, plug in the LAN cable, scan your local network for the miner\'s IP using an ASIC Tool, open the web dashboard, and enter your target pool stratum addresses.',
 
         'question_2' => 'How much does the :coin :b :m miner cost and where to buy it?',
-        'answer_2' => 'Currently, the best available price for the :b :m :h ASIC miner on our platform is <b>:price rubles</b>. This listing is provided by <b>:company</b>. You can review all current listings, evaluate supplier credibility using our Trust Factor badge, and proceed with a secure deal inside our catalog.',
+        'answer_2' => 'Currently, the best available price for the :b :m :h ASIC miner on our platform is <b>:price USDT</b>. This listing is provided by <b>:company</b>. You can review all current listings, evaluate supplier credibility using our Trust Factor badge, and proceed with a secure deal inside our catalog.',
 
         'question_3' => ':h :mes — how much is it in other metrics and how to convert :b :m hashrate?',
         'units' => [
