@@ -11,7 +11,7 @@
     </script>
 
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6" x-data={}
-        x-init="axios.post('/view/store', { viewable_type: 'term', viewable_id: {{ $term->id }} })">
+        x-init="addView('term', {{ $term->id }})">
         <style>
             h3 {
                 font-size: 16px;

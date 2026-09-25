@@ -85,8 +85,9 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
         this.$watch('currency, view, tariff, fee, taxType, count, uptime, profitNumber, firmware', () => {
             this.recalculateAll();
         });
-
-        if (!isWidjet && rModel) axios.post('/view/store', { viewable_type: 'asic-model', viewable_id: selModel.i });
+console.log(!isWidjet);
+console.log(rModel);
+        if (!isWidjet && rModel) window.addView('asic-model', selModel.i);
     },
 
     selectTariff(tariff) {

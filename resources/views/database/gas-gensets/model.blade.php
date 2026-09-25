@@ -29,7 +29,7 @@
             </div>
 
             <div itemscope itemtype="https://schema.org/Product" class="mx-auto md:grid md:grid-cols-3 md:grid-rows-[auto,auto,1fr] md:gap-x-8" x-data={}
-                x-init="axios.post('/view/store', { viewable_type: 'gpu-model', viewable_id: {{ $model->id }} })">
+                x-init="addView('gpu-model', {{ $model->id }})">
                 <div class="md:col-span-2 md:border-r border-slate-300 dark:border-slate-700 md:pr-8">
                     <h1 itemprop="name"
                         class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl mb-4 sm:mb-6 lg:mb-8">

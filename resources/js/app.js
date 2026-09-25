@@ -131,13 +131,9 @@ document.addEventListener('alpine:init', () => {
     }));
 
     Alpine.data('calculator', calculatorAlpine);
-
     Alpine.data('roulette', roulette);
-
     Alpine.data('hashrateConverter', hashrateConverter);
-
     Alpine.data('tgAuth', tgAuth);
-
     Alpine.data('adsStatisticsData', adsStatistics);
 });
 
@@ -169,6 +165,13 @@ window.initLazyComponent = function (componentContext, breakpoint = '1024px') {
 
     window.addEventListener('resize', checkScreen);
 };
+
+window.addView = function (type, id) {
+    console.log('here1');
+    if (navigator.webdriver || window.cdc_adoQpoasnfa76pfcZLmcfl_Array || window.__webdriver_evaluate) return;
+console.log('here2');
+    axios.post('/view/store', { viewable_type: type, viewable_id: id });
+}
 
 Alpine.start();
 
@@ -273,29 +276,22 @@ window.onload = function () {
 
 window.saveRange = function () {
     const sel = window.getSelection();
-    if (sel.rangeCount > 0) {
-        return sel.getRangeAt(0);
-    }
+    if (sel.rangeCount > 0) return sel.getRangeAt(0);
 
     return null;
 }
 
 function prepareTerms() {
     const terms = window.terms || {};
-    console.log(terms);
 
     let activeTerm = null;
     let popup = null;
 
     function createPopup() {
-        if (popup) {
-            return popup;
-        }
+        if (popup) return popup;
 
         popup = document.createElement('div');
-
         popup.className = ['tm-wiki-popup', 'fixed', 'z-50', 'hidden', 'w-80', 'max-w-xs', 'rounded-xl', 'bg-white/40', 'dark:bg-slate-900/40', 'border', 'border-slate-300', 'dark:border-slate-700', 'backdrop-blur-xl', 'p-2', 'sm:p-3', 'shadow-xl'].join(' ');
-
         popup.innerHTML = `
             <div class="tm-wiki-popup-name font-semibold text-slate-800 dark:text-slate-200"></div>
             <div class="tm-wiki-popup-caption mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400"></div>
@@ -310,7 +306,6 @@ function prepareTerms() {
         document.body.appendChild(popup);
 
         popup.addEventListener('mouseenter', () => { cancelHidePopup(); });
-
         popup.addEventListener('mouseleave', () => { scheduleHidePopup(); });
 
         return popup;
@@ -322,31 +317,18 @@ function prepareTerms() {
         }
 
         const rect = element.getBoundingClientRect();
-
         const popupWidth = popup.offsetWidth;
         const popupHeight = popup.offsetHeight;
-
         const gap = 8;
         const viewportPadding = 12;
 
         let left = rect.left + (rect.width / 2) - (popupWidth / 2);
         let top = rect.bottom + gap;
 
-        if (left < viewportPadding) {
-            left = viewportPadding;
-        }
-
-        if (left + popupWidth > window.innerWidth - viewportPadding) {
-            left = window.innerWidth - popupWidth - viewportPadding;
-        }
-
-        if (top + popupHeight > window.innerHeight - viewportPadding) {
-            top = rect.top - popupHeight - gap;
-        }
-
-        if (top < viewportPadding) {
-            top = viewportPadding;
-        }
+        if (left < viewportPadding) left = viewportPadding;
+        if (left + popupWidth > window.innerWidth - viewportPadding) left = window.innerWidth - popupWidth - viewportPadding;
+        if (top + popupHeight > window.innerHeight - viewportPadding) top = rect.top - popupHeight - gap;
+        if (top < viewportPadding) top = viewportPadding;
 
         popup.style.left = `${left}px`;
         popup.style.top = `${top}px`;
@@ -366,7 +348,6 @@ function prepareTerms() {
         const popupElement = createPopup();
 
         popupElement.querySelector('.tm-wiki-popup-name').textContent = data.name || '';
-
         popupElement.querySelector('.tm-wiki-popup-caption').textContent = data.caption || '';
 
         const link = popupElement.querySelector('.tm-wiki-popup-link');
