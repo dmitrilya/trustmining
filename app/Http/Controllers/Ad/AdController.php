@@ -125,10 +125,10 @@ class AdController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Ad\AdCategory  $adCategory
-     * @param  int  $adId
+     * @param  int|string  $adId
      * @return \Illuminate\Http\Response
      */
-    public function show(AdCategory $adCategory, int $adId)
+    public function show(AdCategory $adCategory, int|string $adId)
     {
         $ad = Ad::find($adId);
 
