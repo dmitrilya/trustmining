@@ -39,6 +39,11 @@ class Coin extends Model
         return $this->belongsTo(\App\Models\Database\Algorithm::class);
     }
 
+    public function views()
+    {
+        return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
+    }
+
     public function coinRates()
     {
         return $this->hasMany(\App\Models\Metrics\CoinRate::class);

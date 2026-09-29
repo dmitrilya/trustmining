@@ -50,6 +50,7 @@ use App\Http\Controllers\Rating\HostingRatingController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Wiki\AlgorithmController;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Cache;
 
@@ -115,10 +116,16 @@ $webRoutes = function () {
 
     Route::group(['prefix' => 'wiki'], function () {
         Route::get('/', fn() => view('wiki.index', Cache::get('home_page_data')))->name('wiki');
+
         Route::group(['prefix' => 'dictionary'], function () {
             Route::get('/', [DictionaryController::class, 'index'])->name('dictionary');
             Route::get('/{dictionaryCategory:name}', [DictionaryController::class, 'category'])->name('dictionary.category');
             Route::get('/{dictionaryCategory:name}/{dictionaryTerm:name}', [DictionaryController::class, 'term'])->name('dictionary.term');
+        });
+
+        Route::group(['prefix' => 'algorithms'], function () {
+            Route::get('/', [AlgorithmController::class, 'index'])->name('algorithms');
+            Route::get('/{algorithm:name}', [AlgorithmController::class, 'show'])->name('algorithm.show');
         });
     });
 

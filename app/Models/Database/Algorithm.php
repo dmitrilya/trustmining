@@ -11,6 +11,8 @@ class Algorithm extends Model
 
     public $timestamps = false;
 
+    public $translatable = ['caption', 'description'];
+
     public function asicModels()
     {
         return $this->hasMany(\App\Models\Database\AsicModel::class);
@@ -19,5 +21,10 @@ class Algorithm extends Model
     public function coins()
     {
         return $this->hasMany(\App\Models\Database\Coin::class);
+    }
+
+    public function views()
+    {
+        return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
     }
 }
