@@ -4,16 +4,14 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
 
-use MoveMoveApp\DaData\Enums\Language;
-use MoveMoveApp\DaData\Enums\BranchType;
 use MoveMoveApp\DaData\Facades\DaDataAddress;
-use MoveMoveApp\DaData\Facades\DaDataCompany;
+use MoveMoveApp\DaData\Facades\DaDataOrganization;
 
 trait DaData
 {
     public function dadataSearchAddress($query)
     {
-        return DaDataAddress::prompt($query, 10, Language::RU, [['country' => '*']])['suggestions'];
+        return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']])['suggestions'];
     }
 
     public function dadataSuggsAddress(Request $request)
@@ -26,7 +24,7 @@ trait DaData
 
     public function dadataSearchCity($query)
     {
-        return DaDataAddress::prompt($query, 10, Language::RU, [['country' => '*']], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
+        return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
     }
 
     public function dadataSuggsCity(Request $request)
@@ -46,7 +44,7 @@ trait DaData
 
     public function dadataCompanyByInn($inn)
     {
-        $suggs = DaDataCompany::id($inn, 1, null, BranchType::MAIN);
+        $suggs = DaDataOrganization::id($inn, 1, null, 'MAIN');
 
         if (!count($suggs['suggestions'])) return null;
 

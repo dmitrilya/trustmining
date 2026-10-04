@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cookie;
 use MoveMoveApp\DaData\Facades\DaDataAddress;
-use MoveMoveApp\DaData\Enums\Language;
 
 use App\Http\Traits\NotificationTrait;
 
@@ -94,7 +93,7 @@ class ProfileController extends Controller
 
         try {
             /** @var array $result */
-            $result = (array) DaDataAddress::geolocate($request->lat, $request->lon, 1, 100, Language::RU);
+            $result = (array) DaDataAddress::geolocate($request->lat, $request->lon, 1, 100, 'ru');
 
             if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
                 $city = config('app.default_city');
