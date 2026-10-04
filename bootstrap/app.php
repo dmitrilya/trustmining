@@ -4,13 +4,17 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__ . '/../routes/web.php',
         api: __DIR__ . '/../routes/api.php',
-        commands: __DIR__.'/../routes/console.php',
-        channels: __DIR__.'/../routes/channels.php',
+        commands: __DIR__ . '/../routes/console.php',
+        channels: __DIR__ . '/../routes/channels.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
@@ -57,6 +61,36 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn(Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
+
+        $exceptions->dontFlash([
+            'current_password',
+            'password',
+            'password_confirmation',
+        ]);
+
+        $exceptions->shouldRenderJsonWhen(
+            fn($request) => $request->is('api/*') || $request->expectsJson(),
+        );
+
+        $exceptions->render(function (Throwable $e, $request) {
+            if (
+                config('app.debug')
+                || $e instanceof AuthenticationException
+                || $e instanceof AuthorizationException
+                || $e instanceof ValidationException
+            ) return null;
+
+            if ($request->is('insight') || $request->is('insight/*')) $blade = 'insight';
+            elseif ($request->is('forum') || $request->is('forum/*')) $blade = 'forum';
+            else $blade = 'default';
+
+            $code = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
+
+            return response()->view('errors.' . $blade, [
+                'code' => $code,
+                'exception' => $e
+            ], $code);
+        });
     })->create();
 
 
