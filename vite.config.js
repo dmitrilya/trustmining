@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
     return {
         plugins: [
             laravel({
-                publicDirectory: env.PUBLIC_DIR || 'public',
+                publicDirectory: env.APP_PUBLIC_DIR || 'public',
                 input: [
                     'resources/css/app.css',
                     'resources/css/calculator.css',
