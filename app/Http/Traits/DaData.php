@@ -4,10 +4,10 @@ namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
 
-use MoveMoveIo\DaData\Enums\Language;
-use MoveMoveIo\DaData\Enums\BranchType;
-use MoveMoveIo\DaData\Facades\DaDataAddress;
-use MoveMoveIo\DaData\Facades\DaDataCompany;
+use MoveMoveApp\DaData\Enums\Language;
+use MoveMoveApp\DaData\Enums\BranchType;
+use MoveMoveApp\DaData\Facades\DaDataAddress;
+use MoveMoveApp\DaData\Facades\DaDataCompany;
 
 trait DaData
 {

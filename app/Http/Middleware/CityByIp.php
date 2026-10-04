@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-use MoveMoveIo\DaData\Facades\DaDataAddress;
+use MoveMoveApp\DaData\Facades\DaDataAddress;
 
 class CityByIp
 {

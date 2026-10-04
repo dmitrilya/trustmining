@@ -11,8 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Cookie;
-use MoveMoveIo\DaData\Facades\DaDataAddress;
-use MoveMoveIo\DaData\Enums\Language;
+use MoveMoveApp\DaData\Facades\DaDataAddress;
+use MoveMoveApp\DaData\Enums\Language;
 
 use App\Http\Traits\NotificationTrait;
 
