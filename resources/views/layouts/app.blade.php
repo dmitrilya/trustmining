@@ -11,7 +11,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
-        $theme = request()->cookie('app_theme');
+        $cookieTheme = request()->cookie('app_theme');
+
+        if ($cookieTheme) {
+            try {
+                $decrypted = \Illuminate\Support\Facades\Crypt::decrypt($cookieTheme, false);
+
+                if (str_contains($decrypted, '|')) {
+                    $theme = explode('|', $decrypted)[1];
+                } else {
+                    $theme = $decrypted;
+                }
+            } catch (\Throwable $e) {
+                $theme = $cookieTheme;
+            }
+        }
 
         $location = session('user_location');
         $shouldAskLocation = false;
@@ -23,7 +37,7 @@
         }
 
         $baseUrl = request()->getSchemeAndHttpHost();
-        $prefixes = implode('|', array_map('preg_quote', array_filter(config('app.supported_locales'))));    
+        $prefixes = implode('|', array_map('preg_quote', array_filter(config('app.supported_locales'))));
         $currentPath = ltrim(preg_replace('#^(' . $prefixes . ')#', '', request()->path()), '/');
     @endphp
 
