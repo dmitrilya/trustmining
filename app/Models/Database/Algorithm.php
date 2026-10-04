@@ -11,7 +11,15 @@ class Algorithm extends Model
 
     public $timestamps = false;
 
-    public $translatable = ['caption', 'description'];
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'caption' => 'array',
+        'description' => 'array',
+    ];
 
     public function asicModels()
     {

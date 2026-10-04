@@ -41,6 +41,7 @@ use App\Http\Controllers\Forum\ForumCommentController;
 use App\Http\Controllers\CRM\AmoCRMController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Wiki\DictionaryController;
+use App\Http\Controllers\Wiki\AlgorithmController;
 use App\Http\Controllers\Morph\ViewController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Rating\RatingController;
@@ -50,7 +51,6 @@ use App\Http\Controllers\Rating\HostingRatingController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\Wiki\AlgorithmController;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Cache;
 
