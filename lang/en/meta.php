@@ -470,6 +470,12 @@ return [
             'title' => 'Crypto & Mining Terms and Definitions | TM Wiki',
             'description' => 'Explore essential crypto slang and mining terminology in the specialized TM Wiki section on the TrustMining website.',
             'header' => 'Crypto Dictionary',
+        ],
+
+        'algorithms' => [
+            'title' => 'Mining Encryption Algorithms | TM Wiki',
+            'description' => 'Discover the different cryptocurrency mining algorithms. Find comprehensive information about SHA-256, Scrypt, and other encryption methods on the Trustmining website.',
+            'header' => 'Cryptocurrency Mining Algorithms'
         ]
     ],
 

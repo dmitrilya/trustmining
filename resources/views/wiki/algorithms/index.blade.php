@@ -1,4 +1,4 @@
-<x-home-layout :data="$data" :title="__('meta.wiki.algorithms.title')" :description="__('meta.wiki.algorithms.description')" :header="__('Algorithms')">
+<x-home-layout :data="$data" :title="__('meta.wiki.algorithms.title')" :description="__('meta.wiki.algorithms.description')" :header="__('meta.wiki.algorithms.header')">
     <x-breadcrumbs.breadcrumbs>
         <x-breadcrumbs.breadcrumb position="1" href="{{ route('wiki') }}" :name="__('meta.wiki.header')" />
         <x-breadcrumbs.breadcrumb position="2" :name="__('Algorithms')" />
@@ -22,7 +22,7 @@
                         </h3>
                     </div>
 
-                    <div class="text-xs lg:text-sm text-slate-600 dark:text-slate-400">{{ $algorithm->caption[app()->getLocale()] ?? $algorithm->caption['en'] ?? '' }}</div>
+                    <div class="text-xs lg:text-sm text-slate-600 dark:text-slate-400 mt-2 sm:mt-3">{{ $algorithm->caption[app()->getLocale()] ?? $algorithm->caption['en'] ?? '' }}</div>
                 </div>
 
                 {{-- <a class="block w-fit ml-auto text-xs sm:text-sm text-indigo-500 hover:text-indigo-600"
