@@ -9,7 +9,7 @@ use MoveMoveApp\DaData\Facades\DaDataOrganization;
 
 trait DaData
 {
-    public function dadataSearchAddress($query)
+    public function dadataSearchAddress(string $query)
     {
         return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']])['suggestions'];
     }
@@ -22,7 +22,7 @@ trait DaData
         ], 200);
     }
 
-    public function dadataSearchCity($query)
+    public function dadataSearchCity(string $query)
     {
         return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
     }
@@ -42,7 +42,7 @@ trait DaData
         return DaDataAddress::iplocate($request->ip(), 1);
     }
 
-    public function dadataCompanyByInn($inn)
+    public function dadataCompanyByInn(int|string $inn)
     {
         $suggs = DaDataOrganization::id($inn, 1, null, 'MAIN');
 

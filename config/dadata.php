@@ -1,39 +1,44 @@
 <?php
 
-/**
- * Copyright (c) Dmitry Kovalev.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @see https://github.com/movemoveapp/laravel-dadata
- */
 return [
+
     /*
-    |--------------------------------------------------------------------------
-    | DaData config
-    |--------------------------------------------------------------------------
+    |--------------------------------------------------------------------------------
+    | DaData API Key
+    |--------------------------------------------------------------------------------
     |
-    | To receive the parameters of the token and the secret, you need to
-    | register on the https://dadata.ru/ website and get credentials from the cabinet.
+    | To use the library for interacting with DaData resources and their methods,
+    | you need to specify a token, which serves as the API key. This parameter must
+    | be obtained from your personal account at https://dadata.ru/profile/.
     |
     */
 
-    'token'     => env('DADATA_TOKEN', null),
+    'key'     => env('DADATA_KEY', null),
 
     /*
-     |--------------------------------------------------------------------------
-     | Secret key for standardization
-     |--------------------------------------------------------------------------
-     */
-    'secret'    => env('DADATA_SECRET', null),
+    |--------------------------------------------------------------------------------
+    | DaData Secret Key
+    |--------------------------------------------------------------------------------
+    |
+    | To use the library for interacting with DaData resources and their methods,
+    | you need to specify a secret key, which is an additional security measure
+    | for API access. This parameter must be obtained from your personal account
+    | at https://dadata.ru/profile/.
+    |
+    */
+
+    'secret'    => env('DADATA_SECRET_KEY', null),
 
     /*
-     |--------------------------------------------------------------------------
-     | DaData timeout
-     |--------------------------------------------------------------------------
-     | The maximum number of seconds to wait for a response
-     */
+    |--------------------------------------------------------------------------------
+    | DaData Timeout
+    |--------------------------------------------------------------------------------
+    |
+    | The timeout parameter specifies the number of seconds after which a request
+    | to DaData should be canceled if no response is received. Adjust this value
+    | based on your application's needs to ensure timely responses.
+    */
+
     'timeout'   => env('DADATA_TIMEOUT', 10),
 
 ];
