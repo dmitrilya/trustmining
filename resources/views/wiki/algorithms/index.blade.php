@@ -21,6 +21,8 @@
                             {{ $algorithm->name }}
                         </h3>
                     </div>
+
+                    <div class="text-xs lg:text-sm text-slate-600 dark:text-slate-400">{{ $algorithm->caption }}</div>
                 </div>
 
                 <a class="block w-fit ml-auto text-xs sm:text-sm text-indigo-500 hover:text-indigo-600"
