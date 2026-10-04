@@ -12,7 +12,7 @@
             </div>
         @else
             <div
-                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color">
+                class="w-full h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color">
                 <form action="{{ route('forum.question.store') }}" method="POST" x-data="{ theme: `{{ old('theme') }}`, text: `{{ old('text') }}`, range: null, link_text: null, link_url: null }"
                     @submit.prevent="if (theme.length > 64) return window.pushToastAlert('{{ __('The maximum theme length is 64 characters') }}', 'error');
                         if (text.length > 3000) return window.pushToastAlert('{{ __('The maximum question length is 3000 characters.') }}', 'error'); $el.submit()"
@@ -20,7 +20,7 @@
                     @csrf
 
                     <div>
-                        <x-inputs.text-input class="!mt-0 !ring-0 px-4 py-4 rounded-t-2xl dark:placeholder-slate-400" required id="theme" name="theme"
+                        <x-inputs.text-input class="mt-0! ring-0! px-4 py-4 rounded-t-2xl dark:placeholder-slate-400" required id="theme" name="theme"
                             type="text" autocomplete="off" @change="theme = $el.value" placeholder="{{ __('Theme') }}" ::value="theme"
                             aria-label="{{ __('Theme') }}" />
                         <x-inputs.input-error :messages="$errors->get('theme')" />
@@ -78,7 +78,7 @@
                                         <input type="text" id="hyper" placeholder=" " :value="link_text" @change="link_text = $el.value"
                                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                         <label for="hyper"
-                                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                             {{ __('Text') }}
                                         </label>
                                     </div>
@@ -87,7 +87,7 @@
                                         <input type="url" id="url" placeholder=" " :value="link_url" @change="link_url = $el.value"
                                             class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-600 dark:text-slate-400 border-slate-300 dark:border-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                                         <label for="url"
-                                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                            class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                             URL
                                         </label>
                                     </div>

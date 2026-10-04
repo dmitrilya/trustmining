@@ -68,7 +68,7 @@
                             </svg>
 
                             <div id="messages-signal"
-                                class="{{ !$uncheckedMessagesCount ? 'hidden ' : '' }}absolute w-4 h-4 flex items-center justify-center bg-red-600 border-2 border-white rounded-full -top-1 start-2.5 dark:border-slate-900 text-white text-xxs">
+                                class="{{ !$uncheckedMessagesCount ? 'hidden ' : '' }}absolute w-4 h-4 flex items-center justify-center bg-red-600 border-2 border-white rounded-full -top-1 inset-s-2.5 dark:border-slate-900 text-white text-xxs">
                                 {{ $uncheckedMessagesCount < 10 ? $uncheckedMessagesCount : '9+' }}
                             </div>
                         </a>

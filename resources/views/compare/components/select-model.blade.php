@@ -23,7 +23,7 @@
                 </button>
 
                 <label for="search_model"
-                    class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Model') }}
                 </label>
             </div>

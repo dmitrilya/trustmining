@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8" style="height: calc(100dvh - 64.4px)">
         <div class="flex h-full relative overflow-hidden" x-data="{ open: false }">
             <div :class="{ '-translate-x-full': !open, 'translate-x-0': open }"
-                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 overflow-y-auto shadow shadow-logo-color lg:rounded-l-xl p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-[2.75rem] sm:top-[3.5rem] z-10 lg:translate-x-0 ease-in duration-100 lg:h-full absolute lg:static">
+                class="w-full max-w-xs xl:max-w-sm bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border border-slate-300 dark:border-slate-700 overflow-y-auto shadow shadow-logo-color lg:rounded-l-xl p-1 sm:p-4 h-[calc(100%-14rem)] sm:h-[calc(100%-15.5rem)] top-11 sm:top-14 z-10 lg:translate-x-0 ease-in duration-100 lg:h-full absolute lg:static">
                 <ul role="list" id="chat-list">
                     @foreach ($chats as $chat)
                         @php
@@ -19,7 +19,7 @@
                             class="rounded-lg hover:bg-slate-100 dark:hover:bg-slate-950 block p-2 xs:p-3{{ $activeChat->id != $chat->id ? ($isUnchecked ? ' bg-slate-50 dark:bg-slate-800' : '') : ' border border-indigo-500' }}">
                             <li>
                                 <div id="chat-signal-{{ $chat->id }}"
-                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-600 border xs:border-2 border-white dark:border-slate-950 rounded-full top-0.5 end-0.5 xs:top-1 xs:end-1">
+                                    class="{{ !$isUnchecked ? 'hidden ' : '' }}absolute block w-2 h-2 xs:w-3 xs:h-3 bg-red-600 border xs:border-2 border-white dark:border-slate-950 rounded-full top-0.5 inset-e-0.5 xs:top-1 xs:inset-e-1">
                                 </div>
 
                                 <div class="flex">

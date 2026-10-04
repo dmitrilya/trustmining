@@ -1,13 +1,13 @@
 @if ($message->message)
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-100 leading-1.5 px-3 py-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 mb-2">
                 <span class="date-transform text-xs text-slate-500"
                     data-date="{{ $message->created_at }}"></span>
             </div>
 
-            <p class="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-line">{{ $message->message }}
+            <p class="text-sm text-slate-800 dark:text-slate-200 whitespace-pre-line">{!! trim($message->message) !!}
             </p>
         </div>
     </div>
@@ -17,7 +17,7 @@
     <div x-data="{ open: false }">
         <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
             <div
-                class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+                class="flex flex-col w-full max-w-100 leading-1.5 px-3 py-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
                 <div class="flex items-center space-x-2 mb-2">
                     <span class="date-transform text-xs text-slate-500"
                         data-date="{{ $message->created_at }}"></span>
@@ -49,10 +49,10 @@
         </div>
 
         <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
-            class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
             <div
-                class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
+                class="relative p-2 sm:p-4 flex items-center justify-center w-full h-full max-w-max max-h-full z-50">
                 <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
                     @click.away="open = false">
                     <button @click="open = false" type="button"
@@ -73,7 +73,7 @@
 @if (count($message->files))
     <div class="flex {{ $auth->id == $message->user_id ? 'justify-end' : 'justify-start' }}">
         <div
-            class="flex flex-col w-full max-w-[400px] leading-1.5 px-3 py-2 border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
+            class="flex flex-col w-full max-w-100 leading-1.5 px-3 py-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-b-xl {{ $auth->id == $message->user_id ? 'ml-6 rounded-tl-xl' : 'mr-6 rounded-tr-xl' }}">
             <div class="flex items-center space-x-2 mb-2">
                 <span class="date-transform text-xs text-slate-500"
                     data-date="{{ $message->created_at }}"></span>

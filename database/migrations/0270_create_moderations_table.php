@@ -13,6 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('moderation_statuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
         Schema::create('moderations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('moderation_status_id')->default(1)->constrained()->cascadeOnUpdate();
@@ -32,6 +37,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('moderation_statuses');
         Schema::dropIfExists('moderations');
     }
 };

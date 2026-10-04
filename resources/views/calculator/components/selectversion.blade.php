@@ -68,7 +68,7 @@
                     </button>
 
                     <label for="search_model"
-                        class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('Model') }}
                     </label>
                 </div>
@@ -76,12 +76,12 @@
 
             <template x-if="openModel">
                 <ul role="listbox"
-                    class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
+                    class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
                     <template x-for="asicModel in filteredModels" :key="asicModel.i">
                         <li @click.debounce.10ms="selectModel(asicModel)" role="option"
-                            class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
+                            class="cursor-pointer relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
                             <div class="flex items-center">
-                                <span class="ml-3 block truncate" x-text="asicModel.n"></span>
+                                <span class="block truncate" x-text="asicModel.n"></span>
                             </div>
 
                             <span x-show="selectedModel && selectedModel.i == asicModel.i" class="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -102,7 +102,7 @@
 
                 <div class="relative mt-1" @click.away="openVersion = false">
                     <button type="button" @click="openVersion = !openVersion"
-                        class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
+                        class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
                         <span class="block truncate" x-text="selectedVersion ? `${selectedVersion.h} ${selectedVersion.m}/s` : ''"></span>
 
                         <span class="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -115,7 +115,7 @@
 
                     <template x-if="openVersion">
                         <ul
-                            class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base text-slate-800 dark:text-slate-200 shadow-lg">
+                            class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 text-base text-slate-800 dark:text-slate-200 shadow-lg">
                             <template x-for="asicVersion in selectedModel.v" :key="asicVersion.i">
                                 <li @click.debounce.10ms="selectVersion(asicVersion)"
                                     class="relative select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">

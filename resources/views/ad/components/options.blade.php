@@ -8,7 +8,7 @@
     </button>
 
     <div x-show="open" @mouseleave="open = false" @click.away="open = false" style="display: none"
-        class="z-50 -right-0.5 bottom-[44px] absolute overflow-hidden bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
+        class="z-50 -right-0.5 bottom-11 absolute overflow-hidden bg-white dark:bg-slate-800 divide-y divide-slate-300 dark:divide-slate-700 rounded-lg shadow-lg shadow-logo-color border border-slate-100 dark:border-slate-700 min-w-32 w-full max-w-44">
         <ul class="text-xs sm:text-sm text-slate-800 dark:text-slate-200" aria-labelledby="ad-options-trigger">
             @if ($owner)
                 <li>
@@ -42,7 +42,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M4 4.5V19a1 1 0 0 0 1 1h15M7 10l4 4 4-4 5 5m0 0h-3.207M20 15v-3.207" />
                     </svg>
-                    <span>{{ auth()->check() && auth()->user()->trackedAds->where('id', $ad->id)->count() ? __('Untrack price') : __('To track') }}</span>
+                    <span>{{ auth()->check() && auth()->user()->trackedAds()->where('ads.id', $ad->id)->exists() ? __('Untrack price') : __('To track') }}</span>
                 </li>
                 <li>
                     <a class="flex items-center px-3 py-2 sm:px-4 hover:bg-slate-100 dark:hover:bg-slate-700 dark:hover:text-slate-200"

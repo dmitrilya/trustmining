@@ -281,7 +281,7 @@ class UpdatePrices extends Command
                     continue;
                 }
 
-                $price = (float) (int) preg_replace('/\D/', '', $tds->item(1)->textContent);
+                $price = (float) preg_replace('/\D/', '', $tds->item(1)->textContent);
                 if ($ad->price != $price) $changings->push([
                     'id' => $ad->id,
                     'price' => $price,

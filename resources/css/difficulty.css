@@ -1,55 +1,71 @@
 @import "fonts.css";
+@import "tailwindcss";
 
-@config "../../tailwind.difficulty-widjet.config.js";
+@plugin "@tailwindcss/forms";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@source "../views/metrics/network/difficulty/widjet.blade.php";
+@source "../views/metrics/network/difficulty/components/difficulty.blade.php";
+@source "../views/components/application-logo.blade.php";
 
-.color-logo-gradient {
-    background-image: linear-gradient(
-        to right,
-        #40ff9f,
-        #14aeff,
-        #7966ff,
-        #404099
-    );
-    color: transparent;
-    background-clip: text;
+@theme {  
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --breakpoint-xxs: 358px;
+  --breakpoint-xs: 380px;
 }
 
-.text-xxs {
+@custom-variant dark (&:where(.dark, .dark *));
+
+@utility text-xxs {
     font-size: 9px;
     line-height: 12px;
     letter-spacing: 0.03em;
 }
 
-.dots {
-    flex-grow: 1;
-    background-image: radial-gradient(
-        circle,
-        currentColor 1px,
-        transparent 1.5px
-    );
-    background-size: 10px 1px;
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    height: 1px;
-    min-width: 6px;
-    position: relative;
-    top: -3px;
-    opacity: 0.3;
-}
+@layer base {
+    button {
+        cursor: pointer;
+    }
 
-.bg-primary-gradient {
-    background: linear-gradient(to right, #7966ff, #404099);
-}
+    .color-logo-gradient {
+        background-image: linear-gradient(
+            to right,
+            #40ff9f,
+            #14aeff,
+            #7966ff,
+            #404099
+        );
+        color: transparent;
+        background-clip: text;
+    }
 
-.items-end {
-    align-items: end;
-}
+    .dots {
+        flex-grow: 1;
+        background-image: radial-gradient(
+            circle,
+            currentColor 1px,
+            transparent 1.5px
+        );
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
+        background-position: left bottom;
+        height: 1px;
+        min-width: 6px;
+        position: relative;
+        top: -3px;
+        opacity: 0.3;
+    }
 
-.mx-2 {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    .bg-primary-gradient {
+        background: linear-gradient(to right, #7966ff, #404099);
+    }
+
+    .items-end {
+        align-items: end;
+    }
+
+    .mx-2 {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
 }

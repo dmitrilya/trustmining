@@ -11,10 +11,10 @@
         return this.currentModel?.asic_versions.find(v => v.id == this.selectedVersion) ?? null;
     },
 }">
-    <input class="block h-0 p-0 border-0" type="text" :value="selectedModel?.slug" name="model"
-        @if (isset($required)) required @endif aria-label="{{ __('Model') }}">
-    <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id"
-        @if (isset($required)) required @endif aria-label="{{ __('Version') }}">
+    <input class="block h-0 p-0 border-0" type="text" :value="selectedModel?.slug" name="model" @if (isset($required)) required @endif
+        aria-label="{{ __('Model') }}">
+    <input class="block h-0 p-0 border-0" type="text" :value="selectedVersion" name="asic_version_id" @if (isset($required)) required @endif
+        aria-label="{{ __('Version') }}">
 
     <div class="relative mt-1" x-data="{ open: false }" @click.away="open = false">
         <div class="relative z-0 w-full" @click="open = true">
@@ -23,38 +23,33 @@
                     @input="search = $el.value;selectedModel = null;selectedVersion = null; if (typeof measurement != 'undefined') measurement = '';"
                     class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 appearance-none dark:text-slate-200 focus:outline-none focus:ring-0 peer" />
 
-                <button type="button" aria-label="Clear"
-                    class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
+                <button type="button" aria-label="Clear" class="ml-4 flex h-4 w-4 items-center justify-center rounded-md text-slate-500"
                     @click="search = '';selectedModel = null;selectedVersion = null;if (typeof measurement != 'undefined') measurement = '';$el.previousElementSibling.focus()">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
                 <label for="search_model"
-                    class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform scale-75 -translate-y-6 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                     {{ __('Model') }}
                 </label>
             </div>
         </div>
 
         <ul role="listbox" x-show="open"
-            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
+            class="overflow-y-auto absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 text-base text-slate-800 dark:text-slate-200 shadow-lg shadow-logo-color ring-1 ring-slate-300 dark:ring-slate-700 focus:outline-none sm:text-sm">
 
             <template x-for="asicModel in models" :key="asicModel.id">
                 <li @click="selectedModel = asicModel; open = false; search = asicModel.name"
-                    class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200"
-                    role="option"
+                    class="relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200" role="option"
                     x-show="search === '' || asicModel.name.toLowerCase().indexOf(search.toLowerCase()) !== -1">
                     <div class="flex items-center">
-                        <span class="ml-3 block truncate" x-text="asicModel.name"></span>
+                        <span class="block truncate" x-text="asicModel.name"></span>
                     </div>
 
-                    <span x-show="selectedModel && selectedModel.id == asicModel.id"
-                        class="absolute inset-y-0 right-0 flex items-center pr-4">
-                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                            class="text-indigo-500 hover:text-white" aria-hidden="true">
+                    <span x-show="selectedModel && selectedModel.id == asicModel.id" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                         </svg>
@@ -70,7 +65,7 @@
 
             <div class="relative mt-1" x-data="{ show: false }" @click.away="show = false">
                 <button type="button" @click="show = !show"
-                    class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
+                    class="h-9 flex items-center justify-between w-full bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none py-1.5 px-3 rounded-lg text-left text-slate-800 dark:text-slate-200 shadow shadow-logo-color">
                     <span class="block truncate" x-text="currentVersion?.hashrate ?? '{{ isset($withAllVersions) ? __('All') : '' }}'"></span>
 
                     <span class="absolute inset-y-0 right-0 flex items-center pr-2">
@@ -81,18 +76,16 @@
                     </span>
                 </button>
 
-                <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 py-1 text-base shadow-lg"
+                <ul class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white dark:bg-slate-900 text-base text-slate-800 dark:text-slate-200 shadow-lg"
                     x-show="show">
 
                     @if (isset($withAllVersions))
                         <li @click="selectedVersion = null; if (typeof measurement != 'undefined') measurement = ''; show = false;" role="option"
-                            class="relative cursor-default select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
+                            class="relative cursor-default select-none py-2 pl-3 pr-9 hover:bg-indigo-600 hover:text-slate-200">
                             <span class="block truncate">{{ __('All') }}</span>
 
-                            <span x-show="selectedVersion == null"
-                                class="absolute inset-y-0 right-0 flex items-center pr-4">
-                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
-                                    class="text-indigo-500 hover:text-white" aria-hidden="true">
+                            <span x-show="selectedVersion == null" class="absolute inset-y-0 right-0 flex items-center pr-4">
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" class="text-indigo-500 hover:text-white" aria-hidden="true">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />
                                 </svg>
@@ -105,8 +98,7 @@
                             class="cursor-default relative select-none py-2 pl-3 pr-9 text-slate-800 dark:text-slate-200 hover:bg-indigo-600 hover:text-slate-200">
                             <span class="block truncate" x-text="asicVersion.hashrate"></span>
 
-                            <span x-show="selectedVersion == asicVersion.id"
-                                class="absolute inset-y-0 right-0 flex items-center pr-4">
+                            <span x-show="selectedVersion == asicVersion.id" class="absolute inset-y-0 right-0 flex items-center pr-4">
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" />

@@ -104,7 +104,7 @@ class ArtCalculator
             $rangeEnd   = $end->min($dayEnd);
 
             if ($rangeEnd > $rangeStart) {
-                $total += $rangeEnd->diffInMinutes($rangeStart);
+                $total += $rangeStart->diffInMinutes($rangeEnd);
             }
 
             $start->addDay()->startOfDay();

@@ -261,12 +261,7 @@ class TrustFactorService
         $company = $user->company;
         $hosting = $user->hosting;
         $card = $company?->card ?? [];
-        $age = isset($card['registration_date'])
-            ? Carbon::now()->diffInMonths(
-                Carbon::createFromTimestamp(
-                    $card['registration_date']
-                )
-            ) : 0;
+        $age = isset($card['registration_date']) ? floor(Carbon::createFromTimestamp($card['registration_date'])->diffInMonths(now())) : 0;
 
         $reviews = $user->moderatedReviews;
 
@@ -335,7 +330,7 @@ class TrustFactorService
             'user' => [
                 'ignores' => !(bool) $user->ignores,
                 'is_anchor' => (bool) $user->is_anchor,
-            ],            
+            ],
 
             'registry' => [
                 'exists' => (bool) ($company->registry ?? false),

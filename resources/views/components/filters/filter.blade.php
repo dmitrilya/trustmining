@@ -1,7 +1,9 @@
 <div x-show="filter" class="fixed z-40" style="display: none" role="dialog" aria-modal="true">
-    <div x-show="filter" class="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true" x-transition:enter="transition ease-linear duration-300"
-        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-linear duration-300"
-        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+    <div x-show="filter" class="fixed inset-0 transform transition" x-on:click="filter = false" x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="absolute inset-0 bg-slate-500 dark:bg-slate-950 opacity-80"></div>
+    </div>
 
     <div x-show="filter"
         class="fixed right-0 p-4 h-max w-full sm:max-w-sm flex-col overflow-y-auto bg-white/40 dark:bg-slate-900/40 rounded-b-xl sm:rounded-br-none border border-slate-300 dark:border-slate-700 backdrop-blur-xl shadow-lg shadow-logo-color flex ml-auto"
@@ -30,7 +32,7 @@
 
             <x-buttons.primary-button type="submit" class="w-full justify-center mt-6">{{ __('Apply') }}</x-buttons.primary-button>
 
-            <a href="{{ route(request()->route()->getName(), request()->route()->originalParameters()) }}">
+            <a class="w-full" href="{{ route(request()->route()->getName(), request()->route()->originalParameters()) }}">
                 <x-buttons.secondary-button type="button" class="w-full justify-center mt-2">{{ __('Reset') }}</x-buttons.secondary-button>
             </a>
         </form>

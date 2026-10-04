@@ -1,87 +1,124 @@
-@import "fonts.css";
+@import 'fonts.css';
+@import 'tailwindcss';
 
-@config "../../tailwind.calculator-widjet.config.js";
+@plugin "@tailwindcss/forms";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@source "../views/calculator/widjet.blade.php";
+@source "../views/calculator/components/calculator.blade.php";
+@source "../views/calculator/components/selectversion.blade.php";
+@source "../views/calculator/components/settings.blade.php";
+@source "../views/calculator/components/characteristics.blade.php";
+@source "../views/calculator/components/currency.blade.php";
+@source "../views/calculator/components/profit.blade.php";
+@source "../views/calculator/components/coins.blade.php";
+@source "../views/calculator/components/tax-help.blade.php";
+@source "../views/components/application-logo.blade.php";
+@source "../views/components/inputs/checkbox.blade.php";
+@source "../views/components/inputs/select.blade.php";
+@source "../views/components/inputs/radio.blade.php";
+@source "../views/components/inputs/text-input.blade.php";
 
-.color-logo-gradient {
-    background-image: linear-gradient(
-        to right,
-        #40ff9f,
-        #14aeff,
-        #7966ff,
-        #404099
-    );
-    color: transparent;
-    background-clip: text;
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --breakpoint-xs: 380px;
 }
 
-.text-xxs {
+@custom-variant dark (&:where(.dark, .dark *));
+
+@utility text-xxs {
     font-size: 9px;
     line-height: 12px;
     letter-spacing: 0.03em;
 }
 
-.dots {
-    flex-grow: 1;
-    background-image: radial-gradient(
-        circle,
-        currentColor 1px,
-        transparent 1.5px
-    );
-    background-size: 10px 1px;
-    background-repeat: repeat-x;
-    background-position: left bottom;
-    height: 1px;
-    min-width: 6px;
-    position: relative;
-    top: -3px;
-    opacity: 0.3;
-}
+@source inline("mt-1.5");
+@source inline("mb-1");
+@source inline("xxs:text-xs");
+@source inline("font-mono");
+@source inline("tracking-tight");
+@source inline("text-{blue-700,yellow-300,{emerald,amber,rose,purple}-600,amber-800,green-500}");
+@source inline("dark:text-{blue-300,{emerald,amber,rose,purple}-400,amber-200}");
+@source inline("bg-{emerald,amber,rose}-500/10");
 
-.bg-primary-gradient {
-    background: linear-gradient(to right, #7966ff, #404099);
-}
-
-.items-end {
-    align-items: end;
-}
-
-.mx-2 {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-}
-
-.overflow-y-auto {
-    &::-webkit-scrollbar-track {
-        border-radius: 6px;
-        background-color: #f3f4f6;
+@layer base {
+    button {
+        cursor: pointer;
     }
 
-    &::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-        background-color: #f3f4f6;
+    .color-logo-gradient {
+        background-image: linear-gradient(
+            to right,
+            #40ff9f,
+            #14aeff,
+            #7966ff,
+            #404099
+        );
+        color: transparent;
+        background-clip: text;
     }
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: 6px;
-        background-color: oklch(58.5% 0.233 277.117);
+    .dots {
+        flex-grow: 1;
+        background-image: radial-gradient(
+            circle,
+            currentColor 1px,
+            transparent 1.5px
+        );
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
+        background-position: left bottom;
+        height: 1px;
+        min-width: 6px;
+        position: relative;
+        top: -3px;
+        opacity: 0.3;
     }
-}
 
-.dark .overflow-y-auto {
-    &::-webkit-scrollbar-track {
-        background-color: oklch(14.1% 0.005 285.823);
+    .bg-primary-gradient {
+        background: linear-gradient(to right, #7966ff, #404099);
     }
 
-    &::-webkit-scrollbar {
-        background-color: oklch(14.1% 0.005 285.823);
+    .items-end {
+        align-items: end;
     }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: oklch(51.1% 0.262 276.966);
+    .mx-2 {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .overflow-y-auto {
+        &::-webkit-scrollbar-track {
+            border-radius: 6px;
+            background-color: #f3f4f6;
+        }
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            background-color: #f3f4f6;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 6px;
+            background-color: oklch(58.5% 0.233 277.117);
+        }
+    }
+
+    .dark .overflow-y-auto {
+        &::-webkit-scrollbar-track {
+            background-color: oklch(14.1% 0.005 285.823);
+        }
+
+        &::-webkit-scrollbar {
+            background-color: oklch(14.1% 0.005 285.823);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: oklch(51.1% 0.262 276.966);
+        }
     }
 }

@@ -12,7 +12,10 @@
         coolingTypes: {{ collect(array_column(\App\Enums\CoolingType::cases(), 'name'))->map(fn($type) => __($type)) }},
         sortedModels: [],
         init() {
-            this.$watch('tariff, currency', () => this.updateModels());
+            this.$watch(
+                () => [this.tariff, this.currency],
+                () => this.updateModels()
+            );
     
             this.updateModels();
         },
@@ -68,7 +71,8 @@
                             <x-characteristics.characteristics class="lg:grid grid-cols-2 gap-x-4 my-4 md:my-6">
                                 <x-characteristics.characteristic name="Hashrate" xValue="sortedModels[0].v.h + ' ' + sortedModels[0].v.m + '/s'" />
                                 <x-characteristics.characteristic name="Efficiency" xValue="sortedModels[0].v.e + ' j/' + sortedModels[0].v.m" />
-                                <x-characteristics.characteristic name="Power" xValue="Math.round(sortedModels[0].v.e * sortedModels[0].v.h) + ' {{ __('W') }}'" />
+                                <x-characteristics.characteristic name="Power"
+                                    xValue="Math.round(sortedModels[0].v.e * sortedModels[0].v.h) + ' {{ __('W') }}'" />
                                 <template x-if="sortedModels[0].v.p">
                                     <x-characteristics.characteristic name="The best price" xValue="sortedModels[0].v.p + ' USDT'" />
                                 </template>
@@ -188,7 +192,7 @@
                         class="py-1 px-3 block w-28 rounded-full text-sm xs:text-base text-slate-800 bg-slate-50 dark:bg-slate-950 dark:text-slate-200 border ring-0 border-slate-300 dark:border-slate-700 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500"
                         @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
                     <label for="tariff"
-                        class="z-10 flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 right-0 top-1/2 -translate-y-1/2 scale-75 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="flex items-center absolute text-sm text-slate-600 dark:text-slate-400 duration-300 right-0 top-1/2 -translate-y-1/2 scale-75 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('rub./kW') }}
                     </label>
                 </div>
@@ -217,7 +221,7 @@
         </div>
 
         <div
-            class="min-h-[479px] sm:min-h-[563px] bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 relative divide-y divide-slate-300 dark:divide-slate-700">
+            class="min-h-119.75 sm:min-h-140.75 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 relative divide-y divide-slate-300 dark:divide-slate-700">
             <div
                 class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs sm:text-xs">
                 <p class="col-span-2">{{ __('Model') }}</p>
@@ -235,7 +239,7 @@
                 <a :href="`/asic-miners/${model.bs}/${model.s}`"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center">
                     <h2
-                        class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs sm:text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2">
+                        class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
                             class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
                             <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')" alt="medal">

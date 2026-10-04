@@ -51,7 +51,7 @@
 
     <template x-if="showed">
         <div x-show="show"
-            class="mb-6 bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 {{ $rounded }} shadow-lg shadow-logo-color transform transition sm:w-full {{ $maxWidth }} sm:mx-auto"
+            class="relative mb-6 bg-white/80 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 {{ $rounded }} shadow-lg shadow-logo-color transform transition sm:w-full {{ $maxWidth }} sm:mx-auto"
             x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-300"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-2 sm:translate-y-0 sm:scale-95">

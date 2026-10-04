@@ -35,7 +35,7 @@
                     <input type="email" value="{{ old('email') }}" name="email" id="login-email" placeholder=" " required
                         class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-800 dark:text-slate-200 border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                     <label for="login-email"
-                        class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('Email') }}
                     </label>
                     @if (isset($errors))
@@ -47,7 +47,7 @@
                     <input :type="show ? 'text' : 'password'" value="{{ old('password') }}" name="password" id="login-password" placeholder=" " required
                         class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-slate-800 dark:text-slate-200 border-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-0 peer" />
                     <label for="login-password"
-                        class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        class="absolute text-sm text-slate-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                         {{ __('Password') }}
                     </label>
                     <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" @click="show = !show">

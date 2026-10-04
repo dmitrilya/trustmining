@@ -13,6 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('notification_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->json('settings');
+        });
+
         Schema::create('notifications', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
             $table->foreignId('notification_type_id')->constrained()->cascadeOnUpdate();
@@ -31,6 +37,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('notification_types');
         Schema::dropIfExists('notifications');
     }
 };

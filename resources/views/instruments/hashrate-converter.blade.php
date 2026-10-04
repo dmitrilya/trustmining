@@ -5,13 +5,13 @@
             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
                 {{ __('Select the type of computing power:') }}
             </label>
-            <div class="flex flex-wrap gap-2 p-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl">
+            <div class="flex flex-wrap gap-2 p-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl">
                 <template x-for="type in types">
                     <button type="button" @click="changeType(type.code)"
                         :class="activeType === type.code ?
                             'bg-white/40 dark:bg-slate-900/40 text-indigo-500 shadow-md' :
                             'text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'"
-                        class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-200">
+                        class="flex-1 text-center px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-200">
                         <span x-text="type.name"></span>
                     </button>
                 </template>

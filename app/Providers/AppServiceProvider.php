@@ -3,11 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Http\Request;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,20 +19,16 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app->extend('url', function (UrlGenerator $url, $app) {
             $generator = new class($app['router']->getRoutes(), $app['request'], $app->config->get('app.asset_url')) extends UrlGenerator {
@@ -109,5 +108,19 @@ class AppServiceProvider extends ServiceProvider
 
             'term' => \App\Models\Dictionary\DictionaryTerm::class,
         ]);
+
+        $this->configureRateLimiting();
+    }
+
+    /**
+     * Configure the rate limiters for the application.
+     *
+     * @return void
+     */
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
     }
 }

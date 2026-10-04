@@ -61,7 +61,7 @@ class RouletteService
      */
     public function canSpinAgain(int|null $userId, string|null $deviceUuid): bool
     {
-        $PERIOD = config('settings.roulette.period', 7);
+        $PERIOD = (int) config('settings.roulette.period', 7);
         $EXTRA_SPIN_NAME = config('settings.roulette.extra_spin_name');
 
         if ($userId) {
@@ -90,7 +90,7 @@ class RouletteService
         if (!$user && !$deviceUuid) return 0;
 
         $EXTRA_SPIN_NAME = config('settings.roulette.extra_spin_name');
-        $PERIOD = config('settings.roulette.period', 7);
+        $PERIOD = (int) config('settings.roulette.period', 7);
 
         $lastSpin = RouletteSpin::query()->when($user, fn($q) => $q->where('user_id', $user->id))
             ->when(!$user && $deviceUuid, fn($q) => $q->where('device_uuid', $deviceUuid))
@@ -101,7 +101,7 @@ class RouletteService
         $days = $lastSpin->roulettePrize->name === $EXTRA_SPIN_NAME ? 1 : $PERIOD;
         $unlockTime = $lastSpin->created_at->addDays($days);
 
-        return $unlockTime->isPast() ? 0 : now()->diffInSeconds($unlockTime, false);
+        return $unlockTime->isPast() ? 0 : now()->diffInSeconds($unlockTime);
     }
 
     /**
@@ -118,7 +118,7 @@ class RouletteService
             $lastSpin = RouletteSpin::where('user_id', $userId)->with('roulettePrize:id,name')->latest()->first();
 
             if ($lastSpin) {
-                $requiredDays = $lastSpin->roulettePrize->name === config('settings.roulette.extra_spin_name') ? 1 : config('settings.roulette.period');
+                $requiredDays = $lastSpin->roulettePrize->name === config('settings.roulette.extra_spin_name') ? 1 : (int) config('settings.roulette.period');
 
                 $blockStart = $lastSpin->created_at;
                 $blockEnd = $lastSpin->created_at->copy()->addDays($requiredDays);

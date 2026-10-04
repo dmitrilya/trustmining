@@ -65,7 +65,7 @@
                             @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')" autocomplete="off"
                             class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
-                            class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                            class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
                         <x-inputs.input-error :messages="$errors->get('address')" />
@@ -94,13 +94,7 @@
                     <x-inputs.input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
                 </x-inputs.editable-list>
 
-                <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl">
-                    <div id="editor"
-                        class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-4">
-                    </div>
-
-                    <input type="hidden" class="hidden" name="description" :value="description" required>
-                </div>
+                <x-inputs.editor name="description" />
                 <x-inputs.input-error :messages="$errors->get('description')" />
 
                 <div>

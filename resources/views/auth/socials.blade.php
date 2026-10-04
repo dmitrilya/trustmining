@@ -1,10 +1,10 @@
 <div class="relative flex py-5 items-center">
-    <div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div>
-    <span class="flex-shrink mx-3 text-slate-500 text-xs uppercase tracking-wider">{{ __('or') }}</span>
-    <div class="flex-grow border-t border-slate-300 dark:border-slate-700"></div>
+    <div class="grow border-t border-slate-300 dark:border-slate-700"></div>
+    <span class="shrink mx-3 text-slate-500 text-xs uppercase tracking-wider">{{ __('or') }}</span>
+    <div class="grow border-t border-slate-300 dark:border-slate-700"></div>
 </div>
 
-<a href="https://oauth.yandex.ru/authorize?response_type=code&client_id={{ config('services.yandex_auth.id') }}">
+<a class="w-full" href="https://oauth.yandex.ru/authorize?response_type=code&client_id={{ config('services.yandex_auth.id') }}">
     <x-buttons.secondary-button class="w-full">
         <div class="rounded-full overflow-hidden mr-3 sm:mr-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 44 44" fill="none">

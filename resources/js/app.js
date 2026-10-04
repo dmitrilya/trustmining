@@ -167,9 +167,7 @@ window.initLazyComponent = function (componentContext, breakpoint = '1024px') {
 };
 
 window.addView = function (type, id) {
-    console.log('here1');
     if (navigator.webdriver || window.cdc_adoQpoasnfa76pfcZLmcfl_Array || window.__webdriver_evaluate) return;
-console.log('here2');
     axios.post('/view/store', { viewable_type: type, viewable_id: id });
 }
 

@@ -77,16 +77,21 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
             else this.recalculateAll();
         });
 
-        this.$watch('price, priceCurrency, taxEnabled', () => {
-            this.minPriceUSDT = this.price === '' ? (this.version?.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
-            this.recalculateAll();
-        });
+        this.$watch(
+            () => [this.price, this.priceCurrency, this.taxEnabled],
+            () => {
+                this.minPriceUSDT = this.price === '' ? (this.version?.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
+                this.recalculateAll();
+            }
+        );
 
-        this.$watch('currency, view, tariff, fee, taxType, count, uptime, profitNumber, firmware', () => {
-            this.recalculateAll();
-        });
-console.log(!isWidjet);
-console.log(rModel);
+        this.$watch(
+            () => [this.currency, this.view, this.tariff, this.fee, this.taxType, this.count, this.uptime, this.profitNumber, this.firmware],
+            () => {
+                this.recalculateAll();
+            }
+        );
+
         if (!isWidjet && rModel) window.addView('asic-model', selModel.i);
     },
 

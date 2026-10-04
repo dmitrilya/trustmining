@@ -190,9 +190,8 @@
         </template>
 
         <div class="mt-5" style="background:inherit;">
-            <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl -mx-2 sm:-mx-4">
-                <div id="editor"
-                    class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-2 sm:p-4">
+            <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-lg border border-slate-300 dark:border-slate-700 shadow shadow-logo-color -mx-2 sm:-mx-4">
+                <div id="editor" class="text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-2 sm:p-4">
                 </div>
 
                 <template id="content">{!! $article->content !!}</template>

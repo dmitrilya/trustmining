@@ -1,5 +1,5 @@
 <footer
-    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 border-b border-slate-100 dark:border-slate-700">
+    class="bg-white/40 dark:bg-slate-900/40 border-t border-slate-300 dark:border-slate-700">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <a href="{{ route('home') }}">
             <x-application-logo class="text-[10vw] xs:text-4xl/[1.2]" />
@@ -50,7 +50,7 @@
             </a>
         </div>
 
-        <a class="w-max under text-sm lg:text-base text-slate-800 dark:text-slate-200"
+        <a class="block w-max under text-sm lg:text-base text-slate-800 dark:text-slate-200"
             href="mailto:trustmining.ru@gmail.com" aria-label="{{ __('Write by email') }}">
             trustmining.ru@gmail.com
         </a>
@@ -99,84 +99,84 @@
         <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <div class="space-y-2">
                 <div class="text-xs text-slate-500 uppercase tracking-widest">{{ __('To the buyer') }}</div>
-                {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                {{-- <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('companies') }}">{{ __('Companies') }}</a> --}}
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'miners']) }}">{{ __('Miners') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('hostings') }}">{{ __('Hostings') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('services') }}">{{ __('Services') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'legals']) }}">{{ __('Legals') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'containers']) }}">{{ __('Containers') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'gpus']) }}">{{ __('GPU') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'noiseboxes']) }}">{{ __('Noiseboxes') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'cryptoboilers']) }}">{{ __('Cryptoboilers') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'water_cooling_plates']) }}">{{ __('Water cooling plates') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'firmwares']) }}">{{ __('Firmwares') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'monitorings']) }}">{{ __('Monitoring') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('cryptoexchangers') }}">{{ __('Cryptoexchangers') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('ads', ['adCategory' => 'accessories']) }}">{{ __('Accessories') }}</a>
             </div>
 
             <div class="space-y-2">
                 <div class="text-xs text-slate-500 uppercase tracking-widest">{{ __('To the seller') }}</div>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('support', ['tab' => 'chat']) }}">{{ __('Write to support') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('api.doc') }}">{{ __('API') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('widjets') }}">{{ __('Website widgets') }}</a>
-                {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200" href="{{ route('roadmap') }}">Roadmap</a> --}}
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                {{-- <a class="block w-max under text-sm text-slate-800 dark:text-slate-200" href="{{ route('roadmap') }}">Roadmap</a> --}}
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('support') }}">FAQ</a>
             </div>
 
             <div class="space-y-2">
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('database.asic-miners') }}">{{ __('Catalog of models') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('dictionary') }}">{{ __('Crypto dictionary') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('rating.companies.show') }}">{{ __('Top reliable companies') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('rating.asics') }}">{{ __('The most profitable ASICs') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('hashrate-converter') }}">{{ __('Hashrate converter') }}</a>
-                {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                {{-- <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('blog') }}">{{ __('Blog') }}</a> --}}
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('insight.index') }}">TM
                     Insight</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('forum') }}">{{ __('Forum') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('taxes') }}">{{ __('About Russian taxes') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('about') }}">{{ __('About project') }}</a>
-                {{-- <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                {{-- <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a> --}}
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('privacy') }}">{{ __('Privacy Policy') }}</a>
-                <a class="w-max under text-sm text-slate-800 dark:text-slate-200"
+                <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"
                     href="{{ route('terms') }}">{{ __('User Agreement') }}</a>
             </div>
         </div>

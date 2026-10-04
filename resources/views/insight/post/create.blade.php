@@ -77,13 +77,7 @@
                 ->concat($channel->series->map(fn($series) => ['key' => $series->id, 'value' => $series->name]))
                 ->keyBy('key')" />
 
-            <div id="editor-wrap" class="bg-slate-100 dark:bg-slate-950 rounded-xl mt-2 -mx-2 sm:-mx-4">
-                <div id="editor"
-                    class="!border-t border-slate-300 dark:border-slate-700 text-xs xs:text-sm sm:text-base text-slate-800 dark:text-slate-200 focus:outline-0 p-4">
-                </div>
-
-                <input type="hidden" class="hidden" name="content" :value="content" required>
-            </div>
+            <x-inputs.editor name="content" class="mt-2 -mx-2 sm:-mx-4" />
             <template x-if="validation.content">
                 <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>

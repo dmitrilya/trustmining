@@ -14,6 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('ad_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('title');
+            $table->text('description');
+            $table->string('header');
+        });
+
         Schema::create('ads', function (Blueprint $table) {
             $table->id()->startingValue(10000000);
 
@@ -47,6 +55,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('ad_categories');
         Schema::dropIfExists('ads');
     }
 };
