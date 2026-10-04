@@ -14,12 +14,11 @@ trait DaData
         $result = DaDataAddress::suggest([
             'query' => $query,
             'count' => 10,
-            'language' => 'ru',
-            'division' => 'ADMINISTRATIVE',
-            'locations' => [['country' => '*']]
+            'language' => app()->getLocale() == 'ru' ? 'RU' : 'EN',
+            'locations' => ['country_iso_code' => '*'],
         ]);
 
-        return $result['suggestions'] ?? [];
+        return $result->suggestions ?? [];
     }
 
     public function dadataSuggsAddress(Request $request)
@@ -35,16 +34,13 @@ trait DaData
         $result = DaDataAddress::suggest([
             'query' => $query,
             'count' => 10,
-            'language' => 'ru',
-            'division' => 'ADMINISTRATIVE',
-            'locations' => [['country' => '*']],
-            'locations_geo' => '',
-            'locations_boost' => '',
-            'from_bound' => 'city',
-            'to_bound' => 'city',
+            'language' => app()->getLocale() == 'ru' ? 'RU' : 'EN',
+            'locations' => ['country_iso_code' => '*'],
+            'from_bound' => ['value' => 'city'],
+            'to_bound' => ['value' => 'city'],
         ]);
 
-        return $result['suggestions'] ?? [];
+        return $result->suggestions ?? [];
     }
 
     public function dadataSuggsCity(Request $request)
