@@ -9,9 +9,17 @@ use MoveMoveApp\DaData\Facades\DaDataOrganization;
 
 trait DaData
 {
-    public function dadataSearchAddress(string $query)
+    public function dadataSearchAddress(string $query): array
     {
-        return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']])['suggestions'];
+        $result = DaDataAddress::suggest([
+            'query' => $query,
+            'count' => 10,
+            'language' => 'ru',
+            'division' => 'ADMINISTRATIVE',
+            'locations' => [['country' => '*']]
+        ]);
+
+        return $result['suggestions'] ?? [];
     }
 
     public function dadataSuggsAddress(Request $request)
@@ -24,7 +32,19 @@ trait DaData
 
     public function dadataSearchCity(string $query)
     {
-        return DaDataAddress::prompt($query, 10, 'ru', [['country' => '*']], [], [], ["value" => "city"], ["value" => "city"])['suggestions'];
+        $result = DaDataAddress::suggest([
+            'query' => $query,
+            'count' => 10,
+            'language' => 'ru',
+            'division' => 'ADMINISTRATIVE',
+            'locations' => [['country' => '*']],
+            'locations_geo' => [],
+            'locations_boost' => [],
+            'from_bound' => ["value" => "city"],
+            'to_bound' => ["value" => "city"],
+        ]);
+
+        return $result['suggestions'] ?? [];
     }
 
     public function dadataSuggsCity(Request $request)

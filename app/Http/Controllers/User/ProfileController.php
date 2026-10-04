@@ -93,7 +93,13 @@ class ProfileController extends Controller
 
         try {
             /** @var array $result */
-            $result = (array) DaDataAddress::geolocate($request->lat, $request->lon, 1, 100, 'ru');
+            $result = (array) DaDataAddress::geolocate([
+                'lat' => $request->lat,
+                'lon' => $request->lon,
+                'count' => 1,
+                'radius_meters' => 100,
+                'language' => 'ru'
+            ]);
 
             if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
                 $city = config('app.default_city');
