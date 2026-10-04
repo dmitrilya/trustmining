@@ -143,6 +143,7 @@
             "just now": '{{ __('just now') }}',
             "Details": '{{ __('Details') }}'
         };
+        window.supportedLocales = @json(array_values(array_filter(config('app.supported_locales'))));
     </script>
 </head>
 
@@ -163,7 +164,7 @@
         <meta itemprop="name" content="{{ $attributes->get('itemname') }}" />
     @endif
 
-    <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-[4.25rem] lg:pb-0' : '' }}" x-data="{ filter: false }">
+    <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-17 lg:pb-0' : '' }}" x-data="{ filter: false }">
         <div id="head" class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl sticky top-0 left-0 z-50">
             @include('layouts.navigation')
 
@@ -251,7 +252,7 @@
     @include('auth.register-modal')
 
     <div id="toasts"
-        class="fixed {{ request()->routeIs('insight.*') ? 'bottom-[4.25rem] sm:bottom-[5rem] lg:bottom-5' : 'bottom-5' }} left-1/2 -translate-x-1/2 w-full max-w-xs space-y-2"
+        class="fixed {{ request()->routeIs('insight.*') ? 'bottom-17 sm:bottom-20 lg:bottom-5' : 'bottom-5' }} left-1/2 -translate-x-1/2 w-full max-w-xs space-y-2"
         @if (isset($errors) && $errors->has('forbidden')) x-init="pushToastAlert('{{ $errors->first() }}', 'error')" @endif
         @if (isset($errors) && $errors->has('success')) x-init="pushToastAlert('{{ $errors->first() }}', 'success')" @endif>
     </div>
