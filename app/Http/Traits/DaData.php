@@ -38,10 +38,10 @@ trait DaData
             'language' => 'ru',
             'division' => 'ADMINISTRATIVE',
             'locations' => [['country' => '*']],
-            'locations_geo' => [],
-            'locations_boost' => [],
-            'from_bound' => ["value" => "city"],
-            'to_bound' => ["value" => "city"],
+            'locations_geo' => '',
+            'locations_boost' => '',
+            'from_bound' => 'city',
+            'to_bound' => 'city',
         ]);
 
         return $result['suggestions'] ?? [];
