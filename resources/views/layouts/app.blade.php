@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @php
+        $theme = null;
         $cookieTheme = request()->cookie('app_theme');
 
         if ($cookieTheme) {
