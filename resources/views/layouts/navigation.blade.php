@@ -136,7 +136,7 @@
                                     {{ __('Notifications') }}
                                 </x-dropdown-link>
 
-                                @if (in_array($auth->role->name, ['admin', 'moderator', 'support']))
+                                @if (in_array($auth->role?->name, ['admin', 'moderator', 'support']))
                                     <x-dropdown-link :href="route('moderations')">
                                         {{ __('Moderations') }}
                                     </x-dropdown-link>
@@ -240,7 +240,7 @@
                         {{ __('Notifications') }}
                     </x-responsive-nav-link>
 
-                    @if (in_array($auth->role->name, ['admin', 'moderator', 'support']))
+                    @if (in_array($auth->role?->name, ['admin', 'moderator', 'support']))
                         <x-responsive-nav-link :href="route('moderations')">
                             {{ __('Moderations') }}
                         </x-responsive-nav-link>

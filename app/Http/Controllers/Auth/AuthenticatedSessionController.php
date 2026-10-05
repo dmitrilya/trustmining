@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -39,7 +38,7 @@ class AuthenticatedSessionController extends Controller
 
         (new RouletteService)->compareSpinsAfterLogin(auth()->id());
 
-        return $request->redirect ? redirect($request->redirect) : redirect()->intended(RouteServiceProvider::HOME);
+        return $request->redirect ? redirect($request->redirect) : redirect()->intended('/home');
     }
 
     /**
@@ -125,7 +124,7 @@ class AuthenticatedSessionController extends Controller
 
             (new RouletteService)->compareSpinsAfterLogin(auth()->id());
 
-            return $request->redirect ? redirect($request->redirect) : redirect()->intended(RouteServiceProvider::HOME);
+            return $request->redirect ? redirect($request->redirect) : redirect()->intended('/home');
         } catch (\Exception $e) {
             Log::channel('socials-auth')->info("[YANDEX] {Error catching}\n{$e->getMessage()}");
             return redirect()->route('login')->withErrors(['yandex' => 'Произошла непредвиденная ошибка при авторизации.']);
