@@ -475,7 +475,12 @@ return [
         'algorithms' => [
             'title' => 'Mining Encryption Algorithms | TM Wiki',
             'description' => 'Discover the different cryptocurrency mining algorithms. Find comprehensive information about SHA-256, Scrypt, and other encryption methods on the Trustmining website.',
-            'header' => 'Cryptocurrency Mining Algorithms'
+            'header' => 'Cryptocurrency Mining Algorithms',
+
+            'algorithm' => [
+                'title' => ':name Algorithm - Detailed Information | TM Wiki',
+                'description' => 'Historical background of :name, mined coins, the best equipment, and other useful information on the TrustMining website'
+            ]
         ]
     ],
 
