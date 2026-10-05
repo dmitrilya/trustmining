@@ -135,7 +135,11 @@
                                 <x-dropdown-link :href="route('notifications')">
                                     {{ __('Notifications') }}
                                 </x-dropdown-link>
-
+@php
+    if (is_null($auth->role)) {
+        \Log::error("Битый пользователь! ID: {$auth->id}, его role_id в базе: '{$auth->role_id}' (тип: " . gettype($auth->role_id) . ")");
+    }
+@endphp
                                 @if (in_array($auth->role?->name, ['admin', 'moderator', 'support']))
                                     <x-dropdown-link :href="route('moderations')">
                                         {{ __('Moderations') }}
@@ -240,7 +244,7 @@
                         {{ __('Notifications') }}
                     </x-responsive-nav-link>
 
-                    @if (in_array($auth->role?->name, ['admin', 'moderator', 'support']))
+                    @if (in_array($auth->role->name, ['admin', 'moderator', 'support']))
                         <x-responsive-nav-link :href="route('moderations')">
                             {{ __('Moderations') }}
                         </x-responsive-nav-link>

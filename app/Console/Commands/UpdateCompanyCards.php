@@ -39,7 +39,7 @@ class UpdateCompanyCards extends Command
         $perDay = ceil($total / 7);
         $dayIndex = (int) date('w');
 
-        foreach (Company::skip($dayIndex * $perDay)->take($perDay) as $company) {
+        foreach (Company::skip($dayIndex * $perDay)->take($perDay)->get() as $company) {
             $inn = $company->card['inn'] ?? null;
             $type = $company->card['type'] ?? null;
 
