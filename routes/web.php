@@ -121,6 +121,7 @@ $webRoutes = function () {
             Route::get('/', [DictionaryController::class, 'index'])->name('dictionary');
             Route::get('/{dictionaryCategory:name}', [DictionaryController::class, 'category'])->name('dictionary.category');
             Route::get('/{dictionaryCategory:name}/{dictionaryTerm:name}', [DictionaryController::class, 'term'])->name('dictionary.term');
+            Route::get('/{dictionaryCategory:name}/{dictionaryTerm:name}/get', [DictionaryController::class, 'termGet'])->name('dictionary.term.get');
         });
 
         Route::group(['prefix' => 'algorithms'], function () {

@@ -280,10 +280,12 @@ window.saveRange = function () {
 }
 
 function prepareTerms() {
-    const terms = window.terms || {};
+    window.terms = window.terms || {};
 
     let activeTerm = null;
     let popup = null;
+    let hideTimeout = null;
+    let currentFetchController = null;
 
     function createPopup() {
         if (popup) return popup;
@@ -297,7 +299,7 @@ function prepareTerms() {
                 href="#" target="_blank"
                 class="tm-wiki-popup-link mt-3 inline-block text-sm font-medium text-indigo-500 hover:text-indigo-600"
             >
-                ${__('Details')} →
+                ${typeof __ === 'function' ? __('Details') : 'Details'} →
             </a>
         `;
 
@@ -310,9 +312,7 @@ function prepareTerms() {
     }
 
     function positionPopup(element) {
-        if (!popup) {
-            return;
-        }
+        if (!popup || popup.classList.contains('hidden')) return;
 
         const rect = element.getBoundingClientRect();
         const popupWidth = popup.offsetWidth;
@@ -332,45 +332,81 @@ function prepareTerms() {
         popup.style.top = `${top}px`;
     }
 
-    function showPopup(element) {
+    async function showPopup(element) {
         const key = element.dataset.term;
-        const data = terms[key];
-        const keyParts = key.split('/');
-
-        if (!data) return;
-
-        const current = activeTerm === element;
+        if (!key) return;
 
         activeTerm = element;
-
         const popupElement = createPopup();
 
-        popupElement.querySelector('.tm-wiki-popup-name').textContent = data.name || '';
-        popupElement.querySelector('.tm-wiki-popup-caption').textContent = data.caption || '';
+        if (currentFetchController) currentFetchController.abort();
 
-        const link = popupElement.querySelector('.tm-wiki-popup-link');
+        if (window.terms[key]) {
+            renderPopupData(key, window.terms[key]);
+            return;
+        }
 
-        link.href = `/wiki/dictionary/${keyParts[0]}/${keyParts[1]}`;
-
+        popupElement.querySelector('.tm-wiki-popup-name').textContent = '...';
+        popupElement.querySelector('.tm-wiki-popup-caption').textContent = typeof __ === 'function' ? __('Loading...') : 'Loading...';
+        popupElement.querySelector('.tm-wiki-popup-link').classList.add('hidden');
         popupElement.classList.remove('hidden');
 
-        requestAnimationFrame(() => { positionPopup(element); });
+        requestAnimationFrame(() => { positionPopup(element) });
 
-        return current;
+        currentFetchController = new AbortController();
+        try {
+            const response = await fetch(`/wiki/dictionary/${key}/get`, {
+                signal: currentFetchController.signal,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const data = await response.json();
+
+            window.terms[key] = data;
+
+            if (activeTerm === element) renderPopupData(key, data);
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.error('Fetch error:', error);
+                popupElement.querySelector('.tm-wiki-popup-caption').textContent = 'Error loading data.';
+            }
+        }
+    }
+
+    function renderPopupData(key, data) {
+        if (!popup) return;
+        const keyParts = key.split('/');
+
+        popup.querySelector('.tm-wiki-popup-name').textContent = data.name || '';
+        popup.querySelector('.tm-wiki-popup-caption').textContent = data.caption || '';
+
+        const link = popup.querySelector('.tm-wiki-popup-link');
+        link.href = `/wiki/dictionary/${keyParts[0]}/${keyParts[1]}`;
+        link.classList.remove('hidden');
+
+        popup.classList.remove('hidden');
+
+        requestAnimationFrame(() => { positionPopup(activeTerm); });
     }
 
     function hidePopup() {
+        if (currentFetchController) {
+            currentFetchController.abort();
+            currentFetchController = null;
+        }
         if (!popup) return;
 
         popup.classList.add('hidden');
         activeTerm = null;
     }
 
-    let hideTimeout = null;
-
     function scheduleHidePopup() {
         clearTimeout(hideTimeout);
-
         hideTimeout = setTimeout(() => { hidePopup(); }, 150);
     }
 
@@ -384,12 +420,11 @@ function prepareTerms() {
             showPopup(element);
         });
 
-        element.addEventListener('mouseleave', () => { scheduleHidePopup(); });
+        element.addEventListener('mouseleave', () => { scheduleHidePopup() });
 
         element.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
-
             cancelHidePopup();
 
             if (activeTerm === element && popup && !popup.classList.contains('hidden')) hidePopup();
@@ -399,23 +434,15 @@ function prepareTerms() {
 
     document.addEventListener('click', (event) => {
         if (!activeTerm) return;
-
         if (event.target.closest('span.term[data-term]') || event.target.closest('.tm-wiki-popup')) return;
-
         hidePopup();
     });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') hidePopup();
-    });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') hidePopup() });
 
-    window.addEventListener('resize', () => {
-        if (activeTerm && popup && !popup.classList.contains('hidden')) positionPopup(activeTerm);
-    });
+    window.addEventListener('resize', () => { if (activeTerm) positionPopup(activeTerm) });
 
-    window.addEventListener('scroll', () => {
-        if (activeTerm && popup && !popup.classList.contains('hidden')) positionPopup(activeTerm);
-    }, { passive: true });
+    window.addEventListener('scroll', () => { if (activeTerm) positionPopup(activeTerm) }, { passive: true });
 }
 
 function beforeRangeManipulation(range, pre) {

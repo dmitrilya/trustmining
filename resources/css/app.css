@@ -163,6 +163,34 @@
         opacity: 0.3;
     }
 
+    .html-description {
+        h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(30 41 59);
+        }
+
+        ul {
+            margin-left: 16px;
+            list-style: disc;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td,
+        th {
+            padding: 4px 8px;
+        }
+    }
+
+    .dark .html-description {
+        h3 {
+            color: rgb(226 232 240);
+        }
+    }
+
     span.term {
         color: rgb(99 102 241);
         cursor: pointer;

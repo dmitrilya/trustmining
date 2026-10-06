@@ -6,38 +6,9 @@
         <x-breadcrumbs.breadcrumb position="4" :name="__('dictionary.' . $category->name . '.terms.' . $term->name . '.name')" />
     </x-breadcrumbs.breadcrumbs>
 
-    <script>
-        window.terms = @json($terms);
-    </script>
-
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6" x-data={}
         x-init="addView('term', {{ $term->id }})">
-        <style>
-            h3 {
-                font-size: 16px;
-                font-weight: bold;
-                color: rgb(30 41 59);
-            }
-
-            .dark h3 {
-                color: rgb(226 232 240);
-            }
-
-            ul {
-                margin-left: 16px;
-                list-style: disc;
-            }
-
-            th {
-                text-align: left;
-            }
-
-            td, th {
-                padding: 4px 8px;
-            }
-        </style>
-
-        <div class="text-sm text-slate-600 dark:text-slate-400 space-y-4">
+        <div class="text-sm text-slate-600 dark:text-slate-400 space-y-4 html-description">
             {!! __('dictionary.' . $category->name . '.terms.' . $term->name . '.definition') !!}
         </div>
     </div>

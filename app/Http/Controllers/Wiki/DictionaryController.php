@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Wiki;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 
 use App\Models\Dictionary\DictionaryCategory;
@@ -34,33 +35,18 @@ class DictionaryController extends Controller
 
     public function term(DictionaryCategory $dictionaryCategory, DictionaryTerm $dictionaryTerm): View
     {
-        $definition = __("dictionary.$dictionaryCategory->name.terms.$dictionaryTerm->name.definition");
-        preg_match_all(
-            '/data-term=["\']([^"\']+)["\']/',
-            $definition,
-            $matches
-        );
-
-        $termKeys = array_unique($matches[1]);
-
-        $terms = [];
-
-        foreach ($termKeys as $key) {
-            [$category, $term] = explode('/', $key, 2);
-
-            $data = __("dictionary.$category.terms.$term");
-
-            $terms[$key] = [
-                'name' => $data['name'],
-                'caption' => $data['caption'],
-            ];
-        }
-
         return view('wiki.dictionary.term', [
             'data' => Cache::get('home_page_data'),
             'category' => $dictionaryCategory,
             'term' => $dictionaryTerm,
-            'terms' => $terms
         ]);
+    }
+
+    public function termGet(DictionaryCategory $dictionaryCategory, DictionaryTerm $dictionaryTerm): JsonResponse
+    {
+        return response()->json([
+            'name' => __("dictionary.$dictionaryCategory->name.terms.$dictionaryTerm->name.name"),
+            'caption' => __("dictionary.$dictionaryCategory->name.terms.$dictionaryTerm->name.caption")
+        ], 200);
     }
 }
