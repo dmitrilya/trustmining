@@ -6,7 +6,7 @@
 
     <div class="divide-y divide-slate-300 dark:divide-slate-700">
         @foreach ($forumQuestions as $forumQuestion)
-            <a
+            <a class="block"
                 href="{{ route('forum.question.show', [
                     'forumCategory' => $forumQuestion->forumSubcategory->forumCategory->slug,
                     'forumSubcategory' => $forumQuestion->forumSubcategory->slug,
