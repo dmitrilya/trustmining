@@ -1,7 +1,7 @@
 <x-home-layout :data="$data" :title="__('meta.wiki.algorithms.algorithm.title', ['name' => $algorithm->name])" :description="__('meta.wiki.algorithms.algorithm.description', ['name' => $algorithm->name])" :header="__('Algorithm') . ' ' . $algorithm->name">
     <x-breadcrumbs.breadcrumbs>
         <x-breadcrumbs.breadcrumb position="1" href="{{ route('wiki') }}" :name="__('meta.wiki.header')" />
-        <x-breadcrumbs.breadcrumb position="2" :name="__('Algorithms')" />
+        <x-breadcrumbs.breadcrumb position="2" href="{{ route('algorithms') }}" :name="__('Algorithms')" />
         <x-breadcrumbs.breadcrumb position="3" :name="$algorithm->name" />
     </x-breadcrumbs.breadcrumbs>
 
