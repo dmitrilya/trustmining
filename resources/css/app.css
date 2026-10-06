@@ -190,7 +190,8 @@
     }
 
     .dark .html-description {
-        h3 {
+        h3,
+        h4 {
             color: rgb(226 232 240);
         }
     }
