@@ -8,7 +8,7 @@
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6" x-data={}
         x-init="addView('algorithm', {{ $algorithm->id }})">
         <div class="text-sm text-slate-600 dark:text-slate-400 space-y-4 html-description">
-            {{ $algorithm->description[app()->getLocale()] ?? ($algorithm->description['en'] ?? '') }}
+            {!! $algorithm->description[app()->getLocale()] ?? ($algorithm->description['en'] ?? '') !!}
         </div>
     </div>
 </x-home-layout>
