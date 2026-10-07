@@ -1,11 +1,11 @@
-@import "fonts.css";
-@import "tailwindcss";
+@import "../fonts.css";
+@import "../tailwindcss";
 
 @plugin "@tailwindcss/forms";
 
-@source "../views/metrics/network/difficulty/widjet.blade.php";
-@source "../views/metrics/network/difficulty/components/difficulty.blade.php";
-@source "../views/components/application-logo.blade.php";
+@source "../../views/metrics/network/difficulty/widjet.blade.php";
+@source "../../views/metrics/network/difficulty/components/difficulty.blade.php";
+@source "../../views/components/application-logo.blade.php";
 
 @theme {  
   --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

@@ -1,4 +1,4 @@
-import { calculatorAlpine } from '../calculatorAlpine';
+import { calculatorAlpine } from './calculatorAlpine';
 import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 

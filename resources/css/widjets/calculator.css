@@ -1,22 +1,22 @@
-@import 'fonts.css';
-@import 'tailwindcss';
+@import '../fonts.css';
+@import '../tailwindcss';
 
 @plugin "@tailwindcss/forms";
 
-@source "../views/calculator/widjet.blade.php";
-@source "../views/calculator/components/calculator.blade.php";
-@source "../views/calculator/components/selectversion.blade.php";
-@source "../views/calculator/components/settings.blade.php";
-@source "../views/calculator/components/characteristics.blade.php";
-@source "../views/calculator/components/currency.blade.php";
-@source "../views/calculator/components/profit.blade.php";
-@source "../views/calculator/components/coins.blade.php";
-@source "../views/calculator/components/tax-help.blade.php";
-@source "../views/components/application-logo.blade.php";
-@source "../views/components/inputs/checkbox.blade.php";
-@source "../views/components/inputs/select.blade.php";
-@source "../views/components/inputs/radio.blade.php";
-@source "../views/components/inputs/text-input.blade.php";
+@source "../../views/calculator/widjet.blade.php";
+@source "../../views/calculator/components/calculator.blade.php";
+@source "../../views/calculator/components/selectversion.blade.php";
+@source "../../views/calculator/components/settings.blade.php";
+@source "../../views/calculator/components/characteristics.blade.php";
+@source "../../views/calculator/components/currency.blade.php";
+@source "../../views/calculator/components/profit.blade.php";
+@source "../../views/calculator/components/coins.blade.php";
+@source "../../views/calculator/components/tax-help.blade.php";
+@source "../../views/components/application-logo.blade.php";
+@source "../../views/components/inputs/checkbox.blade.php";
+@source "../../views/components/inputs/select.blade.php";
+@source "../../views/components/inputs/radio.blade.php";
+@source "../../views/components/inputs/text-input.blade.php";
 
 @theme {
     --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif,
