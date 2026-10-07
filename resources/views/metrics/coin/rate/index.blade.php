@@ -142,7 +142,7 @@
                         <div class="col-span-1 text-xxs xs:text-xs sm:text-base lg:text-lg"
                             :class="{
                                 'text-green-500': items[i + 1] && item.value > items[i + 1].value,
-                                'text-red-500': items[i + 1] && item.value < items[i + 1].value,
+                                'text-red-600 dark:text-red-400': items[i + 1] && item.value < items[i + 1].value,
                                 'text-slate-800 dark:text-slate-200': !items[i + 1] || item.value == items[i + 1].value
                             }"
                             x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">

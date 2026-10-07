@@ -88,7 +88,7 @@
                     <div class="shrink-0">⚠️</div>
                     <div class="ml-3">
                         <p class="text-sm sm:text-base text-amber-800 dark:text-amber-200 font-bold">{{ __('The ad has been removed') }}</p>
-                        <p class="text-xs sm:text-sm text-amber-500 mt-1">
+                        <p class="text-xs sm:text-sm text-amber-600 dark:text-amber-400 mt-1">
                             {{ __('We invite you to view similar ads') }}
                         </p>
                     </div>

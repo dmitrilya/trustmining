@@ -49,7 +49,7 @@
 
                         <div class="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                             @foreach ($hosting->tariffs as $tariff)
-                                <div class="rounded-xl py-2 sm:py-3 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 flex flex-col items-center">
+                                <div class="rounded-xl py-2 sm:py-3 bg-indigo-500/10 border border-indigo-600 flex flex-col items-center">
                                     <div class="text-xl xs:text-2xl sm:text-3xl text-indigo-500 mb-1">{{ $tariff['t'] }} <span
                                             class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">₽/{{ __('kW') }}</span></div>
                                     <div class="text-xxs xs:text-xs tracking-wider text-slate-600 dark:text-slate-400 uppercase">{{ __('Uptime') }}

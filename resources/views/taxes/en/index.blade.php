@@ -107,7 +107,7 @@
                 <section id="block-1">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">01</span>
                             Правовой статус и легализация майнинга в РФ
@@ -116,7 +116,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📜</span> Законодательный фундамент (ФЗ-259 и ФЗ-418)
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -151,7 +151,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Реестр майнеров ФНС: Кто обязан регистрироваться?
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -161,22 +161,22 @@
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
                                 <div
                                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
-                                    <h4 class="flex items-center gap-2 mb-2 text-rose-500 font-semibold text-sm sm:text-base lg:text-lg">
+                                    <h4 class="flex items-center gap-2 mb-2 text-rose-600 dark:text-rose-400 font-semibold text-sm sm:text-base lg:text-lg">
                                         <span>🏢</span> Обязаны войти в Реестр ФНС
                                     </h4>
                                     <ul class="space-y-2 text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                         <li class="flex items-start gap-1.5">
-                                            <span class="text-rose-500 font-bold">•</span>
+                                            <span class="text-rose-600 dark:text-rose-400 font-bold">•</span>
                                             <span>Все <strong class="text-slate-800 dark:text-slate-200">юридические лица</strong> (ООО, АО), осуществляющие
                                                 майнинг.</span>
                                         </li>
                                         <li class="flex items-start gap-1.5">
-                                            <span class="text-rose-500 font-bold">•</span>
+                                            <span class="text-rose-600 dark:text-rose-400 font-bold">•</span>
                                             <span>Все <strong class="text-slate-800 dark:text-slate-200">индивидуальные предприниматели (ИП)</strong>,
                                                 независимо от количества устройств.</span>
                                         </li>
                                         <li class="flex items-start gap-1.5">
-                                            <span class="text-rose-500 font-bold">•</span>
+                                            <span class="text-rose-600 dark:text-rose-400 font-bold">•</span>
                                             <span>Физические лица, чье энергопотребление <strong class="text-slate-800 dark:text-slate-200">превышает 6 000
                                                     кВт·ч</strong> в календарный месяц.</span>
                                         </li>
@@ -209,7 +209,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🚨</span> Юридические риски работы «всерую»
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -228,13 +228,13 @@
                                         Осуществление предпринимательской деятельности без государственной регистрации или без специального разрешения
                                         (включения в реестр). Наказывается наложением административного штрафа <strong
                                             class="text-slate-800 dark:text-slate-200">до 1 000 000 рублей</strong> для юридических лиц с возможностью <strong
-                                            class="text-rose-500">принудительной конфискации</strong> всего вычислительного оборудования (АСИКов, ферм, блоков
+                                            class="text-rose-600 dark:text-rose-400">принудительной конфискации</strong> всего вычислительного оборудования (АСИКов, ферм, блоков
                                         питания).
                                     </p>
                                 </div>
 
-                                <div class="p-2 sm:p-4 border-l-4 border-red-600 bg-red-100 dark:bg-red-950/20 rounded-r-lg">
-                                    <h4 class="font-semibold text-red-700 dark:text-red-300 text-sm sm:text-base lg:text-lg mb-1">
+                                <div class="p-2 sm:p-4 border-l-4 border-red-600/60 bg-red-500/10 rounded-r-lg">
+                                    <h4 class="font-semibold text-red-800 dark:text-red-200 text-sm sm:text-base lg:text-lg mb-1">
                                         Уголовная ответственность (<a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                             href="https://www.consultant.ru/document/cons_doc_LAW_10699/cc12ef68af6f5296cb8a9dad10ca87865d02f12f/">ст. 171 УК
                                             РФ</a> «Незаконное предпринимательство»)
@@ -243,7 +243,7 @@
                                         Если деятельность по майнингу осуществлялась без включения в реестр ФНС и принесла государству или гражданам <strong
                                             class="text-slate-800 dark:text-slate-200">крупный ущерб / доход (от 3 500 000 рублей)</strong>, наступает уголовная
                                         ответственность. Санкция статьи предусматривает штрафы до 300 000 рублей, обязательные работы, либо <strong
-                                            class="text-red-700 dark:text-red-500">лишение свободы на срок до 5 лет</strong> в случае совершения преступления
+                                            class="text-red-600 dark:text-red-400">лишение свободы на срок до 5 лет</strong> в случае совершения преступления
                                         организованной группой или в особо крупном размере.
                                     </p>
                                 </div>
@@ -255,7 +255,7 @@
                 <section id="block-2">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">02</span>
                             Двухэтапная концепция налогообложения
@@ -264,7 +264,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🔄</span> Механика ФЗ № 418-ФЗ: Почему налог платится дважды?
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -294,7 +294,7 @@
                                 <div>
                                     <div class="flex items-center justify-between mb-2 sm:mb-4">
                                         <span
-                                            class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900">
+                                            class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/30">
                                             Этап №1</span>
                                         <span class="text-xs text-slate-500">Приход на кошелек</span>
                                     </div>
@@ -321,7 +321,7 @@
                                 <div>
                                     <div class="flex items-center justify-between mb-2 sm:mb-4">
                                         <span
-                                            class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900">Этап
+                                            class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400">Этап
                                             №2</span>
                                         <span class="text-xs text-slate-500">Конвертация в фиат</span>
                                     </div>
@@ -345,19 +345,19 @@
                             </div>
                         </div>
 
-                        <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 rounded-xl p-2 sm:p-4">
-                            <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-2 sm:p-4">
+                            <h4 class="font-bold text-blue-600 dark:text-blue-400 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">💡</span> Математическая модель двухэтапного начисления
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-600 dark:text-blue-400">
                                 Чтобы исключить риски штрафов и доначислений от ФНС, учет и расчет обязательств строятся строго по следующему математическому
                                 алгоритму:
                             </p>
 
                             <div
-                                class="space-y-4 font-mono text-xs bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 text-slate-800 dark:text-slate-200">
+                                class="space-y-4 font-mono text-xs bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-500/30 text-slate-800 dark:text-slate-200">
                                 <div>
-                                    <span class="text-blue-600 dark:text-blue-300 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
+                                    <span class="text-blue-600 dark:text-blue-400 font-bold">ФОРМУЛА ЭТАПА 1 (Налог на добычу):</span><br />
                                     <span class="text-slate-800 dark:text-slate-200">Налоговая База 1 = Объем Добытых Монет × Рыночный Курс Монеты (на дату
                                         зачисления на адрес)</span>
                                 </div>
@@ -367,7 +367,7 @@
                                         × Курс фиксации на Этапе 1)</span>
                                 </div>
                             </div>
-                            <p class="text-xs mt-4 text-rose-500">
+                            <p class="text-xs mt-4 text-rose-600 dark:text-rose-400">
                                 *Важно: Если итоговое значение Формулы Этапа 2 меньше нуля, налог на втором этапе признается равным 0 ₽. Полученный убыток
                                 фиксируется в налоговом регистре для уменьшения будущей прибыли от операций с цифровыми валютами.
                             </p>
@@ -378,7 +378,7 @@
                 <section id="block-3">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">03</span>
                             Майнинг для физических лиц (без статуса ИП)
@@ -387,7 +387,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">⚡</span> <a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_489545">Постановление Правительства РФ № 1469</a>: Лимит 6 000 кВт·ч
                             </h3>
@@ -395,7 +395,7 @@
                                 Обычные граждане имеют законное право заниматься майнингом без получения статуса ИП и без включения в реестр ФНС, но в строго
                                 очерченных рамках энергопотребления. Согласно <strong class="text-slate-800 dark:text-slate-200">Постановлению Правительства РФ
                                     № 1469</strong>, верхний порог потребления электроэнергии для физлица составляет ровно <strong
-                                    class="text-rose-500 font-bold">6 000 кВт·ч в месяц</strong> на одного человека.
+                                    class="text-rose-600 dark:text-rose-400 font-bold">6 000 кВт·ч в месяц</strong> на одного человека.
                             </p>
 
                             <div
@@ -415,7 +415,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🗺️</span> География и карта жестких региональных запретов
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -424,19 +424,19 @@
                             </p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
-                                <div class="border-l-4 border-red-600 bg-red-100 dark:bg-red-950/20 p-2 sm:p-4 rounded-r-lg">
-                                    <h4 class="font-semibold text-red-700 dark:text-red-300 text-sm sm:text-base lg:text-lg mb-1">
+                                <div class="border-l-4 border-red-600/60 bg-red-500/10 p-2 sm:p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-red-800 dark:text-red-200 text-sm sm:text-base lg:text-lg mb-1">
                                         Тотальный круглогодичный запрет
                                     </h4>
                                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                                        Майнинг <strong class="text-red-700 dark:text-red-500">полностью запрещен</strong> (даже до 1 кВт·ч) в следующих
+                                        Майнинг <strong class="text-red-600 dark:text-red-400">полностью запрещен</strong> (даже до 1 кВт·ч) в следующих
                                         регионах: юг Иркутской области (включая города Иркутск, Ангарск, Шелехов), отдельные районы Бурятии и Забайкальского
                                         края, республики Дагестан, Чечня, Ингушетия, Кабардино-Балкария, Карачаево-Черкесия, Северная Осетия, а также на
                                         территориях ДНР, ЛНР, Запорожской и Херсонской областей.
                                     </p>
                                 </div>
-                                <div class="border-l-4 border-amber-500 bg-amber-50/50 dark:bg-amber-950/20 p-2 sm:p-4 rounded-r-lg">
-                                    <h4 class="font-semibold text-amber-950 dark:text-amber-300 text-sm sm:text-base lg:text-lg mb-1">
+                                <div class="border-l-4 border-amber-500/50 bg-amber-500/10 p-2 sm:p-4 rounded-r-lg">
+                                    <h4 class="font-semibold text-amber-800 dark:text-amber-200 text-sm sm:text-base lg:text-lg mb-1">
                                         Сезонный запрет (Пиковые нагрузки)
                                     </h4>
                                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -461,7 +461,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📈</span> 5-ступенчатая прогрессивная шкала НДФЛ (<a target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/3e4bbd6dd9fb5dd4e9394f447653506e1d6fa3a9/"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">ст. 224 НК РФ</a>)
@@ -521,7 +521,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🛡️</span> Профессиональные налоговые вычеты для граждан (<a target="_blank"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/43b2a4727390504760e272227648fa7e6355969d/">ст. 221 НК РФ</a>)
@@ -538,11 +538,11 @@
                             </p>
 
                             <div
-                                class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 p-2 sm:p-4 rounded-xl text-xs md:text-sm">
-                                <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-4">
+                                class="bg-blue-500/10 border border-blue-500/30 p-2 sm:p-4 rounded-xl text-xs md:text-sm">
+                                <h4 class="font-bold text-blue-600 dark:text-blue-400 text-base mb-4">
                                     <span class="inline mr-1 sm:mr-2">📋</span> Какие расходы физлицо может официально вычесть из доходов
                                 </h4>
-                                <ul class="space-y-1 list-none text-blue-900 dark:text-blue-300">
+                                <ul class="space-y-1 list-none text-blue-600 dark:text-blue-400">
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Расходы на оплату электроэнергии (по
                                             квитанциям и чекам Энергосбыта).</span></li>
                                     <li class="flex gap-2"><span class="text-indigo-500">✔</span><span>Стоимость приобретенного майнингового
@@ -560,7 +560,7 @@
                 <section id="block-4">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">04</span>
                             Практические кейсы расчетов для физических лиц
@@ -572,9 +572,9 @@
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
                             <div class="sm:flex items-center gap-3 mb-2 sm:mb-3">
                                 <span
-                                    class="px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold text-xs whitespace-nowrap">Кейс
+                                    class="px-2 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold text-xs whitespace-nowrap">Кейс
                                     А</span>
-                                <h3 class="scroll-mt-[540px] xl:scroll-mt-36 inline text-base font-bold text-slate-800 dark:text-slate-200">
+                                <h3 class="scroll-mt-135 xl:scroll-mt-36 inline text-base font-bold text-slate-800 dark:text-slate-200">
                                     Майнер в «зеленой зоне» с крупной прибылью
                                 </h3>
                             </div>
@@ -617,10 +617,10 @@
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
                             <div class="sm:flex items-center gap-3 mb-2 sm:mb-3">
                                 <span
-                                    class="px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold text-xs whitespace-nowrap">Кейс
+                                    class="px-2 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold text-xs whitespace-nowrap">Кейс
                                     Б</span>
                                 <h3
-                                    class="scroll-mt-[540px] xl:scroll-mt-36 scroll-mt-[540px] xl:scroll-mt-36vinline text-base font-bold text-slate-800 dark:text-slate-200">
+                                    class="scroll-mt-135 xl:scroll-mt-36 inline text-base font-bold text-slate-800 dark:text-slate-200">
                                     Расходы на электроэнергию перекрывают доход (Убыточный майнинг)
                                 </h3>
                             </div>
@@ -642,14 +642,14 @@
                                     <p>3. Налоговая база = 150 000 ₽ − 180 000 ₽ = −30 000 ₽ (Отрицательное значение)</p>
                                     <div class="pt-2 sm:pt-4 border-t border-slate-300 dark:border-slate-700 font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Налоговая база признается равной:</span>
-                                        <span class="text-blue-600 dark:text-blue-300">0 ₽</span>
+                                        <span class="text-blue-600 dark:text-blue-400">0 ₽</span>
                                     </div>
                                     <div class="font-sans text-sm font-bold flex justify-between">
                                         <span class="text-slate-800 dark:text-slate-200">Итоговый НДФЛ к уплате:</span>
                                         <span class="text-green-500">0 ₽</span>
                                     </div>
                                 </div>
-                                <p class="mt-4 text-xs text-rose-500">
+                                <p class="mt-4 text-xs text-rose-600 dark:text-rose-400">
                                     *Внимание: Физическое лицо, в отличие от организации на ОСНО, не имеет права переносить этот чистый операционный убыток (−30
                                     000 ₽) на будущие года для уменьшения налогов следующих периодов. Налог просто обнуляется за текущий год.
                                 </p>
@@ -660,9 +660,9 @@
                             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color">
                             <div class="sm:flex items-center gap-3 mb-2 sm:mb-3">
                                 <span
-                                    class="px-2 py-1 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-bold text-xs whitespace-nowrap">Кейс
+                                    class="px-2 py-1 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 font-bold text-xs whitespace-nowrap">Кейс
                                     В</span>
-                                <h3 class="scroll-mt-[540px] xl:scroll-mt-36 inline text-base font-bold text-slate-800 dark:text-slate-200">
+                                <h3 class="scroll-mt-135 xl:scroll-mt-36 inline text-base font-bold text-slate-800 dark:text-slate-200">
                                     Продажа намайненной монеты (Работа Этапа №2)
                                 </h3>
                             </div>
@@ -676,13 +676,12 @@
 
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
                                     <div
-                                        class="p-2 sm:p-4 border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/30 dark:bg-emerald-950/10 rounded-xl text-xs md:text-sm">
-                                        <span class="font-bold text-emerald-800 dark:text-emerald-400 block mb-1">Сценарий 1: Курс монеты вырос</span>
+                                        class="p-2 sm:p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs md:text-sm">
+                                        <span class="font-bold text-emerald-600 dark:text-emerald-400 block mb-1">Сценарий 1: Курс монеты вырос</span>
                                         <p class="mb-2">Майнер продал свой 0.1 BTC позже на бирже за <strong class="text-slate-800 dark:text-slate-200">700
-                                                000
-                                                ₽</strong>.</p>
+                                                000 ₽</strong>.</p>
                                         <div
-                                            class="font-mono bg-white dark:bg-slate-950 p-2 rounded-lg border border-emerald-100 dark:border-emerald-900/50 space-y-1">
+                                            class="font-mono bg-white dark:bg-slate-950 p-2 rounded-lg border border-emerald-500/30 space-y-1">
                                             <p>Доход Этапа 2 = 700 000 ₽ − 500 000 ₽</p>
                                             <p>База налога = 200 000 ₽ (Прибыль)</p>
                                             <p>НДФЛ (13%) = 200 000 ₽ × 13% = <strong class="text-emerald-600">26 000 ₽</strong></p>
@@ -690,19 +689,18 @@
                                     </div>
 
                                     <div class="p-2 sm:p-4 border border-rose-500/30 bg-rose-500/10 rounded-xl text-xs md:text-sm">
-                                        <span class="font-bold text-rose-500 block mb-1">Сценарий 2: Курс монеты упал</span>
+                                        <span class="font-bold text-rose-600 dark:text-rose-400 block mb-1">Сценарий 2: Курс монеты упал</span>
                                         <p class="mb-2">Майнер продал свой 0.1 BTC позже на бирже за <strong class="text-slate-800 dark:text-slate-200">400
-                                                000
-                                                ₽</strong>.</p>
+                                                000 ₽</strong>.</p>
                                         <div class="font-mono bg-white dark:bg-slate-950 p-2 rounded-lg border border-rose-500/30 space-y-1">
                                             <p>Доход Этапа 2 = 400 000 ₽ − 500 000 ₽</p>
                                             <p>База налога = −100 000 ₽ (Убыток)</p>
-                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 dark:text-blue-300">0 ₽</strong></p>
+                                            <p>НДФЛ к уплате на Этапе 2 = <strong class="text-blue-600 dark:text-blue-400">0 ₽</strong></p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="p-2 sm:p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-xl text-xs">
+                                <div class="p-2 sm:p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs">
                                     <strong class="text-amber-800 dark:text-amber-400">🚨 Важное ограничение <a target="_blank"
                                             href="https://www.consultant.ru/document/cons_doc_LAW_28165/9b06776ae7a39546ad4e3ba04bebef14baabf8d2/"
                                             class="inline text-indigo-500 hover:text-indigo-600 underline">пункта 2.3 статьи 210 НК РФ</a>:</strong> Налоговый
@@ -723,7 +721,7 @@
                 <section id="block-5">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">05</span>
                             Индивидуальные предприниматели (ИП) на ОСНО
@@ -732,7 +730,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">⛔</span> Бескомпромиссный запрет на УСН и спецрежимы (Прямые нормы НК РФ)
                             </h3>
                             <p class="text-slate-600 dark:text-slate-400 mb-2">
@@ -750,12 +748,12 @@
                             </p>
 
                             <div class="p-2 sm:p-4 border-l-4 border-rose-500/30 bg-rose-500/10 rounded-r-lg">
-                                <h4 class="font-bold text-rose-500 text-sm sm:text-base lg:text-lg block mb-1">
+                                <h4 class="font-bold text-rose-600 dark:text-rose-400 text-sm sm:text-base lg:text-lg block mb-1">
                                     ⚠️ Последствия нарушения запрета
                                 </h4>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Если ИП вел майнинг на УСН, налоговая инспекция при проверке аннулирует право на спецрежим <strong
-                                        class="text-rose-500">задним числом с начала квартала</strong>, в котором была совершена первая операция по добыче.
+                                        class="text-rose-600 dark:text-rose-400">задним числом с начала квартала</strong>, в котором была совершена первая операция по добыче.
                                     Предпринимателю принудительно начислят налоги по ОСНО, пени и штраф в размере 20% от неуплаченной суммы на основании
                                     <a target="_blank" class="inline text-indigo-500 hover:text-indigo-600 underline"
                                         href="https://www.consultant.ru/document/cons_doc_LAW_19671/1bab8cfd8c4da82e8af44f7ebcbfa1716bac9586/">ст. 122 НК
@@ -765,7 +763,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Шкала НДФЛ для ИП и механизм профессиональных вычетов
                             </h3>
                             <p class="text-slate-600 dark:text-slate-400 mb-2">
@@ -789,7 +787,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">⚡</span> Учёт операционных затрат: Электричество, хостинг, комиссии пула
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -821,7 +819,7 @@
                                         </h4>
                                         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                             Если оборудование размещается в дата-центре, необходим договор с оператором майнинговой инфраструктуры. В вычет идут
-                                            ежемесячные акты комплексного обслуживания и счета-фактуры. <strong class="text-rose-500">Критически
+                                            ежемесячные акты комплексного обслуживания и счета-фактуры. <strong class="text-rose-600 dark:text-rose-400">Критически
                                                 важно:</strong> сам дата-центр должен состоять в официальном реестре операторов ФНС, иначе расходы снимут.
                                         </p>
                                     </div>
@@ -843,17 +841,17 @@
                             </div>
                         </div>
 
-                        <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 p-2 sm:p-4 rounded-xl">
-                            <h4 class="font-bold text-blue-900 dark:text-blue-300 text-base mb-2">
+                        <div class="bg-blue-500/10 border border-blue-500/30 p-2 sm:p-4 rounded-xl">
+                            <h4 class="font-bold text-blue-600 dark:text-blue-400 text-base mb-2">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Практический пример расчета для ИП на ОСНО:
                             </h4>
-                            <p class="text-xs md:text-sm mb-4 text-blue-900 dark:text-blue-300">
+                            <p class="text-xs md:text-sm mb-4 text-blue-600 dark:text-blue-400">
                                 ИП Сидоров за год добыл криптовалюты на общую сумму <strong class="underline">5 000 000 ₽</strong>. Его подтвержденные
                                 операционные расходы (электроэнергия по договору + хостинг ЦОД) составили <strong class="underline">2 000 000 ₽</strong>.
                                 Входящий НДС от энергетиков составил 400 000 ₽ (включен в общую стоимость затрат, так как вычет по НДС для майнеров запрещен).
                             </p>
                             <div
-                                class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 font-mono text-slate-800 dark:text-slate-200">
+                                class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-500/30 font-mono text-slate-800 dark:text-slate-200">
                                 <p>1. Общий доход (Этап 1) = 5 000 000 ₽</p>
                                 <p>2. Профессиональный вычет (Затраты операционные с учетом НДС) = 2 000 000 ₽</p>
                                 <p>3. Налоговая база = 5 000 000 ₽ − 2 000 000 ₽ = 3 000 000 ₽</p>
@@ -873,7 +871,7 @@
                 <section id="block-6">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">06</span>
                             Юридические лица (ОСНО) - Налог на прибыль и НДС
@@ -882,7 +880,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📈</span>Налог на прибыль по новой ставке 25% (<a target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/eb9180fc785448d58fe76ef323fb67d1832b9363/"
                                     class="inline text-indigo-500 hover:text-indigo-600 underline">ст. 284 НК РФ</a>). Распределение по бюджетам
@@ -924,7 +922,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📦</span>Отсутствие объекта НДС и правила раздельного учета (ст. 146 и ст. 149 НК РФ)
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -937,12 +935,12 @@
                             </p>
 
                             <div class="p-2 sm:p-4 border border-rose-500/30 bg-rose-500/10 rounded-xl mb-2 sm:mb-4">
-                                <span class="font-bold text-rose-500 text-sm block mb-1">⚠️ Финансовое последствие: Запрет вычетов</span>
+                                <span class="font-bold text-rose-600 dark:text-rose-400 text-sm block mb-1">⚠️ Финансовое последствие: Запрет вычетов</span>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                     Поскольку конечная операция освобождена от НДС, организация <strong
                                         class="underline font-medium text-slate-800 dark:text-slate-200">теряет право на налоговый вычет</strong> по входящему
                                     НДС. Весь НДС, предъявленный вам энергосбытовыми компаниями за электричество, арендодателями или поставщиками оборудования
-                                    при покупке АСИКов, <strong class="text-rose-500 font-bold">нельзя вернуть из бюджета</strong>. Этот налог в полном объеме
+                                    при покупке АСИКов, <strong class="text-rose-600 dark:text-rose-400 font-bold">нельзя вернуть из бюджета</strong>. Этот налог в полном объеме
                                     включается в стоимость приобретаемых товаров, работ и услуг (<a
                                         class="inline text-indigo-500 hover:text-indigo-600 underline"
                                         href="https://www.consultant.ru/document/cons_doc_LAW_28165/7e99d9a14446e1adf556f812066034a9091e0cc4/"
@@ -968,7 +966,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">⚙️</span>Амортизация оборудования (3-я группа, ст. 258 НК РФ): Линейный метод и СПИ
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -1013,7 +1011,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📉</span>Правила работы с убытками прошлых лет и ограничение в 50% (ст. 283 НК РФ)
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -1047,12 +1045,12 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 font-bold text-blue-900 dark:text-blue-300 text-base mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 font-bold text-blue-600 dark:text-blue-400 text-base mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Сквозной практический пример учета амортизации и убытков для ООО:
                             </h3>
 
                             <div class="space-y-2 sm:space-y-4 text-xs md:text-sm text-slate-600 dark:text-slate-400">
-                                <div class="p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-blue-100 dark:border-blue-900 rounded-xl shadow-md">
+                                <div class="p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-blue-500/30 rounded-xl shadow-md">
                                     <strong class="text-slate-800 dark:text-slate-200 block mb-2">📅 Год №1 (Капитальные затраты и фиксация убытка):</strong>
                                     Компанией приобретено и введено в эксплуатацию оборудование на сумму <strong class="text-slate-800 dark:text-slate-200">1
                                         000 000 ₽</strong>. Выбран минимальный срок полезного использования - 36 месяцев.
@@ -1063,24 +1061,24 @@
                                         <p>• Итого совокупные задокументированные расходы за первый год: 333 333.36 ₽ + 200 000 ₽ = 533 333.36 ₽.</p>
                                         <p>• Совокупная рыночная стоимость намайненной за этот год криптовалюты на дату зачисления: 400 000 ₽.</p>
                                     </div>
-                                    <span class="font-mono text-xs block mt-4 font-bold text-rose-500">
+                                    <span class="font-mono text-xs block mt-4 font-bold text-rose-600 dark:text-rose-400">
                                         РЕЗУЛЬТАТ ГОДА №1: Налоговая база = 400 000 ₽ − 533 333.36 ₽ = −133 333.36 ₽ (Убыток). Налог на прибыль к уплате = 0 ₽.
                                         Убыток фиксируется в налоговом регистре.
                                     </span>
                                 </div>
 
-                                <div class="p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-blue-100 dark:border-blue-900 rounded-xl shadow-md">
+                                <div class="p-2 sm:p-4 bg-white/40 dark:bg-slate-900/40 border border-blue-500/30 rounded-xl shadow-md">
                                     <strong class="text-slate-800 dark:text-slate-200 block mb-2">📅 Год №2 (Рост рынка и выход на чистую прибыль):</strong>
                                     Оборудование продолжает работать. Амортизация за полный второй год составила 333 333.36 ₽. Затраты на электроэнергию
                                     составили 200 000 ₽. Итого совокупные расходы за второй год = 533 333.36 ₽. На фоне роста курса стоимость добытой на кошелек
                                     криптовалюты составила <strong class="text-slate-800 dark:text-slate-200">1 000 000 ₽</strong>.
-                                    <p class="font-mono text-xs mt-4 font-bold text-rose-500">
+                                    <p class="font-mono text-xs mt-4 font-bold text-rose-600 dark:text-rose-400">
                                         -> Промежуточная прибыль до вычета убытков: 1 000 000 ₽ − 533 333.36 ₽ = 466 666.64 ₽.
                                     </p>
                                 </div>
 
                                 <div
-                                    class="p-2 sm:p-4 bg-white dark:bg-slate-950 border border-blue-200 dark:border-blue-900 rounded-xl font-mono text-xs space-y-1 text-slate-800 dark:text-slate-200">
+                                    class="p-2 sm:p-4 bg-white dark:bg-slate-950 border border-blue-500/30 rounded-xl font-mono text-xs space-y-1 text-slate-800 dark:text-slate-200">
                                     <p class="font-sans font-bold text-slate-500">Алгоритм применения ст. 283 НК РФ (Перенос убытка прошлого периода):</p>
                                     <p>1. Расчет лимита уменьшения налоговой базы текущего года (максимум 50%):</p>
                                     <p class="pl-4">Лимит списания = 466 666.64 ₽ × 50% = 233 333.32 ₽.</p>
@@ -1101,7 +1099,7 @@
                 <section id="block-7">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">07</span>
                             Продажа и списание оборудования
@@ -1110,7 +1108,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📊</span> Понятие остаточной стоимости на ОСНО (ст. 268 НК РФ)
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -1135,7 +1133,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📈</span> Расчет налога при продаже б/у техники выше остаточной стоимости
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1143,8 +1141,8 @@
                                 цене, которая превышает его текущую остаточную стоимость на балансе, у вас возникает прибыль от реализации.
                             </p>
 
-                            <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 p-2 sm:p-4 rounded-xl mb-4">
-                                <h4 class="font-bold text-blue-900 dark:text-blue-300 text-sm sm:text-base lg:text-lg mb-2">
+                            <div class="bg-blue-500/10 border border-blue-500/30 p-2 sm:p-4 rounded-xl mb-4">
+                                <h4 class="font-bold text-blue-600 dark:text-blue-400 text-sm sm:text-base lg:text-lg mb-2">
                                     <span class="inline mr-1 sm:mr-2">📋</span> Пример продажи оборудования с прибылью:
                                 </h4>
                                 <p class="mb-4 text-xs md:text-sm text-slate-600 dark:text-slate-400">
@@ -1153,7 +1151,7 @@
                                     <strong class="underline">80 000 ₽</strong>.
                                 </p>
                                 <div
-                                    class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 font-mono text-slate-800 dark:text-slate-200">
+                                    class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-500/30 font-mono text-slate-800 dark:text-slate-200">
                                     <p>1. Расчет остаточной стоимости устройства: 100 000 ₽ − 40 000 ₽ = 60 000 ₽</p>
                                     <p>2. Определение налоговой базы при реализации: 80 000 ₽ (Цена продажи) − 60 000 ₽ (Остаточная цена) = 20 000 ₽</p>
                                     <p>3. Налог на прибыль к уплате (ставка 25%): 20 000 ₽ × 25% = <span class="text-sm font-bold text-green-500">5 000
@@ -1161,7 +1159,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <p class="text-xs text-rose-500">
+                            <p class="text-xs text-rose-600 dark:text-rose-400">
                                 *Внимание: Если оборудование продается после полного нормативного списания (через 3–5 лет), его остаточная стоимость равна 0 ₽.
                                 В этом случае вся сумма, полученная от продажи б/у техники, признается чистой прибылью и облагается налогом по стандартной
                                 ставке ОСНО. Утверждение, что списанная техника продается без налогов - грубейшая ошибка.
@@ -1169,7 +1167,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📉</span> Учет убытка при продаже оборудования ниже балансовой стоимости
                             </h3>
                             <p class="mb-2 text-slate-600 dark:text-slate-400">
@@ -1193,8 +1191,8 @@
                                 </p>
                             </div>
 
-                            <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50 p-2 sm:p-4 rounded-xl">
-                                <h4 class="font-bold text-blue-900 dark:text-blue-300 text-sm sm:text-base lg:text-lg mb-2">
+                            <div class="bg-blue-500/10 border border-blue-500/30 p-2 sm:p-4 rounded-xl">
+                                <h4 class="font-bold text-blue-600 dark:text-blue-400 text-sm sm:text-base lg:text-lg mb-2">
                                     <span class="inline mr-1 sm:mr-2">📋</span> Пример продажи оборудования с убытком:
                                 </h4>
                                 <p class="mb-4 text-xs md:text-sm text-slate-600 dark:text-slate-400">
@@ -1203,7 +1201,7 @@
                                     за <strong class="underline">36 000 ₽</strong>.
                                 </p>
                                 <div
-                                    class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 font-mono text-slate-800 dark:text-slate-200">
+                                    class="text-xs space-y-1 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-4 rounded-xl border border-blue-500/30 font-mono text-slate-800 dark:text-slate-200">
                                     <p>1. Расчет общего убытка от сделки: 36 000 ₽ − 60 000 ₽ = −24 000 ₽ (Чистый убыток)</p>
                                     <p>2. Определение оставшегося срока амортизации: 36 мес. − 24 мес. = 12 месяцев</p>
                                     <p>3. Порядок списания убытка в КУДиР / Налоговый регистр:</p>
@@ -1220,7 +1218,7 @@
                 <section id="block-8">
                     <div class="border-b border-slate-300 dark:border-slate-700 pb-4 mb-6">
                         <h2
-                            class="scroll-mt-[540px] xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
+                            class="scroll-mt-135 xl:scroll-mt-36 text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-slate-200 sm:flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">08</span>
                             Первичные документы и чек-лист проверки ФНС
@@ -1229,7 +1227,7 @@
 
                     <div class="space-y-6 sm:space-y-8 lg:space-y-12">
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🕒</span>Сроки хранения документов: Требования подпункта 8 пункта 1 статьи 23 НК РФ
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1238,12 +1236,12 @@
                                 доходы и расходы. Согласно актуальной редакции <a class="inline text-indigo-500 hover:text-indigo-600 underline"
                                     target="_blank"
                                     href="https://www.consultant.ru/document/cons_doc_LAW_28165/f07c38898fd7af4a54b1c6d33e01f23cc2dae757/">подпункта 8 пункта 1
-                                    статьи 23 НК РФ</a>, минимальный срок хранения первичной документации составляет <strong class="text-rose-500 font-bold">5
+                                    статьи 23 НК РФ</a>, минимальный срок хранения первичной документации составляет <strong class="text-rose-600 dark:text-rose-400 font-bold">5
                                     лет</strong>.
                             </p>
 
-                            <div class="p-2 sm:p-4 border-l-4 border-amber-500 bg-amber-50/50 dark:bg-amber-950/10 rounded-r-lg mb-4">
-                                <span class="font-bold text-amber-950 dark:text-amber-300 text-xs md:text-sm block mb-1">
+                            <div class="p-2 sm:p-4 border-l-4 border-amber-500/50 bg-amber-500/10 rounded-r-lg mb-4">
+                                <span class="font-bold text-amber-800 dark:text-amber-200 text-xs md:text-sm block mb-1">
                                     ⚠️ Особое юридическое исключение при переносе убытков (п. 4 ст. 283 НК РФ):
                                 </span>
                                 <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400">
@@ -1260,7 +1258,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">📂</span>Полный чек-лист документов для прохождения камеральной и выездной проверки ФНС
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1353,7 +1351,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🗓️</span>Календарь налоговой отчетности и регламентированные сроки уплаты платежей
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1384,19 +1382,19 @@
                                         <tr>
                                             <td class="p-2 sm:p-3 font-medium text-slate-800 dark:text-slate-200">Физические лица</td>
                                             <td class="p-2 sm:p-3">Декларация 3-НДФЛ</td>
-                                            <td class="p-2 sm:p-3 text-rose-500 font-semibold">До 30 апреля года, следующего за отчетным</td>
+                                            <td class="p-2 sm:p-3 text-rose-600 dark:text-rose-400 font-semibold">До 30 апреля года, следующего за отчетным</td>
                                             <td class="p-2 sm:p-3">До 15 июля года, следующего за отчетным</td>
                                         </tr>
                                         <tr>
                                             <td class="p-2 sm:p-3 font-medium text-slate-800 dark:text-slate-200">ИП на ОСНО</td>
                                             <td class="p-2 sm:p-3">Декларация 3-НДФЛ + Учет вычетов в КУДиР</td>
-                                            <td class="p-2 sm:p-3 text-rose-500 font-semibold">До 30 апреля года, следующего за отчетным</td>
+                                            <td class="p-2 sm:p-3 text-rose-600 dark:text-rose-400 font-semibold">До 30 апреля года, следующего за отчетным</td>
                                             <td class="p-2 sm:p-3">Авансы - до 28 числа месяца после отчетного квартала. Итог - до 15 июля.</td>
                                         </tr>
                                         <tr>
                                             <td class="p-2 sm:p-3 font-medium text-slate-800 dark:text-slate-200">Юридические лица</td>
                                             <td class="p-2 sm:p-3">Декларация по налогу на прибыль (ст. 289 НК РФ)</td>
-                                            <td class="p-2 sm:p-3 text-rose-500 font-semibold">Ежеквартально/ежемесячно (до 25 числа месяца после
+                                            <td class="p-2 sm:p-3 text-rose-600 dark:text-rose-400 font-semibold">Ежеквартально/ежемесячно (до 25 числа месяца после
                                                 отчетного периода)</td>
                                             <td class="p-2 sm:p-3">Авансовые платежи вносятся ежемесячно или ежеквартально (строго до 28 числа)</td>
                                         </tr>
@@ -1406,7 +1404,7 @@
                         </div>
 
                         <div>
-                            <h3 class="scroll-mt-[540px] xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
+                            <h3 class="scroll-mt-135 xl:scroll-mt-36 text-lg lg:text-xl font-semibold text-slate-800 dark:text-slate-200 mb-2 sm:mb-3">
                                 <span class="inline mr-1 sm:mr-2">🔒</span>Ежемесячный операционный контроль: Обязанность до 20-го числа (ст. 14.1 ФЗ № 259-ФЗ)
                             </h3>
                             <p class="mb-4 sm:mb-5 lg:mb-6 text-slate-600 dark:text-slate-400">
@@ -1419,7 +1417,7 @@
                             </p>
 
                             <div
-                                class="bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-100 dark:border-blue-900 space-y-2 text-xs md:text-sm text-slate-600 dark:text-slate-400">
+                                class="bg-white dark:bg-slate-950 p-2 sm:p-4 rounded-xl border border-blue-500/30 space-y-2 text-xs md:text-sm text-slate-600 dark:text-slate-400">
                                 <p><strong class="text-slate-800 dark:text-slate-200">• Предельный срок:</strong> Строго <strong
                                         class="text-rose-600 dark:text-rose-400 font-bold">до 20-го числа месяца</strong>, следующего за месяцем добычи
                                     (например, подробный отчет за май обязаны отправить до 20 июня).</p>
@@ -1432,7 +1430,7 @@
                                     куда зачислялись монеты.</p>
                             </div>
 
-                            <p class="text-xs text-rose-500 font-medium mt-3">
+                            <p class="text-xs text-rose-600 dark:text-rose-400 font-medium mt-3">
                                 *Важно: Систематическое (более двух раз в течение календарного года) нарушение сроков отправки операционных сведений до 20-го
                                 числа или предоставление заведомо недостоверных данных о блокчейн-адресах является безусловным основанием для принудительного
                                 исключения предпринимателя или компании из Реестра майнеров ФНС. Это автоматически влечет за собой ограничение коммерческих

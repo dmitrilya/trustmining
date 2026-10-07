@@ -39,12 +39,12 @@
 
                     @if (!is_null($prize->deactivated_at))
                         <div
-                            class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/30 rounded-full text-xxs text-rose-500 font-black uppercase tracking-wider">
+                            class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/30 rounded-full text-xxs text-rose-600 dark:text-rose-400 font-black uppercase tracking-wider">
                             🔴 {{ __('Deactivated') }}
                         </div>
                     @elseif (is_null($prize->activated_at))
                         <div
-                            class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xxs text-amber-500 font-black uppercase tracking-wider">
+                            class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-xxs text-amber-600 dark:text-amber-400 font-black uppercase tracking-wider">
                             ⏳ {{ __('Awaiting launch') }}
                         </div>
                     @else

@@ -28,9 +28,9 @@
                             <div class="shrink-0">⚠️</div>
                             <div class="ml-3">
                                 <p class="text-sm text-amber-800 dark:text-amber-200 font-bold">{{ __('Important Requirement') }}</p>
-                                <p class="text-xs text-amber-500 mt-1">
+                                <p class="text-xs text-amber-600 dark:text-amber-400 mt-1">
                                     {{ __('Each API request must contain a header') }} <code
-                                        class="bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Accept: application/json</code>.
+                                        class="bg-amber-500/10 px-1 py-0.5 rounded">Accept: application/json</code>.
                                     {{ __('Without it, the server will return an incorrect response in HTML format instead of JSON') }}.
                                 </p>
                             </div>
@@ -119,13 +119,13 @@
                                         <td class="pr-2 py-2 pl-4 text-indigo-500 whitespace-nowrap">└ warranty</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int|null</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">{{ __('Warranty in months') }}. <span
-                                                class="italic text-amber-500">({{ __('mandatory only if') }} condition == used)</span></td>
+                                                class="italic text-amber-600 dark:text-amber-400">({{ __('mandatory only if') }} condition == used)</span></td>
                                     </tr>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/10">
                                         <td class="pr-2 py-2 pl-4 text-indigo-500 whitespace-nowrap">└ waiting</td>
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int|null</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">{{ __('Delivery lead time in days') }}. <span
-                                                class="italic text-amber-500">({{ __('mandatory only if') }} availability == preorder)</span></td>
+                                                class="italic text-amber-600 dark:text-amber-400">({{ __('mandatory only if') }} availability == preorder)</span></td>
                                     </tr>
                                     <tr>
                                         <td class="pr-2 py-2 text-indigo-500 font-bold">price</td>
@@ -205,7 +205,7 @@
                     <span class="text-slate-600 dark:text-slate-400 text-sm">— {{ __('Bulk editing of ad parameters') }}</span>
                 </div>
 
-                <div class="bg-rose-50 dark:bg-rose-950/20 border-l-4 border-rose-500/30 p-4 rounded-r-md">
+                <div class="bg-rose-500/10 border-l-4 border-rose-500/30 p-4 rounded-r-md">
                     <div class="flex">
                         <div class="shrink-0">🚫</div>
                         <div class="ml-3">
@@ -273,7 +273,7 @@
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">{{ __('Optional') }} |
                                             {{ __('Number of warranty months from 0 to 12') }} <span
-                                                class="italic text-amber-500">({{ __('for used only') }})</span></td>
+                                                class="italic text-amber-600 dark:text-amber-400">({{ __('for used only') }})</span></td>
                                     </tr>
                                     <tr class="bg-slate-50/50 dark:bg-slate-800/10">
                                         <td class="pr-2 py-2 text-indigo-500 font-bold">ads.props.waiting
@@ -281,7 +281,7 @@
                                         <td class="pr-2 py-2 text-slate-600 dark:text-slate-400">int</td>
                                         <td class="py-2 text-slate-600 dark:text-slate-400">{{ __('Optional') }} |
                                             {{ __('Waiting period in days from 1 to 120') }} <span
-                                                class="italic text-amber-500">({{ __('for pre-order only') }})</span>
+                                                class="italic text-amber-600 dark:text-amber-400">({{ __('for pre-order only') }})</span>
                                         </td>
                                     </tr>
                                 </tbody>

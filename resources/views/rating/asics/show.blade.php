@@ -84,9 +84,9 @@
                                         <span class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
                                         <div class="mt-2 flex items-baseline gap-2">
                                             <span class="text-xl sm:text-3xl font-black"
-                                                :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-500'"
+                                                :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400'"
                                                 x-text="sortedModels[0].netProfit"></span>
-                                            <span class="font-bold" :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-500/50'">USDT</span>
+                                            <span class="font-bold" :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400/50'">USDT</span>
                                         </div>
                                         <p class="text-slate-400 text-xs mt-1 sm:mt-2"
                                             x-text="'≈' + Math.round(sortedModels[0].netProfit / rub * 100) / 100 + '₽'"></p>
@@ -117,8 +117,8 @@
                                     <template x-if="sortedModels[0].v.p">
                                         <div class="mt-1 sm:mt-1.5 w-fit px-1 xs:px-2 py-0.5 rounded text-xxs xxs:text-xs font-bold uppercase tracking-tighter"
                                             :class="{
-                                                'bg-rose-500/10 text-rose-500': sortedModels[0].payback > 1460 || sortedModels[0].payback == 99999,
-                                                'bg-amber-500/10 text-amber-500': sortedModels[0].payback > 730 && sortedModels[0].payback <= 1460,
+                                                'bg-rose-500/10 text-rose-600 dark:text-rose-400': sortedModels[0].payback > 1460 || sortedModels[0].payback == 99999,
+                                                'bg-amber-500/10 text-amber-600 dark:text-amber-400': sortedModels[0].payback > 730 && sortedModels[0].payback <= 1460,
                                                 'bg-emerald-500/10 text-emerald-500': sortedModels[0].payback <= 730,
                                             }">
                                             <span

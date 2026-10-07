@@ -125,12 +125,12 @@
                 </div>
             </div>
 
-            <div class="bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 p-4 rounded-r-md">
+            <div class="bg-amber-500/10 border-l-4 border-amber-500/50 p-4 rounded-r-md">
                 <div class="flex items-start gap-3">
                     <div class="text-lg">⚠️</div>
                     <div class="space-y-1">
                         <h4 class="text-sm font-bold text-amber-800 dark:text-amber-200">Риски работы в серой зоне</h4>
-                        <p class="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
+                        <p class="text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
                             С ужесточением контроля со стороны ЦБ РФ и Росфинмониторинга, любая P2P-активность или промышленный майнинг без легальной структуры
                             неизбежно приводят к запросам по 115-ФЗ и полной заморозке капитала. Своевременное выстраивание белой юридической схемы обходится в
                             10 раз дешевле, чем последующие судебные издержки.

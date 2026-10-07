@@ -32,9 +32,9 @@
     </div>
 
     <div class="grid grid-cols-1 xs:grid-cols-3 gap-1 xs:gap-2 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700">
-        <x-inputs.text-input id="tariff_tariff" type="text" ::value="tariff" placeholder="₽/{{ __('kW') }}" class="w-full !mt-0"
+        <x-inputs.text-input id="tariff_tariff" type="text" ::value="tariff" placeholder="₽/{{ __('kW') }}" class="w-full mt-0!"
             @input="tariff = filterDouble($el, 0, 10, 2);$el.value = tariff" />
-        <x-inputs.text-input id="tariff_uptime" type="text" ::value="uptime" placeholder="%" class="w-full !mt-0"
+        <x-inputs.text-input id="tariff_uptime" type="text" ::value="uptime" placeholder="%" class="w-full mt-0!"
             @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
         <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addTariff()">＋ {{ __('Add') }}</x-buttons.secondary-button>
     </div>
@@ -55,7 +55,7 @@
                             <td class="px-2 xs:px-4 py-2" x-text="tariff.t + ' ₽/{{ __('kW') }}'"></td>
                             <td class="px-2 xs:px-4 py-2" x-text="tariff.u + '%'"></td>
                             <td class="px-2 xs:px-4 py-2 text-right">
-                                <button type="button" @click="removeTariff(i)" class="text-red-700 hover:text-red-500 text-xs transition">
+                                <button type="button" @click="removeTariff(i)" class="text-red-600 dark:text-red-400 text-xs transition">
                                     {{ __('Delete') }}
                                 </button>
                             </td>

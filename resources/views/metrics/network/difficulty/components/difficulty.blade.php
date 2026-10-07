@@ -8,7 +8,7 @@
 
         <span class="sr-only">{{ __('The data is current at the time') }} {{ $actualDate->toIso8601String() }}</span>
         <div
-            class="text-xxs xxs:text-xs px-2 xs:px-4 py-1.5 xs:py-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 text-slate-600 dark:text-slate-400 uppercase tracking-widest">
+            class="text-xxs xxs:text-xs px-2 xs:px-4 py-1.5 xs:py-2 rounded-lg bg-indigo-500/10 border border-indigo-600 text-slate-600 dark:text-slate-400 uppercase tracking-widest">
             {{ __('Updated') }}: <span class="text-indigo-500">{{ $actualDate->diffForHumans() }}</span>
         </div>
 
@@ -78,7 +78,7 @@
                         <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5">
                             {{ __('Difficulty prediction') }}
                         </h2>
-                        <span class="text-2xl xs:text-4xl lg:text-5xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-500' }}">
+                        <span class="text-2xl xs:text-4xl lg:text-5xl font-black {{ $prediction > 0 ? 'text-green-500' : 'text-red-600 dark:text-red-400' }}">
                             {{ $prediction > 0 ? '+' : '' }}{{ $prediction }}%
                         </span>
                     </div>
@@ -97,7 +97,7 @@
                         </div>
                         <div>
                             <h3 class="sr-only">{{ __('Time left until the calculation') }}</h3>
-                            <span class="text-xxs xxs:text-sm text-amber-500 font-medium block leading-tight">{{ $needBlocksTime }}</span>
+                            <span class="text-xxs xxs:text-sm text-amber-600 dark:text-amber-400 font-medium block leading-tight">{{ $needBlocksTime }}</span>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                         30 {{ __('days') }}
                     </span>
                     <span class="sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight"
-                        x-text="diff30d ? (diff30d > 0 ? '+' + diff30d : diff30d) + '%' : '...'" :class="diff30d > 0 ? 'text-green-500' : 'text-red-500'">
+                        x-text="diff30d ? (diff30d > 0 ? '+' + diff30d : diff30d) + '%' : '...'" :class="diff30d > 0 ? 'text-green-500' : 'text-red-600 dark:text-red-400'">
                     </span>
                 </div>
 
@@ -142,7 +142,7 @@
                         90 {{ __('days') }}
                     </span>
                     <span class="sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight"
-                        x-text="diff90d ? (diff90d > 0 ? '+' + diff90d : diff90d) + '%' : '...'" :class="diff90d > 0 ? 'text-green-500' : 'text-red-500'">
+                        x-text="diff90d ? (diff90d > 0 ? '+' + diff90d : diff90d) + '%' : '...'" :class="diff90d > 0 ? 'text-green-500' : 'text-red-600 dark:text-red-400'">
                     </span>
                 </div>
 
@@ -151,7 +151,7 @@
                         180 {{ __('days') }}
                     </span>
                     <span class="sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight"
-                        x-text="diff180d ? (diff180d > 0 ? '+' + diff180d : diff180d) + '%' : '...'" :class="diff180d > 0 ? 'text-green-500' : 'text-red-500'">
+                        x-text="diff180d ? (diff180d > 0 ? '+' + diff180d : diff180d) + '%' : '...'" :class="diff180d > 0 ? 'text-green-500' : 'text-red-600 dark:text-red-400'">
                     </span>
                 </div>
 
@@ -160,7 +160,7 @@
                         1 {{ __('year') }}
                     </span>
                     <span class="sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight"
-                        x-text="diff1y ? (diff1y > 0 ? '+' + diff1y : diff1y) + '%' : '...'" :class="diff1y > 0 ? 'text-green-500' : 'text-red-500'">
+                        x-text="diff1y ? (diff1y > 0 ? '+' + diff1y : diff1y) + '%' : '...'" :class="diff1y > 0 ? 'text-green-500' : 'text-red-600 dark:text-red-400'">
                     </span>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                 <div class="flex bg-white/40 dark:bg-slate-900/40 rounded-lg overflow-hidden border dark:border-slate-700">
                     <div @click="period = '3m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3m'])"
                         :class="{
-                            'text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50': period ==
+                            'text-indigo-500 bg-indigo-500/10': period ==
                                 '3m',
                             'text-slate-600 dark:text-slate-400': period != '3m'
                         }"
@@ -188,7 +188,7 @@
                     </div>
                     <div @click="period = '6m';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['6m'])"
                         :class="{
-                            'text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50': period ==
+                            'text-indigo-500 bg-indigo-500/10': period ==
                                 '6m',
                             'text-slate-600 dark:text-slate-400': period != '6m'
                         }"
@@ -197,7 +197,7 @@
                     </div>
                     <div @click="period = '1y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['1y'])"
                         :class="{
-                            'text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50': period ==
+                            'text-indigo-500 bg-indigo-500/10': period ==
                                 '1y',
                             'text-slate-600 dark:text-slate-400': period != '1y'
                         }"
@@ -206,7 +206,7 @@
                     </div>
                     <div @click="period = '3y';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['3y'])"
                         :class="{
-                            'text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50': period ==
+                            'text-indigo-500 bg-indigo-500/10': period ==
                                 '3y',
                             'text-slate-600 dark:text-slate-400': period != '3y'
                         }"
@@ -215,7 +215,7 @@
                     </div>
                     <div @click="period = 'all';window.graph_chart.xAxes.values[0].set('min', window.dateDiffs['all'])"
                         :class="{
-                            'text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50': period ==
+                            'text-indigo-500 bg-indigo-500/10': period ==
                                 'all',
                             'text-slate-600 dark:text-slate-400': period != 'all'
                         }"

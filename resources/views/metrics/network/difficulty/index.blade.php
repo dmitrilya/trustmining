@@ -81,7 +81,7 @@
                                 <td class="py-1.5 xs:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
                                     :class="{
                                         'text-green-500': item.value > items[i + 1]?.value,
-                                        'text-red-500': item.value < items[i + 1]?.value,
+                                        'text-red-600 dark:text-red-400': item.value < items[i + 1]?.value,
                                         'text-slate-800 dark:text-slate-200': item.value == items[i + 1]?.value
                                     }"
                                     x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">
@@ -159,7 +159,7 @@
                         <td class="py-1.5 xs:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap"
                             :class="{
                                 'text-green-500': {{ $prediction ?? 0 }} < 0,
-                                'text-red-500': {{ $prediction ?? 0 }} > 0,
+                                'text-red-600 dark:text-red-400': {{ $prediction ?? 0 }} > 0,
                                 'text-slate-800 dark:text-slate-200': {{ $prediction ?? 0 }} == 0
                             }">
                             {{ $model['pp'] }}
@@ -168,7 +168,7 @@
                         <td class="py-1.5 xs:py-2 pl-2 sm:pl-4 text-xxs xs:text-xs sm:text-sm lg:text-base text-right whitespace-nowrap hidden xs:table-cell items-end"
                             :class="{
                                 'text-green-500': {{ $prediction ?? 0 }} < 0,
-                                'text-red-500': {{ $prediction ?? 0 }} > 0,
+                                'text-red-600 dark:text-red-400': {{ $prediction ?? 0 }} > 0,
                                 'text-slate-800 dark:text-slate-200': {{ $prediction ?? 0 }} == 0
                             }">
                             {{ $model['c'] }}

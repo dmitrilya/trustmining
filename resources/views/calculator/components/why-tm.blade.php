@@ -39,7 +39,7 @@
 
         <div class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-3">
             <div class="flex items-center gap-2 mb-2 lg:mb-4">
-                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500">
+                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
                     </svg>
@@ -59,7 +59,7 @@
 
         <div class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-3">
             <div class="flex items-center gap-2 mb-2 lg:mb-4">
-                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500">
+                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                     </svg>
@@ -162,7 +162,7 @@
 
         <div class="rounded-xl border border-slate-300 dark:border-slate-700 bg-white/40 dark:bg-slate-900/40 p-2 sm:p-3">
             <div class="flex items-center gap-2 mb-2 lg:mb-4">
-                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500/10 text-orange-500">
+                <div class="shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a2.25 2.25 0 003.182 0l4.318-4.318a2.25 2.25 0 000-3.182L11.16 3.659A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z" />

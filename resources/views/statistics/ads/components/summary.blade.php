@@ -14,7 +14,7 @@
                     <div class="text-xxs lg:text-xs"
                         :class="{
                             'text-green-500': views_count_coef > 0 || views_count_coef === '∞',
-                            'text-red-500': views_count_coef < 0,
+                            'text-red-600 dark:text-red-400': views_count_coef < 0,
                             'text-slate-500': views_count_coef == 0
                         }"
                         x-text="views_count_coef != 0 ? views_count_coef > 0 || views_count_coef === '∞' ? '▲ ' + views_count_coef + '%' : '▼ ' + views_count_coef + '%' : '⬥ ' + views_count_coef + '%'">
@@ -35,7 +35,7 @@
                     <div class="text-xxs lg:text-xs"
                         :class="{
                             'text-green-500': visits_count_coef > 0 || visits_count_coef === '∞',
-                            'text-red-500': visits_count_coef < 0,
+                            'text-red-600 dark:text-red-400': visits_count_coef < 0,
                             'text-slate-500': visits_count_coef == 0
                         }"
                         x-text="visits_count_coef != 0 ? visits_count_coef > 0 || visits_count_coef === '∞' ? '▲ ' + visits_count_coef + '%' : '▼ ' + visits_count_coef + '%' : '⬥ ' + visits_count_coef + '%'">
@@ -56,7 +56,7 @@
                     <div class="text-xxs lg:text-xs"
                         :class="{
                             'text-green-500': phone_views_count_coef > 0 || phone_views_count_coef === '∞',
-                            'text-red-500': phone_views_count_coef < 0,
+                            'text-red-600 dark:text-red-400': phone_views_count_coef < 0,
                             'text-slate-500': phone_views_count_coef == 0
                         }"
                         x-text="phone_views_count_coef != 0 ? phone_views_count_coef > 0 || phone_views_count_coef === '∞' ? '▲ ' + phone_views_count_coef + '%' : '▼ ' + phone_views_count_coef + '%' : '⬥ ' + phone_views_count_coef + '%'">
@@ -77,7 +77,7 @@
                     <div class="text-xxs lg:text-xs"
                         :class="{
                             'text-green-500': tracks_count_coef > 0 || tracks_count_coef === '∞',
-                            'text-red-500': tracks_count_coef < 0,
+                            'text-red-600 dark:text-red-400': tracks_count_coef < 0,
                             'text-slate-500': tracks_count_coef == 0
                         }"
                         x-text="tracks_count_coef != 0 ? tracks_count_coef > 0 || tracks_count_coef === '∞' ? '▲ ' + tracks_count_coef + '%' : '▼ ' + tracks_count_coef + '%' : '⬥ ' + tracks_count_coef + '%'">
@@ -98,7 +98,7 @@
                     <div class="text-xxs lg:text-xs"
                         :class="{
                             'text-green-500': chats_count_coef > 0 || chats_count_coef === '∞',
-                            'text-red-500': chats_count_coef < 0,
+                            'text-red-600 dark:text-red-400': chats_count_coef < 0,
                             'text-slate-500': chats_count_coef == 0
                         }"
                         x-text="chats_count_coef != 0 ? chats_count_coef > 0 || chats_count_coef === '∞' ? '▲ ' + chats_count_coef + '%' : '▼ ' + chats_count_coef + '%' : '⬥ ' + chats_count_coef + '%'">
@@ -116,7 +116,7 @@
                 <div class="text-xxs lg:text-xs"
                     :class="{
                         'text-green-500': cr_coef > 0 || cr_coef === '∞',
-                        'text-red-500': cr_coef < 0,
+                        'text-red-600 dark:text-red-400': cr_coef < 0,
                         'text-slate-500': cr_coef == 0
                     }"
                     x-text="cr_coef != 0 ? cr_coef > 0 || cr_coef === '∞' ? '▲ ' + cr_coef + '%' : '▼ ' + cr_coef + '%' : '⬥ ' + cr_coef + '%'">

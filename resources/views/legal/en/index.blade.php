@@ -125,12 +125,12 @@
                 </div>
             </div>
 
-            <div class="bg-amber-50 dark:bg-amber-950/20 border-l-4 border-amber-500 p-4 rounded-r-md">
+            <div class="bg-amber-500/10 border-l-4 border-amber-500/50 p-4 rounded-r-md">
                 <div class="flex items-start gap-3">
                     <div class="text-lg">⚠️</div>
                     <div class="space-y-1">
                         <h4 class="text-sm font-bold text-amber-800 dark:text-amber-200">Risks of operating in the gray zone</h4>
-                        <p class="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
+                        <p class="text-xs text-amber-600 dark:text-amber-400 leading-relaxed">
                             With the tightening of control by the Central Bank of the Russian Federation and Rosfinmonitoring, any P2P activity or
                             industrial mining without a legal structure inevitably leads to requests under Federal Law No. 115-FZ and a complete
                             freeze of capital. Building a compliant legal structure in a timely manner costs 10 times less than the subsequent

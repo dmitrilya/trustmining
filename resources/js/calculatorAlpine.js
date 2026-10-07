@@ -197,12 +197,12 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
                 taxHelp.push(`<p class='font-sans text-slate-500 mb-1'>${l['Equipment amortization']}</p>`);
                 taxHelp.push(`<span>${l['Price']} ${this.version.n} ${this.version.h}${this.version.m} - <span class='text-indigo-500'>${minPriceRubRounded}</span> ₽ (${l['With VAT']})</span><br>`);
                 if (this.count > 1) taxHelp.push(`<span><span class='text-indigo-500'>${minPriceRubRounded}</span> * ${this.count} = <span class='text-indigo-500'>${minPriceRubRounded * this.count}</span></span><br>`);
-                taxHelp.push(`<span><span class='text-indigo-500'>${minPriceRubRounded * this.count}</span> / 1095 (3 ${l['y']}) = <span class='text-blue-700 dark:text-blue-300'>${amortization}</span></span><br>`);
+                taxHelp.push(`<span><span class='text-indigo-500'>${minPriceRubRounded * this.count}</span> / 1095 (3 ${l['y']}) = <span class='text-blue-600 dark:text-blue-400'>${amortization}</span></span><br>`);
             }
 
             taxHelp.push(`<p class='font-sans text-slate-500 mt-1.5 mb-1'>${l['Tax base']}</p>`);
-            taxHelp.push(`<span class='text-emerald-500'>${round2(dailyIncome / rub)}</span> - <span class='text-red-700 dark:text-red-500'>${round2(dailyConsumption)}</span>`);
-            if (isCompany && this.minPriceUSDT) taxHelp.push(` - <span class='text-blue-700 dark:text-blue-300'>${amortization}</span>`);
+            taxHelp.push(`<span class='text-emerald-500'>${round2(dailyIncome / rub)}</span> - <span class='text-red-600 dark:text-red-400'>${round2(dailyConsumption)}</span>`);
+            if (isCompany && this.minPriceUSDT) taxHelp.push(` - <span class='text-blue-600 dark:text-blue-400'>${amortization}</span>`);
 
             const cryptoTaxProfitRounded = round2(cryptoTaxProfit);
             taxHelp.push(` = <span class='text-yellow-300'>${cryptoTaxProfitRounded}</span>`);

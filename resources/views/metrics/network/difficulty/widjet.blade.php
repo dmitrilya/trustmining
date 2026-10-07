@@ -124,7 +124,7 @@ $watch('currentTheme', value => {
                                     <td class="py-1.5 lg:py-2 text-xxs xxs:text-xs xs:text-sm sm:text-base text-right whitespace-nowrap"
                                         :class="{
                                             'text-green-500': item.value > items[i + 1]?.value,
-                                            'text-red-500': item.value < items[i + 1]?.value,
+                                            'text-red-600 dark:text-red-400': item.value < items[i + 1]?.value,
                                             'text-slate-800 dark:text-slate-200': item.value == items[i + 1]?.value
                                         }"
                                         x-text="items[i + 1] ? (item.value > items[i + 1].value ? '+' + Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%' : Math.round((item.value / items[i + 1].value - 1) * 10000) / 100 + '%') : '—'">

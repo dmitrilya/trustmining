@@ -6,7 +6,7 @@
                 {{ __('The criteria and their strictness depend on the main activity of the company and the presence of certain announcements') }}
             </p>
         </div>
-        <div class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600">
+        <div class="w-full sm:w-fit flex flex-col items-center text-xs px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-600">
             <div class="whitespace-nowrap text-slate-600 dark:text-slate-400 mb-1">{{ __('Main direction') }}</div>
             <div class="whitespace-nowrap text-indigo-500 uppercase">{{ __('trustfactor.directions.' . $tfData['direction']) }}</div>
         </div>

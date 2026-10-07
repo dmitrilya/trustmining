@@ -42,7 +42,7 @@
                 <x-inputs.length-input id="series-name" name="name" type="text" autocomplete="series-name" required
                     max="30" />
                 <template x-if="validation.name">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.name?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.name?.[0]"></p>
                 </template>
             </div>
 
@@ -51,7 +51,7 @@
                 <x-inputs.length-textarea id="series-description" rows="4" name="description" required max="300"
                     :value="old('description')" />
                 <template x-if="validation.description">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.description?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.description?.[0]"></p>
                 </template>
             </div>
 

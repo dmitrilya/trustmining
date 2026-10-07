@@ -1,12 +1,13 @@
 @import 'fonts.css';
 @import 'quill.css';
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 
 @plugin "@tailwindcss/aspect-ratio";
 
-@source "/vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
-@source "/resources/views/**/*.blade.php";
-@source "!/resources/views/roadmap.blade.php";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../views/**/*.blade.php";
+@source not "../views/roadmap.blade.php";
+@source not "../views/**/svg/**/*.blade.php";
 
 @theme {
     --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif,

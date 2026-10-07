@@ -80,28 +80,25 @@
                                     {{ $name }}
                                 </h1>
 
+                                @php
+                                    $price = $moderation->data['price'] ?? $ad->price;
+                                    $withVat = $moderation->data['with_vat'] ?? $ad->with_vat;
+                                @endphp
+
                                 <p
                                     class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200{{ isset($moderation->data['price']) ? ' border border-indigo-500' : '' }}">
-                                    @if (isset($moderation->data['price']))
-                                        @if ($moderation->data['price'] != 0)
-                                            {{ $moderation->data['price'] }} {{ $ad->coin->abbreviation }}
-                                            @if ($moderation->data['with_vat'])
-                                                <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
-                                            @endif
-                                        @else
-                                            {{ __('Price on request') }}
-                                        @endif
+                                    @if ($price != 0)
+                                        {{ $price }} {{ $ad->coin->abbreviation }}
                                     @else
-                                        @if ($ad->price != 0)
-                                            {{ $ad->price }} {{ $ad->coin->abbreviation }}
-                                            @if ($ad->with_vat)
-                                                <span class="text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
-                                            @endif
-                                        @else
-                                            {{ __('Price on request') }}
-                                        @endif
+                                        {{ __('Price on request') }}
                                     @endif
                                 </p>
+
+                                @if ($price != 0 && $withVat)
+                                    <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                        {{ __('The price includes VAT') }}
+                                    </div>
+                                @endif
 
                                 <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                                     target="_blank"
@@ -115,7 +112,7 @@
                                 </a>
 
                                 @php
-                                    $props = isset($moderation->data['props']) ? $moderation->data['props'] : $ad->props;
+                                    $props = $moderation->data['props'] ?? $ad->props;
                                 @endphp
 
                                 <div class="md:col-span-2 md:col-start-1">
@@ -313,21 +310,26 @@
                                 @endif
 
                                 @if ($ad->price != 0)
-                                    <p class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200 flex items-center">
+                                    <div class="mt-5 text-2xl font-semibold text-slate-800 dark:text-slate-200">
                                         <meta itemprop="priceCurrency" content="{{ $ad->coin->abbreviation != 'USDT' ? $ad->coin->abbreviation : 'USD' }}" />
-                                        <span itemprop="price">{{ $ad->price }}</span>
-                                        <span class="ml-2">{{ $ad->coin->abbreviation }}</span>
                                         <meta itemprop="valueAddedTaxIncluded" content="{{ $ad->with_vat ? 'true' : 'false' }}" />
-                                        @if ($ad->with_vat)
-                                            <span class="ml-1 text-xs sm:text-sm lg:text-base">({{ __('The price includes VAT') }})</span>
-                                        @endif
 
                                         @if ($ad->adCategory->name == 'miners' && data_get($ad, 'version_data.price_data.' . $ad->props['Condition'] . '.' . $ad->props['Availability'], null) !== null)
                                             @include('ad.components.price-graduation', [
+                                                'price' => $ad->price . ' ' . $ad->coin->abbreviation,
+                                                'withVat' => $ad->with_vat,
                                                 'priceData' => $ad->version_data->price_data[$ad->props['Condition']][$ad->props['Availability']],
                                             ])
+                                        @else
+                                            <div><span itemprop="price">{{ $ad->price }}</span> {{ $ad->coin->abbreviation }}</div>
                                         @endif
-                                    </p>
+                                    </div>
+
+                                    @if ($ad->with_vat)
+                                        <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                            {{ __('The price includes VAT') }}
+                                        </div>
+                                    @endif
                                 @else
                                     <div itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
                                         <meta itemprop="price" content="0" />

@@ -51,11 +51,11 @@
                 <button @click="toggleReaction(type)"
                     :style="'transform: translateX(' + (getIndex(type) * 44) + 'px)'"
                     :class="userReaction === type ?
-                        'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-500 ring-1 ring-indigo-500/40' :
+                        'bg-indigo-500/10 text-indigo-500 ring-1 ring-indigo-500/40' :
                         'bg-slate-200 dark:bg-slate-800 text-slate-500 hover:bg-slate-100'"
                     class="absolute left-0 flex items-center justify-center gap-0.5 px-1 py-0.5 rounded-full transition duration-500 ease-in-out select-none">
                     <span x-text="reactions[type].symbol"></span>
-                    <span x-text="reactions[type].count" class="min-w-[10px]"></span>
+                    <span x-text="reactions[type].count" class="min-w-2.5"></span>
                 </button>
             </template>
         </div>
@@ -78,7 +78,7 @@
                         }
                     }"
                         x-init="resize()" @input="resize()" @readonly(!auth()->check())
-                        class="py-[0.125rem] min-h-7 bg-transparent border-0 resize-none focus:ring-0 overflow-hidden w-full"></textarea>
+                        class="py-0.5 min-h-7 bg-transparent border-0 resize-none focus:ring-0 overflow-hidden w-full"></textarea>
 
                     <button
                         class="text-base bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 hover:dark:bg-slate-700 shadow-lg text-slate-600 dark:text-slate-400 min-w-7 w-7 h-7 flex items-center justify-center rounded-full">↑</button>

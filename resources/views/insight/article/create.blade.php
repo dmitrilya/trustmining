@@ -177,7 +177,7 @@
                 <x-inputs.length-input id="article-title" name="title" type="text" x-model="title" autocomplete="title" required max="40"
                     @change="saveDraft('article', {title, subtitle, content})" />
                 <template x-if="validation.title">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.title?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.title?.[0]"></p>
                 </template>
             </div>
 
@@ -186,7 +186,7 @@
                 <x-inputs.length-input id="article-subtitle" name="subtitle" type="text" x-model="subtitle" autocomplete="subtitle" required max="70"
                     @change="saveDraft('article', {title, subtitle, content})" />
                 <template x-if="validation.subtitle">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.subtitle?.[0]"></p>
                 </template>
             </div>
 
@@ -194,7 +194,7 @@
                 <x-inputs.input-label for="preview" :value="__('Preview')" />
                 <x-inputs.file-input id="preview" name="preview" class="mt-1 block w-full" accept=".png,.jpg,.jpeg,.webp" required label="max. 5MB, 4/3" />
                 <template x-if="validation.preview">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.preview?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.preview?.[0]"></p>
                 </template>
             </div>
 
@@ -205,19 +205,19 @@
             <x-inputs.multiselect name="tags" label="Hashtags" :all="$tags" withAdding="true" />
 
             <template x-if="validation.tags">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.tags?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.tags?.[0]"></p>
             </template>
 
             <x-inputs.editor name="content" class="mt-2 -mx-2 sm:-mx-4" />
             <template x-if="validation.content">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.content?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.content?.[0]"></p>
             </template>
 
             <div class="xs:flex items-end">
                 <div class="w-full">
                     <x-inputs.date-picker name="published_at" label="Publication date" type="datetime" min="today" :value="old('published_at')" />
                     <template x-if="validation.published_at">
-                        <p class="text-red-500 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
+                        <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.published_at?.[0]"></p>
                     </template>
                 </div>
 

@@ -32,7 +32,7 @@
             @endif
 
             <template x-if="dailyProfit < 0">
-                <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/30 text-xs text-center">
+                <div class="w-fit mx-auto mt-2 px-2 py-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs text-center">
                     <span x-text="'{{ __('It will work in plus with the tariff') }} ' + maxProfitableTariff + ' ₽/{{ __('kW·h') }}'"></span>
                 </div>
             </template>
@@ -43,10 +43,10 @@
                 <span class="text-emerald-500">
                     {{ __('Income') }}
                     <template x-if="firmware && firmware.f > 0">
-                        <span class="text-red-700 dark:text-red-500" x-text="'(-' + firmware.f + '%)'"></span>
+                        <span class="text-red-600 dark:text-red-400" x-text="'(-' + firmware.f + '%)'"></span>
                     </template>
                 </span>
-                <span class="text-red-700 dark:text-red-500">{{ __('Expense') }} (<span x-text="Math.round(hashrate * efficiency)"></span>
+                <span class="text-red-600 dark:text-red-400">{{ __('Expense') }} (<span x-text="Math.round(hashrate * efficiency)"></span>
                     {{ __('W') }})</span>
                 <template x-if="taxEnabled">
                     <span class="text-rose-600 dark:text-rose-400">{{ __('Tax') }}</span>
@@ -54,7 +54,7 @@
             </div>
             <div class="mt-2 h-1 sm:h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
                 <div class="h-full bg-emerald-500 transition duration-500" :style="`width: ${incPercent}%`"></div>
-                <div class="h-full bg-red-600 transition duration-500" :style="`width: ${expPercent}%`"></div>
+                <div class="h-full bg-red-500 transition duration-500" :style="`width: ${expPercent}%`"></div>
                 <template x-if="taxEnabled">
                     <div class="h-full bg-rose-500 transition duration-500" :style="`width: ${taxPercent}%`"></div>
                 </template>

@@ -12,11 +12,11 @@
                 class="text-slate-400 text-xxs xxs:text-xs font-bold uppercase tracking-widest">{{ __('Profit per day') }}</span>
             <div class="mt-2 flex items-baseline gap-2">
                 <span class="text-xl sm:text-3xl font-black"
-                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500'">
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400'">
                     {{ number_format($profit, 2, '.', ' ') }}
                 </span>
                 <span class="font-bold"
-                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-500/50'">USDT</span>
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400/50'">USDT</span>
             </div>
             <p class="text-slate-400 text-xs mt-1 sm:mt-2">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
         </div>
@@ -48,8 +48,8 @@
         @if ($price != 0)
             <div class="mt-1 sm:mt-1.5 w-fit px-1 xs:px-2 py-0.5 rounded text-xxs xxs:text-xs font-bold uppercase tracking-tighter"
                 :class="{
-                    'bg-rose-500/10 text-rose-500': payback > 1460 || payback == '∞',
-                    'bg-amber-500/10 text-amber-500': payback > 730 && payback <= 1460,
+                    'bg-rose-500/10 text-rose-600 dark:text-rose-400': payback > 1460 || payback == '∞',
+                    'bg-amber-500/10 text-amber-600 dark:text-amber-400': payback > 730 && payback <= 1460,
                     'bg-emerald-500/10 text-emerald-500': payback <= 730,
                 }">
                 <span

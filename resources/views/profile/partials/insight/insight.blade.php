@@ -50,7 +50,7 @@
                 <x-inputs.length-input id="channel-name" name="name" type="text" :value="$channel->name ?? old('name')"
                     autocomplete="name" required max="30" />
                 <template x-if="validation.name">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.name?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.name?.[0]"></p>
                 </template>
             </div>
 
@@ -59,7 +59,7 @@
                 <x-inputs.length-input id="channel-slug" name="slug" type="text" :value="$channel->slug ?? old('slug')"
                     autocomplete="slug" required max="20" regex="/[^a-z0-9_]/g" />
                 <template x-if="validation.slug">
-                    <p class="text-red-500 text-xs mt-1" x-text="validation.slug?.[0]"></p>
+                    <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.slug?.[0]"></p>
                 </template>
             </div>
         </div>
@@ -69,7 +69,7 @@
             <x-inputs.length-input id="channel-brief_description" name="brief_description" type="text"
                 :value="$channel->brief_description ?? old('brief_description')" autocomplete="brief_description" required max="100" />
             <template x-if="validation.brief_description">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.brief_description?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.brief_description?.[0]"></p>
             </template>
         </div>
 
@@ -78,7 +78,7 @@
             <x-inputs.length-textarea id="channel-description" rows="4" name="description" required max="500"
                 :value="$channel->description ?? (old('description') ?? '')" />
             <template x-if="validation.description">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.description?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.description?.[0]"></p>
             </template>
         </div>
 
@@ -87,7 +87,7 @@
             <x-inputs.file-input id="channel-logo" name="logo" class="mt-1 block w-full"
                 accept=".png,.jpg,.jpeg,.webp" :required="!$channel" label="max. 2MB" />
             <template x-if="validation.logo">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.logo?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.logo?.[0]"></p>
             </template>
         </div>
 
@@ -96,7 +96,7 @@
             <x-inputs.file-input id="channel-banner" name="banner" class="mt-1 block w-full"
                 accept=".png,.jpg,.jpeg,.webp" label="max. 5MB, 960x360 px" />
             <template x-if="validation.banner">
-                <p class="text-red-500 text-xs mt-1" x-text="validation.banner?.[0]"></p>
+                <p class="text-red-600 dark:text-red-400 text-xs mt-1" x-text="validation.banner?.[0]"></p>
             </template>
         </div>
 

@@ -36,7 +36,7 @@
 
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
-                    <a
+                    <a class="block"
                         href="{{ route('forum.question.show', [
                             'forumCategory' => $question->forumSubcategory->forumCategory->slug,
                             'forumSubcategory' => $question->forumSubcategory->slug,
@@ -81,7 +81,7 @@
 
                 <div class="divide-y divide-slate-300 dark:divide-slate-700">
                     @foreach ($category->forumSubcategories as $subcategory)
-                        <a href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">
+                        <a class="block" href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">
                             <div class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-slate-200 dark:hover:bg-slate-950 flex items-center justify-between">
                                 <div class="flex items-center">
                                     <div

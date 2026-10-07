@@ -19,7 +19,7 @@
         </h3>
         <div class="space-y-2">
             <div class="space-y-1">
-                <div class="flex items-center text-xs font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/50 py-1 rounded-md">
+                <div class="px-2 flex items-center text-xs font-bold bg-indigo-500/10 text-indigo-500 py-1 rounded-md">
                     <span class="mr-1.5">👤</span> {{ __('Individuals (excluding IE)') }}
                 </div>
                 <ul class="text-xxs sm:text-xs text-slate-600 dark:text-slate-400 space-y-1 pt-1 list-disc list-inside">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="space-y-1">
-                <div class="flex items-center text-xs font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 py-1 rounded-md">
+                <div class="px-2 flex items-center text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 py-1 rounded-md">
                     <span class="mr-1.5">💼</span>
                     {{ __('IE (OSNO)') }}
                 </div>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="space-y-1">
-                <div class="flex items-center text-xs font-bold text-blue-500 bg-blue-50 dark:bg-blue-950/40 py-1 rounded-md">
+                <div class="px-2 flex items-center text-xs font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 py-1 rounded-md">
                     <span class="mr-1.5">🏢</span>
                     {{ __('Legal entities (OSNO)') }}
                 </div>

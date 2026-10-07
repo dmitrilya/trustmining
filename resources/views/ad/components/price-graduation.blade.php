@@ -1,7 +1,11 @@
-<span @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open" @click.away="open = false"
-    class="ml-3 text-center text-xs font-semibold px-2 py-1 rounded-full {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
-    <span>{{ isset($priceData['upper_bound']) ? ($ad->price * $ad->coin->rate > $priceData['upper_bound'] ? __('Above market') : ($ad->price * $ad->coin->rate < $priceData['lower_bound'] ? __('Suspiciously cheap') : __('In the market'))) : __('Not enough data') }}</span>
-</span>
+<div class="flex items-center">
+    <div><span itemprop="price">{{ $ad->price }}</span> {{ $ad->coin->abbreviation }}</div>
+
+    <span @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open" @click.away="open = false"
+        class="ml-3 text-center text-xs font-semibold px-2 py-1 rounded-full {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-red-500/10' : 'bg-green-100 text-green-700' }}">
+        <span>{{ isset($priceData['upper_bound']) ? ($ad->price * $ad->coin->rate > $priceData['upper_bound'] ? __('Above market') : ($ad->price * $ad->coin->rate < $priceData['lower_bound'] ? __('Suspiciously cheap') : __('In the market'))) : __('Not enough data') }}</span>
+    </span>
+</div>
 
 <div x-data="{
     price: {{ $ad->price * $ad->coin->rate }},
@@ -32,10 +36,9 @@
             </div>
         </div>
 
-        <div class="absolute top-0 flex flex-col items-center text-slate-400"
-            :style="`left: ${getPercent(lower_bound)}%; transform: translateX(-50%);`">
+        <div class="absolute top-0 flex flex-col items-center text-slate-400" :style="`left: ${getPercent(lower_bound)}%; transform: translateX(-50%);`">
             <div class="group relative cursor-pointer">
-                <div class="w-0.5 h-2 bg-red-600"></div>
+                <div class="w-0.5 h-2 bg-red-500"></div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded-md py-1 px-2 whitespace-nowrap">
                         <span x-text="lower_bound.toLocaleString()"></span>
@@ -44,10 +47,9 @@
             </div>
         </div>
 
-        <div class="absolute top-0 flex flex-col items-center text-slate-400"
-            :style="`left: ${getPercent(upper_bound)}%; transform: translateX(-50%);`">
+        <div class="absolute top-0 flex flex-col items-center text-slate-400" :style="`left: ${getPercent(upper_bound)}%; transform: translateX(-50%);`">
             <div class="group relative cursor-pointer">
-                <div class="w-0.5 h-2 bg-red-600"></div>
+                <div class="w-0.5 h-2 bg-red-500"></div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded-md py-1 px-2 whitespace-nowrap">
                         <span x-text="upper_bound.toLocaleString()"></span>
@@ -56,11 +58,10 @@
             </div>
         </div>
 
-        <div class="absolute top-1/2 -translate-y-1/2 shadow-lg"
-            :style="`left: ${getPercent(price)}%; transform: translate(-50%, -50%);`">
+        <div class="absolute top-1/2 -translate-y-1/2 shadow-lg" :style="`left: ${getPercent(price)}%; transform: translateX(-50%);`">
             <div class="group relative cursor-pointer">
                 <div class="w-3 h-3 rounded-full border-2 border-white shadow-lg"
-                    :class="price > upper_bound || price < lower_bound ? 'bg-red-600' : 'bg-transparent'">
+                    :class="price > upper_bound || price < lower_bound ? 'bg-red-500' : 'bg-transparent'">
                 </div>
                 <div class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 hidden group-hover:block z-10">
                     <div class="bg-slate-800 text-white text-xs rounded-md py-1 px-2 whitespace-nowrap">

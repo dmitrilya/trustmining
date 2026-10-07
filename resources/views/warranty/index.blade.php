@@ -22,12 +22,12 @@
                     Whatsminer</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm" type="text" ::value="sn" @input="sn = $el.value"
+                        <x-inputs.text-input class="w-full mt-0! text-xs sm:text-sm" id="sn_wm" type="text" ::value="sn" @input="sn = $el.value"
                             :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r" type="text" :placeholder="__('Warranty')"
+                            <x-inputs.text-input class="w-full mt-0! text-xs sm:text-sm" id="sn_wm_r" x-ref="sn_wm_r" type="text" :placeholder="__('Warranty')"
                                 disabled readonly />
                         </div>
                         <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"
@@ -55,12 +55,12 @@
                     Bitmain</h2>
                 <div class="flex flex-col lg:flex-row lg:items-end">
                     <div class="w-full">
-                        <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm" type="text" ::value="sn" @input="sn = $el.value"
+                        <x-inputs.text-input class="w-full mt-0! text-xs sm:text-sm" id="sn_bm" type="text" ::value="sn" @input="sn = $el.value"
                             :placeholder="__('Serial number')" />
                     </div>
                     <div class="flex flex-col xs:flex-row mt-2 lg:mt-0 lg:ml-4">
                         <div class="w-full lg:min-w-80">
-                            <x-inputs.text-input class="w-full !mt-0 text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r" type="text" :placeholder="__('Warranty until')"
+                            <x-inputs.text-input class="w-full mt-0! text-xs sm:text-sm" id="sn_bm_r" x-ref="sn_bm_r" type="text" :placeholder="__('Warranty until')"
                                 disabled readonly />
                         </div>
                         <x-buttons.primary-button class="block mt-2 xs:mt-0 xs:ml-2 sm:ml-3 text-xxs sm:text-xs"

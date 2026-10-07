@@ -41,5 +41,8 @@ export default defineConfig(({ mode }) => {
                 ignored: ['**/storage/framework/views/**'],
             },
         },
+        css: {
+            target: ['chrome110', 'firefox110', 'safari16.4', 'edge110']
+        }
     }
 });

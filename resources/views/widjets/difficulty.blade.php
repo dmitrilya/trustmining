@@ -48,7 +48,7 @@
                     <button @click="toggleBlock(key)"
                         class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition duration-300"
                         :class="blocks.includes(key) ?
-                            'text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/50 border-indigo-200 dark:border-indigo-800' :
+                            'text-indigo-700 dark:text-indigo-300 bg-indigo-500/10 border-indigo-200 dark:border-indigo-800' :
                             'bg-white border-slate-300 text-slate-500 opacity-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
 
                         <span x-text="item"></span>

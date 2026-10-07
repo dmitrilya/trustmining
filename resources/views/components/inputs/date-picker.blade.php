@@ -48,7 +48,7 @@
     </div>
 
     @error($name)
-        <p class="mt-1 text-sm text-red-700">{{ $message }}</p>
+        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
     @enderror
 
     <div x-show="open" x-transition x-on:click.outside="open = false"
@@ -101,7 +101,7 @@
                         class="w-12 text-center text-sm bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg p-1 focus:outline-none focus:ring-1 ring-inset focus:ring-indigo-500">
                 </div>
                 <button type="button" @click="open = false"
-                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-600 px-2.5 py-1.5 rounded-lg">OK</button>
+                    class="ml-auto text-xs font-bold text-indigo-500 hover:text-indigo-600 bg-indigo-500/10 border border-indigo-600 px-2.5 py-1.5 rounded-lg">OK</button>
             </div>
         </template>
     </div>

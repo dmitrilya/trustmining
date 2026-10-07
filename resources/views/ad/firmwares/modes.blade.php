@@ -42,8 +42,8 @@
 
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-1 xs:gap-2 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700">
-        <x-inputs.text-input id="mode_hashrate" type="text" x-model="hashrate" ::placeholder="measurement + '/s'" class="w-full !mt-0" />
-        <x-inputs.text-input id="mode_efficiency" type="number" step="0.1" x-model="efficiency" ::placeholder="'{{ __('Eff.') }}' + ' j/' + measurement" class="w-full !mt-0" />
+        <x-inputs.text-input id="mode_hashrate" type="text" x-model="hashrate" ::placeholder="measurement + '/s'" class="w-full mt-0!" />
+        <x-inputs.text-input id="mode_efficiency" type="number" step="0.1" x-model="efficiency" ::placeholder="'{{ __('Eff.') }}' + ' j/' + measurement" class="w-full mt-0!" />
         <x-inputs.select handleChange="(strainLevel => strain = strainLevel)" :items="collect($strainLevels)" size="lg" />
         <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addMode()">＋ {{ __('Add') }}</x-buttons.secondary-button>
     </div>
@@ -67,7 +67,7 @@
                             <td class="px-2 xs:px-4 py-2" x-text="strainLevels[mode.s].value"></td>
                             <td class="px-2 xs:px-4 py-2 text-right">
                                 <button type="button" @click="removeMode(index)"
-                                    class="text-red-700 hover:text-red-500 text-xs transition">
+                                    class="text-red-600 dark:text-red-400 text-xs transition">
                                     {{ __('Delete') }}
                                 </button>
                             </td>

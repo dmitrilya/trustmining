@@ -32,18 +32,18 @@
         @if ($owner)
             <div class="mt-2 absolute z-10 left-0 top-4">
                 <div x-show="hidden" style="display: none"
-                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                    class="w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase">
                     {{ __('Hidden') }}
                 </div>
 
                 @if ($ad->last_moderation_status == 1)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-slate-800 dark:bg-slate-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase">
                         {{ __('Is under moderation') }}
                     </div>
                 @elseif ($ad->last_moderation_status == 3)
                     <div
-                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-700 opacity-50 border border-red-500 rounded-r-md text-xxs text-white uppercase shadow shadow-logo-color hover:bg-red-400 transition ease-in-out duration-100">
+                        class="mt-1.5 w-max cursor-default items-center px-1 py-0.5 bg-red-500/10 border border-red-500 rounded-r-md text-xxs text-white uppercase">
                         {{ __('Rejected') }}
                     </div>
                 @endif
@@ -139,7 +139,7 @@
 
         <div class="mt-2 sm:mt-3">
             @if ($ad->price != 0 && $ad->with_vat)
-                <div class="bg-emerald-50 dark:bg-emerald-950/40 text-emerald-500 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
+                <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
                     {{ __('The price includes VAT') }}
                 </div>
             @endif

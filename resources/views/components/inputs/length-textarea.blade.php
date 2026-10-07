@@ -16,7 +16,7 @@
             else if (validation['{{ $name }}']) delete validation['{{ $name }}'];
         ">{{ $value }}</textarea>
     <div class="min-w-fit mt-1 ml-2 sm:ml-3 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
-        <span :class="length > max ? 'text-red-500' : ''" x-text="length" x-text="length"></span>/<span
+        <span :class="length > max ? 'text-red-600 dark:text-red-400' : ''" x-text="length" x-text="length"></span>/<span
             x-text="max"></span>
     </div>
 </div>

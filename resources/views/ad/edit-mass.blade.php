@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-span-2">
                             <div class="flex items-center">
-                                <x-inputs.text-input autocomplete="price" class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm !mt-0 rounded-md !px-2" id="price"
+                                <x-inputs.text-input autocomplete="price" class="w-full mr-1 sm:mr-2 text-xxs sm:text-sm mt-0! rounded-md !px-2" id="price"
                                     name="price" type="number" required value="{{ $ad->price }}"
                                     @change="let id = $el.closest('.ad').getAttribute('data-id');
                                     let index = changings.findIndex(el => el.id == id);

@@ -19,7 +19,7 @@
 
     <a href="{{ route('insight.video.create', ['channel' => auth()->user()->channel->slug]) }}"
         class="flex items-center gap-2 px-3 py-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition group/item">
-        <span class="p-1 rounded-lg bg-amber-500/10 text-amber-500">🎥</span>
+        <span class="p-1 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">🎥</span>
         <div class="flex flex-col">
             <span>{{ __('Video') }}</span>
             <span class="text-xxs text-slate-500">{{ __('Visual stories') }}</span>

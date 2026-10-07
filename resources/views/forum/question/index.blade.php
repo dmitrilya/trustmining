@@ -17,7 +17,7 @@
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <div class="divide-y divide-slate-300 dark:divide-slate-700">
                 @foreach ($questions as $question)
-                    <a
+                    <a class="block"
                         href="{{ route('forum.question.show', [
                             'forumCategory' => $question->forumSubcategory->forumCategory->slug,
                             'forumSubcategory' => $question->forumSubcategory->slug,
