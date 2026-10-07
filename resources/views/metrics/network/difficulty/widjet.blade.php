@@ -47,7 +47,7 @@
         </noscript>
     @endif
 
-    @vite(['resources/css/difficulty.css', 'resources/js/difficulty.js'])
+    @vite(['resources/css/widjets/difficulty.css', 'resources/js/widjets/difficulty.js'])
 
     @if (in_array('graph', $blocks))
         @vite(['resources/js/graph.js'])

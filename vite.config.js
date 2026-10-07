@@ -11,8 +11,8 @@ export default defineConfig(({ mode }) => {
                 publicDirectory: env.APP_PUBLIC_DIR || 'public',
                 input: [
                     'resources/css/app.css',
-                    'resources/css/calculator.css',
-                    'resources/css/difficulty.css',
+                    'resources/css/widjets/calculator.css',
+                    'resources/css/widjets/difficulty.css',
                     'resources/js/app.js',
                     'resources/js/graph.js',
                     'resources/js/widjets/calculator.js',

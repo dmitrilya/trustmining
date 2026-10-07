@@ -47,7 +47,7 @@
         </noscript>
     @endif
 
-    @vite(['resources/css/calculator.css', 'resources/js/calculator.js'])
+    @vite(['resources/css/widjets/calculator.css', 'resources/js/widjets/calculator.js'])
 </head>
 
 <body class="font-sans antialiased overflow-hidden {{ $theme ?? 'light' }}" x-data="{ currentTheme: '{{ $theme ?? 'light' }}' }" x-init="@if (!$theme) if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
