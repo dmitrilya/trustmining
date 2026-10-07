@@ -107,102 +107,147 @@ class AdService
         $user = $ad->user->name;
         $city = $ad->office->cityWhere;
 
+        $condition = function () use ($ad) {
+            return $ad->props['Condition'] === 'New' ? __('meta.ad.show.conditions.new') : __('meta.ad.show.conditions.used');
+        };
+
+        $availability = function () use ($ad, $city) {
+            return $ad->props['Availability'] === 'Preorder'
+                ? __('meta.ad.show.availability.preorder', ['days' => $ad->props['Waiting (days)']])
+                : __('meta.ad.show.availability.in_stock', ['city' => $city]);
+        };
+
+        $meta = function (string $key, array $replace = []) use ($ad) {
+            return __('meta.ad.show.' . $ad->adCategory->name . '.' . $key, $replace);
+        };
+
         switch ($ad->adCategory->name) {
             case 'miners':
                 $brand = $ad->asicVersion->asicModel->asicBrand->name;
                 $model = $ad->asicVersion->asicModel->name;
                 $rate = $ad->asicVersion->hashrate;
                 $mes = $ad->asicVersion->measurement;
-                $condition = $ad->props['Condition'] == 'New' ? 'Новый' : 'Б/у';
-                $availability = $ad->props['Availability'] == 'Preorder' ? "под заказ с ожиданием до {$ad->props['Waiting (days)']} дней" : "в наличии $city";
 
-                $name = "$model $rate$mes/s";
-                $title = "$model $rate$mes купить у $user $city";
-                $description = "$condition $brand $model $rate $mes/s от $user $availability. Лучшие цены, расчет доходности онлайн";
-                $alt = "Оборудование для майнинга $model $rate $mes/s, производитель $brand, алгоритм {$ad->asicVersion->asicModel->algorithm->name}";
+                $data = ['brand' => $brand, 'model' => $model, 'rate' => $rate, 'measurement' => $mes, 'condition' => $condition(), 'availability' => $availability(), 'user' => $user, 'city' => $city, 'algorithm' => $ad->asicVersion->asicModel->algorithm->name];
+
+                $name = $meta('name', $data);
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 $canonicalHref = route('ads.asic.show', [
                     'asicBrand' => $ad->asicVersion->asicModel->asicBrand->slug,
                     'asicModel' => $ad->asicVersion->asicModel->slug,
                     'asicVersion' => $rate . $mes,
                     'ad' => $ad->user->slug . '-' . $ad->id,
                 ]);
+
                 break;
             case 'gpus':
                 $power = $ad->gpuModel->max_power;
-                $condition = $ad->props['Condition'] == 'New' ? 'Новый' : 'Б/у';
-                $availability = $ad->props['Availability'] == 'Preorder' ? "под заказ с ожиданием до {$ad->props['Waiting (days)']} дней" : "в наличии $city";
+                $brand = $ad->gpuModel->gpuBrand->name;
+                $model = $ad->gpuModel->name;
 
-                $name = $ad->gpuModel->gpuBrand->name . ' ' . $ad->gpuModel->name;
-                $title = "$name {$power}кВт/ч купить у $user $city";
-                $description = "$condition ГПЭС/ГПУ $name $power кВт/ч от $user $availability. Цены, фото, реальные отзывы";
-                $alt = "Газовый генератор $name, мощность $power кВт/ч";
+                $data = ['brand' => $brand, 'model' => $model, 'name' => $brand . ' ' . $model, 'power' => $power, 'condition' => $condition(), 'availability' => $availability(), 'user' => $user, 'city' => $city];
+
+                $name = $meta('name', $data);
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 $canonicalHref = route('ads.gpu.show', [
                     'gpuBrand' => $ad->gpuModel->gpuBrand->slug,
                     'gpuModel' => $ad->gpuModel->slug,
                     'ad' => $ad->user->slug . '-' . $ad->id,
                 ]);
+
                 break;
             case 'legals':
                 $service = $ad->props['Service'];
 
-                $name = 'Услуга юриста по криптовалюте';
-                $title = "$service - Юрист по криптовалюте $city";
-                $description = "Профессиональная юридическая помощь от компании $user. Консультация, сопровождение, защита интересов по всей РФ";
-                $alt = "Юрист по криптовалюте - $service";
+                $data = ['service' => $service, 'user' => $user, 'city' => $city];
+
+                $name = $meta('name', $data);
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'containers':
                 $capacity = $ad->props['Capacity'];
                 $power = $ad->props['Power (kW)'];
+                $length = $ad->props['Length (cm)'];
 
-                $name = 'Контейнер для майнинга';
-                $title = 'Контейнеры для майнинга ';
-                if ($ad->props['Length (cm)'] >= 800) $title .= '40 футов';
-                else if ($ad->props['Length (cm)'] >= 400) $title .= '20 футов';
-                else $title .= "на $capacity устройств";
-                $title .= " купить у $user $city";
-                $description = "Контейнер для $capacity асиков на $power кВт/ч $city у компании $user. Доставка по всей России. Выгодные предложения";
-                $alt = "$name, вместимость до $capacity асиков, мощность до $power кВт/ч";
+                $data = ['capacity' => $capacity, 'power' => $power, 'user' => $user, 'city' => $city, 'name' => __('meta.ad.show.containers.name')];
+
+                if ($length >= 800) $title = __('meta.ad.show.containers.title_size', array_merge($data, ['size' => 40]));
+                elseif ($length >= 400) $title = __('meta.ad.show.containers.title_size', array_merge($data, ['size' => 20]));
+                else $title = __('meta.ad.show.containers.title_devices', $data);
+
+                $name = __('meta.ad.show.containers.name');
+                $description = __('meta.ad.show.containers.description', $data);
+                $alt = __('meta.ad.show.containers.alt', $data);
+
                 break;
             case 'noiseboxes':
                 $capacity = $ad->props['Capacity'] . ' ' . trans_choice('other.device', $ad->props['Capacity']);
                 $material = __($ad->props['Material']);
 
-                $name = 'Шумобокс для асика';
-                $title = "$name на $capacity купить у $user $city";
-                $description = "Качественный шумобокс для ASIC-майнера от компании $user из {strtolower($material)} на $capacity. Размеры, материал, вместимость";
-                $alt = "$name, вместимость $capacity, материал {strtolower($material)}";
+                $data = ['name' => __('meta.ad.show.noiseboxes.name'), 'capacity' => $capacity, 'material' => mb_strtolower($material), 'user' => $user, 'city' => $city];
+
+                $name = $data['name'];
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'cryptoboilers':
                 $capacity = $ad->props['Capacity'] . ' ' . trans_choice('other.device', $ad->props['Capacity']);
                 $designation = $ad->props['Designation'];
                 $area = $ad->props['Heating area (m²)'];
 
-                $name = "Криптокотел $designation";
-                $title = "Криптокотел $designation купить у $user $city";
-                $description = "Криптобойлер $designation на $capacity для отопления до $area кв. м у $user. Схема, фото, актуальные цены";
-                $alt = "$name, вместимость $capacity, отапливаемая площадь до $area кв. м";
+                $data = ['name' => __('meta.ad.show.cryptoboilers.name', ['designation' => $designation]), 'designation' => $designation, 'capacity' => $capacity, 'area' => $area, 'user' => $user, 'city' => $city];
+
+                $name = $data['name'];
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'water_cooling_plates':
                 $models = implode(', ', $ad->props['For which models']);
 
-                $name = "Комплект водоблоков";
-                $title = "Водоблоки для $models $city";
-                $description = "Комлект водоблоков для асиков $models. Цены, помощь в сборке";
-                $alt = "$name для $models";
+                $data = ['name' => __('meta.ad.show.water_cooling_plates.name'), 'models' => $models, 'city' => $city];
+
+                $name = $data['name'];
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'firmwares':
                 $maxMode = collect($ad->props['Modes'])->sortBy('h')->last()['h'];
 
-                $name = "Прошивка $user";
-                $title = "Прошивка/Разгон для {$ad->asicVersion->asicModel->name} {$ad->asicVersion->hashrate} {$ad->asicVersion->measurement} от $user";
-                $description = "Кастомная прошивка и удаленное управление $user. Разгон до $maxMode {$ad->asicVersion->measurement}/s. Подходит для {$ad->asicVersion->asicModel->name}. Помощь в настройке";
-                $alt = "Прошивка и удаленное управление $user для {$ad->asicVersion->asicModel->name}";
+                $model = $ad->asicVersion->asicModel->name;
+                $rate = $ad->asicVersion->hashrate;
+                $measurement = $ad->asicVersion->measurement;
+
+                $data = ['user' => $user, 'model' => $model, 'rate' => $rate, 'measurement' => $measurement, 'max_mode' => $maxMode];
+
+                $name = $meta('name', $data);
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'monitorings':
-                $name = "Мониторинг асиков $user";
-                $title = $name;
-                $description = "Как подключиться к асику удаленно? Программа мониторинга $user. Помощь в настройке";
-                $alt = "Система удаленного мониторинга $user";
+                $data = ['user' => $user];
+
+                $name = $meta('name', $data);
+                $title = $meta('title', $data);
+                $description = $meta('description', $data);
+                $alt = $meta('alt', $data);
+
                 break;
             case 'accessories':
                 switch ($ad->props['Category']) {
@@ -212,17 +257,18 @@ class AdService
                         $name = '';
 
                         if (in_array($c2, ['Without plug', 'European plug (S22)', 'Chinese plug'])) {
-                            $name .= "Кабель питания $c1";
-                            $description = "$name для асика, {__($c2)}";
+                            $name .= __('meta.ad.show.accessories.cables.power_cable_name', ['connector' => $c1]);
+                            $description = __('meta.ad.show.accessories.cables.power_cable_description', ['name' => $name, 'connector' => __($c2)]);
 
-                            if ($c2 == 'Without plug') $description .= ' (под автомат)';
+                            if ($c2 == 'Without plug') $description .= __('meta.ad.show.accessories.cables.without_plug_suffix');
                         } else {
-                            $name .= "Переходник $c1-$c2";
-                            $description = $name;
+                            $name .= __('meta.ad.show.accessories.cables.adapter_name', ['connector1' => $c1, 'connector2' => $c2]);
+                            $description = __('meta.ad.show.accessories.cables.adapter_description', ['name' => $name]);
                         }
 
-                        $title = "$name купить у $user $city";
+                        $title = __('meta.ad.show.accessories.cables.title', ['name' => $name, 'user' => $user, 'city' => $city]);
                         $alt = $description;
+
                         break;
                     case 'Coolers':
                         $size = $ad->props['Size (mm)'];
@@ -230,31 +276,42 @@ class AdService
                         $pin = $ad->props['Connector (pin)'];
                         $model = $ad->props['Model'];
 
-                        $name = "Кулер {$amperage}A {$size}мм";
-                        $title = "Вентилятор для асика {$amperage}A {$size}мм у $user $city";
-                        $description = "Вентилятор для асика $model, {$amperage}A, {$size}мм, $pin pin";
-                        $alt = "Вентилятор для асика, модель $model, ток {$amperage}A, размер {$size}мм, разъем $pin pin";
+                        $data = ['amperage' => $amperage, 'size' => $size, 'pin' => $pin, 'model' => $model, 'user' => $user, 'city' => $city];
+
+                        $name = __('meta.ad.show.accessories.coolers.name', $data);
+                        $title = __('meta.ad.show.accessories.coolers.title', $data);
+                        $description = __('meta.ad.show.accessories.coolers.description', $data);
+                        $alt = __('meta.ad.show.accessories.coolers.alt', $data);
+
                         break;
                     default:
                         $category = __($ad->props['Category']);
                         $name = $category;
                         $title = $category;
-                        $description = "$category для асика";
+                        $description = __('meta.ad.show.accessories.default.description', ['category' => $category]);
                         $alt = $description;
+
                         break;
                 }
 
-                $description .= " в магазине $user $city. Большой ассортимент, помощь с выбором";
+                $description .= __('meta.ad.show.accessories.suffix', ['user' => $user, 'city' => $city]);
+
                 break;
             default:
-                $title = __($ad->adCategory->header) . " купить у $user $city";
-                $description = "Купите {$ad->adCategory->header} $city у компании $user. Доставка по всей России. Фото, характеристики, отзывы";
-                $alt = "{$ad->adCategory->header}";
-                $name = $user . ' ' . __($ad->adCategory->title);
+                $category = __($ad->adCategory->header);
+                $categoryTitle = __($ad->adCategory->title);
+
+                $data = ['category' => $category, 'user' => $user, 'city' => $city, 'title' => $categoryTitle];
+
+                $title = __('meta.ad.show.default.title', $data);
+                $description = __('meta.ad.show.default.description', $data);
+                $alt = __('meta.ad.show.default.alt', $data);
+                $name = __('meta.ad.show.default.name', $data);
+
                 break;
         }
 
-        $description .= " и ежедневные розыгрыши на сайте";
+        $description .= __('meta.ad.show.suffix');
 
         return [$title, $description, $alt, $canonicalHref ?? route('ads.show', ['adCategory' => $ad->adCategory->name, 'ad' => $ad->id]), $name];
     }

@@ -9,12 +9,12 @@ use MoveMoveApp\DaData\Facades\DaDataOrganization;
 
 trait DaData
 {
-    public function dadataSearchAddress(string $query): array
+    public function dadataSearchAddress(string $query, ?string $lang = null): array
     {
         $result = DaDataAddress::suggest([
             'query' => $query,
             'count' => 10,
-            'language' => app()->getLocale() == 'ru' ? 'RU' : 'EN',
+            'language' => $lang ?? app()->getLocale() == 'ru' ? 'RU' : 'EN',
             'locations' => ['country_iso_code' => '*'],
         ]);
 

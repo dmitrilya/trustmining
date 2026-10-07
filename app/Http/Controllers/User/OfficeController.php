@@ -106,12 +106,27 @@ class OfficeController extends Controller
 
         if (!count($suggestions) || !$suggestions[0]['data']['postal_code']) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
+        $currentLocale = app()->getLocale();
+        $alternativeLocale = $currentLocale == 'ru' ? 'en' : 'ru';
+
+        $currentCityName = $suggestions[0]['data']['city'];
+
+        $city = City::where("name->{$currentLocale}", $currentCityName)->first();
+
+        if (!$city) {
+            $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
+            $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+
+            $city = City::create([
+                'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],
+                'name_where' => []
+            ]);
+        }
+
         $office = Office::create([
             'user_id' => $user->id,
             'address' => $suggestions[0]['value'],
-            'city_id' => City::firstOrCreate([
-                'name' => $suggestions[0]['data']['city']
-            ])->id,
+            'city_id' => $city->id,
             'postal_code' => $suggestions[0]['data']['postal_code'],
             'video' => $request->video,
             'images' => [],

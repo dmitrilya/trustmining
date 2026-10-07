@@ -266,6 +266,98 @@ return [
         'statistics' => [
             'title' => 'Статистика объявлений',
             'description' => 'Отчеты эффективности объявлений'
+        ],
+        'show' => [
+            'conditions' => [
+                'new' => 'Новый',
+                'used' => 'Б/у',
+            ],
+            'availability' => [
+                'preorder' => 'под заказ с ожиданием до :days дней',
+                'in_stock' => 'в наличии :city',
+            ],
+            'miners' => [
+                'name' => ':model :rate:measurement/s',
+                'title' => ':model :rate:measurement купить у :user :city',
+                'description' => ':condition :brand :model :rate :measurement/s от :user :availability. Лучшие цены, расчет доходности онлайн',
+                'alt' => 'Оборудование для майнинга :model :rate :measurement/s, производитель :brand, алгоритм :algorithm',
+            ],
+            'gpus' => [
+                'name' => ':brand :model',
+                'title' => ':name :powerкВт/ч купить у :user :city',
+                'description' => ':condition ГПЭС/ГПУ :name :power кВт/ч от :user :availability. Цены, фото, реальные отзывы',
+                'alt' => 'Газовый генератор :name, мощность :power кВт/ч',
+            ],
+            'legals' => [
+                'name' => 'Услуга юриста по криптовалюте',
+                'title' => ':service - Юрист по криптовалюте :city',
+                'description' => 'Профессиональная юридическая помощь от компании :user. Консультация, сопровождение, защита интересов по всей РФ',
+                'alt' => 'Юрист по криптовалюте - :service',
+            ],
+            'containers' => [
+                'name' => 'Контейнер для майнинга',
+                'title_size' => 'Майнинг контейнеры :size футов купить у :user :city',
+                'title_devices' => 'Майнинг контейнеры на :capacity устройств купить у :user :city',
+                'description' => 'Контейнер для :capacity асиков на :power кВт/ч :city у компании :user. Доставка по всей России. Выгодные предложения',
+                'alt' => ':name, вместимость до :capacity асиков, мощность до :power кВт/ч',
+            ],
+            'noiseboxes' => [
+                'name' => 'Шумобокс для асика',
+                'title' => ':name на :capacity купить у :user :city',
+                'description' => 'Качественный шумобокс для ASIC-майнера от компании :user из :material на :capacity. Размеры, материал, вместимость',
+                'alt' => ':name, вместимость :capacity, материал :material',
+            ],
+            'cryptoboilers' => [
+                'name' => 'Криптокотел :designation',
+                'title' => 'Криптокотел :designation купить у :user :city',
+                'description' => 'Криптобойлер :designation на :capacity для отопления до :area кв. м у :user. Схема, фото, актуальные цены',
+                'alt' => ':name, вместимость :capacity, отапливаемая площадь до :area кв. м',
+            ],
+            'water_cooling_plates' => [
+                'name' => 'Комплект водоблоков',
+                'title' => 'Водоблоки для :models :city',
+                'description' => 'Комплект водоблоков для асиков :models. Цены, помощь в сборке',
+                'alt' => ':name для :models',
+            ],
+            'firmwares' => [
+                'name' => 'Прошивка :user',
+                'title' => 'Прошивка/Разгон для :model :rate :measurement от :user',
+                'description' => 'Кастомная прошивка и удаленное управление :user. Разгон до :max_mode :measurement/s. Подходит для :model. Помощь в настройке',
+                'alt' => 'Прошивка и удаленное управление :user для :model',
+            ],
+            'monitorings' => [
+                'name' => 'Мониторинг асиков :user',
+                'title' => 'Мониторинг асиков :user',
+                'description' => 'Как подключиться к асику удаленно? Программа мониторинга :user. Помощь в настройке',
+                'alt' => 'Система удаленного мониторинга :user',
+            ],
+            'accessories' => [
+                'cables' => [
+                    'power_cable_name' => 'Кабель питания :connector',
+                    'power_cable_description' => ':name для асика, :connector',
+                    'without_plug_suffix' => ' (под автомат)',
+                    'adapter_name' => 'Переходник :connector1-:connector2',
+                    'adapter_description' => ':name',
+                    'title' => ':name купить у :user :city',
+                ],
+                'coolers' => [
+                    'name' => 'Кулер :amperageA :sizeмм',
+                    'title' => 'Вентилятор для асика :amperageA :sizeмм у :user :city',
+                    'description' => 'Вентилятор для асика :model, :amperageA, :sizeмм, :pin pin',
+                    'alt' => 'Вентилятор для асика, модель :model, ток :amperageA, размер :sizeмм, разъем :pin pin',
+                ],
+                'default' => [
+                    'description' => ':category для асика',
+                ],
+                'suffix' => ' в магазине :user :city. Большой ассортимент, помощь с выбором',
+            ],
+            'default' => [
+                'title' => ':category купить у :user :city',
+                'description' => 'Купите :category :city у компании :user. Доставка по всей России. Фото, характеристики, отзывы',
+                'alt' => ':category',
+                'name' => ':user :title',
+            ],
+            'suffix' => ' и ежедневные розыгрыши на сайте',
         ]
     ],
 
@@ -320,8 +412,8 @@ return [
             'header' => 'Редактирование офиса'
         ],
         'show' => [
-            'title' => 'Офис компании :name в :city',
-            'description' => 'Посетите официальный офис компании :name в :city. Узнайте адрес и режим работы прямо сейчас на сайте TrustMining',
+            'title' => 'Офис компании :name :city',
+            'description' => 'Посетите официальный офис компании :name :city. Узнайте адрес и режим работы прямо сейчас на сайте TrustMining',
             'header' => 'Офис компании :name'
         ],
         'index' => [

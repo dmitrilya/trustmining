@@ -21,4 +21,14 @@ class City extends Model
         'name_where',
         'slug',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'name' => 'array',
+        'name_where' => 'array',
+    ];
 }

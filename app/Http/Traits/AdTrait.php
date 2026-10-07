@@ -51,7 +51,7 @@ trait AdTrait
                 'users.tf as user_tf',
 
                 'offices.id as office_id',
-                'cities.name as city',
+                DB::raw("COALESCE(cities.name->>'$." . app()->getLocale() . "', cities.name->>'$.ru') as city"),
 
                 'asic_versions.hashrate as asic_version_hashrate',
                 'asic_versions.measurement as asic_version_measurement',

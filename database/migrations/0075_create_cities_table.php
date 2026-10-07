@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('name_where')->nullable();
+            $table->json('name');
+            $table->json('name_where');
             $table->string('slug')->nullable();
         });
     }

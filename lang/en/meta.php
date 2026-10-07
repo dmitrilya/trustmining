@@ -266,6 +266,98 @@ return [
         'statistics' => [
             'title' => 'Listing Statistics',
             'description' => 'Listing performance reports'
+        ],
+        'show' => [
+            'conditions' => [
+                'new' => 'New',
+                'used' => 'Used',
+            ],
+            'availability' => [
+                'preorder' => 'pre-order with a waiting time of up to :days days',
+                'in_stock' => 'in stock :city',
+            ],
+            'miners' => [
+                'name' => ':model :rate:measurement/s',
+                'title' => ':model :rate:measurement for sale by :user :city',
+                'description' => ':condition :brand :model :rate :measurement/s by :user, :availability. Best prices, online profitability calculator',
+                'alt' => 'Mining equipment :model :rate:measurement/s, manufacturer :brand, algorithm :algorithm',
+            ],
+            'gpus' => [
+                'name' => ':brand :model',
+                'title' => ':name :power kW/h for sale by :user :city',
+                'description' => ':condition gas generator :name, :power kW/h by :user, :availability. Prices, photos, real reviews',
+                'alt' => 'Gas generator :name, power :power kW/h',
+            ],
+            'legals' => [
+                'name' => 'Cryptocurrency legal service',
+                'title' => ':service - Cryptocurrency lawyer :city',
+                'description' => 'Professional legal assistance from :user. Consultation, legal support and protection of interests throughout Russia',
+                'alt' => 'Cryptocurrency lawyer - :service',
+            ],
+            'containers' => [
+                'name' => 'Mining container',
+                'title_size' => ':size foot mining container for sale by :user :city',
+                'title_devices' => 'Mining container for :capacity devices for sale by :user :city',
+                'description' => 'Mining container for :capacity ASIC miners with :power kW capacity in :city from :user. Delivery across Russia. Great offers',
+                'alt' => ':name, capacity up to :capacity ASIC miners, power up to :power kW',
+            ],
+            'noiseboxes' => [
+                'name' => 'ASIC noise box',
+                'title' => ':name for :capacity for sale by :user :city',
+                'description' => 'High-quality noise box for an ASIC miner from :user, made of :material, for :capacity. Dimensions, material and capacity',
+                'alt' => ':name, capacity :capacity, material :material',
+            ],
+            'cryptoboilers' => [
+                'name' => 'Crypto boiler :designation',
+                'title' => 'Crypto boiler :designation for sale by :user :city',
+                'description' => 'Crypto boiler :designation for :capacity ASIC miners for heating up to :area sq. m. from :user. Diagram, photos and current prices',
+                'alt' => ':name, capacity :capacity, heating area up to :area sq. m.',
+            ],
+            'water_cooling_plates' => [
+                'name' => 'Water block kit',
+                'title' => 'Water blocks for :models :city',
+                'description' => 'Water block kit for ASIC miners :models. Prices and assembly assistance',
+                'alt' => ':name for :models',
+            ],
+            'firmwares' => [
+                'name' => ':user firmware',
+                'title' => 'Firmware/overclocking for :model :rate :measurement by :user',
+                'description' => 'Custom firmware and remote management by :user. Overclocking up to :max_mode :measurement/s. Suitable for :model. Setup assistance',
+                'alt' => 'Firmware and remote management by :user for :model',
+            ],
+            'monitorings' => [
+                'name' => ':user ASIC monitoring',
+                'title' => ':user ASIC monitoring',
+                'description' => 'How to connect to an ASIC remotely? :user monitoring software. Setup assistance',
+                'alt' => 'Remote ASIC monitoring system by :user',
+            ],
+            'accessories' => [
+                'cables' => [
+                    'power_cable_name' => 'Power cable :connector',
+                    'power_cable_description' => ':name for an ASIC, :connector',
+                    'without_plug_suffix' => ' (for circuit breaker connection)',
+                    'adapter_name' => ':connector1-:connector2 adapter',
+                    'adapter_description' => ':name',
+                    'title' => ':name for sale by :user :city',
+                ],
+                'coolers' => [
+                    'name' => 'ASIC fan :amperageA :sizemm',
+                    'title' => 'ASIC fan :amperageA :sizemm by :user :city',
+                    'description' => 'ASIC fan for :model, :amperageA, :sizemm, :pin pin',
+                    'alt' => 'ASIC fan, model :model, current :amperageA, size :sizemm, :pin pin connector',
+                ],
+                'default' => [
+                    'description' => ':category for an ASIC',
+                ],
+                'suffix' => ' in :user store :city. Wide range and help with choosing',
+            ],
+            'default' => [
+                'title' => ':category for sale by :user :city',
+                'description' => 'Buy :category :city from :user. Delivery across Russia. Photos, specifications and reviews',
+                'alt' => ':category',
+                'name' => ':user :title',
+            ],
+            'suffix' => ' and daily gifs on the website',
         ]
     ],
 
@@ -320,8 +412,8 @@ return [
             'header' => 'Edit Office'
         ],
         'show' => [
-            'title' => ':name Company Office in :city',
-            'description' => 'Visit the official office of :name in :city. Find the address and opening hours right now on the TrustMining website',
+            'title' => ':name Company Office :city',
+            'description' => 'Visit the official office of :name :city. Find the address and opening hours right now on the TrustMining website',
             'header' => ':name Company Office'
         ],
         'index' => [

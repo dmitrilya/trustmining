@@ -50,43 +50,31 @@
                             <div class="relative w-full h-2">
                                 @php
                                     $sortedThresholds = $factor['thresholds'];
-                                    if ($factor['type'] === 'threshold_reverse') {
-                                        arsort($sortedThresholds);
-                                    } else {
-                                        asort($sortedThresholds);
-                                    }
+                                    if ($factor['type'] === 'threshold_reverse') arsort($sortedThresholds);
+                                    else asort($sortedThresholds);
+
                                     $gradients =
                                         $factor['type'] === 'threshold_reverse' ? ['#10b981', '#f59e0b', '#f43f5e'] : ['#f43f5e', '#f59e0b', '#10b981'];
 
                                     $thresholdKeys = array_keys($sortedThresholds);
-
                                     $matchedIndex = array_search($factor['matched_threshold'], $thresholdKeys);
+                                    $count = count($thresholdKeys);
                                 @endphp
 
-                                <div class="w-full h-full flex">
+                                <div class="w-full h-full flex rounded-full overflow-hidden"
+                                    style="background: linear-gradient(to right, {{ $gradients[0] }}, {{ $gradients[1] }}, {{ $gradients[2] }});">
+
                                     @foreach ($thresholdKeys as $i => $threshold)
                                         @php
-                                            $count = count($thresholdKeys);
                                             $segmentWidth = 100 / $count;
-
-                                            $gradientStart = $i * $segmentWidth;
-                                            $gradientEnd = ($i + 1) * $segmentWidth;
-
                                             $isActive = $i === $matchedIndex;
                                         @endphp
 
-                                        <div class="relative h-full {{ $loop->first ? 'rounded-l-full border-r' : ($loop->last ? 'rounded-r-full border-l' : 'border-x') }} border-slate-300 transition duration-300 {{ !$isActive ? 'opacity-25 select-none pointer-events-none' : 'opacity-100 z-10' }}"
-                                            style="
-                                                    width: {{ $segmentWidth }}%; 
-                                                    background: linear-gradient(to right, var(--tw-gradient-stops));
-                                                    --tw-gradient-from: {{ $gradients[0] }} var(--tw-gradient-from-position, 0%);
-                                                    --tw-gradient-to: {{ $gradients[2] }} var(--tw-gradient-to-position, 100%);
-                                                    --tw-gradient-stops: var(--tw-gradient-from), {{ $gradients[1] }} {{ 50 }}%, var(--tw-gradient-to);
-                                                    background-size: {{ $count * 100 }}% 100%;
-                                                    background-position: -{{ $i * 100 }}% 0;
-                                                ">
+                                        <div class="relative h-full transition duration-300 {{ $loop->first ? 'border-r' : ($loop->last ? 'border-l' : 'border-x') }} border-slate-900/50 {{ !$isActive ? 'bg-slate-900/75 z-0' : 'z-10' }}"
+                                            style="width: {{ $segmentWidth }}%;">
+
                                             @if ($isActive)
-                                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-mono text-slate-600 dark:text-slate-400">
+                                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-mono font-bold text-slate-400">
                                                     {{ $factor['value'] }}
                                                 </div>
                                             @endif
