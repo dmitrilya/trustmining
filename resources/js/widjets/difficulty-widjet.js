@@ -15,7 +15,7 @@
 
     function getParentLang() {
         let lang = document.documentElement.lang || 'ru';
-        lang.substring(0, 2).toLowerCase();
+        return lang.substring(0, 2).toLowerCase();
     }
 
     const theme = getParentTheme();
