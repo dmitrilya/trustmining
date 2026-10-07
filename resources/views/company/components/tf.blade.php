@@ -61,7 +61,7 @@
                                     $count = count($thresholdKeys);
                                 @endphp
 
-                                <div class="w-full h-full flex rounded-full overflow-hidden"
+                                <div class="w-full h-full flex rounded-full"
                                     style="background: linear-gradient(to right, {{ $gradients[0] }}, {{ $gradients[1] }}, {{ $gradients[2] }});">
 
                                     @foreach ($thresholdKeys as $i => $threshold)
@@ -74,7 +74,7 @@
                                             style="width: {{ $segmentWidth }}%;">
 
                                             @if ($isActive)
-                                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-mono font-bold text-slate-400">
+                                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-xs font-mono text-slate-600 dark:text-slate-400">
                                                     {{ $factor['value'] }}
                                                 </div>
                                             @endif

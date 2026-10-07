@@ -64,7 +64,7 @@
         @if (count($answer->images))
             <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
                 @foreach ($answer->images as $image)
-                    <div class="group relative rounded-lg overflow-hidden flex items-center overflow-hidden cursor-zoom-in">
+                    <div class="group relative rounded-lg overflow-hidden flex items-center cursor-zoom-in">
                         <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
                             class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
                         </div>
@@ -82,7 +82,7 @@
             </div>
         @endif
 
-        <div itemprop="text" class="mb-1 sm:mb-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $answer->text !!}</div>
+        <div itemprop="text" class="mb-2 sm:mb-3 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $answer->text !!}</div>
     </div>
 
     @if ($authId && $authId == $answer->user_id)
@@ -128,9 +128,9 @@
     </div>
 
     <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
-        class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
-        <div class="relative p-2 sm:p-4 flex items-center justify-center w-full max-w-2xl h-full max-w-max max-h-full z-50">
+        <div class="relative p-2 sm:p-4 flex items-center justify-center w-full h-full max-w-max max-h-full z-50">
             <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800" @click.away="open = false">
                 <button @click="open = false" type="button"
                     class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
