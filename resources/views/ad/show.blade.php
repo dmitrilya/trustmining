@@ -83,6 +83,7 @@
                                 @php
                                     $price = $moderation->data['price'] ?? $ad->price;
                                     $withVat = $moderation->data['with_vat'] ?? $ad->with_vat;
+
                                 @endphp
 
                                 <p
@@ -94,15 +95,24 @@
                                     @endif
                                 </p>
 
-                                @if ($price != 0 && $withVat)
-                                    <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
-                                        {{ __('The price includes VAT') }}
+                                <div class="flex flex-wrap gap-1 xs:gap-2 mt-4">
+                                    <div
+                                        class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                        {{ __('Price updated') }}
+                                        {{ $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at')->diffForHumans() }}
                                     </div>
-                                @endif
+
+                                    @if ($price != 0 && $withVat)
+                                        <div
+                                            class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                            {{ __('The price includes VAT') }}
+                                        </div>
+                                    @endif
+                                </div>
 
                                 <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                                     target="_blank"
-                                    class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
+                                    class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-4 lg:mt-6{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
                                     <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
                                             d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
@@ -325,11 +335,20 @@
                                         @endif
                                     </div>
 
-                                    @if ($ad->with_vat)
-                                        <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
-                                            {{ __('The price includes VAT') }}
+                                    <div class="flex flex-wrap gap-1 xs:gap-2 mt-4">
+                                        <div
+                                            class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                            {{ __('Price updated') }}
+                                            {{ $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at')->diffForHumans() }}
                                         </div>
-                                    @endif
+
+                                        @if ($ad->with_vat)
+                                            <div
+                                                class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                                {{ __('The price includes VAT') }}
+                                            </div>
+                                        @endif
+                                    </div>
                                 @else
                                     <div itemprop="priceSpecification" itemscope itemtype="https://schema.org/PriceSpecification">
                                         <meta itemprop="price" content="0" />
@@ -342,7 +361,7 @@
                                 @endif
 
                                 <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => $ad->office->id]) }}" target="_blank"
-                                    class="flex items-center hover:underline text-xxs xxs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-6">
+                                    class="flex items-center hover:underline text-xxs xxs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-4 lg:mt-6">
                                     <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
                                             d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"

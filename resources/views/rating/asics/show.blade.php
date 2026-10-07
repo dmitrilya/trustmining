@@ -86,7 +86,7 @@
                                             <span class="text-xl sm:text-3xl font-black"
                                                 :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400'"
                                                 x-text="sortedModels[0].netProfit"></span>
-                                            <span class="font-bold" :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400/50'">USDT</span>
+                                            <span class="font-bold" :class="sortedModels[0].netProfit > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400'">USDT</span>
                                         </div>
                                         <p class="text-slate-400 text-xs mt-1 sm:mt-2"
                                             x-text="'≈' + Math.round(sortedModels[0].netProfit / rub * 100) / 100 + '₽'"></p>

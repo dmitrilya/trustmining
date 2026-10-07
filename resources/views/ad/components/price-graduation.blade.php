@@ -2,7 +2,7 @@
     <div><span itemprop="price">{{ $ad->price }}</span> {{ $ad->coin->abbreviation }}</div>
 
     <span @mouseover="open = true" @mouseover.away = "open = false" @click="open = !open" @click.away="open = false"
-        class="ml-3 text-center text-xs font-semibold px-2 py-1 rounded-full {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-red-500/10' : 'bg-green-100 text-green-700' }}">
+        class="ml-3 text-center text-xs font-semibold px-2 py-1 rounded-full border {{ !isset($priceData['upper_bound']) || $ad->price * $ad->coin->rate > $priceData['upper_bound'] || $ad->price * $ad->coin->rate < $priceData['lower_bound'] ? 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400' : 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400' }}">
         <span>{{ isset($priceData['upper_bound']) ? ($ad->price * $ad->coin->rate > $priceData['upper_bound'] ? __('Above market') : ($ad->price * $ad->coin->rate < $priceData['lower_bound'] ? __('Suspiciously cheap') : __('In the market'))) : __('Not enough data') }}</span>
     </span>
 </div>

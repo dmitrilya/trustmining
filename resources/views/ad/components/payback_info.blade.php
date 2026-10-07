@@ -16,7 +16,7 @@
                     {{ number_format($profit, 2, '.', ' ') }}
                 </span>
                 <span class="font-bold"
-                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400/50'">USDT</span>
+                    :class="profit - expense * tariff > 1 ? 'text-emerald-500' : 'text-red-600 dark:text-red-400'">USDT</span>
             </div>
             <p class="text-slate-400 text-xs mt-1 sm:mt-2">≈ {{ number_format($profit / $rub, 2) }} ₽</p>
         </div>
