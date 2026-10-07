@@ -1,6 +1,6 @@
 <x-home-layout :data="$data" :title="__('meta.hashrate-converter.title')" :description="__('meta.hashrate-converter.description')" :header="__('Hashrate converter')">
     <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6"
-        x-data="hashrateConverter()">
+        x-data="hashrateConverter('{{ app()->getLocale() }}')">
         <div class="mb-8">
             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
                 {{ __('Select the type of computing power:') }}

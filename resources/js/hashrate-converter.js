@@ -1,12 +1,12 @@
-export var hashrateConverter = () => ({
+export var hashrateConverter = (lang) => ({
     activeType: 'h',
     prefixes: ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'],
     types: [
-        { code: 'h', name: 'Hash (Хеши)', unit: 'H/s' },
-        { code: 'sol', name: 'Sol (Солы)', unit: 'Sol/s' },
-        { code: 'g', name: 'Graph (Графы)', unit: 'G/s' },
-        { code: 'c', name: 'Cuckoos', unit: 'C/s' },
-        { code: 'k', name: 'Key (Ключи)', unit: 'K/s' }
+        { code: 'h', name: lang == 'ru' ? 'Hash (Хеши)' : 'Hash', unit: 'H/s' },
+        { code: 'sol', name: lang == 'ru' ? 'Sol (Солы)' : 'Sol', unit: 'Sol/s' },
+        { code: 'g', name: lang == 'ru' ? 'Graph (Графы)' : 'Graph', unit: 'G/s' },
+        { code: 'c', name: lang == 'ru' ? 'Cuckoos' : 'Cuckoos', unit: 'C/s' },
+        { code: 'k', name: lang == 'ru' ? 'Key (Ключи)' : 'Key', unit: 'K/s' }
     ],
     values: {},
     init() {
@@ -100,7 +100,25 @@ export var hashrateConverter = () => ({
     },
 
     getPrefixName(prefix) {
-        let names = { '': 'Базовая единица', 'k': 'Кило (Kilo)', 'M': 'Мега (Mega)', 'G': 'Гига (Giga)', 'T': 'Тера (Tera)', 'P': 'Пета (Peta)', 'E': 'Экса (Exa)', 'Z': 'Зетта (Zetta)' };
+        let names = lang == 'ru' ? {
+            '': 'Базовая единица',
+            'k': 'Кило (Kilo)',
+            'M': 'Мега (Mega)',
+            'G': 'Гига (Giga)',
+            'T': 'Тера (Tera)',
+            'P': 'Пета (Peta)',
+            'E': 'Экса (Exa)',
+            'Z': 'Зетта (Zetta)'
+        } : {
+            '': 'Base unit',
+            'k': 'Kilo',
+            'M': 'Mega',
+            'G': 'Giga',
+            'T': 'Tera',
+            'P': 'Peta',
+            'E': 'Exa',
+            'Z': 'Zetta'
+        };
         return names[prefix] || '';
     }
 });
