@@ -89,6 +89,20 @@ return [
         'question_4' => 'Is the warranty voided by overclocking the miner or using custom firmware?',
         'answer_4' => 'Yes, most manufacturers (Bitmain, MicroBT) will void the warranty if they detect the use of third-party software, signs of overheating due to overclocking, or operation in improper conditions (high humidity, dust). The warranty is also voided if the factory seals are damaged.',
     ],
+    'ad' => [
+        'question_1' => 'How is delivery of :m :h from :n carried out?',
+        'answer_1_in_stock' => 'The equipment is <b>:c</b>, shipment from the <b>:n</b> warehouse is within 1-2 days by a partner transport company.',
+        'answer_1_preorder' => 'Delivery from China to Moscow takes up to :d days, then across the Russian Federation by a partner transport company. Please clarify details with the manager via the chat with the company.',
+        'question_2' => 'What is the warranty on :b :m?',
+        'answer_2' => 'New equipment is covered by the manufacturer\'s official warranty. You can <a target="_blank" href="' . route('warranty') . '" class="inline text-indigo-500 hover:text-indigo-600">check the remaining warranty by S/N</a>. Check with <b>:n</b> about the possibility of getting an extended warranty from their service center.',
+        'question_3' => 'How to calculate the ROI of :m on :h?',
+        'answer_3_profit' => 'Currently, :m on :h generates an income equal to <b>:p USDT per day</b>.',
+        'answer_3' => 'Income depends on the hashrate, :c rate, and network difficulty. :p Expenses are the cost of your electricity. Calculate your profit in one click using our <a target="_blank" href=":h" class="inline text-indigo-500 hover:text-indigo-600">mining profitability calculator</a>.',
+        'question_4' => 'Can :n be trusted?',
+        'answer_4' => '<p>For the safety of our users, we have implemented a unique Trust Factor metric. Go to the company profile or look at the icon in the ad</p><div class="flex items-center gap-2"><svg class="w-3 h-3 md:w-4 md:h-4 text-emerald-600 dark:text-emerald-400" width="100" height="100" viewBox="0 0 100 100"xmlns="http://w3.org"><circle cx="50" cy="50" r="40" fill="currentColor" /></svg><span>— Reliable partner.</span></div><div class="flex items-center gap-2"><svg class="w-3 h-3 md:w-4 md:h-4 text-amber-600 dark:text-amber-400" width="100" height="100" viewBox="0 0 100 100" xmlns="http://w3.org"><circle cx="50" cy="50" r="40" fill="currentColor" /></svg><span>— Has minor notes or limited experience.</span></div><div class="flex items-center gap-2"><svg class="w-3 h-3 md:w-4 md:h-4 text-rose-600 dark:text-rose-400" width="100" height="100" viewBox="0 0 100 100" xmlns="http://w3.org"><circle cx="50" cy="50" r="40" fill="currentColor" /></svg><span>— Little information / Risks involved.</span></div>',
+        'question_5' => 'Can I place the purchased equipment in the mining hosting of :n?',
+        'answer_5' => 'Yes, you can place <b>:m</b> in the data center located :a. Rates start from <b>:tariff ₽ per kWh</b>. Check out the <a target="_blank" href=":h" class="inline text-indigo-500 hover:text-indigo-600">hosting information provided by :n</a>',
+    ],
     'asic' => [
         'question_1' => 'How do I properly connect the :b :m and start mining?',
         'answer_1_cooling' => [
@@ -132,16 +146,13 @@ return [
         'question_6' => 'What is the average operational lifespan of the :b :m miner?',
         'answer_6' => 'If adequate cooling is maintained (ASIC chips under 75-80°C), dust is cleared regularly (every 6 months), and grid voltage stays stable, the :m can operate reliably for **3 to 5 years**. The most common components requiring eventual routine replacement are cooling fans.',
     ],
-    'converter' => [
+    'hashrate-converter' => [
         'question_1' => 'How do I convert hashrate from TH/s to GH/s or MH/s?',
         'answer_1' => 'Computing power conversion in crypto mining follows the standard metric system, where each prefix tier multiplies or divides the base value by 1000. For instance, <b>1 TH/s (Terahash)</b> equals 1,000 GH/s (Gigahashes), 1,000,000 MH/s (Megahashes), or 1,000,000,000,000 H/s (raw hashes). Our online converter calculates these shifts automatically.',
-
         'question_2' => 'What is the difference between H/s, Sol/s, and Graphs/s?',
         'answer_2' => 'These are fundamentally distinct computing performance units linked to specific cryptographic setups: <br>• <b>H/s (Hashes/s)</b> is utilized in classic PoW mining grids (Bitcoin, Litecoin).<br>• <b>Sol/s (Solutions/s)</b> measures operational solutions found per second on Equihash engines (Zcash).<br>• <b>Graphs/s (or G/s)</b> calculates graph generation velocity on Cuckoo Cycle frameworks (Grin coin).<br>They cannot be directly compared or added up, as they execute completely different math workloads.',
-
         'question_3' => 'What do the C/s (Cuckoos) and K/s (Keys) units represent?',
         'answer_3' => 'These metrics are applied to niche or hardware-specific consensus protocols. <b>K/s (Keys per second)</b> tracks structural encryption key evaluation speeds (e.g., CryptoNight derivatives). <b>C/s (Cuckoos or Chirps)</b> captures computing cycle runtimes for target Cuckoo architectures. Use our main calculator dropdown to easily denominate these configurations.',
-
         'question_4' => 'How does hashrate affect mining profitability and coin generation speed?',
         'answer_4' => 'Hashrate is the raw velocity at which your mining hardware computes cryptographic puzzles. The higher this metric, the more valid shares your machine transmits to the pool per second, securing you a larger slice of the network block reward. If the network difficulty spikes, the amount of coins mined at the exact same hashrate will drop, which is why tracking active hardware performance is vital.',
     ]
