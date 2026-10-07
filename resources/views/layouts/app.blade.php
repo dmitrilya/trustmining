@@ -273,7 +273,9 @@
     </div>
 
     <script src="https://aikodex-widget.s3.twcstorage.ru/widget.js" data-api-base="https://app.aikodex.ru/api/widget"
-        data-widget-key="wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj" data-accent="#40ff9f" data-greeting="{{ __('AI assistant') }}" async></script>
+        data-widget-key="wk_live_-5REJnWb_qV__87pwjIg5A8yGMz4Cgkj" data-accent="#40ff9f" data-label="{{ __('AI assistant') }}" async
+        data-greeting="{{ __('I specialize in legal matters, but I can help with both choosing equipment and writing an article on the topic of mining') }}">
+    </script>
 </body>
 
 </html>
