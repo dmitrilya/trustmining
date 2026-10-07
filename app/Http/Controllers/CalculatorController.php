@@ -131,6 +131,12 @@ class CalculatorController extends Controller
 
     public function calculatorWidjet(Request $request): ViewBlade
     {
+        $locale = $request->input('lang', 'ru');
+
+        if (!in_array($locale, array_keys(config('app.supported_locales')))) $locale = 'en';
+        
+        app()->setLocale($locale);
+
         $data = Cache::get('optimized_calculator_data');
 
         if ($request->model) {

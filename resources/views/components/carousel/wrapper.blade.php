@@ -6,7 +6,7 @@
         class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col offer-card">
         @switch($model)
             @case('ad')
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
                     <a class="block w-full" href="{{ route('ads', ['adCategory' => 'miners']) }}">
                         <picture class="w-full">
                             <source media="(max-width: 430px)" srcset="/img/miners_xs.jpg">
@@ -16,7 +16,7 @@
                     </a>
                 </div>
 
-                <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+                <div class="flex flex-col grow justify-between p-2 sm:p-3">
                     <div>
                         <p class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Full catalog of miners') }}
@@ -37,7 +37,7 @@
             @break
 
             @case('hosting')
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
                     <a class="block w-full" href="{{ route('hostings') }}">
                         <picture class="w-full">
                             <source media="(max-width: 430px)" srcset="/img/hostings_xs.jpg">
@@ -46,7 +46,7 @@
                         </picture>
                     </a>
                 </div>
-                <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+                <div class="flex flex-col grow justify-between p-2 sm:p-3">
                     <div>
                         <p class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                             {{ __('Full list of hostings') }}
@@ -67,7 +67,7 @@
             @break
 
             @case('article')
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
                     <a class="block w-full" href="{{ route('insight.index') }}">
                         <picture class="w-full">
                             <source media="(max-width: 430px)" srcset="/img/articles_xs.jpg">
@@ -77,7 +77,7 @@
                     </a>
                 </div>
 
-                <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+                <div class="flex flex-col grow justify-between p-2 sm:p-3">
                     <div>
                         <p
                             class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
@@ -99,7 +99,7 @@
             @break
 
             @case('gpu')
-                <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+                <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
                     <a class="block w-full" href="{{ route('ads', ['adCategory' => 'gpus']) }}">
                         <picture class="w-full">
                             <source media="(max-width: 430px)" srcset="/img/gpu_xs.jpg">
@@ -109,7 +109,7 @@
                     </a>
                 </div>
 
-                <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+                <div class="flex flex-col grow justify-between p-2 sm:p-3">
                     <div>
                         <p
                             class="text-xs xs:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">

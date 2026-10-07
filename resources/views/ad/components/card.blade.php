@@ -50,7 +50,7 @@
             </div>
         @endif
 
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+        <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
             <a class="block w-full h-full" draggable="false" href="{{ $href }}" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true"
                 aria-label="{{ $ad->asic_model_name . ' ' . $ad->asic_version_hashrate . $ad->asic_version_measurement }} offer">
                 <template x-if="shown">
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+    <div class="flex flex-col grow justify-between p-2 sm:p-3">
         <div>
             <div class="flex items-start justify-between">
                 @if ($ad->ad_category_name == 'miners')

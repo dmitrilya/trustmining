@@ -1,7 +1,7 @@
 <div
     class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($gpu->images))
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
+        <div class="w-full aspect-4/3 overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" draggable="false"
                 href="{{ route('ads', ['adCategory' => 'gpus', 'gpu_model' => $gpu->slug]) }}" x-data="{ shown: false }"
                 x-intersect.once.margin.300px="shown = true"
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+    <div class="flex flex-col grow justify-between p-2 sm:p-3">
         <div>
             <div class="text-xs sm:text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                 {{ $gpu->gpuBrand->name . ' ' . $gpu->name }}

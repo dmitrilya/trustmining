@@ -3,7 +3,7 @@
 <div
     class="card sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
     @if (count($hosting->images))
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl justify-center items-center">
+        <div class="w-full aspect-4/3 overflow-hidden rounded-xl justify-center items-center">
             <a class="block w-full" href="{{ route('company.hosting', ['user' => $hosting->user->slug]) }}"
                 draggable="false" x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true"
                 aria-label="{{ $hosting->user->name }} hosting">
@@ -25,7 +25,7 @@
         </div>
     @endif
 
-    <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+    <div class="flex flex-col grow justify-between p-2 sm:p-3">
         <div>
             <a href="{{ route('company', ['user' => $hosting->user->slug]) }}" draggable="false"
                 class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">{{ $hosting->user->name }}</a>

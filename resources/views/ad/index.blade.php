@@ -85,7 +85,7 @@
         @if (session('from_deleted_ad'))
             <div class="bg-amber-500/10 border-l-4 border-amber-500/30 p-4 rounded-r-md mb-2 sm:mb-4">
                 <div class="flex">
-                    <div class="flex-shrink-0">⚠️</div>
+                    <div class="shrink-0">⚠️</div>
                     <div class="ml-3">
                         <p class="text-sm sm:text-base text-amber-800 dark:text-amber-200 font-bold">{{ __('The ad has been removed') }}</p>
                         <p class="text-xs sm:text-sm text-amber-500 mt-1">

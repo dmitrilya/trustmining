@@ -796,7 +796,7 @@
                             <div class="space-y-2 sm:space-y-4">
                                 <div
                                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color flex">
-                                    <div class="flex-shrink-0 text-xl mr-2 sm:mr-3">🔌</div>
+                                    <div class="shrink-0 text-xl mr-2 sm:mr-3">🔌</div>
                                     <div>
                                         <h4 class="font-bold text-sm sm:text-base lg:text-lg text-slate-800 dark:text-slate-200 mb-1">Затраты на электроэнергию
                                             (Розетка)</h4>
@@ -810,7 +810,7 @@
 
                                 <div
                                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color flex">
-                                    <div class="flex-shrink-0 text-xl mr-2 sm:mr-3">🏢</div>
+                                    <div class="shrink-0 text-xl mr-2 sm:mr-3">🏢</div>
                                     <div>
                                         <h4 class="font-bold text-sm sm:text-base lg:text-lg text-slate-800 dark:text-slate-200 mb-1">Аренда площадки и услуги
                                             хостинга (ЦОД)
@@ -825,7 +825,7 @@
 
                                 <div
                                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl p-2 sm:p-4 shadow-md shadow-logo-color flex">
-                                    <div class="flex-shrink-0 text-xl mr-2 sm:mr-3">🤝</div>
+                                    <div class="shrink-0 text-xl mr-2 sm:mr-3">🤝</div>
                                     <div>
                                         <h4 class="font-bold text-sm sm:text-base lg:text-lg text-slate-800 dark:text-slate-200 mb-1">Комиссии майнинг-пулов
                                         </h4>

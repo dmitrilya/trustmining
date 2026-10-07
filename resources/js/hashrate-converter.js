@@ -1,7 +1,6 @@
 export var hashrateConverter = () => ({
     activeType: 'h',
     prefixes: ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'],
-
     types: [
         { code: 'h', name: 'Hash (Хеши)', unit: 'H/s' },
         { code: 'sol', name: 'Sol (Солы)', unit: 'Sol/s' },
@@ -9,9 +8,7 @@ export var hashrateConverter = () => ({
         { code: 'c', name: 'Cuckoos', unit: 'C/s' },
         { code: 'k', name: 'Key (Ключи)', unit: 'K/s' }
     ],
-
     values: {},
-
     init() {
         this.resetWithBase(1000, 'M');
     },
@@ -27,47 +24,32 @@ export var hashrateConverter = () => ({
         this.updateFromField(val.toString(), prefix);
     },
 
-    // 🛑 МЕТОД ФИЛЬТРАЦИИ КЛАВИАТУРЫ: Блокирует буквы и дублирующиеся разделители
     filterKey(event) {
         const key = event.key;
 
-        // Разрешаем горячие клавиши (Ctrl+A, Ctrl+C и т.д.) и системные кнопки (BackSpace, Tab, Delete, стрелочки)
-        if (event.ctrlKey || event.metaKey || key.length > 1) {
-            return;
-        }
+        if (event.ctrlKey || event.metaKey || key.length > 1) return;
 
-        // Разрешаем только цифры
-        if (/[0-9]/.test(key)) {
-            return;
-        }
+        if (/[0-9]/.test(key)) return;
 
-        // Разрешаем разделитель дроби (точку или запятую), но строго ОДИН раз за ввод
         if (key === '.' || key === ',') {
             const currentString = event.target.value;
-            if (!currentString.includes('.') && !currentString.includes(',')) {
-                return;
-            }
+
+            if (!currentString.includes('.') && !currentString.includes(',')) return;
         }
 
-        // Любые другие символы полностью отсекаем
         event.preventDefault();
     },
 
-    // 🛑 МЕТОД ФИЛЬТРАЦИИ ВСТАВКИ: Отсекает копирование текста с буквами
     filterPaste(event) {
         const pasteData = (event.clipboardData || window.clipboardData).getData('text');
-
-        // Очищаем пробелы и переводим запятую в точку для валидации регулярным выражением
         const cleanData = pasteData.replace(/\s+/g, '').replace(',', '.');
 
-        // Разрешаем вставку только в том случае, если строка является валидным числом (целым или дробным)
-        if (isNaN(parseFloat(cleanData)) || !/^([0-9]+(\.[0-9]+)?)$/.test(cleanData)) {
-            event.preventDefault();
-        }
+        if (isNaN(parseFloat(cleanData)) || !/^([0-9]+(\.[0-9]+)?)$/.test(cleanData)) event.preventDefault();
     },
 
     cleanNumber(str) {
         if (typeof str !== 'string') return str;
+
         return parseFloat(str.replace(/\s+/g, '').replace(',', '.'));
     },
 
@@ -81,6 +63,7 @@ export var hashrateConverter = () => ({
             parts[0] = parseInt(parts[0]).toLocaleString('ru-RU');
             return parts.join('.');
         }
+
         return num.toLocaleString('ru-RU');
     },
 
@@ -93,6 +76,7 @@ export var hashrateConverter = () => ({
             this.prefixes.forEach(p => {
                 if (p !== targetPrefix) this.values[p] = '';
             });
+
             return;
         }
 

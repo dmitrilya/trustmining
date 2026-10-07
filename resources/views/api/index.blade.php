@@ -25,7 +25,7 @@
                     </p>
                     <div class="bg-amber-500/10 border-l-4 border-amber-500/30 p-4 rounded-r-md">
                         <div class="flex">
-                            <div class="flex-shrink-0">⚠️</div>
+                            <div class="shrink-0">⚠️</div>
                             <div class="ml-3">
                                 <p class="text-sm text-amber-800 dark:text-amber-200 font-bold">{{ __('Important Requirement') }}</p>
                                 <p class="text-xs text-amber-500 mt-1">
@@ -207,7 +207,7 @@
 
                 <div class="bg-rose-50 dark:bg-rose-950/20 border-l-4 border-rose-500/30 p-4 rounded-r-md">
                     <div class="flex">
-                        <div class="flex-shrink-0">🚫</div>
+                        <div class="shrink-0">🚫</div>
                         <div class="ml-3">
                             <p class="text-sm text-rose-600 dark:text-rose-400 font-bold">{{ __('Editing restrictions') }}</p>
                             <p class="text-xs text-rose-600 dark:text-rose-400 mt-1">

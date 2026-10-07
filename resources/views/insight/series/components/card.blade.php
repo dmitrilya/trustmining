@@ -1,7 +1,7 @@
 <div itemprop="item" itemscope itemtype="https://schema.org/CreativeWorkSeries"
     class="relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center"
+        <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center"
             x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true">
             @php
                 $preview = explode('.', $series->contents->first()->preview);

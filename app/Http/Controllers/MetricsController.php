@@ -133,6 +133,12 @@ class MetricsController extends Controller
 
     public function difficultyWidjet(Request $request, Coin $coin)
     {
+        $locale = $request->input('lang', 'ru');
+
+        if (!in_array($locale, array_keys(config('app.supported_locales')))) $locale = 'en';
+
+        app()->setLocale($locale);
+
         $data = $coin->difficultyData();
 
         if (!$data) return back();

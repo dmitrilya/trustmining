@@ -18,7 +18,7 @@
         </a>
     </div>
 
-    <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+    <div class="flex flex-col grow justify-between p-2 sm:p-3">
         <div>
             <div class="text-sm md:text-base text-slate-800 dark:text-slate-200 font-bold">
                 {{ $model->name }}

@@ -7,7 +7,7 @@
             {{ __('Please refresh the page and submit your request again') }}
         </p>
 
-        <div class="w-full aspect-[16/9] max-w-xl rounded-b-lg overflow-hidden">
+        <div class="w-full aspect-16/9 max-w-xl rounded-b-lg overflow-hidden">
             <video autoplay muted loop playsinline poster="/img/error.webp" width="100%">
                 <source src="/img/error.mp4" type="video/mp4">
                 {{ __('Your browser does not support embedded videos.') }}

@@ -41,7 +41,7 @@
             @include('insight.components.sub-edit-action')
         </div>
 
-        <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center">
+        <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center">
             @php
                 $preview =
                     isset($moderation) && isset($moderation->data['preview'])

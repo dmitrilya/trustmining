@@ -2,7 +2,7 @@
     class="relative sm:max-w-md p-2 h-full sm:px-4 sm:py-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color overflow-hidden rounded-xl flex flex-col justify-between">
     <div>
         <div
-            class="w-full aspect-[4/3] overflow-hidden rounded-lg flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
+            class="w-full aspect-4/3 overflow-hidden rounded-lg flex justify-center items-center @if (!$shop->company) bg-slate-200 dark:bg-slate-700 @endif">
             <a class="block w-full" href="{{ route('company', ['user' => $shop->slug]) }}">
                 @if ($shop->company?->bg_logo)
                     @php

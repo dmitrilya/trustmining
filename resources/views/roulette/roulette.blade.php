@@ -67,7 +67,7 @@
                                 </svg>
 
                                 <template x-for="(prize, i) in extendedPrizes" :key="i">
-                                    <div class="w-28 h-32 flex-shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition duration-300 overflow-hidden"
+                                    <div class="w-28 h-32 shrink-0 flex flex-col items-center justify-between px-2 py-4 rounded-xl border relative transition duration-300 overflow-hidden"
                                         :class="prize.style.card + ' ' + prize.style.border">
 
                                         <div class="absolute inset-0 opacity-80 pointer-events-none z-0 select-none"

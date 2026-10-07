@@ -132,7 +132,7 @@
 
                     @if ($v)
                         <div
-                            class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
+                            class="w-full aspect-16/9 overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
                             <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -145,7 +145,7 @@
                                 {{ __('Description') }}</h2>
 
                             <div itemprop="description"
-                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm sm:text-base text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
+                                class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
                                 {!! $d !!}
                             </div>
                         </div>
@@ -221,7 +221,7 @@
             @endif
 
             @if ($company->video)
-                <div class="w-full aspect-[16/9] overflow-hidden rounded-lg mt-8">
+                <div class="w-full aspect-16/9 overflow-hidden rounded-lg mt-8">
                     <iframe class="w-full h-full" src="{{ $company->video }}" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

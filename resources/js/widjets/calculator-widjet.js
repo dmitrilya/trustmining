@@ -13,14 +13,23 @@
         return 'light';
     }
 
+    function getParentLang() {
+        let lang = document.documentElement.lang || 'ru';
+        return lang.substring(0, 2).toLowerCase();
+    }
+
     const theme = getParentTheme();
-    const blocks = me.getAttribute('data-blocks') || 'period,graph,prediction,history';
+    const lang = getParentLang();
+    const blocks = me.getAttribute('data-blocks') || 'additional-params,coins,characteristics,currency';
+    const tariffs = me.getAttribute('data-tariffs') || '[]';
+    const model = me.getAttribute('data-model') || 'antminer-l9';
+    const version = me.getAttribute('data-version') || '17';
     const parentUrl = window.location.href;
 
-    const widgetUrl = `https://trustmining.ru/api/difficulty-widjet/bitcoin?blocks=${encodeURIComponent(blocks)}&theme=${theme}&parent_url=${encodeURIComponent(parentUrl)}`;
+    const widgetUrl = `https://trustmining.ru/api/calculator-widjet?blocks=${encodeURIComponent(blocks)}&theme=${theme}&lang=${lang}&tariffs=${tariffs}&model=${encodeURIComponent(model)}&version=${version}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
-    iframe.title = 'Trust Mining Difficulty';
+    iframe.title = 'Trust Mining Calculator';
     iframe.src = widgetUrl;
     iframe.style.width = '100%';
     iframe.style.border = 'none';
@@ -41,8 +50,6 @@
     });
 
     window.addEventListener('message', function (event) {
-        if (event.data && event.data.type === 'resize-difficulty') {
-            iframe.style.height = event.data.height + 'px';
-        }
+        if (event.data && event.data.type === 'resize-calculator') iframe.style.height = event.data.height + 'px';
     }, false);
 })();

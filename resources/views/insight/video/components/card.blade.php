@@ -1,6 +1,6 @@
 <div itemprop="item" itemscope itemtype="https://schema.org/VideoObject"
     class="card relative sm:max-w-md h-full bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden rounded-xl flex flex-col">
-    <div class="w-full aspect-[4/3] overflow-hidden rounded-xl flex justify-center items-center" x-data="{ shown: false }"
+    <div class="w-full aspect-4/3 overflow-hidden rounded-xl flex justify-center items-center" x-data="{ shown: false }"
         x-intersect.once.margin.300px="shown = true">
         @php
             $preview = explode('.', $video->preview);
@@ -24,7 +24,7 @@
             </picture>
         </template>
     </div>
-    <div class="flex flex-col flex-grow justify-between p-2 sm:p-3">
+    <div class="flex flex-col grow justify-between p-2 sm:p-3">
         <div>
             @include('insight.components.card-channel', [
                 'name' => $video->channel->name,

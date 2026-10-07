@@ -38,14 +38,14 @@
                                             $modPreview = isset($moderation->data['preview']) ? $moderation->data['preview'] : $ad->preview;
                                         @endphp
                                         <div class="min-w-16 w-16 flex flex-col gap-2">
-                                            <div @click="active = 0" class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                            <div @click="active = 0" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
                                                 :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-80 hover:opacity-100'">
                                                 <img src="{{ Storage::url($modPreview) }}" alt="{{ $alt }} {{ __('Preview') }}"
                                                     class="w-full h-full rounded-lg object-cover">
                                             </div>
 
                                             @foreach ($modImages as $index => $image)
-                                                <div @click="active = {{ $index + 1 }}" class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                                <div @click="active = {{ $index + 1 }}" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
                                                     :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
                                                         'opacity-80 hover:opacity-100'">
                                                     <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
@@ -54,7 +54,7 @@
                                             @endforeach
                                         </div>
 
-                                        <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
+                                        <div class="relative w-full aspect-4/3 rounded-lg overflow-hidden bg-slate-100">
                                             <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
                                                 <img itemprop="image" src="{{ Storage::url($modPreview) }}" alt="{{ $alt }}"
                                                     class="w-full h-full object-cover">
@@ -105,7 +105,7 @@
 
                                 <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => isset($moderation->data['office_id']) ? $moderation->data['office_id'] : $ad->office->id]) }}"
                                     target="_blank"
-                                    class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
+                                    class="flex items-center hover:underline text-xxs xs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4{{ isset($moderation->data['office_id']) ? ' border border-indigo-500' : '' }}">
                                     <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
                                             d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
@@ -200,14 +200,14 @@
                             <div class="h-full flex flex-col justify-between">
                                 <div class="flex gap-2" x-data="{ active: 0 }">
                                     <div class="min-w-16 w-16 flex flex-col gap-2">
-                                        <div @click="active = 0" class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                        <div @click="active = 0" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
                                             :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-80 hover:opacity-100'">
                                             <img src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }} {{ __('Preview') }}"
                                                 class="w-full h-full rounded-lg object-cover">
                                         </div>
 
                                         @foreach ($ad->images as $index => $image)
-                                            <div @click="active = {{ $index + 1 }}" class="w-full aspect-[4/3] rounded-lg cursor-pointer transition"
+                                            <div @click="active = {{ $index + 1 }}" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
                                                 :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
                                                     'opacity-80 hover:opacity-100'">
                                                 <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
@@ -216,7 +216,7 @@
                                         @endforeach
                                     </div>
 
-                                    <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-slate-100">
+                                    <div class="relative w-full aspect-4/3 rounded-lg overflow-hidden bg-slate-100">
                                         <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
                                             <img itemprop="image" src="{{ Storage::url($ad->preview) }}" alt="{{ $alt }}"
                                                 class="w-full h-full object-cover">
@@ -340,7 +340,7 @@
                                 @endif
 
                                 <a href="{{ route('company.office', ['user' => $ad->user->slug, 'office' => $ad->office->id]) }}" target="_blank"
-                                    class="flex items-center hover:underline text-xxs xxs:text-xs sm:text-sm sm:text-base text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-6">
+                                    class="flex items-center hover:underline text-xxs xxs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-2 sm:mt-3 md:mt-4 lg:mt-6">
                                     <svg class="w-5 h-5 mr-2" aria-hidden="true" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
                                             d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
