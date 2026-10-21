@@ -1,13 +1,11 @@
-<x-app-layout :title="__('meta.forum.question.my.title')"
-    :description="__('meta.forum.question.my.description')">
+<x-app-layout :title="__('meta.forum.question.my.title')" :description="__('meta.forum.question.my.description')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-xl text-slate-800 dark:text-slate-200 leading-tight">
                 {{ __('My questions') }}
             </h1>
 
-            <a class="block ml-auto w-fit"
-                href="{{ route('forum.question.create') }}">
+            <a class="block ml-auto w-fit" href="{{ route('forum.question.create') }}">
                 <x-buttons.primary-button class="w-full">
                     {{ __('New question') }}
                 </x-buttons.primary-button>
@@ -63,17 +61,14 @@
                         </h3>
 
                         @if (count($question->similar_questions_list) && !$question->published)
-                            <div x-data="{ show: false }"
-                                class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-slate-300 dark:border-slate-700">
+                            <div x-data="{ show: false }" class="mt-2 sm:mt-3 lg:mt-4 px-2 sm:px-4 h-full border-t border-slate-300 dark:border-slate-700">
                                 <div>
                                     <h3 id="accordion-flush-themes-heading">
                                         <button type="button" @click="show = !show"
                                             class="flex items-center justify-between w-full py-5 text-left text-slate-800 dark:text-slate-200 text-xs sm:text-sm lg:text-base">
                                             <span>{{ __('Similar questions') }}</span>
-                                            <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': !show }"
-                                                fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
+                                            <svg class="w-3 h-3 shrink-0" :class="{ 'rotate-180': !show }" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
                                             </svg>
                                         </button>
                                     </h3>
@@ -87,23 +82,19 @@
                                                             'forumSubcategory' => $similarQuestion->forumSubcategory->slug,
                                                             'forumQuestion' => $similarQuestion->id . '-' . Str::slug($similarQuestion->theme),
                                                         ]) }}">
-                                                        <div
-                                                            class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-white dark:hover:bg-slate-900 rounded-lg">
+                                                        <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-white dark:hover:bg-slate-900 rounded-lg">
                                                             <div class="mb-1.5 sm:mb-2 flex justify-between">
-                                                                <div
-                                                                    class="text-xxs sm:text-xs lg:text-sm text-slate-500">
+                                                                <div class="text-xxs sm:text-xs lg:text-sm text-slate-500">
                                                                     {{ __($similarQuestion->forumSubcategory->forumCategory->name) }}.
                                                                     {{ __($similarQuestion->forumSubcategory->name) }}
                                                                 </div>
 
                                                                 <div class="text-right ml-3 sm:ml-5">
-                                                                    <div
-                                                                        class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
+                                                                    <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                                                         {{ __('Views') }}:
                                                                         <span>{{ $similarQuestion->views_count }}</span>
                                                                     </div>
-                                                                    <div
-                                                                        class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
+                                                                    <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
                                                                         {{ __('Answers') }}:
                                                                         <span>{{ $similarQuestion->moderated_forum_answers_count }}</span>
                                                                     </div>

@@ -1,53 +1,14 @@
 <x-app-layout title="{{ $question->theme }}" description="{{ str($question->text)->stripTags()->limit(150) }}">
     <x-slot name="header">
-        <div class="lg:flex items-center justify-between">
-            <nav aria-label="Breadcrumb">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list" class="flex items-center sm:space-x-2">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="1" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="{{ route('forum') }}"
-                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __('Forum') }}</span>
-                            </a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="2" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
-                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __($category->name) }}</span>
-                            </a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm truncate">
-                        <meta itemprop="position" content="3" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="#" class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __($subcategory->name) }}</span>
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-
-            <div class="flex justify-end mt-2 xs:mt-4 lg:mt-0">
-                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
-                    <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
-                </a>
-                <a class="" href="{{ route('forum.question.create') }}">
-                    <x-buttons.primary-button>
-                        {{ __('New question') }}
-                    </x-buttons.primary-button>
-                </a>
-            </div>
+        <div class="flex justify-end">
+            <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
+                <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
+            </a>
+            <a class="" href="{{ route('forum.question.create') }}">
+                <x-buttons.primary-button>
+                    {{ __('New question') }}
+                </x-buttons.primary-button>
+            </a>
         </div>
     </x-slot>
 
@@ -60,124 +21,134 @@
         $notificationAnswerId = request()->answer;
     @endphp
 
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8 lg:grid grid-cols-4 gap-2 sm:gap-4 items-start">
-        <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-2 sm:space-y-4" x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {
-            let answer = document.querySelector('#answer-{{ $notificationAnswerId }}');
-            answer.scrollIntoView({ behavior: 'smooth' });
-            answer.classList.add('animate-scrolling-highlight')
-        }">
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4"
-                x-data="{ open: false }">
-                <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-6 lg:py-8">
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :href="route('forum')" :name="__('Forum')" />
+            <x-breadcrumbs.breadcrumb position="2" :href="route('forum.category', ['forumCategory' => $category->slug])" :name="__($category->name)" />
+            <x-breadcrumbs.breadcrumb position="3" :href="route('forum.category', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug])" :name="__($subcategory->name)" />
+            <x-breadcrumbs.breadcrumb position="4" :name="str($question->theme)->limit(20)" />
+        </x-breadcrumbs.breadcrumbs>
 
-                <h1 itemprop="name" class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-slate-800 dark:text-slate-200 font-bold">
-                    {{ __($question->theme) }}
-                </h1>
+        <div class="lg:grid grid-cols-4 gap-2 sm:gap-4 items-start">
+            <div itemscope itemtype="https://schema.org/Question" class="col-span-3 space-y-2 sm:space-y-4" x-data="{ deleteHref: null }" x-init="if ('{{ $notificationAnswerId !== null }}' == 1) {
+                let answer = document.querySelector('#answer-{{ $notificationAnswerId }}');
+                answer.scrollIntoView({ behavior: 'smooth' });
+                answer.classList.add('animate-scrolling-highlight')
+            }">
+                <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 xs:p-3 md:p-4"
+                    x-data="{ open: false }">
+                    <meta itemprop="about" content="{{ __($category->name) }}. {{ __($subcategory->name) }}">
 
-                @include('forum.components.author', [
-                    'id' => $question->user->id,
-                    'name' => $question->user->name,
-                    'forumScore' => $question->user->forum_score,
-                    'messages' => $question->user->moderated_forum_answers_count,
-                ])
+                    <h1 itemprop="name" class="mb-2 sm:mb-4 lg:mb-6 text-sm xs:text-base sm:text-lg lg:text-xl text-slate-800 dark:text-slate-200 font-bold">
+                        {{ __($question->theme) }}
+                    </h1>
 
-                @if (count($question->images))
-                    <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
-                        @foreach ($question->images as $image)
-                            <div class="group relative rounded-lg overflow-hidden flex items-center cursor-zoom-in">
-                                <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
-                                    class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
+                    @include('forum.components.author', [
+                        'id' => $question->user->id,
+                        'name' => $question->user->name,
+                        'forumScore' => $question->user->forum_score,
+                        'messages' => $question->user->moderated_forum_answers_count,
+                    ])
+
+                    @if (count($question->images))
+                        <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
+                            @foreach ($question->images as $image)
+                                <div class="group relative rounded-lg overflow-hidden flex items-center cursor-zoom-in">
+                                    <div @click.self="$refs.image_preview.src = $el.nextElementSibling.src; open = true"
+                                        class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
+                                    </div>
+                                    <img src="{{ Storage::url($image) }}" />
                                 </div>
-                                <img src="{{ Storage::url($image) }}" />
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if (count($question->files))
+                        <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
+                            @foreach ($question->files as $file)
+                                <x-document :path="Storage::url($file['path'])" :name="$file['name']"></x-document>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <div itemprop="text" class="mb-1 sm:mb-3 lg:mb-6 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $question->text !!}</div>
+
+                    <div class="mt-3 xs:mt-4 sm:mt-5 flex justify-between">
+                        <div class="flex">
+                            <div class="mr-2 sm:mr-3 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
+                                {{ __('Views') }}: <span>{{ $question->views_count }}</span>
                             </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                @if (count($question->files))
-                    <div class="mb-2 sm:mb-3 lg:mb-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 xs:gap-3 xl:gap-4">
-                        @foreach ($question->files as $file)
-                            <x-document :path="Storage::url($file['path'])" :name="$file['name']"></x-document>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div itemprop="text" class="mb-1 sm:mb-3 lg:mb-6 text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 whitespace-pre-line">{!! $question->text !!}</div>
-
-                <div class="mt-3 xs:mt-4 sm:mt-5 flex justify-between">
-                    <div class="flex">
-                        <div class="mr-2 sm:mr-3 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
-                            {{ __('Views') }}: <span>{{ $question->views_count }}</span>
+                            <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
+                                {{ __('Answers') }}: <span itemprop="answerCount">{{ $question->moderatedForumAnswers->count() }}</span>
+                            </div>
                         </div>
-                        <div class="mr-2 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
-                            {{ __('Answers') }}: <span itemprop="answerCount">{{ $question->moderatedForumAnswers->count() }}</span>
+                        <div>
+                            <div data-type="datetime" data-date="{{ $question->created_at }}"
+                                class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500">
+                            </div>
+                            <meta itemprop="dateCreated" content="{{ $question->created_at }}">
                         </div>
                     </div>
-                    <div>
-                        <div data-type="datetime" data-date="{{ $question->created_at }}" class="date-transform text-xxs xs:text-xs lg:text-sm text-slate-500">
-                        </div>
-                        <meta itemprop="dateCreated" content="{{ $question->created_at }}">
-                    </div>
-                </div>
 
-                <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
-                    class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
-                    <div class="relative p-2 sm:p-4 flex items-center justify-center w-full h-full max-w-max max-h-full z-50">
-                        <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
-                            @click.away="open = false">
-                            <button @click="open = false" type="button"
-                                class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
-                                <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-                            <img x-ref="image_preview" src="" alt="Image preview" class="max-h-full">
+                    <div style="display: none" x-show="open" tabindex="-1" aria-hidden="true"
+                        class="overflow-y-auto overflow-x-hidden flex justify-center items-center fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="bg-slate-900/50 dark:bg-slate-950/80 fixed inset-0 z-40"></div>
+                        <div class="relative p-2 sm:p-4 flex items-center justify-center w-full h-full max-w-max max-h-full z-50">
+                            <div class="relative place-items-center bg-white rounded-xl overflow-hidden shadow h-full max-h-max dark:bg-slate-800"
+                                @click.away="open = false">
+                                <button @click="open = false" type="button"
+                                    class="absolute top-1 right-1 text-slate-600 bg-transparent hover:text-slate-600 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-slate-700 dark:hover:text-slate-200">
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                                <img x-ref="image_preview" src="" alt="Image preview" class="max-h-full">
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl overflow-hidden">
+                    @if (!Auth::user())
+                        <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
+                            <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">
+                                {{ __('Please log in to leave a reply') }}</p>
+                            <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
+                        </div>
+                    @else
+                        @include('forum.answer.create')
+                    @endif
+                </div>
+
+                @foreach ($question->moderatedForumAnswers as $i => $answer)
+                    @include('forum.answer.show')
+                @endforeach
+
+                <x-modal name="delete-modal" focusable>
+                    <form method="post" :action="deleteHref" class="p-6">
+                        @csrf
+                        @method('delete')
+
+                        <h2 class="text-lg text-slate-800 dark:text-slate-200">
+                            {{ __('Are you sure?') }}
+                        </h2>
+
+                        <div class="mt-6 flex justify-end">
+                            <x-buttons.secondary-button x-on:click="$dispatch('close')">
+                                {{ __('Cancel') }}
+                            </x-buttons.secondary-button>
+
+                            <x-buttons.danger-button class="ml-3">
+                                {{ __('Delete') }}
+                            </x-buttons.danger-button>
+                        </div>
+                    </form>
+                </x-modal>
             </div>
 
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl overflow-hidden">
-                @if (!Auth::user())
-                    <div class="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 lg:p-6">
-                        <p class="mb-3 sm:mb-5 text-slate-600 dark:text-slate-400 text-xs sm:text-sm lg:text-base">
-                            {{ __('Please log in to leave a reply') }}</p>
-                        <x-buttons.primary-button @click="$dispatch('open-modal', 'login')">{{ __('Sign in') }}</x-buttons.primary-button>
-                    </div>
-                @else
-                    @include('forum.answer.create')
-                @endif
-            </div>
-
-            @foreach ($question->moderatedForumAnswers as $i => $answer)
-                @include('forum.answer.show')
-            @endforeach
-
-            <x-modal name="delete-modal" focusable>
-                <form method="post" :action="deleteHref" class="p-6">
-                    @csrf
-                    @method('delete')
-
-                    <h2 class="text-lg text-slate-800 dark:text-slate-200">
-                        {{ __('Are you sure?') }}
-                    </h2>
-
-                    <div class="mt-6 flex justify-end">
-                        <x-buttons.secondary-button x-on:click="$dispatch('close')">
-                            {{ __('Cancel') }}
-                        </x-buttons.secondary-button>
-
-                        <x-buttons.danger-button class="ml-3">
-                            {{ __('Delete') }}
-                        </x-buttons.danger-button>
-                    </div>
-                </form>
-            </x-modal>
+            @include('forum.components.sidebar')
         </div>
-
-        @include('forum.components.sidebar')
     </div>
 </x-app-layout>

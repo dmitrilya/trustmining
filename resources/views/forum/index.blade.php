@@ -1,116 +1,109 @@
 <x-app-layout :title="__('meta.forum.title')" :description="__('meta.forum.description')">
     <x-slot name="header">
-        <div class="lg:flex items-center justify-between">
-            <nav aria-label="Breadcrumb">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list" class="flex items-center sm:space-x-2">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="1" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="#" class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __('Forum') }}</span>
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-
-            <div class="flex justify-end mt-2 xs:mt-4 lg:mt-0">
-                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
-                    <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
-                </a>
-                <a class="" href="{{ route('forum.question.create') }}">
-                    <x-buttons.primary-button>
-                        {{ __('New question') }}
-                    </x-buttons.primary-button>
-                </a>
-            </div>
+        <div class="flex justify-end">
+            <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
+                <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
+            </a>
+            <a class="" href="{{ route('forum.question.create') }}">
+                <x-buttons.primary-button>
+                    {{ __('New question') }}
+                </x-buttons.primary-button>
+            </a>
         </div>
     </x-slot>
 
-    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
-        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
-            <h2
-                class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-extrabold">
-                {{ __('New posts') }}
-            </h2>
+    <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :name="__('Forum')" />
+        </x-breadcrumbs.breadcrumbs>
 
-            <div class="divide-y divide-slate-300 dark:divide-slate-700">
-                @foreach ($questions as $question)
-                    <a class="block"
-                        href="{{ route('forum.question.show', [
-                            'forumCategory' => $question->forumSubcategory->forumCategory->slug,
-                            'forumSubcategory' => $question->forumSubcategory->slug,
-                            'forumQuestion' => $question->id . '-' . Str::slug($question->theme),
-                        ]) }}">
-                        <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
-                            <div class="mb-1.5 sm:mb-2 flex justify-between">
-                                <div class="text-xxs sm:text-xs lg:text-sm text-slate-500">
-                                    {{ __($question->forumSubcategory->forumCategory->name) }}.
-                                    {{ __($question->forumSubcategory->name) }}
-                                </div>
-
-                                <div class="text-right ml-3 sm:ml-5">
-                                    <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
-                                        {{ __('Views') }}: <span>{{ $question->views_count }}</span>
-                                    </div>
-                                    <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
-                                        {{ __('Answers') }}:
-                                        <span>{{ $question->moderated_forum_answers_count }}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3
-                                class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
-                                {{ $question->theme }}
-                            </h3>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-
-        @foreach ($categories as $category)
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
             <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
-                <h2 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6">
-                    <a href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
-                        class="xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
-                        {{ __($category->name) }}
-                    </a>
+                <h2
+                    class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-extrabold">
+                    {{ __('New posts') }}
                 </h2>
 
                 <div class="divide-y divide-slate-300 dark:divide-slate-700">
-                    @foreach ($category->forumSubcategories as $subcategory)
-                        <a class="block" href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">
-                            <div class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-slate-200 dark:hover:bg-slate-950 flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div
-                                        class="mr-3 sm:mr-4 w-6 h-6 min-w-6 xs:w-8 xs:h-8 xs:min-w-8 sm:w-10 sm:h-10 sm:min-w-10 lg:w-12 lg:h-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
-                                        @include('forum.components.svg.' . $subcategory->slug, [
-                                            'class' => 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200',
-                                            'w' => '55%',
-                                        ])
+                    @foreach ($questions as $question)
+                        <a class="block"
+                            href="{{ route('forum.question.show', [
+                                'forumCategory' => $question->forumSubcategory->forumCategory->slug,
+                                'forumSubcategory' => $question->forumSubcategory->slug,
+                                'forumQuestion' => $question->id . '-' . Str::slug($question->theme),
+                            ]) }}">
+                            <div class="px-4 py-2 xs:py-3 sm:px-6 group hover:bg-slate-200 dark:hover:bg-slate-950">
+                                <div class="mb-1.5 sm:mb-2 flex justify-between">
+                                    <div class="text-xxs sm:text-xs lg:text-sm text-slate-500">
+                                        {{ __($question->forumSubcategory->forumCategory->name) }}.
+                                        {{ __($question->forumSubcategory->name) }}
                                     </div>
-                                    <h3
-                                        class="text-xs xs:text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
-                                        {{ __($subcategory->name) }}
-                                    </h3>
+
+                                    <div class="text-right ml-3 sm:ml-5">
+                                        <div class="mb-0.5 sm:mb-1 text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
+                                            {{ __('Views') }}: <span>{{ $question->views_count }}</span>
+                                        </div>
+                                        <div class="text-xxs sm:text-xs text-slate-500 whitespace-nowrap">
+                                            {{ __('Answers') }}:
+                                            <span>{{ $question->moderated_forum_answers_count }}</span>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="text-right ml-3 sm:ml-5">
-                                    <div class="text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
-                                        {{ __('Posts') }}: {{ $subcategory->published_forum_questions_count }}
-                                    </div>
-                                    @if ($subcategory->latestForumQuestion)
-                                        <div class="date-transform mt-0.5 sm:mt-1 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap"
-                                            data-date={{ $subcategory->latestForumQuestion->created_at }}></div>
-                                    @endif
-                                </div>
+                                <h3
+                                    class="whitespace-nowrap truncate text-xs sm:text-sm lg:text-base text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
+                                    {{ $question->theme }}
+                                </h3>
                             </div>
                         </a>
                     @endforeach
                 </div>
             </div>
-        @endforeach
+
+            @foreach ($categories as $category)
+                <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
+                    <h2 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6">
+                        <a href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
+                            class="xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
+                            {{ __($category->name) }}
+                        </a>
+                    </h2>
+
+                    <div class="divide-y divide-slate-300 dark:divide-slate-700">
+                        @foreach ($category->forumSubcategories as $subcategory)
+                            <a class="block"
+                                href="{{ route('forum.subcategory', ['forumCategory' => $category->slug, 'forumSubcategory' => $subcategory->slug]) }}">
+                                <div
+                                    class="px-4 py-2 xs:py-3 sm:px-6 sm:py-4 group hover:bg-slate-200 dark:hover:bg-slate-950 flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div
+                                            class="mr-3 sm:mr-4 w-6 h-6 min-w-6 xs:w-8 xs:h-8 xs:min-w-8 sm:w-10 sm:h-10 sm:min-w-10 lg:w-12 lg:h-12 lg:min-w-12 rounded-full group-hover:shadow-lg shadow-logo-color border-[1.5px] border-slate-500 dark:border-slate-500 group-hover:border-slate-900 dark:group-hover:border-slate-100 flex items-center justify-center">
+                                            @include('forum.components.svg.' . $subcategory->slug, [
+                                                'class' => 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200',
+                                                'w' => '55%',
+                                            ])
+                                        </div>
+                                        <h3
+                                            class="text-xs xs:text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200 font-bold">
+                                            {{ __($subcategory->name) }}
+                                        </h3>
+                                    </div>
+
+                                    <div class="text-right ml-3 sm:ml-5">
+                                        <div class="text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap">
+                                            {{ __('Posts') }}: {{ $subcategory->published_forum_questions_count }}
+                                        </div>
+                                        @if ($subcategory->latestForumQuestion)
+                                            <div class="date-transform mt-0.5 sm:mt-1 text-xxs sm:text-xs lg:text-sm text-slate-500 whitespace-nowrap"
+                                                data-date={{ $subcategory->latestForumQuestion->created_at }}></div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>

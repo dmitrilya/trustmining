@@ -1,67 +1,25 @@
-<x-app-layout title="{{ __($category->name) }} - {{ __($subcategory->name) }}"
-    :description="__('meta.forum.subcategory.description', ['category' => $category->name, 'subcategory' => $subcategory->name])">
+<x-app-layout title="{{ __($category->name) }} - {{ __($subcategory->name) }}" :description="__('meta.forum.subcategory.description', ['category' => $category->name, 'subcategory' => $subcategory->name])">
     <x-slot name="header">
-        <div class="lg:flex items-center justify-between">
-            <nav aria-label="Breadcrumb">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList" role="list"
-                    class="flex items-center sm:space-x-2">
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="1" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="{{ route('forum') }}"
-                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __('Forum') }}</span>
-                            </a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="text-sm">
-                        <meta itemprop="position" content="2" />
-                        <div class="flex items-center">
-                            <a itemprop="item"
-                                href="{{ route('forum.category', ['forumCategory' => $category->slug]) }}"
-                                class="sm:mr-2 text-sm text-slate-800 dark:text-slate-200 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __($category->name) }}</span>
-                            </a>
-                            <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"
-                                aria-hidden="true" class="h-5 w-3 sm:w-4 text-slate-400">
-                                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                            </svg>
-                        </div>
-                    </li>
-                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"
-                        class="text-sm truncate">
-                        <meta itemprop="position" content="3" />
-                        <div class="flex items-center">
-                            <a itemprop="item" href="#"
-                                class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
-                                <span itemprop="name">{{ __($subcategory->name) }}</span>
-                            </a>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
-
-            <div class="flex justify-end mt-2 xs:mt-4 lg:mt-0">
-                <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
-                    <x-buttons.secondary-button
-                        class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
-                </a>
-                <a class="" href="{{ route('forum.question.create') }}">
-                    <x-buttons.primary-button>
-                        {{ __('New question') }}
-                    </x-buttons.primary-button>
-                </a>
-            </div>
+        <div class="flex justify-end">
+            <a class="mr-1 xs:mr-2" href="{{ route('forum.question.mine') }}">
+                <x-buttons.secondary-button class="bg-secondary-gradient dark:text-slate-800">{{ __('My questions') }}</x-buttons.secondary-button>
+            </a>
+            <a class="" href="{{ route('forum.question.create') }}">
+                <x-buttons.primary-button>
+                    {{ __('New question') }}
+                </x-buttons.primary-button>
+            </a>
         </div>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div
-            class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
+        <x-breadcrumbs.breadcrumbs>
+            <x-breadcrumbs.breadcrumb position="1" :href="route('forum')" :name="__('Forum')" />
+            <x-breadcrumbs.breadcrumb position="2" :href="route('forum.category', ['forumCategory' => $category->slug])" :name="__($category->name)" />
+            <x-breadcrumbs.breadcrumb position="3" :name="__($subcategory->name)" />
+        </x-breadcrumbs.breadcrumbs>
+
+        <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl">
             <h1
                 class="mb-1 sm:mb-3 lg:mb-6 p-4 md:p-6 xs:text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold">
                 {{ __($subcategory->name) }}
