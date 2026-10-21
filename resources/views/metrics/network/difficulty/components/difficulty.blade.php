@@ -108,7 +108,7 @@
                 @endphp
                 <div class="w-full">
                     <div class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                        <div class="bg-gradient-to-r from-indigo-500 to-indigo-700 h-1.5 rounded-full transition duration-500"
+                        <div class="bg-linear-to-r from-indigo-500 to-indigo-700 h-1.5 rounded-full transition duration-500"
                             style="width: {{ $progressPercent }}%">
                         </div>
                     </div>
@@ -226,6 +226,6 @@
             </div>
         @endif
 
-        <div id="graph" class="h-60 sm:h-[25rem] mt-4 lg:mt-6"></div>
+        <div id="graph" class="h-60 sm:h-100 mt-4 lg:mt-6"></div>
     </div>
 @endif

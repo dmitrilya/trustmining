@@ -2,7 +2,7 @@
     description="{{ $channel->name }} - {{ $channel->description }} | TM Insight" :header="$channel->name" :channel="$channel" noindex="true">
     <div>
         @if ($channel->banner)
-            <img src="{{ Storage::url($channel->banner) }}" alt="{{ $channel->name }} banner" class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
+            <img src="{{ Storage::url($channel->banner) }}" alt="{{ $channel->name }} banner" class="w-full aspect-960/360 rounded-xl mb-4 lg:mb-6">
         @endif
 
         <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">

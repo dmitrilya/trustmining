@@ -6,6 +6,7 @@ export var roulette = () => ({
     extendedPrizes: [],
     isSpinning: false,
     currentTranslateX: 0,
+    animationDuration: 0,
     wonPrize: null,
     timeToSpin: null,
     formattedTime: '',
@@ -43,7 +44,9 @@ export var roulette = () => ({
             }
 
             let extended = [];
-            for (let meta = 0; meta < 4; meta++) {
+            const MINIMUM_CARDS = 300;
+
+            while (extended.length < MINIMUM_CARDS) {
                 weightedPool.forEach(prize => {
                     extended.push({ ...prize });
                 });
@@ -174,24 +177,54 @@ export var roulette = () => ({
                 const container = tape.parentElement;
                 const containerWidth = container.offsetWidth;
 
-                const minCardIndex = 220;
-                const targetCardIndex = this.extendedPrizes.findIndex((p, idx) => idx >= minCardIndex && p.id === this.wonPrize.id);
-                const finalIndex = targetCardIndex !== -1 ? targetCardIndex : this.extendedPrizes.findLastIndex(p => p.id === this.wonPrize.id);
+                const totalCards = this.extendedPrizes.length;
+
+                const allMatchingIndices = [];
+                this.extendedPrizes.forEach((p, idx) => {
+                    if (p.id === this.wonPrize.id) allMatchingIndices.push(idx);
+                });
+
+                const minCardIndex = Math.floor(totalCards * 0.65);
+                const maxCardIndex = totalCards - 40;
+
+                const safeIndices = allMatchingIndices.filter(idx => idx >= minCardIndex && idx <= maxCardIndex);
+
+                let finalIndex;
+                if (safeIndices.length > 0) {
+                    finalIndex = safeIndices[Math.floor(Math.random() * safeIndices.length)];
+                } else {
+                    const backupIndices = allMatchingIndices.filter(idx => idx < totalCards - 30);
+                    finalIndex = backupIndices.length > 0 ? backupIndices[backupIndices.length - 1] : allMatchingIndices[0];
+                }
+
+                const cardsPerSecond = 25;
+                const animationDurationMs = Math.max(5000, Math.floor((finalIndex / cardsPerSecond) * 1000));
+
+                // ИЗМЕНЕНИЕ 1: Задаем время анимации через реактивное свойство Alpine.js
+                this.animationDuration = animationDurationMs;
 
                 const cardStep = this.cardWidth + this.gap;
                 const targetPosition = finalIndex * cardStep;
 
                 const randomOffset = Math.floor(Math.random() * (this.cardWidth - 24)) - (this.cardWidth / 2) + 12;
 
-                this.currentTranslateX = (containerWidth / 2) - targetPosition - (this.cardWidth / 2) + randomOffset;
-
-                this.trackTicks();
+                // ИЗМЕНЕНИЕ 2: Оборачиваем изменение координаты в $nextTick.
+                // Это гарантирует, что Alpine сначала применит transition-duration к HTML, 
+                // и только на следующий такт запустит само движение. Без этого анимация может не сработать.
+                this.$nextTick(() => {
+                    this.currentTranslateX = (containerWidth / 2) - targetPosition - (this.cardWidth / 2) + randomOffset;
+                    this.trackTicks();
+                });
 
                 setTimeout(() => {
                     this.isSpinning = false;
+
+                    // ИЗМЕНЕНИЕ 3: Сбрасываем время анимации в 0 через свойство Alpine
+                    this.animationDuration = 0;
+
                     this.startTimer();
                     window.dispatchEvent(new CustomEvent('open-modal', { detail: 'roulette_prize' }));
-                }, 10200);
+                }, animationDurationMs + 200);
             } else {
                 this.isSpinning = false;
                 window.pushToastAlert(response.data.message || __('Request error'), 'error');

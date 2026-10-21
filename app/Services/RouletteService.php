@@ -169,7 +169,7 @@ class RouletteService
 
         if ($chance <= $rarity[0]) {
             return [
-                'card' => 'bg-gradient-to-b from-red-800/40 to-red-900/20 dark:to-slate-900 shadow-md',
+                'card' => 'bg-linear-to-b from-red-800/40 to-red-900/20 dark:to-slate-900 shadow-md',
                 'border' => 'border-red-500/60',
                 'badge' => 'bg-red-500',
                 'patternColor' => '#ef4444'
@@ -178,7 +178,7 @@ class RouletteService
 
         if ($chance <= $rarity[1]) {
             return [
-                'card' => 'bg-gradient-to-b from-amber-800/40 to-amber-900/10 dark:to-slate-900 shadow-md',
+                'card' => 'bg-linear-to-b from-amber-800/40 to-amber-900/10 dark:to-slate-900 shadow-md',
                 'border' => 'border-amber-500/50',
                 'badge' => 'bg-amber-500',
                 'patternColor' => '#d946ef'
@@ -187,7 +187,7 @@ class RouletteService
 
         if ($chance <= $rarity[2]) {
             return [
-                'card' => 'bg-gradient-to-b from-indigo-800/40 to-indigo-900/10 dark:to-slate-900 shadow-md',
+                'card' => 'bg-linear-to-b from-indigo-800/40 to-indigo-900/10 dark:to-slate-900 shadow-md',
                 'border' => 'border-indigo-500/50',
                 'badge' => 'bg-indigo-500',
                 'patternColor' => '#6366f1'

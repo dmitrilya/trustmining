@@ -4,7 +4,7 @@
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/CreativeWorkSeries">
         @if ($channel->banner)
             <img itemprop="image" src="{{ Storage::url($channel->banner) }}" alt="{{ $channel->name }} banner"
-                class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
+                class="w-full aspect-960/360 rounded-xl mb-4 lg:mb-6">
         @endif
 
         <div

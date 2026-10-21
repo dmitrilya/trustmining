@@ -3,7 +3,7 @@
 <div itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
     @if ($user->company->banner)
         <img itemprop="image" src="{{ Storage::url($user->company->banner) }}" alt="{{ $user->name }} banner"
-            class="w-full aspect-[960/360] rounded-xl mb-4 lg:mb-6">
+            class="w-full aspect-960/360 rounded-xl mb-4 lg:mb-6">
     @endif
 
     <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
@@ -77,7 +77,7 @@
         <x-tf :tf="$user->tf" :company="$user->name" class="mt-2 sm:mt-3" />
 
         <div itemprop="description"
-            class="ql-editor mt-3 sm:mt-4 lg:mt-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 !overflow-y-hidden line-clamp-4 sm:line-clamp-3' : '' }}">
+            class="ql-editor mt-3 sm:mt-4 lg:mt-6 text-xs sm:text-sm text-slate-600 dark:text-slate-400{{ !request()->routeIs('company.about') ? ' h-16 overflow-y-hidden! line-clamp-4 sm:line-clamp-3' : '' }}">
             {!! $user->company->description !!}</div>
 
         @if (!request()->routeIs('company.about'))

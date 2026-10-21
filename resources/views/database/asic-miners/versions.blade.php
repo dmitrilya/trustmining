@@ -2,9 +2,9 @@
     <div class="text-xs xs:text-sm font-semibold text-center text-slate-600 dark:text-slate-400 border-b-2 border-slate-300 dark:border-slate-700" x-data=""
         x-init="$nextTick(() => { $el.querySelector('.active')?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }) })">
         <div
-            class="flex -mb-px overflow-x-auto overflow-y-hidden no-scrollbar whitespace-nowrap [mask-image:linear-gradient(to_right,black_80%,transparent_100%)]">
+            class="flex -mb-px overflow-x-auto overflow-y-hidden no-scrollbar whitespace-nowrap mask-[linear-gradient(to_right,black_80%,transparent_100%)]">
             @foreach ($versions as $i => $version)
-                <button class="mr-1 sm:mr-2 -mb-[1px] inline-block p-1 xs:p-2 border-b-2 rounded-t-lg" @click="selectedTab = {{ $i }}"
+                <button class="mr-1 sm:mr-2 -mb-px inline-block p-1 xs:p-2 border-b-2 rounded-t-lg" @click="selectedTab = {{ $i }}"
                     :class="{
                         'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': {{ $i }} !=
                             selectedTab,
