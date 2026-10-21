@@ -4,7 +4,7 @@
     </h1>
 </div>
 
-<div class="max-w-sm md:max-w-2xl mx-auto">
+<div class="max-w-sm lg:max-w-2xl mx-auto">
     <h2 class="text-center text-xs sm:text-lg lg:text-xl text-slate-500">
         {{ __('Customize the network difficulty widget and embed it on your website in just one minute') }}
     </h2>
@@ -26,8 +26,8 @@
         return scale > 1 ? 1 : scale;
     }
 }">
-    <div class="grid grid-cols-1 md:grid-cols-2 justify-center gap-2 md:gap-4 max-w-4xl mx-auto">
-        <div class="w-full md:w-md max-w-md mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 justify-center gap-2 lg:gap-4 max-w-4xl mx-auto">
+        <div class="w-full lg:w-md max-w-md mx-auto">
             <div class="flex p-1 bg-slate-50 dark:bg-slate-900 rounded-xl w-full">
                 <button @click="screen = 430" :class="screen === 430 ? 'bg-white dark:bg-slate-800 shadow-lg' : 'opacity-50'"
                     class="flex-1 py-1.5 text-xs text-slate-600 dark:text-slate-400 font-bold rounded-lg transition">{{ __('Mobile') }}</button>
@@ -48,8 +48,8 @@
                     <button @click="toggleBlock(key)"
                         class="flex items-center justify-between px-3 py-2 text-xs font-semibold rounded-xl border transition duration-300"
                         :class="blocks.includes(key) ?
-                            'text-indigo-700 dark:text-indigo-300 bg-indigo-500/10 border-indigo-200 dark:border-indigo-800' :
-                            'bg-white border-slate-300 text-slate-500 opacity-50 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400'">
+                            'text-indigo-500 bg-indigo-500/10 border-indigo-500/30' :
+                            'bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 opacity-50'">
 
                         <span x-text="item"></span>
 
@@ -62,7 +62,7 @@
                 </template>
             </div>
         </div>
-        <div class="w-full md:w-md max-w-md mx-auto">
+        <div class="w-full lg:w-md max-w-md mx-auto">
             <div class="h-full flex items-start group border p-2 sm:p-4 border-slate-300 dark:border-slate-700 rounded-xl">
                 <div class="break-all text-slate-800 dark:text-slate-200" x-text='`<script src="https://trustmining.ru/build/assets/difficulty-widjet.js" data-theme="${theme}" data-blocks="${blocks.join(" ,")}"></script>`'></div>
 
