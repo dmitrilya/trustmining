@@ -151,7 +151,7 @@
             "Collapse": '{{ __('Collapse') }}',
             "Rating required": '{{ __('Rating required') }}',
             "Enter a message or attach files": '{{ __('Enter a message or attach files') }}',
-            "Network error. Please try again.": '{{ __('Network error. Please try again.') }}',
+            "Network error. Please try again": '{{ __('Network error. Please try again') }}',
             "Request error": '{{ __('Request error') }}',
             "Failed to download file.": '{{ __('Failed to download file.') }}',
             "Failed to start roulette": '{{ __('Failed to start roulette') }}',
@@ -180,18 +180,8 @@
     @endif
 
     <div class="min-h-screen{{ request()->routeIs('insight.*') ? ' pb-17 lg:pb-0' : '' }}" x-data="{ filter: false }">
-        <div id="head" class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl sticky top-0 left-0 z-50">
-            @include('layouts.navigation')
-
-            @if (isset($header))
-                <header class="w-full shadow shadow-logo-color">
-                    <div class="max-w-7xl mx-auto p-3 sm:px-5 lg:px-7">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
-        </div>
-
+        @include('layouts.header')
+        
         <main>
             {{ $slot }}
 

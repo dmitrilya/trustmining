@@ -20,7 +20,7 @@ window.sendMessage = function (chatId, form) {
     }).catch(e => {
         if (e.response.status === 419) {
             pushToastAlert('Your session has expired. Please refresh the page.', "error")
-        } else window.pushToastAlert(__('Network error. Please try again.'), 'error');
+        } else window.pushToastAlert(__('Network error. Please try again'), 'error');
 
         button.classList.remove('loading');
         button.disabled = false;

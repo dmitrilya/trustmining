@@ -1,0 +1,264 @@
+<template x-if="openedMenu">
+    <div x-show="openMenu" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0"
+        x-transition:enter-end="opacity-100 max-h-[1000px]" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 max-h-[1000px]" x-transition:leave-end="opacity-0 max-h-0"
+        {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
+
+        <div class="pt-4 pb-4 sm:pb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <div class="space-y-4 w-full">
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mb-4 sm:mb-6">{{ __('Project') }}</div>
+
+                    {{-- <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('roadmap') }}">Roadmap</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('tariffs') }}">{{ __('Tariffs') }}</a>
+                    </div> --}}
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('about') }}">{{ __('About project') }}</a>
+                    </div>
+
+                    {{-- <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('blog') }}">{{ __('Blog') }}</a>
+                    </div> --}}
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M16 10.5h.01m-4.01 0h.01M8 10.5h.01M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6.6a1 1 0 0 0-.69.275l-2.866 2.723A.5.5 0 0 1 8 18.635V17a1 1 0 0 0-1-1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('forum') }}">{{ __('Forum') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold" href="{{ route('insight.index') }}">TM
+                            Insight</a>
+                    </div>
+
+                    {{-- <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('companies') }}">{{ __('Companies') }}</a>
+                    </div> --}}
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('rating.companies.show') }}">{{ __('Top reliable companies') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M13.6 16.733c.234.269.548.456.895.534a1.4 1.4 0 0 0 1.75-.762c.172-.615-.446-1.287-1.242-1.481-.796-.194-1.41-.861-1.241-1.481a1.4 1.4 0 0 1 1.75-.762c.343.077.654.26.888.524m-1.358 4.017v.617m0-5.939v.725M4 15v4m3-6v6M6 8.5 10.5 5 14 7.5 18 4m0 0h-3.5M18 4v3m2 8a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('rating.asics.show', ['type' => 'profit']) }}">{{ __('The most profitable ASICs') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('rating.hostings.show', ['type' => 'best']) }}">{{ __('The best hostings') }}</a>
+                    </div>
+
+                    {{-- <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('career') }}">{{ __('Career in TrustMining') }}</a>
+                    </div> --}}
+
+                    {{-- <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z">
+                            </path>
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('document', ['path' => 'documents/privacy.pdf']) }}">{{ __('Privacy Policy') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M10 3v4a1 1 0 0 1-1 1H5m4 6 2 2 4-4m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('document', ['path' => 'documents/agreement.pdf']) }}">{{ __('User Agreement') }}</a>
+                    </div> --}}
+                </div>
+                <div class="space-y-4 w-full">
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mb-4 sm:mb-6">{{ __('Tools') }}</div>
+
+                    {{-- <div class="group flex items-center">
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z">
+                            </path>
+                        </svg>
+                        <a class="text-sm lg:text-base text-slate-400 font-semibold"
+                            href="{{ route('events') }}">{{ __('Events') }}</a>
+                    </div> --}}
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M6 15h12M6 6h12m-6 12h.01M7 21h10a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('calculator') }}">{{ __('Mining calculator') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"
+                                d="M7.58209 8.96025 9.8136 11.1917l-1.61782 1.6178c-1.08305-.1811-2.23623.1454-3.07364.9828-1.1208 1.1208-1.32697 2.8069-.62368 4.1363.14842.2806.42122.474.73509.5213.06726.0101.1347.0133.20136.0098-.00351.0666-.00036.1341.00977.2013.04724.3139.24069.5867.52125.7351 1.32944.7033 3.01552.4971 4.13627-.6237.8375-.8374 1.1639-1.9906.9829-3.0736l4.8107-4.8108c1.0831.1811 2.2363-.1454 3.0737-.9828 1.1208-1.1208 1.3269-2.80688.6237-4.13632-.1485-.28056-.4213-.474-.7351-.52125-.0673-.01012-.1347-.01327-.2014-.00977.0035-.06666.0004-.13409-.0098-.20136-.0472-.31386-.2406-.58666-.5212-.73508-1.3294-.70329-3.0155-.49713-4.1363.62367-.8374.83741-1.1639 1.9906-.9828 3.07365l-1.7788 1.77875-2.23152-2.23148-1.41419 1.41424Zm1.31056-3.1394c-.04235-.32684-.24303-.61183-.53647-.76186l-1.98183-1.0133c-.38619-.19746-.85564-.12345-1.16234.18326l-.86321.8632c-.3067.3067-.38072.77616-.18326 1.16235l1.0133 1.98182c.15004.29345.43503.49412.76187.53647l1.1127.14418c.3076.03985.61628-.06528.8356-.28461l.86321-.8632c.21932-.21932.32446-.52801.2846-.83561l-.14417-1.1127ZM19.4448 16.4052l-3.1186-3.1187c-.7811-.781-2.0474-.781-2.8285 0l-.1719.172c-.7811.781-.7811 2.0474 0 2.8284l3.1186 3.1187c.7811.781 2.0474.781 2.8285 0l.1719-.172c.7811-.781.7811-2.0474 0-2.8284Z" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('warranty') }}">{{ __('Check warranty') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M3 15v4m6-6v6m6-4v4m6-6v6M3 11l6-5 6 5 5.5-5.5" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('metrics') }}">{{ __('Metrics') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M10.7367 14.5876c.895.2365 2.8528.754 3.1643-.4966.3179-1.2781-1.5795-1.7039-2.5053-1.9117-.1034-.0232-.1947-.0437-.2694-.0623l-.6025 2.4153c.0611.0152.1328.0341.2129.0553Zm.8452-3.5291c.7468.1993 2.3746.6335 2.6581-.5025.2899-1.16213-1.2929-1.5124-2.066-1.68348-.0869-.01923-.1635-.03619-.2262-.0518l-.5462 2.19058c.0517.0129.1123.0291.1803.0472Z" />
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M9.57909 21.7008c5.35781 1.3356 10.78401-1.9244 12.11971-7.2816 1.3356-5.35745-1.9247-10.78433-7.2822-12.11995C9.06034.963624 3.6344 4.22425 2.2994 9.58206.963461 14.9389 4.22377 20.3652 9.57909 21.7008ZM14.2085 8.0526c1.3853.47719 2.3984 1.1925 2.1997 2.5231-.1441.9741-.6844 1.4456-1.4013 1.6116.9844.5128 1.485 1.2987 1.0078 2.6612-.5915 1.6919-1.9987 1.8347-3.8697 1.4807l-.454 1.8196-1.0972-.2734.4481-1.7953c-.2844-.0706-.575-.1456-.8741-.2269l-.44996 1.8038-1.09594-.2735.45407-1.8234c-.10059-.0258-.20185-.0522-.30385-.0788-.15753-.0411-.3168-.0827-.47803-.1231l-1.42812-.3559.54468-1.2563s.80844.215.7975.1991c.31063.0769.44844-.1256.50282-.2606l.71781-2.8766.11562.0288c-.04375-.0175-.08343-.0288-.11406-.0366l.51188-2.05344c.01375-.23312-.06688-.52719-.51125-.63812.01718-.01157-.79688-.19813-.79688-.19813l.29188-1.17187 1.51313.37781-.0013.00562c.2275.05657.4619.11032.7007.16469l.4497-1.80187 1.0965.27343-.4406 1.76657c.2944.06718.5906.135.8787.20687l.4375-1.755 1.0975.27344-.4493 1.8025Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('metrics.network.difficulty', ['coin' => 'bitcoin']) }}">{{ __('Network difficulty') }} Bitcoin</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('hashrate-converter') }}">{{ __('Hashrate converter') }}</a>
+                    </div>
+
+                    <div class="group flex items-center">
+                        <svg class="w-4 h-4 lg:w-5 lg:h-5 text-slate-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
+                        </svg>
+
+                        <a class="under text-sm lg:text-base text-slate-800 dark:text-slate-200 font-semibold"
+                            href="{{ route('ratings') }}">{{ __('Tops and ratings') }}</a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex lg:col-span-2 xl:col-span-3 items-stretch gap-6">
+                    @if ($popularArticle)
+                        <div itemscope itemtype="https://schema.org/ItemList" class="hidden md:block w-full">
+                            <meta itemprop="name" content="Articles in menu" />
+                            <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
+
+                            <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <meta itemprop="position" content="1" />
+
+                                @include('insight.article.components.card', ['article' => $popularArticle])
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="hidden lg:block w-full">
+                        @include('layouts.components.solutions-blurb1')
+                    </div>
+
+                    <div class="hidden xl:block w-full">
+                        @include('layouts.components.solutions-blurb2')
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
