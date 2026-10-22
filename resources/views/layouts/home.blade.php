@@ -9,11 +9,12 @@
 
     <div class="max-w-10xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
         <div class="lg:grid grid-cols-12 gap-4 items-start relative" x-data="{ isXL: window.matchMedia('(min-width: 1024px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1024px')">
-                <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
-                    @include('home.components.categories')
-                    @include('insight.components.popular-article')
-                    @include('home.components.top-channels')
-                </div>
+            <div class="hidden lg:flex flex-col lg:col-span-3 xl:col-span-2 gap-4">
+                {{-- @include('home.components.categories') --}}
+                <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" type="widjet" />
+                @include('insight.components.popular-article')
+                @include('home.components.top-channels')
+            </div>
 
             <div class="lg:col-span-6 xl:col-span-7">
                 {{ $slot }}

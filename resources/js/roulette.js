@@ -170,23 +170,20 @@ export var roulette = () => ({
 
             if (response.data.success) {
                 this.wonPrize = response.data.prize;
-
                 this.timeToSpin = response.data.timeToSpin || 604800;
                 this.updateFormattedTime();
 
                 const container = tape.parentElement;
                 const containerWidth = container.offsetWidth;
-
                 const totalCards = this.extendedPrizes.length;
-
                 const allMatchingIndices = [];
+
                 this.extendedPrizes.forEach((p, idx) => {
                     if (p.id === this.wonPrize.id) allMatchingIndices.push(idx);
                 });
 
                 const minCardIndex = Math.floor(totalCards * 0.65);
                 const maxCardIndex = totalCards - 40;
-
                 const safeIndices = allMatchingIndices.filter(idx => idx >= minCardIndex && idx <= maxCardIndex);
 
                 let finalIndex;
@@ -197,10 +194,9 @@ export var roulette = () => ({
                     finalIndex = backupIndices.length > 0 ? backupIndices[backupIndices.length - 1] : allMatchingIndices[0];
                 }
 
-                const cardsPerSecond = 25;
+                const cardsPerSecond = 10;
                 const animationDurationMs = Math.max(5000, Math.floor((finalIndex / cardsPerSecond) * 1000));
 
-                // ИЗМЕНЕНИЕ 1: Задаем время анимации через реактивное свойство Alpine.js
                 this.animationDuration = animationDurationMs;
 
                 const cardStep = this.cardWidth + this.gap;
@@ -208,9 +204,6 @@ export var roulette = () => ({
 
                 const randomOffset = Math.floor(Math.random() * (this.cardWidth - 24)) - (this.cardWidth / 2) + 12;
 
-                // ИЗМЕНЕНИЕ 2: Оборачиваем изменение координаты в $nextTick.
-                // Это гарантирует, что Alpine сначала применит transition-duration к HTML, 
-                // и только на следующий такт запустит само движение. Без этого анимация может не сработать.
                 this.$nextTick(() => {
                     this.currentTranslateX = (containerWidth / 2) - targetPosition - (this.cardWidth / 2) + randomOffset;
                     this.trackTicks();
@@ -218,8 +211,6 @@ export var roulette = () => ({
 
                 setTimeout(() => {
                     this.isSpinning = false;
-
-                    // ИЗМЕНЕНИЕ 3: Сбрасываем время анимации в 0 через свойство Alpine
                     this.animationDuration = 0;
 
                     this.startTimer();
@@ -278,9 +269,8 @@ document.querySelectorAll('.download-tg-ids').forEach(button => {
 
             const disposition = response.headers['content-disposition'];
             let fileName = 'tg_ids.txt';
-            if (disposition && disposition.match(/filename="(.+?)"/)) {
+            if (disposition && disposition.match(/filename="(.+?)"/))
                 fileName = disposition.match(/filename="(.+?)"/)[1];
-            }
 
             const blob = new Blob([response.data], { type: 'text/plain' });
             const downloadUrl = window.URL.createObjectURL(blob);

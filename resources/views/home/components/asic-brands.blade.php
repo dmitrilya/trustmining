@@ -1,38 +1,31 @@
 <div x-data="{ show: false }"
-    class="transition px-1 py-1 sm:py-2 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
-    <h2 class="pt-1 px-1 sm:px-2 text-xs text-slate-500 uppercase tracking-widest mb-4 lg:mb-6">
+    class="transition p-2 sm:p-3 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+    <h2 class="text-xs text-slate-500 uppercase tracking-widest mb-4 lg:mb-6">
         {{ __('Brands') }}
     </h2>
 
-    <div class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1">
         @foreach ($asicBrands->slice(0, 6) as $asicBrand)
-            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
-                class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
-                <img height="28px" width="28px" src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}"
-                    alt="{{ $asicBrand->name }} logo" class="w-5 sm:w-7 mr-2">
-                <p
-                    class="font-semibold text-slate-600 dark:text-slate-400 text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200">
+            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}" class="flex items-center group">
+                <img src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }} logo" class="w-5 sm:w-7 mr-2">
+                <p class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
                     {{ $asicBrand->name }}
                 </p>
             </a>
         @endforeach
     </div>
 
-    <div x-show="show" x-collapse x-cloak class="grid grid-cols-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
+    <div x-show="show" x-collapse x-cloak class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
         @foreach ($asicBrands->slice(6) as $asicBrand)
-            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}"
-                class="h-9 flex items-center px-2 py-1 group hover:bg-white dark:hover:bg-slate-800 rounded-full">
-                <img height="28px" width="28px"
-                    src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }}"
-                    class="w-5 sm:w-7 mr-2">
-                <p
-                    class="font-semibold text-slate-600 dark:text-slate-400 text-xs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200">
+            <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}" class="flex items-center group">
+                <img src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }}" class="w-5 sm:w-7 mr-2">
+                <p class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
                     {{ $asicBrand->name }}
                 </p>
             </a>
         @endforeach
     </div>
 
-    <button @click="show = !show;" class="px-2 py-1 text-sm mt-2 text-indigo-500 hover:text-indigo-600"
+    <button @click="show = !show;" class="text-sm mt-3 text-indigo-500 hover:text-indigo-600"
         x-text="!show ? '{{ __('Show all') }}' : '{{ __('Hide') }}'"></button>
 </div>

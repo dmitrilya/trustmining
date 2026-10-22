@@ -51,6 +51,8 @@ use App\Http\Controllers\Rating\HostingRatingController;
 use App\Http\Controllers\Roulette\RoulettePrizeController;
 use App\Http\Controllers\Roulette\RouletteSpinController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VotingController;
+use App\Http\Controllers\Wiki\CoinController;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Cache;
 
@@ -128,6 +130,16 @@ $webRoutes = function () {
             Route::get('/', [AlgorithmController::class, 'index'])->name('algorithms');
             Route::get('/{algorithm:name}', [AlgorithmController::class, 'show'])->name('algorithm.show');
         });
+
+        Route::group(['prefix' => 'coins'], function () {
+            Route::get('/', [CoinController::class, 'index'])->name('coins');
+            Route::get('/{coin:name}', [CoinController::class, 'show'])->name('coin.show');
+        });
+    });
+
+    Route::group(['prefix' => 'voting'], function () {
+        Route::get('/{categorySlug}/show', [VotingController::class, 'show'])->name('voting.show');
+        Route::post('/{categorySlug}/vote', [VotingController::class, 'vote'])->name('voting.vote');
     });
 
     Route::group(['prefix' => 'ratings'], function () {

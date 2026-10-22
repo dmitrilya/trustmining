@@ -1,5 +1,4 @@
-<x-app-layout :title="__('meta.hosting.show.title', ['name' => $hosting->user->name])"
-    :description="__('meta.hosting.show.description', ['name' => $hosting->user->name, 'tariff' => collect($hosting->tariffs)->min('t')])">
+<x-app-layout :title="__('meta.hosting.show.title', ['name' => $hosting->user->name])" :description="__('meta.hosting.show.description', ['name' => $hosting->user->name, 'tariff' => collect($hosting->tariffs)->min('t')])">
     <x-slot name="og">
         <meta property="og:title" content="{{ __('meta.hosting.show.title', ['name' => $hosting->user->name]) }}">
         <meta property="og:description"
@@ -61,8 +60,7 @@
 
                                 <div class="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
                                     @foreach ($tariffs as $tariff)
-                                        <div
-                                            class="rounded-xl py-2 sm:py-3 bg-indigo-500/10 border border-indigo-600 flex flex-col items-center">
+                                        <div class="rounded-xl py-2 sm:py-3 bg-indigo-500/10 border border-indigo-600 flex flex-col items-center">
                                             <div class="text-xl xs:text-2xl sm:text-3xl text-indigo-500 mb-1">{{ $tariff['t'] }} <span
                                                     class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">₽/{{ __('kW') }}</span></div>
                                             <div class="text-xxs xs:text-xs tracking-wider text-slate-600 dark:text-slate-400 uppercase">{{ __('Uptime') }}
@@ -170,8 +168,7 @@
                 <div
                     class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
-                        <div
-                            class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
+                        <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
                             <x-carousel :images="$hosting->images" min="128" max="128"></x-carousel>
 
                             <div class="hidden md:block mt-6">
@@ -404,6 +401,10 @@
                         </div>
                     </div>
                 </div>
+
+                @if (\App\Enums\VotingCategory::best_hosting->validateCandidate($hosting->user))
+                    <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" :candidate="$hosting->user" type="block" />
+                @endif
             </div>
 
             <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1280px')" class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">

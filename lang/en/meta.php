@@ -124,6 +124,16 @@ return [
         ],
     ],
 
+    'voting' => [
+        'index' => [
+            'title' => 'Mining Industry Vote & Ratings | TRUSTMINING',
+            'description' => 'Choose the best representatives of the crypto industry. Monthly independent votings for the best mining hosting, reliable ASIC miners suppliers, and crypto companies based on real user experiences'
+        ],
+        'show' => [
+            'description' => 'Help your favorite company get into the top best on the TrustMining website'
+        ]
+    ],
+
     'calculator' => [
         'app' => [
             'title' => 'TrustMining Profitability and Payback Calculator',

@@ -7,6 +7,7 @@ import { adsStatistics } from './statistics';
 import { roulette } from './roulette';
 import { hashrateConverter } from './hashrate-converter';
 import { tgAuth } from './tgAuth';
+import { votingWidget } from './voting';
 import './suggestions';
 import './broadcast';
 import './carousel';
@@ -135,6 +136,7 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('hashrateConverter', hashrateConverter);
     Alpine.data('tgAuth', tgAuth);
     Alpine.data('adsStatisticsData', adsStatistics);
+    Alpine.data('votingWidget', votingWidget);
 });
 
 window.calculateProfitCAGR = (dailyProfit, days, percent) => {
@@ -197,6 +199,17 @@ window.askLocation = (errorMessage) => {
 window.like = function (type, id) {
     axios.post('/like', { likeableType: type, likeableId: id }).then(r => {
         if (!r.data.success) pushToastAlert(r.data.message, "error");
+    });
+}
+
+window.vote = function (category, type, id) {
+    axios.post(`voting/${category}/vote`, { voteableType: type, voteableId: id }).then(r => {
+        if (!r.data.success && 'message' in r.data) {
+            pushToastAlert(r.data.message, "error");
+            return;
+        }
+
+        if ('message' in r.data) pushToastAlert(r.data.message, "success");
     });
 }
 
