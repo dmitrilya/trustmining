@@ -50,24 +50,22 @@
     @endif
 
     <div class="grid grid-cols-1 gap-6{{ isset($candidate) ? ' md:grid-cols-12' : '' }}">
-        @if (isset($widjetCandidate))
+        @if (isset($candidate))
             @php
                 $rank = 0;
                 $votes = 0;
                 foreach ($results as $index => $row) {
-                    if ($row->voteable_id == $company->id) {
+                    if ($row->voteable_id == $candidate->id) {
                         $rank = $index + 1;
-                        $companyVotes = $row->total_votes;
+                        $votes = $row->total_votes;
                         break;
                     }
                 }
 
-                if ($rank === 0) {
-                    $rank = $results->count() + 1;
-                }
+                if ($rank === 0) $rank = $results->count() + 1;
 
                 $candidate = [
-                    'id' => $company->id,
+                    'id' => $candidate->id,
                     'rank' => $rank,
                     'votes' => $votes,
                 ];

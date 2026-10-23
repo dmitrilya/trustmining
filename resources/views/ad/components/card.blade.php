@@ -101,7 +101,7 @@
                     <x-characteristics.characteristic name="Model" :value="$ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement . '/s'" />
                 @endif
 
-                @if (!isset($sm))
+                @if (!isset($sm) || !$sm)
                     @foreach ($props as $prop => $value)
                         @if ((!is_array($value) && $prop != 'Service') || $prop == 'Modes')
                             @php
@@ -139,7 +139,7 @@
 
         <div class="mt-2 sm:mt-3">
             @if ($ad->price != 0 && $ad->with_vat)
-                <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit rounded-md px-1.5 py-0.5">
+                <div class="text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit">
                     {{ __('The price includes VAT') }}
                 </div>
             @endif

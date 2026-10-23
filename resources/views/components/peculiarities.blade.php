@@ -23,7 +23,7 @@
 
 <div {{ $attributes->merge(['class' => 'space-y-1.5 sm:space-y-1.5']) }}>
     @foreach ($peculiarities as $peculiarity)
-        <x-inputs.checkbox name="peculiarities[]" :checked="in_array($peculiarity, $ps)" :disabled="!$isForm ||
+        <x-inputs.checkbox name="peculiarities[]" :sm="true" :checked="in_array($peculiarity, $ps)" :disabled="!$isForm ||
             (Route::current()->getName() == 'services' && $peculiarity == 'Repair service') ||
             (Route::current()->getName() == 'cryptoexchangers' && $peculiarity == 'Cryptoexchanger')" value="{{ $peculiarity }}">
             {{ __($peculiarity) }}

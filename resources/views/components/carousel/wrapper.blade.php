@@ -1,3 +1,5 @@
+@props(['items', 'blade', 'model', 'sm' => false, 'big' => false])
+
 <x-carousel.list :adCategory="$adCategory ?? null" :items="$items" :blade="$blade" :model="$model" :big="$big" :sm="$sm" />
 
 <div draggable="false"

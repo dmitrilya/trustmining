@@ -27,7 +27,7 @@
             </div>
         </a>
 
-        <a href="{{ route('coins') }}"
+        <a href="#"
             class="group relative flex flex-col justify-between p-2 sm:p-4 lg:p-6 rounded-xl bg-cyan-500/10 border border-cyan-500/30 shadow-md transition-all duration-300">
             <div>
                 <div class="flex items-center gap-2 mb-3">

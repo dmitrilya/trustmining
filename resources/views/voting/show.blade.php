@@ -12,7 +12,8 @@
 
     <div class="mt-4 sm:mt-6 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-4" x-data="votingWidget('{{ route('voting.vote', $category->slug()) }}', '{{ $category->morphClass() }}', {{ collect(['Vote' => __('Vote'), 'Vote counted' => __('Vote counted'), 'Network error. Please try again' => __('Network error. Please try again')]) }})">
         @foreach ($candidates as $candidate)
-            <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl p-2 sm:p-3">
+            <div
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl flex flex-col justify-between p-2 sm:p-3">
                 <div class="flex xs:flex-col items-center">
                     <a class="min-w-16 w-16 h-16 sm:min-w-20 sm:w-20 sm:h-20 rounded-full overflow-hidden hover:ring ring-indigo-600 mr-2 xs:mr-0 xs:mb-3"
                         href="{{ $candidate['href'] }}">
@@ -24,13 +25,15 @@
                     </div>
                 </div>
 
-                <a target="_blank" href="{{ $candidate['href'] }}" class="mt-3 sm:mt-4 w-full">
-                    <x-buttons.secondary-button class="w-full">{{ __('Details') }}</x-buttons.secondary-button>
-                </a>
+                <div>
+                    <a target="_blank" href="{{ $candidate['href'] }}" class="mt-3 sm:mt-4 w-full">
+                        <x-buttons.secondary-button class="w-full">{{ __('Details') }}</x-buttons.secondary-button>
+                    </a>
 
-                <x-buttons.primary-button @click="submitVote({{ $candidate['id'] }})" class="w-full mt-2">
-                    <span x-text="getButtonText({{ $candidate['id'] }})">{{ __('Vote') }}</span>
-                </x-buttons.primary-button>
+                    <x-buttons.primary-button @click="submitVote({{ $candidate['id'] }})" class="w-full mt-2">
+                        <span x-text="getButtonText({{ $candidate['id'] }})">{{ __('Vote') }}</span>
+                    </x-buttons.primary-button>
+                </div>
             </div>
         @endforeach
     </div>

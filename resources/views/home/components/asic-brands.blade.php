@@ -4,22 +4,22 @@
         {{ __('Brands') }}
     </h2>
 
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-2">
         @foreach ($asicBrands->slice(0, 6) as $asicBrand)
             <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}" class="flex items-center group">
                 <img src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }} logo" class="w-5 sm:w-7 mr-2">
-                <p class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
+                <p class="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
                     {{ $asicBrand->name }}
                 </p>
             </a>
         @endforeach
     </div>
 
-    <div x-show="show" x-collapse x-cloak class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-1 mt-1">
+    <div x-show="show" x-collapse x-cloak class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-2 mt-1">
         @foreach ($asicBrands->slice(6) as $asicBrand)
             <a href="{{ route('database.asic-miners.brand', ['asicBrand' => $asicBrand->slug]) }}" class="flex items-center group">
                 <img src="{{ Storage::url('public/brands/' . $asicBrand->name . '.webp') }}" alt="{{ $asicBrand->name }}" class="w-5 sm:w-7 mr-2">
-                <p class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
+                <p class="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400">
                     {{ $asicBrand->name }}
                 </p>
             </a>
