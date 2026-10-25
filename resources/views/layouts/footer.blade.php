@@ -1,13 +1,13 @@
 <footer class="bg-white/40 dark:bg-slate-900/40 border-t border-slate-300 dark:border-slate-700">
     <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
-        <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
-            <div class="xl:order-2 space-y-6 lg:space-y-8">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-y-6 gap-x-4">
+            <div class="xl:order-2 space-y-6 lg:space-y-8 xl:flex flex-col items-end">
                 <a href="{{ route('home') }}">
                     <x-application-logo class="text-[10vw] xs:text-3xl" />
                 </a>
 
-                <div class="mt-6 md:mt-0">
-                    <div class="flex items-center gap-2 lg:gap-3">
+                <div>
+                    <div class="flex items-center xl:justify-end gap-2 lg:gap-3">
                         <a href="https://t.me/trustmining_ru" target="_blank" aria-label="{{ __('Contact in telegram') }}">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 flex items-center justify-center rounded-full bg-slate-800">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" width="20" height="20" viewBox="0 0 20 20"
@@ -49,7 +49,7 @@
                         </a>
                     </div>
 
-                    <p class="max-w-md text-xs text-slate-500 mt-4">{{ __('Copying of materials, in whole or in part, is permitted only with the editor\'s written permission. For collaboration inquiries, please contact us by email') }}
+                    <p class="xl:text-right max-w-md text-xs text-slate-500 mt-4">{{ __('Copying of materials, in whole or in part, is permitted only with the editor\'s written permission. For collaboration inquiries, please contact us by email') }}
                         <a class="underline text-indigo-500 hover:text-indigo-600" href="mailto:trustmining.ru@gmail.com"
                             aria-label="{{ __('Write by email') }}">
                             trustmining.ru@gmail.com
@@ -99,7 +99,7 @@
                 </div>
             </div>
 
-            <div class="order-1 col-span-3 grid gap-4 sm:gap-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-3">
+            <div class="order-1 col-span-2 grid gap-4 sm:gap-6 grid-cols-1 xs:grid-cols-2 md:grid-cols-3">
                 <div class="space-y-2 order-1">
                     <div class="text-xs text-slate-500 uppercase tracking-widest">{{ __('To the buyer') }}</div>
                     {{-- <a class="block w-max under text-sm text-slate-800 dark:text-slate-200"

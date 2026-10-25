@@ -8,7 +8,7 @@
             {{ now()->translatedFormat('F') }}</div>
     </div>
 
-    <h2 class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2">{{ $category->caption() }}</h2>
+    <h2 class="text-xs xs:text-sm text-slate-600 dark:text-slate-400 mt-2">{{ $category->caption() }}</h2>
 
     <div class="mt-4 sm:mt-6 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2 sm:gap-4" x-data="votingWidget('{{ route('voting.vote', $category->slug()) }}', '{{ $category->morphClass() }}', {{ collect(['Vote' => __('Vote'), 'Vote counted' => __('Vote counted'), 'Network error. Please try again' => __('Network error. Please try again')]) }})">
         @foreach ($candidates as $candidate)
