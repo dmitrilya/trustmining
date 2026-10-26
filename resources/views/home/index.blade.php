@@ -1,9 +1,9 @@
 <x-home-layout :data="$__data" :title="__('meta.home.title')" :description="__('meta.home.description')">
-    <div class="lg:hidden mb-4 sm:mb-6">
+    <div class="lg:hidden mb-4">
         @include('home.components.asic-brands')
     </div>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    <section class="mb-4 sm:mb-6">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Miners') }}
@@ -15,11 +15,11 @@
         </div>
     </section>
 
-    <div class="lg:hidden mb-4 sm:mb-6">
+    <div class="lg:hidden mb-4">
         @include('home.components.last-forum-questions')
     </div>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    <section class="mb-4 sm:mb-6">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Hostings') }}
@@ -31,11 +31,11 @@
         </div>
     </section>
 
-    <div class="lg:hidden mb-4 sm:mb-6">
-        @include('home.components.top-channels')
+    <div class="lg:hidden mb-4">
+        <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" type="widjet" />
     </div>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    <section class="mb-4 sm:mb-6">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Gas generators') }}
@@ -47,7 +47,13 @@
         </div>
     </section>
 
-    <section class="mb-4 sm:mb-6 lg:mb-8">
+    @if ($btc = App\Models\Database\Coin::where('abbreviation', 'btc')->first())
+        <div class="lg:hidden mb-4">
+            <x-widjets.voting :category="\App\Enums\VotingCategory::coin_rate_prediction" :candidate="$btc" type="widjet" />
+        </div>
+    @endif
+
+    <section class="mb-4 sm:mb-6">
         <div class="flex items-center justify-between px-4 py-1.5 lg:px-5 lg:py-2 gap-4 mb-2 sm:mb-3">
             <h2 class="font-extrabold text-xl sm:text-2xl text-slate-800 dark:text-slate-200">
                 {{ __('Articles') }}
@@ -58,4 +64,8 @@
             <x-carousel.carousel :items="$articles" blade="insight.article.components.card" model="article" />
         </div>
     </section>
+
+    <div class="lg:hidden">
+        @include('home.components.top-channels')
+    </div>
 </x-home-layout>

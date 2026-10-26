@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use App\Enums\VotingPeriod;
 use App\Enums\VotingCategory;
 
 class VotingController extends Controller
@@ -44,32 +45,33 @@ class VotingController extends Controller
         $modelClass = Relation::getMorphedModel($voteableType) ?? $voteableType;
         if ($modelClass !== $category->modelClass()) return response()->json(['success' => false], 422);
 
+        if ($category === VotingCategory::coin_rate_prediction) {
+            $allowedPredictionTypes = ['coin_up', 'coin_down'];
+            if (!in_array($voteableType, $allowedPredictionTypes)) {
+                return response()->json(['success' => false, 'message' => __('Invalid prediction direction')], 422);
+            }
+        }
+
         $candidate = $modelClass::findOrFail($voteableId);
         if (!$category->validateCandidate($candidate)) return response()->json(['success' => false], 422);
 
-        $yearMonth = (int) now()->format('Ym');
-        $ip = $request->ip();
+        $period = $category->period();
+        $roundId = $period->currentRoundId();
 
-        $fingerprintIpHash = md5($yearMonth . '_' . $category->value . '_' . $ip . '_' . $fingerprint);
+        $hashString = $category->isUniquePerCandidate()
+            ? "{$roundId}_{$category->value}_{$voteableId}_{$fingerprint}"
+            : "{$roundId}_{$category->value}_{$fingerprint}";
 
-        $votesFromThisIp = DB::table('votes')->where('year_month', $yearMonth)
-            ->where('category_id', $category->value)->where('ip_address', inet_pton($ip))->count();
-
-        if ($votesFromThisIp >= 5) return response()->json([
-            'success' => false,
-            'message' => __('The voting limit for your internet connection has been exceeded')
-        ], 429);
+        $fingerprintHash = md5($hashString);
 
         try {
             DB::table('votes')->insert([
-                'category_id'         => $category->value,
-                'voteable_type'       => $voteableType,
-                'voteable_id'         => $voteableId,
-                'year_month'          => $yearMonth,
-                'ip_address'          => inet_pton($ip),
-                'fingerprint'         => $fingerprint,
-                'fingerprint_ip_hash' => $fingerprintIpHash,
-                'created_at'          => now(),
+                'category_id'       => $category->value,
+                'voteable_type'     => $voteableType,
+                'voteable_id'       => $voteableId,
+                'round_id'          => $roundId,
+                'fingerprint_hash'  => $fingerprintHash,
+                'created_at'        => now(),
             ]);
 
             return response()->json([

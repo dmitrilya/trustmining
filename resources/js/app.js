@@ -173,6 +173,24 @@ window.addView = function (type, id) {
     axios.post('/view/store', { viewable_type: type, viewable_id: id });
 }
 
+/**
+ * @param {string|number} rate
+ * @param {string} currency
+ * @returns {string}
+ */
+window.adjustRate = function (rate, currency = 'usdt') {
+    const numericRate = parseFloat(rate);
+
+    if (isNaN(numericRate)) return '0';
+
+    let decimals;
+
+    if (currency === 'rub') decimals = numericRate >= 10000 ? 0 : numericRate >= 100 ? 1 : 2;
+    else decimals = numericRate >= 5000 ? 1 : numericRate >= 40 ? 2 : numericRate >= 10 ? 4 : 8;
+
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(numericRate);
+}
+
 Alpine.start();
 
 window.__ = (key) => window.Translations[key] !== undefined ? window.Translations[key] : key;

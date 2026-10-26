@@ -111,7 +111,7 @@
                     {{ number_format($rate, 8, '.', '') }} USDT</div>
             </div>
 
-            <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
+            <div id="graph" class="h-100 sm:h-140"></div>
         </div>
 
         <div

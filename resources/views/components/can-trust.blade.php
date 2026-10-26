@@ -28,7 +28,6 @@
         
         @if ($tf > $greenLimit)
             <p>{{ __('descriptions.can_trust.trust.green', ['seller' => $user->name]) }}</p>
-        @convertRows
         @elseif ($tf > $yellowLimit)
             <p>{{ __('descriptions.can_trust.trust.yellow', ['seller' => $user->name]) }}</p>
         @else

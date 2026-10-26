@@ -101,7 +101,7 @@
                     {{ number_format($hashrate) }}</div>
             </div>
 
-            <div id="graph" class="h-[25rem] sm:h-[35rem]"></div>
+            <div id="graph" class="h-100 sm:h-140"></div>
         </div>
 
         <div

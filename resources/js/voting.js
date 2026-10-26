@@ -1,22 +1,42 @@
-export var votingWidget = (url, type, l) => ({
+export var votingWidget = (url, l) => ({ // Убрали type из инициализации, так как теперь он приходит в submitVote
     loading: false,
-    voted: false,
     isError: false,
     message: '',
-    // Объект для отслеживания счетчиков конкретных кандидатов на одной странице
     votes: {},
-    buttonTexts: {},
 
-    init() {
-        // Проверяем общую куку голосования для этой номинации (категории)
-        if (localStorage.getItem(`voted_${url}`)) {
-            this.voted = true;
+    // Вспомогательный метод для генерации уникального ключа localStorage для каждого кандидата
+    getStorageKey(type, id) {
+        // Если тип voteable_type относится к прогнозам монет (coin_up или coin_down),
+        // привязываем ключ строго к ID конкретной монеты.
+        // Для обычных голосований (например, 'users') блокируем всю категорию целиком.
+        if (type === 'coin_up' || type === 'coin_down') {
+            return `voted_${url}_coin_${id}`;
         }
+        return `voted_${url}`;
     },
 
-    // Переносим id кандидата в аргумент метода нажатия кнопки
-    async submitVote(id) {
-        if (this.voted || this.loading) return;
+    // Метод проверки: проголосовал ли пользователь ЗА КОНКРЕТНУЮ кнопку/карточку
+    hasVoted(type, id) {
+        const storageKey = this.getStorageKey(type, id);
+        return localStorage.getItem(storageKey) === '1';
+    },
+
+    // Метод проверки: ЗАБЛОКИРОВАНА ли данная конкретная кнопка для нажатия
+    isButtonDisabled(type, id) {
+        if (this.loading) return true;
+
+        // Если это монеты, то кнопка блокируется, только если проголосовали именно за ЭТУ монету
+        if (type === 'coin_up' || type === 'coin_down') {
+            return this.hasVoted('coin_up', id) || this.hasVoted('coin_down', id);
+        }
+
+        // Для хостингов кнопка блокируется, если оставлен любой голос в этой категории
+        return this.hasVoted(type, id);
+    },
+
+    async submitVote(type, id) {
+        // Проверяем блокировку перед отправкой, используя наш новый метод
+        if (this.isButtonDisabled(type, id)) return;
 
         this.loading = true;
         this.message = '';
@@ -40,28 +60,26 @@ export var votingWidget = (url, type, l) => ({
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
                 },
                 body: JSON.stringify({
-                    voteable_id: id, // динамический ID
-                    voteable_type: type, // общий для списка
+                    voteable_id: id,
+                    voteable_type: type,
                     fingerprint: fingerprint
                 })
             });
 
             const r = await response.json();
+            const storageKey = this.getStorageKey(type, id);
 
             if (response.ok) {
-                this.voted = true;
                 this.message = r.message;
-                localStorage.setItem(`voted_${url}`, '1');
-                
-                // Динамически увеличиваем счетчик локально для отрендеренной карточки
+                localStorage.setItem(storageKey, '1');
+
                 if (this.votes[id] !== undefined) this.votes[id]++;
             } else {
                 this.isError = true;
                 this.message = r.message || l['Network error. Please try again'];
-                
+
                 if (response.status === 422 && r.reason == 'already participated') {
-                    this.voted = true;
-                    localStorage.setItem(`voted_${url}`, '1');
+                    localStorage.setItem(storageKey, '1');
                 }
             }
         } catch (e) {
@@ -72,11 +90,11 @@ export var votingWidget = (url, type, l) => ({
         }
     },
 
-    // Вспомогательный хелпер для определения текста кнопки у каждой карточки
-    getButtonText(id) {
-        if (this.voted || localStorage.getItem(`voted_${url}`)) {
-            return l['Vote counted'];
-        }
+    getButtonText(type, id) {
+        if (this.isButtonDisabled(type, id)) return l['Vote counted'];
+        else if (type == 'coin_up') return l['Growth'];
+        else if (type == 'coin_down') return l['Depreciation'];
+
         return l['Vote'];
     }
 });

@@ -9,7 +9,7 @@
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
                     {{ __('Views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                    <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                         x-text="all_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -30,7 +30,7 @@
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
                     {{ __('Visits') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                    <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                         x-text="all_visits_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -51,7 +51,7 @@
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
                     {{ __('Phone views') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                    <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                         x-text="all_phone_views_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -72,7 +72,7 @@
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
                     {{ __('Tracks') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                    <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                         x-text="all_tracks_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -93,7 +93,7 @@
                 <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">
                     {{ __('Chats') }}</div>
                 <div class="flex items-end">
-                    <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                    <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                         x-text="all_chats_count"></div>
                     <div class="text-xxs lg:text-xs"
                         :class="{
@@ -110,7 +110,7 @@
         <div>
             <div class="text-xxs sm:text-xs text-slate-500 mb-1 lg:mb-2">CR</div>
             <div class="flex items-end">
-                <div class="text-sm leading-[16px] xs:text-base xs:leading-[18px] md:text-lg md:leading-[18px] xl:text-xl xl:leading-[22px] text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
+                <div class="text-sm xs:text-base md:text-lg xl:text-xl leading-4 xs:leading-4.5 xl:leading-5.5 text-slate-800 dark:text-slate-200 mr-1 sm:mr-2"
                     x-text="all_cr">
                 </div>
                 <div class="text-xxs lg:text-xs"
@@ -125,5 +125,5 @@
         </div>
     </div>
 
-    <div id="summary" class="h-[25rem] sm:h-[35rem]"></div>
+    <div id="summary" class="h-100 sm:h-140"></div>
 </div>
