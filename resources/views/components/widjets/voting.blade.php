@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-between gap-2 h-2 mt-2 overflow-hidden">
+            <div class="flex justify-between gap-1 h-1.5 mt-2 overflow-hidden">
                 <div class="bg-emerald-500 h-full rounded-full" :style="`width: ${upPercent}%`"
                     style="width: {{ $result->total_predictions == 0 ? 50 : ($result->up_votes / $result->total_predictions) * 100 }}%"></div>
                 <div class="bg-rose-500 h-full rounded-full" :style="`width: ${downPercent}%`"
