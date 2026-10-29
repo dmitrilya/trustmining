@@ -2,11 +2,10 @@
 
 namespace App\Models\Insight;
 
-use Laravel\Scout\Searchable;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -14,7 +13,7 @@ use ReflectionClass;
 
 abstract class ContentModel extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
 
     public function __construct(array $attributes = [])
     {
@@ -100,7 +99,7 @@ abstract class ContentModel extends Model
         $query->published($now)->where('channel_id', $channelId);
     }
 
-    public function scopePublishedInChannels(Builder $query, array $channelIds, $now = null): void
+    public function scopePublishedInChannels(Builder $query, Collection|array $channelIds, $now = null): void
     {
         $query->published($now)->whereIn('channel_id', $channelIds);
     }

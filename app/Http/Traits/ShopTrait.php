@@ -8,10 +8,8 @@ trait ShopTrait
 {
     public function getShops($request)
     {
-        $users = User::where(
-            fn($q) => $q->whereHas('ads', fn($q1) => $q1->where('moderation', 'false')->where('hidden', 'false'))
-                ->orWhereHas('hosting', fn($q1) => $q1->where('moderation', 'false'))
-        )->select(['id', 'name', 'slug', 'tf'])->withCount(['offices' => fn($q) => $q->where('moderation', false)])
+        $users = User::isSeller()->select(['id', 'name', 'slug', 'tf'])
+            ->withCount(['offices' => fn($q) => $q->where('moderation', false)])
             ->with(['company:user_id,bg_logo,card,moderation', 'moderatedReviews:reviewable_id,reviewable_type,rating']);
 
         if ($request->city) $users = $users->whereHas(

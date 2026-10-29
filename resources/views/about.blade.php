@@ -113,43 +113,43 @@
         </div>
 
         <div class="max-w-2xl mx-auto space-y-3">
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Official registration as an individual entrepreneur or legal entity') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Company operating period since official registration') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Number of active offices and sales locations') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Verified and declared company revenue') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Availability of officially employed staff') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Originality and quality of published content') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Accuracy and transparency of legal documentation') }}</p>
             </div>
-            {{-- <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            {{-- <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <div class="mr-3 sm:mr-4 flex items-center justify-center text-xs sm:text-lg text-white bg-[#40ff9f]/90 shadow-lg min-w-5 h-5 sm:min-w-8 sm:h-8 rounded-full">✓</div>
                 <div class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">{{ __('Participation in conferences and mention in the media') }}</div>
             </div> --}}
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Average response time to incoming inquiries') }}</p>
             </div>
-            <div class="bg-white/30 dark:bg-white/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
+            <div class="bg-indigo-500/10 px-4 py-3 sm:px-5 border-l-4 border-indigo-600 rounded-md">
                 <p class="text-xs sm:text-sm lg:text-base text-slate-800 dark:text-slate-200">
                     {{ __('Quantity and quality of customer reviews') }}</p>
             </div>

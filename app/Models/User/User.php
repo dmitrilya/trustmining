@@ -2,19 +2,20 @@
 
 namespace App\Models\User;
 
-use Laravel\Scout\Searchable;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Http\Traits\WeightedSearchable;
 use App\Models\User\NotificationType;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, Searchable;
+    use HasApiTokens, HasFactory, Notifiable, WeightedSearchable;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +31,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'balance',
         'password',
         'email_verified_at',
+    ];
+
+    public static array $searchWeights = [
+        'name' => 2,
+        'company.name' => 2,
     ];
 
     /**
@@ -82,19 +88,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->where('slug', $value)->orWhere('id', $value)->first() ?? abort(404);
     }
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'name' => '',
-            'slug' => '',
-        ];
-    }
-
     public function role()
     {
         return $this->belongsTo(\App\Models\User\Role::class);
@@ -122,7 +115,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function activeAds()
     {
-        return $this->ads()->where('hidden', 0)->where('moderation', 0);
+        return $this->ads()->active();
     }
 
     public function channel()
@@ -278,5 +271,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function moderatedForumComments()
     {
         return $this->hasMany(\App\Models\Forum\ForumComment::class)->where('moderation', false);
+    }
+
+    public function scopeIsSeller(Builder $query)
+    {
+        return $query->where(fn(Builder $q) => $q
+            ->whereHas('activeAds')
+            ->orWhereHas('hosting', fn(Builder $q) => $q->where('moderation', 'false'))
+            ->orWhereHas('moderatedOffices', fn(Builder $q) => $q->where(
+                fn(Builder $q1) => $q1->whereJsonContains('peculiarities', 'Repair service')
+                    ->orWhereJsonContains('peculiarities', 'Cryptoexchanger')
+            )));
     }
 }

@@ -130,7 +130,7 @@ enum VotingCategory: int
             self::best_hosting => [
                 'id'   => $model->id,
                 'name' => $model->name,
-                'caption' => __($model->company?->card['type']) ?? __('Private person'),
+                'caption' => __($model->company?->card['type'] ?? 'Private person'),
                 'href' => route('company.about', $model->slug),
                 'img'  => $model->company?->logo,
             ],

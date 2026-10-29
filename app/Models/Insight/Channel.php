@@ -5,9 +5,11 @@ namespace App\Models\Insight;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Traits\WeightedSearchable;
+
 class Channel extends Model
 {
-    use HasFactory;
+    use HasFactory, WeightedSearchable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +27,11 @@ class Channel extends Model
     ];
 
     protected $withCount = ['activeSubscribers'];
+
+    public static array $searchWeights = [
+        'name' => 3,
+        'brief_description' => 1,
+    ];
 
     /**
      * Retrieve the model for a bound value.

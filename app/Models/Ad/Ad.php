@@ -3,14 +3,16 @@
 namespace App\Models\Ad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use App\Http\Traits\WeightedSearchable;
 use App\Models\Database\Coin;
 
 class Ad extends Model
 {
-    use HasFactory;
+    use HasFactory, WeightedSearchable;
 
     /**
      * The attributes that are mass assignable.
@@ -33,6 +35,13 @@ class Ad extends Model
         'hidden',
         'coin_id',
         'with_vat'
+    ];
+
+    public static array $searchWeights = [
+        'asicVersion.asicModel.name' => 8,
+        'asicVersion.asicModel.asicBrand.name' => 5,
+        'asicVersion.asicModel.algorithm.name' => 3,
+        'user.name' => 2,
     ];
 
     /**
@@ -78,6 +87,38 @@ class Ad extends Model
     public function moderations()
     {
         return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
+    }
+
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('moderation', false)->where('hidden', false);
+    }
+
+    public function scopeWithAsicModelViewsPriority(Builder $query): Builder
+    {
+        $since = now()->subMonths(3);
+
+        $model = new \App\Models\Database\AsicModel();
+        $viewModel = $model->views()->getRelated();
+
+        $viewsTable = $viewModel->getTable();
+        $modelTable = $model->getTable();
+
+        $morphClass = $model->getMorphClass();
+
+        $viewsSubquery = DB::table('asic_versions')
+            ->join($modelTable, "{$modelTable}.id", '=', 'asic_versions.asic_model_id')
+            ->leftJoin($viewsTable, function ($join) use ($viewsTable, $since, $morphClass, $modelTable) {
+                $join->on("{$viewsTable}.viewable_id", '=', "{$modelTable}.id")
+                    ->where("{$viewsTable}.viewable_type", '=', $morphClass)
+                    ->where("{$viewsTable}.created_at", '>=', $since);
+            })
+            ->selectRaw("COUNT({$viewsTable}.id)")
+            ->whereColumn('asic_versions.id', 'ads.asic_version_id');
+
+        return $query
+            ->addSelect(['recent_views_count' => $viewsSubquery])
+            ->orderByDesc('recent_views_count');
     }
 
     /**

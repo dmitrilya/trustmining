@@ -2,33 +2,23 @@
 
 namespace App\Models\Database;
 
-use Laravel\Scout\Searchable;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Traits\WeightedSearchable;
 use App\Enums\CoolingType;
 
 class AsicModel extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, WeightedSearchable;
 
     public $timestamps = false;
 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'name' => '',
-            'description' => '',
-            'algorithms.name' => '',
-            'asic_brands.name' => ''
-        ];
-    }
+    public static array $searchWeights = [
+        'name' => 6,
+        'asicBrand.name' => 2,
+        'algorithm.name' => 1,
+    ];
 
     /**
      * The attributes that should be casted to native types.

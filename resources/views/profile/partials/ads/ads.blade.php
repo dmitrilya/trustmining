@@ -10,7 +10,7 @@
     @if ($moreAdsAvailable && $officeExists)
         <x-slot name="i">
             <a href="{{ route('ad.create') }}"
-                class="min-w-7 h-7 rounded-full shadow-lg shadow-logo-color bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
+                class="min-w-7 h-7 rounded-full shadow-lg bg-secondary-gradient opacity-80 hover:opacity-100 hover:shadow-lg shadow-logo-color text-white text-3xl flex items-center justify-center">+</a>
         </x-slot>
     @endif
 

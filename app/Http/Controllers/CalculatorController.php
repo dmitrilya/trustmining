@@ -33,7 +33,7 @@ class CalculatorController extends Controller
         );
 
         $firmwares = collect();
-        $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
+        $adFirmwares = Ad::where('ad_category_id', 7)->active()
             ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {
@@ -96,7 +96,7 @@ class CalculatorController extends Controller
         $selVersion = $asicVersion && $asicVersion->exists ? collect($selModel['v'])->where('i', $asicVersion->id)->first() : $selModel['v'][0];
 
         $firmwares = collect();
-        $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
+        $adFirmwares = Ad::where('ad_category_id', 7)->active()
             ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {
@@ -156,7 +156,7 @@ class CalculatorController extends Controller
         }
 
         $firmwares = collect();
-        $adFirmwares = Ad::where('ad_category_id', 7)->where('moderation', false)->where('hidden', false)
+        $adFirmwares = Ad::where('ad_category_id', 7)->active()
             ->select(['id', 'user_id', 'asic_version_id', 'props'])->with(['user:id,name', 'asicVersion:id,measurement'])->get();
 
         foreach ($adFirmwares as $firmware) {

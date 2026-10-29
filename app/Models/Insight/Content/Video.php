@@ -2,15 +2,14 @@
 
 namespace App\Models\Insight\Content;
 
-use Laravel\Scout\Searchable;
-
-use App\Models\Insight\ContentModel;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Http\Traits\WeightedSearchable;
+use App\Models\Insight\ContentModel;
 
 class Video extends ContentModel
 {
-    use HasFactory, Searchable;
+    use HasFactory, WeightedSearchable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +23,12 @@ class Video extends ContentModel
         'published_at',
         'moderation',
         'channel_id',
+    ];
+
+    public static array $searchWeights = [
+        'title' => 10,
+        'channel.name' => 5,
+        'series.name' => 2,
     ];
 
     /**

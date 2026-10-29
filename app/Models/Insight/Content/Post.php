@@ -2,15 +2,14 @@
 
 namespace App\Models\Insight\Content;
 
-use Laravel\Scout\Searchable;
-
-use App\Models\Insight\ContentModel;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Http\Traits\WeightedSearchable;
+use App\Models\Insight\ContentModel;
 
 class Post extends ContentModel
 {
-    use HasFactory, Searchable;
+    use HasFactory, WeightedSearchable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +22,19 @@ class Post extends ContentModel
         'published_at',
         'moderation',
         'channel_id',
+    ];
+
+    public static array $searchWeights = [
+        'content' => 10,
+        'channel.name' => 5,
+        'series.name' => 2,
+    ];
+
+    public static array $searchSettings = [
+        'content' => [
+            'strip_tags' => true,
+            'limit' => 70,
+        ],
     ];
 
     /**

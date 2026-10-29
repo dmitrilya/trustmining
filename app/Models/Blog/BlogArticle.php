@@ -23,20 +23,6 @@ class BlogArticle extends Model
     {
         return $this->find(explode('-', $value)[0]) ?? abort(404);
     }
- 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'title' => '',
-            'subtitle' => '',
-            'article' => '',
-        ];
-    }
 
     protected $casts = [
         'created_at' => 'date:Y-m-d',

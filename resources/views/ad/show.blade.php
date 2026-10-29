@@ -96,11 +96,13 @@
                                 </p>
 
                                 <div class="flex flex-wrap gap-1 xs:gap-2 mt-4">
-                                    <div
-                                        class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
-                                        {{ __('Price updated') }}
-                                        {{ $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at')->diffForHumans() }}
-                                    </div>
+                                    @if ($latestModerationDate = $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at'))
+                                        <div
+                                            class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                            {{ __('Price updated') }}
+                                            {{ $latestModerationDate->diffForHumans() }}
+                                        </div>
+                                    @endif
 
                                     @if ($price != 0 && $withVat)
                                         <div
@@ -336,11 +338,13 @@
                                     </div>
 
                                     <div class="flex flex-wrap gap-1 xs:gap-2 mt-4">
-                                        <div
-                                            class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
-                                            {{ __('Price updated') }}
-                                            {{ $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at')->diffForHumans() }}
-                                        </div>
+                                        @if ($latestModerationDate = $ad->moderations()->whereNotNull('data->price')->latest()->value('created_at'))
+                                            <div
+                                                class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 text-xxs xs:text-xs w-fit rounded-md px-1.5 py-0.5">
+                                                {{ __('Price updated') }}
+                                                {{ $latestModerationDate->diffForHumans() }}
+                                            </div>
+                                        @endif
 
                                         @if ($ad->with_vat)
                                             <div

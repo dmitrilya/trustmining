@@ -21,9 +21,7 @@ class UpdateART extends Command
     {
         $twoWeeksAgo = Carbon::now()->subWeeks(2);
 
-        $users = User::whereHas('ads', fn($q) => $q->where('moderation', 'false')->where('hidden', 'false'))
-            ->orWhereHas('hosting', fn($q) => $q->where('moderation', 'false'))
-            ->select(['id', 'art'])->with([
+        $users = User::isSeller()->select(['id', 'art'])->with([
                 'chats:id',
                 'chats.messages' => fn($q) => $q->where('created_at', '>', $twoWeeksAgo)->orderBy('created_at')
                     ->select(['chat_id', 'user_id', 'created_at'])

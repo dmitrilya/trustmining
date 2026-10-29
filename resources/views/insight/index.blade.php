@@ -1,4 +1,4 @@
-<x-insight-layout :title="__('meta.insight.title')" :description="__('meta.insight.description')" header="TM Insight" itemtype="https://schema.org/WebPage" :itemname="'TM Insight ' . __('Home')">
+<x-insight-layout :title="$title ?? __('meta.insight.title')" :description="__('meta.insight.description')" :header="$header ?? 'TM Insight'" itemtype="https://schema.org/WebPage" :itemname="'TM Insight ' . __('Home')">
     <div itemprop="mainEntity" itemscope itemtype="https://schema.org/ItemList">
         <meta itemprop="itemListOrder" content="https://schema.org/ItemListOrderDescending" />
 

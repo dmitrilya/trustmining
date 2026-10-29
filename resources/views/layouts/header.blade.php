@@ -6,7 +6,9 @@
     openedMenu: false,
     openWiki: false,
     openedWiki: false,
-    menuBlocks: ['openAds', 'openMenu', 'openWiki'],
+    openedSearch: false,
+    openSearch: false,
+    menuBlocks: ['openAds', 'openMenu', 'openWiki', 'openSearch'],
     clickedClosed: false,
 
     closeAllExcept(activeBlock) {
@@ -44,7 +46,7 @@
     }
 }">
     <div class="bg-white/40 dark:bg-slate-900/40 backdrop-blur-xl border-b border-slate-300 dark:border-slate-700 w-full shadow shadow-logo-color"
-        @mouseleave="closeAllExcept()">
+        @mouseleave="closeAllExcept('openSearch')">
         <div class="w-full max-w-7xl mx-auto px-3 sm:px-5 lg:px-7">
             @include('layouts.navigation')
 
@@ -58,6 +60,7 @@
             <x-menu.solutions @mouseover="cancelClose('openMenu')" @mouseleave="startClose('openMenu')" @click.away="openMenu = false"
                 class="hidden lg:block" />
             <x-menu.wiki @mouseover="cancelClose('openWiki')" @mouseleave="startClose('openWiki')" @click.away="openWiki = false" class="hidden lg:block" />
+            <x-menu.search class="hidden lg:block mr-4" />
         </div>
     </div>
 </div>

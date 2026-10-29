@@ -16,11 +16,6 @@
                 <x-buttons.menu-desktop-button block="Menu">{{ __('Menu') }}</x-buttons.menu-desktop-button>
                 <x-buttons.menu-desktop-button block="Wiki">{{ __('TM Wiki') }}</x-buttons.menu-desktop-button>
                 <x-buttons.menu-desktop-button :href="route('support')">{{ __('Support') }}</x-buttons.menu-desktop-button>
-
-                @include('layouts.components.search', [
-                    'border' => 'px-2.5 py-1.5 rounded-lg border',
-                    'searchBlock' => 'max-w-sm',
-                ])
             </div>
         </div>
         <div class="flex items-center ml-2 xl:ml-6">
@@ -32,6 +27,14 @@
                         ->where('checked', false)
                         ->count();
                 @endphp
+
+                <button @click="openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
+                    class="mr-4 hidden lg:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm tracking-wide text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-emerald-500/50 hover:shadow-md shadow-logo-color transition-all duration-150">
+                    <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                    </svg>
+                    {{ __('Search') }}
+                </button>
 
                 <div class="mr-3 xs:mr-4"><x-notifications.notifications :notifications="$auth
                     ->notifications()
@@ -129,7 +132,7 @@
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center lg:hidden">
-                <button @click="open = ! open" aria-label="{{ __('Menu') }}"
+                <button @click="open = !open; closeAllExcept()" aria-label="{{ __('Menu') }}"
                     class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-500 dark:hover:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 focus:outline-none focus:bg-slate-100 dark:focus:bg-slate-900 focus:text-slate-500 dark:focus:text-slate-400 transition duration-100 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round"
@@ -143,12 +146,8 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
+    <div x-show="open" x-collapse class="lg:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <div class="py-2">
-                @include('layouts.components.search')
-            </div>
-
             <x-buttons.menu-mobile-button block="Ads">{{ __('Advertisements') }}</x-buttons.menu-mobile-button>
             <x-menu.ads />
 
@@ -200,6 +199,14 @@
                     class="block w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-300 dark:focus:border-slate-700 transition duration-100 ease-in-out"
                     @click="$dispatch('open-modal', 'login')">{{ __('Login') }}</button>
             @endauth
+
+            <button @click="open = false; openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
+                class="mt-2 w-full inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm tracking-wide text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-emerald-500/50 hover:shadow-md shadow-logo-color transition-all duration-150">
+                <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                </svg>
+                {{ __('Search') }}
+            </button>
         </div>
     </div>
 </nav>

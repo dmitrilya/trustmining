@@ -1,5 +1,5 @@
 <footer class="bg-white/40 dark:bg-slate-900/40 border-t border-slate-300 dark:border-slate-700">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
+    <div class="max-w-7xl mx-auto px-3 sm:px-5 lg:px-7 py-6 sm:py-8 lg:py-10 space-y-6 lg:space-y-8">
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-y-6 gap-x-4">
             <div class="xl:order-2 space-y-6 lg:space-y-8 xl:flex flex-col items-end">
                 <a href="{{ route('home') }}">

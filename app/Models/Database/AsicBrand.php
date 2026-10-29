@@ -2,28 +2,20 @@
 
 namespace App\Models\Database;
 
-use Laravel\Scout\Searchable;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Traits\WeightedSearchable;
+
 class AsicBrand extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, WeightedSearchable;
 
     public $timestamps = false;
- 
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'name' => '',
-        ];
-    }
+
+    public static array $searchWeights = [
+        'name' => 1,
+    ];
 
     public function asicModels()
     {

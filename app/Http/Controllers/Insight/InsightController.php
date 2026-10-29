@@ -68,7 +68,9 @@ class InsightController extends Controller
             'newVideos' => Video::publishedInChannels($channelIds, $now)->orderByDesc('published_at')->paginate(4),
             'popularVideos' => Video::publishedInChannels($channelIds, $now)
                 ->withCount(['views as recent_views_count' => fn($q) => $q->where('created_at', '>=', $threeMonthsAgo)])
-                ->orderByDesc('recent_views_count')->paginate(4)
+                ->orderByDesc('recent_views_count')->paginate(4),
+            'title' => __('Subscriptions') . ' | TM Insight',
+            'header' => __('Subscriptions')
         ]);
     }
 

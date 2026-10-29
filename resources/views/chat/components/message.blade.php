@@ -31,7 +31,7 @@
                                 class="absolute w-full h-full bg-slate-900/50 opacity-0 group-hover:opacity-100 transition duration-300 rounded-lg flex items-center justify-center">
                                 <a data-tooltip-target="download-image-{{ $message->id }}-{{ $loop->index }}"
                                     download href="{{ Storage::url($image) }}"
-                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/30 hover:bg-white/50 focus:ring-2 focus:outline-none focus:ring-slate-300">
+                                    class="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/40 hover:bg-white/50 focus:ring-2 focus:outline-none focus:ring-slate-300">
                                     <svg class="w-4 h-4 text-slate-200" aria-hidden="true" fill="none" viewBox="0 0 16 18">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
