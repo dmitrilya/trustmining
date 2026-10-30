@@ -210,7 +210,7 @@ class SearchService
 
             return ($aPrice * $aRate) <=> ($bPrice * $bRate);
         })->take(20)->values()->loadMissing(['user', 'office.cityRelation', 'asicVersion.asicModel.asicBrand', 'coin'])->map(fn(Ad $ad) => [
-            'name' => $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement . ' ' . $ad->price . $ad->coin->abbreviation,
+            'name' => $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement . ' ' . ($ad->price !== 0 ? $ad->price . $ad->coin->abbreviation : __('Price on request')),
             'caption' => $ad->asicVersion->asicModel->asicBrand->name . ' · ' . $ad->user->name . ' · ' . $ad->office->city,
             'icon' => null,
             'href' => route('ads.asic.show', [
