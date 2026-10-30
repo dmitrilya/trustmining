@@ -182,7 +182,7 @@ class SearchService
             ->pluck('views_count', 'viewable_id');
 
         return $ads->sort(function (Ad $a, Ad $b) use ($modelViews) {
-            $relevance = $b->relevance <=> $a->relevance;
+            $relevance = ($b->relevance ?? 0) <=> ($a->relevance ?? 0);
 
             if ($relevance !== 0) return $relevance;
 
@@ -193,13 +193,23 @@ class SearchService
 
             if ($views !== 0) return $views;
 
-            return $a->price <=> $b->price;
-        })->take(20)->values()->loadMissing([
-            'user',
-            'office.cityRelation',
-            'asicVersion.asicModel.asicBrand',
-            'coin'
-        ])->map(fn(Ad $ad) => [
+            $aFree = (float) $a->price === 0.0;
+            $bFree = (float) $b->price === 0.0;
+
+            if ($aFree !== $bFree) return $aFree <=> $bFree;
+
+            $aPrice = (float) $a->price;
+            $bPrice = (float) $b->price;
+
+            if (!(bool) $a->with_vat) $aPrice *= 1.20;
+
+            if (!(bool) $b->with_vat) $bPrice *= 1.20;
+
+            $aRate = (float) ($a->coin->rate ?? 0);
+            $bRate = (float) ($b->coin->rate ?? 0);
+
+            return ($aPrice * $aRate) <=> ($bPrice * $bRate);
+        })->take(20)->values()->loadMissing(['user', 'office.cityRelation', 'asicVersion.asicModel.asicBrand', 'coin'])->map(fn(Ad $ad) => [
             'name' => $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement . ' ' . $ad->price . $ad->coin->abbreviation,
             'caption' => $ad->asicVersion->asicModel->asicBrand->name . ' · ' . $ad->user->name . ' · ' . $ad->office->city,
             'icon' => null,
@@ -209,6 +219,6 @@ class SearchService
                 'asicVersion' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
                 'ad' => $ad->user->slug . '-' . $ad->id,
             ]),
-        ])->values();
+        ])->valu 
     }
 }
