@@ -146,7 +146,7 @@
     </div>
 
     <!-- Mobile Navigation Menu -->
-    <div x-show="open" x-collapse class="lg:hidden">
+    <div x-show="open" x-collapse class="lg:hidden" style="display: none">
         <div class="pt-2 pb-3 space-y-1">
             <x-buttons.menu-mobile-button block="Ads">{{ __('Advertisements') }}</x-buttons.menu-mobile-button>
             <x-menu.ads />
