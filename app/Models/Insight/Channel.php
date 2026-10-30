@@ -5,11 +5,11 @@ namespace App\Models\Insight;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 
 class Channel extends Model
 {
-    use HasFactory, WeightedSearchable;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +31,19 @@ class Channel extends Model
     public static array $searchWeights = [
         'name' => 3,
         'brief_description' => 1,
+    ];
+
+    public static array $searchableDependents = [
+        'name' => [
+            \App\Models\Insight\Content\Article::class => 'articles',
+            \App\Models\Insight\Content\Post::class => 'posts',
+            \App\Models\Insight\Content\Video::class => 'videos',
+            \App\Models\Insight\Series::class => 'series',
+        ],
+
+        'brief_description' => [
+            \App\Models\Insight\Series::class => 'series',
+        ],
     ];
 
     /**

@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use App\Models\Ad\AdCategory;
 use App\Models\Ad\Ad;
 
 trait AdTrait
@@ -14,6 +13,7 @@ trait AdTrait
     {
         $authId = auth()->id() ?? 0;
         $adClass = addslashes(Ad::class);
+        $locale = app()->getLocale();
 
         $ads = DB::table('ads')
             ->leftJoin('users', 'users.id', '=', 'ads.user_id')
@@ -51,7 +51,7 @@ trait AdTrait
                 'users.tf as user_tf',
 
                 'offices.id as office_id',
-                DB::raw("COALESCE(cities.name->>'$." . app()->getLocale() . "', cities.name->>'$.ru') as city"),
+                DB::raw("COALESCE(cities.name->>'$." . $locale . "', cities.name->>'$.ru') as city"),
 
                 'asic_versions.hashrate as asic_version_hashrate',
                 'asic_versions.measurement as asic_version_measurement',
@@ -152,7 +152,7 @@ trait AdTrait
                 });
             }
 
-            if ($request->city) $ads->orderByRaw("CASE WHEN cities.name = ? THEN 1 ELSE 0 END DESC", [$request->city]);
+            if ($request->city) $ads->orderByRaw("CASE WHEN cities.name->'$.{$locale}' = ? THEN 1 ELSE 0 END DESC", [$request->city]);
 
             if ($request->display) {
                 switch ($request->display) {

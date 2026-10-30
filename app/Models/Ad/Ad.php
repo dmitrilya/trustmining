@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 use App\Models\Database\Coin;
 
 class Ad extends Model
 {
-    use HasFactory, WeightedSearchable;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -42,6 +42,7 @@ class Ad extends Model
         'asicVersion.asicModel.asicBrand.name' => 5,
         'asicVersion.asicModel.algorithm.name' => 3,
         'user.name' => 2,
+        'user.company.name' => 2,
     ];
 
     /**

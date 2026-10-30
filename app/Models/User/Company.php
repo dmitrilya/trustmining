@@ -5,9 +5,11 @@ namespace App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Http\Traits\Searchable;
+
 class Company extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +28,13 @@ class Company extends Model
         'bg_logo',
         'site',
         'moderation'
+    ];
+
+    public static array $searchableDependents = [
+        'name' => [
+            \App\Models\User\User::class => 'user',
+            \App\Models\Ad\Ad::class => 'user.ads',
+        ],
     ];
 
     /**

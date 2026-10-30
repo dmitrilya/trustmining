@@ -72,6 +72,7 @@ export var calculatorAlpine = (isWidjet, algorithms, firmwares, tariffs, selVers
 
         this.$watch('version', () => {
             this.minPriceUSDT = this.price === '' ? (this.version?.p ? (!this.taxEnabled || this.version.v ? this.version.p : this.version.p * 1.2) : null) : (this.priceCurrency == 'USDT' ? this.price : this.price * rub);
+            this.availableFirmwares = [];
 
             if (this.firmware) this.firmware = null;
             else this.recalculateAll();

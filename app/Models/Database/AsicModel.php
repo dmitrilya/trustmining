@@ -5,12 +5,12 @@ namespace App\Models\Database;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 use App\Enums\CoolingType;
 
 class AsicModel extends Model
 {
-    use HasFactory, WeightedSearchable;
+    use HasFactory, Searchable;
 
     public $timestamps = false;
 
@@ -18,6 +18,12 @@ class AsicModel extends Model
         'name' => 6,
         'asicBrand.name' => 2,
         'algorithm.name' => 1,
+    ];
+
+    public static array $searchableDependents = [
+        'name' => [
+            \App\Models\Ad\Ad::class => 'asicVersions.ads',
+        ],
     ];
 
     /**

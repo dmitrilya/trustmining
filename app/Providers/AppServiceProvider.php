@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use App\Observers\SearchableObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -74,6 +76,24 @@ class AppServiceProvider extends ServiceProvider
         Password::defaults(function () {
             return Password::min(4);
         });
+
+        $models = [
+            \App\Models\User\User::class,
+            \App\Models\User\Company::class,
+            \App\Models\Ad\Ad::class,
+            \App\Models\Database\AsicBrand::class,
+            \App\Models\Database\AsicModel::class,
+            \App\Models\Database\Algorithm::class,
+            \App\Models\Insight\Channel::class,
+            \App\Models\Insight\Series::class,
+            \App\Models\Insight\Content\Article::class,
+            \App\Models\Insight\Content\Post::class,
+            \App\Models\Insight\Content\Video::class,
+        ];
+
+        foreach ($models as $model) {
+            $model::observe(SearchableObserver::class);
+        }
 
         Relation::enforceMorphMap([
             'channel'       => \App\Models\Insight\Channel::class,

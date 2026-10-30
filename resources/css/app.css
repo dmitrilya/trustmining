@@ -14,10 +14,10 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
-    --breakpoint-xxs: 358px;
-    --breakpoint-xs: 380px;
-    --breakpoint-xxl: 1420px;
-    --breakpoint-xxxl: 1664px;
+    --breakpoint-xxs: 22.375rem;
+    --breakpoint-xs: 23.75rem;
+    --breakpoint-xxl: 88.75rem;
+    --breakpoint-xxxl: 104rem;
 
     --grid-template-rows-\[auto\,auto\,1fr\]: auto auto 1fr;
     --grid-template-columns-16: repeat(16, minmax(0, 1fr));

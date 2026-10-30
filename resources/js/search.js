@@ -9,7 +9,7 @@ export const search = () => ({
         const query = this.query.trim();
         const requestId = ++this.requestId;
 
-        if (!query) {
+        if (!query || query.length < 2) {
             this.suggestions = {};
             this.activeCategory = null;
             this.loading = false;

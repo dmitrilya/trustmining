@@ -5,16 +5,23 @@ namespace App\Models\Database;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 
 class AsicBrand extends Model
 {
-    use HasFactory, WeightedSearchable;
+    use HasFactory, Searchable;
 
     public $timestamps = false;
 
     public static array $searchWeights = [
         'name' => 1,
+    ];
+
+    public static array $searchableDependents = [
+        'name' => [
+            \App\Models\Database\AsicModel::class => 'asicModels',
+            \App\Models\Ad\Ad::class => 'asicModels.asicVersions.ads',
+        ],
     ];
 
     public function asicModels()

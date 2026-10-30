@@ -10,12 +10,12 @@ use Illuminate\Notifications\Notifiable;
 
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 use App\Models\User\NotificationType;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, WeightedSearchable;
+    use HasApiTokens, HasFactory, Notifiable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +36,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public static array $searchWeights = [
         'name' => 2,
         'company.name' => 2,
+    ];
+
+    public static array $searchableDependents = [
+        'name' => [
+            \App\Models\Ad\Ad::class => 'ads',
+        ],
     ];
 
     /**

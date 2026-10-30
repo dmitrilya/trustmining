@@ -94,11 +94,15 @@
 
             <x-tf :tf="$ad->user_tf" :company="$ad->user_name" class="my-1 md:my-2" />
 
+            @if ($ad->ad_category_name == 'firmwares')
+                <div class="text-xxs xxs:text-xs xs:text-sm text-slate-800 dark:text-slate-200 truncate mb-1 sm:mb-1.5">
+                    {{ $ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement . '/s' }}
+                </div>
+            @endif
+
             <x-characteristics.characteristics>
                 @if ($ad->ad_category_name == 'gpus')
                     <x-characteristics.characteristic name="Power (kW·h)" :value="$ad->gpu_model_max_power" />
-                @elseif ($ad->ad_category_name == 'firmwares')
-                    <x-characteristics.characteristic name="Model" :value="$ad->asic_model_name . ' ' . (float) $ad->asic_version_hashrate . $ad->asic_version_measurement . '/s'" />
                 @endif
 
                 @if (!isset($sm) || !$sm)

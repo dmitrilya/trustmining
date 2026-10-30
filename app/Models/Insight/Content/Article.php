@@ -4,12 +4,12 @@ namespace App\Models\Insight\Content;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Http\Traits\WeightedSearchable;
+use App\Http\Traits\Searchable;
 use App\Models\Insight\ContentModel;
 
 class Article extends ContentModel
 {
-    use HasFactory, WeightedSearchable;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that are mass assignable.

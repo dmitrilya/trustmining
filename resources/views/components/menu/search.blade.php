@@ -26,7 +26,7 @@
             </div>
 
             <div x-show="query.trim().length > 0" x-cloak class="mt-4 overflow-hidden">
-                <div x-show="categories.length > 0" class="flex gap-2 mb-3 overflow-x-auto" role="tablist" aria-label="{{ __('Search categories') }}">
+                <div x-show="categories.length > 0" class="flex gap-2 mb-3 pb-2 overflow-x-auto" role="tablist" aria-label="{{ __('Search categories') }}">
                     <template x-for="category in categories" :key="category">
                         <button type="button" @click="activeCategory = category"
                             :class="activeCategory === category ?
@@ -44,15 +44,15 @@
 
                 <div x-show="categories.length > 0" x-ref="suggestionList" class="max-h-[min(55vh,480px)] overflow-y-auto" role="tabpanel">
                     <template x-for="(item, index) in activeItems" :key="item.href ?? `${activeCategory}-${index}`">
-                        <a :href="item.href" class="group flex mr-2 sm:mr-4 items-center gap-3 rounded-xl py-2">
+                        <a :href="item.href" class="group flex mr-2 sm:mr-4 items-center gap-2 sm:gap-3 rounded-xl py-2">
                             <div
-                                class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                                class="flex w-6 h-6 min-w-6 xs:w-8 xs:h-8 xs:min-w-8 sm:w-10 sm:h-10 sm:min-w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
                                 <template x-if="item.icon">
                                     <img :src="item.icon" :alt="item.name" class="h-full w-full object-contain p-1.5" loading="lazy" />
                                 </template>
 
                                 <template x-if="!item.icon">
-                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                                    <svg class="h-1/2 w-1/2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
                                         <path d="M4 5h16v14H4z"></path>
                                         <path d="M8 9h8M8 13h5"></path>
                                     </svg>
@@ -60,10 +60,10 @@
                             </div>
 
                             <div class="min-w-0 flex-1">
-                                <div class="truncate text-sm font-medium text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400"
+                                <div class="truncate text-sm sm:text-base font-medium text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-emerald-400"
                                     x-text="item.name"></div>
 
-                                <div class="mt-1 text-xs text-slate-600 dark:text-slate-400" x-text="item.caption"></div>
+                                <div class="mt-0.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400" x-text="item.caption"></div>
                             </div>
 
                             <svg class="h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400 transition group-hover:text-indigo-600 dark:group-hover:text-emerald-400"
