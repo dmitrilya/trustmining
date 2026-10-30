@@ -53,10 +53,10 @@ trait Searchable
 
         if ($constraints) $constraints($builder);
 
-        $keyName = (new static())->getKeyName();
+        $models = $builder->get()->keyBy('id');
+        if ($models->isEmpty()) return new Collection();
 
-        $ids = $builder->pluck($keyName)->all();
-        if (empty($ids)) return new Collection();
+        $ids = $models->keys()->all();
 
         $views = [];
 
@@ -85,7 +85,6 @@ trait Searchable
         });
 
         $ids = array_slice($ids, 0, $limit);
-        $models = static::query()->whereKey($ids)->get()->keyBy($keyName);
 
         return new Collection(
             collect($ids)
