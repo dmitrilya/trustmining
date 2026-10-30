@@ -219,6 +219,6 @@ class SearchService
                 'asicVersion' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
                 'ad' => $ad->user->slug . '-' . $ad->id,
             ]),
-        ])->valu 
+        ])->values();
     }
 }
