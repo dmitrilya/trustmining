@@ -16,16 +16,14 @@ use App\Models\User\User;
 use App\Models\Ad\AdCategory;
 use App\Models\Ad\Ad;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SearchService
 {
     public function search(string $query): array
     {
         $query = trim($query);
-
-        if ($query === '') {
-            return [];
-        }
+        if ($query === '') return [];
 
         $searchMap = [
             'ads'       => [__('Advertisements'), 'searchAds'],
@@ -40,10 +38,14 @@ class SearchService
         ];
 
         return collect($searchMap)
-            ->map(fn($config) => [
-                'label' => $config[0],
-                'items' => $this->{$config[1]}($query),
-            ])
+            ->map(function ($config, $key) use ($query) {
+                $items = $this->{$config[1]}($query);
+
+                return [
+                    'label' => $config[0],
+                    'items' => $items,
+                ];
+            })
             ->filter(fn($category) => $category['items']->isNotEmpty())
             ->all();
     }
@@ -80,7 +82,9 @@ class SearchService
     {
         return Article::search($query, 10, null, '-2 weeks')->loadMissing(['channel', 'series'])->map(fn(Article $article) => [
             'name' => $article->title,
-            'caption' => $article->channel->name . (($series = $article->series->first()) ? ' · ' . $series->name : '') . ' · ' . $article->subtitle,
+            'caption' => $article->channel->name .
+                (($series = $article->series->first()) ? ' · ' . $series->name : '') .
+                ' · ' . $article->subtitle,
             'icon' => null,
             'href' => route('insight.article.show', [
                 'channel' => $article->channel->slug,
@@ -166,6 +170,12 @@ class SearchService
 
         if ($ads->isEmpty()) return collect();
 
+        $ads->loadMissing([
+            'asicVersion:id,asic_model_id,hashrate,measurement',
+            'coin:id,abbreviation',
+            'coin.latestRate:id,coin_id,rate',
+        ]);
+
         $modelIds = $ads
             ->pluck('asicVersion.asic_model_id')
             ->filter()
@@ -181,35 +191,43 @@ class SearchService
             ->groupBy('viewable_id')
             ->pluck('views_count', 'viewable_id');
 
-        return $ads->sort(function (Ad $a, Ad $b) use ($modelViews) {
-            $relevance = ($b->relevance ?? 0) <=> ($a->relevance ?? 0);
+        $sortData = [];
 
-            if ($relevance !== 0) return $relevance;
+        foreach ($ads as $ad) {
+            $modelId = $ad->asicVersion->asic_model_id;
 
-            $aModelId = $a->asicVersion->asic_model_id;
-            $bModelId = $b->asicVersion->asic_model_id;
+            $price = (float) $ad->price;
 
-            $views = ($modelViews[$bModelId] ?? 0) <=> ($modelViews[$aModelId] ?? 0);
+            if ($price != 0.0 && !(bool) $ad->with_vat) $price *= 1.20;
 
-            if ($views !== 0) return $views;
+            $sortData[$ad->id] = [
+                'relevance' => (float) ($ad->relevance ?? 0),
+                'views' => (int) ($modelViews[$modelId] ?? 0),
+                'free' => (float) $ad->price === 0.0,
+                'price' => $price * (float) ($ad->coin->rate ?? 0),
+            ];
+        }
 
-            $aFree = (float) $a->price === 0.0;
-            $bFree = (float) $b->price === 0.0;
+        $sorted = $ads->sort(function (Ad $a, Ad $b) use ($sortData, &$comparisons) {
+            $aData = $sortData[$a->id];
+            $bData = $sortData[$b->id];
 
-            if ($aFree !== $bFree) return $aFree <=> $bFree;
+            return ($bData['relevance'] <=> $aData['relevance'])
+                ?: ($bData['views'] <=> $aData['views'])
+                ?: ($aData['free'] <=> $bData['free'])
+                ?: ($aData['price'] <=> $bData['price']);
+        });
 
-            $aPrice = (float) $a->price;
-            $bPrice = (float) $b->price;
+        $topAds = $sorted->take(20)->values();
 
-            if (!(bool) $a->with_vat) $aPrice *= 1.20;
+        $topAds->loadMissing([
+            'user:id,name',
+            'office.cityRelation:name',
+            'asicVersion.asicModel:id,asic_brand_id,name,slug',
+            'asicVersion.asicModel.asicBrand:id,name,slug',
+        ]);
 
-            if (!(bool) $b->with_vat) $bPrice *= 1.20;
-
-            $aRate = (float) ($a->coin->rate ?? 0);
-            $bRate = (float) ($b->coin->rate ?? 0);
-
-            return ($aPrice * $aRate) <=> ($bPrice * $bRate);
-        })->take(20)->values()->loadMissing(['user', 'office.cityRelation', 'asicVersion.asicModel.asicBrand', 'coin'])->map(fn(Ad $ad) => [
+        return $topAds->map(fn(Ad $ad) => [
             'name' => $ad->asicVersion->asicModel->name . ' ' . $ad->asicVersion->hashrate . $ad->asicVersion->measurement . ' ' . ($ad->price ? $ad->price . $ad->coin->abbreviation : __('Price on request')),
             'caption' => $ad->asicVersion->asicModel->asicBrand->name . ' · ' . $ad->user->name . ' · ' . $ad->office->city,
             'icon' => null,
@@ -219,6 +237,6 @@ class SearchService
                 'asicVersion' => $ad->asicVersion->hashrate . $ad->asicVersion->measurement,
                 'ad' => $ad->user->slug . '-' . $ad->id,
             ]),
-        ])->values();
+        ]);
     }
 }

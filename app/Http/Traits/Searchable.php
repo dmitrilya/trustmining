@@ -28,7 +28,6 @@ trait Searchable
             ->where('searchable_type', $type)
             ->whereRaw("content LIKE ? ESCAPE '!'", ['%' . $escapedQuery . '%'])
             ->get(['searchable_id', 'content']);
-
         if ($documents->isEmpty()) return new Collection();
 
         $scores = [];
@@ -57,7 +56,6 @@ trait Searchable
         $keyName = (new static())->getKeyName();
 
         $ids = $builder->pluck($keyName)->all();
-
         if (empty($ids)) return new Collection();
 
         $views = [];
@@ -87,7 +85,6 @@ trait Searchable
         });
 
         $ids = array_slice($ids, 0, $limit);
-
         $models = static::query()->whereKey($ids)->get()->keyBy($keyName);
 
         return new Collection(
