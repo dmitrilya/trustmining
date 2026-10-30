@@ -161,7 +161,7 @@ class SearchService
         $ads = Ad::search(
             $query,
             PHP_INT_MAX,
-            fn($builder) => $builder->where('ad_category_id', $minersCategoryId)
+            fn($builder) => $builder->where('ad_category_id', $minersCategoryId)->active()
         );
 
         if ($ads->isEmpty()) return collect();
