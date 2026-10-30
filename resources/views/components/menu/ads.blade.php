@@ -1,6 +1,5 @@
 <template x-if="openedAds">
-    <div x-show="openAds" x-collapse
-        {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
+    <div x-show="openAds" x-collapse {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
         <div class="pt-4 pb-4 sm:pb-6">
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                 @php

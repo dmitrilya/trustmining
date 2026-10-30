@@ -1,6 +1,5 @@
 <template x-if="openedMenu">
     <div x-show="openMenu" x-collapse {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
-
         <div class="pt-4 pb-4 sm:pb-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full">

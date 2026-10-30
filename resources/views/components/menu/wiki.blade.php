@@ -1,9 +1,5 @@
 <template x-if="openedWiki">
-    <div x-show="openWiki" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 max-h-0"
-        x-transition:enter-end="opacity-100 max-h-[1000px]" x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 max-h-[1000px]" x-transition:leave-end="opacity-0 max-h-0"
-        {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
-
+    <div x-show="openWiki" x-collapse {{ $attributes->merge(['class' => 'overflow-hidden w-full']) }}>
         <div class="pt-4 pb-4 sm:pb-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <div class="space-y-4 w-full">

@@ -9,7 +9,7 @@
                 class="group relative flex items-center max-w-sm p-3 mt-1 w-full rounded-xl shadow shadow-logo-color border-0 ring-1 ring-inset! ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none">
                 <input x-ref="searchInput" type="text" autocomplete="off" x-model="query" id="tm_search"
                     placeholder="{{ __('Find a miner, company or article...') }}" @input.debounce.500ms="search()" @keydown.escape="clear()"
-                    class="peer block w-full border-0 bg-transparent p-0 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-0" />
+                    class="peer block w-full border-0 bg-transparent p-0 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-0" />
 
                 <svg x-show="loading" x-cloak class="ml-3 h-4 w-4 shrink-0 animate-spin text-indigo-500" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
