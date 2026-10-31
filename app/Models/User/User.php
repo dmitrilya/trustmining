@@ -289,4 +289,15 @@ class User extends Authenticatable implements MustVerifyEmail
                     ->orWhereJsonContains('peculiarities', 'Cryptoexchanger')
             )));
     }
+
+    public function externalMappings()
+    {
+        return $this->morphMany(\App\Models\ExternalSourcesMapping::class, 'ratable');
+    }
+
+    public function ratingsHistory()
+    {
+        return $this->hasManyThrough(\App\Models\ExternalRating::class, \App\Models\ExternalSourcesMapping::class, 'ratable_id', 'mapping_id', 'id', 'id')
+            ->where('ratable_type', self::class);
+    }
 }

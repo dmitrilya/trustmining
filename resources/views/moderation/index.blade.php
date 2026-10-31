@@ -64,6 +64,40 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
+        <x-buttons.primary-button class="mb-4"
+            @click="fetch('/external-ratings/get-links').then(response => response.json()).then(data => {
+                const links = data.links;
+                if (!links || links.length === 0) return;\
+
+                const CHUNK_SIZE = 3; // Сколько вкладок открывать одновременно
+                const DELAY_BETWEEN_CHUNKS = 4000; // Пауза в миллисекундах (4 секунды) между пачками
+                let currentIndex = 0;
+
+                function openNextChunk() {
+                    if (currentIndex >= links.length) {
+                        pushToastAlert(__('Global ratings update is complete!'), 'success')
+                        return;
+                    }
+
+                    const chunk = links.slice(currentIndex, currentIndex + CHUNK_SIZE);
+                    chunk.forEach(url => {
+                        window.open(url, '_blank');
+                    });
+
+                    currentIndex += CHUNK_SIZE;
+                    
+                    setTimeout(openNextChunk, DELAY_BETWEEN_CHUNKS);
+                }
+
+                openNextChunk();
+            })
+            .catch(err => {
+                console.error(err);
+                pushToastAlert(__('Error'), 'error')
+            );">
+            {{ __('Collect ratings') }}
+        </x-buttons.primary-button>
+
         <div
             class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
             <ul role="list" class="divide-y divide-slate-300 dark:divide-slate-700">
@@ -75,9 +109,7 @@
                             : ($user->company
                                 ? $user->company->logo
                                 : null);
-                        $name = $moderation->moderationable->channel
-                            ? $moderation->moderationable->channel->name
-                            : $user->name;
+                        $name = $moderation->moderationable->channel ? $moderation->moderationable->channel->name : $user->name;
                     @endphp
 
                     <a href="{{ route('moderation', ['moderation' => $moderation->id]) }}"
@@ -85,8 +117,7 @@
                         <li>
                             <div class="flex">
                                 @if ($logo)
-                                    <img class="h-12 w-12 flex-none rounded-full bg-slate-50 mr-4"
-                                        src="{{ Storage::url($logo) }}" alt="">
+                                    <img class="h-12 w-12 flex-none rounded-full bg-slate-50 mr-4" src="{{ Storage::url($logo) }}" alt="">
                                 @endif
 
                                 <div class="w-full">

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\API\Ad\AdController;
+use App\Http\Controllers\Api\ExternalRatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
             Route::get('/get', [AdController::class, 'get']);
             Route::post('/update', [AdController::class, 'update'])->name('api.ads.update');
         });
+
+        Route::post('/v1/update-external-rating', [ExternalRatingController::class, 'update']);
     });
 });
 

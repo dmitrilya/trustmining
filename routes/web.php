@@ -16,6 +16,7 @@ use App\Http\Controllers\Database\GPUModelController;
 use App\Http\Controllers\Database\AsicModelController;
 use App\Http\Controllers\Ad\AdController;
 use App\Http\Controllers\Ad\HostingController;
+use App\Http\Controllers\Api\ExternalRatingController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\PassportController;
@@ -426,6 +427,8 @@ $webRoutes = function () {
                     Route::put('/toggle-active', [RoulettePrizeController::class, 'toggleActive'])->name('roulette.prize.toggle-active');
                 });
             });
+
+            Route::get('/external-ratings/get-links', [ExternalRatingController::class, 'getAllLinks']);
         });
 
         Route::get('/beams/auth', function (Request $request) {
