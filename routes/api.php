@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
             Route::post('/update', [AdController::class, 'update'])->name('api.ads.update');
         });
 
-        Route::post('/v1/update-external-rating', [ExternalRatingController::class, 'update']);
+        Route::post('/update-external-rating', [ExternalRatingController::class, 'update']);
     });
 });
 
