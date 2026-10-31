@@ -67,10 +67,10 @@
         <x-buttons.primary-button class="mb-4"
             @click="fetch('/external-ratings/get-links').then(response => response.json()).then(data => {
                 const links = data.links;
-                if (!links || links.length === 0) return;\
+                if (!links || links.length === 0) return;
 
-                const CHUNK_SIZE = 3; // Сколько вкладок открывать одновременно
-                const DELAY_BETWEEN_CHUNKS = 4000; // Пауза в миллисекундах (4 секунды) между пачками
+                const CHUNK_SIZE = 3;
+                const DELAY_BETWEEN_CHUNKS = 4000;
                 let currentIndex = 0;
 
                 function openNextChunk() {
