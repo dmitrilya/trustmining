@@ -75,26 +75,31 @@
 
                 function openNextChunk() {
                     if (currentIndex >= links.length) {
-                        pushToastAlert(__('Global ratings update is complete!'), 'success')
+                        pushToastAlert(__('Global ratings update is complete!'), 'success');
                         return;
                     }
 
                     const chunk = links.slice(currentIndex, currentIndex + CHUNK_SIZE);
                     chunk.forEach(url => {
-                        window.open(url, '_blank');
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.target = '_blank';
+                        a.rel = 'noopener noreferrer';
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
                     });
 
                     currentIndex += CHUNK_SIZE;
-                    
                     setTimeout(openNextChunk, DELAY_BETWEEN_CHUNKS);
                 }
 
                 openNextChunk();
-            })
-            .catch(err => {
+            }).catch(err => {
                 console.error(err);
                 pushToastAlert(__('Error'), 'error');
-            });">{{ __('Collect ratings') }}
+            });">
+            {{ __('Collect ratings') }}
         </x-buttons.primary-button>
 
         <div
