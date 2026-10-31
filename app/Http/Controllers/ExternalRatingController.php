@@ -13,15 +13,8 @@ class ExternalRatingController extends Controller
 {
     public function update(Request $request)
     {
-        $validated = $request->validate([
-            'source'        => ['required', new Enum(RatingSource::class)],
-            'id'            => ['required', 'string'],
-            'rating'        => ['required', 'float'],
-            'reviews_count' => ['required', 'integer'],
-        ]);
-
-        $source = RatingSource::from($validated['source']);
-        $externalId = $validated['id'];
+        $source = RatingSource::from($request->source);
+        $externalId = $request->id;
 
         $mapping = ExternalSourcesMapping::where('rating_source_id', $source->value)
             ->where('external_id', $externalId)
@@ -31,8 +24,8 @@ class ExternalRatingController extends Controller
 
         ExternalRating::create([
             'mapping_id'    => $mapping->id,
-            'rating'        => $validated['rating'],
-            'reviews_count' => $validated['reviews_count'],
+            'rating'        => $request->rating,
+            'reviews_count' => $request->reviews_count,
         ]);
 
         $targetEntity = $mapping->ratable;
