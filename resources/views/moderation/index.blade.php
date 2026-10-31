@@ -6,7 +6,7 @@
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
-                        class="inline-flex items-center border border-transparent text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
+                        class="inline-flex items-center text-sm leading-4 rounded-md text-slate-600 dark:text-slate-400 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 hover:text-slate-800 dark:hover:text-slate-200 focus:outline-none transition ease-in-out duration-100">
                         <div>{{ __('Model') }}</div>
 
                         <div class="ml-1">
@@ -93,9 +93,8 @@
             })
             .catch(err => {
                 console.error(err);
-                pushToastAlert(__('Error'), 'error')
-            );">
-            {{ __('Collect ratings') }}
+                pushToastAlert(__('Error'), 'error');
+            });">{{ __('Collect ratings') }}
         </x-buttons.primary-button>
 
         <div
