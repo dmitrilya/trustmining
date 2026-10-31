@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\API\Ad\AdController;
-use App\Http\Controllers\Api\ExternalRatingController;
+use App\Http\Controllers\ExternalRatingController;
 
 /*
 |--------------------------------------------------------------------------

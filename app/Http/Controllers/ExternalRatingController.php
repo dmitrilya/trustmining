@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
-use App\Http\Controllers\Controller;
 
 use App\Enums\RatingSource;
 use App\Models\ExternalRating;
