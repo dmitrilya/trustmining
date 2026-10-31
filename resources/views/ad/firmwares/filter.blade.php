@@ -1,5 +1,13 @@
 @php
-    $requestModels = request()['For_which_models'];
+    $models = \App\Models\Database\AsicModel::where('release', '>', '2010-03-01')
+        ->select(['id', 'name', 'slug'])
+        ->get();
+
+    $rModel = request()->get('model');
+    $selModel = $rModel ? $models->where('slug', $rModel)->first() : null;
 @endphp
 
-<x-inputs.multiselect name="For_which_models" label="For which models" :all="App\Models\Database\AsicModel::pluck('name')->diff($requestModels)->values()" :selected="collect($requestModels)" />
+@include('ad.firmwares.select-model', [
+    'models' => $models,
+    'selectedModel' => $selModel,
+])
