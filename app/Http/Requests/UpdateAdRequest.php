@@ -53,7 +53,7 @@ class UpdateAdRequest extends FormRequest
                         if (!isset($value['Modes']) || !is_array($value['Modes']) || empty($value['Modes']))
                             $fail('For a firmware category, you must specify a list of operating modes.');
 
-                        if (!array_key_exists('Fee (%)', $value) || blank($value['Fee (%)']))
+                        if (!array_key_exists('Fee (%)', $value) || (blank($value['Fee (%)']) && !is_numeric($value['Fee (%)'])))
                             $fail('For a firmware category, the "Fee (%)" field is required.');
                     }
                 },
