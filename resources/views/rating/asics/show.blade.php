@@ -58,7 +58,7 @@
         </x-breadcrumbs.breadcrumbs>
 
         <div class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-2 sm:p-4 lg:p-6">
-            <h2 class="text-xxs sm:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5 sm:mb-3 lg:mb-4">
+            <h2 class="text-xxs xxs:text-xs font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase block mb-1.5 sm:mb-3 lg:mb-4">
                 {{ $filterType ? __('meta.rating.asics.filters.best', ['prefix' => __("meta.rating.asics.types.$type.best_prefix")]) : __("meta.rating.asics.types.$type.best") }}
             </h2>
 
@@ -223,7 +223,7 @@
         <div
             class="min-h-119.75 sm:min-h-140.75 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-xl shadow-lg shadow-logo-color p-2 sm:p-4 lg:p-6 relative divide-y divide-slate-300 dark:divide-slate-700">
             <div
-                class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs sm:text-xs">
+                class="py-2 xs:pb-3 sm:pb-4 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center font-bold text-slate-500 text-xxs xxs:text-xs">
                 <p class="col-span-2">{{ __('Model') }}</p>
                 <p class="hidden xl:block">{{ __('Power') }}</p>
                 <p class="hidden xl:block">{{ __('Algorithm') }}</p>
@@ -239,7 +239,7 @@
                 <a :href="`/asic-miners/${model.bs}/${model.s}`"
                     class="py-2 group rounded-md grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10 xxl:grid-cols-11 gap-1 xs:gap-2 items-center">
                     <h2
-                        class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs sm:text-sm group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2">
+                        class="relative font-bold text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200 col-span-2">
                         <div x-show="index < 3"
                             class="absolute -left-2 sm:-left-3 md:-left-4 lg:-left-5 -top-2 sm:-top-2 md:-top-3 lg:-top-4 w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
                             <img :src="index === 0 ? '/img/gold.webp' : (index === 1 ? '/img/silver.webp' : '/img/bronze.webp')" alt="medal">
@@ -247,25 +247,25 @@
 
                         <span x-text="`${model.n} ${model.v.h}${model.v.m}/s`"></span>
                     </h2>
-                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.v.e * model.v.h * 10) / 10 + ' ' + '{{ __('W') }}'"></div>
-                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="hidden xl:block text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="algos[model.a].n"></div>
-                    <div class="hidden xxl:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="hidden xxl:block text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.v.e + 'j/' + model.v.m"></div>
-                    <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="hidden md:block text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(algos[model.a].p[0].p * model.v.h * model.v.c / (currency === 'RUB' ? rub : 1) * 100) / 100">
                     </div>
-                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="hidden sm:block text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="Math.round(model.v.e * model.v.h * tariff * (currency == 'RUB' ? 1 : rub) * 24 / 10) / 100">
                     </div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.v.p ? Math.round(model.v.p / (currency == 'USDT' ? 1 : rub) * 10) / 10 + ' ' + currency : '-'">
                     </div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.netProfitCurrency">
                     </div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
+                    <div class="text-slate-600 dark:text-slate-400 text-xxs xxs:text-xs group-hover:text-slate-800 dark:group-hover:text-slate-200"
                         x-text="model.payback != 99999 ? model.payback + ' {{ __('days') }}' : '-'">
                     </div>
                     <div class="hidden lg:block pl-1.5 sm:pl-2">

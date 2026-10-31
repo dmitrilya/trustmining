@@ -19,6 +19,14 @@
             </div>
         </div>
         <div class="flex items-center ml-2 xl:ml-6">
+            <button @click="openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
+                class="mr-4 hidden lg:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm tracking-wide text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-emerald-500/50 hover:shadow-md shadow-logo-color transition-all duration-150">
+                <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                </svg>
+                {{ __('Search') }}
+            </button>
+
             @auth
                 @php
                     $auth = Auth::user();
@@ -27,14 +35,6 @@
                         ->where('checked', false)
                         ->count();
                 @endphp
-
-                <button @click="openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
-                    class="mr-4 hidden lg:inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm tracking-wide text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-emerald-500/50 hover:shadow-md shadow-logo-color transition-all duration-150">
-                    <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                    </svg>
-                    {{ __('Search') }}
-                </button>
 
                 <div class="mr-3 xs:mr-4"><x-notifications.notifications :notifications="$auth
                     ->notifications()
@@ -195,12 +195,11 @@
                     </form>
                 </div>
             @else
-                <button
-                    class="block w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-700 focus:outline-none focus:text-slate-800 dark:focus:text-slate-200 focus:bg-slate-50 dark:focus:bg-slate-800 focus:border-slate-300 dark:focus:border-slate-700 transition duration-100 ease-in-out"
-                    @click="$dispatch('open-modal', 'login')">{{ __('Login') }}</button>
+                <x-buttons.menu-mobile-button @click="$dispatch('open-modal', 'login')">{{ __('Login') }}</x-buttons.menu-mobile-button>
             @endauth
 
-            <button @click="open = false; openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
+            <button
+                @click="open = false; openedSearch = true; openSearch = !openSearch; if (openSearch) $nextTick(() => document.getElementById('tm_search').focus());"
                 class="mt-2 w-full inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm tracking-wide text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-emerald-400 border border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-emerald-500/50 hover:shadow-md shadow-logo-color transition-all duration-150">
                 <svg class="w-3 h-3 mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
