@@ -55,7 +55,7 @@ quill.on('text-change', () => description = quill.root.innerHTML);">
     <div class="w-full">
         <x-inputs.input-label for="fee" :value="__('Fee (%)')" />
         <x-inputs.text-input id="fee" :value="$ad->props['Fee (%)'] ?? 0" type="text"
-            @input="count = filterDouble($el, 1, 100, 2);$el.value = count"
+            @input="count = filterDouble($el, 0, 100, 2);$el.value = count"
             @change="let props = JSON.parse($refs.props_firmwares.value);props['Fee (%)'] = $el.value;$refs.props_firmwares.value = JSON.stringify(props);" />
     </div>
 
