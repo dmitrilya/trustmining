@@ -26,11 +26,11 @@ enum RatingSource: string
     public function logo(): string
     {
         return match ($this) {
-            self::YANDEX_MAPS => '/img/sources/yandex-maps.svg',
-            self::GOOGLE_MAPS => '/img/sources/google-maps.svg',
-            self::GIS => '/img/sources/2gis.svg',
-            self::TOP_MINING => '/img/sources/top-mining.svg',
-            self::AVITO => '/img/sources/avito.svg',
+            self::YANDEX_MAPS => 'yandex-maps.svg',
+            self::GOOGLE_MAPS => 'google-maps.svg',
+            self::GIS => '2gis.svg',
+            self::TOP_MINING => 'top-mining.svg',
+            self::AVITO => 'avito.svg',
         };
     }
 
