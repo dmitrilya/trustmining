@@ -30,7 +30,7 @@
                         <x-buttons.secondary-button class="w-full">{{ __('Details') }}</x-buttons.secondary-button>
                     </a>
 
-                    <x-buttons.primary-button @click="submitVote(null, {{ $candidate['id'] }})" class="w-full mt-2">
+                    <x-buttons.primary-button @click="submitVote('{{ $category->morphClass() }}'', {{ $candidate['id'] }})" class="w-full mt-2">
                         <span x-text="getButtonText('{{ $category->morphClass() }}', {{ $candidate['id'] }})">{{ __('Vote') }}</span>
                     </x-buttons.primary-button>
                 </div>

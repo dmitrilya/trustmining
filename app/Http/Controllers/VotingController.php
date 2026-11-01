@@ -42,10 +42,8 @@ class VotingController extends Controller
         $fingerprint = $request->input('fingerprint');
         if (!$fingerprint || strlen($fingerprint) !== 32) return response()->json(['success' => false], 400);
 
-        if ($voteableType) {
-            $modelClass = Relation::getMorphedModel($voteableType);
-            if ($modelClass !== $category->modelClass()) return response()->json(['success' => false], 422);
-        } else $modelClass = $category->modelClass();
+        $modelClass = Relation::getMorphedModel($voteableType) ?? $voteableType;
+        if ($modelClass !== $category->modelClass()) return response()->json(['success' => false], 422);
 
         if ($category === VotingCategory::coin_rate_prediction) {
             $allowedPredictionTypes = ['coin_up', 'coin_down'];
