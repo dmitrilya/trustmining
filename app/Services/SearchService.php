@@ -146,7 +146,7 @@ class SearchService
 
     private function searchUsers(string $query): Collection
     {
-        return User::search($query, 10, fn($builder) => $builder->isSeller())->loadMissing(['company'])->map(fn(User $user) => [
+        return User::search($query, 10, fn($builder) => $builder->possiblySeller())->loadMissing(['company'])->map(fn(User $user) => [
             'name' => $user->name,
             'caption' => __($user->company?->card['type'] ?? 'Private person'),
             'icon' => null,

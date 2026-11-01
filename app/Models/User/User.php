@@ -290,6 +290,17 @@ class User extends Authenticatable implements MustVerifyEmail
             )));
     }
 
+    public function scopePossiblySeller(Builder $query)
+    {
+        return $query->where(fn(Builder $q) => $q
+            ->whereHas('ads')
+            ->orWhereHas('hosting')
+            ->orWhereHas('offices', fn(Builder $q) => $q->where(
+                fn(Builder $q1) => $q1->whereJsonContains('peculiarities', 'Repair service')
+                    ->orWhereJsonContains('peculiarities', 'Cryptoexchanger')
+            )));
+    }
+
     public function externalMappings()
     {
         return $this->morphMany(\App\Models\ExternalSourcesMapping::class, 'ratable');
