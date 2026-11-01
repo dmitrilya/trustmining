@@ -7,6 +7,27 @@
     @endif
 
     <div class="border border-slate-300 dark:border-slate-700 shadow-lg shadow-logo-color rounded-xl p-4 lg:p-6 mb-4 lg:mb-6">
+        @if ($user->caption)
+            @php
+                $params = explode('|', $user->caption);
+            @endphp
+
+            @if (count($params) == 2 && in_array($params[0], ['amber', 'emerald', 'rose', 'indigo']))
+                <div
+                    class="w-full text-center mb-4 bg-{{ $params[0] }}-500/10 border-2 border-{{ $params[0] }}-500/30 rounded-lg px-3 py-2">
+                    <div class="text-{{ $params[0] }}-600 dark:text-{{ $params[0] }}-400 font-black sm:text-lg lg:text-xl">
+                        {{ __($params[1]) }}
+                    </div>
+
+                    @if ($params[1] == 'Possibly closed')
+                        <div class="text-slate-600 dark:text-slate-400 text-xxs sm:text-xs mt-2">
+                            *{{ __('This sign appears when there are signs of closure, and the seller (company) does not contact the TrustMining team.') }}
+                        </div>
+                    @endif
+                </div>
+            @endif
+        @endif
+
         <div class="flex justify-between items-start mb-1 sm:mb-2">
             <div>
                 <div class="flex items-center">

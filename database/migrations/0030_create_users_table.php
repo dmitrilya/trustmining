@@ -39,6 +39,7 @@ return new class extends Migration
             $table->boolean('ignores')->default(0);
             $table->boolean('is_anchor')->default(0);
             $table->boolean('first')->default(0);
+            $table->string('caption')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
