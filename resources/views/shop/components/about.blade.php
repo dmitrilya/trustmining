@@ -14,7 +14,7 @@
 
             @if (count($params) == 2 && in_array($params[0], ['amber', 'emerald', 'rose', 'indigo']))
                 <div
-                    class="w-full text-center mb-4 bg-{{ $params[0] }}-500/10 border-2 border-{{ $params[0] }}-500/30 rounded-lg px-3 py-2">
+                    class="w-full text-center mb-4 bg-{{ $params[0] }}-500/10 border-2 border-{{ $params[0] }}-500/30 rounded-lg px-3 py-2 sm:py-4">
                     <div class="text-{{ $params[0] }}-600 dark:text-{{ $params[0] }}-400 font-black sm:text-lg lg:text-xl">
                         {{ __($params[1]) }}
                     </div>

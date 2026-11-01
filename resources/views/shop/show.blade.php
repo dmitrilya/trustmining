@@ -37,7 +37,7 @@
                 <a href="{{ route('ad.create') }}"
                     class="cursor-pointer bg-slate-100 dark:bg-slate-800 group hover:bg-white dark:hover:bg-slate-900 sm:max-w-md p-2 h-full sm:px-4 sm:py-3 shadow-lg shadow-logo-color overflow-hidden rounded-lg flex justify-center items-center border-2 border-dashed border-slate-300 dark:border-slate-700">
                     <div class="flex flex-col justify-center items-center">
-                        <svg class="w-[72px] h-[72px] text-slate-400 dark:text-slate-400" aria-hidden="true" width="24" height="24" fill="none"
+                        <svg class="w-16 h-16 text-slate-400 dark:text-slate-400" aria-hidden="true" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2"
                                 d="M16.5 15v1.5m0 0V18m0-1.5H15m1.5 0H18M3 9V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3M3 9v6a1 1 0 0 0 1 1h5M3 9h16m0 0v1M6 12h3m12 4.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
