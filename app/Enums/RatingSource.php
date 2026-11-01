@@ -43,7 +43,7 @@ enum RatingSource: string
             self::GOOGLE_MAPS => "https://google.com:{$externalId}",
             self::GIS => "https://2gis.ru/firm/{$externalId}/tab/reviews",
             self::TOP_MINING => "https://top-mining.ru/{$externalId}",
-            self::AVITO => "https://www.avito.ru/brands/{$externalId}",
+            self::AVITO => "https://www.avito.ru/brands/{$externalId}/all",
         };
     }
 
