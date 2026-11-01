@@ -30,7 +30,7 @@
         </div>
 
         <div class="flex items-center mt-2 sm:mt-4" x-data="{ momentRating: {{ $shop->moderatedReviews->count() ? $shop->moderatedReviews->avg('rating') : 0 }} }">
-            <x-rating sm="true"></x-rating>
+            <x-reviews.rating sm="true" />
 
             <p class="ml-3 text-xxs xs:text-xs sm:text-sm text-indigo-500 hover:text-indigo-600">
                 {{ $shop->moderatedReviews->count() }} {{ trans_choice('navigation.reviews', $shop->moderatedReviews->count()) }}

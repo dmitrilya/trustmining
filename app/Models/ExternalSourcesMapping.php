@@ -16,7 +16,7 @@ class ExternalSourcesMapping extends Model
     protected $fillable = [
         'ratable_type',
         'ratable_id',
-        'rating_source_id',
+        'rating_source',
         'external_id',
     ];
 
@@ -24,7 +24,7 @@ class ExternalSourcesMapping extends Model
      * Автоматическое приведение строки из базы к вашему Enum
      */
     protected $casts = [
-        'rating_source_id' => RatingSource::class,
+        'rating_source' => RatingSource::class,
     ];
 
     /**

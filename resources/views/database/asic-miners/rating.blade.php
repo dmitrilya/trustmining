@@ -1,7 +1,7 @@
 <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating" class="mt-4 sm:mt-6">
     <h3 class="sr-only">{{ __('Reviews') }}</h3>
     <div class="flex items-center" x-data="{ momentRating: {{ $model->reviews_avg ?? 0 }} }">
-        <x-rating></x-rating>
+        <x-reviews.rating />
         @if ($model->reviews_count)
             <meta itemprop="ratingValue" content="{{ $model->reviews_avg }}" />
             <meta itemprop="reviewCount" content="{{ $model->reviews_count }}" />

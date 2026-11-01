@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('external_sources_mapping', function (Blueprint $table) {
             $table->id();
             $table->morphs('ratable');
-            $table->string('rating_source_id');
+            $table->string('rating_source');
             $table->string('external_id');
             $table->timestamps();
 
-            $table->unique(['rating_source_id', 'external_id'], 'source_external_unique');
+            $table->unique(['rating_source', 'external_id'], 'source_external_unique');
         });
 
         Schema::create('external_ratings', function (Blueprint $table) {

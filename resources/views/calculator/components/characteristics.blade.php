@@ -3,7 +3,7 @@
             <div class="mt-6">
                 <h2 class="sr-only">{{ __('Reviews') }}</h2>
                 <div class="flex items-center">
-                    <x-rating></x-rating>
+                    <x-reviews.rating />
 
                     <a :href="version ? `/asic-miners/${version.bs}/${version.ns}/reviews` : '#'" class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">
                         <span x-text="version?.r"></span>

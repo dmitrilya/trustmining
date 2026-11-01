@@ -29,7 +29,7 @@
                         data-date="{{ $review->moderations()->count() > 1 ? $review->updated_at : $review->created_at }}"></span>
                 </div>
 
-                <div x-data="{ momentRating: {{ $review->rating }} }"><x-rating></x-rating></div>
+                <div x-data="{ momentRating: {{ $review->rating }} }"><x-reviews.rating /></div>
 
                 @if ($isOwnReview)
                     <template x-if="isUnderModeration">
@@ -89,7 +89,7 @@
 
                             <input type="hidden" name="rating" :value="rating" required>
 
-                            <x-rating :clickable="true"></x-rating>
+                            <x-reviews.rating :clickable="true" />
 
                             <div class="flex flex-col justify-center ml-2">
                                 <div class="text-xxs sm:text-xs text-slate-500" x-show="document">

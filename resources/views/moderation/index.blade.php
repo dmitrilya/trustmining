@@ -69,8 +69,8 @@
                 const links = data.links;
                 if (!links || links.length === 0) return;
 
-                const CHUNK_SIZE = 3;
-                const DELAY_BETWEEN_CHUNKS = 4000;
+                const CHUNK_SIZE = 1;
+                const DELAY_BETWEEN_CHUNKS = 3000;
                 let currentIndex = 0;
 
                 function openNextChunk() {

@@ -10,7 +10,7 @@
     <div class="font-semibold text-slate-800 dark:text-slate-200 mb-1">
         @if ($type == 'New review' || $type == 'Review edited')
             <div class="flex items-center" x-data="{ momentRating: {{ $pretext }} }">
-                <x-rating></x-rating>
+                <x-reviews.rating />
             </div>
         @else
             {{ $pretext }}

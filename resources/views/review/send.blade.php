@@ -51,7 +51,7 @@
 
                         <input type="hidden" name="rating" :value="rating" required>
 
-                        <x-rating :clickable="true"></x-rating>
+                        <x-reviews.rating :clickable="true" />
 
                         <div class="flex flex-col justify-center ml-2">
                             <div class="text-xxs sm:text-xs text-slate-500" style="display: none" x-show="document">

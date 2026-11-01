@@ -311,4 +311,60 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(\App\Models\ExternalRating::class, \App\Models\ExternalSourcesMapping::class, 'ratable_id', 'mapping_id', 'id', 'id')
             ->where('ratable_type', self::class);
     }
+
+    public function getExternalRatings(): \Illuminate\Support\Collection
+    {
+        $result = collect();
+
+        $directMappings = $this->externalMappings()->with('latestRating')->get();
+
+        foreach ($directMappings as $mapping) {
+            if (!$mapping->latestRating) continue;
+
+            $result->put($mapping->rating_source->value, [
+                'source_name'    => $mapping->rating_source->name(),
+                'logo'           => $mapping->rating_source->logo(),
+                'rating'         => (float) $mapping->latestRating->rating,
+                'reviews_count'  => (int) $mapping->latestRating->reviews_count,
+            ]);
+        }
+
+        $offices = $this->offices()->with('externalMappings.latestRating')->get();
+        $aggregatedOffices = [];
+
+        foreach ($offices as $office) {
+            foreach ($office->externalMappings as $mapping) {
+                if (!$mapping->latestRating) continue;
+
+                $sourceKey = $mapping->rating_source->value;
+
+                if (!isset($aggregatedOffices[$sourceKey])) {
+                    $aggregatedOffices[$sourceKey] = [
+                        'source_name'         => $mapping->rating_source->name(),
+                        'logo'                => $mapping->rating_source->logo(),
+                        'total_rating_sum'    => 0,
+                        'total_reviews_count' => 0,
+                        'offices_counted'     => 0,
+                    ];
+                }
+
+                $aggregatedOffices[$sourceKey]['total_rating_sum'] += (float) $mapping->latestRating->rating;
+                $aggregatedOffices[$sourceKey]['total_reviews_count'] += (int) $mapping->latestRating->reviews_count;
+                $aggregatedOffices[$sourceKey]['offices_counted']++;
+            }
+        }
+
+        foreach ($aggregatedOffices as $sourceKey => $item) {
+            $result->put($sourceKey, [
+                'source_name'    => $item['source_name'],
+                'logo'           => $item['logo'],
+                'rating'         => $item['offices_counted'] > 0
+                    ? round($item['total_rating_sum'] / $item['offices_counted'], 2)
+                    : 0,
+                'reviews_count'  => $item['total_reviews_count'],
+            ]);
+        }
+
+        return $result;
+    }
 }

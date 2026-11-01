@@ -38,16 +38,7 @@
 
     @include('components.about-seller_tables')
 
-    <div class="mt-4">
-        <h3 class="sr-only">{{ __('Reviews') }}</h3>
-        <div class="flex items-center" x-data="{ momentRating: {{ $user->moderatedReviews->count() ? $user->moderatedReviews->avg('rating') : 0 }} }">
-            <x-rating></x-rating>
-
-            <a href="{{ route('company.reviews', ['user' => $user->slug]) }}"
-                class="ml-3 text-sm text-indigo-500 hover:text-indigo-600">{{ $user->moderatedReviews->count() }}
-                {{ trans_choice('navigation.reviews', $user->moderatedReviews->count()) }}</a>
-        </div>
-    </div>
+    <x-reviews.reviews :user="$user" />
 
     <x-tf :tf="$user->tf" :company="$user->name" class="mt-2 sm:mt-3" />
 </div>

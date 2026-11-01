@@ -16,9 +16,7 @@ class ExternalRatingController extends Controller
         $source = RatingSource::from($request->source);
         $externalId = $request->id;
 
-        $mapping = ExternalSourcesMapping::where('rating_source_id', $source->value)
-            ->where('external_id', $externalId)
-            ->first();
+        $mapping = ExternalSourcesMapping::where('rating_source', $source->value)->where('external_id', $externalId)->first();
 
         if (!$mapping) return response()->json(['success' => false], 404);
 
@@ -44,7 +42,7 @@ class ExternalRatingController extends Controller
         $links = [];
 
         foreach ($mappings as $mapping) {
-            $sourceEnum = $mapping->rating_source_id;
+            $sourceEnum = $mapping->rating_source;
             $href = $sourceEnum->href($mapping->external_id);
 
             if ($href) $links[] = $href;
