@@ -12,15 +12,15 @@ enum RatingSource: string
 
     public function name(): string
     {
-        $names = [
-            self::YANDEX_MAPS => ['en' => 'Yandex Maps', 'ru' => 'Яндекс Карты'],
-            self::GOOGLE_MAPS => ['en' => 'Google Maps', 'ru' => 'Google Карты'],
-            self::GIS => ['en' => '2GIS', 'ru' => '2ГИС'],
-            self::TOP_MINING => ['en' => 'Top Mining', 'ru' => 'Топ Майнинг'],
-            self::AVITO => ['en' => 'Avito', 'ru' => 'Авито'],
-        ];
+        $locale = app()->getLocale();
 
-        return $names[$this->value][app()->getLocale()] ?? reset($names[$this->value]);
+        return match ($this) {
+            self::YANDEX_MAPS => $locale === 'ru' ? 'Яндекс Карты' : 'Yandex Maps',
+            self::GOOGLE_MAPS => $locale === 'ru' ? 'Google Карты' : 'Google Maps',
+            self::GIS         => $locale === 'ru' ? '2ГИС'         : '2GIS',
+            self::TOP_MINING   => $locale === 'ru' ? 'Топ Майнинг'  : 'Top Mining',
+            self::AVITO        => $locale === 'ru' ? 'Авито'        : 'Avito',
+        };
     }
 
     public function logo(): string
