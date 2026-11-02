@@ -130,15 +130,12 @@ trait Searchable
 
         $content = implode(static::$searchableSeparator, $values);
 
-        DB::table('searchables')->updateOrInsert(
-            [
-                'searchable_type' => $this->getMorphClass(),
-                'searchable_id' => $this->getKey(),
-            ],
-            [
-                'content' => $content,
-            ]
-        );
+        DB::table('searchables')->updateOrInsert([
+            'searchable_type' => $this->getMorphClass(),
+            'searchable_id' => $this->getKey(),
+        ], [
+            'content' => $content,
+        ]);
     }
 
     protected function resolveSearchableValue(string $path): string
@@ -172,8 +169,7 @@ trait Searchable
         foreach ($dependents as $field => $models) {
             if (!$force && !$this->wasChanged($field)) continue;
 
-            foreach ($models as $modelClass => $relationPath)
-                $relations[$modelClass][$relationPath] = true;
+            foreach ($models as $modelClass => $relationPath) $relations[$modelClass][$relationPath] = true;
         }
 
         $processed = [];
@@ -193,31 +189,16 @@ trait Searchable
     protected function walkDependentRelations(Model $model, array $segments, string $modelClass, array &$processed): void
     {
         if (empty($segments)) return;
-
         $segment = array_shift($segments);
-        if (!method_exists($model, $segment)) {
-            throw new \RuntimeException(
-                "Relation {$segment} not found in " . get_class($model)
-            );
-        }
+        if (!method_exists($model, $segment)) throw new \RuntimeException("Relation {$segment} not found in " . get_class($model));
 
         $relation = $model->{$segment}();
-        if (!$relation instanceof Relation) {
-            throw new \RuntimeException(
-                "{$segment} is not an Eloquent relation in " . get_class($model)
-            );
-        }
+        if (!$relation instanceof Relation) throw new \RuntimeException("{$segment} is not an Eloquent relation in " . get_class($model));
 
         $related = $relation->getRelated();
 
         if (empty($segments)) {
-            if (!$related instanceof $modelClass) {
-                throw new \RuntimeException(
-                    "Relation does not return {$modelClass}"
-                );
-            }
-
-            $column = $related->qualifyColumn($related->getKeyName());
+            if (!$related instanceof $modelClass) throw new \RuntimeException("Relation does not return {$modelClass}");
 
             $relation->chunkById(200, function (Collection $models) use (&$processed, $modelClass) {
                 foreach ($models as $dependent) {
@@ -230,7 +211,7 @@ trait Searchable
 
                     $dependent->syncSearchableRecord();
                 }
-            }, $column);
+            });
 
             return;
         }
@@ -238,7 +219,7 @@ trait Searchable
         $relation->chunkById(200, function (Collection $models) use ($segments, $modelClass, &$processed) {
             foreach ($models as $relatedModel)
                 $this->walkDependentRelations($relatedModel, $segments, $modelClass, $processed);
-        }, $related->qualifyColumn($related->getKeyName()));
+        });
     }
 
     public function deleteSearchable(): void

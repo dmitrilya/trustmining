@@ -33,7 +33,7 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $data = ['email' => $request->email];
-        if ($request->name) array_merge($data, [
+        if ($request->name) $data = array_merge($data, [
             'name' => $request->name,
             'slug' => Str::slug($request->name)
         ]);
