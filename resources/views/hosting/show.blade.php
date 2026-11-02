@@ -21,7 +21,7 @@
             @include('shop.components.about')
         @endif
 
-        <div class="xl:flex items-start gap-4">
+        <div class="xl:flex items-start gap-2 sm:gap-4">
             <div class="flex-1 min-w-0 xl:max-w-[calc(100%-336px)]">
                 @if (isset($moderation))
                     @include('moderation.components.buttons')
@@ -405,6 +405,10 @@
                 @if (\App\Enums\VotingCategory::best_hosting->validateCandidate($hosting->user))
                     <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" :candidate="$hosting->user" type="block" />
                 @endif
+
+                @if ($hosting->user->is_anchor)
+                    <x-widjets.your-company title="Is this your company's hosting?" class="p-2 sm:p-4 md:p-6 mt-2 sm:mt-4 xl:hidden" />
+                @endif
             </div>
 
             <div x-data="{ isXL: window.matchMedia('(min-width: 1280px)').matches }" x-init="if (!isXL) window.initLazyComponent($data, '1280px')" class="hidden xl:flex flex-col gap-4 w-xs max-w-xs">
@@ -416,6 +420,10 @@
                                 data-blocks="currency" data-model="antminer-l9" data-version="17"></script>
                         </div>
 
+                        @if ($hosting->user->is_anchor)
+                            <x-widjets.your-company title="Is this your company's hosting?" class="p-2 sm:p-3" />
+                        @endif
+
                         <x-ai-kodex targetWidth="1280" />
                     </div>
                 </template>
@@ -424,7 +432,7 @@
 
         @if (!isset($moderation))
             <div
-                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-8 xl:p-10 mt-4">
+                class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mt-2 sm:mt-4">
                 @include('company.components.tf')
             </div>
         @endif

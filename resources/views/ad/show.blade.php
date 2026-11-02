@@ -500,6 +500,10 @@
                     </div>
                 </div>
 
+                @if ($ad->user->is_anchor)
+                    <x-widjets.your-company title="Is this an ad for your company?" class="p-2 sm:p-4 md:p-6 lg:p-14 mt-2 sm:mt-4 xl:hidden" />
+                @endif
+
                 @if (!isset($moderation))
                     <div
                         class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 lg:p-14 mt-2 sm:mt-4">
@@ -535,6 +539,10 @@
                                 <script src="https://trustmining.ru/build/assets/calculator-widjet.js" data-theme="dark" data-blocks="additional-params,currency,coins"
                                     data-model="{{ $ad->asicVersion->asicModel->slug }}" data-version="{{ $ad->asicVersion->hashrate }}"></script>
                             </div>
+                        @endif
+
+                        @if ($ad->user->is_anchor)
+                            <x-widjets.your-company title="Is this an ad for your company?" class="p-2 sm:p-3" />
                         @endif
 
                         <x-ai-kodex targetWidth="1280" />
