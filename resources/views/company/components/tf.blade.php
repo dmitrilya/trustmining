@@ -70,7 +70,7 @@
                                             $isActive = $i === $matchedIndex;
                                         @endphp
 
-                                        <div class="relative h-full transition duration-300 {{ $loop->first ? 'border-r' : ($loop->last ? 'border-l' : 'border-x') }} border-slate-900/50 {{ !$isActive ? 'bg-slate-900/75 z-0' : 'z-10' }}"
+                                        <div class="relative h-full transition duration-300 {{ $loop->first ? 'border-r rounded-l-full' : ($loop->last ? 'border-l rounded-r-full' : 'border-x') }} border-slate-300 dark:border-slate-700 {{ !$isActive ? 'bg-slate-200/75 dark:bg-slate-900/75 z-0' : 'z-10' }}"
                                             style="width: {{ $segmentWidth }}%;">
 
                                             @if ($isActive)
