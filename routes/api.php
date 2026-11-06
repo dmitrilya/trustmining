@@ -6,6 +6,7 @@ use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\API\Ad\AdController;
 use App\Http\Controllers\ExternalRatingController;
+use App\Http\Controllers\Wiki\CoinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +32,5 @@ Route::middleware(['auth:sanctum', 'throttle:api'])->group(function () {
 
 Route::get('/calculator-widjet', [CalculatorController::class, 'calculatorWidjet']);
 Route::get('/difficulty-widjet/{coin:name}', [MetricsController::class, 'difficultyWidjet']);
+Route::get('/coin-stat-widjet/{coin:name}', [CoinController::class, 'widjet']);
 Route::get('/metrics/network/{coin:name}/get-difficulty', [MetricsController::class, 'getDifficulty'])->name('metrics.network.get_difficulty');

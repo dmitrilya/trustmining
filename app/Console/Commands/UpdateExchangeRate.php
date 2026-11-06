@@ -83,7 +83,7 @@ class UpdateExchangeRate extends Command
 
         $this->updateProfit();
 
-        if (now()->hour === 0 && now()->minute < 5) $this->compressYesterdayRates();
+        if (now()->hour === 0 && now()->minute < 5) $this->compressPreviousRates();
 
         return Command::SUCCESS;
     }
@@ -231,26 +231,26 @@ class UpdateExchangeRate extends Command
         ]);
     }
 
-    protected function compressYesterdayRates(): void
+    protected function compressPreviousRates(): void
     {
-        $startOfYesterday = now()->subDay()->startOfDay();
-        $endOfYesterday = $startOfYesterday->copy()->endOfDay();
+        $start = now()->subDays(2)->startOfDay();
+        $end = $start->copy()->endOfDay();
 
         $coinIds = Coin::pluck('id');
 
         foreach ($coinIds as $coinId) {
-            $ratesQuery = DB::table('coin_rates')->where('coin_id', $coinId)->whereBetween('created_at', [$startOfYesterday, $endOfYesterday]);
+            $ratesQuery = DB::table('coin_rates')->where('coin_id', $coinId)->whereBetween('created_at', [$start, $end]);
 
             $averageRate = $ratesQuery->avg('rate');
 
             if ($averageRate !== null) {
-                DB::transaction(function () use ($ratesQuery, $coinId, $averageRate, $startOfYesterday) {
+                DB::transaction(function () use ($ratesQuery, $coinId, $averageRate, $start) {
                     $ratesQuery->delete();
 
                     DB::table('coin_rates')->insert([
                         'coin_id'    => $coinId,
                         'rate'       => $averageRate,
-                        'created_at' => $startOfYesterday,
+                        'created_at' => $start,
                     ]);
                 });
             }

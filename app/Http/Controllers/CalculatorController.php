@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\FirmwareModeStrainLevel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-use Illuminate\View\View as ViewBlade;
+use Illuminate\View\View;
 
 use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
@@ -19,7 +19,7 @@ class CalculatorController extends Controller
 {
     use ViewTrait, AdTrait;
 
-    public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
+    public function calculator(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
     {
         $data = Cache::get('optimized_calculator_data');
 
@@ -88,7 +88,7 @@ class CalculatorController extends Controller
         ]);
     }
 
-    public function calculatorApp(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): ViewBlade
+    public function calculatorApp(Request $request, ?AsicModel $asicModel = null, ?AsicVersion $asicVersion = null): View
     {
         $data = Cache::get('optimized_calculator_data');
 
@@ -129,7 +129,7 @@ class CalculatorController extends Controller
         ]);
     }
 
-    public function calculatorWidjet(Request $request): ViewBlade
+    public function calculatorWidjet(Request $request): View
     {
         $locale = $request->input('lang', 'ru');
 

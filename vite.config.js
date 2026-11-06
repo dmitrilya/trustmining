@@ -13,12 +13,14 @@ export default defineConfig(({ mode }) => {
                     'resources/css/app.css',
                     'resources/css/widjets/calculator.css',
                     'resources/css/widjets/difficulty.css',
+                    'resources/css/widjets/coin-stat.css',
                     'resources/js/app.js',
                     'resources/js/graph.js',
                     'resources/js/widjets/calculator.js',
                     'resources/js/widjets/difficulty.js',
+                    'resources/js/widjets/coin-stat.js',
                     'resources/js/widjets/calculator-widjet.js',
-                    'resources/js/widjets/difficulty-widjet.js',
+                    'resources/js/widjets/coin-stat-widjet.js',
                 ],
                 refresh: true,
             }),
@@ -28,7 +30,7 @@ export default defineConfig(({ mode }) => {
             rollupOptions: {
                 output: {
                     entryFileNames: (chunkInfo) => {
-                        return chunkInfo.name === 'calculator-widjet' || chunkInfo.name === 'difficulty-widjet'
+                        return chunkInfo.name === 'calculator-widjet' || chunkInfo.name === 'difficulty-widjet' || chunkInfo.name === 'coin-stat-widjet'
                             ? 'assets/[name].js'
                             : 'assets/[name]-[hash].js';
                     },
