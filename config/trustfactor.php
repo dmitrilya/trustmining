@@ -58,6 +58,7 @@ return [
             'employees',
             'reviews',
             'fake_reviews',
+            'external_ratings',
             'offices',
             'unique_content',
             'response_time',
@@ -391,6 +392,48 @@ return [
                     1 => -1,
                     0 => 0,
                 ],
+            ],
+
+            'external_ratings' => [
+                'type' => 'threshold_group',
+                'source' => 'reviews.external_ratings.avg',
+                'conditions' => [
+                    [
+                        'source' => 'reviews.external_ratings.avg',
+                        'operator' => '!=',
+                        'value' => null,
+                    ]
+                ],
+                'components' => [
+                    'yandex_maps' => [
+                        'source' => 'reviews.external_ratings.yandex_maps.display',
+                    ],
+
+                    'google_maps' => [
+                        'source' => 'reviews.external_ratings.google_maps.display',
+                    ],
+
+                    '2gis' => [
+                        'source' => 'reviews.external_ratings.2gis.display',
+                    ],
+
+                    'top_mining' => [
+                        'source' => 'reviews.external_ratings.top_mining.display',
+                    ],
+
+                    'avito' => [
+                        'source' => 'reviews.external_ratings.avito.display',
+                    ],
+                ],
+                'thresholds' => [
+                    '4.85' => 4,
+                    '4.70' => 2,
+                    '4.40' => 0,
+                    '4.10' => -3,
+                    '3.90' => -6,
+                    '3.65' => -10,
+                    '0'    => -15,
+                ]
             ],
 
             'offices' => [

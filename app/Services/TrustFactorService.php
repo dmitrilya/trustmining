@@ -79,8 +79,8 @@ class TrustFactorService
     {
         $type = $factor['type'] ?? null;
         if ($type === 'group') return $this->calculateGroup($name, $factor);
-
         if ($type === 'list') return $this->calculateList($name, $factor);
+        if ($type === 'threshold_group') return $this->calculateThresholdGroup($name, $factor);
 
         $value = $this->getData($factor['source']);
 
@@ -178,6 +178,31 @@ class TrustFactorService
         ];
     }
 
+    private function calculateThresholdGroup(string $name, array $factor): array
+    {
+        $value = $this->getData($factor['source']);
+
+        $components = [];
+
+        foreach ($factor['components'] ?? [] as $componentName => $component) {
+            $components[] = [
+                'name' => $componentName,
+                'value' => $this->getData($component['source']),
+            ];
+        }
+
+        $result = $this->calculateThreshold(
+            $name,
+            $value,
+            $factor['thresholds'],
+            'threshold_group'
+        );
+
+        $result['components'] = $components;
+
+        return $result;
+    }
+
     private function calculateList(string $name, array $factor): array
     {
         $items = array_keys($this->getData($factor['source'])) ?? [];
@@ -224,9 +249,6 @@ class TrustFactorService
         return true;
     }
 
-    /**
-     * Проверка условия выполнения фактора.
-     */
     private function checkCondition(?array $condition): bool
     {
         if (!$condition) return true;
@@ -245,17 +267,11 @@ class TrustFactorService
         };
     }
 
-    /**
-     * Получение подготовленного значения.
-     */
     private function getData(string $source): mixed
     {
         return data_get($this->data, $source);
     }
 
-    /**
-     * Подготовка всех данных, которые используются проверками.
-     */
     private function prepareData(User $user): void
     {
         $company = $user->company;
@@ -267,6 +283,28 @@ class TrustFactorService
 
         $realReviews = $reviews->where('fake', false);
         $fakeReviews = $reviews->where('fake', true);
+        $externalRatings = $user->getExternalRatings()
+            ->map(function ($externalRating) {
+                $externalRating['corr_rating'] = (
+                    $externalRating['rating'] * $externalRating['reviews_count'] + 4.5 * 5
+                ) / ($externalRating['reviews_count'] + 5);
+
+                $externalRating['display'] = $externalRating['rating']
+                    . ' ' . $externalRating['reviews_count']
+                    . ' ' . trans_choice('navigation.reviews', $externalRating['reviews_count']);
+
+                return $externalRating;
+            });
+
+        $externalRatings = [
+            'avg' => $externalRatings->avg('corr_rating'),
+            ...$externalRatings->mapWithKeys(fn($rating) => [
+                $rating['source_name'] => [
+                    'corr_rating' => $rating['corr_rating'],
+                    'display' => $rating['display'],
+                ],
+            ])->all(),
+        ];
 
         $activeAdsCount = $user->activeAds->count();
 
@@ -311,6 +349,7 @@ class TrustFactorService
                 'count' => $realReviews->count(),
                 'average' => $realReviews->avg('rating') ?? 0,
                 'fake_count' => $fakeReviews->count(),
+                'external_ratings' => $externalRatings
             ],
 
             'offices' => [

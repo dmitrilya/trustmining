@@ -18,8 +18,8 @@ enum RatingSource: string
             self::YANDEX_MAPS => $locale === 'ru' ? 'Яндекс Карты' : 'Yandex Maps',
             self::GOOGLE_MAPS => $locale === 'ru' ? 'Google Карты' : 'Google Maps',
             self::GIS         => $locale === 'ru' ? '2ГИС'         : '2GIS',
-            self::TOP_MINING   => $locale === 'ru' ? 'Топ Майнинг'  : 'Top Mining',
-            self::AVITO        => $locale === 'ru' ? 'Авито'        : 'Avito',
+            self::TOP_MINING  => $locale === 'ru' ? 'Топ Майнинг'  : 'Top Mining',
+            self::AVITO       => $locale === 'ru' ? 'Авито'        : 'Avito',
         };
     }
 

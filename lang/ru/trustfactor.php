@@ -169,6 +169,27 @@ return [
             'title' => 'Поддельные отзывы',
             'description' => 'Обнаружены искусственные отзывы'
         ],
+        'external_ratings' => [
+            'title' => 'Репутация',
+            'description' => 'Средний рейтинг сторонних сервисов',
+            'components' => [
+                'yandex_maps' => [
+                    'title' => 'Яндекс Карты',
+                ],
+                'google_maps' => [
+                    'title' => 'Google Карты',
+                ],
+                '2gis' => [
+                    'title' => '2ГИС',
+                ],
+                'top_mining' => [
+                    'title' => 'Топ Майнинг',
+                ],
+                'avito' => [
+                    'title' => 'Авито',
+                ],
+            ]
+        ],
         'offices' => [
             'title' => 'Проверенные офисы',
             'description' => 'Подтвержденные офисы повышают доверие'

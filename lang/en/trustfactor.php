@@ -169,6 +169,27 @@ return [
             'title' => 'Fake reviews',
             'description' => 'Artificial or fraudulent reviews have been detected',
         ],
+        'external_ratings' => [
+            'title' => 'Reputation',
+            'description' => 'Average rating of third-party services',
+            'components' => [
+                'yandex_maps' => [
+                    'title' => 'Yandex Maps',
+                ],
+                'google_maps' => [
+                    'title' => 'Google Maps',
+                ],
+                '2gis' => [
+                    'title' => '2GIS',
+                ],
+                'top_mining' => [
+                    'title' => 'Top Mining',
+                ],
+                'avito' => [
+                    'title' => 'Avito',
+                ],
+            ]
+        ],
         'offices' => [
             'title' => 'Verified offices',
             'description' => 'Confirmed office locations increase trust',
