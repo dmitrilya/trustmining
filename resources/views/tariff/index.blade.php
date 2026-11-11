@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <svg viewBox="0 0 1208 1024" class="absolute -translate-x-1/2 left-1/2 top-1/2 h-[60rem] -z-10"
+            <svg viewBox="0 0 1208 1024" class="absolute -translate-x-1/2 left-1/2 top-1/2 h-240 -z-10"
                 style="mask-image: radial-gradient(closest-side, white, transparent)">
                 <ellipse cx="604" cy="512" rx="604" ry="512"
                     fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)"></ellipse>

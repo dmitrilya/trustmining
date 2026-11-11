@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('images');
             $table->text('description');
             $table->string('address');
+            $table->foreignId('city_id')->constrained()->cascadeOnUpdate();
             $table->string('video')->nullable();
             $table->string('contract')->nullable();
             $table->json('contract_deficiencies');

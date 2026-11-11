@@ -17,6 +17,7 @@ use App\Http\Traits\HostingTrait;
 use App\Http\Traits\FileTrait;
 
 use App\Models\Ad\Hosting;
+use App\Models\City;
 
 class HostingController extends Controller
 {
@@ -50,7 +51,7 @@ class HostingController extends Controller
 
         if ($request->ajax()) return response()->json([
             'html' => Blade::render(
-                '<x-carousel.list :items="$hostings" blade="hosting.components.card" model="hosting" />',
+                '<x-carousel.list :items="$hostings" blade="hosting.components.card" model="hosting" sm="true />',
                 [
                     'items' => $hostings,
                 ]
@@ -66,11 +67,10 @@ class HostingController extends Controller
      */
     public function create()
     {
+        /** @var \App\Models\User\User $user */
         $user = Auth::user();
 
-        if ($user->hosting) return back()->withErrors(['forbidden' => __('Hosting already exists.')]);
-
-        if (!$user->tariff || !$user->tariff->can_have_hosting)
+        if (!$user->tariff || $user->hostings()->count() >= $user->tariff->max_hostings)
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('hosting.create');
@@ -86,17 +86,37 @@ class HostingController extends Controller
     {
         $user = $request->user();
 
-        if ($user->hosting) return redirect()->route('profile')->withErrors(['forbidden' => __('Hosting already exists.')]);
-
-        if (!$user->tariff || !$user->tariff->can_have_hosting)
+        if (!$user->tariff || $user->hostings()->count() >= $user->tariff->max_hostings)
             return back()->withErrors(['forbidden' => __('Not available with current plan')]);
+
+        $suggestions = $this->dadataSearchAddress($request->address);
+
+        if (!count($suggestions) || !$suggestions[0]['data']['postal_code']) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
+
+        $currentLocale = app()->getLocale();
+        $alternativeLocale = $currentLocale == 'ru' ? 'en' : 'ru';
+
+        $currentCityName = $suggestions[0]['data']['city'];
+
+        $city = City::where("name->{$currentLocale}", $currentCityName)->first();
+
+        if (!$city) {
+            $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
+            $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+
+            $city = City::create([
+                'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],
+                'name_where' => []
+            ]);
+        }
 
         $firstHosting = Hosting::orderByDesc('ordering_id')->first();
         $hosting = Hosting::create([
             'ordering_id' => $firstHosting ? $firstHosting->ordering_id + 1 : 1,
             'user_id' => $user->id,
             'description' => Purifier::clean(htmlspecialchars_decode($request->description), 'description'),
-            'address' => $request->address ? $request->address : 'Not specified',
+            'address' => $suggestions[0]['value'],
+            'city_id' => $city->id,
             'video' => $request->video,
             'images' => [],
             'contract_deficiencies' => [],
@@ -118,7 +138,7 @@ class HostingController extends Controller
 
         $hosting->moderations()->create(['data' => $hosting->attributesToArray()]);
 
-        return redirect()->route('company.hosting', ['user' => $user->slug]);
+        return redirect()->route('company.hosting', ['user' => $user->slug, 'hosting' => strtolower($city->name['en']) . '-' . $hosting->id]);
     }
 
     /**
@@ -133,9 +153,6 @@ class HostingController extends Controller
 
         if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
-
-        if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
 
         return view('hosting.edit', compact('hosting'));
     }
@@ -154,9 +171,6 @@ class HostingController extends Controller
         if ($hosting->moderations()->where('moderation_status_id', 1)->exists())
             return back()->withErrors(['forbidden' => __('Unavailable, currently under moderation')]);
 
-        if (!$user->tariff || !$user->tariff->can_have_hosting)
-            return back()->withErrors(['forbidden' => __('Not available with current plan')]);
-
         $data = [];
         $t = $request->tariffs ?? [];
         $p = $request->peculiarities ?? [];
@@ -164,7 +178,6 @@ class HostingController extends Controller
         $e = $request->expenses ?? [];
 
         if ($request->description != $hosting->description) $data['description'] = Purifier::clean(htmlspecialchars_decode($request->description), 'description');
-        if ($request->address != $hosting->address) $data['address'] = $request->address ? $request->address : 'Not specified';
         if ($request->video != $hosting->video) $data['video'] = $request->video;
 
         $currentTariffs = collect($hosting->tariffs);
@@ -190,7 +203,7 @@ class HostingController extends Controller
 
         if (!empty($data)) $hosting->moderations()->create(['data' => $data]);
 
-        return redirect()->route('company.hosting', ['user' => $user->slug]);
+        return redirect()->route('company.hosting', ['user' => $user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]);
     }
 
     /**

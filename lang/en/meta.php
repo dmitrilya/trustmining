@@ -377,6 +377,10 @@ return [
             'description' => 'Find the best mining hotel: reliability analysis, current rates, detailed terms, and reviews on the TrustMining website',
             'header' => 'Mining Hosting'
         ],
+        'shop' => [
+            'title' => 'Mining hotels from :name',
+            'description' => 'Learn about the company\'s equipment hosting platforms: name. Terms and current rates are available on the Trust Mining website'
+        ],
         'show' => [
             'title' => 'Mining Hotel :name - Mining Hosting',
             'description' => 'Host your equipment with :name at the rate of :tariff ₽/kW. Reliability analysis, photos, prices, and terms on the Trust Mining website'

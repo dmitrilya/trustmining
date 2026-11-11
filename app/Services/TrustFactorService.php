@@ -503,7 +503,7 @@ class TrustFactorService
             if ($direction) $scores[$direction] += $weights[$category] ?? 0;
         }
 
-        if ($user->hosting && !$user->hosting->moderation) $scores['hosting'] += $weights['hosting'] ?? 0;
+        $scores['hosting'] += $user->hostings()->where('moderation', false)->count() * ($weights['hosting'] ?? 0);
 
         foreach ($user->moderatedOffices as $office) {
             if (in_array('Repair service', $office->peculiarities ?? [])) $scores['service'] += $weights['service'] ?? 0;

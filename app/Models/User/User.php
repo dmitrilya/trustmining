@@ -154,9 +154,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(\App\Models\User\Passport::class);
     }
 
+    public function hostings()
+    {
+        return $this->hasMany(\App\Models\Ad\Hosting::class);
+    }
+
     public function hosting()
     {
-        return $this->hasOne(\App\Models\Ad\Hosting::class);
+        return $this->hasOne(\App\Models\Ad\Hosting::class)
+            ->orderByRaw("(SELECT MIN(t.t) FROM JSON_TABLE(hostings.tariffs, '$[*]' COLUMNS (t DECIMAL(4, 2) PATH '$.t')) AS t) ASC")
+            ->orderBy('hostings.id');
     }
 
     public function offices()
@@ -283,7 +290,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where(fn(Builder $q) => $q
             ->whereHas('activeAds')
-            ->orWhereHas('hosting', fn(Builder $q) => $q->where('moderation', 'false'))
+            ->orWhereHas('hostings', fn(Builder $q) => $q->where('moderation', 'false'))
             ->orWhereHas('moderatedOffices', fn(Builder $q) => $q->where(
                 fn(Builder $q1) => $q1->whereJsonContains('peculiarities', 'Repair service')
                     ->orWhereJsonContains('peculiarities', 'Cryptoexchanger')
@@ -294,7 +301,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where(fn(Builder $q) => $q
             ->whereHas('ads')
-            ->orWhereHas('hosting')
+            ->orWhereHas('hostings')
             ->orWhereHas('offices', fn(Builder $q) => $q->where(
                 fn(Builder $q1) => $q1->whereJsonContains('peculiarities', 'Repair service')
                     ->orWhereJsonContains('peculiarities', 'Cryptoexchanger')

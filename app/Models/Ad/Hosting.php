@@ -4,6 +4,7 @@ namespace App\Models\Ad;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Hosting extends Model
 {
@@ -19,6 +20,7 @@ class Hosting extends Model
         'user_id',
         'description',
         'address',
+        'city_id',
         'video',
         'images',
         'contract',
@@ -54,6 +56,31 @@ class Hosting extends Model
         'expenses' => 'array',
         'conditions' => 'array',
     ];
+
+    protected $with = ['cityRelation'];
+
+    protected function city(): Attribute
+    {
+        $locale = app()->getLocale();
+
+        return Attribute::make(
+            get: fn() => $this->cityRelation->name[$locale] ?? $this->cityRelation->name['en']
+        );
+    }
+
+    protected function cityWhere(): Attribute
+    {
+        $locale = app()->getLocale();
+
+        return Attribute::make(
+            get: fn() => $this->cityRelation->name_where[$locale] ?? $this->cityRelation->name_where['en'] ?? $this->city
+        );
+    }
+
+    public function cityRelation()
+    {
+        return $this->belongsTo(\App\Models\City::class, 'city_id');
+    }
 
     public function user()
     {

@@ -111,8 +111,16 @@ class SitemapGenerate extends Command
 
         foreach ($users as $user) {
             $out .= $this->addUrl('company/' . $user->slug . '/shop');
-            if ($user->hosting && !$user->hosting->moderation) $out .= $this->addUrl('company/' . $user->slug . '/hosting', $user->hosting->updated_at);
             if ($user->company && !$user->company->moderation) $out .= $this->addUrl('company/' . $user->slug . '/about', $user->company->updated_at);
+            
+            $hostings = $user->hostings()->where('moderation', false)->select(['id', 'user_id', 'city_id', 'updated_at'])->get();
+            if ($hostings->count()) {
+                $out .= $this->addUrl('company/' . $user->slug . '/hostings', $hosting->sortByDesc('updated_at')->first()->updated_at);
+
+                foreach ($hostings as $hosting) {
+                    $out .= $this->addUrl('company/' . $user->slug . '/hosting/' . $hosting->cityRelation->name['en'] . '-' . $hosting->id, $hosting->updated_at);
+                }
+            }
 
             foreach ($user->ads->where('moderation', false)->where('hidden', false) as $ad) {
                 $out .= $this->addUrl('ads/' . $ad->adCategory->name . '/' . $ad->id, $ad->updated_at);

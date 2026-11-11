@@ -27,7 +27,7 @@
         </div>
 
         <div>
-            <x-carousel.carousel :items="$hostings" blade="hosting.components.card" model="hosting" />
+            <x-carousel.carousel :items="$hostings" blade="hosting.components.card" model="hosting" sm="true" />
         </div>
     </section>
 

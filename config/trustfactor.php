@@ -33,7 +33,7 @@ return [
             'firmwares' => 12,
             'monitorings' => 4,
             'gpus' => 9,
-            'hosting' => 35,
+            'hosting' => 25,
             'service' =>  15,
             'exchanger' => 3,
         ],

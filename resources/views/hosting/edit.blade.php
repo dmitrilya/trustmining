@@ -62,14 +62,12 @@
 
                 <div class="relative mt-1" x-data="{ open: false, sugs: false }" @click.away="open = false">
                     <div class="relative z-0 w-full group" @click="open = true">
-                        <input type="text" id="address" name="address" x-ref="search" placeholder=" " value="{{ __($hosting->address) }}"
-                            @input.debounce.1000ms="sugs = dadataSuggs($el.value, $refs.suggestionList, open, 'address')" autocomplete="off"
+                        <input type="text" id="address" readonly disabled value="{{ __($hosting->address) }}"
                             class="block py-2.5 px-0 w-full text-sm text-slate-800 bg-transparent border-0 border-b-2 border-slate-300 appearance-none dark:text-slate-200 dark:border-slate-700 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-500 peer" />
                         <label for="address"
                             class="absolute text-sm text-slate-600 dark:text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-left peer-focus:inset-s-0 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                             {{ __('Address of the territory') }}
                         </label>
-                        <x-inputs.input-error :messages="$errors->get('address')" />
                     </div>
 
                     <ul role="listbox" style="display: none" x-show="open && sugs" x-ref="suggestionList"

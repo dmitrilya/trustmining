@@ -20,12 +20,12 @@
         'h' => route('calculator.modelver', ['asicModel' => $ad->asicVersion->asicModel->slug, 'asicVersion' => $ad->asicVersion->hashrate]),
     ])" />
     <x-faqs.faq i="4" :question="__('faq.ad.question_4', ['n' => $ad->user->name])" :answer="__('faq.ad.answer_4')" />
-    @if ($ad->user->hosting && $ad->user->tariff && $ad->user->tariff->can_have_hosting && !$ad->user->hosting->moderation)
+    @if ($ad->user->hosting && $ad->user->tariff && !$ad->user->hosting->moderation)
         <x-faqs.faq i="5" :question="__('faq.ad.question_5', ['n' => $ad->user->name])" :answer="__('faq.ad.answer_5', [
             'm' => $ad->asicVersion->asicModel->name,
             'a' => $ad->user->hosting->address,
             'tariff' => collect($ad->user->hosting->tariffs)->min('t'),
-            'h' => route('company.hosting', ['user' => $ad->user->slug]),
+            'h' => route('company.hostings', ['user' => $ad->user->slug]),
             'n' => $ad->user->name,
         ])" />
     @endif

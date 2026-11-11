@@ -49,7 +49,7 @@
 
         <x-filters.filter>@include('hosting.components.filter')</x-filters.filter>
 
-        <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        <div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
             @php
                 $auth = Auth::user();
             @endphp

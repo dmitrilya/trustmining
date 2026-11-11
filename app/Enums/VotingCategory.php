@@ -104,7 +104,7 @@ enum VotingCategory: int
     public function applyFilter(Builder $query): Builder
     {
         return match ($this) {
-            self::best_hosting => $query->whereHas('hosting', function ($q) {
+            self::best_hosting => $query->whereHas('hostings', function ($q) {
                 $q->where('moderation', false);
             }),
 

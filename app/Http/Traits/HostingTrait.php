@@ -9,11 +9,7 @@ trait HostingTrait
 {
     public function getHostings(?Request $request = null)
     {
-        $hostings = Hosting::with(['user:id,name,slug,tf', 'user.phones:id,user_id'])->whereHas('user', function ($query) {
-            $query->whereHas('tariff', function ($q) {
-                $q->where('can_have_hosting', true);
-            });
-        });
+        $hostings = Hosting::with(['user:id,name,slug,tf', 'user.phones:id,user_id', 'cityRelation:id,name'])->whereHas('user', fn ($q) => $q->whereHas('tariff'));
 
         if ($request) {
             if ($request->peculiarities && count($request->peculiarities))

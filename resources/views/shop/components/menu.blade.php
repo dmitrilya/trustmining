@@ -25,7 +25,6 @@
         $hasHosting =
             $hasCompany &&
             $user->tariff &&
-            $user->tariff->can_have_hosting &&
             $user->hosting &&
             !$user->hosting->moderation;
     @endphp
@@ -50,11 +49,11 @@
                 {{ __('Information and documents') }}</p>
         </div>
     </a>
-    <a href="{{ $hasHosting ? route('company.hosting', ['user' => $user->slug]) : '#' }}"
+    <a href="{{ $hasHosting ? route('company.hostings', ['user' => $user->slug]) : '#' }}"
         class="group relative flex flex-col sm:flex-row items-center gap-2 sm:gap-4 rounded-lg{{ $hasHosting ? '' : ' opacity-50' }}">
         <div
             class="flex h-9 sm:h-11 w-9 sm:w-11 flex-none items-center justify-center rounded-lg bg-slate-50 dark:bg-slate-950">
-            <svg class="h-5 sm:h-6 w-5 sm:w-6 {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-indigo-500' : 'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600') : 'text-slate-600 dark:text-slate-400' }}"
+            <svg class="h-5 sm:h-6 w-5 sm:w-6 {{ $hasHosting ? (request()->routeIs('company.hostings') || request()->routeIs('company.hosting') ? 'text-indigo-500' : 'text-slate-600 dark:text-slate-400 group-hover:text-indigo-600') : 'text-slate-600 dark:text-slate-400' }}"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
@@ -62,11 +61,11 @@
         </div>
         <div>
             <div
-                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-600 dark:text-slate-400' }}">
+                class="font-bold text-xxs xs:text-xs sm:text-base {{ $hasHosting ? (request()->routeIs('company.hostings') || request()->routeIs('company.hosting') ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-600 dark:text-slate-400' }}">
                 {{ __('Hosting') }}
             </div>
             <p
-                class="hidden sm:block mt-1 text-sm {{ $hasHosting ? (request()->routeIs('company.hosting') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-500' }}">
+                class="hidden sm:block mt-1 text-sm {{ $hasHosting ? (request()->routeIs('company.hostings') || request()->routeIs('company.hosting') ? 'text-slate-600 dark:text-slate-400' : 'text-slate-500 group-hover:text-slate-800 dark:group-hover:text-slate-200') : 'text-slate-500' }}">
                 {{ __('Placement data') }}
             </p>
         </div>

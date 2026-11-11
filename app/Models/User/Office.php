@@ -17,8 +17,8 @@ class Office extends Model
      */
     protected $fillable = [
         'user_id',
-        'city_id',
         'address',
+        'city_id',
         'images',
         'video',
         'postal_code',
@@ -56,14 +56,14 @@ class Office extends Model
         );
     }
 
-    public function user()
-    {
-        return $this->belongsTo(\App\Models\User\User::class);
-    }
-
     public function cityRelation()
     {
         return $this->belongsTo(\App\Models\City::class, 'city_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User\User::class);
     }
 
     public function moderations()
@@ -75,6 +75,7 @@ class Office extends Model
     {
         return $this->morphMany(\App\Models\Morph\View::class, 'viewable');
     }
+    
     public function externalMappings()
     {
         return $this->morphMany(\App\Models\ExternalSourcesMapping::class, 'ratable');

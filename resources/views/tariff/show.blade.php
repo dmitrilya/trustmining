@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <svg viewBox="0 0 1208 1024" class="absolute -translate-x-1/2 left-1/2 top-1/2 h-[60rem] -z-10"
+            <svg viewBox="0 0 1208 1024" class="absolute -translate-x-1/2 left-1/2 top-1/2 h-240 -z-10"
                 style="mask-image: radial-gradient(closest-side, white, transparent)">
                 <ellipse cx="604" cy="512" rx="604" ry="512" fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)"></ellipse>
                 <defs>
@@ -68,7 +68,7 @@
                             </svg>
                             <div class="text-sm text-slate-500"><span
                                     class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_ads }}</span>
-                                {{ __('of ads') }}</div>
+                                {{ trans_choice('other.ads', $tariff->max_ads) }}</div>
                         </div>
                         <div class="flex items-center">
                             <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -77,16 +77,16 @@
                             </svg>
                             <div class="text-sm text-slate-500"><span
                                     class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_offices }}</span>
-                                {{ __('of offices') }}</div>
+                                {{ trans_choice('other.offices', $tariff->max_offices) }}</div>
                         </div>
-                    @endif
-                    @if ($tariff->can_have_hosting)
                         <div class="flex items-center">
                             <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
                             </svg>
-                            <div class="text-sm text-slate-500">{{ __('Hosting adding') }}</div>
+                            <div class="text-sm text-slate-500"><span
+                                    class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariff->max_hostings }}</span>
+                                {{ trans_choice('other.hostings', $tariff->max_hostings) }}</div>
                         </div>
                     @endif
                     @if ($tariff->can_have_phone)
@@ -256,7 +256,7 @@
                     </div>
                 </div>
 
-                <x-buttons.primary-button class="block w-full sm:w-max ml-auto md:!mt-10">{{ __('Pay') }}</x-buttons.primary-button>
+                <x-buttons.primary-button class="block w-full sm:w-max ml-auto md:mt-10!">{{ __('Pay') }}</x-buttons.primary-button>
             </form>
         </div>
     </div>

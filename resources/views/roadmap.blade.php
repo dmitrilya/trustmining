@@ -79,7 +79,7 @@
                 </div>
 
                 <svg viewBox="0 0 1208 1024"
-                    class="absolute -translate-x-1/3 -translate-y-1/2 left-full top-1/2 h-[60rem] -z-10"
+                    class="absolute -translate-x-1/3 -translate-y-1/2 left-full top-1/2 h-240 -z-10"
                     style="mask-image: radial-gradient(closest-side, white, transparent)">
                     <ellipse cx="604" cy="512" rx="604" ry="512"
                         fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)"></ellipse>
@@ -107,7 +107,7 @@
                 x-init="$refs.timeline.style.height = $el.scrollHeight + 75 + 'px'">
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('22-08-2025')->timestamp * 1000 }}"></div>
@@ -121,11 +121,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/3.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-lg shadow-logo-color -rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2 -translate-x-full rounded-xl shadow-lg shadow-logo-color -rotate-15">
                         <img src="{{ Storage::url('public/roadmap/1.webp') }}" alt=""
                             class="h-44 sm:h-64 absolute left-1/2 -translate-x-1/2 rounded-xl shadow-lg shadow-logo-color z-10">
                         <img src="{{ Storage::url('public/roadmap/2.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-lg shadow-logo-color rotate-[15deg]">
+                            class="h-44 sm:h-64 absolute left-1/2  rounded-xl shadow-lg shadow-logo-color rotate-15">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -142,7 +142,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-09-2025')->timestamp * 1000 }}"></div>
@@ -166,7 +166,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('10-09-2025')->timestamp * 1000 }}"></div>
@@ -180,11 +180,11 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/6.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-lg shadow-logo-color -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[20%] rounded-xl shadow-lg shadow-logo-color -rotate-6">
                         <img src="{{ Storage::url('public/roadmap/5.webp') }}" alt=""
                             class="h-44 sm:h-64 absolute -translate-x-1/2 left-[50%] rounded-xl shadow-lg shadow-logo-color">
                         <img src="{{ Storage::url('public/roadmap/4.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-lg shadow-logo-color rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[80%] rounded-xl shadow-lg shadow-logo-color rotate-6">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('Stage goals') }}</div>
@@ -201,7 +201,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-09-2025')->timestamp * 1000 }}"></div>
@@ -226,7 +226,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-09-2025')->timestamp * 1000 }}"></div>
@@ -248,7 +248,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('20-10-2025')->timestamp * 1000 }}"></div>
@@ -276,7 +276,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('25-11-2025')->timestamp * 1000 }}"></div>
@@ -289,9 +289,9 @@
 
                     <div class="my-6 w-full relative h-60 sm:h-80 py-8">
                         <img src="{{ Storage::url('public/roadmap/7.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-lg shadow-logo-color -rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[30%] rounded-xl shadow-lg shadow-logo-color -rotate-6">
                         <img src="{{ Storage::url('public/roadmap/8.webp') }}" alt=""
-                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-lg shadow-logo-color rotate-[6deg]">
+                            class="h-44 sm:h-64 absolute -translate-x-1/2 left-[70%] rounded-xl shadow-lg shadow-logo-color rotate-6">
                     </div>
 
                     <div class="md:text-lg text-slate-800 dark:text-slate-200 font-semibold mb-2 md:mb-4">{{ __('List of changes') }}</div>
@@ -310,7 +310,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('1-12-2026')->timestamp * 1000 }}"></div>
@@ -335,7 +335,7 @@
 
                 <article>
                     <header class="-ml-4 sm:-ml-8 xl:-ml-12 flex items-center mb-6 md:mb-8">
-                        <div class="h-[0.0625rem] w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
+                        <div class="h-px w-2.5 sm:w-4 bg-slate-500 mr-2 sm:mr-4 xl:mr-8 z-10 rounded-r-md">
                         </div>
                         <div class="date-transform text-xs text-slate-600 dark:text-slate-400 font-semibold" data-type="date"
                             data-date="{{ Carbon\Carbon::create('01-02-2025')->timestamp * 1000 }}"></div>

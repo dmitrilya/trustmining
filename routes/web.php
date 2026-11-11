@@ -242,7 +242,8 @@ $webRoutes = function () {
         Route::get('/shop', [ShopController::class, 'shop'])->name('company');
         Route::get('/reviews', [ShopController::class, 'reviews'])->name('company.reviews');
         Route::get('/about', [ShopController::class, 'aboutCompany'])->name('company.about');
-        Route::get('/hosting', [ShopController::class, 'hosting'])->name('company.hosting');
+        Route::get('/hostings', [ShopController::class, 'hostings'])->name('company.hostings');
+        Route::get('/hosting/{hosting}', [ShopController::class, 'hosting'])->name('company.hosting');
         Route::get('/offices', [ShopController::class, 'offices'])->name('company.offices');
         Route::get('/offices/{office}', [ShopController::class, 'office'])->name('company.office');
     });

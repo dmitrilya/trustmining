@@ -5,10 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Traits\ShopTrait;
 use App\Http\Traits\ViewTrait;
 use App\Http\Traits\AdTrait;
+use App\Http\Traits\HostingTrait;
 use App\Services\TrustFactorService;
 
 use App\Models\User\User;
@@ -16,7 +18,7 @@ use App\Models\User\Office;
 
 class ShopController extends Controller
 {
-    use ShopTrait, ViewTrait, AdTrait;
+    use ShopTrait, ViewTrait, AdTrait, HostingTrait;
 
     /**
      * Display a listing of the resource.
@@ -47,7 +49,9 @@ class ShopController extends Controller
      */
     public function aboutCompany(User $user)
     {
-        if (!$user->company || $user->company->moderation && !(auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user')))
+        $auth = Auth::user();
+
+        if (!$user->company || $user->company->moderation && !($auth && ($auth->id == $user->id || $auth->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
         return view('company.show', [
@@ -58,24 +62,46 @@ class ShopController extends Controller
     }
 
     /**
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function hosting(User $user)
+    public function hostings(Request $request, User $user)
     {
-        $canSee = auth()->check() && (auth()->id() == $user->id || auth()->user()->role->name != 'user');
+        $auth = Auth::user();
 
-        if (
-            !$user->tariff || !$user->tariff->can_have_hosting ||
-            !$user->hosting || $user->hosting->moderation && !$canSee
-        )
+        if (!$user->tariff || $user->hostings()->where('moderation', false) && !($auth && ($auth->id == $user->id || $auth->role->name != 'user')))
+            return redirect()->route('company', ['user' => $user->slug]);
+
+        return view('shop.hostings', [
+            'user' => $user,
+            'hostings' => $this->getHostings($request)->where('user_id', $user->id)->get(),
+        ]);
+    }
+
+    /**
+     * @param  \App\Models\User\User  $user
+     * @param  string  $hostingQuery
+     * @return \Illuminate\Http\Response
+     */
+    public function hosting(User $user, string $hostingQuery)
+    {
+        $queryParts = explode('-', $hostingQuery);
+        if (count($queryParts) < 2) abort(404);
+
+        $hosting = $user->hostings()->where('id', end($queryParts))->first();
+        if (!$hosting) abort(404);
+
+        $auth = Auth::user();
+
+        if (!$user->tariff || $hosting->moderation && !($auth && ($auth->id == $user->id || $auth->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
         $this->addView(request(), $user->hosting);
 
         return view('hosting.show', [
             'user' => $user,
-            'hosting' => $user->hosting,
+            'hosting' => $hosting,
             'tfData' => (new TrustFactorService)->calculateDetailed($user)
         ]);
     }

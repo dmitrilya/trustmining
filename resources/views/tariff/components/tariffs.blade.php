@@ -17,7 +17,7 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[0]->max_ads }}</span>
-                    {{ __('of ads') }}</div>
+                    {{ trans_choice('other.ads', $tariffs[0]->max_ads) }}</div>
             </div>
             <div class="flex items-center">
                 <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
@@ -27,18 +27,18 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[0]->max_offices }}</span>
-                    {{ __('of offices') }}</div>
+                    {{ trans_choice('other.offices', $tariffs[0]->max_offices) }}</div>
             </div>
-            @if ($tariffs[0]->can_have_hosting)
-                <div class="flex items-center">
-                    <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <div class="text-sm text-slate-500">{{ __('Hosting adding') }}</div>
-                </div>
-            @endif
+            <div class="flex items-center">
+                <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <div class="text-sm text-slate-500"><span
+                        class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[0]->max_hostings }}</span>
+                    {{ trans_choice('other.hostings', $tariffs[0]->max_hostings) }}</div>
+            </div>
             @if ($tariffs[0]->can_have_phone)
                 <div class="flex items-center">
                     <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
@@ -89,7 +89,7 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[1]->max_ads }}</span>
-                    {{ __('of ads') }}</div>
+                    {{ trans_choice('other.ads', $tariffs[1]->max_ads) }}</div>
             </div>
             <div class="flex items-center">
                 <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
@@ -99,18 +99,18 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[1]->max_offices }}</span>
-                    {{ __('of offices') }}</div>
+                    {{ trans_choice('other.offices', $tariffs[1]->max_offices) }}</div>
             </div>
-            @if ($tariffs[1]->can_have_hosting)
-                <div class="flex items-center">
-                    <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
-                        fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <div class="text-sm text-slate-500">{{ __('Hosting adding') }}</div>
-                </div>
-            @endif
+            <div class="flex items-center">
+                <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <div class="text-sm text-slate-500"><span
+                        class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[1]->max_hostings }}</span>
+                    {{ trans_choice('other.hostings', $tariffs[1]->max_hostings) }}</div>
+            </div>
             @if ($tariffs[1]->can_have_phone)
                 <div class="flex items-center">
                     <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
@@ -162,7 +162,7 @@
                 </svg>
                 <div class="text-sm text-slate-400"><span
                         class="text-white font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[2]->max_ads }}</span>
-                    {{ __('of ads') }}</div>
+                    {{ trans_choice('other.ads', $tariffs[2]->max_ads) }}</div>
             </div>
             <div class="flex items-center">
                 <svg class="mr-4 shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
@@ -172,18 +172,18 @@
                 </svg>
                 <div class="text-sm text-slate-400"><span
                         class="text-white font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[2]->max_offices }}</span>
-                    {{ __('of offices') }}</div>
+                    {{ trans_choice('other.offices', $tariffs[2]->max_offices) }}</div>
             </div>
-            @if ($tariffs[2]->can_have_hosting)
-                <div class="flex items-center">
-                    <svg class="mr-4 shrink-0 w-4 h-4 text-white" aria-hidden="true" fill="currentColor"
-                        viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                    </svg>
-                    <div class="text-sm text-slate-400">{{ __('Hosting adding') }}</div>
-                </div>
-            @endif
+            <div class="flex items-center">
+                <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <div class="text-sm text-slate-500"><span
+                        class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">{{ $tariffs[2]->max_hostings }}</span>
+                    {{ trans_choice('other.hostings', $tariffs[2]->max_hostings) }}</div>
+            </div>
             @if ($tariffs[2]->can_have_phone)
                 <div class="flex items-center">
                     <svg class="mr-4 shrink-0 w-4 h-4 text-white" aria-hidden="true"
@@ -249,7 +249,7 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">2</span>
-                    {{ __('of ads') }}</div>
+                    {{ trans_choice('other.ads', 2) }}</div>
             </div>
             <div class="flex items-center">
                 <svg class="mr-4 shrink-0 w-4 h-4 text-indigo-500" aria-hidden="true"
@@ -259,7 +259,7 @@
                 </svg>
                 <div class="text-sm text-slate-500"><span
                         class="text-slate-800 font-semibold text-base sm:text-lg lg:text-xl">1</span>
-                    {{ __('of offices') }}</div>
+                    {{ trans_choice('other.offices', 1) }}</div>
             </div>
         </div>
     </div>
