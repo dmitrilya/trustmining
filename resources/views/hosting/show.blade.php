@@ -26,381 +26,57 @@
                 @if (isset($moderation))
                     @include('moderation.components.buttons')
 
-                    <div
-                        class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6 mb-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
-                            <div
-                                class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6{{ isset($moderation->data['images']) ? ' border border-indigo-500' : '' }}">
-                                <x-carousel :images="isset($moderation->data['images']) ? $moderation->data['images'] : $hosting->images" min="128" max="128"></x-carousel>
-
-                                <div class="hidden md:block mt-6">
-                                    <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
-                                </div>
-                            </div>
-
-                            <div class="lg:col-span-3 space-y-5">
-                                <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl md:text-3xl">
-                                    {{ __('Hosting ASICs for mining') }}
-                                </h1>
-
-                                <h3
-                                    class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg{{ isset($moderation->data['address']) ? ' border border-indigo-500' : '' }}">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" fill="currentColor" viewBox="0 0 24 24">
-                                        <path fill-rule="evenodd"
-                                            d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    {{ isset($moderation->data['address']) ? __($moderation->data['address']) : __($hosting->address) }}
-                                </h3>
-
-                                @php
-                                    $tariffs = $moderation->data['tariffs'] ?? $hosting->tariffs;
-                                @endphp
-
-                                <div class="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                                    @foreach ($tariffs as $tariff)
-                                        <div class="rounded-xl py-2 sm:py-3 bg-indigo-500/10 border border-indigo-600 flex flex-col items-center">
-                                            <div class="text-xl xs:text-2xl sm:text-3xl text-indigo-500 mb-1">{{ $tariff['t'] }} <span
-                                                    class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">₽/{{ __('kW') }}</span></div>
-                                            <div class="text-xxs xs:text-xs tracking-wider text-slate-600 dark:text-slate-400 uppercase">{{ __('Uptime') }}
-                                                {{ $tariff['u'] }}%</div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                <div class="md:hidden">
-                                    <x-peculiarities class="{{ isset($moderation->data['peculiarities']) ? ' border border-indigo-500' : '' }}"
-                                        :ps="isset($moderation->data['peculiarities']) ? $moderation->data['peculiarities'] : $hosting->peculiarities" model="hosting"></x-peculiarities>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
-
-                                    <ul role="list"
-                                        class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['conditions']) ? ' border border-indigo-500' : '' }}">
-                                        @php
-                                            $c = isset($moderation->data['conditions']) ? $moderation->data['conditions'] : $hosting->conditions;
-                                        @endphp
-
-                                        @if (!count($c))
-                                            <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
-                                        @else
-                                            @foreach ($c as $condition)
-                                                <li class="text-slate-600 dark:text-slate-400">{{ $condition }}</li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
-                                </div>
-
-                                <div>
-                                    <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Additional costs') }}
-                                    </h3>
-
-                                    <ul role="list"
-                                        class="list-disc space-y-2 pl-4 text-sm{{ isset($moderation->data['expenses']) ? ' border border-indigo-500' : '' }}">
-                                        @php
-                                            $e = isset($moderation->data['expenses']) ? $moderation->data['expenses'] : $hosting->expenses;
-                                        @endphp
-
-                                        @if (!count($e))
-                                            <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
-                                        @else
-                                            @foreach ($e as $expense)
-                                                <li class="text-slate-600 dark:text-slate-400">{{ $expense }}</li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-8">
-                            <div class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                                @php
-                                    $contract = isset($moderation->data['contract']) ? $moderation->data['contract'] : $hosting->contract;
-                                    $territory = isset($moderation->data['territory']) ? $moderation->data['territory'] : $hosting->territory;
-                                    $energySupply = isset($moderation->data['energy_supply']) ? $moderation->data['energy_supply'] : $hosting->energy_supply;
-                                @endphp
-
-                                @if ($contract)
-                                    <div class="{{ isset($moderation->data['contract']) ? 'border border-indigo-500' : '' }}">
-                                        <x-document :path="Storage::url($contract)" :name="__('Contract')"></x-document>
-                                    </div>
-                                @endif
-
-                                @if ($territory)
-                                    <div class="{{ isset($moderation->data['territory']) ? 'border border-indigo-500' : '' }}">
-                                        <x-document :path="Storage::url($territory)" :name="__('Territory')"></x-document>
-                                    </div>
-                                @endif
-
-                                @if ($energySupply)
-                                    <div class="{{ isset($moderation->data['energy_supply']) ? 'border border-indigo-500' : '' }}">
-                                        <x-document :path="Storage::url($energySupply)" :name="__('Energy supply agreement')"></x-document>
-                                    </div>
-                                @endif
-                            </div>
-
-                            @php
-                                $v = isset($moderation->data['video']) ? $moderation->data['video'] : $hosting->video;
-                            @endphp
-
-                            @if ($v)
-                                <div
-                                    class="w-full aspect-16/9 overflow-hidden rounded-lg mt-8{{ isset($moderation->data['video']) ? ' border border-indigo-500' : '' }}">
-                                    <iframe class="w-full h-full" src="{{ $v }}" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div>
-                            @endif
-
-                            <div>
-                                <div itemprop="description"
-                                    class="ql-editor mt-5 text-xxs xs:text-xs sm:text-sm text-slate-800 dark:text-slate-200{{ isset($moderation->data['description']) ? ' border border-indigo-500' : '' }}">
-                                    {!! $moderation->data['description'] ?? $hosting->description !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('hosting.components.hosting', [
+                        'isModeration' => true,
+                        'isOwner' => $auth && $hosting->user->id == $auth->id,
+                        'id' => $hosting->id,
+                        'owner' => $hosting->user,
+                        'images' => ['changed' => isset($moderation->data['images']), 'data' => $moderation->data['images'] ?? $hosting->images],
+                        'peculiarities' => [
+                            'changed' => isset($moderation->data['peculiarities']),
+                            'data' => $moderation->data['peculiarities'] ?? $hosting->peculiarities,
+                        ],
+                        'address' => ['changed' => isset($moderation->data['address']), 'data' => $moderation->data['address'] ?? $hosting->address],
+                        'tariffs' => ['changed' => isset($moderation->data['tariffs']), 'data' => $moderation->data['tariffs'] ?? $hosting->tariffs],
+                        'conditions' => [
+                            'changed' => isset($moderation->data['conditions']),
+                            'data' => $moderation->data['conditions'] ?? $hosting->conditions,
+                        ],
+                        'expenses' => ['changed' => isset($moderation->data['expenses']), 'data' => $moderation->data['expenses'] ?? $hosting->expenses],
+                        'contract' => ['changed' => isset($moderation->data['contract']), 'data' => $moderation->data['contract'] ?? $hosting->contract],
+                        'territory' => [
+                            'changed' => isset($moderation->data['territory']),
+                            'data' => $moderation->data['territory'] ?? $hosting->territory,
+                        ],
+                        'energy_supply' => [
+                            'changed' => isset($moderation->data['energy_supply']),
+                            'data' => $moderation->data['energy_supply'] ?? $hosting->energy_supply,
+                        ],
+                        'video' => ['changed' => isset($moderation->data['video']), 'data' => $moderation->data['video'] ?? $hosting->video],
+                        'description' => [
+                            'changed' => isset($moderation->data['description']),
+                            'data' => $moderation->data['description'] ?? $hosting->description,
+                        ],
+                    ])
                 @endif
 
-                <div
-                    class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
-                        <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
-                            <x-carousel :images="$hosting->images" min="128" max="128"></x-carousel>
-
-                            <div class="hidden md:block mt-6">
-                                <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-3 space-y-5">
-                            <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl">
-                                {{ __('Hosting ASICs for mining') }}
-                            </h1>
-
-                            <h3 class="flex items-center text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                {{ __($hosting->address) }}
-                            </h3>
-
-                            <div class="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                                @foreach ($hosting->tariffs as $tariff)
-                                    <div class="rounded-xl py-2 sm:py-3 bg-indigo-500/10 border border-indigo-600 flex flex-col items-center">
-                                        <div class="text-xl xs:text-2xl sm:text-3xl text-indigo-500 mb-1">{{ $tariff['t'] }} <span
-                                                class="text-xs sm:text-sm text-slate-600 dark:text-slate-400">₽/{{ __('kW') }}</span></div>
-                                        <div class="text-xxs xs:text-xs tracking-wider text-slate-600 dark:text-slate-400 uppercase">{{ __('Uptime') }}
-                                            {{ $tariff['u'] }}%</div>
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            <div class="md:hidden">
-                                <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
-                            </div>
-
-                            <div>
-                                <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
-
-                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                                    @if (!count($hosting->conditions))
-                                        <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
-                                    @else
-                                        @foreach ($hosting->conditions as $condition)
-                                            <li class="text-slate-600 dark:text-slate-400">{{ $condition }}</li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Additional costs') }}</h3>
-
-                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                                    @if (!count($hosting->expenses))
-                                        <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
-                                    @else
-                                        @foreach ($hosting->expenses as $expense)
-                                            <li class="text-slate-600 dark:text-slate-400">{{ $expense }}</li>
-                                        @endforeach
-                                    @endif
-                                </ul>
-                            </div>
-
-                            <div>
-                                @if ($auth && $hosting->user->id == $auth->id)
-                                    <a class="block mt-6" href="{{ route('hosting.edit', ['hosting' => $hosting->id]) }}">
-                                        <x-buttons.primary-button>{{ __('Edit') }}</x-buttons.primary-button>
-                                    </a>
-                                @else
-                                    <a class="block mt-6" target="_blank" href="{{ route('chat.start', ['user' => $hosting->user->id]) }}">
-                                        <x-buttons.primary-button>{{ __('Contact') }}</x-buttons.primary-button>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
-                            @if ($hosting->contract)
-                                <x-document :path="Storage::url($hosting->contract)" :name="__('Contract')"></x-document>
-                            @endif
-
-                            @if ($hosting->territory)
-                                <x-document :path="Storage::url($hosting->territory)" :name="__('Territory')"></x-document>
-                            @endif
-
-                            @if ($hosting->energy_supply)
-                                <x-document :path="Storage::url($hosting->energy_supply)" :name="__('Energy supply agreement')"></x-document>
-                            @endif
-                        </div>
-
-                        @if (!$auth || ($hosting->user->id != $auth->id && count($hosting->contract_deficiencies)))
-                            <div x-data="{ deficiencies: [], done: false }">
-                                <x-buttons.secondary-button
-                                    class="w-full sm:w-max justify-center bg-secondary-gradient dark:text-slate-800 xs:py-3 mt-2 xs:mt-3 sm:mt-4"
-                                    @click="if (!status) {
-                                    if ('{{ $auth && $auth->tariff }}') axios.get('{{ route('hosting.contract_deficiencies', ['hosting' => $hosting->id]) }}')
-                                        .then(r => {
-                                            if (r.data.success) {
-                                                deficiencies = r.data.deficiencies;
-                                                done = true;
-                                            }
-                                            else pushToastAlert(r.data.message, 'error');
-                                        });
-                                    else $dispatch('open-modal', 'need-subscription');
-                                }">
-                                    <svg class="min-w-4 h-4 mr-2 xs:mr-3" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
-                                    </svg>
-
-                                    <span>{{ __('Defects of the contract') }}</span>
-                                </x-buttons.secondary-button>
-
-                                <template x-if="done">
-                                    <div>
-                                        <h5 class="text-xxs sm:text-xs mt-4 sm:mt-5 mb-1 text-slate-600 font-bold">
-                                            {{ __('Anything that may result in the loss of equipment by the customer or other material or financial losses') }}
-                                        </h5>
-
-                                        <p x-show="!deficiencies[0].length" class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
-                                            {{ __('No defects found') }}</p>
-                                        <template x-for="problem in deficiencies[0]" :key="problem.problem">
-                                            <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
-                                                x-text="problem.point + ' - ' + problem.problem"></p>
-                                        </template>
-
-                                        <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
-                                            {{ __('Inaccuracies in the description of the terms of the contract that may lead to disputes') }}
-                                        </h5>
-
-                                        <p x-show="!deficiencies[1].length" class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
-                                            {{ __('No defects found') }}</p>
-                                        <template x-for="problem in deficiencies[1]" :key="problem.problem">
-                                            <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
-                                                x-text="problem.point + ' - ' + problem.problem"></p>
-                                        </template>
-
-                                        <h5 class="text-xxs sm:text-xs mt-3 sm:mt-4 mb-1 text-slate-600 font-bold">
-                                            {{ __('The presence of errors in the text or deviation from the standards for drafting contracts') }}
-                                        </h5>
-
-                                        <p x-show="!deficiencies[2].length" class="mt-1 text-xxs sm:text-xs text-slate-600 dark:text-slate-400">
-                                            {{ __('No defects found') }}</p>
-                                        <template x-for="problem in deficiencies[2]" :key="problem.problem">
-                                            <p class="mt-1 flex-inline text-xxs sm:text-xs text-slate-600 dark:text-slate-400"
-                                                x-text="problem.point + ' - ' + problem.problem"></p>
-                                        </template>
-                                    </div>
-                                </template>
-                            </div>
-                        @endif
-
-                        @if ($hosting->video)
-                            <div class="w-full aspect-16/9 overflow-hidden rounded-lg mt-8">
-                                <iframe class="w-full h-full" src="{{ $hosting->video }}" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="mt-8" x-data="{ selectedTab: 'description' }">
-                        <div
-                            class="mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm text-center text-slate-600 border-b border-slate-300 dark:text-slate-400 dark:border-slate-700">
-                            <ul class="flex flex-wrap -mb-px">
-                                <li class="mr-0.5 sm:mr-2">
-                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'description'"
-                                        :class="{
-                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'description' !=
-                                                selectedTab,
-                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'description' ==
-                                                selectedTab
-                                        }">
-                                        {{ __('Description') }}
-                                    </button>
-                                </li>
-                                <li class="mr-0.5 sm:mr-2">
-                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'reviews'"
-                                        :class="{
-                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'reviews' !=
-                                                selectedTab,
-                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'reviews' ==
-                                                selectedTab
-                                        }">
-                                        {{ __('Reviews') }}
-                                    </button>
-                                </li>
-                                <li>
-                                    <button class="inline-block p-1 xs:p-2 sm:p-3 lg:p-4 border-b-2 rounded-t-lg" @click="selectedTab = 'location'"
-                                        :class="{
-                                            'border-transparent hover:text-slate-800 dark:hover:text-slate-200 hover:border-slate-400 dark:hover:border-slate-600': 'location' !=
-                                                selectedTab,
-                                            'text-indigo-500 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-600': 'location' ==
-                                                selectedTab
-                                        }">
-                                        {{ __('Location') }}
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div x-show="selectedTab == 'description'">
-                            <x-can-trust :user="$hosting->user" :id="$hosting->id" />
-
-                            <h2 class="font-extrabold tracking-tight text-slate-800 dark:text-slate-200">
-                                {{ __('Description of the data center for mining') }}
-                            </h2>
-
-                            <div itemprop="description" class="ql-editor mt-5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                                {!! $hosting->description !!}
-                            </div>
-                        </div>
-
-                        <div class="space-y-6" x-show="selectedTab == 'reviews'" style="display: none">
-                            @include('review.reviews', ['auth' => $auth, 'reviews' => $hosting->user->reviews])
-                            @include('review.send', [
-                                'auth' => $auth,
-                                'reviews' => $hosting->user->reviews,
-                                'type' => 'user',
-                                'id' => $hosting->user->id,
-                            ])
-                        </div>
-
-                        <div x-show="selectedTab == 'location'" style="display: none">
-                            @include('ad.components.location', ['location' => $hosting->address])
-                        </div>
-                    </div>
-                </div>
+                @include('hosting.components.hosting', [
+                    'isModeration' => false,
+                    'isOwner' => $auth && $hosting->user->id == $auth->id,
+                    'id' => $hosting->id,
+                    'owner' => $hosting->user,
+                    'images' => ['changed' => false, 'data' => $hosting->images],
+                    'peculiarities' => ['changed' => false, 'data' => $hosting->peculiarities],
+                    'address' => ['changed' => false, 'data' => $hosting->address],
+                    'tariffs' => ['changed' => false, 'data' => $hosting->tariffs],
+                    'conditions' => ['changed' => false, 'data' => $hosting->conditions],
+                    'expenses' => ['changed' => false, 'data' => $hosting->expenses],
+                    'contract' => ['changed' => false, 'data' => $hosting->contract],
+                    'territory' => ['changed' => false, 'data' => $hosting->territory],
+                    'energy_supply' => ['changed' => false, 'data' => $hosting->energy_supply],
+                    'video' => ['changed' => false, 'data' => $hosting->video],
+                    'description' => ['changed' => false, 'data' => $hosting->description],
+                ])
 
                 @if (\App\Enums\VotingCategory::best_hosting->validateCandidate($hosting->user))
                     <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" :candidate="$hosting->user" type="block" />

@@ -65,7 +65,7 @@ trait ModerationTrait
                     if (isset($moderation->data['images'])) $files = array_merge($files, $m->images);
                     break;
                 case ('hosting'):
-                    if (isset($moderation->data['images'])) {
+                    if (isset($moderation->data['images']) && isset($m->images[0])) {
                         $files = array_merge($files, $m->images);
                         $files = array_merge($files, $this->getAdditionalFiles([$m->images[0]], [400, 224]));
                     }

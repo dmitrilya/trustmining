@@ -12,44 +12,39 @@ class HostingRatingController extends Controller
 {
     public function show(string $type): View
     {
-        $hostings = Hosting::with(['user:id,name,slug,tf'])->get();
+        $hostings = Hosting::with(['user:id,name,slug,tf'])->get()
+            ->map(fn($h) => tap($h, fn($h) => $h->price = collect($h->tariffs)->min(fn($t) => $t['t'] / $t['u'])))
+            ->groupBy('user_id')->map(fn($userHostings) => $userHostings->sortBy('price')->first())->values();
 
-        if ($type == 'reliable') $hostings = $hostings->sortByDesc(fn($h) => $h->user->tf);
+        if ($type === 'reliable') $hostings = $hostings->sortByDesc(fn($h) => $h->user->tf ?? 0);
+        elseif ($type === 'cheapest') $hostings = $hostings->sortBy('price');
         else {
-            $hostings = $hostings->map(function ($hosting) {
-                $tariffs = collect($hosting->tariffs);
-                $u97 = $tariffs->where('u', '>=', 97);
-                $minTariff = $u97->count() ? $u97->sortBy('t')->first() : $tariffs->sortByDesc('u')->first();
-                $hosting->price = $minTariff['t'] / $minTariff['u'];
+            $uniquePrices = $hostings->pluck('price')->unique()->sortDesc()->values();
+            $uniqueTfs = $hostings->map(fn($h) => $h->user->tf ?? 0)->unique()->sort()->values();
+
+            $priceDenominator = max(1, $uniquePrices->count() - 1);
+            $tfDenominator = max(1, $uniqueTfs->count() - 1);
+
+            $hostings = $hostings->map(function ($hosting) use ($uniquePrices, $uniqueTfs, $priceDenominator, $tfDenominator) {
+                $priceRank = $uniquePrices->search($hosting->price);
+                $pricePoints = $uniquePrices->count() <= 1 ? 10 : 1 + ($priceRank / $priceDenominator) * 9;
+
+                $tfRank = $uniqueTfs->search($hosting->user->tf);
+                $tfPoints = $uniqueTfs->count() <= 1 ? 15 : 1.5 + ($tfRank / $tfDenominator) * 13.5;
+
+                $hosting->balanced_score = $pricePoints + $tfPoints;
+
                 return $hosting;
+            })->sort(function ($a, $b) {
+                if ($a->balanced_score !== $b->balanced_score) return $b->balanced_score <=> $a->balanced_score;
+
+                return $b->user->tf <=> $a->user->tf;
             });
-
-            if ($type == 'cheapest') $hostings = $hostings->sortBy('price');
-            else {
-                $sortedByPrice = $hostings->sortByDesc('price')->values();
-                $totalCount = $sortedByPrice->count();
-
-                $sortedByTf = $hostings->sortBy(fn($h) => $h->user->tf ?? 0)->values();
-
-                $hostings = $hostings->map(function ($hosting) use ($sortedByPrice, $sortedByTf, $totalCount) {
-                    if ($totalCount <= 1) {
-                        $hosting->balanced_score = 10;
-                        return $hosting;
-                    }
-
-                    $priceIndex = $sortedByPrice->search(fn($item) => $item->id === $hosting->id);
-                    $pricePoints = 1 + ($priceIndex / ($totalCount - 1)) * 9;
-
-                    $tfIndex = $sortedByTf->search(fn($item) => $item->id === $hosting->id);
-                    $tfPoints = 1.5 + ($tfIndex / ($totalCount - 1)) * 13.5;
-
-                    $hosting->balanced_score = $pricePoints + $tfPoints;
-
-                    return $hosting;
-                })->sortByDesc('balanced_score');
-            }
         }
 
-        return view('rating.hostings.show', ['type' => $type, 'hostings' => $hostings->take(5)]);
+        return view('rating.hostings.show', [
+            'type' => $type,
+            'hostings' => $hostings->take(5)->values(),
+        ]);
     }
 }
