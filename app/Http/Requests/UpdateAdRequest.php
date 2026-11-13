@@ -40,7 +40,6 @@ class UpdateAdRequest extends FormRequest
         $ad = $this->route('ad');
 
         return [
-            'office_id' => ['required', new OfficeBelongsToUser],
             'preview' => 'file|mimes:jpg,png,jpeg,webp|max:2048',
             'images' => 'nullable|array|max:3',
             'images.*' => 'file|mimes:jpg,png,jpeg,webp|max:1024',

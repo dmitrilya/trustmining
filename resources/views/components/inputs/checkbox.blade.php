@@ -12,16 +12,14 @@
 ])
 
 <div class="{{ $class }}">
-    <label class="flex items-center cursor-pointer group"
+    <label class="flex items-center {{ $disabled ? 'cursor-not-allowed' : 'cursor-pointer' }} group"
         @if ($handleDisabledClick) @click="if($el.querySelector('input').disabled) { $event.preventDefault(); {{ $handleDisabledClick }} }" @endif>
-        <input @if ($disabled) disabled @endif @if ($checked) checked @endif
-            @if ($handleChange) @change="{{ $handleChange }}($el.checked)" @endif type="checkbox"
-            name="{{ $name }}" value="{{ $value }}" class="sr-only peer" {{ $attributes }}
-            @if ($dataInit) x-init="{{ $dataInit }}" @endif>
+        <input @disabled($disabled) @if ($checked) checked @endif
+            @if ($handleChange) @change="{{ $handleChange }}($el.checked)" @endif type="checkbox" name="{{ $name }}"
+            value="{{ $value }}" class="sr-only peer" {{ $attributes }} @if ($dataInit) x-init="{{ $dataInit }}" @endif>
         <div
             class="{{ $sm ? 'mr-1 sm:mr-2 w-3 h-3 sm:w-4 sm:h-4' : 'mr-2 w-4 h-4' }} flex items-center justify-center shrink-0 bg-slate-100 dark:bg-slate-900 peer-checked:bg-indigo-600 border border-slate-300 dark:border-slate-700 rounded-md transition duration-100 text-transparent peer-checked:text-white peer-disabled:opacity-50">
-            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                stroke-width="3">
+            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
         </div>

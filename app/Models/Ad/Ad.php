@@ -90,6 +90,11 @@ class Ad extends Model
         return $this->morphMany(\App\Models\Morph\Moderation::class, 'moderationable');
     }
 
+    public function acceptedModerations()
+    {
+        return $this->moderations()->where('moderation_status_id', 2);
+    }
+
     public function scopeActive(Builder $query)
     {
         return $query->where('moderation', false)->where('hidden', false);
@@ -127,10 +132,10 @@ class Ad extends Model
      */
     public function getPreviousPrice(): ?float
     {
-        $currentModerationId = $this->moderations()->latest('id')->value('id');
+        $currentModerationId = $this->acceptedModerations()->latest('id')->value('id');
         $currentPrice = $this->price * $this->coin->rate;
 
-        $pastModerations = $this->moderations()->where('id', '<', $currentModerationId)
+        $pastModerations = $this->acceptedModerations()->where('id', '<', $currentModerationId)
             ->whereNotNull('data->price')->whereNotNull('data->coin_id')->latest('id')->get();
 
         foreach ($pastModerations as $moderation) {

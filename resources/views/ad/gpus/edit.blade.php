@@ -10,14 +10,7 @@
 <input type="hidden" name="props" x-ref="props_gpus" value="{{ json_encode($ad->props) }}">
 
 <div x-data="{ inStock: {{ $ad->props['Availability'] == 'In stock' ? 'true' : 'false' }} }">
-    <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" :value="inStock" class="sr-only peer" disabled
-            @change="inStock = ! inStock;let props = JSON.parse($refs.props_gpus.value);props.Availability = inStock ? 'In stock' : 'Preorder';delete props['Waiting (days)'];$refs.props_gpus.value = JSON.stringify(props);">
-        <div
-            class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition dark:border-slate-700 peer-checked:bg-indigo-300">
-        </div>
-        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('In stock') }}</span>
-    </label>
+    <x-inputs.toggler ::checked="inStock" :disabled="true" :big="true">{{ __('In stock') }}</x-inputs.toggler>
 
     <div x-show="!inStock" class="mt-4">
         <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
@@ -29,14 +22,7 @@
 </div>
 
 <div x-data="{ anew: {{ $ad->props['Condition'] == 'New' ? 'true' : 'false' }} }">
-    <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" :value="anew" class="sr-only peer" disabled
-            @change="anew = ! anew;let props = JSON.parse($refs.props_gpus.value);props.Condition = anew ? 'New' : 'Used';delete props['Warranty (months)'];$refs.props_gpus.value = JSON.stringify(props);">
-        <div
-            class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition dark:border-slate-700 peer-checked:bg-indigo-300">
-        </div>
-        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('New') }}</span>
-    </label>
+    <x-inputs.toggler ::checked="anew" :disabled="true" :big="true">{{ __('New') }}</x-inputs.toggler>
 
     <div x-show="!anew">
         <div class="mt-4">

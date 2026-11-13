@@ -14,7 +14,10 @@
                 @csrf
                 @method('PUT')
 
-                <x-inputs.select :label="__('Office')" name="office_id" :key="$ad->office_id" :items="$offices->map(fn($office) => ['key' => $office->id, 'value' => $office->address])->keyBy('key')" />
+                <div>
+                    <x-inputs.input-label for="office_id" :value="__('Office')" />
+                    <x-inputs.text-input id="office_id" :disabled="true" :value="$ad->office->address" />
+                </div>
 
                 <div>
                     <x-inputs.input-label for="preview" :value="__('Change preview')" />

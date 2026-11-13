@@ -9,53 +9,37 @@
 
 <div>
     <x-inputs.input-label for="asic_version" :value="__('Version')" />
-    <x-inputs.text-input id="asic_version" disabled :value="$ad->asicVersion->hashrate" />
+    <x-inputs.text-input id="asic_version" :disabled="true" :value="$ad->asicVersion->hashrate" />
 </div>
 
 <input type="hidden" name="props" x-ref="props_miners" value="{{ json_encode($ad->props) }}">
 
 <div x-data="{ inStock: {{ $ad->props['Availability'] == 'In stock' ? 'true' : 'false' }} }">
-    <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" :value="inStock" class="sr-only peer" disabled
-            @change="inStock = ! inStock;let props = JSON.parse($refs.props_miners.value);props.Availability = inStock ? 'In stock' : 'Preorder';delete props['Waiting (days)'];$refs.props_miners.value = JSON.stringify(props);">
-        <div
-            class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition dark:border-slate-700 peer-checked:bg-indigo-600">
-        </div>
-        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('In stock') }}</span>
-    </label>
+    <x-inputs.toggler ::checked="inStock" :disabled="true" :big="true">{{ __('In stock') }}</x-inputs.toggler>
 
     <div x-show="!inStock" class="mt-4">
         <x-inputs.input-label for="waiting" :value="__('Waiting (days)')" />
-        <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180" autocomplete="waiting"
-            :value="$ad->props['Waiting (days)'] ?? null"
+        <x-inputs.text-input id="waiting" name="waiting" type="number" min="1" max="180" autocomplete="waiting" :value="$ad->props['Waiting (days)'] ?? null"
             @change="let props = JSON.parse($refs.props_miners.value);props['Waiting (days)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
         <x-inputs.input-error :messages="$errors->get('waiting')" />
     </div>
 </div>
 
 <div x-data="{ anew: {{ $ad->props['Condition'] == 'New' ? 'true' : 'false' }} }">
-    <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" :value="anew" class="sr-only peer" disabled
-            @change="anew = ! anew;let props = JSON.parse($refs.props_miners.value);props.Condition = anew ? 'New' : 'Used';delete props['Warranty (months)'];$refs.props_miners.value = JSON.stringify(props);">
-        <div
-            class="relative w-11 h-6 bg-slate-100 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-indigo-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition dark:border-slate-700 peer-checked:bg-indigo-600">
-        </div>
-        <span class="ml-3 text-sm text-slate-800 dark:text-slate-200">{{ __('New') }}</span>
-    </label>
+    <x-inputs.toggler ::checked="anew" :disabled="true" :big="true">{{ __('New') }}</x-inputs.toggler>
 
     <div x-show="!anew">
         <div class="mt-4">
             <x-inputs.input-label for="warranty" :value="__('Warranty (months)')" />
-            <x-inputs.text-input id="warranty" name="warranty" type="number" min="0" max="12"
-                autocomplete="warranty" :value="$ad->props['Warranty (months)'] ?? null"
+            <x-inputs.text-input id="warranty" name="warranty" type="number" min="0" max="12" autocomplete="warranty" :value="$ad->props['Warranty (months)'] ?? null"
                 @change="let props = JSON.parse($refs.props_miners.value);props['Warranty (months)'] = $el.value;$refs.props_miners.value = JSON.stringify(props);" />
             <x-inputs.input-error :messages="$errors->get('warranty')" />
         </div>
 
         <div class="mt-6">
             <x-inputs.input-label for="images" :value="__('Change photo')" />
-            <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple
-                accept=".png,.jpg,.jpeg,.webp" max="3" label='max. 2MB, 3 items' />
+            <x-inputs.file-input id="images" name="images[]" class="mt-1 block w-full" multiple accept=".png,.jpg,.jpeg,.webp" max="3"
+                label='max. 2MB, 3 items' />
             <x-inputs.input-error :messages="$errors->get('images')" />
             @foreach ($errors->get('images.*') as $error)
                 <x-inputs.input-error :messages="$error" />

@@ -43,8 +43,6 @@ class AdService
         $data['with_vat'] = isset($data['with_vat']);
         $changings = [];
 
-        if ($data['office_id'] != $ad->office_id) $changings['office_id'] = $data['office_id'];
-
         $props = collect($data['props']);
         $propDiffs = $props->reject(fn($value, $key) => $value === ($ad->props[$key] ?? null))->toArray();
         if (count($propDiffs)) $changings['props'] = $props;

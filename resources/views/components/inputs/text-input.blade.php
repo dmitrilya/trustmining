@@ -2,7 +2,7 @@
 
 @if ($type === 'password')
     <div x-data="{ show: false }" class="relative mt-1">
-        <input :type="show ? 'text' : 'password'"
+        <input :type="show ? 'text' : 'password'" @disabled($disabled)
             {{ $attributes->merge(['class' => 'py-1.5 px-3 block w-full rounded-lg shadow shadow-logo-color text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset! ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-25']) }}>
         <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" @click="show = !show">
             <template x-if="!show">
@@ -21,6 +21,6 @@
         </button>
     </div>
 @else
-    <input type="{{ $type }}"
+    <input type="{{ $type }}" @disabled($disabled)
         {{ $attributes->merge(['class' => 'py-1.5 px-3 block mt-1 w-full rounded-lg shadow shadow-logo-color text-slate-800 bg-white dark:bg-slate-950 dark:text-slate-200 border-0 ring-1 ring-inset! ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-25']) }}>
 @endif
