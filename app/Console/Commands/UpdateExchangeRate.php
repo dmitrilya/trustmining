@@ -91,6 +91,7 @@ class UpdateExchangeRate extends Command
     private function updateProfit()
     {
         $measurements = ['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z'];
+        $twoMonthsAgo = now()->subMonths(2);
         $algorithms = Algorithm::select(['id', 'name'])->with([
             'coins' => fn($q) => $q->where('profit', '>', 0)->whereHas('latestRate', fn($q1) => $q1->where('rate', '>', 0))
                 ->select(['id', 'abbreviation', 'name', 'algorithm_id', 'profit', 'merged_group', 'fee'])
@@ -111,18 +112,22 @@ class UpdateExchangeRate extends Command
             'asicVersions:id,hashrate,asic_model_id,efficiency,measurement',
             'asicVersions.ads' => function ($q) {
                 $q->select(['id', 'asic_version_id', 'price', 'coin_id', 'props', 'with_vat', 'user_id', 'moderation', 'hidden'])
-                    ->active()->where('ad_category_id', AdCategory::where('name', 'miners')->value('id'));
+                    ->active()->where('price', '!=', 0)->where('ad_category_id', AdCategory::where('name', 'miners')->value('id'))
+                    ->with(['acceptedModerations:moderationable_id,moderationable_type,created_at']);
             },
             'asicVersions.ads.coin:id,abbreviation',
             'asicVersions.ads.user:id,name',
             'moderatedReviews:reviewable_id,reviewable_type,rating'
-        ])->get()->map(function ($model) use ($measurements, $algorithms) {
+        ])->get()->map(function ($model) use ($measurements, $algorithms, $twoMonthsAgo) {
             $algorithm = $algorithms->where('id', $model->algorithm->id)->first();
             $am = in_array(strtolower($model->algorithm->measurement), ['h', 'sol', 'g', 'c', 'k']) ? 0 :
                 array_search(substr($model->algorithm->measurement, 0, 1), $measurements);
 
-            $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model) {
-                $ads = $version->ads->where('price', '!=', 0)->map(function ($ad) {
+            $model->asicVersions->map(function ($version) use ($measurements, $algorithm, $am, $model, $twoMonthsAgo) {
+                $ads = $version->ads->filter(function ($ad) use ($twoMonthsAgo) {
+                    $latestModeration = $ad->acceptedModerations->sortByDesc('created_at')->first();
+                    return $latestModeration && $latestModeration->created_at >= $twoMonthsAgo;
+                })->map(function ($ad) {
                     $ad->usdt_price = round($ad->price * $ad->coin->rate, 2);
                     return $ad;
                 });
