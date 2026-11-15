@@ -11,15 +11,15 @@
     </div>
 
     @if (count($externalRatings = $user->getExternalRatings()))
-        <div class="mt-2 flex flex-wrap gap-2 sm:gap-3">
+        <div class="mt-3 flex flex-wrap gap-2 sm:gap-3">
             @foreach ($externalRatings as $externalRating)
                 <div>
                     <h3 class="sr-only">{{ __('Rating') . ' ' . $externalRating['source_name'] }}</h3>
 
                     <div class="flex items-center gap-2">
-                        <img class="h-8 sm:h-10 lg:h-12 rounded-xl" src="/img/sources/{{ $externalRating['logo'] }}" alt="{{ $externalRating['source_name'] }} logo">
+                        <img class="h-8 sm:h-10 rounded-xl" src="/img/sources/{{ $externalRating['logo'] }}" alt="{{ $externalRating['source_name'] }} logo">
                         <div>
-                            <div class="font-mono text-slate-800 dark:text-slate-200 text-xl sm:text-2xl">{{ $externalRating['rating'] }}</div>
+                            <div class="font-mono text-slate-800 dark:text-slate-200 text-xl sm:text-2xl leading-6">{{ $externalRating['rating'] }}</div>
                             <div class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">
                                 {{ $externalRating['reviews_count'] . ' ' . trans_choice('navigation.reviews', $externalRating['reviews_count']) }}
                             </div>

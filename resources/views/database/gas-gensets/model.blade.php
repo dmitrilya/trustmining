@@ -124,7 +124,7 @@
                         <div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
                             <h3 class="sr-only">{{ __('Reviews') }}</h3>
                             <div class="flex items-center" x-data="{ momentRating: {{ $momentRating }} }">
-                                <x-reviews.rating>
+                                <x-reviews.rating />
                                 <meta itemprop="ratingValue" content="{{ $momentRating }}" />
                                 <meta itemprop="worstRating" content="1" />
                                 <meta itemprop="bestRating" content="5" />
