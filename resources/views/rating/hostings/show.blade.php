@@ -101,7 +101,7 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-end">
-                            <a class="block" href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]) }}">
+                            <a class="block" href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}">
                                 <x-buttons.secondary-button>{{ __('Details') }}</x-buttons.primary-button>
                             </a>
 

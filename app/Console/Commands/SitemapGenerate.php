@@ -118,7 +118,7 @@ class SitemapGenerate extends Command
                 $out .= $this->addUrl('company/' . $user->slug . '/hostings', $hosting->sortByDesc('updated_at')->first()->updated_at);
 
                 foreach ($hostings as $hosting) {
-                    $out .= $this->addUrl('company/' . $user->slug . '/hosting/' . $hosting->cityRelation->name['en'] . '-' . $hosting->id, $hosting->updated_at);
+                    $out .= $this->addUrl('company/' . $user->slug . '/hosting/' . strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id, $hosting->updated_at);
                 }
             }
 

@@ -37,13 +37,13 @@
                     {{ collect($hosting->tariffs)->min('t') }} <span class="text-xxs sm:text-xs">₽/{{ __('kW') }}</span>
                 </div>
 
-                <a href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]) }}"
+                <a href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}"
                     target="_blank" draggable="false"
-                    class="block hover:underline text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 mt-1 sm:mt-2">{{ $hosting->city }}</a>
+                    class="block hover:underline text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 mt-1 sm:mt-2">{{ $hosting->city ?? 'Unknown' }}</a>
 
                 <div class="relative flex mt-1 sm:mt-2 items-center">
                     <a class="block w-full" draggable="false"
-                        href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]) }}">
+                        href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}">
                         <x-buttons.secondary-button class="w-full justify-center">{{ __('Details') }}</x-buttons.secondary-button>
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                                 d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        {{ __($hosting->city) }}
+                        {{ __($hosting->city ?? 'Unknown') }}
                     </h3>
 
                     <div class="grid grid-cols-3 xl:grid-cols-2 gap-2">
@@ -139,7 +139,7 @@
                     </div>
 
                     <a class="block mt-6 w-full"
-                        href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]) }}">
+                        href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}">
                         <x-buttons.primary-button class="w-full">{{ __('Details') }}</x-buttons.primary-button>
                     </a>
                 </div>

@@ -91,24 +91,26 @@ class HostingController extends Controller
 
         $suggestions = $this->dadataSearchAddress($request->address);
 
-        if (!count($suggestions) || !$suggestions[0]['data']['postal_code']) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
-
-        $currentLocale = app()->getLocale();
-        $alternativeLocale = $currentLocale == 'ru' ? 'en' : 'ru';
+        if (!count($suggestions)) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
         $currentCityName = $suggestions[0]['data']['city'];
 
-        $city = City::where("name->{$currentLocale}", $currentCityName)->first();
+        if ($currentCityName) {
+            $currentLocale = app()->getLocale();
+            $alternativeLocale = $currentLocale == 'ru' ? 'en' : 'ru';
 
-        if (!$city) {
-            $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
-            $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+            $city = City::where("name->{$currentLocale}", $currentCityName)->first();
 
-            $city = City::create([
-                'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],
-                'name_where' => []
-            ]);
-        }
+            if (!$city) {
+                $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
+                $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+
+                $city = City::create([
+                    'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],
+                    'name_where' => []
+                ]);
+            }
+        } else $city = City::where("name->en", 'Unknown city')->first();
 
         $firstHosting = Hosting::orderByDesc('ordering_id')->first();
         $hosting = Hosting::create([
@@ -116,7 +118,7 @@ class HostingController extends Controller
             'user_id' => $user->id,
             'description' => Purifier::clean(htmlspecialchars_decode($request->description), 'description'),
             'address' => $suggestions[0]['value'],
-            'city_id' => $city->id,
+            'city_id' => $city->id ?? null,
             'video' => $request->video,
             'images' => [],
             'contract_deficiencies' => [],
@@ -199,7 +201,7 @@ class HostingController extends Controller
 
         if (!empty($data)) $hosting->moderations()->create(['data' => $data]);
 
-        return redirect()->route('company.hosting', ['user' => $user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en']) . '-' . $hosting->id]);
+        return redirect()->route('company.hosting', ['user' => $user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]);
     }
 
     /**
