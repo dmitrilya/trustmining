@@ -17,7 +17,7 @@
     </div>
 
     @php
-        $expansions = collect($hosting->hostingExpansions ?? [])->sortBy('planned_at');
+        $expansions = collect($hosting->hostingExpansions()->where('planned_at', '>', now())->get() ?? [])->sortBy('planned_at');
         $months = __('time.month_names');
     @endphp
 
