@@ -33,13 +33,11 @@
             </div>
 
             <div class="mt-2 sm:mt-3">
-                <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-base md:text-lg lg:text-xl font-bold">
-                    {{ collect($hosting->tariffs)->min('t') }} <span class="text-xxs sm:text-xs">₽/{{ __('kW') }}</span>
+                <div class="text-slate-800 dark:text-slate-200 text-xxs sm:text-xs font-bold">
+                    {{ __('from') }} <span class="text-lg sm:text-xl lg:text-2xl">{{ collect($hosting->tariffs)->min('t') }}</span> ₽/{{ __('kW') }}
                 </div>
 
-                <a href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}"
-                    target="_blank" draggable="false"
-                    class="block hover:underline text-xxs xs:text-xs text-indigo-500 hover:text-indigo-600 mt-1 sm:mt-2">{{ $hosting->city ?? 'Unknown' }}</a>
+                <div class="text-xxs xs:text-xs text-indigo-500 mt-1 sm:mt-2">{{ $hosting->city ?? 'Unknown' }}</div>
 
                 <div class="relative flex mt-1 sm:mt-2 items-center">
                     <a class="block w-full" draggable="false"
@@ -55,7 +53,7 @@
         <div class="h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
             <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
                 @if (count($hosting->images))
-                    <div class="w-full aspect-4/3 overflow-hidden rounded-xl justify-center items-center mb-6">
+                    <div class="w-full aspect-4/3 overflow-hidden rounded-xl justify-center items-center">
                         <a class="block w-full" href="{{ route('company.hostings', ['user' => $hosting->user->slug]) }}" draggable="false"
                             x-data="{ shown: false }" x-intersect.once.margin.300px="shown = true" aria-label="{{ $hosting->user->name }} hosting">
                             @php
@@ -76,22 +74,21 @@
                     </div>
                 @endif
 
-                <div class="hidden md:block">
+                <div class="hidden md:block mt-6">
                     <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
                 </div>
             </div>
 
             <div class="lg:col-span-3 flex flex-col justify-between">
-                <div class="space-y-5">
-                    <h3 class="flex items-center text-xs xs:text-sm sm:text-base font-bold tracking-tight text-slate-800 dark:text-slate-200">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        {{ __($hosting->city ?? 'Unknown') }}
-                    </h3>
+                <div class="space-y-4">
+                    <div>
+                        <h2 class="sr-only">{{ __('Mining hotel') }} {{ $hosting->user->name }}</h2>
+
+                        <a href="{{ route('company', ['user' => $hosting->user->slug]) }}" draggable="false"
+                            class="block hover:underline text-sm xs:text-base sm:text-lg text-indigo-500 hover:text-indigo-600">{{ $hosting->user->name }}</a>
+
+                        <x-tf :tf="$hosting->user->tf" :company="$hosting->user->name" class="mt-1 md:mt-2" />
+                    </div>
 
                     <div class="grid grid-cols-3 xl:grid-cols-2 gap-2">
                         @foreach ($hosting->tariffs as $tariff)
@@ -104,16 +101,16 @@
                         @endforeach
                     </div>
 
-                    <div class="md:hidden">
+                    <div class="md:hidden mb-4">
                         <x-peculiarities :ps="$hosting->peculiarities" model="hosting"></x-peculiarities>
                     </div>
                 </div>
 
-                <div class="space-y-5">
+                <div class="space-y-4">
                     <div>
                         <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
 
-                        <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                        <ul role="list" class="list-disc space-y-1 pl-4 text-sm">
                             @if (!count($hosting->conditions))
                                 <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                             @else
@@ -127,7 +124,7 @@
                     <div>
                         <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Additional costs') }}</h3>
 
-                        <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+                        <ul role="list" class="list-disc space-y-1 pl-4 text-sm">
                             @if (!count($hosting->expenses))
                                 <li class="text-slate-600 dark:text-slate-400">{{ __('Not specified') }}</li>
                             @else
@@ -138,10 +135,26 @@
                         </ul>
                     </div>
 
-                    <a class="block mt-6 w-full"
-                        href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}">
-                        <x-buttons.primary-button class="w-full">{{ __('Details') }}</x-buttons.primary-button>
-                    </a>
+                    <div>
+                        <div class="text-xxs xs:text-xs text-indigo-500">{{ $hosting->city ?? 'Unknown' }}</div>
+
+                        <div class="flex items-center gap-4 mt-1 sm:mt-2">
+                            <a class="block w-full"
+                                href="{{ route('company.hosting', ['user' => $hosting->user->slug, 'hosting' => strtolower($hosting->cityRelation->name['en'] ?? 'unknown-city') . '-' . $hosting->id]) }}">
+                                <x-buttons.primary-button class="w-full">{{ __('Details') }}</x-buttons.primary-button>
+                            </a>
+
+                            @if ($auth?->id == $hosting->user->id && request()->routeIs('company.hostings'))
+                                <a class="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+                                    href="{{ route('hosting.edit', ['hosting' => $hosting->id]) }}" aria-label="{{ __('Edit') }}">
+                                    <svg class="w-7 h-7" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                                    </svg>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

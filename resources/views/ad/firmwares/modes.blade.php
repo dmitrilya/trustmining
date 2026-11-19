@@ -45,7 +45,7 @@
         <x-inputs.text-input id="mode_hashrate" type="text" x-model="hashrate" ::placeholder="measurement + '/s'" class="w-full mt-0!" />
         <x-inputs.text-input id="mode_efficiency" type="number" step="0.1" x-model="efficiency" ::placeholder="'{{ __('Eff.') }}' + ' j/' + measurement" class="w-full mt-0!" />
         <x-inputs.select handleChange="(strainLevel => strain = strainLevel)" :items="collect($strainLevels)" size="lg" />
-        <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addMode()">＋ {{ __('Add') }}</x-buttons.secondary-button>
+        <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addMode()">{{ __('Add') }}</x-buttons.secondary-button>
     </div>
 
     <template x-if="modes.length">

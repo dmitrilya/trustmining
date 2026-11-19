@@ -382,7 +382,7 @@ return [
             'description' => 'Learn about the company\'s equipment hosting platforms: name. Terms and current rates are available on the Trust Mining website'
         ],
         'show' => [
-            'title' => 'Mining Hotel :name - Mining Hosting',
+            'title' => 'Mining Hotel :name - Hosting for ASICs',
             'description' => 'Host your equipment with :name at the rate of :tariff ₽/kW. Reliability analysis, photos, prices, and terms on the Trust Mining website'
         ],
         'create' => [

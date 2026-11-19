@@ -28,7 +28,7 @@
             <div
                 class="bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 overflow-hidden shadow shadow-logo-color rounded-xl p-2 sm:p-4 md:p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
-                    <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6 space-y-5">
+                    <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6 space-y-4">
                         <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl flex items-center gap-3">
                             <span
                                 class="inline-flex mr-1 xs:mr-2 sm:mr-0 items-center justify-center min-w-8 h-8 rounded-xl bg-white/40 dark:bg-slate-900/40 text-slate-600 dark:text-slate-400 font-mono text-base border border-slate-300 dark:border-slate-700">{{ $loop->iteration }}</span>

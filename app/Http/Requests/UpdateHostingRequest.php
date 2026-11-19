@@ -32,8 +32,11 @@ class UpdateHostingRequest extends FormRequest
             'territory' => 'file|mimes:doc,docx,pdf|max:1024',
             'energy_supply' => 'file|mimes:doc,docx,pdf|max:1024',
             'tariffs' => 'required|array|min:1',
-            'tariffs.*.t' => 'required|numeric|between:0,10',
+            'tariffs.*.t' => 'required|numeric|between:0,20',
             'tariffs.*.u' => 'required|numeric|between:0,100',
+            'total_capacity' => 'nullable|required_with:occupied_capacity|numeric|min:0',
+            'occupied_capacity' => 'nullable|numeric|min:0|lte:total_capacity',
+            'expansions' => 'nullable|array',
         ];
     }
 

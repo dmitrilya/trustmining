@@ -32,5 +32,20 @@ return [
         'october' => 'October',
         'november' => 'November',
         'december' => 'December'
+    ],
+
+    'month_short_names' => [
+        'january' => 'Jan',
+        'february' => 'Feb',
+        'march' => 'Mar',
+        'april' => 'Apr',
+        'may' => 'May',
+        'june' => 'Jun',
+        'july' => 'Jul',
+        'august' => 'Aug',
+        'september' => 'Sep',
+        'october' => 'Oct',
+        'november' => 'Nov',
+        'december' => 'Dec'
     ]
 ];

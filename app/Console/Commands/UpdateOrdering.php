@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Ad\Ad;
 use App\Models\User\User;
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 
 class UpdateOrdering extends Command
 {

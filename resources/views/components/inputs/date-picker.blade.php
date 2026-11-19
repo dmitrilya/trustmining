@@ -1,4 +1,4 @@
-@props(['name', 'label' => null, 'type' => 'date', 'min' => null, 'max' => null, 'value' => null, 'disabled' => false])
+@props(['name', 'label' => null, 'type' => 'date', 'min' => null, 'max' => null, 'value' => null, 'placeholder' => 'Immediately', 'disabled' => false])
 
 @php
     $minDateValue = null;
@@ -18,7 +18,7 @@
     minTimestamp: {{ $minDateValue ?? 'null' }},
     maxTimestamp: {{ $maxDateValue ?? 'null' }},
     initialTimestamp: {{ $initialTimestamp ? $initialTimestamp * 1000 : 'null' }}
-})" x-init="init()" class="w-full relative">
+})" x-init="init()" @datetime-clear.window="clear()" class="w-full relative">
     @if ($label)
         <x-inputs.input-label class="mb-1" for="{{ $name }}_display" :value="__($label)" />
     @endif
@@ -27,7 +27,7 @@
 
     <div class="relative w-full">
         <input type="text" id="{{ $name }}_display" {{ $disabled ? 'disabled' : '' }} readonly :value="getDisplayValue()" @click="open = !open"
-            class="py-1.5 px-10 block w-full rounded-lg shadow shadow-logo-color bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-indigo-500 focus:outline-none disabled:opacity-25">
+            class="py-1.5 px-10 block w-full rounded-lg shadow shadow-logo-color bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 focus:ring-indigo-500 dark:focus:ring-emerald-500/50 focus:outline-none disabled:opacity-25">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-600 dark:text-slate-400">
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -56,40 +56,69 @@
         style="display: none;">
         <div class="flex items-center justify-between mb-3">
             <button type="button" @click="prevMonth()"
-                class="w-8 h-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">&lt;</button>
-            <span class="text-sm text-slate-800 dark:text-slate-200" x-text="monthNames[month] + ' ' + year"></span>
+                class="w-8 h-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+                &lt;
+            </button>
+
+            <span class="text-sm text-slate-800 dark:text-slate-200" x-text="config.type === 'month' ? year : monthNames[month] + ' ' + year">
+            </span>
+
             <button type="button" @click="nextMonth()"
-                class="w-8 h-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">&gt;</button>
+                class="w-8 h-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400">
+                &gt;
+            </button>
         </div>
 
-        <div class="grid grid-cols-7 gap-1 text-center text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">
-            <div>{{ __('time.weekday_names.mon') }}</div>
-            <div>{{ __('time.weekday_names.tue') }}</div>
-            <div>{{ __('time.weekday_names.wed') }}</div>
-            <div>{{ __('time.weekday_names.thu') }}</div>
-            <div>{{ __('time.weekday_names.fri') }}</div>
-            <div>{{ __('time.weekday_names.sat') }}</div>
-            <div>{{ __('time.weekday_names.sun') }}</div>
-        </div>
+        @if ($type != 'month')
+            <div class="grid grid-cols-7 gap-1 text-center text-xs font-medium text-slate-600 dark:text-slate-400 mb-2">
+                <div>{{ __('time.weekday_names.mon') }}</div>
+                <div>{{ __('time.weekday_names.tue') }}</div>
+                <div>{{ __('time.weekday_names.wed') }}</div>
+                <div>{{ __('time.weekday_names.thu') }}</div>
+                <div>{{ __('time.weekday_names.fri') }}</div>
+                <div>{{ __('time.weekday_names.sat') }}</div>
+                <div>{{ __('time.weekday_names.sun') }}</div>
+            </div>
+        @endif
 
-        <div class="grid grid-cols-7 gap-1 text-center text-sm" style="min-height: 192px">
-            <template x-for="blank in blanks">
-                <div class="p-1"></div>
-            </template>
+        <template x-if="config.type === 'month'">
+            <div class="grid grid-cols-3 gap-2 text-center text-sm">
+                <template x-for="(name, index) in monthNames" :key="index">
+                    <button type="button" @click="isMonthDisabled(index) ? null : selectMonth(index)" :disabled="isMonthDisabled(index)"
+                        class="p-1 rounded-lg transition overflow-hidden"
+                        :class="{
+                            'text-slate-200 bg-indigo-600': isSelectedMonth(index),
+                            'text-indigo-500 font-bold border border-indigo-600 hover:bg-slate-200 dark:hover:bg-slate-800': isCurrentMonth(index) && !
+                                isSelectedMonth(index) && !isMonthDisabled(index),
+                            'text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800':
+                                !isCurrentMonth(index) && !isSelectedMonth(index) && !isMonthDisabled(index),
+                            'text-slate-400 dark:text-slate-600 cursor-not-allowed opacity-30': isMonthDisabled(index)
+                        }"
+                        x-text="name"></button>
+                </template>
+            </div>
+        </template>
 
-            <template x-for="date in daysInMonth">
-                <button type="button" @click="isDisabled(date) ? null : selectDay(date)" :disabled="isDisabled(date)" class="p-1 rounded-lg transition"
-                    :class="{
-                        'text-slate-200 bg-indigo-600 hover:bg-indigo-700': isSelected(date),
-                        'text-indigo-500 font-bold border border-indigo-600 hover:bg-slate-200 dark:hover:bg-slate-800': isToday(date) && !isSelected(date) && !
-                            isDisabled(date),
-                        'text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer':
-                            !isToday(date) && !isSelected(date) && !isDisabled(date),
-                        'text-slate-800 dark:text-slate-200 cursor-not-allowed opacity-25': isDisabled(date)
-                    }"
-                    x-text="date"></button>
-            </template>
-        </div>
+        <template x-if="config.type !== 'month'">
+            <div class="grid grid-cols-7 gap-1 text-center text-sm" style="min-height: 192px">
+                <template x-for="blank in blanks">
+                    <div class="p-1"></div>
+                </template>
+
+                <template x-for="date in daysInMonth">
+                    <button type="button" @click="isDisabled(date) ? null : selectDay(date)" :disabled="isDisabled(date)" class="p-1 rounded-lg transition"
+                        :class="{
+                            'text-slate-200 bg-indigo-600 hover:bg-indigo-700': isSelected(date),
+                            'text-indigo-500 font-bold border border-indigo-600 hover:bg-slate-200 dark:hover:bg-slate-800': isToday(date) && !isSelected(
+                                date) && !isDisabled(date),
+                            'text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer':
+                                !isToday(date) && !isSelected(date) && !isDisabled(date),
+                            'text-slate-800 dark:text-slate-200 cursor-not-allowed opacity-25': isDisabled(date)
+                        }"
+                        x-text="date"></button>
+                </template>
+            </div>
+        </template>
 
         <template x-if="config.type === 'datetime'">
             <div class="mt-3 pt-3 border-t border-slate-300 dark:border-slate-700 flex items-center justify-center gap-2">
@@ -113,11 +142,7 @@
             return {
                 open: false,
                 config: config,
-                monthNames: ['{{ __('time.month_names.january') }}', '{{ __('time.month_names.february') }}', '{{ __('time.month_names.march') }}',
-                    '{{ __('time.month_names.april') }}', '{{ __('time.month_names.may') }}', '{{ __('time.month_names.june') }}',
-                    '{{ __('time.month_names.july') }}', '{{ __('time.month_names.august') }}', '{{ __('time.month_names.september') }}',
-                    '{{ __('time.month_names.october') }}', '{{ __('time.month_names.november') }}', '{{ __('time.month_names.december') }}'
-                ],
+                monthNames: @js(array_map(fn($month) => __('time.month_' . ($type === 'month' ? 'short_' : '') . "names.$month"), ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'])),
                 viewDate: new Date(),
                 selectedDate: null,
                 month: 0,
@@ -141,6 +166,12 @@
                     this.getDays();
                 },
 
+                handleChange() {
+                    this.$dispatch('datetime-change', {
+                        value: this.getFormattedValue()
+                    });
+                },
+
                 getDays() {
                     let days = new Date(this.year, this.month + 1, 0).getDate();
                     this.daysInMonth = Array.from({
@@ -154,22 +185,28 @@
                 },
 
                 prevMonth() {
-                    if (this.month === 0) {
+                    if (this.config.type === 'month') {
+                        this.year--;
+                    } else if (this.month === 0) {
                         this.month = 11;
                         this.year--;
                     } else {
                         this.month--;
                     }
+
                     this.getDays();
                 },
 
                 nextMonth() {
-                    if (this.month === 11) {
+                    if (this.config.type === 'month') {
+                        this.year++;
+                    } else if (this.month === 11) {
                         this.month = 0;
                         this.year++;
                     } else {
                         this.month++;
                     }
+
                     this.getDays();
                 },
 
@@ -181,8 +218,29 @@
                     return false;
                 },
 
+                isMonthDisabled(month) {
+                    const monthStart = new Date(this.year, month, 1, 0, 0, 0).getTime();
+                    const monthEnd = new Date(this.year, month + 1, 0, 23, 59, 59, 999).getTime();
+
+                    if (this.config.minTimestamp && monthEnd < this.config.minTimestamp) return true;
+                    if (this.config.maxTimestamp && monthStart > this.config.maxTimestamp) return true;
+
+                    return false;
+                },
+
+                selectMonth(month) {
+                    if (this.isMonthDisabled(month)) return;
+
+                    this.selectedDate = new Date(this.year, month, 1);
+                    this.month = month;
+                    this.handleChange();
+                    this.open = false;
+                },
+
                 selectDay(day) {
                     this.selectedDate = new Date(this.year, this.month, day, this.hour, this.minute);
+                    this.handleChange();
+
                     if (this.config.type === 'date') this.open = false;
                 },
 
@@ -201,6 +259,14 @@
                         this.hour,
                         this.minute
                     );
+
+                    this.handleChange();
+                },
+
+                clear() {
+                    this.selectedDate = null;
+                    this.open = false;
+                    this.handleChange();
                 },
 
                 isSelected(day) {
@@ -210,13 +276,33 @@
                         this.selectedDate.getFullYear() === this.year;
                 },
 
+                isSelectedMonth(month) {
+                    return this.selectedDate &&
+                        this.selectedDate.getMonth() === month &&
+                        this.selectedDate.getFullYear() === this.year;
+                },
+
                 isToday(day) {
                     let today = new Date();
                     return today.getDate() === day && today.getMonth() === this.month && today.getFullYear() === this.year;
                 },
 
+                isCurrentMonth(month) {
+                    const today = new Date();
+
+                    return today.getMonth() === month &&
+                        today.getFullYear() === this.year;
+                },
+
                 getDisplayValue() {
-                    if (!this.selectedDate || this.selectedDate == new Date()) return '{{ __('Immediately') }}';
+                    if (!this.selectedDate) return '{{ __($placeholder) }}';
+
+                    if (this.config.type === 'month') {
+                        return this.selectedDate.toLocaleString('ru-RU', {
+                            month: 'long',
+                            year: 'numeric'
+                        });
+                    }
 
                     let options = this.config.type === 'datetime' ? {
                         day: '2-digit',
@@ -239,6 +325,12 @@
                     let d = this.selectedDate;
                     let pad = (num) => String(num).padStart(2, '0');
 
+                    if (this.config.type === 'month') {
+                        let year = d.getFullYear();
+                        let month = pad(d.getMonth() + 1);
+                        return `${year}-${month}-01`;
+                    }
+
                     let year = d.getUTCFullYear();
                     let month = pad(d.getUTCMonth() + 1);
                     let day = pad(d.getUTCDate());
@@ -249,11 +341,6 @@
                         `${year}-${month}-${day} ${hours}:${minutes}:00` :
                         `${year}-${month}-${day}`;
                 },
-
-                clear() {
-                    this.selectedDate = null;
-                    this.open = false;
-                }
             }
         }
     }

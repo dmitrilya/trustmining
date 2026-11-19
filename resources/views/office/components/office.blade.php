@@ -5,7 +5,7 @@
             <x-carousel :images="$images['data']" min="128" max="128"></x-carousel>
         </div>
 
-        <div class="md:col-span-4 space-y-5">
+        <div class="md:col-span-4 space-y-4">
             <h3 class="flex items-center mb-4 text-sm font-bold tracking-tight text-slate-800 dark:text-slate-200 xs:text-base sm:text-lg">
                 <svg class="min-w-4 w-4 h-4 sm:min-w-5 sm:w-5 sm:h-5 text-slate-600 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                     height="24" fill="currentColor" viewBox="0 0 24 24">

@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Rating;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
-use App\Models\User\User;
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 
 class HostingRatingController extends Controller
 {

@@ -18,35 +18,8 @@
     <div class="mx-auto md:grid md:grid-cols-12 md:grid-rows-[auto,auto,1fr] md:gap-x-8 offer-card">
         <div class="md:col-span-5">
             <div class="h-full flex flex-col justify-between">
-                <div class="flex gap-2{{ $preview['changed'] || $images['changed'] ? ' border border-indigo-500' : '' }}" x-data="{ active: 0 }">
-                    <div class="min-w-16 w-16 flex flex-col gap-2">
-                        <div @click="active = 0" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
-                            :class="active === 0 ? 'ring-2 ring-indigo-500' : 'opacity-80 hover:opacity-100'">
-                            <img src="{{ Storage::url($preview['data']) }}" alt="{{ $alt }} {{ __('Preview') }}"
-                                class="w-full h-full rounded-lg object-cover">
-                        </div>
-
-                        @foreach ($images['data'] as $index => $image)
-                            <div @click="active = {{ $index + 1 }}" class="w-full aspect-4/3 rounded-lg cursor-pointer transition"
-                                :class="active === {{ $index + 1 }} ? 'ring-2 ring-indigo-500' :
-                                    'opacity-80 hover:opacity-100'">
-                                <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ __('Preview') }} {{ $index + 2 }}"
-                                    class="w-full h-full rounded-lg object-cover">
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="relative w-full aspect-4/3 rounded-lg overflow-hidden bg-slate-100">
-                        <div x-show="active === 0" x-transition.opacity.duration.300ms class="absolute inset-0">
-                            <img itemprop="image" src="{{ Storage::url($preview['data']) }}" alt="{{ $alt }}" class="w-full h-full object-cover">
-                        </div>
-
-                        @foreach ($images['data'] as $index => $image)
-                            <div x-show="active === {{ $index + 1 }}" x-transition.opacity.duration.300ms class="absolute inset-0">
-                                <img src="{{ Storage::url($image) }}" alt="{{ $alt }} {{ $index + 2 }}" class="w-full h-full object-cover">
-                            </div>
-                        @endforeach
-                    </div>
+                <div class="{{ $preview['changed'] || $images['changed'] ? 'border border-indigo-500' : '' }}">
+                    <x-images :images="[$preview['data'], ...$images['data']]" :alt="$alt" />
                 </div>
 
                 <div class="hidden md:block">
@@ -132,7 +105,9 @@
                         <meta itemprop="priceCurrency" content="{{ $coin['data'] != 'USDT' ? $coin['data'] : 'USD' }}" />
                         <meta itemprop="valueAddedTaxIncluded" content="{{ $with_vat['data'] ? 'true' : 'false' }}" />
 
-                        @if ($ad->adCategory->name == 'miners' && data_get($ad, 'version_data.price_data.' . $props['data']['Condition'] . '.' . $props['data']['Availability'], null) !== null)
+                        @if (
+                            $ad->adCategory->name == 'miners' &&
+                                data_get($ad, 'version_data.price_data.' . $props['data']['Condition'] . '.' . $props['data']['Availability'], null) !== null)
                             @include('ad.components.price-graduation', [
                                 'price' => $price['data'] . ' ' . $coin['data'],
                                 'withVat' => $with_vat['data'],

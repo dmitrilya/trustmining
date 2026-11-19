@@ -9,7 +9,7 @@
     </x-slot>
 
     <div class="max-w-3xl mx-auto px-2 py-4 sm:p-6 lg:p-8">
-        <div class="p-4 sm:p-8 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
+        <div class="p-2 sm:p-4 lg:p-6 bg-white/40 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 shadow shadow-logo-color rounded-xl">
             <p class="text-xxs sm:text-xs text-slate-600 mt-6">* - {{ __('required fields') }}</p>
 
             <form method="post" action="{{ route('hosting.store') }}" class="mt-2 space-y-6" enctype=multipart/form-data x-data="{ description: `{{ old('description') }}` }"
@@ -93,6 +93,27 @@
                 <x-inputs.editable-list name="expenses">
                     <x-inputs.input-label :value="__('Additional costs (e.g. delivery to the territory)')" />
                 </x-inputs.editable-list>
+
+                <div x-data="{
+                    total: '{{ old('total_capacity', '') }}',
+                    occupied: '{{ old('occupied_capacity', '') }}'
+                }" class="flex flex-col xs:flex-row gap-4">
+                    <div class="w-full">
+                        <x-inputs.input-label for="total_capacity" :value="__('Total capacity') . ' (' . __('kW') . ')'" />
+                        <x-inputs.text-input id="total_capacity" name="total_capacity" type="text" autocomplete="total_capacity" x-model="total"
+                            @input="total = filterDouble($el, 0, 10000000, 0); $el.value = total" />
+                        <x-inputs.input-error :messages="$errors->get('total_capacity')" />
+                    </div>
+
+                    <div class="w-full">
+                        <x-inputs.input-label for="occupied_capacity" :value="__('Occupied capacity') . ' (' . __('kW') . ')'" />
+                        <x-inputs.text-input id="occupied_capacity" name="occupied_capacity" type="text" autocomplete="occupied_capacity" x-model="occupied"
+                            @input="occupied = filterDouble($el, 0, parseFloat(total) || 10000000, 0); $el.value = occupied" />
+                        <x-inputs.input-error :messages="$errors->get('occupied_capacity')" />
+                    </div>
+                </div>
+
+                @include('hosting.components.expansions', ['expansions' => old('expansions', [])])
 
                 <x-inputs.editor name="description" />
                 <x-inputs.input-error :messages="$errors->get('description')" />

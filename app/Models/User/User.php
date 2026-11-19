@@ -156,12 +156,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hostings()
     {
-        return $this->hasMany(\App\Models\Ad\Hosting::class);
+        return $this->hasMany(\App\Models\Hosting\Hosting::class);
     }
 
     public function hosting()
     {
-        return $this->hasOne(\App\Models\Ad\Hosting::class)
+        return $this->hasOne(\App\Models\Hosting\Hosting::class)
             ->orderByRaw("(SELECT MIN(t.t) FROM JSON_TABLE(hostings.tariffs, '$[*]' COLUMNS (t DECIMAL(4, 2) PATH '$.t')) AS t) ASC")
             ->orderBy('hostings.id');
     }

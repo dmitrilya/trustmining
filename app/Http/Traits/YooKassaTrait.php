@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 use App\Jobs\TokenNull;
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 use App\Models\User\User;
 use App\Models\DailyHostingProfit;
 use Carbon\Carbon;

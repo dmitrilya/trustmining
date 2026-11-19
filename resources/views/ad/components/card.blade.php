@@ -90,7 +90,7 @@
             </div>
 
             <a href="{{ route('company', ['user' => $ad->user_slug]) }}" draggable="false"
-                class="block hover:underline text-xs md:text-sm text-indigo-500 hover:text-indigo-600 mt-1">{{ $ad->user_name }}</a>
+                class="block hover:underline text-xs sm:text-sm text-indigo-500 hover:text-indigo-600 mt-1">{{ $ad->user_name }}</a>
 
             <x-tf :tf="$ad->user_tf" :company="$ad->user_name" class="my-1 md:my-2" />
 
@@ -143,16 +143,16 @@
 
         <div class="mt-2 sm:mt-3">
             @if ($ad->price != 0 && $ad->with_vat)
-                <div class="text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit">
+                <div class="text-emerald-600 dark:text-emerald-400 text-xxs sm:text-xs w-fit mb-1">
                     {{ __('The price includes VAT') }}
                 </div>
             @endif
 
-            <div class="text-slate-800 dark:text-slate-200 text-sm sm:text-base md:text-lg lg:text-xl font-bold">
+            <div class="text-slate-800 dark:text-slate-200 font-bold">
                 @if ($ad->price != 0)
-                    {{ $ad->price }} <span class="text-xxs sm:text-xs">{{ $ad->coin }}</span>
+                    <span class="text-lg sm:text-xl lg:text-2xl">{{ $ad->price }}</span> <span class="text-xxs sm:text-xs">{{ $ad->coin }}</span>
                 @else
-                    {{ __('Price on request') }}
+                    <span class="text-sm sm:text-base md:text-lg lg:text-xl">{{ __('Price on request') }}</span>
                 @endif
             </div>
 

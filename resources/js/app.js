@@ -169,20 +169,23 @@ window.scrollBottom = function (el) {
 }
 
 window.filterDouble = function (el, min, max, precision) {
-    let v = el.value.replace(/,/g, '.').replace(/[^\d.]/g, '').replace(/^0+(?=\d)/, '');
+    let regex = precision === 0 ? /[^\d]/g : /[^\d.]/g;
+    let v = el.value.replace(/,/g, '.').replace(regex, '').replace(/^0+(?=\d)/, '');
 
     let parts = v.split('.');
     if (parts.length > 2) v = parts[0] + '.' + parts.slice(1).join('');
 
-    parts = v.split('.');
-    if (parts[1] && parts[1].length > precision) {
-        v = parts[0] + '.' + parts[1].slice(0, precision);
+    if (precision > 0) {
+        parts = v.split('.');
+        if (parts[1] && parts[1].length > precision) {
+            v = parts[0] + '.' + parts[1].slice(0, precision);
+        }
     }
 
     if (v !== '' && !v.endsWith('.')) {
         let num = parseFloat(v);
-        if (max && num > max) v = max;
-        if (min && num < min) v = min;
+        if (max !== undefined && max !== null && num > max) v = max;
+        else if (min !== undefined && min !== null && num < min) v = min;
     }
 
     return v.toString();

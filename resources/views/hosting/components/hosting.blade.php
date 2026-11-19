@@ -3,15 +3,17 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-3 sm:gap-6">
         <div class="lg:col-span-4 sm:border-r border-slate-300 dark:border-slate-700 sm:pr-6">
             <div class="{{ $images['changed'] ? 'border border-indigo-500' : '' }}">
-                <x-carousel :images="$images['data']" min="128" max="128"></x-carousel>
+                <x-images :images="$images['data']" :alt="__('Hosting') . ' ' . $owner->name" previews_position="under" />
             </div>
 
-            <div class="hidden md:block mt-6">
-                <x-peculiarities :class="$peculiarities['changed'] ? 'border border-indigo-500' : ''" :ps="$peculiarities['data']" model="hosting"></x-peculiarities>
-            </div>
+            @if ($hosting->hostingCapacity)
+                <div class="mt-4 sm:mt-6">
+                    @include('hosting.components.capacity')
+                </div>
+            @endif
         </div>
 
-        <div class="lg:col-span-3 space-y-5">
+        <div class="lg:col-span-3 space-y-4">
             <h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-slate-200 sm:text-2xl">
                 {{ __('Hosting ASICs for mining') }}
             </h1>
@@ -38,9 +40,7 @@
                 @endforeach
             </div>
 
-            <div class="md:hidden">
-                <x-peculiarities :class="$peculiarities['changed'] ? 'border border-indigo-500' : ''" :ps="$peculiarities['data']" model="hosting"></x-peculiarities>
-            </div>
+            <x-peculiarities :class="$peculiarities['changed'] ? 'border border-indigo-500' : ''" :ps="$peculiarities['data']" model="hosting"></x-peculiarities>
 
             <div>
                 <h3 class="text-sm text-slate-800 dark:text-slate-200 mb-2">{{ __('Conditions') }}</h3>
@@ -70,6 +70,8 @@
                 </ul>
             </div>
 
+            @include('hosting.components.expansions-view')
+
             @if (!$isModeration)
                 <div>
                     @if ($isOwner)
@@ -87,7 +89,7 @@
     </div>
 
     <div class="mt-8">
-        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8">
+        <div class="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             @if ($contract['data'])
                 <div class="{{ $contract['changed'] ? 'border border-indigo-500' : '' }}">
                     <x-document :path="Storage::url($contract['data'])" :name="__('Contract')"></x-document>

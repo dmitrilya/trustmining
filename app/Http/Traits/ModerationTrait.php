@@ -21,7 +21,7 @@ trait ModerationTrait
                 'moderationable' => function ($morphTo) {
                     $morphTo->morphWith([
                         \App\Models\User\Company::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],
-                        \App\Models\Ad\Hosting::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],
+                        \App\Models\Hosting\Hosting::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],
                         \App\Models\Ad\Ad::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],
                         \App\Models\Morph\Review::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],
                         \App\Models\User\Office::class => ['user:id,name,tariff_id', 'user.company:user_id,logo'],

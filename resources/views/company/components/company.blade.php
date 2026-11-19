@@ -7,7 +7,7 @@
             </div>
         @endif
 
-        <div class="space-y-5">
+        <div class="space-y-4">
             <h1 class="text-xl sm:text-2xl text-slate-800 dark:text-slate-200">{{ $company->name }}</h1>
 
             @if ($isModeration)

@@ -9,7 +9,7 @@ return [
     'seconds' => 'секунда|секунды|секунд',
     'period_choice' => 'каждый день|каждые :count дня|каждые :count дней',
 
-    'weekdays' => [
+    'weekday_names' => [
         'mon' => 'Пн',
         'tue' => 'Вт',
         'wed' => 'Ср',
@@ -32,5 +32,20 @@ return [
         'october' => 'Октябрь',
         'november' => 'Ноябрь',
         'december' => 'Декабрь'
+    ],
+
+    'month_short_names' => [
+        'january' => 'Янв',
+        'february' => 'Фев',
+        'march' => 'Мар',
+        'april' => 'Апр',
+        'may' => 'Май',
+        'june' => 'Июн',
+        'july' => 'Июл',
+        'august' => 'Авг',
+        'september' => 'Сен',
+        'october' => 'Окт',
+        'november' => 'Ноя',
+        'december' => 'Дек'
     ]
 ];

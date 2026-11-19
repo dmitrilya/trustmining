@@ -5,7 +5,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 
 use App\Jobs\GetYandexGPTOperation;
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 use App\Models\Forum\ForumAnswer;
 use App\Models\Forum\ForumComment;
 use App\Models\Forum\ForumQuestion;

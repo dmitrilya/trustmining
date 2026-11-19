@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Ad;
+namespace App\Models\Hosting;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -85,6 +85,21 @@ class Hosting extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User\User::class);
+    }
+
+    public function hostingCapacities()
+    {
+        return $this->hasMany(HostingCapacity::class);
+    }
+
+    public function hostingCapacity()
+    {
+        return $this->hasOne(HostingCapacity::class)->latestOfMany();
+    }
+
+    public function hostingExpansions()
+    {
+        return $this->hasMany(HostingExpansion::class);
     }
 
     public function moderations()

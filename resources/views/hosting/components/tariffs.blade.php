@@ -33,10 +33,10 @@
 
     <div class="grid grid-cols-1 xs:grid-cols-3 gap-1 xs:gap-2 p-2 sm:p-4 rounded-xl border border-slate-300 dark:border-slate-700">
         <x-inputs.text-input id="tariff_tariff" type="text" ::value="tariff" placeholder="₽/{{ __('kW') }}" class="w-full mt-0!"
-            @input="tariff = filterDouble($el, 0, 10, 2);$el.value = tariff" />
+            @input="tariff = filterDouble($el, 0, 20, 2);$el.value = tariff" />
         <x-inputs.text-input id="tariff_uptime" type="text" ::value="uptime" placeholder="%" class="w-full mt-0!"
             @input="uptime = filterDouble($el, 0, 100, 2);$el.value = uptime" />
-        <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addTariff()">＋ {{ __('Add') }}</x-buttons.secondary-button>
+        <x-buttons.secondary-button class="sm:text-xs font-semibold" type="button" @click="addTariff()">{{ __('Add') }}</x-buttons.secondary-button>
     </div>
 
     <template x-if="tariffs.length">

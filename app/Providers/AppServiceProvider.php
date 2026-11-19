@@ -108,7 +108,7 @@ class AppServiceProvider extends ServiceProvider
             'company'       => \App\Models\User\Company::class,
             'office'        => \App\Models\User\Office::class,
             'passport'      => \App\Models\User\Passport::class,
-            'hosting'       => \App\Models\Ad\Hosting::class,
+            'hosting'       => \App\Models\Hosting\Hosting::class,
             'ad'            => \App\Models\Ad\Ad::class,
             'track'         => \App\Models\Morph\Track::class,
             'message'       => \App\Models\Chat\Message::class,

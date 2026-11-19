@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\HostingTrait;
 use App\Http\Traits\FileTrait;
 
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 use App\Models\City;
 
 class HostingController extends Controller
@@ -128,6 +128,13 @@ class HostingController extends Controller
             'expenses' => $request->expenses ?? [],
         ]);
 
+        if ($request->total_capacity) $hosting->hostingCapacities()->create([
+            'total' => $request->total_capacity,
+            'occupied' => $request->occupied_capacity,
+        ]);
+
+        $hosting->hostingExpansions()->insert($request->expansions ?? []);
+
         $time = time();
         $hosting->images = $this->saveFiles($request->file('images'), 'hostings', 'photo', $hosting->id, $time, [608, null], $user->name);
         $this->saveFile($request->file('images')[0], 'hostings', 'photo', $hosting->id . '_0', $time, [400, 300], $user->name);
@@ -146,7 +153,7 @@ class HostingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ad\Hosting  $hosting
+     * @param  \App\Models\Hosting\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
     public function edit(Hosting $hosting)
@@ -163,7 +170,7 @@ class HostingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateHostingRequest  $request
-     * @param  \App\Models\Ad\Hosting  $hosting
+     * @param  \App\Models\Hosting\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateHostingRequest $request, Hosting $hosting)
@@ -187,6 +194,17 @@ class HostingController extends Controller
         if (collect($hosting->conditions)->sort()->values()->toArray() !== collect($c)->sort()->values()->toArray()) $data['conditions'] = $c;
         if (collect($hosting->expenses)->sort()->values()->toArray() !== collect($e)->sort()->values()->toArray()) $data['expenses'] = $e;
 
+        if ($request->total_capacity && (
+            $request->total_capacity != $hosting->hostingCapacity?->total || (
+                $request->filled('occupied_capacity') && $request->occupied_capacity != $hosting->hostingCapacity?->occupied
+            )
+        )) $hosting->hostingCapacities()->create([
+            'total' => $request->total_capacity,
+            'occupied' => $request->occupied_capacity,
+        ]);
+
+        $hosting->hostingExpansions()->createMany($request->expansions ?? []);
+
         $time = time();
 
         if ($request->images) {
@@ -207,7 +225,7 @@ class HostingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ad\Hosting  $hosting
+     * @param  \App\Models\Hosting\Hosting  $hosting
      * @return \Illuminate\Http\Response
      */
     public function destroy(Hosting $hosting)

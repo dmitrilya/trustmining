@@ -7,7 +7,7 @@ use PhpOffice\PhpWord\IOFactory;
 use Illuminate\Support\Facades\Storage;
 
 use App\Services\YandexGPTService;
-use App\Models\Ad\Hosting;
+use App\Models\Hosting\Hosting;
 use GdImage;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\File;
