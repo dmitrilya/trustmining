@@ -6,11 +6,9 @@
                 <x-images :images="$images['data']" :alt="__('Hosting') . ' ' . $owner->name" previews_position="under" />
             </div>
 
-            @if ($hosting->hostingCapacity)
-                <div class="mt-4 sm:mt-6">
-                    @include('hosting.components.capacity')
-                </div>
-            @endif
+            <div class="mt-4 sm:mt-6">
+                @include('hosting.components.capacity')
+            </div>
         </div>
 
         <div class="lg:col-span-3 space-y-4">

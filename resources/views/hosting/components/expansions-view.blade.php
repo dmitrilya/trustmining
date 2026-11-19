@@ -22,7 +22,7 @@
     @endphp
 
     @if ($expansions->isEmpty())
-        <div class="text-center py-6 text-xs text-slate-500 italic">
+        <div class="text-center py-4 text-xs text-slate-500 italic">
             {{ __('No expansion plans specified') }}
         </div>
     @else
