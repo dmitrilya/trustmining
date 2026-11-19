@@ -47,9 +47,8 @@ class VotingController extends Controller
 
         if ($category === VotingCategory::coin_rate_prediction) {
             $allowedPredictionTypes = ['coin_up', 'coin_down'];
-            if (!in_array($voteableType, $allowedPredictionTypes)) {
+            if (!in_array($voteableType, $allowedPredictionTypes))
                 return response()->json(['success' => false, 'message' => __('Invalid prediction direction')], 422);
-            }
         }
 
         $candidate = $modelClass::findOrFail($voteableId);
@@ -76,14 +75,16 @@ class VotingController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => __('Your vote has been successfully counted')
+                'message' => __('Your vote has been successfully counted'),
+                'available_at' => $period->nextRoundTimestampMs(),
             ], 200);
         } catch (\Illuminate\Database\QueryException $e) {
             if ($e->getCode() === '23000') {
                 return response()->json([
                     'success' => false,
                     'reason' => 'already participated',
-                    'message' => __('You have already participated in this vote')
+                    'message' => __('You have already participated in this vote'),
+                    'available_at' => $period->nextRoundTimestampMs(),
                 ], 422);
             }
 

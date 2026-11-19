@@ -12,7 +12,15 @@ export var votingWidget = (url, l) => ({
 
     hasVoted(type, id) {
         const storageKey = this.getStorageKey(type, id);
-        return localStorage.getItem(storageKey) === '1';
+        const expireTime = localStorage.getItem(storageKey);
+        
+        if (!expireTime) return false;
+
+        if (parseInt(expireTime, 10) > Date.now()) return true;
+
+        localStorage.removeItem(storageKey);
+
+        return false;
     },
 
     isButtonDisabled(type, id) {
@@ -60,7 +68,7 @@ export var votingWidget = (url, l) => ({
 
             if (response.ok) {
                 this.message = r.message;
-                localStorage.setItem(storageKey, '1');
+                localStorage.setItem(storageKey, r.available_at);
 
                 if (this.votes[id] !== undefined) this.votes[id]++;
             } else {
@@ -68,7 +76,7 @@ export var votingWidget = (url, l) => ({
                 this.message = r.message || l['Network error. Please try again'];
 
                 if (response.status === 422 && r.reason == 'already participated') {
-                    localStorage.setItem(storageKey, '1');
+                    localStorage.setItem(storageKey, r.available_at);
                 }
             }
         } catch (e) {

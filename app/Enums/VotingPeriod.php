@@ -37,4 +37,19 @@ enum VotingPeriod: string
             self::yearly => (int) $now->format('Y'),
         };
     }
+
+    public function nextRoundTimestampMs(): int
+    {
+        $now = Carbon::now();
+
+        $nextRound = match ($this) {
+            self::daily     => $now->addDay()->startOfDay(),
+            self::weekly    => $now->addWeek()->startOfWeek(),
+            self::monthly   => $now->addMonth()->startOfMonth(),
+            self::quarterly => $now->addQuarter()->startOfQuarter(),
+            self::yearly    => $now->addYear()->startOfYear(),
+        };
+
+        return $nextRound->timestamp * 1000;
+    }
 }
