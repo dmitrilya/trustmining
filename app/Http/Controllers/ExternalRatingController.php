@@ -48,6 +48,8 @@ class ExternalRatingController extends Controller
             if ($href) $links[] = $href;
         }
 
+        shuffle($links);
+
         return response()->json([
             'links' => $links
         ]);
