@@ -49,7 +49,7 @@
 
         <x-filters.filter>@include('hosting.components.filter')</x-filters.filter>
 
-        <div class="grid gap-2 grid-cols-1 xl:grid-cols-2">
+        <div class="grid gap-2 grid-cols-1 xl:grid-cols-2" id="infinite-loader" x-data="{}" x-init="new InfiniteLoader({ endpoint: '{{ route('hostings', request()->route()->originalParameters()) }}', data: {{ request()->collect() }}, page: {{ $hostings->currentPage() }}, lastPage: {{ $hostings->lastPage() }}, count: 1 });">
             @php
                 $auth = Auth::user();
             @endphp

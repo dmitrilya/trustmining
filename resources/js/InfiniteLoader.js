@@ -19,14 +19,17 @@ class InfiniteLoader {
 
     init() {
         this.observeLastItem();
+        console.log('init');
     }
 
     handleIntersect(entries) {
+        console.log('handleIntersect');
         if (entries[0].isIntersecting && !this.isLoading) this.loadMore();
     }
 
     async loadMore() {
         this.isLoading = true;
+        console.log('loadMore');
 
         try {
             const response = await axios.get(this.endpoint, {

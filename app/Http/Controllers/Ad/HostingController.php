@@ -30,14 +30,14 @@ class HostingController extends Controller
      */
     public function index(Request $request)
     {
-        $hostings = $this->getHostings($request)->orderByDesc('ordering_id');
+        $hostings = $this->getHostings($request)->orderByDesc('ordering_id')->paginate(1)->withQueryString();
 
         if ($request->ajax()) return response()->json([
-            'html' => view('hosting.components.list', ['hostings' => $hostings->paginate($request->count), 'auth' => $request->user()])->render(),
+            'html' => view('hosting.components.list', ['hostings' => $hostings, 'auth' => $request->user()])->render(),
             'hasMore' => $hostings->hasMorePages()
         ]);
 
-        return view('hosting.index', ['hostings' => $hostings->paginate(15)]);
+        return view('hosting.index', ['hostings' => $hostings]);
     }
 
     /**
