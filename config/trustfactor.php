@@ -406,23 +406,23 @@ return [
                 ],
                 'components' => [
                     'yandex_maps' => [
-                        'source' => 'reviews.external_ratings.yandex_maps.display',
+                        'source' => 'reviews.external_ratings.yandex_maps.value',
                     ],
 
                     'google_maps' => [
-                        'source' => 'reviews.external_ratings.google_maps.display',
+                        'source' => 'reviews.external_ratings.google_maps.value',
                     ],
 
                     '2gis' => [
-                        'source' => 'reviews.external_ratings.2gis.display',
+                        'source' => 'reviews.external_ratings.2gis.value',
                     ],
 
                     'top_mining' => [
-                        'source' => 'reviews.external_ratings.top_mining.display',
+                        'source' => 'reviews.external_ratings.top_mining.value',
                     ],
 
                     'avito' => [
-                        'source' => 'reviews.external_ratings.avito.display',
+                        'source' => 'reviews.external_ratings.avito.value',
                     ],
                 ],
                 'thresholds' => [

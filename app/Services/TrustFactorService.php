@@ -289,19 +289,19 @@ class TrustFactorService
                     $externalRating['rating'] * $externalRating['reviews_count'] + 4.5 * 5
                 ) / ($externalRating['reviews_count'] + 5);
 
-                $externalRating['display'] = $externalRating['rating']
-                    . ' ' . $externalRating['reviews_count']
-                    . ' ' . trans_choice('navigation.reviews', $externalRating['reviews_count']);
+                $externalRating['value'] = $externalRating['rating']
+                    . ' (' . $externalRating['reviews_count']
+                    . ' ' . trans_choice('navigation.reviews', $externalRating['reviews_count']) . ')';
 
                 return $externalRating;
             });
 
         $externalRatings = [
             'avg' => $externalRatings->avg('corr_rating'),
-            ...$externalRatings->mapWithKeys(fn($rating) => [
-                $rating['source_name'] => [
+            ...$externalRatings->mapWithKeys(fn($rating, $sourceName) => [
+                $sourceName => [
                     'corr_rating' => $rating['corr_rating'],
-                    'display' => $rating['display'],
+                    'value' => $rating['value'],
                 ],
             ])->all(),
         ];

@@ -48,7 +48,7 @@
                         <div class="shrink-0">
                             @if ($factor['type'] === 'threshold_group')
                                 <div class="text-xxs font-mono text-slate-600 dark:text-slate-400">
-                                    {{ $component['display'] ?? '—' }}
+                                    {{ $component['value'] ?? '—' }}
                                 </div>
                             @else
                                 <div
