@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use App\Http\Traits\Metrics\NetworkTrait;
 use App\Http\Traits\Metrics\CoinTrait;
@@ -75,6 +76,45 @@ class MetricsController extends Controller
             'rate' => $latestRate,
             'ads' => $ads
         ]);
+    }
+
+    public function coinRates(Request $request): JsonResponse
+    {
+        $coinNames = $request->coins;
+        if (empty($coinNames) || !is_array($coinNames)) return response()->json(['success' => false], 404);
+
+        $coinsModels = Coin::whereIn('abbreviation', $coinNames)->get(['id', 'name', 'abbreviation']);
+        if (!$coinsModels->count()) return response()->json(['success' => false], 404);
+
+        $thirtyDaysAgo = now()->subDays(30)->startOfDay();
+        $responseCoins = [];
+
+        foreach ($coinsModels as $coin) {
+            $historyData = $coin->coinRates()->where('created_at', '>=', $thirtyDaysAgo)->select([
+                DB::raw("DATE(created_at) as date"),
+                DB::raw("AVG(rate) as avg_rate")
+            ])->groupBy(DB::raw("DATE(created_at)"))->orderBy('date', 'asc')->pluck('avg_rate')
+                ->map(fn($r) => adjust_rate($r))->toArray();
+
+            $rateYesterday = $coin->coinRates()->where('created_at', '<=', now()->subDay())
+                ->orderBy('created_at', 'desc')->value('rate');
+
+            $changePercent = 0.00;
+
+            if ($rateYesterday && (float)$rateYesterday > 0)
+                $changePercent = (($coin->rate - (float)$rateYesterday) / (float)$rateYesterday) * 100;
+
+            if (empty($historyData)) $historyData = [adjust_rate($coin->rate)];
+
+            $responseCoins[$coin->abbreviation] = [
+                'name' => $coin->name,
+                'rate' => adjust_rate($coin->rate),
+                'change' => round($changePercent, 2),
+                'history' => $historyData
+            ];
+        }
+
+        return response()->json(['success' => true, 'coins'   => $responseCoins]);
     }
 
     public function difficulty(Request $request, Coin $coin)

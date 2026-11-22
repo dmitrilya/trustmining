@@ -12,10 +12,10 @@ use App\Http\Requests\Insight\Content\UpdatePostRequest;
 use App\Http\Requests\Insight\StoreCommentRequest;
 use App\Http\Requests\Insight\UpdateCommentRequest;
 
-
 use App\Services\Insight\Content\PostService;
 use App\Http\Traits\ViewTrait;
-
+use App\Models\Database\Coin;
+use App\Models\Dictionary\DictionaryTerm;
 use App\Models\Insight\Content\Post;
 use App\Models\Insight\Channel;
 
@@ -52,7 +52,17 @@ class PostController extends Controller
      */
     public function create(Channel $channel)
     {
-        return view('insight.post.create', ['channel' => $channel]);
+        return view('insight.post.create', [
+            'channel' => $channel,
+            'terms' => DictionaryTerm::with(['dictionaryCategory'])->get()->map(fn($term) => [
+                'key' => $term->dictionaryCategory->name . '/' . $term->name,
+                'value' => __('dictionary.' .  $term->dictionaryCategory->name . '.terms.' . $term->name . '.name'),
+            ])->keyBy('key')->sortBy('value'),
+            'coins' => Coin::has('coinRates')->select(['abbreviation'])->get()->map(fn($coin) => [
+                'key' => $coin->abbreviation,
+                'value' => $coin->abbreviation,
+            ])->keyBy('key')->sortBy('value'),
+        ]);
     }
 
     /**
@@ -91,8 +101,9 @@ class PostController extends Controller
     public function show(Channel $channel, Post $post)
     {
         $user = Auth::user();
+        $isOwner = $user && $user->id == $channel->user_id;
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($post->moderation || $post->published_at > now()))
+        if (($post->moderation || $post->published_at > now()) && (!$user || $user->role->name == 'user' && !$isOwner))
             return response()->view('errors.insight', [
                 'code' => 404,
                 'published_at' => $post->published_at
@@ -100,7 +111,7 @@ class PostController extends Controller
 
         $this->addView(request(), $post);
 
-        return view('insight.post.show', [
+        $data = [
             'channel' => $channel,
             'post' => $post,
             'comments' => $post->comments()->with([
@@ -114,7 +125,20 @@ class PostController extends Controller
                 'replies.user.channel:user_id,name,logo',
                 'replies.reactions'
             ])->get()
-        ]);
+        ];
+
+        if ($isOwner) {
+            $data['terms'] = DictionaryTerm::with(['dictionaryCategory'])->get()->map(fn($term) => [
+                'key' => $term->dictionaryCategory->name . '/' . $term->name,
+                'value' => __('dictionary.' .  $term->dictionaryCategory->name . '.terms.' . $term->name . '.name')
+            ])->keyBy('key')->sortBy('value');
+            $data['coins'] = Coin::has('coinRates')->select(['abbreviation'])->get()->map(fn($coin) => [
+                'key' => $coin->abbreviation,
+                'value' => $coin->abbreviation,
+            ])->keyBy('key')->sortBy('value');
+        }
+
+        return view('insight.post.show', $data);
     }
 
     /**

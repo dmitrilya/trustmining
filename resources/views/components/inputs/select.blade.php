@@ -24,6 +24,8 @@
 @if ($isJs || count($items))
     <div x-data="{
         open: false,
+        selectId: @js($id ?? $name),
+        initialKey: {{ $defaultKey }},
         itemKey: {{ $defaultKey }},
         isDisabled: {{ $attributes->get('disabled') ?? ($disabled ? 'true' : 'false') }},
     
@@ -45,9 +47,13 @@
                 }
             }, { deep: true });
     
-            if ({{ $initKey ? 'true' : 'false' }} && {{ $initKey ?? 'false' }}) this.itemKey = {{ $initKey ?? 'null' }};
+            if ({{ $initKey ? 'true' : 'false' }} && {{ $initKey ?? 'false' }}) {
+                this.initialKey = {{ $initKey ?? 'null' }};
+                this.itemKey = this.initialKey;
+            }
         }
-    }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }};">
+    }" x-effect="isDisabled = {{ $attributes->get(':disabled') ?? ($disabled ? 'true' : 'false') }};"
+        @reset-select.window="if ($event.detail === selectId) itemKey = initialKey">
 
         @if (isset($label))
             <x-inputs.input-label :value="$label" />

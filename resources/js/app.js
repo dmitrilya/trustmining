@@ -224,6 +224,7 @@ window.onload = function () {
 
     Array.from(document.getElementsByClassName("date-transform")).forEach(el => window.dateTransform(el));
 
+    prepareRates();
     prepareTerms();
 }
 
@@ -232,6 +233,262 @@ window.saveRange = function () {
     if (sel.rangeCount > 0) return sel.getRangeAt(0);
 
     return null;
+}
+
+function prepareRates() {
+    const elements = document.querySelectorAll('.rate:not(#editor .rate)');
+    const uniqueCoins = [...new Set(
+        Array.from(elements).map(el => el.dataset.coin).filter(coin => coin)
+    )];
+
+    if (uniqueCoins.length === 0) return;
+
+    axios.get('/metrics/coin/rates', {
+        params: { coins: uniqueCoins }
+    }).then(r => {
+        const coins = r.data.coins;
+
+        elements.forEach(el => {
+            const coin = el.dataset.coin;
+            const data = coins[coin];
+
+            if (data !== undefined) {
+                const change = document.createElement('span');
+                change.className = data.change < 0 ? 'text-red-600 dark:text-red-400' : 'text-green-500';
+                change.innerText = ' ' + (data.change > 0 ? '+' : '') + data.change + '%';
+                change.style.fontWeight = 'bold';
+                el.appendChild(change);
+
+                const origHeight = el.offsetHeight + 'px';
+                const origWidth = el.offsetWidth + 'px';
+
+                const wrapper = document.createElement('span');
+                wrapper.className = 'rate-wrapper inline-block relative mx-1';
+                wrapper.style.height = origHeight;
+                wrapper.style.width = origWidth;
+                el.before(wrapper);
+                wrapper.appendChild(el);
+
+                el.classList.add('rate-expanded', 'backdrop-blur-xl', 'absolute', 'flex', 'overflow-hidden');
+                el.style.transition = 'all 0.3s ease-in-out';
+                el.style.flexDirection = 'column';
+                el.style.alignItems = 'flex-start';
+                el.style.height = origHeight;
+                el.style.width = origWidth;
+                el.style.marginLeft = 0;
+                el.style.marginRight = 0;
+                el.style.width = origWidth;
+
+                const targetFontSize = 16;
+                const initialFontSize = parseFloat(window.getComputedStyle(el).fontSize);
+                const diffFontSize = (targetFontSize - initialFontSize) * 2;
+
+                const preview = document.createElement('span');
+                preview.className = 'rate-preview inline-flex items-center gap-2';
+                preview.style.setProperty('--coin-url', el.style.getPropertyValue('--coin-url'));
+
+                while (el.firstChild) {
+                    preview.appendChild(el.firstChild);
+                }
+
+                el.appendChild(preview);
+
+                const popover = document.createElement('div');
+                popover.className = 'flex w-full gap-2';
+                popover.style.flexDirection = 'column';
+                popover.style.alignItems = 'flex-start';
+                popover.innerHTML = `<div class="text-slate-800 dark:text-slate-200 text-lg sm:text-xl font-bold whitespace-nowrap">${data.rate} <span class="text-xs sm:text-sm">USDT</span></div>`;
+
+                if (data.history && data.history.length > 1) popover.innerHTML += `
+                    <div class="w-full flex items-center justify-center h-12">
+                        <svg class="sparkline" width="${window.innerWidth > 380 ? 158 : 140}" height="30" stroke-width="2" stroke="currentColor" fill="none"></svg>
+                    </div>`;
+
+                popover.innerHTML += `
+                    <a class="block w-full no-underline" href="/metrics/coin/${data.name.toLowerCase()}/rate">
+                        <button type="button" class="w-full flex items-center justify-center px-4 py-1.5 rounded-lg font-extrabold text-xxs sm:text-xs text-slate-800 dark:text-slate-200 uppercase tracking-widest shadow hover:shadow-md hover:-translate-y-0.5 focus:outline-none transition ease-in-out duration-100 bg-white/40 dark:bg-slate-900/40 border-0 ring-1 ring-inset ring-slate-300 dark:ring-slate-700 shadow-logo-color hover:shadow-logo-color">
+                            ${__('Details')}
+                        </button>
+                    </a>`;
+
+                el.appendChild(popover);
+
+                let isClosing = false;
+                let leaveTimeout = null;
+
+                let open = () => {
+                    if (isClosing) return;
+                    if (leaveTimeout) clearTimeout(leaveTimeout);
+
+                    const rect = wrapper.getBoundingClientRect();
+                    const targetWidth = window.innerWidth > 380 ? 180 : 160;
+                    
+                    // 1. Измеряем точную высоту контента карточки
+                    el.style.overflow = 'visible';
+                    el.style.width = targetWidth + 'px';
+                    const targetHeight = el.scrollHeight + 4 + diffFontSize;
+                    el.style.overflow = 'hidden';
+
+                    // 2. Ставим базовые настройки (вниз и вправо)
+                    el.style.left = '0px';
+                    el.style.right = 'unset';
+                    el.style.top = '2px';
+                    el.style.bottom = 'unset';
+
+                    el.style.flexDirection = 'column';
+                    el.style.alignItems = 'flex-start';
+                    el.style.justifyContent = 'start';
+                    preview.style.order = '1';
+                    popover.style.order = '2';
+                    popover.style.flexDirection = 'column';
+                    popover.style.alignItems = 'flex-start';
+
+                    // 3. ЕСЛИ НЕ ВЛАЗИТ СПРАВА — переключаем привязку на правый край wrapper
+                    if (rect.left + targetWidth > window.innerWidth) {
+                        el.style.left = 'unset';
+                        el.style.right = '0px'; // Коробка жестко встает справа и будет расти ВЛЕВО
+                        
+                        el.style.alignItems = 'flex-end';
+                        popover.style.alignItems = 'flex-end';
+                    }
+
+                    // 4. ЕСЛИ НЕ ВЛАЗИТ СНИЗУ — переключаем привязку на нижний край wrapper
+                    if (rect.top + targetHeight > window.innerHeight) {
+                        el.style.top = 'unset';
+                        el.style.bottom = '-2px'; // Коробка жестко встает снизу и будет расти ВВЕРХ
+                        el.style.justifyContent = 'end';
+
+                        preview.style.order = '2';
+                        popover.style.order = '1';
+                        popover.style.flexDirection = 'column-reverse';
+                    }
+
+                    // 5. ЗАПУСКАЕМ ИЗМЕНЕНИЕ РАЗМЕРОВ
+                    el.style.width = targetWidth + 'px';
+                    el.style.height = targetHeight + 'px';
+                    el.style.zIndex = '50';
+                    el.style.fontSize = targetFontSize + 'px';
+                };
+
+                let close = () => {
+                    isClosing = true;
+
+                    // Возвращаем физические размеры плашки обратно.
+                    // Так как el.style.right или bottom НЕ ТРОГАЮТСЯ в этот момент, 
+                    // карточка плавно сжимается ИМЕННО в ту сторону, откуда открылась!
+                    el.style.height = wrapper.style.height;
+                    el.style.width = wrapper.style.width;
+                    el.style.zIndex = '0';
+                    el.style.fontSize = initialFontSize + 'px';
+
+                    if (leaveTimeout) clearTimeout(leaveTimeout);
+
+                    // СБРОС КООРДИНАТ В ДЕФОЛТ ПЕРЕНЕСЕН СТРОГО СЮДА!
+                    // Он сработает через 300мс, когда анимация сжатия ПОЛНОСТЬЮ завершилась
+                    // и элемент уже принял размеры маленького wrapper. Скачок будет не виден глазу.
+                    leaveTimeout = setTimeout(() => {
+                        if (el.style.height === wrapper.style.height) {
+                            el.style.bottom = '';
+                            el.style.right = '';
+                            el.style.top = '2px';
+                            el.style.left = '0px';
+                            
+                            el.style.flexDirection = 'column';
+                            el.style.alignItems = 'flex-start';
+                            el.style.justifyContent = '';
+
+                            preview.style.order = '';
+                            popover.style.order = '';
+                            popover.style.flexDirection = 'column';
+                            popover.style.alignItems = 'flex-start';
+                        }
+                        isClosing = false;
+                    }, 300); // 300ms должно в точности совпадать с временем вашего CSS transition
+                };
+
+                wrapper.addEventListener('mouseenter', open);
+                wrapper.addEventListener('mouseleave', close);
+                wrapper.addEventListener('click', (e) => {
+                    if (e.target.closest('a') || e.target.closest('button')) return;
+
+                    e.stopPropagation();
+
+                    const isCurrentClosed = (parseInt(el.style.height) === wrapper.offsetHeight || !el.style.height);
+
+                    if (isCurrentClosed) {
+                        document.querySelectorAll('.rate-wrapper').forEach(otherWrapper => {
+                            if (otherWrapper !== wrapper) {
+                                otherWrapper.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+                            }
+                        });
+                        open();
+                    } else close();
+                });
+
+                if (!window.rateOutsideClickRegistered) {
+                    window.rateOutsideClickRegistered = true;
+                    document.addEventListener('click', () => {
+                        document.querySelectorAll('.rate-wrapper[data-clicked="true"]').forEach(openW => {
+                            openW.dataset.clicked = 'false';
+                            openW.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+                        });
+                    });
+                }
+
+                const svg = popover.querySelector('.sparkline');
+                if (svg && data.history && data.history.length > 1) {
+                    buildAndAnimateChart(el, svg, data.history);
+                }
+            }
+        });
+    });
+}
+
+function buildAndAnimateChart(parentElement, svg, history) {
+    const width = window.innerWidth > 380 ? 158 : 140;
+    const height = 28;
+    const max = Math.max(...history);
+    const min = Math.min(...history);
+    const range = max - min === 0 ? 1 : max - min;
+
+    const points = history.map((val, index) => {
+        return {
+            x: (index / (history.length - 1)) * width,
+            y: (height - ((val - min) / range) * height) + 1
+        };
+    });
+
+    let d = '';
+    if (points.length > 0) {
+        d = `M ${points[0].x} ${points[0].y}`;
+
+        for (let i = 0; i < points.length - 1; i++) {
+            const p0 = points[i === 0 ? i : i - 1];
+            const p1 = points[i];
+            const p2 = points[i + 1];
+            const p3 = points[i + 2 === points.length ? i + 1 : i + 2];
+
+            const cp1x = p1.x + (p2.x - p0.x) / 6;
+            const cp1y = p1.y + (p2.y - p0.y) / 6;
+            const cp2x = p2.x - (p3.x - p1.x) / 6;
+            const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+            d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+        }
+    }
+
+    svg.innerHTML = `<path d="${d}" stroke="oklch(51.1% .262 276.966)" stroke-linecap="round" stroke-linejoin="round" />`;
+
+    const path = svg.querySelector('path');
+    const length = path.getTotalLength();
+
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    path.style.transition = 'stroke-dashoffset 0.8s ease-in-out';
+
+    parentElement.addEventListener('mouseenter', () => {
+        path.style.strokeDashoffset = '0';
+    }, { once: true });
 }
 
 function prepareTerms() {
@@ -274,15 +531,18 @@ function prepareTerms() {
         const popupHeight = popup.offsetHeight;
         const gap = 8;
         const viewportPadding = 12;
+        const windowWidth = document.documentElement.clientWidth;
+        const windowHeight = document.documentElement.clientHeight;
 
         let left = rect.left + (rect.width / 2) - (popupWidth / 2);
         let top = rect.bottom + gap;
 
         if (left < viewportPadding) left = viewportPadding;
-        if (left + popupWidth > window.innerWidth - viewportPadding) left = window.innerWidth - popupWidth - viewportPadding;
-        if (top + popupHeight > window.innerHeight - viewportPadding) top = rect.top - popupHeight - gap;
+        if (left + popupWidth > windowWidth - viewportPadding) left = windowWidth - popupWidth - viewportPadding;
+        if (top + popupHeight > windowHeight - viewportPadding) top = rect.top - popupHeight - gap;
         if (top < viewportPadding) top = viewportPadding;
 
+        popup.style
         popup.style.left = `${left}px`;
         popup.style.top = `${top}px`;
     }

@@ -17,16 +17,22 @@
             @endforeach
         </div>
 
-        <div class="space-y-8 lg:space-y-12" x-show="widjet == 'calculator'">
-            @include('widjets.calculator')
-        </div>
+        <template x-if="widjet == 'calculator'">
+            <div class="space-y-8 lg:space-y-12">
+                @include('widjets.calculator')
+            </div>
+        </template>
 
-        <div class="space-y-8 lg:space-y-12" x-show="widjet == 'difficulty'" style="display: none">
-            @include('widjets.difficulty')
-        </div>
+        <template x-if="widjet == 'difficulty'">
+            <div class="space-y-8 lg:space-y-12">
+                @include('widjets.difficulty')
+            </div>
+        </template>
 
-        <div class="space-y-8 lg:space-y-12" x-show="widjet == 'coin-stat'" style="display: none">
-            @include('widjets.coin-stat')
-        </div>
+        <template x-if="widjet == 'coin-stat'">
+            <div class="space-y-8 lg:space-y-12">
+                @include('widjets.coin-stat')
+            </div>
+        </template>
     </div>
 </x-app-layout>

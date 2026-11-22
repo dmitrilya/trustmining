@@ -2,6 +2,55 @@
     <form action="{{ route('insight.post.update', ['channel' => $post->channel->slug, 'post' => $post->id]) }}" method="POST" class="flex flex-col gap-4"
         enctype=multipart/form-data x-data="{ validation: [], loading: false, content: `{{ $post->content }}` }"
         x-init='const Delta = Quill.import("delta");    
+        const Inline = Quill.import("blots/inline");
+            
+        class TermBlot extends Inline {
+            static blotName = "term";
+            static tagName = "span";
+            static className = "term";
+        
+            static create(value) {
+                const node = super.create();
+                node.setAttribute("data-term", value);
+                return node;
+            }
+        
+            static formats(node) {
+                return node.getAttribute("data-term");
+            }
+        
+            format(name, value) {
+                if (name === "term" && value) this.domNode.setAttribute("data-term", value);
+                else super.format(name, value);
+            }
+        }
+        Quill.register(TermBlot);
+        
+        class RateBlot extends Inline {
+            static blotName = "rate";
+            static tagName = "span";
+            static className = "rate";
+        
+            static create(value) {
+                const node = super.create();
+                node.setAttribute("data-coin", value);
+                node.style.setProperty("--coin-url", `url("/storage/coins/${value}.webp")`);
+                return node;
+            }
+        
+            static formats(node) {
+                return node.getAttribute("data-coin");
+            }
+        
+            format(name, value) {
+                if (name === "rate" && value) {
+                    this.domNode.setAttribute("data-coin", value);
+                    this.domNode.style.setProperty("--coin-url", `url("/storage/coins/${value}.webp")`);
+                } else super.format(name, value);
+            }
+        }
+        Quill.register(RateBlot);
+        
         const Link = Quill.import("formats/link");
         class CustomLink extends Link {
             static create(value) {
@@ -83,5 +132,13 @@
             <x-buttons.primary-button class="block mt-4 xs:mt-0 ml-auto xs:ml-3" ::disabled="loading"
                 ::class="loading ? 'opacity-50 cursor-progress' : ''">{{ __('Save') }}</x-buttons.primary-button>
         </div>
+
+        <x-insight-toolbar-modal name="term" title="Attach a term" :clearable="false">
+            <x-inputs.select name="term" label="Select a term" :items="$terms" />
+        </x-insight-toolbar-modal>
+
+        <x-insight-toolbar-modal name="rate" title="Attach a coin rate" :clearable="false">
+            <x-inputs.select name="coin" label="Select a coin" :items="$coins" :icon="['type' => 'value', 'path' => '/storage/coins/']" />
+        </x-insight-toolbar-modal>
     </form>
 </div>

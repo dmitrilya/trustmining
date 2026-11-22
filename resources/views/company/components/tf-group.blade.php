@@ -47,12 +47,12 @@
 
                         <div class="shrink-0">
                             @if ($factor['type'] === 'threshold_group')
-                                <div class="text-xxs font-mono text-slate-600 dark:text-slate-400">
+                                <div class="text-xxs sm:text-xs font-mono text-slate-600 dark:text-slate-400">
                                     {{ $component['value'] ?? '—' }}
                                 </div>
                             @else
                                 <div
-                                    class="text-xxs font-mono w-6 flex justify-center py-0.5 rounded
+                                    class="text-xxs sm:text-xs font-mono w-6 flex justify-center py-0.5 rounded
                                         {{ $component['score'] > 0
                                             ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                                             : ($component['score'] < 0

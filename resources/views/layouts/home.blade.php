@@ -13,6 +13,8 @@
                 {{-- @include('home.components.categories') --}}
                 <x-widjets.voting :category="\App\Enums\VotingCategory::best_hosting" type="widjet" />
                 @include('insight.components.popular-article')
+                <script src="https://trustmining.ru/build/assets/coin-stat-widjet.js" data-coin="litecoin" data-theme="dark"
+                    data-blocks="difficulty-prediction,difficulty,hashrate"></script>
                 @include('home.components.top-channels')
             </div>
 
@@ -27,7 +29,7 @@
                     @if ($btc = App\Models\Database\Coin::where('abbreviation', 'btc')->first())
                         <x-widjets.voting :category="\App\Enums\VotingCategory::coin_rate_prediction" :candidate="$btc" type="widjet" />
                     @endif
-                    
+
                     <x-ai-kodex targetWidth="1024" />
                     @include('home.components.asic-brands')
                     @include('home.components.last-forum-questions')

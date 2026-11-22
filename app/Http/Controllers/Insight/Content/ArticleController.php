@@ -15,7 +15,8 @@ use App\Http\Requests\Insight\UpdateCommentRequest;
 
 use App\Services\Insight\Content\ArticleService;
 use App\Http\Traits\ViewTrait;
-
+use App\Models\Database\Coin;
+use App\Models\Dictionary\DictionaryTerm;
 use App\Models\Insight\Content\Article;
 use App\Models\Insight\Channel;
 
@@ -55,7 +56,15 @@ class ArticleController extends Controller
     {
         return view('insight.article.create', [
             'channel' => $channel,
-            'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys()
+            'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys(),
+            'terms' => DictionaryTerm::with(['dictionaryCategory'])->get()->map(fn($term) => [
+                'key' => $term->dictionaryCategory->name . '/' . $term->name,
+                'value' => __('dictionary.' .  $term->dictionaryCategory->name . '.terms.' . $term->name . '.name'),
+            ])->keyBy('key')->sortBy('value'),
+            'coins' => Coin::has('coinRates')->select(['abbreviation'])->get()->map(fn($coin) => [
+                'key' => $coin->abbreviation,
+                'value' => $coin->abbreviation,
+            ])->keyBy('key')->sortBy('value'),
         ]);
     }
 
@@ -98,8 +107,9 @@ class ArticleController extends Controller
     public function show(Channel $channel, Article $article)
     {
         $user = Auth::user();
+        $isOwner = $user && $user->id == $channel->user_id;
 
-        if ((!$user || $user->role->name == 'user' && $user->id != $channel->user_id) && ($article->moderation || $article->published_at > now()))
+        if (($article->moderation || $article->published_at > now()) && (!$user || $user->role->name == 'user' && !$isOwner))
             return response()->view('errors.insight', [
                 'code' => 404,
                 'published_at' => $article->published_at
@@ -107,7 +117,7 @@ class ArticleController extends Controller
 
         $this->addView(request(), $article);
 
-        return view('insight.article.show', [
+        $data = [
             'channel' => $channel,
             'article' => $article,
             'comments' => $article->comments()->with([
@@ -122,7 +132,20 @@ class ArticleController extends Controller
                 'replies.reactions'
             ])->get(),
             'tags' => Article::pluck('tags')->flatten()->groupBy(fn($tag) => $tag)->sortByDesc(fn($tagGroup) => $tagGroup->count())->keys()
-        ]);
+        ];
+
+        if ($isOwner) {
+            $data['terms'] = DictionaryTerm::with(['dictionaryCategory'])->get()->map(fn($term) => [
+                'key' => $term->dictionaryCategory->name . '/' . $term->name,
+                'value' => __('dictionary.' .  $term->dictionaryCategory->name . '.terms.' . $term->name . '.name')
+            ])->keyBy('key')->sortBy('value');
+            $data['coins'] = Coin::has('coinRates')->select(['abbreviation'])->get()->map(fn($coin) => [
+                'key' => $coin->abbreviation,
+                'value' => $coin->abbreviation,
+            ])->keyBy('key')->sortBy('value');
+        }
+
+        return view('insight.article.show', $data);
     }
 
     /**

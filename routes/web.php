@@ -180,6 +180,7 @@ $webRoutes = function () {
         });
         Route::group(['prefix' => 'coin'], function () {
             Route::get('/', [MetricsController::class, 'coin'])->name('metrics.coin');
+            Route::get('/rates', [MetricsController::class, 'coinRates'])->name('metrics.coin.rates');
             Route::group(['prefix' => '{coin:name}'], function () {
                 Route::get('/rate', [MetricsController::class, 'coinRate'])->name('metrics.coin.rate');
                 Route::get('/get-rate', [MetricsController::class, 'getCoinRate'])->name('metrics.coin.get_rate');
