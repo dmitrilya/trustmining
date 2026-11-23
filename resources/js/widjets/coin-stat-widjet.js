@@ -20,6 +20,7 @@
 
     const theme = getParentTheme();
     const lang = getParentLang();
+    const blocks = me.getAttribute('data-blocks') || 'difficulty-prediction,difficulty,hashrate';
     const coin = me.getAttribute('data-coin') || 'bitcoin';
     const parentUrl = window.location.href;
 
