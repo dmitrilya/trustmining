@@ -24,7 +24,7 @@
     const coin = me.getAttribute('data-coin') || 'bitcoin';
     const parentUrl = window.location.href;
 
-    const widgetUrl = `https://trustmining.ru/api/coin-stat-widjet/${coin.toLowerCase()}?theme=${theme}&lang=${lang}&parent_url=${encodeURIComponent(parentUrl)}`;
+    const widgetUrl = `https://trustmining.ru/api/coin-stat-widjet/${coin.toLowerCase()}?blocks=${encodeURIComponent(blocks)}&theme=${theme}&lang=${lang}&parent_url=${encodeURIComponent(parentUrl)}`;
 
     const iframe = document.createElement('iframe');
     iframe.title = 'Trust Mining Coin Stat';
