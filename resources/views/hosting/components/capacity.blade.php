@@ -32,7 +32,7 @@
                     {{ __('Total') }}
                 </div>
                 <div class="xs:text-lg sm:text-xl lg:text-2xl font-mono text-slate-800 dark:text-slate-200">
-                    {{ number_format($total / 1000, 0, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
+                    {{ number_format($total / 1000, 1, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     {{ __('Occupied') }}
                 </div>
                 <div class="xs:text-lg sm:text-xl lg:text-2xl font-mono text-rose-600 dark:text-rose-400">
-                    {{ number_format($occupied / 1000, 0, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
+                    {{ number_format($occupied / 1000, 1, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                     {{ __('Free') }}
                 </div>
                 <div class="xs:text-lg sm:text-xl lg:text-2xl font-mono text-emerald-600 dark:text-emerald-400">
-                    {{ number_format($free / 1000, 0, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
+                    {{ number_format($free / 1000, 1, '.', ' ') }} <span class="text-xs font-semibold text-slate-500">{{ __('MW') }}</span>
                 </div>
             </div>
         </div>

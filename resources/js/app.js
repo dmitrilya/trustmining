@@ -323,18 +323,14 @@ function prepareRates() {
                     const rect = wrapper.getBoundingClientRect();
                     const targetWidth = window.innerWidth > 380 ? 180 : 160;
                     
-                    // 1. Измеряем точную высоту контента карточки
                     el.style.overflow = 'visible';
                     el.style.width = targetWidth + 'px';
                     const targetHeight = el.scrollHeight + 4 + diffFontSize;
                     el.style.overflow = 'hidden';
-
-                    // 2. Ставим базовые настройки (вниз и вправо)
                     el.style.left = '0px';
                     el.style.right = 'unset';
                     el.style.top = '2px';
                     el.style.bottom = 'unset';
-
                     el.style.flexDirection = 'column';
                     el.style.alignItems = 'flex-start';
                     el.style.justifyContent = 'start';
@@ -343,19 +339,17 @@ function prepareRates() {
                     popover.style.flexDirection = 'column';
                     popover.style.alignItems = 'flex-start';
 
-                    // 3. ЕСЛИ НЕ ВЛАЗИТ СПРАВА — переключаем привязку на правый край wrapper
                     if (rect.left + targetWidth > window.innerWidth) {
                         el.style.left = 'unset';
-                        el.style.right = '0px'; // Коробка жестко встает справа и будет расти ВЛЕВО
+                        el.style.right = '0px';
                         
                         el.style.alignItems = 'flex-end';
                         popover.style.alignItems = 'flex-end';
                     }
 
-                    // 4. ЕСЛИ НЕ ВЛАЗИТ СНИЗУ — переключаем привязку на нижний край wrapper
                     if (rect.top + targetHeight > window.innerHeight) {
                         el.style.top = 'unset';
-                        el.style.bottom = '-2px'; // Коробка жестко встает снизу и будет расти ВВЕРХ
+                        el.style.bottom = '-2px';
                         el.style.justifyContent = 'end';
 
                         preview.style.order = '2';
@@ -363,7 +357,6 @@ function prepareRates() {
                         popover.style.flexDirection = 'column-reverse';
                     }
 
-                    // 5. ЗАПУСКАЕМ ИЗМЕНЕНИЕ РАЗМЕРОВ
                     el.style.width = targetWidth + 'px';
                     el.style.height = targetHeight + 'px';
                     el.style.zIndex = '50';
@@ -373,9 +366,6 @@ function prepareRates() {
                 let close = () => {
                     isClosing = true;
 
-                    // Возвращаем физические размеры плашки обратно.
-                    // Так как el.style.right или bottom НЕ ТРОГАЮТСЯ в этот момент, 
-                    // карточка плавно сжимается ИМЕННО в ту сторону, откуда открылась!
                     el.style.height = wrapper.style.height;
                     el.style.width = wrapper.style.width;
                     el.style.zIndex = '0';
@@ -383,9 +373,6 @@ function prepareRates() {
 
                     if (leaveTimeout) clearTimeout(leaveTimeout);
 
-                    // СБРОС КООРДИНАТ В ДЕФОЛТ ПЕРЕНЕСЕН СТРОГО СЮДА!
-                    // Он сработает через 300мс, когда анимация сжатия ПОЛНОСТЬЮ завершилась
-                    // и элемент уже принял размеры маленького wrapper. Скачок будет не виден глазу.
                     leaveTimeout = setTimeout(() => {
                         if (el.style.height === wrapper.style.height) {
                             el.style.bottom = '';
@@ -403,7 +390,7 @@ function prepareRates() {
                             popover.style.alignItems = 'flex-start';
                         }
                         isClosing = false;
-                    }, 300); // 300ms должно в точности совпадать с временем вашего CSS transition
+                    }, 300);
                 };
 
                 wrapper.addEventListener('mouseenter', open);
