@@ -5,7 +5,7 @@ document.addEventListener('alpine:initialized', () => {
     const sendHeight = () => {
         const height = document.body.scrollHeight;
         window.parent.postMessage({
-            type: 'resize-difficulty',
+            type: 'resize-coin-stat',
             height: height
         }, '*');
     };

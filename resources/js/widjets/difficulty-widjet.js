@@ -47,8 +47,6 @@
     });
 
     window.addEventListener('message', function (event) {
-        if (event.data && event.data.type === 'resize-difficulty') {
-            iframe.style.height = event.data.height + 'px';
-        }
+        if (event.data && event.data.type === 'resize-difficulty') iframe.style.height = event.data.height + 'px';
     }, false);
 })();
