@@ -14,7 +14,7 @@
             @include('moderation.components.buttons')
 
             @include('company.components.company', [
-                'isModeration' => false,
+                'isModeration' => true,
                 'images' => ['changed' => isset($moderation->data['images']), 'data' => $moderation->data['images'] ?? $company->images],
                 'documents' => ['changed' => isset($moderation->data['documents']), 'data' => $moderation->data['documents'] ?? $company->documents],
                 'video' => ['changed' => isset($moderation->data['video']), 'data' => $moderation->data['video'] ?? $company->video],
