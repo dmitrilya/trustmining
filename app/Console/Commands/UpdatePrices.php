@@ -76,7 +76,7 @@ class UpdatePrices extends Command
         $changings = array_merge($changings, $this->minerGroup($users->where('name', 'MinerGroup')->first()));
         $changings = array_merge($changings, $this->leoMining($users->where('name', 'LeoMining')->first()));
         $changings = array_merge($changings, $this->aximine($users->where('name', 'Aximine')->first()));
-        
+
         if (count($changings)) Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiToken,
             'Accept'        => 'application/json',
@@ -939,16 +939,15 @@ class UpdatePrices extends Command
                 $xpath = new DOMXPath($dom);
 
                 $currentPageCards = $xpath->query('//div[contains(@class, "catalog-block__item")]');
-
                 if ($currentPageCards->length === 0) break;
-
                 foreach ($currentPageCards as $i => $card) {
-                    $status = trim($xpath->query('.//div[contains(@class, "js-replace-status")]', $card)->item(0)->textContent);
+                    $status = trim($xpath->query('.//span[contains(@class, "js-replace-status")]', $card)->item(0)->textContent);
                     if ($status !== 'В наличии') break;
 
-                    $price = trim($xpath->query('.//div[contains(@class, "price__new-val")]', $card)->item(0)->textContent);
-                    $fullName = trim($xpath->query('.//a', $card)->item(0)->textContent);
+                    $price = trim($xpath->query('.//span[contains(@class, "price__new-val")]', $card)->item(0)->textContent);
+                    $fullName = trim($xpath->query('.//a[contains(@class, "js-popup-title")]', $card)->item(0)->textContent);
                     $name = $this->parseModelName($fullName, true);
+                    if ($name[1] == 'antmineru3s21exph') $name[1] = 'antminers21exphyd3u';
                     $nameWithBrand = $name[0] . $name[1];
 
                     $variants = [
@@ -997,7 +996,7 @@ class UpdatePrices extends Command
                 }
 
                 usleep(100000);
-            } while (trim($xpath->query('.//div[contains(@class, "js-replace-status")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) === 'В наличии');
+            } while (trim($xpath->query('.//span[contains(@class, "js-replace-status")]', $currentPageCards->item($currentPageCards->length - 1))->item(0)->textContent) === 'В наличии');
 
             foreach ($ads->where('price', '!=', 0) as $ad) {
                 $changings->push([
