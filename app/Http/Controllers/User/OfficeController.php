@@ -104,18 +104,18 @@ class OfficeController extends Controller
 
         $suggestions = $this->dadataSearchAddress($request->address);
 
-        if (!count($suggestions) || !$suggestions[0]['data']['postal_code']) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
+        if (!count($suggestions) || !$suggestions[0]->data->postal_code) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
         $currentLocale = app()->getLocale();
         $alternativeLocale = $currentLocale == 'ru' ? 'en' : 'ru';
 
-        $currentCityName = $suggestions[0]['data']['city'];
+        $currentCityName = $suggestions[0]->data->city;
 
         $city = City::where("name->{$currentLocale}", $currentCityName)->first();
 
         if (!$city) {
             $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
-            $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+            $alternativeCityName = $alternativeSuggestions[0]->data->city ?? $currentCityName;
 
             $city = City::create([
                 'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],
@@ -127,7 +127,7 @@ class OfficeController extends Controller
             'user_id' => $user->id,
             'address' => $suggestions[0]['value'],
             'city_id' => $city->id,
-            'postal_code' => $suggestions[0]['data']['postal_code'],
+            'postal_code' => $suggestions[0]->data->postal_code,
             'video' => $request->video,
             'images' => [],
             'peculiarities' => $request->peculiarities ? $request->peculiarities : [],

@@ -93,7 +93,7 @@ class HostingController extends Controller
 
         if (!count($suggestions)) return back()->withErrors(['forbidden' => __('Please check the correctness of the specified address')]);
 
-        $currentCityName = $suggestions[0]['data']['city'];
+        $currentCityName = $suggestions[0]->data->city;
 
         if ($currentCityName) {
             $currentLocale = app()->getLocale();
@@ -103,7 +103,7 @@ class HostingController extends Controller
 
             if (!$city) {
                 $alternativeSuggestions = $this->dadataSearchAddress($request->address, $alternativeLocale);
-                $alternativeCityName = $alternativeSuggestions[0]['data']['city'] ?? $currentCityName;
+                $alternativeCityName = $alternativeSuggestions[0]->data->city ?? $currentCityName;
 
                 $city = City::create([
                     'name' => [$currentLocale => $currentCityName, $alternativeLocale => $alternativeCityName],

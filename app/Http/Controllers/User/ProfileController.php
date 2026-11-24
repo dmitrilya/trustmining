@@ -101,14 +101,14 @@ class ProfileController extends Controller
                 'language' => 'ru'
             ]);
 
-            if (empty($result['suggestions']) || !$result['suggestions'][0]['data']['city']) {
+            if (empty($result['suggestions']) || !$result['suggestions'][0]->data->city) {
                 $city = config('app.default_city');
                 $source = 'default';
                 $locale = $defaultLocale;
             } else {
-                $city = $result['suggestions'][0]['data']['city'];
+                $city = $result['suggestions'][0]->data->city;
                 $source = 'geo';
-                $locale = $result['suggestions'][0]['data']['country_iso_code'] == 'RU' ? 'ru' : 'en';
+                $locale = $result['suggestions'][0]->data->country_iso_code == 'RU' ? 'ru' : 'en';
             }
         } catch (\Exception $e) {
             $city = config('app.default_city');
