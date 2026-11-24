@@ -18,6 +18,9 @@
                 'images' => ['changed' => isset($moderation->data['images']), 'data' => $moderation->data['images'] ?? $company->images],
                 'documents' => ['changed' => isset($moderation->data['documents']), 'data' => $moderation->data['documents'] ?? $company->documents],
                 'video' => ['changed' => isset($moderation->data['video']), 'data' => $moderation->data['video'] ?? $company->video],
+                'logo' => ['changed' => isset($moderation->data['logo']), 'data' => $moderation->data['logo'] ?? $company->logo],
+                'bg_logo' => ['changed' => isset($moderation->data['bg_logo']), 'data' => $moderation->data['bg_logo'] ?? $company->bg_logo],
+                'site' => ['changed' => isset($moderation->data['site']), 'data' => $moderation->data['site'] ?? $company->site],
             ])
         @endif
 

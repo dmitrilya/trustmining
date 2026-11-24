@@ -11,6 +11,12 @@
             <h1 class="text-xl sm:text-2xl text-slate-800 dark:text-slate-200">{{ $company->name }}</h1>
 
             @if ($isModeration)
+                @if ($logo['changed'])
+                    <div class="border border-indigo-500">
+                        <img class="rounded-full w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16" src="{{ Storage::url($logo['data']) }}" alt="">
+                    </div>
+                @endif
+
                 @if ($bg_logo['changed'])
                     <div class="border border-indigo-500">
                         <img class="h-40" src="{{ Storage::url($bg_logo['data']) }}" alt="">
