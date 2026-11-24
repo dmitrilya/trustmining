@@ -117,7 +117,7 @@ class HostingController extends Controller
             'ordering_id' => $firstHosting ? $firstHosting->ordering_id + 1 : 1,
             'user_id' => $user->id,
             'description' => Purifier::clean(htmlspecialchars_decode($request->description), 'description'),
-            'address' => $suggestions[0]['value'],
+            'address' => $suggestions[0]->value,
             'city_id' => $city->id ?? null,
             'video' => $request->video,
             'images' => [],

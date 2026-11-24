@@ -125,7 +125,7 @@ class OfficeController extends Controller
 
         $office = Office::create([
             'user_id' => $user->id,
-            'address' => $suggestions[0]['value'],
+            'address' => $suggestions[0]->value,
             'city_id' => $city->id,
             'postal_code' => $suggestions[0]->data->postal_code,
             'video' => $request->video,
