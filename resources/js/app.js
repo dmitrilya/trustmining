@@ -112,9 +112,9 @@ window.adjustRate = function (rate, currency = 'usdt') {
     return new Intl.NumberFormat('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(numericRate);
 }
 
-Alpine.start();
-
 window.__ = (key) => window.Translations[key] !== undefined ? window.Translations[key] : key;
+
+Alpine.start();
 
 window.askLocation = (errorMessage) => {
     if ("geolocation" in navigator) {
