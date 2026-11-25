@@ -70,7 +70,7 @@ class ShopController extends Controller
     {
         $auth = Auth::user();
 
-        if (!$user->tariff || $user->hostings()->where('moderation', false) && !($auth && ($auth->id == $user->id || $auth->role->name != 'user')))
+        if (!$user->tariff || !$user->hostings()->where('moderation', false)->count() && !($auth && ($auth->id == $user->id || $auth->role->name != 'user')))
             return redirect()->route('company', ['user' => $user->slug]);
 
         return view('shop.hostings', [
