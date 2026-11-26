@@ -68,7 +68,34 @@
                     container: [
                         ["bold", "italic", "underline"],
                         ["link"],
-                    ]
+                        ["term", "rate"],
+                    ],
+                    handlers: {
+                        term: function() {
+                            this.quill.focus();
+                            const [range] = this.quill.selection.getRange();
+        
+                            const selectedText = this.quill.getText(range.index, range.length);
+        
+                            attachCallback = (term) => this.quill.updateContents(
+                                new Delta().retain(range.index).delete(range.length).insert(selectedText, { term: term }),
+                                Quill.sources.USER,
+                            );
+        
+                            window.dispatchEvent(new CustomEvent("open-modal", { detail: "attach-term_modal" }));
+                        },
+                        rate: function() {
+                            this.quill.focus();
+                            const [range] = this.quill.selection.getRange();
+        
+                            attachCallback = (coin) => this.quill.updateContents(
+                                new Delta().retain(range.index).delete(range.length).insert(coin, { rate: coin }),
+                                Quill.sources.USER,
+                            );
+        
+                            window.dispatchEvent(new CustomEvent("open-modal", { detail: "attach-rate_modal" }));
+                        },
+                    }
                 },
                 keyboard: {
                     bindings: {
@@ -79,12 +106,29 @@
             placeholder: "{{ __('Text of your post') }}",
             theme: "snow"
         });
+
+        const toolbar = quill.getModule("toolbar").container;
+            
+        toolbar.querySelector(".ql-term").innerHTML = `
+            <svg viewBox="0 0 24 24" width="18" height="18">
+                <path class="ql-stroke" d="M4 5h16v14H4z M8 9h8 M8 13h5" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+        `;
         
+        toolbar.querySelector(".ql-rate").innerHTML = `
+            <svg viewBox="0 0 24 24" width="18" height="18">
+                <circle class="ql-stroke" cx="12" cy="12" r="9" stroke-width="1.7"/>
+                <path class="ql-stroke" d="M15 8.5c-.7-.7-1.6-1-2.8-1-1.5 0-2.5.8-2.5 1.9 0 3 5.5 1.2 5.5 4.3 0 1.2-1.1 2.1-2.8 2.1-1.2 0-2.3-.4-3.1-1.2 M12 5.5v13"
+                    fill="none" stroke-width="1.5"
+                    stroke-linecap="round"/>
+            </svg>
+        `;
+
         quill.root.innerHTML = `{{ $post->content }}`;
-        
+
         quill.on("text-change", () => {
-            content = quill.root.innerHTML;
-            if (validation["content"]) delete validation["content"];
+        content = quill.root.innerHTML;
+        if (validation["content"]) delete validation["content"];
         });'
         @submit.prevent="if (Object.keys(validation).length > 0) {
             pushToastAlert(Object.values(validation)[0], 'error');
