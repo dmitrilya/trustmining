@@ -297,7 +297,7 @@ class TrustFactorService
             });
 
         $externalRatings = [
-            'avg' => $externalRatings->avg('corr_rating'),
+            'avg' => $externalRatings->where('rating', '!=', 0)->avg('corr_rating'),
             ...$externalRatings->mapWithKeys(fn($rating, $sourceName) => [
                 $sourceName => [
                     'corr_rating' => $rating['corr_rating'],
