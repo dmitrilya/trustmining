@@ -34,7 +34,7 @@
             static create(value) {
                 const node = super.create();
                 node.setAttribute("data-coin", value);
-                node.style.setProperty("--coin-url", `url("/storage/coins/${value}.webp")`);
+                node.style.setProperty("--coin-url", `url(/storage/coins/${value}.webp)`);
                 return node;
             }
         
@@ -45,7 +45,7 @@
             format(name, value) {
                 if (name === "rate" && value) {
                     this.domNode.setAttribute("data-coin", value);
-                    this.domNode.style.setProperty("--coin-url", `url("/storage/coins/${value}.webp")`);
+                    this.domNode.style.setProperty("--coin-url", `url(/storage/coins/${value}.webp)`);
                 } else super.format(name, value);
             }
         }

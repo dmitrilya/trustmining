@@ -57,7 +57,7 @@ return [
             'URI.AllowedSchemes' => ['http' => true, 'https' => true, 'mailto' => true],
             'Attr.AllowedFrameTargets' => ['_blank'],
             'Attr.AllowedClasses' => ['inline', 'term', 'rate'],
-            'HTML.DefinitionID'    => 'quill-editor-post',
+            'HTML.DefinitionID'    => 'insight_post',
             'HTML.DefinitionRev'   => 1,
             'CSS.AllowedProperties' => ['--coin-url'],
             'AutoFormat.RemoveEmpty' => true,
