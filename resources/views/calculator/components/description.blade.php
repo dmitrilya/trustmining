@@ -3,9 +3,7 @@
         {{ __('Profitability analysis overview') }}
     </h2>
 
-    <div itemprop="description" class="ql-editor text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition ease-in-out"
-        style="overflow-y: hidden; max-height: 3.75rem" :style="{ maxHeight: show ? $el.scrollHeight + 'px' : '3.75rem' }">
-
+    <div itemprop="description" :class="show ? '' : 'line-clamp-3'" class="ql-editor overflow-hidden! text-xs sm:text-sm text-slate-600 dark:text-slate-400 transition ease-in-out">
         @php
             $BASE_TARIFF = 5;
             $BASE_UPTIME = 99.7;
