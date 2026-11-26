@@ -93,8 +93,7 @@ class MetricsController extends Controller
             $historyData = $coin->coinRates()->where('created_at', '>=', $thirtyDaysAgo)->select([
                 DB::raw("DATE(created_at) as date"),
                 DB::raw("AVG(rate) as avg_rate")
-            ])->groupBy(DB::raw("DATE(created_at)"))->orderBy('date', 'asc')->pluck('avg_rate')
-                ->map(fn($r) => adjust_rate($r))->toArray();
+            ])->groupBy(DB::raw("DATE(created_at)"))->orderBy('date', 'asc')->pluck('avg_rate')->toArray();
 
             $rateYesterday = $coin->coinRates()->where('created_at', '<=', now()->subDay())
                 ->orderBy('created_at', 'desc')->value('rate');
@@ -104,11 +103,11 @@ class MetricsController extends Controller
             if ($rateYesterday && (float)$rateYesterday > 0)
                 $changePercent = (($coin->rate - (float)$rateYesterday) / (float)$rateYesterday) * 100;
 
-            if (empty($historyData)) $historyData = [adjust_rate($coin->rate)];
+            if (empty($historyData)) $historyData = [$coin->rate];
 
             $responseCoins[$coin->abbreviation] = [
                 'name' => $coin->name,
-                'rate' => adjust_rate($coin->rate),
+                'rate' => $coin->rate,
                 'change' => round($changePercent, 2),
                 'history' => $historyData
             ];
